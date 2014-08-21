@@ -1,0 +1,672 @@
+<!--
+Automatically generated HTML file from Doconce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Doconce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Loops and lists">
+<meta name="keywords" content="loops,boolean expressions,logical expressions,factorial,lists,method (class),list comprehension,list, nested,nested lists,list comprehension,pretty print,sublist,slicing,nested loops,tuples,list functionality,sequence (data type),sum ($\Sigma$) implementation,comparing floating-point numbers,comparing real numbers,comparing objects">
+
+
+
+<!-- Bootstrap style: bootswatch_readable -->
+<link href="http://netdna.bootstrapcdn.com/bootswatch/3.1.1/readable/bootstrap.min.css" rel="stylesheet">
+<!-- not necessary
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+
+<style type="text/css">
+/* Let inline verbatim have the same color as the surroundings */
+code { color: inherit; background-color: transparent; }
+</style>
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [(u' While loops ', 1, u'sec:basic:loops', u'sec:basic:loops'),
+              (u' A naive solution ',
+               2,
+               u'sec:basic:naive',
+               u'sec:basic:naive'),
+              (u' While loops ', 2, u'sec:basic:while', u'sec:basic:while'),
+              (u' Boolean expressions ',
+               2,
+               u'sec:basic:boolexpr',
+               u'sec:basic:boolexpr'),
+              (u' Loop implementation of a sum ',
+               2,
+               u'sec:basic:sumloop',
+               u'sec:basic:sumloop'),
+              (u' Lists ', 1, None, '___sec5'),
+              (u' Basic list operations ',
+               2,
+               u'sec:lists:basc:op',
+               u'sec:lists:basc:op'),
+              (u' For loops ', 2, None, '___sec7'),
+              (u' The nature of for loops ', 3, None, '___sec8'),
+              (u' Making the table ', 3, None, '___sec9'),
+              (u' Alternative implementations with lists and loops ',
+               1,
+               None,
+               '___sec10'),
+              (u' While loop implementation of a for loop ',
+               2,
+               None,
+               '___sec11'),
+              (u' The range construction ', 2, None, '___sec12'),
+              (u' For loops with list indices ', 2, None, '___sec13'),
+              (u' Changing list elements ', 2, None, '___sec14'),
+              (u' List comprehension ',
+               2,
+               u'sec:basic:list:comprehension',
+               u'sec:basic:list:comprehension'),
+              (u' Traversing multiple lists simultaneously ',
+               2,
+               None,
+               '___sec16'),
+              (u' Nested lists ',
+               1,
+               u'sec:basic:nestedlists',
+               u'sec:basic:nestedlists'),
+              (u' A table as a list of rows or columns ',
+               2,
+               None,
+               '___sec18'),
+              (u' Printing objects ', 2, None, '___sec19'),
+              (u' Modules for pretty print of objects ', 3, None, '___sec20'),
+              (u' Manual printing ', 3, None, '___sec21'),
+              (u' Extracting sublists ',
+               2,
+               u'sec:basic:slice',
+               u'sec:basic:slice'),
+              (u' Example ', 3, None, '___sec23'),
+              (u' Traversing nested lists ', 2, None, '___sec24'),
+              (u' Tuples ', 1, u'sec:lists:tuples', u'sec:lists:tuples'),
+              (u' Summary ',
+               1,
+               u'sec:looplist:summary',
+               u'sec:looplist:summary'),
+              (u' Chapter topics ', 2, None, '___sec27'),
+              (u' While loops ', 3, None, '___sec28'),
+              (u' Lists ', 3, None, '___sec29'),
+              (u' Nested lists ', 3, None, '___sec30'),
+              (u' Tuples ', 3, None, '___sec31'),
+              (u' For loops ', 3, None, '___sec32'),
+              (u' Pretty print ', 3, None, '___sec33'),
+              (u' Terminology ', 3, None, '___sec34'),
+              (u' Example: Analyzing list data ',
+               2,
+               u'sec:looplist:summary:ex',
+               u'sec:looplist:summary:ex'),
+              (u' Problem ', 3, None, '___sec36'),
+              (u' Solution ', 3, None, '___sec37'),
+              (u' Remark ', 3, None, '___sec38'),
+              (u' How to find more Python information ',
+               2,
+               u'sec:basic:pyinfo',
+               u'sec:basic:pyinfo'),
+              (u' Exercises ', 1, None, '___sec40'),
+              (u' Exercise 1: Make a Fahrenheit-Celsius conversion table ',
+               2,
+               u'sec:basic:ex41',
+               u'sec:basic:ex41'),
+              (u' Exercise 2: Generate an approximate Fahrenheit-Celsius conversion table ',
+               2,
+               u'sec:basic:ex1',
+               u'sec:basic:ex1'),
+              (u' Exercise 3: Work with a list ',
+               2,
+               u'sec:basic:ex00',
+               u'sec:basic:ex00'),
+              (u' Exercise 4: Generate odd numbers ',
+               2,
+               u'sec:basic:ex0',
+               u'sec:basic:ex0'),
+              (u' Exercise 5: Sum of first $n$ integers ',
+               2,
+               u'sec:basic:sum:no',
+               u'sec:basic:sum:no'),
+              (u' Exercise 6: Generate equally spaced coordinates ',
+               2,
+               u'sec:basic:ex44',
+               u'sec:basic:ex44'),
+              (u' Exercise 7: Make a table of values from a formula ',
+               2,
+               u'sec:basic:ex4',
+               u'sec:basic:ex4'),
+              (u' Exercise 8: Store values from a formula in lists ',
+               2,
+               u'sec:basic:ex4b',
+               u'sec:basic:ex4b'),
+              (u' Exercise 9: Simulate operations on lists by hand ',
+               2,
+               u'sec:basic:ex43',
+               u'sec:basic:ex43'),
+              (u' Exercise 10: Compute a mathematical sum ',
+               2,
+               u'sec:basic:ex29a',
+               u'sec:basic:ex29a'),
+              (u' Exercise 11: Replace a while loop by a for loop ',
+               2,
+               u'sec:basic:ex29b',
+               u'sec:basic:ex29b'),
+              (u' Exercise 12: Simulate a program by hand ',
+               2,
+               u'sec:basic:ex24a',
+               u'sec:basic:ex24a'),
+              (u' Exercise 13: Explore Python documentation ',
+               2,
+               u'sec:basic:ex47',
+               u'sec:basic:ex47'),
+              (u' Exercise 14: Index a nested lists ',
+               2,
+               u'sec:basic:ex15n',
+               u'sec:basic:ex15n'),
+              (u' Exercise 15: Store data in lists ',
+               2,
+               u'sec:basic:ex1b',
+               u'sec:basic:ex1b'),
+              (u' Exercise 16: Store data in a nested list ',
+               2,
+               u'sec:basic:ex4c',
+               u'sec:basic:ex4c'),
+              (u' Exercise 17: Values of boolean expressions ',
+               2,
+               u'sec:basic:ex15b',
+               u'sec:basic:ex15b'),
+              (u' Exercise 18: Explore round-off errors from a large number of inverse operations ',
+               2,
+               u'sec:basic:ex14b',
+               u'sec:basic:ex14b'),
+              (u' Exercise 19: Explore what zero can be on a computer ',
+               2,
+               u'sec:basic:ex14',
+               u'sec:basic:ex14'),
+              (u' Remarks ', 3, None, '___sec60'),
+              (u' Exercise 20: Compare two real numbers with a tolerance ',
+               2,
+               u'sec:formula:ex14c',
+               u'sec:formula:ex14c'),
+              (u' Exercise 21: Interpret a code ',
+               2,
+               u'sec:basic:ex16',
+               u'sec:basic:ex16'),
+              (u' Exercise 22: Explore problems with inaccurate indentation ',
+               2,
+               u'sec:basic:ex3',
+               u'sec:basic:ex3'),
+              (u' Remarks ', 3, None, '___sec64'),
+              (u' Exercise 23: Explore punctuation in Python programs ',
+               2,
+               u'sec:input:ex33',
+               u'sec:input:ex33'),
+              (u' Exercise 24: Investigate a for loop over a changing list ',
+               2,
+               u'sec:basic:ex18',
+               u'sec:basic:ex18'),
+              (u' References ', 1, None, '___sec67')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- newcommands_keep.tex -->
+$$
+\newcommand{\tp}{\thinspace .}
+\renewcommand{\Re}{\bbbr}
+
+\newcommand{\rhodim}{\mbox{kgm}^{-3}}
+\newcommand{\mudim}{\mbox{kg}\,\mbox{s}^{-1}\mbox{m}^{-1}}
+\newcommand{\Cdim}{\mbox{kg}\,\mbox{s}^{-1}}
+
+
+\newcommand{\Oof}[1]{\mathcal{O}(#1)}
+\newcommand{\Prob}[1]{\hbox{P}(#1)}
+\newcommand{\Var}[1]{\hbox{Var}(#1)}
+\newcommand{\Cov}[2]{\hbox{Cov}(#1,#2)}
+\newcommand{\StDev}[1]{\hbox{StDev}(#1)}
+$$
+
+
+
+
+    
+<!-- Bootstrap navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="looplist-readable.html">Loops and lists</a>
+  </div>
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     <!-- navigation toc: --> <li><a href="._looplist-readable001.html#sec:basic:loops" style="font-size: 80%;">While loops</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec5" style="font-size: 80%;">Lists</a></li>
+     <!-- navigation toc: --> <li><a href="._looplist-readable003.html#___sec10" style="font-size: 80%;">Alternative implementations with lists and loops</a></li>
+     <!-- navigation toc: --> <li><a href="._looplist-readable004.html#sec:basic:nestedlists" style="font-size: 80%;">Nested lists</a></li>
+     <!-- navigation toc: --> <li><a href="._looplist-readable005.html#sec:lists:tuples" style="font-size: 80%;">Tuples</a></li>
+     <!-- navigation toc: --> <li><a href="._looplist-readable006.html#sec:looplist:summary" style="font-size: 80%;">Summary</a></li>
+     <!-- navigation toc: --> <li><a href="._looplist-readable007.html#___sec40" style="font-size: 80%;">Exercises</a></li>
+     <!-- navigation toc: --> <li><a href="._looplist-readable007.html#___sec67" style="font-size: 80%;">References</a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div> <!-- end of navigation bar -->
+
+<div class="container">
+
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+
+<a name="part0002"></a>
+<!-- !split -->
+
+<h1 id="___sec5">Lists <a name="___sec5"></a></h1>
+
+Up to now a variable has typically contained a single number.
+Sometimes numbers are naturally grouped together. For example, all
+Celsius degrees in the first column of our table from the section <a href="._looplist-readable001.html#sec:basic:while">While loops</a> could be conveniently stored together as a
+group. A Python <em>list</em> can be used to represent such a group of
+numbers in a program.  With a variable that refers to the list, we can
+work with the whole group at once, but we can also access individual
+elements of the group.  Figure <a href="#sec:basic:fig1">1</a> illustrates the
+difference between an <code>int</code> object and a list object.  In general, a
+list may contain a sequence of arbitrary objects in a given order.
+Python has great functionality for examining and manipulating such
+sequences of objects, which will be demonstrated below.
+
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 1:  Illustration of two variables: <code>var1</code> refers to an <code>int</code> object with value 21, created by the statement <code>var1 = 21</code>, and <code>var2</code> refers to a <code>list</code> object with value <code>[20, 21, 29, 4.0]</code>, i.e., three <code>int</code> objects and one <code>float</code> object, created by the statement <code>var2 = [20, 21, 29, 4.0]</code>. <a name="sec:basic:fig1"></a> </p></center>
+<p><img src="fig-looplist/lumpy_int_list.png" align="bottom" width=400></p>
+</center>
+
+<h2 id="sec:lists:basc:op">Basic list operations<a name="sec:lists:basc:op"></a></h2>
+
+To create a list with the numbers from the first column in our table,
+we just put all the numbers inside square brackets and separate the
+numbers by commas:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">C <span style="color: #666666">=</span> [<span style="color: #666666">-20</span>, <span style="color: #666666">-15</span>, <span style="color: #666666">-10</span>, <span style="color: #666666">-5</span>, <span style="color: #666666">0</span>, <span style="color: #666666">5</span>, <span style="color: #666666">10</span>, <span style="color: #666666">15</span>, <span style="color: #666666">20</span>, <span style="color: #666666">25</span>, <span style="color: #666666">30</span>, <span style="color: #666666">35</span>, <span style="color: #666666">40</span>]
+</pre></div>
+<p>
+The variable <code>C</code> now refers to a <code>list</code> object holding
+13 list <em>elements</em>. All list  elements are in this
+case <code>int</code> objects.
+
+<p>
+Every element in a list is associated with
+an <em>index</em>, which reflects the position of the element in the list.
+The first element has index 0, the second index 1, and so on.
+Associated with the <code>C</code> list above
+we have 13 indices, starting with 0 and ending with 12.
+To access the element with index 3, i.e., the fourth element in the list,
+we can write <code>C[3]</code>. As we see from the list, <code>C[3]</code> refers
+to an <code>int</code> object with the value \( -5 \).
+
+<p>
+Elements in lists can be deleted, and new elements can be inserted
+anywhere. The functionality for
+doing this is built into the list object and accessed by a dot
+notation. Two examples
+are <code>C.append(v)</code>, which appends a new element <code>v</code> to the
+end of the list, and <code>C.insert(i,v)</code>, which
+inserts a new element <code>v</code> in
+position number <code>i</code> in the list.
+The number of elements in a list is given by <code>len(C)</code>.
+Let us exemplify some list operations in an interactive session to see
+the effect of the operations:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> C <span style="color: #666666">=</span> [<span style="color: #666666">-10</span>, <span style="color: #666666">-5</span>, <span style="color: #666666">0</span>, <span style="color: #666666">5</span>, <span style="color: #666666">10</span>, <span style="color: #666666">15</span>, <span style="color: #666666">20</span>, <span style="color: #666666">25</span>, <span style="color: #666666">30</span>]     <span style="color: #408080; font-style: italic"># create list</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> C<span style="color: #666666">.</span>append(<span style="color: #666666">35</span>)              <span style="color: #408080; font-style: italic"># add new element 35 at the end</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> C                         <span style="color: #408080; font-style: italic"># view list C</span>
+[<span style="color: #666666">-10</span>, <span style="color: #666666">-5</span>, <span style="color: #666666">0</span>, <span style="color: #666666">5</span>, <span style="color: #666666">10</span>, <span style="color: #666666">15</span>, <span style="color: #666666">20</span>, <span style="color: #666666">25</span>, <span style="color: #666666">30</span>, <span style="color: #666666">35</span>]
+</pre></div>
+<p>
+Two lists can be added:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> C <span style="color: #666666">=</span> C <span style="color: #666666">+</span> [<span style="color: #666666">40</span>, <span style="color: #666666">45</span>]          <span style="color: #408080; font-style: italic"># extend C at the end</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> C
+[<span style="color: #666666">-10</span>, <span style="color: #666666">-5</span>, <span style="color: #666666">0</span>, <span style="color: #666666">5</span>, <span style="color: #666666">10</span>, <span style="color: #666666">15</span>, <span style="color: #666666">20</span>, <span style="color: #666666">25</span>, <span style="color: #666666">30</span>, <span style="color: #666666">35</span>, <span style="color: #666666">40</span>, <span style="color: #666666">45</span>]
+</pre></div>
+<p>
+What adding two
+lists means is up to the list object to define, and not surprisingly,
+addition of two lists is defined as appending the second list to the first.
+The result of <code>C + [40,45]</code> is a new list object, which we then
+assign to <code>C</code> such that this name refers
+to this new list.
+In fact, every object in Python
+and everything you can do with it is defined by programs made by humans.
+With the techniques of class programming
+(see the chapter ref{ch:class})
+you can create your own objects and define (if desired) what it means to add
+such objects. All this gives enormous power in the hands of programmers.
+As one example, you can define your own list
+object if you are not satisfied with the functionality of
+Python's own lists.
+
+<p>
+New elements can be inserted anywhere in the list (and not only at
+the end as we did with <code>C.append</code>):
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> C<span style="color: #666666">.</span>insert(<span style="color: #666666">0</span>, <span style="color: #666666">-15</span>)          <span style="color: #408080; font-style: italic"># insert new element -15 as index 0</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> C
+[<span style="color: #666666">-15</span>, <span style="color: #666666">-10</span>, <span style="color: #666666">-5</span>, <span style="color: #666666">0</span>, <span style="color: #666666">5</span>, <span style="color: #666666">10</span>, <span style="color: #666666">15</span>, <span style="color: #666666">20</span>, <span style="color: #666666">25</span>, <span style="color: #666666">30</span>, <span style="color: #666666">35</span>, <span style="color: #666666">40</span>, <span style="color: #666666">45</span>]
+</pre></div>
+<p>
+With <code>del C[i]</code> we can remove an element with index <code>i</code> from
+the list <code>C</code>. Observe that this changes the list, so <code>C[i]</code>
+refers to another (the next) element after the removal:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">del</span> C[<span style="color: #666666">2</span>]                  <span style="color: #408080; font-style: italic"># delete 3rd element</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> C
+[<span style="color: #666666">-15</span>, <span style="color: #666666">-10</span>, <span style="color: #666666">0</span>, <span style="color: #666666">5</span>, <span style="color: #666666">10</span>, <span style="color: #666666">15</span>, <span style="color: #666666">20</span>, <span style="color: #666666">25</span>, <span style="color: #666666">30</span>, <span style="color: #666666">35</span>, <span style="color: #666666">40</span>, <span style="color: #666666">45</span>]
+<span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">del</span> C[<span style="color: #666666">2</span>]                  <span style="color: #408080; font-style: italic"># delete what is now 3rd element</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> C
+[<span style="color: #666666">-15</span>, <span style="color: #666666">-10</span>, <span style="color: #666666">5</span>, <span style="color: #666666">10</span>, <span style="color: #666666">15</span>, <span style="color: #666666">20</span>, <span style="color: #666666">25</span>, <span style="color: #666666">30</span>, <span style="color: #666666">35</span>, <span style="color: #666666">40</span>, <span style="color: #666666">45</span>]
+<span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000">len</span>(C)                    <span style="color: #408080; font-style: italic"># length of list</span>
+<span style="color: #666666">11</span>
+</pre></div>
+<p>
+The command <code>C.index(10)</code> returns the index corresponding to
+the first element with value <code>10</code> (this is the 4th element in our sample
+list, with index 3):
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> C<span style="color: #666666">.</span>index(<span style="color: #666666">10</span>)               <span style="color: #408080; font-style: italic"># find index for an element (10)</span>
+<span style="color: #666666">3</span>
+</pre></div>
+<p>
+To just test if an object with the value <code>10</code>
+is an element in the list, one can write the boolean expression
+<code>10 in C</code>:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #666666">10</span> <span style="color: #AA22FF; font-weight: bold">in</span> C                   <span style="color: #408080; font-style: italic"># is 10 an element in C?</span>
+<span style="color: #008000">True</span>
+</pre></div>
+<p>
+Python allows negative indices, which leads to
+indexing from the right. As
+demonstrated below, <code>C[-1]</code> gives the last element of the list <code>C</code>.
+<code>C[-2]</code> is the element before <code>C[-1]</code>, and so forth.
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> C[<span style="color: #666666">-1</span>]                     <span style="color: #408080; font-style: italic"># view the last list element</span>
+<span style="color: #666666">45</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> C[<span style="color: #666666">-2</span>]                     <span style="color: #408080; font-style: italic"># view the next last list element</span>
+<span style="color: #666666">40</span>
+</pre></div>
+<p>
+Building long lists by writing down all the elements separated
+by commas is a tedious process that can easily be automated by
+a loop, using ideas from the section <a href="._looplist-readable001.html#sec:basic:sumloop">Loop implementation of a sum</a>.
+Say we want to build a list of degrees from -50 to 200 in steps
+of 2.5 degrees. We then start with an empty list and use a <code>while</code>
+loop to append one element at a time:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">C <span style="color: #666666">=</span> []
+C_value <span style="color: #666666">=</span> <span style="color: #666666">-50</span>
+C_max <span style="color: #666666">=</span> <span style="color: #666666">200</span>
+<span style="color: #008000; font-weight: bold">while</span> C_value <span style="color: #666666">&lt;=</span> C_max:
+     C<span style="color: #666666">.</span>append(C_value)
+     C_value <span style="color: #666666">+=</span> <span style="color: #666666">2.5</span>
+</pre></div>
+<p>
+In the next sections, we shall see how we can express these six lines
+of code with just one single statement.
+
+<p>
+There is a compact syntax for creating variables that refer to the
+various list elements. Simply list a sequence of variables on the
+left-hand side of an assignment to a list:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> somelist <span style="color: #666666">=</span> [<span style="color: #BA2121">&#39;book.tex&#39;</span>, <span style="color: #BA2121">&#39;book.log&#39;</span>, <span style="color: #BA2121">&#39;book.pdf&#39;</span>]
+<span style="color: #666666">&gt;&gt;&gt;</span> texfile, logfile, pdf <span style="color: #666666">=</span> somelist
+<span style="color: #666666">&gt;&gt;&gt;</span> texfile
+<span style="color: #BA2121">&#39;book.tex&#39;</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> logfile
+<span style="color: #BA2121">&#39;book.log&#39;</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> pdf
+<span style="color: #BA2121">&#39;book.pdf&#39;</span>
+</pre></div>
+<p>
+The number of variables on the left-hand side must match the number of
+elements in the list, otherwise an error occurs.
+
+<p>
+A final comment regards the syntax: some list operations are reached
+by a dot notation, as in <code>C.append(e)</code>, while other operations
+requires the list object as an argument to a function, as in
+<code>len(C)</code>.  Although <code>C.append</code> for a programmer behaves as a
+function, it is a function that is reached through a list object, and
+it is common to say that <code>append</code> is a <em>method</em> in the list
+object, not a function. There are no strict
+rules in Python whether functionality regarding an object is reached
+through a method or a function.
+
+<h2 id="___sec7">For loops <a name="___sec7"></a></h2>
+
+<h3 id="___sec8">The nature of for loops <a name="___sec8"></a></h3>
+
+When data are collected in a list, we often want to perform the same
+operations on each element in the list. We then need to walk through
+all list elements. Computer languages have a special construct
+for doing this conveniently, and this construct is in Python
+and many other languages called a <code>for</code> loop. Let us use a
+<code>for</code> loop to print out all list elements:
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">degrees <span style="color: #666666">=</span> [<span style="color: #666666">0</span>, <span style="color: #666666">10</span>, <span style="color: #666666">20</span>, <span style="color: #666666">40</span>, <span style="color: #666666">100</span>]
+<span style="color: #008000; font-weight: bold">for</span> C <span style="color: #AA22FF; font-weight: bold">in</span> degrees:
+    <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;list element:&#39;</span>, C
+<span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;The degrees list has&#39;</span>, <span style="color: #008000">len</span>(degrees), <span style="color: #BA2121">&#39;elements&#39;</span>
+</pre></div>
+<p>
+The <code>for C in degrees</code> construct creates a loop over all
+elements in the list <code>degrees</code>.
+In each pass of the loop, the variable
+<code>C</code> refers to an element in the list, starting with <code>degrees[0]</code>,
+proceeding with <code>degrees[1]</code>, and so on, before
+ending with the last element <code>degrees[n-1]</code>
+(if <code>n</code> denotes the number of elements in the list, <code>len(degrees)</code>).
+
+<p>
+The <code>for</code> loop specification ends with a colon, and after the colon
+comes a block of statements that does something useful with the
+current element. Each statement in the block must be indented,
+as we explained for <code>while</code> loops.
+In the example above, the block belonging to the <code>for</code> loop
+contains only one statement.
+The final <code>print</code> statement has the same indentation (none in this
+example)
+as the <code>for</code> statement and is executed as soon as the
+loop is terminated.
+
+<p>
+As already mentioned,
+understanding all details of a program by following the program flow
+by hand is often a very good idea. Here, we first define a list
+<code>degrees</code> containing 5 elements. Then we enter the <code>for</code> loop.
+In the first pass of the loop, <code>C</code> refers to the first element in
+the list <code>degrees</code>, i.e., the <code>int</code> object holding the value <code>0</code>.
+Inside the loop we then print out the text <code>'list element:'</code>
+and the value of <code>C</code>, which is <code>0</code>. There are no more statements
+in the loop block, so we proceed with the next pass of the
+loop. <code>C</code> then refers to the <code>int</code> object <code>10</code>, the output
+now prints <code>10</code> after the leading text, we proceed with <code>C</code>
+as the integers <code>20</code> and <code>40</code>, and finally <code>C</code> is <code>100</code>.
+After having printed the list element
+with value <code>100</code>, we move on to the statement
+after the indented loop block, which prints out the number of
+list elements.
+The total output becomes
+
+<p>
+
+<!-- code=text (!bc ccq) typeset with pygments style "default" -->
+<blockquote>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">list element: 0
+list element: 10
+list element: 20
+list element: 40
+list element: 100
+The degrees list has 5 elements
+</pre></div>
+</blockquote><p>
+Correct indentation of statements is crucial in Python, and we
+therefore strongly recommend you to work through
+<a href="._looplist-readable007.html#sec:basic:ex3">Exercise 22: Explore problems with inaccurate indentation</a> to learn more about this topic.
+
+<p>
+<!-- ===== Making the table  <a name="___sec9"></a>===== -->
+
+<h3>Making the table</h3>
+
+Our knowledge of lists and <code>for</code> loops over elements in lists
+puts us in a good position
+to write a program where we collect all the
+Celsius degrees to appear in the table in a list <code>Cdegrees</code>,
+and then use a <code>for</code> loop to compute and write out the corresponding
+Fahrenheit degrees.
+The complete program may look like this:
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">Cdegrees <span style="color: #666666">=</span> [<span style="color: #666666">-20</span>, <span style="color: #666666">-15</span>, <span style="color: #666666">-10</span>, <span style="color: #666666">-5</span>, <span style="color: #666666">0</span>, <span style="color: #666666">5</span>, <span style="color: #666666">10</span>, <span style="color: #666666">15</span>, <span style="color: #666666">20</span>, <span style="color: #666666">25</span>, <span style="color: #666666">30</span>, <span style="color: #666666">35</span>, <span style="color: #666666">40</span>]
+<span style="color: #008000; font-weight: bold">for</span> C <span style="color: #AA22FF; font-weight: bold">in</span> Cdegrees:
+    F <span style="color: #666666">=</span> (<span style="color: #666666">9.0/5</span>)<span style="color: #666666">*</span>C <span style="color: #666666">+</span> <span style="color: #666666">32</span>
+    <span style="color: #008000; font-weight: bold">print</span> C, F
+</pre></div>
+<p>
+The <code>print C, F</code> statement just prints the value of <code>C</code> and
+<code>F</code> with a default format, where each number is separated by one space
+character (blank). This does not look like a nice table (the output
+is identical to the one shown in the section <a href="._looplist-readable001.html#sec:basic:naive">A naive solution</a>.
+Nice formatting is obtained by forcing <code>C</code> and <code>F</code> to be written
+in fields of fixed width and with a fixed number of decimals.
+An appropriate printf format is <code>%5d</code>
+(or <code>%5.0f</code>) for
+<code>C</code> and
+<code>%5.1f</code> for <code>F</code>.
+We may also add a headline to the table. The complete program
+becomes:
+
+<p>
+
+<!-- code=text (!bc txt) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">Cdegrees = [-20, -15, -10, -5, 0, 5, 10, 15, 20, 25, 30, 35, 40]
+print &#39;    C    F&#39;
+for C in Cdegrees:
+    F = (9.0/5)*C + 32
+    print &#39;%5d %5.1f&#39; % (C, F)
+</pre></div>
+<p>
+This code is found in the file
+<a href="http://tinyurl.com/pwyasaa/looplist/c2d_table_list.py" target="_self"><tt>c2f_table_list.py</tt></a>
+and its output becomes
+
+<p>
+
+<!-- code=text (!bc ccq) typeset with pygments style "default" -->
+<blockquote>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">    C    F
+  -20  -4.0
+  -15   5.0
+  -10  14.0
+   -5  23.0
+    0  32.0
+    5  41.0
+   10  50.0
+   15  59.0
+   20  68.0
+   25  77.0
+   30  86.0
+   35  95.0
+   40 104.0
+</pre></div>
+</blockquote><p>
+<p>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pager">
+  <li class="previous">
+    <a href="._looplist-readable001.html">&larr; Prev</a>
+  </li>
+  <li class="next">
+    <a href="._looplist-readable003.html">Next &rarr;</a>
+  </li>
+</ul>
+<!-- ------------------- end of main content --------------- -->
+
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap footer
+<footer>
+<a href="http://..."><img width="250" align=right src="http://..."></a>
+</footer>
+-->
+
+
+</body>
+</html>
+    
+

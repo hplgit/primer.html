@@ -1,0 +1,612 @@
+<!--
+Automatically generated HTML file from Doconce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Doconce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Computing with formulas">
+<meta name="keywords" content="directory,run Python program,execute Python program,terminal window,console (terminal) window,directory,comments,non-English characters,formatting text and numbers,printf syntax,string,triple-quoted strings,format string syntax,newline character (line break),line break,source code,application,statements,expression,syntax,whitespace,blanks,whitespace,input (data),output (data),user (of a program),operating system (OS),Windows,Mac OS X,Unix,Linux,objects,round-off errors,interactive sessions standard Python shell,type conversion,check an object's type,rounding float to integer,interactive sessions IPython,IPython,run Python program,execute Python program,IPython running Python programs,IPython start-up file,IPython executing operating system commands,IPython command history,complex numbers,Gaussian function">
+
+
+
+
+<link href="https://raw.githubusercontent.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/css/solarized_light_code.css" rel="stylesheet" type="text/css" title="light"/>
+<script src="http://www.peterhaschke.com/assets/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<link href="http://thomasf.github.io/solarized-css/solarized-light.min.css" rel="stylesheet">
+<style type="text/css">
+.alert-text-small   { font-size: 80%;  }
+.alert-text-large   { font-size: 130%; }
+.alert-text-normal  { font-size: 90%;  }
+.alert {
+  padding:8px 35px 8px 14px; margin-bottom:18px;
+  text-shadow:0 1px 0 rgba(255,255,255,0.5);
+  border:1px solid #93a1a1;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  color: #555;
+  background-color: #eee8d5;
+  background-position: 10px 5px;
+  background-repeat: no-repeat;
+  background-size: 38px;
+  padding-left: 55px;
+  width: 75%;
+ }
+.alert-block {padding-top:14px; padding-bottom:14px}
+.alert-block > p, .alert-block > ul {margin-bottom:1em}
+.alert li {margin-top: 1em}
+.alert-block p+p {margin-top:5px}
+.alert-notice { background-image: url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_notice.png); }
+.alert-summary  { background-image:url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_summary.png); }
+.alert-warning { background-image: url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_warning.png); }
+.alert-question {background-image:url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_question.png); }
+
+div { text-align: justify; text-justify: inter-word; }
+</style>
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [(u' The first programming encounter: a formula ',
+               1,
+               u'sec:formula:1',
+               u'sec:formula:1'),
+              (u' Using a program as a calculator ',
+               2,
+               u'sec:formula:1st',
+               u'sec:formula:1st'),
+              (u' About programs and programming ', 2, None, '___sec2'),
+              (u' Tools for writing programs ', 2, None, '___sec3'),
+              (u' Writing and running your first Python program ',
+               2,
+               None,
+               '___sec4'),
+              (u' Warning about typing program text ', 2, None, '___sec5'),
+              (u' Verifying the result ', 2, None, '___sec6'),
+              (u' Using variables ',
+               2,
+               u'sec:formula:variables',
+               u'sec:formula:variables'),
+              (u' Names of variables ', 2, None, '___sec8'),
+              (u' Reserved words in Python ',
+               2,
+               u'sec:formula:keywords',
+               u'sec:formula:keywords'),
+              (u' Comments ', 2, None, '___sec10'),
+              (u' Remark ', 3, None, '___sec11'),
+              (u' Formatting text and numbers ',
+               2,
+               u'sec:formula:format',
+               u'sec:formula:format'),
+              (u' Printf syntax ', 3, None, '___sec13'),
+              (u' Format string syntax ', 3, None, '___sec14'),
+              (u' The newline character ', 3, None, '___sec15'),
+              (u' Computer science glossary ',
+               1,
+               u'sec:formula:glossary',
+               u'sec:formula:glossary'),
+              (u' Another formula: Celsius-Fahrenheit conversion ',
+               1,
+               u'sec:formula:c2f',
+               u'sec:formula:c2f'),
+              (u' Potential error: integer division ',
+               2,
+               u'sec:formula:intdiv',
+               u'sec:formula:intdiv'),
+              (u' Straightforward coding of the formula ',
+               3,
+               None,
+               '___sec19'),
+              (u' Verifying the results ', 3, None, '___sec20'),
+              (u' Float and integer division ', 3, None, '___sec21'),
+              (u' Objects in Python ', 2, None, '___sec22'),
+              (u' Avoiding integer division ',
+               2,
+               u'sec:formula:c2f:correct',
+               u'sec:formula:c2f:correct'),
+              (u' Locating potential integer division ', 3, None, '___sec24'),
+              (u' Remark ', 3, None, '___sec25'),
+              (u' Arithmetic operators and precedence ',
+               2,
+               u'sec:formula:operators',
+               u'sec:formula:operators'),
+              (u' Evaluating standard mathematical functions ',
+               1,
+               u'sec:formula:stdmath',
+               u'sec:formula:stdmath'),
+              (u' Example: Using the square root function ',
+               2,
+               u'sec:formula:sqrt',
+               u'sec:formula:sqrt'),
+              (u' Problem ', 3, None, '___sec29'),
+              (u' The program ', 3, None, '___sec30'),
+              (u' Two ways of importing a module ', 3, None, '___sec31'),
+              (u' Import with new names ', 3, None, '___sec32'),
+              (u' Example: Computing with $\\sinh x$ ', 2, None, '___sec33'),
+              (u' A first glimpse of round-off errors ',
+               2,
+               u'sec:formula:roundoff',
+               u'sec:formula:roundoff'),
+              (u' Interactive computing ',
+               1,
+               u'sec:formula:pyshell',
+               u'sec:formula:pyshell'),
+              (u' Using the Python shell ', 2, None, '___sec36'),
+              (u' Type conversion ',
+               2,
+               u'sec:formulas:typeconversion',
+               u'sec:formulas:typeconversion'),
+              (u' IPython ',
+               2,
+               u'sec:formula:ipython',
+               u'sec:formula:ipython'),
+              (u' Running programs ', 3, None, '___sec39'),
+              (u' Quick recovery of previous output ', 3, None, '___sec40'),
+              (u' Tab completion ', 3, None, '___sec41'),
+              (u' Recovering previous commands ', 3, None, '___sec42'),
+              (u' Running Unix/Windows commands ', 3, None, '___sec43'),
+              (u' Notebooks ', 3, None, '___sec44'),
+              (u' Complex numbers ',
+               1,
+               u'sec:formula:complex',
+               u'sec:formula:complex'),
+              (u' Complex arithmetics in Python ', 2, None, '___sec46'),
+              (u' Complex functions in Python ', 2, None, '___sec47'),
+              (u' Unified treatment of complex and real functions ',
+               2,
+               u'formulas:unified:complex:real',
+               u'formulas:unified:complex:real'),
+              (u' Symbolic computing ',
+               1,
+               u'sec:formula:sympy',
+               u'sec:formula:sympy'),
+              (u' Basic differentiation and integration ',
+               2,
+               u'sec:formula:sympy:diffint',
+               u'sec:formula:sympy:diffint'),
+              (u' Equation solving and Taylor series ', 2, None, '___sec51'),
+              (u' Summary ',
+               1,
+               u'sec:formula:summary',
+               u'sec:formula:summary'),
+              (u' Chapter topics ', 2, None, '___sec53'),
+              (u' Programs must be accurate! ', 3, None, '___sec54'),
+              (u' Variables ', 3, None, '___sec55'),
+              (u' Comment lines ', 3, None, '___sec56'),
+              (u' Object types ', 3, None, '___sec57'),
+              (u' Operators ', 3, None, '___sec58'),
+              (u' Common mathematical functions ', 3, None, '___sec59'),
+              (u' Print ', 3, None, '___sec60'),
+              (u' Complex numbers ', 3, None, '___sec61'),
+              (u' Terminology ', 3, None, '___sec62'),
+              (u' Example: Trajectory of a ball ', 2, None, '___sec63'),
+              (u' Problem ', 3, None, '___sec64'),
+              (u' Solution ', 3, None, '___sec65'),
+              (u' About typesetting conventions in this book ',
+               2,
+               None,
+               '___sec66'),
+              (u' Style guide for Python code ', 3, None, '___sec67'),
+              (u' Exercises ', 1, u'sec:formula:exer', u'sec:formula:exer'),
+              (u' What does it mean to solve an exercise? ',
+               3,
+               None,
+               '___sec69'),
+              (u' Exercise 1: Compute 1+1 ',
+               2,
+               u'sec:formula:ex0',
+               u'sec:formula:ex0'),
+              (u' Exercise 2: Write a Hello World program ',
+               2,
+               u'sec:formula:ex5',
+               u'sec:formula:ex5'),
+              (u' Exercise 3: Derive and compute a formula ',
+               2,
+               u'sec:formula:ex16',
+               u'sec:formula:ex16'),
+              (u' Exercise 4: Convert from meters to British length units ',
+               2,
+               u'sec:formula:ex9',
+               u'sec:formula:ex9'),
+              (u' Exercise 5: Compute the mass of various substances ',
+               2,
+               u'sec:formula:exex3',
+               u'sec:formula:exex3'),
+              (u' Exercise 6: Compute the growth of money in a bank ',
+               2,
+               u'sec:formula:ex3',
+               u'sec:formula:ex3'),
+              (u' Exercise 7: Find error(s) in a program ',
+               2,
+               u'sec:formula:ex12',
+               u'sec:formula:ex12'),
+              (u' Exercise 8: Type in program text ',
+               2,
+               u'sec:formula:exex1',
+               u'sec:formula:exex1'),
+              (u' Exercise 9: Type in programs and debug them ',
+               2,
+               u'sec:formula:exex2a',
+               u'sec:formula:exex2a'),
+              (u' Exercise 10: Evaluate a Gaussian function ',
+               2,
+               u'sec:formula:ex7',
+               u'sec:formula:ex7'),
+              (u' Remarks ', 3, None, '___sec80'),
+              (u' Exercise 11: Compute the air resistance on a football ',
+               2,
+               u'sec:formula:ex11',
+               u'sec:formula:ex11'),
+              (u' Exercise 12: How to cook the perfect egg ',
+               2,
+               u'sec:formula:ex14',
+               u'sec:formula:ex14'),
+              (u' Exercise 13: Derive the trajectory of a ball ',
+               2,
+               u'sec:formula:ex13',
+               u'sec:formula:ex13'),
+              (u' Exercise 14: Find errors in the coding of formulas ',
+               2,
+               u'sec:formula:ex1',
+               u'sec:formula:ex1'),
+              (u' Exercise 15: Explain why a program does not work ',
+               2,
+               u'sec:formula:ex15',
+               u'sec:formula:ex15'),
+              (u' Exercise 16: Find errors in Python statements ',
+               2,
+               u'sec:formula:ex2',
+               u'sec:formula:ex2'),
+              (u' Exercise 17: Find errors in the coding of a formula ',
+               2,
+               u'sec:formula:ex4',
+               u'sec:formula:ex4'),
+              (u' References ', 1, None, '___sec88')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- newcommands_keep.tex -->
+$$
+\newcommand{\tp}{\thinspace .}
+\renewcommand{\Re}{\bbbr}
+
+\newcommand{\rhodim}{\mbox{kgm}^{-3}}
+\newcommand{\mudim}{\mbox{kg}\,\mbox{s}^{-1}\mbox{m}^{-1}}
+\newcommand{\Cdim}{\mbox{kg}\,\mbox{s}^{-1}}
+
+
+\newcommand{\Oof}[1]{\mathcal{O}(#1)}
+\newcommand{\Prob}[1]{\hbox{P}(#1)}
+\newcommand{\Var}[1]{\hbox{Var}(#1)}
+\newcommand{\Cov}[2]{\hbox{Cov}(#1,#2)}
+\newcommand{\StDev}[1]{\hbox{StDev}(#1)}
+$$
+
+
+
+
+    
+<a name="part0003"></a>
+<p>
+<!-- begin top navigation -->
+<table style="width: 100%"><tr><td>
+<div style="text-align: left;"><a href="._formulas-solarized002.html">&laquo; Previous</a></div>
+</td><td>
+<div style="text-align: right;"><a href="._formulas-solarized004.html">Next &raquo;</a></div>
+</td></tr></table>
+<!-- end top navigation -->
+</p>
+
+<p>
+<!-- !split -->
+
+<h1>Another formula: Celsius-Fahrenheit conversion <a name="sec:formula:c2f"></a></h1>
+
+Our next example involves the formula for converting temperature
+measured in Celsius degrees to the corresponding value in Fahrenheit
+degrees:
+
+$$
+\begin{equation}
+F = \frac{9}{5}C + 32
+\tag{3}
+\end{equation}
+$$
+
+In this formula, \( C \) is the amount of degrees in Celsius, and \( F \) is
+the corresponding temperature measured in Fahrenheit.  Our goal now is
+to write a computer program that can compute \( F \) from
+<a href="#mjx-eqn-3">(3)</a> when \( C \) is known.
+
+<h2>Potential error: integer division <a name="sec:formula:intdiv"></a></h2>
+
+<h3>Straightforward coding of the formula  <a name="___sec19"></a></h3>
+
+A straightforward attempt at coding the formula
+<a href="#mjx-eqn-3">(3)</a> goes as follows:
+
+<p>
+<!-- begin verbatim block  txt-->
+<pre><code>C = 21
+F = (9/5)*C + 32
+print F
+</code></pre>
+<!-- end verbatim block -->
+The parentheses around <code>9/5</code> are not strictly needed, i.e.,
+<code>(9/5)*C</code> is computationally identical to <code>9/5*C</code>, but
+parentheses remove any doubt that <code>9/5*C</code> could mean
+<code>9/(5*C)</code>.  The section <a href="#sec:formula:operators">Arithmetic operators and precedence</a> has more
+information on this topic.
+
+<p>
+When run under Python version 2.x, the program prints the value
+53. You can find the program in the file <a href="http://tinyurl.com/pwyasaa/formulas/c2f_v1.py" target="_self"><tt>c2f_v1.py</tt></a> in the <code>src/formulas</code> folder in the
+folder tree of example programs from this document (downloaded from
+<a href="http://hplgit.github.com/scipro-primer" target="_self"><tt>http://hplgit.github.com/scipro-primer</tt></a>).  The <code>v1</code> part of the
+name stands for <em>version 1</em>. Throughout this document, we will often
+develop several trial versions of a program, but remove the version
+number in the final version of the program.
+
+<h3>Verifying the results  <a name="___sec20"></a></h3>
+
+Testing the correctness is easy in this case since we can evaluate the
+formula on a calculator: \( \frac{9}{5}\cdot 21+32 \) is 69.8, not 53. What
+is wrong?  The formula in the program looks correct!
+
+<h3>Float and integer division  <a name="___sec21"></a></h3>
+
+The error in our program above is one of the most common errors in
+mathematical software and is not at all obvious for a newcomer to
+programming. In many computer languages, there are two types of
+divisions: float division and integer division. Float division is what
+you know from mathematics: 9/5 becomes 1.8 in decimal notation.
+
+<p>
+Integer division \( a/b \) with integers (whole numbers) \( a \) and \( b \)
+results in an integer that is truncated (or mathematically, rounded
+down). More precisely, the result is the largest integer \( c \) such that
+\( bc\leq a \). This implies that \( 9/5 \) becomes 1 since \( 1\cdot 5 = 5 \leq
+9 \) while \( 2\cdot 5 = 10 >9 \). Another example is \( 1/5 \), which becomes 0
+since \( 0\cdot 5 \leq 1 \) (and \( 1\cdot 5 > 1 \)).  Yet another example is
+\( 16/6 \), which results in 2 (try \( 2\cdot 6 \) and \( 3\cdot 6 \) to convince
+yourself).  Many computer languages, including Fortran, C, C++, Java,
+and Python version 2, interpret a division operation <code>a/b</code> as integer
+division if both operands <code>a</code> and <code>b</code> are integers. If either <code>a</code> or
+<code>b</code> is a real (floating-point) number, <code>a/b</code> implies the standard
+mathematical float division.  Other languages, such as MATLAB and
+Python version 3, interprets <code>a/b</code> as float division even if both
+operands are integers, or complex division if one of the operands is a
+complex number.
+
+<p>
+The problem with our program is the coding of the formula <code>(9/5)*C +
+32</code>. This formula is evaluated as follows. First, <code>9/5</code> is
+calculated. Since <code>9</code> and <code>5</code> are interpreted by Python as integers
+(whole numbers), <code>9/5</code> is a division between two integers, and Python
+version 2 chooses by default integer division, which results in
+1. Then 1 is multiplied by <code>C</code>, which equals 21, resulting in
+21. Finally, 21 and 32 are added with 53 as result.
+
+<p>
+We shall very soon present a correct version of the temperature
+conversion program, but first it may be advantageous to introduce a
+frequently used term in Python programming: <em>object</em>.
+
+<h2>Objects in Python  <a name="___sec22"></a></h2>
+
+When we write
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>C = 21
+</code></pre>
+<!-- end verbatim block -->
+Python interprets the number <code>21</code> on the right-hand side of the
+assignment as an integer and creates an <code>int</code> (for integer) <em>object</em>
+holding the value 21. The variable <code>C</code> acts as a <em>name</em> for this <code>int</code>
+object.  Similarly, if we write <code>C = 21.0</code>, Python recognizes <code>21.0</code>
+as a real number and therefore creates a <code>float</code> (for floating-point)
+object holding the value 21.0 and lets <code>C</code> be a name for this
+object. In fact, any assignment statement has the form of a variable
+name on the left-hand side and an object on the right-hand side.  One
+may say that Python programming is about solving a problem by defining
+and changing objects.
+
+<p>
+At this stage, you do not need to know what an object really is, just
+think of an <code>int</code> object as a collection, say a storage box, with some
+information about an integer number. This information is stored
+somewhere in the computer's memory, and with the name <code>C</code> the program
+gets access to this information.  The fundamental issue right now is
+that 21 and 21.0 are identical numbers in mathematics, while in a
+Python program 21 gives rise to an <code>int</code> object and 21.0 to a <code>float</code>
+object.
+
+<p>
+There are lots of different object types in Python, and you will later
+learn how to create your own customized objects. Some objects contain
+a lot of data, not just an integer or a real number. For example,
+when we write
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>print 'A text with an integer %d and a float %f' % (2, 2.0)
+</code></pre>
+<!-- end verbatim block -->
+a <code>str</code> (string) object, without a name,
+is first made of the text between the quotes
+and then this <code>str</code> object is printed. We can alternatively
+do this in two steps:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>s = 'A text with an integer %d and a float %f' % (2, 2.0)
+print s
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+<!-- It is usual to say that <code>C = 21</code> creates a name <code>C</code> for an -->
+<!-- <code>int</code> object with the value 21. Alternatively, we may say that -->
+<!-- <code>C</code> is a <em>variable</em> of <code>int</code> type, holding the value 21. -->
+
+<h2>Avoiding integer division <a name="sec:formula:c2f:correct"></a></h2>
+
+As a quite general rule of thumb, one should be careful to avoid
+integer division when programming mathematical formulas. In the rare
+cases when a mathematical algorithm does make use of integer division,
+one should use a double forward slash, <code>//</code>, as division operator,
+because this is Python's way of explicitly indicating integer
+division.
+
+<p>
+Python version 3 has no problem with unintended integer division, so
+the problem only arises with Python version 2 (and many other common
+languages for scientific computing).  There are several ways to avoid
+integer division with the plain <code>/</code> operator.  The simplest remedy in
+Python version 2 is to write
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>from __future__ import division
+</code></pre>
+<!-- end verbatim block -->
+This import statement must be present in the beginning of every file
+where the <code>/</code> operator always shall imply float division.
+Alternatively, one can run a Python program <code>someprogram.py</code> from the
+command line with the argument <code>-Qnew</code> to the Python interpreter:
+
+<p>
+<!-- begin verbatim block  sys-->
+<pre><code>Terminal&gt; python -Qnew someprogram.py
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+A more widely applicable method, also in other programming languages
+than Python version 2, is to enforce one of the operands to be a
+<code>float</code> object. In the current example, there are several ways to do
+this:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>F = (9.0/5)*C + 32
+F = (9/5.0)*C + 32
+F = float(C)*9/5 + 32
+</code></pre>
+<!-- end verbatim block -->
+In the first two lines, one of the operands is written as a decimal
+number, implying a <code>float</code> object and hence float division.  In the
+last line, <code>float(C)*9</code> means <code>float</code> times <code>int</code>, which results in a
+<code>float</code> object, and float division is guaranteed.
+
+<p>
+A related construction,
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>F = float(C)*(9/5) + 32
+</code></pre>
+<!-- end verbatim block -->
+does not work correctly, because <code>9/5</code> is evaluated by integer
+division, yielding 1, before being multiplied by a <code>float</code>
+representation of <code>C</code> (see next section for how compound arithmetic
+operations are calculated). In other words, the formula reads
+<code>F=C+32</code>, which is wrong.
+
+<p>
+We now understand why the first version of the program does not work
+and what the remedy is. A correct program is
+
+<p>
+<!-- begin verbatim block  txt-->
+<pre><code>C = 21
+F = (9.0/5)*C + 32
+print F
+</code></pre>
+<!-- end verbatim block -->
+Instead of <code>9.0</code> we may just write <code>9.</code> (the dot implies a <code>float</code>
+interpretation of the number).  The program is available in the file
+<a href="http://tinyurl.com/pwyasaa/formulas/c2d.py" target="_self"><tt>c2f.py</tt></a>. Try to run it - and observe
+that the output becomes 69.8, which is correct.
+
+<h3>Locating potential integer division  <a name="___sec24"></a></h3>
+
+Running a Python program with the <code>-Qwarnall</code> argument, say
+
+<p>
+<!-- begin verbatim block  sys-->
+<pre><code>Terminal&gt; python -Qwarnall someprogram.py
+</code></pre>
+<!-- end verbatim block -->
+will print out a warning every time an integer division
+expression is encountered in Python version 2.
+
+<h3>Remark  <a name="___sec25"></a></h3>
+
+We could easily have run into problems in our very first programs if
+we instead of writing the formula \( \frac{1}{2}gt^2 \) as <code>0.5*g*t**2</code>
+wrote <code>(1/2)*g*t**2</code>.  This term would then always be zero!
+
+<h2>Arithmetic operators and precedence <a name="sec:formula:operators"></a></h2>
+
+Formulas in Python programs are usually evaluated in the same way as
+we would evaluate them mathematically.  Python proceeds from left to
+right, term by term in an expression (terms are separated by plus or
+minus).  In each term, power operations such as \( a^b \), coded as
+<code>a**b</code>, has precedence over multiplication and division.  As in
+mathematics, we can use parentheses to dictate the way a formula is
+evaluated.  Below are two illustrations of these principles.
+
+<ul>
+  <li> <code>5/9+2*a**4/2</code>: First 5/9 is evaluated (as integer division, giving 0 as result), then \( a^4 \) (<code>a**4</code>) is evaluated, then 2 is multiplied with \( a^4 \), that result is divided by 2, and the answer is added to the result of the first term. The answer is therefore <code>a**4</code>.</li>
+  <li> <code>5/(9+2)*a**(4/2)</code>: First \( 5\over 9+2 \) is evaluated (as integer division, yielding 0), then 4/2 is computed (as integer division, yielding 2), then <code>a**2</code> is calculated, and that number is multiplied by the result of <code>5/(9+2)</code>. The answer is thus always zero.</li>
+</ul>
+
+As evident from these two examples, it is easy to unintentionally get
+integer division in formulas. Although integer division can be turned
+off in Python, we think it is important to be strongly aware of the
+integer division concept and to develop good programming habits to
+avoid it. The reason is that this concept appears in so many common
+computer languages that it is better to learn as early as possible how
+to deal with the problem rather than using a Python-specific feature
+to remove the problem.
+
+<p>
+<p>
+<!-- begin bottom navigation -->
+<table style="width: 100%"><tr><td>
+<div style="text-align: left;"><a href="._formulas-solarized002.html">&laquo; Previous</a></div>
+</td><td>
+<div style="text-align: right;"><a href="._formulas-solarized004.html">Next &raquo;</a></div>
+</td></tr></table>
+<!-- end bottom navigation -->
+</p>
+
+<!-- ------------------- end of main content --------------- -->
+
+
+</body>
+</html>
+    
+

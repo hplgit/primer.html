@@ -1,0 +1,1008 @@
+<!--
+Automatically generated HTML file from Doconce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Doconce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Computing with formulas">
+<meta name="keywords" content="directory,run Python program,execute Python program,terminal window,console (terminal) window,directory,comments,non-English characters,formatting text and numbers,printf syntax,string,triple-quoted strings,format string syntax,newline character (line break),line break,source code,application,statements,expression,syntax,whitespace,blanks,whitespace,input (data),output (data),user (of a program),operating system (OS),Windows,Mac OS X,Unix,Linux,objects,round-off errors,interactive sessions standard Python shell,type conversion,check an object's type,rounding float to integer,interactive sessions IPython,IPython,run Python program,execute Python program,IPython running Python programs,IPython start-up file,IPython executing operating system commands,IPython command history,complex numbers,Gaussian function">
+
+
+
+
+<link href="https://raw.githubusercontent.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/css/solarized_light_code.css" rel="stylesheet" type="text/css" title="light"/>
+<script src="http://www.peterhaschke.com/assets/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<link href="http://thomasf.github.io/solarized-css/solarized-light.min.css" rel="stylesheet">
+<style type="text/css">
+.alert-text-small   { font-size: 80%;  }
+.alert-text-large   { font-size: 130%; }
+.alert-text-normal  { font-size: 90%;  }
+.alert {
+  padding:8px 35px 8px 14px; margin-bottom:18px;
+  text-shadow:0 1px 0 rgba(255,255,255,0.5);
+  border:1px solid #93a1a1;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  color: #555;
+  background-color: #eee8d5;
+  background-position: 10px 5px;
+  background-repeat: no-repeat;
+  background-size: 38px;
+  padding-left: 55px;
+  width: 75%;
+ }
+.alert-block {padding-top:14px; padding-bottom:14px}
+.alert-block > p, .alert-block > ul {margin-bottom:1em}
+.alert li {margin-top: 1em}
+.alert-block p+p {margin-top:5px}
+.alert-notice { background-image: url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_notice.png); }
+.alert-summary  { background-image:url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_summary.png); }
+.alert-warning { background-image: url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_warning.png); }
+.alert-question {background-image:url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_question.png); }
+
+div { text-align: justify; text-justify: inter-word; }
+</style>
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [(u' The first programming encounter: a formula ',
+               1,
+               u'sec:formula:1',
+               u'sec:formula:1'),
+              (u' Using a program as a calculator ',
+               2,
+               u'sec:formula:1st',
+               u'sec:formula:1st'),
+              (u' About programs and programming ', 2, None, '___sec2'),
+              (u' Tools for writing programs ', 2, None, '___sec3'),
+              (u' Writing and running your first Python program ',
+               2,
+               None,
+               '___sec4'),
+              (u' Warning about typing program text ', 2, None, '___sec5'),
+              (u' Verifying the result ', 2, None, '___sec6'),
+              (u' Using variables ',
+               2,
+               u'sec:formula:variables',
+               u'sec:formula:variables'),
+              (u' Names of variables ', 2, None, '___sec8'),
+              (u' Reserved words in Python ',
+               2,
+               u'sec:formula:keywords',
+               u'sec:formula:keywords'),
+              (u' Comments ', 2, None, '___sec10'),
+              (u' Remark ', 3, None, '___sec11'),
+              (u' Formatting text and numbers ',
+               2,
+               u'sec:formula:format',
+               u'sec:formula:format'),
+              (u' Printf syntax ', 3, None, '___sec13'),
+              (u' Format string syntax ', 3, None, '___sec14'),
+              (u' The newline character ', 3, None, '___sec15'),
+              (u' Computer science glossary ',
+               1,
+               u'sec:formula:glossary',
+               u'sec:formula:glossary'),
+              (u' Another formula: Celsius-Fahrenheit conversion ',
+               1,
+               u'sec:formula:c2f',
+               u'sec:formula:c2f'),
+              (u' Potential error: integer division ',
+               2,
+               u'sec:formula:intdiv',
+               u'sec:formula:intdiv'),
+              (u' Straightforward coding of the formula ',
+               3,
+               None,
+               '___sec19'),
+              (u' Verifying the results ', 3, None, '___sec20'),
+              (u' Float and integer division ', 3, None, '___sec21'),
+              (u' Objects in Python ', 2, None, '___sec22'),
+              (u' Avoiding integer division ',
+               2,
+               u'sec:formula:c2f:correct',
+               u'sec:formula:c2f:correct'),
+              (u' Locating potential integer division ', 3, None, '___sec24'),
+              (u' Remark ', 3, None, '___sec25'),
+              (u' Arithmetic operators and precedence ',
+               2,
+               u'sec:formula:operators',
+               u'sec:formula:operators'),
+              (u' Evaluating standard mathematical functions ',
+               1,
+               u'sec:formula:stdmath',
+               u'sec:formula:stdmath'),
+              (u' Example: Using the square root function ',
+               2,
+               u'sec:formula:sqrt',
+               u'sec:formula:sqrt'),
+              (u' Problem ', 3, None, '___sec29'),
+              (u' The program ', 3, None, '___sec30'),
+              (u' Two ways of importing a module ', 3, None, '___sec31'),
+              (u' Import with new names ', 3, None, '___sec32'),
+              (u' Example: Computing with $\\sinh x$ ', 2, None, '___sec33'),
+              (u' A first glimpse of round-off errors ',
+               2,
+               u'sec:formula:roundoff',
+               u'sec:formula:roundoff'),
+              (u' Interactive computing ',
+               1,
+               u'sec:formula:pyshell',
+               u'sec:formula:pyshell'),
+              (u' Using the Python shell ', 2, None, '___sec36'),
+              (u' Type conversion ',
+               2,
+               u'sec:formulas:typeconversion',
+               u'sec:formulas:typeconversion'),
+              (u' IPython ',
+               2,
+               u'sec:formula:ipython',
+               u'sec:formula:ipython'),
+              (u' Running programs ', 3, None, '___sec39'),
+              (u' Quick recovery of previous output ', 3, None, '___sec40'),
+              (u' Tab completion ', 3, None, '___sec41'),
+              (u' Recovering previous commands ', 3, None, '___sec42'),
+              (u' Running Unix/Windows commands ', 3, None, '___sec43'),
+              (u' Notebooks ', 3, None, '___sec44'),
+              (u' Complex numbers ',
+               1,
+               u'sec:formula:complex',
+               u'sec:formula:complex'),
+              (u' Complex arithmetics in Python ', 2, None, '___sec46'),
+              (u' Complex functions in Python ', 2, None, '___sec47'),
+              (u' Unified treatment of complex and real functions ',
+               2,
+               u'formulas:unified:complex:real',
+               u'formulas:unified:complex:real'),
+              (u' Symbolic computing ',
+               1,
+               u'sec:formula:sympy',
+               u'sec:formula:sympy'),
+              (u' Basic differentiation and integration ',
+               2,
+               u'sec:formula:sympy:diffint',
+               u'sec:formula:sympy:diffint'),
+              (u' Equation solving and Taylor series ', 2, None, '___sec51'),
+              (u' Summary ',
+               1,
+               u'sec:formula:summary',
+               u'sec:formula:summary'),
+              (u' Chapter topics ', 2, None, '___sec53'),
+              (u' Programs must be accurate! ', 3, None, '___sec54'),
+              (u' Variables ', 3, None, '___sec55'),
+              (u' Comment lines ', 3, None, '___sec56'),
+              (u' Object types ', 3, None, '___sec57'),
+              (u' Operators ', 3, None, '___sec58'),
+              (u' Common mathematical functions ', 3, None, '___sec59'),
+              (u' Print ', 3, None, '___sec60'),
+              (u' Complex numbers ', 3, None, '___sec61'),
+              (u' Terminology ', 3, None, '___sec62'),
+              (u' Example: Trajectory of a ball ', 2, None, '___sec63'),
+              (u' Problem ', 3, None, '___sec64'),
+              (u' Solution ', 3, None, '___sec65'),
+              (u' About typesetting conventions in this book ',
+               2,
+               None,
+               '___sec66'),
+              (u' Style guide for Python code ', 3, None, '___sec67'),
+              (u' Exercises ', 1, u'sec:formula:exer', u'sec:formula:exer'),
+              (u' What does it mean to solve an exercise? ',
+               3,
+               None,
+               '___sec69'),
+              (u' Exercise 1: Compute 1+1 ',
+               2,
+               u'sec:formula:ex0',
+               u'sec:formula:ex0'),
+              (u' Exercise 2: Write a Hello World program ',
+               2,
+               u'sec:formula:ex5',
+               u'sec:formula:ex5'),
+              (u' Exercise 3: Derive and compute a formula ',
+               2,
+               u'sec:formula:ex16',
+               u'sec:formula:ex16'),
+              (u' Exercise 4: Convert from meters to British length units ',
+               2,
+               u'sec:formula:ex9',
+               u'sec:formula:ex9'),
+              (u' Exercise 5: Compute the mass of various substances ',
+               2,
+               u'sec:formula:exex3',
+               u'sec:formula:exex3'),
+              (u' Exercise 6: Compute the growth of money in a bank ',
+               2,
+               u'sec:formula:ex3',
+               u'sec:formula:ex3'),
+              (u' Exercise 7: Find error(s) in a program ',
+               2,
+               u'sec:formula:ex12',
+               u'sec:formula:ex12'),
+              (u' Exercise 8: Type in program text ',
+               2,
+               u'sec:formula:exex1',
+               u'sec:formula:exex1'),
+              (u' Exercise 9: Type in programs and debug them ',
+               2,
+               u'sec:formula:exex2a',
+               u'sec:formula:exex2a'),
+              (u' Exercise 10: Evaluate a Gaussian function ',
+               2,
+               u'sec:formula:ex7',
+               u'sec:formula:ex7'),
+              (u' Remarks ', 3, None, '___sec80'),
+              (u' Exercise 11: Compute the air resistance on a football ',
+               2,
+               u'sec:formula:ex11',
+               u'sec:formula:ex11'),
+              (u' Exercise 12: How to cook the perfect egg ',
+               2,
+               u'sec:formula:ex14',
+               u'sec:formula:ex14'),
+              (u' Exercise 13: Derive the trajectory of a ball ',
+               2,
+               u'sec:formula:ex13',
+               u'sec:formula:ex13'),
+              (u' Exercise 14: Find errors in the coding of formulas ',
+               2,
+               u'sec:formula:ex1',
+               u'sec:formula:ex1'),
+              (u' Exercise 15: Explain why a program does not work ',
+               2,
+               u'sec:formula:ex15',
+               u'sec:formula:ex15'),
+              (u' Exercise 16: Find errors in Python statements ',
+               2,
+               u'sec:formula:ex2',
+               u'sec:formula:ex2'),
+              (u' Exercise 17: Find errors in the coding of a formula ',
+               2,
+               u'sec:formula:ex4',
+               u'sec:formula:ex4'),
+              (u' References ', 1, None, '___sec88')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- newcommands_keep.tex -->
+$$
+\newcommand{\tp}{\thinspace .}
+\renewcommand{\Re}{\bbbr}
+
+\newcommand{\rhodim}{\mbox{kgm}^{-3}}
+\newcommand{\mudim}{\mbox{kg}\,\mbox{s}^{-1}\mbox{m}^{-1}}
+\newcommand{\Cdim}{\mbox{kg}\,\mbox{s}^{-1}}
+
+
+\newcommand{\Oof}[1]{\mathcal{O}(#1)}
+\newcommand{\Prob}[1]{\hbox{P}(#1)}
+\newcommand{\Var}[1]{\hbox{Var}(#1)}
+\newcommand{\Cov}[2]{\hbox{Cov}(#1,#2)}
+\newcommand{\StDev}[1]{\hbox{StDev}(#1)}
+$$
+
+
+
+
+    
+<a name="part0009"></a>
+<p>
+<!-- begin top navigation -->
+<table style="width: 100%"><tr><td>
+<div style="text-align: left;"><a href="._formulas-solarized008.html">&laquo; Previous</a></div>
+</td><td>
+</td></tr></table>
+<!-- end top navigation -->
+</p>
+
+<p>
+<!-- !split -->
+
+<h1>Exercises <a name="sec:formula:exer"></a></h1>
+
+<h3>What does it mean to solve an exercise?  <a name="___sec69"></a></h3>
+
+The solution to most of the exercises in this document is a Python
+program.  To produce the solution, you first need understand the
+problem and what the program is supposed to do, and then you need to
+understand how to translate the problem description into a series of
+Python statements.  Equally important is the verification (testing) of
+the program. A complete solution to a programming exercises therefore
+consists of two parts: 1) the program text and 2) a demonstration that the
+program works correctly. Some simple programs, like the ones in the
+first two exercises below, have so
+obviously correct output that the verification
+can just be to run the program and record the output.
+
+<p>
+In cases where the correctness of the output is not obvious, it is
+necessary to prove or bring evidence that the result is correct. This
+can be done through comparisons with calculations done separately on
+a calculator, or one can apply the program to a special simple test case
+with known results. The requirement is to provide evidence to the
+claim that the program is without programming errors.
+
+<p>
+The sample run of the program to check its correctness can be inserted
+at the end of the program as a triple-quoted string. Alternatively,
+the output lines can be inserted as comments, but using a multi-line
+string requires less typing. (Technically, a string object is created,
+but not assigned to any name or used for anything in the program
+beyond providing useful information for the reader of the code.)  One
+can do
+
+<p>
+<!-- begin verbatim block  sys-->
+<pre><code>Terminal&gt; python myprogram.py &gt; result
+</code></pre>
+<!-- end verbatim block -->
+and use a text editor to insert the file <code>result</code> inside the
+triple-quoted multi-line string. Here is an example on a
+run of a Fahrenheit to Celsius conversion program inserted at
+the end as a triple-quoted string:
+
+<p>
+<!-- begin verbatim block  pypro-->
+<pre><code>F = 69.8                # Fahrenheit degrees
+C = (5.0/9)*(F - 32)    # Corresponding Celsius degrees
+print C
+
+'''
+Sample run (correct result is 21):
+python f2c.py
+21.0
+'''
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2>Exercise 1: Compute 1+1 <a name="sec:formula:ex0"></a></h2>
+
+The first exercise concerns some very basic mathematics and
+programming: assign the result of 1+1 to a variable and print the
+value of that variable.
+Filename: <code>1plus1.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2>Exercise 2: Write a Hello World program <a name="sec:formula:ex5"></a></h2>
+
+Almost all books about programming languages start with a very simple
+program that prints the text <code>Hello, World!</code> to the screen.
+Make such a program in Python.
+Filename: <code>hello_world.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2>Exercise 3: Derive and compute a formula <a name="sec:formula:ex16"></a></h2>
+
+Can a newborn baby in Norway expect to live for one billion (\( 10^9 \))
+seconds?  Write a Python program for doing arithmetics to answer the
+question.
+Filename: <code>seconds2years.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2>Exercise 4: Convert from meters to British length units <a name="sec:formula:ex9"></a></h2>
+
+Make a program where you set a length given in meters and then compute
+and write out the corresponding length measured in inches, in feet, in
+yards, and in miles. Use that one inch is 2.54 cm, one foot is 12
+inches, one yard is 3 feet, and one British mile is 1760 yards. For
+verification, a length of 640 meters corresponds to 25196.85 inches,
+2099.74 feet, 699.91 yards, or 0.3977 miles.
+Filename: <code>length_conversion.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2>Exercise 5: Compute the mass of various substances <a name="sec:formula:exex3"></a></h2>
+
+The density of a substance is defined as \( \varrho = m/V \), where \( m \) is
+the mass of a volume \( V \). Compute and print out the mass of one liter
+of each of the following substances whose densities in \( \hbox{g/cm}^3 \)
+are found in the file <a href="http://tinyurl.com/pwyasaa/files/densities.dat" target="_self"><tt>src/files/densities.dat</tt></a>: iron, air, gasoline, ice, the human
+body, silver, and platinum.
+Filename: <code>1liter.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2>Exercise 6: Compute the growth of money in a bank <a name="sec:formula:ex3"></a></h2>
+
+Let \( p \) be a bank's interest rate in percent per year. An initial amount
+\( A \) has then grown to
+
+$$
+\begin{equation*} A\left(1 + {p\over 100}\right)^n\end{equation*}
+$$
+
+after \( n \) years. Make a program for computing how much money 1000 euros
+have grown to after three years with 5 percent interest rate.
+Filename: <code>interest_rate.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2>Exercise 7: Find error(s) in a program <a name="sec:formula:ex12"></a></h2>
+
+Suppose somebody has written a simple one-line program for computing
+\( \sin (1) \):
+
+<p>
+<!-- begin verbatim block  pypro-->
+<pre><code>x=1; print 'sin(%g)=%g' % (x, sin(x))
+</code></pre>
+<!-- end verbatim block -->
+Create this program and try to run it. What is the problem?
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2>Exercise 8: Type in program text <a name="sec:formula:exex1"></a></h2>
+
+Type the following program in your editor and execute it. If your
+program does not work, check that you have copied the code correctly.
+
+<p>
+<!-- begin verbatim block  pypro-->
+<pre><code>from math import pi
+
+h = 5.0   # height
+b = 2.0   # base
+r = 1.5   # radius
+
+area_parallelogram = h*b
+print 'The area of the parallelogram is %.3f' % area_parallelogram
+
+area_square = b**2
+print 'The area of the square is %g' % area_square
+
+area_circle = pi*r**2
+print 'The area of the circle is %.3f' % area_circle
+
+volume_cone = 1.0/3*pi*r**2*h
+print 'The volume of the cone is %.3f' % volume_cone
+</code></pre>
+<!-- end verbatim block -->
+Filename: <code>formulas_shapes.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2>Exercise 9: Type in programs and debug them <a name="sec:formula:exex2a"></a></h2>
+
+Type these short programs in your editor and execute them. When they
+do not work, identify and correct the erroneous statements.
+
+<p>
+<b>a)</b>
+Does \( \sin^2(x) + \cos^2(x) = 1 \)?
+
+<p>
+<!-- begin verbatim block  pypro-->
+<pre><code>from math import sin, cos
+x = pi/4
+1_val = math.sin^2(x) + math.cos^2(x)
+print 1_VAL
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+<b>b)</b>
+Compute \( s \) in meters when \( s=v_0t + 0,5at^2 \), with \( v_0=3 \) m/s, \( t=1 \) s, \( a=2\ \hbox{m/s}^2 \).
+
+<p>
+<!-- begin verbatim block  pypro-->
+<pre><code>v0 = 3 m/s
+t = 1 s
+a = 2 m/s**2
+s = v0.t + 0,5.a.t**2
+print s
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+<b>c)</b>
+Verify these equations:
+
+$$
+\begin{equation*}
+(a + b)^2 = a^2 + 2ab + b^2
+\end{equation*}
+$$
+
+
+$$
+\begin{equation*}
+(a - b)^2 = a^2 - 2ab + b^2
+\end{equation*}
+$$
+
+
+<p>
+<!-- begin verbatim block  pypro-->
+<pre><code>a = 3,3   b = 5,3
+a2 = a**2
+b2 = b**2
+
+eq1_sum = a2 + 2ab + b2
+eq2_sum = a2 - 2ab + b2
+
+eq1_pow = (a + b)**2
+eq2_pow = (a - b)**2
+
+print 'First equation:  %g = %g', % (eq1_sum, eq1_pow)
+print 'Second equation: %h = %h', % (eq2_pow, eq2_pow)
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+Filename: <code>sin2_plus_cos2.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2>Exercise 10: Evaluate a Gaussian function <a name="sec:formula:ex7"></a></h2>
+
+The bell-shaped Gaussian function,
+
+$$
+\begin{equation}
+f(x) =
+{1\over\sqrt{2\pi }\, s}
+\exp{\left[-\frac{1}{2}\left({x-m\over s}\right)^2\right]},
+\tag{7}
+\end{equation}
+$$
+
+is one of the most widely used functions in science and technology.
+The parameters \( m \) and \( s>0 \) are prescribed real numbers.  Make a
+program for evaluating this function when \( m=0 \), \( s=2 \), and
+\( x=1 \). Verify the program's result by comparing with hand calculations
+on a calculator.
+Filename: <code>gaussian1.py</code>.
+
+<p>
+<!-- Closing remarks for this Exercise -->
+
+<h3>Remarks  <a name="___sec80"></a></h3>
+
+The function <a href="#mjx-eqn-7">(7)</a> is named after
+<a href="http://en.wikipedia.org/wiki/Carl_Gauss" target="_self">Carl Friedrich Gauss</a>,
+1777-1855, who was
+a German mathematician and scientist,
+now considered as one of the greatest scientists of all time.
+He contributed to many fields, including number theory, statistics,
+mathematical analysis, differential geometry,
+geodesy, electrostatics, astronomy, and optics.
+Gauss introduced the function <a href="#mjx-eqn-7">(7)</a> when
+he analyzed probabilities related to astronomical data.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2>Exercise 11: Compute the air resistance on a football <a name="sec:formula:ex11"></a></h2>
+
+The drag force, due to air resistance, on an object can be expressed
+as
+
+$$
+\begin{equation}
+F_d = \frac{1}{2} C_D \varrho AV^2,
+\end{equation}
+$$
+
+where \( \varrho \) is the density of the air, \( V \) is the velocity of the
+object, \( A \) is the cross-sectional area (normal to the velocity direction),
+and \( C_D \) is the drag coefficient, which depends heavily on the
+shape of the object and the roughness of the surface.
+
+<p>
+The gravity force on an object with mass \( m \) is \( F_g = mg \), where
+\( g=9.81 \hbox{m}\,\hbox{s}^{-2} \).
+
+<p>
+We can use the formulas for \( F_d \) and \( F_g \) to study the importance of
+air resistance versus gravity when kicking a football.  The density of
+air is \( \varrho = 1.2\ \hbox{kg }\,{\hbox{m}}^{-3} \).  We have \( A=\pi
+a^2 \) for any ball with radius \( a \).  For a football, \( a=11 \) cm,
+the mass is 0.43 kg, and \( C_D \) can be taken as 0.2.
+
+<p>
+Make a program that computes the drag force and the gravity force on a
+football. Write out the forces with one decimal in units of Newton
+(\( \hbox{N} = \hbox{kg}\,\hbox{m}/\hbox{s}^{2} \)).  Also print the ratio
+of the drag force and the gravity force.  Define \( C_D \), \( \varrho \),
+\( A \), \( V \), \( m \), \( g \), \( F_d \), and \( F_g \) as variables, and put a comment
+with the corresponding unit.  Use the program to calculate the forces
+on the ball for a hard kick, \( V=120 \hbox{ km}/\hbox{h} \) and for a
+soft kick, \( V=10 \hbox{ km}/\hbox{h} \) (it is easy to mix inconsistent
+units, so make sure you compute with \( V \) expressed in m/s).
+Filename: <code>kick.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2>Exercise 12: How to cook the perfect egg <a name="sec:formula:ex14"></a></h2>
+
+<!-- good: <a href="http://newton.ex.ac.uk/teaching/CDHW/egg/" target="_self"><tt>http://newton.ex.ac.uk/teaching/CDHW/egg/</tt></a> -->
+<!-- ok: <a href="http://nasaexplores.nasa.gov/show_912_teacher_st.php" target="_self"><tt>http://nasaexplores.nasa.gov/show_912_teacher_st.php</tt></a>?id=03070985426 -->
+
+<p>
+As an egg cooks, the proteins first denature and then coagulate.  When
+the temperature exceeds a critical point, reactions begin and proceed
+faster as the temperature increases. In the egg white, the proteins
+start to coagulate for temperatures above 63 C, while in the yolk the
+proteins start to coagulate for temperatures above 70 C.  For a soft
+boiled egg, the white needs to have been heated long enough to
+coagulate at a temperature above 63 C, but the yolk should not be
+heated above 70 C.  For a hard boiled egg, the center of the yolk
+should be allowed to reach 70 C.
+
+<p>
+The following formula expresses the time \( t \) it takes (in seconds) for
+the center of the yolk to reach the temperature \( T_y \) (in Celsius
+degrees):
+
+$$
+\begin{equation}
+t = \frac{M^{2/3}c\rho^{1/3}}{K\pi^2(4\pi/3)^{2/3}}
+\ln\left\lbrack 0.76\frac{T_o - T_w}{T_y-T_w}\right\rbrack\tp
+\tag{8}
+\end{equation}
+$$
+
+Here, \( M \), \( \rho \), \( c \), and \( K \) are properties of the egg: \( M \) is the
+mass, \( \rho \) is the density, \( c \) is the specific heat capacity, and
+\( K \) is thermal conductivity.  Relevant values are \( M= 47 \) g for a
+small egg and \( M=67 \) g for a large egg, \( \rho = 1.038\hbox{
+g}\,\hbox{cm}^{-3} \), \( c=3.7\hbox{ J}\,\hbox{g}^{-1}\,\hbox{K}^{-1} \),
+and \( K=5.4\cdot 10^{-3}\hbox{ W}\,\hbox{cm}^{-1}\,\hbox{K}^{-1} \).
+Furthermore, \( T_w \) is the temperature (in C degrees) of the boiling
+water, and \( T_o \) is the original temperature (in C degrees) of the egg
+before being put in the water.  Implement the formula in a program,
+set \( T_w=100 \) C and \( T_y=70 \) C, and compute \( t \) for a large egg taken
+from the fridge (\( T_o=4 \) C) and from room temperature (\( T_o=20 \) C).
+Filename: <code>egg.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2>Exercise 13: Derive the trajectory of a ball <a name="sec:formula:ex13"></a></h2>
+
+The purpose of this exercise is to explain how Equation
+<a href="._formulas-solarized008.html#mjx-eqn-6">(6)</a> for the trajectory of a ball arises
+from basic physics. There is no programming in this exercise, just
+physics and mathematics.
+
+<p>
+The motion of the ball is governed by Newton's second law:
+
+$$
+\begin{align}
+F_x &= ma_x\\ 
+F_y &= ma_y
+\end{align}
+$$
+
+where \( F_x \) and \( F_y \) are the sum of forces in the \( x \) and \( y \)
+directions, respectively, \( a_x \) and \( a_y \) are the accelerations of the
+ball in the \( x \) and \( y \) directions, and \( m \) is the mass of the ball.
+Let \( (x(t),y(t)) \) be the position of the ball, i.e., the horizontal
+and vertical coordinate of the ball at time \( t \). There are well-known
+relations between acceleration, velocity, and position: the
+acceleration is the time derivative of the velocity, and the velocity
+is the time derivative of the position. Therefore we have that
+
+$$
+\begin{align}
+a_x &= {d^2 x\over dt^2},\\ 
+a_y &= {d^2 y\over dt^2}\tp
+\end{align}
+$$
+
+If we assume that gravity is the only important force on the ball,
+\( F_x=0 \) and \( F_y=-mg \).
+
+<p>
+Integrate the two components of Newton's second law twice. Use the
+initial conditions on velocity and position,
+
+$$
+\begin{align}
+{d\over dt}x(0)&= v_0\cos\theta,\\ 
+{d\over dt}y(0)&= v_0\sin\theta,\\ 
+x(0) &= 0,\\ 
+y(0) &= y_0,
+\end{align}
+$$
+
+to determine the four integration constants.  Write up the final
+expressions for \( x(t) \) and \( y(t) \). Show that if \( \theta =\pi/2 \), i.e.,
+the motion is purely vertical, we get the formula
+<a href="._formulas-solarized001.html#mjx-eqn-1">(1)</a> for the \( y \) position.  Also show that if we
+eliminate \( t \), we end up with the relation
+<a href="._formulas-solarized008.html#mjx-eqn-6">(6)</a> between the \( x \) and \( y \) coordinates
+of the ball.  You may read more about this type of motion in a physics
+book, e.g., <a href="#Lerner">[9]</a>.
+Filename: <code>trajectory.*</code>.
+
+<p>
+<!-- y = ax?? + bx + c -->
+<!-- which is the equation for a parabola: -->
+<!-- y(t) = -1/2*g/(v0??*cos??(theta))*x?? + tan(theta)*x + y0 -->
+<!-- and insert in y(t): -->
+<!-- t = x/(v0*cos(theta)) -->
+<!-- We eliminate t -->
+<!--  -->
+<!-- y(t) = -1/2*g*t?? + v0*sin(theta)*t + y0 -->
+<!-- x(t) = v0*cos(theta)*t -->
+<!-- After integration: -->
+<!--  -->
+<!-- m*y = -1/2*m*g*t**2 + m*v0*sin(theta)*t + m*y0 -->
+<!-- m*dy/dt = -mgt + C = -mgt + m*v0*sin(theta) -->
+<!--  -->
+<!-- m*x = m*v0*cos(theta)*t -->
+<!-- m*dx/dt = C = m*v0*cos(theta) -->
+<!-- Integration: -->
+<!-- Do this in sympy!!! -->
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2>Exercise 14: Find errors in the coding of formulas <a name="sec:formula:ex1"></a></h2>
+
+Some versions of our program for calculating the formula
+<a href="._formulas-solarized003.html#mjx-eqn-3">(3)</a> are listed below.  Find the versions
+that will not work correctly and explain why in each case.
+
+<p>
+<!-- begin verbatim block  cc-->
+<pre><code>C = 21;    F =  9/5*C + 32;        print F
+C = 21.0;  F =  (9/5)*C + 32;      print F
+C = 21.0;  F =  9*C/5 + 32;        print F
+C = 21.0;  F =  9.*(C/5.0) + 32;   print F
+C = 21.0;  F =  9.0*C/5.0 + 32;    print F
+C = 21;    F =  9*C/5 + 32;        print F
+C = 21.0;  F =  (1/5)*9*C + 32;    print F
+C = 21;    F =  (1./5)*9*C + 32;   print F
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+<!-- find_errors_division.py -->
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2>Exercise 15: Explain why a program does not work <a name="sec:formula:ex15"></a></h2>
+
+Find out why the following program does not work:
+
+<p>
+<!-- begin verbatim block  pypro-->
+<pre><code>C = A + B
+A = 3
+B = 2
+print C
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2>Exercise 16: Find errors in Python statements <a name="sec:formula:ex2"></a></h2>
+
+Try the following statements in an interactive Python shell. Explain
+why some statements fail and correct the errors.
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>1a = 2
+a1 = b
+x = 2
+y = X + 4  # is it 6?
+from Math import tan
+print tan(pi)
+pi = &quot;3.14159'
+print tan(pi)
+c = 4**3**2**3
+_ = ((c-78564)/c + 32))
+discount = 12%
+AMOUNT = 120.-
+amount = 120$
+address = hpl@simula.no
+and = duck
+class = 'INF1100, gr 2&quot;
+continue_ = x &gt; 0
+rev = fox = True
+Norwegian = ['a human language']
+true = fox is rev in Norwegian
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<b>Hint.</b>
+It is wise to test the values of the expressions
+on the right-hand side, and the validity of the variable names,
+separately before you put the left- and right-hand sides together in
+statements. The last two statements work, but explaining why goes
+beyond what is treated in this document.
+
+<p>
+<!-- --- end hint in exercise --- -->
+
+<p>
+<!-- find_errors_statements.py -->
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2>Exercise 17: Find errors in the coding of a formula <a name="sec:formula:ex4"></a></h2>
+
+Given a quadratic equation,
+
+$$
+\begin{equation*} ax^2 + bx + c = 0,\end{equation*}
+$$
+
+the two roots are
+
+$$
+\begin{equation} x_1 = {-b + \sqrt{b^2 -4ac}\over 2a},\quad
+x_2 = {-b - \sqrt{b^2 -4ac}\over 2a}\tp
+\tag{9}
+\end{equation}
+$$
+
+What are the problems with the following program?
+
+<p>
+<!-- begin verbatim block  pypro-->
+<pre><code>a = 2; b = 1; c = 2
+from math import sqrt
+q = b*b - 4*a*c
+q_sr = sqrt(q)
+x1 = (-b + q_sr)/2*a
+x2 = (-b - q_sr)/2*a
+print x1, x2
+</code></pre>
+<!-- end verbatim block -->
+Correct the program so that it solves the given equation.
+Filename: <code>find_errors_roots.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<h1>References  <a name="___sec88"></a></h1>
+
+<!-- begin bibliography -->
+
+<ol>
+ <li> <a name="Langtangen_TCSE6_accesspy"></a> <b>H. P. Langtangen</b>. 
+    How to access Python for doing scientific computing,
+    <a href="http://tcse6.on.net/accesspy" target="_self"><tt>http://tcse6.on.net/accesspy</tt></a>.</li>
+ <li> <a name="Langtangen_TCSE6_runpy"></a> <b>H. P. Langtangen</b>. 
+    Different ways of running Python programs,
+    <a href="http://tcse6.on.net/runpy" target="_self"><tt>http://tcse6.on.net/runpy</tt></a>.</li>
+ <li> <a name="Knuth85"></a> <b>D. E. Knuth</b>. 
+    Theory and Practice,
+    <em>EATCS Bull.</em>,
+    27,
+    pp. 14-21,
+    1985.</li>
+ <li> <a name="Langtangen_TCSE6_files"></a> <b>H. P. Langtangen</b>. 
+    Files, strings, and dictionaries,
+    <a href="http://tcse6.on.net/files" target="_self"><tt>http://tcse6.on.net/files</tt></a>.</li>
+ <li> <a name="Langtangen_TCSE6_looplist"></a> <b>H. P. Langtangen</b>. 
+    Loops and lists,
+    <a href="http://tcse6.on.net/looplist" target="_self"><tt>http://tcse6.on.net/looplist</tt></a>.</li>
+ <li> <a name="Langtangen_TCSE6_input"></a> <b>H. P. Langtangen</b>. 
+    User input and error handling,
+    <a href="http://tcse6.on.net/input" target="_self"><tt>http://tcse6.on.net/input</tt></a>.</li>
+ <li> <a name="Langtangen_TCSE6_plot"></a> <b>H. P. Langtangen</b>. 
+    Array computing and curve plotting,
+    <a href="http://tcse6.on.net/plot" target="_self"><tt>http://tcse6.on.net/plot</tt></a>.</li>
+ <li> <a name="Langtangen_TCSE6_funcif"></a> <b>H. P. Langtangen</b>. 
+    Functions and branching,
+    <a href="http://tcse6.on.net/funcif" target="_self"><tt>http://tcse6.on.net/funcif</tt></a>.</li>
+ <li> <a name="Lerner"></a> <b>L. S. Lerner</b>. 
+    <em>Physics for Scientists and Engineers</em>,
+    Jones and Barlett,
+    1996.</li>
+</ol>
+
+<!-- end bibliography -->
+
+<p>
+<!-- begin bottom navigation -->
+<table style="width: 100%"><tr><td>
+<div style="text-align: left;"><a href="._formulas-solarized008.html">&laquo; Previous</a></div>
+</td><td>
+</td></tr></table>
+<!-- end bottom navigation -->
+</p>
+
+<!-- ------------------- end of main content --------------- -->
+
+
+</body>
+</html>
+    
+

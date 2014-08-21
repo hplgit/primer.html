@@ -1,0 +1,804 @@
+<!--
+Automatically generated HTML file from Doconce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Doconce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Loops and lists">
+<meta name="keywords" content="loops,boolean expressions,logical expressions,factorial,lists,method (class),list comprehension,list, nested,nested lists,list comprehension,pretty print,sublist,slicing,nested loops,tuples,list functionality,sequence (data type),sum ($\Sigma$) implementation,comparing floating-point numbers,comparing real numbers,comparing objects">
+
+
+
+
+<link href="https://raw.githubusercontent.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/css/solarized_light_code.css" rel="stylesheet" type="text/css" title="light"/>
+<script src="http://www.peterhaschke.com/assets/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<link href="http://thomasf.github.io/solarized-css/solarized-light.min.css" rel="stylesheet">
+<style type="text/css">
+.alert-text-small   { font-size: 80%;  }
+.alert-text-large   { font-size: 130%; }
+.alert-text-normal  { font-size: 90%;  }
+.alert {
+  padding:8px 35px 8px 14px; margin-bottom:18px;
+  text-shadow:0 1px 0 rgba(255,255,255,0.5);
+  border:1px solid #93a1a1;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  color: #555;
+  background-color: #eee8d5;
+  background-position: 10px 5px;
+  background-repeat: no-repeat;
+  background-size: 38px;
+  padding-left: 55px;
+  width: 75%;
+ }
+.alert-block {padding-top:14px; padding-bottom:14px}
+.alert-block > p, .alert-block > ul {margin-bottom:1em}
+.alert li {margin-top: 1em}
+.alert-block p+p {margin-top:5px}
+.alert-notice { background-image: url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_notice.png); }
+.alert-summary  { background-image:url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_summary.png); }
+.alert-warning { background-image: url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_warning.png); }
+.alert-question {background-image:url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_question.png); }
+
+div { text-align: justify; text-justify: inter-word; }
+</style>
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [(u' While loops ', 1, u'sec:basic:loops', u'sec:basic:loops'),
+              (u' A naive solution ',
+               2,
+               u'sec:basic:naive',
+               u'sec:basic:naive'),
+              (u' While loops ', 2, u'sec:basic:while', u'sec:basic:while'),
+              (u' Boolean expressions ',
+               2,
+               u'sec:basic:boolexpr',
+               u'sec:basic:boolexpr'),
+              (u' Loop implementation of a sum ',
+               2,
+               u'sec:basic:sumloop',
+               u'sec:basic:sumloop'),
+              (u' Lists ', 1, None, '___sec5'),
+              (u' Basic list operations ',
+               2,
+               u'sec:lists:basc:op',
+               u'sec:lists:basc:op'),
+              (u' For loops ', 2, None, '___sec7'),
+              (u' The nature of for loops ', 3, None, '___sec8'),
+              (u' Making the table ', 3, None, '___sec9'),
+              (u' Alternative implementations with lists and loops ',
+               1,
+               None,
+               '___sec10'),
+              (u' While loop implementation of a for loop ',
+               2,
+               None,
+               '___sec11'),
+              (u' The range construction ', 2, None, '___sec12'),
+              (u' For loops with list indices ', 2, None, '___sec13'),
+              (u' Changing list elements ', 2, None, '___sec14'),
+              (u' List comprehension ',
+               2,
+               u'sec:basic:list:comprehension',
+               u'sec:basic:list:comprehension'),
+              (u' Traversing multiple lists simultaneously ',
+               2,
+               None,
+               '___sec16'),
+              (u' Nested lists ',
+               1,
+               u'sec:basic:nestedlists',
+               u'sec:basic:nestedlists'),
+              (u' A table as a list of rows or columns ',
+               2,
+               None,
+               '___sec18'),
+              (u' Printing objects ', 2, None, '___sec19'),
+              (u' Modules for pretty print of objects ', 3, None, '___sec20'),
+              (u' Manual printing ', 3, None, '___sec21'),
+              (u' Extracting sublists ',
+               2,
+               u'sec:basic:slice',
+               u'sec:basic:slice'),
+              (u' Example ', 3, None, '___sec23'),
+              (u' Traversing nested lists ', 2, None, '___sec24'),
+              (u' Tuples ', 1, u'sec:lists:tuples', u'sec:lists:tuples'),
+              (u' Summary ',
+               1,
+               u'sec:looplist:summary',
+               u'sec:looplist:summary'),
+              (u' Chapter topics ', 2, None, '___sec27'),
+              (u' While loops ', 3, None, '___sec28'),
+              (u' Lists ', 3, None, '___sec29'),
+              (u' Nested lists ', 3, None, '___sec30'),
+              (u' Tuples ', 3, None, '___sec31'),
+              (u' For loops ', 3, None, '___sec32'),
+              (u' Pretty print ', 3, None, '___sec33'),
+              (u' Terminology ', 3, None, '___sec34'),
+              (u' Example: Analyzing list data ',
+               2,
+               u'sec:looplist:summary:ex',
+               u'sec:looplist:summary:ex'),
+              (u' Problem ', 3, None, '___sec36'),
+              (u' Solution ', 3, None, '___sec37'),
+              (u' Remark ', 3, None, '___sec38'),
+              (u' How to find more Python information ',
+               2,
+               u'sec:basic:pyinfo',
+               u'sec:basic:pyinfo'),
+              (u' Exercises ', 1, None, '___sec40'),
+              (u' Exercise 1: Make a Fahrenheit-Celsius conversion table ',
+               2,
+               u'sec:basic:ex41',
+               u'sec:basic:ex41'),
+              (u' Exercise 2: Generate an approximate Fahrenheit-Celsius conversion table ',
+               2,
+               u'sec:basic:ex1',
+               u'sec:basic:ex1'),
+              (u' Exercise 3: Work with a list ',
+               2,
+               u'sec:basic:ex00',
+               u'sec:basic:ex00'),
+              (u' Exercise 4: Generate odd numbers ',
+               2,
+               u'sec:basic:ex0',
+               u'sec:basic:ex0'),
+              (u' Exercise 5: Sum of first $n$ integers ',
+               2,
+               u'sec:basic:sum:no',
+               u'sec:basic:sum:no'),
+              (u' Exercise 6: Generate equally spaced coordinates ',
+               2,
+               u'sec:basic:ex44',
+               u'sec:basic:ex44'),
+              (u' Exercise 7: Make a table of values from a formula ',
+               2,
+               u'sec:basic:ex4',
+               u'sec:basic:ex4'),
+              (u' Exercise 8: Store values from a formula in lists ',
+               2,
+               u'sec:basic:ex4b',
+               u'sec:basic:ex4b'),
+              (u' Exercise 9: Simulate operations on lists by hand ',
+               2,
+               u'sec:basic:ex43',
+               u'sec:basic:ex43'),
+              (u' Exercise 10: Compute a mathematical sum ',
+               2,
+               u'sec:basic:ex29a',
+               u'sec:basic:ex29a'),
+              (u' Exercise 11: Replace a while loop by a for loop ',
+               2,
+               u'sec:basic:ex29b',
+               u'sec:basic:ex29b'),
+              (u' Exercise 12: Simulate a program by hand ',
+               2,
+               u'sec:basic:ex24a',
+               u'sec:basic:ex24a'),
+              (u' Exercise 13: Explore Python documentation ',
+               2,
+               u'sec:basic:ex47',
+               u'sec:basic:ex47'),
+              (u' Exercise 14: Index a nested lists ',
+               2,
+               u'sec:basic:ex15n',
+               u'sec:basic:ex15n'),
+              (u' Exercise 15: Store data in lists ',
+               2,
+               u'sec:basic:ex1b',
+               u'sec:basic:ex1b'),
+              (u' Exercise 16: Store data in a nested list ',
+               2,
+               u'sec:basic:ex4c',
+               u'sec:basic:ex4c'),
+              (u' Exercise 17: Values of boolean expressions ',
+               2,
+               u'sec:basic:ex15b',
+               u'sec:basic:ex15b'),
+              (u' Exercise 18: Explore round-off errors from a large number of inverse operations ',
+               2,
+               u'sec:basic:ex14b',
+               u'sec:basic:ex14b'),
+              (u' Exercise 19: Explore what zero can be on a computer ',
+               2,
+               u'sec:basic:ex14',
+               u'sec:basic:ex14'),
+              (u' Remarks ', 3, None, '___sec60'),
+              (u' Exercise 20: Compare two real numbers with a tolerance ',
+               2,
+               u'sec:formula:ex14c',
+               u'sec:formula:ex14c'),
+              (u' Exercise 21: Interpret a code ',
+               2,
+               u'sec:basic:ex16',
+               u'sec:basic:ex16'),
+              (u' Exercise 22: Explore problems with inaccurate indentation ',
+               2,
+               u'sec:basic:ex3',
+               u'sec:basic:ex3'),
+              (u' Remarks ', 3, None, '___sec64'),
+              (u' Exercise 23: Explore punctuation in Python programs ',
+               2,
+               u'sec:input:ex33',
+               u'sec:input:ex33'),
+              (u' Exercise 24: Investigate a for loop over a changing list ',
+               2,
+               u'sec:basic:ex18',
+               u'sec:basic:ex18'),
+              (u' References ', 1, None, '___sec67')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- newcommands_keep.tex -->
+$$
+\newcommand{\tp}{\thinspace .}
+\renewcommand{\Re}{\bbbr}
+
+\newcommand{\rhodim}{\mbox{kgm}^{-3}}
+\newcommand{\mudim}{\mbox{kg}\,\mbox{s}^{-1}\mbox{m}^{-1}}
+\newcommand{\Cdim}{\mbox{kg}\,\mbox{s}^{-1}}
+
+
+\newcommand{\Oof}[1]{\mathcal{O}(#1)}
+\newcommand{\Prob}[1]{\hbox{P}(#1)}
+\newcommand{\Var}[1]{\hbox{Var}(#1)}
+\newcommand{\Cov}[2]{\hbox{Cov}(#1,#2)}
+\newcommand{\StDev}[1]{\hbox{StDev}(#1)}
+$$
+
+
+
+
+    
+<a name="part0006"></a>
+<p>
+<!-- begin top navigation -->
+<table style="width: 100%"><tr><td>
+<div style="text-align: left;"><a href="._looplist-solarized005.html">&laquo; Previous</a></div>
+</td><td>
+<div style="text-align: right;"><a href="._looplist-solarized007.html">Next &raquo;</a></div>
+</td></tr></table>
+<!-- end top navigation -->
+</p>
+
+<p>
+<!-- !split -->
+
+<h1>Summary <a name="sec:looplist:summary"></a></h1>
+
+<h2>Chapter topics  <a name="___sec27"></a></h2>
+
+<h3>While loops  <a name="___sec28"></a></h3>
+
+Loops are used to repeat a collection of program statements several
+times.
+The statements that belong to the loop must be consistently
+indented in Python.
+A <code>while</code> loop runs as long as a condition evaluates to <code>True</code>:
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; t = 0; dt = 0.5; T = 2
+&gt;&gt;&gt; while t &lt;= T:
+...      print t
+...      t += dt
+...
+0
+0.5
+1.0
+1.5
+2.0
+&gt;&gt;&gt; print 'Final t:', t, '; t &lt;= T is', t &lt;= T
+Final t: 2.5 ; t &lt;= T is False
+</code></pre>
+<!-- end verbatim block -->
+
+<h3>Lists  <a name="___sec29"></a></h3>
+
+A list is used to collect a number of values or variables in an
+ordered sequence.
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; mylist = [t, dt, T, 'mynumbers.dat', 100]
+</code></pre>
+<!-- end verbatim block -->
+A list element can be any Python object, including numbers, strings,
+functions, and other lists, for instance.
+
+<p>
+The table below
+shows some important list operations
+(only a subset of these are explained in the present document).
+
+<p>
+<table border="1">
+<thead>
+<tr><th align="center">                       Construction                       </th> <th align="center">                         Meaning                          </th> </tr>
+</thead>
+<tbody>
+<tr><td align="left">   <code>a = [] </code>                                          </td> <td align="left">   initialize an empty list                                      </td> </tr>
+<tr><td align="left">   <code>a = [1, 4.4, 'run.py'] </code>                          </td> <td align="left">   initialize a list                                             </td> </tr>
+<tr><td align="left">   <code>a.append(elem)</code>                                   </td> <td align="left">   add <code>elem</code> object to the end                       </td> </tr>
+<tr><td align="left">   <code>a + [1,3]</code>                                        </td> <td align="left">   add two lists                                                 </td> </tr>
+<tr><td align="left">   <code>a.insert(i, e)</code>                                   </td> <td align="left">   insert element <code>e</code> before index <code>i</code>     </td> </tr>
+<tr><td align="left">   <code>a[3]</code>                                             </td> <td align="left">   index a list element                                          </td> </tr>
+<tr><td align="left">   <code>a[-1]</code>                                            </td> <td align="left">   get last list element                                         </td> </tr>
+<tr><td align="left">   <code>a[1:3]</code>                                           </td> <td align="left">   slice: copy data to sublist (here: index 1, 2)                </td> </tr>
+<tr><td align="left">   <code>del a[3]</code>                                         </td> <td align="left">   delete an element (index <code>3</code>)                      </td> </tr>
+<tr><td align="left">   <code>a.remove(e)</code>                                      </td> <td align="left">   remove an element with value <code>e</code>                   </td> </tr>
+<tr><td align="left">   <code>a.index('run.py')</code>                                </td> <td align="left">   find index corresponding to an element's value                </td> </tr>
+<tr><td align="left">   <code>'run.py' in a</code>                                    </td> <td align="left">   test if a value is contained in the list                      </td> </tr>
+<tr><td align="left">   <code>a.count(v)</code>                                       </td> <td align="left">   count how many elements that have the value <code>v</code>    </td> </tr>
+<tr><td align="left">   <code>len(a)</code>                                           </td> <td align="left">   number of elements in list <code>a</code>                     </td> </tr>
+<tr><td align="left">   <code>min(a)</code>                                           </td> <td align="left">   the smallest element in <code>a</code>                        </td> </tr>
+<tr><td align="left">   <code>max(a)</code>                                           </td> <td align="left">   the largest element in <code>a</code>                         </td> </tr>
+<tr><td align="left">   <code>sum(a)</code>                                           </td> <td align="left">   add all elements in <code>a</code>                            </td> </tr>
+<tr><td align="left">   <code>sorted(a)</code>                                        </td> <td align="left">   return sorted version of list <code>a</code>                  </td> </tr>
+<tr><td align="left">   <code>reversed(a)</code>                                      </td> <td align="left">   return reversed sorted version of list <code>a</code>         </td> </tr>
+<tr><td align="left">   <code>b[3][0][2]</code>                                       </td> <td align="left">   nested list indexing                                          </td> </tr>
+<tr><td align="left">   <code>isinstance(a, list)</code>                              </td> <td align="left">   is <code>True</code> if <code>a</code> is a list              </td> </tr>
+<tr><td align="left">   <code>type(a) is list</code>                                  </td> <td align="left">   is <code>True</code> if <code>a</code> is a list              </td> </tr>
+</tbody>
+</table>
+
+<h3>Nested lists  <a name="___sec30"></a></h3>
+
+If the list elements are also lists, we have a
+nested list. The following session summarizes indexing and loop
+traversal of nested lists:
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; nl = [[0, 0, 1], [-1, -1, 2], [-10, 10, 5]]
+&gt;&gt;&gt; nl[0]
+[0, 0, 1]
+&gt;&gt;&gt; nl[-1]
+[-10, 10, 5]
+&gt;&gt;&gt; nl[0][2]
+1
+&gt;&gt;&gt; nl[-1][0]
+-10
+&gt;&gt;&gt; for p in nl:
+...     print p
+...
+[0, 0, 1]
+[-1, -1, 2]
+[-10, 10, 5]
+&gt;&gt;&gt; for a, b, c in nl:
+...     print '%3d %3d %3d' % (a, b, c)
+...
+  0   0   1
+ -1  -1   2
+-10  10   5
+</code></pre>
+<!-- end verbatim block -->
+
+<h3>Tuples  <a name="___sec31"></a></h3>
+
+A tuple can be viewed as a constant list: no changes in the
+contents of the tuple is allowed.
+Tuples employ standard parentheses or no parentheses, and elements
+are separated with comma as in lists:
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; mytuple = (t, dt, T, 'mynumbers.dat', 100)
+&gt;&gt;&gt; mytuple =  t, dt, T, 'mynumbers.dat', 100
+</code></pre>
+<!-- end verbatim block -->
+Many list operations are also valid for tuples, but those
+that changes the list content cannot be used with tuples
+(examples are
+<code>append</code>, <code>del</code>, <code>remove</code>, <code>index</code>, and <code>sort</code>).
+
+<p>
+An object <code>a</code> containing an ordered collection of other objects such
+that <code>a[i]</code> refers to object with index <code>i</code> in the collection,
+is known as a
+<em>sequence</em> in Python.
+Lists, tuples, strings, and arrays
+are examples on sequences.
+You choose a sequence type when there is a natural ordering
+of elements. For a collection of unordered objects
+a <em>dictionary</em> (see the section ref{sec:files:dicts}) is
+often more convenient.
+
+<h3>For loops  <a name="___sec32"></a></h3>
+
+A <code>for</code> loop is used to run through the elements of a list
+or a tuple:
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; for elem in [10, 20, 25, 27, 28.5]:
+...     print elem,
+...
+10 20 25 27 28.5
+</code></pre>
+<!-- end verbatim block -->
+The trailing comma after the <code>print</code> statement prevents the newline
+character, which otherwise <code>print</code> would automatically add.
+
+<p>
+The <code>range</code> function is frequently used in <code>for</code> loops over
+a sequence of integers. Recall that <code>range(start, stop, inc)</code>
+does not include the upper limit <code>stop</code> among the list item.
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; for elem in range(1, 5, 2):
+...     print elem,
+...
+1 3
+&gt;&gt;&gt; range(1, 5, 2)
+[1, 3]
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+Implementation of a sum \( \sum_{j=M}^N q(j) \), where \( q(j) \) is some
+mathematical expression involving the integer counter \( j \), is
+normally implemented using a <code>for</code> loop. Choosing, e.g., \( q(j) = 1/j^{2} \),
+the sum is calculated by
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>s = 0  # accumulation variable
+for j in range(M, N+1, 1):
+    s += 1./j**2
+</code></pre>
+<!-- end verbatim block -->
+
+<h3>Pretty print  <a name="___sec33"></a></h3>
+
+To print a list <code>a</code>, <code>print a</code> can be used, but the
+<code>pprint</code> and <code>scitools.pprint2</code> modules and their
+<code>pprint</code> function give a nicer layout
+of the output for long and nested lists. The <code>scitools.pprint2</code> module
+has the possibility to control the formatting of floating-point
+numbers.
+
+<h3>Terminology  <a name="___sec34"></a></h3>
+
+The important computer science terms in this document are
+
+<ul>
+  <li> list</li>
+  <li> tuple</li>
+  <li> nested list (and nested tuple)</li>
+  <li> sublist (subtuple) or slice <code>a[i:j]</code></li>
+  <li> <code>while</code> loop</li>
+  <li> <code>for</code> loop</li>
+  <li> list comprehension</li>
+  <li> boolean expression</li>
+</ul>
+
+<h2>Example: Analyzing list data <a name="sec:looplist:summary:ex"></a></h2>
+
+<h3>Problem  <a name="___sec36"></a></h3>
+
+The file <a href="http://tinyurl.com/pwyasaa/misc/Oxford_sun_hours.txt" target="_self"><tt>src/misc/Oxford_sun_hours.txt</tt></a> contains data
+of the number of sun hours in Oxford, UK, for every month since
+January 1929. The data are already on a suitable nested list format:
+
+<p>
+<!-- begin verbatim block  dat-->
+<pre><code>[
+[43.8, 60.5, 190.2, ...],
+[49.9, 54.3, 109.7, ...],
+[63.7, 72.0, 142.3, ...],
+...
+]
+</code></pre>
+<!-- end verbatim block -->
+The list in every line holds the number of sun
+hours for each of the year's 12 months.
+That is, the first index in the nested list corresponds to year and the
+second index corresponds to the month number. More precisely,
+the double index <code>[i][j]</code> corresponds to year 1929 + <code>i</code>
+and month 1 + <code>j</code> (January being month number 1).
+
+<p>
+The task is to define this nested list in a program and do the following
+data analysis.
+
+<ul>
+  <li> Compute the average number of sun hours for each month during the total data period (1929-2009).</li>
+  <li> Which month has the best weather according to the means found in the preceding task?</li>
+  <li> For each decade, 1930-1939, 1940-1949, \( \ldots \), 2000-2009, compute the average number of sun hours per day in January and December. For example, use December 1949, January 1950, \( \ldots \), December 1958, and January 1959 as data for the decade 1950-1959. Are there any noticeable differences between the decades?</li>
+</ul>
+
+<h3>Solution  <a name="___sec37"></a></h3>
+
+Initializing the data is easy: just copy the data from the
+<code>Oxford_sun_hours.txt</code> file into the program file and
+set a variable name on the left hand side (the long and wide code
+is only indicated here):
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>data = [
+[43.8, 60.5, 190.2, ...],
+[49.9, 54.3, 109.7, ...],
+[63.7, 72.0, 142.3, ...],
+...
+]
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+For task 1, we need to establish a list <code>monthly_mean</code>
+with the results from the
+computation, i.e., <code>monthly_mean[2]</code> holds the average
+number of sun hours for March in the period 1929-2009.
+The average is computed in the standard way: for each month,
+we run through all
+the years, sum up the values, and finally divide by the number
+of years (\( 2009-1929+1 \)).
+
+<p>
+When looping over years and months it is convenient to have
+loop variables running over the true years (1929 to 2009) and
+the standard month number (1 to 12). These variables must be
+correctly translated to indices in the <code>data</code> list such that
+all indices start at 0. The following code produces the answers
+to task 1:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>monthly_mean = [0]*12      # list with 12 elements
+for month in range(1, 13):
+    m = month - 1   # corresponding list index (starts at 0)
+    s = 0           # sum
+    n = 2009 - 1929 + 1  # no of years
+    for year in range(1929, 2010):
+        y = year - 1929  # corresponding list index (starts at 0)
+        s += data[y][m]
+    monthly_mean[m] = s/n
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+An alternative solution would be to introduce separate variables for
+the monthly averages, say <code>Jan_mean</code>, <code>Feb_mean</code>, etc.
+The reader should as an exercise write the code associated with
+such a solution and realize that using the <code>monthly_mean</code>
+list is more elegant and yields much simpler and shorter code.
+Separate variables might be an okay solution for 2-3 variables, but
+as many as 12.
+
+<p>
+Perhaps we want a nice-looking printout of the results.
+This can elegantly be created by first defining a tuple (or list) of
+the names of the months and then running through this list in parallel
+with <code>monthly_mean</code>:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>month_names = 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',\ 
+              'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+for name, value in zip(month_names, monthly_mean):
+    print '%s: %.1f' % (name, value)
+</code></pre>
+<!-- end verbatim block -->
+The printout becomes
+
+<p>
+<!-- begin verbatim block  ccq-->
+<pre><code>Jan: 55.9
+Feb: 71.8
+Mar: 115.1
+Apr: 151.3
+May: 188.7
+Jun: 196.1
+Jul: 191.4
+Aug: 182.1
+Sep: 136.7
+Oct: 103.4
+Nov: 66.6
+Dec: 51.7
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+Task 2 can be solved by pure inspection of the above printout, which reveals
+that June is the winner. However, since we are learning programming, we
+should be able to replace our eyes with some computer code to automate
+the task. The maximum value <code>max_value</code>
+of a list like <code>monthly_mean</code> is
+simply obtained by <code>max(monthly_mean)</code>.
+The corresponding index, needed to find the right name of the corresponding
+month, is found from <code>monthly_mean.index(max_value)</code>.
+The code for task 2 is then
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>max_value = max(monthly_mean)
+month = month_names[monthly_mean.index(max_value)]
+print '%s has best weather with %.1f sun hours on average' % \ 
+      (month, max_value)
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+Task 3 requires us to first develop an algorithm for how to compute
+the decade averages. The algorithm, expressed with words, goes as
+follows. We loop over the decades, and for each decade,
+we loop over its years, and for each year, we add the December data of
+the previous year and the January data of the current year to
+an accumulation variable. Dividing this accumulation variable by
+\( 10\cdot 2\cdot 30 \) gives the average number of sun hours per day
+in the winter time for the particular decade.
+The code segment below expresses this algorithm in the Python language:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>decade_mean = []
+for decade_start in range(1930, 2010, 10):
+    Jan_index = 0; Dec_index = 11  # indices
+    s = 0
+    for year in range(decade_start, decade_start+10):
+        y = year - 1929  # list index
+        print data[y-1][Dec_index] + data[y][Jan_index]
+        s += data[y-1][Dec_index] + data[y][Jan_index]
+    decade_mean.append(s/(20.*30))
+for i in range(len(decade_mean)):
+    print 'Decade %d-%d: %.1f' % \ 
+          (1930+i*10, 1939+i*10, decade_mean[i])
+</code></pre>
+<!-- end verbatim block -->
+The output becomes
+
+<p>
+<!-- begin verbatim block  ccq-->
+<pre><code>Decade 1930-1939: 1.7
+Decade 1940-1949: 1.8
+Decade 1950-1959: 1.8
+Decade 1960-1969: 1.8
+Decade 1970-1979: 1.6
+Decade 1980-1989: 2.0
+Decade 1990-1999: 1.8
+Decade 2000-2009: 2.1
+</code></pre>
+<!-- end verbatim block -->
+The complete code is found in the file
+<a href="http://tinyurl.com/pwyasaa/looplist/sun_data.py" target="_self"><tt>sun_data.py</tt></a>.
+
+<h3>Remark  <a name="___sec38"></a></h3>
+
+The file <code>Oxford_sun_hours.txt</code> is based on data from
+the <a href="http://www.metoffice.gov.uk/climate/uk/stationdata/" target="_self">UK Met Office</a>.
+A Python program for downloading the data, interpreting the content,
+and creating a file like <code>Oxford_sun_hours.txt</code> is explained
+in detail in the section ref{sec:files:url:weather}.
+
+<h2>How to find more Python information <a name="sec:basic:pyinfo"></a></h2>
+
+This document contains only fragments of the Python language.  When
+doing your own projects or exercises you will certainly feel the need
+for looking up more detailed information on modules, objects, etc.
+Fortunately, there is a lot of excellent documentation on the Python
+programming language.
+
+<p>
+The primary reference is the <a href="http://docs.python.org/index.html" target="_self">official Python documentation website</a>: <code>docs.python.org</code>. Here you can
+find a Python tutorial, the very useful <em>Library Reference</em>
+<a href="._looplist-solarized007.html#Python:Library:Reference">[1]</a>, and a <em>Language Reference</em>, to mention
+some key documents.  When you wonder what functions you can find in a
+module, say the <code>math</code> module, you can go to the Library Reference
+search for <em>math</em>, which quickly leads you to the official
+documentation of the <code>math</code> module. Alternatively, you can go to the
+index of this document and pick the <code>math (module)</code> item directly.
+Similarly, if you want to look up more details of the printf
+formatting syntax, go to the index and follow the <em>printf-style
+formatting</em> index.
+
+<p>
+<div class="alert alert-block alert-warning alert-text-normal"><b>Warning.</b>
+A word of caution is probably necessary here. Reference manuals are
+very technical and written primarily for experts, so it can be quite
+difficult for a newbie to understand the information.  An important
+ability is to browse such manuals and dig out the key information you
+are looking for, without being annoyed by all the text you do not
+understand. As with programming, reading manuals efficiently requires
+a lot of training.
+</div>
+
+
+<p>
+A tool somewhat similar to the Python Standard Library documentation is the
+<code>pydoc</code> program. In a terminal window you write
+
+<p>
+<!-- begin verbatim block  sys-->
+<pre><code>Terminal&gt; pydoc math
+</code></pre>
+<!-- end verbatim block -->
+In IPython there are two corresponding possibilities, either
+
+<p>
+<!-- begin verbatim block  ipy-->
+<pre><code>In [1]: !pydoc math
+</code></pre>
+<!-- end verbatim block -->
+or
+
+<p>
+<!-- begin verbatim block  ipy-->
+<pre><code>In [2]: import math
+In [3]: help(math)
+</code></pre>
+<!-- end verbatim block -->
+The documentation of the complete <code>math</code> module is shown as plain text.
+If a specific function is wanted, we can ask for that directly,
+e.g., <code>pydoc math.tan</code>.
+Since <code>pydoc</code> is very fast, many prefer <code>pydoc</code> over
+web pages, but <code>pydoc</code> has often less information compared to
+the web documentation of modules.
+
+<p>
+There are also a large number of books about Python.  Beazley
+<a href="._looplist-solarized007.html#Beazley">[2]</a> is an excellent reference that improves and extends the
+information in the web documentation. The <em>Learning Python</em> book
+<a href="._looplist-solarized007.html#LearningPython">[3]</a> has been very popular for many years as an
+introduction to the language.  There is a special <a href="http://wiki.python.org/moin/PythonBooks" target="_self">web page</a> listing most Python books on
+the market. Very few books target scientific computing with Python,
+but <a href="._looplist-solarized007.html#Fuhrer_et_al_2014">[4]</a> gives an introduction to Python for
+mathematical applications and is more compact and advanced than the
+present book. It also serves as an excellent reference for the
+capabilities of Python in a scientific context.  A comprehensive book
+on the use of Python for assisting and automating scientific work is
+<a href="._looplist-solarized007.html#TCSE3">[5]</a>.
+
+<p>
+Quick references, which list almost to all Python functionality in
+compact tabular form, are very handy. We recommend in particular the
+one by <a href="http://rgruet.free.fr/PQR27/PQR2.7.html" target="_self">Richard Gruet</a>
+<a href="._looplist-solarized007.html#Python:Quick:Ref">[6]</a>.
+
+<p>
+The website <a href="http://www.python.org/doc/" target="_self"><tt>http://www.python.org/doc/</tt></a> contains a list of useful Python
+introductions and reference manuals.
+
+<p>
+<p>
+<!-- begin bottom navigation -->
+<table style="width: 100%"><tr><td>
+<div style="text-align: left;"><a href="._looplist-solarized005.html">&laquo; Previous</a></div>
+</td><td>
+<div style="text-align: right;"><a href="._looplist-solarized007.html">Next &raquo;</a></div>
+</td></tr></table>
+<!-- end bottom navigation -->
+</p>
+
+<!-- ------------------- end of main content --------------- -->
+
+
+</body>
+</html>
+    
+

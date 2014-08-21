@@ -1,0 +1,648 @@
+<!--
+Automatically generated HTML file from Doconce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Doconce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Computing with formulas">
+<meta name="keywords" content="directory,run Python program,execute Python program,terminal window,console (terminal) window,directory,comments,non-English characters,formatting text and numbers,printf syntax,string,triple-quoted strings,format string syntax,newline character (line break),line break,source code,application,statements,expression,syntax,whitespace,blanks,whitespace,input (data),output (data),user (of a program),operating system (OS),Windows,Mac OS X,Unix,Linux,objects,round-off errors,interactive sessions standard Python shell,type conversion,check an object's type,rounding float to integer,interactive sessions IPython,IPython,run Python program,execute Python program,IPython running Python programs,IPython start-up file,IPython executing operating system commands,IPython command history,complex numbers,Gaussian function">
+
+
+
+
+<link href="https://raw.githubusercontent.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/css/solarized_light_code.css" rel="stylesheet" type="text/css" title="light"/>
+<script src="http://www.peterhaschke.com/assets/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<link href="http://thomasf.github.io/solarized-css/solarized-light.min.css" rel="stylesheet">
+<style type="text/css">
+.alert-text-small   { font-size: 80%;  }
+.alert-text-large   { font-size: 130%; }
+.alert-text-normal  { font-size: 90%;  }
+.alert {
+  padding:8px 35px 8px 14px; margin-bottom:18px;
+  text-shadow:0 1px 0 rgba(255,255,255,0.5);
+  border:1px solid #93a1a1;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  color: #555;
+  background-color: #eee8d5;
+  background-position: 10px 5px;
+  background-repeat: no-repeat;
+  background-size: 38px;
+  padding-left: 55px;
+  width: 75%;
+ }
+.alert-block {padding-top:14px; padding-bottom:14px}
+.alert-block > p, .alert-block > ul {margin-bottom:1em}
+.alert li {margin-top: 1em}
+.alert-block p+p {margin-top:5px}
+.alert-notice { background-image: url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_notice.png); }
+.alert-summary  { background-image:url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_summary.png); }
+.alert-warning { background-image: url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_warning.png); }
+.alert-question {background-image:url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_question.png); }
+
+div { text-align: justify; text-justify: inter-word; }
+</style>
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [(u' The first programming encounter: a formula ',
+               1,
+               u'sec:formula:1',
+               u'sec:formula:1'),
+              (u' Using a program as a calculator ',
+               2,
+               u'sec:formula:1st',
+               u'sec:formula:1st'),
+              (u' About programs and programming ', 2, None, '___sec2'),
+              (u' Tools for writing programs ', 2, None, '___sec3'),
+              (u' Writing and running your first Python program ',
+               2,
+               None,
+               '___sec4'),
+              (u' Warning about typing program text ', 2, None, '___sec5'),
+              (u' Verifying the result ', 2, None, '___sec6'),
+              (u' Using variables ',
+               2,
+               u'sec:formula:variables',
+               u'sec:formula:variables'),
+              (u' Names of variables ', 2, None, '___sec8'),
+              (u' Reserved words in Python ',
+               2,
+               u'sec:formula:keywords',
+               u'sec:formula:keywords'),
+              (u' Comments ', 2, None, '___sec10'),
+              (u' Remark ', 3, None, '___sec11'),
+              (u' Formatting text and numbers ',
+               2,
+               u'sec:formula:format',
+               u'sec:formula:format'),
+              (u' Printf syntax ', 3, None, '___sec13'),
+              (u' Format string syntax ', 3, None, '___sec14'),
+              (u' The newline character ', 3, None, '___sec15'),
+              (u' Computer science glossary ',
+               1,
+               u'sec:formula:glossary',
+               u'sec:formula:glossary'),
+              (u' Another formula: Celsius-Fahrenheit conversion ',
+               1,
+               u'sec:formula:c2f',
+               u'sec:formula:c2f'),
+              (u' Potential error: integer division ',
+               2,
+               u'sec:formula:intdiv',
+               u'sec:formula:intdiv'),
+              (u' Straightforward coding of the formula ',
+               3,
+               None,
+               '___sec19'),
+              (u' Verifying the results ', 3, None, '___sec20'),
+              (u' Float and integer division ', 3, None, '___sec21'),
+              (u' Objects in Python ', 2, None, '___sec22'),
+              (u' Avoiding integer division ',
+               2,
+               u'sec:formula:c2f:correct',
+               u'sec:formula:c2f:correct'),
+              (u' Locating potential integer division ', 3, None, '___sec24'),
+              (u' Remark ', 3, None, '___sec25'),
+              (u' Arithmetic operators and precedence ',
+               2,
+               u'sec:formula:operators',
+               u'sec:formula:operators'),
+              (u' Evaluating standard mathematical functions ',
+               1,
+               u'sec:formula:stdmath',
+               u'sec:formula:stdmath'),
+              (u' Example: Using the square root function ',
+               2,
+               u'sec:formula:sqrt',
+               u'sec:formula:sqrt'),
+              (u' Problem ', 3, None, '___sec29'),
+              (u' The program ', 3, None, '___sec30'),
+              (u' Two ways of importing a module ', 3, None, '___sec31'),
+              (u' Import with new names ', 3, None, '___sec32'),
+              (u' Example: Computing with $\\sinh x$ ', 2, None, '___sec33'),
+              (u' A first glimpse of round-off errors ',
+               2,
+               u'sec:formula:roundoff',
+               u'sec:formula:roundoff'),
+              (u' Interactive computing ',
+               1,
+               u'sec:formula:pyshell',
+               u'sec:formula:pyshell'),
+              (u' Using the Python shell ', 2, None, '___sec36'),
+              (u' Type conversion ',
+               2,
+               u'sec:formulas:typeconversion',
+               u'sec:formulas:typeconversion'),
+              (u' IPython ',
+               2,
+               u'sec:formula:ipython',
+               u'sec:formula:ipython'),
+              (u' Running programs ', 3, None, '___sec39'),
+              (u' Quick recovery of previous output ', 3, None, '___sec40'),
+              (u' Tab completion ', 3, None, '___sec41'),
+              (u' Recovering previous commands ', 3, None, '___sec42'),
+              (u' Running Unix/Windows commands ', 3, None, '___sec43'),
+              (u' Notebooks ', 3, None, '___sec44'),
+              (u' Complex numbers ',
+               1,
+               u'sec:formula:complex',
+               u'sec:formula:complex'),
+              (u' Complex arithmetics in Python ', 2, None, '___sec46'),
+              (u' Complex functions in Python ', 2, None, '___sec47'),
+              (u' Unified treatment of complex and real functions ',
+               2,
+               u'formulas:unified:complex:real',
+               u'formulas:unified:complex:real'),
+              (u' Symbolic computing ',
+               1,
+               u'sec:formula:sympy',
+               u'sec:formula:sympy'),
+              (u' Basic differentiation and integration ',
+               2,
+               u'sec:formula:sympy:diffint',
+               u'sec:formula:sympy:diffint'),
+              (u' Equation solving and Taylor series ', 2, None, '___sec51'),
+              (u' Summary ',
+               1,
+               u'sec:formula:summary',
+               u'sec:formula:summary'),
+              (u' Chapter topics ', 2, None, '___sec53'),
+              (u' Programs must be accurate! ', 3, None, '___sec54'),
+              (u' Variables ', 3, None, '___sec55'),
+              (u' Comment lines ', 3, None, '___sec56'),
+              (u' Object types ', 3, None, '___sec57'),
+              (u' Operators ', 3, None, '___sec58'),
+              (u' Common mathematical functions ', 3, None, '___sec59'),
+              (u' Print ', 3, None, '___sec60'),
+              (u' Complex numbers ', 3, None, '___sec61'),
+              (u' Terminology ', 3, None, '___sec62'),
+              (u' Example: Trajectory of a ball ', 2, None, '___sec63'),
+              (u' Problem ', 3, None, '___sec64'),
+              (u' Solution ', 3, None, '___sec65'),
+              (u' About typesetting conventions in this book ',
+               2,
+               None,
+               '___sec66'),
+              (u' Style guide for Python code ', 3, None, '___sec67'),
+              (u' Exercises ', 1, u'sec:formula:exer', u'sec:formula:exer'),
+              (u' What does it mean to solve an exercise? ',
+               3,
+               None,
+               '___sec69'),
+              (u' Exercise 1: Compute 1+1 ',
+               2,
+               u'sec:formula:ex0',
+               u'sec:formula:ex0'),
+              (u' Exercise 2: Write a Hello World program ',
+               2,
+               u'sec:formula:ex5',
+               u'sec:formula:ex5'),
+              (u' Exercise 3: Derive and compute a formula ',
+               2,
+               u'sec:formula:ex16',
+               u'sec:formula:ex16'),
+              (u' Exercise 4: Convert from meters to British length units ',
+               2,
+               u'sec:formula:ex9',
+               u'sec:formula:ex9'),
+              (u' Exercise 5: Compute the mass of various substances ',
+               2,
+               u'sec:formula:exex3',
+               u'sec:formula:exex3'),
+              (u' Exercise 6: Compute the growth of money in a bank ',
+               2,
+               u'sec:formula:ex3',
+               u'sec:formula:ex3'),
+              (u' Exercise 7: Find error(s) in a program ',
+               2,
+               u'sec:formula:ex12',
+               u'sec:formula:ex12'),
+              (u' Exercise 8: Type in program text ',
+               2,
+               u'sec:formula:exex1',
+               u'sec:formula:exex1'),
+              (u' Exercise 9: Type in programs and debug them ',
+               2,
+               u'sec:formula:exex2a',
+               u'sec:formula:exex2a'),
+              (u' Exercise 10: Evaluate a Gaussian function ',
+               2,
+               u'sec:formula:ex7',
+               u'sec:formula:ex7'),
+              (u' Remarks ', 3, None, '___sec80'),
+              (u' Exercise 11: Compute the air resistance on a football ',
+               2,
+               u'sec:formula:ex11',
+               u'sec:formula:ex11'),
+              (u' Exercise 12: How to cook the perfect egg ',
+               2,
+               u'sec:formula:ex14',
+               u'sec:formula:ex14'),
+              (u' Exercise 13: Derive the trajectory of a ball ',
+               2,
+               u'sec:formula:ex13',
+               u'sec:formula:ex13'),
+              (u' Exercise 14: Find errors in the coding of formulas ',
+               2,
+               u'sec:formula:ex1',
+               u'sec:formula:ex1'),
+              (u' Exercise 15: Explain why a program does not work ',
+               2,
+               u'sec:formula:ex15',
+               u'sec:formula:ex15'),
+              (u' Exercise 16: Find errors in Python statements ',
+               2,
+               u'sec:formula:ex2',
+               u'sec:formula:ex2'),
+              (u' Exercise 17: Find errors in the coding of a formula ',
+               2,
+               u'sec:formula:ex4',
+               u'sec:formula:ex4'),
+              (u' References ', 1, None, '___sec88')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- newcommands_keep.tex -->
+$$
+\newcommand{\tp}{\thinspace .}
+\renewcommand{\Re}{\bbbr}
+
+\newcommand{\rhodim}{\mbox{kgm}^{-3}}
+\newcommand{\mudim}{\mbox{kg}\,\mbox{s}^{-1}\mbox{m}^{-1}}
+\newcommand{\Cdim}{\mbox{kg}\,\mbox{s}^{-1}}
+
+
+\newcommand{\Oof}[1]{\mathcal{O}(#1)}
+\newcommand{\Prob}[1]{\hbox{P}(#1)}
+\newcommand{\Var}[1]{\hbox{Var}(#1)}
+\newcommand{\Cov}[2]{\hbox{Cov}(#1,#2)}
+\newcommand{\StDev}[1]{\hbox{StDev}(#1)}
+$$
+
+
+
+
+    
+<a name="part0002"></a>
+<p>
+<!-- begin top navigation -->
+<table style="width: 100%"><tr><td>
+<div style="text-align: left;"><a href="._formulas-solarized001.html">&laquo; Previous</a></div>
+</td><td>
+<div style="text-align: right;"><a href="._formulas-solarized003.html">Next &raquo;</a></div>
+</td></tr></table>
+<!-- end top navigation -->
+</p>
+
+<p>
+<!-- !split -->
+
+<h1>Computer science glossary <a name="sec:formula:glossary"></a></h1>
+
+It is now time to pick up some important words that programmers use
+when they talk about programming: algorithm, application, assignment,
+blanks (whitespace), bug, code, code segment, code snippet, debug,
+debugging, execute, executable, implement, implementation, input,
+library, operating system, output, statement, syntax, user, verify,
+and verification.  These words are frequently used in English in lots
+of contexts, yet they have a precise meaning in computer science.
+
+<p>
+<!-- ********* Terms Related to Develping Programs  *********** -->
+
+<p>
+<em>Program</em> and <em>code</em> are interchangeable terms.  A code/program
+<em>segment</em> is a collection of consecutive statements from a program.
+Another term with similar meaning is <em>code snippet</em>.  Many also use
+the word <em>application</em> in the same meaning as program and code.  A
+related term is <em>source code</em>, which is the same as the text that
+constitutes the program.  You find the source code of a program in one
+or more text files.  (Note that text files normally have the extension
+<code>.txt</code>, while program files have an extension related to the
+programming language, e.g., <code>.py</code> for Python programs. The content of
+a <code>.py</code> file is, nevertheless, plain text as in a <code>.txt</code> file.)
+
+<p>
+We talk about <em>running a program</em>, or equivalently <em>executing a
+program</em> or <em>executing a file</em>. The file we execute is the file in
+which the program text is stored. This file is often called an
+<em>executable</em> or an <em>application</em>.  The program text may appear in many
+files, but the executable is just the single file that starts the
+whole program when we run that file. Running a file can be done in
+several ways, for instance, by double-clicking the file icon, by
+writing the filename in a terminal window, or by giving the filename
+to some program. This latter technique is what we have used so far in
+this document: we feed the filename to the program <code>python</code>.  That is,
+we execute a Python program by executing another program <code>python</code>,
+which interprets the text in our Python program file.
+
+<p>
+The term <em>library</em> is widely used for a collection of generally useful
+program pieces that can be applied in many different contexts. Having
+access to good libraries means that you do not need to program code
+snippets that others have already programmed (most probable in a
+better way!).  There are huge numbers of Python libraries. In Python
+terminology, the libraries are composed of <em>modules</em> and <em>packages</em>.
+The section <a href="._formulas-solarized004.html#sec:formula:stdmath">Evaluating standard mathematical functions</a> gives a first glimpse of the <code>math</code>
+module, which contains a set of standard mathematical functions for
+\( \sin x \), \( \cos x \), \( \ln x \), \( e^x \), \( \sinh x \), \( \sin^{-1} x \),
+etc. Later, you will meet many other useful modules. Packages are just
+collections of modules. The standard Python distribution comes with a
+large number of modules and packages, but you can download many more
+from the Internet, see in particular <code>www.python.org/pypi</code>.  Very
+often, when you encounter a programming task that is likely to occur
+in many other contexts, you can find a Python module where the job is
+already done. To mention just one example, say you need to compute how
+many days there are between two dates. This is a non-trivial task that
+lots of other programmers must have faced, so it is not a big surprise
+that Python comes with a module <code>datetime</code> to do calculations with
+dates.
+
+<p>
+The recipe for what the computer is supposed to do in a program is
+called <em>algorithm</em>. In the examples in the first couple of chapters in
+this document, the algorithms are so simple that we can hardly
+distinguish them from the program text itself, but later in the
+document we will carefully set up an algorithm before attempting to
+<em>implement</em> it in a program. This is useful when the algorithm is much
+more compact than the resulting program code.  The algorithm in the
+current example consists of three steps:
+
+<ul>
+  <li> initialize the variables \( v_0 \), \( g \), and \( t \) with numerical values,</li>
+  <li> evaluate \( y \) according to the formula <a href="._formulas-solarized001.html#mjx-eqn-1">(1)</a>,</li>
+  <li> print the \( y \) value to the screen.</li>
+</ul>
+
+The Python program is very close to this text, but some less
+experienced programmers may want to write the tasks in English before
+translating them to Python.
+
+<p>
+The <em>implementation</em> of an algorithm is the process of writing and
+testing a program. The testing phase is also known as <em>verification</em>:
+After the program text is written we need to <em>verify</em> that the program
+works correctly.  This is a very important step that will receive
+substantial attention in the present document. Mathematical software
+produce numbers, and it is normally quite a challenging task to verify
+that the numbers are correct.
+
+<p>
+An <em>error</em> in a program is known as a <em>bug</em>, and the process of
+locating and removing bugs is called <em>debugging</em>. Many look at
+debugging as the most difficult and challenging part of computer
+programming.
+We have in fact devoted  ref{ch:debug} to the art of
+debugging in this document.
+The origin of the strange terms bug and debugging can be found in
+<a href="http://en.wikipedia.org/wiki/Software_bug#Etymology" target="_self">Wikipedia</a>.
+
+<p>
+Programs are built of <em>statements</em>.  There are many types of
+statements:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>v0 = 3
+</code></pre>
+<!-- end verbatim block -->
+is an <em>assignment</em>
+statement, while
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>print y
+</code></pre>
+<!-- end verbatim block -->
+is a <em>print</em> statement.
+It is common to have one statement on each line, but it is possible
+to write multiple statements on one line if the statements are separated
+by semi-colon. Here is an example:
+
+<p>
+<!-- begin verbatim block  pypro-->
+<pre><code>v0 = 3; g = 9.81; t = 0.6
+y = v0*t - 0.5*g*t**2
+print y
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+Although most newcomers to computer programming will think they
+understand the meaning of the lines in the above program, it is
+important to be aware of some major differences between notation in a
+computer program and notation in mathematics.  When you see the
+equality sign <code>=</code> in mathematics, it has a certain interpretation as
+an equation (\( x+2=5 \)) or a definition (\( f(x)=x^2+1 \)).  In a computer
+program, however, the equality sign has a quite different meaning, and
+it is called an <em>assignment</em>.  The right-hand side of an assignment
+contains an <em>expression</em>, which is a combination of values, variables,
+and operators.  When the expression is <em>evaluated</em>, it results in a
+value that the variable on the left-hand side will refer to. We often
+say that the right-hand side value is <em>assigned</em> to the variable on
+the left-hand side.  In the current context it means that we in the
+first line assign the number 3 to the variable <code>v0</code>, 9.81 to <code>g</code>, and
+0.6 to <code>t</code>.  In the next line, the right-hand side expression <code>v0*t -
+0.5*g*t**2</code> is first evaluated, and the result is then assigned to the
+<code>y</code> variable.
+
+<p>
+Consider the assignment statement
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>y = y + 3
+</code></pre>
+<!-- end verbatim block -->
+This statement is mathematically false, but in a program it just means
+that we evaluate the right-hand side expression and assign its value
+to the variable <code>y</code>. That is, we first take the current value of <code>y</code>
+and add 3. The value of this operation is assigned to <code>y</code>.  The old
+value of <code>y</code> is then lost.
+
+<p>
+You may think of the <code>=</code> as an arrow, <code>y <- y+3</code>, rather than an
+equality sign, to illustrate that the value to the right of the arrow
+is stored in the variable to the left of the arrow. In fact, the R
+programming language for statistical computing actually applies an
+arrow, many old languages (like Algol, Simula, and Pascal) used <code>:=</code>
+to explicitly state that we are not dealing with a mathematical
+equality.
+
+<p>
+An example will illustrate the principle of assignment to a variable:
+
+<p>
+<!-- begin verbatim block  pypro-->
+<pre><code>y = 3
+print y
+y = y + 4
+print y
+y = y*y
+print y
+</code></pre>
+<!-- end verbatim block -->
+Running this program results in three numbers: <code>3</code>, <code>7</code>, <code>49</code>.
+Go through the program and convince yourself that you understand what
+the result of each statement becomes.
+
+<p>
+A computer program must have correct <em>syntax</em>, meaning that the text
+in the program must follow the strict rules of the computer language
+for constructing statements.  For example, the syntax of the print
+statement is the word <code>print</code>, followed by one or more spaces,
+followed by an expression of what we want to print (a Python variable,
+text enclosed in quotes, a number, for instance).  Computers are very
+picky about syntax! For instance, a human having read all the previous
+pages may easily understand what this program does,
+
+<p>
+<!-- begin verbatim block  pypro-->
+<pre><code>myvar = 5.2
+prinnt Myvar
+</code></pre>
+<!-- end verbatim block -->
+but the computer will find two errors in the last line:
+<code>prinnt</code> is an unknown instruction and <code>Myvar</code> is an undefined
+variable. Only the first error is reported (a syntax error), because
+Python stops the program once an error is found.
+All errors that Python finds are easy to remove. The difficulty with
+programming is to remove the rest of the errors, such as errors in
+formulas or the sequence of operations.
+
+<p>
+<em>Blanks</em> may or may not be important in Python programs.  In
+the document <a href="http://tcse6.on.net/looplist" target="_self">Loops and lists</a> <a href="._formulas-solarized009.html#Langtangen_TCSE6_looplist">[5]</a> you
+will see that blanks are in some occasions essential for a correct
+program.  Around <code>=</code> or arithmetic operators, however, blanks do not
+matter. We could hence write our program from the section <a href="._formulas-solarized001.html#sec:formula:variables">Using variables</a> as
+
+<p>
+<!-- begin verbatim block  pypro-->
+<pre><code>v0=3;g=9.81;t=0.6;y=v0*t-0.5*g*t**2;print y
+</code></pre>
+<!-- end verbatim block -->
+This is not a good idea because blanks are essential for easy reading
+of a program code, and easy reading is essential for finding errors,
+and finding errors is <em>the</em> difficult part of programming.  The
+recommended layout in Python programs specifies one blank around <code>=</code>,
+<code>+</code>, and <code>-</code>, and no blanks around <code>*</code>, <code>/</code>, and <code>**</code>. Note that the
+blank after <code>print</code> is essential: <code>print</code> is a command in Python and
+<code>printy</code> is not recognized as any valid command.  (Python will
+complain that <code>printy</code> is an undefined variable.)  Computer scientists
+often use the term <em>whitespace</em> when referring to a blank. (To be more
+precise, blank is the character produced by the space bar on the
+keyboard, while whitespace denotes any character(s) that, if printed,
+do not print ink on the paper: a blank, a tabulator character
+(produced by backslash followed by t), or a newline character
+(produced by backslash followed by n).  (The newline character is
+explained in the section <a href="._formulas-solarized001.html#sec:formula:format">Formatting text and numbers</a>.)
+
+<p>
+<!-- ********** Terms Related to Using Programs *************** -->
+
+<p>
+When we interact with computer programs, we usually provide some
+information to the program and get some information out.  It is common
+to use the term <em>input data</em>, or just <em>input</em>, for the information
+that must be known on beforehand.  The result from a program is
+similarly referred to as <em>output data</em>, or just <em>output</em>.  In our
+example, \( v_0 \), \( g \), and \( t \) constitute input, while \( y \) is
+output. All input data must be assigned values in the program before
+the output can be computed.
+Input data can be explicitly initialized in the program, as we do in
+the present example, or the data can be provided by the user through
+keyboard typing while the program is running (see the document <a href="http://tcse6.on.net/input" target="_self">User input
+and error handling</a>
+<a href="._formulas-solarized009.html#Langtangen_TCSE6_input">[6]</a>).  Output data can be printed in the
+terminal window, as in the current example, displayed as graphics on
+the screen, as done in the document <a href="http://tcse6.on.net/plot" target="_self">Array computing and curve
+plotting</a> <a href="._formulas-solarized009.html#Langtangen_TCSE6_plot">[7]</a>, or
+stored in a file for later access, as explained in the document
+<a href="http://tcse6.on.net/files" target="_self">Files, strings, and dictionaries</a>
+<a href="._formulas-solarized009.html#Langtangen_TCSE6_files">[4]</a>.
+
+<p>
+The word <em>user</em> usually has a special meaning in computer science: It
+means a human interacting with a program.  You are a user of a text
+editor for writing Python programs, and you are a user of your own
+programs. When you write programs, it is difficult to imagine how
+other users will interact with the program.  Maybe they provide wrong
+input or misinterpret the output.  Making user-friendly programs is
+very challenging and depends heavily on the target audience of
+users. The author had the average reader of the book in mind as a
+typical user when developing programs for this document.
+
+<p>
+A central part of a computer is the <em>operating system</em>.  This is
+actually a collection of programs that manages the hardware and
+software resources on the computer. There are three dominating operating
+systems today on computers: Windows, Mac OS X, and Linux.
+In addition, we have Android and iOS for handheld devices.
+Several versions of Windows have appeared since the 1990s:
+Windows 95, 98, 2000, ME, XP, Vista, Windows 7, and Windows 8.  Unix
+was invented already in 1970 and comes in many different versions.
+Nowadays, two open source implementations of Unix, Linux and
+Free BSD Unix, are most common. The latter forms the core of the Mac
+OS X operating system on Macintosh machines, while Linux exists in
+slightly different flavors: Red Hat, Debian, Ubuntu, and OpenSuse to
+mention the most important distributions.  We will use the term Unix
+in this document as a synonym for all the operating systems that
+inherit from classical Unix, such as Solaris, Free BSD, Mac OS X, and
+any Linux variant.  As a computer user and reader of this document, you
+should know exactly what operating system you have.
+
+<p>
+The user's interaction with the operation system is through a set of
+programs. The most widely used of these enable viewing the contents of
+folders or starting other programs.  To interact with the operating
+system, as a user, you can either issue commands in a terminal window
+or use graphical programs. For example, for viewing the file contents
+of a folder you can run the command <code>ls</code> in a Unix terminal window or
+<code>dir</code> in a DOS (Windows) terminal window. The graphical alternatives
+are many, some of the most common are Windows Explorer on Windows,
+Nautilus and Konqueror on Unix, and Finder on Mac.  To start a
+program, it is common to double-click on a file icon or write the
+program's name in a terminal window.
+
+<p>
+<p>
+<!-- begin bottom navigation -->
+<table style="width: 100%"><tr><td>
+<div style="text-align: left;"><a href="._formulas-solarized001.html">&laquo; Previous</a></div>
+</td><td>
+<div style="text-align: right;"><a href="._formulas-solarized003.html">Next &raquo;</a></div>
+</td></tr></table>
+<!-- end bottom navigation -->
+</p>
+
+<!-- ------------------- end of main content --------------- -->
+
+
+</body>
+</html>
+    
+

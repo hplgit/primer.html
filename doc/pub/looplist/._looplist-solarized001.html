@@ -1,0 +1,746 @@
+<!--
+Automatically generated HTML file from Doconce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Doconce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Loops and lists">
+<meta name="keywords" content="loops,boolean expressions,logical expressions,factorial,lists,method (class),list comprehension,list, nested,nested lists,list comprehension,pretty print,sublist,slicing,nested loops,tuples,list functionality,sequence (data type),sum ($\Sigma$) implementation,comparing floating-point numbers,comparing real numbers,comparing objects">
+
+
+
+
+<link href="https://raw.githubusercontent.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/css/solarized_light_code.css" rel="stylesheet" type="text/css" title="light"/>
+<script src="http://www.peterhaschke.com/assets/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<link href="http://thomasf.github.io/solarized-css/solarized-light.min.css" rel="stylesheet">
+<style type="text/css">
+.alert-text-small   { font-size: 80%;  }
+.alert-text-large   { font-size: 130%; }
+.alert-text-normal  { font-size: 90%;  }
+.alert {
+  padding:8px 35px 8px 14px; margin-bottom:18px;
+  text-shadow:0 1px 0 rgba(255,255,255,0.5);
+  border:1px solid #93a1a1;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  color: #555;
+  background-color: #eee8d5;
+  background-position: 10px 5px;
+  background-repeat: no-repeat;
+  background-size: 38px;
+  padding-left: 55px;
+  width: 75%;
+ }
+.alert-block {padding-top:14px; padding-bottom:14px}
+.alert-block > p, .alert-block > ul {margin-bottom:1em}
+.alert li {margin-top: 1em}
+.alert-block p+p {margin-top:5px}
+.alert-notice { background-image: url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_notice.png); }
+.alert-summary  { background-image:url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_summary.png); }
+.alert-warning { background-image: url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_warning.png); }
+.alert-question {background-image:url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_question.png); }
+
+div { text-align: justify; text-justify: inter-word; }
+</style>
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [(u' While loops ', 1, u'sec:basic:loops', u'sec:basic:loops'),
+              (u' A naive solution ',
+               2,
+               u'sec:basic:naive',
+               u'sec:basic:naive'),
+              (u' While loops ', 2, u'sec:basic:while', u'sec:basic:while'),
+              (u' Boolean expressions ',
+               2,
+               u'sec:basic:boolexpr',
+               u'sec:basic:boolexpr'),
+              (u' Loop implementation of a sum ',
+               2,
+               u'sec:basic:sumloop',
+               u'sec:basic:sumloop'),
+              (u' Lists ', 1, None, '___sec5'),
+              (u' Basic list operations ',
+               2,
+               u'sec:lists:basc:op',
+               u'sec:lists:basc:op'),
+              (u' For loops ', 2, None, '___sec7'),
+              (u' The nature of for loops ', 3, None, '___sec8'),
+              (u' Making the table ', 3, None, '___sec9'),
+              (u' Alternative implementations with lists and loops ',
+               1,
+               None,
+               '___sec10'),
+              (u' While loop implementation of a for loop ',
+               2,
+               None,
+               '___sec11'),
+              (u' The range construction ', 2, None, '___sec12'),
+              (u' For loops with list indices ', 2, None, '___sec13'),
+              (u' Changing list elements ', 2, None, '___sec14'),
+              (u' List comprehension ',
+               2,
+               u'sec:basic:list:comprehension',
+               u'sec:basic:list:comprehension'),
+              (u' Traversing multiple lists simultaneously ',
+               2,
+               None,
+               '___sec16'),
+              (u' Nested lists ',
+               1,
+               u'sec:basic:nestedlists',
+               u'sec:basic:nestedlists'),
+              (u' A table as a list of rows or columns ',
+               2,
+               None,
+               '___sec18'),
+              (u' Printing objects ', 2, None, '___sec19'),
+              (u' Modules for pretty print of objects ', 3, None, '___sec20'),
+              (u' Manual printing ', 3, None, '___sec21'),
+              (u' Extracting sublists ',
+               2,
+               u'sec:basic:slice',
+               u'sec:basic:slice'),
+              (u' Example ', 3, None, '___sec23'),
+              (u' Traversing nested lists ', 2, None, '___sec24'),
+              (u' Tuples ', 1, u'sec:lists:tuples', u'sec:lists:tuples'),
+              (u' Summary ',
+               1,
+               u'sec:looplist:summary',
+               u'sec:looplist:summary'),
+              (u' Chapter topics ', 2, None, '___sec27'),
+              (u' While loops ', 3, None, '___sec28'),
+              (u' Lists ', 3, None, '___sec29'),
+              (u' Nested lists ', 3, None, '___sec30'),
+              (u' Tuples ', 3, None, '___sec31'),
+              (u' For loops ', 3, None, '___sec32'),
+              (u' Pretty print ', 3, None, '___sec33'),
+              (u' Terminology ', 3, None, '___sec34'),
+              (u' Example: Analyzing list data ',
+               2,
+               u'sec:looplist:summary:ex',
+               u'sec:looplist:summary:ex'),
+              (u' Problem ', 3, None, '___sec36'),
+              (u' Solution ', 3, None, '___sec37'),
+              (u' Remark ', 3, None, '___sec38'),
+              (u' How to find more Python information ',
+               2,
+               u'sec:basic:pyinfo',
+               u'sec:basic:pyinfo'),
+              (u' Exercises ', 1, None, '___sec40'),
+              (u' Exercise 1: Make a Fahrenheit-Celsius conversion table ',
+               2,
+               u'sec:basic:ex41',
+               u'sec:basic:ex41'),
+              (u' Exercise 2: Generate an approximate Fahrenheit-Celsius conversion table ',
+               2,
+               u'sec:basic:ex1',
+               u'sec:basic:ex1'),
+              (u' Exercise 3: Work with a list ',
+               2,
+               u'sec:basic:ex00',
+               u'sec:basic:ex00'),
+              (u' Exercise 4: Generate odd numbers ',
+               2,
+               u'sec:basic:ex0',
+               u'sec:basic:ex0'),
+              (u' Exercise 5: Sum of first $n$ integers ',
+               2,
+               u'sec:basic:sum:no',
+               u'sec:basic:sum:no'),
+              (u' Exercise 6: Generate equally spaced coordinates ',
+               2,
+               u'sec:basic:ex44',
+               u'sec:basic:ex44'),
+              (u' Exercise 7: Make a table of values from a formula ',
+               2,
+               u'sec:basic:ex4',
+               u'sec:basic:ex4'),
+              (u' Exercise 8: Store values from a formula in lists ',
+               2,
+               u'sec:basic:ex4b',
+               u'sec:basic:ex4b'),
+              (u' Exercise 9: Simulate operations on lists by hand ',
+               2,
+               u'sec:basic:ex43',
+               u'sec:basic:ex43'),
+              (u' Exercise 10: Compute a mathematical sum ',
+               2,
+               u'sec:basic:ex29a',
+               u'sec:basic:ex29a'),
+              (u' Exercise 11: Replace a while loop by a for loop ',
+               2,
+               u'sec:basic:ex29b',
+               u'sec:basic:ex29b'),
+              (u' Exercise 12: Simulate a program by hand ',
+               2,
+               u'sec:basic:ex24a',
+               u'sec:basic:ex24a'),
+              (u' Exercise 13: Explore Python documentation ',
+               2,
+               u'sec:basic:ex47',
+               u'sec:basic:ex47'),
+              (u' Exercise 14: Index a nested lists ',
+               2,
+               u'sec:basic:ex15n',
+               u'sec:basic:ex15n'),
+              (u' Exercise 15: Store data in lists ',
+               2,
+               u'sec:basic:ex1b',
+               u'sec:basic:ex1b'),
+              (u' Exercise 16: Store data in a nested list ',
+               2,
+               u'sec:basic:ex4c',
+               u'sec:basic:ex4c'),
+              (u' Exercise 17: Values of boolean expressions ',
+               2,
+               u'sec:basic:ex15b',
+               u'sec:basic:ex15b'),
+              (u' Exercise 18: Explore round-off errors from a large number of inverse operations ',
+               2,
+               u'sec:basic:ex14b',
+               u'sec:basic:ex14b'),
+              (u' Exercise 19: Explore what zero can be on a computer ',
+               2,
+               u'sec:basic:ex14',
+               u'sec:basic:ex14'),
+              (u' Remarks ', 3, None, '___sec60'),
+              (u' Exercise 20: Compare two real numbers with a tolerance ',
+               2,
+               u'sec:formula:ex14c',
+               u'sec:formula:ex14c'),
+              (u' Exercise 21: Interpret a code ',
+               2,
+               u'sec:basic:ex16',
+               u'sec:basic:ex16'),
+              (u' Exercise 22: Explore problems with inaccurate indentation ',
+               2,
+               u'sec:basic:ex3',
+               u'sec:basic:ex3'),
+              (u' Remarks ', 3, None, '___sec64'),
+              (u' Exercise 23: Explore punctuation in Python programs ',
+               2,
+               u'sec:input:ex33',
+               u'sec:input:ex33'),
+              (u' Exercise 24: Investigate a for loop over a changing list ',
+               2,
+               u'sec:basic:ex18',
+               u'sec:basic:ex18'),
+              (u' References ', 1, None, '___sec67')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- newcommands_keep.tex -->
+$$
+\newcommand{\tp}{\thinspace .}
+\renewcommand{\Re}{\bbbr}
+
+\newcommand{\rhodim}{\mbox{kgm}^{-3}}
+\newcommand{\mudim}{\mbox{kg}\,\mbox{s}^{-1}\mbox{m}^{-1}}
+\newcommand{\Cdim}{\mbox{kg}\,\mbox{s}^{-1}}
+
+
+\newcommand{\Oof}[1]{\mathcal{O}(#1)}
+\newcommand{\Prob}[1]{\hbox{P}(#1)}
+\newcommand{\Var}[1]{\hbox{Var}(#1)}
+\newcommand{\Cov}[2]{\hbox{Cov}(#1,#2)}
+\newcommand{\StDev}[1]{\hbox{StDev}(#1)}
+$$
+
+
+
+
+    
+<a name="part0001"></a>
+<p>
+<!-- begin top navigation -->
+<table style="width: 100%"><tr><td>
+<div style="text-align: left;"><a href="._looplist-solarized000.html">&laquo; Previous</a></div>
+</td><td>
+<div style="text-align: right;"><a href="._looplist-solarized002.html">Next &raquo;</a></div>
+</td></tr></table>
+<!-- end top navigation -->
+</p>
+
+<p>
+<!-- !split -->
+
+<h1>While loops <a name="sec:basic:loops"></a></h1>
+
+Our task now is to print out a conversion table with Celsius degrees
+in the first column of the table and the corresponding Fahrenheit degrees
+in the second column. Such a table may look like this:
+
+<p>
+<!-- begin verbatim block  ccq-->
+<pre><code>  -20  -4.0
+  -15   5.0
+  -10  14.0
+   -5  23.0
+    0  32.0
+    5  41.0
+   10  50.0
+   15  59.0
+   20  68.0
+   25  77.0
+   30  86.0
+   35  95.0
+   40 104.0
+</code></pre>
+<!-- end verbatim block -->
+
+<h2>A naive solution <a name="sec:basic:naive"></a></h2>
+
+The formula for converting \( C \) degrees Celsius to \( F \) degrees
+Fahrenheit is \( F=9C/5 + 32 \).
+Since we know how to evaluate the formula for
+one value of \( C \), we can just repeat these statements as many times
+as required for the table above. Using three statements per line in
+the program, for compact layout of the code, we can write the whole
+program as
+
+<p>
+<!-- begin verbatim block  txt-->
+<pre><code>C = -20;  F = 9.0/5*C + 32;  print C, F
+C = -15;  F = 9.0/5*C + 32;  print C, F
+C = -10;  F = 9.0/5*C + 32;  print C, F
+C =  -5;  F = 9.0/5*C + 32;  print C, F
+C =   0;  F = 9.0/5*C + 32;  print C, F
+C =   5;  F = 9.0/5*C + 32;  print C, F
+C =  10;  F = 9.0/5*C + 32;  print C, F
+C =  15;  F = 9.0/5*C + 32;  print C, F
+C =  20;  F = 9.0/5*C + 32;  print C, F
+C =  25;  F = 9.0/5*C + 32;  print C, F
+C =  30;  F = 9.0/5*C + 32;  print C, F
+C =  35;  F = 9.0/5*C + 32;  print C, F
+C =  40;  F = 9.0/5*C + 32;  print C, F
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+Running this program (which is stored in the file
+<code>c2f_table_repeat.py</code>),
+demonstrates that the output becomes
+
+<p>
+<!-- begin verbatim block  ccq-->
+<pre><code>-20 -4.0
+-15 5.0
+-10 14.0
+-5 23.0
+0 32.0
+5 41.0
+10 50.0
+15 59.0
+20 68.0
+25 77.0
+30 86.0
+35 95.0
+40 104.0
+</code></pre>
+<!-- end verbatim block -->
+This output suffers from somewhat ugly formatting, but that problem
+can quickly
+be fixed by replacing <code>print C, F</code> by a <code>print</code> statement based
+on printf formatting. We will return to this detail later.
+
+<p>
+The main problem with the program above is that lots of statements are
+identical and repeated. First of all it is boring to write this sort
+of repeated statements, especially if we want many more \( C \) and \( F \)
+values in the table. Second, the idea of the computer
+is to automate repetition. Therefore, all computer languages have
+constructs to efficiently express repetition. These constructs are called
+<em>loops</em> and come in two variants in Python:
+<code>while</code> loops and <code>for</code> loops. Most programs in this document
+employ loops, so this concept is extremely important to learn.
+
+<h2>While loops <a name="sec:basic:while"></a></h2>
+
+The <code>while</code> loop is used to repeat a set of statements as long as a
+condition is true.  We shall introduce this kind of loop through an
+example.  The task is to generate the rows of the table of \( C \) and \( F \)
+values. The \( C \) value starts at \( -20 \) and is incremented by 5 as long
+as \( C\leq 40 \). For each \( C \) value we compute the corresponding \( F \)
+value and write out the two temperatures.  In addition, we also add a
+line of dashes above and below the table.
+
+<p>
+The list of tasks to be done can be summarized as follows:
+
+<ul>
+ <li> Print line with dashes</li>
+ <li> \( C=-20 \)</li>
+ <li> While \( C\leq 40 \):</li>
+
+<ul>
+   <li> \( F = {9\over 5}C + 32 \)</li>
+   <li> Print \( C \) and \( F \)</li>
+   <li> Increment \( C \) by \( 5 \)</li>
+</ul>
+
+ <li> Print line with dashes</li>
+</ul>
+
+This is the <em>algorithm</em> of our programming task. The way from a
+detailed algorithm to a fully functioning Python code can often
+be made very short, which is definitely true in the present case:
+
+<p>
+<!-- begin verbatim block  txt-->
+<pre><code>print '------------------'     # table heading
+C = -20                        # start value for C
+dC = 5                         # increment of C in loop
+while C &lt;= 40:                 # loop heading with condition
+    F = (9.0/5)*C + 32         # 1st statement inside loop
+    print C, F                 # 2nd statement inside loop
+    C = C + dC                 # 3rd statement inside loop
+print '------------------'     # end of table line (after loop)
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+A very important feature of Python is now encountered: the block of
+statements to be executed in each pass of the <code>while</code> loop must be
+indented. In the example above the block consists of three lines, and
+all these lines must have exactly the same indentation.  Our choice of
+indentation in this document is four spaces.  The first statement whose
+indentation coincides with that of the <code>while</code> line marks the end of
+the loop and is executed after the loop has terminated.  In this
+example this is the final <code>print</code> statement.  You are encouraged to
+type in the code above in a file, indent the last line four spaces,
+and observe what happens (you will experience that lines in the table
+are separated by a line of dashes: <code>--------</code>).
+
+<p>
+Many novice Python programmers forget the colon at the end of the
+<code>while</code> line - this colon is essential and marks the beginning of the
+indented block of statements inside the loop.  Later, we will see that
+there are many other similar program constructions in Python where
+there is a heading ending with a colon, followed by an indented block
+of statements.
+
+<p>
+Programmers need to fully understand what is going on in a program and
+be able to simulate the program by hand. Let us do this with the
+program segment above. First, we define the start value for the
+sequence of Celsius temperatures: <code>C = -20</code>. We also define the
+increment <code>dC</code> that will be added to <code>C</code> inside the loop.  Then we
+enter the loop condition <code>C <= 40</code>.  The first time <code>C</code> is <code>-20</code>,
+which implies that <code>C <= 40</code> (equivalent to \( C\leq 40 \) in mathematical
+notation) is true. Since the loop condition is true, we enter the
+loop and execute all the indented statements. That is, we compute <code>F</code>
+corresponding to the current <code>C</code> value, print the temperatures, and
+increment <code>C</code> by <code>dC</code>.  For simplicity, we have used
+a plain <code>print C, F</code> without any formatting so the columns will not
+be aligned, but this can easily be fixed later.
+
+<p>
+Thereafter, we enter the second pass in the loop.  First we check the
+condition: <code>C</code> is <code>-15</code> and <code>C <= 40</code> is still true. We execute the
+statements in the indented loop block, <code>C</code> becomes <code>-10</code>, this is
+still less than or equal to <code>40</code>, so we enter the loop block
+again. This procedure is repeated until <code>C</code> is updated from <code>40</code> to
+<code>45</code> in the final statement in the loop block. When we then test the
+condition, <code>C <= 40</code>, this condition is no longer true, and the loop
+is terminated.  We proceed with the next statement that has the same
+indentation as the <code>while</code> statement, which is the final <code>print</code>
+statement in this example.
+
+<p>
+Newcomers to programming are sometimes confused by statements like
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>C = C + dC
+</code></pre>
+<!-- end verbatim block -->
+This line looks erroneous from a mathematical viewpoint, but the
+statement is perfectly valid computer code, because we first evaluate
+the expression on the right-hand side of the equality sign and then
+let the variable on the left-hand side refer to the result of this
+evaluation. In our case, <code>C</code> and <code>dC</code> are two different <code>int</code>
+objects. The operation <code>C+dC</code> results in a new <code>int</code> object, which in
+the assignment <code>C = C+dC</code> is bound to the name <code>C</code>. Before this
+assignment, <code>C</code> was already bound to an <code>int</code> object, and this object
+is automatically destroyed when <code>C</code> is bound to a new object and there
+are no other names (variables) referring to this previous object (if
+you did not get this last point, just relax and continue reading!).
+
+<p>
+Since incrementing the value of a variable is frequently done in
+computer programs, there is a special short-hand notation for this and
+related operations:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>C += dC   # equivalent to C = C + dC
+C -= dC   # equivalent to C = C - dC
+C *= dC   # equivalent to C = C*dC
+C /= dC   # equivalent to C = C/dC
+</code></pre>
+<!-- end verbatim block -->
+
+<h2>Boolean expressions <a name="sec:basic:boolexpr"></a></h2>
+
+In our first example on a <code>while</code> loop, we worked with a condition
+<code>C <= 40</code>, which evaluates to either true or false, written as
+<code>True</code> or <code>False</code> in Python.
+Other comparisons are also useful:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>C == 40    # C equals 40
+C != 40    # C does not equal 40
+C &gt;= 40    # C is greater than or equal to 40
+C &gt;  40    # C is greater than 40
+C &lt;  40    # C is less than 40
+</code></pre>
+<!-- end verbatim block -->
+Not only comparisons between numbers
+can be used as conditions in <code>while</code> loops: any
+expression that has a boolean (<code>True</code> or <code>False</code>) value can be used.
+Such expressions are known as <em>logical</em> or <em>boolean</em>
+expressions.
+
+<p>
+The keyword <code>not</code> can be inserted in front of the boolean
+expression to change the value from <code>True</code> to <code>False</code> or from
+<code>False</code> to <code>True</code>.
+To evaluate <code>not C == 40</code>, we first evaluate <code>C == 40</code>,
+for <code>C = 1</code> this is <code>False</code>, and then <code>not</code> turns the value into
+<code>True</code>. On
+the opposite, if <code>C == 40</code> is <code>True</code>, <code>not C == 40</code> becomes
+<code>False</code>.  Mathematically it is easier to read <code>C != 40</code> than
+<code>not C == 40</code>, but these two boolean expressions are equivalent.
+
+<p>
+Boolean expressions can be combined with <code>and</code> and <code>or</code> to
+form new compound boolean expressions, as in
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>while x &gt; 0 and y &lt;= 1:
+    print x, y
+</code></pre>
+<!-- end verbatim block -->
+If <code>cond1</code> and <code>cond2</code> are two boolean expressions with values
+<code>True</code> or <code>False</code>,
+the compound boolean expression <code>cond1 and cond2</code>
+is <code>True</code> if both <code>cond1</code> and <code>cond2</code> are <code>True</code>.
+On the other hand, <code>cond1 or cond2</code> is <code>True</code> if at
+least one of the conditions, <code>cond1</code> or <code>cond2</code>, is <code>True</code>
+
+<p>
+<div class="alert alert-block alert-notice alert-text-normal"><b>Remark.</b>
+In Python,
+<code>cond1 and cond2</code> or <code>cond1 or cond2</code>
+returns one of the operands
+and not just <code>True</code> or <code>False</code>
+values as in most other
+computer languages. The operands <code>cond1</code> or <code>cond2</code>
+can be expressions or objects. In case of expressions, these are first
+evaluated
+to an object before the compound boolean expression is evaluated.
+For example, <code>(5+1) or -1</code> evaluates to
+<code>6</code> (the second operand is not evaluated when the first one is
+<code>True</code>), and <code>(5+1) and -1</code> evaluates to <code>-1</code>.
+</div>
+
+
+<p>
+Here are some more examples from
+an interactive session where we just evaluate the boolean expressions
+themselves without using them in loop conditions:
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; x = 0;  y = 1.2
+&gt;&gt;&gt; x &gt;= 0 and y &lt; 1
+False
+&gt;&gt;&gt; x &gt;= 0 or y &lt; 1
+True
+&gt;&gt;&gt; x &gt; 0 or y &gt; 1
+True
+&gt;&gt;&gt; x &gt; 0 or not y &gt; 1
+False
+&gt;&gt;&gt; -1 &lt; x &lt;= 0   #  -1 &lt; x and x &lt;= 0
+True
+&gt;&gt;&gt; not (x &gt; 0 or y &gt; 0)
+False
+</code></pre>
+<!-- end verbatim block -->
+In the last sample expression, <code>not</code> applies to the value of the
+boolean expression inside the parentheses: <code>x>0</code> is <code>False</code>, <code>y>0</code>
+is <code>True</code>, so the combined expression with <code>or</code> is <code>True</code>,
+and <code>not</code>
+turns this value to <code>False</code>.
+
+<p>
+The common
+boolean values in Python are <code>True</code>, <code>False</code>, <code>0</code> (false),
+and any integer different from zero (true). To see such values in
+action, we recommend doing
+<a href="._looplist-solarized007.html#sec:basic:ex16">Exercise 21: Interpret a code</a> and
+<a href="._looplist-solarized007.html#sec:basic:ex15b">Exercise 17: Values of boolean expressions</a>.
+
+<p>
+<div class="alert alert-block alert-notice alert-text-normal"><b>Boolean evaluation of an object.</b>
+All objects in Python can in fact be evaluated in a
+boolean context, and all are <code>True</code> except <code>False</code>, zero numbers,
+and empty strings, lists, and dictionaries:
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; s = 'some string'
+&gt;&gt;&gt; bool(s)
+True
+&gt;&gt;&gt; s = ''  # empty string
+&gt;&gt;&gt; bool(s)
+False
+&gt;&gt;&gt; L = [1, 4, 6]
+&gt;&gt;&gt; bool(L)
+True
+&gt;&gt;&gt; L = []
+&gt;&gt;&gt; bool(L)
+False
+&gt;&gt;&gt; a = 88.0
+&gt;&gt;&gt; bool(a)
+True
+&gt;&gt;&gt; a = 0.0
+&gt;&gt;&gt; bool(a)
+False
+</code></pre>
+<!-- end verbatim block -->
+Essentially, <code>if a</code> tests if <code>a</code> is a non-empty object or if it is
+non-zero value. Such constructions are frequent in Python code.
+</div>
+
+
+<p>
+Erroneous thinking about boolean expressions is one of the most
+common sources of errors in computer programs, so you should be
+careful every time you encounter a boolean expression and check
+that it is correctly stated.
+
+<h2>Loop implementation of a sum <a name="sec:basic:sumloop"></a></h2>
+
+Summations frequently appear in mathematics. For instance,
+the sine function can be calculated as a polynomial:
+
+$$
+\begin{equation}
+\sin (x) \approx x - \frac{x^3}{3!} + \frac{x^5}{5!} - \frac{x^7}{7!} +
+\cdots,
+\tag{1}
+\end{equation}
+$$
+
+where \( 3!=3\cdot 2\cdot 1 \), \( 5! = 5\cdot 4\cdot 3\cdot 2\cdot 1 \),
+etc., are factorial expressions. Computing \( k!=k(k-1)(k-2)\cdots 2\cdot 1 \)
+is done by <code>math.factorial(k)</code>.
+
+<p>
+An infinite number of terms are needed on the right-hand side of
+<a href="#mjx-eqn-1">(1)</a> for the equality sign to hold. With a finite
+number of terms, we obtain an approximation to \( \sin (x) \), which is
+well suited for being calculated in a program since only powers and
+the basic four arithmetic operations are involved.
+Say we want to compute the
+right-hand side of <a href="#mjx-eqn-1">(1)</a> for powers up to \( N=25 \).
+Writing out and implementing each one of these terms is a tedious job
+that can easily be automated by a loop.
+
+<p>
+Computation of the sum in <a href="#mjx-eqn-1">(1)</a> by a <code>while</code> loop in
+Python, makes use of (i) a counter <code>k</code> that runs through odd
+numbers from 1 up to some given maximum power <code>N</code>, and (ii) a
+summation variable, say <code>s</code>, which accumulates the terms, one at a
+time. The purpose of each pass of the loop is to compute a new term
+and add it to <code>s</code>. Since the sign of each term alternates, we introduce
+a variable <code>sign</code> that changes between \( -1 \) and \( 1 \)  in each pass
+of the loop.
+
+<p>
+The previous paragraph can be precisely expressed by this piece
+of Python code:
+
+<p>
+<!-- begin verbatim block  pypro-->
+<pre><code>x = 1.2  # assign some value
+N = 25   # maximum power in sum
+k = 1
+s = x
+sign = 1.0
+import math
+
+while k &lt; N:
+    sign = - sign
+    k = k + 2
+    term = sign*x**k/math.factorial(k)
+    s = s + term
+
+print 'sin(%g) = %g (approximation with %d terms)' % (x, s, N)
+</code></pre>
+<!-- end verbatim block -->
+The best way to understand such a program is to simulate it by
+hand. That is, we go through the statements, one by one, and write down
+on a piece of paper what the state of each variable is.
+
+<p>
+When the loop is first entered, <code>k < N</code> implies <code>1 < 25</code>,
+which is <code>True</code> so we enter the loop block. There, we compute
+<code>sign = -1.0</code>, <code>k = 3</code>, <code>term = -1.0*x**3/(3*2*1))</code>
+(note that <code>sign</code> is float so we always have <code>float</code> divided
+<!-- intdiv -->
+by <code>int</code>),
+and <code>s = x - x**3/6</code>, which equals the first two terms in the
+sum. Then we test the loop condition: <code>3 < 25</code> is <code>True</code> so
+we enter the loop block again. This time we obtain
+<code>term = 1.0*x**5/math.factorial(5)</code>, which correctly implements
+the third term in the sum. At some point, <code>k</code> is updated to
+from <code>23</code> to <code>25</code> inside the loop and the loop condition
+then becomes <code>25 < 25</code>, which is <code>False</code>, implying that the
+program jumps over the loop block and continues with the <code>print</code>
+statement (which has the same indentation as the <code>while</code> statement).
+
+<p>
+<p>
+<!-- begin bottom navigation -->
+<table style="width: 100%"><tr><td>
+<div style="text-align: left;"><a href="._looplist-solarized000.html">&laquo; Previous</a></div>
+</td><td>
+<div style="text-align: right;"><a href="._looplist-solarized002.html">Next &raquo;</a></div>
+</td></tr></table>
+<!-- end bottom navigation -->
+</p>
+
+<!-- ------------------- end of main content --------------- -->
+
+
+</body>
+</html>
+    
+

@@ -1,0 +1,692 @@
+<!--
+Automatically generated HTML file from Doconce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Doconce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Computing with formulas">
+<meta name="keywords" content="directory,run Python program,execute Python program,terminal window,console (terminal) window,directory,comments,non-English characters,formatting text and numbers,printf syntax,string,triple-quoted strings,format string syntax,newline character (line break),line break,source code,application,statements,expression,syntax,whitespace,blanks,whitespace,input (data),output (data),user (of a program),operating system (OS),Windows,Mac OS X,Unix,Linux,objects,round-off errors,interactive sessions standard Python shell,type conversion,check an object's type,rounding float to integer,interactive sessions IPython,IPython,run Python program,execute Python program,IPython running Python programs,IPython start-up file,IPython executing operating system commands,IPython command history,complex numbers,Gaussian function">
+
+
+
+
+<link href="https://raw.githubusercontent.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/css/solarized_light_code.css" rel="stylesheet" type="text/css" title="light"/>
+<script src="http://www.peterhaschke.com/assets/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<link href="http://thomasf.github.io/solarized-css/solarized-light.min.css" rel="stylesheet">
+<style type="text/css">
+.alert-text-small   { font-size: 80%;  }
+.alert-text-large   { font-size: 130%; }
+.alert-text-normal  { font-size: 90%;  }
+.alert {
+  padding:8px 35px 8px 14px; margin-bottom:18px;
+  text-shadow:0 1px 0 rgba(255,255,255,0.5);
+  border:1px solid #93a1a1;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  color: #555;
+  background-color: #eee8d5;
+  background-position: 10px 5px;
+  background-repeat: no-repeat;
+  background-size: 38px;
+  padding-left: 55px;
+  width: 75%;
+ }
+.alert-block {padding-top:14px; padding-bottom:14px}
+.alert-block > p, .alert-block > ul {margin-bottom:1em}
+.alert li {margin-top: 1em}
+.alert-block p+p {margin-top:5px}
+.alert-notice { background-image: url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_notice.png); }
+.alert-summary  { background-image:url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_summary.png); }
+.alert-warning { background-image: url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_warning.png); }
+.alert-question {background-image:url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_question.png); }
+
+div { text-align: justify; text-justify: inter-word; }
+</style>
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [(u' The first programming encounter: a formula ',
+               1,
+               u'sec:formula:1',
+               u'sec:formula:1'),
+              (u' Using a program as a calculator ',
+               2,
+               u'sec:formula:1st',
+               u'sec:formula:1st'),
+              (u' About programs and programming ', 2, None, '___sec2'),
+              (u' Tools for writing programs ', 2, None, '___sec3'),
+              (u' Writing and running your first Python program ',
+               2,
+               None,
+               '___sec4'),
+              (u' Warning about typing program text ', 2, None, '___sec5'),
+              (u' Verifying the result ', 2, None, '___sec6'),
+              (u' Using variables ',
+               2,
+               u'sec:formula:variables',
+               u'sec:formula:variables'),
+              (u' Names of variables ', 2, None, '___sec8'),
+              (u' Reserved words in Python ',
+               2,
+               u'sec:formula:keywords',
+               u'sec:formula:keywords'),
+              (u' Comments ', 2, None, '___sec10'),
+              (u' Remark ', 3, None, '___sec11'),
+              (u' Formatting text and numbers ',
+               2,
+               u'sec:formula:format',
+               u'sec:formula:format'),
+              (u' Printf syntax ', 3, None, '___sec13'),
+              (u' Format string syntax ', 3, None, '___sec14'),
+              (u' The newline character ', 3, None, '___sec15'),
+              (u' Computer science glossary ',
+               1,
+               u'sec:formula:glossary',
+               u'sec:formula:glossary'),
+              (u' Another formula: Celsius-Fahrenheit conversion ',
+               1,
+               u'sec:formula:c2f',
+               u'sec:formula:c2f'),
+              (u' Potential error: integer division ',
+               2,
+               u'sec:formula:intdiv',
+               u'sec:formula:intdiv'),
+              (u' Straightforward coding of the formula ',
+               3,
+               None,
+               '___sec19'),
+              (u' Verifying the results ', 3, None, '___sec20'),
+              (u' Float and integer division ', 3, None, '___sec21'),
+              (u' Objects in Python ', 2, None, '___sec22'),
+              (u' Avoiding integer division ',
+               2,
+               u'sec:formula:c2f:correct',
+               u'sec:formula:c2f:correct'),
+              (u' Locating potential integer division ', 3, None, '___sec24'),
+              (u' Remark ', 3, None, '___sec25'),
+              (u' Arithmetic operators and precedence ',
+               2,
+               u'sec:formula:operators',
+               u'sec:formula:operators'),
+              (u' Evaluating standard mathematical functions ',
+               1,
+               u'sec:formula:stdmath',
+               u'sec:formula:stdmath'),
+              (u' Example: Using the square root function ',
+               2,
+               u'sec:formula:sqrt',
+               u'sec:formula:sqrt'),
+              (u' Problem ', 3, None, '___sec29'),
+              (u' The program ', 3, None, '___sec30'),
+              (u' Two ways of importing a module ', 3, None, '___sec31'),
+              (u' Import with new names ', 3, None, '___sec32'),
+              (u' Example: Computing with $\\sinh x$ ', 2, None, '___sec33'),
+              (u' A first glimpse of round-off errors ',
+               2,
+               u'sec:formula:roundoff',
+               u'sec:formula:roundoff'),
+              (u' Interactive computing ',
+               1,
+               u'sec:formula:pyshell',
+               u'sec:formula:pyshell'),
+              (u' Using the Python shell ', 2, None, '___sec36'),
+              (u' Type conversion ',
+               2,
+               u'sec:formulas:typeconversion',
+               u'sec:formulas:typeconversion'),
+              (u' IPython ',
+               2,
+               u'sec:formula:ipython',
+               u'sec:formula:ipython'),
+              (u' Running programs ', 3, None, '___sec39'),
+              (u' Quick recovery of previous output ', 3, None, '___sec40'),
+              (u' Tab completion ', 3, None, '___sec41'),
+              (u' Recovering previous commands ', 3, None, '___sec42'),
+              (u' Running Unix/Windows commands ', 3, None, '___sec43'),
+              (u' Notebooks ', 3, None, '___sec44'),
+              (u' Complex numbers ',
+               1,
+               u'sec:formula:complex',
+               u'sec:formula:complex'),
+              (u' Complex arithmetics in Python ', 2, None, '___sec46'),
+              (u' Complex functions in Python ', 2, None, '___sec47'),
+              (u' Unified treatment of complex and real functions ',
+               2,
+               u'formulas:unified:complex:real',
+               u'formulas:unified:complex:real'),
+              (u' Symbolic computing ',
+               1,
+               u'sec:formula:sympy',
+               u'sec:formula:sympy'),
+              (u' Basic differentiation and integration ',
+               2,
+               u'sec:formula:sympy:diffint',
+               u'sec:formula:sympy:diffint'),
+              (u' Equation solving and Taylor series ', 2, None, '___sec51'),
+              (u' Summary ',
+               1,
+               u'sec:formula:summary',
+               u'sec:formula:summary'),
+              (u' Chapter topics ', 2, None, '___sec53'),
+              (u' Programs must be accurate! ', 3, None, '___sec54'),
+              (u' Variables ', 3, None, '___sec55'),
+              (u' Comment lines ', 3, None, '___sec56'),
+              (u' Object types ', 3, None, '___sec57'),
+              (u' Operators ', 3, None, '___sec58'),
+              (u' Common mathematical functions ', 3, None, '___sec59'),
+              (u' Print ', 3, None, '___sec60'),
+              (u' Complex numbers ', 3, None, '___sec61'),
+              (u' Terminology ', 3, None, '___sec62'),
+              (u' Example: Trajectory of a ball ', 2, None, '___sec63'),
+              (u' Problem ', 3, None, '___sec64'),
+              (u' Solution ', 3, None, '___sec65'),
+              (u' About typesetting conventions in this book ',
+               2,
+               None,
+               '___sec66'),
+              (u' Style guide for Python code ', 3, None, '___sec67'),
+              (u' Exercises ', 1, u'sec:formula:exer', u'sec:formula:exer'),
+              (u' What does it mean to solve an exercise? ',
+               3,
+               None,
+               '___sec69'),
+              (u' Exercise 1: Compute 1+1 ',
+               2,
+               u'sec:formula:ex0',
+               u'sec:formula:ex0'),
+              (u' Exercise 2: Write a Hello World program ',
+               2,
+               u'sec:formula:ex5',
+               u'sec:formula:ex5'),
+              (u' Exercise 3: Derive and compute a formula ',
+               2,
+               u'sec:formula:ex16',
+               u'sec:formula:ex16'),
+              (u' Exercise 4: Convert from meters to British length units ',
+               2,
+               u'sec:formula:ex9',
+               u'sec:formula:ex9'),
+              (u' Exercise 5: Compute the mass of various substances ',
+               2,
+               u'sec:formula:exex3',
+               u'sec:formula:exex3'),
+              (u' Exercise 6: Compute the growth of money in a bank ',
+               2,
+               u'sec:formula:ex3',
+               u'sec:formula:ex3'),
+              (u' Exercise 7: Find error(s) in a program ',
+               2,
+               u'sec:formula:ex12',
+               u'sec:formula:ex12'),
+              (u' Exercise 8: Type in program text ',
+               2,
+               u'sec:formula:exex1',
+               u'sec:formula:exex1'),
+              (u' Exercise 9: Type in programs and debug them ',
+               2,
+               u'sec:formula:exex2a',
+               u'sec:formula:exex2a'),
+              (u' Exercise 10: Evaluate a Gaussian function ',
+               2,
+               u'sec:formula:ex7',
+               u'sec:formula:ex7'),
+              (u' Remarks ', 3, None, '___sec80'),
+              (u' Exercise 11: Compute the air resistance on a football ',
+               2,
+               u'sec:formula:ex11',
+               u'sec:formula:ex11'),
+              (u' Exercise 12: How to cook the perfect egg ',
+               2,
+               u'sec:formula:ex14',
+               u'sec:formula:ex14'),
+              (u' Exercise 13: Derive the trajectory of a ball ',
+               2,
+               u'sec:formula:ex13',
+               u'sec:formula:ex13'),
+              (u' Exercise 14: Find errors in the coding of formulas ',
+               2,
+               u'sec:formula:ex1',
+               u'sec:formula:ex1'),
+              (u' Exercise 15: Explain why a program does not work ',
+               2,
+               u'sec:formula:ex15',
+               u'sec:formula:ex15'),
+              (u' Exercise 16: Find errors in Python statements ',
+               2,
+               u'sec:formula:ex2',
+               u'sec:formula:ex2'),
+              (u' Exercise 17: Find errors in the coding of a formula ',
+               2,
+               u'sec:formula:ex4',
+               u'sec:formula:ex4'),
+              (u' References ', 1, None, '___sec88')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- newcommands_keep.tex -->
+$$
+\newcommand{\tp}{\thinspace .}
+\renewcommand{\Re}{\bbbr}
+
+\newcommand{\rhodim}{\mbox{kgm}^{-3}}
+\newcommand{\mudim}{\mbox{kg}\,\mbox{s}^{-1}\mbox{m}^{-1}}
+\newcommand{\Cdim}{\mbox{kg}\,\mbox{s}^{-1}}
+
+
+\newcommand{\Oof}[1]{\mathcal{O}(#1)}
+\newcommand{\Prob}[1]{\hbox{P}(#1)}
+\newcommand{\Var}[1]{\hbox{Var}(#1)}
+\newcommand{\Cov}[2]{\hbox{Cov}(#1,#2)}
+\newcommand{\StDev}[1]{\hbox{StDev}(#1)}
+$$
+
+
+
+
+    
+<a name="part0005"></a>
+<p>
+<!-- begin top navigation -->
+<table style="width: 100%"><tr><td>
+<div style="text-align: left;"><a href="._formulas-solarized004.html">&laquo; Previous</a></div>
+</td><td>
+<div style="text-align: right;"><a href="._formulas-solarized006.html">Next &raquo;</a></div>
+</td></tr></table>
+<!-- end top navigation -->
+</p>
+
+<p>
+<!-- !split -->
+
+<h1>Interactive computing <a name="sec:formula:pyshell"></a></h1>
+
+A particular convenient feature of Python is the ability to execute
+statements and evaluate expressions interactively. The environments
+where you work interactively with programming are commonly known as
+Python <em>shells</em>. The simplest Python shell is invoked by just typing
+<code>python</code> at the command line in a terminal window. Some messages about
+Python are written out together with a prompt <code>>>></code>, after which you
+can issue commands.  Let us try to use the interactive shell as a
+calculator.  Type in <code>3*4.5-0.5</code> and then press the Return key to see
+Python's response to this expression:
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>Terminal&gt; python
+Python 2.7.5+ (default, Sep 19 2013, 13:48:49)
+[GCC 4.8.1] on linux2
+Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.
+&gt;&gt;&gt; 3*4.5-0.5
+13.0
+</code></pre>
+<!-- end verbatim block -->
+The text on a line after <code>>>></code> is what we write (shell input) and the
+text without the <code>>>></code> prompt is the result that Python calculates
+(shell output).  It is easy, as explained below, to recover previous
+input and edit the text. This editing feature makes it convenient to
+experiment with statements and expressions.
+
+<h2>Using the Python shell  <a name="___sec36"></a></h2>
+
+The program from the section <a href="._formulas-solarized001.html#sec:formula:variables">Using variables</a> can be typed in line
+by line in the interactive shell:
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; v0 = 5
+&gt;&gt;&gt; g = 9.81
+&gt;&gt;&gt; t = 0.6
+&gt;&gt;&gt; y = v0*t - 0.5*g*t**2
+&gt;&gt;&gt; print y
+1.2342
+</code></pre>
+<!-- end verbatim block -->
+We can now easily calculate an <code>y</code> value corresponding to another
+(say) <code>v0</code> value: hit the up arrow key to recover previous
+statements, repeat pressing this key until the <code>v0 = 5</code> statement
+is displayed. You can then edit the line, e.g., to
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; v0 = 6
+</code></pre>
+<!-- end verbatim block -->
+Press return to execute this statement. You can control the new
+value of <code>v0</code> by either typing just <code>v0</code> or <code>print v0</code>:
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; v0
+6
+&gt;&gt;&gt; print v0
+6
+</code></pre>
+<!-- end verbatim block -->
+The next step is to recompute <code>y</code> with this new <code>v0</code> value.
+Hit the up arrow key multiple times to recover the statement where
+<code>y</code> is assigned, press the Return key, and write <code>y</code> or
+<code>print y</code> to see the result of the computation:
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; y = v0*t - 0.5*g*t**2
+&gt;&gt;&gt; y
+1.8341999999999996
+&gt;&gt;&gt; print y
+1.8342
+</code></pre>
+<!-- end verbatim block -->
+The reason why we get two slightly different results is that
+typing just <code>y</code> prints out all the decimals that are
+stored in the computer (16), while <code>print y</code> writes out <code>y</code>
+with fewer decimals. As mentioned in the section <a href="._formulas-solarized004.html#sec:formula:roundoff">A first glimpse of round-off errors</a>
+computations on a computer often suffer from round-off errors. The present
+calculation is no exception. The correct answer is <code>1.8342</code>, but
+round-off errors lead to a number that is incorrect in the 16th decimal.
+The error is here \( 4\cdot 10^{-16} \).
+
+<h2>Type conversion <a name="sec:formulas:typeconversion"></a></h2>
+
+Often you can work with variables in Python without bothering about
+the type of objects these variables refer to. Nevertheless, we
+encountered a serious problem in the section <a href="._formulas-solarized003.html#sec:formula:intdiv">Potential error: integer division</a> with
+integer division, which forced us to be careful about the types of
+objects in a calculation. The interactive shell is very useful for
+exploring types.  The following example illustrates the <code>type</code>
+function and how we can convert an object from one type to another.
+
+<p>
+First, we create an <code>int</code> object bound to the name <code>C</code> and
+check its type by calling <code>type(C)</code>:
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; C = 21
+&gt;&gt;&gt; type(C)
+&lt;type 'int'&gt;
+</code></pre>
+<!-- end verbatim block -->
+We convert this
+<code>int</code> object to a corresponding <code>float</code> object:
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; C = float(C)   # type conversion
+&gt;&gt;&gt; type(C)
+&lt;type 'float'&gt;
+&gt;&gt;&gt; C
+21.0
+</code></pre>
+<!-- end verbatim block -->
+In the statement <code>C = float(C)</code> we create a new object from the
+original object referred to by the name <code>C</code> and bind it to the same
+name <code>C</code>. That is, <code>C</code> refers to a different object after the
+statement than before.  The original <code>int</code> with value <code>21</code> cannot be
+reached anymore (since we have no name for it) and will be
+automatically deleted by Python.
+
+<p>
+We may also do the reverse operation, i.e., convert a particular
+<code>float</code> object to a corresponding <code>int</code> object:
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; C = 20.9
+&gt;&gt;&gt; type(C)
+&lt;type 'float'&gt;
+&gt;&gt;&gt; D = int(C)      # type conversion
+&gt;&gt;&gt; type(D)
+&lt;type 'int'&gt;
+&gt;&gt;&gt; D
+20                  # decimals are truncated :-/
+</code></pre>
+<!-- end verbatim block -->
+In general, one can convert a variable <code>v</code> to type <code>MyType</code>
+by writing <code>v=MyType(v)</code>, if it makes sense to do the conversion.
+
+<p>
+In the last input we tried to convert a <code>float</code> to an <code>int</code>, and this
+operation implied stripping off the decimals. Correct conversion
+according to mathematical rounding rules can be achieved with help of
+the <code>round</code> function:
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; round(20.9)
+21.0
+&gt;&gt;&gt; int(round(20.9))
+21
+</code></pre>
+<!-- end verbatim block -->
+
+<h2>IPython <a name="sec:formula:ipython"></a></h2>
+
+There exist several improvements of the standard Python shell
+presented in the section <a href="#sec:formula:pyshell">Interactive computing</a>.  The author advocates
+IPython as the preferred interactive shell. You will then need to have
+IPython installed. Typing <code>ipython</code> in a terminal window starts the
+shell.  The (default) prompt in IPython is not <code>>>></code> but <code>In [X]:</code>,
+where <code>X</code> is the number of the present input command.  The most widely
+used features of IPython are summarized below.
+
+<h3>Running programs  <a name="___sec39"></a></h3>
+
+Python programs can be run from within the shell:
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>In [1]: run ball2.py
+1.2342
+</code></pre>
+<!-- end verbatim block -->
+This command requires that you have taken a <code>cd</code> to
+the folder where the <code>ball2.py</code> program is located
+and started IPython from there.
+
+<p>
+On Windows you may, as an alternative to starting IPython from a DOS
+or PowerShell window, double click on the IPython desktop icon or use the Start
+menu. In that case, you must move to the right folder where your
+program is located. This is done by the <code>os.chdir</code> (change directory)
+command. Typically, you write something like
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>In [1]: import os
+In [2]: os.chdir(r'C:\Documents and Settings\me\My Documents\div')
+In [3]: run ball2.py
+</code></pre>
+<!-- end verbatim block -->
+if the <code>ball2.py</code> program is located in the folder <code>div</code> under <code>My
+Documents</code> of user <code>me</code>.  Note the <code>r</code> before the quote in the string:
+it is required to let a backslash really mean the backslash character.
+If you end up typing the <code>os.chdir</code> command every time you enter
+an IPython shell, this command (and others) can be placed in a
+<em>startup file</em> such that they are automatically executed when you
+launch IPython.
+
+<p>
+Inside IPython you can invoke any operating system command.  This
+allows us to navigate to the right folder above using Unix or Windows
+(<code>cd</code>) rather than Python (<code>os.chdir</code>):
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>In [1]: cd C:\Documents and Settings\me\My Documents\div
+In [3]: run ball2.py
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+We recommend running all your Python programs from the IPython shell.
+Especially when something goes wrong, IPython can help you to examine
+the state of variables so that you become quicker to locate bugs.
+
+<p>
+<div class="alert alert-block alert-notice alert-text-normal"><b>Typesetting convention for executing Python programs.</b>
+In the rest of the document, we just write the program name and the
+output when we illustrate the execution of a program:
+
+<p>
+<!-- begin verbatim block  sys-->
+<pre><code>ball2.py
+1.2342
+</code></pre>
+<!-- end verbatim block -->
+You then need to write <code>run</code> before the program name if you execute
+the program in IPython, or if you prefer to run the program directly
+in a terminal window, you need to write
+<code>python</code> prior to the program name.  The document <a href="http://tcse6.on.net/runpy" target="_self">Different ways of running
+Python programs</a>
+<a href="._formulas-solarized009.html#Langtangen_TCSE6_runpy">[2]</a> describes various other ways to run a
+Python program.
+</div>
+
+
+<h3>Quick recovery of previous output  <a name="___sec40"></a></h3>
+
+The results of the previous statements in an interactive IPython
+session are available in variables of the form <code>_iX</code> (underscore, <code>i</code>,
+and a number <code>X</code>), where <code>X</code> is 1 for the last statement, 2 for the
+second last statement, and so forth. Short forms are <code>_</code> for <code>_i1</code>,
+<code>__</code> for <code>_i2</code>, and <code>___</code> for <code>_i3</code>.  The output from the <code>In [1]</code>
+input above is <code>1.2342</code>. We can now refer to this number by an
+underscore and, e.g., multiply it by 10:
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>In [2]: _*10
+Out[2]: 12.341999999999999
+</code></pre>
+<!-- end verbatim block -->
+Output from Python statements or expressions in IPython are
+preceded by <code>Out[X]</code> where <code>X</code> is the command number
+corresponding to the previous <code>In [X]</code> prompt.
+When programs are executed, as with the <code>run</code> command, or when
+operating system commands are run (as shown below), the output is
+from the operating system and then not preceded by any <code>Out[X]</code>
+label.
+
+<p>
+The command history from previous IPython sessions is available in a
+new session. This feature makes it easy to modify work from a previous
+session by just hitting the up-arrow to recall commands and edit them
+as necessary.
+
+<h3>Tab completion  <a name="___sec41"></a></h3>
+
+Pressing the TAB key will complete an incompletely typed variable
+name.  For example, after defining <code>my_long_variable_name = 4</code>, write
+just <code>my</code> at the <code>In [4]:</code> prompt below, and then hit the TAB key. You
+will experience that <code>my</code> is immediately expanded to
+<code>my_long_variable_name</code>. This automatic expansion feature is called
+TAB completion and can save you from quite some typing.
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>In [3]: my_long_variable_name = 4
+
+In [4]: my_long_variable_name
+Out[4]: 4
+</code></pre>
+<!-- end verbatim block -->
+
+<h3>Recovering previous commands  <a name="___sec42"></a></h3>
+
+You can walk through the command history by typing <code>Ctrl+p</code> or the up
+arrow for going backward or <code>Ctrl+n</code> or the down arrow for going
+forward. Any command you hit can be edited and re-executed. Also
+commands from previous interactive sessions are stored in the command
+history.
+
+<h3>Running Unix/Windows commands  <a name="___sec43"></a></h3>
+
+Operating system commands can be run from IPython.  Below we run the
+three Unix commands <code>date</code>, <code>ls</code> (list files), <code>mkdir</code> (make
+directory), and <code>cd</code> (change directory):
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>In [5]: date
+Thu Nov 18 11:06:16 CET 2010
+
+In [6]: ls
+myfile.py  yourprog.py
+
+In [7]: mkdir mytestdir
+
+In [8]: cd mytestdir
+</code></pre>
+<!-- end verbatim block -->
+If you have defined Python variables with the same name as
+operating system commands, e.g., <code>date=30</code>, you must write
+<code>!date</code> to run the corresponding operating system command.
+
+<p>
+IPython can do much more than what is shown here, but the advanced
+features and the documentation of them probably do not make sense
+before you are more experienced with Python - and with reading
+manuals.
+
+<p>
+<!-- Once you find yourself using IPython heavily in your daily -->
+<!-- work, I strongly encourage you to read the <a href="http://ipython.org/ipython-doc/stable/interactive/tutorial.html" target="_self">IPython tutorial</a> -->
+
+<p>
+<div class="alert alert-block alert-notice alert-text-normal"><b>Typesetting of interactive shells in this document.</b>
+In the rest of the document we will apply the <code>>>></code> prompt in
+interactive sessions instead of the input and output prompts as used
+by default by IPython, simply because most Python books and electronic manuals
+use <code>>>></code> to mark input in interactive shells.
+However, when you sit by the computer and want to use an interactive
+shell, we recommend using IPython, and then you will see
+the <code>In [X]</code> prompt instead of <code>>>></code>.
+</div>
+
+
+<h3>Notebooks  <a name="___sec44"></a></h3>
+
+A particularly interesting feature of IPython is the notebook, which
+allows you to record and replay exploratory interactive sessions with
+a mix of text, mathematics, Python code, and graphics. See the section ref{sec:accesspy:ipynb} for a quick introduction to IPython notebooks.
+
+<p>
+<p>
+<!-- begin bottom navigation -->
+<table style="width: 100%"><tr><td>
+<div style="text-align: left;"><a href="._formulas-solarized004.html">&laquo; Previous</a></div>
+</td><td>
+<div style="text-align: right;"><a href="._formulas-solarized006.html">Next &raquo;</a></div>
+</td></tr></table>
+<!-- end bottom navigation -->
+</p>
+
+<!-- ------------------- end of main content --------------- -->
+
+
+</body>
+</html>
+    
+

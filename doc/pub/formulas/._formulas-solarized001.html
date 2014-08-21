@@ -1,0 +1,1107 @@
+<!--
+Automatically generated HTML file from Doconce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Doconce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Computing with formulas">
+<meta name="keywords" content="directory,run Python program,execute Python program,terminal window,console (terminal) window,directory,comments,non-English characters,formatting text and numbers,printf syntax,string,triple-quoted strings,format string syntax,newline character (line break),line break,source code,application,statements,expression,syntax,whitespace,blanks,whitespace,input (data),output (data),user (of a program),operating system (OS),Windows,Mac OS X,Unix,Linux,objects,round-off errors,interactive sessions standard Python shell,type conversion,check an object's type,rounding float to integer,interactive sessions IPython,IPython,run Python program,execute Python program,IPython running Python programs,IPython start-up file,IPython executing operating system commands,IPython command history,complex numbers,Gaussian function">
+
+
+
+
+<link href="https://raw.githubusercontent.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/css/solarized_light_code.css" rel="stylesheet" type="text/css" title="light"/>
+<script src="http://www.peterhaschke.com/assets/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<link href="http://thomasf.github.io/solarized-css/solarized-light.min.css" rel="stylesheet">
+<style type="text/css">
+.alert-text-small   { font-size: 80%;  }
+.alert-text-large   { font-size: 130%; }
+.alert-text-normal  { font-size: 90%;  }
+.alert {
+  padding:8px 35px 8px 14px; margin-bottom:18px;
+  text-shadow:0 1px 0 rgba(255,255,255,0.5);
+  border:1px solid #93a1a1;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  color: #555;
+  background-color: #eee8d5;
+  background-position: 10px 5px;
+  background-repeat: no-repeat;
+  background-size: 38px;
+  padding-left: 55px;
+  width: 75%;
+ }
+.alert-block {padding-top:14px; padding-bottom:14px}
+.alert-block > p, .alert-block > ul {margin-bottom:1em}
+.alert li {margin-top: 1em}
+.alert-block p+p {margin-top:5px}
+.alert-notice { background-image: url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_notice.png); }
+.alert-summary  { background-image:url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_summary.png); }
+.alert-warning { background-image: url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_warning.png); }
+.alert-question {background-image:url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_question.png); }
+
+div { text-align: justify; text-justify: inter-word; }
+</style>
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [(u' The first programming encounter: a formula ',
+               1,
+               u'sec:formula:1',
+               u'sec:formula:1'),
+              (u' Using a program as a calculator ',
+               2,
+               u'sec:formula:1st',
+               u'sec:formula:1st'),
+              (u' About programs and programming ', 2, None, '___sec2'),
+              (u' Tools for writing programs ', 2, None, '___sec3'),
+              (u' Writing and running your first Python program ',
+               2,
+               None,
+               '___sec4'),
+              (u' Warning about typing program text ', 2, None, '___sec5'),
+              (u' Verifying the result ', 2, None, '___sec6'),
+              (u' Using variables ',
+               2,
+               u'sec:formula:variables',
+               u'sec:formula:variables'),
+              (u' Names of variables ', 2, None, '___sec8'),
+              (u' Reserved words in Python ',
+               2,
+               u'sec:formula:keywords',
+               u'sec:formula:keywords'),
+              (u' Comments ', 2, None, '___sec10'),
+              (u' Remark ', 3, None, '___sec11'),
+              (u' Formatting text and numbers ',
+               2,
+               u'sec:formula:format',
+               u'sec:formula:format'),
+              (u' Printf syntax ', 3, None, '___sec13'),
+              (u' Format string syntax ', 3, None, '___sec14'),
+              (u' The newline character ', 3, None, '___sec15'),
+              (u' Computer science glossary ',
+               1,
+               u'sec:formula:glossary',
+               u'sec:formula:glossary'),
+              (u' Another formula: Celsius-Fahrenheit conversion ',
+               1,
+               u'sec:formula:c2f',
+               u'sec:formula:c2f'),
+              (u' Potential error: integer division ',
+               2,
+               u'sec:formula:intdiv',
+               u'sec:formula:intdiv'),
+              (u' Straightforward coding of the formula ',
+               3,
+               None,
+               '___sec19'),
+              (u' Verifying the results ', 3, None, '___sec20'),
+              (u' Float and integer division ', 3, None, '___sec21'),
+              (u' Objects in Python ', 2, None, '___sec22'),
+              (u' Avoiding integer division ',
+               2,
+               u'sec:formula:c2f:correct',
+               u'sec:formula:c2f:correct'),
+              (u' Locating potential integer division ', 3, None, '___sec24'),
+              (u' Remark ', 3, None, '___sec25'),
+              (u' Arithmetic operators and precedence ',
+               2,
+               u'sec:formula:operators',
+               u'sec:formula:operators'),
+              (u' Evaluating standard mathematical functions ',
+               1,
+               u'sec:formula:stdmath',
+               u'sec:formula:stdmath'),
+              (u' Example: Using the square root function ',
+               2,
+               u'sec:formula:sqrt',
+               u'sec:formula:sqrt'),
+              (u' Problem ', 3, None, '___sec29'),
+              (u' The program ', 3, None, '___sec30'),
+              (u' Two ways of importing a module ', 3, None, '___sec31'),
+              (u' Import with new names ', 3, None, '___sec32'),
+              (u' Example: Computing with $\\sinh x$ ', 2, None, '___sec33'),
+              (u' A first glimpse of round-off errors ',
+               2,
+               u'sec:formula:roundoff',
+               u'sec:formula:roundoff'),
+              (u' Interactive computing ',
+               1,
+               u'sec:formula:pyshell',
+               u'sec:formula:pyshell'),
+              (u' Using the Python shell ', 2, None, '___sec36'),
+              (u' Type conversion ',
+               2,
+               u'sec:formulas:typeconversion',
+               u'sec:formulas:typeconversion'),
+              (u' IPython ',
+               2,
+               u'sec:formula:ipython',
+               u'sec:formula:ipython'),
+              (u' Running programs ', 3, None, '___sec39'),
+              (u' Quick recovery of previous output ', 3, None, '___sec40'),
+              (u' Tab completion ', 3, None, '___sec41'),
+              (u' Recovering previous commands ', 3, None, '___sec42'),
+              (u' Running Unix/Windows commands ', 3, None, '___sec43'),
+              (u' Notebooks ', 3, None, '___sec44'),
+              (u' Complex numbers ',
+               1,
+               u'sec:formula:complex',
+               u'sec:formula:complex'),
+              (u' Complex arithmetics in Python ', 2, None, '___sec46'),
+              (u' Complex functions in Python ', 2, None, '___sec47'),
+              (u' Unified treatment of complex and real functions ',
+               2,
+               u'formulas:unified:complex:real',
+               u'formulas:unified:complex:real'),
+              (u' Symbolic computing ',
+               1,
+               u'sec:formula:sympy',
+               u'sec:formula:sympy'),
+              (u' Basic differentiation and integration ',
+               2,
+               u'sec:formula:sympy:diffint',
+               u'sec:formula:sympy:diffint'),
+              (u' Equation solving and Taylor series ', 2, None, '___sec51'),
+              (u' Summary ',
+               1,
+               u'sec:formula:summary',
+               u'sec:formula:summary'),
+              (u' Chapter topics ', 2, None, '___sec53'),
+              (u' Programs must be accurate! ', 3, None, '___sec54'),
+              (u' Variables ', 3, None, '___sec55'),
+              (u' Comment lines ', 3, None, '___sec56'),
+              (u' Object types ', 3, None, '___sec57'),
+              (u' Operators ', 3, None, '___sec58'),
+              (u' Common mathematical functions ', 3, None, '___sec59'),
+              (u' Print ', 3, None, '___sec60'),
+              (u' Complex numbers ', 3, None, '___sec61'),
+              (u' Terminology ', 3, None, '___sec62'),
+              (u' Example: Trajectory of a ball ', 2, None, '___sec63'),
+              (u' Problem ', 3, None, '___sec64'),
+              (u' Solution ', 3, None, '___sec65'),
+              (u' About typesetting conventions in this book ',
+               2,
+               None,
+               '___sec66'),
+              (u' Style guide for Python code ', 3, None, '___sec67'),
+              (u' Exercises ', 1, u'sec:formula:exer', u'sec:formula:exer'),
+              (u' What does it mean to solve an exercise? ',
+               3,
+               None,
+               '___sec69'),
+              (u' Exercise 1: Compute 1+1 ',
+               2,
+               u'sec:formula:ex0',
+               u'sec:formula:ex0'),
+              (u' Exercise 2: Write a Hello World program ',
+               2,
+               u'sec:formula:ex5',
+               u'sec:formula:ex5'),
+              (u' Exercise 3: Derive and compute a formula ',
+               2,
+               u'sec:formula:ex16',
+               u'sec:formula:ex16'),
+              (u' Exercise 4: Convert from meters to British length units ',
+               2,
+               u'sec:formula:ex9',
+               u'sec:formula:ex9'),
+              (u' Exercise 5: Compute the mass of various substances ',
+               2,
+               u'sec:formula:exex3',
+               u'sec:formula:exex3'),
+              (u' Exercise 6: Compute the growth of money in a bank ',
+               2,
+               u'sec:formula:ex3',
+               u'sec:formula:ex3'),
+              (u' Exercise 7: Find error(s) in a program ',
+               2,
+               u'sec:formula:ex12',
+               u'sec:formula:ex12'),
+              (u' Exercise 8: Type in program text ',
+               2,
+               u'sec:formula:exex1',
+               u'sec:formula:exex1'),
+              (u' Exercise 9: Type in programs and debug them ',
+               2,
+               u'sec:formula:exex2a',
+               u'sec:formula:exex2a'),
+              (u' Exercise 10: Evaluate a Gaussian function ',
+               2,
+               u'sec:formula:ex7',
+               u'sec:formula:ex7'),
+              (u' Remarks ', 3, None, '___sec80'),
+              (u' Exercise 11: Compute the air resistance on a football ',
+               2,
+               u'sec:formula:ex11',
+               u'sec:formula:ex11'),
+              (u' Exercise 12: How to cook the perfect egg ',
+               2,
+               u'sec:formula:ex14',
+               u'sec:formula:ex14'),
+              (u' Exercise 13: Derive the trajectory of a ball ',
+               2,
+               u'sec:formula:ex13',
+               u'sec:formula:ex13'),
+              (u' Exercise 14: Find errors in the coding of formulas ',
+               2,
+               u'sec:formula:ex1',
+               u'sec:formula:ex1'),
+              (u' Exercise 15: Explain why a program does not work ',
+               2,
+               u'sec:formula:ex15',
+               u'sec:formula:ex15'),
+              (u' Exercise 16: Find errors in Python statements ',
+               2,
+               u'sec:formula:ex2',
+               u'sec:formula:ex2'),
+              (u' Exercise 17: Find errors in the coding of a formula ',
+               2,
+               u'sec:formula:ex4',
+               u'sec:formula:ex4'),
+              (u' References ', 1, None, '___sec88')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- newcommands_keep.tex -->
+$$
+\newcommand{\tp}{\thinspace .}
+\renewcommand{\Re}{\bbbr}
+
+\newcommand{\rhodim}{\mbox{kgm}^{-3}}
+\newcommand{\mudim}{\mbox{kg}\,\mbox{s}^{-1}\mbox{m}^{-1}}
+\newcommand{\Cdim}{\mbox{kg}\,\mbox{s}^{-1}}
+
+
+\newcommand{\Oof}[1]{\mathcal{O}(#1)}
+\newcommand{\Prob}[1]{\hbox{P}(#1)}
+\newcommand{\Var}[1]{\hbox{Var}(#1)}
+\newcommand{\Cov}[2]{\hbox{Cov}(#1,#2)}
+\newcommand{\StDev}[1]{\hbox{StDev}(#1)}
+$$
+
+
+
+
+    
+<a name="part0001"></a>
+<p>
+<!-- begin top navigation -->
+<table style="width: 100%"><tr><td>
+<div style="text-align: left;"><a href="._formulas-solarized000.html">&laquo; Previous</a></div>
+</td><td>
+<div style="text-align: right;"><a href="._formulas-solarized002.html">Next &raquo;</a></div>
+</td></tr></table>
+<!-- end top navigation -->
+</p>
+
+<p>
+<!-- !split -->
+
+<h1>The first programming encounter: a formula <a name="sec:formula:1"></a></h1>
+
+The first formula we shall consider concerns the vertical motion of a
+ball thrown up in the air.  From Newton's second law of motion one can
+set up a mathematical model for the motion of the ball and find that
+the vertical position of the ball, called \( y \), varies with time \( t \)
+according to the following formula:
+
+$$
+\begin{equation}
+y(t) = v_0t - \frac{1}{2}gt^2\tp
+\tag{1}
+\end{equation}
+$$
+
+Here, \( v_0 \) is the initial velocity of the ball, \( g \) is the
+acceleration of gravity, and \( t \) is time.  Observe that the \( y \) axis
+is chosen such that the ball starts at \( y=0 \) when \( t=0 \).  The above
+formula neglects air resistance, which is usually small unless \( v_0 \)
+is large, see <a href="._formulas-solarized009.html#sec:formula:ex11">Exercise 11: Compute the air resistance on a football</a>.
+
+<p>
+To get an overview of the time it takes for the ball to move upwards
+and return to \( y=0 \) again, we can look for solutions to the equation
+\( y=0 \):
+
+$$
+\begin{equation*} v_0t - \frac{1}{2}gt^2 = t(v_0 - \frac{1}{2}gt) =0
+\quad\Rightarrow\quad t=0\hbox{ or }t=2v_0/g\tp\end{equation*}
+$$
+
+That is, the ball returns after \( 2v_0/g \) seconds, and it is
+therefore reasonable to restrict the interest of <a href="#mjx-eqn-1">(1)</a>
+to \( t\in [0, 2v_0/g] \).
+
+<h2>Using a program as a calculator <a name="sec:formula:1st"></a></h2>
+
+Our first program will evaluate <a href="#mjx-eqn-1">(1)</a> for a specific
+choice of \( v_0 \), \( g \), and \( t \). Choosing \( v_0=5 \hbox{ m/s} \) and
+\( g=9.81 \hbox{ m/}\hbox{s}^2 \) makes the ball come back after
+\( t=2v_0/g\approx 1\hbox{ s} \).  This means that we are basically
+interested in the time interval \( [0,1] \).  Say we want to compute the
+height of the ball at time \( t=0.6 \hbox{ s} \).  From
+<a href="#mjx-eqn-1">(1)</a> we have
+
+$$
+\begin{equation}
+y = 5\cdot 0.6 - \frac{1}{2}\cdot 9.81 \cdot 0.6^2
+\tag{2}
+\end{equation}
+$$
+
+This arithmetic expression can be evaluated and its value can be
+printed by a very simple one-line Python program:
+
+<p>
+<!-- begin verbatim block  txt-->
+<pre><code>print 5*0.6 - 0.5*9.81*0.6**2
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+The four standard arithmetic operators are written as <code>+</code>, <code>-</code>, <code>*</code>,
+and <code>/</code> in Python and most other computer languages. The
+exponentiation employs a double asterisk notation in Python, e.g.,
+\( 0.6^2 \) is written as <code>0.6**2</code>.
+
+<p>
+Our task now is to create the program and run it, and this will be
+described next.
+
+<h2>About programs and programming  <a name="___sec2"></a></h2>
+
+A computer program is just a sequence of instructions to the computer,
+written in a computer language. Most computer languages look somewhat
+similar to English, but they are very much simpler. The number of
+words and associated instructions is very limited, so to perform a
+complicated operation we must combine a large number of different
+types of instructions.  The program text, containing the sequence of
+instructions, is stored in one or more files. The computer can only do
+exactly what the program tells the computer to do.
+
+<p>
+Another perception of the word <em>program</em> is a file that can be run
+(&quot;double-clicked&quot;) to perform a task. Sometimes this is a file with
+textual instructions (which is the case with Python), and sometimes
+this file is a translation of all the program text to a more efficient
+and computer-friendly language that is quite difficult to read for a
+human.  All the programs in this document consist of short text
+stored in a single file.  Other programs that you have used
+frequently, for instance Firefox or Internet Explorer for reading web
+pages, consist of program text distributed over a large number of
+files, written by a large number of people over many years. One single
+file contains the machine-efficient translation of the whole program,
+and this is normally the file that you double-click on when starting
+the program.  In general, the word program means either this single
+file or the collection of files with textual instructions.
+
+<p>
+Programming is obviously about writing programs, but this process is
+more than writing the correct instructions in a file.  First, we must
+understand how a problem can be solved by giving a sequence of
+instructions to the computer.  This is one of the most difficult
+things with programming.  Second, we must express this sequence of
+instructions correctly in a computer language and store the
+corresponding text in a file (the program). This is normally the
+easiest part. Third, we must find out how to check the validity of the
+results.
+Usually, the results are not as expected, and we need to a fourth
+phase where we systematically track down the errors and correct them.
+Mastering these four steps requires a lot of training, which means
+making a large number of programs
+(exercises in this document, for instance!)
+and getting the programs to work.
+
+<h2>Tools for writing programs  <a name="___sec3"></a></h2>
+
+There are three alternative types of tools for writing Python programs:
+
+<ul>
+ <li> a plain text editor</li>
+ <li> an integrated development environment (IDE) with a text editor</li>
+ <li> an IPython notebook</li>
+</ul>
+
+What you choose depends on how you access Python.  the document
+<a href="http://tcse6.on.net/accesspy" target="_self">How to access Python for doing scientific computing</a> <a href="._formulas-solarized009.html#Langtangen_TCSE6_accesspy">[1]</a>
+contains information on the various possibilities to install Python on
+your own computer, access a pre-installed Python environment on a
+computer system at an institution, or access Python in cloud services
+through your web browser.
+
+<p>
+Based on teaching this and previous books to more than 3000 students,
+my recommendations go as follows.
+
+<ul>
+ <li> If you use this document in a course, the instructor has
+   probably made a choice for how you should access Python - follow
+   that advice.</li>
+ <li> If you are a student at a university where Linux is the
+   dominating operating system, install a virtual machine with
+   Ubuntu on your own laptop and do all your scientific work
+   in Ubuntu.  Write Python programs in an editor
+   like Gedit, Emacs, or Vim, and run programs in a terminal
+   window (the <code>gnome-terminal</code> is recommended).</li>
+ <li> If you are a student a university where Windows is the
+   dominating operating system, and you are a Windows user
+   yourself, install Anaconda.
+   Write and run Python programs in Spyder.</li>
+ <li> If you are uncertain how much you will program with Python
+   and primarily want to get a taste of Python programming first,
+   access Python in the cloud, e.g., through the
+   Wakari site.</li>
+ <li> If you want Python on your Mac and you are experienced with
+   compiling and linking software in the Mac OS X environment,
+   install Anaconda on the Mac. Write and run programs in Spyder,
+   or use a text editor like TextWrangler,
+   Emacs, or Vim, and run programs in the Terminal application.
+   If you are not very familiar with building software on the Mac,
+   and with environment variables like <code>PATH</code>, it will be easier
+   in the long run to access Python in Ubuntu through a virtual machine.</li>
+</ul>
+
+<h2>Writing and running your first Python program  <a name="___sec4"></a></h2>
+
+I assume that you have made a decision on how to access Python,
+which dictates whether you will be writing programs
+in a text editor or in an IPython notebook.
+What you write will be the same - the difference lies in how
+you run the program.  the document <a href="http://tcse6.on.net/accesspy" target="_self">How to access Python
+for doing scientific computing</a>
+<a href="._formulas-solarized009.html#Langtangen_TCSE6_accesspy">[1]</a> briefly describe how to write
+programs in a text editor, run them in a terminal window or in Spyder,
+and how to operate an IPython notebook. I recommend taking a look at
+that material before proceeding.
+
+<p>
+Open up your chosen text editor and write the following line:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>print 5*0.6 - 0.5*9.81*0.6**2
+</code></pre>
+<!-- end verbatim block -->
+This is a complete Python program for evaluating the formula
+<a href="#mjx-eqn-2">(2)</a>. Save the line to a file with name <code>ball1.py</code>.
+
+<p>
+The action required to run this program depends on what type of
+tool you use for running programs:
+
+<ul>
+ <li> terminal window: move to the folder where <code>ball1.py</code> is located
+   and type <code>python ball1.py</code></li>
+ <li> IPython notebook: click on the &quot;play&quot; button to execute the cell</li>
+ <li> Spyder: choose <em>Run</em> from the <em>Run</em> pull-down menu</li>
+</ul>
+
+The output is 1.2342 and appears
+
+<ul>
+ <li> right after the <code>python ball1.py</code> command in a terminal window</li>
+ <li> right after the program line (cell) in the IPython notebook</li>
+ <li> in the lower right window in Spyder</li>
+</ul>
+
+We remark that there are other ways of running Python programs in the
+terminal window, see the document <a href="http://tcse6.on.net/runpy" target="_self">Different ways of running
+Python programs</a>
+<a href="._formulas-solarized009.html#Langtangen_TCSE6_runpy">[2]</a>.
+
+<p>
+Suppose you want to evaluate <a href="#mjx-eqn-1">(1)</a> for \( v_0=1 \) and
+\( t=0.1 \). This is easy: move the cursor to the editor window, edit the
+program text to
+
+<p>
+<!-- begin verbatim block  pypro-->
+<pre><code>print 1*0.1 - 0.5*9.81*0.1**2
+</code></pre>
+<!-- end verbatim block -->
+Run the program again in Spyder or re-execute the cell in an IPython
+notebook.  If you use a plain text editor, always remember to save the
+file after editing it, then move back to the terminal window and run
+the program as before:
+
+<p>
+<!-- begin verbatim block  sys-->
+<pre><code>Terminal&gt; python ball1.py
+0.05095
+</code></pre>
+<!-- end verbatim block -->
+The result of the calculation has changed, as expected.
+
+<p>
+<div class="alert alert-block alert-notice alert-text-normal"><b>Typesetting of operating system commands.</b>
+We use the prompt <code>Terminal></code> in this document to indicate
+commands in a Unix or DOS/PowerShell terminal window. The text
+following the <code>Terminal></code> prompt must be a valid operating
+system command.
+You will likely see a different prompt in the terminal window on your machine,
+perhaps something reflecting your username or the current folder.
+</div>
+
+
+<h2>Warning about typing program text  <a name="___sec5"></a></h2>
+
+Even though a program is just a text, there is one major difference
+between a text in a program and a text intended to be read by a human.
+When a human reads a text, she or he is able to understand the message
+of the text even if the text is not perfectly precise or if there are
+grammar errors.  If our one-line program was expressed as
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>write 5*0.6 - 0.5*9.81*0.6^2
+</code></pre>
+<!-- end verbatim block -->
+most humans would interpret <code>write</code> and <code>print</code> as the same
+thing, and many would also interpret <code>6^2</code> as \( 6^2 \).
+In the Python language, however, <code>write</code> is a grammar error and
+<code>6^2</code> means an operation very different from the exponentiation
+<code>6**2</code>.
+Our communication with a computer through
+a program must be perfectly precise without a single grammar
+or logical error. The famous computer scientist Donald Knuth put it this
+way:
+<blockquote>
+    <em>Programming demands significantly higher standard of
+    accuracy. Things don't simply have to make sense to another human being,
+    they must make sense to a computer.</em>
+    Donald Knuth <a href="._formulas-solarized009.html#Knuth85">[3]</a> (p. 18), 1938-.
+</blockquote>
+
+That is, the computer will only do exactly what we tell it to do. Any
+error in the program, however small, may affect the program. There is
+a chance that we will never notice it, but most often an error causes
+the program to stop or produce wrong results.  The conclusion is that
+computers have a much more pedantic attitude to language than what
+(most) humans have.
+
+<p>
+Now you understand why any program text must be carefully typed,
+paying attention to the correctness of every character.  If you try
+out program texts from this document, make sure that you type them in
+<em>exactly as you see them</em> in the document.  Blanks, for instance, are
+often important in Python, so it is a good habit to always count them
+and type them in correctly.  Any attempt not to follow this advice
+will cause you frustrations, sweat, and maybe even tears.
+
+<h2>Verifying the result  <a name="___sec6"></a></h2>
+
+We should <em>always</em> carefully control that the output of a computer
+program is correct. You will experience that in most of the cases, at
+least until you are an experienced programmer, the output is wrong,
+and you have to search for errors.  In the present application we can
+simply use a calculator to control the program. Setting \( t=0.6 \) and
+\( v_0=5 \) in the formula, the calculator confirms that 1.2342 is the
+correct solution to our mathematical problem.
+
+<h2>Using variables <a name="sec:formula:variables"></a></h2>
+
+When we want to evaluate \( y(t) \) for many values of \( t \), we must modify
+the \( t \) value at two places in our program. Changing another
+parameter, like \( v_0 \), is in principle straightforward, but in
+practice it is easy to modify the wrong number.  Such modifications
+would be simpler to perform if we express our formula in terms of
+variables, i.e., symbols, rather than numerical values. Most
+programming languages, Python included, have variables similar to the
+concept of variables in mathematics.  This means that we can define
+<code>v0</code>, <code>g</code>, <code>t</code>, and <code>y</code> as variables in the program, initialize the
+former three with numerical values, and combine these three variables
+to the desired right-hand side expression in <a href="#mjx-eqn-1">(1)</a>,
+and assign the result to the variable <code>y</code>.
+
+<p>
+<!-- === The program  <a name="___sec30"></a>=== -->
+
+<p>
+The alternative version of our program, where we use variables, may be
+written as this text:
+
+<p>
+<!-- begin verbatim block  pypro-->
+<pre><code>v0 = 5
+g = 9.81
+t = 0.6
+y = v0*t - 0.5*g*t**2
+print y
+</code></pre>
+<!-- end verbatim block -->
+Variables in Python are defined by setting a name
+(here <code>v0</code>, <code>g</code>, <code>t</code>, or <code>y</code>) equal to
+a numerical value or an expression involving already defined variables.
+
+<p>
+<!-- FIGURE: [fig-formulas/idle_prog2, width=400 frac=0.9] An Idle editor window containing a multi-line program with several variables. <a name="sec:formula:fig4"></a> -->
+
+<p>
+Note that this second program is much easier to read because it is
+closer to the mathematical notation used in the formula
+<a href="#mjx-eqn-1">(1)</a>.  The program is also safer to modify, because
+we clearly see what each number is when there is a name associated
+with it.  In particular, we can change <code>t</code> at one place only (the
+line <code>t = 0.6</code>) and not two as was required in the previous
+program.
+
+<p>
+We store the program text in a file <code>ball2.py</code>.  Running the program
+results in the correct output 1.2342.
+
+<h2>Names of variables  <a name="___sec8"></a></h2>
+
+Introducing variables with descriptive names, close to those in the
+mathematical problem we are going to solve, is considered important
+for the readability and reliability (correctness) of the program.
+Variable names can contain any lower or upper case letter, the numbers
+from 0 to 9, and underscore, but the first character cannot be a
+number.  Python distinguishes between upper and lower case, so <code>X</code> is
+always different from <code>x</code>.  Here are a few examples on alternative
+variable names in the present example:
+
+<p>
+<!-- begin verbatim block  pypro-->
+<pre><code>initial_velocity = 5
+acceleration_of_gravity = 9.81
+TIME = 0.6
+VerticalPositionOfBall = initial_velocity*TIME - \ 
+                         0.5*acceleration_of_gravity*TIME**2
+print VerticalPositionOfBall
+</code></pre>
+<!-- end verbatim block -->
+With such long variables names, the code for evaluating the
+formula becomes so long that we have decided to break it into
+two lines. This is done by a backslash at the very end of the line
+(make sure there are no blanks after the backslash!).
+
+<p>
+In this document we shall adopt the convention that variable names have
+lower case letters where words are separated by an
+underscore. Whenever the variable represents a mathematical symbol, we
+use the symbol or a good approximation to it as variable name. For
+example, \( y \) in mathematics becomes <code>y</code> in the program, and \( v_0 \) in
+mathematics becomes <code>v_0</code> in the program. A close resemblance between
+mathematical symbols in the description of the problem and variables
+names is important for easy reading of the code and for detecting
+errors.  This principle is illustrated by the code snippet above: even
+if the long variable names explain well what they represent, checking
+the correctness of the formula for \( y \) is harder than in the program
+that employs the variables <code>v0</code>, <code>g</code>, <code>t</code>, and <code>y0</code>.
+
+<p>
+For all variables where there is no associated precise mathematical
+description and symbol, one must use <em>descriptive</em> variable names
+which explain the purpose of the variable.  For example, if a problem
+description introduces the symbol \( D \) for a force due to air
+resistance, one applies a variable <code>D</code> also in the program. However,
+if the problem description does not define any symbol for this force,
+one must apply a descriptive name, such as <code>air_resistance</code>,
+<code>resistance_force</code>, or <code>drag_force</code>.
+
+<p>
+<div class="alert alert-block alert-summary alert-text-normal"><b>How to choose variable names.</b>
+
+<ul>
+  <li> Use the same variable names in the program as in the
+    mathematical description of the problem you want to solve.</li>
+  <li> For all variables without a precise mathematical definition and symbol,
+    use a carefully chosen descriptive name.</li>
+</ul>
+</div>
+
+
+<h2>Reserved words in Python <a name="sec:formula:keywords"></a></h2>
+
+Certain words are reserved in Python because they are used to build up
+the Python language. These reserved words cannot
+be used as variable names:
+<code>and</code>,
+<code>as</code>,
+<code>assert</code>,
+<code>break</code>,
+<code>class</code>,
+<code>continue</code>,
+<code>def</code>,
+<code>del</code>,
+<code>elif</code>,
+<code>else</code>,
+<code>except</code>,
+<code>False</code>,
+<code>finally</code>,
+<code>for</code>,
+<code>from</code>,
+<code>global</code>,
+<code>if</code>,
+<code>import</code>,
+<code>in</code>,
+<code>is</code>,
+<code>lambda</code>,
+<code>None</code>,
+<code>nonlocal</code>,
+<code>not</code>,
+<code>or</code>,
+<code>pass</code>,
+<code>raise</code>,
+<code>return</code>,
+<code>True</code>,
+<code>try</code>,
+<code>with</code>,
+<code>while</code>, and
+<code>yield</code>.
+If you wish to use a reserved word as a variable name, it is common
+to an underscore at the end. For example,  if you need
+a mathematical quantity \( \lambda \) in the program, you may work
+with <code>lambda_</code> as variable name.
+See <a href="._formulas-solarized009.html#sec:formula:ex2">Exercise 16: Find errors in Python statements</a> for examples on legal and illegal
+variable names.
+
+<p>
+Program files can have a freely chosen name, but stay away from names
+that coincide with keywords or module names in Python.  For instance,
+do not use <code>math.py</code>, <code>time.py</code>, <code>random.py</code>, <code>os.py</code>, <code>sys.py</code>,
+<code>while.py</code>, <code>for.py</code>, <code>if.py</code>, <code>class.py</code>, or <code>def.py</code>.
+
+<h2>Comments  <a name="___sec10"></a></h2>
+
+Along with the program statements it is often informative to provide
+some comments in a natural human language to explain the idea behind
+the statements.  Comments in Python start with the <code>#</code> character, and
+everything after this character on a line is ignored when the program
+is run.  Here is an example of our program with explanatory comments:
+
+<p>
+<!-- begin verbatim block  pypro-->
+<pre><code># Program for computing the height of a ball in vertical motion.
+v0 = 5    # initial velocity
+g = 9.81  # acceleration of gravity
+t = 0.6   # time
+y = v0*t - 0.5*g*t**2  # vertical position
+print y
+</code></pre>
+<!-- end verbatim block -->
+This program and the initial version in the section <a href="#sec:formula:variables">Using variables</a>
+are identical when run on the computer, but for a human the latter is
+easier to understand because of the comments.
+
+<p>
+<!-- admon potential: box with rules for good comments! -->
+
+<p>
+Good comments together with well-chosen variable names are necessary
+for any program longer than a few lines, because otherwise the program
+becomes difficult to understand, both for the programmer and others.
+It requires some practice to write really instructive comments. Never
+repeat with words what the program statements already clearly express.
+Use instead comments to provide important information that is not
+obvious from the code, for example, what mathematical variable names
+mean, what variables are used for, a quick overview of a set of
+forthcoming statements, and general ideas behind the problem solving
+strategy in the code.
+
+<h3>Remark  <a name="___sec11"></a></h3>
+
+If you use non-English characters in your comments,
+Python will complain. For example,
+
+<p>
+<!-- begin verbatim block  pypro-->
+<pre><code>s = 1.8   # Å. Ødegård recommended this value for s
+</code></pre>
+<!-- end verbatim block -->
+Running this program results in the error message
+
+<p>
+<!-- begin verbatim block  ccq-->
+<pre><code>SyntaxError: Non-ASCII character '\xc3' in file ...
+but no encoding declared; see
+http://www.python.org/peps/pep-0263.html for details
+</code></pre>
+<!-- end verbatim block -->
+Non-English characters are allowed if you put the following
+magic line in the program before such characters are used:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code># -*- coding: utf-8 -*-
+</code></pre>
+<!-- end verbatim block -->
+(Yes, this is a comment, but it is <em>not</em> ignored by Python!)
+More information on non-English characters and encodings like UTF-8
+is found in the document <a href="http://tcse6.on.net/files" target="_self">Files, strings, and dictionaries</a> <a href="._formulas-solarized009.html#Langtangen_TCSE6_files">[4]</a>.
+
+<h2>Formatting text and numbers <a name="sec:formula:format"></a></h2>
+
+Instead of just printing the numerical value of <code>y</code> in our
+introductory program, we now want to write a more informative text,
+typically something like
+
+<p>
+<!-- begin verbatim block  ccq-->
+<pre><code>At t=0.6 s, the height of the ball is 1.23 m.
+</code></pre>
+<!-- end verbatim block -->
+where we also have control of the number of digits (here \( y \) is
+accurate up to centimeters only).
+
+<h3>Printf syntax  <a name="___sec13"></a></h3>
+
+The output of the type shown above is accomplished by a <code>print</code>
+statement combined with some technique for formatting the numbers.
+The oldest and most widely used such technique is known as <em>printf</em>
+formatting (originating from the function <code>printf</code> in the C
+programming language).  For a newcomer to programming, the syntax of
+printf formatting may look awkward, but it is quite easy to learn and
+very convenient and flexible to work with. The printf syntax is used
+in a lot of other programming languages as well.
+
+<p>
+The sample output above is produced by this statement using printf syntax:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>print 'At t=%g s, the height of the ball is %.2f m.' % (t, y)
+</code></pre>
+<!-- end verbatim block -->
+Let us explain this line in detail. The <code>print</code> statement prints a
+string: everything that is enclosed in quotes (either single: <code>'</code>, or
+double: <code>"</code>) denotes a string in Python. The string above is formatted
+using printf syntax.  This means that the string has various
+&quot;slots&quot;, starting with a percentage sign, here <code>%g</code> and <code>%.2f</code>,
+where variables in the program can be put in. We have two &quot;slots&quot; in
+the present case, and consequently two variables must be put into the
+slots. The relevant syntax is to list the variables inside standard
+parentheses after the string, separated from the string by a
+percentage sign.  The first variable, <code>t</code>, goes into the first
+&quot;slot&quot;.  This &quot;slot&quot; has a format specification <code>%g</code>, where the
+percentage sign marks the slot and the following character, <code>g</code>, is a
+format specification. The <code>g</code> format instructs
+the real number to be written as
+compactly as possible.  The next variable, <code>y</code>, goes into the second
+&quot;slot&quot;.  The format specification here is <code>.2f</code>, which means a real
+number written with two digits after comma.  The <code>f</code> in the <code>.2f</code>
+format stands for <em>float</em>, a short form for <em>floating-point number</em>,
+which is the term used for a real number on a computer.
+
+<p>
+For completeness we present the whole program, where
+text and numbers are mixed in the output:
+
+<p>
+<!-- begin verbatim block  txt-->
+<pre><code>v0 = 5
+g = 9.81
+t = 0.6
+y = v0*t - 0.5*g*t**2
+print 'At t=%g s, the height of the ball is %.2f m.' % (t, y)
+</code></pre>
+<!-- end verbatim block -->
+The program is found in the file <a href="http://tinyurl.com/pwyasaa/formulas/ball_print1.py" target="_self"><tt>ball_print1.py</tt></a> in the <code>src/formulas</code> folder of the collection of programs
+associated with this document.
+
+<p>
+There are many more ways to specify formats. For example, <code>e</code> writes a
+number in <em>scientific notation</em>, i.e., with a number between 1 and 10
+followed by a power of 10, as in \( 1.2432\cdot 10^{-3} \). On a computer
+such a number is written in the form <code>1.2432e-03</code>. Capital <code>E</code> in the
+exponent is also possible, just replace <code>e</code> by <code>E</code>, with the result
+<code>1.2432E-03</code>.
+
+<p>
+For <em>decimal notation</em> we use the letter <code>f</code>, as in <code>%f</code>, and the
+output number then appears with digits before and/or after a comma,
+e.g., <code>0.0012432</code> instead of <code>1.2432E-03</code>.  With the <code>g</code> format, the
+output will use scientific notation for large or small numbers and
+decimal notation otherwise. This format is normally what gives most
+compact output of a real number.  A lower case <code>g</code> leads to lower case
+<code>e</code> in scientific notation, while upper case <code>G</code> implies <code>E</code> instead
+of <code>e</code> in the exponent.
+
+<p>
+One can also specify the format as <code>10.4f</code> or <code>14.6E</code>, meaning in the
+first case that a float is written in decimal notation with four
+decimals in a field of width equal to 10 characters, and in the second
+case a float written in scientific notation with six decimals in a
+field of width 14 characters.
+
+<p>
+Here is a list of some important printf format specifications
+(the program <a href="http://tinyurl.com/pwyasaa/formulas/printf_demo.py" target="_self"><tt>printf_demo.py</tt></a>
+exemplifies many of the constructions):
+
+<p>
+<table border="1">
+<thead>
+<tr><th align="center">                                 Format                                 </th> <th align="center">                                Meaning                                 </th> </tr>
+</thead>
+<tbody>
+<tr><td align="left">   <code>%s</code>                                                             </td> <td align="left">   a string                                                                    </td> </tr>
+<tr><td align="left">   <code>%d</code>                                                             </td> <td align="left">   an integer                                                                  </td> </tr>
+<tr><td align="left">   <code>%0xd</code>                                                           </td> <td align="left">   an integer padded with <code>x</code> leading zeros                         </td> </tr>
+<tr><td align="left">   <code>%f</code>                                                             </td> <td align="left">   decimal notation with six decimals                                          </td> </tr>
+<tr><td align="left">   <code>%e</code>                                                             </td> <td align="left">   compact scientific notation, <code>e</code> in the exponent                 </td> </tr>
+<tr><td align="left">   <code>%E</code>                                                             </td> <td align="left">   compact scientific notation, <code>E</code> in the exponent                 </td> </tr>
+<tr><td align="left">   <code>%g</code>                                                             </td> <td align="left">   compact decimal or scientific notation (with <code>e</code>)                </td> </tr>
+<tr><td align="left">   <code>%G</code>                                                             </td> <td align="left">   compact decimal or scientific notation (with <code>E</code>)                </td> </tr>
+<tr><td align="left">   <code>%xz</code>                                                            </td> <td align="left">   format <code>z</code> right-adjusted in a field of width <code>x</code>     </td> </tr>
+<tr><td align="left">   <code>%-xz</code>                                                           </td> <td align="left">   format <code>z</code> left-adjusted  in a field of width <code>x</code>     </td> </tr>
+<tr><td align="left">   <code>%.yz</code>                                                           </td> <td align="left">   format <code>z</code> with <code>y</code> decimals                          </td> </tr>
+<tr><td align="left">   <code>%x.yz</code>                                                          </td> <td align="left">   format <code>z</code> with y decimals in a field of width <code>x</code>    </td> </tr>
+<tr><td align="left">   <code>%%</code>                                                             </td> <td align="left">   the percentage sign <code>%</code> itself                                   </td> </tr>
+</tbody>
+</table>
+<p>
+For a complete specification of the possible printf-style format
+strings, follow the link from the item <em>printf-style formatting</em> in
+the <a href="http://docs.python.org/2/genindex.html" target="_self">index</a> of the Python
+Standard Library online documentation.
+
+<p>
+We may try out some formats by writing more numbers to the screen in
+our program (the corresponding file is <a href="http://tinyurl.com/pwyasaa/formulas/ball_print2.py" target="_self"><tt>ball_print2.py</tt></a>):
+
+<p>
+<!-- begin verbatim block  txt-->
+<pre><code>v0 = 5
+g = 9.81
+t = 0.6
+y = v0*t - 0.5*g*t**2
+
+print &quot;&quot;&quot;
+At t=%f s, a ball with
+initial velocity v0=%.3E m/s
+is located at the height %.2f m.
+&quot;&quot;&quot; % (t, v0, y)
+</code></pre>
+<!-- end verbatim block -->
+Observe here that we use a <em>triple-quoted</em> string, recognized by
+starting and ending
+with three single or double quotes: <code>'''</code> or
+<code>"""</code>.
+Triple-quoted strings are used for text that spans several lines.
+
+<p>
+In the <code>print</code> statement above, we print <code>t</code> in the <code>f</code> format, which
+by default implies six decimals; <code>v0</code> is written in the <code>.3E</code> format,
+which implies three decimals and the number spans as narrow field as
+possible; and <code>y</code> is written with two decimals in decimal notation in
+as narrow field as possible.  The output becomes
+
+<p>
+<!-- begin verbatim block  sys-->
+<pre><code>Terminal&gt; python ball_print2.py
+
+At t=0.600000 s, a ball with
+initial velocity v0=5.000E+00 m/s
+is located at the height 1.23 m.
+</code></pre>
+<!-- end verbatim block -->
+You should look at each number in the output
+and check the formatting in detail.
+
+<h3>Format string syntax  <a name="___sec14"></a></h3>
+
+Python offers all the functionality of the printf format and much more
+through a different syntax, often known as <em>format string syntax</em>. Let
+us illustrate this syntax on the one-line output previously used to
+show the printf construction. The corresponding format string syntax
+reads
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>print 'At t={t:g} s, the height of the ball is {y:.2f} m.'.format(
+    t=t, y=y)
+</code></pre>
+<!-- end verbatim block -->
+The &quot;slots&quot; where variables are inserted are now recognized by
+curly braces rather than a percentage sign. The name of the variable
+is listed with an optional colon and format specifier of the same
+kind as was used for the printf format. The various variables and
+their values must be listed at the end as shown. This time the
+&quot;slots&quot; have names so the sequence of variables is not important.
+
+<p>
+The multi-line example is written as follows in this alternative format:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>print &quot;&quot;&quot;
+At t={t:f} s, a ball with
+initial velocity v0={v0:.3E} m/s
+is located at the height {y:.2f} m.
+&quot;&quot;&quot;.format(t=t, v0=v0, y=y)
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+<a name="sec:formula:newline"></a>
+
+<h3>The newline character  <a name="___sec15"></a></h3>
+
+We often want a computer program to write out text that spans several
+lines. In the last example we obtained such output by triple-quoted
+strings. We could also use ordinary single-quoted strings and a
+special character for indicating where line breaks should occur.  This
+special character reads <code>\n</code>, i.e., a backslash followed by the letter
+<code>n</code>.  The two <code>print</code> statements
+
+<p>
+<!-- begin verbatim block  pypro-->
+<pre><code>print &quot;&quot;&quot;y(t) is
+the position of
+our ball.&quot;&quot;&quot;
+
+print 'y(t) is\nthe position of\nour ball'
+</code></pre>
+<!-- end verbatim block -->
+result in identical output:
+
+<p>
+<!-- begin verbatim block  ccq-->
+<pre><code>y(t) is
+the position of
+our ball.
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+<p>
+<!-- begin bottom navigation -->
+<table style="width: 100%"><tr><td>
+<div style="text-align: left;"><a href="._formulas-solarized000.html">&laquo; Previous</a></div>
+</td><td>
+<div style="text-align: right;"><a href="._formulas-solarized002.html">Next &raquo;</a></div>
+</td></tr></table>
+<!-- end bottom navigation -->
+</p>
+
+<!-- ------------------- end of main content --------------- -->
+
+
+</body>
+</html>
+    
+

@@ -1,0 +1,642 @@
+<!--
+Automatically generated HTML file from Doconce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Doconce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Loops and lists">
+<meta name="keywords" content="loops,boolean expressions,logical expressions,factorial,lists,method (class),list comprehension,list, nested,nested lists,list comprehension,pretty print,sublist,slicing,nested loops,tuples,list functionality,sequence (data type),sum ($\Sigma$) implementation,comparing floating-point numbers,comparing real numbers,comparing objects">
+
+
+
+
+<link href="https://raw.githubusercontent.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/css/solarized_light_code.css" rel="stylesheet" type="text/css" title="light"/>
+<script src="http://www.peterhaschke.com/assets/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<link href="http://thomasf.github.io/solarized-css/solarized-light.min.css" rel="stylesheet">
+<style type="text/css">
+.alert-text-small   { font-size: 80%;  }
+.alert-text-large   { font-size: 130%; }
+.alert-text-normal  { font-size: 90%;  }
+.alert {
+  padding:8px 35px 8px 14px; margin-bottom:18px;
+  text-shadow:0 1px 0 rgba(255,255,255,0.5);
+  border:1px solid #93a1a1;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  color: #555;
+  background-color: #eee8d5;
+  background-position: 10px 5px;
+  background-repeat: no-repeat;
+  background-size: 38px;
+  padding-left: 55px;
+  width: 75%;
+ }
+.alert-block {padding-top:14px; padding-bottom:14px}
+.alert-block > p, .alert-block > ul {margin-bottom:1em}
+.alert li {margin-top: 1em}
+.alert-block p+p {margin-top:5px}
+.alert-notice { background-image: url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_notice.png); }
+.alert-summary  { background-image:url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_summary.png); }
+.alert-warning { background-image: url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_warning.png); }
+.alert-question {background-image:url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_question.png); }
+
+div { text-align: justify; text-justify: inter-word; }
+</style>
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [(u' While loops ', 1, u'sec:basic:loops', u'sec:basic:loops'),
+              (u' A naive solution ',
+               2,
+               u'sec:basic:naive',
+               u'sec:basic:naive'),
+              (u' While loops ', 2, u'sec:basic:while', u'sec:basic:while'),
+              (u' Boolean expressions ',
+               2,
+               u'sec:basic:boolexpr',
+               u'sec:basic:boolexpr'),
+              (u' Loop implementation of a sum ',
+               2,
+               u'sec:basic:sumloop',
+               u'sec:basic:sumloop'),
+              (u' Lists ', 1, None, '___sec5'),
+              (u' Basic list operations ',
+               2,
+               u'sec:lists:basc:op',
+               u'sec:lists:basc:op'),
+              (u' For loops ', 2, None, '___sec7'),
+              (u' The nature of for loops ', 3, None, '___sec8'),
+              (u' Making the table ', 3, None, '___sec9'),
+              (u' Alternative implementations with lists and loops ',
+               1,
+               None,
+               '___sec10'),
+              (u' While loop implementation of a for loop ',
+               2,
+               None,
+               '___sec11'),
+              (u' The range construction ', 2, None, '___sec12'),
+              (u' For loops with list indices ', 2, None, '___sec13'),
+              (u' Changing list elements ', 2, None, '___sec14'),
+              (u' List comprehension ',
+               2,
+               u'sec:basic:list:comprehension',
+               u'sec:basic:list:comprehension'),
+              (u' Traversing multiple lists simultaneously ',
+               2,
+               None,
+               '___sec16'),
+              (u' Nested lists ',
+               1,
+               u'sec:basic:nestedlists',
+               u'sec:basic:nestedlists'),
+              (u' A table as a list of rows or columns ',
+               2,
+               None,
+               '___sec18'),
+              (u' Printing objects ', 2, None, '___sec19'),
+              (u' Modules for pretty print of objects ', 3, None, '___sec20'),
+              (u' Manual printing ', 3, None, '___sec21'),
+              (u' Extracting sublists ',
+               2,
+               u'sec:basic:slice',
+               u'sec:basic:slice'),
+              (u' Example ', 3, None, '___sec23'),
+              (u' Traversing nested lists ', 2, None, '___sec24'),
+              (u' Tuples ', 1, u'sec:lists:tuples', u'sec:lists:tuples'),
+              (u' Summary ',
+               1,
+               u'sec:looplist:summary',
+               u'sec:looplist:summary'),
+              (u' Chapter topics ', 2, None, '___sec27'),
+              (u' While loops ', 3, None, '___sec28'),
+              (u' Lists ', 3, None, '___sec29'),
+              (u' Nested lists ', 3, None, '___sec30'),
+              (u' Tuples ', 3, None, '___sec31'),
+              (u' For loops ', 3, None, '___sec32'),
+              (u' Pretty print ', 3, None, '___sec33'),
+              (u' Terminology ', 3, None, '___sec34'),
+              (u' Example: Analyzing list data ',
+               2,
+               u'sec:looplist:summary:ex',
+               u'sec:looplist:summary:ex'),
+              (u' Problem ', 3, None, '___sec36'),
+              (u' Solution ', 3, None, '___sec37'),
+              (u' Remark ', 3, None, '___sec38'),
+              (u' How to find more Python information ',
+               2,
+               u'sec:basic:pyinfo',
+               u'sec:basic:pyinfo'),
+              (u' Exercises ', 1, None, '___sec40'),
+              (u' Exercise 1: Make a Fahrenheit-Celsius conversion table ',
+               2,
+               u'sec:basic:ex41',
+               u'sec:basic:ex41'),
+              (u' Exercise 2: Generate an approximate Fahrenheit-Celsius conversion table ',
+               2,
+               u'sec:basic:ex1',
+               u'sec:basic:ex1'),
+              (u' Exercise 3: Work with a list ',
+               2,
+               u'sec:basic:ex00',
+               u'sec:basic:ex00'),
+              (u' Exercise 4: Generate odd numbers ',
+               2,
+               u'sec:basic:ex0',
+               u'sec:basic:ex0'),
+              (u' Exercise 5: Sum of first $n$ integers ',
+               2,
+               u'sec:basic:sum:no',
+               u'sec:basic:sum:no'),
+              (u' Exercise 6: Generate equally spaced coordinates ',
+               2,
+               u'sec:basic:ex44',
+               u'sec:basic:ex44'),
+              (u' Exercise 7: Make a table of values from a formula ',
+               2,
+               u'sec:basic:ex4',
+               u'sec:basic:ex4'),
+              (u' Exercise 8: Store values from a formula in lists ',
+               2,
+               u'sec:basic:ex4b',
+               u'sec:basic:ex4b'),
+              (u' Exercise 9: Simulate operations on lists by hand ',
+               2,
+               u'sec:basic:ex43',
+               u'sec:basic:ex43'),
+              (u' Exercise 10: Compute a mathematical sum ',
+               2,
+               u'sec:basic:ex29a',
+               u'sec:basic:ex29a'),
+              (u' Exercise 11: Replace a while loop by a for loop ',
+               2,
+               u'sec:basic:ex29b',
+               u'sec:basic:ex29b'),
+              (u' Exercise 12: Simulate a program by hand ',
+               2,
+               u'sec:basic:ex24a',
+               u'sec:basic:ex24a'),
+              (u' Exercise 13: Explore Python documentation ',
+               2,
+               u'sec:basic:ex47',
+               u'sec:basic:ex47'),
+              (u' Exercise 14: Index a nested lists ',
+               2,
+               u'sec:basic:ex15n',
+               u'sec:basic:ex15n'),
+              (u' Exercise 15: Store data in lists ',
+               2,
+               u'sec:basic:ex1b',
+               u'sec:basic:ex1b'),
+              (u' Exercise 16: Store data in a nested list ',
+               2,
+               u'sec:basic:ex4c',
+               u'sec:basic:ex4c'),
+              (u' Exercise 17: Values of boolean expressions ',
+               2,
+               u'sec:basic:ex15b',
+               u'sec:basic:ex15b'),
+              (u' Exercise 18: Explore round-off errors from a large number of inverse operations ',
+               2,
+               u'sec:basic:ex14b',
+               u'sec:basic:ex14b'),
+              (u' Exercise 19: Explore what zero can be on a computer ',
+               2,
+               u'sec:basic:ex14',
+               u'sec:basic:ex14'),
+              (u' Remarks ', 3, None, '___sec60'),
+              (u' Exercise 20: Compare two real numbers with a tolerance ',
+               2,
+               u'sec:formula:ex14c',
+               u'sec:formula:ex14c'),
+              (u' Exercise 21: Interpret a code ',
+               2,
+               u'sec:basic:ex16',
+               u'sec:basic:ex16'),
+              (u' Exercise 22: Explore problems with inaccurate indentation ',
+               2,
+               u'sec:basic:ex3',
+               u'sec:basic:ex3'),
+              (u' Remarks ', 3, None, '___sec64'),
+              (u' Exercise 23: Explore punctuation in Python programs ',
+               2,
+               u'sec:input:ex33',
+               u'sec:input:ex33'),
+              (u' Exercise 24: Investigate a for loop over a changing list ',
+               2,
+               u'sec:basic:ex18',
+               u'sec:basic:ex18'),
+              (u' References ', 1, None, '___sec67')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- newcommands_keep.tex -->
+$$
+\newcommand{\tp}{\thinspace .}
+\renewcommand{\Re}{\bbbr}
+
+\newcommand{\rhodim}{\mbox{kgm}^{-3}}
+\newcommand{\mudim}{\mbox{kg}\,\mbox{s}^{-1}\mbox{m}^{-1}}
+\newcommand{\Cdim}{\mbox{kg}\,\mbox{s}^{-1}}
+
+
+\newcommand{\Oof}[1]{\mathcal{O}(#1)}
+\newcommand{\Prob}[1]{\hbox{P}(#1)}
+\newcommand{\Var}[1]{\hbox{Var}(#1)}
+\newcommand{\Cov}[2]{\hbox{Cov}(#1,#2)}
+\newcommand{\StDev}[1]{\hbox{StDev}(#1)}
+$$
+
+
+
+
+    
+<a name="part0003"></a>
+<p>
+<!-- begin top navigation -->
+<table style="width: 100%"><tr><td>
+<div style="text-align: left;"><a href="._looplist-solarized002.html">&laquo; Previous</a></div>
+</td><td>
+<div style="text-align: right;"><a href="._looplist-solarized004.html">Next &raquo;</a></div>
+</td></tr></table>
+<!-- end top navigation -->
+</p>
+
+<p>
+<!-- !split -->
+
+<h1>Alternative implementations with lists and loops  <a name="___sec10"></a></h1>
+
+We have already solved the problem of printing out a nice-looking
+conversion table for Celsius and Fahrenheit degrees.
+Nevertheless, there are usually many alternative ways to write a program that
+solves a specific problem. The next paragraphs explore some other possible
+Python constructs and programs to store numbers in lists and print out
+tables. The various code snippets are collected in the program file
+<a href="http://tinyurl.com/pwyasaa/looplist/session.py" target="_self"><tt>session.py</tt></a>.
+
+<h2>While loop implementation of a for loop  <a name="___sec11"></a></h2>
+
+Any <code>for</code> loop can be implemented as a <code>while</code> loop.
+The general code
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>for element in somelist:
+    &lt;process element&gt;
+</code></pre>
+<!-- end verbatim block -->
+can be transformed to this <code>while</code> loop:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>index = 0
+while index &lt; len(somelist):
+    element = somelist[index]
+    &lt;process element&gt;
+    index += 1
+</code></pre>
+<!-- end verbatim block -->
+In particular, the example involving the printout of a table of
+Celsius and Fahrenheit degrees can be implemented as follows in terms
+of a <code>while</code> loop:
+
+<p>
+<!-- begin verbatim block  pypro-->
+<pre><code>Cdegrees = [-20, -15, -10, -5, 0, 5, 10, 15, 20, 25, 30, 35, 40]
+index = 0
+print '    C    F'
+while index &lt; len(Cdegrees):
+    C = Cdegrees[index]
+    F = (9.0/5)*C + 32
+    print '%5d %5.1f' % (C, F)
+    index += 1
+</code></pre>
+<!-- end verbatim block -->
+
+<h2>The range construction  <a name="___sec12"></a></h2>
+
+It is tedious to write the many elements in the <code>Cdegrees</code> in the
+previous programs. We should use a loop to automate the construction of
+the <code>Cdegrees</code> list. The <code>range</code> construction is particularly
+useful in this regard:
+
+<ul>
+  <li> <code>range(n)</code> generates integers <code>0, 1, 2, ..., n-1</code>.</li>
+  <li> <code>range(start, stop, step)</code> generates a sequence if integers <code>start</code>, <code>start+step</code>, <code>start+2*step</code>, and so on up to, <em>but not including</em>, <code>stop</code>. For example, <code>range(2, 8, 3)</code> returns 2 and 5 (and not 8), while <code>range(1, 11, 2)</code> returns 1, 3, 5, 7, 9.</li>
+  <li> <code>range(start, stop)</code> is the same as <code>range(start, stop, 1)</code>.</li>
+</ul>
+
+A <code>for</code> loop over integers are written as
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>for i in range(start, stop, step):
+    ...
+</code></pre>
+<!-- end verbatim block -->
+We can use this construction to create a <code>Cdegrees</code> list of
+the values \( -20, -15, \ldots, 40 \):
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>Cdegrees = []
+for C in range(-20, 45, 5):
+    Cdegrees.append(C)
+
+# or just
+Cdegrees = range(-20, 45, 5)
+</code></pre>
+<!-- end verbatim block -->
+Note that the upper limit must be greater than <code>40</code> to ensure that
+<code>40</code> is included in the range of integers.
+<!-- Also note that <code>range</code> -->
+<!-- can only generate integers, so the last line is only relevant if -->
+<!-- we want equidistant integer temperatures. The more generally -->
+<!-- applicable generation of equidistant temperatures is explained next. -->
+
+<p>
+Suppose we want to create <code>Cdegrees</code> as \( -10, -7.5, -5, \ldots, 40 \).
+This time we cannot use <code>range</code> directly, because <code>range</code> can only
+create integers and we have decimal degrees such as \( -7.5 \) and \( 1.5 \).
+In this more general case, we introduce an integer counter \( i \) and
+generate the \( C \) values by the formula \( C=-10 + i\cdot 2.5 \) for
+\( i=0,1,\ldots, 20 \). The following Python code implements this task:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>Cdegrees = []
+for i in range(0, 21):
+     C = -10 + i*2.5
+     Cdegrees.append(C)
+</code></pre>
+<!-- end verbatim block -->
+
+<h2>For loops with list indices  <a name="___sec13"></a></h2>
+
+Instead of iterating over a list directly with the construction
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>for element in somelist:
+    ...
+</code></pre>
+<!-- end verbatim block -->
+we can equivalently
+iterate of the list indices and index the list inside the loop:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>for i in range(len(somelist)):
+    element = somelist[i]
+    ...
+</code></pre>
+<!-- end verbatim block -->
+Since <code>len(somelist)</code> returns the length of <code>somelist</code> and
+the largest legal index is <code>len(somelist)-1</code>, because indices always
+start at 0, <code>range(len(somelist))</code> will generate all the correct
+indices: <code>0</code>, <code>1</code>, \( \ldots \), <code>len(somelist)-1</code>.
+
+<p>
+Programmers coming from other languages, such as Fortran,
+C, C++, Java, and C#, are very much used to <code>for</code> loops with
+integer counters and usually
+tend to use <code>for i in range(len(somelist))</code> and work with
+<code>somelist[i]</code> inside the loop. This might be necessary or convenient,
+but if possible, Python programmers are encouraged to use
+<code>for element in somelist</code>, which is more elegant to read.
+
+<p>
+Iterating over loop indices is useful when we need to process two
+lists simultaneously. As an example, we first create two <code>Cdegrees</code>
+and <code>Fdegrees</code> lists, and then we make a list to write out a table
+with <code>Cdegrees</code> and <code>Fdegrees</code> as the two columns of the table.
+Iterating over a loop index is convenient in the final list:
+
+<p>
+<!-- begin verbatim block  pypro-->
+<pre><code>Cdegrees = []
+n = 21
+C_min = -10
+C_max = 40
+dC = (C_max - C_min)/float(n-1)  # increment in C
+for i in range(0, n):
+     C = -10 + i*dC
+     Cdegrees.append(C)
+
+Fdegrees = []
+for C in Cdegrees:
+    F = (9.0/5)*C + 32
+    Fdegrees.append(F)
+
+for i in range(len(Cdegrees)):
+    C = Cdegrees[i]
+    F = Fdegrees[i]
+    print '%5.1f %5.1f' % (C, F)
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+Instead of appending new elements to the lists, we can start with lists
+of the right size, containing zeros, and then index the lists to fill
+in the right values. Creating a list of length <code>n</code> consisting of zeros
+(for instance) is done by
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>somelist = [0]*n
+</code></pre>
+<!-- end verbatim block -->
+With this construction, the program above can use <code>for</code> loops over
+indices everywhere:
+
+<p>
+<!-- begin verbatim block  pypro-->
+<pre><code>n = 21
+C_min = -10
+C_max = 40
+dC = (C_max - C_min)/float(n-1)  # increment in C
+
+Cdegrees = [0]*n
+for i in range(len(Cdegrees)):
+     Cdegrees[i] = -10 + i*dC
+
+Fdegrees = [0]*n
+for i in range(len(Cdegrees)):
+    Fdegrees[i] = (9.0/5)*Cdegrees[i] + 32
+
+for i in range(len(Cdegrees)):
+    print '%5.1f %5.1f' % (Cdegrees[i], Fdegrees[i])
+</code></pre>
+<!-- end verbatim block -->
+Note that we need the construction <code>[0]*n</code> to create a list of the
+right length, otherwise the index <code>[i]</code> will be illegal.
+
+<h2>Changing list elements  <a name="___sec14"></a></h2>
+
+We have two seemingly alternative ways to traverse a list, either a
+loop over elements or over indices. Suppose we want to change the
+<code>Cdegrees</code> list by adding 5 to all elements. We could try
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>for c in Cdegrees:
+    c += 5
+</code></pre>
+<!-- end verbatim block -->
+but this loop leaves <code>Cdegrees</code> unchanged, while
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>for i in range(len(Cdegrees)):
+    Cdegrees[i] += 5
+</code></pre>
+<!-- end verbatim block -->
+works as intended. What is wrong with the first loop?
+The problem is that <code>c</code> is an ordinary variable, which
+refers to a list element in the loop, but when we execute
+<code>c += 5</code>, we let <code>c</code> refer to a new <code>float</code> object (<code>c+5</code>).
+This object is never inserted in the list. The first two
+passes of the loop are equivalent to
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>c = Cdegrees[0]   # automatically done in the for statement
+c += 5
+c = Cdegrees[1]   # automatically done in the for statement
+c += 5
+</code></pre>
+<!-- end verbatim block -->
+The variable <code>c</code> can only be used to read list elements and never
+to change them. Only an assignment of the form
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>Cdegrees[i] = ...
+</code></pre>
+<!-- end verbatim block -->
+can change a list element.
+
+<p>
+There is a way of traversing a list where we get both the index and
+an element in each pass of the loop:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>for i, c in enumerate(Cdegrees):
+    Cdegrees[i] = c + 5
+</code></pre>
+<!-- end verbatim block -->
+This loop also adds 5 to all elements in the list.
+
+<h2>List comprehension <a name="sec:basic:list:comprehension"></a></h2>
+
+Because running through a list and for each element creating a new element
+in another list is a frequently encountered task, Python has a special
+compact syntax for doing this, called <em>list comprehension</em>.
+The general syntax reads
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>newlist = [E(e) for e in list]
+</code></pre>
+<!-- end verbatim block -->
+where
+<code>E(e)</code> represents an expression involving element <code>e</code>.
+Here are three examples:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>Cdegrees = [-5 + i*0.5 for i in range(n)]
+Fdegrees = [(9.0/5)*C + 32 for C in Cdegrees]
+C_plus_5 = [C+5 for C in Cdegrees]
+</code></pre>
+<!-- end verbatim block -->
+List comprehensions are recognized as a <code>for</code> loop inside square
+brackets and will be frequently exemplified throughout the document.
+
+<h2>Traversing multiple lists simultaneously  <a name="___sec16"></a></h2>
+
+We may use the <code>Cdegrees</code> and <code>Fdegrees</code> lists to
+make a table. To this end, we need to traverse both arrays.
+The <code>for element in list</code> construction is not suitable in this
+case, since it extracts elements from one list only.
+A solution is to use a <code>for</code> loop over the integer indices so that
+we can index both lists:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>for i in range(len(Cdegrees)):
+    print '%5d %5.1f' % (Cdegrees[i], Fdegrees[i])
+</code></pre>
+<!-- end verbatim block -->
+It happens quite frequently that two or more lists need to be traversed
+simultaneously. As an alternative to the loop over indices,
+Python offers a special nice syntax that can be sketched as
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>for e1, e2, e3, ... in zip(list1, list2, list3, ...):
+    # work with element e1 from list1, element e2 from list2,
+    # element e3 from list3, etc.
+</code></pre>
+<!-- end verbatim block -->
+The <code>zip</code> function turns \( n \) lists
+(<code>list1, list2, list3, ...</code>) into one list
+of \( n \)-tuples, where each \( n \)-tuple <code>(e1,e2,e3,...)</code>
+has its first element (<code>e1</code>) from the first list (<code>list1</code>),
+the second element (<code>e2</code>) from the second list (<code>list2</code>), and
+so forth. The loop stops when the end of the shortest list is reached.
+In our specific case of iterating over the two lists
+<code>Cdegrees</code> and <code>Fdegrees</code>, we can use the <code>zip</code> function:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>for C, F in zip(Cdegrees, Fdegrees):
+    print '%5d %5.1f' % (C, F)
+</code></pre>
+<!-- end verbatim block -->
+It is considered more <em>Pythonic</em> to iterate over list elements,
+here <code>C</code> and <code>F</code>, rather than over list indices as in
+the <code>for i in range(len(Cdegrees))</code> construction.
+
+<p>
+<p>
+<!-- begin bottom navigation -->
+<table style="width: 100%"><tr><td>
+<div style="text-align: left;"><a href="._looplist-solarized002.html">&laquo; Previous</a></div>
+</td><td>
+<div style="text-align: right;"><a href="._looplist-solarized004.html">Next &raquo;</a></div>
+</td></tr></table>
+<!-- end bottom navigation -->
+</p>
+
+<!-- ------------------- end of main content --------------- -->
+
+
+</body>
+</html>
+    
+
