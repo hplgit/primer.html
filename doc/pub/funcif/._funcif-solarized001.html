@@ -1,0 +1,1651 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Functions and branching">
+<meta name="keywords" content="function header,function body,body of a function,call a function,invoke a function,Online Python Tutor,keyword arguments,function arguments keyword,positional arguments,function arguments positional,named arguments,function arguments named,doc strings,main program,lambda functions,lambda functions,bioinformatics,DNA,list iteration,string iteration,list comprehension,random strings,CPU time measurements,test function,nose tests,pytest tests,test function,nose tests,pytest tests,mod function,Online Python Tutor,Trapezoidal rule for integration,Midpoint rule for integration,Fourier series,Heaviside function,sort (list)">
+
+<title>Functions and branching</title>
+
+
+<link href="https://raw.githubusercontent.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/css/solarized_light_code.css" rel="stylesheet" type="text/css" title="light"/>
+<script src="http://www.peterhaschke.com/assets/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<link href="http://thomasf.github.io/solarized-css/solarized-light.min.css" rel="stylesheet">
+<style type="text/css">
+h1 {color: #b58900;}  /* yellow */
+/* h1 {color: #cb4b16;}  orange */
+/* h1 {color: #d33682;}  magenta, the original choice of thomasf */
+.alert-text-small   { font-size: 80%;  }
+.alert-text-large   { font-size: 130%; }
+.alert-text-normal  { font-size: 90%;  }
+.alert {
+  padding:8px 35px 8px 14px; margin-bottom:18px;
+  text-shadow:0 1px 0 rgba(255,255,255,0.5);
+  border:1px solid #93a1a1;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  color: #555;
+  background-color: #eee8d5;
+  background-position: 10px 5px;
+  background-repeat: no-repeat;
+  background-size: 38px;
+  padding-left: 55px;
+  width: 75%;
+ }
+.alert-block {padding-top:14px; padding-bottom:14px}
+.alert-block > p, .alert-block > ul {margin-bottom:1em}
+.alert li {margin-top: 1em}
+.alert-block p+p {margin-top:5px}
+.alert-notice { background-image: url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_notice.png); }
+.alert-summary  { background-image:url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_summary.png); }
+.alert-warning { background-image: url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_warning.png); }
+.alert-question {background-image:url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_question.png); }
+
+div { text-align: justify; text-justify: inter-word; }
+</style>
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [(' Functions ', 1, None, '___sec0'),
+              (' Mathematical functions as Python functions ',
+               2,
+               'sec:basic:func1',
+               'sec:basic:func1'),
+              (' Understanding the program flow ',
+               2,
+               'sec:basic:pot',
+               'sec:basic:pot'),
+              (' Local and global variables ',
+               2,
+               'sec:basic:localglobal',
+               'sec:basic:localglobal'),
+              (' Local variables are invisible outside functions ',
+               3,
+               None,
+               '___sec4'),
+              (' Local variables hide global variables ', 3, None, '___sec5'),
+              (' Example ', 3, None, '___sec6'),
+              (' Changing global variables inside functions ',
+               3,
+               None,
+               '___sec7'),
+              (' Multiple arguments ',
+               2,
+               'sec:basic:multiple:args',
+               'sec:basic:multiple:args'),
+              (' Function argument or global variable? ',
+               2,
+               'sec:basic:arg:or:global',
+               'sec:basic:arg:or:global'),
+              (' Beyond mathematical functions ',
+               2,
+               'sec:basic:makelist',
+               'sec:basic:makelist'),
+              (' Remark 1 ', 3, None, '___sec11'),
+              (' Remark 2 ', 3, None, '___sec12'),
+              (' Multiple return values ',
+               2,
+               'sec:basic:multiple:returns',
+               'sec:basic:multiple:returns'),
+              (' Computing sums ', 2, 'sec:basic:sum', 'sec:basic:sum'),
+              (' Functions with no return values ',
+               2,
+               'sec:basic:None',
+               'sec:basic:None'),
+              (' Keyword arguments ',
+               2,
+               'sec:basic:kwargs',
+               'sec:basic:kwargs'),
+              (' Example: Function with default parameters ',
+               3,
+               None,
+               '___sec17'),
+              (' Example: Computing a sum with default tolerance ',
+               3,
+               None,
+               '___sec18'),
+              (' Doc strings ',
+               2,
+               'sec:basic:docstring',
+               'sec:basic:docstring'),
+              (' Functions as arguments to functions ',
+               2,
+               'sec:basic:farg',
+               'sec:basic:farg'),
+              (' The behavior of the numerical derivative as $h\\rightarrow 0$ ',
+               3,
+               None,
+               '___sec21'),
+              (' The main program ', 2, None, '___sec22'),
+              (' Lambda functions ',
+               2,
+               'sec:basic:lambdafunc',
+               'sec:basic:lambdafunc'),
+              (' Branching ', 1, 'sec:input:if', 'sec:input:if'),
+              (' If-else blocks ', 2, None, '___sec25'),
+              (' Inline if tests ', 2, None, '___sec26'),
+              (' Mixing loops, branching, and functions in bioinformatics examples ',
+               1,
+               None,
+               '___sec27'),
+              (' Counting letters in DNA strings ',
+               2,
+               'bioinf:count',
+               'bioinf:count'),
+              (' List iteration ', 3, None, '___sec29'),
+              (' String iteration ', 3, None, '___sec30'),
+              (' Index iteration ', 3, None, '___sec31'),
+              (' While loops ', 3, None, '___sec32'),
+              (' Summing a boolean list ', 3, None, '___sec33'),
+              (' Inline if test ', 3, None, '___sec34'),
+              (' Using boolean values directly ', 3, None, '___sec35'),
+              (' List comprehensions ', 3, None, '___sec36'),
+              (' Using a sum iterator ', 3, None, '___sec37'),
+              (' Extracting indices ', 3, None, '___sec38'),
+              (" Using Python's library ", 3, None, '___sec39'),
+              (' Efficiency assessment ',
+               2,
+               'bioinf:count:cpu',
+               'bioinf:count:cpu'),
+              (' Generating random DNA strings ', 3, None, '___sec41'),
+              (' Measuring CPU time ', 3, None, '___sec42'),
+              (' Verifying the implementations ',
+               2,
+               'bioinf:count:verify',
+               'bioinf:count:verify'),
+              (' Summary ', 1, 'sec:funcif:summary', 'sec:funcif:summary'),
+              (' Chapter topics ', 2, None, '___sec45'),
+              (' User-defined functions ', 3, None, '___sec46'),
+              (' Keyword arguments ', 3, None, '___sec47'),
+              (' If tests ', 3, None, '___sec48'),
+              (' Inline if tests ', 3, None, '___sec49'),
+              (' Terminology ', 3, None, '___sec50'),
+              (' Example: Numerical integration ',
+               2,
+               'sec:funcif:summary:ex',
+               'sec:funcif:summary:ex'),
+              (' Problem ', 3, None, '___sec52'),
+              (' Solution ', 3, None, '___sec53'),
+              (' Verification ', 3, None, '___sec54'),
+              (' Checking the validity of function arguments ',
+               3,
+               None,
+               '___sec55'),
+              (' Exercises ', 1, None, '___sec56'),
+              (' Exercise 1: Write a Fahrenheit-Celsius conversion function ',
+               2,
+               'sec:basic:ex26b',
+               'sec:basic:ex26b'),
+              (' Exercise 2: Evaluate a sum and write a test function ',
+               2,
+               'sec:basic:ex29d',
+               'sec:basic:ex29d'),
+              (' Exercise 3: Write a function for solving $ax^2 + bx + c =0$ ',
+               2,
+               'sec:funcif:ex1',
+               'sec:funcif:ex1'),
+              (' Exercise 4: Implement the sum function ',
+               2,
+               'sec:input:ex1',
+               'sec:input:ex1'),
+              (' Exercise 5: Compute a polynomial via a product ',
+               2,
+               'sec:basic:ex32',
+               'sec:basic:ex32'),
+              (' Exercise 6: Integrate a function by the Trapezoidal rule ',
+               2,
+               'sec:basic:ex38',
+               'sec:basic:ex38'),
+              (' Remarks ', 3, None, '___sec63'),
+              (' Exercise 7: Derive the general Midpoint integration rule ',
+               2,
+               'sec:basic:ex39c',
+               'sec:basic:ex39c'),
+              (' Exercise 8: Make an adaptive Trapezoidal rule ',
+               2,
+               'sec:basic:ex39d',
+               'sec:basic:ex39d'),
+              (' Remarks ', 3, None, '___sec66'),
+              (' Exercise 9: Explain why a program works ',
+               2,
+               'sec:basic:ex48',
+               'sec:basic:ex48'),
+              (' Exercise 10: Simulate a program by hand ',
+               2,
+               'sec:basic:ex:locglob',
+               'sec:basic:ex:locglob'),
+              (' Exercise 11: Compute the area of an arbitrary triangle ',
+               2,
+               'sec:basic:ex25',
+               'sec:basic:ex25'),
+              (' Exercise 12: Compute the length of a path ',
+               2,
+               'sec:basic:ex25b',
+               'sec:basic:ex25b'),
+              (' Exercise 13: Approximate $\\pi$ ',
+               2,
+               'sec:basic:ex25c',
+               'sec:basic:ex25c'),
+              (' Exercise 14: Write functions ',
+               2,
+               'sec:basic:ex42a',
+               'sec:basic:ex42a'),
+              (' Exercise 15: Approximate a function by a sum of sines ',
+               2,
+               'sec:formula:ex10',
+               'sec:formula:ex10'),
+              (' Remarks ', 3, None, '___sec74'),
+              (' Exercise 16: Implement a Gaussian function ',
+               2,
+               'sec:basic:ex33',
+               'sec:basic:ex33'),
+              (' Exercise 17: Wrap a formula in a function ',
+               2,
+               'sec:basic:ex46',
+               'sec:basic:ex46'),
+              (' Exercise 18: Write a function for numerical differentiation ',
+               2,
+               'sec:basic:ex38a',
+               'sec:basic:ex38a'),
+              (' Exercise 19: Implement the factorial function ',
+               2,
+               'sec:basic:ex35',
+               'sec:basic:ex35'),
+              (' Exercise 20: Compute velocity and acceleration from 1D position data ',
+               2,
+               'sec:basic:ex29q',
+               'sec:basic:ex29q'),
+              (' Exercise 21: Find the max and min values of a function ',
+               2,
+               'sec:basic:ex29g',
+               'sec:basic:ex29g'),
+              (' Exercise 22: Find the max and min elements in a list ',
+               2,
+               'sec:basic:ex29g2',
+               'sec:basic:ex29g2'),
+              (' Exercise 23: Implement the Heaviside function ',
+               2,
+               'sec:basic:exH1',
+               'sec:basic:exH1'),
+              (' Exercise 24: Implement a smoothed Heaviside function ',
+               2,
+               'sec:basic:exH2',
+               'sec:basic:exH2'),
+              (' Exercise 25: Implement an indicator function ',
+               2,
+               'sec:basic:exH3',
+               'sec:basic:exH3'),
+              (' Exercise 26: Implement a piecewise constant function ',
+               2,
+               'sec:basic:exH4',
+               'sec:basic:exH4'),
+              (' Exercise 27: Apply indicator functions ',
+               2,
+               'sec:basic:exH4b',
+               'sec:basic:exH4b'),
+              (' Exercise 28: Test your understanding of branching ',
+               2,
+               'sec:basic:ex49',
+               'sec:basic:ex49'),
+              (' Exercise 29: Simulate nested loops by hand ',
+               2,
+               'sec:basic:ex40',
+               'sec:basic:ex40'),
+              (' Exercise 30: Rewrite a mathematical function ',
+               2,
+               'sec:basic:ex29f',
+               'sec:basic:ex29f'),
+              (' Exercise 31: Make a table for approximations of $\\cos x$ ',
+               2,
+               'sec:basic:ex29e',
+               'sec:basic:ex29e'),
+              (' Exercise 32: Use None in keyword arguments ',
+               2,
+               'sec:basic:ex31b',
+               'sec:basic:ex31b'),
+              (' Exercise 33: Write a sort function for a list of 4-tuples ',
+               2,
+               'sec:basic:ex28',
+               'sec:basic:ex28'),
+              (' Exercise 34: Find prime numbers ',
+               2,
+               'sec:basic:ex37',
+               'sec:basic:ex37'),
+              (' Exercise 35: Find pairs of characters ',
+               2,
+               'bioinf:exer:pairs1',
+               'bioinf:exer:pairs1'),
+              (' Exercise 36: Count substrings ',
+               2,
+               'bioinf:exer:substr1',
+               'bioinf:exer:substr1'),
+              (' Exercise 37: Resolve a problem with a function ',
+               2,
+               'sec:input:ex35',
+               'sec:input:ex35'),
+              (' Exercise 38: Determine the types of some objects ',
+               2,
+               'sec:basic:ex20',
+               'sec:basic:ex20'),
+              (' Remarks ', 3, None, '___sec98'),
+              (' Exercise 39: Find an error in a program ',
+               2,
+               'sec:basic:ex34',
+               'sec:basic:ex34'),
+              (' References ', 1, None, '___sec100')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- newcommands_keep.tex -->
+$$
+\newcommand{\tp}{\thinspace .}
+$$
+
+
+
+
+    
+<a name="part0001"></a>
+<p>
+<!-- begin top navigation -->
+<table style="width: 100%"><tr><td>
+<div style="text-align: left;"><a href="._funcif-solarized000.html">&laquo; Previous</a></div>
+</td><td>
+<div style="text-align: right;"><a href="._funcif-solarized002.html">Next &raquo;</a></div>
+</td></tr></table>
+<!-- end top navigation -->
+</p>
+
+<p>
+<!-- !split -->
+
+<h1>Functions  <a name="___sec0"></a></h1>
+
+In a computer language like Python, the term <em>function</em> means more
+than just a mathematical function. A function is a collection of
+statements that you can execute wherever and whenever you want in the
+program.  You may send variables to the function to influence what is
+getting computed by statements in the function, and the function may
+return new objects back to you.
+
+<p>
+In particular, functions help avoid duplicating code snippets by
+putting all similar snippets in a common place. This strategy saves
+typing and makes it easier to change the program later.  Functions are
+also often used to just split a long program into smaller, more
+manageable pieces, so the program and your own thinking about it
+become clearer.  Python comes with lots of pre-defined functions
+(<code>math.sqrt</code>, <code>range</code>, and <code>len</code> are examples we have met so far).
+This section explains how you can define your own functions.
+
+<h2>Mathematical functions as Python functions <a name="sec:basic:func1"></a></h2>
+
+Let us start with making a Python function that
+evaluates a mathematical function, more precisely
+the function \( F(C) \) for converting Celsius degrees \( C \) to the
+corresponding Fahrenheit degrees \( F \):
+
+$$
+\begin{equation*}
+F(C) = \frac{9}{5}C+32\tp
+\end{equation*}
+$$
+
+The corresponding Python
+function must take \( C \) as argument and return the value \( F(C) \). The code
+for this looks like
+
+<p>
+
+def F(C):
+    return (9.0/5)*C + 32
+<p>
+All Python functions begin with <code>def</code>, followed by the function
+name, and then inside parentheses a comma-separated list of
+<em>function arguments</em>.
+Here we have only one argument <code>C</code>. This argument acts
+as a standard variable inside the function. The statements to be
+performed inside the function must be indented.
+At the end of a function it is common to <em>return</em> a value, that is,
+send a value &quot;out of the function&quot;. This value is normally associated
+with the name of the function, as in the present case where the returned
+value is the result of the mathematical function \( F(C) \).
+
+<p>
+The <code>def</code> line with the function name and arguments is often referred
+to as the <em>function header</em>, while
+the indented statements constitute the <em>function body</em>.
+
+<p>
+To use a function, we must <em>call</em> (or <em>invoke</em>)
+it. Because the function
+returns a value, we need to store this value in a variable or
+make use of it in other ways. Here are some calls to <code>F</code>:
+
+<p>
+
+temp1 = F(15.5)
+a = 10
+temp2 = F(a)
+print F(a+1)
+sum_temp = F(10) + F(20)
+<p>
+The returned object from <code>F(C)</code> is in our case a <code>float</code> object. The
+call <code>F(C)</code> can therefore be placed anywhere in a code where a <code>float</code>
+object would be valid. The <code>print</code> statement above is one example.
+
+<p>
+As another example, say we have a list <code>Cdegrees</code> of Celsius degrees
+and we want to compute a list of the corresponding Fahrenheit degrees
+using the <code>F</code> function above in a list comprehension:
+
+<p>
+
+Fdegrees = [F(C) for C in Cdegrees]
+<p>
+Yet another example may involve a slight
+variation of our <code>F(C)</code> function, where a formatted
+string instead of a real number is returned:
+
+<p>
+
+&gt;&gt;&gt; def F2(C):
+...     F_value = (9.0/5)*C + 32
+...     return '%.1f degrees Celsius corresponds to '\ 
+...            '%.1f degrees Fahrenheit' % (C, F_value)
+...
+&gt;&gt;&gt; s1 = F2(21)
+&gt;&gt;&gt; s1
+'21.0 degrees Celsius corresponds to 69.8 degrees Fahrenheit'
+<p>
+The assignment to <code>F_value</code> demonstrates that we can create
+variables inside a function as needed.
+
+<h2>Understanding the program flow <a name="sec:basic:pot"></a></h2>
+
+A programmer must have a deep understanding of the sequence of
+statements that are executed in the program and be able to
+simulate by hand what happens with a program in the computer.
+To help build this understanding,
+a debugger (see the document <a href="http://tcse6.on.net/debug" target="_self">Debugging in Python</a> <a href="._funcif-solarized005.html#Langtangen_TCSE6_debug">[1]</a>)
+or the <a href="http://www.pythontutor.com/" target="_self">Online Python Tutor</a> are excellent
+tools. A debugger can be used for all sorts of programs, large and small,
+while the Online Python Tutor is primarily an educational tool for
+small programs. We shall demonstrate it here.
+
+<p>
+Below is a program <a href="http://tinyurl.com/pwyasaa/funcif/c2f.py" target="_self"><tt>c2f.py</tt></a>
+having a function and a <code>for</code> loop, with the purpose of
+printing out a table for conversion of Celsius to Fahrenheit degrees:
+
+<p>
+
+<iframe width="950" height="500" frameborder="0"
+        src="http://pythontutor.com/iframe-embed.html#code=def+F%28C%29%3A%0A++++F+%3D+9.%2F5%2AC+%2B+32%0A++++return+F%0A%0AdC+%3D+10%0AC+%3D+-30%0Awhile+C+%3C%3D+50%3A%0A++++print+%27%255.1f+%25.51f%27+%25+%28C%2C+F%28C%29%29%0A++++C+%2B%3D+dC&curInstr=0&py=2&cumulative=false">
+</iframe>
+<p>
+We shall now ask the Online Python Tutor to visually explain how the
+program is executed.  Go to <a href="http://www.pythontutor.com/visualize.html" target="_self"><tt>http://www.pythontutor.com/visualize.html</tt></a>, erase the code there and
+write or paste the <code>c2f.py</code> file into the editor area.
+Click <em>Visualize Execution</em>.  Press
+the forward button to advance one statement at a time and observe the
+evolution of variables to the right in the window.  This demo
+illustrates how the program jumps around in the loop and up to the
+<code>F(C)</code> function and back again.  Figure <a href="#sec:basic:pot:fig">1</a> gives a
+snapshot of the status of variables, terminal output, and what the
+current and next statements are.
+
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 1:  Screen shot of the Online Python Tutor and stepwise execution of the <code>c2f.py</code> program. <a name="sec:basic:pot:fig"></a> </p></center>
+<p><img src="fig-funcif/python_online_tutor2.png" align="bottom" width=700></p>
+</center>
+
+<p>
+<div class="alert alert-block alert-notice alert-text-normal">
+<b>Tip: How does a program actually work?</b>
+<p>
+Every time you are a bit uncertain how the flow of statements progresses
+in a program with loops and/or functions, go to
+<a href="http://www.pythontutor.com/visualize.html" target="_self"><tt>http://www.pythontutor.com/visualize.html</tt></a>, paste in your
+program and see exactly what happens.
+</div>
+
+
+<h2>Local and global variables <a name="sec:basic:localglobal"></a></h2>
+
+<h3>Local variables are invisible outside functions  <a name="___sec4"></a></h3>
+
+Let us reconsider the <code>F2(C)</code> function from the section <a href="#sec:basic:func1">Mathematical functions as Python functions</a>. The variable <code>F_value</code> is a <em>local</em> variable in
+the function, and a local variable does not exist outside the
+function, i.e., in the main program. We can easily demonstrate this
+fact by continuing the previous interactive session:
+
+<p>
+
+&gt;&gt;&gt; c1 = 37.5
+&gt;&gt;&gt; s2 = F2(c1)
+&gt;&gt;&gt; F_value
+...
+NameError: name 'F_value' is not defined
+<p>
+This error message demonstrates that the surrounding program outside
+the function is not aware of <code>F_value</code>.  Also the argument to the
+function, <code>C</code>, is a local variable that we cannot access outside the
+function:
+
+<p>
+
+&gt;&gt;&gt; C
+...
+NameError: name 'C' is not defined
+<p>
+On the contrary, the variables defined outside of the function, like
+<code>s1</code>, <code>s2</code>, and <code>c1</code> in the above session, are
+<em>global</em> variables. These can be accessed everywhere in a program,
+also inside the <code>F2</code> function.
+
+<h3>Local variables hide global variables  <a name="___sec5"></a></h3>
+
+Local variables are created inside a function and destroyed when we
+leave the function.  To learn more about this fact, we may study the
+following session where we write out <code>F_value</code>, <code>C</code>, and some global
+variable <code>r</code> inside the function:
+
+<p>
+
+&gt;&gt;&gt; def F3(C):
+...     F_value = (9.0/5)*C + 32
+...     print 'Inside F3: C=%s F_value=%s r=%s' % (C, F_value, r)
+...     return '%.1f degrees Celsius corresponds to '\ 
+...            '%.1f degrees Fahrenheit' % (C, F_value)
+...
+&gt;&gt;&gt; C = 60    # make a global variable C
+&gt;&gt;&gt; r = 21    # another global variable
+&gt;&gt;&gt; s3 = F3(r)
+Inside F3: C=21 F_value=69.8 r=21
+&gt;&gt;&gt; s3
+'21.0 degrees Celsius corresponds to 69.8 degrees Fahrenheit'
+&gt;&gt;&gt; C
+60
+<p>
+This example illustrates that there are two <code>C</code> variables, one global,
+defined in the main program with the value 60 (an <code>int</code> object), and
+one local, living when the program flow is inside the <code>F3</code>
+function. The value of this latter <code>C</code> is given in the call to the
+<code>F3</code> function (an <code>int</code> object).  Inside the <code>F3</code>
+function the local <code>C</code> <em>hides</em> the global <code>C</code> variable in the sense
+that when we refer to <code>C</code> we access the local variable.
+(The global <code>C</code> can technically be
+accessed as <code>globals()['C']</code>, but one should avoid working with local
+and global variables with the same names at the same time!)
+
+<p>
+The Online Python Tutor gives a complete overview of what the local
+and global variables are at any point of time.  For instance, in the
+example from the section <a href="#sec:basic:pot">Understanding the program flow</a>, Figure <a href="#sec:basic:pot:fig">1</a>
+shows the content of the three global variables <code>F</code>, <code>dC</code>, and <code>C</code>,
+along with the content of the variables that are in play in this call
+of the <code>F(C)</code> function: <code>C</code> and <code>F</code>.
+
+<p>
+<div class="alert alert-block alert-summary alert-text-normal">
+<b>How Python looks up variables.</b>
+<p>
+The more general rule, when you have several variables with the same
+name, is that Python first tries to look up the variable name among
+the local variables, then there is a search among global variables,
+and finally among built-in Python functions.
+</div>
+
+
+<h3>Example  <a name="___sec6"></a></h3>
+
+Here is a complete sample program that aims to illustrate the rule above:
+
+<p>
+
+print sum  # sum is a built-in Python function
+sum = 500  # rebind the name sum to an int
+print sum  # sum is a global variable
+
+def myfunc(n):
+    sum = n + 1
+    print sum  # sum is a local variable
+    return sum
+
+sum = myfunc(2) + 1   # new value in global variable sum
+print sum
+<p>
+In the first line, there are no local variables, so Python searches
+for a global value with name <code>sum</code>, but cannot find any, so the search
+proceeds with the built-in functions, and among them Python finds a
+function with name <code>sum</code>. The printout of <code>sum</code> becomes something like
+<code><built-in function sum></code>.
+
+<p>
+The second line rebinds the global name <code>sum</code> to an <code>int</code> object.
+When trying to access <code>sum</code> in the next <code>print</code> statement, Python
+searches among the global variables (no local variables so far)
+and finds one. The printout becomes <code>500</code>.
+The call <code>myfunc(2)</code> invokes a function where <code>sum</code> is a local
+variable. Doing a <code>print sum</code> in this function makes Python first
+search among the local variables, and since <code>sum</code> is found there,
+the printout becomes <code>3</code> (and not <code>500</code>, the value of the
+global variable <code>sum</code>). The
+value of the local variable <code>sum</code> is returned, added to <code>1</code>,
+to form an <code>int</code> object with value <code>4</code>. This <code>int</code> object
+is then bound to the global variable <code>sum</code>. The final <code>print sum</code>
+leads to a search among global variables, and we find one with value
+<code>4</code>.
+
+<h3>Changing global variables inside functions  <a name="___sec7"></a></h3>
+
+The values of global variables can be accessed inside functions, but
+the values cannot be changed unless the variable is declared as <code>global</code>:
+
+<p>
+
+<iframe width="950" height="500" frameborder="0"
+        src="http://pythontutor.com/iframe-embed.html#code=a+%3D+20%3B+b+%3D+-2.5++++++++%23+global+variables%0A%0Adef+f1%28x%29%3A%0A++++a+%3D+21++++++++++++++%23+this+is+a+new+local+variable%0A++++return+a%2Ax+%2B+b%0A%0Aprint+a+++++++++++++++++%23+yields+20%0A%0Adef+f2%28x%29%3A%0A++++global+a%0A++++a+%3D+21++++++++++++++%23+the+global+a+is+changed%0A++++return+a%2Ax+%2B+b%0A%0Af1%283%29%3B+print+a++++++++++%23+20+is+printed%0Af2%283%29%3B+print+a++++++++++%23+21+is+printed&curInstr=0&py=2&cumulative=false">
+</iframe>
+<p>
+Note that in the <code>f1</code> function, <code>a = 21</code> creates a local variable
+<code>a</code>. As a programmer you may think you change the global <code>a</code>, but it
+does not happen!  <em>You are strongly encouraged to run the programs
+in this section in the Online Python Tutor</em>, which is an excellent tool to
+explore local versus global variables and thereby get a good
+understanding of these concepts.
+
+<h2>Multiple arguments <a name="sec:basic:multiple:args"></a></h2>
+
+The previous <code>F(C)</code> and <code>F2(C)</code> functions from the section <a href="#sec:basic:func1">Mathematical functions as Python functions</a> are functions of one variable, <code>C</code>, or as we
+phrase it in computer science: the functions take one argument (<code>C</code>).
+Functions can have as many arguments as desired; just separate the
+argument names by commas.
+
+<p>
+Consider the mathematical function
+
+$$
+\begin{equation*} y(t) = v_0t - \frac{1}{2}gt^2,\end{equation*}
+$$
+
+where \( g \) is a fixed constant and \( v_0 \) is a physical parameter that
+can vary.  Mathematically, \( y \) is a function of one variable, \( t \), but
+the function values also depends on the value of \( v_0 \). That is, to
+evaluate \( y \), we need values for \( t \) <em>and</em> \( v_0 \).  A natural Python
+implementation is therefore a function with two arguments:
+
+<p>
+
+def yfunc(t, v0):
+    g = 9.81
+    return v0*t - 0.5*g*t**2
+<p>
+Note that the arguments <code>t</code> and
+<code>v0</code> are local variables in this function.
+Examples on valid calls are
+
+<p>
+
+y = yfunc(0.1, 6)
+y = yfunc(0.1, v0=6)
+y = yfunc(t=0.1, v0=6)
+y = yfunc(v0=6, t=0.1)
+<p>
+The possibility to write <code>argument=value</code> in the call makes it easier
+to read and understand the call statement.
+With the <code>argument=value</code> syntax for all arguments, the sequence
+of the arguments does not matter in the call, which here means that
+we may put
+<code>v0</code> before <code>t</code>. When omitting the <code>argument=</code> part, the
+sequence of arguments in the call must perfectly match the sequence
+of arguments in the function definition.
+The <code>argument=value</code> arguments must appear after all the
+arguments where only <code>value</code> is provided (e.g., <code>yfunc(t=0.1, 6)</code>
+is illegal).
+
+<p>
+Whether we write <code>yfunc(0.1, 6)</code> or <code>yfunc(v0=6, t=0.1)</code>,
+the arguments are initialized as local variables in the function
+in the same way as when we assign values to variables:
+
+<p>
+
+    t = 0.1
+    v0 = 6
+<p>
+These statements are not visible in the code, but a call to a function
+automatically initializes the arguments in this way.
+
+<h2>Function argument or global variable? <a name="sec:basic:arg:or:global"></a></h2>
+
+Since \( y \) mathematically is considered a function of one variable, \( t \),
+some may argue that the Python version of the function,
+<code>yfunc</code>, should be a function of <code>t</code> only.
+This is easy to reflect in Python:
+
+<p>
+
+def yfunc(t):
+    g = 9.81
+    return v0*t - 0.5*g*t**2
+<p>
+The main difference is that <code>v0</code> now becomes a
+<em>global</em> variable, which needs to be initialized outside
+the function <code>yfunc</code> (in the main program) before we attempt to call
+<code>yfunc</code>.
+The next session demonstrates what happens if we fail to initialize
+such a global variable:
+
+<p>
+
+&gt;&gt;&gt; def yfunc(t):
+...     g = 9.81
+...     return v0*t - 0.5*g*t**2
+...
+&gt;&gt;&gt; yfunc(0.6)
+...
+NameError: global name 'v0' is not defined
+<p>
+The remedy is to define <code>v0</code> as
+a global variable prior to calling <code>yfunc</code>:
+
+<p>
+
+&gt;&gt;&gt; v0 = 5
+&gt;&gt;&gt; yfunc(0.6)
+1.2342
+<p>
+The rationale for having <code>yfunc</code> as a function of <code>t</code> only becomes
+evident in the section <a href="#sec:basic:farg">Functions as arguments to functions</a>.
+
+<h2>Beyond mathematical functions <a name="sec:basic:makelist"></a></h2>
+
+So far our Python functions have typically computed some mathematical
+function, but the usefulness of Python functions goes far beyond
+mathematical functions.  Any set of statements that we want to
+repeatedly execute under potentially slightly different circumstances
+is a candidate for a Python function.  Say we want to make a list of
+numbers starting from some value and stopping at another value, with
+increments of a given size.  With corresponding variables <code>start=2</code>,
+<code>stop=8</code>, and <code>inc=2</code>, we should produce the numbers 2, 4, 6, and 8.
+Let us write a function doing the task, together with a couple of
+statements that demonstrate how we call the function:
+
+<p>
+
+def makelist(start, stop, inc):
+    value = start
+    result = []
+    while value &lt;= stop:
+        result.append(value)
+        value = value + inc
+    return result
+
+mylist = makelist(0, 100, 0.2)
+print mylist  # will print 0, 0.2, 0.4, 0.6, ... 99.8, 100
+
+<h3>Remark 1  <a name="___sec11"></a></h3>
+
+The <code>makelist</code> function has three arguments: <code>start</code>, <code>stop</code>, and
+<code>inc</code>, which become local variables in the function.  Also <code>value</code> and
+<code>result</code> are local variables.  In the surrounding program we define
+only one variable, <code>mylist</code>, and this is then a global variable.
+
+<h3>Remark 2  <a name="___sec12"></a></h3>
+
+You might think that <code>range(start, stop, inc)</code> makes the <code>makelist</code>
+function redundant, but <code>range</code> can only generate integers, while
+<code>makelist</code> can generate real numbers too, and more, as demonstrated in
+<a href="._funcif-solarized005.html#sec:basic:ex20">Exercise 38: Determine the types of some objects</a>.
+
+<h2>Multiple return values <a name="sec:basic:multiple:returns"></a></h2>
+
+Python functions may return more than one value.  Suppose we are
+interested in evaluating both \( y(t) \) and \( y'(t) \):
+
+$$
+\begin{align*}
+y(t) & = v_0t - \frac{1}{2}gt^2,\\ 
+y'(t) & = v_0 - gt\tp
+\end{align*}
+$$
+
+To return both \( y \) and \( y' \) we simply separate their corresponding
+variables by a comma in the <code>return</code> statement:
+
+<p>
+
+def yfunc(t, v0):
+    g = 9.81
+    y = v0*t - 0.5*g*t**2
+    dydt = v0 - g*t
+    return y, dydt
+<p>
+Calling this latter <code>yfunc</code> function makes a need for
+two values on the left-hand side
+of the assignment operator because the function returns two values:
+
+<p>
+
+position, velocity = yfunc(0.6, 3)
+<p>
+Here is an application of the <code>yfunc</code> function for
+producing a nicely
+formatted table of \( t \), \( y(t) \), and \( y'(t) \) values:
+
+<p>
+
+t_values = [0.05*i for i in range(10)]
+for t in t_values:
+    position, velocity = yfunc(t, v0=5)
+    print 't=%-10g position=%-10g velocity=%-10g' % \ 
+         (t, position, velocity)
+<p>
+The format <code>%-10g</code> prints a real number as compactly as possible
+(decimal or scientific notation) in a field of width 10 characters.
+The minus sign (-) after the percentage sign implies that
+the number is <em>left-adjusted</em> in this field, a feature that is
+important for creating nice-looking columns in the output:
+
+<p>
+
+t=0          position=0          velocity=5
+t=0.05       position=0.237737   velocity=4.5095
+t=0.1        position=0.45095    velocity=4.019
+t=0.15       position=0.639638   velocity=3.5285
+t=0.2        position=0.8038     velocity=3.038
+t=0.25       position=0.943437   velocity=2.5475
+t=0.3        position=1.05855    velocity=2.057
+t=0.35       position=1.14914    velocity=1.5665
+t=0.4        position=1.2152     velocity=1.076
+t=0.45       position=1.25674    velocity=0.5855
+<p>
+When a function returns multiple values, separated by a comma in the
+<code>return</code> statement, a tuple (the section ref{sec:lists:tuples})
+is actually returned. We can demonstrate
+that fact by the following session:
+
+<p>
+
+&gt;&gt;&gt; def f(x):
+...     return x, x**2, x**4
+...
+&gt;&gt;&gt; s = f(2)
+&gt;&gt;&gt; s
+(2, 4, 16)
+&gt;&gt;&gt; type(s)
+&lt;type 'tuple'&gt;
+&gt;&gt;&gt; x, x2, x4 = f(2)   # store in separate variables
+<p>
+Note that storing multiple return values in separate variables, as we
+do in the last line,
+is actually the same functionality as we use for storing list
+(or tuple) elements in
+separate variables, see the section ref{sec:lists:basc:op}.
+
+<h2>Computing sums <a name="sec:basic:sum"></a></h2>
+
+Our next example concerns a Python function
+for calculating the sum
+
+$$
+\begin{equation}
+L(x;n) = \sum_{i=1}^n {1\over i}\left( {x\over 1+x}\right)^{i}\tp
+\tag{1}
+\end{equation}
+$$
+
+To compute a sum in a program, we use a loop and add
+terms to an accumulation variable inside the loop.
+The section ref{sec:basic:sumloop} explains the idea. However,
+summation expressions with an integer counter, such as \( i \) in
+<a href="#mjx-eqn-1">(1)</a>, are normally implemented by a <code>for</code> loop
+over the \( i \) counter and not a <code>while</code> loop as in
+the section ref{sec:basic:sumloop}.
+For example,
+the implementation of \( \sum_{i=1}^n i^2 \) is typically implemented as
+
+<p>
+
+s = 0
+for i in range(1, n+1):
+    s += i**2
+<p>
+For the specific sum <a href="#mjx-eqn-1">(1)</a> we just replace <code>i**2</code>
+by the right term inside the <code>for</code> loop:
+
+<p>
+
+s = 0
+for i in range(1, n+1):
+    s += (1.0/i)*(x/(1.0+x))**i
+<p>
+Observe the factors <code>1.0</code> used to avoid integer division,
+since <code>i</code> is <code>int</code> and <code>x</code> may also be <code>int</code>.
+
+<p>
+It is natural to embed the computation of the sum in a function that
+takes \( x \) and \( n \) as arguments and returns the sum:
+
+<p>
+
+def L(x, n):
+    s = 0
+    for i in range(1, n+1):
+        s += (1.0/i)*(x/(1.0+x))**i
+    return s
+<p>
+Our formula <a href="#mjx-eqn-1">(1)</a> is not chosen at random.
+In fact, it can be shown that \( L(x;n) \)
+is an approximation to \( \ln (1+x) \) for a finite \( n \) and \( x\geq 1 \).
+The approximation becomes exact in the limit
+
+$$
+\begin{equation*}
+\lim_{n\rightarrow\infty} L(x;n) = \ln (1+x)\tp
+\end{equation*}
+$$
+
+
+<p>
+<div class="alert alert-block alert-notice alert-text-normal">
+<b>Computational significance of \( L(x;n) \).</b>
+<p>
+Although we can compute \( \ln(1+x) \) on a calculator or by
+<code>math.log(1+x)</code> in Python, you may have wondered how such a
+function is actually calculated inside the calculator or the
+<code>math</code> module.  In most cases this must be done via simple
+mathematical expressions such as the sum in <a href="#mjx-eqn-1">(1)</a>. A
+calculator and the <code>math</code> module will use more sophisticated
+formulas than <a href="#mjx-eqn-1">(1)</a> for ultimate efficiency of the
+calculations, but the main point is that the numerical values of
+mathematical functions like \( \ln(x) \), \( \sin(x) \), and \( \tan(x) \) are
+usually computed by sums similar to <a href="#mjx-eqn-1">(1)</a>.
+</div>
+
+
+<p>
+Instead of having our <code>L</code> function just returning the value of the
+sum, we could return additional information on the error involved in
+the approximation of \( \ln (1+x) \) by \( L(x;n) \).  The size of the terms
+decreases with increasing \( n \), and the first neglected term is then
+bigger than all the remaining terms, but not necessarily bigger than
+their sum. The first neglected term is hence an indication of the size
+of the total error we make, so we may use this term as a rough
+estimate of the error.  For comparison, we could also return the exact
+error since we are able to calculate the \( \ln \) function by <code>math.log</code>.
+
+<p>
+A new version of the <code>L(x, n)</code>
+function, where we return the value of \( L(x;n) \),
+the first neglected term, and the exact error goes as follows:
+
+<p>
+
+def L2(x, n):
+    s = 0
+    for i in range(1, n+1):
+        s += (1.0/i)*(x/(1.0+x))**i
+    value_of_sum = s
+    first_neglected_term = (1.0/(n+1))*(x/(1.0+x))**(n+1)
+    from math import log
+    exact_error = log(1+x) - value_of_sum
+    return value_of_sum, first_neglected_term, exact_error
+
+# typical call:
+value, approximate_error, exact_error = L2(x, 100)
+<p>
+The next section demonstrates the usage of the <code>L2</code> function to
+judge the quality of the approximation \( L(x;n) \) to \( \ln (1+x) \).
+
+<h2>Functions with no return values <a name="sec:basic:None"></a></h2>
+
+Sometimes a function just performs a set of statements, without
+computing objects that are natural to return to the calling code.  In
+such situations one can simply skip the <code>return</code> statement.  Some
+programming languages use the terms <em>procedure</em> or <em>subroutine</em> for
+functions that do not return anything.
+
+<p>
+Let us exemplify a function without return values by making a table of the
+accuracy of the \( L(x;n) \) approximation to \( \ln (1+x) \) from the
+previous section:
+
+<p>
+
+def table(x):
+    print '\nx=%g, ln(1+x)=%g' % (x, log(1+x))
+    for n in [1, 2, 10, 100, 500]:
+        value, next, error = L2(x, n)
+        print 'n=%-4d %-10g  (next term: %8.2e  '\ 
+              'error: %8.2e)' % (n, value, next, error)
+<p>
+This function just performs a set of statements that we may want to
+run several times. Calling
+
+<p>
+
+table(10)
+table(1000)
+<p>
+gives the output
+
+<p>
+
+x=10, ln(1+x)=2.3979
+n=1    0.909091    (next term: 4.13e-01  error: 1.49e+00)
+n=2    1.32231     (next term: 2.50e-01  error: 1.08e+00)
+n=10   2.17907     (next term: 3.19e-02  error: 2.19e-01)
+n=100  2.39789     (next term: 6.53e-07  error: 6.59e-06)
+n=500  2.3979      (next term: 3.65e-24  error: 6.22e-15)
+
+x=1000, ln(1+x)=6.90875
+n=1    0.999001    (next term: 4.99e-01  error: 5.91e+00)
+n=2    1.498       (next term: 3.32e-01  error: 5.41e+00)
+n=10   2.919       (next term: 8.99e-02  error: 3.99e+00)
+n=100  5.08989     (next term: 8.95e-03  error: 1.82e+00)
+n=500  6.34928     (next term: 1.21e-03  error: 5.59e-01)
+<p>
+From this output we see that the sum converges much more slowly when
+\( x \) is large than when \( x \) is small. We also see that the error is an
+order of magnitude or more larger than the first neglected term in the
+sum.  The functions <code>L</code>, <code>L2</code>, and <code>table</code> are found in the file
+<a href="http://tinyurl.com/pwyasaa/funcif/lnsum.py" target="_self"><tt>lnsum.py</tt></a>.
+
+<p>
+When there is no explicit <code>return</code> statement in a function, Python
+actually inserts an invisible <code>return None</code> statement.
+<code>None</code> is a special object in Python that represents
+something we might think of as empty data or just &quot;nothing&quot;.
+Other computer languages, such as C, C++, and Java, use the word <em>void</em> for
+a similar thing.
+Normally, one will call the <code>table</code> function without assigning the
+return value to any variable, but
+if we assign the return value to a variable,
+<code>result = table(500)</code>,
+<code>result</code> will refer to a <code>None</code> object.
+
+<p>
+The <code>None</code> value is often used for variables that should exist in a
+program, but where it is natural to think of the value as conceptually
+undefined.  The standard way to test if an object <code>obj</code> is set to
+<code>None</code> or not reads
+
+<p>
+
+if obj is None:
+   ...
+if obj is not None:
+   ...
+<p>
+One can also use <code>obj == None</code>. The <code>is</code> operator tests if two
+names refer to the same object, while <code>==</code> tests if the contents of two
+objects are the same:
+
+<p>
+
+&gt;&gt;&gt; a = 1
+&gt;&gt;&gt; b = a
+&gt;&gt;&gt; a is b   # a and b refer to the same object
+True
+&gt;&gt;&gt; c = 1.0
+&gt;&gt;&gt; a is c
+False
+&gt;&gt;&gt; a == c   # a and c are mathematically equal
+True
+<p>
+<!-- Many examples throughout the document will illustrate the use of <code>None</code>. -->
+
+<h2>Keyword arguments <a name="sec:basic:kwargs"></a></h2>
+
+Some function arguments can be given a default value so that we may leave
+out these arguments in the call. A typical function may look
+as
+
+<p>
+
+&gt;&gt;&gt; def somefunc(arg1, arg2, kwarg1=True, kwarg2=0):
+&gt;&gt;&gt;     print arg1, arg2, kwarg1, kwarg2
+<p>
+The first two arguments, <code>arg1</code> and <code>arg2</code>, are <em>ordinary</em> or
+<em>positional</em> arguments, while the latter two are <em>keyword arguments</em> or <em>named arguments</em>.
+Each keyword
+argument has a
+name (in this example <code>kwarg1</code> and <code>kwarg2</code>) and an associated
+default value.
+The keyword arguments must always be listed after the positional arguments
+in the function definition.
+
+<p>
+When calling <code>somefunc</code>, we may leave out some or all of
+the keyword arguments.
+Keyword arguments that do not appear in the call
+get their values from the specified
+default values. We can demonstrate the effect through some calls:
+
+<p>
+
+&gt;&gt;&gt; somefunc('Hello', [1,2])
+Hello [1, 2] True 0
+&gt;&gt;&gt; somefunc('Hello', [1,2], kwarg1='Hi')
+Hello [1, 2] Hi 0
+&gt;&gt;&gt; somefunc('Hello', [1,2], kwarg2='Hi')
+Hello [1, 2] True Hi
+&gt;&gt;&gt; somefunc('Hello', [1,2], kwarg2='Hi', kwarg1=6)
+Hello [1, 2] 6 Hi
+<p>
+The sequence of the keyword arguments does not matter in the call.
+We may also mix
+the positional and keyword arguments if we explicitly write
+<code>name=value</code> for all arguments in the call:
+
+<p>
+
+&gt;&gt;&gt; somefunc(kwarg2='Hello', arg1='Hi', kwarg1=6, arg2=[1,2],)
+Hi [1, 2] 6 Hello
+
+<h3>Example: Function with default parameters  <a name="___sec17"></a></h3>
+
+Consider a function of \( t \) which also contains some parameters, here
+\( A \), \( a \), and \( \omega \):
+
+$$
+\begin{equation}
+f(t; A,a, \omega) = Ae^{-at}\sin (\omega t)\tp
+\end{equation}
+$$
+
+We can implement \( f \) as a Python function where the independent
+variable \( t \) is an ordinary
+positional argument, and the parameters \( A \), \( a \), and \( \omega \) are
+keyword arguments with suitable default values:
+
+<p>
+
+from math import pi, exp, sin
+
+def f(t, A=1, a=1, omega=2*pi):
+    return A*exp(-a*t)*sin(omega*t)
+<p>
+Calling <code>f</code> with just the <code>t</code> argument specified is possible:
+
+<p>
+
+v1 = f(0.2)
+<p>
+In this case we evaluate the expression \( e^{-0.2}\sin (2\pi\cdot 0.2) \).
+Other possible calls include
+
+<p>
+
+v2 = f(0.2, omega=1)
+v3 = f(1, A=5, omega=pi, a=pi**2)
+v4 = f(A=5, a=2, t=0.01, omega=0.1)
+v5 = f(0.2, 0.5, 1, 1)
+<p>
+You should write down the mathematical expressions that arise from these
+four calls. Also observe in the third line above that a positional
+argument, <code>t</code> in that case,
+can appear in between the keyword arguments if we write the positional
+argument on the keyword argument form <code>name=value</code>.
+In the last line we demonstrate that keyword arguments can be
+used as positional argument, i.e., the name part can be skipped, but then the
+sequence of the keyword arguments in the call must match the sequence in
+the function definition exactly.
+
+<h3>Example: Computing a sum with default tolerance  <a name="___sec18"></a></h3>
+
+Consider the \( L(x;n) \) sum and the Python implementations <code>L(x, n)</code> and
+<code>L2(x, n)</code>
+from the section <a href="#sec:basic:sum">Computing sums</a>.  Instead of specifying the number of
+terms in the sum, \( n \), it is better to specify a tolerance
+\( \varepsilon \) of the accuracy. We can use the first neglected term as
+an estimate of the accuracy.  This means that we sum up terms as long
+as the absolute value of the next term is greater than \( \epsilon \).  It
+is natural to provide a default value for \( \epsilon \):
+
+<p>
+
+def L3(x, epsilon=1.0E-6):
+    x = float(x)
+    i = 1
+    term = (1.0/i)*(x/(1+x))**i
+    s = term
+    while abs(term) &gt; epsilon:
+        i += 1
+        term = (1.0/i)*(x/(1+x))**i
+        s += term
+    return s, i
+<p>
+Here is an example involving this function to make a table of
+the approximation error as \( \epsilon \) decreases:
+
+<p>
+
+def table2(x):
+    from math import log
+    for k in range(4, 14, 2):
+        epsilon = 10**(-k)
+        approx, n = L3(x, epsilon=epsilon)
+        exact = log(1+x)
+        exact_error = exact - approx
+<p>
+The output from calling <code>table2(10)</code> becomes
+
+<p>
+
+epsilon: 1e-04, exact error: 8.18e-04, n=55
+epsilon: 1e-06, exact error: 9.02e-06, n=97
+epsilon: 1e-08, exact error: 8.70e-08, n=142
+epsilon: 1e-10, exact error: 9.20e-10, n=187
+epsilon: 1e-12, exact error: 9.31e-12, n=233
+<p>
+We see that the <code>epsilon</code> estimate is almost 10 times smaller than the
+exact error, regardless of the size of <code>epsilon</code>.  Since <code>epsilon</code>
+follows the exact error quite well over many orders of magnitude, we
+may view <code>epsilon</code> as a useful indication of the size of the error.
+
+<h2>Doc strings <a name="sec:basic:docstring"></a></h2>
+
+There is a convention in Python to insert a documentation
+string right after the
+<code>def</code> line of the function definition. The documentation string,
+known as a <em>doc string</em>, should contain
+a short description of the purpose of the function and explain
+what the different arguments and return values are.
+Interactive sessions from a Python shell are also common to
+illustrate how the code is used. Doc strings are usually enclosed in
+triple double quotes <code>"""</code>, which allow the string to span several
+lines.
+
+<p>
+Here are two examples on short and long doc strings:
+
+<p>
+
+def C2F(C):
+    &quot;&quot;&quot;Convert Celsius degrees (C) to Fahrenheit.&quot;&quot;&quot;
+    return (9.0/5)*C + 32
+
+def line(x0, y0, x1, y1):
+    &quot;&quot;&quot;
+    Compute the coefficients a and b in the mathematical
+    expression for a straight line y = a*x + b that goes
+    through two points (x0, y0) and (x1, y1).
+
+    x0, y0: a point on the line (floats).
+    x1, y1: another point on the line (floats).
+    return: coefficients a, b (floats) for the line (y=a*x+b).
+    &quot;&quot;&quot;
+    a = (y1 - y0)/float(x1 - x0)
+    b = y0 - a*x0
+    return a, b
+<p>
+Note that the doc string must appear before any statement in the function body.
+
+<p>
+There are several Python tools that can automatically extract doc
+strings from the source code and produce various types of
+documentation.  The leading tools is <a href="http://sphinx-doc.org/invocation.html#invocation-apidoc" target="_self">Sphinx</a>, see also
+<a href="._funcif-solarized005.html#TCSE3">[2]</a> (Appendix B.2).
+
+<p>
+The doc string can be accessed in a code as <code>funcname.__doc__</code>, where
+<code>funcname</code> is the name of the function, e.g.,
+
+<p>
+
+print line.__doc__
+<p>
+which prints out the documentation of the <code>line</code> function above:
+
+<p>
+
+
+    Compute the coefficients a and b in the mathematical
+    expression for a straight line y = a*x + b that goes
+    through two points (x0, y0) and (x1, y1).
+
+    x0, y0: a point on the line (float objects).
+    x1, y1: another point on the line (float objects).
+    return: coefficients a, b for the line (y=a*x+b).
+<p>
+If the function <code>line</code> is in a file <code>funcs.py</code>, we may also run
+<code>pydoc funcs.line</code> in a terminal window to look the documentation
+of the <code>line</code> function in terms of the function signature and the doc
+string.
+
+<p>
+Doc strings often contain interactive sessions, copied from a Python shell,
+to illustrate how the function is used. We can add such a session to
+the doc string in the <code>line</code> function:
+
+<p>
+
+def line(x0, y0, x1, y1):
+    &quot;&quot;&quot;
+    Compute the coefficients a and b in the mathematical
+    expression for a straight line y = a*x + b that goes
+    through two points (x0,y0) and (x1,y1).
+
+    x0, y0: a point on the line (float).
+    x1, y1: another point on the line (float).
+    return: coefficients a, b (floats) for the line (y=a*x+b).
+
+    Example:
+    &gt;&gt;&gt; a, b = line(1, -1, 4, 3)
+    &gt;&gt;&gt; a
+    1.3333333333333333
+    &gt;&gt;&gt; b
+    -2.333333333333333
+    &quot;&quot;&quot;
+    a = (y1 - y0)/float(x1 - x0)
+    b = y0 - a*x0
+    return a, b
+<p>
+A particularly nice feature is that all such interactive sessions in doc
+strings can be automatically run, and new results are compared to the
+results found in the doc strings. This makes it possible to use interactive
+sessions in doc strings both for exemplifying how the code is used and
+for testing that the code works.
+
+<p>
+<div class="alert alert-block alert-summary alert-text-normal">
+<b>Function input and output.</b>
+<p>
+It is a convention in Python that function arguments represent the
+input data to the function, while the returned objects represent the
+output data. We can sketch a general Python function as
+
+<p>
+
+def somefunc(i1, i2, i3, io4, io5, i6=value1, io7=value2):
+    # modify io4, io5, io6; compute o1, o2, o3
+    return o1, o2, o3, io4, io5, io7
+<p>
+Here <code>i1</code>, <code>i2</code>, <code>i3</code> are positional arguments representing
+input data; <code>io4</code> and <code>io5</code> are positional arguments representing
+input <em>and</em> output data; <code>i6</code> and <code>io7</code> are keyword arguments
+representing input and input/output data, respectively; and
+<code>o1</code>, <code>o2</code>, and <code>o3</code> are computed objects in the function,
+representing output data together with <code>io4</code>, <code>io5</code>, and <code>io7</code>.
+All examples later in the document will make use of this convention.
+</div>
+
+
+<h2>Functions as arguments to functions <a name="sec:basic:farg"></a></h2>
+
+Programs doing calculus frequently need to have functions as arguments
+in functions. For example, a mathematical function
+\( f(x) \) is needed in Python functions for
+
+<ul>
+  <li> numerical root finding: solve \( f(x)=0 \) approximately
+    (the sections ref{sec:input:summarizingex} and ref{sec:diffeq:Newtonsmethod:sec})</li>
+  <li> numerical differentiation: compute \( f'(x) \) approximately (the sections ref{sec:dcalculus:finite:differences} and ref{sec:class:autodF})</li>
+  <li> numerical integration: compute \( \int_a^b f(x)dx \) approximately (the sections ref{sec:dcalculus:integration} and ref{sec:class:autoint})</li>
+  <li> numerical solution of differential equations: \( \frac{dx}{dt} = f(x) \) ( ref{ch:ode2})</li>
+</ul>
+
+In such Python functions we need to have the \( f(x) \) function as an
+argument <code>f</code>. This is straightforward in Python and hardly needs
+any explanation, but in most other languages special constructions
+must be used for transferring a function to another function as argument.
+
+<p>
+As an example, consider a function for computing the second-order
+derivative of a function \( f(x) \) numerically:
+
+$$
+\begin{equation}
+f''(x) \approx {f(x-h) - 2f(x) + f(x+h)\over h^2},
+\tag{2}
+\end{equation}
+$$
+
+where \( h \) is a small number. The approximation
+<a href="#mjx-eqn-2">(2)</a> becomes exact in the limit
+\( h\rightarrow 0 \).
+A Python function for computing <a href="#mjx-eqn-2">(2)</a> can be
+implemented as follows:
+
+<p>
+
+def diff2nd(f, x, h=1E-6):
+    r = (f(x-h) - 2*f(x) + f(x+h))/float(h*h)
+    return r
+<p>
+The <code>f</code> argument is like any other argument, i.e., a name for
+an object, here a function object that we can call as we normally
+call functions. An application of <code>diff2nd</code> may be
+
+<p>
+
+def g(t):
+    return t**(-6)
+
+t = 1.2
+d2g = diff2nd(g, t)
+print &quot;g''(%f)=%f&quot; % (t, d2g)
+
+<h3>The behavior of the numerical derivative as \( h\rightarrow 0 \)  <a name="___sec21"></a></h3>
+
+From mathematics we know that the approximation formula
+<a href="#mjx-eqn-2">(2)</a> becomes more accurate as \( h \) decreases.
+Let us try to demonstrate this expected feature by making a table
+of the second-order derivative of \( g(t)=t^{-6} \) at \( t=1 \) as \( h\rightarrow 0 \):
+
+<p>
+
+for k in range(1,15):
+    h = 10**(-k)
+    d2g = diff2nd(g, 1, h)
+    print 'h=%.0e: %.5f' % (h, d2g)
+<p>
+The output becomes
+
+<p>
+
+h=1e-01: 44.61504
+h=1e-02: 42.02521
+h=1e-03: 42.00025
+h=1e-04: 42.00000
+h=1e-05: 41.99999
+h=1e-06: 42.00074
+h=1e-07: 41.94423
+h=1e-08: 47.73959
+h=1e-09: -666.13381
+h=1e-10: 0.00000
+h=1e-11: 0.00000
+h=1e-12: -666133814.77509
+h=1e-13: 66613381477.50939
+h=1e-14: 0.00000
+<p>
+With \( g(t)=t^{-6} \), the exact answer is \( g''(1)=42 \), but for \( h < 10^{-8} \)
+the computations give totally wrong answers!
+The problem is that for small \( h \) on a computer, round-off errors
+in the formula <a href="#mjx-eqn-2">(2)</a> blow up and destroy the
+accuracy.
+The mathematical result that
+<a href="#mjx-eqn-2">(2)</a> becomes an increasingly better approximation
+as \( h \) gets smaller and smaller does not hold on a computer!  Or more
+precisely, the result holds until \( h \) in the present case reaches
+\( 10^{-4} \).
+
+<p>
+The reason for the inaccuracy is that the numerator in
+<a href="#mjx-eqn-2">(2)</a> for \( g(t)=t^{-6} \) and \( t=1 \) contains subtraction
+of quantities that are almost equal. The result is a very small
+and inaccurate number. The
+inaccuracy is magnified by \( h^{-2} \), a number that becomes very large for
+small \( h \).
+
+<p>
+Switching from the standard floating-point numbers (<code>float</code>) to
+numbers with arbitrary high precision resolves the problem. Python
+has a module <code>decimal</code> that can be used for this purpose.
+The file <a href="http://tinyurl.com/pwyasaa/funcif/high_precision.py" target="_self"><tt>high_precision.py</tt></a>
+solves the current problem using
+arithmetics based on the <code>decimal</code> module. With 25 digits in
+<code>x</code> and <code>h</code> inside the <code>diff2nd</code> function, we get accurate
+results for \( h \leq 10^{-13} \). However, for most practical
+applications of <a href="#mjx-eqn-2">(2)</a>, a moderately small \( h \),
+say \( 10^{-3}\leq h \leq 10^{-4} \),
+gives sufficient accuracy and then round-off errors from <code>float</code>
+calculations do not pose problems. Real-world science or engineering
+applications usually have many parameters with uncertainty, making the
+end result also uncertain, and
+formulas like <a href="#mjx-eqn-2">(2)</a> can then be computed with
+moderate accuracy without affecting the overall uncertainty in the
+answers.
+
+<h2>The main program  <a name="___sec22"></a></h2>
+
+In programs containing functions we often refer to a part of the
+program that is called the <em>main program</em>.
+This is the collection of all the statements outside the functions, plus
+the definition of all functions. Let us look at
+a complete program:
+
+<p>
+
+from math import *                   # in main
+
+def f(x):                            # in main
+    e = exp(-0.1*x)
+    s = sin(6*pi*x)
+    return e*s
+
+x = 2                                # in main
+y = f(x)                             # in main
+print 'f(%g)=%g' % (x, y)            # in main
+<p>
+The main program here consists of the lines with a comment <code>in main</code>.
+The execution always starts with the first line in the main program.
+When a function is encountered, its statements are just used to define
+the function - nothing gets computed inside the function before we
+explicitly call the function, either from the main program or from another
+function. All variables initialized in the main program become global
+variables (see the section <a href="#sec:basic:localglobal">Local and global variables</a>).
+
+<p>
+The program flow in the program above goes as follows:
+
+<ul>
+  <li> Import functions from the <code>math</code> module,</li>
+  <li> define a function <code>f(x)</code>,</li>
+  <li> define <code>x</code>,</li>
+  <li> call <code>f</code> and execute the function body,</li>
+  <li> define <code>y</code> as the value returned from <code>f</code>,</li>
+  <li> print the string.</li>
+</ul>
+
+In point 4, we jump to the <code>f</code> function and execute the statement
+inside that function for the first time. Then we jump back to
+the main program and assign the <code>float</code> object returned from <code>f</code>
+to the <code>y</code> variable.
+
+<p>
+Readers who are uncertain about the program flow and the jumps between
+the main program and functions should use a debugger
+or the Online Python Tutor as explained in the section <a href="#sec:basic:pot">Understanding the program flow</a>.
+
+<h2>Lambda functions <a name="sec:basic:lambdafunc"></a></h2>
+
+There is a quick one-line construction of functions that is often
+convenient to make Python code compact:
+
+<p>
+
+f = lambda x: x**2 + 4
+<p>
+This so-called
+<em>lambda function</em> is equivalent to writing
+
+<p>
+
+def f(x):
+    return x**2 + 4
+<p>
+In general,
+
+<p>
+
+def g(arg1, arg2, arg3, ...):
+    return expression
+<p>
+can be written as
+
+<p>
+
+g = lambda arg1, arg2, arg3, ...: expression
+<p>
+Lambda functions are usually used to quickly define a function as argument
+to another function. Consider, as an example, the <code>diff2nd</code>
+function from the section <a href="#sec:basic:farg">Functions as arguments to functions</a>.
+In the example from that chapter we want to differentiate
+\( g(t)=t^{-6} \) twice and first make a Python function <code>g(t)</code> and
+then send this <code>g</code> to
+<code>diff2nd</code> as argument. We can skip
+the step with defining the <code>g(t)</code> function and instead insert
+a lambda function as the <code>f</code> argument in the call to <code>diff2nd</code>:
+
+<p>
+
+d2 = diff2nd(lambda t: t**(-6), 1, h=1E-4)
+<p>
+Because lambda functions saves quite some typing, at least for very small
+functions, they are popular among many programmers.
+
+<p>
+Lambda functions may also take keyword arguments. For example,
+
+<p>
+
+d2 = diff2nd(lambda t, A=1, a=0.5: -a*2*t*A*exp(-a*t**2), 1.2)
+<p>
+<p>
+<!-- begin bottom navigation -->
+<table style="width: 100%"><tr><td>
+<div style="text-align: left;"><a href="._funcif-solarized000.html">&laquo; Previous</a></div>
+</td><td>
+<div style="text-align: right;"><a href="._funcif-solarized002.html">Next &raquo;</a></div>
+</td></tr></table>
+<!-- end bottom navigation -->
+</p>
+
+<!-- ------------------- end of main content --------------- -->
+
+
+</body>
+</html>
+    
+

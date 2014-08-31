@@ -1,0 +1,896 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Functions and branching">
+<meta name="keywords" content="function header,function body,body of a function,call a function,invoke a function,Online Python Tutor,keyword arguments,function arguments keyword,positional arguments,function arguments positional,named arguments,function arguments named,doc strings,main program,lambda functions,lambda functions,bioinformatics,DNA,list iteration,string iteration,list comprehension,random strings,CPU time measurements,test function,nose tests,pytest tests,test function,nose tests,pytest tests,mod function,Online Python Tutor,Trapezoidal rule for integration,Midpoint rule for integration,Fourier series,Heaviside function,sort (list)">
+
+<title>Functions and branching</title>
+
+
+<link href="https://raw.githubusercontent.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/css/solarized_light_code.css" rel="stylesheet" type="text/css" title="light"/>
+<script src="http://www.peterhaschke.com/assets/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<link href="http://thomasf.github.io/solarized-css/solarized-light.min.css" rel="stylesheet">
+<style type="text/css">
+h1 {color: #b58900;}  /* yellow */
+/* h1 {color: #cb4b16;}  orange */
+/* h1 {color: #d33682;}  magenta, the original choice of thomasf */
+.alert-text-small   { font-size: 80%;  }
+.alert-text-large   { font-size: 130%; }
+.alert-text-normal  { font-size: 90%;  }
+.alert {
+  padding:8px 35px 8px 14px; margin-bottom:18px;
+  text-shadow:0 1px 0 rgba(255,255,255,0.5);
+  border:1px solid #93a1a1;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  color: #555;
+  background-color: #eee8d5;
+  background-position: 10px 5px;
+  background-repeat: no-repeat;
+  background-size: 38px;
+  padding-left: 55px;
+  width: 75%;
+ }
+.alert-block {padding-top:14px; padding-bottom:14px}
+.alert-block > p, .alert-block > ul {margin-bottom:1em}
+.alert li {margin-top: 1em}
+.alert-block p+p {margin-top:5px}
+.alert-notice { background-image: url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_notice.png); }
+.alert-summary  { background-image:url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_summary.png); }
+.alert-warning { background-image: url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_warning.png); }
+.alert-question {background-image:url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_question.png); }
+
+div { text-align: justify; text-justify: inter-word; }
+</style>
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [(' Functions ', 1, None, '___sec0'),
+              (' Mathematical functions as Python functions ',
+               2,
+               'sec:basic:func1',
+               'sec:basic:func1'),
+              (' Understanding the program flow ',
+               2,
+               'sec:basic:pot',
+               'sec:basic:pot'),
+              (' Local and global variables ',
+               2,
+               'sec:basic:localglobal',
+               'sec:basic:localglobal'),
+              (' Local variables are invisible outside functions ',
+               3,
+               None,
+               '___sec4'),
+              (' Local variables hide global variables ', 3, None, '___sec5'),
+              (' Example ', 3, None, '___sec6'),
+              (' Changing global variables inside functions ',
+               3,
+               None,
+               '___sec7'),
+              (' Multiple arguments ',
+               2,
+               'sec:basic:multiple:args',
+               'sec:basic:multiple:args'),
+              (' Function argument or global variable? ',
+               2,
+               'sec:basic:arg:or:global',
+               'sec:basic:arg:or:global'),
+              (' Beyond mathematical functions ',
+               2,
+               'sec:basic:makelist',
+               'sec:basic:makelist'),
+              (' Remark 1 ', 3, None, '___sec11'),
+              (' Remark 2 ', 3, None, '___sec12'),
+              (' Multiple return values ',
+               2,
+               'sec:basic:multiple:returns',
+               'sec:basic:multiple:returns'),
+              (' Computing sums ', 2, 'sec:basic:sum', 'sec:basic:sum'),
+              (' Functions with no return values ',
+               2,
+               'sec:basic:None',
+               'sec:basic:None'),
+              (' Keyword arguments ',
+               2,
+               'sec:basic:kwargs',
+               'sec:basic:kwargs'),
+              (' Example: Function with default parameters ',
+               3,
+               None,
+               '___sec17'),
+              (' Example: Computing a sum with default tolerance ',
+               3,
+               None,
+               '___sec18'),
+              (' Doc strings ',
+               2,
+               'sec:basic:docstring',
+               'sec:basic:docstring'),
+              (' Functions as arguments to functions ',
+               2,
+               'sec:basic:farg',
+               'sec:basic:farg'),
+              (' The behavior of the numerical derivative as $h\\rightarrow 0$ ',
+               3,
+               None,
+               '___sec21'),
+              (' The main program ', 2, None, '___sec22'),
+              (' Lambda functions ',
+               2,
+               'sec:basic:lambdafunc',
+               'sec:basic:lambdafunc'),
+              (' Branching ', 1, 'sec:input:if', 'sec:input:if'),
+              (' If-else blocks ', 2, None, '___sec25'),
+              (' Inline if tests ', 2, None, '___sec26'),
+              (' Mixing loops, branching, and functions in bioinformatics examples ',
+               1,
+               None,
+               '___sec27'),
+              (' Counting letters in DNA strings ',
+               2,
+               'bioinf:count',
+               'bioinf:count'),
+              (' List iteration ', 3, None, '___sec29'),
+              (' String iteration ', 3, None, '___sec30'),
+              (' Index iteration ', 3, None, '___sec31'),
+              (' While loops ', 3, None, '___sec32'),
+              (' Summing a boolean list ', 3, None, '___sec33'),
+              (' Inline if test ', 3, None, '___sec34'),
+              (' Using boolean values directly ', 3, None, '___sec35'),
+              (' List comprehensions ', 3, None, '___sec36'),
+              (' Using a sum iterator ', 3, None, '___sec37'),
+              (' Extracting indices ', 3, None, '___sec38'),
+              (" Using Python's library ", 3, None, '___sec39'),
+              (' Efficiency assessment ',
+               2,
+               'bioinf:count:cpu',
+               'bioinf:count:cpu'),
+              (' Generating random DNA strings ', 3, None, '___sec41'),
+              (' Measuring CPU time ', 3, None, '___sec42'),
+              (' Verifying the implementations ',
+               2,
+               'bioinf:count:verify',
+               'bioinf:count:verify'),
+              (' Summary ', 1, 'sec:funcif:summary', 'sec:funcif:summary'),
+              (' Chapter topics ', 2, None, '___sec45'),
+              (' User-defined functions ', 3, None, '___sec46'),
+              (' Keyword arguments ', 3, None, '___sec47'),
+              (' If tests ', 3, None, '___sec48'),
+              (' Inline if tests ', 3, None, '___sec49'),
+              (' Terminology ', 3, None, '___sec50'),
+              (' Example: Numerical integration ',
+               2,
+               'sec:funcif:summary:ex',
+               'sec:funcif:summary:ex'),
+              (' Problem ', 3, None, '___sec52'),
+              (' Solution ', 3, None, '___sec53'),
+              (' Verification ', 3, None, '___sec54'),
+              (' Checking the validity of function arguments ',
+               3,
+               None,
+               '___sec55'),
+              (' Exercises ', 1, None, '___sec56'),
+              (' Exercise 1: Write a Fahrenheit-Celsius conversion function ',
+               2,
+               'sec:basic:ex26b',
+               'sec:basic:ex26b'),
+              (' Exercise 2: Evaluate a sum and write a test function ',
+               2,
+               'sec:basic:ex29d',
+               'sec:basic:ex29d'),
+              (' Exercise 3: Write a function for solving $ax^2 + bx + c =0$ ',
+               2,
+               'sec:funcif:ex1',
+               'sec:funcif:ex1'),
+              (' Exercise 4: Implement the sum function ',
+               2,
+               'sec:input:ex1',
+               'sec:input:ex1'),
+              (' Exercise 5: Compute a polynomial via a product ',
+               2,
+               'sec:basic:ex32',
+               'sec:basic:ex32'),
+              (' Exercise 6: Integrate a function by the Trapezoidal rule ',
+               2,
+               'sec:basic:ex38',
+               'sec:basic:ex38'),
+              (' Remarks ', 3, None, '___sec63'),
+              (' Exercise 7: Derive the general Midpoint integration rule ',
+               2,
+               'sec:basic:ex39c',
+               'sec:basic:ex39c'),
+              (' Exercise 8: Make an adaptive Trapezoidal rule ',
+               2,
+               'sec:basic:ex39d',
+               'sec:basic:ex39d'),
+              (' Remarks ', 3, None, '___sec66'),
+              (' Exercise 9: Explain why a program works ',
+               2,
+               'sec:basic:ex48',
+               'sec:basic:ex48'),
+              (' Exercise 10: Simulate a program by hand ',
+               2,
+               'sec:basic:ex:locglob',
+               'sec:basic:ex:locglob'),
+              (' Exercise 11: Compute the area of an arbitrary triangle ',
+               2,
+               'sec:basic:ex25',
+               'sec:basic:ex25'),
+              (' Exercise 12: Compute the length of a path ',
+               2,
+               'sec:basic:ex25b',
+               'sec:basic:ex25b'),
+              (' Exercise 13: Approximate $\\pi$ ',
+               2,
+               'sec:basic:ex25c',
+               'sec:basic:ex25c'),
+              (' Exercise 14: Write functions ',
+               2,
+               'sec:basic:ex42a',
+               'sec:basic:ex42a'),
+              (' Exercise 15: Approximate a function by a sum of sines ',
+               2,
+               'sec:formula:ex10',
+               'sec:formula:ex10'),
+              (' Remarks ', 3, None, '___sec74'),
+              (' Exercise 16: Implement a Gaussian function ',
+               2,
+               'sec:basic:ex33',
+               'sec:basic:ex33'),
+              (' Exercise 17: Wrap a formula in a function ',
+               2,
+               'sec:basic:ex46',
+               'sec:basic:ex46'),
+              (' Exercise 18: Write a function for numerical differentiation ',
+               2,
+               'sec:basic:ex38a',
+               'sec:basic:ex38a'),
+              (' Exercise 19: Implement the factorial function ',
+               2,
+               'sec:basic:ex35',
+               'sec:basic:ex35'),
+              (' Exercise 20: Compute velocity and acceleration from 1D position data ',
+               2,
+               'sec:basic:ex29q',
+               'sec:basic:ex29q'),
+              (' Exercise 21: Find the max and min values of a function ',
+               2,
+               'sec:basic:ex29g',
+               'sec:basic:ex29g'),
+              (' Exercise 22: Find the max and min elements in a list ',
+               2,
+               'sec:basic:ex29g2',
+               'sec:basic:ex29g2'),
+              (' Exercise 23: Implement the Heaviside function ',
+               2,
+               'sec:basic:exH1',
+               'sec:basic:exH1'),
+              (' Exercise 24: Implement a smoothed Heaviside function ',
+               2,
+               'sec:basic:exH2',
+               'sec:basic:exH2'),
+              (' Exercise 25: Implement an indicator function ',
+               2,
+               'sec:basic:exH3',
+               'sec:basic:exH3'),
+              (' Exercise 26: Implement a piecewise constant function ',
+               2,
+               'sec:basic:exH4',
+               'sec:basic:exH4'),
+              (' Exercise 27: Apply indicator functions ',
+               2,
+               'sec:basic:exH4b',
+               'sec:basic:exH4b'),
+              (' Exercise 28: Test your understanding of branching ',
+               2,
+               'sec:basic:ex49',
+               'sec:basic:ex49'),
+              (' Exercise 29: Simulate nested loops by hand ',
+               2,
+               'sec:basic:ex40',
+               'sec:basic:ex40'),
+              (' Exercise 30: Rewrite a mathematical function ',
+               2,
+               'sec:basic:ex29f',
+               'sec:basic:ex29f'),
+              (' Exercise 31: Make a table for approximations of $\\cos x$ ',
+               2,
+               'sec:basic:ex29e',
+               'sec:basic:ex29e'),
+              (' Exercise 32: Use None in keyword arguments ',
+               2,
+               'sec:basic:ex31b',
+               'sec:basic:ex31b'),
+              (' Exercise 33: Write a sort function for a list of 4-tuples ',
+               2,
+               'sec:basic:ex28',
+               'sec:basic:ex28'),
+              (' Exercise 34: Find prime numbers ',
+               2,
+               'sec:basic:ex37',
+               'sec:basic:ex37'),
+              (' Exercise 35: Find pairs of characters ',
+               2,
+               'bioinf:exer:pairs1',
+               'bioinf:exer:pairs1'),
+              (' Exercise 36: Count substrings ',
+               2,
+               'bioinf:exer:substr1',
+               'bioinf:exer:substr1'),
+              (' Exercise 37: Resolve a problem with a function ',
+               2,
+               'sec:input:ex35',
+               'sec:input:ex35'),
+              (' Exercise 38: Determine the types of some objects ',
+               2,
+               'sec:basic:ex20',
+               'sec:basic:ex20'),
+              (' Remarks ', 3, None, '___sec98'),
+              (' Exercise 39: Find an error in a program ',
+               2,
+               'sec:basic:ex34',
+               'sec:basic:ex34'),
+              (' References ', 1, None, '___sec100')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- newcommands_keep.tex -->
+$$
+\newcommand{\tp}{\thinspace .}
+$$
+
+
+
+
+    
+<a name="part0003"></a>
+<p>
+<!-- begin top navigation -->
+<table style="width: 100%"><tr><td>
+<div style="text-align: left;"><a href="._funcif-solarized002.html">&laquo; Previous</a></div>
+</td><td>
+<div style="text-align: right;"><a href="._funcif-solarized004.html">Next &raquo;</a></div>
+</td></tr></table>
+<!-- end top navigation -->
+</p>
+
+<p>
+<!-- !split -->
+
+<h1>Mixing loops, branching, and functions in bioinformatics examples  <a name="___sec27"></a></h1>
+
+Life is definitely digital. The genetic code of all living organisms
+are represented by a long sequence of simple molecules called
+nucleotides, or bases, which makes up the Deoxyribonucleic acid,
+better known as DNA. There are only four such nucleotides, and the
+entire genetic code of a human can be seen as a simple, though 3
+billion long, string of the letters A, C, G, and T.  Analyzing DNA
+data to gain increased biological understanding is much about
+searching in long strings for certain string patterns involving the
+letters A, C, G, and T.  This is an integral part of <em>bioinformatics</em>,
+a scientific discipline addressing the use of computers to search
+for, explore, and use information about genes, nucleic acids, and
+proteins.
+
+<p>
+The leading Python software for bioinformatics applications is
+<a href="http://biopython.org" target="_self">BioPython</a>. The examples
+in this document
+(below and the sections ref{bioinf:DNAanalysis},
+ref{bioinf:random}, and ref{bioinf:oo})
+are simple illustrations of the type of problem settings and corresponding
+Python implementations that are encountered in bioinformatics. For
+real-world problem solving one should rather utilize BioPython, but
+the sections below act as an introduction to what is inside packages
+like BioPython.
+
+<p>
+<a name="bioinf:basics"></a>
+
+<p>
+We start with some very simple examples on DNA analysis that bring together
+basic building blocks in programming: loops, <code>if</code> tests, and functions.
+
+<h2>Counting letters in DNA strings <a name="bioinf:count"></a></h2>
+
+Given some string <code>dna</code> containing the letters A, C, G, or T,
+representing the bases that make up DNA, we ask the question: how
+many times does a certain base occur in the DNA string?
+For example, if <code>dna</code> is ATGGCATTA and we ask how many times the
+base A occur in this string, the answer is 3.
+
+<p>
+A general Python implementation answering this problem can be done
+in many ways. Several possible solutions are presented below.
+
+<h3>List iteration  <a name="___sec29"></a></h3>
+
+The most straightforward solution is to loop over the letters
+in the string, test if the current letter equals the desired one,
+and if so, increase a counter. Looping over the letters is
+obvious if the letters are stored in a list. This is easily
+done by converting a string to a list:
+<p>
+
+&gt;&gt;&gt; list('ATGC')
+['A', 'T', 'G', 'C']
+<p>
+Our first solution becomes
+
+<p>
+
+def count_v1(dna, base):
+    dna = list(dna)  # convert string to list of letters
+    i = 0            # counter
+    for c in dna:
+        if c == base:
+            i += 1
+    return i
+
+<h3>String iteration  <a name="___sec30"></a></h3>
+
+Python allows us to iterate directly over a string without converting
+it to a list:
+<p>
+
+&gt;&gt;&gt; for c in 'ATGC':
+...     print c
+A
+T
+G
+C
+<p>
+In fact, all built-in objects in Python that contain a set of elements in
+a particular sequence allow a <code>for</code> loop construction of the
+type <code>for element in object</code>.
+<!-- Examples of such objects are -->
+<!-- lists, tuples, strings, arrays, files, dictionaries -->
+
+<p>
+A slight improvement of our solution is therefore to iterate directly
+over the string:
+
+<p>
+
+def count_v2(dna, base):
+    i = 0 # counter
+    for c in dna:
+        if c == base:
+            i += 1
+    return i
+
+dna = 'ATGCGGACCTAT'
+base = 'C'
+n = count_v2(dna, base)
+
+# printf-style formatting
+print '%s appears %d times in %s' % (base, n, dna)
+
+# or (new) format string syntax
+print '{base} appears {n} times in {dna}'.format(
+    base=base, n=n, dna=dna)
+<p>
+We have here illustrated two alternative ways of writing out text
+where the value of variables are to be inserted in &quot;slots&quot; in the
+string.
+
+<h3>Index iteration  <a name="___sec31"></a></h3>
+
+Although it is natural in Python to iterate over the letters in a
+string (or more generally over elements in a sequence), programmers
+with experience from other languages (Fortran, C and Java are
+examples) are used to <code>for</code> loops with an integer counter running over
+all indices in a string or array:
+
+<p>
+
+def count_v3(dna, base):
+    i = 0 # counter
+    for j in range(len(dna)):
+        if dna[j] == base:
+            i += 1
+    return i
+<p>
+Python indices always start at 0 so the legal indices for our
+string become <code>0</code>, <code>1</code>, ...,
+<code>len(dna)-1</code>, where <code>len(dna)</code> is the number of letters in the
+string <code>dna</code>. The <code>range(x)</code> function returns a list of integers
+<code>0</code>, <code>1</code>, ..., <code>x-1</code>, implying that <code>range(len(dna))</code> generates
+all the legal indices for <code>dna</code>.
+
+<h3>While loops  <a name="___sec32"></a></h3>
+
+The <code>while</code> loop equivalent to the last function reads
+
+<p>
+
+def count_v4(dna, base):
+    i = 0 # counter
+    j = 0 # string index
+    while j &lt; len(dna):
+        if dna[j] == base:
+            i += 1
+        j += 1
+    return i
+<p>
+Correct indentation is here crucial: a typical error is to fail
+indenting the <code>j += 1</code> line correctly.
+
+<h3>Summing a boolean list  <a name="___sec33"></a></h3>
+
+The idea now is to create a list <code>m</code> where <code>m[i]</code> is <code>True</code> if
+<code>dna[i]</code> equals the letter we search for (<code>base</code>).
+The number of <code>True</code> values in <code>m</code> is then the number of <code>base</code>
+letters in <code>dna</code>. We can use the <code>sum</code> function to find
+this number because doing arithmetics with boolean lists
+automatically interprets <code>True</code> as <code>1</code> and <code>False</code> as <code>0</code>.
+That is, <code>sum(m)</code> returns the number of <code>True</code> elements in <code>m</code>.
+A possible function doing this is
+
+<p>
+
+def count_v5(dna, base):
+    m = []   # matches for base in dna: m[i]=True if dna[i]==base
+    for c in dna:
+        if c == base:
+            m.append(True)
+        else:
+            m.append(False)
+    return sum(m)
+
+<h3>Inline if test  <a name="___sec34"></a></h3>
+
+Shorter, more compact code is often a goal if the compactness
+enhances readability. The four-line <code>if</code> test in the previous
+function can be condensed to one line using the inline
+<code>if</code> construction: <code>if condition value1 else value2</code>.
+
+<p>
+
+def count_v6(dna, base):
+    m = []   # matches for base in dna: m[i]=True if dna[i]==base
+    for c in dna:
+        m.append(True if c == base else False)
+    return sum(m)
+
+<h3>Using boolean values directly  <a name="___sec35"></a></h3>
+
+The inline <code>if</code> test is in fact redundant in the previous function
+because the value of the condition <code>c == base</code> can be used
+directly: it has the value <code>True</code> or <code>False</code>. This saves
+some typing and adds clarity, at least to Python programmers with
+some experience:
+
+<p>
+
+def count_v7(dna, base):
+    m = []   # matches for base in dna: m[i]=True if dna[i]==base
+    for c in dna:
+        m.append(c == base)
+    return sum(m)
+
+<h3>List comprehensions  <a name="___sec36"></a></h3>
+
+Building a list with the aid of a <code>for</code> loop can often be condensed to
+a single line by using list comprehensions: <code>[expr for e in
+sequence]</code>, where <code>expr</code> is some expression normally involving the
+iteration variable <code>e</code>. In our last example, we can introduce a list
+comprehension
+
+<p>
+
+def count_v8(dna, base):
+    m = [c == base for c in dna]
+    return sum(m)
+<p>
+Here it is tempting to get rid of the <code>m</code> variable and
+reduce the function body to a single line:
+
+<p>
+
+def count_v9(dna, base):
+    return sum([c == base for c in dna])
+
+<h3>Using a sum iterator  <a name="___sec37"></a></h3>
+
+The DNA string is usually huge - 3 billion letters for the human
+species. Making a boolean array with <code>True</code> and <code>False</code> values
+therefore increases the memory usage by a factor of two
+in our sample functions <code>count_v5</code> to <code>count_v9</code>.
+Summing without actually storing an extra list is desirable.
+Fortunately, <code>sum([x for x in s])</code> can be replaced by
+<code>sum(x for x in s)</code>, where the latter sums the elements in <code>s</code>
+as <code>x</code> visits the elements of <code>s</code> one by one. Removing the brackets
+therefore avoids first making a list before applying <code>sum</code> to
+that list. This is a minor modification of the <code>count_v9</code> function:
+
+<p>
+
+def count_v10(dna, base):
+    return sum(c == base for c in dna)
+<p>
+Below we shall measure the impact of the various program constructs
+on the CPU time.
+
+<h3>Extracting indices  <a name="___sec38"></a></h3>
+
+Instead of making a boolean list with elements expressing whether
+a letter matches the given <code>base</code> or not, we may collect all
+the indices of the matches. This can be done by adding an <code>if</code>
+test to the list comprehension:
+
+<p>
+
+def count_v11(dna, base):
+    return len([i for i in range(len(dna)) if dna[i] == base])
+<p>
+The <a href="http://www.pythontutor.com/" target="_self">Online Python Tutor</a> is
+really helpful to reach an understanding of this compact code.
+Alternatively, you may play with the constructions in an
+interactive Python shell:
+
+<p>
+
+&gt;&gt;&gt; dna = 'AATGCTTA'
+&gt;&gt;&gt; base = 'A'
+&gt;&gt;&gt; indices = [i for i in range(len(dna)) if dna[i] == base]
+&gt;&gt;&gt; indices
+[0, 1, 7]
+&gt;&gt;&gt; print dna[0], dna[1], dna[7]  # check
+A A A
+<p>
+Observe that the element <code>i</code> in the list comprehension is only
+made for those <code>i</code>
+where <code>dna[i] == base</code>.
+
+<h3>Using Python's library  <a name="___sec39"></a></h3>
+
+Very often when you set out to do a task in Python, there is already
+functionality for the task in the object itself, in the Python
+libraries, or in third-party libraries found on the Internet.
+Counting how many times a letter (or substring) <code>base</code> appears in a
+string <code>dna</code> is obviously a very common task so Python supports
+it by the syntax <code>dna.count(base)</code>:
+
+<p>
+
+def count_v12(dna, base):
+    return dna.count(base)
+
+def compare_efficiency():
+
+<h2>Efficiency assessment <a name="bioinf:count:cpu"></a></h2>
+
+Now we have 11 different versions of how to count the occurrences
+of a letter in a string. Which one of these implementations is the fastest?
+To answer the question we need some test data, which should be a
+huge string <code>dna</code>.
+
+<h3>Generating random DNA strings  <a name="___sec41"></a></h3>
+
+The simplest way of generating a long string is to repeat a
+character a large number of times:
+<p>
+
+N = 1000000
+dna = 'A'*N
+<p>
+The resulting string is just <code>'AAA...A</code>, of length <code>N</code>, which is fine
+for testing the efficiency of Python functions. Nevertheless, it is
+more exciting to work with a DNA string with letters from the whole
+alphabet A, C, G, and T. To make a DNA string with a random
+composition of the letters we can first make a list of random
+letters and then join all those letters to a string:
+<p>
+
+import random
+alphabet = list('ATGC')
+dna = [random.choice(alphabet) for i in range(N)]
+dna = ''.join(dna)  # join the list elements to a string
+<p>
+The <code>random.choice(x)</code> function selects an element in the list
+<code>x</code> at random.
+
+<p>
+Note that <code>N</code> is very often a large number. In Python version 2.x,
+<code>range(N)</code> generates a list of <code>N</code> integers. We can avoid the list by
+using <code>xrange</code> which generates an integer at a time and not the whole
+list. In Python version 3.x, the <code>range</code> function is actually the
+<code>xrange</code> function in version 2.x.  Using <code>xrange</code>, combining the
+statements, and wrapping the construction of a random DNA string in a
+function, gives
+
+<p>
+
+import random
+
+def generate_string(N, alphabet='ACGT'):
+    return ''.join([random.choice(alphabet) for i in xrange(N)])
+
+dna = generate_string(600000)
+<p>
+The call <code>generate_string(10)</code> may generate something like <code>AATGGCAGAA</code>.
+
+<h3>Measuring CPU time  <a name="___sec42"></a></h3>
+
+Our next goal is to see how much time the various <code>count_v*</code>
+functions spend on counting letters in a huge string, which is to be
+generated as shown above.
+Measuring the time spent in a program can be done by the <code>time</code>
+module:
+<p>
+
+import time
+...
+t0 = time.clock()
+# do stuff
+t1 = time.clock()
+cpu_time = t1 - t0
+<p>
+The <code>time.clock()</code> function returns the CPU time spent in the program since
+its start. If the interest is in the total time, also including reading
+and writing files, <code>time.time()</code> is the appropriate function to call.
+
+<p>
+Running through all our functions made so far and recording timings can be
+done by
+
+<p>
+
+import time
+functions = [count_v1, count_v2, count_v3, count_v4,
+             count_v5, count_v6, count_v7, count_v8,
+             count_v9, count_v10, count_v11, count_v12]
+timings = []  # timings[i] holds CPU time for functions[i]
+
+for function in functions:
+    t0 = time.clock()
+    function(dna, 'A')
+    t1 = time.clock()
+    cpu_time = t1 - t0
+    timings.append(cpu_time)
+<p>
+In Python, functions are ordinary objects so making a list of
+functions is no more special than making a list of strings or numbers.
+
+<p>
+We can now iterate over <code>timings</code> and <code>functions</code> simultaneously via <code>zip</code>
+to make a nice printout of the results:
+
+<p>
+
+for cpu_time, function in zip(timings, functions):
+    print '{f:&lt;9s}: {cpu:.2f} s'.format(
+        f=function.func_name, cpu=cpu_time)
+<p>
+Timings on a MacBook Air 11 running Ubuntu show that
+the functions using <code>list.append</code> require almost the double of
+the time of the functions that work with list comprehensions.
+Even faster is the simple iteration over the string.
+However, the built-in count functionality of strings
+(<code>dna.count(base)</code>) runs over 30 times faster than the best of our
+handwritten Python functions!
+The reason is that the <code>for</code> loop needed to count in <code>dna.count(base)</code>
+is actually implemented in C and runs very much faster than loops in Python.
+
+<p>
+A clear lesson learned is: google around before you start out to implement
+what seems to be a quite common task. Others have probably already
+done it for you, and most likely is their solution much better than what
+you can (easily) come up with.
+
+<h2>Verifying the implementations <a name="bioinf:count:verify"></a></h2>
+
+We end this section with showing how to make tests that verify our 12
+counting functions. To this end, we make a new function that first
+computes a certainly correct answer to a counting problem and then
+calls all the <code>count_*</code> functions, stored in the list <code>functions</code>, to
+check that each call has the correct result:
+
+<p>
+
+def test_count_all():
+    dna = 'ATTTGCGGTCCAAA'
+    exact = dna.count('A')
+    for f in functions:
+        if f(dna, 'A') != exact:
+            print f.__name__, 'failed'
+<p>
+Here, we believe in <code>dna.count('A')</code> as the correct answer.
+
+<p>
+We might take this test function one step further and adopt the
+conventions in the <a href="http://pytest.org" target="_self">pytest</a> and
+<a href="https://nose.readthedocs.org" target="_self">nose</a>
+testing frameworks for Python code.
+(See the section ref{sec:nose} for more information about pytest and nose.)
+
+<p>
+These conventions say that the test function should
+
+<ul>
+ <li> have a name starting with <code>test_</code>;</li>
+ <li> have no arguments;</li>
+ <li> let a boolean variable, say <code>success</code>, be <code>True</code> if a test
+   passes and be <code>False</code> if the test fails;</li>
+ <li> create a message about what failed, stored in some string, say <code>msg</code>;</li>
+ <li> use the construction <code>assert success, msg</code>, which will
+   abort the program and write out the error message
+   <code>msg</code> if <code>success</code> is <code>False</code>.</li>
+</ul>
+
+The pytest and nose test frameworks can search for all Python files in
+a folder tree, run all <code>test_*()</code> functions, and report how many of
+the tests that failed, if we adopt the conventions above.  Our revised
+test function becomes
+
+<p>
+
+def test_count_all():
+    dna = 'ATTTGCGGTCCAAA'
+    exact = dna.count('A')
+    for f in functions:
+        success = f(dna, 'A') == exact
+        msg = '%s failed' % f.__name__
+        assert success, msg
+<p>
+It is worth notifying that the name of a function <code>f</code>, as a string object,
+is given by <code>f.__name__</code>, and we make use of this information to
+construct an informative message in case a test fails.
+
+<p>
+It is a good habit to write such test functions since the execution
+of all tests in all files can be fully automated. Every time you to
+a change in some file you can with minimum effort rerun all tests.
+
+<p>
+The entire suite of functions presented above, including the timings and tests,
+can be found in the file <a href="http://tinyurl.com/pwyasaa/funcif/count.py" target="_self"><tt>count.py</tt></a>.
+
+<p>
+<!-- === Testing with Real Data === -->
+
+<p>
+<p>
+<!-- begin bottom navigation -->
+<table style="width: 100%"><tr><td>
+<div style="text-align: left;"><a href="._funcif-solarized002.html">&laquo; Previous</a></div>
+</td><td>
+<div style="text-align: right;"><a href="._funcif-solarized004.html">Next &raquo;</a></div>
+</td></tr></table>
+<!-- end bottom navigation -->
+</p>
+
+<!-- ------------------- end of main content --------------- -->
+
+
+</body>
+</html>
+    
+

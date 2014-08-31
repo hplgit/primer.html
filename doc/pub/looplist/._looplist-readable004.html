@@ -1,0 +1,812 @@
+<!--
+Automatically generated HTML file from Doconce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Doconce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Loops and lists">
+<meta name="keywords" content="loops,boolean expressions,logical expressions,factorial,lists,method (class),list comprehension,list, nested,nested lists,list comprehension,pretty print,sublist,slicing,nested loops,tuples,list functionality,sequence (data type),sum ($\Sigma$) implementation,comparing floating-point numbers,comparing real numbers,comparing objects">
+
+
+
+<!-- Bootstrap style: bootswatch_readable -->
+<link href="http://netdna.bootstrapcdn.com/bootswatch/3.1.1/readable/bootstrap.min.css" rel="stylesheet">
+<!-- not necessary
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+
+<style type="text/css">
+/* Let inline verbatim have the same color as the surroundings */
+code { color: inherit; background-color: transparent; }
+</style>
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [(u' While loops ', 1, u'sec:basic:loops', u'sec:basic:loops'),
+              (u' A naive solution ',
+               2,
+               u'sec:basic:naive',
+               u'sec:basic:naive'),
+              (u' While loops ', 2, u'sec:basic:while', u'sec:basic:while'),
+              (u' Boolean expressions ',
+               2,
+               u'sec:basic:boolexpr',
+               u'sec:basic:boolexpr'),
+              (u' Loop implementation of a sum ',
+               2,
+               u'sec:basic:sumloop',
+               u'sec:basic:sumloop'),
+              (u' Lists ', 1, None, '___sec5'),
+              (u' Basic list operations ',
+               2,
+               u'sec:lists:basc:op',
+               u'sec:lists:basc:op'),
+              (u' For loops ', 2, None, '___sec7'),
+              (u' The nature of for loops ', 3, None, '___sec8'),
+              (u' Making the table ', 3, None, '___sec9'),
+              (u' Alternative implementations with lists and loops ',
+               1,
+               None,
+               '___sec10'),
+              (u' While loop implementation of a for loop ',
+               2,
+               None,
+               '___sec11'),
+              (u' The range construction ', 2, None, '___sec12'),
+              (u' For loops with list indices ', 2, None, '___sec13'),
+              (u' Changing list elements ', 2, None, '___sec14'),
+              (u' List comprehension ',
+               2,
+               u'sec:basic:list:comprehension',
+               u'sec:basic:list:comprehension'),
+              (u' Traversing multiple lists simultaneously ',
+               2,
+               None,
+               '___sec16'),
+              (u' Nested lists ',
+               1,
+               u'sec:basic:nestedlists',
+               u'sec:basic:nestedlists'),
+              (u' A table as a list of rows or columns ',
+               2,
+               None,
+               '___sec18'),
+              (u' Printing objects ', 2, None, '___sec19'),
+              (u' Modules for pretty print of objects ', 3, None, '___sec20'),
+              (u' Manual printing ', 3, None, '___sec21'),
+              (u' Extracting sublists ',
+               2,
+               u'sec:basic:slice',
+               u'sec:basic:slice'),
+              (u' Example ', 3, None, '___sec23'),
+              (u' Traversing nested lists ', 2, None, '___sec24'),
+              (u' Tuples ', 1, u'sec:lists:tuples', u'sec:lists:tuples'),
+              (u' Summary ',
+               1,
+               u'sec:looplist:summary',
+               u'sec:looplist:summary'),
+              (u' Chapter topics ', 2, None, '___sec27'),
+              (u' While loops ', 3, None, '___sec28'),
+              (u' Lists ', 3, None, '___sec29'),
+              (u' Nested lists ', 3, None, '___sec30'),
+              (u' Tuples ', 3, None, '___sec31'),
+              (u' For loops ', 3, None, '___sec32'),
+              (u' Pretty print ', 3, None, '___sec33'),
+              (u' Terminology ', 3, None, '___sec34'),
+              (u' Example: Analyzing list data ',
+               2,
+               u'sec:looplist:summary:ex',
+               u'sec:looplist:summary:ex'),
+              (u' Problem ', 3, None, '___sec36'),
+              (u' Solution ', 3, None, '___sec37'),
+              (u' Remark ', 3, None, '___sec38'),
+              (u' How to find more Python information ',
+               2,
+               u'sec:basic:pyinfo',
+               u'sec:basic:pyinfo'),
+              (u' Exercises ', 1, None, '___sec40'),
+              (u' Exercise 1: Make a Fahrenheit-Celsius conversion table ',
+               2,
+               u'sec:basic:ex41',
+               u'sec:basic:ex41'),
+              (u' Exercise 2: Generate an approximate Fahrenheit-Celsius conversion table ',
+               2,
+               u'sec:basic:ex1',
+               u'sec:basic:ex1'),
+              (u' Exercise 3: Work with a list ',
+               2,
+               u'sec:basic:ex00',
+               u'sec:basic:ex00'),
+              (u' Exercise 4: Generate odd numbers ',
+               2,
+               u'sec:basic:ex0',
+               u'sec:basic:ex0'),
+              (u' Exercise 5: Sum of first $n$ integers ',
+               2,
+               u'sec:basic:sum:no',
+               u'sec:basic:sum:no'),
+              (u' Exercise 6: Generate equally spaced coordinates ',
+               2,
+               u'sec:basic:ex44',
+               u'sec:basic:ex44'),
+              (u' Exercise 7: Make a table of values from a formula ',
+               2,
+               u'sec:basic:ex4',
+               u'sec:basic:ex4'),
+              (u' Exercise 8: Store values from a formula in lists ',
+               2,
+               u'sec:basic:ex4b',
+               u'sec:basic:ex4b'),
+              (u' Exercise 9: Simulate operations on lists by hand ',
+               2,
+               u'sec:basic:ex43',
+               u'sec:basic:ex43'),
+              (u' Exercise 10: Compute a mathematical sum ',
+               2,
+               u'sec:basic:ex29a',
+               u'sec:basic:ex29a'),
+              (u' Exercise 11: Replace a while loop by a for loop ',
+               2,
+               u'sec:basic:ex29b',
+               u'sec:basic:ex29b'),
+              (u' Exercise 12: Simulate a program by hand ',
+               2,
+               u'sec:basic:ex24a',
+               u'sec:basic:ex24a'),
+              (u' Exercise 13: Explore Python documentation ',
+               2,
+               u'sec:basic:ex47',
+               u'sec:basic:ex47'),
+              (u' Exercise 14: Index a nested lists ',
+               2,
+               u'sec:basic:ex15n',
+               u'sec:basic:ex15n'),
+              (u' Exercise 15: Store data in lists ',
+               2,
+               u'sec:basic:ex1b',
+               u'sec:basic:ex1b'),
+              (u' Exercise 16: Store data in a nested list ',
+               2,
+               u'sec:basic:ex4c',
+               u'sec:basic:ex4c'),
+              (u' Exercise 17: Values of boolean expressions ',
+               2,
+               u'sec:basic:ex15b',
+               u'sec:basic:ex15b'),
+              (u' Exercise 18: Explore round-off errors from a large number of inverse operations ',
+               2,
+               u'sec:basic:ex14b',
+               u'sec:basic:ex14b'),
+              (u' Exercise 19: Explore what zero can be on a computer ',
+               2,
+               u'sec:basic:ex14',
+               u'sec:basic:ex14'),
+              (u' Remarks ', 3, None, '___sec60'),
+              (u' Exercise 20: Compare two real numbers with a tolerance ',
+               2,
+               u'sec:formula:ex14c',
+               u'sec:formula:ex14c'),
+              (u' Exercise 21: Interpret a code ',
+               2,
+               u'sec:basic:ex16',
+               u'sec:basic:ex16'),
+              (u' Exercise 22: Explore problems with inaccurate indentation ',
+               2,
+               u'sec:basic:ex3',
+               u'sec:basic:ex3'),
+              (u' Remarks ', 3, None, '___sec64'),
+              (u' Exercise 23: Explore punctuation in Python programs ',
+               2,
+               u'sec:input:ex33',
+               u'sec:input:ex33'),
+              (u' Exercise 24: Investigate a for loop over a changing list ',
+               2,
+               u'sec:basic:ex18',
+               u'sec:basic:ex18'),
+              (u' References ', 1, None, '___sec67')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- newcommands_keep.tex -->
+$$
+\newcommand{\tp}{\thinspace .}
+\renewcommand{\Re}{\bbbr}
+
+\newcommand{\rhodim}{\mbox{kgm}^{-3}}
+\newcommand{\mudim}{\mbox{kg}\,\mbox{s}^{-1}\mbox{m}^{-1}}
+\newcommand{\Cdim}{\mbox{kg}\,\mbox{s}^{-1}}
+
+
+\newcommand{\Oof}[1]{\mathcal{O}(#1)}
+\newcommand{\Prob}[1]{\hbox{P}(#1)}
+\newcommand{\Var}[1]{\hbox{Var}(#1)}
+\newcommand{\Cov}[2]{\hbox{Cov}(#1,#2)}
+\newcommand{\StDev}[1]{\hbox{StDev}(#1)}
+$$
+
+
+
+
+    
+<!-- Bootstrap navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="looplist-readable.html">Loops and lists</a>
+  </div>
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     <!-- navigation toc: --> <li><a href="._looplist-readable001.html#sec:basic:loops" style="font-size: 80%;">While loops</a></li>
+     <!-- navigation toc: --> <li><a href="._looplist-readable002.html#___sec5" style="font-size: 80%;">Lists</a></li>
+     <!-- navigation toc: --> <li><a href="._looplist-readable003.html#___sec10" style="font-size: 80%;">Alternative implementations with lists and loops</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:basic:nestedlists" style="font-size: 80%;">Nested lists</a></li>
+     <!-- navigation toc: --> <li><a href="._looplist-readable005.html#sec:lists:tuples" style="font-size: 80%;">Tuples</a></li>
+     <!-- navigation toc: --> <li><a href="._looplist-readable006.html#sec:looplist:summary" style="font-size: 80%;">Summary</a></li>
+     <!-- navigation toc: --> <li><a href="._looplist-readable007.html#___sec40" style="font-size: 80%;">Exercises</a></li>
+     <!-- navigation toc: --> <li><a href="._looplist-readable007.html#___sec67" style="font-size: 80%;">References</a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div> <!-- end of navigation bar -->
+
+<div class="container">
+
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+
+<a name="part0004"></a>
+<!-- !split -->
+
+<h1 id="sec:basic:nestedlists">Nested lists<a name="sec:basic:nestedlists"></a></h1>
+
+Nested lists are list objects where the elements in the lists can be
+lists themselves. A couple of examples will motivate for nested lists
+and illustrate the basic operations on such lists.
+
+<h2 id="___sec18">A table as a list of rows or columns <a name="___sec18"></a></h2>
+
+Our table data have so far used one separate
+list for each column. If there were \( n \) columns, we would need \( n \)
+list objects to represent the data in the table.
+However, we think of a table as <em>one</em> entity, not a collection of
+\( n \) columns.  It would therefore
+be natural to use one argument for the whole table.
+This is easy to achieve using a <em>nested list</em>,
+where each entry in the list is a list itself.
+A table object, for instance, is a list of lists, either a list of
+the row elements of the table or a list of the column elements of
+the table.
+Here is an example where the table is a list of two columns, and each
+column is a list of numbers:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">Cdegrees <span style="color: #666666">=</span> <span style="color: #008000">range</span>(<span style="color: #666666">-20</span>, <span style="color: #666666">41</span>, <span style="color: #666666">5</span>)   <span style="color: #408080; font-style: italic"># -20, -15, ..., 35, 40</span>
+Fdegrees <span style="color: #666666">=</span> [(<span style="color: #666666">9.0/5</span>)<span style="color: #666666">*</span>C <span style="color: #666666">+</span> <span style="color: #666666">32</span> <span style="color: #008000; font-weight: bold">for</span> C <span style="color: #AA22FF; font-weight: bold">in</span> Cdegrees]
+
+table <span style="color: #666666">=</span> [Cdegrees, Fdegrees]
+</pre></div>
+<p>
+(Note that any value
+in \( [41,45] \) can be used as second argument (stop value)
+to <code>range</code> and will
+ensure that 40 is included in the range of generate numbers.)
+
+<p>
+With the subscript <code>table[0]</code> we can access the
+first element in <code>table</code>, which is nothing but the <code>Cdegrees</code> list,
+and with <code>table[0][2]</code> we reach
+the third element in the first element, i.e.,
+<code>Cdegrees[2]</code>.
+
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 2:  Two ways of creating a table as a nested list. Left: table of columns <code>C</code> and <code>F</code>, where <code>C</code> and <code>F</code> are lists. Right: table of rows, where each row <code>[C, F]</code> is a list of two floats. <a name="sec:basic:fig2"></a> </p></center>
+<p><img src="fig-looplist/table12.png" align="bottom" width=400></p>
+</center>
+
+<p>
+However, tabular data with rows and columns usually have the convention
+that the underlying data is a nested list where the first index counts
+the rows and the second index counts the columns.
+To have <code>table</code> on this form, we must construct <code>table</code> as
+a list of <code>[C, F]</code> pairs. The first index will then run over rows
+<code>[C, F]</code>. Here is how we may construct the nested list:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">table <span style="color: #666666">=</span> []
+<span style="color: #008000; font-weight: bold">for</span> C, F <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">zip</span>(Cdegrees, Fdegrees):
+    table<span style="color: #666666">.</span>append([C, F])
+</pre></div>
+<p>
+We may shorten this code segment by introducing
+a list comprehension:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">table <span style="color: #666666">=</span> [[C, F] <span style="color: #008000; font-weight: bold">for</span> C, F <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">zip</span>(Cdegrees, Fdegrees)]
+</pre></div>
+<p>
+This construction loops through pairs <code>C</code> and <code>F</code>, and for each pass in
+the loop we create a list element <code>[C, F]</code>.
+
+<p>
+The subscript <code>table[1]</code> refers to the second element in <code>table</code>,
+which is a <code>[C, F]</code> pair, while <code>table[1][0]</code> is the
+<code>C</code> value and <code>table[1][1]</code> is the <code>F</code> value.
+Figure <a href="#sec:basic:fig2">2</a> illustrates both a list of columns and a list
+of pairs. Using this figure, you can realize that the first index looks
+up an element in the outer list, and that this element can be indexed
+with the second index.
+
+<h2 id="___sec19">Printing objects <a name="___sec19"></a></h2>
+
+<h3 id="___sec20">Modules for pretty print of objects <a name="___sec20"></a></h3>
+
+We may write
+<code>print table</code>
+to immediately view the nested list
+<code>table</code> from the previous section. In fact, any Python object <code>obj</code>
+can be printed to the screen
+by the command <code>print obj</code>.
+The output is usually one line, and this line may become very long if the
+list has many elements. For example, a long list like our
+<code>table</code> variable, demands a quite long line when printed.
+
+<p>
+
+<!-- code=text (!bc ccq) typeset with pygments style "default" -->
+<blockquote>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">[[-20, -4.0], [-15, 5.0], [-10, 14.0], ............., [40, 104.0]]
+</pre></div>
+</blockquote><p>
+Splitting the output over several shorter lines makes the
+layout nicer and more readable.
+The <code>pprint</code> module offers a <em>pretty print</em> functionality for
+this purpose. The usage of <code>pprint</code> looks like
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">pprint</span>
+pprint<span style="color: #666666">.</span>pprint(table)
+</pre></div>
+<p>
+and the corresponding output becomes
+
+<p>
+
+<!-- code=text (!bc ccq) typeset with pygments style "default" -->
+<blockquote>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">[[-20, -4.0],
+ [-15, 5.0],
+ [-10, 14.0],
+ [-5, 23.0],
+ [0, 32.0],
+ [5, 41.0],
+ [10, 50.0],
+ [15, 59.0],
+ [20, 68.0],
+ [25, 77.0],
+ [30, 86.0],
+ [35, 95.0],
+ [40, 104.0]]
+</pre></div>
+</blockquote><p>
+With this document comes a slightly modified <code>pprint</code> module having the
+name <code>scitools.pprint2</code>. This module
+allows full format control of the printing of the <code>float</code> objects
+in lists by specifying <code>scitools.pprint2.float_format</code>
+as a printf format string. The following example demonstrates how the
+output format of real numbers can be changed:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">pprint</span><span style="color: #666666">,</span> <span style="color: #0000FF; font-weight: bold">scitools.pprint2</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> somelist <span style="color: #666666">=</span> [<span style="color: #666666">15.8</span>, [<span style="color: #666666">0.2</span>, <span style="color: #666666">1.7</span>]]
+<span style="color: #666666">&gt;&gt;&gt;</span> pprint<span style="color: #666666">.</span>pprint(somelist)
+[<span style="color: #666666">15.800000000000001</span>, [<span style="color: #666666">0.20000000000000001</span>, <span style="color: #666666">1.7</span>]]
+<span style="color: #666666">&gt;&gt;&gt;</span> scitools<span style="color: #666666">.</span>pprint2<span style="color: #666666">.</span>pprint(somelist)
+[<span style="color: #666666">15.8</span>, [<span style="color: #666666">0.2</span>, <span style="color: #666666">1.7</span>]]
+<span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #408080; font-style: italic"># default output is &#39;%g&#39;, change this to</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> scitools<span style="color: #666666">.</span>pprint2<span style="color: #666666">.</span>float_format <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;</span><span style="color: #BB6688; font-weight: bold">%.2e</span><span style="color: #BA2121">&#39;</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> scitools<span style="color: #666666">.</span>pprint2<span style="color: #666666">.</span>pprint(somelist)
+[<span style="color: #666666">1.58e+01</span>, [<span style="color: #666666">2.00e-01</span>, <span style="color: #666666">1.70e+00</span>]]
+</pre></div>
+<p>
+As can be seen from this session, the <code>pprint</code> module writes
+floating-point numbers with a lot of digits, in fact so many that we
+explicitly see the round-off errors. Many find this type of output
+is annoying and that the default output from the <code>scitools.pprint2</code>
+module is more like one would desire and expect.
+
+<p>
+The <code>pprint</code> and <code>scitools.pprint2</code> modules also have a function
+<code>pformat</code>, which works as the <code>pprint</code> function, but it returns
+a pretty formatted string rather than printing the string:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">s <span style="color: #666666">=</span> pprint<span style="color: #666666">.</span>pformat(somelist)
+<span style="color: #008000; font-weight: bold">print</span> s
+</pre></div>
+<p>
+This last <code>print</code> statement prints the same as <code>pprint.pprint(somelist)</code>.
+
+<h3 id="___sec21">Manual printing <a name="___sec21"></a></h3>
+
+Many will argue that tabular data such as those stored in the
+nested <code>table</code> list are not printed in a particularly pretty way
+by the <code>pprint</code> module. One would rather expect pretty output to
+be a table with two nicely aligned columns. To produce such output we
+need to code the formatting manually. This is quite easy: we loop over
+each row, extract the two elements <code>C</code> and <code>F</code> in each row,
+and print these in fixed-width fields using the printf syntax.
+The code goes as follows:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">for</span> C, F <span style="color: #AA22FF; font-weight: bold">in</span> table:
+    <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;</span><span style="color: #BB6688; font-weight: bold">%5d</span><span style="color: #BA2121"> </span><span style="color: #BB6688; font-weight: bold">%5.1f</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> (C, F)
+</pre></div>
+
+<h2 id="sec:basic:slice">Extracting sublists<a name="sec:basic:slice"></a></h2>
+
+Python has a nice syntax for extracting parts of a list structure. Such
+parts are known as <em>sublists</em> or <em>slices</em>:
+
+<p>
+<code>A[i:]</code> is the sublist starting with index <code>i</code> in <code>A</code>
+and continuing to the end of <code>A</code>:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> A <span style="color: #666666">=</span> [<span style="color: #666666">2</span>, <span style="color: #666666">3.5</span>, <span style="color: #666666">8</span>, <span style="color: #666666">10</span>]
+<span style="color: #666666">&gt;&gt;&gt;</span> A[<span style="color: #666666">2</span>:]
+[<span style="color: #666666">8</span>, <span style="color: #666666">10</span>]
+</pre></div>
+<p>
+<code>A[i:j]</code> is the sublist starting with index <code>i</code> in <code>A</code>
+and continuing up to and including index <code>j-1</code>.
+Make sure you remember that the element corresponding to
+index <code>j</code> is not included in the sublist:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> A[<span style="color: #666666">1</span>:<span style="color: #666666">3</span>]
+[<span style="color: #666666">3.5</span>, <span style="color: #666666">8</span>]
+</pre></div>
+<p>
+<code>A[:i]</code> is the sublist starting with index 0 in <code>A</code> and
+continuing up to and including the element with index <code>i-1</code>:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> A[:<span style="color: #666666">3</span>]
+[<span style="color: #666666">2</span>, <span style="color: #666666">3.5</span>, <span style="color: #666666">8</span>]
+</pre></div>
+<p>
+<code>A[1:-1]</code> extracts all elements except the first and the last
+(recall that index <code>-1</code> refers to the last element),
+and <code>A[:]</code> is the whole list:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> A[<span style="color: #666666">1</span>:<span style="color: #666666">-1</span>]
+[<span style="color: #666666">3.5</span>, <span style="color: #666666">8</span>]
+<span style="color: #666666">&gt;&gt;&gt;</span> A[:]
+[<span style="color: #666666">2</span>, <span style="color: #666666">3.5</span>, <span style="color: #666666">8</span>, <span style="color: #666666">10</span>]
+</pre></div>
+<p>
+In nested lists we may use slices in the first index, e.g.,
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> table[<span style="color: #666666">4</span>:]
+[[<span style="color: #666666">0</span>, <span style="color: #666666">32.0</span>], [<span style="color: #666666">5</span>, <span style="color: #666666">41.0</span>], [<span style="color: #666666">10</span>, <span style="color: #666666">50.0</span>], [<span style="color: #666666">15</span>, <span style="color: #666666">59.0</span>], [<span style="color: #666666">20</span>, <span style="color: #666666">68.0</span>],
+ [<span style="color: #666666">25</span>, <span style="color: #666666">77.0</span>], [<span style="color: #666666">30</span>, <span style="color: #666666">86.0</span>], [<span style="color: #666666">35</span>, <span style="color: #666666">95.0</span>], [<span style="color: #666666">40</span>, <span style="color: #666666">104.0</span>]]
+</pre></div>
+<p>
+We can also slice the second index, or both indices:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> table[<span style="color: #666666">4</span>:<span style="color: #666666">7</span>][<span style="color: #666666">0</span>:<span style="color: #666666">2</span>]
+[[<span style="color: #666666">0</span>, <span style="color: #666666">32.0</span>], [<span style="color: #666666">5</span>, <span style="color: #666666">41.0</span>]]
+</pre></div>
+<p>
+Observe that <code>table[4:7]</code> makes a list
+<code>[[0, 32.0], [5, 41.0], [10, 50.0]]</code> with three elements.
+The slice <code>[0:2]</code> acts on this sublist and picks out its
+first two elements,
+with indices 0 and 1.
+
+<p>
+Sublists are always copies of the original list, so if you modify
+the sublist the original list remains unaltered and vice versa:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> l1 <span style="color: #666666">=</span> [<span style="color: #666666">1</span>, <span style="color: #666666">4</span>, <span style="color: #666666">3</span>]
+<span style="color: #666666">&gt;&gt;&gt;</span> l2 <span style="color: #666666">=</span> l1[:<span style="color: #666666">-1</span>]
+<span style="color: #666666">&gt;&gt;&gt;</span> l2
+[<span style="color: #666666">1</span>, <span style="color: #666666">4</span>]
+<span style="color: #666666">&gt;&gt;&gt;</span> l1[<span style="color: #666666">0</span>] <span style="color: #666666">=</span> <span style="color: #666666">100</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> l1             <span style="color: #408080; font-style: italic"># l1 is modified</span>
+[<span style="color: #666666">100</span>, <span style="color: #666666">4</span>, <span style="color: #666666">3</span>]
+<span style="color: #666666">&gt;&gt;&gt;</span> l2             <span style="color: #408080; font-style: italic"># l2 is not modified</span>
+[<span style="color: #666666">1</span>, <span style="color: #666666">4</span>]
+</pre></div>
+<p>
+The fact that slicing makes a copy can also be illustrated by the
+following code:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> B <span style="color: #666666">=</span> A[:]
+<span style="color: #666666">&gt;&gt;&gt;</span> C <span style="color: #666666">=</span> A
+<span style="color: #666666">&gt;&gt;&gt;</span> B <span style="color: #666666">==</span> A
+<span style="color: #008000">True</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> B <span style="color: #AA22FF; font-weight: bold">is</span> A
+<span style="color: #008000">False</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> C <span style="color: #AA22FF; font-weight: bold">is</span> A
+<span style="color: #008000">True</span>
+</pre></div>
+<p>
+The <code>B == A</code> boolean expression is <code>True</code> if all elements in <code>B</code>
+are equal to the corresponding elements in <code>A</code>. The test
+<code>B is A</code> is <code>True</code> if <code>A</code> and <code>B</code> are names for the
+same list. Setting <code>C = A</code> makes <code>C</code> refer to the same
+list object as <code>A</code>, while <code>B = A[:]</code> makes <code>B</code> refer to
+a copy of the list referred to by <code>A</code>.
+
+<h3 id="___sec23">Example <a name="___sec23"></a></h3>
+
+We end this information on sublists by writing
+out the part of the <code>table</code> list of <code>[C, F]</code> rows
+(see the section <a href="#sec:basic:nestedlists">Nested lists</a>) where
+the Celsius degrees are between 10 and 35 (not including 35):
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">for</span> C, F <span style="color: #AA22FF; font-weight: bold">in</span> table[Cdegrees<span style="color: #666666">.</span>index(<span style="color: #666666">10</span>):Cdegrees<span style="color: #666666">.</span>index(<span style="color: #666666">35</span>)]:
+<span style="color: #666666">...</span>     <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;</span><span style="color: #BB6688; font-weight: bold">%5.0f</span><span style="color: #BA2121"> </span><span style="color: #BB6688; font-weight: bold">%5.1f</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> (C, F)
+<span style="color: #666666">...</span>
+   <span style="color: #666666">10</span>  <span style="color: #666666">50.0</span>
+   <span style="color: #666666">15</span>  <span style="color: #666666">59.0</span>
+   <span style="color: #666666">20</span>  <span style="color: #666666">68.0</span>
+   <span style="color: #666666">25</span>  <span style="color: #666666">77.0</span>
+   <span style="color: #666666">30</span>  <span style="color: #666666">86.0</span>
+</pre></div>
+<p>
+You should always stop reading and convince yourself that you understand
+why a code segment produces the printed output. In this latter example,
+<code>Cdegrees.index(10)</code> returns the index corresponding to the value
+<code>10</code> in the <code>Cdegrees</code> list. Looking at the <code>Cdegrees</code>
+elements, one realizes (do it!) that the <code>for</code> loop is equivalent to
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">for</span> C, F <span style="color: #AA22FF; font-weight: bold">in</span> table[<span style="color: #666666">6</span>:<span style="color: #666666">11</span>]:
+</pre></div>
+<p>
+This loop runs over the indices \( 6, 7, \ldots, 10 \) in <code>table</code>.
+
+<h2 id="___sec24">Traversing nested lists <a name="___sec24"></a></h2>
+
+We have seen that traversing the nested list <code>table</code> could be
+done by a loop of the form
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">for</span> C, F <span style="color: #AA22FF; font-weight: bold">in</span> table:
+    <span style="color: #408080; font-style: italic"># process C and F</span>
+</pre></div>
+<p>
+This is natural code when we know that <code>table</code> is a list of
+<code>[C, F]</code> lists.
+Now we shall address more general nested
+lists where we do not necessarily know how many elements there are
+in each list element of the list.
+
+<p>
+Suppose we use a nested list <code>scores</code> to record the scores of players in
+a game: <code>scores[i]</code> holds a list of the historical scores obtained by player
+number <code>i</code>. Different players have played the game a different number
+of times, so the length of <code>scores[i]</code> depends on <code>i</code>.
+Some code may help to make this clearer:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">scores <span style="color: #666666">=</span> []
+<span style="color: #408080; font-style: italic"># score of player no. 0:</span>
+scores<span style="color: #666666">.</span>append([<span style="color: #666666">12</span>, <span style="color: #666666">16</span>, <span style="color: #666666">11</span>, <span style="color: #666666">12</span>])
+<span style="color: #408080; font-style: italic"># score of player no. 1:</span>
+scores<span style="color: #666666">.</span>append([<span style="color: #666666">9</span>])
+<span style="color: #408080; font-style: italic"># score of player no. 2:</span>
+scores<span style="color: #666666">.</span>append([<span style="color: #666666">6</span>, <span style="color: #666666">9</span>, <span style="color: #666666">11</span>, <span style="color: #666666">14</span>, <span style="color: #666666">17</span>, <span style="color: #666666">15</span>, <span style="color: #666666">14</span>, <span style="color: #666666">20</span>])
+</pre></div>
+<p>
+The list <code>scores</code> has three elements, each element
+corresponding to a player.
+The element no. <code>g</code> in the list
+<code>scores[p]</code> corresponds to the score obtained in
+game number <code>g</code> played by player number <code>p</code>.
+The length of the lists <code>scores[p]</code>
+varies and equals 4, 1, and 8 for <code>p</code> equal to 0, 1, and 2,
+respectively.
+
+<p>
+In the general case we may have \( n \) players, and some may have played the
+game a large number of times, making <code>scores</code> potentially a big
+nested list.
+How can we traverse the <code>scores</code> list
+and write it out in a table format with nicely formatted columns?
+Each row in the table corresponds to a player, while columns correspond
+to scores.
+For example,
+the data initialized above can be written out as
+
+<p>
+
+<!-- code=text (!bc ccq) typeset with pygments style "default" -->
+<blockquote>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">  12  16  11  12
+   9
+   6   9  11  14  17  15  14  20
+</pre></div>
+</blockquote><p>
+In a program, we must use
+two <em>nested loops</em>, one for the elements
+in <code>scores</code> and one for the elements in the sublists of <code>scores</code>.
+The example below will make this clear.
+
+<p>
+There are two basic ways of traversing a nested list: either we use
+integer indices for each index, or we use variables for the list elements.
+Let us first exemplify the index-based version:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">for</span> p <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #008000">len</span>(scores)):
+    <span style="color: #008000; font-weight: bold">for</span> g <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #008000">len</span>(scores[p])):
+        score <span style="color: #666666">=</span> scores[p][g]
+        <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;</span><span style="color: #BB6688; font-weight: bold">%4d</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> score,
+    <span style="color: #008000; font-weight: bold">print</span>
+</pre></div>
+<p>
+With the trailing comma after the print string, we avoid a newline so
+that the column values in the table (i.e., scores for one player)
+appear at the same line. The single <code>print</code>
+command after the loop over <code>c</code> adds a newline after each table row.
+The reader is encouraged to go through the loops by hand and simulate
+what happens in each statement (use the simple <code>scores</code> list initialized
+above).
+
+<p>
+The alternative version where we use variables for iterating over the
+elements in the <code>scores</code> list and its sublists looks like this:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">for</span> player <span style="color: #AA22FF; font-weight: bold">in</span> scores:
+    <span style="color: #008000; font-weight: bold">for</span> game <span style="color: #AA22FF; font-weight: bold">in</span> player:
+        <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;</span><span style="color: #BB6688; font-weight: bold">%4d</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> game,
+    <span style="color: #008000; font-weight: bold">print</span>
+</pre></div>
+<p>
+Again, the reader should step through the code by hand and realize what
+the values of <code>player</code> and <code>game</code> are in each pass of the loops.
+
+<p>
+In the very general case we can have a nested list with many indices:
+<code>somelist[i1][i2][i3]...</code>. To visit each of the elements
+in the list, we use as many nested <code>for</code> loops as there are
+indices. With four indices, iterating over integer indices look as
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">for</span> i1 <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #008000">len</span>(somelist)):
+    <span style="color: #008000; font-weight: bold">for</span> i2 <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #008000">len</span>(somelist[i1])):
+        <span style="color: #008000; font-weight: bold">for</span> i3 <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #008000">len</span>(somelist[i1][i2])):
+            <span style="color: #008000; font-weight: bold">for</span> i4 <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #008000">len</span>(somelist[i1][i2][i3])):
+                value <span style="color: #666666">=</span> somelist[i1][i2][i3][i4]
+                <span style="color: #408080; font-style: italic"># work with value</span>
+</pre></div>
+<p>
+The corresponding version iterating over sublists becomes
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">for</span> sublist1 <span style="color: #AA22FF; font-weight: bold">in</span> somelist:
+    <span style="color: #008000; font-weight: bold">for</span> sublist2 <span style="color: #AA22FF; font-weight: bold">in</span> sublist1:
+        <span style="color: #008000; font-weight: bold">for</span> sublist3 <span style="color: #AA22FF; font-weight: bold">in</span> sublist2:
+            <span style="color: #008000; font-weight: bold">for</span> sublist4 <span style="color: #AA22FF; font-weight: bold">in</span> sublist3:
+                value <span style="color: #666666">=</span> sublist4
+                <span style="color: #408080; font-style: italic"># work with value</span>
+</pre></div>
+<p>
+We recommend to do ref{sec:basic:ex40} to get a better
+understanding of nested <code>for</code> loops.
+
+<p>
+<p>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pager">
+  <li class="previous">
+    <a href="._looplist-readable003.html">&larr; Prev</a>
+  </li>
+  <li class="next">
+    <a href="._looplist-readable005.html">Next &rarr;</a>
+  </li>
+</ul>
+<!-- ------------------- end of main content --------------- -->
+
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap footer
+<footer>
+<a href="http://..."><img width="250" align=right src="http://..."></a>
+</footer>
+-->
+
+
+</body>
+</html>
+    
+

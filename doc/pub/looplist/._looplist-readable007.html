@@ -1,0 +1,1063 @@
+<!--
+Automatically generated HTML file from Doconce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Doconce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Loops and lists">
+<meta name="keywords" content="loops,boolean expressions,logical expressions,factorial,lists,method (class),list comprehension,list, nested,nested lists,list comprehension,pretty print,sublist,slicing,nested loops,tuples,list functionality,sequence (data type),sum ($\Sigma$) implementation,comparing floating-point numbers,comparing real numbers,comparing objects">
+
+
+
+<!-- Bootstrap style: bootswatch_readable -->
+<link href="http://netdna.bootstrapcdn.com/bootswatch/3.1.1/readable/bootstrap.min.css" rel="stylesheet">
+<!-- not necessary
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+
+<style type="text/css">
+/* Let inline verbatim have the same color as the surroundings */
+code { color: inherit; background-color: transparent; }
+</style>
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [(u' While loops ', 1, u'sec:basic:loops', u'sec:basic:loops'),
+              (u' A naive solution ',
+               2,
+               u'sec:basic:naive',
+               u'sec:basic:naive'),
+              (u' While loops ', 2, u'sec:basic:while', u'sec:basic:while'),
+              (u' Boolean expressions ',
+               2,
+               u'sec:basic:boolexpr',
+               u'sec:basic:boolexpr'),
+              (u' Loop implementation of a sum ',
+               2,
+               u'sec:basic:sumloop',
+               u'sec:basic:sumloop'),
+              (u' Lists ', 1, None, '___sec5'),
+              (u' Basic list operations ',
+               2,
+               u'sec:lists:basc:op',
+               u'sec:lists:basc:op'),
+              (u' For loops ', 2, None, '___sec7'),
+              (u' The nature of for loops ', 3, None, '___sec8'),
+              (u' Making the table ', 3, None, '___sec9'),
+              (u' Alternative implementations with lists and loops ',
+               1,
+               None,
+               '___sec10'),
+              (u' While loop implementation of a for loop ',
+               2,
+               None,
+               '___sec11'),
+              (u' The range construction ', 2, None, '___sec12'),
+              (u' For loops with list indices ', 2, None, '___sec13'),
+              (u' Changing list elements ', 2, None, '___sec14'),
+              (u' List comprehension ',
+               2,
+               u'sec:basic:list:comprehension',
+               u'sec:basic:list:comprehension'),
+              (u' Traversing multiple lists simultaneously ',
+               2,
+               None,
+               '___sec16'),
+              (u' Nested lists ',
+               1,
+               u'sec:basic:nestedlists',
+               u'sec:basic:nestedlists'),
+              (u' A table as a list of rows or columns ',
+               2,
+               None,
+               '___sec18'),
+              (u' Printing objects ', 2, None, '___sec19'),
+              (u' Modules for pretty print of objects ', 3, None, '___sec20'),
+              (u' Manual printing ', 3, None, '___sec21'),
+              (u' Extracting sublists ',
+               2,
+               u'sec:basic:slice',
+               u'sec:basic:slice'),
+              (u' Example ', 3, None, '___sec23'),
+              (u' Traversing nested lists ', 2, None, '___sec24'),
+              (u' Tuples ', 1, u'sec:lists:tuples', u'sec:lists:tuples'),
+              (u' Summary ',
+               1,
+               u'sec:looplist:summary',
+               u'sec:looplist:summary'),
+              (u' Chapter topics ', 2, None, '___sec27'),
+              (u' While loops ', 3, None, '___sec28'),
+              (u' Lists ', 3, None, '___sec29'),
+              (u' Nested lists ', 3, None, '___sec30'),
+              (u' Tuples ', 3, None, '___sec31'),
+              (u' For loops ', 3, None, '___sec32'),
+              (u' Pretty print ', 3, None, '___sec33'),
+              (u' Terminology ', 3, None, '___sec34'),
+              (u' Example: Analyzing list data ',
+               2,
+               u'sec:looplist:summary:ex',
+               u'sec:looplist:summary:ex'),
+              (u' Problem ', 3, None, '___sec36'),
+              (u' Solution ', 3, None, '___sec37'),
+              (u' Remark ', 3, None, '___sec38'),
+              (u' How to find more Python information ',
+               2,
+               u'sec:basic:pyinfo',
+               u'sec:basic:pyinfo'),
+              (u' Exercises ', 1, None, '___sec40'),
+              (u' Exercise 1: Make a Fahrenheit-Celsius conversion table ',
+               2,
+               u'sec:basic:ex41',
+               u'sec:basic:ex41'),
+              (u' Exercise 2: Generate an approximate Fahrenheit-Celsius conversion table ',
+               2,
+               u'sec:basic:ex1',
+               u'sec:basic:ex1'),
+              (u' Exercise 3: Work with a list ',
+               2,
+               u'sec:basic:ex00',
+               u'sec:basic:ex00'),
+              (u' Exercise 4: Generate odd numbers ',
+               2,
+               u'sec:basic:ex0',
+               u'sec:basic:ex0'),
+              (u' Exercise 5: Sum of first $n$ integers ',
+               2,
+               u'sec:basic:sum:no',
+               u'sec:basic:sum:no'),
+              (u' Exercise 6: Generate equally spaced coordinates ',
+               2,
+               u'sec:basic:ex44',
+               u'sec:basic:ex44'),
+              (u' Exercise 7: Make a table of values from a formula ',
+               2,
+               u'sec:basic:ex4',
+               u'sec:basic:ex4'),
+              (u' Exercise 8: Store values from a formula in lists ',
+               2,
+               u'sec:basic:ex4b',
+               u'sec:basic:ex4b'),
+              (u' Exercise 9: Simulate operations on lists by hand ',
+               2,
+               u'sec:basic:ex43',
+               u'sec:basic:ex43'),
+              (u' Exercise 10: Compute a mathematical sum ',
+               2,
+               u'sec:basic:ex29a',
+               u'sec:basic:ex29a'),
+              (u' Exercise 11: Replace a while loop by a for loop ',
+               2,
+               u'sec:basic:ex29b',
+               u'sec:basic:ex29b'),
+              (u' Exercise 12: Simulate a program by hand ',
+               2,
+               u'sec:basic:ex24a',
+               u'sec:basic:ex24a'),
+              (u' Exercise 13: Explore Python documentation ',
+               2,
+               u'sec:basic:ex47',
+               u'sec:basic:ex47'),
+              (u' Exercise 14: Index a nested lists ',
+               2,
+               u'sec:basic:ex15n',
+               u'sec:basic:ex15n'),
+              (u' Exercise 15: Store data in lists ',
+               2,
+               u'sec:basic:ex1b',
+               u'sec:basic:ex1b'),
+              (u' Exercise 16: Store data in a nested list ',
+               2,
+               u'sec:basic:ex4c',
+               u'sec:basic:ex4c'),
+              (u' Exercise 17: Values of boolean expressions ',
+               2,
+               u'sec:basic:ex15b',
+               u'sec:basic:ex15b'),
+              (u' Exercise 18: Explore round-off errors from a large number of inverse operations ',
+               2,
+               u'sec:basic:ex14b',
+               u'sec:basic:ex14b'),
+              (u' Exercise 19: Explore what zero can be on a computer ',
+               2,
+               u'sec:basic:ex14',
+               u'sec:basic:ex14'),
+              (u' Remarks ', 3, None, '___sec60'),
+              (u' Exercise 20: Compare two real numbers with a tolerance ',
+               2,
+               u'sec:formula:ex14c',
+               u'sec:formula:ex14c'),
+              (u' Exercise 21: Interpret a code ',
+               2,
+               u'sec:basic:ex16',
+               u'sec:basic:ex16'),
+              (u' Exercise 22: Explore problems with inaccurate indentation ',
+               2,
+               u'sec:basic:ex3',
+               u'sec:basic:ex3'),
+              (u' Remarks ', 3, None, '___sec64'),
+              (u' Exercise 23: Explore punctuation in Python programs ',
+               2,
+               u'sec:input:ex33',
+               u'sec:input:ex33'),
+              (u' Exercise 24: Investigate a for loop over a changing list ',
+               2,
+               u'sec:basic:ex18',
+               u'sec:basic:ex18'),
+              (u' References ', 1, None, '___sec67')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- newcommands_keep.tex -->
+$$
+\newcommand{\tp}{\thinspace .}
+\renewcommand{\Re}{\bbbr}
+
+\newcommand{\rhodim}{\mbox{kgm}^{-3}}
+\newcommand{\mudim}{\mbox{kg}\,\mbox{s}^{-1}\mbox{m}^{-1}}
+\newcommand{\Cdim}{\mbox{kg}\,\mbox{s}^{-1}}
+
+
+\newcommand{\Oof}[1]{\mathcal{O}(#1)}
+\newcommand{\Prob}[1]{\hbox{P}(#1)}
+\newcommand{\Var}[1]{\hbox{Var}(#1)}
+\newcommand{\Cov}[2]{\hbox{Cov}(#1,#2)}
+\newcommand{\StDev}[1]{\hbox{StDev}(#1)}
+$$
+
+
+
+
+    
+<!-- Bootstrap navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="looplist-readable.html">Loops and lists</a>
+  </div>
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     <!-- navigation toc: --> <li><a href="._looplist-readable001.html#sec:basic:loops" style="font-size: 80%;">While loops</a></li>
+     <!-- navigation toc: --> <li><a href="._looplist-readable002.html#___sec5" style="font-size: 80%;">Lists</a></li>
+     <!-- navigation toc: --> <li><a href="._looplist-readable003.html#___sec10" style="font-size: 80%;">Alternative implementations with lists and loops</a></li>
+     <!-- navigation toc: --> <li><a href="._looplist-readable004.html#sec:basic:nestedlists" style="font-size: 80%;">Nested lists</a></li>
+     <!-- navigation toc: --> <li><a href="._looplist-readable005.html#sec:lists:tuples" style="font-size: 80%;">Tuples</a></li>
+     <!-- navigation toc: --> <li><a href="._looplist-readable006.html#sec:looplist:summary" style="font-size: 80%;">Summary</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec40" style="font-size: 80%;">Exercises</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec67" style="font-size: 80%;">References</a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div> <!-- end of navigation bar -->
+
+<div class="container">
+
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+
+<a name="part0007"></a>
+<!-- !split -->
+
+<h1 id="___sec40">Exercises <a name="___sec40"></a></h1>
+
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:basic:ex41">Exercise 1: Make a Fahrenheit-Celsius conversion table<a name="sec:basic:ex41"></a></h2>
+
+Write a Python program that prints out a table with Fahrenheit degrees \( 0,
+10, 20, \ldots, 100 \) in the first column and the corresponding Celsius
+degrees in the second column.
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<b>Hint.</b>
+Modify the <code>c2f_table_while.py</code> program from the section <a href="._looplist-readable001.html#sec:basic:while">While loops</a>.
+
+<p>
+<!-- --- end hint in exercise --- -->
+Filename: <code>f2c_table_while.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:basic:ex1">Exercise 2: Generate an approximate Fahrenheit-Celsius conversion table<a name="sec:basic:ex1"></a></h2>
+
+Many people use an approximate formula for quickly converting Fahrenheit
+(\( F \)) to
+Celsius (\( C \)) degrees:
+
+$$
+\begin{equation}
+C \approx \hat C = (F-30)/2
+\tag{2}
+\end{equation}
+$$
+
+Modify the program from <a href="#sec:basic:ex41">Exercise 1: Make a Fahrenheit-Celsius conversion table</a> so that
+it prints three columns: \( F \), \( C \), and the approximate value \( \hat C \).
+Filename: <code>f2c_approx_table.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:basic:ex00">Exercise 3: Work with a list<a name="sec:basic:ex00"></a></h2>
+
+Set a variable <code>primes</code> to a list containing the numbers
+2, 3, 5, 7, 11, and 13.
+Write out each list element in a <code>for</code> loop.
+Assign 17 to a variable <code>p</code> and add <code>p</code> to the end of the list.
+Print out the entire new list.
+Filename: <code>primes.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:basic:ex0">Exercise 4: Generate odd numbers<a name="sec:basic:ex0"></a></h2>
+
+Write a program that generates all odd numbers from 1 to <code>n</code>.
+Set <code>n</code> in the beginning of the program and use a <code>while</code> loop
+to compute the numbers. (Make sure that if <code>n</code> is an even number,
+the largest generated odd number is <code>n-1</code>.)
+Filename: <code>odd.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:basic:sum:no">Exercise 5: Sum of first \( n \) integers<a name="sec:basic:sum:no"></a></h2>
+
+Write a program that computes the sum of the integers from 1 up to
+and including \( n \). Compare the result with the famous formula
+\( n(n+1)/2 \).
+Filename: <code>sum_int.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:basic:ex44">Exercise 6: Generate equally spaced coordinates<a name="sec:basic:ex44"></a></h2>
+
+We want to generate \( n+1 \) equally spaced \( x \) coordinates in \( [a,b] \).
+Store the coordinates in a list.
+
+<p>
+<b>a)</b>
+Start with an empty list, use a <code>for</code> loop and append each
+coordinate to the list.
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<b>Hint.</b>
+With \( n \) intervals, corresponding to \( n+1 \) points, in \( [a,b] \), each
+interval has length \( h=(b-a)/n \). The coordinates can then
+be generated by the formula \( x_i=a+ih \), \( i=0,\ldots,n+1 \).
+
+<p>
+<!-- --- end hint in exercise --- -->
+
+<p>
+<b>b)</b>
+Use a list comprehension (see the section <a href="._looplist-readable003.html#sec:basic:list:comprehension">List comprehension</a>).
+
+<p>
+Filename: <code>coor.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:basic:ex4">Exercise 7: Make a table of values from a formula<a name="sec:basic:ex4"></a></h2>
+
+The purpose of this exercise is to write code that prints a nicely formatted
+table of \( t \) and \( y(t) \) values, where
+
+$$
+\begin{equation*} y(t) = v_0t - \frac{1}{2}gt^2\tp\end{equation*}
+$$
+
+Use \( n+1 \) uniformly spaced \( t \) values throughout the interval \( [0, 2v_0/g] \).
+
+<p>
+<b>a)</b>
+Use a <code>for</code> loop to produce the table.
+
+<p>
+<b>b)</b>
+Add code with a <code>while</code> loop to produce the table.
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<b>Hint.</b>
+Because of potential round-off errors,
+you may need to adjust the upper limit of the <code>while</code> loop to
+ensure that the last point (\( t=2v_0/g \), \( y=0 \)) is included.
+
+<p>
+<!-- --- end hint in exercise --- -->
+
+<p>
+Filename: <code>ball_table1.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:basic:ex4b">Exercise 8: Store values from a formula in lists<a name="sec:basic:ex4b"></a></h2>
+
+This exercise aims to produce the same table of numbers as in <a href="#sec:basic:ex4">Exercise 7: Make a table of values from a formula</a>, but with different code.  First, store the \( t \) and
+\( y \) values in two lists <code>t</code> and <code>y</code>.  Thereafter, write out a nicely
+formatted table by traversing the two lists with a <code>for</code> loop.
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<b>Hint.</b>
+In the <code>for</code> loop,
+use either <code>zip</code> to traverse the two lists in parallel, or use
+an index and the <code>range</code> construction.
+
+<p>
+<!-- --- end hint in exercise --- -->
+Filename: <code>ball_table2.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:basic:ex43">Exercise 9: Simulate operations on lists by hand<a name="sec:basic:ex43"></a></h2>
+
+You are given the following program:
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">a <span style="color: #666666">=</span> [<span style="color: #666666">1</span>, <span style="color: #666666">3</span>, <span style="color: #666666">5</span>, <span style="color: #666666">7</span>, <span style="color: #666666">11</span>]
+b <span style="color: #666666">=</span> [<span style="color: #666666">13</span>, <span style="color: #666666">17</span>]
+c <span style="color: #666666">=</span> a <span style="color: #666666">+</span> b
+<span style="color: #008000; font-weight: bold">print</span> c
+b[<span style="color: #666666">0</span>] <span style="color: #666666">=</span> <span style="color: #666666">-1</span>
+d <span style="color: #666666">=</span> [e<span style="color: #666666">+1</span> <span style="color: #008000; font-weight: bold">for</span> e <span style="color: #AA22FF; font-weight: bold">in</span> a]
+<span style="color: #008000; font-weight: bold">print</span> d
+d<span style="color: #666666">.</span>append(b[<span style="color: #666666">0</span>] <span style="color: #666666">+</span> <span style="color: #666666">1</span>)
+d<span style="color: #666666">.</span>append(b[<span style="color: #666666">-1</span>] <span style="color: #666666">+</span> <span style="color: #666666">1</span>)
+<span style="color: #008000; font-weight: bold">print</span> d[<span style="color: #666666">-2</span>:]
+<span style="color: #008000; font-weight: bold">for</span> e1 <span style="color: #AA22FF; font-weight: bold">in</span> a:
+    <span style="color: #008000; font-weight: bold">for</span> e2 <span style="color: #AA22FF; font-weight: bold">in</span> b:
+        <span style="color: #008000; font-weight: bold">print</span> e1 <span style="color: #666666">+</span> e2
+</pre></div>
+<p>
+Go through each statement and explain what is printed by the program.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:basic:ex29a">Exercise 10: Compute a mathematical sum<a name="sec:basic:ex29a"></a></h2>
+
+The following code is supposed to compute the sum
+\( s = \sum_{k=1}^M {1\over k} \):
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">s <span style="color: #666666">=</span> <span style="color: #666666">0</span>;  k <span style="color: #666666">=</span> <span style="color: #666666">1</span>;  M <span style="color: #666666">=</span> <span style="color: #666666">100</span>
+<span style="color: #008000; font-weight: bold">while</span> k <span style="color: #666666">&lt;</span> M:
+    s <span style="color: #666666">+=</span> <span style="color: #666666">1/</span>k
+<span style="color: #008000; font-weight: bold">print</span> s
+</pre></div>
+<p>
+This program does not work correctly. What are the three errors?
+(If you try to run the program, nothing will happen on the screen.
+Type <code>Ctrl+c</code>, i.e., hold down the Control (<code>Ctrl</code>)
+key and then type the <code>c</code> key, to stop the program.)
+Write a correct program.
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<b>Hint.</b>
+There are two basic ways to find errors in a program:
+
+<ol>
+<li> read the program carefully and think about the consequences
+   of each statement,</li>
+<li> print out intermediate results and compare with
+   hand calculations.</li>
+</ol>
+
+First, try method 1 and find as many errors as you can. Thereafter,
+try method 2 for \( M=3 \) and compare the evolution of <code>s</code> with your own
+hand calculations.
+
+<p>
+<!-- --- end hint in exercise --- -->
+Filename: <code>sum_while.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:basic:ex29b">Exercise 11: Replace a while loop by a for loop<a name="sec:basic:ex29b"></a></h2>
+
+Rewrite the corrected version of the
+program in <a href="#sec:basic:ex29a">Exercise 10: Compute a mathematical sum</a> using a
+<code>for</code> loop over <code>k</code> values
+instead of a <code>while</code> loop.
+Filename: <code>sum_for.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:basic:ex24a">Exercise 12: Simulate a program by hand<a name="sec:basic:ex24a"></a></h2>
+
+Consider the following program for computing with interest rates:
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">initial_amount <span style="color: #666666">=</span> <span style="color: #666666">100</span>
+p <span style="color: #666666">=</span> <span style="color: #666666">5.5</span>  <span style="color: #408080; font-style: italic"># interest rate</span>
+amount <span style="color: #666666">=</span> initial_amount
+years <span style="color: #666666">=</span> <span style="color: #666666">0</span>
+<span style="color: #008000; font-weight: bold">while</span> amount <span style="color: #666666">&lt;=</span> <span style="color: #666666">1.5*</span>initial_amount:
+    amount <span style="color: #666666">=</span> amount <span style="color: #666666">+</span> p<span style="color: #666666">/100*</span>amount
+    years <span style="color: #666666">=</span> years <span style="color: #666666">+</span> <span style="color: #666666">1</span>
+<span style="color: #008000; font-weight: bold">print</span> years
+</pre></div>
+<p>
+<b>a)</b>
+Use a pocket calculator or an interactive Python shell
+and work through the program calculations by hand. Write down
+the value of <code>amount</code> and <code>years</code> in each pass of the loop.
+
+<p>
+<b>b)</b>
+Set <code>p = 5</code> instead. Why will the loop
+now run forever? (Apply Ctrl+c, see <a href="#sec:basic:ex29a">Exercise 10: Compute a mathematical sum</a>, to
+stop a program with a loop that runs forever.)
+Make the program robust against such errors.
+
+<p>
+<b>c)</b>
+Make use of the operator <code>+=</code> wherever possible in the program.
+
+<p>
+<b>d)</b>
+Explain with words what type of mathematical problem that is solved
+by this program.
+
+<p>
+Filename: <code>interest_rate_loop.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:basic:ex47">Exercise 13: Explore Python documentation<a name="sec:basic:ex47"></a></h2>
+
+Suppose you want to compute with the inverse sine function:
+\( \sin^{-1}x \). How do you do that in a Python program?
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<b>Hint.</b>
+The <code>math</code> module has an inverse sine function.
+Find the correct name of the function by looking up
+the module content in the online <a href="http://docs.python.org/2/library/" target="_self">Python Standard Library</a> document
+or use <code>pydoc</code>, see the section <a href="._looplist-readable006.html#sec:basic:pyinfo">How to find more Python information</a>.
+
+<p>
+<!-- --- end hint in exercise --- -->
+Filename: <code>inverse_sine.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:basic:ex15n">Exercise 14: Index a nested lists<a name="sec:basic:ex15n"></a></h2>
+
+We define the following nested list:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">q <span style="color: #666666">=</span> [[<span style="color: #BA2121">&#39;a&#39;</span>, <span style="color: #BA2121">&#39;b&#39;</span>, <span style="color: #BA2121">&#39;c&#39;</span>], [<span style="color: #BA2121">&#39;d&#39;</span>, <span style="color: #BA2121">&#39;e&#39;</span>, <span style="color: #BA2121">&#39;f&#39;</span>], [<span style="color: #BA2121">&#39;g&#39;</span>, <span style="color: #BA2121">&#39;h&#39;</span>]]
+</pre></div>
+<p>
+<b>a)</b>
+Index this list to extract 1) the letter <code>a</code>;
+2) the list <code>['d', 'e', 'f']</code>; 3) the last element <code>h</code>;
+4) the <code>d</code> element.
+Explain why <code>q[-1][-2]</code> has the value <code>g</code>.
+
+<p>
+<b>b)</b>
+We can visit all elements of <code>q</code> using this nested <code>for</code> loop:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> q:
+    <span style="color: #008000; font-weight: bold">for</span> j <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #008000">len</span>(i)):
+        <span style="color: #008000; font-weight: bold">print</span> i[j]
+</pre></div>
+<p>
+What type of objects are <code>i</code> and <code>j</code>?
+
+<p>
+Filename: <code>index_nested_list.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:basic:ex1b">Exercise 15: Store data in lists<a name="sec:basic:ex1b"></a></h2>
+
+Modify the program from <a href="#sec:basic:ex1">Exercise 2: Generate an approximate Fahrenheit-Celsius conversion table</a> so that
+all the \( F \), \( C \), and \( \hat C \) values are stored in separate lists
+<code>F</code>, <code>C</code>, and <code>C_approx</code>, respectively.
+Then make a nested list <code>conversion</code> so that
+<code>conversion[i]</code> holds a row in the table: <code>[F[i], C[i], C_approx[i]]</code>.
+Finally, let the program traverse the <code>conversion</code> list and write
+out the same table as in <a href="#sec:basic:ex1">Exercise 2: Generate an approximate Fahrenheit-Celsius conversion table</a>.
+Filename: <code>f2c_approx_lists.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:basic:ex4c">Exercise 16: Store data in a nested list<a name="sec:basic:ex4c"></a></h2>
+
+<b>a)</b>
+Compute two lists of \( t \) and \( y \) values as explained
+in <a href="#sec:basic:ex4b">Exercise 8: Store values from a formula in lists</a>. Store the two
+lists in a new nested list <code>ty1</code> such that <code>ty1[0]</code> and <code>ty1[1]</code>
+correspond to the two lists.  Write out a table with \( t \) and \( y \)
+values in two columns by looping over the data in the <code>ty1</code> list.
+Each number should be written with two decimals.
+
+<p>
+<b>b)</b>
+Make a list <code>ty2</code> which holds each row in the table
+of \( t \) and \( y \) values (<code>ty1</code> is a list of table columns while
+<code>ty2</code> is a list of table rows, as explained in the section <a href="._looplist-readable004.html#sec:basic:nestedlists">Nested lists</a>). Loop over the <code>ty2</code> list and write out the \( t \) and \( y \)
+values with two decimals each.
+
+<p>
+Filename: <code>ball_table3.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:basic:ex15b">Exercise 17: Values of boolean expressions<a name="sec:basic:ex15b"></a></h2>
+
+Explain the outcome of each of the following boolean expressions:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">C <span style="color: #666666">=</span> <span style="color: #666666">41</span>
+C <span style="color: #666666">==</span> <span style="color: #666666">40</span>
+C <span style="color: #666666">!=</span> <span style="color: #666666">40</span> <span style="color: #AA22FF; font-weight: bold">and</span> C <span style="color: #666666">&lt;</span> <span style="color: #666666">41</span>
+C <span style="color: #666666">!=</span> <span style="color: #666666">40</span> <span style="color: #AA22FF; font-weight: bold">or</span>  C <span style="color: #666666">&lt;</span> <span style="color: #666666">41</span>
+<span style="color: #AA22FF; font-weight: bold">not</span> C <span style="color: #666666">==</span> <span style="color: #666666">40</span>
+<span style="color: #AA22FF; font-weight: bold">not</span> C <span style="color: #666666">&gt;</span> <span style="color: #666666">40</span>
+C <span style="color: #666666">&lt;=</span> <span style="color: #666666">41</span>
+<span style="color: #AA22FF; font-weight: bold">not</span> <span style="color: #008000">False</span>
+<span style="color: #008000">True</span> <span style="color: #AA22FF; font-weight: bold">and</span> <span style="color: #008000">False</span>
+<span style="color: #008000">False</span> <span style="color: #AA22FF; font-weight: bold">or</span> <span style="color: #008000">True</span>
+<span style="color: #008000">False</span> <span style="color: #AA22FF; font-weight: bold">or</span> <span style="color: #008000">False</span> <span style="color: #AA22FF; font-weight: bold">or</span> <span style="color: #008000">False</span>
+<span style="color: #008000">True</span> <span style="color: #AA22FF; font-weight: bold">and</span> <span style="color: #008000">True</span> <span style="color: #AA22FF; font-weight: bold">and</span> <span style="color: #008000">False</span>
+<span style="color: #008000">False</span> <span style="color: #666666">==</span> <span style="color: #666666">0</span>
+<span style="color: #008000">True</span> <span style="color: #666666">==</span> <span style="color: #666666">0</span>
+<span style="color: #008000">True</span> <span style="color: #666666">==</span> <span style="color: #666666">1</span>
+</pre></div>
+<p>
+<div class="alert alert-block alert-danger alert-text-normal"><b>Note.</b>
+It makes sense to compare
+<code>True</code> and <code>False</code> to the integers 0 and 1,
+but not other integers (e.g., <code>True == 12</code> is <code>False</code> although
+the <em>integer</em> 12 evaluates to <code>True</code> in a boolean context, as
+in <code>bool(12)</code> or <code>if 12</code>).
+</div>
+
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:basic:ex14b">Exercise 18: Explore round-off errors from a large number of inverse operations<a name="sec:basic:ex14b"></a></h2>
+
+Maybe you have tried to hit the square root key on a calculator
+multiple times and then squared the number again an equal number of
+times. These set of inverse mathematical operations should of course
+bring you back to the starting value for the computations, but this does
+not always happen. To avoid tedious pressing of calculator keys, we can
+let a computer automate the process. Here is an appropriate program:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">math</span> <span style="color: #008000; font-weight: bold">import</span> sqrt
+<span style="color: #008000; font-weight: bold">for</span> n <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">1</span>, <span style="color: #666666">60</span>):
+    r <span style="color: #666666">=</span> <span style="color: #666666">2.0</span>
+    <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(n):
+        r <span style="color: #666666">=</span> sqrt(r)
+    <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(n):
+        r <span style="color: #666666">=</span> r<span style="color: #666666">**2</span>
+    <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;</span><span style="color: #BB6688; font-weight: bold">%d</span><span style="color: #BA2121"> times sqrt and **2: </span><span style="color: #BB6688; font-weight: bold">%.16f</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> (n, r)
+</pre></div>
+<p>
+Explain with words what the program does. Then run the program.
+Round-off errors are here completely destroying the calculations when
+<code>n</code> is large enough! Investigate the case when we come back to
+1 instead of 2 by fixing an <code>n</code> value where this happens and printing
+out <code>r</code> in both <code>for</code> loops over <code>i</code>.
+Can you now explain why we come back to 1 and not 2?
+Filename: <code>repeated_sqrt.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:basic:ex14">Exercise 19: Explore what zero can be on a computer<a name="sec:basic:ex14"></a></h2>
+
+Type in the following code and run it:
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">eps <span style="color: #666666">=</span> <span style="color: #666666">1.0</span>
+<span style="color: #008000; font-weight: bold">while</span> <span style="color: #666666">1.0</span> <span style="color: #666666">!=</span> <span style="color: #666666">1.0</span> <span style="color: #666666">+</span> eps:
+    <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;...............&#39;</span>, eps
+    eps <span style="color: #666666">=</span> eps<span style="color: #666666">/2.0</span>
+<span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;final eps:&#39;</span>, eps
+</pre></div>
+<p>
+Explain with words what the code is doing, line by line.
+Then examine the output. How can it be that the
+&quot;equation&quot; \( 1\neq 1+ \hbox{eps} \) is not true?
+Or in other words, that a number of approximately size \( 10^{-16} \)
+(the final <code>eps</code> value when the loop terminates) gives
+the same result as if <code>eps</code> were zero?
+Filename: <code>machine_zero.py</code>.
+
+<p>
+<!-- Closing remarks for this Exercise -->
+
+<h3 id="___sec60">Remarks <a name="___sec60"></a></h3>
+
+The nonzero <code>eps</code> value computed above is called <em>machine epsilon</em> or
+<em>machine zero</em> and is an important parameter to know, especially when
+certain mathematical techniques are applied to control round-off
+errors.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:formula:ex14c">Exercise 20: Compare two real numbers with a tolerance<a name="sec:formula:ex14c"></a></h2>
+
+Run the following program:
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">a <span style="color: #666666">=</span> <span style="color: #666666">1/947.0*947</span>
+b <span style="color: #666666">=</span> <span style="color: #666666">1</span>
+<span style="color: #008000; font-weight: bold">if</span> a <span style="color: #666666">!=</span> b:
+    <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;Wrong result!&#39;</span>
+</pre></div>
+<p>
+The lesson learned from this program is that one should never compare
+two floating-point objects directly using <code>a == b</code> or <code>a != b</code>,
+because round-off errors quickly make two identical mathematical
+values different on a computer.  A better result is to test if
+<code>abs(a - b) < tol</code>, where <code>tol</code> is a very small number.  Modify the test
+according to this idea.
+Filename: <code>compare_floats.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:basic:ex16">Exercise 21: Interpret a code<a name="sec:basic:ex16"></a></h2>
+
+The function <code>time</code> in the module <code>time</code> returns the number
+of seconds since a particular date (called the Epoch, which is
+January 1, 1970, on many types of computers). Python programs can therefore
+use <code>time.time()</code> to mimic a stop watch. Another function,
+<code>time.sleep(n)</code> causes the program to pause for <code>n</code> seconds
+and is handy for inserting a pause.
+Use this information to
+explain what the following code does:
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">time</span>
+t0 <span style="color: #666666">=</span> time<span style="color: #666666">.</span>time()
+<span style="color: #008000; font-weight: bold">while</span> time<span style="color: #666666">.</span>time() <span style="color: #666666">-</span> t0 <span style="color: #666666">&lt;</span> <span style="color: #666666">10</span>:
+    <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;....I like while loops!&#39;</span>
+    time<span style="color: #666666">.</span>sleep(<span style="color: #666666">2</span>)
+<span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;Oh, no - the loop is over.&#39;</span>
+</pre></div>
+<p>
+How many times is the <code>print</code> statement inside the loop executed?
+Now, copy the code segment and change the <code><</code> sign in the loop
+condition to a <code>></code> sign.  Explain what happens now.
+Filename: <code>time_while.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:basic:ex3">Exercise 22: Explore problems with inaccurate indentation<a name="sec:basic:ex3"></a></h2>
+
+Type in the following program in a file and check carefully that you have
+exactly the same spaces:
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">C <span style="color: #666666">=</span> <span style="color: #666666">-60</span>; dC <span style="color: #666666">=</span> <span style="color: #666666">2</span>
+<span style="color: #008000; font-weight: bold">while</span> C <span style="color: #666666">&lt;=</span> <span style="color: #666666">60</span>:
+    F <span style="color: #666666">=</span> (<span style="color: #666666">9.0/5</span>)<span style="color: #666666">*</span>C <span style="color: #666666">+</span> <span style="color: #666666">32</span>
+      <span style="color: #008000; font-weight: bold">print</span> C, F
+C <span style="color: #666666">=</span> C <span style="color: #666666">+</span> dC
+</pre></div>
+<p>
+Run the program. What is the first problem? Correct that error.
+What is the next problem? What is the cause of that problem?
+(See <a href="#sec:basic:ex29a">Exercise 10: Compute a mathematical sum</a> for how to stop a hanging program.)
+Filename: <code>indentation.py</code>.
+
+<p>
+<!-- Closing remarks for this Exercise -->
+
+<h3 id="___sec64">Remarks <a name="___sec64"></a></h3>
+
+The lesson learned from this exercise is that one has to be very
+careful with indentation in Python programs! Other computer languages
+usually enclose blocks belonging to loops in curly braces,
+parentheses, or begin-end marks. Python's convention with using solely
+indentation contributes to visually attractive, easy-to-read code, at
+the cost of requiring a pedantic attitude to blanks from the
+programmer.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:input:ex33">Exercise 23: Explore punctuation in Python programs<a name="sec:input:ex33"></a></h2>
+
+Some of the following assignments work and some do not.
+Explain in each case why the assignment works/fails and, if it
+works, what kind of object <code>x</code> refers to and what the value is
+if we do a <code>print x</code>.
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">x <span style="color: #666666">=</span> <span style="color: #666666">1</span>
+x <span style="color: #666666">=</span> <span style="color: #666666">1.</span>
+x <span style="color: #666666">=</span> <span style="color: #666666">1</span>;
+x <span style="color: #666666">=</span> <span style="color: #666666">1</span>!
+x <span style="color: #666666">=</span> <span style="color: #666666">1</span>?
+x <span style="color: #666666">=</span> <span style="color: #666666">1</span>:
+x <span style="color: #666666">=</span> <span style="color: #666666">1</span>,
+</pre></div>
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<b>Hint.</b>
+Explore the statements in an interactive Python shell.
+
+<p>
+<!-- --- end hint in exercise --- -->
+Filename: <code>punctuation.*</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:basic:ex18">Exercise 24: Investigate a for loop over a changing list<a name="sec:basic:ex18"></a></h2>
+
+Study the following interactive session and explain in detail what
+happens in each pass of the loop, and use this explanation to
+understand the output.
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> numbers <span style="color: #666666">=</span> <span style="color: #008000">range</span>(<span style="color: #666666">10</span>)
+<span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">print</span> numbers
+[<span style="color: #666666">0</span>, <span style="color: #666666">1</span>, <span style="color: #666666">2</span>, <span style="color: #666666">3</span>, <span style="color: #666666">4</span>, <span style="color: #666666">5</span>, <span style="color: #666666">6</span>, <span style="color: #666666">7</span>, <span style="color: #666666">8</span>, <span style="color: #666666">9</span>]
+<span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">for</span> n <span style="color: #AA22FF; font-weight: bold">in</span> numbers:
+<span style="color: #666666">...</span>     i <span style="color: #666666">=</span> <span style="color: #008000">len</span>(numbers)<span style="color: #666666">/2</span>
+<span style="color: #666666">...</span>     <span style="color: #008000; font-weight: bold">del</span> numbers[i]
+<span style="color: #666666">...</span>     <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;n=</span><span style="color: #BB6688; font-weight: bold">%d</span><span style="color: #BA2121">, del </span><span style="color: #BB6688; font-weight: bold">%d</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> (n,i), numbers
+<span style="color: #666666">...</span>
+n<span style="color: #666666">=0</span>, <span style="color: #008000; font-weight: bold">del</span> <span style="color: #666666">5</span> [<span style="color: #666666">0</span>, <span style="color: #666666">1</span>, <span style="color: #666666">2</span>, <span style="color: #666666">3</span>, <span style="color: #666666">4</span>, <span style="color: #666666">6</span>, <span style="color: #666666">7</span>, <span style="color: #666666">8</span>, <span style="color: #666666">9</span>]
+n<span style="color: #666666">=1</span>, <span style="color: #008000; font-weight: bold">del</span> <span style="color: #666666">4</span> [<span style="color: #666666">0</span>, <span style="color: #666666">1</span>, <span style="color: #666666">2</span>, <span style="color: #666666">3</span>, <span style="color: #666666">6</span>, <span style="color: #666666">7</span>, <span style="color: #666666">8</span>, <span style="color: #666666">9</span>]
+n<span style="color: #666666">=2</span>, <span style="color: #008000; font-weight: bold">del</span> <span style="color: #666666">4</span> [<span style="color: #666666">0</span>, <span style="color: #666666">1</span>, <span style="color: #666666">2</span>, <span style="color: #666666">3</span>, <span style="color: #666666">7</span>, <span style="color: #666666">8</span>, <span style="color: #666666">9</span>]
+n<span style="color: #666666">=3</span>, <span style="color: #008000; font-weight: bold">del</span> <span style="color: #666666">3</span> [<span style="color: #666666">0</span>, <span style="color: #666666">1</span>, <span style="color: #666666">2</span>, <span style="color: #666666">7</span>, <span style="color: #666666">8</span>, <span style="color: #666666">9</span>]
+n<span style="color: #666666">=8</span>, <span style="color: #008000; font-weight: bold">del</span> <span style="color: #666666">3</span> [<span style="color: #666666">0</span>, <span style="color: #666666">1</span>, <span style="color: #666666">2</span>, <span style="color: #666666">8</span>, <span style="color: #666666">9</span>]
+</pre></div>
+<p>
+<div class="alert alert-block alert-danger alert-text-normal"><b>Warning.</b>
+The message in this exercise is to <em>never modify a list that
+we are looping over.</em> Modification is indeed technically possible, as
+shown above, but you really need to know what you are doing. Otherwise
+you will experience very strange program behavior.
+</div>
+
+
+<p>
+<!-- --- end exercise --- -->
+
+<h1 id="___sec67">References <a name="___sec67"></a></h1>
+
+<!-- begin bibliography -->
+
+<ol>
+ <li> <a name="Python:Library:Reference"></a> <b>P. S. Foundation</b>. 
+    The Python Standard Library,
+    <a href="http://docs.python.org/2/library/" target="_self"><tt>http://docs.python.org/2/library/</tt></a>.</li>
+ <li> <a name="Beazley"></a> <b>D. Beazley</b>. 
+    <em>Python Essential Reference</em>,
+    Addison-Wesley,
+    2009.</li>
+ <li> <a name="LearningPython"></a> <b>M. Lutz</b>. 
+    <em>Learning Python</em>,
+    O'Reilly,
+    2013.</li>
+ <li> <a name="Fuhrer_et_al_2014"></a> <b>C. F\"uhrer, J. E. Solem and O. Verdier</b>. 
+    <em>Computing with Python - An Introduction to Python for Science and Engineering</em>,
+    Pearson,
+    2014.</li>
+ <li> <a name="TCSE3"></a> <b>H. P. Langtangen</b>. 
+    <em>Python Scripting for Computational Science</em>,
+    Springer,
+    2009.</li>
+ <li> <a name="Python:Quick:Ref"></a> <b>R. Gruet</b>. 
+    Python Quick Reference,
+    <a href="http://rgruet.free.fr/" target="_self"><tt>http://rgruet.free.fr/</tt></a>.</li>
+</ol>
+
+<!-- end bibliography -->
+
+<p>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pager">
+  <li class="previous">
+    <a href="._looplist-readable006.html">&larr; Prev</a>
+  </li>
+</ul>
+<!-- ------------------- end of main content --------------- -->
+
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap footer
+<footer>
+<a href="http://..."><img width="250" align=right src="http://..."></a>
+</footer>
+-->
+
+
+</body>
+</html>
+    
+
