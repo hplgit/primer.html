@@ -1,0 +1,659 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Array computing and curve plotting">
+<meta name="keywords" content="vectors,vector computing,scalar (math quantity),heterogeneous lists,Numerical Python,NumPy,array (datatype),array computing,vectorization,array slicing,subarrays,allocate,vectorization,scalar code,curve plotting,plotting,making graphs,backend (Easyviz),backend (Easyviz),remove files (in Python),delete files (in Python),boolean indexing,boolean indexing,in-place array arithmetics,check an object's type,shape (of an array),array shape,matrix,shape (of an array),array shape,least squares approximation,Trapezoidal rule for integration,Lagrange's interpolation formula,interpolation,Midpoint rule for integration,Trapezoidal rule for integration">
+
+<title>Array computing and curve plotting</title>
+
+<!-- Bootstrap style: bootswatch_readable -->
+<link href="http://netdna.bootstrapcdn.com/bootswatch/3.1.1/readable/bootstrap.min.css" rel="stylesheet">
+<!-- not necessary
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+
+<style type="text/css">
+/* Let inline verbatim have the same color as the surroundings */
+code { color: inherit; background-color: transparent; }
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [(' Vectors ', 1, None, '___sec0'),
+              (' The vector concept ', 2, None, '___sec1'),
+              (' Mathematical operations on vectors ',
+               2,
+               'sec:plot:vectors',
+               'sec:plot:vectors'),
+              (' Vector arithmetics and vector functions ',
+               2,
+               'sec:plot:arraycomp',
+               'sec:plot:arraycomp'),
+              (' Arrays in Python programs ', 1, None, '___sec4'),
+              (' Using lists for collecting function data ',
+               2,
+               'sec:plot:listdata',
+               'sec:plot:listdata'),
+              (' Basics of numerical Python arrays ',
+               2,
+               'sec:plot:array:basics',
+               'sec:plot:array:basics'),
+              (' Computing coordinates and function values ',
+               2,
+               None,
+               '___sec7'),
+              (' Vectorization ',
+               2,
+               'sec:plot:vectorization',
+               'sec:plot:vectorization'),
+              (' Curve plotting ',
+               1,
+               'sec:plot:curveplots',
+               'sec:plot:curveplots'),
+              (' Matplotlib; pylab ', 2, 'sec:plot:pylab', 'sec:plot:pylab'),
+              (' A basic plot ', 3, None, '___sec11'),
+              (' Decorating the plot ', 3, None, '___sec12'),
+              (' Plotting multiple curves ', 3, None, '___sec13'),
+              (' Placing several plots in one figure ', 3, None, '___sec14'),
+              (' Matplotlib; pyplot ',
+               2,
+               'sec:plot:pyplot',
+               'sec:plot:pyplot'),
+              (' SciTools and Easyviz ',
+               2,
+               'sec:plot:SciTools',
+               'sec:plot:SciTools'),
+              (' Importing SciTools and Easyviz ', 3, None, '___sec17'),
+              (' A basic plot ', 3, None, '___sec18'),
+              (' Decorating the plot ', 3, None, '___sec19'),
+              (' Plotting multiple curves ', 3, None, '___sec20'),
+              (' Changing backend ', 3, None, '___sec21'),
+              (' Placing several plots in one figure ', 3, None, '___sec22'),
+              (' Making animations ', 2, 'easyviz:movie', 'easyviz:movie'),
+              (' Example ', 3, None, '___sec24'),
+              (' Animation in Easyviz ', 3, None, '___sec25'),
+              (' Basic animation in Matplotlib ', 3, None, '___sec26'),
+              (' Using FuncAnimation in Matplotlib ', 3, None, '___sec27'),
+              (' Making videos ', 2, 'sec:plot:video', 'sec:plot:video'),
+              (' Animated GIF file ', 3, None, '___sec29'),
+              (' MP4, Ogg, WebM, and Flash videos ', 3, None, '___sec30'),
+              (' Curve plots in pure text ', 2, None, '___sec31'),
+              (' Plotting difficulties ',
+               1,
+               'sec:plot:difficulties',
+               'sec:plot:difficulties'),
+              (' Piecewisely defined functions ',
+               2,
+               'sec:plot:pwisefunc',
+               'sec:plot:pwisefunc'),
+              (' Example: The Heaviside function ', 3, None, '___sec34'),
+              (' Example: A hat function ', 3, None, '___sec35'),
+              (' Rapidly varying functions ',
+               2,
+               'sec:plot:sin1x',
+               'sec:plot:sin1x'),
+              (' More advanced vectorization of functions ',
+               1,
+               'sec:plot:if:vectorize',
+               'sec:plot:if:vectorize'),
+              (' Vectorization of StringFunction objects ',
+               2,
+               'sec:plot:StringFunction:vectorize',
+               'sec:plot:StringFunction:vectorize'),
+              (' Vectorization of the Heaviside function ',
+               2,
+               'sec:vec:Heaviside',
+               'sec:vec:Heaviside'),
+              (' Loop ', 3, None, '___sec40'),
+              (' Automatic vectorization ', 3, None, '___sec41'),
+              (' Mixing boolean and floating-point calculations ',
+               3,
+               None,
+               '___sec42'),
+              (' Manual vectorization ', 3, None, '___sec43'),
+              (' Vectorization of a hat function ',
+               2,
+               'sec:vec:hatfunc',
+               'sec:vec:hatfunc'),
+              (' More on numerical Python arrays ',
+               1,
+               'sec:plot:numpy:more',
+               'sec:plot:numpy:more'),
+              (' Copying arrays ', 2, None, '___sec46'),
+              (' In-place arithmetics ', 2, None, '___sec47'),
+              (' Allocating arrays ', 2, None, '___sec48'),
+              (' Generalized indexing ',
+               2,
+               'sec:plot:generalized:index',
+               'sec:plot:generalized:index'),
+              (' Testing for the array type ', 2, None, '___sec50'),
+              (' Example: Vectorizing a constant function ',
+               3,
+               None,
+               '___sec51'),
+              (' Compact syntax for array generation ', 2, None, '___sec52'),
+              (' Shape manipulation ', 2, None, '___sec53'),
+              (' Higher-dimensional arrays ',
+               1,
+               'sec:plot:2Darrays',
+               'sec:plot:2Darrays'),
+              (' Matrices and arrays ', 2, None, '___sec55'),
+              (' Two-dimensional numerical Python arrays ',
+               2,
+               'sec:plot:2D:arrays',
+               'sec:plot:2D:arrays'),
+              (' Array computing ',
+               2,
+               'sec:plot:array2comp',
+               'sec:plot:array2comp'),
+              (' Remark ', 3, None, '___sec58'),
+              (' Two-dimensional arrays and functions of two variables ',
+               2,
+               None,
+               '___sec59'),
+              (' Matrix objects ',
+               2,
+               'sec:plot:numpy:matrix',
+               'sec:plot:numpy:matrix'),
+              (' Summary ', 1, None, '___sec61'),
+              (' Chapter topics ', 2, None, '___sec62'),
+              (' Array computing ', 3, None, '___sec63'),
+              (' Plotting curves ', 3, None, '___sec64'),
+              (' Making movies ', 3, None, '___sec65'),
+              (' Terminology ', 3, None, '___sec66'),
+              (' Example: Animating a function ',
+               2,
+               'sec:plot:summarizing',
+               'sec:plot:summarizing'),
+              (' Problem ', 3, None, '___sec68'),
+              (' Solution ', 3, None, '___sec69'),
+              (' Scaling ', 3, None, '___sec70'),
+              (' Exercises ', 1, 'sec:plot:exer', 'sec:plot:exer'),
+              (' Exercise 1: Fill lists with function values ',
+               2,
+               'sec:plot:ex1',
+               'sec:plot:ex1'),
+              (' Exercise 2: Fill arrays; loop version ',
+               2,
+               'sec:plot:ex2',
+               'sec:plot:ex2'),
+              (' Exercise 3: Fill arrays; vectorized version ',
+               2,
+               'sec:plot:ex2b',
+               'sec:plot:ex2b'),
+              (' Exercise 4: Plot a function ',
+               2,
+               'sec:plot:ex2c',
+               'sec:plot:ex2c'),
+              (' Exercise 5: Apply a function to a vector ',
+               2,
+               'sec:plot:math:ex1',
+               'sec:plot:math:ex1'),
+              (' Exercise 6: Simulate by hand a vectorized expression ',
+               2,
+               'sec:plot:ex3',
+               'sec:plot:ex3'),
+              (' Exercise 7: Demonstrate array slicing ',
+               2,
+               'sec:plot:ex15d',
+               'sec:plot:ex15d'),
+              (' Exercise 8: Plot a formula ',
+               2,
+               'sec:plot:ex15',
+               'sec:plot:ex15'),
+              (' Exercise 9: Plot a formula for several parameters ',
+               2,
+               'sec:plot:ex15b',
+               'sec:plot:ex15b'),
+              (' Exercise 10: Specify the extent of the axes in a plot ',
+               2,
+               'sec:plot:ex15ba',
+               'sec:plot:ex15ba'),
+              (' Exercise 11: Plot exact and inexact Fahrenheit-Celsius conversion formulas ',
+               2,
+               'sec:plot:ex15c',
+               'sec:plot:ex15c'),
+              (' Exercise 12: Plot the trajectory of a ball ',
+               2,
+               'sec:plot:ex5',
+               'sec:plot:ex5'),
+              (' Exercise 13: Plot data in a two-column file ',
+               2,
+               'sec:files:ex12',
+               'sec:files:ex12'),
+              (' Remarks ', 3, None, '___sec85'),
+              (' Exercise 14: Plot data from a file ',
+               2,
+               'sec:files:ex12c',
+               'sec:files:ex12c'),
+              (' Exercise 15: Fit a polynomial to data points ',
+               2,
+               'sec:files:ex12c2',
+               'sec:files:ex12c2'),
+              (' Exercise 16: Fit a polynomial to experimental data ',
+               2,
+               'sec:files:ex19',
+               'sec:files:ex19'),
+              (' Exercise 17: Read acceleration data and find velocities ',
+               2,
+               'sec:files:ex22',
+               'sec:files:ex22'),
+              (' Exercise 18: Read acceleration data and plot velocities ',
+               2,
+               'sec:files:ex23',
+               'sec:files:ex23'),
+              (" Exercise 19: Plot a trip's path and velocity from GPS coordinates ",
+               2,
+               'sec:files:ex24',
+               'sec:files:ex24'),
+              (' Exercise 20: Vectorize the Midpoint rule for integration ',
+               2,
+               'sec:class:exer:sum',
+               'sec:class:exer:sum'),
+              (' Remarks ', 3, None, '___sec93'),
+              (" Exercise 21: Implement Lagrange's interpolation formula ",
+               2,
+               'sec:class:ex27a',
+               'sec:class:ex27a'),
+              (" Exercise 22: Plot Lagrange's interpolating polynomial ",
+               2,
+               'sec:class:ex27b',
+               'sec:class:ex27b'),
+              (" Exercise 23: Investigate the behavior of Lagrange's interpolating polynomials ",
+               2,
+               'sec:class:ex27c',
+               'sec:class:ex27c'),
+              (' Remarks ', 3, None, '___sec97'),
+              (' Exercise 24: Plot a wave packet ',
+               2,
+               'sec:plot:ex5d',
+               'sec:plot:ex5d'),
+              (' Exercise 25: Judge a plot ',
+               2,
+               'sec:plot:ex7',
+               'sec:plot:ex7'),
+              (' Exercise 26: Plot the viscosity of water ',
+               2,
+               'sec:plot:ex13c',
+               'sec:plot:ex13c'),
+              (' Exercise 27: Explore a complicated function graphically ',
+               2,
+               'sec:plot:ex16',
+               'sec:plot:ex16'),
+              (' Exercise 28: Plot Taylor polynomial approximations to $\\sin x$ ',
+               2,
+               'sec:plot:ex5b',
+               'sec:plot:ex5b'),
+              (' Exercise 29: Animate a wave packet ',
+               2,
+               'sec:plot:ex5e',
+               'sec:plot:ex5e'),
+              (' Exercise 30: Animate two-scale temperature variations ',
+               2,
+               'sec:plot:ex18',
+               'sec:plot:ex18'),
+              (' Remarks ', 3, None, '___sec105'),
+              (' Exercise 31: Use non-uniformly distributed coordinates for visualization ',
+               2,
+               'sec:plot:ex19',
+               'sec:plot:ex19'),
+              (" Exercise 32: Animate a planet's orbit ",
+               2,
+               'sec:plot:ex5g',
+               'sec:plot:ex5g'),
+              (' Exercise 33: Animate the evolution of Taylor polynomials ',
+               2,
+               'sec:plot:ex17',
+               'sec:plot:ex17'),
+              (' Exercise 34: Plot the velocity profile for pipeflow ',
+               2,
+               'sec:plot:ex4',
+               'sec:plot:ex4'),
+              (' Exercise 35: Plot sum-of-sines approximations to a function ',
+               2,
+               'sec:plot:ex8',
+               'sec:plot:ex8'),
+              (' Exercise 36: Animate the evolution of a sum-of-sine approximation to a function ',
+               2,
+               'sec:plot:ex8m',
+               'sec:plot:ex8m'),
+              (' Exercise 37: Plot functions from the command line ',
+               2,
+               'sec:plot:ex14',
+               'sec:plot:ex14'),
+              (' Exercise 38: Improve command-line input ',
+               2,
+               'sec:plot:ex14b',
+               'sec:plot:ex14b'),
+              (' Exercise 39: Demonstrate energy concepts from physics ',
+               2,
+               'sec:plot:ex20',
+               'sec:plot:ex20'),
+              (' Exercise 40: Plot a w-like function ',
+               2,
+               'sec:plot:math:ex9',
+               'sec:plot:math:ex9'),
+              (' Exercise 41: Visualize approximations in the Midpoint integration rule ',
+               2,
+               'sec:plot:ex:vizmidpoint',
+               'sec:plot:ex:vizmidpoint'),
+              (' Exercise 42: Visualize approximations in the Trapezoidal integration rule ',
+               2,
+               'sec:plot:ex:viztrapezoidal',
+               'sec:plot:ex:viztrapezoidal'),
+              (' Exercise 43: Experience overflow in a function ',
+               2,
+               'sec:plot:ex13',
+               'sec:plot:ex13'),
+              (' Remarks ', 3, None, '___sec119'),
+              (' Exercise 44: Apply a function to a rank 2 array ',
+               2,
+               'sec:plot:math:ex2',
+               'sec:plot:math:ex2'),
+              (' Exercise 45: Explain why array computations fail ',
+               2,
+               'sec:plot:ex11',
+               'sec:plot:ex11'),
+              (' References ', 1, None, '___sec122')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- newcommands_keep.tex -->
+$$
+\newcommand{\tp}{\thinspace .}
+$$
+
+
+
+
+    
+<!-- Bootstrap navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="plot-readable.html">Array computing and curve plotting</a>
+  </div>
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     <!-- navigation toc: --> <li><a href="._plot-readable001.html#___sec0" style="font-size: 80%;">Vectors</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-readable002.html#___sec4" style="font-size: 80%;">Arrays in Python programs</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-readable003.html#sec:plot:curveplots" style="font-size: 80%;">Curve plotting</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-readable004.html#sec:plot:difficulties" style="font-size: 80%;">Plotting difficulties</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-readable005.html#sec:plot:if:vectorize" style="font-size: 80%;">More advanced vectorization of functions</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-readable006.html#sec:plot:numpy:more" style="font-size: 80%;">More on numerical Python arrays</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-readable007.html#sec:plot:2Darrays" style="font-size: 80%;">Higher-dimensional arrays</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-readable008.html#___sec61" style="font-size: 80%;">Summary</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-readable009.html#sec:plot:exer" style="font-size: 80%;">Exercises</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-readable009.html#___sec122" style="font-size: 80%;">References</a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div> <!-- end of navigation bar -->
+
+<div class="container">
+
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+
+<a name="part0000"></a>
+<!-- ------------------- main content ---------------------- -->
+
+
+
+<div class="jumbotron">
+<center><h1>Array computing and curve plotting</h1></center>  <!-- document title -->
+
+<p>
+<!-- author(s): Hans Petter Langtangen -->
+
+<center>
+<b>Hans Petter Langtangen</b> [1, 2]
+</center>
+
+
+<p>
+<!-- institution(s) -->
+
+<center>[1] <b>Center for Biomedical Computing, Simula Research Laboratory</b></center>
+<center>[2] <b>Department of Informatics, University of Oslo</b></center>
+<p>
+<center><h4>Dec 11, 2014</h4></center> <!-- date -->
+
+<h2>Table of contents</h2>
+
+<p>
+<a href="._plot-readable001.html#___sec0"> Vectors </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._plot-readable001.html#___sec1"> The vector concept </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._plot-readable001.html#sec:plot:vectors"> Mathematical operations on vectors </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._plot-readable001.html#sec:plot:arraycomp"> Vector arithmetics and vector functions </a><br>
+<a href="._plot-readable002.html#___sec4"> Arrays in Python programs </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._plot-readable002.html#sec:plot:listdata"> Using lists for collecting function data </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._plot-readable002.html#sec:plot:array:basics"> Basics of numerical Python arrays </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._plot-readable002.html#___sec7"> Computing coordinates and function values </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._plot-readable002.html#sec:plot:vectorization"> Vectorization </a><br>
+<a href="._plot-readable003.html#sec:plot:curveplots"> Curve plotting </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._plot-readable003.html#sec:plot:pylab"> Matplotlib; pylab </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._plot-readable003.html#___sec11"> A basic plot </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._plot-readable003.html#___sec12"> Decorating the plot </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._plot-readable003.html#___sec13"> Plotting multiple curves </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._plot-readable003.html#___sec14"> Placing several plots in one figure </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._plot-readable003.html#sec:plot:pyplot"> Matplotlib; pyplot </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._plot-readable003.html#sec:plot:SciTools"> SciTools and Easyviz </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._plot-readable003.html#___sec17"> Importing SciTools and Easyviz </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._plot-readable003.html#___sec18"> A basic plot </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._plot-readable003.html#___sec19"> Decorating the plot </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._plot-readable003.html#___sec20"> Plotting multiple curves </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._plot-readable003.html#___sec21"> Changing backend </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._plot-readable003.html#___sec22"> Placing several plots in one figure </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._plot-readable003.html#easyviz:movie"> Making animations </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._plot-readable003.html#___sec24"> Example </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._plot-readable003.html#___sec25"> Animation in Easyviz </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._plot-readable003.html#___sec26"> Basic animation in Matplotlib </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._plot-readable003.html#___sec27"> Using FuncAnimation in Matplotlib </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._plot-readable003.html#sec:plot:video"> Making videos </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._plot-readable003.html#___sec29"> Animated GIF file </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._plot-readable003.html#___sec30"> MP4, Ogg, WebM, and Flash videos </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._plot-readable003.html#___sec31"> Curve plots in pure text </a><br>
+<a href="._plot-readable004.html#sec:plot:difficulties"> Plotting difficulties </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._plot-readable004.html#sec:plot:pwisefunc"> Piecewisely defined functions </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._plot-readable004.html#___sec34"> Example: The Heaviside function </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._plot-readable004.html#___sec35"> Example: A hat function </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._plot-readable004.html#sec:plot:sin1x"> Rapidly varying functions </a><br>
+<a href="._plot-readable005.html#sec:plot:if:vectorize"> More advanced vectorization of functions </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._plot-readable005.html#sec:plot:StringFunction:vectorize"> Vectorization of StringFunction objects </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._plot-readable005.html#sec:vec:Heaviside"> Vectorization of the Heaviside function </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._plot-readable005.html#___sec40"> Loop </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._plot-readable005.html#___sec41"> Automatic vectorization </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._plot-readable005.html#___sec42"> Mixing boolean and floating-point calculations </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._plot-readable005.html#___sec43"> Manual vectorization </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._plot-readable005.html#sec:vec:hatfunc"> Vectorization of a hat function </a><br>
+<a href="._plot-readable006.html#sec:plot:numpy:more"> More on numerical Python arrays </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._plot-readable006.html#___sec46"> Copying arrays </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._plot-readable006.html#___sec47"> In-place arithmetics </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._plot-readable006.html#___sec48"> Allocating arrays </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._plot-readable006.html#sec:plot:generalized:index"> Generalized indexing </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._plot-readable006.html#___sec50"> Testing for the array type </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._plot-readable006.html#___sec51"> Example: Vectorizing a constant function </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._plot-readable006.html#___sec52"> Compact syntax for array generation </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._plot-readable006.html#___sec53"> Shape manipulation </a><br>
+<a href="._plot-readable007.html#sec:plot:2Darrays"> Higher-dimensional arrays </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._plot-readable007.html#___sec55"> Matrices and arrays </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._plot-readable007.html#sec:plot:2D:arrays"> Two-dimensional numerical Python arrays </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._plot-readable007.html#sec:plot:array2comp"> Array computing </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._plot-readable007.html#___sec58"> Remark </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._plot-readable007.html#___sec59"> Two-dimensional arrays and functions of two variables </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._plot-readable007.html#sec:plot:numpy:matrix"> Matrix objects </a><br>
+<a href="._plot-readable008.html#___sec61"> Summary </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._plot-readable008.html#___sec62"> Chapter topics </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._plot-readable008.html#___sec63"> Array computing </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._plot-readable008.html#___sec64"> Plotting curves </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._plot-readable008.html#___sec65"> Making movies </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._plot-readable008.html#___sec66"> Terminology </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._plot-readable008.html#sec:plot:summarizing"> Example: Animating a function </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._plot-readable008.html#___sec68"> Problem </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._plot-readable008.html#___sec69"> Solution </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._plot-readable008.html#___sec70"> Scaling </a><br>
+<a href="._plot-readable009.html#sec:plot:exer"> Exercises </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._plot-readable009.html#sec:plot:ex1"> Exercise 1: Fill lists with function values </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._plot-readable009.html#sec:plot:ex2"> Exercise 2: Fill arrays; loop version </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._plot-readable009.html#sec:plot:ex2b"> Exercise 3: Fill arrays; vectorized version </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._plot-readable009.html#sec:plot:ex2c"> Exercise 4: Plot a function </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._plot-readable009.html#sec:plot:math:ex1"> Exercise 5: Apply a function to a vector </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._plot-readable009.html#sec:plot:ex3"> Exercise 6: Simulate by hand a vectorized expression </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._plot-readable009.html#sec:plot:ex15d"> Exercise 7: Demonstrate array slicing </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._plot-readable009.html#sec:plot:ex15"> Exercise 8: Plot a formula </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._plot-readable009.html#sec:plot:ex15b"> Exercise 9: Plot a formula for several parameters </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._plot-readable009.html#sec:plot:ex15ba"> Exercise 10: Specify the extent of the axes in a plot </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._plot-readable009.html#sec:plot:ex15c"> Exercise 11: Plot exact and inexact Fahrenheit-Celsius conversion formulas </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._plot-readable009.html#sec:plot:ex5"> Exercise 12: Plot the trajectory of a ball </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._plot-readable009.html#sec:files:ex12"> Exercise 13: Plot data in a two-column file </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._plot-readable009.html#___sec85"> Remarks </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._plot-readable009.html#sec:files:ex12c"> Exercise 14: Plot data from a file </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._plot-readable009.html#sec:files:ex12c2"> Exercise 15: Fit a polynomial to data points </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._plot-readable009.html#sec:files:ex19"> Exercise 16: Fit a polynomial to experimental data </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._plot-readable009.html#sec:files:ex22"> Exercise 17: Read acceleration data and find velocities </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._plot-readable009.html#sec:files:ex23"> Exercise 18: Read acceleration data and plot velocities </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._plot-readable009.html#sec:files:ex24"> Exercise 19: Plot a trip's path and velocity from GPS coordinates </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._plot-readable009.html#sec:class:exer:sum"> Exercise 20: Vectorize the Midpoint rule for integration </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._plot-readable009.html#___sec93"> Remarks </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._plot-readable009.html#sec:class:ex27a"> Exercise 21: Implement Lagrange's interpolation formula </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._plot-readable009.html#sec:class:ex27b"> Exercise 22: Plot Lagrange's interpolating polynomial </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._plot-readable009.html#sec:class:ex27c"> Exercise 23: Investigate the behavior of Lagrange's interpolating polynomials </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._plot-readable009.html#___sec97"> Remarks </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._plot-readable009.html#sec:plot:ex5d"> Exercise 24: Plot a wave packet </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._plot-readable009.html#sec:plot:ex7"> Exercise 25: Judge a plot </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._plot-readable009.html#sec:plot:ex13c"> Exercise 26: Plot the viscosity of water </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._plot-readable009.html#sec:plot:ex16"> Exercise 27: Explore a complicated function graphically </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._plot-readable009.html#sec:plot:ex5b"> Exercise 28: Plot Taylor polynomial approximations to \( \sin x \) </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._plot-readable009.html#sec:plot:ex5e"> Exercise 29: Animate a wave packet </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._plot-readable009.html#sec:plot:ex18"> Exercise 30: Animate two-scale temperature variations </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._plot-readable009.html#___sec105"> Remarks </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._plot-readable009.html#sec:plot:ex19"> Exercise 31: Use non-uniformly distributed coordinates for visualization </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._plot-readable009.html#sec:plot:ex5g"> Exercise 32: Animate a planet's orbit </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._plot-readable009.html#sec:plot:ex17"> Exercise 33: Animate the evolution of Taylor polynomials </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._plot-readable009.html#sec:plot:ex4"> Exercise 34: Plot the velocity profile for pipeflow </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._plot-readable009.html#sec:plot:ex8"> Exercise 35: Plot sum-of-sines approximations to a function </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._plot-readable009.html#sec:plot:ex8m"> Exercise 36: Animate the evolution of a sum-of-sine approximation to a function </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._plot-readable009.html#sec:plot:ex14"> Exercise 37: Plot functions from the command line </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._plot-readable009.html#sec:plot:ex14b"> Exercise 38: Improve command-line input </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._plot-readable009.html#sec:plot:ex20"> Exercise 39: Demonstrate energy concepts from physics </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._plot-readable009.html#sec:plot:math:ex9"> Exercise 40: Plot a w-like function </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._plot-readable009.html#sec:plot:ex:vizmidpoint"> Exercise 41: Visualize approximations in the Midpoint integration rule </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._plot-readable009.html#sec:plot:ex:viztrapezoidal"> Exercise 42: Visualize approximations in the Trapezoidal integration rule </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._plot-readable009.html#sec:plot:ex13"> Exercise 43: Experience overflow in a function </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._plot-readable009.html#___sec119"> Remarks </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._plot-readable009.html#sec:plot:math:ex2"> Exercise 44: Apply a function to a rank 2 array </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._plot-readable009.html#sec:plot:ex11"> Exercise 45: Explain why array computations fail </a><br>
+<a href="._plot-readable009.html#___sec122"> References </a><br>
+</p>
+<p>
+<!-- Externaldocuments: ../formulas/main_formulas, ../looplist/main_looplist, ../funcif/main_funcif, ../input/main_input, ../files/main_files, ../class/main_class, ../random/main_random, ../oo/main_oo, ../diffeq/main_diffeq, ../discalc/main_discalc, ../ode1/main_ode1, ../boxspring/main_boxspring, ../ode2/main_ode2, ../debug/main_debug, ../cython/main_cython, ../tech/main_timing, ../tech/main_varargs, ../tech/main_runpy, ../tech/main_ostasks, ../tech/main_accesspy, ../tech/main_nose -->
+
+<p>
+<a name="ch:plot"></a>
+
+<p>
+A list object is handy for storing tabular data, such as a sequence of
+objects or a table of objects.  An array is very similar to a list,
+but less flexible and computationally much more efficient.  When using
+the computer to perform mathematical calculations, we often end up
+with a huge amount of numbers and associated arithmetic operations.
+Storing numbers in lists may in such contexts lead to slow programs,
+while arrays can make the programs run much faster.  This is crucial
+for many advanced applications of mathematics in industry and science,
+where computer programs may run for hours and days, or even weeks.
+Any clever idea that reduces the execution time by some factor is
+therefore paramount.
+
+<p>
+However, one can argue that programmers of mathematical software have
+traditionally paid too much attention to efficiency and &quot;clever&quot;
+program constructs. The resulting software often becomes very hard to
+maintain and extend. In this document we advocate a focus on clear,
+well-designed, and easy-to-understand programs that work
+correctly. Thereafter, one can start thinking about optimization for
+speed. Fortunately, arrays contribute to clear code, correctness and
+speed - all at once.
+
+<p>
+This document gives an introduction to arrays: how they are created
+and what they can be used for.  Array computing usually ends up with a
+lot of numbers. It may be very hard to understand what these numbers
+mean by just looking at them. Since the human is a visual animal, a
+good way to understand numbers is to visualize them. In this
+document we concentrate on visualizing curves that reflect functions
+of one variable; i.e., curves of the form \( y=f(x) \).  A synonym for
+curve is graph, and the image of curves on the screen is often called
+a plot.  We will use arrays to store the information about points
+along the curve. In a nutshell, array computing demands visualization
+and visualization demands arrays.
+
+<p>
+All program examples in this document can be found as files in the
+folder <a href="http://tinyurl.com/pwyasaa/plot" target="_self"><tt>src/plot</tt></a>.
+
+<p>
+
+
+<p><a href="._plot-readable001.html" class="btn btn-primary btn-lg">Read &raquo;</a></p>
+
+
+</div> <!-- end jumbotron -->
+
+<p>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pager">
+  <li class="next">
+    <a href="._plot-readable001.html">Next &rarr;</a>
+  </li>
+</ul>
+<!-- ------------------- end of main content --------------- -->
+
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap footer
+<footer>
+<a href="http://..."><img width="250" align=right src="http://..."></a>
+</footer>
+-->
+
+
+</body>
+</html>
+    
+

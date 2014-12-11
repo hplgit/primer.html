@@ -1,0 +1,879 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="User input and error handling">
+<meta name="keywords" content="command-line arguments,option-value pairs (command line),standard input,standard output,standard error,bytes,bits,exceptions,widgets,event loop,modules,test block (in module files),test function,nose tests,pytest tests,search for module files,module folders,refactoring,binomial distribution,Bernoulli trials,Poisson distribution,Poisson process">
+
+<title>User input and error handling</title>
+
+<!-- Bootstrap style: bootswatch_readable -->
+<link href="http://netdna.bootstrapcdn.com/bootswatch/3.1.1/readable/bootstrap.min.css" rel="stylesheet">
+<!-- not necessary
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+
+<style type="text/css">
+/* Let inline verbatim have the same color as the surroundings */
+code { color: inherit; background-color: transparent; }
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [(' Asking questions and reading answers ',
+               1,
+               'sec:input:rawinput',
+               'sec:input:rawinput'),
+              (' Reading keyboard input ',
+               2,
+               'sec:input:rawinput2',
+               'sec:input:rawinput2'),
+              (' Reading from the command line ',
+               1,
+               'sec:input:sysargv',
+               'sec:input:sysargv'),
+              (' Providing input on the command line ',
+               2,
+               'sec:input:cml',
+               'sec:input:cml'),
+              (' A variable number of command-line arguments ',
+               2,
+               None,
+               '___sec4'),
+              (' More on command-line arguments ', 2, None, '___sec5'),
+              (' Turning user text into live objects ', 1, None, '___sec6'),
+              (' The magic eval function ',
+               2,
+               'sec:input:eval',
+               'sec:input:eval'),
+              (' Applying eval to strings ', 3, None, '___sec8'),
+              (' Applying eval to user input ', 3, None, '___sec9'),
+              (' The magic exec function ',
+               2,
+               'sec:input:exec',
+               'sec:input:exec'),
+              (' Turning string expressions into functions ',
+               2,
+               'sec:input:StringFunction',
+               'sec:input:StringFunction'),
+              (' Option-value pairs on the command line ',
+               1,
+               'sec:input:argparse',
+               'sec:input:argparse'),
+              (' Basic usage of the argparse module ', 2, None, '___sec13'),
+              (' Mathematical expressions as values ', 2, None, '___sec14'),
+              (' Reading data from file ',
+               1,
+               'sec:files:reading',
+               'sec:files:reading'),
+              (' Reading a file line by line ', 2, None, '___sec16'),
+              (' Alternative ways of reading a file ',
+               2,
+               'sec:files:reading:other',
+               'sec:files:reading:other'),
+              (' The modern with statement ', 3, None, '___sec18'),
+              (' The old while construction ', 3, None, '___sec19'),
+              (' Reading a file into a string ', 3, None, '___sec20'),
+              (' Reading a mixture of text and numbers ',
+               2,
+               'sec:files:textnum',
+               'sec:files:textnum'),
+              (' Is it more to file reading? ', 3, None, '___sec22'),
+              (' Writing data to file ',
+               1,
+               'sec:files:writing',
+               'sec:files:writing'),
+              (' Example: Writing a table to file ', 2, None, '___sec24'),
+              (' Problem ', 3, None, '___sec25'),
+              (' Solution ', 3, None, '___sec26'),
+              (' Standard input and output as file objects ',
+               2,
+               None,
+               '___sec27'),
+              (' Redirecting standard input, output, and error ',
+               3,
+               None,
+               '___sec28'),
+              (' Note ', 3, None, '___sec29'),
+              (' What is a file, really? ',
+               2,
+               'sec:files:really',
+               'sec:files:really'),
+              (' Pure text files ', 3, None, '___sec31'),
+              (' Word processor files ', 3, None, '___sec32'),
+              (' Image files ', 3, None, '___sec33'),
+              (' Music files ', 3, None, '___sec34'),
+              (' PDF files ', 3, None, '___sec35'),
+              (' Remarks ', 3, None, '___sec36'),
+              (' Handling errors ',
+               1,
+               'sec:input:except',
+               'sec:input:except'),
+              (' Exception handling ',
+               2,
+               'sec:input:except:handling',
+               'sec:input:except:handling'),
+              (' Testing for a specific exception ', 3, None, '___sec39'),
+              (' Examples on exception types ', 3, None, '___sec40'),
+              (' Digression ', 3, None, '___sec41'),
+              (' Raising exceptions ', 2, None, '___sec42'),
+              (' Example ', 3, None, '___sec43'),
+              (' A glimpse of graphical user interfaces ',
+               1,
+               'sec:input:GUI',
+               'sec:input:GUI'),
+              (' Making modules ',
+               1,
+               'sec:input:modules',
+               'sec:input:modules'),
+              (' Example: Interest on bank deposits ', 2, None, '___sec46'),
+              (' Collecting functions in a module file ',
+               2,
+               'sec:input:module:create',
+               'sec:input:module:create'),
+              (' Test block ',
+               2,
+               'sec:input:module:testblock',
+               'sec:input:module:testblock'),
+              (' Example on a test block in a minimalistic module ',
+               3,
+               None,
+               '___sec49'),
+              (' A test block in the `interest` module ',
+               3,
+               None,
+               '___sec50'),
+              (' Verification of the module code ',
+               2,
+               'sec:input:modules:testfunc',
+               'sec:input:modules:testfunc'),
+              (' Getting input data ',
+               2,
+               'sec:input:modules:inputdata',
+               'sec:input:modules:inputdata'),
+              (' Doc strings in modules ', 2, None, '___sec53'),
+              (' Using modules ',
+               2,
+               'sec:input:modules:usage',
+               'sec:input:modules:usage'),
+              (' What gets imported by various import statements? ',
+               3,
+               None,
+               '___sec55'),
+              (' How to make Python find a module file ',
+               3,
+               None,
+               '___sec56'),
+              (' How to make Python run the module file ',
+               3,
+               None,
+               '___sec57'),
+              (' Distributing modules ',
+               2,
+               'sec:input:modules:setuppy',
+               'sec:input:modules:setuppy'),
+              (' Making software available on the Internet ',
+               2,
+               None,
+               '___sec59'),
+              (' Summary ', 1, 'sec:input:summary', 'sec:input:summary'),
+              (' Chapter topics ',
+               2,
+               'sec:input:summary:topics',
+               'sec:input:summary:topics'),
+              (' Question and answer input ', 3, None, '___sec62'),
+              (' Getting command-line arguments ', 3, None, '___sec63'),
+              (' Using option-value pairs ', 3, None, '___sec64'),
+              (' Generating code on the fly ', 3, None, '___sec65'),
+              (' Turning string formulas into Python functions ',
+               3,
+               None,
+               '___sec66'),
+              (' File operations ', 3, None, '___sec67'),
+              (' Handling exceptions ', 3, None, '___sec68'),
+              (' Raising exceptions ', 3, None, '___sec69'),
+              (' Modules ', 3, None, '___sec70'),
+              (' Terminology ', 3, None, '___sec71'),
+              (' Example: Bisection root finding ',
+               2,
+               'sec:input:summarizingex',
+               'sec:input:summarizingex'),
+              (' Problem ', 3, None, '___sec73'),
+              (' Solution ', 3, None, '___sec74'),
+              (' Verification ', 3, None, '___sec75'),
+              (' Making a function ', 3, None, '___sec76'),
+              (' Making a test function ', 3, None, '___sec77'),
+              (' Making a module ', 3, None, '___sec78'),
+              (' Defining a user interface ', 3, None, '___sec79'),
+              (' Using the module ', 3, None, '___sec80'),
+              (' Potential problems with the software ', 3, None, '___sec81'),
+              (' Distributing the bisection module to others ',
+               3,
+               None,
+               '___sec82'),
+              (' Exercises ', 1, None, '___sec83'),
+              (' Exercise 1: Make an interactive program ',
+               2,
+               'sec:input:ex24',
+               'sec:input:ex24'),
+              (' Exercise 2: Read a number from the command line ',
+               2,
+               'sec:input:ex24b',
+               'sec:input:ex24b'),
+              (' Exercise 3: Read a number from a file ',
+               2,
+               'sec:input:ex24bfile',
+               'sec:input:ex24bfile'),
+              (' Exercise 4: Read and write several numbers from and to file ',
+               2,
+               'sec:input:ex24bfile2',
+               'sec:input:ex24bfile2'),
+              (' Exercise 5: Use exceptions to handle wrong input ',
+               2,
+               'sec:input:ex24c',
+               'sec:input:ex24c'),
+              (' Exercise 6: Read input from the keyboard ',
+               2,
+               'sec:input:ex25',
+               'sec:input:ex25'),
+              (' Exercise 7: Read input from the command line ',
+               2,
+               'sec:input:ex26',
+               'sec:input:ex26'),
+              (' Exercise 8: Try MSWord or LibreOffice to write a program ',
+               2,
+               'sec:files:ex7',
+               'sec:files:ex7'),
+              (' Exercise 9: Prompt the user for input to a formula ',
+               2,
+               'sec:input:ex6',
+               'sec:input:ex6'),
+              (' Exercise 10: Read parameters in a formula from the command line ',
+               2,
+               'sec:input:ex5',
+               'sec:input:ex5'),
+              (' Exercise 11: Use exceptions to handle wrong input ',
+               2,
+               'sec:input:ex8b',
+               'sec:input:ex8b'),
+              (' Exercise 12: Test validity of input data ',
+               2,
+               'sec:input:ex7',
+               'sec:input:ex7'),
+              (' Exercise 13: Raise an exception in case of wrong input ',
+               2,
+               'sec:input:ex8',
+               'sec:input:ex8'),
+              (' Exercise 14: Evaluate a formula for data in a file ',
+               2,
+               'sec:input:ex:ball:file',
+               'sec:input:ex:ball:file'),
+              (' Exercise 15: Compute the distance it takes to stop a car ',
+               2,
+               'sec:input:ex21',
+               'sec:input:ex21'),
+              (' Exercise 16: Look up calendar functionality ',
+               2,
+               'sec:input:ex48',
+               'sec:input:ex48'),
+              (' Exercise 17: Use the StringFunction tool ',
+               2,
+               'sec:input:ex28b',
+               'sec:input:ex28b'),
+              (' Exercise 18: Why we test for specific exception types ',
+               2,
+               'sec:input:ex11',
+               'sec:input:ex11'),
+              (' Exercise 19: Make a complete module ',
+               2,
+               'sec:input:ex27',
+               'sec:input:ex27'),
+              (' Exercise 20: Check if mathematical identities hold ',
+               2,
+               'sec:input:ex2',
+               'sec:input:ex2'),
+              (' Exercise 21: Compute probabilities with the binomial distribution ',
+               2,
+               'sec:input:ex15',
+               'sec:input:ex15'),
+              (' Exercise 22: Compute probabilities with the Poisson distribution ',
+               2,
+               'sec:input:ex16',
+               'sec:input:ex16'),
+              (' References ', 1, None, '___sec106')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- newcommands_keep.tex -->
+$$
+\newcommand{\tp}{\thinspace .}
+$$
+
+
+
+
+    
+<!-- Bootstrap navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="input-readable.html">User input and error handling</a>
+  </div>
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     <!-- navigation toc: --> <li><a href="._input-readable001.html#sec:input:rawinput" style="font-size: 80%;">Asking questions and reading answers</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable002.html#sec:input:sysargv" style="font-size: 80%;">Reading from the command line</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable003.html#___sec6" style="font-size: 80%;">Turning user text into live objects</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable004.html#sec:input:argparse" style="font-size: 80%;">Option-value pairs on the command line</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable005.html#sec:files:reading" style="font-size: 80%;">Reading data from file</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable006.html#sec:files:writing" style="font-size: 80%;">Writing data to file</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:input:except" style="font-size: 80%;">Handling errors</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable008.html#sec:input:GUI" style="font-size: 80%;">A glimpse of graphical user interfaces</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable009.html#sec:input:modules" style="font-size: 80%;">Making modules</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable010.html#sec:input:summary" style="font-size: 80%;">Summary</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable011.html#___sec83" style="font-size: 80%;">Exercises</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable011.html#___sec106" style="font-size: 80%;">References</a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div> <!-- end of navigation bar -->
+
+<div class="container">
+
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+
+<a name="part0007"></a>
+<!-- !split -->
+
+<h1 id="sec:input:except">Handling errors<a name="sec:input:except"></a></h1>
+
+<p>
+Suppose we forget to provide a command-line argument to the
+<code>c2f_cml.py</code> program from the section <a href="._input-readable002.html#sec:input:cml">Providing input on the command line</a>:
+
+<p>
+
+<!-- code=text (!bc sys) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">c2f_cml.py
+Traceback (most recent call last):
+  File &quot;c2f_cml.py&quot;, line 2, in ?
+    C = float(sys.argv[1])
+IndexError: list index out of range
+</pre></div>
+<p>
+Python aborts the program and shows an error message containing the
+line where the error occurred, the type of the error (<code>IndexError</code>),
+and a quick explanation of what the error is.
+From this information we deduce that
+the index 1 is out of range. Because there are
+no command-line arguments in this case, <code>sys.argv</code> has only one
+element, namely the program name. The only valid index is then 0.
+
+<p>
+For an experienced Python programmer this error message will normally
+be clear enough to indicate what is wrong. For others it would be very
+helpful if wrong usage could be detected by our program and a
+description of correct operation could be printed.  The question is
+how to detect the error inside the program.
+
+<p>
+The problem in our sample execution is that <code>sys.argv</code> does not
+contain two elements (the program name, as always, plus one
+command-line argument). We can therefore test on the length of
+<code>sys.argv</code> to detect wrong usage: if <code>len(sys.argv)</code> is less than 2,
+the user failed to provide information on the <code>C</code> value.  The new
+version of the program, <code>c2f_cml_if.py</code>, starts with this <code>if</code> test:
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">if</span> <span style="color: #008000">len</span>(sys<span style="color: #666666">.</span>argv) <span style="color: #666666">&lt;</span> <span style="color: #666666">2</span>:
+    <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;You failed to provide Celsius degrees as input &#39;</span>\ 
+          <span style="color: #BA2121">&#39;on the command line!&#39;</span>
+    sys<span style="color: #666666">.</span>exit(<span style="color: #666666">1</span>)  <span style="color: #408080; font-style: italic"># abort because of error</span>
+F <span style="color: #666666">=</span> <span style="color: #666666">9.0*</span>C<span style="color: #666666">/5</span> <span style="color: #666666">+</span> <span style="color: #666666">32</span>
+<span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">C is </span><span style="color: #BB6688; font-weight: bold">%.1f</span><span style="color: #BA2121">F&#39;</span> <span style="color: #666666">%</span> (C, F)
+</pre></div>
+<p>
+We use the <code>sys.exit</code> function to abort the program. Any argument
+different from zero signifies that the program was aborted due to
+an error, but the precise value of the argument does not matter so
+here we simply choose it to be <code>1</code>. If no errors are found,
+but we still want to abort the program, <code>sys.exit(0)</code> is used.
+
+<p>
+A more modern and flexible way of handling potential errors in a program
+is
+to <em>try</em> to execute some statements, and if something goes wrong,
+the program can detect this and jump to a set of statements that
+handle the erroneous situation as desired.
+The relevant program construction reads
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">try</span>:
+    <span style="color: #666666">&lt;</span>statements<span style="color: #666666">&gt;</span>
+<span style="color: #008000; font-weight: bold">except</span>:
+    <span style="color: #666666">&lt;</span>statements<span style="color: #666666">&gt;</span>
+</pre></div>
+<p>
+If something goes wrong when executing the statements in the
+<code>try</code> block, Python raises what is known as an <em>exception</em>.
+The execution jumps directly to the <code>except</code> block whose
+statements can provide a remedy for the error. The next section
+explains the <code>try-except</code> construction in more detail
+through examples.
+
+<h2 id="sec:input:except:handling">Exception handling<a name="sec:input:except:handling"></a></h2>
+
+<p>
+To clarify the idea of exception handling,
+let us use a <code>try-except</code> block
+to handle the potential problem arising when our
+Celsius-Fahrenheit conversion program lacks a command-line argument:
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">sys</span>
+<span style="color: #008000; font-weight: bold">try</span>:
+    C <span style="color: #666666">=</span> <span style="color: #008000">float</span>(sys<span style="color: #666666">.</span>argv[<span style="color: #666666">1</span>])
+<span style="color: #008000; font-weight: bold">except</span>:
+    <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;You failed to provide Celsius degrees as input &#39;</span>\
+          <span style="color: #BA2121">&#39;on the command line!&#39;</span>
+    sys<span style="color: #666666">.</span>exit(<span style="color: #666666">1</span>)  <span style="color: #408080; font-style: italic"># abort</span>
+F <span style="color: #666666">=</span> <span style="color: #666666">9.0*</span>C<span style="color: #666666">/5</span> <span style="color: #666666">+</span> <span style="color: #666666">32</span>
+<span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">C is </span><span style="color: #BB6688; font-weight: bold">%.1f</span><span style="color: #BA2121">F&#39;</span> <span style="color: #666666">%</span> (C, F)
+</pre></div>
+<p>
+The program is stored in the file
+<a href="http://tinyurl.com/pwyasaa/input/c2f_cml_except1.py" target="_self"><tt>c2f_cml_except1.py</tt></a>.  If the
+command-line argument is missing, the indexing <code>sys.argv[1]</code>, which
+has an invalid index <code>1</code>, <em>raises an exception</em>. This means that the
+program jumps directly to the <code>except</code> block, implying that <code>float</code> is
+not called, and <code>C</code> is not initialized with a value.  In the except
+block, the programmer can retrieve information about the exception and
+perform statements to recover from the error. In our example, we know
+what the error can be, and therefore we just print a message and abort
+the program.
+
+<p>
+Suppose the user provides a command-line argument. Now, the <code>try</code>
+block is executed successfully, and the program neglects the
+<code>except</code> block and continues with the Fahrenheit conversion.
+We can try out the last program in two cases:
+
+<p>
+
+<!-- code=text (!bc sys) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">c2f_cml_except1.py
+You failed to provide Celsius degrees as input on the command line!
+
+c2f_cml_except1.py 21
+21C is 69.8F
+</pre></div>
+<p>
+In the first case, the illegal index in <code>sys.argv[1]</code> causes
+an exception to be raised, and we perform the steps in the <code>except</code>
+block. In the second case, the <code>try</code> block executes successfully,
+so we jump over the <code>except</code> block and continue with the computations
+and the printout of results.
+
+<p>
+For a user of the program, it does not matter if the programmer applies
+an <code>if</code> test or exception handling to recover
+from a missing command-line argument. Nevertheless, exception handling
+is considered a better programming solution because it allows more
+advanced ways to abort or continue the execution. Therefore, we
+adopt exception handling as our standard way of dealing with errors in
+the rest of this document.
+
+<h3 id="___sec39">Testing for a specific exception <a name="___sec39"></a></h3>
+
+<p>
+Consider the assignment
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">C <span style="color: #666666">=</span> <span style="color: #008000">float</span>(sys<span style="color: #666666">.</span>argv[<span style="color: #666666">1</span>])
+</pre></div>
+<p>
+There are two typical errors associated with this statement: i)
+<code>sys.argv[1]</code> is illegal indexing because no command-line arguments
+are provided, and ii) the content in the string <code>sys.argv[1]</code>
+is not a pure number that can be converted to a <code>float</code> object.
+Python detects both these errors and raises an
+<code>IndexError</code> exception
+in the first case and a <code>ValueError</code> in the second.
+In the program above, we jump to the <code>except</code> block and issue
+the same message regardless of what went wrong in the <code>try</code>
+block. For example, when we indeed provide a command-line argument, but
+write it on an illegal form (<code>21C</code>), the program jumps to the
+<code>except</code> block and prints a misleading message:
+
+<p>
+
+<!-- code=text (!bc sys) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">c2f_cml_except1.py 21C
+You failed to provide Celsius degrees as input on the command line!
+</pre></div>
+<p>
+The solution to this problem is to branch into different
+<code>except</code> blocks depending on what type of exception that
+was raised in the <code>try</code> block (program
+<a href="http://tinyurl.com/pwyasaa/input/c2f_cml_except2.py" target="_self"><tt>c2f_cml_except2.py</tt></a>):
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">sys</span>
+<span style="color: #008000; font-weight: bold">try</span>:
+    C <span style="color: #666666">=</span> <span style="color: #008000">float</span>(sys<span style="color: #666666">.</span>argv[<span style="color: #666666">1</span>])
+<span style="color: #008000; font-weight: bold">except</span> <span style="color: #D2413A; font-weight: bold">IndexError</span>:
+    <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;Celsius degrees must be supplied on the command line&#39;</span>
+    sys<span style="color: #666666">.</span>exit(<span style="color: #666666">1</span>)  <span style="color: #408080; font-style: italic"># abort execution</span>
+<span style="color: #008000; font-weight: bold">except</span> <span style="color: #D2413A; font-weight: bold">ValueError</span>:
+    <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;Celsius degrees must be a pure number, &#39;</span>\
+          <span style="color: #BA2121">&#39;not &quot;</span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121">&quot;&#39;</span> <span style="color: #666666">%</span> sys<span style="color: #666666">.</span>argv[<span style="color: #666666">1</span>]
+    sys<span style="color: #666666">.</span>exit(<span style="color: #666666">1</span>)
+
+F <span style="color: #666666">=</span> <span style="color: #666666">9.0*</span>C<span style="color: #666666">/5</span> <span style="color: #666666">+</span> <span style="color: #666666">32</span>
+<span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">C is </span><span style="color: #BB6688; font-weight: bold">%.1f</span><span style="color: #BA2121">F&#39;</span> <span style="color: #666666">%</span> (C, F)
+</pre></div>
+<p>
+Now, if we fail to provide a command-line argument, an <code>IndexError</code>
+occurs and we tell the user to write the <code>C</code> value on the
+command line. On the other hand, if the <code>float</code> conversion fails,
+because the command-line argument has wrong syntax, a
+<code>ValueError</code> exception is raised and we branch into the second
+<code>except</code> block and explain that the form of the given number is
+wrong:
+
+<p>
+
+<!-- code=text (!bc sys) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">c2f_cml_except1.py 21C
+Celsius degrees must be a pure number, not &quot;21C&quot;
+</pre></div>
+
+<h3 id="___sec40">Examples on exception types <a name="___sec40"></a></h3>
+
+<p>
+List indices out of range lead to
+<code>IndexError</code> exceptions:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> data <span style="color: #666666">=</span> [<span style="color: #666666">1.0/</span>i <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">1</span>,<span style="color: #666666">10</span>)]
+<span style="color: #666666">&gt;&gt;&gt;</span> data[<span style="color: #666666">9</span>]
+<span style="color: #666666">...</span>
+<span style="color: #D2413A; font-weight: bold">IndexError</span>: <span style="color: #008000">list</span> index out of <span style="color: #008000">range</span>
+</pre></div>
+<p>
+Some programming languages (Fortran, C, C++, and Perl are examples)
+allow list indices outside the legal index values, and such unnoticed
+errors can be hard to find. Python always stops a program when an
+invalid index is encountered, unless you handle the exception
+explicitly as a programmer.
+
+<p>
+Converting a string to <code>float</code> is unsuccessful and gives
+a <code>ValueError</code> if the string is not a
+pure integer or real number:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> C <span style="color: #666666">=</span> <span style="color: #008000">float</span>(<span style="color: #BA2121">&#39;21 C&#39;</span>)
+<span style="color: #666666">...</span>
+<span style="color: #D2413A; font-weight: bold">ValueError</span>: invalid literal <span style="color: #008000; font-weight: bold">for</span> <span style="color: #008000">float</span>(): <span style="color: #666666">21</span> C
+</pre></div>
+<p>
+Trying to use a variable that is not initialized gives a
+<code>NameError</code> exception:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">print</span> a
+<span style="color: #666666">...</span>
+<span style="color: #D2413A; font-weight: bold">NameError</span>: name <span style="color: #BA2121">&#39;a&#39;</span> <span style="color: #AA22FF; font-weight: bold">is</span> <span style="color: #AA22FF; font-weight: bold">not</span> defined
+</pre></div>
+<p>
+Division by zero raises a <code>ZeroDivisionError</code> exception:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #666666">3.0/0</span>
+<span style="color: #666666">...</span>
+<span style="color: #D2413A; font-weight: bold">ZeroDivisionError</span>: <span style="color: #008000">float</span> division
+</pre></div>
+<p>
+Writing a Python keyword illegally or performing a Python grammar error
+leads to a <code>SyntaxError</code> exception:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> forr d <span style="color: #AA22FF; font-weight: bold">in</span> data:
+<span style="color: #666666">...</span>
+    forr d <span style="color: #AA22FF; font-weight: bold">in</span> data:
+         <span style="color: #666666">^</span>
+<span style="color: #D2413A; font-weight: bold">SyntaxError</span>: invalid syntax
+</pre></div>
+<p>
+What if we try to multiply a string by a number?
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #BA2121">&#39;a string&#39;</span><span style="color: #666666">*3.14</span>
+<span style="color: #666666">...</span>
+<span style="color: #D2413A; font-weight: bold">TypeError</span>: can<span style="color: #BA2121">&#39;t multiply sequence by non-int of type &#39;</span><span style="color: #008000">float</span><span style="color: #BA2121">&#39;</span>
+</pre></div>
+<p>
+The <code>TypeError</code> exception is raised because the
+object types
+involved in the multiplication are wrong (<code>str</code> and <code>float</code>).
+
+<h3 id="___sec41">Digression <a name="___sec41"></a></h3>
+
+<p>
+It might come as a surprise, but multiplication of a string and a number
+is legal if the number is an integer. The multiplication means that
+the string should be repeated the specified number of times.
+The same rule also applies to lists:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #BA2121">&#39;--&#39;</span><span style="color: #666666">*10</span>   <span style="color: #408080; font-style: italic"># ten double dashes = 20 dashes</span>
+<span style="color: #BA2121">&#39;--------------------&#39;</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> n <span style="color: #666666">=</span> <span style="color: #666666">4</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> [<span style="color: #666666">1</span>, <span style="color: #666666">2</span>, <span style="color: #666666">3</span>]<span style="color: #666666">*</span>n
+[<span style="color: #666666">1</span>, <span style="color: #666666">2</span>, <span style="color: #666666">3</span>, <span style="color: #666666">1</span>, <span style="color: #666666">2</span>, <span style="color: #666666">3</span>, <span style="color: #666666">1</span>, <span style="color: #666666">2</span>, <span style="color: #666666">3</span>, <span style="color: #666666">1</span>, <span style="color: #666666">2</span>, <span style="color: #666666">3</span>]
+<span style="color: #666666">&gt;&gt;&gt;</span> [<span style="color: #666666">0</span>]<span style="color: #666666">*</span>n
+[<span style="color: #666666">0</span>, <span style="color: #666666">0</span>, <span style="color: #666666">0</span>, <span style="color: #666666">0</span>]
+</pre></div>
+<p>
+The latter construction is handy when we want to create a list of
+<code>n</code> elements and later assign specific values to each element in a
+<code>for</code> loop.
+
+<h2 id="___sec42">Raising exceptions <a name="___sec42"></a></h2>
+
+<p>
+When an error occurs in your program, you may either print a message
+and use <code>sys.exit(1)</code> to abort the program, or you may raise
+an exception. The latter task is easy. You just write
+<code>raise E(message)</code>,
+where <code>E</code> can be a known exception type in Python
+and <code>message</code> is a string explaining what is wrong.
+Most often <code>E</code> means
+<code>ValueError</code> if the value of some variable is illegal, or
+<code>TypeError</code> if the type of a variable is wrong.
+You can also define your own exception types.
+An exception can be raised from any location in a program.
+
+<h3 id="___sec43">Example <a name="___sec43"></a></h3>
+
+<p>
+In the program <code>c2f_cml_except2.py</code> from the section <a href="#sec:input:except:handling">Exception handling</a> we show how we can test for different
+exceptions and abort the program.  Sometimes we see that an exception
+may happen, but if it happens, we want a more precise error message to
+help the user.  This can be done by raising a new exception in an
+<code>except</code> block and provide the desired exception type and message.
+
+<p>
+Another application of raising exceptions with tailored error messages
+arises when input data are invalid. The code below illustrates how to
+raise exceptions in various cases.
+
+<p>
+We collect the reading of <code>C</code> and handling of errors a separate
+function:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">read_C</span>():
+    <span style="color: #008000; font-weight: bold">try</span>:
+        C <span style="color: #666666">=</span> <span style="color: #008000">float</span>(sys<span style="color: #666666">.</span>argv[<span style="color: #666666">1</span>])
+    <span style="color: #008000; font-weight: bold">except</span> <span style="color: #D2413A; font-weight: bold">IndexError</span>:
+        <span style="color: #008000; font-weight: bold">raise</span> <span style="color: #D2413A; font-weight: bold">IndexError</span>\ 
+        (<span style="color: #BA2121">&#39;Celsius degrees must be supplied on the command line&#39;</span>)
+    <span style="color: #008000; font-weight: bold">except</span> <span style="color: #D2413A; font-weight: bold">ValueError</span>:
+        <span style="color: #008000; font-weight: bold">raise</span> <span style="color: #D2413A; font-weight: bold">ValueError</span>\ 
+        (<span style="color: #BA2121">&#39;Celsius degrees must be a pure number, &#39;</span>\ 
+        <span style="color: #BA2121">&#39;not &quot;</span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121">&quot;&#39;</span> <span style="color: #666666">%</span> sys<span style="color: #666666">.</span>argv[<span style="color: #666666">1</span>])
+    <span style="color: #408080; font-style: italic"># C is read correctly as a number, but can have wrong value:</span>
+    <span style="color: #008000; font-weight: bold">if</span> C <span style="color: #666666">&lt;</span> <span style="color: #666666">-273.15</span>:
+        <span style="color: #008000; font-weight: bold">raise</span> <span style="color: #D2413A; font-weight: bold">ValueError</span>(<span style="color: #BA2121">&#39;C=</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121"> is a non-physical value!&#39;</span> <span style="color: #666666">%</span> C)
+    <span style="color: #008000; font-weight: bold">return</span> C
+</pre></div>
+<p>
+There are two ways of using the <code>read_C</code> function.
+The simplest is to call the function,
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">C <span style="color: #666666">=</span> read_C()
+</pre></div>
+<p>
+Wrong input will now lead to a raw dump of exceptions, e.g.,
+
+<p>
+
+<!-- code=text (!bc sys) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">c2f_cml_v5.py
+Traceback (most recent call last):
+  File &quot;c2f_cml4.py&quot;, line 5, in ?
+    raise IndexError\ 
+IndexError: Celsius degrees must be supplied on the command line
+</pre></div>
+<p>
+New users of this program may become uncertain when
+getting raw output from exceptions, because words like
+<code>Traceback</code>, <code>raise</code>, and <code>IndexError</code> do not make much sense
+unless you have some experience with Python.
+A more user-friendly output can be obtained by calling
+the <code>read_C</code> function inside a <code>try-except</code> block,
+check for any exception (or better: check for <code>IndexError</code>
+<em>or</em> <code>ValueError</code>), and write out the exception message in
+a more nicely formatted form. In this way, the programmer takes
+complete control of how the program behaves when errors are encountered:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">try</span>:
+    C <span style="color: #666666">=</span> read_C()
+<span style="color: #008000; font-weight: bold">except</span> <span style="color: #D2413A; font-weight: bold">Exception</span> <span style="color: #008000; font-weight: bold">as</span> e:
+    <span style="color: #008000; font-weight: bold">print</span> e            <span style="color: #408080; font-style: italic"># exception message</span>
+    sys<span style="color: #666666">.</span>exit(<span style="color: #666666">1</span>)        <span style="color: #408080; font-style: italic"># terminate execution</span>
+</pre></div>
+<p>
+<code>Exception</code> is the parent name of all exceptions, and <code>e</code> is an
+exception object. Nice printout of the exception message follows from
+a straight <code>print e</code>.  Instead of <code>Exception</code> we can write
+<code>(ValueError, IndexError)</code> to test more specifically for two exception
+types we can expect from the <code>read_C</code> function:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">try</span>:
+    C <span style="color: #666666">=</span> read_C()
+<span style="color: #008000; font-weight: bold">except</span> (<span style="color: #D2413A; font-weight: bold">ValueError</span>, <span style="color: #D2413A; font-weight: bold">IndexError</span>) <span style="color: #008000; font-weight: bold">as</span> e:
+    <span style="color: #008000; font-weight: bold">print</span> e            <span style="color: #408080; font-style: italic"># exception message</span>
+    sys<span style="color: #666666">.</span>exit(<span style="color: #666666">1</span>)        <span style="color: #408080; font-style: italic"># terminate execution</span>
+</pre></div>
+<p>
+After the <code>try-except</code> block above, we can continue with
+computing <code>F = 9*C/5 + 32</code> and print out <code>F</code>.
+The complete program is found in the file
+<a href="http://tinyurl.com/pwyasaa/input/c2f_cml.py" target="_self"><tt>c2f_cml.py</tt></a>.
+We may now test the program's behavior when the input is wrong and right:
+
+<p>
+
+<!-- code=text (!bc sys) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">c2f_cml.py
+Celsius degrees must be supplied on the command line
+
+c2f_cml.py 21C
+Celsius degrees must be a pure number, not &quot;21C&quot;
+
+c2f_cml.py -500
+C=-500 is a non-physical value!
+
+c2f_cml.py 21
+21C is 69.8F
+</pre></div>
+<p>
+This program deals with wrong
+input, writes an informative message, and terminates the execution without
+annoying behavior.
+
+<p>
+Scattered <code>if</code> tests with <code>sys.exit</code> calls are considered
+a bad programming style compared to the use of nested exception handling
+as illustrated above.
+You should abort execution in the main program only, not inside
+functions. The reason is that the functions can be re-used in other
+occasions where the error can be dealt with differently. For instance, one may
+avoid abortion by using some suitable default data.
+
+<p>
+The programming style illustrated above is considered the
+best way of dealing with errors, so
+we suggest that you hereafter apply exceptions for handling potential
+errors in the programs you make, simply because this is what
+experienced programmers expect from your codes.
+
+<p>
+<p>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pager">
+  <li class="previous">
+    <a href="._input-readable006.html">&larr; Prev</a>
+  </li>
+  <li class="next">
+    <a href="._input-readable008.html">Next &rarr;</a>
+  </li>
+</ul>
+<!-- ------------------- end of main content --------------- -->
+
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap footer
+<footer>
+<a href="http://..."><img width="250" align=right src="http://..."></a>
+</footer>
+-->
+
+
+</body>
+</html>
+    
+

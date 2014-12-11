@@ -13,7 +13,7 @@ Automatically generated HTML file from DocOnce source
 
 
 <link href="https://raw.githubusercontent.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/css/solarized_light_code.css" rel="stylesheet" type="text/css" title="light"/>
-<script src="http://www.peterhaschke.com/assets/highlight.pack.js"></script>
+<script src="https://rawgit.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/js/highlight.pack.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
 
 <link href="http://thomasf.github.io/solarized-css/solarized-light.min.css" rel="stylesheet">
@@ -50,6 +50,7 @@ h1 {color: #b58900;}  /* yellow */
 
 div { text-align: justify; text-justify: inter-word; }
 </style>
+
 
 </head>
 
@@ -184,7 +185,7 @@ div { text-align: justify; text-justify: inter-word; }
                2,
                'sec:basic:ex47',
                'sec:basic:ex47'),
-              (' Exercise 14: Index a nested lists ',
+              (' Exercise 14: Index a nested list ',
                2,
                'sec:basic:ex15n',
                'sec:basic:ex15n'),
@@ -274,6 +275,7 @@ $$
 
 <h1>While loops <a name="sec:basic:loops"></a></h1>
 
+<p>
 Our task now is to print out a conversion table with Celsius degrees
 in the first column of the table and the corresponding Fahrenheit degrees
 in the second column. Such a table may look like this:
@@ -298,6 +300,7 @@ in the second column. Such a table may look like this:
 
 <h2>A naive solution <a name="sec:basic:naive"></a></h2>
 
+<p>
 The formula for converting \( C \) degrees Celsius to \( F \) degrees
 Fahrenheit is \( F=9C/5 + 32 \).
 Since we know how to evaluate the formula for
@@ -364,6 +367,7 @@ employ loops, so this concept is extremely important to learn.
 
 <h2>While loops <a name="sec:basic:while"></a></h2>
 
+<p>
 The <code>while</code> loop is used to repeat a set of statements as long as a
 condition is true.  We shall introduce this kind of loop through an
 example.  The task is to generate the rows of the table of \( C \) and \( F \)
@@ -433,8 +437,8 @@ be able to simulate the program by hand. Let us do this with the
 program segment above. First, we define the start value for the
 sequence of Celsius temperatures: <code>C = -20</code>. We also define the
 increment <code>dC</code> that will be added to <code>C</code> inside the loop.  Then we
-enter the loop condition <code>C <= 40</code>.  The first time <code>C</code> is <code>-20</code>,
-which implies that <code>C <= 40</code> (equivalent to \( C\leq 40 \) in mathematical
+enter the loop condition <code>C &lt;= 40</code>.  The first time <code>C</code> is <code>-20</code>,
+which implies that <code>C &lt;= 40</code> (equivalent to \( C\leq 40 \) in mathematical
 notation) is true. Since the loop condition is true, we enter the
 loop and execute all the indented statements. That is, we compute <code>F</code>
 corresponding to the current <code>C</code> value, print the temperatures, and
@@ -444,12 +448,12 @@ be aligned, but this can easily be fixed later.
 
 <p>
 Thereafter, we enter the second pass in the loop.  First we check the
-condition: <code>C</code> is <code>-15</code> and <code>C <= 40</code> is still true. We execute the
+condition: <code>C</code> is <code>-15</code> and <code>C &lt;= 40</code> is still true. We execute the
 statements in the indented loop block, <code>C</code> becomes <code>-10</code>, this is
 still less than or equal to <code>40</code>, so we enter the loop block
 again. This procedure is repeated until <code>C</code> is updated from <code>40</code> to
 <code>45</code> in the final statement in the loop block. When we then test the
-condition, <code>C <= 40</code>, this condition is no longer true, and the loop
+condition, <code>C &lt;= 40</code>, this condition is no longer true, and the loop
 is terminated.  We proceed with the next statement that has the same
 indentation as the <code>while</code> statement, which is the final <code>print</code>
 statement in this example.
@@ -490,8 +494,9 @@ C /= dC   # equivalent to C = C/dC
 
 <h2>Boolean expressions <a name="sec:basic:boolexpr"></a></h2>
 
+<p>
 In our first example on a <code>while</code> loop, we worked with a condition
-<code>C <= 40</code>, which evaluates to either true or false, written as
+<code>C &lt;= 40</code>, which evaluates to either true or false, written as
 <code>True</code> or <code>False</code> in Python.
 Other comparisons are also useful:
 
@@ -580,7 +585,7 @@ False
 </code></pre>
 <!-- end verbatim block -->
 In the last sample expression, <code>not</code> applies to the value of the
-boolean expression inside the parentheses: <code>x>0</code> is <code>False</code>, <code>y>0</code>
+boolean expression inside the parentheses: <code>x&gt;0</code> is <code>False</code>, <code>y&gt;0</code>
 is <code>True</code>, so the combined expression with <code>or</code> is <code>True</code>,
 and <code>not</code>
 turns this value to <code>False</code>.
@@ -636,6 +641,7 @@ that it is correctly stated.
 
 <h2>Loop implementation of a sum <a name="sec:basic:sumloop"></a></h2>
 
+<p>
 Summations frequently appear in mathematics. For instance,
 the sine function can be calculated as a polynomial:
 
@@ -699,19 +705,19 @@ hand. That is, we go through the statements, one by one, and write down
 on a piece of paper what the state of each variable is.
 
 <p>
-When the loop is first entered, <code>k < N</code> implies <code>1 < 25</code>,
+When the loop is first entered, <code>k &lt; N</code> implies <code>1 &lt; 25</code>,
 which is <code>True</code> so we enter the loop block. There, we compute
 <code>sign = -1.0</code>, <code>k = 3</code>, <code>term = -1.0*x**3/(3*2*1))</code>
 (note that <code>sign</code> is float so we always have <code>float</code> divided
 <!-- intdiv -->
 by <code>int</code>),
 and <code>s = x - x**3/6</code>, which equals the first two terms in the
-sum. Then we test the loop condition: <code>3 < 25</code> is <code>True</code> so
+sum. Then we test the loop condition: <code>3 &lt; 25</code> is <code>True</code> so
 we enter the loop block again. This time we obtain
 <code>term = 1.0*x**5/math.factorial(5)</code>, which correctly implements
 the third term in the sum. At some point, <code>k</code> is updated to
 from <code>23</code> to <code>25</code> inside the loop and the loop condition
-then becomes <code>25 < 25</code>, which is <code>False</code>, implying that the
+then becomes <code>25 &lt; 25</code>, which is <code>False</code>, implying that the
 program jumps over the loop block and continues with the <code>print</code>
 statement (which has the same indentation as the <code>while</code> statement).
 

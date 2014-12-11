@@ -1,0 +1,799 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Introduction to classes in Python">
+<meta name="keywords" content="constructor (class),UML class diagram,instance (class),user-defined datatype (class),method class),attribute (class),namespace,test function,nose tests,pytest tests,special methods (class),callable objects,test function,closure,Newton's method,wrapper code,integration numerical,symbolic computing,integration symbolic,mutable objects,immutable objects,protected attributes (class),test function,information hiding,private attributes (class),API,application programming interface,protected attributes (class),check an object's type,static typing,weak typing,strong typing,dynamic typing,duck typing,static class attributes,static class variables,static class methods,interval arithmetic">
+
+<title>Introduction to classes in Python</title>
+
+
+<link href="https://raw.githubusercontent.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/css/solarized_light_code.css" rel="stylesheet" type="text/css" title="light"/>
+<script src="https://rawgit.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<link href="http://thomasf.github.io/solarized-css/solarized-light.min.css" rel="stylesheet">
+<style type="text/css">
+h1 {color: #b58900;}  /* yellow */
+/* h1 {color: #cb4b16;}  orange */
+/* h1 {color: #d33682;}  magenta, the original choice of thomasf */
+.alert-text-small   { font-size: 80%;  }
+.alert-text-large   { font-size: 130%; }
+.alert-text-normal  { font-size: 90%;  }
+.alert {
+  padding:8px 35px 8px 14px; margin-bottom:18px;
+  text-shadow:0 1px 0 rgba(255,255,255,0.5);
+  border:1px solid #93a1a1;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  color: #555;
+  background-color: #eee8d5;
+  background-position: 10px 5px;
+  background-repeat: no-repeat;
+  background-size: 38px;
+  padding-left: 55px;
+  width: 75%;
+ }
+.alert-block {padding-top:14px; padding-bottom:14px}
+.alert-block > p, .alert-block > ul {margin-bottom:1em}
+.alert li {margin-top: 1em}
+.alert-block p+p {margin-top:5px}
+.alert-notice { background-image: url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_notice.png); }
+.alert-summary  { background-image:url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_summary.png); }
+.alert-warning { background-image: url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_warning.png); }
+.alert-question {background-image:url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_question.png); }
+
+div { text-align: justify; text-justify: inter-word; }
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [(' Simple function classes ',
+               1,
+               'sec:class:functors',
+               'sec:class:functors'),
+              (' Challenge: functions with parameters ',
+               2,
+               'sec:class:func1',
+               'sec:class:func1'),
+              (' Problem ', 3, None, '___sec2'),
+              (' A bad solution: global variables ', 3, None, '___sec3'),
+              (' Representing a function as a class ',
+               2,
+               'sec:class:func2',
+               'sec:class:func2'),
+              (' Implementation ', 3, None, '___sec5'),
+              (' Usage and dissection ', 3, None, '___sec6'),
+              (' The self  variable ', 3, None, '___sec7'),
+              (' Extension of the class ', 3, None, '___sec8'),
+              (' Remark ', 3, None, '___sec9'),
+              (' Using methods as ordinary functions ', 3, None, '___sec10'),
+              (' Doc strings ', 3, None, '___sec11'),
+              (' Another function class example ',
+               2,
+               'sec:class:func3',
+               'sec:class:func3'),
+              (' Remark ', 3, None, '___sec13'),
+              (' Alternative function class implementations ',
+               2,
+               'sec:class:func2b',
+               'sec:class:func2b'),
+              (' Making classes without the class construct ',
+               2,
+               'sec:class:whatis',
+               'sec:class:whatis'),
+              (' First remark ', 3, None, '___sec16'),
+              (' Second remark ', 3, None, '___sec17'),
+              (' More examples on classes ',
+               1,
+               'sec:class:addex',
+               'sec:class:addex'),
+              (' Bank accounts ',
+               2,
+               'sec:class:account',
+               'sec:class:account'),
+              (' Phone book ',
+               2,
+               'sec:class:phonebook',
+               'sec:class:phonebook'),
+              (' A circle ', 2, 'sec:class:circle', 'sec:class:circle'),
+              (' Verification ', 3, None, '___sec22'),
+              (' Remark ', 3, None, '___sec23'),
+              (' Special methods ',
+               1,
+               'sec:class:specialmethods',
+               'sec:class:specialmethods'),
+              (' The call special method ',
+               2,
+               'sec:class:call',
+               'sec:class:call'),
+              (' Example: Automagic differentiation ',
+               2,
+               'sec:class:autodF',
+               'sec:class:autodF'),
+              (' Problem ', 3, None, '___sec27'),
+              (' Solution ', 3, None, '___sec28'),
+              (' Verification ', 3, None, '___sec29'),
+              (" Application: Newton's method ", 3, None, '___sec30'),
+              (' Example: Automagic integration ',
+               2,
+               'sec:class:autoint',
+               'sec:class:autoint'),
+              (' A simple implementation ', 3, None, '___sec32'),
+              (' Verification via symbolic computing ', 3, None, '___sec33'),
+              (' Remark ', 3, None, '___sec34'),
+              (' Turning an instance into a string ',
+               2,
+               'sec:class:str',
+               'sec:class:str'),
+              (' Example: Phone book with special methods ',
+               2,
+               'sec:class:phonebook2',
+               'sec:class:phonebook2'),
+              (' Remark ', 3, None, '___sec37'),
+              (' Adding objects ', 2, 'sec:class:add', 'sec:class:add'),
+              (' Example: Class for polynomials ',
+               2,
+               'sec:class:Polynomial',
+               'sec:class:Polynomial'),
+              (' Implementation ', 3, None, '___sec40'),
+              (' Usage ', 3, None, '___sec41'),
+              (' Pretty print of polynomials ', 3, None, '___sec42'),
+              (' Verifying the implementation ', 3, None, '___sec43'),
+              (' Arithmetic operations and other special methods ',
+               2,
+               'sec:class:arithmetics',
+               'sec:class:arithmetics'),
+              (' Special methods for string conversion ',
+               2,
+               'sec:class:repr',
+               'sec:class:repr'),
+              (' Recreating objects from strings ', 3, None, '___sec46'),
+              (' Example: Class for vectors in the plane ',
+               1,
+               'sec:class:Vec2D',
+               'sec:class:Vec2D'),
+              (' Some mathematical operations on vectors ',
+               2,
+               None,
+               '___sec48'),
+              (' Implementation ', 2, None, '___sec49'),
+              (' Usage ', 2, None, '___sec50'),
+              (' Comment ', 3, None, '___sec51'),
+              (' Example: Class for complex numbers ', 1, None, '___sec52'),
+              (' Implementation ',
+               2,
+               'sec:class:Complex',
+               'sec:class:Complex'),
+              (' Illegal operations ',
+               2,
+               'sec:class:illegalop',
+               'sec:class:illegalop'),
+              (' Mixing complex and real numbers ',
+               2,
+               'sec:class:complex:mixed',
+               'sec:class:complex:mixed'),
+              (' Dynamic, static, strong, weak, and duck typing ',
+               2,
+               None,
+               '___sec56'),
+              (" Special methods for ``right'' operands ",
+               2,
+               'sec:class:complex:rightop',
+               'sec:class:complex:rightop'),
+              (' Remark ', 3, None, '___sec58'),
+              (' Inspecting instances ',
+               2,
+               'sec:class:inspect',
+               'sec:class:inspect'),
+              (' Static methods and attributes ',
+               1,
+               'sec:class:static',
+               'sec:class:static'),
+              (' Summary ', 1, None, '___sec61'),
+              (' Chapter topics ',
+               2,
+               'sec:class:summary',
+               'sec:class:summary'),
+              (' Classes ', 3, None, '___sec63'),
+              (' Special methods ', 3, None, '___sec64'),
+              (' Terminology ', 3, None, '___sec65'),
+              (' Example: interval arithmetic ', 2, None, '___sec66'),
+              (' Problem ', 3, None, '___sec67'),
+              (' Solution ', 3, None, '___sec68'),
+              (' Exercises ', 1, None, '___sec69'),
+              (' Exercise 1: Make a function class ',
+               2,
+               'sec:class:ex2',
+               'sec:class:ex2'),
+              (' Exercise 2: Add an attribute to a class ',
+               2,
+               'sec:class:ex25q',
+               'sec:class:ex25q'),
+              (' Exercise 3: Add functionality to a class ',
+               2,
+               'sec:class:ex25q2',
+               'sec:class:ex25q2'),
+              (' Exercise 4: Make classes for a rectangle and a triangle ',
+               2,
+               'sec:class:ex23',
+               'sec:class:ex23'),
+              (' Exercise 5: Make a class for quadratic functions ',
+               2,
+               'sec:class:ex11',
+               'sec:class:ex11'),
+              (' Exercise 6: Make a class for straight lines ',
+               2,
+               'sec:class:ex25',
+               'sec:class:ex25'),
+              (' Exercise 7: Flexible handling of function arguments ',
+               2,
+               'sec:class:ex25b',
+               'sec:class:ex25b'),
+              (' Exercise 8: Wrap functions in a class ',
+               2,
+               'sec:class:ex27d',
+               'sec:class:ex27d'),
+              (' Exercise 9: Flexible handling of function arguments ',
+               2,
+               'sec:class:ex27e',
+               'sec:class:ex27e'),
+              (' Exercise 10: Deduce a class implementation ',
+               2,
+               'sec:class:ex1',
+               'sec:class:ex1'),
+              (' Exercise 11: Implement special methods in a class ',
+               2,
+               'sec:class:ex2b2',
+               'sec:class:ex2b2'),
+              (' Exercise 12: Make a class for summation of series ',
+               2,
+               'sec:class:ex2b',
+               'sec:class:ex2b'),
+              (' Exercise 13: Apply a numerical differentiation class ',
+               2,
+               'sec:class:ex10',
+               'sec:class:ex10'),
+              (' Exercise 14: Apply symbolic differentiation ',
+               2,
+               'sec:class:exer:sympy:diff',
+               'sec:class:exer:sympy:diff'),
+              (' Exercise 15: Implement in-place `+=` and `-=` operators ',
+               2,
+               'sec:class:ex25qb',
+               'sec:class:ex25qb'),
+              (' Exercise 16: Implement a class for numerical differentiation ',
+               2,
+               'sec:class:ex21',
+               'sec:class:ex21'),
+              (' Exercise 17: Examine a program ',
+               2,
+               'sec:class:ex21b',
+               'sec:class:ex21b'),
+              (' Exercise 18: Modify a class for numerical differentiation ',
+               2,
+               'sec:class:ex23s',
+               'sec:class:ex23s'),
+              (' Exercise 19: Make a class for the Heaviside function ',
+               2,
+               'sec:basic:exHclass',
+               'sec:basic:exHclass'),
+              (' Exercise 20: Make a class for the indicator function ',
+               2,
+               'sec:basic:exIndclass',
+               'sec:basic:exIndclass'),
+              (' Exercise 21: Make a class for piecewise constant functions ',
+               2,
+               'sec:basic:ex:piecewisefunc',
+               'sec:basic:ex:piecewisefunc'),
+              (' Exercise 22: Speed up repeated integral calculations ',
+               2,
+               'sec:class:ex13c',
+               'sec:class:ex13c'),
+              (' Exercise 23: Apply a class for polynomials ',
+               2,
+               'sec:class:ex5',
+               'sec:class:ex5'),
+              (' Exercise 24: Find a bug in a class for polynomials ',
+               2,
+               'sec:class:ex4',
+               'sec:class:ex4'),
+              (' Exercise 25: Implement subtraction of polynomials ',
+               2,
+               'sec:class:ex6a',
+               'sec:class:ex6a'),
+              (' Exercise 26: Test the functionality of pretty print of polynomials ',
+               2,
+               'sec:class:exer:str',
+               'sec:class:exer:str'),
+              (' Exercise 27: Vectorize a class for polynomials ',
+               2,
+               'sec:class:ex7v',
+               'sec:class:ex7v'),
+              (' Remarks ', 3, None, '___sec97'),
+              (' Exercise 28: Use a dict to hold polynomial coefficients ',
+               2,
+               'sec:class:ex8',
+               'sec:class:ex8'),
+              (' Exercise 29: Extend class Vec2D to work with lists/tuples ',
+               2,
+               'sec:class:ex16',
+               'sec:class:ex16'),
+              (' Exercise 30: Extend class Vec2D to 3D vectors ',
+               2,
+               'sec:class:ex17b',
+               'sec:class:ex17b'),
+              (' Exercise 31: Use NumPy arrays in class Vec2D ',
+               2,
+               'sec:class:ex17',
+               'sec:class:ex17'),
+              (' Exercise 32: Make classes for students and courses ',
+               2,
+               'sec:class:ex15',
+               'sec:class:ex15'),
+              (' Exercise 33: Find local and global extrema of a function ',
+               2,
+               'sec:plot:ex28',
+               'sec:plot:ex28'),
+              (' Exercise 34: Find the optimal production for a company ',
+               2,
+               'sec:class:ex18a',
+               'sec:class:ex18a'),
+              (' References ', 1, None, '___sec105')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- newcommands_keep.tex -->
+$$
+\newcommand{\tp}{\thinspace .}
+$$
+
+
+
+
+    
+<a name="part0002"></a>
+<p>
+<!-- begin top navigation -->
+<table style="width: 100%"><tr><td>
+<div style="text-align: left;"><a href="._class-solarized001.html">&laquo; Previous</a></div>
+</td><td>
+<div style="text-align: right;"><a href="._class-solarized003.html">Next &raquo;</a></div>
+</td></tr></table>
+<!-- end top navigation -->
+</p>
+
+<p>
+<!-- !split -->
+
+<h1>More examples on classes <a name="sec:class:addex"></a></h1>
+
+<p>
+The use of classes to solve problems from
+mathematical and physical sciences may not be
+so obvious. On the other hand, in
+many administrative programs for managing
+interactions between objects in the real world the objects
+themselves are
+natural candidates for being modeled by classes.
+Below we give some examples on what classes can be used to model.
+
+<h2>Bank accounts <a name="sec:class:account"></a></h2>
+
+<p>
+The concept of a bank account in a program is a good candidate for a
+class.  The account has some data, typically the name of the account
+holder, the account number, and the current balance.  Three things we
+can do with an account is withdraw money, put money into the account,
+and print out the data of the account.  These actions are modeled by
+methods.  With a class we can pack the data and actions together into
+a new data type so that one account corresponds to one variable in a
+program.
+
+<p>
+Class <code>Account</code> can be implemented as follows:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>class Account:
+    def __init__(self, name, account_number, initial_amount):
+        self.name = name
+        self.no = account_number
+        self.balance = initial_amount
+
+    def deposit(self, amount):
+        self.balance += amount
+
+    def withdraw(self, amount):
+        self.balance -= amount
+
+    def dump(self):
+        s = '%s, %s, balance: %s' % \ 
+            (self.name, self.no, self.balance)
+        print s
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+Here is a simple test of how class <code>Account</code> can be used:
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; from classes import Account
+&gt;&gt;&gt; a1 = Account('John Olsson', '19371554951', 20000)
+&gt;&gt;&gt; a2 = Account('Liz Olsson',  '19371564761', 20000)
+&gt;&gt;&gt; a1.deposit(1000)
+&gt;&gt;&gt; a1.withdraw(4000)
+&gt;&gt;&gt; a2.withdraw(10500)
+&gt;&gt;&gt; a1.withdraw(3500)
+&gt;&gt;&gt; print &quot;a1's balance:&quot;, a1.balance
+a1's balance: 13500
+&gt;&gt;&gt; a1.dump()
+John Olsson, 19371554951, balance: 13500
+&gt;&gt;&gt; a2.dump()
+Liz Olsson, 19371564761, balance: 9500
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+The author of this class does not want users of the class to operate
+on the attributes directly and thereby change the name, the account
+number, or the balance. The intention is that users of the class
+should only call the constructor, the <code>deposit</code>, <code>withdraw</code>, and
+<code>dump</code> methods, and (if desired) inspect the <code>balance</code> attribute, but
+never change it. Other languages with class support usually have
+special keywords that can restrict access to class attributes and
+methods, but Python does not. Either the author of a Python class has
+to rely on correct usage, or a special convention can be used: any
+name starting with an underscore represents an attribute that should
+never be touched or a method that should never be called.  One refers
+to names starting with an underscore as <em>protected</em> names. These can
+be freely used inside methods in the class, but not outside.
+
+<p>
+In class <code>Account</code>, it is natural to protect access to the <code>name</code>,
+<code>no</code>, and <code>balance</code> attributes by prefixing these names by an
+underscore. For <em>reading</em> only of the <code>balance</code> attribute, we provide
+a new method <code>get_balance</code>. The user of the class should now only call
+the methods in the class and not access any attributes.
+
+<p>
+The new "protected" version of class <code>Account</code>, called
+<code>AccountP</code>, reads
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>class AccountP:
+    def __init__(self, name, account_number, initial_amount):
+        self._name = name
+        self._no = account_number
+        self._balance = initial_amount
+
+    def deposit(self, amount):
+        self._balance += amount
+
+    def withdraw(self, amount):
+        self._balance -= amount
+
+    def get_balance(self):
+        return self._balance
+
+    def dump(self):
+        s = '%s, %s, balance: %s' % \ 
+            (self._name, self._no, self._balance)
+        print s
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+We can technically access the attributes, but we then break the
+convention that names starting with an underscore should never
+be touched outside the class. Here is class <code>AccountP</code> in action:
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; a1 = AccountP('John Olsson', '19371554951', 20000)
+&gt;&gt;&gt; a1.deposit(1000)
+&gt;&gt;&gt; a1.withdraw(4000)
+&gt;&gt;&gt; a1.withdraw(3500)
+&gt;&gt;&gt; a1.dump()
+John Olsson, 19371554951, balance: 13500
+&gt;&gt;&gt; print a1._balance       # it works, but a convention is broken
+13500
+print a1.get_balance()      # correct way of viewing the balance
+13500
+&gt;&gt;&gt; a1._no = '19371554955'  # this is a &quot;serious crime&quot;
+</code></pre>
+<!-- end verbatim block -->
+Python has a special construct, called <em>properties</em>, that can
+be used to protect attributes from being changed. This is very useful,
+but the author considers properties a bit too complicated for this
+introductory book.
+
+<p>
+<!-- We remark that users of Python classes tend to access attributes (without -->
+<!-- a leading underscore) directly, while in other languages, such as -->
+<!-- C++, Java, and C#, developers are strongly encouraged to read an -->
+<!-- attribute <code>X</code> by a <code>get_X()</code> method and to change the -->
+<!-- attribute by a <code>set_X(X)</code> method. -->
+
+<h2>Phone book <a name="sec:class:phonebook"></a></h2>
+
+<p>
+You are probably familiar with the phone book on your mobile phone.
+The phone book contains a list of persons. For each person you can
+record the name, telephone numbers, email address, and perhaps other
+relevant data.  A natural way of representing such personal data in a
+program is to create a class, say class <code>Person</code>. The attributes of
+the class holds data like the name, mobile phone number, office phone
+number, private phone number, and email address.  The constructor may
+initialize some of the data about a person.  Additional data can be
+specified later by calling methods in the class.  One method can print
+the data. Other methods can register additional telephone numbers and
+an email address. In addition we initialize some of the attributes in
+a constructor method. The attributes that are not initialized when
+constructing a <code>Person</code> instance can be added later by calling
+appropriate methods. For example, adding an office number is done by
+calling <code>add_office_number</code>.
+
+<p>
+Class <code>Person</code> may look as
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>class Person:
+    def __init__(self, name,
+                 mobile_phone=None, office_phone=None,
+                 private_phone=None, email=None):
+        self.name = name
+        self.mobile = mobile_phone
+        self.office = office_phone
+        self.private = private_phone
+        self.email = email
+
+    def add_mobile_phone(self, number):
+        self.mobile = number
+
+    def add_office_phone(self, number):
+        self.office = number
+
+    def add_private_phone(self, number):
+        self.private = number
+
+    def add_email(self, address):
+        self.email = address
+</code></pre>
+<!-- end verbatim block -->
+Note the use of <code>None</code> as default value for various attributes: the
+object <code>None</code> is commonly used to indicate that a variable or
+attribute is defined, but yet not with a sensible value.
+
+<p>
+A quick demo session of class <code>Person</code> may go as follows:
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; p1 = Person('Hans Hanson',
+...             office_phone='767828283', email='h@hanshanson.com')
+&gt;&gt;&gt; p2 = Person('Ole Olsen', office_phone='767828292')
+&gt;&gt;&gt; p2.add_email('olsen@somemail.net')
+&gt;&gt;&gt; phone_book = [p1, p2]
+</code></pre>
+<!-- end verbatim block -->
+It can be handy to add a method for printing the contents of
+a <code>Person</code> instance in a nice fashion:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>class Person:
+    ...
+    def dump(self):
+        s = self.name + '\n'
+        if self.mobile is not None:
+            s += 'mobile phone:   %s\n' % self.mobile
+        if self.office is not None:
+            s += 'office phone:   %s\n' % self.office
+        if self.private is not None:
+            s += 'private phone:  %s\n' % self.private
+        if self.email is not None:
+            s += 'email address:  %s\n' % self.email
+        print s
+</code></pre>
+<!-- end verbatim block -->
+With this method we can easily print the phone book:
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; for person in phone_book:
+...     person.dump()
+...
+Hans Hanson
+office phone:   767828283
+email address:  h@hanshanson.com
+
+Ole Olsen
+office phone:   767828292
+email address:  olsen@somemail.net
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+A phone book can be a list of <code>Person</code> instances, as indicated in the
+examples above. However, if we quickly want to look up the phone
+numbers or email address for a given name, it would be more convenient
+to store the <code>Person</code> instances in a dictionary with the name
+as key:
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; phone_book = {'Hanson': p1, 'Olsen': p2}
+&gt;&gt;&gt; for person in sorted(phone_book):  # alphabetic order
+...     phone_book[person].dump()
+</code></pre>
+<!-- end verbatim block -->
+The current example of <code>Person</code> objects is extended in
+the section <a href="._class-solarized003.html#sec:class:phonebook2">Example: Phone book with special methods</a>.
+
+<h2>A circle <a name="sec:class:circle"></a></h2>
+
+<p>
+Geometric figures, such as a circle, are other candidates for classes
+in a program. A circle is uniquely defined by its center point
+\( (x_0,y_0) \) and its radius \( R \). We can collect these three numbers
+as attributes in a class. The values of \( x_0 \), \( y_0 \), and \( R \) are
+naturally initialized in the constructor. Other methods can be
+<code>area</code> and <code>circumference</code> for calculating the area
+\( \pi R^2 \) and the circumference \( 2\pi R \):
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>class Circle:
+    def __init__(self, x0, y0, R):
+        self.x0, self.y0, self.R = x0, y0, R
+
+    def area(self):
+        return pi*self.R**2
+
+    def circumference(self):
+        return 2*pi*self.R
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+An example of using class <code>Circle</code> goes as follows:
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; c = Circle(2, -1, 5)
+&gt;&gt;&gt; print 'A circle with radius %g at (%g, %g) has area %g' % \ 
+...       (c.R, c.x0, c.y0, c.area())
+A circle with radius 5 at (2, -1) has area 78.5398
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+The ideas of class <code>Circle</code> can be applied to other geometric
+objects as well: rectangles, triangles, ellipses, boxes, spheres, etc.
+<a href="._class-solarized008.html#sec:class:ex23">Exercise 4: Make classes for a rectangle and a triangle</a> tests if you are able to adapt class
+<code>Circle</code> to a rectangle and a triangle.
+
+<h3>Verification  <a name="___sec22"></a></h3>
+
+<p>
+We should include a test function for checking that the implementation
+of class <code>Circle</code> is correct:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>def test_Circle():
+    R = 2.5
+    c = Circle(7.4, -8.1, R)
+
+    from math import pi
+    exact_area = pi*R**2
+    computed_area = c.area()
+    diff = abs(exact_area - computed_area)
+    tol = 1E-14
+    assert diff &lt; tol, 'bug in Circle.area, diff=%s' % diff
+
+    exact_circumference = 2*pi*R
+    computed_circumference = c.circumference()
+    diff = abs(exact_circumference - computed_circumference)
+    assert diff &lt; tol, 'bug in Circle.circumference, diff=%s' % diff
+</code></pre>
+<!-- end verbatim block -->
+The <code>test_Circle</code> function is written in a way that it can be used
+in a pytest or nose testing
+framework (see the section ref{sec:nose}, or the brief examples
+in the sections ref{bioinf:count:verify}, ref{sec:funcif:summary:ex}, and
+ref{sec:input:modules:testfunc}).
+The necessary conventions
+are that the function name starts
+with <code>test_</code>, the function takes no arguments, and all tests
+are of the form <code>assert success</code> or <code>assert success, msg</code> where
+<code>success</code> is a boolean condition for the test and <code>msg</code> is an
+optional message to be written if the test fails (<code>success</code> is
+<code>False</code>). It is a good habit to write such test functions to
+verify the implementation of classes.
+
+<h3>Remark  <a name="___sec23"></a></h3>
+
+<p>
+There are usually many solutions to a programming problem.
+Representing a circle
+is no exception. Instead of using a class, we could collect
+\( x_0 \), \( y_0 \), and \( R \) in a list and create global functions
+<code>area</code> and <code>circumference</code> that take such a list as argument:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>x0, y0, R = 2, -1, 5
+circle = [x0, y0, R]
+
+def area(c):
+    R = c[2]
+    return pi*R**2
+
+def circumference(c):
+    R = c[2]
+    return 2*pi*R
+</code></pre>
+<!-- end verbatim block -->
+Alternatively, the circle could be represented by a dictionary with
+keys <code>'center'</code> and <code>'radius'</code>:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>circle = {'center': (2, -1), 'radius': 5}
+
+def area(c):
+    R = c['radius']
+    return pi*R**2
+
+def circumference(c):
+    R = c['radius']
+    return 2*pi*R
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+<p>
+<!-- begin bottom navigation -->
+<table style="width: 100%"><tr><td>
+<div style="text-align: left;"><a href="._class-solarized001.html">&laquo; Previous</a></div>
+</td><td>
+<div style="text-align: right;"><a href="._class-solarized003.html">Next &raquo;</a></div>
+</td></tr></table>
+<!-- end bottom navigation -->
+</p>
+
+<!-- ------------------- end of main content --------------- -->
+
+
+</body>
+</html>
+    
+

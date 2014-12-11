@@ -1,0 +1,677 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Introduction to classes in Python">
+<meta name="keywords" content="constructor (class),UML class diagram,instance (class),user-defined datatype (class),method class),attribute (class),namespace,test function,nose tests,pytest tests,special methods (class),callable objects,test function,closure,Newton's method,wrapper code,integration numerical,symbolic computing,integration symbolic,mutable objects,immutable objects,protected attributes (class),test function,information hiding,private attributes (class),API,application programming interface,protected attributes (class),check an object's type,static typing,weak typing,strong typing,dynamic typing,duck typing,static class attributes,static class variables,static class methods,interval arithmetic">
+
+<title>Introduction to classes in Python</title>
+
+<!-- Bootstrap style: bootstrap_bluegray -->
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://raw.github.com/hplgit/doconce/master/bundled/html_styles/style_bootstrap/css/bootstrap_bluegray.css" rel="stylesheet">
+<!-- not necessary
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+
+<style type="text/css">
+/* Let inline verbatim have the same color as the surroundings */
+code { color: inherit; background-color: transparent; }
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [(' Simple function classes ',
+               1,
+               'sec:class:functors',
+               'sec:class:functors'),
+              (' Challenge: functions with parameters ',
+               2,
+               'sec:class:func1',
+               'sec:class:func1'),
+              (' Problem ', 3, None, '___sec2'),
+              (' A bad solution: global variables ', 3, None, '___sec3'),
+              (' Representing a function as a class ',
+               2,
+               'sec:class:func2',
+               'sec:class:func2'),
+              (' Implementation ', 3, None, '___sec5'),
+              (' Usage and dissection ', 3, None, '___sec6'),
+              (' The self  variable ', 3, None, '___sec7'),
+              (' Extension of the class ', 3, None, '___sec8'),
+              (' Remark ', 3, None, '___sec9'),
+              (' Using methods as ordinary functions ', 3, None, '___sec10'),
+              (' Doc strings ', 3, None, '___sec11'),
+              (' Another function class example ',
+               2,
+               'sec:class:func3',
+               'sec:class:func3'),
+              (' Remark ', 3, None, '___sec13'),
+              (' Alternative function class implementations ',
+               2,
+               'sec:class:func2b',
+               'sec:class:func2b'),
+              (' Making classes without the class construct ',
+               2,
+               'sec:class:whatis',
+               'sec:class:whatis'),
+              (' First remark ', 3, None, '___sec16'),
+              (' Second remark ', 3, None, '___sec17'),
+              (' More examples on classes ',
+               1,
+               'sec:class:addex',
+               'sec:class:addex'),
+              (' Bank accounts ',
+               2,
+               'sec:class:account',
+               'sec:class:account'),
+              (' Phone book ',
+               2,
+               'sec:class:phonebook',
+               'sec:class:phonebook'),
+              (' A circle ', 2, 'sec:class:circle', 'sec:class:circle'),
+              (' Verification ', 3, None, '___sec22'),
+              (' Remark ', 3, None, '___sec23'),
+              (' Special methods ',
+               1,
+               'sec:class:specialmethods',
+               'sec:class:specialmethods'),
+              (' The call special method ',
+               2,
+               'sec:class:call',
+               'sec:class:call'),
+              (' Example: Automagic differentiation ',
+               2,
+               'sec:class:autodF',
+               'sec:class:autodF'),
+              (' Problem ', 3, None, '___sec27'),
+              (' Solution ', 3, None, '___sec28'),
+              (' Verification ', 3, None, '___sec29'),
+              (" Application: Newton's method ", 3, None, '___sec30'),
+              (' Example: Automagic integration ',
+               2,
+               'sec:class:autoint',
+               'sec:class:autoint'),
+              (' A simple implementation ', 3, None, '___sec32'),
+              (' Verification via symbolic computing ', 3, None, '___sec33'),
+              (' Remark ', 3, None, '___sec34'),
+              (' Turning an instance into a string ',
+               2,
+               'sec:class:str',
+               'sec:class:str'),
+              (' Example: Phone book with special methods ',
+               2,
+               'sec:class:phonebook2',
+               'sec:class:phonebook2'),
+              (' Remark ', 3, None, '___sec37'),
+              (' Adding objects ', 2, 'sec:class:add', 'sec:class:add'),
+              (' Example: Class for polynomials ',
+               2,
+               'sec:class:Polynomial',
+               'sec:class:Polynomial'),
+              (' Implementation ', 3, None, '___sec40'),
+              (' Usage ', 3, None, '___sec41'),
+              (' Pretty print of polynomials ', 3, None, '___sec42'),
+              (' Verifying the implementation ', 3, None, '___sec43'),
+              (' Arithmetic operations and other special methods ',
+               2,
+               'sec:class:arithmetics',
+               'sec:class:arithmetics'),
+              (' Special methods for string conversion ',
+               2,
+               'sec:class:repr',
+               'sec:class:repr'),
+              (' Recreating objects from strings ', 3, None, '___sec46'),
+              (' Example: Class for vectors in the plane ',
+               1,
+               'sec:class:Vec2D',
+               'sec:class:Vec2D'),
+              (' Some mathematical operations on vectors ',
+               2,
+               None,
+               '___sec48'),
+              (' Implementation ', 2, None, '___sec49'),
+              (' Usage ', 2, None, '___sec50'),
+              (' Comment ', 3, None, '___sec51'),
+              (' Example: Class for complex numbers ', 1, None, '___sec52'),
+              (' Implementation ',
+               2,
+               'sec:class:Complex',
+               'sec:class:Complex'),
+              (' Illegal operations ',
+               2,
+               'sec:class:illegalop',
+               'sec:class:illegalop'),
+              (' Mixing complex and real numbers ',
+               2,
+               'sec:class:complex:mixed',
+               'sec:class:complex:mixed'),
+              (' Dynamic, static, strong, weak, and duck typing ',
+               2,
+               None,
+               '___sec56'),
+              (" Special methods for ``right'' operands ",
+               2,
+               'sec:class:complex:rightop',
+               'sec:class:complex:rightop'),
+              (' Remark ', 3, None, '___sec58'),
+              (' Inspecting instances ',
+               2,
+               'sec:class:inspect',
+               'sec:class:inspect'),
+              (' Static methods and attributes ',
+               1,
+               'sec:class:static',
+               'sec:class:static'),
+              (' Summary ', 1, None, '___sec61'),
+              (' Chapter topics ',
+               2,
+               'sec:class:summary',
+               'sec:class:summary'),
+              (' Classes ', 3, None, '___sec63'),
+              (' Special methods ', 3, None, '___sec64'),
+              (' Terminology ', 3, None, '___sec65'),
+              (' Example: interval arithmetic ', 2, None, '___sec66'),
+              (' Problem ', 3, None, '___sec67'),
+              (' Solution ', 3, None, '___sec68'),
+              (' Exercises ', 1, None, '___sec69'),
+              (' Exercise 1: Make a function class ',
+               2,
+               'sec:class:ex2',
+               'sec:class:ex2'),
+              (' Exercise 2: Add an attribute to a class ',
+               2,
+               'sec:class:ex25q',
+               'sec:class:ex25q'),
+              (' Exercise 3: Add functionality to a class ',
+               2,
+               'sec:class:ex25q2',
+               'sec:class:ex25q2'),
+              (' Exercise 4: Make classes for a rectangle and a triangle ',
+               2,
+               'sec:class:ex23',
+               'sec:class:ex23'),
+              (' Exercise 5: Make a class for quadratic functions ',
+               2,
+               'sec:class:ex11',
+               'sec:class:ex11'),
+              (' Exercise 6: Make a class for straight lines ',
+               2,
+               'sec:class:ex25',
+               'sec:class:ex25'),
+              (' Exercise 7: Flexible handling of function arguments ',
+               2,
+               'sec:class:ex25b',
+               'sec:class:ex25b'),
+              (' Exercise 8: Wrap functions in a class ',
+               2,
+               'sec:class:ex27d',
+               'sec:class:ex27d'),
+              (' Exercise 9: Flexible handling of function arguments ',
+               2,
+               'sec:class:ex27e',
+               'sec:class:ex27e'),
+              (' Exercise 10: Deduce a class implementation ',
+               2,
+               'sec:class:ex1',
+               'sec:class:ex1'),
+              (' Exercise 11: Implement special methods in a class ',
+               2,
+               'sec:class:ex2b2',
+               'sec:class:ex2b2'),
+              (' Exercise 12: Make a class for summation of series ',
+               2,
+               'sec:class:ex2b',
+               'sec:class:ex2b'),
+              (' Exercise 13: Apply a numerical differentiation class ',
+               2,
+               'sec:class:ex10',
+               'sec:class:ex10'),
+              (' Exercise 14: Apply symbolic differentiation ',
+               2,
+               'sec:class:exer:sympy:diff',
+               'sec:class:exer:sympy:diff'),
+              (' Exercise 15: Implement in-place `+=` and `-=` operators ',
+               2,
+               'sec:class:ex25qb',
+               'sec:class:ex25qb'),
+              (' Exercise 16: Implement a class for numerical differentiation ',
+               2,
+               'sec:class:ex21',
+               'sec:class:ex21'),
+              (' Exercise 17: Examine a program ',
+               2,
+               'sec:class:ex21b',
+               'sec:class:ex21b'),
+              (' Exercise 18: Modify a class for numerical differentiation ',
+               2,
+               'sec:class:ex23s',
+               'sec:class:ex23s'),
+              (' Exercise 19: Make a class for the Heaviside function ',
+               2,
+               'sec:basic:exHclass',
+               'sec:basic:exHclass'),
+              (' Exercise 20: Make a class for the indicator function ',
+               2,
+               'sec:basic:exIndclass',
+               'sec:basic:exIndclass'),
+              (' Exercise 21: Make a class for piecewise constant functions ',
+               2,
+               'sec:basic:ex:piecewisefunc',
+               'sec:basic:ex:piecewisefunc'),
+              (' Exercise 22: Speed up repeated integral calculations ',
+               2,
+               'sec:class:ex13c',
+               'sec:class:ex13c'),
+              (' Exercise 23: Apply a class for polynomials ',
+               2,
+               'sec:class:ex5',
+               'sec:class:ex5'),
+              (' Exercise 24: Find a bug in a class for polynomials ',
+               2,
+               'sec:class:ex4',
+               'sec:class:ex4'),
+              (' Exercise 25: Implement subtraction of polynomials ',
+               2,
+               'sec:class:ex6a',
+               'sec:class:ex6a'),
+              (' Exercise 26: Test the functionality of pretty print of polynomials ',
+               2,
+               'sec:class:exer:str',
+               'sec:class:exer:str'),
+              (' Exercise 27: Vectorize a class for polynomials ',
+               2,
+               'sec:class:ex7v',
+               'sec:class:ex7v'),
+              (' Remarks ', 3, None, '___sec97'),
+              (' Exercise 28: Use a dict to hold polynomial coefficients ',
+               2,
+               'sec:class:ex8',
+               'sec:class:ex8'),
+              (' Exercise 29: Extend class Vec2D to work with lists/tuples ',
+               2,
+               'sec:class:ex16',
+               'sec:class:ex16'),
+              (' Exercise 30: Extend class Vec2D to 3D vectors ',
+               2,
+               'sec:class:ex17b',
+               'sec:class:ex17b'),
+              (' Exercise 31: Use NumPy arrays in class Vec2D ',
+               2,
+               'sec:class:ex17',
+               'sec:class:ex17'),
+              (' Exercise 32: Make classes for students and courses ',
+               2,
+               'sec:class:ex15',
+               'sec:class:ex15'),
+              (' Exercise 33: Find local and global extrema of a function ',
+               2,
+               'sec:plot:ex28',
+               'sec:plot:ex28'),
+              (' Exercise 34: Find the optimal production for a company ',
+               2,
+               'sec:class:ex18a',
+               'sec:class:ex18a'),
+              (' References ', 1, None, '___sec105')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- newcommands_keep.tex -->
+$$
+\newcommand{\tp}{\thinspace .}
+$$
+
+
+
+
+    
+<!-- Bootstrap navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="class-bootstrap.html">Introduction to classes in Python</a>
+  </div>
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     <!-- navigation toc: --> <li><a href="._class-bootstrap001.html#sec:class:functors" style="font-size: 80%;">Simple function classes</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap002.html#sec:class:addex" style="font-size: 80%;">More examples on classes</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap003.html#sec:class:specialmethods" style="font-size: 80%;">Special methods</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:class:Vec2D" style="font-size: 80%;">Example: Class for vectors in the plane</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap005.html#___sec52" style="font-size: 80%;">Example: Class for complex numbers</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap006.html#sec:class:static" style="font-size: 80%;">Static methods and attributes</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap007.html#___sec61" style="font-size: 80%;">Summary</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap008.html#___sec69" style="font-size: 80%;">Exercises</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap008.html#___sec105" style="font-size: 80%;">References</a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div> <!-- end of navigation bar -->
+
+<div class="container">
+
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+
+<a name="part0004"></a>
+<!-- !split -->
+
+<h1 id="sec:class:Vec2D">Example: Class for vectors in the plane<a name="sec:class:Vec2D"></a></h1>
+
+<p>
+This section explains how to implement two-dimensional vectors in Python
+such that these vectors act as objects we can add, subtract,
+form inner products with, and do other mathematical operations on.
+To understand the forthcoming material, it is necessary to
+have digested the section <a href="._class-bootstrap003.html#sec:class:specialmethods">Special methods</a>,
+in particular the sections <a href="._class-bootstrap003.html#sec:class:add">Adding objects</a> and <a href="._class-bootstrap003.html#sec:class:arithmetics">Arithmetic operations and other special methods</a>.
+
+<h2 id="___sec48">Some mathematical operations on vectors <a name="___sec48"></a></h2>
+
+<p>
+Vectors in the plane are
+described by a pair of real numbers, \( (a, b) \).
+In the section ref{sec:plot:vectors} we present
+mathematical
+rules for adding and subtracting vectors, multiplying two vectors (the inner or
+dot or scalar product), the length of a vector, and multiplication by
+a scalar:
+
+$$
+\begin{align}
+(a,b) + (c,d) &= (a+c, b+d),\\ 
+(a,b) - (c,d) &= (a-c, b-d),\\ 
+(a,b)\cdot(c,d) &= ac + bd,\\ 
+||(a,b)|| &= \sqrt{(a,b)\cdot(a,b)}  \thinspace .
+\end{align}
+$$
+
+Moreover,
+two vectors \( (a,b) \) and \( (c,d) \) are equal if \( a=c \) and \( b=d \).
+
+<h2 id="___sec49">Implementation <a name="___sec49"></a></h2>
+
+<p>
+We may create a class for plane vectors where the above mathematical
+operations are implemented by special methods. The class must contain
+two attributes, one for each component of the vector, called <code>x</code> and
+<code>y</code>
+below. We include special methods for addition, subtraction, the scalar
+product (multiplication), the absolute value (length), comparison of
+two vectors (<code>==</code> and <code>!=</code>), as well as a method for printing out
+a vector.
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Vec2D</span>:
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__init__</span>(<span style="color: #008000">self</span>, x, y):
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>x <span style="color: #666666">=</span> x
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>y <span style="color: #666666">=</span> y
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__add__</span>(<span style="color: #008000">self</span>, other):
+        <span style="color: #008000; font-weight: bold">return</span> Vec2D(<span style="color: #008000">self</span><span style="color: #666666">.</span>x <span style="color: #666666">+</span> other<span style="color: #666666">.</span>x, <span style="color: #008000">self</span><span style="color: #666666">.</span>y <span style="color: #666666">+</span> other<span style="color: #666666">.</span>y)
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__sub__</span>(<span style="color: #008000">self</span>, other):
+        <span style="color: #008000; font-weight: bold">return</span> Vec2D(<span style="color: #008000">self</span><span style="color: #666666">.</span>x <span style="color: #666666">-</span> other<span style="color: #666666">.</span>x, <span style="color: #008000">self</span><span style="color: #666666">.</span>y <span style="color: #666666">-</span> other<span style="color: #666666">.</span>y)
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__mul__</span>(<span style="color: #008000">self</span>, other):
+        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>x<span style="color: #666666">*</span>other<span style="color: #666666">.</span>x <span style="color: #666666">+</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>y<span style="color: #666666">*</span>other<span style="color: #666666">.</span>y
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__abs__</span>(<span style="color: #008000">self</span>):
+        <span style="color: #008000; font-weight: bold">return</span> math<span style="color: #666666">.</span>sqrt(<span style="color: #008000">self</span><span style="color: #666666">.</span>x<span style="color: #666666">**2</span> <span style="color: #666666">+</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>y<span style="color: #666666">**2</span>)
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__eq__</span>(<span style="color: #008000">self</span>, other):
+        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>x <span style="color: #666666">==</span> other<span style="color: #666666">.</span>x <span style="color: #AA22FF; font-weight: bold">and</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>y <span style="color: #666666">==</span> other<span style="color: #666666">.</span>y
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__str__</span>(<span style="color: #008000">self</span>):
+        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #BA2121">&#39;(</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">, </span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">)&#39;</span> <span style="color: #666666">%</span> (<span style="color: #008000">self</span><span style="color: #666666">.</span>x, <span style="color: #008000">self</span><span style="color: #666666">.</span>y)
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__ne__</span>(<span style="color: #008000">self</span>, other):
+        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #AA22FF; font-weight: bold">not</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>__eq__(other)  <span style="color: #408080; font-style: italic"># reuse __eq__</span>
+</pre></div>
+<p>
+The <code>__add__</code>,
+<code>__sub__</code>,
+<code>__mul__</code>,
+<code>__abs__</code>, and
+<code>__eq__</code> methods
+should be quite straightforward to understand from the previous
+mathematical definitions of these operations.
+The last method deserves a comment: here we simply reuse the
+equality operator <code>__eq__</code>, but precede it with a <code>not</code>.
+We could also have implemented this method as
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__ne__</span>(<span style="color: #008000">self</span>, other):
+        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>x <span style="color: #666666">!=</span> other<span style="color: #666666">.</span>x <span style="color: #AA22FF; font-weight: bold">or</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>y <span style="color: #666666">!=</span> other<span style="color: #666666">.</span>y
+</pre></div>
+<p>
+Nevertheless, this implementation requires us to write more, and it has
+the danger of introducing an error in the logics of the boolean
+expressions. A more reliable approach, when we know that the
+<code>__eq__</code> method works, is to reuse this method and
+observe that <code>a != b</code> means <code>not (a == b)</code>.
+
+<p>
+A word of warning is in place regarding our implementation of the
+equality operator (<code>==</code> via <code>__eq__</code>).
+We test for equality of each component, which is correct from a
+mathematical point of view. However, each vector component is a
+floating-point number that may be subject to round-off errors both
+in the representation on the computer and from previous (inexact)
+floating-point calculations. Two mathematically equal components may
+be different in their inexact representations on the computer.
+The remedy for this problem is to avoid testing for equality, but instead
+check that the difference between the components is sufficiently small.
+The function <code>numpy.allclose</code> can be used for this purpose:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">if</span> a <span style="color: #666666">==</span> b:
+</pre></div>
+<p>
+by
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">if</span> numpy<span style="color: #666666">.</span>allclose(a, b):
+</pre></div>
+<p>
+A more reliable
+equality operator can now be implemented:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Vec2D</span>:
+    <span style="color: #666666">...</span>
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__eq__</span>(<span style="color: #008000">self</span>, other):
+        <span style="color: #008000; font-weight: bold">return</span> numpy<span style="color: #666666">.</span>allclose(<span style="color: #008000">self</span><span style="color: #666666">.</span>x, other<span style="color: #666666">.</span>x) <span style="color: #AA22FF; font-weight: bold">and</span> \ 
+               numpy<span style="color: #666666">.</span>allclose(<span style="color: #008000">self</span><span style="color: #666666">.</span>y, other<span style="color: #666666">.</span>y)
+</pre></div>
+<p>
+As a rule of thumb, you should never apply the <code>==</code> test to two
+<code>float</code> objects.
+
+<p>
+The special method
+<code>__len__</code> could be introduced as a synonym for
+<code>__abs__</code>, i.e., for a <code>Vec2D</code> instance named <code>v</code>,
+<code>len(v)</code> is the same as <code>abs(v)</code>, because the absolute value of
+a vector is mathematically the same as the length of the vector.
+However, if we implement
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__len__</span>(<span style="color: #008000">self</span>):
+        <span style="color: #408080; font-style: italic"># Reuse implementation of __abs__</span>
+        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">abs</span>(<span style="color: #008000">self</span>)  <span style="color: #408080; font-style: italic"># equiv. to self.__abs__()</span>
+</pre></div>
+<p>
+we will run into trouble when we compute <code>len(v)</code> and the answer
+is (as usual) a <code>float</code>. Python will then complain and tell us that
+<code>len(v)</code> must return an <code>int</code>. Therefore,
+<code>__len__</code> cannot be used as a synonym for the length of the
+vector in our application. On the other hand, we could let
+<code>len(v)</code> mean the number of components in the vector:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__len__</span>(<span style="color: #008000">self</span>):
+        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #666666">2</span>
+</pre></div>
+<p>
+This is not a very useful function, though, as we already know that all our
+<code>Vec2D</code> vectors have just two components.
+For generalizations of the class to vectors with \( n \) components, the
+<code>__len__</code> method is of course useful.
+
+<h2 id="___sec50">Usage <a name="___sec50"></a></h2>
+
+<p>
+Let us play with some <code>Vec2D</code> objects:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> u <span style="color: #666666">=</span> Vec2D(<span style="color: #666666">0</span>,<span style="color: #666666">1</span>)
+<span style="color: #666666">&gt;&gt;&gt;</span> v <span style="color: #666666">=</span> Vec2D(<span style="color: #666666">1</span>,<span style="color: #666666">0</span>)
+<span style="color: #666666">&gt;&gt;&gt;</span> w <span style="color: #666666">=</span> Vec2D(<span style="color: #666666">1</span>,<span style="color: #666666">1</span>)
+<span style="color: #666666">&gt;&gt;&gt;</span> a <span style="color: #666666">=</span> u <span style="color: #666666">+</span> v
+<span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">print</span> a
+(<span style="color: #666666">1</span>, <span style="color: #666666">1</span>)
+<span style="color: #666666">&gt;&gt;&gt;</span> a <span style="color: #666666">==</span> w
+<span style="color: #008000">True</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> a <span style="color: #666666">=</span> u <span style="color: #666666">-</span> v
+<span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">print</span> a
+(<span style="color: #666666">-1</span>, <span style="color: #666666">1</span>)
+<span style="color: #666666">&gt;&gt;&gt;</span> a <span style="color: #666666">=</span> u<span style="color: #666666">*</span>v
+<span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">print</span> a
+<span style="color: #666666">0</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">print</span> <span style="color: #008000">abs</span>(u)
+<span style="color: #666666">1.0</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> u <span style="color: #666666">==</span> v
+<span style="color: #008000">False</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> u <span style="color: #666666">!=</span> v
+<span style="color: #008000">True</span>
+</pre></div>
+<p>
+When you read through this interactive session, you should check
+that the calculation is mathematically correct,
+that the resulting object type of a calculation is correct,
+and how each calculation is performed in the program.
+The latter topic is investigated by following the program
+flow through the class methods.
+As an example, let us consider the expression <code>u != v</code>.
+This is a boolean expression that is <code>True</code> since <code>u</code> and <code>v</code>
+are different vectors. The resulting object type should be <code>bool</code>,
+with values <code>True</code> or <code>False</code>. This is confirmed by the output
+in the interactive session above. The Python calculation of
+<code>u != v</code> leads to a call to
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">u<span style="color: #666666">.</span>__ne__(v)
+</pre></div>
+<p>
+which leads to a call to
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">u<span style="color: #666666">.</span>__eq__(v)
+</pre></div>
+<p>
+The result of this last call is <code>False</code>, because the special method
+will evaluate the boolean expression
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">0</span> <span style="color: #666666">==</span> <span style="color: #666666">1</span> <span style="color: #AA22FF; font-weight: bold">and</span> <span style="color: #666666">1</span> <span style="color: #666666">==</span> <span style="color: #666666">0</span>
+</pre></div>
+<p>
+which is obviously <code>False</code>. When going back to the <code>__ne__</code>
+method, we end up with a return of <code>not False</code>, which evaluates
+to <code>True</code>.
+
+<h3 id="___sec51">Comment <a name="___sec51"></a></h3>
+
+<p>
+For real computations with vectors in the plane, you would probably just
+use a Numerical Python array of length 2. However, one thing such objects
+cannot do is evaluating <code>u*v</code> as a scalar product.
+The multiplication operator for Numerical Python arrays is not defined
+as a scalar product (it is rather defined as
+\( (a,b)\cdot(c,d) = (ac, bd) \)). Another difference between our <code>Vec2D</code>
+class and Numerical Python arrays is the <code>abs</code> function, which
+computes the length of the vector in class <code>Vec2D</code>, while it does something
+completely different with Numerical Python arrays.
+
+<p>
+<p>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pager">
+  <li class="previous">
+    <a href="._class-bootstrap003.html">&larr; Prev</a>
+  </li>
+  <li class="next">
+    <a href="._class-bootstrap005.html">Next &rarr;</a>
+  </li>
+</ul>
+<!-- ------------------- end of main content --------------- -->
+
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap footer
+<footer>
+<a href="http://..."><img width="250" align=right src="http://..."></a>
+</footer>
+-->
+
+
+</body>
+</html>
+    
+

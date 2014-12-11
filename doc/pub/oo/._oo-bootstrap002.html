@@ -1,0 +1,1265 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Object-oriented programming">
+<meta name="keywords" content="object-based programming,class hierarchy,class relationship superclass,class relationship derived class,class relationship inheritance,derived class,parent class,base class,superclass,subclass,class relationship subclass,Online Python Tutor,check an object's type,is-a class relationship,has-a class relationship,class relationship is-a,class relationship has-a,dynamic binding,factory function,closure,functional programming,Midpoint rule for integration,Trapezoidal rule for integration,overloading (of methods),polymorphism,Midpoint rule for integration,Trapezoidal rule for integration,recursive function calls,multiple inheritance,convergence rate,Trapezoidal rule for integration,Midpoint rule for integration,object-oriented programming">
+
+<title>Object-oriented programming</title>
+
+<!-- Bootstrap style: bootstrap_bluegray -->
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://raw.github.com/hplgit/doconce/master/bundled/html_styles/style_bootstrap/css/bootstrap_bluegray.css" rel="stylesheet">
+<!-- not necessary
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+
+<style type="text/css">
+/* Let inline verbatim have the same color as the surroundings */
+code { color: inherit; background-color: transparent; }
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [(' Inheritance and class hierarchies ',
+               1,
+               'sec:oo:inheritance',
+               'sec:oo:inheritance'),
+              (' A class for straight lines ',
+               2,
+               'sec:oo:Line',
+               'sec:oo:Line'),
+              (' A first try on a class for parabolas ',
+               2,
+               'sec:oo:Parabola1',
+               'sec:oo:Parabola1'),
+              (' A class for parabolas using inheritance ',
+               2,
+               None,
+               '___sec3'),
+              (' Program flow ', 3, None, '___sec4'),
+              (' Checking the class type ', 2, None, '___sec5'),
+              (' Attribute vs inheritance: has-a vs is-a relationship ',
+               2,
+               None,
+               '___sec6'),
+              (' Superclass for defining an interface ',
+               2,
+               'sec:oo:Func',
+               'sec:oo:Func'),
+              (' Class hierarchy for numerical differentiation ',
+               1,
+               'sec:oo:numdiff',
+               'sec:oo:numdiff'),
+              (' Classes for differentiation ',
+               2,
+               'sec:oo:Diff',
+               'sec:oo:Diff'),
+              (' Computer science remark ', 3, None, '___sec10'),
+              (' Verification ', 2, None, '___sec11'),
+              (' A flexible main program ', 2, None, '___sec12'),
+              (' Extensions ', 2, 'sec:oo:Diff:extend', 'sec:oo:Diff:extend'),
+              (' Application ', 3, None, '___sec14'),
+              (' Alternative implementation via functions ',
+               2,
+               'sec:oo:diff:alt:func',
+               'sec:oo:diff:alt:func'),
+              (' Alternative implementation via functional programming ',
+               2,
+               'sec:oo:diff:alt:FP',
+               'sec:oo:diff:alt:FP'),
+              (' Alternative implementation via a single class ',
+               2,
+               'sec:oo:diff:oneclass',
+               'sec:oo:diff:oneclass'),
+              (' Remark ', 3, None, '___sec18'),
+              (' Class hierarchy for numerical integration ',
+               1,
+               'sec:oo:int',
+               'sec:oo:int'),
+              (' Numerical integration methods ',
+               2,
+               'sec:oo:int:methods',
+               'sec:oo:int:methods'),
+              (' Classes for integration ',
+               2,
+               'sec:oo:Integrator',
+               'sec:oo:Integrator'),
+              (' Verification ', 2, None, '___sec22'),
+              (' Using the class hierarchy ', 2, None, '___sec23'),
+              (' About object-oriented programming ', 2, None, '___sec24'),
+              (' Class hierarchy for making drawings ',
+               1,
+               'sec:oo:shapes',
+               'sec:oo:shapes'),
+              (' Using the object collection ', 2, None, '___sec26'),
+              (' Basic drawing ', 3, None, '___sec27'),
+              (' Groups of objects ', 3, None, '___sec28'),
+              (' Changing line styles and colors ', 3, None, '___sec29'),
+              (' The figure composition as an object hierarchy ',
+               3,
+               None,
+               '___sec30'),
+              (' Animation: translating the vehicle ', 3, None, '___sec31'),
+              (' Animation: rolling the wheels ',
+               3,
+               'sketcher:vehicle1:anim',
+               'sketcher:vehicle1:anim'),
+              (' Example of classes for geometric objects ',
+               2,
+               None,
+               '___sec33'),
+              (' Simple geometric objects ', 3, None, '___sec34'),
+              (' Class curve ', 3, None, '___sec35'),
+              (' Compound geometric objects ', 3, None, '___sec36'),
+              (' Adding functionality via recursion ', 2, None, '___sec37'),
+              (' Basic principles of recursion ', 3, None, '___sec38'),
+              (' Explaining recursion ', 3, None, '___sec39'),
+              (' Scaling, translating, and rotating a figure ',
+               2,
+               'sketcher:scaling',
+               'sketcher:scaling'),
+              (' Scaling ', 3, None, '___sec41'),
+              (' Translation ', 3, None, '___sec42'),
+              (' Rotation ', 3, None, '___sec43'),
+              (' Classes for DNA analysis ', 1, 'bioinf:oo', 'bioinf:oo'),
+              (' Class for regions ', 2, None, '___sec45'),
+              (' Class for genes ', 2, None, '___sec46'),
+              (' Basic features of class gene ', 3, None, '___sec47'),
+              (' Flexible constructor ', 3, None, '___sec48'),
+              (' Other methods ', 3, None, '___sec49'),
+              (' Subclasses ', 2, None, '___sec50'),
+              (' Summary ', 1, None, '___sec51'),
+              (' Chapter topics ', 2, None, '___sec52'),
+              (' Subclass example ', 3, None, '___sec53'),
+              (' Subclassing in general ', 3, None, '___sec54'),
+              (' Terminology ', 3, None, '___sec55'),
+              (' Example: Input data reader ',
+               2,
+               'sec:oo:ReadInput',
+               'sec:oo:ReadInput'),
+              (' Problem ', 3, None, '___sec57'),
+              (' Solution ', 3, None, '___sec58'),
+              (' Prompting the user ', 3, None, '___sec59'),
+              (' Reading from file ', 3, None, '___sec60'),
+              (' Reading from the command line ', 3, None, '___sec61'),
+              (' Reading from a gui ', 3, None, '___sec62'),
+              (' More flexibility in the superclass ', 3, None, '___sec63'),
+              (' Demonstrating the tool ', 3, None, '___sec64'),
+              (' Exercises ', 1, None, '___sec65'),
+              (' Exercise 1: Demonstrate the magic of inheritance ',
+               2,
+               'sec:oo:ex1',
+               'sec:oo:ex1'),
+              (' Exercise 2: Make polynomial subclasses of parabolas ',
+               2,
+               'sec:oo:ex2',
+               'sec:oo:ex2'),
+              (' Remarks ', 3, None, '___sec68'),
+              (' Exercise 3: Implement a class for a function as a subclass ',
+               2,
+               'sec:oo:ex3',
+               'sec:oo:ex3'),
+              (' Exercise 4: Create an alternative class hierarchy for polynomials ',
+               2,
+               'sec:oo:ex5',
+               'sec:oo:ex5'),
+              (' Exercise 5: Make circle a subclass of an ellipse ',
+               2,
+               'sec:oo:ex5b',
+               'sec:oo:ex5b'),
+              (' Exercise 6: Make super- and subclass for a point ',
+               2,
+               'sec:oo:ex17',
+               'sec:oo:ex17'),
+              (' Exercise 7: Modify a function class by subclassing ',
+               2,
+               'sec:oo:ex7',
+               'sec:oo:ex7'),
+              (' Exercise 8: Explore the accuracy of difference formulas ',
+               2,
+               'sec:oo:ex18',
+               'sec:oo:ex18'),
+              (' Exercise 9: Implement a subclass ',
+               2,
+               'sec:oo:ex15b',
+               'sec:oo:ex15b'),
+              (' Exercise 10: Make classes for numerical differentiation ',
+               2,
+               'sec:oo:ex33',
+               'sec:oo:ex33'),
+              (' Exercise 11: Implement a new subclass for differentiation ',
+               2,
+               'sec:oo:ex31',
+               'sec:oo:ex31'),
+              (' Exercise 12: Understand if a class can be used recursively ',
+               2,
+               'sec:oo:ex14',
+               'sec:oo:ex14'),
+              (' Exercise 13: Represent people by a class hierarchy ',
+               2,
+               'sec:oo:ex4',
+               'sec:oo:ex4'),
+              (' Remark ', 3, None, '___sec80'),
+              (' Exercise 14: Add a new class in a class hierarchy ',
+               2,
+               'sec:oo:ex15',
+               'sec:oo:ex15'),
+              (' Exercise 15: Compute convergence rates of numerical integration methods ',
+               2,
+               'sec:oo:ex16',
+               'sec:oo:ex16'),
+              (' Exercise 16: Add common functionality in a class hierarchy ',
+               2,
+               'sec:oo:ex6',
+               'sec:oo:ex6'),
+              (' Exercise 17: Make a class hierarchy for root finding ',
+               2,
+               'sec:oo:ex41',
+               'sec:oo:ex41'),
+              (' Exercise 18: Make a calculus calculator class ',
+               2,
+               'sec:plot:ex30',
+               'sec:plot:ex30'),
+              (' Exercise 19: Compute inverse functions ',
+               2,
+               'sec:plot:ex30b',
+               'sec:plot:ex30b'),
+              (' Exercise 20: Make line drawing of a person; program ',
+               2,
+               'pysketcher:exer:person:prog',
+               'pysketcher:exer:person:prog'),
+              (' Exercise 21: Make line drawing of a person; class ',
+               2,
+               'pysketcher:exer:person:class',
+               'pysketcher:exer:person:class'),
+              (' Exercise 22: Animate a person with waving hands ',
+               2,
+               'pysketcher:exer:person:anim',
+               'pysketcher:exer:person:anim'),
+              (' References ', 1, None, '___sec90')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- newcommands_keep.tex -->
+$$
+\newcommand{\tp}{\thinspace .}
+$$
+
+
+
+
+    
+<!-- Bootstrap navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="oo-bootstrap.html">Object-oriented programming</a>
+  </div>
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     <!-- navigation toc: --> <li><a href="._oo-bootstrap001.html#sec:oo:inheritance" style="font-size: 80%;">Inheritance and class hierarchies</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:oo:numdiff" style="font-size: 80%;">Class hierarchy for numerical differentiation</a></li>
+     <!-- navigation toc: --> <li><a href="._oo-bootstrap003.html#sec:oo:int" style="font-size: 80%;">Class hierarchy for numerical integration</a></li>
+     <!-- navigation toc: --> <li><a href="._oo-bootstrap004.html#sec:oo:shapes" style="font-size: 80%;">Class hierarchy for making drawings</a></li>
+     <!-- navigation toc: --> <li><a href="._oo-bootstrap004.html#bioinf:oo" style="font-size: 80%;">Classes for DNA analysis</a></li>
+     <!-- navigation toc: --> <li><a href="._oo-bootstrap005.html#___sec51" style="font-size: 80%;">Summary</a></li>
+     <!-- navigation toc: --> <li><a href="._oo-bootstrap006.html#___sec65" style="font-size: 80%;">Exercises</a></li>
+     <!-- navigation toc: --> <li><a href="._oo-bootstrap006.html#___sec90" style="font-size: 80%;">References</a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div> <!-- end of navigation bar -->
+
+<div class="container">
+
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+
+<a name="part0002"></a>
+<!-- !split -->
+
+<h1 id="sec:oo:numdiff">Class hierarchy for numerical differentiation<a name="sec:oo:numdiff"></a></h1>
+
+<p>
+The document <a href="http://tcse6.on.net/class" target="_self">Introduction to classes in
+Python</a> <a href="._oo-bootstrap006.html#Langtangen_TCSE6_class">[2]</a>
+presents a class <code>Derivative</code> that (approximately) differentiate any
+mathematical function represented by a callable Python object.  The
+class employs the simplest possible numerical derivative.  There are a
+lot of other numerical formulas for computing approximations to
+\( f'(x) \):
+
+$$
+\begin{align}
+f'(x) &= \frac{f(x+h)-f(x)}{h} + \mathcal{O}(h),
+ \quad\hbox{(1st-order forward diff.)}
+\tag{1}\\ 
+f'(x) &= \frac{f(x)-f(x-h)}{h} + \mathcal{O}(h),
+ \quad\hbox{(1st-order backward diff.)}
+\tag{2}\\ 
+f'(x) &= \frac{f(x+h)-f(x-h)}{2h} + \mathcal{O}(h^2),
+ \quad\hbox{(2nd-order central diff.)}
+\tag{3}\\ 
+f'(x) &=  \frac{4}{3}\frac{f(x+h)-f(x-h)}{2h}
+  -\frac{1}{3}\frac{f(x+2h) - f(x-2h)}{4h} + \mathcal{O}(h^4),
+\nonumber\\ 
+&  \quad\hbox{(4th-order central diff.)} \tag{4}\\ 
+f'(x) &=  \frac{3}{2}\frac{f(x+h)-f(x-h)}{2h}
+  -\frac{3}{5}\frac{f(x+2h) - f(x-2h)}{4h} + \nonumber\\ 
+&  \frac{1}{10}\frac{f(x+3h) - f(x-3h)}{6h} + \mathcal{O}(h^6),\nonumber\\ 
+& \quad\hbox{(6th-order central diff.)}\\ 
+f'(x) &=  \frac{1}{h}\left(
+-\frac{1}{6}f(x+2h) + f(x+h) - \frac{1}{2}f(x) - \frac{1}{3}f(x-h)\right)
+  + \mathcal{O}(h^3),\nonumber\\ 
+& \quad\hbox{(3rd-order forward diff.)}
+\tag{5}
+\end{align}
+$$
+
+The key ideas about the implementation of such a family of formulas
+are explained in the section <a href="#sec:oo:Diff">Classes for differentiation</a>.  For the interested reader,
+the sections <a href="#sec:oo:Diff:extend">Extensions</a>-<a href="#sec:oo:diff:oneclass">Alternative implementation via a single class</a> contains
+more advanced additional material that can well be skipped in a first
+reading. However, the additional material puts the basic solution in
+the section <a href="#sec:oo:Diff">Classes for differentiation</a> into a wider perspective, which may increase
+the understanding of object orientation.
+
+<h2 id="sec:oo:Diff">Classes for differentiation<a name="sec:oo:Diff"></a></h2>
+
+<p>
+It is argued in the document <a href="http://tcse6.on.net/class" target="_self">Introduction to classes in
+Python</a> <a href="._oo-bootstrap006.html#Langtangen_TCSE6_class">[2]</a>
+that it is wise to implement a numerical differentiation formula as a
+class where \( f(x) \) and \( h \) are attributes and a <code>__call__</code> method
+makes class instances behave as ordinary Python functions.  Hence,
+when we have a collection of different numerical differentiation
+formulas, like <a href="#mjx-eqn-1">(1)</a>-<a href="#mjx-eqn-5">(5)</a>, it makes sense
+to implement each one of them as a class.
+
+<p>
+Doing this implementation
+(see ref{sec:class:ex21}),
+we realize that the constructors are identical because their task in
+the present case to store \( f \) and \( h \).  Object-orientation is now a
+natural next step: we can avoid duplicating the constructors by
+letting all the classes inherit the common constructor code.  To this
+end, we introduce a superclass <code>Diff</code> and implement the different
+numerical differentiation rules in subclasses of <code>Diff</code>.  Since the
+subclasses inherit their constructor, all they have to do is to
+provide a <code>__call__</code> method that implements the relevant
+differentiation formula.
+
+<p>
+Let us show what the superclass <code>Diff</code> looks like and how
+three subclasses implement the
+formulas <a href="#mjx-eqn-1">(1)</a>-<a href="#mjx-eqn-3">(3)</a>:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Diff</span>:
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__init__</span>(<span style="color: #008000">self</span>, f, h<span style="color: #666666">=1E-5</span>):
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>f <span style="color: #666666">=</span> f
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>h <span style="color: #666666">=</span> <span style="color: #008000">float</span>(h)
+
+<span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Forward1</span>(Diff):
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__call__</span>(<span style="color: #008000">self</span>, x):
+        f, h <span style="color: #666666">=</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>f, <span style="color: #008000">self</span><span style="color: #666666">.</span>h
+        <span style="color: #008000; font-weight: bold">return</span> (f(x<span style="color: #666666">+</span>h) <span style="color: #666666">-</span> f(x))<span style="color: #666666">/</span>h
+
+<span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Backward1</span>(Diff):
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__call__</span>(<span style="color: #008000">self</span>, x):
+        f, h <span style="color: #666666">=</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>f, <span style="color: #008000">self</span><span style="color: #666666">.</span>h
+        <span style="color: #008000; font-weight: bold">return</span> (f(x) <span style="color: #666666">-</span> f(x<span style="color: #666666">-</span>h))<span style="color: #666666">/</span>h
+
+<span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Central2</span>(Diff):
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__call__</span>(<span style="color: #008000">self</span>, x):
+        f, h <span style="color: #666666">=</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>f, <span style="color: #008000">self</span><span style="color: #666666">.</span>h
+        <span style="color: #008000; font-weight: bold">return</span> (f(x<span style="color: #666666">+</span>h) <span style="color: #666666">-</span> f(x<span style="color: #666666">-</span>h))<span style="color: #666666">/</span>(<span style="color: #666666">2*</span>h)
+</pre></div>
+<p>
+These small classes demonstrates an important feature of object-orientation:
+code common to many different classes are placed in a superclass, and
+the subclasses add just the code that differs among the classes.
+
+<p>
+We can easily implement the formulas <a href="#mjx-eqn-4">(4)</a>-<a href="#mjx-eqn-5">(5)</a>
+by following the same method:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Central4</span>(Diff):
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__call__</span>(<span style="color: #008000">self</span>, x):
+        f, h <span style="color: #666666">=</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>f, <span style="color: #008000">self</span><span style="color: #666666">.</span>h
+        <span style="color: #008000; font-weight: bold">return</span> (<span style="color: #666666">4./3</span>)<span style="color: #666666">*</span>(f(x<span style="color: #666666">+</span>h)   <span style="color: #666666">-</span> f(x<span style="color: #666666">-</span>h))  <span style="color: #666666">/</span>(<span style="color: #666666">2*</span>h) <span style="color: #666666">-</span> \ 
+               (<span style="color: #666666">1./3</span>)<span style="color: #666666">*</span>(f(x<span style="color: #666666">+2*</span>h) <span style="color: #666666">-</span> f(x<span style="color: #666666">-2*</span>h))<span style="color: #666666">/</span>(<span style="color: #666666">4*</span>h)
+
+<span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Central6</span>(Diff):
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__call__</span>(<span style="color: #008000">self</span>, x):
+        f, h <span style="color: #666666">=</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>f, <span style="color: #008000">self</span><span style="color: #666666">.</span>h
+        <span style="color: #008000; font-weight: bold">return</span> (<span style="color: #666666">3./2</span>) <span style="color: #666666">*</span>(f(x<span style="color: #666666">+</span>h)   <span style="color: #666666">-</span> f(x<span style="color: #666666">-</span>h))  <span style="color: #666666">/</span>(<span style="color: #666666">2*</span>h) <span style="color: #666666">-</span> \ 
+               (<span style="color: #666666">3./5</span>) <span style="color: #666666">*</span>(f(x<span style="color: #666666">+2*</span>h) <span style="color: #666666">-</span> f(x<span style="color: #666666">-2*</span>h))<span style="color: #666666">/</span>(<span style="color: #666666">4*</span>h) <span style="color: #666666">+</span> \ 
+               (<span style="color: #666666">1./10</span>)<span style="color: #666666">*</span>(f(x<span style="color: #666666">+3*</span>h) <span style="color: #666666">-</span> f(x<span style="color: #666666">-3*</span>h))<span style="color: #666666">/</span>(<span style="color: #666666">6*</span>h)
+
+<span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Forward3</span>(Diff):
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__call__</span>(<span style="color: #008000">self</span>, x):
+        f, h <span style="color: #666666">=</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>f, <span style="color: #008000">self</span><span style="color: #666666">.</span>h
+        <span style="color: #008000; font-weight: bold">return</span> (<span style="color: #666666">-</span>(<span style="color: #666666">1./6</span>)<span style="color: #666666">*</span>f(x<span style="color: #666666">+2*</span>h) <span style="color: #666666">+</span> f(x<span style="color: #666666">+</span>h) <span style="color: #666666">-</span> <span style="color: #666666">0.5*</span>f(x) <span style="color: #666666">-</span> \ 
+                (<span style="color: #666666">1./3</span>)<span style="color: #666666">*</span>f(x<span style="color: #666666">-</span>h))<span style="color: #666666">/</span>h
+
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">test_Central2</span>():
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f</span>(x):
+        <span style="color: #008000; font-weight: bold">return</span> a<span style="color: #666666">*</span>x <span style="color: #666666">+</span> b
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">df_exact</span>(x):
+        <span style="color: #008000; font-weight: bold">return</span> a
+
+    a <span style="color: #666666">=</span> <span style="color: #666666">0.2</span>; b <span style="color: #666666">=</span> <span style="color: #666666">-4</span>
+    df <span style="color: #666666">=</span> Central2(f, h<span style="color: #666666">=0.55</span>)
+    x <span style="color: #666666">=</span> <span style="color: #666666">6.2</span>
+    msg <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;method Central2 failed: df/dx=</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121"> != </span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> \ 
+          (df(x), df_exact(x))
+    tol <span style="color: #666666">=</span> <span style="color: #666666">1E-14</span>
+    <span style="color: #008000; font-weight: bold">assert</span> <span style="color: #008000">abs</span>(df_exact(x) <span style="color: #666666">-</span> df(x)) <span style="color: #666666">&lt;</span> tol
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">_test_one_method</span>(method):
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Test method in string `method` on a linear function.&quot;&quot;&quot;</span>
+    f <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">lambda</span> x: a<span style="color: #666666">*</span>x <span style="color: #666666">+</span> b
+    df_exact <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">lambda</span> x: a
+    a <span style="color: #666666">=</span> <span style="color: #666666">0.2</span>; b <span style="color: #666666">=</span> <span style="color: #666666">-4</span>
+    df <span style="color: #666666">=</span> <span style="color: #008000">eval</span>(method)(f, h<span style="color: #666666">=0.55</span>)
+    x <span style="color: #666666">=</span> <span style="color: #666666">6.2</span>
+    msg <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;method </span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121"> failed: df/dx=</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121"> != </span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> \ 
+          (method, df(x), df_exact(x))
+    tol <span style="color: #666666">=</span> <span style="color: #666666">1E-14</span>
+    <span style="color: #008000; font-weight: bold">assert</span> <span style="color: #008000">abs</span>(df_exact(x) <span style="color: #666666">-</span> df(x)) <span style="color: #666666">&lt;</span> tol
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">test_all_methods</span>():
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Call _test_one_method for all subclasses of Diff.&quot;&quot;&quot;</span>
+    <span style="color: #008000; font-weight: bold">print</span> <span style="color: #008000">globals</span>()
+    names <span style="color: #666666">=</span> <span style="color: #008000">list</span>(<span style="color: #008000">globals</span>()<span style="color: #666666">.</span>keys())  <span style="color: #408080; font-style: italic"># all names in this module</span>
+    <span style="color: #008000; font-weight: bold">for</span> name <span style="color: #AA22FF; font-weight: bold">in</span> names:
+        <span style="color: #008000; font-weight: bold">if</span> name[<span style="color: #666666">0</span>]<span style="color: #666666">.</span>isupper():
+            <span style="color: #008000; font-weight: bold">if</span> <span style="color: #008000">issubclass</span>(<span style="color: #008000">eval</span>(name), Diff):
+                <span style="color: #008000; font-weight: bold">if</span> name <span style="color: #666666">!=</span> <span style="color: #BA2121">&#39;Diff&#39;</span>:
+                    _test_one_method(name)
+</pre></div>
+<p>
+We have placed all the classes in a module file <a href="http://tinyurl.com/pwyasaa/oo/Diff.py" target="_self"><tt>Diff.py</tt></a>.  Here is a short interactive example using
+the module to numerically differentiate the sine function:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">Diff</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #666666">*</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">math</span> <span style="color: #008000; font-weight: bold">import</span> sin
+<span style="color: #666666">&gt;&gt;&gt;</span> mycos <span style="color: #666666">=</span> Central4(sin)
+<span style="color: #666666">&gt;&gt;&gt;</span> mycos(pi)              <span style="color: #408080; font-style: italic"># compute sin&#39;(pi)</span>
+<span style="color: #666666">-1.000000082740371</span>
+</pre></div>
+<p>
+Instead of a plain Python function we may use an object with a
+<code>__call__</code> method, here exemplified through the
+function \( f(t;a,b,c)=at^2 + bt + c \):
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Poly2</span>:
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__init__</span>(<span style="color: #008000">self</span>, a, b, c):
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>a, <span style="color: #008000">self</span><span style="color: #666666">.</span>b, <span style="color: #008000">self</span><span style="color: #666666">.</span>c <span style="color: #666666">=</span> a, b, c
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__call__</span>(<span style="color: #008000">self</span>, t):
+        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>a<span style="color: #666666">*</span>t<span style="color: #666666">**2</span> <span style="color: #666666">+</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>b<span style="color: #666666">*</span>t <span style="color: #666666">+</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>c
+
+f <span style="color: #666666">=</span> Poly2(<span style="color: #666666">1</span>, <span style="color: #666666">0</span>, <span style="color: #666666">1</span>)
+dfdt <span style="color: #666666">=</span> Central4(f)
+t <span style="color: #666666">=</span> <span style="color: #666666">2</span>
+<span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&quot;f&#39;(</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">)=</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">&quot;</span> <span style="color: #666666">%</span> (t, dfdt(t))
+</pre></div>
+<p>
+Let us examine the program flow.
+When Python encounters <code>dfdt = Central4(f)</code>,
+it looks for the constructor in class <code>Central4</code>, but there is no
+constructor in that class. Python then examines the superclasses
+of <code>Central4</code>, listed in <code>Central4.__bases__</code>.
+The superclass <code>Diff</code> contains a constructor, and this method
+is called. When Python meets the <code>dfdt(t)</code> call, it looks
+for <code>__call__</code> in class <code>Central4</code> and finds it, so there
+is no need to examine the superclass. This process of looking up
+methods of a class is called <em>dynamic binding.</em>
+
+<h3 id="___sec10">Computer science remark <a name="___sec10"></a></h3>
+
+<p>
+Dynamic binding means that a name is bound to a function while the
+program is running.  Normally, in computer languages, a function name
+is static in the sense that it is hardcoded as part of the function
+body and will not change during the execution of the program. This
+principle is known as static binding of function/method names.  Object
+orientation offers the technical means to associate different
+functions with the same name, which yields a kind of magic for
+increased flexibility in programs.  The particular function that the
+name refers to can be set at run-time, i.e., when the program is
+running, and therefore known as dynamic binding.
+
+<p>
+In Python, dynamic binding is a natural feature since names
+(variables) can refer to functions and therefore be dynamically bound
+during execution, just as any ordinary variable.  To illustrate this
+point, let <code>func1</code> and <code>func2</code> be two Python functions of one
+argument, and consider the code
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">if</span> <span style="color: #008000">input</span> <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;func1&#39;</span>:
+    f <span style="color: #666666">=</span> func1
+<span style="color: #008000; font-weight: bold">elif</span> <span style="color: #008000">input</span> <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;func2&#39;</span>:
+    f <span style="color: #666666">=</span> func2
+y <span style="color: #666666">=</span> f(x)
+</pre></div>
+<p>
+Here, the name <code>f</code> is bound to one of the <code>func1</code> and <code>func2</code> function
+objects while the program is running.  This is a result of two
+features: (i) dynamic typing (so the contents of <code>f</code> can change), and
+(ii) functions being ordinary objects.  The bottom line is that
+dynamic binding comes natural in Python, while it appears more like
+convenient magic in languages like C++, Java, and C#.
+
+<h2 id="___sec11">Verification <a name="___sec11"></a></h2>
+
+<p>
+We have several alternative numerical methods for differentiation
+implemented in the <code>Diff</code> hierarchy, and the <code>Diff</code> module should
+contain one or more test functions for verifying the
+implementations. The fundamental problem is that even if we know the
+exact derivative of a function, we do not know what the numerical
+error in one of the subclass methods is.  This fact prevents us from
+comparing the numerical and the exact derivative.
+
+<p>
+Fortunately, numerical differentiation formulas of the type we have
+encountered above are able to differentiate lower order polynomials
+exactly.  All of them are capable of computing \( f'(x)=a \), where
+\( f(x)=ax+b \), without approximation errors for any \( h \).  We can use
+this knowledge to construct a test function:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">test_Central2</span>():
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f</span>(x):
+        <span style="color: #008000; font-weight: bold">return</span> a<span style="color: #666666">*</span>x <span style="color: #666666">+</span> b
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">df_exact</span>(x):
+        <span style="color: #008000; font-weight: bold">return</span> a
+
+    a <span style="color: #666666">=</span> <span style="color: #666666">0.2</span>; b <span style="color: #666666">=</span> <span style="color: #666666">-4</span>
+    df <span style="color: #666666">=</span> Central2(f, h<span style="color: #666666">=0.55</span>)
+    x <span style="color: #666666">=</span> <span style="color: #666666">6.2</span>
+    msg <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;method Central2 failed: df/dx=</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121"> != </span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> \ 
+          (df(x), df_exact(x))
+    tol <span style="color: #666666">=</span> <span style="color: #666666">1E-14</span>
+    <span style="color: #008000; font-weight: bold">assert</span> <span style="color: #008000">abs</span>(df_exact(x) <span style="color: #666666">-</span> df(x)) <span style="color: #666666">&lt;</span> tol
+</pre></div>
+<p>
+It will be boring to write such a test function for each class
+in the hierarchy. Therefore, we parameterize the class name
+and rewrite <code>test_Central</code> such that it can be reused for
+any class in the <code>Diff</code> hierarchy:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">_test_one_method</span>(method):
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Test method in string `method` on a linear function.&quot;&quot;&quot;</span>
+    f <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">lambda</span> x: a<span style="color: #666666">*</span>x <span style="color: #666666">+</span> b
+    df_exact <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">lambda</span> x: a
+    a <span style="color: #666666">=</span> <span style="color: #666666">0.2</span>; b <span style="color: #666666">=</span> <span style="color: #666666">-4</span>
+    df <span style="color: #666666">=</span> <span style="color: #008000">eval</span>(method)(f, h<span style="color: #666666">=0.55</span>)
+    x <span style="color: #666666">=</span> <span style="color: #666666">6.2</span>
+    msg <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;method </span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121"> failed: df/dx=</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121"> != </span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> \ 
+          (method, df(x), df_exact(x))
+    tol <span style="color: #666666">=</span> <span style="color: #666666">1E-14</span>
+    <span style="color: #008000; font-weight: bold">assert</span> <span style="color: #008000">abs</span>(df_exact(x) <span style="color: #666666">-</span> df(x)) <span style="color: #666666">&lt;</span> tol
+</pre></div>
+<p>
+Some comments are needed to explain this function:
+
+<ul>
+ <li> All our test functions are intended for the pytest and nose testing
+   frameworks.
+   (See The
+   document <a href="http://tcse6.on.net/nose" target="_self">Unit testing with pytest and nose</a>
+   <a href="._oo-bootstrap006.html#Langtangen_TCSE6_nose">[3]</a> for more information on such test functions.)
+   The function name must then start with <code>test_</code> and
+   no arguments are allowed. For the helper function <code>_test_one_method</code>
+   with an argument, the function name cannot start with <code>test</code>, and that
+   is why an underscore is added.</li>
+ <li> Lambda functions
+   (see the section ref{sec:basic:lambdafunc})
+   are used to save code in the definitions of <code>f</code> and <code>df_exact</code>.</li>
+ <li> The subclass to be tested is given as a string <code>method</code>.
+   Calling the constructor must then be done by <code>eval(method)(f)</code>.</li>
+</ul>
+
+It remains to make a loop over all the implemented subclasses and
+call <code>_test_one_method</code> for each of them. As always, we try to find
+a way to automate boring work, which here consists of listing all
+the subclasses (and remembering to update the list when new subclasses
+are added). All global variables in a file is available from the
+dictionary returned by <code>globals()</code>. The key is a variable name and
+the value is the corresponding object. For example, <code>print globals()</code>
+reveals that all the defined classes are in <code>globals()</code>, e.g.,
+
+<p>
+
+<!-- code=text typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">&#39;Central2&#39;: &lt;class Diff.Central2 at 0x1a87c80&gt;,
+&#39;Central4&#39;: &lt;class Diff.Central4 at 0x1a87f58&gt;,
+&#39;Diff&#39;: &lt;class Diff.Diff at 0x1a870b8&gt;,
+</pre></div>
+<p>
+To find all the relevant classes to test, we grab all names from
+the <code>globals()</code> dictionary, look for names that starts with upper case,
+and find the names that correspond to a subclass of <code>Diff</code> (drop <code>Diff</code>
+itself as this class cannot compute anything and therefore cannot be
+tested). Translating this algorithm to code gives us a test function
+that can test all subclasses in the <code>Diff</code> hierarchy:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">test_all_methods</span>():
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Call _test_one_method for all subclasses of Diff.&quot;&quot;&quot;</span>
+    <span style="color: #008000; font-weight: bold">print</span> <span style="color: #008000">globals</span>()
+    names <span style="color: #666666">=</span> <span style="color: #008000">list</span>(<span style="color: #008000">globals</span>()<span style="color: #666666">.</span>keys())  <span style="color: #408080; font-style: italic"># all names in this module</span>
+    <span style="color: #008000; font-weight: bold">for</span> name <span style="color: #AA22FF; font-weight: bold">in</span> names:
+        <span style="color: #008000; font-weight: bold">if</span> name[<span style="color: #666666">0</span>]<span style="color: #666666">.</span>isupper():
+            <span style="color: #008000; font-weight: bold">if</span> <span style="color: #008000">issubclass</span>(<span style="color: #008000">eval</span>(name), Diff):
+                <span style="color: #008000; font-weight: bold">if</span> name <span style="color: #666666">!=</span> <span style="color: #BA2121">&#39;Diff&#39;</span>:
+                    _test_one_method(name)
+</pre></div>
+
+<h2 id="___sec12">A flexible main program <a name="___sec12"></a></h2>
+
+<p>
+As a demonstration of the power of Python programming, we shall now
+write a main program for our <code>Diff</code> module
+that accepts a function on the command-line, together with
+information about the difference type (centered, backward, or forward),
+the order of the approximation, and a value of the independent variable.
+The corresponding output is the derivative of the given function.
+An example of the usage of the program goes like this:
+
+<p>
+
+<!-- code=text (!bc sys) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">Diff.py &#39;exp(sin(x))&#39; Central 2 3.1
+-1.04155573055
+</pre></div>
+<p>
+Here, we asked the program to differentiate \( f(x)=e^{\sin x} \)
+at \( x=3.1 \) with a central scheme of order 2 (using the <code>Central2</code> class
+in the <code>Diff</code> hierarchy).
+
+<p>
+We can provide any expression with <code>x</code> as input and request any
+scheme from the <code>Diff</code> hierarchy, and the derivative will be
+(approximately) computed.  One great thing with Python is that the
+code is very short (<a href="http://tinyurl.com/pwyasaa/oo/differentiate.py" target="_self"><tt>differentiate.py</tt></a>):
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">    <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">math</span> <span style="color: #008000; font-weight: bold">import</span> sin
+    mycos <span style="color: #666666">=</span> Central4(sin)
+    <span style="color: #008000; font-weight: bold">print</span> <span style="color: #008000">dir</span>(mycos)
+    <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;Subclass </span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121"> has these attributes and methods:&#39;</span> <span style="color: #666666">%</span> \ 
+          mycos<span style="color: #666666">.</span>__class__<span style="color: #666666">.</span>__name__
+    <span style="color: #008000; font-weight: bold">print</span> mycos<span style="color: #666666">.</span>__dict__
+    <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;Superclass </span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121"> has these attributes and methods:&#39;</span> <span style="color: #666666">%</span> \ 
+          mycos<span style="color: #666666">.</span>__class__<span style="color: #666666">.</span>__bases__[<span style="color: #666666">0</span>]<span style="color: #666666">.</span>__name__
+    <span style="color: #008000; font-weight: bold">print</span> mycos<span style="color: #666666">.</span>__class__<span style="color: #666666">.</span>__bases__[<span style="color: #666666">0</span>]<span style="color: #666666">.</span>__dict__
+    <span style="color: #408080; font-style: italic"># Compute sin&#39;(pi)</span>
+    <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&quot;g&#39;(</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">)=</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121"> (exact value is </span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">)&quot;</span> <span style="color: #666666">%</span> (pi, mycos(pi), cos(pi))
+    mysin <span style="color: #666666">=</span> Central4(Central4(sin))
+    <span style="color: #408080; font-style: italic"># Compute sin&#39;&#39;(pi)</span>
+    <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&quot;g&#39;&#39;(</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">)=</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121"> (exact value is </span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">)&quot;</span> <span style="color: #666666">%</span> (pi, mysin(pi), <span style="color: #666666">-</span>sin(pi))
+
+    df <span style="color: #666666">=</span> Central2(<span style="color: #008000; font-weight: bold">lambda</span> x: exp(x), h<span style="color: #666666">=1.0E-9</span>)
+    bigx <span style="color: #666666">=</span> <span style="color: #666666">20</span>
+    <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;Big x=</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">: f=</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">, error in derivative: </span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> \ 
+          (bigx, exp(bigx), exp(bigx) <span style="color: #666666">-</span> df(bigx))
+
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">math</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #666666">*</span>  <span style="color: #408080; font-style: italic"># make all math functions available to main</span>
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">main</span>():
+    <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">scitools.StringFunction</span> <span style="color: #008000; font-weight: bold">import</span> StringFunction
+    <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">sys</span>
+
+    <span style="color: #008000; font-weight: bold">try</span>:
+        formula <span style="color: #666666">=</span> sys<span style="color: #666666">.</span>argv[<span style="color: #666666">1</span>]
+        difftype <span style="color: #666666">=</span> sys<span style="color: #666666">.</span>argv[<span style="color: #666666">2</span>]
+        difforder <span style="color: #666666">=</span> sys<span style="color: #666666">.</span>argv[<span style="color: #666666">3</span>]
+        x <span style="color: #666666">=</span> <span style="color: #008000">float</span>(sys<span style="color: #666666">.</span>argv[<span style="color: #666666">4</span>])
+    <span style="color: #008000; font-weight: bold">except</span> <span style="color: #D2413A; font-weight: bold">IndexError</span>:
+        <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;Usage:   Diff.py formula difftype difforder x&#39;</span>
+        <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;Example: Diff.py &quot;sin(x)*exp(-x)&quot; Central 4 3.14&#39;</span>
+        sys<span style="color: #666666">.</span>exit(<span style="color: #666666">1</span>)
+
+    classname <span style="color: #666666">=</span> difftype <span style="color: #666666">+</span> difforder
+    f <span style="color: #666666">=</span> StringFunction(formula)
+    df <span style="color: #666666">=</span> <span style="color: #008000">eval</span>(classname)(f)
+    <span style="color: #008000; font-weight: bold">print</span> df(x)
+
+<span style="color: #008000; font-weight: bold">if</span> __name__ <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;__main__&#39;</span>:
+    main()
+</pre></div>
+<p>
+Read the code line by line, and convince yourself that you understand
+what is going on.
+You may need to review the sections ref{sec:input:eval} and
+ref{sec:input:StringFunction}.
+
+<p>
+One disadvantage is that the code above is limited to <code>x</code> as the name
+of the independent variable. If we allow a 5th command-line argument
+with the name of the independent variable, we can pass this name on
+to the <code>StringFunction</code> constructor, and suddenly our program
+works with any name for the independent variable!
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">varname <span style="color: #666666">=</span> sys<span style="color: #666666">.</span>argv[<span style="color: #666666">5</span>]
+f <span style="color: #666666">=</span> StringFunction(formula, independent_variables<span style="color: #666666">=</span>varname)
+</pre></div>
+<p>
+Of course, the program crashes if we do not provide five command-line
+arguments, and the program does not work properly if we are not
+careful with ordering of the command-line arguments.
+There is some way to go before the program is really user friendly, but that
+is beyond the scope of this document.
+
+<p>
+Many other popular programming languages (C++, Java, C#) cannot
+perform the <code>eval</code> operation while the program is running.
+The result is that one needs <code>if</code> tests to turn the information
+in <code>difftype</code> and <code>difforder</code>
+into creation of subclass instances. Such type of code
+would look like this in Python:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">if</span> classname <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;Forward1&#39;</span>:
+    df <span style="color: #666666">=</span> Forward1(f)
+<span style="color: #008000; font-weight: bold">elif</span> classname <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;Backward1&#39;</span>:
+    df <span style="color: #666666">=</span> Backward1(f)
+<span style="color: #666666">...</span>
+</pre></div>
+<p>
+and so forth. This piece of code is very common in object-oriented
+systems and often put in a function that is referred to as a
+<em>factory function</em>.
+Thanks to <code>eval</code> in Python, factory functions are usually only a matter of
+applying <code>eval</code> to a string.
+
+<h2 id="sec:oo:Diff:extend">Extensions<a name="sec:oo:Diff:extend"></a></h2>
+
+<p>
+The great advantage of sharing code via inheritance becomes obvious
+when we want to extend the functionality of a class hierarchy. It is
+possible to do this by adding more code to the superclass only.
+Suppose we want to be able to assess the accuracy of the numerical
+approximation to the derivative by comparing with the exact
+derivative, if available. All we need to do is to allow an extra
+argument in the constructor and provide an additional superclass
+method that computes the error in the numerical derivative.  We may
+add this code to class <code>Diff</code>, or we may add it in a subclass <code>Diff2</code>
+and let the other classes for various numerical differentiation
+formulas inherit from class <code>Diff2</code>.  We follow the latter approach:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Diff2</span>(Diff):
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__init__</span>(<span style="color: #008000">self</span>, f, h<span style="color: #666666">=1E-5</span>, dfdx_exact<span style="color: #666666">=</span><span style="color: #008000">None</span>):
+        Diff<span style="color: #666666">.</span>__init__(<span style="color: #008000">self</span>, f, h)
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>exact <span style="color: #666666">=</span> dfdx_exact
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">error</span>(<span style="color: #008000">self</span>, x):
+        <span style="color: #008000; font-weight: bold">if</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>exact <span style="color: #AA22FF; font-weight: bold">is</span> <span style="color: #AA22FF; font-weight: bold">not</span> <span style="color: #008000">None</span>:
+            df_numerical <span style="color: #666666">=</span> <span style="color: #008000">self</span>(x)
+            df_exact <span style="color: #666666">=</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>exact(x)
+            <span style="color: #008000; font-weight: bold">return</span> df_exact <span style="color: #666666">-</span> df_numerical
+
+<span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Forward1</span>(Diff2):
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__call__</span>(<span style="color: #008000">self</span>, x):
+        f, h <span style="color: #666666">=</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>f, <span style="color: #008000">self</span><span style="color: #666666">.</span>h
+        <span style="color: #008000; font-weight: bold">return</span> (f(x<span style="color: #666666">+</span>h) <span style="color: #666666">-</span> f(x))<span style="color: #666666">/</span>h
+</pre></div>
+<p>
+The other subclasses, <code>Backward1</code>, <code>Central2</code>, and so on, must
+also be derived from <code>Diff2</code> to equip all subclasses with new
+functionality for perfectly assessing the accuracy of the approximation.
+No other modifications are necessary in this example, since all the
+subclasses can inherit the superclass constructor and the <code>error</code>
+method. Figure <a href="#fig:oo:Diff2:fig">2</a> shows a UML diagram of
+the new <code>Diff</code> class hierarchy.
+
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 2:  UML diagram of the <code>Diff</code> hierarchy for a series of differentiation formulas   (<code>Backward1</code>, <code>Central2</code>, etc.). <a name="fig:oo:Diff2:fig"></a> </p></center>
+<p><img src="fig-oo/lumpy_Diff2_hier.png" align="bottom" width=400></p>
+</center>
+
+<p>
+Here is an example of usage:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">mycos <span style="color: #666666">=</span> Forward1(sin, dfdx_exact<span style="color: #666666">=</span>cos)
+<span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;Error in derivative is&#39;</span>, mycos<span style="color: #666666">.</span>error(x<span style="color: #666666">=</span>pi)
+</pre></div>
+<p>
+The program flow of the <code>mycos.error(x=pi)</code>
+call can be interesting to follow.
+We first enter the <code>error</code> method in class <code>Diff2</code>,
+which then calls <code>self(x)</code>, i.e., the <code>__call__</code> method
+in class <code>Forward1</code>, which jumps out to the <code>self.f</code> function,
+i.e., the <code>sin</code> function in the <code>math</code> module in the present case.
+After returning to the <code>error</code> method,
+the next call is to <code>self.exact</code>, which is the <code>cos</code> function
+(from <code>math</code>) in our case.
+
+<h3 id="___sec14">Application <a name="___sec14"></a></h3>
+
+<p>
+We can apply the methods in the <code>Diff2</code> hierarchy to get some insight
+into the accuracy of various difference formulas.  Let us write out a
+table where the rows correspond to different \( h \) values, and the
+columns correspond to different approximation methods (except the
+first column, which reflects the \( h \) value). The values in the table
+can be the numerically computed \( f'(x) \) or the error in this
+approximation if the exact derivative is known. The following function
+writes such a table:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">table</span>(f, x, h_values, methods, dfdx<span style="color: #666666">=</span><span style="color: #008000">None</span>):
+    <span style="color: #408080; font-style: italic"># Print headline (h and class names for the methods)</span>
+    <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;      h       &#39;</span>,
+    <span style="color: #008000; font-weight: bold">for</span> method <span style="color: #AA22FF; font-weight: bold">in</span> methods:
+        <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;</span><span style="color: #BB6688; font-weight: bold">%-15s</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> method<span style="color: #666666">.</span>__name__,
+    <span style="color: #008000; font-weight: bold">print</span>  <span style="color: #408080; font-style: italic"># newline</span>
+    <span style="color: #408080; font-style: italic"># Print table</span>
+    <span style="color: #008000; font-weight: bold">for</span> h <span style="color: #AA22FF; font-weight: bold">in</span> h_values:
+        <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;</span><span style="color: #BB6688; font-weight: bold">%10.2E</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> h,
+        <span style="color: #008000; font-weight: bold">for</span> method <span style="color: #AA22FF; font-weight: bold">in</span> methods:
+            <span style="color: #008000; font-weight: bold">if</span> dfdx <span style="color: #AA22FF; font-weight: bold">is</span> <span style="color: #AA22FF; font-weight: bold">not</span> <span style="color: #008000">None</span>:       <span style="color: #408080; font-style: italic"># write error</span>
+                d <span style="color: #666666">=</span> method(f, h, dfdx)
+                output <span style="color: #666666">=</span> d<span style="color: #666666">.</span>error(x)
+            <span style="color: #008000; font-weight: bold">else</span>:                      <span style="color: #408080; font-style: italic"># write value</span>
+                d <span style="color: #666666">=</span> method(f, h)
+                output <span style="color: #666666">=</span> d(x)
+            <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;</span><span style="color: #BB6688; font-weight: bold">%15.8E</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> output,
+        <span style="color: #008000; font-weight: bold">print</span>  <span style="color: #408080; font-style: italic"># newline</span>
+</pre></div>
+<p>
+The next lines tries three approximation methods on \( f(x)=e^{-10x} \) for \( x=0 \)
+and with \( h=1, 1/2, 1/4, 1/16, \ldots, 1/512 \):
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">Diff2</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #666666">*</span>
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">math</span> <span style="color: #008000; font-weight: bold">import</span> exp
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f1</span>(x):
+    <span style="color: #008000; font-weight: bold">return</span> exp(<span style="color: #666666">-10*</span>x)
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">df1dx</span>(x):
+    <span style="color: #008000; font-weight: bold">return</span> <span style="color: #666666">-10*</span>exp(<span style="color: #666666">-10*</span>x)
+
+table(f1, <span style="color: #666666">0</span>, [<span style="color: #666666">2**</span>(<span style="color: #666666">-</span>k) <span style="color: #008000; font-weight: bold">for</span> k <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">10</span>)],
+      [Forward1, Central2, Central4], df1dx)
+</pre></div>
+<p>
+Note how convenient it is to make a list of class names - class names can be
+used as ordinary variables, and to print the class name as a string we just
+use the <code>__name__</code> attribute.
+The output of the main program above becomes
+
+<p>
+
+<!-- code=text (!bc ccq) typeset with pygments style "default" -->
+<blockquote>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">      h        Forward1        Central2        Central4
+  1.00E+00 -9.00004540E+00  1.10032329E+04 -4.04157586E+07
+  5.00E-01 -8.01347589E+00  1.38406421E+02 -3.48320240E+03
+  2.50E-01 -6.32833999E+00  1.42008179E+01 -2.72010498E+01
+  1.25E-01 -4.29203837E+00  2.81535264E+00 -9.79802452E-01
+  6.25E-02 -2.56418286E+00  6.63876231E-01 -5.32825724E-02
+  3.12E-02 -1.41170013E+00  1.63556996E-01 -3.21608292E-03
+  1.56E-02 -7.42100948E-01  4.07398036E-02 -1.99260429E-04
+  7.81E-03 -3.80648092E-01  1.01756309E-02 -1.24266603E-05
+  3.91E-03 -1.92794011E-01  2.54332554E-03 -7.76243120E-07
+  1.95E-03 -9.70235594E-02  6.35795004E-04 -4.85085874E-08
+</pre></div>
+</blockquote><p>
+From one row to the next, \( h \) is halved, and from about the 5th row and
+onwards, the <code>Forward1</code> errors are also halved, which is consistent
+with the error \( \mathcal{O}(h) \) of this method. Looking at the
+2nd column, we see that the errors are reduced to 1/4 when going from
+one row to the next, at least after the 5th row. This is also
+according to the theory since the error is proportional to \( h^2 \).
+For the last row with a 4th-order scheme, the error is reduced by 1/16,
+which again is what we expect when the error term is \( \mathcal{O}(h^4) \).
+What is also interesting to observe, is the benefit of using a
+higher-order scheme like <code>Central4</code>: with, for example,
+\( h=1/128 \) the <code>Forward1</code> scheme gives an error of \( -0.7 \),
+<code>Central2</code> improves this to \( 0.04 \), while <code>Central4</code> has an
+error of \( -0.0002 \). More accurate
+formulas definitely give better results.
+(Strictly speaking, it is the fraction of the work and the accuracy that
+counts: <code>Central4</code> needs four function evaluations, while
+<code>Central2</code> and <code>Forward1</code> only needs two.)
+The test example shown here is found in the file
+<a href="http://tinyurl.com/pwyasaa/oo/Diff2_examples.py" target="_self"><tt>Diff2_examples.py</tt></a>.
+
+<h2 id="sec:oo:diff:alt:func">Alternative implementation via functions<a name="sec:oo:diff:alt:func"></a></h2>
+
+<p>
+Could we implement the functionality offered by the <code>Diff</code> hierarchy
+of objects by using plain functions and no object orientation? The
+answer is &quot;yes, almost&quot;.  What we have to pay for a pure
+function-based solution is a less friendly user interface to the
+differentiation functionality: more arguments must be supplied in
+function calls, because each difference formula, now coded as a
+straight Python function, must get \( f(x) \), \( x \), and \( h \) as
+arguments. In the class version we first store \( f \) and \( h \) as
+attributes in the constructor, and every time we want to compute the
+derivative, we just supply \( x \) as argument.
+
+<p>
+A  Python function for implementing numerical differentiation reads
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">central2_func</span>(f, x, h<span style="color: #666666">=1.0E-5</span>):
+    <span style="color: #008000; font-weight: bold">return</span> (f(x<span style="color: #666666">+</span>h) <span style="color: #666666">-</span> f(x<span style="color: #666666">-</span>h))<span style="color: #666666">/</span>(<span style="color: #666666">2*</span>h)
+</pre></div>
+<p>
+The usage demonstrates the difference from the class solution:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">mycos <span style="color: #666666">=</span> central2_func(sin, pi, <span style="color: #666666">1E-6</span>)
+<span style="color: #408080; font-style: italic"># Compute sin&#39;(pi):</span>
+<span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&quot;g&#39;(</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">)=</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121"> (exact value is </span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">)&quot;</span> <span style="color: #666666">%</span> (pi, mycos, cos(pi))
+</pre></div>
+<p>
+Now, <code>mycos</code> is a number, not a callable object. The nice thing with
+the class solution is that <code>mycos</code> appeared to be a standard Python
+function whose mathematical values equal the derivative of the
+Python function <code>sin(x)</code>. But does it matter whether <code>mycos</code> is
+a function or a number? Yes, it matters if
+we want to apply the difference formula twice to compute
+the second-order derivative. When <code>mycos</code> is a callable object
+of type <code>Central2</code>,
+we just write
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">mysin <span style="color: #666666">=</span> Central2(mycos)
+<span style="color: #408080; font-style: italic"># or</span>
+mysin <span style="color: #666666">=</span> Central2(Central2(sin))
+
+<span style="color: #408080; font-style: italic"># Compute g&#39;&#39;(pi):</span>
+<span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&quot;g&#39;&#39;(</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">)=</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">&quot;</span> <span style="color: #666666">%</span> (pi, mysin(pi))
+</pre></div>
+<p>
+With the <code>central2_func</code> function, this composition will not work.
+Moreover, when the derivative is an object, we can send this object to
+any algorithm that expects a mathematical function, and such
+algorithms include numerical integration, differentiation,
+interpolation, ordinary differential equation solvers, and finding
+zeros of equations, so the applications are many.
+
+<h2 id="sec:oo:diff:alt:FP">Alternative implementation via functional programming<a name="sec:oo:diff:alt:FP"></a></h2>
+
+<p>
+As a conclusion of the previous section, the great benefit of the
+object-oriented solution in the section <a href="#sec:oo:Diff">Classes for differentiation</a> is that one can
+have some subclass instance <code>d</code> from the <code>Diff</code> (or <code>Diff2</code>) hierarchy
+and write <code>d(x)</code> to evaluate the derivative at a point <code>x</code>.  The
+<code>d(x)</code> call behaves as if <code>d</code> were a standard Python function
+containing a manually coded expression for the derivative.
+
+<p>
+The <code>d(x)</code> interface to the derivative can also be obtained by other
+and perhaps more direct means than object-oriented programming.  In
+programming languages where functions are ordinary objects that can be
+referred to by variables, as in Python, one can make a function that
+returns the right <code>d(x)</code> function according to the chosen numerical
+derivation rule. The code looks as this (see <a href="http://tinyurl.com/pwyasaa/oo/Diff_functional.py" target="_self"><tt>Diff_functional.py</tt></a> for the complete code):
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">differentiate</span>(f, method, h<span style="color: #666666">=1.0E-5</span>):
+    h <span style="color: #666666">=</span> <span style="color: #008000">float</span>(h)  <span style="color: #408080; font-style: italic"># avoid integer division</span>
+
+    <span style="color: #008000; font-weight: bold">if</span> method <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;Forward1&#39;</span>:
+        <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">Forward1</span>(x):
+            <span style="color: #008000; font-weight: bold">return</span> (f(x<span style="color: #666666">+</span>h) <span style="color: #666666">-</span> f(x))<span style="color: #666666">/</span>h
+	<span style="color: #008000; font-weight: bold">return</span> Forward1
+
+    <span style="color: #008000; font-weight: bold">elif</span> method <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;Backward1&#39;</span>:
+        <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">Backward1</span>(x):
+            <span style="color: #008000; font-weight: bold">return</span> (f(x) <span style="color: #666666">-</span> f(x<span style="color: #666666">-</span>h))<span style="color: #666666">/</span>h
+	<span style="color: #008000; font-weight: bold">return</span> Backward1
+    <span style="color: #666666">...</span>
+</pre></div>
+<p>
+And the usage goes like
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">mycos <span style="color: #666666">=</span> differentiate(sin,   <span style="color: #BA2121">&#39;Forward1&#39;</span>)
+mysin <span style="color: #666666">=</span> differentiate(mycos, <span style="color: #BA2121">&#39;Forward1&#39;</span>)
+x <span style="color: #666666">=</span> pi
+<span style="color: #008000; font-weight: bold">print</span> mycos(x), cos(x), mysin, <span style="color: #666666">-</span>sin(x)
+</pre></div>
+<p>
+The surprising thing is that when we call <code>mycos(x)</code> we provide
+only <code>x</code>, while the function itself looks like
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">Forward1</span>(x):
+    <span style="color: #008000; font-weight: bold">return</span> (f(x<span style="color: #666666">+</span>h) <span style="color: #666666">-</span> f(x))<span style="color: #666666">/</span>h
+<span style="color: #008000; font-weight: bold">return</span> Forward1
+</pre></div>
+<p>
+How do the parameters <code>f</code> and <code>h</code> get their values when we call
+<code>mycos(x)</code>? There is some magic attached to the <code>Forward1</code> function,
+or literally, there are some variables attached to <code>Forward1</code>: this
+function remembers the values of <code>f</code> and <code>h</code> that existed as local
+variables in the <code>differentiate</code> function when the <code>Forward1</code> function
+was defined.
+
+<p>
+In computer science terms, the <code>Forward1</code> always has access to
+variables in the <em>scope</em> in which the function was defined. The
+<code>Forward1</code> function is what is known as a <em>closure</em> in some computer
+languages.  Closures are much used in a programming style called
+<em>functional programming</em>.  Two key features of functional programming
+is operations on lists (like list comprehensions) and returning
+functions from functions.  Python supports functional programming, but
+we will not consider this programming style further in this document.
+
+<h2 id="sec:oo:diff:oneclass">Alternative implementation via a single class<a name="sec:oo:diff:oneclass"></a></h2>
+
+<p>
+Instead of making many classes or functions for the many different
+differentiation schemes, the basic information about the schemes can
+be stored in one table. With a single method in one single class can
+use the table information, and for a given scheme, compute the
+derivative.  To do this, we need to reformulate the mathematical
+problem (actually by using ideas from the section <a href="._oo-bootstrap003.html#sec:oo:int:methods">Numerical integration methods</a>).
+
+<p>
+A family of numerical differentiation schemes can be written
+
+$$
+\begin{equation}
+f'(x) \approx h^{-1}\sum_{i=-r}^r w_if(x_i),
+\tag{6}
+\end{equation}
+$$
+
+where \( w_i \) are weights and \( x_i \) are points.
+The \( 2r+1 \) points
+are symmetric around some point \( x \):
+
+$$
+\begin{equation*} x_i = x + ih,\quad i=-r,\ldots,r\tp \end{equation*}
+$$
+
+The weights depend on the differentiation scheme.
+For example,
+the Midpoint  scheme <a href="#mjx-eqn-3">(3)</a> has
+
+$$
+\begin{equation*} w_{-1}=-1,\quad w_0=0,\quad w_{1}=1\tp\end{equation*}
+$$
+
+
+<p>
+The table below lists the values of \( w_i \) for different difference
+formulas.  The type of difference is abbreviated with c for central, f
+for forward, and b for backward. The number after the nature of a
+scheme denotes the order of the schemes (for example, &quot;c 2&quot; is a
+central difference of 2nd order).  We have set \( r=4 \), which is
+sufficient for the schemes written up in this document.
+
+<p>
+
+<div class="row">
+  <div class="col-xs-12">
+    <table class="table table-striped table-hover table-condensed">
+<thead>
+<tr><td align="center"><b>   </b></td> <td align="center">     \( x-4h \)    </td> <td align="center">     \( x-3h \)     </td> <td align="center">     \( x-2h \)    </td> <td align="center">    \( x-h \)     </td> <td align="center">     \( x \)      </td> <td align="center">    \( x+h \)    </td> <td align="center">     \( x+2h \)     </td> <td align="center">     \( x+3h \)    </td> <td align="center">     \( x+4h \)     </td> </tr>
+</thead>
+<tbody>
+<tr><td align="left">   c 2    </td> <td align="center">   0                      </td> <td align="center">   0                       </td> <td align="center">   0                      </td> <td align="center">   \( -\frac{1}{2} \)    </td> <td align="center">   0                     </td> <td align="center">   \( \frac{1}{2} \)    </td> <td align="center">   0                       </td> <td align="center">   0                      </td> <td align="center">   0                       </td> </tr>
+<tr><td align="left">   c 4    </td> <td align="center">   0                      </td> <td align="center">   0                       </td> <td align="center">   \( \frac{1}{12} \)     </td> <td align="center">   \( -\frac{2}{3} \)    </td> <td align="center">   0                     </td> <td align="center">   \( \frac{2}{3} \)    </td> <td align="center">   \( -\frac{1}{12} \)     </td> <td align="center">   0                      </td> <td align="center">   0                       </td> </tr>
+<tr><td align="left">   c 6    </td> <td align="center">   0                      </td> <td align="center">   \( -\frac{1}{60} \)     </td> <td align="center">   \( \frac{3}{20} \)     </td> <td align="center">   \( -\frac{3}{4} \)    </td> <td align="center">   0                     </td> <td align="center">   \( \frac{3}{4} \)    </td> <td align="center">   \( -\frac{3}{20} \)     </td> <td align="center">   \( \frac{1}{60} \)     </td> <td align="center">   0                       </td> </tr>
+<tr><td align="left">   c 8    </td> <td align="center">   \( \frac{1}{280} \)    </td> <td align="center">   \( -\frac{4}{105} \)    </td> <td align="center">   \( \frac{12}{60} \)    </td> <td align="center">   \( -\frac{4}{5} \)    </td> <td align="center">   0                     </td> <td align="center">   \( \frac{4}{5} \)    </td> <td align="center">   \( -\frac{12}{60} \)    </td> <td align="center">   \( \frac{4}{105} \)    </td> <td align="center">   \( -\frac{1}{280} \)    </td> </tr>
+<tr><td align="left">   f 1    </td> <td align="center">   0                      </td> <td align="center">   0                       </td> <td align="center">   0                      </td> <td align="center">   0                     </td> <td align="center">   1                     </td> <td align="center">   1                    </td> <td align="center">   0                       </td> <td align="center">   0                      </td> <td align="center">   0                       </td> </tr>
+<tr><td align="left">   f 3    </td> <td align="center">   0                      </td> <td align="center">   0                       </td> <td align="center">   0                      </td> <td align="center">   \( -\frac{2}{6} \)    </td> <td align="center">   \( -\frac{1}{2} \)    </td> <td align="center">   1                    </td> <td align="center">   \( -\frac{1}{6} \)      </td> <td align="center">   0                      </td> <td align="center">   0                       </td> </tr>
+<tr><td align="left">   b 1    </td> <td align="center">   0                      </td> <td align="center">   0                       </td> <td align="center">   0                      </td> <td align="center">   \( -1 \)              </td> <td align="center">   1                     </td> <td align="center">   0                    </td> <td align="center">   0                       </td> <td align="center">   0                      </td> <td align="center">   0                       </td> </tr>
+</tbody>
+    </table>
+  </div>
+</div> <!-- col-xs-12 -->
+<p>
+Given a table of the \( w_i \) values, we can use
+<a href="#mjx-eqn-6">(6)</a> to compute the derivative. A faster,
+vectorized computation can have the \( x_i \), \( w_i \), and \( f(x_i) \) values
+as stored in three vectors. Then \( h^{-1}\sum_i w_if(x_i) \) can be
+interpreted as a dot product between the two vectors with components
+\( w_i \) and \( f(x_i) \), respectively.
+
+<p>
+A class with the table of weights as a static variable, a constructor,
+and a <code>__call__</code> method for evaluating the derivative via
+\( h^{-1}\sum_iw_if(x_i) \) looks as follows:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Diff3</span>:
+    table <span style="color: #666666">=</span> {
+    (<span style="color: #BA2121">&#39;forward&#39;</span>, <span style="color: #666666">1</span>):
+    [<span style="color: #666666">0</span>, <span style="color: #666666">0</span>, <span style="color: #666666">0</span>, <span style="color: #666666">0</span>, <span style="color: #666666">1</span>, <span style="color: #666666">1</span>, <span style="color: #666666">0</span>, <span style="color: #666666">0</span>, <span style="color: #666666">0</span>],
+    (<span style="color: #BA2121">&#39;central&#39;</span>, <span style="color: #666666">2</span>):
+    [<span style="color: #666666">0</span>, <span style="color: #666666">0</span>, <span style="color: #666666">0</span>, <span style="color: #666666">-1./2</span>, <span style="color: #666666">0</span>, <span style="color: #666666">1./2</span>, <span style="color: #666666">0</span>, <span style="color: #666666">0</span>, <span style="color: #666666">0</span>],
+    (<span style="color: #BA2121">&#39;central&#39;</span>, <span style="color: #666666">4</span>):
+    [ <span style="color: #666666">0</span>, <span style="color: #666666">0</span>, <span style="color: #666666">1./12</span>, <span style="color: #666666">-2./3</span>, <span style="color: #666666">0</span>, <span style="color: #666666">2./3</span>, <span style="color: #666666">-1./12</span>, <span style="color: #666666">0</span>, <span style="color: #666666">0</span>],
+    <span style="color: #666666">...</span>
+    }
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__init__</span>(<span style="color: #008000">self</span>, f, h<span style="color: #666666">=1.0E-5</span>, <span style="color: #008000">type</span><span style="color: #666666">=</span><span style="color: #BA2121">&#39;central&#39;</span>, order<span style="color: #666666">=2</span>):
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>f, <span style="color: #008000">self</span><span style="color: #666666">.</span>h, <span style="color: #008000">self</span><span style="color: #666666">.</span>type, <span style="color: #008000">self</span><span style="color: #666666">.</span>order <span style="color: #666666">=</span> f, h, <span style="color: #008000">type</span>, order
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>weights <span style="color: #666666">=</span> np<span style="color: #666666">.</span>array(Diff2<span style="color: #666666">.</span>table[(<span style="color: #008000">type</span>, order)])
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__call__</span>(<span style="color: #008000">self</span>, x):
+        f_values <span style="color: #666666">=</span> np<span style="color: #666666">.</span>array([f(<span style="color: #008000">self</span><span style="color: #666666">.</span>x<span style="color: #666666">+</span>i<span style="color: #666666">*</span><span style="color: #008000">self</span><span style="color: #666666">.</span>h) \ 
+                             <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">-4</span>,<span style="color: #666666">5</span>)])
+        <span style="color: #008000; font-weight: bold">return</span> np<span style="color: #666666">.</span>dot(<span style="color: #008000">self</span><span style="color: #666666">.</span>weights, f_values)<span style="color: #666666">/</span><span style="color: #008000">self</span><span style="color: #666666">.</span>h
+</pre></div>
+<p>
+Here we used <code>numpy</code>'s <code>dot(x, y)</code> function for computing the inner or
+dot product between two arrays <code>x</code> and <code>y</code>.
+
+<p>
+Class <code>Diff3</code> can be found in the file
+<a href="http://tinyurl.com/pwyasaa/oo/Diff3.py" target="_self"><tt>Diff3.py</tt></a>.
+Using class <code>Diff3</code> to differentiate the sine function goes like this:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">Diff3</span>
+mycos <span style="color: #666666">=</span> Diff3<span style="color: #666666">.</span>Diff3(sin, <span style="color: #008000">type</span><span style="color: #666666">=</span><span style="color: #BA2121">&#39;central&#39;</span>, order<span style="color: #666666">=4</span>)
+<span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&quot;sin&#39;(pi):&quot;</span>, mycos(pi)
+</pre></div>
+
+<h3 id="___sec18">Remark <a name="___sec18"></a></h3>
+
+<p>
+The downside of class <code>Diff3</code>, compared with the other implementation
+techniques, is that the sum \( h^{-1}\sum_iw_if(x_i) \) contains many
+multiplications by zero for lower-order schemes. These multiplications
+are known to yield zero in advance so we waste computer resources on
+trivial calculations. Once upon a time, programmers would have been
+extremely careful to avoid wasting multiplications this way, but today
+arithmetic operations are quite cheap, especially compared to fetching
+data from the computer's memory. Lots of other factors also influence
+the computational efficiency of a program, but this is beyond the
+scope of this document.
+
+<p>
+<p>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pager">
+  <li class="previous">
+    <a href="._oo-bootstrap001.html">&larr; Prev</a>
+  </li>
+  <li class="next">
+    <a href="._oo-bootstrap003.html">Next &rarr;</a>
+  </li>
+</ul>
+<!-- ------------------- end of main content --------------- -->
+
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap footer
+<footer>
+<a href="http://..."><img width="250" align=right src="http://..."></a>
+</footer>
+-->
+
+
+</body>
+</html>
+    
+

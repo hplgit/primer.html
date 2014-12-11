@@ -1,0 +1,949 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="User input and error handling">
+<meta name="keywords" content="command-line arguments,option-value pairs (command line),standard input,standard output,standard error,bytes,bits,exceptions,widgets,event loop,modules,test block (in module files),test function,nose tests,pytest tests,search for module files,module folders,refactoring,binomial distribution,Bernoulli trials,Poisson distribution,Poisson process">
+
+<title>User input and error handling</title>
+
+<!-- Bootstrap style: bootstrap_bluegray -->
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://raw.github.com/hplgit/doconce/master/bundled/html_styles/style_bootstrap/css/bootstrap_bluegray.css" rel="stylesheet">
+<!-- not necessary
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+
+<style type="text/css">
+/* Let inline verbatim have the same color as the surroundings */
+code { color: inherit; background-color: transparent; }
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [(' Asking questions and reading answers ',
+               1,
+               'sec:input:rawinput',
+               'sec:input:rawinput'),
+              (' Reading keyboard input ',
+               2,
+               'sec:input:rawinput2',
+               'sec:input:rawinput2'),
+              (' Reading from the command line ',
+               1,
+               'sec:input:sysargv',
+               'sec:input:sysargv'),
+              (' Providing input on the command line ',
+               2,
+               'sec:input:cml',
+               'sec:input:cml'),
+              (' A variable number of command-line arguments ',
+               2,
+               None,
+               '___sec4'),
+              (' More on command-line arguments ', 2, None, '___sec5'),
+              (' Turning user text into live objects ', 1, None, '___sec6'),
+              (' The magic eval function ',
+               2,
+               'sec:input:eval',
+               'sec:input:eval'),
+              (' Applying eval to strings ', 3, None, '___sec8'),
+              (' Applying eval to user input ', 3, None, '___sec9'),
+              (' The magic exec function ',
+               2,
+               'sec:input:exec',
+               'sec:input:exec'),
+              (' Turning string expressions into functions ',
+               2,
+               'sec:input:StringFunction',
+               'sec:input:StringFunction'),
+              (' Option-value pairs on the command line ',
+               1,
+               'sec:input:argparse',
+               'sec:input:argparse'),
+              (' Basic usage of the argparse module ', 2, None, '___sec13'),
+              (' Mathematical expressions as values ', 2, None, '___sec14'),
+              (' Reading data from file ',
+               1,
+               'sec:files:reading',
+               'sec:files:reading'),
+              (' Reading a file line by line ', 2, None, '___sec16'),
+              (' Alternative ways of reading a file ',
+               2,
+               'sec:files:reading:other',
+               'sec:files:reading:other'),
+              (' The modern with statement ', 3, None, '___sec18'),
+              (' The old while construction ', 3, None, '___sec19'),
+              (' Reading a file into a string ', 3, None, '___sec20'),
+              (' Reading a mixture of text and numbers ',
+               2,
+               'sec:files:textnum',
+               'sec:files:textnum'),
+              (' Is it more to file reading? ', 3, None, '___sec22'),
+              (' Writing data to file ',
+               1,
+               'sec:files:writing',
+               'sec:files:writing'),
+              (' Example: Writing a table to file ', 2, None, '___sec24'),
+              (' Problem ', 3, None, '___sec25'),
+              (' Solution ', 3, None, '___sec26'),
+              (' Standard input and output as file objects ',
+               2,
+               None,
+               '___sec27'),
+              (' Redirecting standard input, output, and error ',
+               3,
+               None,
+               '___sec28'),
+              (' Note ', 3, None, '___sec29'),
+              (' What is a file, really? ',
+               2,
+               'sec:files:really',
+               'sec:files:really'),
+              (' Pure text files ', 3, None, '___sec31'),
+              (' Word processor files ', 3, None, '___sec32'),
+              (' Image files ', 3, None, '___sec33'),
+              (' Music files ', 3, None, '___sec34'),
+              (' PDF files ', 3, None, '___sec35'),
+              (' Remarks ', 3, None, '___sec36'),
+              (' Handling errors ',
+               1,
+               'sec:input:except',
+               'sec:input:except'),
+              (' Exception handling ',
+               2,
+               'sec:input:except:handling',
+               'sec:input:except:handling'),
+              (' Testing for a specific exception ', 3, None, '___sec39'),
+              (' Examples on exception types ', 3, None, '___sec40'),
+              (' Digression ', 3, None, '___sec41'),
+              (' Raising exceptions ', 2, None, '___sec42'),
+              (' Example ', 3, None, '___sec43'),
+              (' A glimpse of graphical user interfaces ',
+               1,
+               'sec:input:GUI',
+               'sec:input:GUI'),
+              (' Making modules ',
+               1,
+               'sec:input:modules',
+               'sec:input:modules'),
+              (' Example: Interest on bank deposits ', 2, None, '___sec46'),
+              (' Collecting functions in a module file ',
+               2,
+               'sec:input:module:create',
+               'sec:input:module:create'),
+              (' Test block ',
+               2,
+               'sec:input:module:testblock',
+               'sec:input:module:testblock'),
+              (' Example on a test block in a minimalistic module ',
+               3,
+               None,
+               '___sec49'),
+              (' A test block in the `interest` module ',
+               3,
+               None,
+               '___sec50'),
+              (' Verification of the module code ',
+               2,
+               'sec:input:modules:testfunc',
+               'sec:input:modules:testfunc'),
+              (' Getting input data ',
+               2,
+               'sec:input:modules:inputdata',
+               'sec:input:modules:inputdata'),
+              (' Doc strings in modules ', 2, None, '___sec53'),
+              (' Using modules ',
+               2,
+               'sec:input:modules:usage',
+               'sec:input:modules:usage'),
+              (' What gets imported by various import statements? ',
+               3,
+               None,
+               '___sec55'),
+              (' How to make Python find a module file ',
+               3,
+               None,
+               '___sec56'),
+              (' How to make Python run the module file ',
+               3,
+               None,
+               '___sec57'),
+              (' Distributing modules ',
+               2,
+               'sec:input:modules:setuppy',
+               'sec:input:modules:setuppy'),
+              (' Making software available on the Internet ',
+               2,
+               None,
+               '___sec59'),
+              (' Summary ', 1, 'sec:input:summary', 'sec:input:summary'),
+              (' Chapter topics ',
+               2,
+               'sec:input:summary:topics',
+               'sec:input:summary:topics'),
+              (' Question and answer input ', 3, None, '___sec62'),
+              (' Getting command-line arguments ', 3, None, '___sec63'),
+              (' Using option-value pairs ', 3, None, '___sec64'),
+              (' Generating code on the fly ', 3, None, '___sec65'),
+              (' Turning string formulas into Python functions ',
+               3,
+               None,
+               '___sec66'),
+              (' File operations ', 3, None, '___sec67'),
+              (' Handling exceptions ', 3, None, '___sec68'),
+              (' Raising exceptions ', 3, None, '___sec69'),
+              (' Modules ', 3, None, '___sec70'),
+              (' Terminology ', 3, None, '___sec71'),
+              (' Example: Bisection root finding ',
+               2,
+               'sec:input:summarizingex',
+               'sec:input:summarizingex'),
+              (' Problem ', 3, None, '___sec73'),
+              (' Solution ', 3, None, '___sec74'),
+              (' Verification ', 3, None, '___sec75'),
+              (' Making a function ', 3, None, '___sec76'),
+              (' Making a test function ', 3, None, '___sec77'),
+              (' Making a module ', 3, None, '___sec78'),
+              (' Defining a user interface ', 3, None, '___sec79'),
+              (' Using the module ', 3, None, '___sec80'),
+              (' Potential problems with the software ', 3, None, '___sec81'),
+              (' Distributing the bisection module to others ',
+               3,
+               None,
+               '___sec82'),
+              (' Exercises ', 1, None, '___sec83'),
+              (' Exercise 1: Make an interactive program ',
+               2,
+               'sec:input:ex24',
+               'sec:input:ex24'),
+              (' Exercise 2: Read a number from the command line ',
+               2,
+               'sec:input:ex24b',
+               'sec:input:ex24b'),
+              (' Exercise 3: Read a number from a file ',
+               2,
+               'sec:input:ex24bfile',
+               'sec:input:ex24bfile'),
+              (' Exercise 4: Read and write several numbers from and to file ',
+               2,
+               'sec:input:ex24bfile2',
+               'sec:input:ex24bfile2'),
+              (' Exercise 5: Use exceptions to handle wrong input ',
+               2,
+               'sec:input:ex24c',
+               'sec:input:ex24c'),
+              (' Exercise 6: Read input from the keyboard ',
+               2,
+               'sec:input:ex25',
+               'sec:input:ex25'),
+              (' Exercise 7: Read input from the command line ',
+               2,
+               'sec:input:ex26',
+               'sec:input:ex26'),
+              (' Exercise 8: Try MSWord or LibreOffice to write a program ',
+               2,
+               'sec:files:ex7',
+               'sec:files:ex7'),
+              (' Exercise 9: Prompt the user for input to a formula ',
+               2,
+               'sec:input:ex6',
+               'sec:input:ex6'),
+              (' Exercise 10: Read parameters in a formula from the command line ',
+               2,
+               'sec:input:ex5',
+               'sec:input:ex5'),
+              (' Exercise 11: Use exceptions to handle wrong input ',
+               2,
+               'sec:input:ex8b',
+               'sec:input:ex8b'),
+              (' Exercise 12: Test validity of input data ',
+               2,
+               'sec:input:ex7',
+               'sec:input:ex7'),
+              (' Exercise 13: Raise an exception in case of wrong input ',
+               2,
+               'sec:input:ex8',
+               'sec:input:ex8'),
+              (' Exercise 14: Evaluate a formula for data in a file ',
+               2,
+               'sec:input:ex:ball:file',
+               'sec:input:ex:ball:file'),
+              (' Exercise 15: Compute the distance it takes to stop a car ',
+               2,
+               'sec:input:ex21',
+               'sec:input:ex21'),
+              (' Exercise 16: Look up calendar functionality ',
+               2,
+               'sec:input:ex48',
+               'sec:input:ex48'),
+              (' Exercise 17: Use the StringFunction tool ',
+               2,
+               'sec:input:ex28b',
+               'sec:input:ex28b'),
+              (' Exercise 18: Why we test for specific exception types ',
+               2,
+               'sec:input:ex11',
+               'sec:input:ex11'),
+              (' Exercise 19: Make a complete module ',
+               2,
+               'sec:input:ex27',
+               'sec:input:ex27'),
+              (' Exercise 20: Check if mathematical identities hold ',
+               2,
+               'sec:input:ex2',
+               'sec:input:ex2'),
+              (' Exercise 21: Compute probabilities with the binomial distribution ',
+               2,
+               'sec:input:ex15',
+               'sec:input:ex15'),
+              (' Exercise 22: Compute probabilities with the Poisson distribution ',
+               2,
+               'sec:input:ex16',
+               'sec:input:ex16'),
+              (' References ', 1, None, '___sec106')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- newcommands_keep.tex -->
+$$
+\newcommand{\tp}{\thinspace .}
+$$
+
+
+
+
+    
+<!-- Bootstrap navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="input-bootstrap.html">User input and error handling</a>
+  </div>
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     <!-- navigation toc: --> <li><a href="._input-bootstrap001.html#sec:input:rawinput" style="font-size: 80%;">Asking questions and reading answers</a></li>
+     <!-- navigation toc: --> <li><a href="._input-bootstrap002.html#sec:input:sysargv" style="font-size: 80%;">Reading from the command line</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec6" style="font-size: 80%;">Turning user text into live objects</a></li>
+     <!-- navigation toc: --> <li><a href="._input-bootstrap004.html#sec:input:argparse" style="font-size: 80%;">Option-value pairs on the command line</a></li>
+     <!-- navigation toc: --> <li><a href="._input-bootstrap005.html#sec:files:reading" style="font-size: 80%;">Reading data from file</a></li>
+     <!-- navigation toc: --> <li><a href="._input-bootstrap006.html#sec:files:writing" style="font-size: 80%;">Writing data to file</a></li>
+     <!-- navigation toc: --> <li><a href="._input-bootstrap007.html#sec:input:except" style="font-size: 80%;">Handling errors</a></li>
+     <!-- navigation toc: --> <li><a href="._input-bootstrap008.html#sec:input:GUI" style="font-size: 80%;">A glimpse of graphical user interfaces</a></li>
+     <!-- navigation toc: --> <li><a href="._input-bootstrap009.html#sec:input:modules" style="font-size: 80%;">Making modules</a></li>
+     <!-- navigation toc: --> <li><a href="._input-bootstrap010.html#sec:input:summary" style="font-size: 80%;">Summary</a></li>
+     <!-- navigation toc: --> <li><a href="._input-bootstrap011.html#___sec83" style="font-size: 80%;">Exercises</a></li>
+     <!-- navigation toc: --> <li><a href="._input-bootstrap011.html#___sec106" style="font-size: 80%;">References</a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div> <!-- end of navigation bar -->
+
+<div class="container">
+
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+
+<a name="part0003"></a>
+<!-- !split -->
+
+<h1 id="___sec6">Turning user text into live objects <a name="___sec6"></a></h1>
+
+<p>
+It is possible to provide text with valid Python code as input to
+a program and then turn the text into live objects as if the
+text were written directly into the program beforehand.
+This is a very powerful tool for letting users specify function formulas,
+for instance, as input to a program. The program code itself has no
+knowledge about the kind of function the user wants to work with, yet
+at run time the user's desired formula enters the computations.
+
+<h2 id="sec:input:eval">The magic eval function<a name="sec:input:eval"></a></h2>
+
+<p>
+The <code>eval</code> functions takes a string as argument and
+evaluates this string as a Python <em>expression</em>. The result of an
+expression is an object. Consider
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> r <span style="color: #666666">=</span> <span style="color: #008000">eval</span>(<span style="color: #BA2121">&#39;1+2&#39;</span>)
+<span style="color: #666666">&gt;&gt;&gt;</span> r
+<span style="color: #666666">3</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000">type</span>(r)
+<span style="color: #666666">&lt;</span><span style="color: #008000">type</span> <span style="color: #BA2121">&#39;int&#39;</span><span style="color: #666666">&gt;</span>
+</pre></div>
+<p>
+The result of <code>r = eval('1+2')</code> is the same as if we had written
+<code>r = 1+2</code> directly:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> r <span style="color: #666666">=</span> <span style="color: #666666">1+2</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> r
+<span style="color: #666666">3</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000">type</span>(r)
+<span style="color: #666666">&lt;</span><span style="color: #008000">type</span> <span style="color: #BA2121">&#39;int&#39;</span><span style="color: #666666">&gt;</span>
+</pre></div>
+<p>
+In general, any valid Python expression stored as text in a string <code>s</code>
+can be turned into live Python code by <code>eval(s)</code>.
+
+<p>
+Here is an example where the string to be evaluated is <code>'2.5'</code>, which
+causes Python to see <code>r = 2.5</code> and make a <code>float</code> object:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> r <span style="color: #666666">=</span> <span style="color: #008000">eval</span>(<span style="color: #BA2121">&#39;2.5&#39;</span>)
+<span style="color: #666666">&gt;&gt;&gt;</span> r
+<span style="color: #666666">2.5</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000">type</span>(r)
+<span style="color: #666666">&lt;</span><span style="color: #008000">type</span> <span style="color: #BA2121">&#39;float&#39;</span><span style="color: #666666">&gt;</span>
+</pre></div>
+<p>
+Let us proceed with some more examples. We can put the initialization of
+a list inside quotes and use <code>eval</code> to make a <code>list</code> object:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> r <span style="color: #666666">=</span> <span style="color: #008000">eval</span>(<span style="color: #BA2121">&#39;[1, 6, 7.5]&#39;</span>)
+<span style="color: #666666">&gt;&gt;&gt;</span> r
+[<span style="color: #666666">1</span>, <span style="color: #666666">6</span>, <span style="color: #666666">7.5</span>]
+<span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000">type</span>(r)
+<span style="color: #666666">&lt;</span><span style="color: #008000">type</span> <span style="color: #BA2121">&#39;list&#39;</span><span style="color: #666666">&gt;</span>
+</pre></div>
+<p>
+Again, the assignment to <code>r</code> is equivalent to writing
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> r <span style="color: #666666">=</span> [<span style="color: #666666">1</span>, <span style="color: #666666">6</span>, <span style="color: #666666">7.5</span>]
+</pre></div>
+<p>
+We can also make a <code>tuple</code> object by using tuple syntax (standard
+parentheses instead of brackets):
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> r <span style="color: #666666">=</span> <span style="color: #008000">eval</span>(<span style="color: #BA2121">&#39;(-1, 1)&#39;</span>)
+<span style="color: #666666">&gt;&gt;&gt;</span> r
+(<span style="color: #666666">-1</span>, <span style="color: #666666">1</span>)
+<span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000">type</span>(r)
+<span style="color: #666666">&lt;</span><span style="color: #008000">type</span> <span style="color: #BA2121">&#39;tuple&#39;</span><span style="color: #666666">&gt;</span>
+</pre></div>
+<p>
+Another example reads
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">math</span> <span style="color: #008000; font-weight: bold">import</span> sqrt
+<span style="color: #666666">&gt;&gt;&gt;</span> r <span style="color: #666666">=</span> <span style="color: #008000">eval</span>(<span style="color: #BA2121">&#39;sqrt(2)&#39;</span>)
+<span style="color: #666666">&gt;&gt;&gt;</span> r
+<span style="color: #666666">1.4142135623730951</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000">type</span>(r)
+<span style="color: #666666">&lt;</span><span style="color: #008000">type</span> <span style="color: #BA2121">&#39;float&#39;</span><span style="color: #666666">&gt;</span>
+</pre></div>
+<p>
+At the time we run <code>eval('sqrt(2)')</code>, this is the same as if we had
+written
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> r <span style="color: #666666">=</span> sqrt(<span style="color: #666666">2</span>)
+</pre></div>
+<p>
+directly, and this is valid syntax only  if the <code>sqrt</code> function is defined.
+Therefore, the import of <code>sqrt</code> prior to running <code>eval</code> is
+important in this example.
+
+<h3 id="___sec8">Applying eval to strings <a name="___sec8"></a></h3>
+
+<p>
+If we put a string, enclosed in quotes, inside the expression string,
+the result is a string object:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> r <span style="color: #666666">=</span> <span style="color: #008000">eval</span>(<span style="color: #BA2121">&#39;&quot;math programming&quot;&#39;</span>)
+<span style="color: #666666">&gt;&gt;&gt;</span> r
+<span style="color: #BA2121">&#39;math programming&#39;</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000">type</span>(r)
+<span style="color: #666666">&lt;</span><span style="color: #008000">type</span> <span style="color: #BA2121">&#39;str&#39;</span><span style="color: #666666">&gt;</span>
+</pre></div>
+<p>
+Note that we must use two types of quotes: first double quotes to mark
+<code>math programming</code> as a string object and then another set of quotes,
+here single quotes (but we could also have used triple single quotes),
+to embed the text <code>&quot;math programming&quot;</code> inside a string.  It does not
+matter if we have single or double quotes as inner or outer quotes,
+i.e., <code>'&quot;...&quot;'</code> is the same as <code>&quot;'...'&quot;</code>, because <code>'</code> and <code>&quot;</code> are
+interchangeable as long as a pair of either type is used consistently.
+
+<p>
+Writing just
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> r <span style="color: #666666">=</span> <span style="color: #008000">eval</span>(<span style="color: #BA2121">&#39;math programming&#39;</span>)
+</pre></div>
+<p>
+is the same as writing
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> r <span style="color: #666666">=</span> math programming
+</pre></div>
+<p>
+which is an invalid expression. Python will in this case think that
+<code>math</code> and <code>programming</code> are two (undefined) variables, and setting two
+variables next to each other with a space in between is invalid Python
+syntax. However,
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> r <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;math programming&#39;</span>
+</pre></div>
+<p>
+is valid syntax, as this is how we initialize a string <code>r</code> in Python.
+To repeat,
+if we put the valid syntax <code>'math programming'</code> inside a string,
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">s <span style="color: #666666">=</span> <span style="color: #BA2121">&quot;&#39;math programming&#39;&quot;</span>
+</pre></div>
+<p>
+<code>eval(s)</code> will evaluate the text inside the double quotes as
+<code>'math programming'</code>, which yields a string.
+
+<h3 id="___sec9">Applying eval to user input <a name="___sec9"></a></h3>
+
+<p>
+So, why is the <code>eval</code> function so useful?  When we get input via
+<code>raw_input</code> or <code>sys.argv</code>, it is always in the form of a string
+object, which often must be converted to another type of object,
+usually an <code>int</code> or <code>float</code>.  Sometimes we want to avoid specifying
+one particular type. The <code>eval</code> function can then be of help: we feed
+the string object from the input to the <code>eval</code> function and let the it
+interpret the string and convert it to the right object.
+
+<p>
+An example may clarify the point.  Consider a small program where we
+read in two values and add them.  The values could be strings, floats,
+integers, lists, and so forth, as long as we can apply a <code>+</code> operator
+to the values.  Since we do not know if the user supplies a string,
+float, integer, or something else, we just convert the input by
+<code>eval</code>, which means that the user's syntax will determine the type.
+The program goes as follows
+(<a href="http://tinyurl.com/pwyasaa/input/add_input.py" target="_self"><tt>add_input.py</tt></a>):
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">i1 <span style="color: #666666">=</span> <span style="color: #008000">eval</span>(<span style="color: #008000">raw_input</span>(<span style="color: #BA2121">&#39;Give input: &#39;</span>))
+i2 <span style="color: #666666">=</span> <span style="color: #008000">eval</span>(<span style="color: #008000">raw_input</span>(<span style="color: #BA2121">&#39;Give input: &#39;</span>))
+r <span style="color: #666666">=</span> i1 <span style="color: #666666">+</span> i2
+<span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;</span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121"> + </span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121"> becomes </span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121">with value </span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> \
+      (<span style="color: #008000">type</span>(i1), <span style="color: #008000">type</span>(i2), <span style="color: #008000">type</span>(r), r)
+</pre></div>
+<p>
+Observe that we write out the two supplied values,
+together with the types of the values (obtained by <code>eval</code>), and the sum.
+Let us run the program with
+an integer and a real number as input:
+
+<p>
+
+<!-- code=text (!bc sys) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">add_input.py
+Give input: 4
+Give input: 3.1
+&lt;type &#39;int&#39;&gt; + &lt;type &#39;float&#39;&gt; becomes &lt;type &#39;float&#39;&gt;
+with value 7.1
+</pre></div>
+<p>
+The string <code>'4'</code>, returned by the first call to <code>raw_input</code>,
+is interpreted as an <code>int</code> by <code>eval</code>, while <code>'3.1'</code> gives
+rise to a <code>float</code> object.
+
+<p>
+Supplying two lists also works fine:
+
+<p>
+
+<!-- code=text (!bc sys) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">add_input.py
+Give input: [-1, 3.2]
+Give input: [9,-2,0,0]
+&lt;type &#39;list&#39;&gt; + &lt;type &#39;list&#39;&gt; becomes &lt;type &#39;list&#39;&gt;
+with value [-1, 3.2000000000000002, 9, -2, 0, 0]
+</pre></div>
+<p>
+If we want to use the program to add two strings, the strings must be
+enclosed in quotes for <code>eval</code> to recognize the texts as string
+objects (without the quotes, <code>eval</code> aborts with an error):
+
+<p>
+
+<!-- code=text (!bc sys) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">add_input.py
+Give input: &#39;one string&#39;
+Give input: &quot; and another string&quot;
+&lt;type &#39;str&#39;&gt; + &lt;type &#39;str&#39;&gt; becomes &lt;type &#39;str&#39;&gt;
+with value one string and another string
+</pre></div>
+<p>
+Not all objects are meaningful to add:
+
+<p>
+
+<!-- code=text (!bc sys) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">add_input.py
+Give input: 3.2
+Give input: [-1,10]
+Traceback (most recent call last):
+  File &quot;add_input.py&quot;, line 3, in &lt;module&gt;
+    r = i1 + i2
+TypeError: unsupported operand type(s) for +: &#39;float&#39; and &#39;list&#39;
+</pre></div>
+<p>
+A similar program adding two arbitrary command-line arguments
+reads ((<a href="http://tinyurl.com/pwyasaa/input/add_input.py" target="_self"><tt>add_input.py</tt></a>):
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">sys</span>
+i1 <span style="color: #666666">=</span> <span style="color: #008000">eval</span>(sys<span style="color: #666666">.</span>argv[<span style="color: #666666">1</span>])
+i2 <span style="color: #666666">=</span> <span style="color: #008000">eval</span>(sys<span style="color: #666666">.</span>argv[<span style="color: #666666">2</span>])
+r <span style="color: #666666">=</span> i1 <span style="color: #666666">+</span> i2
+<span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;</span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121"> + </span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121"> becomes </span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121">with value </span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> \
+      (<span style="color: #008000">type</span>(i1), <span style="color: #008000">type</span>(i2), <span style="color: #008000">type</span>(r), r)
+</pre></div>
+<p>
+Another important example on the usefulness of <code>eval</code> is to turn
+formulas, given as input, into mathematics in the program.  Consider
+the program
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">math</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #666666">*</span>   <span style="color: #408080; font-style: italic"># make all math functions available</span>
+<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">sys</span>
+formula <span style="color: #666666">=</span> sys<span style="color: #666666">.</span>argv[<span style="color: #666666">1</span>]
+x <span style="color: #666666">=</span> <span style="color: #008000">eval</span>(sys<span style="color: #666666">.</span>argv[<span style="color: #666666">2</span>])
+result <span style="color: #666666">=</span> <span style="color: #008000">eval</span>(formula)
+<span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;</span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121"> for x=</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121"> yields </span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> (formula, x, result)
+</pre></div>
+<p>
+Two command-line arguments are expected: a formula and a number.  Say
+the formula given is <code>2*sin(x)+1</code> and the number is 3.14.  This
+information is read from the command line as strings.  Doing <code>x =
+eval(sys.argv[2])</code> means <code>x = eval('3.14')</code>, which is equivalent to <code>x
+= 3.14</code>, and <code>x</code> refers to a <code>float</code> object.  The <code>eval(formula)</code>
+expression means <code>eval('2*sin(x)+1')</code>, and the corresponding statement
+<code>result = eval(formula</code> is therefore effectively <code>result =
+2*sin(x)+1</code>, which requires <code>sin</code> and <code>x</code> to be defined objects. The
+result is a <code>float</code> (approximately 1.003).  Providing <code>cos(x)</code> as the
+first command-line argument creates a need to have <code>cos</code> defined, so
+that is why we import all functions from the <code>math</code> module.
+Let us try to run the program:
+
+<p>
+
+<!-- code=text (!bc sys) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">eval_formula.py &quot;2*sin(x)+1&quot; 3.14
+2*sin(x)+1 for x=3.14 yields 1.00319
+</pre></div>
+<p>
+The very nice thing with using <code>eval</code> in <code>x = eval(sys.argv[2])</code> is that
+we can provide mathematical expressions like <code>pi/2</code> or even
+<code>tanh(2*pi)</code>, as the latter just effectively results in the
+statement <code>x = tanh(2*pi)</code>, and this works fine as long has we have
+imported <code>tanh</code> and <code>pi</code>.
+
+<h2 id="sec:input:exec">The magic exec function<a name="sec:input:exec"></a></h2>
+
+<p>
+Having presented <code>eval</code> for turning strings into Python code, we take
+the opportunity to also describe the related <code>exec</code> function to
+execute a string containing arbitrary Python code, not only an
+expression.
+
+<p>
+Suppose the user can write a formula as input to the
+program, available to us in the form of a string object.
+We would then like to turn this formula into a callable Python
+function.  For example, writing <code>sin(x)*cos(3*x) + x**2</code> as the formula,
+we would make the function
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f</span>(x):
+    <span style="color: #008000; font-weight: bold">return</span> sin(x)<span style="color: #666666">*</span>cos(<span style="color: #666666">3*</span>x) <span style="color: #666666">+</span> x<span style="color: #666666">**2</span>
+</pre></div>
+<p>
+This is easy with <code>exec</code>: just construct the right Python syntax
+for defining <code>f(x)</code> in a string and apply <code>exec</code> to the string,
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">formula <span style="color: #666666">=</span> sys<span style="color: #666666">.</span>argv[<span style="color: #666666">1</span>]
+code <span style="color: #666666">=</span> <span style="color: #BA2121">&quot;&quot;&quot;</span>
+<span style="color: #BA2121">def f(x):</span>
+<span style="color: #BA2121">    return </span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121"></span>
+<span style="color: #BA2121">&quot;&quot;&quot;</span> <span style="color: #666666">%</span> formula
+<span style="color: #008000; font-weight: bold">exec</span>(code)
+</pre></div>
+<p>
+As an example,
+think of <code>&quot;sin(x)*cos(3*x) + x**2&quot;</code> as the first command-line
+argument. Then <code>formula</code> will hold this text, which is inserted into
+the <code>code</code> string such that it becomes
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">def f(x):</span>
+<span style="color: #BA2121; font-style: italic">    return sin(x)*cos(3*x) + x**2</span>
+<span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
+</pre></div>
+<p>
+Thereafter, <code>exec(code)</code> executes the code as if we had written
+the contents of the <code>code</code> string directly into the program by hand.
+With this technique, we can turn any user-given formula into a
+Python function!
+
+<p>
+Let us now use this technique in a useful application.
+Suppose we have made a function for computing
+the integral \( \int_a^b f(x)dx \) by the Midpoint rule
+with \( n \) intervals:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">midpoint_integration</span>(f, a, b, n<span style="color: #666666">=100</span>):
+    h <span style="color: #666666">=</span> (b <span style="color: #666666">-</span> a)<span style="color: #666666">/</span><span style="color: #008000">float</span>(n)
+    I <span style="color: #666666">=</span> <span style="color: #666666">0</span>
+    <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(n):
+        I <span style="color: #666666">+=</span> f(a <span style="color: #666666">+</span> i<span style="color: #666666">*</span>h <span style="color: #666666">+</span> <span style="color: #666666">0.5*</span>h)
+    <span style="color: #008000; font-weight: bold">return</span> h<span style="color: #666666">*</span>I
+</pre></div>
+<p>
+We now want to read \( a \), \( b \), and \( n \) from the command line as well
+as the formula that makes up the \( f(x) \) function:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">math</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #666666">*</span>
+<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">sys</span>
+f_formula <span style="color: #666666">=</span> sys<span style="color: #666666">.</span>argv[<span style="color: #666666">1</span>]
+a <span style="color: #666666">=</span> <span style="color: #008000">eval</span>(sys<span style="color: #666666">.</span>argv[<span style="color: #666666">2</span>])
+b <span style="color: #666666">=</span> <span style="color: #008000">eval</span>(sys<span style="color: #666666">.</span>argv[<span style="color: #666666">3</span>])
+<span style="color: #008000; font-weight: bold">if</span> <span style="color: #008000">len</span>(sys<span style="color: #666666">.</span>argv) <span style="color: #666666">&gt;=</span> <span style="color: #666666">5</span>:
+    n <span style="color: #666666">=</span> <span style="color: #008000">int</span>(sys<span style="color: #666666">.</span>argv[<span style="color: #666666">4</span>])
+<span style="color: #008000; font-weight: bold">else</span>:
+    n <span style="color: #666666">=</span> <span style="color: #666666">200</span>
+</pre></div>
+<p>
+Note that we import everything from <code>math</code> and use <code>eval</code> when
+reading the input for <code>a</code> and <code>b</code> as this will allow the user to
+provide values like <code>2*cos(pi/3)</code>.
+
+<p>
+The next step is to convert the <code>f_formula</code> for \( f(x) \) into a
+Python function <code>g(x)</code>:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">code <span style="color: #666666">=</span> <span style="color: #BA2121">&quot;&quot;&quot;</span>
+<span style="color: #BA2121">def g(x):</span>
+<span style="color: #BA2121">    return </span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121"></span>
+<span style="color: #BA2121">&quot;&quot;&quot;</span> <span style="color: #666666">%</span> f_formula
+<span style="color: #008000; font-weight: bold">exec</span>(code)
+</pre></div>
+<p>
+Now we have an ordinary Python function <code>g(x)</code> that we can ask
+the integration function to integrate:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">I <span style="color: #666666">=</span> midpoint_integration(g, a, b, n)
+<span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;Integral of </span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121"> on [</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">, </span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">] with n=</span><span style="color: #BB6688; font-weight: bold">%d</span><span style="color: #BA2121">: </span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> \ 
+      (f_formula, a, b, n, I)
+</pre></div>
+<p>
+The complete code is found in <a href="http://tinyurl.com/pwyasaa/input/integrate.py" target="_self"><tt>integrate.py</tt></a>. A sample run for \( \int_0^{\pi/2} \sin(x)dx \) goes like
+
+<p>
+
+<!-- code=text (!bc sys) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">integrate.py &quot;sin(x)&quot; 0 pi/2
+integral of sin(x) on [0, 1.5708] with n=200: 1
+</pre></div>
+<p>
+(The quotes in <code>&quot;sin(x)&quot;</code> are needed because of the parenthesis will
+otherwise be interpreted by the shell.)
+
+<h2 id="sec:input:StringFunction">Turning string expressions into functions<a name="sec:input:StringFunction"></a></h2>
+
+<p>
+The examples in the previous section indicate that it can be handy
+to ask the user for a formula and turn that formula into a Python
+function.
+Since this operation is so useful, we have made a special tool that
+hides the technicalities. The tool is named
+<code>StringFunction</code> and works as follows:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">scitools.StringFunction</span> <span style="color: #008000; font-weight: bold">import</span> StringFunction
+<span style="color: #666666">&gt;&gt;&gt;</span> formula <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;exp(x)*sin(x)&#39;</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> f <span style="color: #666666">=</span> StringFunction(formula)   <span style="color: #408080; font-style: italic"># turn formula into function f(x)</span>
+</pre></div>
+<p>
+The <code>f</code> object now behaves as an ordinary Python function of <code>x</code>:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> f(<span style="color: #666666">0</span>)
+<span style="color: #666666">0.0</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> f(pi)
+<span style="color: #666666">2.8338239229952166e-15</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> f(log(<span style="color: #666666">1</span>))
+<span style="color: #666666">0.0</span>
+</pre></div>
+<p>
+Expressions involving other independent variables than <code>x</code> are also
+possible.
+Here is an example with the function
+\( g(t) = Ae^{-at}\sin (\omega x) \):
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">g <span style="color: #666666">=</span> StringFunction(<span style="color: #BA2121">&#39;A*exp(-a*t)*sin(omega*x)&#39;</span>,
+                   independent_variable<span style="color: #666666">=</span><span style="color: #BA2121">&#39;t&#39;</span>,
+                   A<span style="color: #666666">=1</span>, a<span style="color: #666666">=0.1</span>, omega<span style="color: #666666">=</span>pi, x<span style="color: #666666">=0.5</span>)
+</pre></div>
+<p>
+The first argument is the function formula, as before, but now we need
+to specify the name of the independent variable (<code>'x'</code> is default).
+The other parameters in the function (\( A \), \( a \), \( \omega \), and \( x \)) must be
+specified with values, and we use keyword arguments, consistent with
+the names in the function formula, for this purpose. Any of the parameters
+<code>A</code>, <code>a</code>, <code>omega</code>, and <code>x</code>
+can be changed later by calls like
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">g<span style="color: #666666">.</span>set_parameters(omega<span style="color: #666666">=0.1</span>)
+g<span style="color: #666666">.</span>set_parameters(omega<span style="color: #666666">=0.1</span>, A<span style="color: #666666">=5</span>, x<span style="color: #666666">=0</span>)
+</pre></div>
+<p>
+Calling <code>g(t)</code> works as if <code>g</code> were a plain Python
+function of <code>t</code>, which
+also stores all the parameters <code>A</code>, <code>a</code>, <code>omega</code>, and
+<code>x</code>, and their values. You can use <code>pydoc</code>
+to bring
+up more documentation on the possibilities with <code>StringFunction</code>.
+Just run
+
+<p>
+
+<!-- code=text (!bc ccq) typeset with pygments style "default" -->
+<blockquote>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">pydoc scitools.StringFunction.StringFunction
+</pre></div>
+</blockquote><p>
+A final important point is that <code>StringFunction</code> objects are as
+computationally efficient as hand-written Python functions.
+(This property is quite remarkable, as a string formula will in most
+other programming languages be much slower to evaluate than if the
+formula were hardcoded inside a plain function.)
+
+<p>
+<p>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pager">
+  <li class="previous">
+    <a href="._input-bootstrap002.html">&larr; Prev</a>
+  </li>
+  <li class="next">
+    <a href="._input-bootstrap004.html">Next &rarr;</a>
+  </li>
+</ul>
+<!-- ------------------- end of main content --------------- -->
+
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap footer
+<footer>
+<a href="http://..."><img width="250" align=right src="http://..."></a>
+</footer>
+-->
+
+
+</body>
+</html>
+    
+

@@ -1,0 +1,1143 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Object-oriented programming">
+<meta name="keywords" content="object-based programming,class hierarchy,class relationship superclass,class relationship derived class,class relationship inheritance,derived class,parent class,base class,superclass,subclass,class relationship subclass,Online Python Tutor,check an object's type,is-a class relationship,has-a class relationship,class relationship is-a,class relationship has-a,dynamic binding,factory function,closure,functional programming,Midpoint rule for integration,Trapezoidal rule for integration,overloading (of methods),polymorphism,Midpoint rule for integration,Trapezoidal rule for integration,recursive function calls,multiple inheritance,convergence rate,Trapezoidal rule for integration,Midpoint rule for integration,object-oriented programming">
+
+<title>Object-oriented programming</title>
+
+<!-- Bootstrap style: bootswatch_readable -->
+<link href="http://netdna.bootstrapcdn.com/bootswatch/3.1.1/readable/bootstrap.min.css" rel="stylesheet">
+<!-- not necessary
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+
+<style type="text/css">
+/* Let inline verbatim have the same color as the surroundings */
+code { color: inherit; background-color: transparent; }
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [(' Inheritance and class hierarchies ',
+               1,
+               'sec:oo:inheritance',
+               'sec:oo:inheritance'),
+              (' A class for straight lines ',
+               2,
+               'sec:oo:Line',
+               'sec:oo:Line'),
+              (' A first try on a class for parabolas ',
+               2,
+               'sec:oo:Parabola1',
+               'sec:oo:Parabola1'),
+              (' A class for parabolas using inheritance ',
+               2,
+               None,
+               '___sec3'),
+              (' Program flow ', 3, None, '___sec4'),
+              (' Checking the class type ', 2, None, '___sec5'),
+              (' Attribute vs inheritance: has-a vs is-a relationship ',
+               2,
+               None,
+               '___sec6'),
+              (' Superclass for defining an interface ',
+               2,
+               'sec:oo:Func',
+               'sec:oo:Func'),
+              (' Class hierarchy for numerical differentiation ',
+               1,
+               'sec:oo:numdiff',
+               'sec:oo:numdiff'),
+              (' Classes for differentiation ',
+               2,
+               'sec:oo:Diff',
+               'sec:oo:Diff'),
+              (' Computer science remark ', 3, None, '___sec10'),
+              (' Verification ', 2, None, '___sec11'),
+              (' A flexible main program ', 2, None, '___sec12'),
+              (' Extensions ', 2, 'sec:oo:Diff:extend', 'sec:oo:Diff:extend'),
+              (' Application ', 3, None, '___sec14'),
+              (' Alternative implementation via functions ',
+               2,
+               'sec:oo:diff:alt:func',
+               'sec:oo:diff:alt:func'),
+              (' Alternative implementation via functional programming ',
+               2,
+               'sec:oo:diff:alt:FP',
+               'sec:oo:diff:alt:FP'),
+              (' Alternative implementation via a single class ',
+               2,
+               'sec:oo:diff:oneclass',
+               'sec:oo:diff:oneclass'),
+              (' Remark ', 3, None, '___sec18'),
+              (' Class hierarchy for numerical integration ',
+               1,
+               'sec:oo:int',
+               'sec:oo:int'),
+              (' Numerical integration methods ',
+               2,
+               'sec:oo:int:methods',
+               'sec:oo:int:methods'),
+              (' Classes for integration ',
+               2,
+               'sec:oo:Integrator',
+               'sec:oo:Integrator'),
+              (' Verification ', 2, None, '___sec22'),
+              (' Using the class hierarchy ', 2, None, '___sec23'),
+              (' About object-oriented programming ', 2, None, '___sec24'),
+              (' Class hierarchy for making drawings ',
+               1,
+               'sec:oo:shapes',
+               'sec:oo:shapes'),
+              (' Using the object collection ', 2, None, '___sec26'),
+              (' Basic drawing ', 3, None, '___sec27'),
+              (' Groups of objects ', 3, None, '___sec28'),
+              (' Changing line styles and colors ', 3, None, '___sec29'),
+              (' The figure composition as an object hierarchy ',
+               3,
+               None,
+               '___sec30'),
+              (' Animation: translating the vehicle ', 3, None, '___sec31'),
+              (' Animation: rolling the wheels ',
+               3,
+               'sketcher:vehicle1:anim',
+               'sketcher:vehicle1:anim'),
+              (' Example of classes for geometric objects ',
+               2,
+               None,
+               '___sec33'),
+              (' Simple geometric objects ', 3, None, '___sec34'),
+              (' Class curve ', 3, None, '___sec35'),
+              (' Compound geometric objects ', 3, None, '___sec36'),
+              (' Adding functionality via recursion ', 2, None, '___sec37'),
+              (' Basic principles of recursion ', 3, None, '___sec38'),
+              (' Explaining recursion ', 3, None, '___sec39'),
+              (' Scaling, translating, and rotating a figure ',
+               2,
+               'sketcher:scaling',
+               'sketcher:scaling'),
+              (' Scaling ', 3, None, '___sec41'),
+              (' Translation ', 3, None, '___sec42'),
+              (' Rotation ', 3, None, '___sec43'),
+              (' Classes for DNA analysis ', 1, 'bioinf:oo', 'bioinf:oo'),
+              (' Class for regions ', 2, None, '___sec45'),
+              (' Class for genes ', 2, None, '___sec46'),
+              (' Basic features of class gene ', 3, None, '___sec47'),
+              (' Flexible constructor ', 3, None, '___sec48'),
+              (' Other methods ', 3, None, '___sec49'),
+              (' Subclasses ', 2, None, '___sec50'),
+              (' Summary ', 1, None, '___sec51'),
+              (' Chapter topics ', 2, None, '___sec52'),
+              (' Subclass example ', 3, None, '___sec53'),
+              (' Subclassing in general ', 3, None, '___sec54'),
+              (' Terminology ', 3, None, '___sec55'),
+              (' Example: Input data reader ',
+               2,
+               'sec:oo:ReadInput',
+               'sec:oo:ReadInput'),
+              (' Problem ', 3, None, '___sec57'),
+              (' Solution ', 3, None, '___sec58'),
+              (' Prompting the user ', 3, None, '___sec59'),
+              (' Reading from file ', 3, None, '___sec60'),
+              (' Reading from the command line ', 3, None, '___sec61'),
+              (' Reading from a gui ', 3, None, '___sec62'),
+              (' More flexibility in the superclass ', 3, None, '___sec63'),
+              (' Demonstrating the tool ', 3, None, '___sec64'),
+              (' Exercises ', 1, None, '___sec65'),
+              (' Exercise 1: Demonstrate the magic of inheritance ',
+               2,
+               'sec:oo:ex1',
+               'sec:oo:ex1'),
+              (' Exercise 2: Make polynomial subclasses of parabolas ',
+               2,
+               'sec:oo:ex2',
+               'sec:oo:ex2'),
+              (' Remarks ', 3, None, '___sec68'),
+              (' Exercise 3: Implement a class for a function as a subclass ',
+               2,
+               'sec:oo:ex3',
+               'sec:oo:ex3'),
+              (' Exercise 4: Create an alternative class hierarchy for polynomials ',
+               2,
+               'sec:oo:ex5',
+               'sec:oo:ex5'),
+              (' Exercise 5: Make circle a subclass of an ellipse ',
+               2,
+               'sec:oo:ex5b',
+               'sec:oo:ex5b'),
+              (' Exercise 6: Make super- and subclass for a point ',
+               2,
+               'sec:oo:ex17',
+               'sec:oo:ex17'),
+              (' Exercise 7: Modify a function class by subclassing ',
+               2,
+               'sec:oo:ex7',
+               'sec:oo:ex7'),
+              (' Exercise 8: Explore the accuracy of difference formulas ',
+               2,
+               'sec:oo:ex18',
+               'sec:oo:ex18'),
+              (' Exercise 9: Implement a subclass ',
+               2,
+               'sec:oo:ex15b',
+               'sec:oo:ex15b'),
+              (' Exercise 10: Make classes for numerical differentiation ',
+               2,
+               'sec:oo:ex33',
+               'sec:oo:ex33'),
+              (' Exercise 11: Implement a new subclass for differentiation ',
+               2,
+               'sec:oo:ex31',
+               'sec:oo:ex31'),
+              (' Exercise 12: Understand if a class can be used recursively ',
+               2,
+               'sec:oo:ex14',
+               'sec:oo:ex14'),
+              (' Exercise 13: Represent people by a class hierarchy ',
+               2,
+               'sec:oo:ex4',
+               'sec:oo:ex4'),
+              (' Remark ', 3, None, '___sec80'),
+              (' Exercise 14: Add a new class in a class hierarchy ',
+               2,
+               'sec:oo:ex15',
+               'sec:oo:ex15'),
+              (' Exercise 15: Compute convergence rates of numerical integration methods ',
+               2,
+               'sec:oo:ex16',
+               'sec:oo:ex16'),
+              (' Exercise 16: Add common functionality in a class hierarchy ',
+               2,
+               'sec:oo:ex6',
+               'sec:oo:ex6'),
+              (' Exercise 17: Make a class hierarchy for root finding ',
+               2,
+               'sec:oo:ex41',
+               'sec:oo:ex41'),
+              (' Exercise 18: Make a calculus calculator class ',
+               2,
+               'sec:plot:ex30',
+               'sec:plot:ex30'),
+              (' Exercise 19: Compute inverse functions ',
+               2,
+               'sec:plot:ex30b',
+               'sec:plot:ex30b'),
+              (' Exercise 20: Make line drawing of a person; program ',
+               2,
+               'pysketcher:exer:person:prog',
+               'pysketcher:exer:person:prog'),
+              (' Exercise 21: Make line drawing of a person; class ',
+               2,
+               'pysketcher:exer:person:class',
+               'pysketcher:exer:person:class'),
+              (' Exercise 22: Animate a person with waving hands ',
+               2,
+               'pysketcher:exer:person:anim',
+               'pysketcher:exer:person:anim'),
+              (' References ', 1, None, '___sec90')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- newcommands_keep.tex -->
+$$
+\newcommand{\tp}{\thinspace .}
+$$
+
+
+
+
+    
+<!-- Bootstrap navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="oo-readable.html">Object-oriented programming</a>
+  </div>
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     <!-- navigation toc: --> <li><a href="._oo-readable001.html#sec:oo:inheritance" style="font-size: 80%;">Inheritance and class hierarchies</a></li>
+     <!-- navigation toc: --> <li><a href="._oo-readable002.html#sec:oo:numdiff" style="font-size: 80%;">Class hierarchy for numerical differentiation</a></li>
+     <!-- navigation toc: --> <li><a href="._oo-readable003.html#sec:oo:int" style="font-size: 80%;">Class hierarchy for numerical integration</a></li>
+     <!-- navigation toc: --> <li><a href="._oo-readable004.html#sec:oo:shapes" style="font-size: 80%;">Class hierarchy for making drawings</a></li>
+     <!-- navigation toc: --> <li><a href="._oo-readable004.html#bioinf:oo" style="font-size: 80%;">Classes for DNA analysis</a></li>
+     <!-- navigation toc: --> <li><a href="._oo-readable005.html#___sec51" style="font-size: 80%;">Summary</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec65" style="font-size: 80%;">Exercises</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec90" style="font-size: 80%;">References</a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div> <!-- end of navigation bar -->
+
+<div class="container">
+
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+
+<a name="part0006"></a>
+<!-- !split -->
+
+<h1 id="___sec65">Exercises <a name="___sec65"></a></h1>
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:oo:ex1">Exercise 1: Demonstrate the magic of inheritance<a name="sec:oo:ex1"></a></h2>
+
+<p>
+Consider class <code>Line</code> from the section <a href="._oo-readable001.html#sec:oo:Line">A class for straight lines</a> and
+a subclass <code>Parabola0</code> defined as
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Parabola0</span>(Line):
+    <span style="color: #008000; font-weight: bold">pass</span>
+</pre></div>
+<p>
+That is, class <code>Parabola0</code> does not have any own code, but it inherits
+from class <code>Line</code>. Demonstrate in a program or interactive session,
+using <code>dir</code> and looking at the <code>__dict__</code> object,
+(see the section ref{sec:class:inspect})
+that an instance of class <code>Parabola0</code> contains everything
+(i.e., all attributes and
+methods) that an instance of class <code>Line</code> contains.
+Filename: <code>dir_subclass.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:oo:ex2">Exercise 2: Make polynomial subclasses of parabolas<a name="sec:oo:ex2"></a></h2>
+
+<p>
+The task in this exercise is to make
+a class <code>Cubic</code> for cubic functions
+
+$$
+\begin{equation*} c_3x^3 + c_2x^2 + c_1x + c_0\end{equation*}
+$$
+
+with a call operator and a <code>table</code> method as in classes
+<code>Line</code> and <code>Parabola</code> from the section <a href="._oo-readable001.html#sec:oo:inheritance">Inheritance and class hierarchies</a>.
+Implement class <code>Cubic</code> by
+inheriting from class <code>Parabola</code>, and
+call up functionality in class <code>Parabola</code> in the same way as class
+<code>Parabola</code> calls up functionality in class <code>Line</code>.
+
+<p>
+Make a similar class <code>Poly4</code> for 4-th degree polynomials
+
+$$
+\begin{equation*} c_4x^4 + c_3x^3 + c_2x^2 + c_1x + c_0\end{equation*}
+$$
+
+by inheriting from class
+<code>Cubic</code>.
+Insert <code>print</code> statements in all the <code>__call__</code>
+to help following the program flow.
+Evaluate cubic and a 4-th degree polynomial at a point, and observe
+the printouts from all the superclasses.
+Filename: <code>Cubic_Poly4.py</code>.
+
+<p>
+<!-- Closing remarks for this Exercise -->
+
+<h3 id="___sec68">Remarks <a name="___sec68"></a></h3>
+
+<p>
+This exercise follows the idea from the section <a href="._oo-readable001.html#sec:oo:inheritance">Inheritance and class hierarchies</a>
+where more complex polynomials are subclasses of simpler ones.
+Conceptually, a cubic polynomial <em>is not</em> a parabola, so many
+programmers
+will not accept class <code>Cubic</code> as a subclass of <code>Parabola</code>;
+it should be the other way around, and
+<a href="#sec:oo:ex2">Exercise 2: Make polynomial subclasses of parabolas</a> follows that approach. Nevertheless, one
+can use inheritance solely for sharing code and not for expressing that
+a subclass <code>is a</code> kind of the superclass. For code sharing it
+is natural to start with the simplest polynomial as superclass and
+add terms to the inherited data structure as we make subclasses
+for higher degree polynomials.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:oo:ex3">Exercise 3: Implement a class for a function as a subclass<a name="sec:oo:ex3"></a></h2>
+
+<p>
+Implement a class for the function \( f(x)=A\sin (wx) + ax^2 + bx + c \).
+The class should have a call operator for evaluating the function for
+some argument \( x \), and a constructor that takes the function
+parameters <code>A</code>, <code>w</code>, <code>a</code>, <code>b</code>, and <code>c</code> as arguments.  Also a <code>table</code>
+method as in classes <code>Line</code> and <code>Parabola</code> should be
+present. Implement the class by deriving it from class <code>Parabola</code> and
+call up functionality already implemented in class <code>Parabola</code> whenever
+possible.
+Filename: <code>sin_plus_quadratic.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:oo:ex5">Exercise 4: Create an alternative class hierarchy for polynomials<a name="sec:oo:ex5"></a></h2>
+
+<p>
+Let class <code>Polynomial</code> from the document <a href="http://tcse6.on.net/class" target="_self">Introduction to classes in
+Python</a> <a href="#Langtangen_TCSE6_class">[2]</a> be
+a superclass and implement class <code>Parabola</code> as a subclass.  The
+constructor in class <code>Parabola</code> should take the three coefficients in
+the parabola as separate arguments.  Try to reuse as much code as
+possible from the superclass in the subclass.  Implement class <code>Line</code>
+as a subclass specialization of class <code>Parabola</code>.
+
+<p>
+Which class design do you prefer, class <code>Line</code> as a subclass of
+<code>Parabola</code> and <code>Polynomial</code>, or <code>Line</code> as a superclass with extensions
+in subclasses?  (See also remark in <a href="#sec:oo:ex2">Exercise 2: Make polynomial subclasses of parabolas</a>.)
+Filename: <code>Polynomial_hier.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:oo:ex5b">Exercise 5: Make circle a subclass of an ellipse<a name="sec:oo:ex5b"></a></h2>
+
+<p>
+The document <a href="http://tcse6.on.net/class" target="_self">Introduction to classes in
+Python</a> <a href="#Langtangen_TCSE6_class">[2]</a>
+presents class <code>Circle</code>. Make a similar class <code>Ellipse</code> for
+representing an ellipse. Then create a new class <code>Circle</code> that is a
+subclass of <code>Ellipse</code>.
+Filename: <code>Ellipse_Circle.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:oo:ex17">Exercise 6: Make super- and subclass for a point<a name="sec:oo:ex17"></a></h2>
+
+<p>
+A point \( (x,y) \) in the plane can be represented by a class:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Point</span>:
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__init__</span>(<span style="color: #008000">self</span>, x, y):
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>x, <span style="color: #008000">self</span><span style="color: #666666">.</span>y <span style="color: #666666">=</span> x, y
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__str__</span>(<span style="color: #008000">self</span>):
+        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #BA2121">&#39;(</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">, </span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">)&#39;</span> <span style="color: #666666">%</span> (<span style="color: #008000">self</span><span style="color: #666666">.</span>x, <span style="color: #008000">self</span><span style="color: #666666">.</span>y)
+</pre></div>
+<p>
+We can extend the <code>Point</code> class to also contain the representation of
+the point in polar coordinates. To this end, create a subclass
+<code>PolarPoint</code> whose constructor takes the polar representation of a
+point, \( (r,\theta) \), as arguments.  Store \( r \) and \( \theta \) as
+attributes and call the superclass constructor with the corresponding
+\( x \) and \( y \) values (recall the relations \( x=r\cos\theta \) and
+\( y=r\sin\theta \) between Cartesian and polar coordinates).  Add a
+<code>__str__</code> method in class <code>PolarPoint</code> which prints out \( r \), \( \theta \),
+\( x \), and \( y \). Verify the implementation by initializing three points
+and printing these points.
+Filename: <code>PolarPoint.py</code>.
+
+<p>
+<!-- (Needs Cartesian for plotting, polar for reading (natural)) -->
+<!-- to print the list of points nicely...can have Cartesian print and Polar print -->
+<!-- a read method in PolarPoint), and plot the data, needs __repr__ -->
+<!-- position, read the coords from file into the data structure (maybe -->
+<!-- or sattelite's -->
+<!-- class with list of PolarPoint instances for, e.g., tracking a planet's -->
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:oo:ex7">Exercise 7: Modify a function class by subclassing<a name="sec:oo:ex7"></a></h2>
+
+<p>
+Consider a class <code>F</code> implementing the function
+\( f(t;a,b) = e^{-at}\sin (bt) \):
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">F</span>:
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__init__</span>(<span style="color: #008000">self</span>, a, b):
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>a, <span style="color: #008000">self</span><span style="color: #666666">.</span>b <span style="color: #666666">=</span> a, b
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__call__</span>(<span style="color: #008000">self</span>, t):
+        <span style="color: #008000; font-weight: bold">return</span> exp(<span style="color: #666666">-</span><span style="color: #008000">self</span><span style="color: #666666">.</span>a<span style="color: #666666">*</span>t)<span style="color: #666666">*</span>sin(<span style="color: #008000">self</span><span style="color: #666666">.</span>b<span style="color: #666666">*</span>t)
+</pre></div>
+<p>
+We now want to study how the function \( f(t;a,b) \) varies with the
+parameter \( b \), given \( t \) and \( a \). Mathematically, this means that we
+want to compute \( g(b;t,a)=f(t;a,b) \).  Write a subclass <code>Fb</code> of <code>F</code>
+with a new <code>__call__</code> method for evaluating \( g(b;t,a) \). Do not
+reimplement the formula, but call the <code>__call__</code> method in the
+superclass to evaluate \( f(t;a,b) \).  The <code>Fs</code> should work as follows:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">f <span style="color: #666666">=</span> Fs(t<span style="color: #666666">=2</span>, a<span style="color: #666666">=4.5</span>)
+<span style="color: #008000; font-weight: bold">print</span> f(<span style="color: #666666">3</span>)  <span style="color: #408080; font-style: italic"># b=3</span>
+</pre></div>
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<b>Hint.</b>
+Before calling <code>__call__</code> in the superclass, the attribute <code>b</code>
+in the superclass must be set to the right value.
+
+<p>
+<!-- --- end hint in exercise --- -->
+Filename: <code>Fb.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:oo:ex18">Exercise 8: Explore the accuracy of difference formulas<a name="sec:oo:ex18"></a></h2>
+
+<p>
+The purpose of this exercise is to investigate the accuracy of the
+<code>Backward1</code>, <code>Forward1</code>, <code>Forward3</code>, <code>Central2</code>, <code>Central4</code>,
+<code>Central6</code> methods for the function
+
+$$
+\begin{equation*} v(x)={1-e^{x/\mu}\over 1-e^{1/\mu}}\tp\end{equation*}
+$$
+
+Compute the errors in the approximations for
+\( x=0, 0.9 \) and  \( \mu =1, 0.01 \). Illustrate in a plot
+how the \( v(x) \) function looks like for these two \( \mu \) values.
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<b>Hint.</b>
+Modify the <a href="http://tinyurl.com/pwyasaa/oo/Diff2_examples.py" target="_self"><tt>src/oo/Diff2_examples.py</tt></a> program
+which produces tables
+of errors of difference approximations as discussed at the end
+of the section <a href="._oo-readable002.html#sec:oo:Diff:extend">Extensions</a>.
+
+<p>
+<!-- --- end hint in exercise --- -->
+Filename: <code>boundary_layer_derivative.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:oo:ex15b">Exercise 9: Implement a subclass<a name="sec:oo:ex15b"></a></h2>
+
+<p>
+Make a subclass <code>Sine1</code> of class <code>FuncWithDerivatives</code> from the section <a href="._oo-readable001.html#sec:oo:Func">Superclass for defining an interface</a> for the \( \sin x \) function.  Implement the function
+only, and rely on the inherited <code>df</code> and <code>ddf</code> methods for computing
+the derivatives. Make another subclass <code>Sine2</code> for \( \sin x \) where you
+also implement the <code>df</code> and <code>ddf</code> methods using analytical expressions
+for the derivatives.  Compare <code>Sine1</code> and <code>Sine2</code> for computing the
+first- and second-order derivatives of \( \sin x \) at two \( x \) points.
+Filename: <code>Sine12.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:oo:ex33">Exercise 10: Make classes for numerical differentiation<a name="sec:oo:ex33"></a></h2>
+
+<p>
+Carry out
+ref{sec:class:ex21}.
+Find the common code in the classes <code>Derivative</code>, <code>Backward</code>, and
+<code>Central</code>.  Move this code to a superclass, and let the three
+mentioned classes be subclasses of this superclass. Compare the
+resulting code with the hierarchy shown in the section <a href="._oo-readable002.html#sec:oo:Diff">Classes for differentiation</a>.
+Filename: <code>numdiff_classes.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:oo:ex31">Exercise 11: Implement a new subclass for differentiation<a name="sec:oo:ex31"></a></h2>
+
+<p>
+A one-sided, three-point, second-order accurate formula for
+differentiating a function \( f(x) \) has the form
+
+$$
+\begin{equation}
+f'(x)\approx {f(x-2h) -4f(x-h) + 3f(x)\over 2h}\tp
+\end{equation}
+$$
+
+Implement this formula in a subclass <code>Backward2</code> of class <code>Diff</code> from
+the section <a href="._oo-readable002.html#sec:oo:numdiff">Class hierarchy for numerical differentiation</a>. Compare <code>Backward2</code> with <code>Backward1</code> for
+\( g(t)=e^{-t} \) for \( t=0 \) and \( h=2^{-k} \) for \( k=0,1,\ldots, 14 \) (write
+out the errors in \( g'(t) \)).
+Filename: <code>Backward2.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:oo:ex14">Exercise 12: Understand if a class can be used recursively<a name="sec:oo:ex14"></a></h2>
+
+<p>
+Suppose you want to compute \( f''(x) \) of some mathematical function \( f(x) \),
+and that you apply some class from the section <a href="._oo-readable002.html#sec:oo:numdiff">Class hierarchy for numerical differentiation</a>
+twice, e.g.,
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">ddf <span style="color: #666666">=</span> Central2(Central2(f))
+</pre></div>
+<p>
+Will this work?
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<b>Hint.</b>
+Follow the program flow, and find out what
+the resulting formula will be. Then see if this formula coincides with
+a formula you know for approximating \( f''(x) \) (actually, to recover
+the well-known formula with an \( h \) parameter, you would use \( h/2 \)
+in the nested calls to <code>Central2</code>).
+
+<p>
+<!-- --- end hint in exercise --- -->
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:oo:ex4">Exercise 13: Represent people by a class hierarchy<a name="sec:oo:ex4"></a></h2>
+
+<p>
+Classes are often used to model objects in the real world.  We may
+represent the data about a person in a program by a class <code>Person</code>,
+containing the person's name, address, phone number, date of birth,
+and nationality.  A method <code>__str__</code> may print the person's data.
+Implement such a class <code>Person</code>.
+
+<p>
+A worker is a person with a job. In a program, a worker is naturally
+represented as class <code>Worker</code> derived from class <code>Person</code>, because a
+worker <em>is</em> a person, i.e., we have an is-a relationship.  Class
+<code>Worker</code> extends class <code>Person</code> with additional data, say name of
+company, company address, and job phone number.  The print
+functionality must be modified accordingly.  Implement this <code>Worker</code>
+class.
+
+<p>
+A scientist is a special kind of a worker. Class <code>Scientist</code> may
+therefore be derived from class <code>Worker</code>. Add data about the
+scientific discipline (physics, chemistry, mathematics, computer
+science, ...). One may also add the type of scientist: theoretical,
+experimental, or computational. The value of such a type attribute
+should not be restricted to just one category, since a scientist may
+be classified as, e.g., both experimental and computational (i.e., you
+can represent the value as a list or tuple).  Implement class
+<code>Scientist</code>.
+
+<p>
+Researcher, postdoc, and professor are special cases of a scientist.
+One can either create classes for these job positions, or one may add
+an attribute (<code>position</code>) for this information in class
+<code>Scientist</code>. We adopt the former strategy.  When, e.g., a researcher
+is represented by a class <code>Researcher</code>, no extra data or methods are
+needed.  In Python we can create such an empty class by writing <code>pass</code>
+(the empty statement) as the class body:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Researcher</span>(Scientist):
+    <span style="color: #008000; font-weight: bold">pass</span>
+</pre></div>
+<p>
+Finally, make a demo program where you create and print instances of
+classes <code>Person</code>, <code>Worker</code>, <code>Scientist</code>, <code>Researcher</code>, <code>Postdoc</code>, and
+<code>Professor</code>.  Print out the attribute contents of each instance (use
+the <code>dir</code> function).
+
+<h3 id="___sec80">Remark <a name="___sec80"></a></h3>
+
+<p>
+An alternative design is to introduce a class <code>Teacher</code> as a special
+case of <code>Worker</code> and let <code>Professor</code> be both a <code>Teacher</code> and
+<code>Scientist</code>, which is natural. This implies that class <code>Professor</code> has
+two superclasses, <code>Teacher</code> and <code>Scientist</code>, or equivalently, class
+<code>Professor</code> inherits from two superclasses.  This is known as
+<em>multiple inheritance</em> and technically achieved as follows in Python:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Professor</span>(Teacher, Scientist):
+    <span style="color: #008000; font-weight: bold">pass</span>
+</pre></div>
+<p>
+It is a continuous debate in computer science whether multiple
+inheritance is a good idea or not. One obvious problem in the present
+example is that class <code>Professor</code> inherits two names, one via
+<code>Teacher</code> and one via <code>Scientist</code> (both these classes inherit from
+<code>Person</code>).
+Filename: <code>Person.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:oo:ex15">Exercise 14: Add a new class in a class hierarchy<a name="sec:oo:ex15"></a></h2>
+
+<p>
+Add the Monte Carlo integration method from the
+document <a href="http://tcse6.on.net/random" target="_self">Random numbers and simple games</a> <a href="#Langtangen_TCSE6_random">[6]</a> as a
+subclass in the <code>Integrator</code> hierarchy explained in the section <a href="._oo-readable003.html#sec:oo:int">Class hierarchy for numerical integration</a>.  Import the superclass <code>Integrator</code> from the
+<code>integrate</code> module in the file with the new integration class. Test
+the Monte Carlo integration class in a case with known analytical
+solution.
+Filename: <code>MCint_class.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:oo:ex16">Exercise 15: Compute convergence rates of numerical integration methods<a name="sec:oo:ex16"></a></h2>
+
+<p>
+Numerical integration methods can compute ``any`` integral
+\( \int_a^b f(x)dx \), but the result is not exact. The methods have
+a parameter \( n \), closely related to the number of evaluations of
+the function \( f \), that can be increased to achieve more accurate
+results. In this exercise we want to explore the relation between
+the error \( E \) in the numerical approximation to the integral
+and \( n \). Different numerical methods have different relations.
+
+<p>
+The relations are of the form
+
+$$
+\begin{equation*} E = Cn^r,\end{equation*}
+$$
+
+where and \( C \) and \( r < 0 \) are constants to be determined. That is,
+\( r \) is the most important of these parameters, because if
+Simpson's method has a more negative \( r \) than the Trapezoidal method, it
+means that increasing \( n \) in Simpson's method reduces the error
+more effectively than increasing \( n \) in the Trapezoidal method.
+
+<p>
+One can estimate \( r \) from numerical experiments. For a chosen
+\( f(x) \), where the exact value of \( \int_a^bf(x)dx \) is available,
+one computes the numerical approximation for \( N+1 \) values of
+\( n \): \( n_0 < n_1 < \cdots < n_N \) and finds the corresponding errors
+\( E_0,E_1,\ldots,E_N \) (the difference between the exact value
+and the value produced by the numerical method).
+
+<p>
+One way to estimate \( r \) goes as follows. For two successive experiments
+we have
+
+$$
+\begin{equation*} E_i = Cn_i^r\tp\end{equation*}
+$$
+
+and
+
+$$
+\begin{equation*} E_{i+1} = Cn_{i+1}^r\end{equation*}
+$$
+
+Divide the first equation by the second to eliminate \( C \), and then
+take the logarithm to solve for \( r \):
+
+$$
+\begin{equation*}
+r = {\ln (E_{i}/E_{i+1})\over\ln (n_{i}/n_{i+1})}\tp
+\end{equation*}
+$$
+
+We can compute \( r \) for all pairs of two successive experiments. Say
+\( r_i \) is the \( r \) value found from experiment \( i \) and \( i+1 \),
+
+$$
+\begin{equation*}
+r_i = {\ln (E_{i}/E_{i+1})\over\ln (n_{i}/n_{i+1})},\quad i=0,1,\ldots,N-1\tp
+\end{equation*}
+$$
+
+Usually, the last value, \( r_{N-1} \), is the best
+approximation to the true \( r \) value.
+Knowing \( r \), we can compute \( C \) as \( E_in_i^{-r} \) for any \( i \).
+
+<p>
+Use the method above to estimate \( r \) and \( C \) for the Midpoint method,
+the Trapezoidal method, and Simpson's method.  Make your own choice of
+integral problem: \( f(x) \), \( a \), and \( b \).  Let the parameter \( n \) be the
+number of function evaluations in each method, and run the experiments
+with \( n=2^{k}+1 \) for \( k=2,\ldots,11 \).  The <code>Integrator</code> hierarchy from
+the section <a href="._oo-readable003.html#sec:oo:int">Class hierarchy for numerical integration</a> has all the requested methods implemented.
+Filename: <code>integrators_convergence.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:oo:ex6">Exercise 16: Add common functionality in a class hierarchy<a name="sec:oo:ex6"></a></h2>
+
+<p>
+Suppose you want to use classes in the <code>Integrator</code>
+hierarchy from the section <a href="._oo-readable003.html#sec:oo:int">Class hierarchy for numerical integration</a>
+to calculate integrals of the form
+
+$$
+\begin{equation*} F(x) = \int_a^x f(t)dt\tp\end{equation*}
+$$
+
+Such functions
+\( F(x) \) can be efficiently computed by the method from
+ref{sec:class:ex13c}. Implement this computation of
+\( F(x) \) in an additional method in the superclass <code>Integrator</code>.
+Test that the implementation is correct for \( f(x)=2x-3 \) for all
+the implemented integration methods (the Midpoint, Trapezoidal and
+Gauss-Legendre methods, as well as Simpson's rule, integrate a linear
+function exactly).
+Filename: <code>integrate_efficient.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:oo:ex41">Exercise 17: Make a class hierarchy for root finding<a name="sec:oo:ex41"></a></h2>
+
+<p>
+Given a general nonlinear equation \( f(x)=0 \), we want to implement
+classes for solving such an equation, and organize the classes in a
+class hierarchy. Make classes for three methods:
+Newton's method (in the section ref{sec:diffeq:Newtonsmethod:sec}),
+the Bisection method (in the section ref{sec:input:summarizingex}),
+and the Secant method (in ref{sec:diffeq:ex14b}).
+
+<p>
+It is not obvious how such a hierarchy should be organized.
+One idea is to let the superclass store the \( f(x) \) function
+and its derivative \( f'(x) \) (if provided - if not, use a
+finite difference approximation for \( f'(x) \)).
+A method
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">solve</span>(start_values<span style="color: #666666">=</span>[<span style="color: #666666">0</span>], max_iter<span style="color: #666666">=100</span>, tolerance<span style="color: #666666">=1E-6</span>):
+    <span style="color: #666666">...</span>
+</pre></div>
+<p>
+in the superclass can implement a general iteration loop. The
+<code>start_values</code> argument is a list of starting values for the algorithm
+in question: one point for Newton, two for Secant, and an interval
+\( [a,b] \) containing a root for Bisection.  Let <code>solve</code> define a list
+<code>self.x</code> holding all the computed approximations. The initial value of
+<code>self.x</code> is simply <code>start_values</code>. For the Bisection method, one can
+use the convention \( a, b, c \) = <code>self.x[-3:]</code>, where \( [a,b] \) represents
+the most recently computed interval and \( c \) is its midpoint.  The
+<code>solve</code> method can return an approximate root \( x \), the corresponding
+\( f(x) \) value, a boolean indicator that is <code>True</code> if \( |f(x)| \) is less
+than the <code>tolerance</code> parameter, and a list of all the approximations
+and their \( f \) values (i.e., a list of \( (x, f(x)) \) tuples).
+
+<p>
+Do ref{sec:diffeq:ex14c} using the new class hierarchy.
+Filename: <code>Rootfinders.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:plot:ex30">Exercise 18: Make a calculus calculator class<a name="sec:plot:ex30"></a></h2>
+
+<p>
+Given a function \( f(x) \) defined on a domain \( [a,b] \), the purpose of
+many mathematical exercises is to sketch the function curve \( y=f(x) \),
+compute the derivative \( f'(x) \), find local and global extreme points,
+and compute the integral \( \int_a^b f(x)dx \).
+Make a class <code>CalculusCalculator</code> which can perform all these actions
+for any function \( f(x) \) using numerical differentiation and integration,
+and the method explained in ref{sec:plot:ex28}.
+for finding extrema.
+
+<p>
+Here is an interactive session with the class where we
+analyze \( f(x)=x^2e^{-0.2x}\sin (2\pi x) \) on \( [0,6] \) with a grid
+(set of \( x \) coordinates) of 700 points:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">CalculusCalculator</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #666666">*</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f</span>(x):
+<span style="color: #666666">...</span>     <span style="color: #008000; font-weight: bold">return</span> x<span style="color: #666666">**2*</span>exp(<span style="color: #666666">-0.2*</span>x)<span style="color: #666666">*</span>sin(<span style="color: #666666">2*</span>pi<span style="color: #666666">*</span>x)
+<span style="color: #666666">...</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> c <span style="color: #666666">=</span> CalculusCalculator(f, <span style="color: #666666">0</span>, <span style="color: #666666">6</span>, resolution<span style="color: #666666">=700</span>)
+<span style="color: #666666">&gt;&gt;&gt;</span> c<span style="color: #666666">.</span>plot()                <span style="color: #408080; font-style: italic"># plot f</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> c<span style="color: #666666">.</span>plot_derivative()     <span style="color: #408080; font-style: italic"># plot f&#39;</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> c<span style="color: #666666">.</span>extreme_points()
+
+All minima: <span style="color: #666666">0.8052</span>, <span style="color: #666666">1.7736</span>, <span style="color: #666666">2.7636</span>, <span style="color: #666666">3.7584</span>, <span style="color: #666666">4.7556</span>, <span style="color: #666666">5.754</span>, <span style="color: #666666">0</span>
+All maxima: <span style="color: #666666">0.3624</span>, <span style="color: #666666">1.284</span>, <span style="color: #666666">2.2668</span>, <span style="color: #666666">3.2604</span>, <span style="color: #666666">4.2564</span>, <span style="color: #666666">5.2548</span>, <span style="color: #666666">6</span>
+Global minimum: <span style="color: #666666">5.754</span>
+Global maximum: <span style="color: #666666">5.2548</span>
+
+<span style="color: #666666">&gt;&gt;&gt;</span> c<span style="color: #666666">.</span>integral
+<span style="color: #666666">-1.7353776102348935</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> c<span style="color: #666666">.</span>df(<span style="color: #666666">2.51</span>)    <span style="color: #408080; font-style: italic"># c.df(x) is the derivative of f</span>
+<span style="color: #666666">-24.056988888465636</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> c<span style="color: #666666">.</span>set_differentiation_method(Central4)
+<span style="color: #666666">&gt;&gt;&gt;</span> c<span style="color: #666666">.</span>df(<span style="color: #666666">2.51</span>)
+<span style="color: #666666">-24.056988832723189</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> c<span style="color: #666666">.</span>set_integration_method(Simpson)  <span style="color: #408080; font-style: italic"># more accurate integration</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> c<span style="color: #666666">.</span>integral
+<span style="color: #666666">-1.7353857856973565</span>
+</pre></div>
+<p>
+Design the class such that the above session can be carried out.
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<b>Hint.</b>
+Use classes from the <code>Diff</code> and <code>Integrator</code>
+hierarchies (the sections <a href="._oo-readable002.html#sec:oo:numdiff">Class hierarchy for numerical differentiation</a> and <a href="._oo-readable003.html#sec:oo:int">Class hierarchy for numerical integration</a>)
+for numerical differentiation and integration (with, e.g., <code>Central2</code>
+and <code>Trapezoidal</code> as default methods for differentiation and integration).
+The method <code>set_differentiation_method</code>
+takes a subclass name in the <code>Diff</code> hierarchy as argument, and
+makes an attribute <code>df</code> that holds a subclass instance for computing
+derivatives.
+With <code>set_integration_method</code> we can similarly set
+the integration method as a subclass name in the <code>Integrator</code>
+hierarchy, and then compute the integral \( \int_a^bf(x)dx \) and store
+the value in the attribute <code>integral</code>.
+The <code>extreme_points</code> method performs a <code>print</code> on
+a <code>MinMax</code> instance, which is stored as an attribute in the
+calculator class.
+
+<p>
+<!-- --- end hint in exercise --- -->
+Filename: <code>CalculusCalculator.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:plot:ex30b">Exercise 19: Compute inverse functions<a name="sec:plot:ex30b"></a></h2>
+
+<p>
+Extend class <code>CalculusCalculator</code> from <a href="#sec:plot:ex30">Exercise 18: Make a calculus calculator class</a>
+to offer computations of inverse functions.
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<b>Hint.</b>
+A numerical way of computing inverse functions is explained in
+the document <a href="http://tcse6.on.net/diffeq" target="_self">Sequences and difference
+equations</a>
+<a href="#Langtangen_TCSE6_diffeq">[8]</a>.  Other, perhaps more attractive
+methods are described in the exercises on inverse functions in the
+document <a href="http://tcse6.on.net/ode2" target="_self">Programming of ordinary differential equations</a> <a href="#Langtangen_TCSE6_ode2">[4]</a>.
+
+<p>
+<!-- --- end hint in exercise --- -->
+Filename: <code>CalculusCalculator2.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="pysketcher:exer:person:prog">Exercise 20: Make line drawing of a person; program<a name="pysketcher:exer:person:prog"></a></h2>
+
+<p>
+A very simple sketch of a human being can be made of a circle for the
+head, two lines for the arms, one vertical line, a triangle, or a rectangle
+for the torso, and
+two lines for the legs.
+Make such a drawing in a program, utilizing appropriate classes
+in the <code>Shape</code> hierarchy.
+Filename: <code>draw_person.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="pysketcher:exer:person:class">Exercise 21: Make line drawing of a person; class<a name="pysketcher:exer:person:class"></a></h2>
+
+<p>
+Use the code from <a href="#pysketcher:exer:person:prog">Exercise 20: Make line drawing of a person; program</a> to make a
+subclass of <code>Shape</code> that draws a person.  Supply the following
+arguments to the constructor: the center point of the head and the
+radius \( R \) of the head. Let the arms and the torso be of length \( 4R \),
+and the legs of length \( 6R \).  The angle between the legs can be fixed
+(say 30 degrees), while the angle of the arms relative to the torso
+can be an argument to the constructor with a suitable default value.
+Filename: <code>Person.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="pysketcher:exer:person:anim">Exercise 22: Animate a person with waving hands<a name="pysketcher:exer:person:anim"></a></h2>
+
+<p>
+Make a subclass of the class from <a href="#pysketcher:exer:person:class">Exercise 21: Make line drawing of a person; class</a>
+where the constructor can
+take an argument describing the angle between the arms and the torso.
+Use this new class to animate a person who waves her/his hands.
+Filename: <code>waving_person.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<h1 id="___sec90">References <a name="___sec90"></a></h1>
+
+<p>
+<!-- begin bibliography -->
+
+<ol>
+ <li> <a name="Langtangen_TCSE6_debug"></a> <b>H. P. Langtangen</b>. 
+    Debugging in Python,
+    <a href="http://hplgit.github.io/primer.html/doc/pub/debug" target="_self"><tt>http://hplgit.github.io/primer.html/doc/pub/debug</tt></a>.</li>
+ <li> <a name="Langtangen_TCSE6_class"></a> <b>H. P. Langtangen</b>. 
+    Introduction to classes in Python,
+    <a href="http://hplgit.github.io/primer.html/doc/pub/class" target="_self"><tt>http://hplgit.github.io/primer.html/doc/pub/class</tt></a>.</li>
+ <li> <a name="Langtangen_TCSE6_nose"></a> <b>H. P. Langtangen</b>. 
+    Unit testing with nose,
+    <a href="http://hplgit.github.io/primer.html/doc/pub/nose" target="_self"><tt>http://hplgit.github.io/primer.html/doc/pub/nose</tt></a>.</li>
+ <li> <a name="Langtangen_TCSE6_ode2"></a> <b>H. P. Langtangen</b>. 
+    Programming of ordinary differential equations,
+    <a href="http://hplgit.github.io/primer.html/doc/pub/ode2" target="_self"><tt>http://hplgit.github.io/primer.html/doc/pub/ode2</tt></a>.</li>
+ <li> <a name="Langtangen_TCSE6_funcif"></a> <b>H. P. Langtangen</b>. 
+    Functions and branching,
+    <a href="http://hplgit.github.io/primer.html/doc/pub/funcif" target="_self"><tt>http://hplgit.github.io/primer.html/doc/pub/funcif</tt></a>.</li>
+ <li> <a name="Langtangen_TCSE6_random"></a> <b>H. P. Langtangen</b>. 
+    Random numbers and simple games,
+    <a href="http://hplgit.github.io/primer.html/doc/pub/random" target="_self"><tt>http://hplgit.github.io/primer.html/doc/pub/random</tt></a>.</li>
+ <li> <a name="Langtangen_TCSE6_varargs"></a> <b>H. P. Langtangen</b>. 
+    Variable number of function arguments in Python,
+    <a href="http://hplgit.github.io/primer.html/doc/pub/varargs" target="_self"><tt>http://hplgit.github.io/primer.html/doc/pub/varargs</tt></a>.</li>
+ <li> <a name="Langtangen_TCSE6_diffeq"></a> <b>H. P. Langtangen</b>. 
+    Sequences and difference equations,
+    <a href="http://hplgit.github.io/primer.html/doc/pub/diffeq" target="_self"><tt>http://hplgit.github.io/primer.html/doc/pub/diffeq</tt></a>.</li>
+</ol>
+
+<!-- end bibliography -->
+
+<p>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pager">
+  <li class="previous">
+    <a href="._oo-readable005.html">&larr; Prev</a>
+  </li>
+</ul>
+<!-- ------------------- end of main content --------------- -->
+
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap footer
+<footer>
+<a href="http://..."><img width="250" align=right src="http://..."></a>
+</footer>
+-->
+
+
+</body>
+</html>
+    
+

@@ -1,0 +1,896 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Dictionaries and strings">
+<meta name="keywords" content="dictionary,keys (dictionaries),immutable objects,mutable objects,dictionary comprehensions,nested dictionaries,dictionary nested,date conversion,plotting data vs date,string slicing,slicing,substrings,string substrings,string searching,string substitution,substitution (in text),string splitting,string case change,string testing for number,whitespace,blank lines in files,string stripping leading/trailing blanks,string joining list elements,dictionary functionality">
+
+<title>Dictionaries and strings</title>
+
+<!-- Bootstrap style: bootstrap_bluegray -->
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://raw.github.com/hplgit/doconce/master/bundled/html_styles/style_bootstrap/css/bootstrap_bluegray.css" rel="stylesheet">
+<!-- not necessary
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+
+<style type="text/css">
+/* Let inline verbatim have the same color as the surroundings */
+code { color: inherit; background-color: transparent; }
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [(u' Dictionaries ', 1, u'sec:files:dicts', u'sec:files:dicts'),
+              (u' Making dictionaries ', 2, None, '___sec1'),
+              (u' Dictionary operations ', 2, None, '___sec2'),
+              (u' Remark ', 3, None, '___sec3'),
+              (u' Example: Polynomials as dictionaries ',
+               2,
+               u'sec:files:poly',
+               u'sec:files:poly'),
+              (u' Dictionaries with default values and ordering ',
+               2,
+               u'sec:files:dict:default:order',
+               u'sec:files:dict:default:order'),
+              (u' Dictionaries with default values ', 3, None, '___sec6'),
+              (u' Ordered dictionaries ', 3, None, '___sec7'),
+              (u' Example: File data in dictionaries ',
+               2,
+               u'sec:files:dict:density',
+               u'sec:files:dict:density'),
+              (u' Problem ', 3, None, '___sec9'),
+              (u' Solution ', 3, None, '___sec10'),
+              (u' Example: File data in nested dictionaries ',
+               2,
+               u'sec:files:dictdict',
+               u'sec:files:dictdict'),
+              (u' Problem ', 3, None, '___sec12'),
+              (u' Algorithm ', 3, None, '___sec13'),
+              (u' Implementation ', 3, None, '___sec14'),
+              (u' Dissection ', 3, None, '___sec15'),
+              (u' Example: Reading and plotting data recorded at specific dates ',
+               2,
+               u'sec:files:stockprices',
+               u'sec:files:stockprices'),
+              (u' Problem ', 3, None, '___sec17'),
+              (u' Solution ', 3, None, '___sec18'),
+              (u' Strings ', 1, u'sec:files:str', u'sec:files:str'),
+              (u' Common operations on strings ',
+               2,
+               u'sec:files:stringop',
+               u'sec:files:stringop'),
+              (u' Substring specification ', 3, None, '___sec21'),
+              (u' Searching for substrings ', 3, None, '___sec22'),
+              (u' Substitution ', 3, None, '___sec23'),
+              (u' String splitting ', 3, None, '___sec24'),
+              (u' Upper and lower case ', 3, None, '___sec25'),
+              (u' Strings are constant ', 3, None, '___sec26'),
+              (u' Strings with digits only ', 3, None, '___sec27'),
+              (u' Whitespace ', 3, None, '___sec28'),
+              (u' Joining strings ', 3, None, '___sec29'),
+              (u' Example: Reading pairs of numbers ',
+               2,
+               u'sec:files:pairs',
+               u'sec:files:pairs'),
+              (u' Problem ', 3, None, '___sec31'),
+              (u' Solution ', 3, None, '___sec32'),
+              (u' Example: Reading coordinates ', 2, None, '___sec33'),
+              (u' Problem ', 3, None, '___sec34'),
+              (u' Solution 1: substring extraction ', 3, None, '___sec35'),
+              (u' Solution 2: string search ', 3, None, '___sec36'),
+              (u' Solution 3: string split ', 3, None, '___sec37'),
+              (u' Reading data from web pages ',
+               1,
+               u'sec:files:webtxt',
+               u'sec:files:webtxt'),
+              (u' About web pages ',
+               2,
+               u'sec:files:HTMLintro',
+               u'sec:files:HTMLintro'),
+              (u' How to access web pages in programs ',
+               2,
+               u'sec:files:urllib',
+               u'sec:files:urllib'),
+              (u' Alternative 1 ', 3, None, '___sec41'),
+              (u' Alternative 2 ', 3, None, '___sec42'),
+              (u' Example: Reading pure text files ',
+               2,
+               u'sec:files:url:weather',
+               u'sec:files:url:weather'),
+              (u' Example: Extracting data from HTML ',
+               2,
+               u'sec:files:url:interpret',
+               u'sec:files:url:interpret'),
+              (u' Handling non-English text ',
+               2,
+               u'sec:files:encoding',
+               u'sec:files:encoding'),
+              (u' Reading and writing spreadsheet files ',
+               1,
+               u'sec:files:csv',
+               u'sec:files:csv'),
+              (u' CSV files ', 2, None, '___sec47'),
+              (u' Reading CSV files ', 2, None, '___sec48'),
+              (u' Processing spreadsheet data ', 2, None, '___sec49'),
+              (u' Writing CSV files ', 2, None, '___sec50'),
+              (u' Remark ', 3, None, '___sec51'),
+              (u' Representing number cells with Numerical Python arrays ',
+               2,
+               None,
+               '___sec52'),
+              (u' Using more high-level Numerical Python functionality ',
+               2,
+               None,
+               '___sec53'),
+              (u' Summary ', 1, None, '___sec54'),
+              (u' Chapter topics ', 2, None, '___sec55'),
+              (u' Dictionaries ', 3, None, '___sec56'),
+              (u' Strings ', 3, None, '___sec57'),
+              (u' Downloading Internet files ', 3, None, '___sec58'),
+              (u' Terminology ', 3, None, '___sec59'),
+              (u' Example: A file database ',
+               2,
+               u'sec:files:sumex',
+               u'sec:files:sumex'),
+              (u' Problem ', 3, None, '___sec61'),
+              (u' Solution ', 3, None, '___sec62'),
+              (u' Exercises ',
+               1,
+               u'sec:files:exercises',
+               u'sec:files:exercises'),
+              (u' Exercise 1: Make a dictionary from a table ',
+               2,
+               u'sec:files:ex2b:basic',
+               u'sec:files:ex2b:basic'),
+              (u' Exercise 2: Explore syntax differences: lists vs. dicts ',
+               2,
+               u'sec:files:ex2',
+               u'sec:files:ex2'),
+              (u' Exercise 3: Use string operations to improve a program ',
+               2,
+               u'sec:files:ex17',
+               u'sec:files:ex17'),
+              (u' Exercise 4: Interpret output from a program ',
+               2,
+               u'sec:files:ex13',
+               u'sec:files:ex13'),
+              (u' Exercise 5: Make a nested dictionary from a file ',
+               2,
+               u'sec:files:ex2d:nested',
+               u'sec:files:ex2d:nested'),
+              (u' Exercise 6: Make a nested dictionary from a file ',
+               2,
+               u'sec:files:ex2d:nested2',
+               u'sec:files:ex2d:nested2'),
+              (u' Exercise 7: Compare data structures for polynomials ',
+               2,
+               u'sec:files:ex16',
+               u'sec:files:ex16'),
+              (u' Exercise 8: Compute the derivative of a polynomial ',
+               2,
+               u'sec:files:ex3',
+               u'sec:files:ex3'),
+              (u' Exercise 9: Specify functions on the command line ',
+               2,
+               u'sec:basic:ex10',
+               u'sec:basic:ex10'),
+              (u' Exercise 10: Interpret function specifications ',
+               2,
+               u'sec:basic:ex10b',
+               u'sec:basic:ex10b'),
+              (u' Exercise 11: Compare average temperatures in cities ',
+               2,
+               u'sec:files:ex8',
+               u'sec:files:ex8'),
+              (u' References ', 1, None, '___sec75')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- newcommands_keep.tex -->
+$$
+\newcommand{\tp}{\thinspace .}
+$$
+
+
+
+
+    
+<!-- Bootstrap navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="files-bootstrap.html">Dictionaries and strings</a>
+  </div>
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     <!-- navigation toc: --> <li><a href="._files-bootstrap001.html#sec:files:dicts" style="font-size: 80%;">Dictionaries</a></li>
+     <!-- navigation toc: --> <li><a href="._files-bootstrap002.html#sec:files:str" style="font-size: 80%;">Strings</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:files:webtxt" style="font-size: 80%;">Reading data from web pages</a></li>
+     <!-- navigation toc: --> <li><a href="._files-bootstrap004.html#sec:files:csv" style="font-size: 80%;">Reading and writing spreadsheet files</a></li>
+     <!-- navigation toc: --> <li><a href="._files-bootstrap005.html#___sec54" style="font-size: 80%;">Summary</a></li>
+     <!-- navigation toc: --> <li><a href="._files-bootstrap006.html#sec:files:exercises" style="font-size: 80%;">Exercises</a></li>
+     <!-- navigation toc: --> <li><a href="._files-bootstrap006.html#___sec75" style="font-size: 80%;">References</a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div> <!-- end of navigation bar -->
+
+<div class="container">
+
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+
+<a name="part0003"></a>
+<!-- !split -->
+
+<h1 id="sec:files:webtxt">Reading data from web pages<a name="sec:files:webtxt"></a></h1>
+
+<p>
+Python has a module <code>urllib</code> which makes it possible to read data from
+a web page as easily as
+we can read data from an ordinary file. (In principle this is
+true, but in practice
+the text in web pages tend to be much more complicated than the text
+in the files we have treated so far.)
+Before we do this, a few concepts from the Internet world must be touched.
+
+<h2 id="sec:files:HTMLintro">About web pages<a name="sec:files:HTMLintro"></a></h2>
+
+<p>
+Web pages are viewed with a web browser. There are many browsers:
+Firefox, Internet Explorer, Safari, Opera, and Google Chrome to mention
+the most famous.
+Any web page you visit is associated with an address, usually something like
+
+<p>
+
+<!-- code=text (!bc ccq) typeset with pygments style "default" -->
+<blockquote>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">http://www.some.where.net/some/file.html
+</pre></div>
+</blockquote><p>
+This type of web address is called
+a URL (Uniform Resource Locator) or
+URI (Uniform Resource Identifier).
+(We stick to the term URL in this document because Python's tools for
+accessing resources on the Internet have <code>url</code> as part of
+module and function names.)
+The graphics you see in a web browser, i.e., the web page you see with
+your eyes, is produced by a series of commands that specifies
+the text on the page, the images, buttons to be pressed, etc.
+Roughly speaking, these commands are like statements in computer programs.
+The commands are stored in a text file and follow rules in a language,
+exactly as you are used to when writing statements in a programming language.
+
+<p>
+The common language for defining web pages is HTML.
+A web page is then simply a text file with text containing
+HTML commands. Instead of a physical file, the web page can also be
+the output text from a program. In that case the URL is the name of the
+program file.
+
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 4:  Example of what a very simple HTML file looks like in a web browser. <a name="sec:io:webpagefig"></a> </p></center>
+<p><img src="fig-files/simple_webpage.png" align="bottom" width=400></p>
+</center>
+
+<p>
+The web browser interprets the text and the HTML commands, and then
+decides how to display the
+information visually. Let us demonstrate this for a very simple
+web page shown in Figure <a href="#sec:io:webpagefig">4</a>.
+This page was produced by the following text with embedded HTML commands:
+
+<p>
+
+<!-- code=html (!bc htmlpro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">&lt;html&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;body</span> <span style="color: #7D9029">bgcolor=</span><span style="color: #BA2121">&quot;orange&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;h1&gt;</span>A Very Simple HTML Page<span style="color: #008000; font-weight: bold">&lt;/h1&gt;</span> <span style="color: #408080; font-style: italic">&lt;!-- headline --&gt;</span>
+Web pages are written in a language called
+<span style="color: #008000; font-weight: bold">&lt;a</span> <span style="color: #7D9029">href=</span><span style="color: #BA2121">&quot;http://www.w3.org/MarkUp/Guide/&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>HTML<span style="color: #008000; font-weight: bold">&lt;/a&gt;</span>.
+Ordinary text is written as ordinary text, but when we
+need links, headlines, lists,
+<span style="color: #008000; font-weight: bold">&lt;ul&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;li&gt;&lt;em&gt;</span>emphasized words<span style="color: #008000; font-weight: bold">&lt;/em&gt;</span>, or
+<span style="color: #008000; font-weight: bold">&lt;li&gt;</span> <span style="color: #008000; font-weight: bold">&lt;b&gt;</span>boldface text<span style="color: #008000; font-weight: bold">&lt;/b&gt;</span>, 
+<span style="color: #008000; font-weight: bold">&lt;/ul&gt;</span>
+we need to embed the text inside HTML tags. We can also
+insert GIF or PNG images, taken from other Internet sites, 
+if desired.
+<span style="color: #008000; font-weight: bold">&lt;hr&gt;</span> <span style="color: #408080; font-style: italic">&lt;!-- horizontal line --&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;img</span> <span style="color: #7D9029">src=</span><span style="color: #BA2121">&quot;http://www.simula.no/simula_logo.gif&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;/body&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;/html&gt;</span>
+</pre></div>
+<p>
+A typical HTML command consists of an opening and a closing <em>tag</em>.
+For example, emphasized text is specified by enclosing the text
+inside <code>em</code> (emphasize) tags:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&lt;</span>em<span style="color: #666666">&gt;</span>emphasized words<span style="color: #666666">&lt;/</span>em<span style="color: #666666">&gt;</span>
+</pre></div>
+<p>
+The opening tag is enclosed in less than and greater than signs, while
+the closing tag has an additional forward slash before the tag name.
+
+<p>
+In the HTML file we see an opening and closing <code>html</code> tag around the
+whole text in the file. Similarly, there is a pair of <code>body</code> tags,
+where the first one also has a parameter <code>bgcolor</code> which can be used
+to specify a background color in the web page.  Section headlines are
+specified by enclosing the headline text inside <code>h1</code> tags. Subsection
+headlines apply <code>h2</code> tags, which results in a smaller font compared
+with <code>h1</code> tags.  Comments appear inside <code>&lt;!--</code> and <code>--&gt;</code>.  Links to
+other web pages are written inside <code>a</code> tags, with an argument <code>href</code>
+for the link's web address.  Lists apply the <code>ul</code> (unordered list)
+tag, while each item is written with just an opening tag <code>li</code> (list
+item), but no closing tag is necessary. Images are also specified with
+just an opening tag having name <code>img</code>, and the image file is given as
+a file name or URL of a file, enclosed in double quotes, as the <code>src</code>
+parameter.
+
+<p>
+The ultra-quick HTML course in the previous paragraphs gives a glimpse
+of how web pages can be constructed.
+One can either write the HTML
+file by hand in a pure text editor, or one can use programs such as
+Dream Weaver to help design the page graphically in a user-friendly
+environment, and then the program can automatically
+generate the right HTML syntax in files.
+
+<h2 id="sec:files:urllib">How to access web pages in programs<a name="sec:files:urllib"></a></h2>
+
+<p>
+Why is it useful to know some HTML and how web pages are constructed?
+The reason is that the web is full of information that we can
+get access to through programs and use in new contexts. What we can get
+access to is not the visual web page you see, but the underlying HTML
+file. The information you see on the screen appear in text form in
+the HTML file, and by extracting text, we can get hold of the
+text's information in a program.
+
+<p>
+Given the URL as a string stored in a variable,
+there are two ways of accessing the HTML text in a Python program:
+
+<h3 id="___sec41">Alternative 1 <a name="___sec41"></a></h3>
+
+<p>
+Download the HTML file and store it as a local file with a given name,
+say <code>webpage.html</code>:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">urllib</span>
+url <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;http://www.simula.no/research/scientific/cbc&#39;</span>
+urllib<span style="color: #666666">.</span>urlretrieve(url, filename<span style="color: #666666">=</span><span style="color: #BA2121">&#39;webpage.html&#39;</span>)
+</pre></div>
+
+<h3 id="___sec42">Alternative 2 <a name="___sec42"></a></h3>
+
+<p>
+Open the HTML file as a file-like object:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">infile <span style="color: #666666">=</span> urllib<span style="color: #666666">.</span>urlopen(url)
+</pre></div>
+<p>
+This <code>infile</code> object has methods such as <code>read</code>, <code>readline</code>, and
+<code>readlines</code>.
+
+<h2 id="sec:files:url:weather">Example: Reading pure text files<a name="sec:files:url:weather"></a></h2>
+
+<p>
+Some web pages are just pure text files. Extracting the data from such
+pages are as easy as reading ordinary text files. Here is an example
+of historic weather data from the UK:
+
+<p>
+
+<!-- code=text (!bc ccq) typeset with pygments style "default" -->
+<blockquote>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">http://www.metoffice.gov.uk/climate/uk/stationdata/
+</pre></div>
+</blockquote><p>
+We may choose a station, say Oxford, which directs us to the page
+
+<p>
+
+<!-- code=text (!bc ccq) typeset with pygments style "default" -->
+<blockquote>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">http://www.metoffice.gov.uk/climate/uk/stationdata/oxforddata.txt
+</pre></div>
+</blockquote><p>
+We can download this data file by
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">urllib</span>
+url <span style="color: #666666">=</span> \ 
+<span style="color: #BA2121">&#39;http://www.metoffice.gov.uk/climate/uk/stationdata/oxforddata.txt&#39;</span>
+urllib<span style="color: #666666">.</span>urlretrieve(url, filename<span style="color: #666666">=</span><span style="color: #BA2121">&#39;Oxford.txt&#39;</span>)
+</pre></div>
+<p>
+The files looks as follows:
+
+<p>
+
+<!-- code=text (!bc dat) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">Oxford
+Location: 4509E 2072N, 63 metres amsl
+Estimated data is marked with a * after the value.
+Missing data (more than 2 days missing in month) is marked by  ---.
+Sunshine data taken from an automatic ...
+   yyyy  mm   tmax    tmin      af    rain     sun
+              degC    degC    days      mm   hours
+   1853   1    8.4     2.7       4    62.8     ---
+   1853   2    3.2    -1.8      19    29.3     ---
+   1853   3    7.7    -0.6      20    25.9     ---
+   1853   4   12.6     4.5       0    60.1     ---
+   1853   5   16.8     6.1       0    59.5     ---
+
+...
+
+   2010   1    4.7    -1.0      17    56.4    68.2
+   2010   2    7.1     1.3       7    79.8    59.3
+   2010   3   11.3     3.2       8    47.6   130.2
+   2010   4   15.8     4.9       0    25.5   209.5
+   2010   5   17.6     7.3       0    28.6   207.4
+   2010   6   23.0    11.1       0    34.5   230.5
+   2010   7   23.3*   14.1*      0*   24.4*  184.4*  Provisional
+   2010   8   21.4    12.0       0   146.2   123.8   Provisional
+   2010   9   19.0    10.0       0    48.1   118.6   Provisional
+   2010  10   14.6     7.4       2    43.5   128.8   Provisional
+</pre></div>
+<p>
+After the 7 header lines the data consists of 7 or 8 columns of
+numbers, the 8th being of no interest.
+Some numbers may have <code>*</code> or <code>#</code> appended to them,
+but this character must be stripped off before using the number.
+The columns contain the year, the month number (1-12), average maximum
+temperature, average minimum temperature, total number of days of
+air frost (<code>af</code>) during the month,
+total rainfall during the month, and the total number
+of hours with sun during the month. The temperature averages are taken
+over the maximum and minimum temperatures for all days in the month.
+Unavailable data are marked by three dashes.
+
+<p>
+The data can be conveniently stored in a dictionary with, e.g.,
+three main keys: place (name), location (the info on the 2nd),
+and data. The latter is a dictionary with two keys: year and month.
+
+<p>
+The following program creates the <code>data</code> dictionary:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">infile <span style="color: #666666">=</span> <span style="color: #008000">open</span>(local_file, <span style="color: #BA2121">&#39;r&#39;</span>)
+data <span style="color: #666666">=</span> {}
+data[<span style="color: #BA2121">&#39;place&#39;</span>] <span style="color: #666666">=</span> infile<span style="color: #666666">.</span>readline()<span style="color: #666666">.</span>strip()
+data[<span style="color: #BA2121">&#39;location&#39;</span>] <span style="color: #666666">=</span> infile<span style="color: #666666">.</span>readline()<span style="color: #666666">.</span>strip()
+<span style="color: #408080; font-style: italic"># Skip the next 5 lines</span>
+<span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">5</span>):
+    infile<span style="color: #666666">.</span>readline()
+
+data[<span style="color: #BA2121">&#39;data&#39;</span>] <span style="color: #666666">=</span>{}
+<span style="color: #008000; font-weight: bold">for</span> line <span style="color: #AA22FF; font-weight: bold">in</span> infile:
+    columns <span style="color: #666666">=</span> line<span style="color: #666666">.</span>split()
+
+    year <span style="color: #666666">=</span> <span style="color: #008000">int</span>(columns[<span style="color: #666666">0</span>])
+    month <span style="color: #666666">=</span> <span style="color: #008000">int</span>(columns[<span style="color: #666666">1</span>])
+
+    <span style="color: #008000; font-weight: bold">if</span> columns[<span style="color: #666666">-1</span>] <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;Provisional&#39;</span>:
+        <span style="color: #008000; font-weight: bold">del</span> columns[<span style="color: #666666">-1</span>]
+    <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">2</span>, <span style="color: #008000">len</span>(columns)):
+        <span style="color: #008000; font-weight: bold">if</span> columns[i] <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;---&#39;</span>:
+            columns[i] <span style="color: #666666">=</span> <span style="color: #008000">None</span>
+        <span style="color: #008000; font-weight: bold">elif</span> columns[i][<span style="color: #666666">-1</span>] <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;*&#39;</span> <span style="color: #AA22FF; font-weight: bold">or</span> columns[i][<span style="color: #666666">-1</span>] <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;#&#39;</span>:
+            <span style="color: #408080; font-style: italic"># Strip off trailing character</span>
+            columns[i] <span style="color: #666666">=</span> <span style="color: #008000">float</span>(columns[i][:<span style="color: #666666">-1</span>])
+        <span style="color: #008000; font-weight: bold">else</span>:
+            columns[i] <span style="color: #666666">=</span> <span style="color: #008000">float</span>(columns[i])
+
+    tmax, tmin, air_frost, rain, sun <span style="color: #666666">=</span> columns[<span style="color: #666666">2</span>:]
+
+    <span style="color: #008000; font-weight: bold">if</span> <span style="color: #AA22FF; font-weight: bold">not</span> year <span style="color: #AA22FF; font-weight: bold">in</span> data[<span style="color: #BA2121">&#39;data&#39;</span>]:
+        data[<span style="color: #BA2121">&#39;data&#39;</span>][year] <span style="color: #666666">=</span> {}
+    data[<span style="color: #BA2121">&#39;data&#39;</span>][year][month] <span style="color: #666666">=</span> {<span style="color: #BA2121">&#39;tmax&#39;</span>: tmax,
+                                 <span style="color: #BA2121">&#39;tmin&#39;</span>: tmin,
+                                 <span style="color: #BA2121">&#39;air frost&#39;</span>: air_frost,
+                                 <span style="color: #BA2121">&#39;sun&#39;</span>: sun}
+</pre></div>
+<p>
+The code is available in the file
+<a href="http://tinyurl.com/pwyasaa/files/historic_weather.py" target="_self"><tt>historic_weather.py</tt></a>.
+
+<p>
+With a few lines of code, we can extract the data we want, say a
+two-dimensional array of the number of sun hours in a month (these data
+are available from year 1929):
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">sun <span style="color: #666666">=</span> [[data[<span style="color: #BA2121">&#39;data&#39;</span>][y][m][<span style="color: #BA2121">&#39;sun&#39;</span>] <span style="color: #008000; font-weight: bold">for</span> m <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">1</span>,<span style="color: #666666">13</span>)] \ 
+       <span style="color: #008000; font-weight: bold">for</span> y <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">1929</span>, <span style="color: #666666">2010</span>)]
+<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
+sun <span style="color: #666666">=</span> np<span style="color: #666666">.</span>array(sun)
+</pre></div>
+
+<h2 id="sec:files:url:interpret">Example: Extracting data from HTML<a name="sec:files:url:interpret"></a></h2>
+
+<p>
+Very often, interesting data in a web page appear inside HTML code.
+We then need to interpret the text using string operations and store
+the data in variables. An example will clarify the principle.
+
+<p>
+The web site <code>www.worldclimate.com</code> contains data on temperature and
+rainfall in a large number of cities around the world.
+For example,
+
+<p>
+
+<!-- code=text (!bc ccq) typeset with pygments style "default" -->
+<blockquote>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">http://www.worldclimate.com/cgi-bin/data.pl?ref=N38W009+2100+08535W
+</pre></div>
+</blockquote><p>
+contains a table of the average rainfall for each month of the year
+in the town Lisbon, Portugal.
+Our task is to download this web page and extract the tabular data
+(rainfall per month) in a list.
+
+<p>
+Downloading the file is done with <code>urllib</code> as explained in
+the sections <a href="#sec:files:urllib">How to access web pages in programs</a> and <a href="#sec:files:url:weather">Example: Reading pure text files</a>.
+Before attempting to read and interpret the text in the file, we need
+to look at the HTML code to find the interesting parts and determine
+how we can extract the data.
+The table with the rainfall data appears in the middle of the file.
+A sketch of the relevant HTML code goes as follows:
+
+<p>
+
+<!-- code=text (!bc dat) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">&lt;p&gt;Weather station &lt;strong&gt;LISBOA&lt;/strong&gt; ...
+&lt;tr&gt;&lt;th align=right&gt;&lt;th&gt;  Jan&lt;th&gt;  Feb&lt;th&gt; ... &lt;br&gt;
+&lt;tr&gt;&lt;td&gt; mm &lt;td align=right&gt; 95.2 &lt;td align=right&gt; 86.7 ...&lt;br&gt;
+&lt;tr&gt;&lt;td&gt;inches &lt;td align=right&gt;3.7&lt;td align=right&gt;3.4 ...&lt;br&gt;
+</pre></div>
+<p>
+Our task is to walk through the file line by line and stop for processing
+the first and third line above:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">infile <span style="color: #666666">=</span> <span style="color: #008000">open</span>(<span style="color: #BA2121">&#39;Lisbon_rainfall.html&#39;</span>, <span style="color: #BA2121">&#39;r&#39;</span>)
+rainfall <span style="color: #666666">=</span> []
+<span style="color: #008000; font-weight: bold">for</span> line <span style="color: #AA22FF; font-weight: bold">in</span> infile:
+    <span style="color: #008000; font-weight: bold">if</span> <span style="color: #BA2121">&#39;Weather station&#39;</span> <span style="color: #AA22FF; font-weight: bold">in</span> line:
+        station <span style="color: #666666">=</span> line<span style="color: #666666">.</span>split(<span style="color: #BA2121">&#39;&lt;/strong&gt;&#39;</span>)[<span style="color: #666666">0</span>]<span style="color: #666666">.</span>split(<span style="color: #BA2121">&#39;&lt;strong&gt;&#39;</span>)[<span style="color: #666666">0</span>]
+    <span style="color: #008000; font-weight: bold">if</span> <span style="color: #BA2121">&#39;&lt;td&gt; mm &lt;td&#39;</span> <span style="color: #AA22FF; font-weight: bold">in</span> line:
+        data <span style="color: #666666">=</span> line<span style="color: #666666">.</span>split(<span style="color: #BA2121">&#39;&lt;td align=right&gt;&#39;</span>)
+</pre></div>
+<p>
+The resulting <code>data</code> list looks like
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">[<span style="color: #BA2121">&#39;&lt;tr&gt;&lt;td&gt; mm &#39;</span>, <span style="color: #BA2121">&#39; 95.2 &#39;</span>, <span style="color: #666666">...</span>, <span style="color: #BA2121">&#39;702.4&lt;br&gt; </span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121">&#39;</span>]
+</pre></div>
+<p>
+To process this list further, we strip off the <code>&lt;br&gt;...</code> part of
+the last element:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">        data[<span style="color: #666666">-1</span>] <span style="color: #666666">=</span> data[<span style="color: #666666">-1</span>]<span style="color: #666666">.</span>split(<span style="color: #BA2121">&#39;&lt;br&gt;&#39;</span>)[<span style="color: #666666">0</span>]
+</pre></div>
+<p>
+Then we drop the first element and convert the others to <code>float</code>
+objects:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">        data <span style="color: #666666">=</span> [<span style="color: #008000">float</span>(x) <span style="color: #008000; font-weight: bold">for</span> x <span style="color: #AA22FF; font-weight: bold">in</span> data[<span style="color: #666666">1</span>:]]
+</pre></div>
+<p>
+Now we have the rainfall data for each month as a list of real
+numbers. The complete program appears in the file
+<a href="http://tinyurl.com/pwyasaa/files/Lisbon_rainfall.py" target="_self"><tt>Lisbon_rainfall.py</tt></a>.
+The recipe provided in this example can be used to interpret many other
+types of web pages where HTML code and data are wired together.
+
+<p>
+<!-- send SMS to mobile phone -->
+<!-- <a href="http://www.gammu.org/wiki/index.php" target="_self"><tt>http://www.gammu.org/wiki/index.php</tt></a>?title=Main_Page -->
+
+<h2 id="sec:files:encoding">Handling non-English text<a name="sec:files:encoding"></a></h2>
+
+<p>
+By default, Python only accepts English characters in a program file.
+Comments and strings in other languages, containing non-English characters,
+requires a special comment line before any non-English characters appears:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #408080; font-style: italic"># -*- coding: utf-8 -*-</span>
+</pre></div>
+<p>
+This line specifies that the file applies the UTF-8 encoding. Alternative
+encodings are UTF-16 and latin-1, depending on what your computer system
+supports. UTF-8 is most common nowadays.
+
+<p>
+There are two types of strings in Python: plain strings (known as
+byte strings) with type <code>str</code>
+and unicode strings with type <code>unicode</code>. Plain strings suffice as long
+as you are writing English text only. A string is then just a
+series of bytes representing integers between 0 and 255.
+The first characters corresponding to the numbers 0 to 127 constitute
+the ASCII set. These can be printed out:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">0</span>, <span style="color: #666666">128</span>):
+    <span style="color: #008000; font-weight: bold">print</span> i, <span style="color: #008000">chr</span>(i)
+</pre></div>
+<p>
+The keys on an English keyboard can be recognized from <code>i=32</code> to <code>i=126</code>.
+The next numbers are used to represent non-English characters.
+
+<p>
+Texts with non-English
+characters are recommended to be represented by unicode strings.
+This is the default string type in Python 3, while in Python
+2 we need to explicitly annotate a string as unicode by
+a <code>u</code> prefix as in <code>s = u'my text'</code>.
+
+<p>
+We shall now explore plain strings and unicode strings and will for
+that purpose need a help function for displaying a string in the terminal
+window, printing the type of string, dumping the exact content of
+the string, and telling us the length of the string in bytes:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">check</span>(s):
+    <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;</span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121">, </span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121">: </span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121"> (</span><span style="color: #BB6688; font-weight: bold">%d</span><span style="color: #BA2121">)&#39;</span> <span style="color: #666666">%</span> \ 
+          (s, s<span style="color: #666666">.</span>__class__<span style="color: #666666">.</span>__name__, <span style="color: #008000">repr</span>(s), <span style="color: #008000">len</span>(s))
+</pre></div>
+<p>
+Let us start with a German character typed with a German keyboard:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> Gauss <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;C. F. Gauß&#39;</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> check(Gauss)
+C<span style="color: #666666">.</span> F<span style="color: #666666">.</span> Gauß, <span style="color: #008000">str</span>: <span style="color: #BA2121">&#39;C. F. Gau</span><span style="color: #BB6622; font-weight: bold">\xc3\x9f</span><span style="color: #BA2121">&#39;</span> (<span style="color: #666666">11</span>)
+</pre></div>
+<p>
+Observe that there are 10 characters in the string, but <code>len(Gauss)</code>
+is 11. We can write each character:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">for</span> char <span style="color: #AA22FF; font-weight: bold">in</span> Gauss:
+<span style="color: #666666">...</span>     <span style="color: #008000; font-weight: bold">print</span> <span style="color: #008000">ord</span>(char),
+<span style="color: #666666">...</span>
+<span style="color: #666666">67</span> <span style="color: #666666">46</span> <span style="color: #666666">32</span> <span style="color: #666666">70</span> <span style="color: #666666">46</span> <span style="color: #666666">32</span> <span style="color: #666666">71</span> <span style="color: #666666">97</span> <span style="color: #666666">117</span> <span style="color: #666666">195</span> <span style="color: #666666">159</span>
+</pre></div>
+<p>
+The last character in the <code>Gauss</code> object, the special German character,
+is represented
+by two bytes: 195 and 159. The other characters are in the
+range 0-127.
+
+<p>
+The <code>Gauss</code> object above is a plain Python 2 (byte) string. We can define
+the string as unicode in Python 2:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> Gauss <span style="color: #666666">=</span> <span style="color: #BA2121">u&#39;C. F. Gauß&#39;</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> check(Gauss)
+C<span style="color: #666666">.</span> F<span style="color: #666666">.</span> Gauß, <span style="color: #008000">unicode</span>: <span style="color: #BA2121">u&#39;C. F. Gau</span><span style="color: #BB6622; font-weight: bold">\xdf</span><span style="color: #BA2121">&#39;</span> (<span style="color: #666666">10</span>)
+</pre></div>
+<p>
+This time the unicode representation is as long as the expected number
+of characters, and the special German ß looks like <code>\xdf</code>.
+In fact, this character has unicode representation
+DF and we can use this code directly
+when we define the string, instead of a German keyboard:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> Gauss <span style="color: #666666">=</span> <span style="color: #BA2121">u&#39;C. F. Gau</span><span style="color: #BB6622; font-weight: bold">\xdf</span><span style="color: #BA2121">&#39;</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> check(Gauss)
+C<span style="color: #666666">.</span> F<span style="color: #666666">.</span> Gauß, <span style="color: #008000">unicode</span>: <span style="color: #BA2121">u&#39;C. F. Gau</span><span style="color: #BB6622; font-weight: bold">\xdf</span><span style="color: #BA2121">&#39;</span> (<span style="color: #666666">10</span>)
+</pre></div>
+<p>
+The string can be defined through the UTF-8 bytecode counterpart to ß,
+which is C3 9F:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> Gauss <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;C. F. Gau</span><span style="color: #BB6622; font-weight: bold">\xc3\x9f</span><span style="color: #BA2121">&#39;</span>  <span style="color: #408080; font-style: italic"># plain string</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> check(Gauss)
+C<span style="color: #666666">.</span> F<span style="color: #666666">.</span> Gauß, <span style="color: #008000">str</span>: <span style="color: #BA2121">&#39;C. F. Gau</span><span style="color: #BB6622; font-weight: bold">\xc3\x9f</span><span style="color: #BA2121">&#39;</span> (<span style="color: #666666">11</span>)
+</pre></div>
+<p>
+Mixing UTF-8 bytecode in unicode strings, as in <code>u'C. F. Gau\xc3\x9f'</code>,
+gives and unreadable output.
+
+<p>
+We can convert from a unicode representation to UTF-8 bytecode
+and back again:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> Gauss <span style="color: #666666">=</span> <span style="color: #BA2121">u&#39;C. F. Gau</span><span style="color: #BB6622; font-weight: bold">\xdf</span><span style="color: #BA2121">&#39;</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000">repr</span>(Gauss<span style="color: #666666">.</span>encode(<span style="color: #BA2121">&#39;utf-8&#39;</span>))  <span style="color: #408080; font-style: italic"># convert to UTF-8 bytecode</span>
+<span style="color: #BA2121">&#39;C. F. Gau</span><span style="color: #BB6622; font-weight: bold">\xc3\x9f</span><span style="color: #BA2121">&#39;</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000">unicode</span>(Gauss<span style="color: #666666">.</span>encode(<span style="color: #BA2121">&#39;utf-8&#39;</span>), <span style="color: #BA2121">&#39;utf-8&#39;</span>)  <span style="color: #408080; font-style: italic"># convert back again</span>
+<span style="color: #BA2121">u&#39;C. F. Gau</span><span style="color: #BB6622; font-weight: bold">\xdf</span><span style="color: #BA2121">&#39;</span>
+</pre></div>
+<p>
+Other encodings are UTF-16 and latin-1:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000">repr</span>(Gauss<span style="color: #666666">.</span>encode(<span style="color: #BA2121">&#39;utf-16&#39;</span>))
+<span style="color: #BA2121">&#39;</span><span style="color: #BB6622; font-weight: bold">\xff\xfe</span><span style="color: #BA2121">C</span><span style="color: #BB6622; font-weight: bold">\x00</span><span style="color: #BA2121">.</span><span style="color: #BB6622; font-weight: bold">\x00</span><span style="color: #BA2121"> </span><span style="color: #BB6622; font-weight: bold">\x00</span><span style="color: #BA2121">F</span><span style="color: #BB6622; font-weight: bold">\x00</span><span style="color: #BA2121">.</span><span style="color: #BB6622; font-weight: bold">\x00</span><span style="color: #BA2121"> </span><span style="color: #BB6622; font-weight: bold">\x00</span><span style="color: #BA2121">G</span><span style="color: #BB6622; font-weight: bold">\x00</span><span style="color: #BA2121">a</span><span style="color: #BB6622; font-weight: bold">\x00</span><span style="color: #BA2121">u</span><span style="color: #BB6622; font-weight: bold">\x00\xdf\x00</span><span style="color: #BA2121">&#39;</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000">repr</span>(Gauss<span style="color: #666666">.</span>encode(<span style="color: #BA2121">&#39;latin-1&#39;</span>))
+<span style="color: #BA2121">&#39;C. F. Gau</span><span style="color: #BB6622; font-weight: bold">\xdf</span><span style="color: #BA2121">&#39;</span>
+</pre></div>
+<p>
+Writing the unicode variable <code>Gauss</code> to file, a la <code>f.write(Gauss)</code>,
+leads to a <code>UnicodeEncodeError</code> in Python 2, saying that <code>'ascii'
+codec can't encode character u'\xdf' in position 9</code>.  The UTF-8
+bytecode representation of strings does not pose any problems with
+file writing.  The solution for unicode
+strings is to use the <code>codecs</code> module and explicitly work with a
+file object that converts unicode to UTF-8:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">codecs</span>
+<span style="color: #008000; font-weight: bold">with</span> codecs<span style="color: #666666">.</span>open(<span style="color: #BA2121">&#39;tmp.txt&#39;</span>, <span style="color: #BA2121">&#39;w&#39;</span>, <span style="color: #BA2121">&#39;utf-8&#39;</span>) <span style="color: #008000; font-weight: bold">as</span> f:
+    f<span style="color: #666666">.</span>write(Gauss)
+</pre></div>
+<p>
+This is not necessary with Python 3, so if you use non-English characters,
+Python 3 has a clear advantage over Python 2.
+
+<p>
+To summarize, non-English character can be input with a non-English
+keyboard and stored either as a plain (byte) string or as a unicode
+string:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> name <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;Åsmund Ødegård&#39;</span>  <span style="color: #408080; font-style: italic"># plain string</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> check(name)
+Åsmund Ødegård, <span style="color: #008000">str</span>: <span style="color: #BA2121">&#39;</span><span style="color: #BB6622; font-weight: bold">\xc3\x85</span><span style="color: #BA2121">smund </span><span style="color: #BB6622; font-weight: bold">\xc3\x98</span><span style="color: #BA2121">deg</span><span style="color: #BB6622; font-weight: bold">\xc3\xa5</span><span style="color: #BA2121">rd&#39;</span> (<span style="color: #666666">17</span>)
+<span style="color: #666666">&gt;&gt;&gt;</span> name <span style="color: #666666">=</span> <span style="color: #BA2121">u&#39;Åsmund Ødegård&#39;</span> <span style="color: #408080; font-style: italic"># unicode</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> check(name)
+Åsmund Ødegård, <span style="color: #008000">unicode</span>: <span style="color: #BA2121">u&#39;</span><span style="color: #BB6622; font-weight: bold">\xc5</span><span style="color: #BA2121">smund </span><span style="color: #BB6622; font-weight: bold">\xd8</span><span style="color: #BA2121">deg</span><span style="color: #BB6622; font-weight: bold">\xe5</span><span style="color: #BA2121">rd&#39;</span> (<span style="color: #666666">14</span>)
+</pre></div>
+<p>
+Alternatively, the non-English characters can be specified
+with special codes, depending on whether the representation is a
+plain UTF-8 string or a unicode string.
+Using a <a href="http://www.utf8-chartable.de/" target="_self">table</a> with conversion
+between unicode and UTF-8 representation we find that
+in UTF-8, Å has the code C3 85, Ø is C3 98, and å is C3 A5:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> name <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;</span><span style="color: #BB6622; font-weight: bold">\xc3\x85</span><span style="color: #BA2121">smund </span><span style="color: #BB6622; font-weight: bold">\xc3\x98</span><span style="color: #BA2121">deg</span><span style="color: #BB6622; font-weight: bold">\xc3\xa5</span><span style="color: #BA2121">rd&#39;</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> check(name)
+Åsmund Ødegård, <span style="color: #008000">str</span>: <span style="color: #BA2121">&#39;</span><span style="color: #BB6622; font-weight: bold">\xc3\x85</span><span style="color: #BA2121">smund </span><span style="color: #BB6622; font-weight: bold">\xc3\x98</span><span style="color: #BA2121">deg</span><span style="color: #BB6622; font-weight: bold">\xc3\xa5</span><span style="color: #BA2121">rd&#39;</span> (<span style="color: #666666">17</span>)
+</pre></div>
+<p>
+In unicode, Å is C5, Ø is D8, å is E5:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> name <span style="color: #666666">=</span> <span style="color: #BA2121">u&#39;</span><span style="color: #BB6622; font-weight: bold">\xc5</span><span style="color: #BA2121">smund </span><span style="color: #BB6622; font-weight: bold">\xd8</span><span style="color: #BA2121">deg</span><span style="color: #BB6622; font-weight: bold">\xe5</span><span style="color: #BA2121">rd&#39;</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> check(name)
+Åsmund Ødegård, <span style="color: #008000">unicode</span>: <span style="color: #BA2121">u&#39;</span><span style="color: #BB6622; font-weight: bold">\xc5</span><span style="color: #BA2121">smund </span><span style="color: #BB6622; font-weight: bold">\xd8</span><span style="color: #BA2121">deg</span><span style="color: #BB6622; font-weight: bold">\xe5</span><span style="color: #BA2121">rd&#39;</span> (<span style="color: #666666">14</span>)
+</pre></div>
+<p>
+The examples above have been collected in the file <a href="http://tinyurl.com/pwyasaa/files/unicode_utf8.py" target="_self"><tt>unicode_utf8.py</tt></a>.
+
+<p>
+<p>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pager">
+  <li class="previous">
+    <a href="._files-bootstrap002.html">&larr; Prev</a>
+  </li>
+  <li class="next">
+    <a href="._files-bootstrap004.html">Next &rarr;</a>
+  </li>
+</ul>
+<!-- ------------------- end of main content --------------- -->
+
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap footer
+<footer>
+<a href="http://..."><img width="250" align=right src="http://..."></a>
+</footer>
+-->
+
+
+</body>
+</html>
+    
+

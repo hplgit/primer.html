@@ -1,0 +1,794 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Array computing and curve plotting">
+<meta name="keywords" content="vectors,vector computing,scalar (math quantity),heterogeneous lists,Numerical Python,NumPy,array (datatype),array computing,vectorization,array slicing,subarrays,allocate,vectorization,scalar code,curve plotting,plotting,making graphs,backend (Easyviz),backend (Easyviz),remove files (in Python),delete files (in Python),boolean indexing,boolean indexing,in-place array arithmetics,check an object's type,shape (of an array),array shape,matrix,shape (of an array),array shape,least squares approximation,Trapezoidal rule for integration,Lagrange's interpolation formula,interpolation,Midpoint rule for integration,Trapezoidal rule for integration">
+
+<title>Array computing and curve plotting</title>
+
+<!-- Bootstrap style: bootswatch_readable -->
+<link href="http://netdna.bootstrapcdn.com/bootswatch/3.1.1/readable/bootstrap.min.css" rel="stylesheet">
+<!-- not necessary
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+
+<style type="text/css">
+/* Let inline verbatim have the same color as the surroundings */
+code { color: inherit; background-color: transparent; }
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [(' Vectors ', 1, None, '___sec0'),
+              (' The vector concept ', 2, None, '___sec1'),
+              (' Mathematical operations on vectors ',
+               2,
+               'sec:plot:vectors',
+               'sec:plot:vectors'),
+              (' Vector arithmetics and vector functions ',
+               2,
+               'sec:plot:arraycomp',
+               'sec:plot:arraycomp'),
+              (' Arrays in Python programs ', 1, None, '___sec4'),
+              (' Using lists for collecting function data ',
+               2,
+               'sec:plot:listdata',
+               'sec:plot:listdata'),
+              (' Basics of numerical Python arrays ',
+               2,
+               'sec:plot:array:basics',
+               'sec:plot:array:basics'),
+              (' Computing coordinates and function values ',
+               2,
+               None,
+               '___sec7'),
+              (' Vectorization ',
+               2,
+               'sec:plot:vectorization',
+               'sec:plot:vectorization'),
+              (' Curve plotting ',
+               1,
+               'sec:plot:curveplots',
+               'sec:plot:curveplots'),
+              (' Matplotlib; pylab ', 2, 'sec:plot:pylab', 'sec:plot:pylab'),
+              (' A basic plot ', 3, None, '___sec11'),
+              (' Decorating the plot ', 3, None, '___sec12'),
+              (' Plotting multiple curves ', 3, None, '___sec13'),
+              (' Placing several plots in one figure ', 3, None, '___sec14'),
+              (' Matplotlib; pyplot ',
+               2,
+               'sec:plot:pyplot',
+               'sec:plot:pyplot'),
+              (' SciTools and Easyviz ',
+               2,
+               'sec:plot:SciTools',
+               'sec:plot:SciTools'),
+              (' Importing SciTools and Easyviz ', 3, None, '___sec17'),
+              (' A basic plot ', 3, None, '___sec18'),
+              (' Decorating the plot ', 3, None, '___sec19'),
+              (' Plotting multiple curves ', 3, None, '___sec20'),
+              (' Changing backend ', 3, None, '___sec21'),
+              (' Placing several plots in one figure ', 3, None, '___sec22'),
+              (' Making animations ', 2, 'easyviz:movie', 'easyviz:movie'),
+              (' Example ', 3, None, '___sec24'),
+              (' Animation in Easyviz ', 3, None, '___sec25'),
+              (' Basic animation in Matplotlib ', 3, None, '___sec26'),
+              (' Using FuncAnimation in Matplotlib ', 3, None, '___sec27'),
+              (' Making videos ', 2, 'sec:plot:video', 'sec:plot:video'),
+              (' Animated GIF file ', 3, None, '___sec29'),
+              (' MP4, Ogg, WebM, and Flash videos ', 3, None, '___sec30'),
+              (' Curve plots in pure text ', 2, None, '___sec31'),
+              (' Plotting difficulties ',
+               1,
+               'sec:plot:difficulties',
+               'sec:plot:difficulties'),
+              (' Piecewisely defined functions ',
+               2,
+               'sec:plot:pwisefunc',
+               'sec:plot:pwisefunc'),
+              (' Example: The Heaviside function ', 3, None, '___sec34'),
+              (' Example: A hat function ', 3, None, '___sec35'),
+              (' Rapidly varying functions ',
+               2,
+               'sec:plot:sin1x',
+               'sec:plot:sin1x'),
+              (' More advanced vectorization of functions ',
+               1,
+               'sec:plot:if:vectorize',
+               'sec:plot:if:vectorize'),
+              (' Vectorization of StringFunction objects ',
+               2,
+               'sec:plot:StringFunction:vectorize',
+               'sec:plot:StringFunction:vectorize'),
+              (' Vectorization of the Heaviside function ',
+               2,
+               'sec:vec:Heaviside',
+               'sec:vec:Heaviside'),
+              (' Loop ', 3, None, '___sec40'),
+              (' Automatic vectorization ', 3, None, '___sec41'),
+              (' Mixing boolean and floating-point calculations ',
+               3,
+               None,
+               '___sec42'),
+              (' Manual vectorization ', 3, None, '___sec43'),
+              (' Vectorization of a hat function ',
+               2,
+               'sec:vec:hatfunc',
+               'sec:vec:hatfunc'),
+              (' More on numerical Python arrays ',
+               1,
+               'sec:plot:numpy:more',
+               'sec:plot:numpy:more'),
+              (' Copying arrays ', 2, None, '___sec46'),
+              (' In-place arithmetics ', 2, None, '___sec47'),
+              (' Allocating arrays ', 2, None, '___sec48'),
+              (' Generalized indexing ',
+               2,
+               'sec:plot:generalized:index',
+               'sec:plot:generalized:index'),
+              (' Testing for the array type ', 2, None, '___sec50'),
+              (' Example: Vectorizing a constant function ',
+               3,
+               None,
+               '___sec51'),
+              (' Compact syntax for array generation ', 2, None, '___sec52'),
+              (' Shape manipulation ', 2, None, '___sec53'),
+              (' Higher-dimensional arrays ',
+               1,
+               'sec:plot:2Darrays',
+               'sec:plot:2Darrays'),
+              (' Matrices and arrays ', 2, None, '___sec55'),
+              (' Two-dimensional numerical Python arrays ',
+               2,
+               'sec:plot:2D:arrays',
+               'sec:plot:2D:arrays'),
+              (' Array computing ',
+               2,
+               'sec:plot:array2comp',
+               'sec:plot:array2comp'),
+              (' Remark ', 3, None, '___sec58'),
+              (' Two-dimensional arrays and functions of two variables ',
+               2,
+               None,
+               '___sec59'),
+              (' Matrix objects ',
+               2,
+               'sec:plot:numpy:matrix',
+               'sec:plot:numpy:matrix'),
+              (' Summary ', 1, None, '___sec61'),
+              (' Chapter topics ', 2, None, '___sec62'),
+              (' Array computing ', 3, None, '___sec63'),
+              (' Plotting curves ', 3, None, '___sec64'),
+              (' Making movies ', 3, None, '___sec65'),
+              (' Terminology ', 3, None, '___sec66'),
+              (' Example: Animating a function ',
+               2,
+               'sec:plot:summarizing',
+               'sec:plot:summarizing'),
+              (' Problem ', 3, None, '___sec68'),
+              (' Solution ', 3, None, '___sec69'),
+              (' Scaling ', 3, None, '___sec70'),
+              (' Exercises ', 1, 'sec:plot:exer', 'sec:plot:exer'),
+              (' Exercise 1: Fill lists with function values ',
+               2,
+               'sec:plot:ex1',
+               'sec:plot:ex1'),
+              (' Exercise 2: Fill arrays; loop version ',
+               2,
+               'sec:plot:ex2',
+               'sec:plot:ex2'),
+              (' Exercise 3: Fill arrays; vectorized version ',
+               2,
+               'sec:plot:ex2b',
+               'sec:plot:ex2b'),
+              (' Exercise 4: Plot a function ',
+               2,
+               'sec:plot:ex2c',
+               'sec:plot:ex2c'),
+              (' Exercise 5: Apply a function to a vector ',
+               2,
+               'sec:plot:math:ex1',
+               'sec:plot:math:ex1'),
+              (' Exercise 6: Simulate by hand a vectorized expression ',
+               2,
+               'sec:plot:ex3',
+               'sec:plot:ex3'),
+              (' Exercise 7: Demonstrate array slicing ',
+               2,
+               'sec:plot:ex15d',
+               'sec:plot:ex15d'),
+              (' Exercise 8: Plot a formula ',
+               2,
+               'sec:plot:ex15',
+               'sec:plot:ex15'),
+              (' Exercise 9: Plot a formula for several parameters ',
+               2,
+               'sec:plot:ex15b',
+               'sec:plot:ex15b'),
+              (' Exercise 10: Specify the extent of the axes in a plot ',
+               2,
+               'sec:plot:ex15ba',
+               'sec:plot:ex15ba'),
+              (' Exercise 11: Plot exact and inexact Fahrenheit-Celsius conversion formulas ',
+               2,
+               'sec:plot:ex15c',
+               'sec:plot:ex15c'),
+              (' Exercise 12: Plot the trajectory of a ball ',
+               2,
+               'sec:plot:ex5',
+               'sec:plot:ex5'),
+              (' Exercise 13: Plot data in a two-column file ',
+               2,
+               'sec:files:ex12',
+               'sec:files:ex12'),
+              (' Remarks ', 3, None, '___sec85'),
+              (' Exercise 14: Plot data from a file ',
+               2,
+               'sec:files:ex12c',
+               'sec:files:ex12c'),
+              (' Exercise 15: Fit a polynomial to data points ',
+               2,
+               'sec:files:ex12c2',
+               'sec:files:ex12c2'),
+              (' Exercise 16: Fit a polynomial to experimental data ',
+               2,
+               'sec:files:ex19',
+               'sec:files:ex19'),
+              (' Exercise 17: Read acceleration data and find velocities ',
+               2,
+               'sec:files:ex22',
+               'sec:files:ex22'),
+              (' Exercise 18: Read acceleration data and plot velocities ',
+               2,
+               'sec:files:ex23',
+               'sec:files:ex23'),
+              (" Exercise 19: Plot a trip's path and velocity from GPS coordinates ",
+               2,
+               'sec:files:ex24',
+               'sec:files:ex24'),
+              (' Exercise 20: Vectorize the Midpoint rule for integration ',
+               2,
+               'sec:class:exer:sum',
+               'sec:class:exer:sum'),
+              (' Remarks ', 3, None, '___sec93'),
+              (" Exercise 21: Implement Lagrange's interpolation formula ",
+               2,
+               'sec:class:ex27a',
+               'sec:class:ex27a'),
+              (" Exercise 22: Plot Lagrange's interpolating polynomial ",
+               2,
+               'sec:class:ex27b',
+               'sec:class:ex27b'),
+              (" Exercise 23: Investigate the behavior of Lagrange's interpolating polynomials ",
+               2,
+               'sec:class:ex27c',
+               'sec:class:ex27c'),
+              (' Remarks ', 3, None, '___sec97'),
+              (' Exercise 24: Plot a wave packet ',
+               2,
+               'sec:plot:ex5d',
+               'sec:plot:ex5d'),
+              (' Exercise 25: Judge a plot ',
+               2,
+               'sec:plot:ex7',
+               'sec:plot:ex7'),
+              (' Exercise 26: Plot the viscosity of water ',
+               2,
+               'sec:plot:ex13c',
+               'sec:plot:ex13c'),
+              (' Exercise 27: Explore a complicated function graphically ',
+               2,
+               'sec:plot:ex16',
+               'sec:plot:ex16'),
+              (' Exercise 28: Plot Taylor polynomial approximations to $\\sin x$ ',
+               2,
+               'sec:plot:ex5b',
+               'sec:plot:ex5b'),
+              (' Exercise 29: Animate a wave packet ',
+               2,
+               'sec:plot:ex5e',
+               'sec:plot:ex5e'),
+              (' Exercise 30: Animate two-scale temperature variations ',
+               2,
+               'sec:plot:ex18',
+               'sec:plot:ex18'),
+              (' Remarks ', 3, None, '___sec105'),
+              (' Exercise 31: Use non-uniformly distributed coordinates for visualization ',
+               2,
+               'sec:plot:ex19',
+               'sec:plot:ex19'),
+              (" Exercise 32: Animate a planet's orbit ",
+               2,
+               'sec:plot:ex5g',
+               'sec:plot:ex5g'),
+              (' Exercise 33: Animate the evolution of Taylor polynomials ',
+               2,
+               'sec:plot:ex17',
+               'sec:plot:ex17'),
+              (' Exercise 34: Plot the velocity profile for pipeflow ',
+               2,
+               'sec:plot:ex4',
+               'sec:plot:ex4'),
+              (' Exercise 35: Plot sum-of-sines approximations to a function ',
+               2,
+               'sec:plot:ex8',
+               'sec:plot:ex8'),
+              (' Exercise 36: Animate the evolution of a sum-of-sine approximation to a function ',
+               2,
+               'sec:plot:ex8m',
+               'sec:plot:ex8m'),
+              (' Exercise 37: Plot functions from the command line ',
+               2,
+               'sec:plot:ex14',
+               'sec:plot:ex14'),
+              (' Exercise 38: Improve command-line input ',
+               2,
+               'sec:plot:ex14b',
+               'sec:plot:ex14b'),
+              (' Exercise 39: Demonstrate energy concepts from physics ',
+               2,
+               'sec:plot:ex20',
+               'sec:plot:ex20'),
+              (' Exercise 40: Plot a w-like function ',
+               2,
+               'sec:plot:math:ex9',
+               'sec:plot:math:ex9'),
+              (' Exercise 41: Visualize approximations in the Midpoint integration rule ',
+               2,
+               'sec:plot:ex:vizmidpoint',
+               'sec:plot:ex:vizmidpoint'),
+              (' Exercise 42: Visualize approximations in the Trapezoidal integration rule ',
+               2,
+               'sec:plot:ex:viztrapezoidal',
+               'sec:plot:ex:viztrapezoidal'),
+              (' Exercise 43: Experience overflow in a function ',
+               2,
+               'sec:plot:ex13',
+               'sec:plot:ex13'),
+              (' Remarks ', 3, None, '___sec119'),
+              (' Exercise 44: Apply a function to a rank 2 array ',
+               2,
+               'sec:plot:math:ex2',
+               'sec:plot:math:ex2'),
+              (' Exercise 45: Explain why array computations fail ',
+               2,
+               'sec:plot:ex11',
+               'sec:plot:ex11'),
+              (' References ', 1, None, '___sec122')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- newcommands_keep.tex -->
+$$
+\newcommand{\tp}{\thinspace .}
+$$
+
+
+
+
+    
+<!-- Bootstrap navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="plot-readable.html">Array computing and curve plotting</a>
+  </div>
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     <!-- navigation toc: --> <li><a href="#___sec0" style="font-size: 80%;">Vectors</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-readable002.html#___sec4" style="font-size: 80%;">Arrays in Python programs</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-readable003.html#sec:plot:curveplots" style="font-size: 80%;">Curve plotting</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-readable004.html#sec:plot:difficulties" style="font-size: 80%;">Plotting difficulties</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-readable005.html#sec:plot:if:vectorize" style="font-size: 80%;">More advanced vectorization of functions</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-readable006.html#sec:plot:numpy:more" style="font-size: 80%;">More on numerical Python arrays</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-readable007.html#sec:plot:2Darrays" style="font-size: 80%;">Higher-dimensional arrays</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-readable008.html#___sec61" style="font-size: 80%;">Summary</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-readable009.html#sec:plot:exer" style="font-size: 80%;">Exercises</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-readable009.html#___sec122" style="font-size: 80%;">References</a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div> <!-- end of navigation bar -->
+
+<div class="container">
+
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+
+<a name="part0001"></a>
+<!-- !split -->
+
+<h1 id="___sec0">Vectors <a name="___sec0"></a></h1>
+
+<p>
+This section gives a brief introduction to the vector concept,
+assuming that you have heard about vectors in the plane and maybe
+vectors in space before. This background will be valuable when we
+start to work with arrays and curve plotting.
+
+<h2 id="___sec1">The vector concept <a name="___sec1"></a></h2>
+
+<p>
+Some mathematical quantities are associated with a set of numbers. One
+example is a point in the plane, where we need two coordinates (real
+numbers) to describe the point mathematically.  Naming the two
+coordinates of a particular point as \( x \) and \( y \), it is common to use
+the notation \( (x,y) \) for the point.  That is, we group the numbers
+inside parentheses.  Instead of symbols we might use the numbers
+directly: \( (0,0) \) and \( (1.5,-2.35) \) are also examples of coordinates
+in the plane.
+
+<p>
+A point in three-dimensional space has three coordinates, which we may
+name \( x_1 \), \( x_2 \), and \( x_3 \). The common notation groups the numbers
+inside parentheses: \( (x_1,x_2,x_3) \).  Alternatively, we may use the
+symbols \( x \), \( y \), and \( z \), and write the point as \( (x,y,z) \), or
+numbers can be used instead of symbols.
+
+<p>
+<!-- Now, think of a bird that is flying around. At time \( t \) the bird -->
+<!-- is located at the point \( (x,y,z) \) in space. The complete information -->
+<!-- of where the bird is, can be represented as a collection of -->
+<!-- \( t \), \( x \), \( y \), and \( z \). These numbers can be collected inside -->
+<!-- parentheses: \( (x,y,z,t) \) or \( (t,x,y,z) \). This quantity is known -->
+<!-- as a space-time point. -->
+
+<p>
+From high school you may have a memory of solving two equations with
+two unknowns. At the university you will soon meet problems that are
+formulated as \( n \) equations with \( n \) unknowns.  The solution of such
+problems contains \( n \) numbers that we can collect inside parentheses
+and number from 1 to \( n \): \( (x_1,x_2,x_3,\ldots,x_{n-1},x_n) \).
+
+<p>
+Quantities such as \( (x,y) \), \( (x,y,z) \), or \( (x_1,\ldots,x_n) \) are known
+as <em>vectors</em> in mathematics.  A visual representation of a vector is
+an arrow that goes from the origin to a point. For example, the vector
+\( (x,y) \) is an arrow that goes from \( (0,0) \) to the point with
+coordinates \( (x,y) \) in the plane. Similarly, \( (x,y,z) \) is an arrow
+from \( (0,0,0) \) to the point \( (x,y,z) \) in three-dimensional space.
+
+<p>
+Mathematicians found it convenient to introduce spaces with higher
+dimension than three, because when we have a solution of \( n \) equations
+collected in a vector \( (x_1,\ldots,x_n) \), we may think of this vector
+as a point in a space with dimension \( n \), or equivalently, an arrow
+that goes from the origin \( (0,\ldots,0) \) in \( n \)-dimensional space to
+the point \( (x_1,\ldots,x_n) \). Figure <a href="#sec:plot:vec:fig1">1</a>
+illustrates a vector as an arrow, either starting at the origin, or at
+any other point. Two arrows/vectors that have the same direction and
+the same length are mathematically equivalent.
+
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 1:  A vector \( (2,3) \) visualized in the standard way as an arrow from the origin to the point \( (2,3) \), and mathematically equivalently, as an arrow from \( (1,\frac{1}{2}) \) (or any point \( (a,b) \)) to \( (3, 3\frac{1}{2}) \) (or \( (a+2,b+3) \)). <a name="sec:plot:vec:fig1"></a> </p></center>
+<p><img src="fig-plot/vector_illustration2.png" align="bottom" width=400></p>
+</center>
+
+<p>
+We say that \( (x_1,\ldots,x_n) \) is an \( n \)-vector or a vector with \( n \)
+components. Each of the numbers \( x_1 \), \( x_2 \), \( \ldots \) is a component
+or an element. We refer to the first component (or element), the
+second component (or element), and so forth.
+
+<p>
+A Python program may use a list or tuple to represent a vector:
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">v1 <span style="color: #666666">=</span> [x, y]         <span style="color: #408080; font-style: italic"># list of variables</span>
+v2 <span style="color: #666666">=</span> (<span style="color: #666666">-1</span>, <span style="color: #666666">2</span>)        <span style="color: #408080; font-style: italic"># tuple of numbers</span>
+v3 <span style="color: #666666">=</span> (x1, x2, x3)   <span style="color: #408080; font-style: italic"># tuple of variables</span>
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">math</span> <span style="color: #008000; font-weight: bold">import</span> exp
+v4 <span style="color: #666666">=</span> [exp(<span style="color: #666666">-</span>i<span style="color: #666666">*0.1</span>) <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">150</span>)]
+</pre></div>
+<p>
+While <code>v1</code> and <code>v2</code> are vectors in the plane and <code>v3</code> is a vector in
+three-dimensional space, <code>v4</code> is a vector in a 150-dimensional space,
+consisting of 150 values of the exponential function.  Since Python
+lists and tuples have 0 as the first index, we may also in mathematics
+write the vector \( (x_1,x_2) \) as \( (x_0,x_1) \). This is not at all common
+in mathematics, but makes the distance from a mathematical description
+of a problem to its solution in Python shorter.
+
+<p>
+It is impossible to visually demonstrate how a space with 150
+dimensions looks like.  Going from the plane to three-dimensional
+space gives a rough feeling of what it means to add a dimension, but
+if we forget about the idea of a visual perception of space, the
+mathematics is very simple: going from a 4-dimensional vector to a
+5-dimensional vector is just as easy as adding an element to a list of
+symbols or numbers.
+
+<h2 id="sec:plot:vectors">Mathematical operations on vectors<a name="sec:plot:vectors"></a></h2>
+
+<p>
+Since vectors can be viewed as arrows having a length and a direction,
+vectors are extremely useful in geometry and physics.  The velocity of
+a car has a magnitude and a direction, so has the acceleration, and
+the position of a point in the car is also a vector.  An edge of a
+triangle can be viewed as a line (arrow) with a direction and length.
+
+<p>
+In geometric and physical applications of vectors, mathematical
+operations on vectors are important. We shall exemplify some of the
+most important operations on vectors below. The goal is not to teach
+computations with vectors, but more to illustrate that such
+computations are defined by mathematical rules.  Given two vectors,
+\( (u_1,u_2) \) and \( (v_1,v_2) \), we can add these vectors according to the
+rule:
+
+$$
+\begin{equation}
+(u_1,u_2) + (v_1,v_2) = (u_1+v_1, u_2+v_2)\tp
+\end{equation}
+$$
+
+We can also subtract two vectors using a similar rule:
+
+$$
+\begin{equation}
+(u_1,u_2) - (v_1,v_2) = (u_1-v_1, u_2-v_2)\tp
+\end{equation}
+$$
+
+A vector can be multiplied by a number. This number, called \( a \) below, is
+usually denoted as a <em>scalar</em>:
+
+$$
+\begin{equation}
+a\cdot (v_1,v_2) = (av_1, av_2)\tp
+\end{equation}
+$$
+
+The inner product, also called dot product, or scalar product,
+of two vectors is a number:
+
+$$
+\begin{equation} (u_1,u_2)\cdot (v_1,v_2) = u_1v_1 + u_2v_2\tp
+\end{equation}
+$$
+
+(From high school mathematics and physics you might recall that the
+inner or dot product also can be expressed as the product of the
+lengths of the two vectors multiplied by the cosine of the angle
+between them, but we will not make use of that formula.  There is also
+a <em>cross product</em> defined for 2-vectors or 3-vectors, but we do not
+list the cross product formula here.)
+
+<p>
+The length of a vector is defined by
+
+$$
+\begin{equation} ||(v_1,v_2)|| = \sqrt{(v_1,v_2)\cdot (v_1,v_2)}= \sqrt{v_1^2 + v_2^2}\tp
+\end{equation}
+$$
+
+
+<p>
+The same mathematical operations apply to \( n \)-dimensional vectors as
+well.  Instead of counting indices from 1, as we usually do in
+mathematics, we now count from 0, as in Python. The addition and
+subtraction of two vectors with \( n \) components (or elements) read
+
+$$
+\begin{align}
+(u_0,\ldots,u_{n-1}) + (v_0,\ldots,v_{n-1}) &=  (u_0+v_0,\ldots,u_{n-1}+v_{n-1}) , \\ 
+(u_0,\ldots,u_{n-1}) - (v_0,\ldots,v_{n-1}) &=  (u_0-v_0,\ldots,u_{n-1}-v_{n-1}) \tp
+\end{align}
+$$
+
+Multiplication of a scalar \( a \) and a vector \( (v_0,\ldots,v_{n-1}) \) equals
+
+$$
+\begin{equation}
+(av_0,\ldots,av_{n-1})\tp
+\end{equation}
+$$
+
+The inner or dot product of two \( n \)-vectors is defined as
+
+$$
+\begin{equation}
+(u_0,\ldots,u_{n-1}) \cdot (v_0,\ldots,v_{n-1})
+= u_0v_0+\cdots + u_{n-1}v_{n-1} = \sum_{j=0}^{n-1} u_jv_j\tp
+\end{equation}
+$$
+
+Finally, the length \( ||v|| \) of an \( n \)-vector \( v=(v_0,\ldots,v_{n-1}) \) is
+
+$$
+\begin{align}
+\sqrt{(v_0,\ldots,v_{n-1})\cdot (v_0,\ldots,v_{n-1})} &=
+\left(v_0^2 + v_1^2 + \cdots + v_{n-1}^2\right)^\frac{1}{2}\nonumber\\ 
+& =
+\left(\sum_{j=0}^{n-1} v_j^2\right)^\frac{1}{2}\tp
+\end{align}
+$$
+
+<h2 id="sec:plot:arraycomp">Vector arithmetics and vector functions<a name="sec:plot:arraycomp"></a></h2>
+
+<p>
+In addition to the operations on vectors in the section <a href="#sec:plot:vectors">Mathematical operations on vectors</a>, which you might recall from high school
+mathematics, we can define other operations on vectors.  This is very
+useful for speeding up programs.  Unfortunately, the forthcoming
+vector operations are hardly treated in textbooks on mathematics, yet
+these operations play a significant role in mathematical software,
+especially in computing environment such as MATLAB, Octave, Python,
+and R.
+
+<p>
+Applying a mathematical function of one variable, \( f(x) \), to a vector
+is defined as a vector where \( f \) is applied to each element. Let
+\( v=(v_0,\ldots,v_{n-1}) \) be a vector. Then
+
+$$
+\begin{equation*} f(v) = (f(v_0),\ldots,f(v_{n-1}))\tp\end{equation*}
+$$
+
+For example, the sine of \( v \) is
+
+$$
+\begin{equation*} \sin(v) = (\sin(v_0),\ldots,\sin(v_{n-1}))\tp\end{equation*}
+$$
+
+It follows that squaring a vector, or the more general operation of
+raising the vector to a power, can be defined as applying the
+operation to each element:
+
+$$
+\begin{equation*} v^b = (v_0^b,\ldots,v_{n-1}^b)\tp\end{equation*}
+$$
+
+Another operation between two vectors that arises in computer programming
+of mathematics is the &quot;asterisk&quot; multiplication, defined as
+
+$$
+\begin{equation} u*v = (u_0v_0, u_1v_1, \ldots, u_{n-1}v_{n-1})\tp
+\tag{1}
+\end{equation}
+$$
+
+Adding a scalar to a vector or array can be defined as adding the scalar
+to each component. If \( a \) is a scalar and \( v \) a vector, we have
+
+$$
+\begin{equation*} a + v = (a+v_0, \ldots, a+v_{n-1})\tp\end{equation*}
+$$
+
+
+<p>
+A compound vector expression may look like
+
+$$
+\begin{equation}
+v^2*\cos(v)*e^v + 2\tp
+\tag{2}
+\end{equation}
+$$
+
+How do we calculate this expression?  We use the normal rules of
+mathematics, working our way, term by term, from left to right, paying
+attention to the fact that powers are evaluated before multiplications
+and divisions, which are evaluated prior to addition and subtraction.
+First we calculate \( v^2 \), which results in a vector we may call
+\( u \). Then we calculate \( \cos(v) \) and call the result \( p \). Then we
+multiply \( u*p \) to get a vector which we may call \( w \). The next step is
+to evaluate \( e^v \), call the result \( q \), followed by the multiplication
+\( w*q \), whose result is stored as \( r \). Then we add \( r+2 \) to get the
+final result.  It might be more convenient to list these operations
+after each other:
+
+<ul>
+  <li> \( u=v^2 \)</li>
+  <li> \( p=\cos (v) \)</li>
+  <li> \( w = u*p \)</li>
+  <li> \( q = e^v \)</li>
+  <li> \( r = w*q \)</li>
+  <li> \( s=r +2 \)</li>
+</ul>
+
+Writing out the vectors \( u \), \( w \), \( p \), \( q \), and \( r \) in terms of a
+general vector \( v=(v_0,\ldots,v_{n-1}) \) (do it!) shows that the result
+of the expression <a href="#mjx-eqn-2">(2)</a> is the vector
+
+$$
+\begin{equation*} (v_0^2\cos(v_0)e^{v_0}+2,\ldots,v_{n-1}^2\cos(v_{n-1})e^{v_{n-1}}+2)\tp\end{equation*}
+$$
+
+That is, component no. \( i \) in the result vector equals the number
+arising from applying the formula <a href="#mjx-eqn-2">(2)</a> to \( v_i \),
+where the * multiplication is ordinary multiplication between two
+numbers.
+
+<p>
+We can, alternatively, introduce the function
+
+$$
+\begin{equation*} f(x) = x^2\cos(x)e^x + 2\end{equation*}
+$$
+
+and use the result that \( f(v) \)
+means applying \( f \) to each element
+in \( v \). The result is the same as in the vector
+expression <a href="#mjx-eqn-2">(2)</a>.
+
+<p>
+In Python programming it is important for speed (and convenience too)
+that we can apply functions of one variable, like \( f(x) \), to
+vectors. What this means mathematically is something we have tried to
+explain in this subsection.  Doing <a href="._plot-readable009.html#sec:plot:math:ex1">Exercise 5: Apply a function to a vector</a>
+and <a href="._plot-readable009.html#sec:plot:ex3">Exercise 6: Simulate by hand a vectorized expression</a> may help to grasp the ideas of vector computing,
+and with more programming experience you will hopefully discover that
+vector computing is very useful.  It is not necessary to have a
+thorough understanding of vector computing in order to proceed with
+the next sections.
+
+<p>
+Arrays are used to represent vectors in a program, but one can do more
+with arrays than with vectors. Until the section <a href="._plot-readable007.html#sec:plot:2Darrays">Higher-dimensional arrays</a> it
+suffices to think of arrays as the same as vectors in a program.
+
+<p>
+<p>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pager">
+  <li class="previous">
+    <a href="._plot-readable000.html">&larr; Prev</a>
+  </li>
+  <li class="next">
+    <a href="._plot-readable002.html">Next &rarr;</a>
+  </li>
+</ul>
+<!-- ------------------- end of main content --------------- -->
+
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap footer
+<footer>
+<a href="http://..."><img width="250" align=right src="http://..."></a>
+</footer>
+-->
+
+
+</body>
+</html>
+    
+

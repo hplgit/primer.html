@@ -1,0 +1,892 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Introduction to classes in Python">
+<meta name="keywords" content="constructor (class),UML class diagram,instance (class),user-defined datatype (class),method class),attribute (class),namespace,test function,nose tests,pytest tests,special methods (class),callable objects,test function,closure,Newton's method,wrapper code,integration numerical,symbolic computing,integration symbolic,mutable objects,immutable objects,protected attributes (class),test function,information hiding,private attributes (class),API,application programming interface,protected attributes (class),check an object's type,static typing,weak typing,strong typing,dynamic typing,duck typing,static class attributes,static class variables,static class methods,interval arithmetic">
+
+<title>Introduction to classes in Python</title>
+
+<!-- Bootstrap style: bootswatch_readable -->
+<link href="http://netdna.bootstrapcdn.com/bootswatch/3.1.1/readable/bootstrap.min.css" rel="stylesheet">
+<!-- not necessary
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+
+<style type="text/css">
+/* Let inline verbatim have the same color as the surroundings */
+code { color: inherit; background-color: transparent; }
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [(' Simple function classes ',
+               1,
+               'sec:class:functors',
+               'sec:class:functors'),
+              (' Challenge: functions with parameters ',
+               2,
+               'sec:class:func1',
+               'sec:class:func1'),
+              (' Problem ', 3, None, '___sec2'),
+              (' A bad solution: global variables ', 3, None, '___sec3'),
+              (' Representing a function as a class ',
+               2,
+               'sec:class:func2',
+               'sec:class:func2'),
+              (' Implementation ', 3, None, '___sec5'),
+              (' Usage and dissection ', 3, None, '___sec6'),
+              (' The self  variable ', 3, None, '___sec7'),
+              (' Extension of the class ', 3, None, '___sec8'),
+              (' Remark ', 3, None, '___sec9'),
+              (' Using methods as ordinary functions ', 3, None, '___sec10'),
+              (' Doc strings ', 3, None, '___sec11'),
+              (' Another function class example ',
+               2,
+               'sec:class:func3',
+               'sec:class:func3'),
+              (' Remark ', 3, None, '___sec13'),
+              (' Alternative function class implementations ',
+               2,
+               'sec:class:func2b',
+               'sec:class:func2b'),
+              (' Making classes without the class construct ',
+               2,
+               'sec:class:whatis',
+               'sec:class:whatis'),
+              (' First remark ', 3, None, '___sec16'),
+              (' Second remark ', 3, None, '___sec17'),
+              (' More examples on classes ',
+               1,
+               'sec:class:addex',
+               'sec:class:addex'),
+              (' Bank accounts ',
+               2,
+               'sec:class:account',
+               'sec:class:account'),
+              (' Phone book ',
+               2,
+               'sec:class:phonebook',
+               'sec:class:phonebook'),
+              (' A circle ', 2, 'sec:class:circle', 'sec:class:circle'),
+              (' Verification ', 3, None, '___sec22'),
+              (' Remark ', 3, None, '___sec23'),
+              (' Special methods ',
+               1,
+               'sec:class:specialmethods',
+               'sec:class:specialmethods'),
+              (' The call special method ',
+               2,
+               'sec:class:call',
+               'sec:class:call'),
+              (' Example: Automagic differentiation ',
+               2,
+               'sec:class:autodF',
+               'sec:class:autodF'),
+              (' Problem ', 3, None, '___sec27'),
+              (' Solution ', 3, None, '___sec28'),
+              (' Verification ', 3, None, '___sec29'),
+              (" Application: Newton's method ", 3, None, '___sec30'),
+              (' Example: Automagic integration ',
+               2,
+               'sec:class:autoint',
+               'sec:class:autoint'),
+              (' A simple implementation ', 3, None, '___sec32'),
+              (' Verification via symbolic computing ', 3, None, '___sec33'),
+              (' Remark ', 3, None, '___sec34'),
+              (' Turning an instance into a string ',
+               2,
+               'sec:class:str',
+               'sec:class:str'),
+              (' Example: Phone book with special methods ',
+               2,
+               'sec:class:phonebook2',
+               'sec:class:phonebook2'),
+              (' Remark ', 3, None, '___sec37'),
+              (' Adding objects ', 2, 'sec:class:add', 'sec:class:add'),
+              (' Example: Class for polynomials ',
+               2,
+               'sec:class:Polynomial',
+               'sec:class:Polynomial'),
+              (' Implementation ', 3, None, '___sec40'),
+              (' Usage ', 3, None, '___sec41'),
+              (' Pretty print of polynomials ', 3, None, '___sec42'),
+              (' Verifying the implementation ', 3, None, '___sec43'),
+              (' Arithmetic operations and other special methods ',
+               2,
+               'sec:class:arithmetics',
+               'sec:class:arithmetics'),
+              (' Special methods for string conversion ',
+               2,
+               'sec:class:repr',
+               'sec:class:repr'),
+              (' Recreating objects from strings ', 3, None, '___sec46'),
+              (' Example: Class for vectors in the plane ',
+               1,
+               'sec:class:Vec2D',
+               'sec:class:Vec2D'),
+              (' Some mathematical operations on vectors ',
+               2,
+               None,
+               '___sec48'),
+              (' Implementation ', 2, None, '___sec49'),
+              (' Usage ', 2, None, '___sec50'),
+              (' Comment ', 3, None, '___sec51'),
+              (' Example: Class for complex numbers ', 1, None, '___sec52'),
+              (' Implementation ',
+               2,
+               'sec:class:Complex',
+               'sec:class:Complex'),
+              (' Illegal operations ',
+               2,
+               'sec:class:illegalop',
+               'sec:class:illegalop'),
+              (' Mixing complex and real numbers ',
+               2,
+               'sec:class:complex:mixed',
+               'sec:class:complex:mixed'),
+              (' Dynamic, static, strong, weak, and duck typing ',
+               2,
+               None,
+               '___sec56'),
+              (" Special methods for ``right'' operands ",
+               2,
+               'sec:class:complex:rightop',
+               'sec:class:complex:rightop'),
+              (' Remark ', 3, None, '___sec58'),
+              (' Inspecting instances ',
+               2,
+               'sec:class:inspect',
+               'sec:class:inspect'),
+              (' Static methods and attributes ',
+               1,
+               'sec:class:static',
+               'sec:class:static'),
+              (' Summary ', 1, None, '___sec61'),
+              (' Chapter topics ',
+               2,
+               'sec:class:summary',
+               'sec:class:summary'),
+              (' Classes ', 3, None, '___sec63'),
+              (' Special methods ', 3, None, '___sec64'),
+              (' Terminology ', 3, None, '___sec65'),
+              (' Example: interval arithmetic ', 2, None, '___sec66'),
+              (' Problem ', 3, None, '___sec67'),
+              (' Solution ', 3, None, '___sec68'),
+              (' Exercises ', 1, None, '___sec69'),
+              (' Exercise 1: Make a function class ',
+               2,
+               'sec:class:ex2',
+               'sec:class:ex2'),
+              (' Exercise 2: Add an attribute to a class ',
+               2,
+               'sec:class:ex25q',
+               'sec:class:ex25q'),
+              (' Exercise 3: Add functionality to a class ',
+               2,
+               'sec:class:ex25q2',
+               'sec:class:ex25q2'),
+              (' Exercise 4: Make classes for a rectangle and a triangle ',
+               2,
+               'sec:class:ex23',
+               'sec:class:ex23'),
+              (' Exercise 5: Make a class for quadratic functions ',
+               2,
+               'sec:class:ex11',
+               'sec:class:ex11'),
+              (' Exercise 6: Make a class for straight lines ',
+               2,
+               'sec:class:ex25',
+               'sec:class:ex25'),
+              (' Exercise 7: Flexible handling of function arguments ',
+               2,
+               'sec:class:ex25b',
+               'sec:class:ex25b'),
+              (' Exercise 8: Wrap functions in a class ',
+               2,
+               'sec:class:ex27d',
+               'sec:class:ex27d'),
+              (' Exercise 9: Flexible handling of function arguments ',
+               2,
+               'sec:class:ex27e',
+               'sec:class:ex27e'),
+              (' Exercise 10: Deduce a class implementation ',
+               2,
+               'sec:class:ex1',
+               'sec:class:ex1'),
+              (' Exercise 11: Implement special methods in a class ',
+               2,
+               'sec:class:ex2b2',
+               'sec:class:ex2b2'),
+              (' Exercise 12: Make a class for summation of series ',
+               2,
+               'sec:class:ex2b',
+               'sec:class:ex2b'),
+              (' Exercise 13: Apply a numerical differentiation class ',
+               2,
+               'sec:class:ex10',
+               'sec:class:ex10'),
+              (' Exercise 14: Apply symbolic differentiation ',
+               2,
+               'sec:class:exer:sympy:diff',
+               'sec:class:exer:sympy:diff'),
+              (' Exercise 15: Implement in-place `+=` and `-=` operators ',
+               2,
+               'sec:class:ex25qb',
+               'sec:class:ex25qb'),
+              (' Exercise 16: Implement a class for numerical differentiation ',
+               2,
+               'sec:class:ex21',
+               'sec:class:ex21'),
+              (' Exercise 17: Examine a program ',
+               2,
+               'sec:class:ex21b',
+               'sec:class:ex21b'),
+              (' Exercise 18: Modify a class for numerical differentiation ',
+               2,
+               'sec:class:ex23s',
+               'sec:class:ex23s'),
+              (' Exercise 19: Make a class for the Heaviside function ',
+               2,
+               'sec:basic:exHclass',
+               'sec:basic:exHclass'),
+              (' Exercise 20: Make a class for the indicator function ',
+               2,
+               'sec:basic:exIndclass',
+               'sec:basic:exIndclass'),
+              (' Exercise 21: Make a class for piecewise constant functions ',
+               2,
+               'sec:basic:ex:piecewisefunc',
+               'sec:basic:ex:piecewisefunc'),
+              (' Exercise 22: Speed up repeated integral calculations ',
+               2,
+               'sec:class:ex13c',
+               'sec:class:ex13c'),
+              (' Exercise 23: Apply a class for polynomials ',
+               2,
+               'sec:class:ex5',
+               'sec:class:ex5'),
+              (' Exercise 24: Find a bug in a class for polynomials ',
+               2,
+               'sec:class:ex4',
+               'sec:class:ex4'),
+              (' Exercise 25: Implement subtraction of polynomials ',
+               2,
+               'sec:class:ex6a',
+               'sec:class:ex6a'),
+              (' Exercise 26: Test the functionality of pretty print of polynomials ',
+               2,
+               'sec:class:exer:str',
+               'sec:class:exer:str'),
+              (' Exercise 27: Vectorize a class for polynomials ',
+               2,
+               'sec:class:ex7v',
+               'sec:class:ex7v'),
+              (' Remarks ', 3, None, '___sec97'),
+              (' Exercise 28: Use a dict to hold polynomial coefficients ',
+               2,
+               'sec:class:ex8',
+               'sec:class:ex8'),
+              (' Exercise 29: Extend class Vec2D to work with lists/tuples ',
+               2,
+               'sec:class:ex16',
+               'sec:class:ex16'),
+              (' Exercise 30: Extend class Vec2D to 3D vectors ',
+               2,
+               'sec:class:ex17b',
+               'sec:class:ex17b'),
+              (' Exercise 31: Use NumPy arrays in class Vec2D ',
+               2,
+               'sec:class:ex17',
+               'sec:class:ex17'),
+              (' Exercise 32: Make classes for students and courses ',
+               2,
+               'sec:class:ex15',
+               'sec:class:ex15'),
+              (' Exercise 33: Find local and global extrema of a function ',
+               2,
+               'sec:plot:ex28',
+               'sec:plot:ex28'),
+              (' Exercise 34: Find the optimal production for a company ',
+               2,
+               'sec:class:ex18a',
+               'sec:class:ex18a'),
+              (' References ', 1, None, '___sec105')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- newcommands_keep.tex -->
+$$
+\newcommand{\tp}{\thinspace .}
+$$
+
+
+
+
+    
+<!-- Bootstrap navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="class-readable.html">Introduction to classes in Python</a>
+  </div>
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     <!-- navigation toc: --> <li><a href="._class-readable001.html#sec:class:functors" style="font-size: 80%;">Simple function classes</a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable002.html#sec:class:addex" style="font-size: 80%;">More examples on classes</a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable003.html#sec:class:specialmethods" style="font-size: 80%;">Special methods</a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable004.html#sec:class:Vec2D" style="font-size: 80%;">Example: Class for vectors in the plane</a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable005.html#___sec52" style="font-size: 80%;">Example: Class for complex numbers</a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable006.html#sec:class:static" style="font-size: 80%;">Static methods and attributes</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec61" style="font-size: 80%;">Summary</a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable008.html#___sec69" style="font-size: 80%;">Exercises</a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable008.html#___sec105" style="font-size: 80%;">References</a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div> <!-- end of navigation bar -->
+
+<div class="container">
+
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+
+<a name="part0007"></a>
+<!-- !split -->
+
+<h1 id="___sec61">Summary <a name="___sec61"></a></h1>
+
+<h2 id="sec:class:summary">Chapter topics<a name="sec:class:summary"></a></h2>
+
+<h3 id="___sec63">Classes <a name="___sec63"></a></h3>
+
+<p>
+A class contains attributes (variables) and methods.
+A first rough overview of a class can be to just list the
+attributes and methods, e.g., in a UML diagram.
+
+<p>
+Below is a sample class with three attributes (<code>m</code>, <code>M</code>, and
+<code>G</code>) and three methods (a constructor, <code>force</code>, and <code>visualize</code>).
+The class represents the gravity force between two masses. This force
+is computed by the <code>force</code> method, while the <code>visualize</code> method plots
+the force as a function of the distance between the masses.
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Gravity</span>:
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Gravity force between two physical objects.&quot;&quot;&quot;</span>
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__init__</span>(<span style="color: #008000">self</span>, m, M):
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>m <span style="color: #666666">=</span> m           <span style="color: #408080; font-style: italic"># mass of object 1</span>
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>M <span style="color: #666666">=</span> M           <span style="color: #408080; font-style: italic"># mass of object 2</span>
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>G <span style="color: #666666">=</span> <span style="color: #666666">6.67428E-11</span> <span style="color: #408080; font-style: italic"># gravity constant, m**3/kg/s**2</span>
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">force</span>(<span style="color: #008000">self</span>, r):
+        G, m, M <span style="color: #666666">=</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>G, <span style="color: #008000">self</span><span style="color: #666666">.</span>m, <span style="color: #008000">self</span><span style="color: #666666">.</span>M
+        <span style="color: #008000; font-weight: bold">return</span> G<span style="color: #666666">*</span>m<span style="color: #666666">*</span>M<span style="color: #666666">/</span>r<span style="color: #666666">**2</span>
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">visualize</span>(<span style="color: #008000">self</span>, r_start, r_stop, n<span style="color: #666666">=100</span>):
+        <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">scitools.std</span> <span style="color: #008000; font-weight: bold">import</span> plot, linspace
+        r <span style="color: #666666">=</span> linspace(r_start, r_stop, n)
+        g <span style="color: #666666">=</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>force(r)
+        title<span style="color: #666666">=</span><span style="color: #BA2121">&#39;Gravity force: m=</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">, M=</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> (<span style="color: #008000">self</span><span style="color: #666666">.</span>m, <span style="color: #008000">self</span><span style="color: #666666">.</span>M)
+        plot(r, g, title<span style="color: #666666">=</span>title)
+</pre></div>
+<p>
+Note that to access attributes inside the <code>force</code> method, and to
+call the <code>force</code> method inside the <code>visualize</code> method, we must prefix
+with <code>self</code>.
+Also recall that all methods must take <code>self</code>, &quot;this&quot; instance,
+as first argument, but the argument is left out in calls.
+The assignment of attributes to a local variable (e.g., <code>G = self.G</code>)
+inside methods is not necessary, but here it makes the mathematical
+formula easier to read and compare with standard mathematical notation.
+
+<p>
+This class (found in file <a href="http://tinyurl.com/pwyasaa/class/Gravity.py" target="_self"><tt>Gravity.py</tt></a>)
+can be used to find
+the gravity force between the Moon and the Earth:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">mass_moon <span style="color: #666666">=</span> <span style="color: #666666">7.35E+22</span>;  mass_earth <span style="color: #666666">=</span> <span style="color: #666666">5.97E+24</span>
+gravity <span style="color: #666666">=</span> Gravity(mass_moon, mass_earth)
+r <span style="color: #666666">=</span> <span style="color: #666666">3.85E+8</span>  <span style="color: #408080; font-style: italic"># Earth-Moon distance in meters</span>
+Fg <span style="color: #666666">=</span> gravity<span style="color: #666666">.</span>force(r)
+<span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;force:&#39;</span>, Fg
+</pre></div>
+<p>
+<!-- bar plot of experiment type? n values, m bars next to each other for -->
+<!-- each value -->
+
+<h3 id="___sec64">Special methods <a name="___sec64"></a></h3>
+
+<p>
+A collection of special methods, with two leading and trailing underscores in
+the method names, offers special syntax in Python programs.
+
+<p>
+The table below provides an overview of the
+most important special methods.
+
+<p>
+
+<div class="row">
+  <div class="col-xs-11">
+    <table class="table table-striped table-hover table-condensed">
+<thead>
+<tr><td align="center"><b>            Construction           </b></td> <td align="center"><b>                            Meaning2                            </b></td> </tr>
+</thead>
+<tbody>
+<tr><td align="left">   <code>a.__init__(self, args)</code>    </td> <td align="left">   constructor: <code>a = A(args)</code>                               </td> </tr>
+<tr><td align="left">   <code>a.__del__(self)</code>           </td> <td align="left">   destructor: <code>del a</code>                                      </td> </tr>
+<tr><td align="left">   <code>a.__call__(self, args)</code>    </td> <td align="left">   call as function: <code>a(args)</code>                              </td> </tr>
+<tr><td align="left">   <code>a.__str__(self)</code>           </td> <td align="left">   pretty print: <code>print a</code>, <code>str(a)</code>             </td> </tr>
+<tr><td align="left">   <code>a.__repr__(self)</code>          </td> <td align="left">   representation: <code>a = eval(repr(a))</code>                      </td> </tr>
+<tr><td align="left">   <code>a.__add__(self, b)</code>        </td> <td align="left">   <code>a + b</code>                                                  </td> </tr>
+<tr><td align="left">   <code>a.__sub__(self, b)</code>        </td> <td align="left">   <code>a - b</code>                                                  </td> </tr>
+<tr><td align="left">   <code>a.__mul__(self, b)</code>        </td> <td align="left">   <code>a*b</code>                                                    </td> </tr>
+<tr><td align="left">   <code>a.__div__(self, b)</code>        </td> <td align="left">   <code>a/b</code>                                                    </td> </tr>
+<tr><td align="left">   <code>a.__radd__(self, b)</code>       </td> <td align="left">   <code>b + a</code>                                                  </td> </tr>
+<tr><td align="left">   <code>a.__rsub__(self, b)</code>       </td> <td align="left">   <code>b - a</code>                                                  </td> </tr>
+<tr><td align="left">   <code>a.__rmul__(self, b)</code>       </td> <td align="left">   <code>b*a</code>                                                    </td> </tr>
+<tr><td align="left">   <code>a.__rdiv__(self, b)</code>       </td> <td align="left">   <code>b/a</code>                                                    </td> </tr>
+<tr><td align="left">   <code>a.__pow__(self, p)</code>        </td> <td align="left">   <code>a**p</code>                                                   </td> </tr>
+<tr><td align="left">   <code>a.__lt__(self, b)</code>         </td> <td align="left">   <code>a &lt; b</code>                                               </td> </tr>
+<tr><td align="left">   <code>a.__gt__(self, b)</code>         </td> <td align="left">   <code>a &gt; b</code>                                               </td> </tr>
+<tr><td align="left">   <code>a.__le__(self, b)</code>         </td> <td align="left">   <code>a &lt;= b</code>                                              </td> </tr>
+<tr><td align="left">   <code>a.__ge__(self, b)</code>         </td> <td align="left">   <code>a =&gt; b</code>                                              </td> </tr>
+<tr><td align="left">   <code>a.__eq__(self, b)</code>         </td> <td align="left">   <code>a == b</code>                                                 </td> </tr>
+<tr><td align="left">   <code>a.__ne__(self, b)</code>         </td> <td align="left">   <code>a != b</code>                                                 </td> </tr>
+<tr><td align="left">   <code>a.__bool__(self)</code>          </td> <td align="left">   boolean expression, as in <code>if a:</code>                        </td> </tr>
+<tr><td align="left">   <code>a.__len__(self)</code>           </td> <td align="left">   length of <code>a</code> (<code>int</code>): <code>len(a)</code>    </td> </tr>
+<tr><td align="left">   <code>a.__abs__(self)</code>           </td> <td align="left">   <code>abs(a)</code>                                                 </td> </tr>
+</tbody>
+    </table>
+  </div>
+</div> <!-- col-xs-11 -->
+
+<h3 id="___sec65">Terminology <a name="___sec65"></a></h3>
+
+<p>
+The important computer science topics in this document are
+
+<ul>
+  <li> classes</li>
+  <li> methods</li>
+  <li> attributes</li>
+  <li> constructor (<code>__init__</code>)</li>
+  <li> special methods (<code>__add__</code>, <code>__str__</code>, <code>__ne__</code>, etc.)</li>
+</ul>
+
+<h2 id="___sec66">Example: interval arithmetic <a name="___sec66"></a></h2>
+
+<p>
+Input data to mathematical formulas are often subject to uncertainty,
+usually because physical measurements of many quantities involve
+measurement errors, or because it is difficult to measure a parameter and
+one is forced to make a qualified guess of the value instead.
+In such cases it could be more natural to specify an input parameter
+by an interval \( [a,b] \), which is guaranteed to contain the true value
+of the parameter. The size of the interval expresses the uncertainty
+in this parameter. Suppose all input parameters are specified as
+intervals, what will be the interval, i.e., the uncertainty, of the
+output data from the formula? This section develops a tool for
+computing this output uncertainty in the cases where
+the overall computation consists
+of the standard arithmetic operations.
+
+<p>
+To be specific, consider measuring the acceleration of gravity by
+dropping a ball and recording the time it takes to reach the ground.
+Let the ground correspond to \( y=0 \) and let the ball be dropped
+from \( y=y_0 \). The position of the ball, \( y(t) \), is then
+
+$$
+\begin{equation*} y(t) = y_0 - \frac{1}{2}gt^2 \thinspace . \end{equation*}
+$$
+
+If \( T \) is the time it takes to reach the ground, we have that \( y(T)=0 \),
+which gives the equation \( \frac{1}{2}gT^2=y_0 \), with solution
+
+$$
+\begin{equation*}g = 2y_0T^{-2} \thinspace . \end{equation*}
+$$
+
+In such experiments we always
+introduce some measurement error in the start position \( y_0 \) and in
+the time taking (\( T \)). Suppose \( y_0 \) is known to lie in \( [0.99,1.01] \) m
+and \( T \) in \( [0.43, 0.47] \) s, reflecting a
+2% measurement error in position and a 10% error
+from using a stop watch. What is the error in \( g \)? With the tool to
+be developed below, we can find that there is a 22% error in \( g \).
+
+<h3 id="___sec67">Problem <a name="___sec67"></a></h3>
+
+<p>
+Assume that two numbers \( p \) and \( q \) are guaranteed to lie inside intervals,
+
+$$
+\begin{equation*} p=[a,b], \quad q = [c, d] \thinspace . \end{equation*}
+$$
+
+The sum \( p+q \) is then guaranteed to lie inside an interval \( [s,t] \)
+where \( s=a+c \) and \( t=b+d \). Below we list the rules of
+<em>interval arithmetic</em>, i.e.,
+the rules for addition,
+subtraction, multiplication, and division of two intervals:
+
+<ul>
+  <li> \( p+q = [a + c, b + d] \)</li>
+  <li> \( p-q = [a - d, b - c] \)</li>
+  <li> \( pq =  [\min(ac, ad, bc, bd), \max(ac, ad, bc, bd)] \)</li>
+  <li> \( p/q = [\min(a/c, a/d, b/c, b/d), \max(a/c, a/d, b/c, b/d)] \) provided that \( [c,d] \) does not contain zero</li>
+</ul>
+
+For doing these calculations in a program, it would be natural to have
+a new type for quantities specified by intervals. This new type
+should support
+the operators <code>+</code>, <code>-</code>, <code>*</code>, and <code>/</code> according to the
+rules above.
+The task is hence to implement a class for interval arithmetic with
+special methods for the listed operators.
+Using the class, we should be able to estimate the uncertainty
+of two formulas:
+
+<ul>
+  <li> The acceleration of gravity, \( g=2y_0T^{-2} \), given a 2% uncertainty in \( y_0 \): \( y_0=[0.99,1.01] \), and a 10% uncertainty in \( T \): \( T=[T_m\cdot 0.95, T_m\cdot 1.05] \), with \( T_m=0.45 \).</li>
+  <li> The volume of a sphere, \( V=\frac{4}{3}\pi R^3 \), given a 20% uncertainty in \( R \): \( R=[R_m\cdot 0.9, R_m\cdot 1.1] \), with \( R_m =6 \).</li>
+</ul>
+
+<h3 id="___sec68">Solution <a name="___sec68"></a></h3>
+
+<p>
+The new type is naturally realized as a class <code>IntervalMath</code>
+whose data consist of
+the lower and upper bound of the interval. Special methods are used to
+implement arithmetic operations and printing of the object.
+Having understood class <code>Vec2D</code> from the section <a href="._class-readable004.html#sec:class:Vec2D">Example: Class for vectors in the plane</a>,
+it should be straightforward to understand the class below:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">IntervalMath</span>:
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__init__</span>(<span style="color: #008000">self</span>, lower, upper):
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>lo <span style="color: #666666">=</span> <span style="color: #008000">float</span>(lower)
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>up <span style="color: #666666">=</span> <span style="color: #008000">float</span>(upper)
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__add__</span>(<span style="color: #008000">self</span>, other):
+        a, b, c, d <span style="color: #666666">=</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>lo, <span style="color: #008000">self</span><span style="color: #666666">.</span>up, other<span style="color: #666666">.</span>lo, other<span style="color: #666666">.</span>up
+        <span style="color: #008000; font-weight: bold">return</span> IntervalMath(a <span style="color: #666666">+</span> c, b <span style="color: #666666">+</span> d)
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__sub__</span>(<span style="color: #008000">self</span>, other):
+        a, b, c, d <span style="color: #666666">=</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>lo, <span style="color: #008000">self</span><span style="color: #666666">.</span>up, other<span style="color: #666666">.</span>lo, other<span style="color: #666666">.</span>up
+        <span style="color: #008000; font-weight: bold">return</span> IntervalMath(a <span style="color: #666666">-</span> d, b <span style="color: #666666">-</span> c)
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__mul__</span>(<span style="color: #008000">self</span>, other):
+        a, b, c, d <span style="color: #666666">=</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>lo, <span style="color: #008000">self</span><span style="color: #666666">.</span>up, other<span style="color: #666666">.</span>lo, other<span style="color: #666666">.</span>up
+        <span style="color: #008000; font-weight: bold">return</span> IntervalMath(<span style="color: #008000">min</span>(a<span style="color: #666666">*</span>c, a<span style="color: #666666">*</span>d, b<span style="color: #666666">*</span>c, b<span style="color: #666666">*</span>d),
+                            <span style="color: #008000">max</span>(a<span style="color: #666666">*</span>c, a<span style="color: #666666">*</span>d, b<span style="color: #666666">*</span>c, b<span style="color: #666666">*</span>d))
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__div__</span>(<span style="color: #008000">self</span>, other):
+        a, b, c, d <span style="color: #666666">=</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>lo, <span style="color: #008000">self</span><span style="color: #666666">.</span>up, other<span style="color: #666666">.</span>lo, other<span style="color: #666666">.</span>up
+        <span style="color: #408080; font-style: italic"># [c,d] cannot contain zero:</span>
+        <span style="color: #008000; font-weight: bold">if</span> c<span style="color: #666666">*</span>d <span style="color: #666666">&lt;=</span> <span style="color: #666666">0</span>:
+            <span style="color: #008000; font-weight: bold">raise</span> <span style="color: #D2413A; font-weight: bold">ValueError</span>\ 
+                  (<span style="color: #BA2121">&#39;Interval </span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121"> cannot be denominator because &#39;</span>\ 
+                  <span style="color: #BA2121">&#39;it contains zero&#39;</span> <span style="color: #666666">%</span> other)
+        <span style="color: #008000; font-weight: bold">return</span> IntervalMath(<span style="color: #008000">min</span>(a<span style="color: #666666">/</span>c, a<span style="color: #666666">/</span>d, b<span style="color: #666666">/</span>c, b<span style="color: #666666">/</span>d),
+                            <span style="color: #008000">max</span>(a<span style="color: #666666">/</span>c, a<span style="color: #666666">/</span>d, b<span style="color: #666666">/</span>c, b<span style="color: #666666">/</span>d))
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__str__</span>(<span style="color: #008000">self</span>):
+        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #BA2121">&#39;[</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">, </span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">]&#39;</span> <span style="color: #666666">%</span> (<span style="color: #008000">self</span><span style="color: #666666">.</span>lo, <span style="color: #008000">self</span><span style="color: #666666">.</span>up)
+</pre></div>
+<p>
+The code of this class is found in the file
+<a href="http://tinyurl.com/pwyasaa/class/IntervalMath.py" target="_self"><tt>IntervalMath.py</tt></a>.
+A quick demo of the class can go as
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">I <span style="color: #666666">=</span> IntervalMath
+a <span style="color: #666666">=</span> I(<span style="color: #666666">-3</span>,<span style="color: #666666">-2</span>)
+b <span style="color: #666666">=</span> I(<span style="color: #666666">4</span>,<span style="color: #666666">5</span>)
+expr <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;a+b&#39;</span>, <span style="color: #BA2121">&#39;a-b&#39;</span>, <span style="color: #BA2121">&#39;a*b&#39;</span>, <span style="color: #BA2121">&#39;a/b&#39;</span>
+<span style="color: #008000; font-weight: bold">for</span> e <span style="color: #AA22FF; font-weight: bold">in</span> expr:
+    <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;</span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121"> =&#39;</span> <span style="color: #666666">%</span> e, <span style="color: #008000">eval</span>(e)
+</pre></div>
+<p>
+The output becomes
+
+<p>
+
+<!-- code=text (!bc ccq) typeset with pygments style "default" -->
+<blockquote>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">a+b = [1, 3]
+a-b = [-8, -6]
+a*b = [-15, -8]
+a/b = [-0.75, -0.4]
+</pre></div>
+</blockquote><p>
+This gives the impression that with very short code we can
+provide a new type that
+enables computations with interval arithmetic and thereby with uncertain
+quantities. However, the class above has severe limitations as shown
+next.
+
+<p>
+<!-- === Extending the Class === -->
+
+<p>
+Consider computing the uncertainty of \( aq \) if \( a \) is
+expressed as an interval \( [4,5] \) and \( q \) is a number (<code>float</code>):
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">a <span style="color: #666666">=</span> I(<span style="color: #666666">4</span>,<span style="color: #666666">5</span>)
+q <span style="color: #666666">=</span> <span style="color: #666666">2</span>
+b <span style="color: #666666">=</span> a<span style="color: #666666">*</span>q
+</pre></div>
+<p>
+This does not work so well:
+
+<p>
+
+<!-- code=text (!bc ccq) typeset with pygments style "default" -->
+<blockquote>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">  File &quot;IntervalMath.py&quot;, line 15, in __mul__
+    a, b, c, d = self.lo, self.up, other.lo, other.up
+AttributeError: &#39;float&#39; object has no attribute &#39;lo&#39;
+</pre></div>
+</blockquote><p>
+The problem is that <code>a*q</code> is a multiplication between
+an <code>IntervalMath</code> object <code>a</code> and a <code>float</code> object <code>q</code>.
+The <code>__mul__</code> method in class <code>IntervalMath</code> is invoked,
+but the code there tries to extract the <code>lo</code> attribute of <code>q</code>,
+which does not exist since <code>q</code> is a <code>float</code>.
+
+<p>
+We can extend the <code>__mul__</code> method and the other methods for
+arithmetic operations to allow for a number as operand - we just
+convert the number to an interval with the same lower and upper bounds:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__mul__</span>(<span style="color: #008000">self</span>, other):
+        <span style="color: #008000; font-weight: bold">if</span> <span style="color: #008000">isinstance</span>(other, (<span style="color: #008000">int</span>, <span style="color: #008000">float</span>)):
+            other <span style="color: #666666">=</span> IntervalMath(other, other)
+        a, b, c, d <span style="color: #666666">=</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>lo, <span style="color: #008000">self</span><span style="color: #666666">.</span>up, other<span style="color: #666666">.</span>lo, other<span style="color: #666666">.</span>up
+        <span style="color: #008000; font-weight: bold">return</span> IntervalMath(<span style="color: #008000">min</span>(a<span style="color: #666666">*</span>c, a<span style="color: #666666">*</span>d, b<span style="color: #666666">*</span>c, b<span style="color: #666666">*</span>d),
+                            <span style="color: #008000">max</span>(a<span style="color: #666666">*</span>c, a<span style="color: #666666">*</span>d, b<span style="color: #666666">*</span>c, b<span style="color: #666666">*</span>d))
+</pre></div>
+<p>
+Looking at the formula \( g=2y_0T^{-2} \), we run into a related problem:
+now we want to multiply \( 2 \) (<code>int</code>)
+with \( y_0 \), and if \( y_0 \) is an interval,
+this multiplication is not defined among <code>int</code> objects.
+To handle this case,
+we need to implement an <code>__rmul__(self, other)</code> method
+for doing <code>other*self</code>, as explained in the section <a href="._class-readable005.html#sec:class:complex:rightop">Special methods for &quot;right&quot; operands</a>:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__rmul__</span>(<span style="color: #008000">self</span>, other):
+        <span style="color: #008000; font-weight: bold">if</span> <span style="color: #008000">isinstance</span>(other, (<span style="color: #008000">int</span>, <span style="color: #008000">float</span>)):
+            other <span style="color: #666666">=</span> IntervalMath(other, other)
+        <span style="color: #008000; font-weight: bold">return</span> other<span style="color: #666666">*</span><span style="color: #008000">self</span>
+</pre></div>
+<p>
+Similar methods for addition, subtraction, and division must also be
+included in the class.
+
+<p>
+Returning to \( g=2y_0T^{-2} \), we also have a problem with \( T^{-2} \) when
+\( T \) is an interval. The expression <code>T**(-2)</code> invokes the
+power operator (at least if we do not rewrite the expression as
+<code>1/(T*T)</code>), which requires a <code>__pow__</code> method
+in class <code>IntervalMath</code>. We limit the
+possibility to have integer powers, since this is easy to compute
+by repeated multiplications:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__pow__</span>(<span style="color: #008000">self</span>, exponent):
+        <span style="color: #008000; font-weight: bold">if</span> <span style="color: #008000">isinstance</span>(exponent, <span style="color: #008000">int</span>):
+            p <span style="color: #666666">=</span> <span style="color: #666666">1</span>
+            <span style="color: #008000; font-weight: bold">if</span> exponent <span style="color: #666666">&gt;</span> <span style="color: #666666">0</span>:
+                <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(exponent):
+                    p <span style="color: #666666">=</span> p<span style="color: #666666">*</span><span style="color: #008000">self</span>
+            <span style="color: #008000; font-weight: bold">elif</span> exponent <span style="color: #666666">&lt;</span> <span style="color: #666666">0</span>:
+                <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">-</span>exponent):
+                    p <span style="color: #666666">=</span> p<span style="color: #666666">*</span><span style="color: #008000">self</span>
+                p <span style="color: #666666">=</span> <span style="color: #666666">1/</span>p
+            <span style="color: #008000; font-weight: bold">else</span>:   <span style="color: #408080; font-style: italic"># exponent == 0</span>
+                p <span style="color: #666666">=</span> IntervalMath(<span style="color: #666666">1</span>, <span style="color: #666666">1</span>)
+            <span style="color: #008000; font-weight: bold">return</span> p
+        <span style="color: #008000; font-weight: bold">else</span>:
+            <span style="color: #008000; font-weight: bold">raise</span> <span style="color: #D2413A; font-weight: bold">TypeError</span>(<span style="color: #BA2121">&#39;exponent must int&#39;</span>)
+</pre></div>
+<p>
+Another natural extension of the class
+is the possibility to convert an interval to
+a number by choosing the midpoint of the interval:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> a <span style="color: #666666">=</span> IntervalMath(<span style="color: #666666">5</span>,<span style="color: #666666">7</span>)
+<span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000">float</span>(a)
+<span style="color: #666666">6</span>
+</pre></div>
+<p>
+<code>float(a)</code> calls <code>a.__float__()</code>, which we implement as
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__float__</span>(<span style="color: #008000">self</span>):
+        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #666666">0.5*</span>(<span style="color: #008000">self</span><span style="color: #666666">.</span>lo <span style="color: #666666">+</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>up)
+</pre></div>
+<p>
+A <code>__repr__</code> method returning the right syntax for recreating the
+present instance is also natural to include in any class:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__repr__</span>(<span style="color: #008000">self</span>):
+        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #BA2121">&#39;</span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121">(</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">, </span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">)&#39;</span> <span style="color: #666666">%</span> \ 
+               (<span style="color: #008000">self</span><span style="color: #666666">.</span>__class__<span style="color: #666666">.</span>__name__, <span style="color: #008000">self</span><span style="color: #666666">.</span>lo, <span style="color: #008000">self</span><span style="color: #666666">.</span>up)
+</pre></div>
+<p>
+<!-- === Demonstrating the Class === -->
+
+<p>
+We are now in a position to test out the extended class <code>IntervalMath</code>.
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> g <span style="color: #666666">=</span> <span style="color: #666666">9.81</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> y_0 <span style="color: #666666">=</span> I(<span style="color: #666666">0.99</span>, <span style="color: #666666">1.01</span>)      <span style="color: #408080; font-style: italic"># 2% uncertainty</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> Tm <span style="color: #666666">=</span> <span style="color: #666666">0.45</span>                <span style="color: #408080; font-style: italic"># mean T</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> T <span style="color: #666666">=</span> I(Tm<span style="color: #666666">*0.95</span>, Tm<span style="color: #666666">*1.05</span>)  <span style="color: #408080; font-style: italic"># 10% uncertainty</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">print</span> T
+[<span style="color: #666666">0.4275</span>, <span style="color: #666666">0.4725</span>]
+<span style="color: #666666">&gt;&gt;&gt;</span> g <span style="color: #666666">=</span> <span style="color: #666666">2*</span>y_0<span style="color: #666666">*</span>T<span style="color: #666666">**</span>(<span style="color: #666666">-2</span>)
+<span style="color: #666666">&gt;&gt;&gt;</span> g
+IntervalMath(<span style="color: #666666">8.86873</span>, <span style="color: #666666">11.053</span>)
+<span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #408080; font-style: italic"># Compute with mean values</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> T <span style="color: #666666">=</span> <span style="color: #008000">float</span>(T)
+<span style="color: #666666">&gt;&gt;&gt;</span> y <span style="color: #666666">=</span> <span style="color: #666666">1</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> g <span style="color: #666666">=</span> <span style="color: #666666">2*</span>y_0<span style="color: #666666">*</span>T<span style="color: #666666">**</span>(<span style="color: #666666">-2</span>)
+<span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;</span><span style="color: #BB6688; font-weight: bold">%.2f</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> g
+<span style="color: #666666">9.88</span>
+</pre></div>
+<p>
+Another formula, the volume \( V=\frac{4}{3}\pi R^3 \) of a sphere,
+shows great sensitivity to uncertainties in \( R \):
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> Rm <span style="color: #666666">=</span> <span style="color: #666666">6</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> R <span style="color: #666666">=</span> I(Rm<span style="color: #666666">*0.9</span>, Rm<span style="color: #666666">*1.1</span>)   <span style="color: #408080; font-style: italic"># 20 % error</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> V <span style="color: #666666">=</span> (<span style="color: #666666">4./3</span>)<span style="color: #666666">*</span>pi<span style="color: #666666">*</span>R<span style="color: #666666">**3</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> V
+IntervalMath(<span style="color: #666666">659.584</span>, <span style="color: #666666">1204.26</span>)
+<span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">print</span> V
+[<span style="color: #666666">659.584</span>, <span style="color: #666666">1204.26</span>]
+<span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">print</span> <span style="color: #008000">float</span>(V)
+<span style="color: #666666">931.922044761</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #408080; font-style: italic"># Compute with mean values</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> R <span style="color: #666666">=</span> <span style="color: #008000">float</span>(R)
+<span style="color: #666666">&gt;&gt;&gt;</span> V <span style="color: #666666">=</span> (<span style="color: #666666">4./3</span>)<span style="color: #666666">*</span>pi<span style="color: #666666">*</span>R<span style="color: #666666">**3</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">print</span> V
+<span style="color: #666666">904.778684234</span>
+</pre></div>
+<p>
+Here, a 20% uncertainty in \( R \) gives almost 60% uncertainty in \( V \),
+and the mean of the \( V \) interval is significantly different from
+computing the volume with the mean of \( R \).
+<!-- >>> R.width_in_percent() -->
+<!-- 19.999999999999986 -->
+<!-- >>> V.width_in_percent() -->
+<!-- 58.446601941747581 -->
+
+<p>
+The complete code of class <code>IntervalMath</code> is found in
+<code>IntervalMath.py</code>. Compared to the implementations shown above,
+the real implementation in the file employs some ingenious constructions
+and help methods to save typing and repeating code in the special
+methods for arithmetic operations.
+
+<p>
+<p>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pager">
+  <li class="previous">
+    <a href="._class-readable006.html">&larr; Prev</a>
+  </li>
+  <li class="next">
+    <a href="._class-readable008.html">Next &rarr;</a>
+  </li>
+</ul>
+<!-- ------------------- end of main content --------------- -->
+
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap footer
+<footer>
+<a href="http://..."><img width="250" align=right src="http://..."></a>
+</footer>
+-->
+
+
+</body>
+</html>
+    
+

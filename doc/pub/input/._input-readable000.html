@@ -1,0 +1,614 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="User input and error handling">
+<meta name="keywords" content="command-line arguments,option-value pairs (command line),standard input,standard output,standard error,bytes,bits,exceptions,widgets,event loop,modules,test block (in module files),test function,nose tests,pytest tests,search for module files,module folders,refactoring,binomial distribution,Bernoulli trials,Poisson distribution,Poisson process">
+
+<title>User input and error handling</title>
+
+<!-- Bootstrap style: bootswatch_readable -->
+<link href="http://netdna.bootstrapcdn.com/bootswatch/3.1.1/readable/bootstrap.min.css" rel="stylesheet">
+<!-- not necessary
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+
+<style type="text/css">
+/* Let inline verbatim have the same color as the surroundings */
+code { color: inherit; background-color: transparent; }
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [(' Asking questions and reading answers ',
+               1,
+               'sec:input:rawinput',
+               'sec:input:rawinput'),
+              (' Reading keyboard input ',
+               2,
+               'sec:input:rawinput2',
+               'sec:input:rawinput2'),
+              (' Reading from the command line ',
+               1,
+               'sec:input:sysargv',
+               'sec:input:sysargv'),
+              (' Providing input on the command line ',
+               2,
+               'sec:input:cml',
+               'sec:input:cml'),
+              (' A variable number of command-line arguments ',
+               2,
+               None,
+               '___sec4'),
+              (' More on command-line arguments ', 2, None, '___sec5'),
+              (' Turning user text into live objects ', 1, None, '___sec6'),
+              (' The magic eval function ',
+               2,
+               'sec:input:eval',
+               'sec:input:eval'),
+              (' Applying eval to strings ', 3, None, '___sec8'),
+              (' Applying eval to user input ', 3, None, '___sec9'),
+              (' The magic exec function ',
+               2,
+               'sec:input:exec',
+               'sec:input:exec'),
+              (' Turning string expressions into functions ',
+               2,
+               'sec:input:StringFunction',
+               'sec:input:StringFunction'),
+              (' Option-value pairs on the command line ',
+               1,
+               'sec:input:argparse',
+               'sec:input:argparse'),
+              (' Basic usage of the argparse module ', 2, None, '___sec13'),
+              (' Mathematical expressions as values ', 2, None, '___sec14'),
+              (' Reading data from file ',
+               1,
+               'sec:files:reading',
+               'sec:files:reading'),
+              (' Reading a file line by line ', 2, None, '___sec16'),
+              (' Alternative ways of reading a file ',
+               2,
+               'sec:files:reading:other',
+               'sec:files:reading:other'),
+              (' The modern with statement ', 3, None, '___sec18'),
+              (' The old while construction ', 3, None, '___sec19'),
+              (' Reading a file into a string ', 3, None, '___sec20'),
+              (' Reading a mixture of text and numbers ',
+               2,
+               'sec:files:textnum',
+               'sec:files:textnum'),
+              (' Is it more to file reading? ', 3, None, '___sec22'),
+              (' Writing data to file ',
+               1,
+               'sec:files:writing',
+               'sec:files:writing'),
+              (' Example: Writing a table to file ', 2, None, '___sec24'),
+              (' Problem ', 3, None, '___sec25'),
+              (' Solution ', 3, None, '___sec26'),
+              (' Standard input and output as file objects ',
+               2,
+               None,
+               '___sec27'),
+              (' Redirecting standard input, output, and error ',
+               3,
+               None,
+               '___sec28'),
+              (' Note ', 3, None, '___sec29'),
+              (' What is a file, really? ',
+               2,
+               'sec:files:really',
+               'sec:files:really'),
+              (' Pure text files ', 3, None, '___sec31'),
+              (' Word processor files ', 3, None, '___sec32'),
+              (' Image files ', 3, None, '___sec33'),
+              (' Music files ', 3, None, '___sec34'),
+              (' PDF files ', 3, None, '___sec35'),
+              (' Remarks ', 3, None, '___sec36'),
+              (' Handling errors ',
+               1,
+               'sec:input:except',
+               'sec:input:except'),
+              (' Exception handling ',
+               2,
+               'sec:input:except:handling',
+               'sec:input:except:handling'),
+              (' Testing for a specific exception ', 3, None, '___sec39'),
+              (' Examples on exception types ', 3, None, '___sec40'),
+              (' Digression ', 3, None, '___sec41'),
+              (' Raising exceptions ', 2, None, '___sec42'),
+              (' Example ', 3, None, '___sec43'),
+              (' A glimpse of graphical user interfaces ',
+               1,
+               'sec:input:GUI',
+               'sec:input:GUI'),
+              (' Making modules ',
+               1,
+               'sec:input:modules',
+               'sec:input:modules'),
+              (' Example: Interest on bank deposits ', 2, None, '___sec46'),
+              (' Collecting functions in a module file ',
+               2,
+               'sec:input:module:create',
+               'sec:input:module:create'),
+              (' Test block ',
+               2,
+               'sec:input:module:testblock',
+               'sec:input:module:testblock'),
+              (' Example on a test block in a minimalistic module ',
+               3,
+               None,
+               '___sec49'),
+              (' A test block in the `interest` module ',
+               3,
+               None,
+               '___sec50'),
+              (' Verification of the module code ',
+               2,
+               'sec:input:modules:testfunc',
+               'sec:input:modules:testfunc'),
+              (' Getting input data ',
+               2,
+               'sec:input:modules:inputdata',
+               'sec:input:modules:inputdata'),
+              (' Doc strings in modules ', 2, None, '___sec53'),
+              (' Using modules ',
+               2,
+               'sec:input:modules:usage',
+               'sec:input:modules:usage'),
+              (' What gets imported by various import statements? ',
+               3,
+               None,
+               '___sec55'),
+              (' How to make Python find a module file ',
+               3,
+               None,
+               '___sec56'),
+              (' How to make Python run the module file ',
+               3,
+               None,
+               '___sec57'),
+              (' Distributing modules ',
+               2,
+               'sec:input:modules:setuppy',
+               'sec:input:modules:setuppy'),
+              (' Making software available on the Internet ',
+               2,
+               None,
+               '___sec59'),
+              (' Summary ', 1, 'sec:input:summary', 'sec:input:summary'),
+              (' Chapter topics ',
+               2,
+               'sec:input:summary:topics',
+               'sec:input:summary:topics'),
+              (' Question and answer input ', 3, None, '___sec62'),
+              (' Getting command-line arguments ', 3, None, '___sec63'),
+              (' Using option-value pairs ', 3, None, '___sec64'),
+              (' Generating code on the fly ', 3, None, '___sec65'),
+              (' Turning string formulas into Python functions ',
+               3,
+               None,
+               '___sec66'),
+              (' File operations ', 3, None, '___sec67'),
+              (' Handling exceptions ', 3, None, '___sec68'),
+              (' Raising exceptions ', 3, None, '___sec69'),
+              (' Modules ', 3, None, '___sec70'),
+              (' Terminology ', 3, None, '___sec71'),
+              (' Example: Bisection root finding ',
+               2,
+               'sec:input:summarizingex',
+               'sec:input:summarizingex'),
+              (' Problem ', 3, None, '___sec73'),
+              (' Solution ', 3, None, '___sec74'),
+              (' Verification ', 3, None, '___sec75'),
+              (' Making a function ', 3, None, '___sec76'),
+              (' Making a test function ', 3, None, '___sec77'),
+              (' Making a module ', 3, None, '___sec78'),
+              (' Defining a user interface ', 3, None, '___sec79'),
+              (' Using the module ', 3, None, '___sec80'),
+              (' Potential problems with the software ', 3, None, '___sec81'),
+              (' Distributing the bisection module to others ',
+               3,
+               None,
+               '___sec82'),
+              (' Exercises ', 1, None, '___sec83'),
+              (' Exercise 1: Make an interactive program ',
+               2,
+               'sec:input:ex24',
+               'sec:input:ex24'),
+              (' Exercise 2: Read a number from the command line ',
+               2,
+               'sec:input:ex24b',
+               'sec:input:ex24b'),
+              (' Exercise 3: Read a number from a file ',
+               2,
+               'sec:input:ex24bfile',
+               'sec:input:ex24bfile'),
+              (' Exercise 4: Read and write several numbers from and to file ',
+               2,
+               'sec:input:ex24bfile2',
+               'sec:input:ex24bfile2'),
+              (' Exercise 5: Use exceptions to handle wrong input ',
+               2,
+               'sec:input:ex24c',
+               'sec:input:ex24c'),
+              (' Exercise 6: Read input from the keyboard ',
+               2,
+               'sec:input:ex25',
+               'sec:input:ex25'),
+              (' Exercise 7: Read input from the command line ',
+               2,
+               'sec:input:ex26',
+               'sec:input:ex26'),
+              (' Exercise 8: Try MSWord or LibreOffice to write a program ',
+               2,
+               'sec:files:ex7',
+               'sec:files:ex7'),
+              (' Exercise 9: Prompt the user for input to a formula ',
+               2,
+               'sec:input:ex6',
+               'sec:input:ex6'),
+              (' Exercise 10: Read parameters in a formula from the command line ',
+               2,
+               'sec:input:ex5',
+               'sec:input:ex5'),
+              (' Exercise 11: Use exceptions to handle wrong input ',
+               2,
+               'sec:input:ex8b',
+               'sec:input:ex8b'),
+              (' Exercise 12: Test validity of input data ',
+               2,
+               'sec:input:ex7',
+               'sec:input:ex7'),
+              (' Exercise 13: Raise an exception in case of wrong input ',
+               2,
+               'sec:input:ex8',
+               'sec:input:ex8'),
+              (' Exercise 14: Evaluate a formula for data in a file ',
+               2,
+               'sec:input:ex:ball:file',
+               'sec:input:ex:ball:file'),
+              (' Exercise 15: Compute the distance it takes to stop a car ',
+               2,
+               'sec:input:ex21',
+               'sec:input:ex21'),
+              (' Exercise 16: Look up calendar functionality ',
+               2,
+               'sec:input:ex48',
+               'sec:input:ex48'),
+              (' Exercise 17: Use the StringFunction tool ',
+               2,
+               'sec:input:ex28b',
+               'sec:input:ex28b'),
+              (' Exercise 18: Why we test for specific exception types ',
+               2,
+               'sec:input:ex11',
+               'sec:input:ex11'),
+              (' Exercise 19: Make a complete module ',
+               2,
+               'sec:input:ex27',
+               'sec:input:ex27'),
+              (' Exercise 20: Check if mathematical identities hold ',
+               2,
+               'sec:input:ex2',
+               'sec:input:ex2'),
+              (' Exercise 21: Compute probabilities with the binomial distribution ',
+               2,
+               'sec:input:ex15',
+               'sec:input:ex15'),
+              (' Exercise 22: Compute probabilities with the Poisson distribution ',
+               2,
+               'sec:input:ex16',
+               'sec:input:ex16'),
+              (' References ', 1, None, '___sec106')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- newcommands_keep.tex -->
+$$
+\newcommand{\tp}{\thinspace .}
+$$
+
+
+
+
+    
+<!-- Bootstrap navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="input-readable.html">User input and error handling</a>
+  </div>
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     <!-- navigation toc: --> <li><a href="._input-readable001.html#sec:input:rawinput" style="font-size: 80%;">Asking questions and reading answers</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable002.html#sec:input:sysargv" style="font-size: 80%;">Reading from the command line</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable003.html#___sec6" style="font-size: 80%;">Turning user text into live objects</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable004.html#sec:input:argparse" style="font-size: 80%;">Option-value pairs on the command line</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable005.html#sec:files:reading" style="font-size: 80%;">Reading data from file</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable006.html#sec:files:writing" style="font-size: 80%;">Writing data to file</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable007.html#sec:input:except" style="font-size: 80%;">Handling errors</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable008.html#sec:input:GUI" style="font-size: 80%;">A glimpse of graphical user interfaces</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable009.html#sec:input:modules" style="font-size: 80%;">Making modules</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable010.html#sec:input:summary" style="font-size: 80%;">Summary</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable011.html#___sec83" style="font-size: 80%;">Exercises</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable011.html#___sec106" style="font-size: 80%;">References</a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div> <!-- end of navigation bar -->
+
+<div class="container">
+
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+
+<a name="part0000"></a>
+<!-- ------------------- main content ---------------------- -->
+
+
+
+<div class="jumbotron">
+<center><h1>User input and error handling</h1></center>  <!-- document title -->
+
+<p>
+<!-- author(s): Hans Petter Langtangen -->
+
+<center>
+<b>Hans Petter Langtangen</b> [1, 2]
+</center>
+
+
+<p>
+<!-- institution(s) -->
+
+<center>[1] <b>Center for Biomedical Computing, Simula Research Laboratory</b></center>
+<center>[2] <b>Department of Informatics, University of Oslo</b></center>
+<p>
+<center><h4>Dec 11, 2014</h4></center> <!-- date -->
+
+<h2>Table of contents</h2>
+
+<p>
+<a href="._input-readable001.html#sec:input:rawinput"> Asking questions and reading answers </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._input-readable001.html#sec:input:rawinput2"> Reading keyboard input </a><br>
+<a href="._input-readable002.html#sec:input:sysargv"> Reading from the command line </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._input-readable002.html#sec:input:cml"> Providing input on the command line </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._input-readable002.html#___sec4"> A variable number of command-line arguments </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._input-readable002.html#___sec5"> More on command-line arguments </a><br>
+<a href="._input-readable003.html#___sec6"> Turning user text into live objects </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._input-readable003.html#sec:input:eval"> The magic eval function </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._input-readable003.html#___sec8"> Applying eval to strings </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._input-readable003.html#___sec9"> Applying eval to user input </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._input-readable003.html#sec:input:exec"> The magic exec function </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._input-readable003.html#sec:input:StringFunction"> Turning string expressions into functions </a><br>
+<a href="._input-readable004.html#sec:input:argparse"> Option-value pairs on the command line </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._input-readable004.html#___sec13"> Basic usage of the argparse module </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._input-readable004.html#___sec14"> Mathematical expressions as values </a><br>
+<a href="._input-readable005.html#sec:files:reading"> Reading data from file </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._input-readable005.html#___sec16"> Reading a file line by line </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._input-readable005.html#sec:files:reading:other"> Alternative ways of reading a file </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._input-readable005.html#___sec18"> The modern with statement </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._input-readable005.html#___sec19"> The old while construction </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._input-readable005.html#___sec20"> Reading a file into a string </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._input-readable005.html#sec:files:textnum"> Reading a mixture of text and numbers </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._input-readable005.html#___sec22"> Is it more to file reading? </a><br>
+<a href="._input-readable006.html#sec:files:writing"> Writing data to file </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._input-readable006.html#___sec24"> Example: Writing a table to file </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._input-readable006.html#___sec25"> Problem </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._input-readable006.html#___sec26"> Solution </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._input-readable006.html#___sec27"> Standard input and output as file objects </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._input-readable006.html#___sec28"> Redirecting standard input, output, and error </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._input-readable006.html#___sec29"> Note </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._input-readable006.html#sec:files:really"> What is a file, really? </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._input-readable006.html#___sec31"> Pure text files </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._input-readable006.html#___sec32"> Word processor files </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._input-readable006.html#___sec33"> Image files </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._input-readable006.html#___sec34"> Music files </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._input-readable006.html#___sec35"> PDF files </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._input-readable006.html#___sec36"> Remarks </a><br>
+<a href="._input-readable007.html#sec:input:except"> Handling errors </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._input-readable007.html#sec:input:except:handling"> Exception handling </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._input-readable007.html#___sec39"> Testing for a specific exception </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._input-readable007.html#___sec40"> Examples on exception types </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._input-readable007.html#___sec41"> Digression </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._input-readable007.html#___sec42"> Raising exceptions </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._input-readable007.html#___sec43"> Example </a><br>
+<a href="._input-readable008.html#sec:input:GUI"> A glimpse of graphical user interfaces </a><br>
+<a href="._input-readable009.html#sec:input:modules"> Making modules </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._input-readable009.html#___sec46"> Example: Interest on bank deposits </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._input-readable009.html#sec:input:module:create"> Collecting functions in a module file </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._input-readable009.html#sec:input:module:testblock"> Test block </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._input-readable009.html#___sec49"> Example on a test block in a minimalistic module </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._input-readable009.html#___sec50"> A test block in the <code>interest</code> module </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._input-readable009.html#sec:input:modules:testfunc"> Verification of the module code </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._input-readable009.html#sec:input:modules:inputdata"> Getting input data </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._input-readable009.html#___sec53"> Doc strings in modules </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._input-readable009.html#sec:input:modules:usage"> Using modules </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._input-readable009.html#___sec55"> What gets imported by various import statements? </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._input-readable009.html#___sec56"> How to make Python find a module file </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._input-readable009.html#___sec57"> How to make Python run the module file </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._input-readable009.html#sec:input:modules:setuppy"> Distributing modules </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._input-readable009.html#___sec59"> Making software available on the Internet </a><br>
+<a href="._input-readable010.html#sec:input:summary"> Summary </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._input-readable010.html#sec:input:summary:topics"> Chapter topics </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._input-readable010.html#___sec62"> Question and answer input </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._input-readable010.html#___sec63"> Getting command-line arguments </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._input-readable010.html#___sec64"> Using option-value pairs </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._input-readable010.html#___sec65"> Generating code on the fly </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._input-readable010.html#___sec66"> Turning string formulas into Python functions </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._input-readable010.html#___sec67"> File operations </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._input-readable010.html#___sec68"> Handling exceptions </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._input-readable010.html#___sec69"> Raising exceptions </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._input-readable010.html#___sec70"> Modules </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._input-readable010.html#___sec71"> Terminology </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._input-readable010.html#sec:input:summarizingex"> Example: Bisection root finding </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._input-readable010.html#___sec73"> Problem </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._input-readable010.html#___sec74"> Solution </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._input-readable010.html#___sec75"> Verification </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._input-readable010.html#___sec76"> Making a function </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._input-readable010.html#___sec77"> Making a test function </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._input-readable010.html#___sec78"> Making a module </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._input-readable010.html#___sec79"> Defining a user interface </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._input-readable010.html#___sec80"> Using the module </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._input-readable010.html#___sec81"> Potential problems with the software </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._input-readable010.html#___sec82"> Distributing the bisection module to others </a><br>
+<a href="._input-readable011.html#___sec83"> Exercises </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._input-readable011.html#sec:input:ex24"> Exercise 1: Make an interactive program </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._input-readable011.html#sec:input:ex24b"> Exercise 2: Read a number from the command line </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._input-readable011.html#sec:input:ex24bfile"> Exercise 3: Read a number from a file </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._input-readable011.html#sec:input:ex24bfile2"> Exercise 4: Read and write several numbers from and to file </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._input-readable011.html#sec:input:ex24c"> Exercise 5: Use exceptions to handle wrong input </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._input-readable011.html#sec:input:ex25"> Exercise 6: Read input from the keyboard </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._input-readable011.html#sec:input:ex26"> Exercise 7: Read input from the command line </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._input-readable011.html#sec:files:ex7"> Exercise 8: Try MSWord or LibreOffice to write a program </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._input-readable011.html#sec:input:ex6"> Exercise 9: Prompt the user for input to a formula </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._input-readable011.html#sec:input:ex5"> Exercise 10: Read parameters in a formula from the command line </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._input-readable011.html#sec:input:ex8b"> Exercise 11: Use exceptions to handle wrong input </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._input-readable011.html#sec:input:ex7"> Exercise 12: Test validity of input data </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._input-readable011.html#sec:input:ex8"> Exercise 13: Raise an exception in case of wrong input </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._input-readable011.html#sec:input:ex:ball:file"> Exercise 14: Evaluate a formula for data in a file </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._input-readable011.html#sec:input:ex21"> Exercise 15: Compute the distance it takes to stop a car </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._input-readable011.html#sec:input:ex48"> Exercise 16: Look up calendar functionality </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._input-readable011.html#sec:input:ex28b"> Exercise 17: Use the StringFunction tool </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._input-readable011.html#sec:input:ex11"> Exercise 18: Why we test for specific exception types </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._input-readable011.html#sec:input:ex27"> Exercise 19: Make a complete module </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._input-readable011.html#sec:input:ex2"> Exercise 20: Check if mathematical identities hold </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._input-readable011.html#sec:input:ex15"> Exercise 21: Compute probabilities with the binomial distribution </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._input-readable011.html#sec:input:ex16"> Exercise 22: Compute probabilities with the Poisson distribution </a><br>
+<a href="._input-readable011.html#___sec106"> References </a><br>
+</p>
+<p>
+<!-- Externaldocuments: ../formulas/main_formulas, ../looplist/main_looplist, ../funcif/main_funcif, ../plot/main_plot, ../files/main_files, ../class/main_class, ../random/main_random, ../oo/main_oo, ../diffeq/main_diffeq, ../discalc/main_discalc, ../ode1/main_ode1, ../boxspring/main_boxspring, ../ode2/main_ode2, ../debug/main_debug, ../cython/main_cython, ../tech/main_timing, ../tech/main_varargs, ../tech/main_runpy, ../tech/main_ostasks, ../tech/main_accesspy, ../tech/main_nose -->
+
+<p>
+<a name="ch:input"></a>
+
+<p>
+Consider a program for evaluating the formula \( x = A\sin(w t) \):
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">math</span> <span style="color: #008000; font-weight: bold">import</span> sin
+A <span style="color: #666666">=</span> <span style="color: #666666">0.1</span>
+w <span style="color: #666666">=</span> <span style="color: #666666">1</span>
+t <span style="color: #666666">=</span> <span style="color: #666666">0.6</span>
+x <span style="color: #666666">=</span> A<span style="color: #666666">*</span>sin(w<span style="color: #666666">*</span>t)
+<span style="color: #008000; font-weight: bold">print</span> x
+</pre></div>
+<p>
+In this program,
+<code>A</code>, <code>w</code>, and <code>t</code> are input data in the sense that these parameters
+must be known before
+the program can perform the calculation of <code>x</code>. The results
+produced by the program, here <code>x</code>, constitute the output data.
+
+<p>
+Input data can be hardcoded in the program as we do above. That is, we
+explicitly set variables to specific values: <code>A=0.1</code>, <code>w=1</code>, <code>t=0.6</code>.
+This programming style may be suitable for small programs.  In
+general, however, it is considered good practice to let a user of the
+program provide input data when the program is running.  There is then
+no need to modify the program itself when a new set of input data is
+to be explored. This is an important feature, because
+a golden rule of programming is that modification of
+the source code always represents a danger of introducing new errors
+by accident.
+
+<p>
+This document starts with describing three different ways of reading
+data into a program:
+
+<ol>
+<li> let the user answer questions in a dialog
+   in the terminal window (the section <a href="._input-readable001.html#sec:input:rawinput">Asking questions and reading answers</a>),</li>
+<li> let the user provide input on the command line (the section <a href="._input-readable002.html#sec:input:sysargv">Reading from the command line</a>),</li>
+<li> let the user provide input data in a file (the section <a href="._input-readable005.html#sec:files:reading">Reading data from file</a>),</li>
+<li> let the user write input data
+   in a graphical interface (the section <a href="._input-readable008.html#sec:input:GUI">A glimpse of graphical user interfaces</a>).</li>
+</ol>
+
+Even if your program works perfectly, wrong input data from the user
+may cause the program to produce wrong answers or even crash.
+Checking that the input data are correct is important, and the section <a href="._input-readable007.html#sec:input:except">Handling errors</a> tells you how to do this with so-called
+exceptions.
+
+<p>
+The Python programming environment is organized as a big collection of
+modules.  Organizing your own Python software in terms of modules is
+therefore a natural and wise thing to do. The section <a href="._input-readable009.html#sec:input:modules">Making modules</a> tells you how easy it is to make your own
+modules.
+
+<p>
+<!-- The topics you learn from this document will be key -->
+<!-- ingredients in most of the programs you will write hereafter. -->
+
+<p>
+All the program examples from the present document are available in
+files in the <a href="http://tinyurl.com/pwyasaa/input" target="_self"><tt>src/input</tt></a> folder.
+
+<p>
+
+
+<p><a href="._input-readable001.html" class="btn btn-primary btn-lg">Read &raquo;</a></p>
+
+
+</div> <!-- end jumbotron -->
+
+<p>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pager">
+  <li class="next">
+    <a href="._input-readable001.html">Next &rarr;</a>
+  </li>
+</ul>
+<!-- ------------------- end of main content --------------- -->
+
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap footer
+<footer>
+<a href="http://..."><img width="250" align=right src="http://..."></a>
+</footer>
+-->
+
+
+</body>
+</html>
+    
+

@@ -1,0 +1,1903 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Introduction to classes in Python">
+<meta name="keywords" content="constructor (class),UML class diagram,instance (class),user-defined datatype (class),method class),attribute (class),namespace,test function,nose tests,pytest tests,special methods (class),callable objects,test function,closure,Newton's method,wrapper code,integration numerical,symbolic computing,integration symbolic,mutable objects,immutable objects,protected attributes (class),test function,information hiding,private attributes (class),API,application programming interface,protected attributes (class),check an object's type,static typing,weak typing,strong typing,dynamic typing,duck typing,static class attributes,static class variables,static class methods,interval arithmetic">
+
+<title>Introduction to classes in Python</title>
+
+
+<link href="https://raw.githubusercontent.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/css/solarized_light_code.css" rel="stylesheet" type="text/css" title="light"/>
+<script src="https://rawgit.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<link href="http://thomasf.github.io/solarized-css/solarized-light.min.css" rel="stylesheet">
+<style type="text/css">
+h1 {color: #b58900;}  /* yellow */
+/* h1 {color: #cb4b16;}  orange */
+/* h1 {color: #d33682;}  magenta, the original choice of thomasf */
+.alert-text-small   { font-size: 80%;  }
+.alert-text-large   { font-size: 130%; }
+.alert-text-normal  { font-size: 90%;  }
+.alert {
+  padding:8px 35px 8px 14px; margin-bottom:18px;
+  text-shadow:0 1px 0 rgba(255,255,255,0.5);
+  border:1px solid #93a1a1;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  color: #555;
+  background-color: #eee8d5;
+  background-position: 10px 5px;
+  background-repeat: no-repeat;
+  background-size: 38px;
+  padding-left: 55px;
+  width: 75%;
+ }
+.alert-block {padding-top:14px; padding-bottom:14px}
+.alert-block > p, .alert-block > ul {margin-bottom:1em}
+.alert li {margin-top: 1em}
+.alert-block p+p {margin-top:5px}
+.alert-notice { background-image: url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_notice.png); }
+.alert-summary  { background-image:url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_summary.png); }
+.alert-warning { background-image: url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_warning.png); }
+.alert-question {background-image:url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_question.png); }
+
+div { text-align: justify; text-justify: inter-word; }
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [(' Simple function classes ',
+               1,
+               'sec:class:functors',
+               'sec:class:functors'),
+              (' Challenge: functions with parameters ',
+               2,
+               'sec:class:func1',
+               'sec:class:func1'),
+              (' Problem ', 3, None, '___sec2'),
+              (' A bad solution: global variables ', 3, None, '___sec3'),
+              (' Representing a function as a class ',
+               2,
+               'sec:class:func2',
+               'sec:class:func2'),
+              (' Implementation ', 3, None, '___sec5'),
+              (' Usage and dissection ', 3, None, '___sec6'),
+              (' The self  variable ', 3, None, '___sec7'),
+              (' Extension of the class ', 3, None, '___sec8'),
+              (' Remark ', 3, None, '___sec9'),
+              (' Using methods as ordinary functions ', 3, None, '___sec10'),
+              (' Doc strings ', 3, None, '___sec11'),
+              (' Another function class example ',
+               2,
+               'sec:class:func3',
+               'sec:class:func3'),
+              (' Remark ', 3, None, '___sec13'),
+              (' Alternative function class implementations ',
+               2,
+               'sec:class:func2b',
+               'sec:class:func2b'),
+              (' Making classes without the class construct ',
+               2,
+               'sec:class:whatis',
+               'sec:class:whatis'),
+              (' First remark ', 3, None, '___sec16'),
+              (' Second remark ', 3, None, '___sec17'),
+              (' More examples on classes ',
+               1,
+               'sec:class:addex',
+               'sec:class:addex'),
+              (' Bank accounts ',
+               2,
+               'sec:class:account',
+               'sec:class:account'),
+              (' Phone book ',
+               2,
+               'sec:class:phonebook',
+               'sec:class:phonebook'),
+              (' A circle ', 2, 'sec:class:circle', 'sec:class:circle'),
+              (' Verification ', 3, None, '___sec22'),
+              (' Remark ', 3, None, '___sec23'),
+              (' Special methods ',
+               1,
+               'sec:class:specialmethods',
+               'sec:class:specialmethods'),
+              (' The call special method ',
+               2,
+               'sec:class:call',
+               'sec:class:call'),
+              (' Example: Automagic differentiation ',
+               2,
+               'sec:class:autodF',
+               'sec:class:autodF'),
+              (' Problem ', 3, None, '___sec27'),
+              (' Solution ', 3, None, '___sec28'),
+              (' Verification ', 3, None, '___sec29'),
+              (" Application: Newton's method ", 3, None, '___sec30'),
+              (' Example: Automagic integration ',
+               2,
+               'sec:class:autoint',
+               'sec:class:autoint'),
+              (' A simple implementation ', 3, None, '___sec32'),
+              (' Verification via symbolic computing ', 3, None, '___sec33'),
+              (' Remark ', 3, None, '___sec34'),
+              (' Turning an instance into a string ',
+               2,
+               'sec:class:str',
+               'sec:class:str'),
+              (' Example: Phone book with special methods ',
+               2,
+               'sec:class:phonebook2',
+               'sec:class:phonebook2'),
+              (' Remark ', 3, None, '___sec37'),
+              (' Adding objects ', 2, 'sec:class:add', 'sec:class:add'),
+              (' Example: Class for polynomials ',
+               2,
+               'sec:class:Polynomial',
+               'sec:class:Polynomial'),
+              (' Implementation ', 3, None, '___sec40'),
+              (' Usage ', 3, None, '___sec41'),
+              (' Pretty print of polynomials ', 3, None, '___sec42'),
+              (' Verifying the implementation ', 3, None, '___sec43'),
+              (' Arithmetic operations and other special methods ',
+               2,
+               'sec:class:arithmetics',
+               'sec:class:arithmetics'),
+              (' Special methods for string conversion ',
+               2,
+               'sec:class:repr',
+               'sec:class:repr'),
+              (' Recreating objects from strings ', 3, None, '___sec46'),
+              (' Example: Class for vectors in the plane ',
+               1,
+               'sec:class:Vec2D',
+               'sec:class:Vec2D'),
+              (' Some mathematical operations on vectors ',
+               2,
+               None,
+               '___sec48'),
+              (' Implementation ', 2, None, '___sec49'),
+              (' Usage ', 2, None, '___sec50'),
+              (' Comment ', 3, None, '___sec51'),
+              (' Example: Class for complex numbers ', 1, None, '___sec52'),
+              (' Implementation ',
+               2,
+               'sec:class:Complex',
+               'sec:class:Complex'),
+              (' Illegal operations ',
+               2,
+               'sec:class:illegalop',
+               'sec:class:illegalop'),
+              (' Mixing complex and real numbers ',
+               2,
+               'sec:class:complex:mixed',
+               'sec:class:complex:mixed'),
+              (' Dynamic, static, strong, weak, and duck typing ',
+               2,
+               None,
+               '___sec56'),
+              (" Special methods for ``right'' operands ",
+               2,
+               'sec:class:complex:rightop',
+               'sec:class:complex:rightop'),
+              (' Remark ', 3, None, '___sec58'),
+              (' Inspecting instances ',
+               2,
+               'sec:class:inspect',
+               'sec:class:inspect'),
+              (' Static methods and attributes ',
+               1,
+               'sec:class:static',
+               'sec:class:static'),
+              (' Summary ', 1, None, '___sec61'),
+              (' Chapter topics ',
+               2,
+               'sec:class:summary',
+               'sec:class:summary'),
+              (' Classes ', 3, None, '___sec63'),
+              (' Special methods ', 3, None, '___sec64'),
+              (' Terminology ', 3, None, '___sec65'),
+              (' Example: interval arithmetic ', 2, None, '___sec66'),
+              (' Problem ', 3, None, '___sec67'),
+              (' Solution ', 3, None, '___sec68'),
+              (' Exercises ', 1, None, '___sec69'),
+              (' Exercise 1: Make a function class ',
+               2,
+               'sec:class:ex2',
+               'sec:class:ex2'),
+              (' Exercise 2: Add an attribute to a class ',
+               2,
+               'sec:class:ex25q',
+               'sec:class:ex25q'),
+              (' Exercise 3: Add functionality to a class ',
+               2,
+               'sec:class:ex25q2',
+               'sec:class:ex25q2'),
+              (' Exercise 4: Make classes for a rectangle and a triangle ',
+               2,
+               'sec:class:ex23',
+               'sec:class:ex23'),
+              (' Exercise 5: Make a class for quadratic functions ',
+               2,
+               'sec:class:ex11',
+               'sec:class:ex11'),
+              (' Exercise 6: Make a class for straight lines ',
+               2,
+               'sec:class:ex25',
+               'sec:class:ex25'),
+              (' Exercise 7: Flexible handling of function arguments ',
+               2,
+               'sec:class:ex25b',
+               'sec:class:ex25b'),
+              (' Exercise 8: Wrap functions in a class ',
+               2,
+               'sec:class:ex27d',
+               'sec:class:ex27d'),
+              (' Exercise 9: Flexible handling of function arguments ',
+               2,
+               'sec:class:ex27e',
+               'sec:class:ex27e'),
+              (' Exercise 10: Deduce a class implementation ',
+               2,
+               'sec:class:ex1',
+               'sec:class:ex1'),
+              (' Exercise 11: Implement special methods in a class ',
+               2,
+               'sec:class:ex2b2',
+               'sec:class:ex2b2'),
+              (' Exercise 12: Make a class for summation of series ',
+               2,
+               'sec:class:ex2b',
+               'sec:class:ex2b'),
+              (' Exercise 13: Apply a numerical differentiation class ',
+               2,
+               'sec:class:ex10',
+               'sec:class:ex10'),
+              (' Exercise 14: Apply symbolic differentiation ',
+               2,
+               'sec:class:exer:sympy:diff',
+               'sec:class:exer:sympy:diff'),
+              (' Exercise 15: Implement in-place `+=` and `-=` operators ',
+               2,
+               'sec:class:ex25qb',
+               'sec:class:ex25qb'),
+              (' Exercise 16: Implement a class for numerical differentiation ',
+               2,
+               'sec:class:ex21',
+               'sec:class:ex21'),
+              (' Exercise 17: Examine a program ',
+               2,
+               'sec:class:ex21b',
+               'sec:class:ex21b'),
+              (' Exercise 18: Modify a class for numerical differentiation ',
+               2,
+               'sec:class:ex23s',
+               'sec:class:ex23s'),
+              (' Exercise 19: Make a class for the Heaviside function ',
+               2,
+               'sec:basic:exHclass',
+               'sec:basic:exHclass'),
+              (' Exercise 20: Make a class for the indicator function ',
+               2,
+               'sec:basic:exIndclass',
+               'sec:basic:exIndclass'),
+              (' Exercise 21: Make a class for piecewise constant functions ',
+               2,
+               'sec:basic:ex:piecewisefunc',
+               'sec:basic:ex:piecewisefunc'),
+              (' Exercise 22: Speed up repeated integral calculations ',
+               2,
+               'sec:class:ex13c',
+               'sec:class:ex13c'),
+              (' Exercise 23: Apply a class for polynomials ',
+               2,
+               'sec:class:ex5',
+               'sec:class:ex5'),
+              (' Exercise 24: Find a bug in a class for polynomials ',
+               2,
+               'sec:class:ex4',
+               'sec:class:ex4'),
+              (' Exercise 25: Implement subtraction of polynomials ',
+               2,
+               'sec:class:ex6a',
+               'sec:class:ex6a'),
+              (' Exercise 26: Test the functionality of pretty print of polynomials ',
+               2,
+               'sec:class:exer:str',
+               'sec:class:exer:str'),
+              (' Exercise 27: Vectorize a class for polynomials ',
+               2,
+               'sec:class:ex7v',
+               'sec:class:ex7v'),
+              (' Remarks ', 3, None, '___sec97'),
+              (' Exercise 28: Use a dict to hold polynomial coefficients ',
+               2,
+               'sec:class:ex8',
+               'sec:class:ex8'),
+              (' Exercise 29: Extend class Vec2D to work with lists/tuples ',
+               2,
+               'sec:class:ex16',
+               'sec:class:ex16'),
+              (' Exercise 30: Extend class Vec2D to 3D vectors ',
+               2,
+               'sec:class:ex17b',
+               'sec:class:ex17b'),
+              (' Exercise 31: Use NumPy arrays in class Vec2D ',
+               2,
+               'sec:class:ex17',
+               'sec:class:ex17'),
+              (' Exercise 32: Make classes for students and courses ',
+               2,
+               'sec:class:ex15',
+               'sec:class:ex15'),
+              (' Exercise 33: Find local and global extrema of a function ',
+               2,
+               'sec:plot:ex28',
+               'sec:plot:ex28'),
+              (' Exercise 34: Find the optimal production for a company ',
+               2,
+               'sec:class:ex18a',
+               'sec:class:ex18a'),
+              (' References ', 1, None, '___sec105')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- newcommands_keep.tex -->
+$$
+\newcommand{\tp}{\thinspace .}
+$$
+
+
+
+
+    
+<a name="part0008"></a>
+<p>
+<!-- begin top navigation -->
+<table style="width: 100%"><tr><td>
+<div style="text-align: left;"><a href="._class-solarized007.html">&laquo; Previous</a></div>
+</td><td>
+</td></tr></table>
+<!-- end top navigation -->
+</p>
+
+<p>
+<!-- !split -->
+
+<h1>Exercises  <a name="___sec69"></a></h1>
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2>Exercise 1: Make a function class <a name="sec:class:ex2"></a></h2>
+
+<p>
+Make a class <code>F</code> that implements the function
+
+$$
+\begin{equation*} f(x; a, w)=e^{-ax}\sin(wx) \thinspace . \end{equation*}
+$$
+
+A <code>value(x)</code> method computes values of \( f \), while \( a \) and \( w \) are class
+attributes.
+Test the class in an interactive session:
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; from F import F
+&gt;&gt;&gt; f = F(a=1.0, w=0.1)
+&gt;&gt;&gt; from math import pi
+&gt;&gt;&gt; print f.value(x=pi)
+0.013353835137
+&gt;&gt;&gt; f.a = 2
+&gt;&gt;&gt; print f.value(pi)
+0.00057707154012
+</code></pre>
+<!-- end verbatim block -->
+Filename: <code>F.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2>Exercise 2: Add an attribute to a class <a name="sec:class:ex25q"></a></h2>
+
+<p>
+Add an attribute <code>transactions</code> to the <code>Account</code> class from
+the section <a href="._class-solarized002.html#sec:class:account">Bank accounts</a>. The new attribute counts the number
+of transactions done in the <code>deposit</code> and <code>withdraw</code> methods.
+Print the total number of transactions in the <code>dump</code>
+method. Write a test function <code>test_Account()</code> for testing that the
+implementation of the extended class <code>Account</code> is correct.
+Filename: <code>Account2.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2>Exercise 3: Add functionality to a class <a name="sec:class:ex25q2"></a></h2>
+
+<p>
+In class <code>Account</code> from the section <a href="._class-solarized002.html#sec:class:account">Bank accounts</a>, introduce a
+list <code>transactions</code>, where each element holds a dictionary with the
+amount of a transaction and the point of time the transaction took
+place. Remove the <code>balance</code> attribute and use instead the
+<code>transactions</code> list to compute the balance in <code>get_balance</code>.  Print
+out a nicely formatted table of all transactions, their amounts, and
+their time in a method <code>print_transactions</code>.
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<b>Hint.</b>
+Use the <code>time</code> module to get the date and local time.
+
+<p>
+<!-- --- end hint in exercise --- -->
+Filename: <code>Account3.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2>Exercise 4: Make classes for a rectangle and a triangle <a name="sec:class:ex23"></a></h2>
+
+<p>
+The purpose of this exercise is to create classes like
+class <code>Circle</code> from the section <a href="._class-solarized002.html#sec:class:circle">A circle</a> for
+representing other geometric figures: a rectangle with width
+\( W \), height \( H \), and lower left corner \( (x_0, y_0) \); and
+a general triangle specified by its
+three vertices \( (x_0,y_0) \), \( (x_1,y_1) \), and
+\( (x_2,y_2) \) as explained in ref{sec:basic:ex25}.
+Provide three methods: <code>__init__</code> (to initialize the geometric data),
+<code>area</code>, and <code>perimeter</code>. Write test functions <code>test_Rectangle()</code>
+and <code>test_Triangle()</code> for
+checking that the results produced by <code>area</code> and <code>perimeter</code>
+coincide with exact values within a small tolerance.
+Filename: <code>geometric_shapes.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2>Exercise 5: Make a class for quadratic functions <a name="sec:class:ex11"></a></h2>
+
+<p>
+Consider a quadratic function \( f(x;a,b,c)=ax^2 + bx + c \).
+Make a class <code>Quadratic</code>
+for representing \( f \), where \( a \), \( b \), and \( c \) are attributes, and
+the methods are
+
+<ul>
+  <li> <code>value</code> for computing a value of \( f \) at a point \( x \),</li>
+  <li> <code>table</code> for writing out a table of \( x \) and \( f \) values for \( n \) $x$ values in the interval \( [L,R] \),</li>
+  <li> <code>roots</code> for computing the two roots.</li>
+</ul>
+
+The file with class <code>Quadratic</code> and corresponding demonstrations and/or
+tests should be organized as a module such that other programs can
+do a <code>from Quadratic import Quadratic</code> to use the class.
+Filename: <code>Quadratic.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2>Exercise 6: Make a class for straight lines <a name="sec:class:ex25"></a></h2>
+
+<p>
+Make a class <code>Line</code> whose constructor takes two points
+<code>p1</code> and <code>p2</code> (2-tuples or 2-lists) as input.
+The line goes through these two
+points (see function <code>line</code> in the section ref{sec:basic:docstring} for
+the relevant formula of the line).
+A <code>value(x)</code> method computes a value on the line
+at the point <code>x</code>. Also make
+a function <code>test_Line()</code> for verifying the implementation.
+Here is a demo in an interactive session:
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; from Line import Line, test_Line
+&gt;&gt;&gt; line = Line((0,-1), (2,4))
+&gt;&gt;&gt; print line.value(0.5), line.value(0), line.value(1)
+0.25 -1.0 1.5
+&gt;&gt;&gt; test_Line()
+</code></pre>
+<!-- end verbatim block -->
+Filename: <code>Line.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2>Exercise 7: Flexible handling of function arguments <a name="sec:class:ex25b"></a></h2>
+
+<p>
+The constructor in class <code>Line</code> in <a href="#sec:class:ex25">Exercise 6: Make a class for straight lines</a> takes
+two points as arguments.  Now we want to have more flexibility in the
+way we specify a straight line: we can give two points, a point and a
+slope, or a slope and the line's interception with the \( y \) axis.
+Write this extended class and a test function for checking that the
+increased flexibility does work.
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<b>Hint.</b>
+Let the constructor take two arguments <code>p1</code> and <code>p2</code>
+as before, and test with
+<code>isinstance</code> whether the
+arguments are <code>float</code> versus <code>tuple</code> or <code>list</code> to determine
+what kind of data the user supplies:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>if isinstance(p1, (tuple,list)) and isinstance(p2, (float,int)):
+    # p1 is a point and p2 is slope
+    self.a = p2
+    self.b = p1[1] - p2*p1[0]
+elif ...
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+<!-- --- end hint in exercise --- -->
+Filename: <code>Line2.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2>Exercise 8: Wrap functions in a class <a name="sec:class:ex27d"></a></h2>
+
+<p>
+The purpose of this exercise is to make a class interface to an
+already existing set of functions implementing Lagrange's
+interpolation method from ref{sec:class:ex27a}.  We want to
+construct a class <code>LagrangeInterpolation</code> with a typical usage like:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>import numpy as np
+# Compute some interpolation points along y=sin(x)
+xp = np.linspace(0, np.pi, 5)
+yp = np.sin(xp)
+
+# Lagrange's interpolation polynomial
+p_L = LagrangeInterpolation(xp, yp)
+x = 1.2
+print 'p_L(%g)=%g' % (x, p_L(x)),
+print 'sin(%g)=%g' % (x, np.sin(x))
+p_L.plot()   # show graph of p_L
+</code></pre>
+<!-- end verbatim block -->
+The <code>plot</code> method visualizes \( p_L(x) \) for \( x \) between the first
+and last interpolation point (<code>xp[0]</code> and <code>xp[-1]</code>).
+In addition to writing the class itself, you should write code to verify
+the implementation.
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<b>Hint.</b>
+The class does not need much code as it can call
+the functions <code>p_L</code> from
+ref{sec:class:ex27a} and
+<code>graph</code> from ref{sec:class:ex27b}, available in
+the <code>Lagrange_poly2</code> module made in the latter exercise.
+
+<p>
+<!-- --- end hint in exercise --- -->
+Filename: <code>Lagrange_poly3.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2>Exercise 9: Flexible handling of function arguments <a name="sec:class:ex27e"></a></h2>
+
+<p>
+Instead of manually computing the interpolation points,
+as demonstrated in <a href="#sec:class:ex27d">Exercise 8: Wrap functions in a class</a>, we now want
+the constructor in class <code>LagrangeInterpolation</code> to also
+accept some Python function <code>f(x)</code> for computing
+the interpolation points.
+Typically, we would like to write
+this code:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>from numpy import exp, sin, pi
+
+def myfunction(x):
+    return exp(-x/2.0)*sin(x)
+
+p_L = LagrangeInterpolation(myfunction, x=[0, pi], n=11)
+</code></pre>
+<!-- end verbatim block -->
+With such a code, \( n=11 \) uniformly distributed \( x \) points between
+\( 0 \) and \( \pi \) are computed, and the corresponding \( y \) values are
+obtained by calling <code>myfunction</code>.
+The Lagrange interpolation polynomial is then constructed from
+these points. Note that the previous types of calls,
+<code>LangrangeInterpolation(xp, yp)</code>, must still be valid.
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<b>Hint.</b>
+The constructor in class <code>LagrangeInterpolation</code> must now
+accept two different sets of arguments: <code>xp, yp</code> vs. <code>f, x, n</code>.
+You can use the <code>isinstance(a, t)</code> function to test if object <code>a</code> is
+of type <code>t</code>. Declare the constructor with three
+arguments <code>arg1</code>, <code>arg2</code>, and <code>arg3=None</code>. Test
+if <code>arg1</code> and <code>arg2</code> are arrays
+(<code>isinstance(arg1, numpy.ndarray)</code>), and
+in that case, set <code>xp=arg1</code> and <code>yp=arg2</code>. On the other hand,
+if <code>arg1</code> is a function (<code>callable(arg1)</code> is <code>True</code>),
+<code>arg2</code> is a list or tuple (<code>isinstance(arg2, (list,tuple))</code>),
+and <code>arg3</code> is an integer, set
+<code>f=arg1</code>, <code>x=arg2</code>, and <code>n=arg3</code>.
+
+<p>
+<!-- --- end hint in exercise --- -->
+Filename: <code>Lagrange_poly4.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2>Exercise 10: Deduce a class implementation <a name="sec:class:ex1"></a></h2>
+
+<p>
+Write a class <code>Hello</code> that behaves as illustrated in the following
+session:
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; a = Hello()
+&gt;&gt;&gt; print a('students')
+Hello, students!
+&gt;&gt;&gt; print a
+Hello, World!
+</code></pre>
+<!-- end verbatim block -->
+Filename: <code>Hello.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2>Exercise 11: Implement special methods in a class <a name="sec:class:ex2b2"></a></h2>
+
+<p>
+Modify the class from <a href="#sec:class:ex2">Exercise 1: Make a function class</a>
+such that the following interactive session can be run:
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; from F import F
+&gt;&gt;&gt; f = F(a=1.0, w=0.1)
+&gt;&gt;&gt; from math import pi
+&gt;&gt;&gt; print f(x=pi)
+0.013353835137
+&gt;&gt;&gt; f.a = 2
+&gt;&gt;&gt; print f(pi)
+0.00057707154012
+&gt;&gt;&gt; print f
+exp(-a*x)*sin(w*x)
+</code></pre>
+<!-- end verbatim block -->
+Filename: <code>F2.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2>Exercise 12: Make a class for summation of series <a name="sec:class:ex2b"></a></h2>
+
+<p>
+The task in this exercise is to calculate a sum \( S(x)=\sum_{k=M}^N f_k(x) \),
+where \( f_k(x) \) is some user-given formula for the terms in the sum.
+The following snippet demonstrates the typical use and functionality
+of a class <code>Sum</code> for computing \( S(x)= \sum_{k=0}^N (-x)^k \):
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>def term(k, x):
+    return (-x)**k
+
+S = Sum(term, M=0, N=3)
+x = 0.5
+print S(x)
+print S.term(k=4)
+</code></pre>
+<!-- end verbatim block -->
+The latter statement prints the term \( (-x)^4 \).
+
+<p>
+<b>a)</b>
+Implement class <code>Sum</code> such that the code snippet above works.
+
+<p>
+<b>b)</b>
+Implement a test function <code>test_Sum()</code> for verifying the results of
+the various methods in class <code>Sum</code> for a specific choice of \( f_k(x) \).
+
+<p>
+<b>c)</b>
+Apply class <code>Sum</code> to compute the Taylor polynomial approximation to
+\( \sin x \) for \( x=\pi \) and some chosen \( x \) and \( N \).
+
+<p>
+Filename: <code>Sum.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2>Exercise 13: Apply a numerical differentiation class <a name="sec:class:ex10"></a></h2>
+
+<p>
+Isolate class <code>Derivative</code> from the section <a href="._class-solarized003.html#sec:class:autodF">Example: Automagic differentiation</a>
+in a module file. Also isolate class <code>Y</code> from
+the section <a href="._class-solarized001.html#sec:class:func2">Representing a function as a class</a> in a module file.
+Make a program that imports class <code>Derivative</code> and class
+<code>Y</code> and applies the former to differentiate the
+function \( y(t)=v_0t - \frac{1}{2}gt^2 \) represented by class <code>Y</code>.
+Compare the computed derivative with the exact value for
+\( t=0, \frac{1}{2}v_0/g, v_0/g \).
+Filenames: <code>dYdt.py</code>, <code>Derivative.py</code>, <code>Y.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2>Exercise 14: Apply symbolic differentiation <a name="sec:class:exer:sympy:diff"></a></h2>
+
+<p>
+Class <code>Derivative</code> from the section <a href="._class-solarized003.html#sec:class:autodF">Example: Automagic differentiation</a> applies numerical
+differentiation. With the aid of <code>sympy</code> we can quite easily
+offer exact differentiation. Extend class <code>Derivative</code> such
+that the differentiation is exact if the user supplies a <code>sympy</code>
+expression as argument to the constructor:
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; def f(x):
+        return x**3
+...
+&gt;&gt;&gt; import sympy
+&gt;&gt;&gt; x = sympy.symbols('x')
+&gt;&gt;&gt; symbolic_formula = f(x)
+&gt;&gt;&gt; dfdx = Derivative(symbolic_formula)
+&gt;&gt;&gt; x = 2
+&gt;&gt;&gt; dfdx(x)
+12
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<b>Hint.</b>
+Introduce a test on the type of argument in the constructor in
+class <code>Derivative</code>: if <code>str(type(f))</code> starts with <code>sympy</code>,
+<code>f</code> is a <code>sympy</code> expression that we can differentiate with
+<code>sympy.diff</code> and turn the result into a plain Python with
+<code>sympy.lamdify</code>,
+see the section ref{sec:formula:sympy:diffint}.
+
+<p>
+<!-- --- end hint in exercise --- -->
+Filename: <code>Derivative_sympy.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2>Exercise 15: Implement in-place <code>+=</code> and <code>-=</code> operators <a name="sec:class:ex25qb"></a></h2>
+
+<p>
+As alternatives to the <code>deposit</code> and <code>withdraw</code> methods
+in class  <code>Account</code> class from
+the section <a href="._class-solarized002.html#sec:class:account">Bank accounts</a>, we could use the operation <code>+=</code> for
+<code>deposit</code> and <code>-=</code> for <code>withdraw</code>.
+Implement the <code>+=</code> and <code>-=</code> operators, a
+<code>__str__</code> method, and preferably a
+<code>__repr__</code> method in class <code>Account</code>. Write a <code>test_Account()</code>
+function to verify the implementation of all functionality
+in class <code>Account</code>.
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<b>Hint.</b>
+The special methods <code>__iadd__</code> and <code>__isub__</code>
+implement the <code>+=</code> and <code>-=</code> operators, respectively.
+For instance, <code>a -= p</code> implies a call to <code>a.__isub__(p)</code>.
+One important feature of <code>__iadd__</code> and <code>__isub__</code>
+is that they must return <code>self</code> to work properly,
+see the documentation of these
+methods in Chapter 3 of the <a href="http://docs.python.org/2/reference/" target="_self">Python Language Reference</a>.
+
+<p>
+<!-- --- end hint in exercise --- -->
+Filename: <code>Account4.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2>Exercise 16: Implement a class for numerical differentiation <a name="sec:class:ex21"></a></h2>
+
+<p>
+<!-- Class <code>Derivative</code> from the section <a href="._class-solarized003.html#sec:class:autodF">Example: Automagic differentiation</a> applies the -->
+<!-- simple formula <a href="._class-solarized001.html#mjx-eqn-1">(1)</a> for numerical differentiation. -->
+<!-- An alternative and usually better formula is -->
+A widely used formula for numerical differentiation of a function \( f(x) \)
+takes the form
+
+$$
+\begin{align}
+f'(x) & \approx  {f(x+h) - f(x-h)\over 2h} \tp
+\tag{3}
+\end{align}
+$$
+
+This formula usually gives more accurate derivatives than
+<a href="._class-solarized001.html#mjx-eqn-1">(1)</a> because it applies a centered, rather than
+a one-sided, difference.
+
+<p>
+The goal of this exercise is to use the formula <a href="#mjx-eqn-3">(3)</a>
+to automatically differentiate a mathematical function \( f(x) \) implemented
+as a Python function <code>f(x)</code>. More precisely, the following
+code should work:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>def f(x):
+    return 0.25*x**4
+
+df = Central(f)  # make function-like object df
+# df(x) computes the derivative of f(x) approximately
+x = 2
+print 'df(%g)=%g' % (x, df(x))
+print 'exact:',  x**3
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+<b>a)</b>
+Implement class <code>Central</code> and test that the code above works.
+Include an optional argument <code>h</code> to the constructor in class
+<code>Central</code> so that \( h \) in the
+approximation <a href="#mjx-eqn-3">(3)</a> can be specified.
+
+<p>
+<b>b)</b>
+Write a test function <code>test_Central()</code> to verify the implementation.
+Utilize the fact that the formula <a href="#mjx-eqn-3">(3)</a> is
+exact for quadratic polynomials.
+
+<p>
+<b>c)</b>
+Write a function <code>table(f, x, h=1E-5)</code> that prints a
+table of errors in the numerical derivative <a href="#mjx-eqn-3">(3)</a>
+applied to a function <code>f</code> at some points <code>x</code>.
+The argument <code>f</code> is a <code>sympy</code> expression for
+a function. This <code>f</code> object can be transformed to a Python function and fed
+to the constructor of class <code>Central</code>, and <code>f</code> can be used to compute
+the exact derivative symbolically.
+The argument <code>x</code> is a list or array of points \( x \), and <code>h</code> is the \( h \)
+in <a href="#mjx-eqn-3">(3)</a>.
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<b>Hint.</b>
+The following session demonstrates how <code>sympy</code> can differentiate a
+mathematical expression and turn the result into a Python
+function:
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; import sympy
+&gt;&gt;&gt; x = sympy.Symbol('x')
+&gt;&gt;&gt; f_expr = 'x*sin(2*x)'
+&gt;&gt;&gt; df_expr = sympy.diff(f_expr)
+&gt;&gt;&gt; df_expr
+2*x*cos(2*x) + sin(2*x)
+&gt;&gt;&gt; df = sympy.lambdify([x], df_expr)  # make Python function
+&gt;&gt;&gt; df(0)
+0.0
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+<!-- --- end hint in exercise --- -->
+
+<p>
+<b>d)</b>
+Organize the file with the class and functions such that it can be
+used a module.
+
+<p>
+Filename: <code>Central.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2>Exercise 17: Examine a program <a name="sec:class:ex21b"></a></h2>
+
+<p>
+Consider this program file for computing a backward difference approximation
+to the derivative of a function <code>f(x)</code>:
+
+<p>
+<!-- begin verbatim block  pypro-->
+<pre><code>from math import *
+
+class Backward:
+    def __init__(self, f, h=e-9):
+        self.f, self.h = f, h
+    def __call__(self, x):
+        h, f = self.h, self.f
+        return (f(x) - f(x-h))/h  # finite difference
+
+dsin = Backward(sin)
+e = dsin(0) - cos(0); print 'error:', e
+dexp = Backward(exp, h=e-7)
+e = dexp(0) - exp(0); print 'error:', e
+</code></pre>
+<!-- end verbatim block -->
+The output becomes
+
+<p>
+<!-- begin verbatim block  ccq-->
+<pre><code>error: -1.00023355634
+error: 371.570909212
+</code></pre>
+<!-- end verbatim block -->
+Is the approximation that bad, or are there bugs in the program?
+
+<p>
+<!-- h=e-7 means e - 7! Same with e-9 -->
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2>Exercise 18: Modify a class for numerical differentiation <a name="sec:class:ex23s"></a></h2>
+
+<p>
+Make the two attributes <code>h</code> and <code>f</code> of class
+<code>Derivative</code> from the section <a href="._class-solarized003.html#sec:class:autodF">Example: Automagic differentiation</a> protected as
+explained in the section <a href="._class-solarized002.html#sec:class:account">Bank accounts</a>. That is, prefix <code>h</code> and
+<code>f</code> with an underscore to tell users that these attributes should not be
+accessed directly. Add two methods <code>get_precision()</code> and
+<code>set_precision(h)</code> for reading and changing <code>h</code>.
+Filename: <code>Derivative_protected.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2>Exercise 19: Make a class for the Heaviside function <a name="sec:basic:exHclass"></a></h2>
+
+<p>
+the exercise &quot;Implement a
+smoothed Heaviside function&quot; in the document <a href="http://tcse6.on.net/funcif" target="_self">Functions and
+branching</a>,
+
+<p>
+<b>a)</b>
+Use a class to implement the
+discontinuous Heaviside function and smoothed continuous version, as defined
+in the exercise &quot;Implement a
+smoothed Heaviside function&quot; in the document <a href="http://tcse6.on.net/funcif" target="_self">Functions and
+branching</a>,
+such that the following code works:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>H = Heaviside()         # original discontinous Heaviside function
+print H(0.1)
+H = Heaviside(eps=0.8)  # smoothed continuous Heaviside function
+print H(0.1)
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+<b>b)</b>
+Extend class <code>Heaviside</code> such that
+array arguments are allowed:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>H = Heaviside()         # original discontinous Heaviside function
+x = numpy.linspace(-1, 1, 11)
+print H(x)
+H = Heaviside(eps=0.8)  # smoothed Heaviside function
+print H(x)
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<b>Hint.</b>
+Use ideas from the section ref{sec:vec:Heaviside}.
+
+<p>
+<!-- --- end hint in exercise --- -->
+
+<p>
+<b>c)</b>
+Extend class <code>Heaviside</code> such that it supports plotting:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>H = Heaviside()
+x, y = H.plot(xmin=-4, xmax=4)  # x in [-4, 4]
+from matplotlib.pyplot import plot
+plot(x, y)
+
+H = Heaviside(eps=1)
+x, y = H.plot(xmin=-4, xmax=4)
+plot(x, y)
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<b>Hint.</b>
+Techniques from the section ref{sec:plot:pwisefunc} must in the first case
+be used to return arrays <code>x</code> and <code>y</code> such that the discontinuity is
+exactly reproduced. In the continuous (smoothed) case, one needs to
+compute a sufficiently fine resolution (<code>x</code>) based on the <code>eps</code>
+parameter, e.g., 201/$\epsilon$ points in the interval \( [-\epsilon,
+\epsilon] \), with a coarser set of coordinates outside this interval
+where the smoothed Heaviside function is almost constant, 0 or 1.
+
+<p>
+<!-- --- end hint in exercise --- -->
+
+<p>
+<b>d)</b>
+Write a test function <code>test_Heaviside()</code> for verifying the result
+of the various methods in class <code>Heaviside</code>.
+
+<p>
+Filename: <code>Heaviside_class.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2>Exercise 20: Make a class for the indicator function <a name="sec:basic:exIndclass"></a></h2>
+
+<p>
+We shall work with indicator
+functions as explained in the exercise &quot;Implement an indicator function&quot;
+in the document <a href="http://tcse6.on.net/funcif" target="_self">Functions and
+branching</a>. Make a class implementation
+of such an indicator function, using a definition in terms of
+Heaviside functions. Allow for an \( \epsilon \) parameter in the calls to the
+Heaviside function such that
+we can easily choose between a discontinuous and a smoothed,
+continuous version of the indicator function:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>I = Indicator(a, b)          # indicator function on [a,b]
+print I(b+0.1), I((a+b)/2.0)
+I = Indicator(0, 2, eps=1)   # smoothed indicator function on [0,2]
+print I(0), I(1), I(1.9)
+</code></pre>
+<!-- end verbatim block -->
+Note that if you build on the version of class <code>Heaviside</code>
+in <a href="#sec:basic:exHclass">Exercise 19: Make a class for the Heaviside function</a>b, any <code>Indicator</code> instance
+will accept array arguments too.
+Filename: <code>Indicator.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2>Exercise 21: Make a class for piecewise constant functions <a name="sec:basic:ex:piecewisefunc"></a></h2>
+
+<p>
+The purpose of this exercise is to implement a piecewise constant
+function, as explained in ref{sec:basic:exH4}, in a Python
+class.
+
+<p>
+<b>a)</b>
+Implement the minimum functionality such that the following code works:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>f = PiecewiseConstant([(0.4, 1), (0.2, 1.5), (0.1, 3)], xmax=4)
+print f(1.5), f(1.75), f(4)
+
+x = np.linspace(0, 4, 21)
+print f(x)
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+<b>b)</b>
+Add a <code>plot</code> method to class <code>PiecewiseConstant</code>
+such that we
+can easily plot the graph of the function:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>x, y = f.plot()
+from matplotlib.pyplot import plot
+plot(x, y)
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+Filename: <code>PiecewiseConstant.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2>Exercise 22: Speed up repeated integral calculations <a name="sec:class:ex13c"></a></h2>
+
+<p>
+The observant reader may have noticed that our <code>Integral</code> class
+from the section <a href="._class-solarized003.html#sec:class:autoint">Example: Automagic integration</a>
+is very inefficient if we want to tabulate or plot a
+function \( F(x)=\int_a^xf(x) \) for several consecutive values of \( x \),
+say \( x_0 < x_1 < \cdots < x_n \). Requesting \( F(x_k) \) will recompute
+the integral computed as part of \( F(x_{k-1}) \), and this is of course
+waste of computer work.
+Use the ideas from the section ref{sec:diffeq:integral} to modify
+the <code>__call__</code> method such that if <code>x</code> is an array,
+assumed to contain coordinates of increasing value:
+\( x_0 < x_1 < \cdots < x_n \), the method returns an array with
+\( F(x_0), F(x_1),\ldots,F(x_n) \) with the minimum computational work.
+Filename: <code>Integral_eff.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2>Exercise 23: Apply a class for polynomials <a name="sec:class:ex5"></a></h2>
+
+<p>
+The Taylor polynomial of degree \( N \) for the exponential function \( e^x \)
+is given by
+
+$$
+\begin{equation*} p(x) = \sum_{k=0}^N {x^k\over k!} \thinspace . \end{equation*}
+$$
+
+Make a program that (i) imports class
+<code>Polynomial</code> from the section <a href="._class-solarized003.html#sec:class:Polynomial">Example: Class for polynomials</a>, (ii) reads  \( x \)
+and a series of \( N \) values
+from the command line, (iii) creates a
+<code>Polynomial</code> instance representing the Taylor polynomial for each
+\( N \) value, and (iv)
+prints the values of \( p(x) \) for all the given \( N \) values as well as the
+exact value \( e^x \).
+Try the program out with
+\( x=0.5, 3, 10 \) and \( N=2,5,10, 15, 25 \).
+Filename: <code>Polynomial_exp.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2>Exercise 24: Find a bug in a class for polynomials <a name="sec:class:ex4"></a></h2>
+
+<p>
+Go through this alternative implementation of class
+<code>Polynomial</code> from the section <a href="._class-solarized003.html#sec:class:Polynomial">Example: Class for polynomials</a>
+and explain each line in detail:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>class Polynomial:
+    def __init__(self, coefficients):
+        self.coeff = coefficients
+
+    def __call__(self, x):
+        return sum([c*x**i for i, c in enumerate(self.coeff)])
+
+    def __add__(self, other):
+        maxlength = max(len(self), len(other))
+        # Extend both lists with zeros to this maxlength
+        self.coeff += [0]*(maxlength - len(self.coeff))
+        other.coeff += [0]*(maxlength - len(other.coeff))
+        result_coeff = self.coeff
+        for i in range(maxlength):
+            result_coeff[i] += other.coeff[i]
+        return Polynomial(result_coeff)
+</code></pre>
+<!-- end verbatim block -->
+The <code>enumerate</code> function, used in the <code>__call__</code> method,
+enables us to iterate over a list <code>somelist</code> with
+both list indices and list elements: <code>for index, element in enumerate(somelist)</code>.
+Write the code above in a file, and demonstrate that adding two polynomials
+does not work. Find the bug and correct it.
+Filename: <code>Polynomial_error.py</code>.
+
+<p>
+<!-- result_coeff = self.coeff[:] -->
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2>Exercise 25: Implement subtraction of polynomials <a name="sec:class:ex6a"></a></h2>
+
+<p>
+Implement the special method <code>__sub__</code> in class
+<code>Polynomial</code> from the section <a href="._class-solarized003.html#sec:class:Polynomial">Example: Class for polynomials</a>.
+Add a test for this functionality in function <code>test_Polynomial</code>.
+Filename: <code>Polynomial_sub.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2>Exercise 26: Test the functionality of pretty print of polynomials <a name="sec:class:exer:str"></a></h2>
+
+<p>
+Verify the functionality of the <code>__str__</code> method in class <code>Polynomial</code> from
+the section <a href="._class-solarized003.html#sec:class:Polynomial">Example: Class for polynomials</a> by writing a new test function
+<code>test_Polynomial_str()</code>.
+Filename: <code>Polynomial_test_str.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2>Exercise 27: Vectorize a class for polynomials <a name="sec:class:ex7v"></a></h2>
+
+<p>
+Introducing an array instead of a list in class <code>Polynomial</code> does not
+enhance the efficiency of the implementation unless the mathematical
+computations are also vectorized. That is, all explicit Python loops
+must be substituted by vectorized expressions.
+
+<p>
+<b>a)</b>
+Go through class <code>Polynomial.py</code> and make sure the <code>coeff</code> attribute
+is always a <code>numpy</code> array with <code>float</code> elements.
+
+<p>
+<b>b)</b>
+Update the test function <code>test_Polynomial</code> to make use of the fact
+that the <code>coeff</code> attribute is always a
+<code>numpy</code> array with <code>float</code> elements. Run <code>test_Polynomial</code>
+to check that the new implementation is correct.
+
+<p>
+<b>c)</b>
+Vectorize the <code>__add__</code> method by adding the
+common parts of the coefficients arrays and then appending
+the rest of the longest array to the result.
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<b>Hint.</b>
+Appending an array
+<code>a</code> to an array <code>b</code> can be done by <code>concatenate(a, b)</code>.
+
+<p>
+<!-- --- end hint in exercise --- -->
+
+<p>
+<b>d)</b>
+Vectorize the <code>__call__</code> method by
+observing that evaluation of a polynomial, \( \sum_{i=0}^{n-1}c_ix^i \),
+can be computed as the inner product of two arrays:
+\( (c_0,\ldots,c_{n-1}) \) and \( (x^0,x^1,\ldots,x^{n-1}) \).
+The latter array can be computed by <code>x**p</code>, where
+<code>p</code> is an array with powers \( 0,1,\ldots,n-1 \), and <code>x</code>
+is a scalar.
+
+<p>
+<b>e)</b>
+The <code>differentiate</code> method can be vectorized by
+the statements
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>n = len(self.coeff)
+self.coeff[:-1] = linspace(1, n-1, n-1)*self.coeff[1:]
+self.coeff = self.coeff[:-1]
+</code></pre>
+<!-- end verbatim block -->
+Show by hand calculations in a case where <code>n</code> is 3 that
+the vectorized statements produce the same result as the
+original <code>differentiate</code> method.
+
+<p>
+Filename: <code>Polynomial_vec.py</code>.
+
+<p>
+<!-- Closing remarks for this Exercise -->
+
+<h3>Remarks  <a name="___sec97"></a></h3>
+
+<p>
+The <code>__mul__</code> method is more challenging to vectorize so you may leave
+this unaltered. Check that the
+vectorized versions of <code>__add__</code>,
+<code>__call__</code>, and <code>differentiate</code> work as intended by calling
+the <code>test_Polynomial</code> function.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2>Exercise 28: Use a dict to hold polynomial coefficients <a name="sec:class:ex8"></a></h2>
+
+<p>
+Use a dictionary for the <code>coeff</code> attribute in class <code>Polynomial</code> from
+the section <a href="._class-solarized003.html#sec:class:Polynomial">Example: Class for polynomials</a> such that <code>self.coeff[k]</code> holds the
+coefficient of the \( x^k \) term.  The advantage with a dictionary is
+that only the nonzero coefficients need to be stored.
+
+<p>
+<b>a)</b>
+Implement a constructor and the <code>__add__</code> method.
+
+<p>
+<b>b)</b>
+Implement the <code>__mul__</code> method.
+
+<p>
+<b>c)</b>
+Write a test function for verifying the implementations in a) and b)
+when the polynomials \( x-3x^{100} \) and \( x^{20} - x +4x^{100} \) are added
+and multiplied.
+
+<p>
+Filename: <code>Polynomial_dict.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2>Exercise 29: Extend class Vec2D to work with lists/tuples <a name="sec:class:ex16"></a></h2>
+
+<p>
+The <code>Vec2D</code> class from the section <a href="._class-solarized004.html#sec:class:Vec2D">Example: Class for vectors in the plane</a> supports
+addition and subtraction, but only addition and subtraction of two
+<code>Vec2D</code> objects. Sometimes we would like to add or subtract a
+point that is represented by a list or a tuple:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>u = Vec2D(-2, 4)
+v = u + (1,1.5)
+w = [-3, 2] - v
+</code></pre>
+<!-- end verbatim block -->
+That is, a list or a tuple must be allowed in the right or left operand.
+Implement such an extension of class <code>Vec2D</code>.
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<b>Hint.</b>
+Ideas are found in the sections <a href="._class-solarized005.html#sec:class:complex:mixed">Mixing complex and real numbers</a> and
+<a href="._class-solarized005.html#sec:class:complex:rightop">Special methods for &quot;right&quot; operands</a>.
+
+<p>
+<!-- --- end hint in exercise --- -->
+Filename: <code>Vec2D_lists.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2>Exercise 30: Extend class Vec2D to 3D vectors <a name="sec:class:ex17b"></a></h2>
+
+<p>
+Extend the implementation of class <code>Vec2D</code>
+from the section <a href="._class-solarized004.html#sec:class:Vec2D">Example: Class for vectors in the plane</a> to a class <code>Vec3D</code> for vectors
+in three-dimensional space. Add a method <code>cross</code> for computing
+the cross product of two 3D vectors.
+Filename: <code>Vec3D.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2>Exercise 31: Use NumPy arrays in class Vec2D <a name="sec:class:ex17"></a></h2>
+
+<p>
+The internal code in class <code>Vec2D</code> from the section <a href="._class-solarized004.html#sec:class:Vec2D">Example: Class for vectors in the plane</a>
+can be valid for vectors in any space dimension if we represent the
+vector as a NumPy array in the class instead of separate variables <code>x</code>
+and <code>y</code> for the vector components.  Make a new class <code>Vec</code> where you
+apply NumPy functionality in the methods.  The constructor should be
+able to treat all the following ways of initializing a vector:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>a = array([1, -1, 4], float)  # numpy array
+v = Vec(a)
+v = Vec([1, -1, 4])           # list
+v = Vec((1, -1, 4))           # tuple
+v = Vec(1, -1)                # coordinates
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<b>Hint.</b>
+In the constructor, use variable number of arguments as
+described in the document <a href="http://tcse6.on.net/varargs" target="_self">Variable number of
+function arguments in Python</a>
+<a href="#Langtangen_TCSE6_varargs">[2]</a>.  All arguments are then available as
+a tuple, and if there is only one element in the tuple, it should be
+an array, list, or tuple you can send through <code>asarray</code> to get a NumPy
+array. If there are many arguments, these are coordinates, and the
+tuple of arguments can be transformed by <code>array</code> to a NumPy array.
+Assume in all operations that the involved vectors have equal
+dimension (typically that <code>other</code> has the same dimension as
+<code>self</code>). Recall to return <code>Vec</code> objects from all arithmetic
+operations, not NumPy arrays, because the next operation with the
+vector will then not take place in <code>Vec</code> but in NumPy. If <code>self.v</code> is
+the attribute holding the vector as a NumPy array, the addition
+operator will typically be implemented as
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>class Vec:
+    ...
+    def __add__(self, other):
+        return Vec(selv.v + other.v)
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+<!-- --- end hint in exercise --- -->
+Filename: <code>Vec.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2>Exercise 32: Make classes for students and courses <a name="sec:class:ex15"></a></h2>
+
+<p>
+Redo the summarizing problem in the section ref{sec:files:sumex} by using
+classes.  More precisely, introduce a class <code>Student</code> and a class
+<code>Course</code>.  Find appropriate attributes and methods.  The classes
+should have a <code>__str__</code> method for pretty-printing of the contents.
+Filename: <code>Student_Course.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2>Exercise 33: Find local and global extrema of a function <a name="sec:plot:ex28"></a></h2>
+
+<p>
+Extreme points of a function \( f(x) \) are normally found by solving
+\( f'(x)=0 \). A much simpler method is to evaluate \( f(x) \) for a set of
+discrete points in the interval \( [a, b] \) and look for local minima and
+maxima among these points. We work with \( n+1 \) equally spaced points
+\( a=x_0 < x_1 < \cdots < x_{n}=b \), \( x_i=a+ih \), \( h=(b-a)/n \).
+
+<p>
+First we find all local extreme points in the interior of the domain.
+Local minima are recognized by
+
+$$
+\begin{equation*} f(x_{i-1}) > f(x_i) < f(x_{i+1}),\quad i=1,\ldots,n-1 \thinspace .
+\end{equation*}
+$$
+
+Similarly, at a local maximum point \( x_i \) we have
+
+$$
+\begin{equation*} f(x_{i-1}) < f(x_i) > f(x_{i+1}),\quad i=1,\ldots,n-1 \thinspace .
+\end{equation*}
+$$
+
+Let \( P_{\min} \) be the set of \( x \) values for local minima and
+\( F_{\min} \) the set of the corresponding \( f(x) \) values at these minima.
+Two sets \( P_{\max} \) and \( F_{\max} \) are defined correspondingly for the maxima.
+
+<p>
+The boundary points \( x=a \) and \( x=b \) are for algorithmic simplicity also
+defined as local extreme points: \( x=a \) is a local minimum if \( f(a) < f(x_1) \),
+and a local maximum otherwise. Similarly, \( x=b \) is a local minimum if
+\( f(b) < f(x_{n-1}) \), and a local maximum otherwise.
+The end points \( a \) and \( b \) and the corresponding function values must
+be added to the sets \( P_{\min},P_{\max},F_{\min},F_{\max} \).
+
+<p>
+The global maximum point is defined as the \( x \) value corresponding
+to the maximum value in \( F_{\max} \). The global minimum point is
+the \( x \) value corresponding to the minimum value in \( F_{\min} \).
+
+<p>
+<b>a)</b>
+Make a class <code>MinMax</code> with the following functionality:
+
+<ul>
+  <li> <code>__init__</code> takes \( f(x) \), \( a \), \( b \), and \( n \) as arguments, and calls a method <code>_find_extrema</code> to compute the local and global extreme points.</li>
+  <li> <code>_find_extrema</code> implements the algorithm above for finding local and global extreme points, and stores the sets \( P_{\min},P_{\max},F_{\min},F_{\max} \) as list attributes in the (<code>self</code>) instance.</li>
+  <li> <code>get_global_minimum</code> returns the global minimum point as a pair
+    \( (x, f(x)) \).</li>
+  <li> <code>get_global_maximum</code> returns the global maximum point as a pair
+    \( (x, f(x)) \).</li>
+  <li> <code>get_all_minima</code> returns a list or array of all \( (x,f(x)) \) minima.</li>
+  <li> <code>get_all_maxima</code> returns a list or array of all \( (x,f(x)) \) maxima.</li>
+  <li> <code>__str__</code> returns a string where a nicely formatted table
+    of all the min/max points are listed, plus the global extreme points.</li>
+</ul>
+
+Here is a sample code using class <code>MinMax</code>:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>def f(x):
+    return x**2*exp(-0.2*x)*sin(2*pi*x)
+
+m = MinMax(f, 0, 4, 5001)
+print m
+</code></pre>
+<!-- end verbatim block -->
+The output becomes
+
+<p>
+<!-- begin verbatim block  ccq-->
+<pre><code>All minima: 0.8056, 1.7736, 2.7632, 3.7584, 0
+All maxima: 0.3616, 1.284, 2.2672, 3.2608, 4
+Global minimum: 3.7584
+Global maximum: 3.2608
+</code></pre>
+<!-- end verbatim block -->
+Make sure that the program also works for functions without local
+extrema, e.g., linear functions \( f(x)=ax+b \).
+
+<p>
+<b>b)</b>
+The algorithm sketched above finds local extreme
+points \( x_i \), but all we know is that the true extreme point is in the
+interval \( (x_{i-1},x_{i+1}) \). A more accurate algorithm may take this
+interval as a starting point and run a Bisection method (see
+the final part of the document <a href="http://tcse6.on.net/input" target="_self">User
+input and error handling</a>
+<a href="#Langtangen_TCSE6_input">[4]</a>) to find the extreme point \( \bar x \) such
+that \( f'(\bar x)=0 \).  Add a method
+<code>_refine_extrema</code> in class <code>MinMax</code>,
+which goes through all the interior local minima
+and maxima and solves \( f'(\bar x)=0 \).  Compute \( f'(x) \) using the
+<code>Derivative</code> class (the section <a href="._class-solarized003.html#sec:class:autodF">Example: Automagic differentiation</a> with \( h \ll
+x_{i+1}-x_{i-1} \).
+
+<p>
+Filename: <code>minmaxf.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2>Exercise 34: Find the optimal production for a company <a name="sec:class:ex18a"></a></h2>
+
+<p>
+The company PROD produces two different products, P$_1$ and P$_2$,
+based on three different raw materials, \( \mbox{M}_1 \), \( \mbox{M}_2 \) and
+\( \mbox{M}_3 \). The following table shows how much of each raw material
+\( \mbox{M}_i \) that is required to produce <em>a single unit</em> of each
+product P$_j$:
+
+<p>
+<table border="1">
+<thead>
+<tr><th align="center">                </th> <th align="center">P$_1$</th> <th align="center">P$_2$</th> </tr>
+</thead>
+<tbody>
+<tr><td align="center">   \( \mbox{M}_1 \)    </td> <td align="center">   2        </td> <td align="center">   1        </td> </tr>
+<tr><td align="center">   \( \mbox{M}_2 \)    </td> <td align="center">   5        </td> <td align="center">   3        </td> </tr>
+<tr><td align="center">   \( \mbox{M}_3 \)    </td> <td align="center">   0        </td> <td align="center">   4        </td> </tr>
+</tbody>
+</table>
+<p>
+ For instance, to produce one unit of \( \mbox{P}_2 \) one needs 1 unit of
+ \( \mbox{M}_1 \), 3 units of \( \mbox{M}_2 \) and 4 units of \( \mbox{M}_3 \).
+ Furthermore, PROD has available 100, 80 and 150 units of material
+ \( \mbox{M}_1 \), \( \mbox{M}_2 \) and \( \mbox{M}_3 \) respectively (for the
+ time period considered).  The revenue per produced unit of product
+ \( \mbox{P}_1 \) is 150 NOK, and for one unit of \( \mbox{P}_2 \) it is 175
+ NOK. On the other hand the raw materials \( \mbox{M}_1 \), \( \mbox{M}_2 \)
+ and \( \mbox{M}_3 \) cost 10, 17 and 25 NOK per unit, respectively.  The
+ question is: how much should PROD produce of each product?  We here
+ assume that PROD wants to maximize its net revenue (which is revenue
+ minus costs).
+
+<p>
+<b>a)</b>
+Let \( x \) and \( y \) be the number of units produced of product
+\( \mbox{P}_1 \) and \( \mbox{P}_2 \), respectively. Explain why the total
+revenue \( f(x,y) \) is given by
+
+$$
+\begin{equation*}
+       f(x,y)=150x-(10\cdot 2+17\cdot 5)x+
+              175y-(10\cdot 1+17\cdot 3 + 25\cdot 4)y
+\end{equation*}
+$$
+
+and simplify this expression.
+The function \( f(x,y) \) is <em>linear</em> in \( x \) and \( y \)
+(make sure you know what linearity means).
+
+<p>
+<b>b)</b>
+Explain why PROD's problem may be stated mathematically as follows:
+
+$$
+\begin{equation}
+  \tag{4}
+  \begin{array}{lrrrrr}
+   \mbox{\rm maximize}    &\multicolumn{3}{c}{f(x,y)} \\ 
+   \mbox{\rm subject to}  &       \\ 
+       &2x   &+   &y  &\le &100 \\ 
+       &5x   &+   &3y &\le &80 \\ 
+       &     &    &4y &\le &150 \\ 
+       &     &\multicolumn{4}{l}{x\ge 0, y \ge 0.}
+  \end{array}
+ \end{equation}
+$$
+
+ This is an example of a <em>linear optimization problem.</em>
+
+<p>
+<b>c)</b>
+The production \( (x,y) \) may be considered as a point in the
+plane. Illustrate geometrically the set \( T \) of all such points that
+satisfy the constraints in model <a href="#mjx-eqn-4">(4)</a>. Every point in this
+set is called a <em>feasible point.</em>
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<b>Hint.</b>
+For every inequality
+determine first the straight line obtained by replacing the
+inequality by equality. Then, find the points satisfying the
+inequality (a half-plane), and finally, intersect these half-planes.
+
+<p>
+<!-- --- end hint in exercise --- -->
+
+<p>
+<b>d)</b>
+Make a program
+for drawing the straight lines defined by the
+inequalities. Each line can be written as \( ax + by = c \). Let the
+program read each line from the command line
+as a list of the \( a \), \( b \), and \( c \) values. In the present case
+the command-line arguments will be
+
+<p>
+<!-- begin verbatim block  ccq-->
+<pre><code>'[2,1,100]' '[5,3,80]' '[0,4,150]' '[1,0,0]' '[0,1,0]'
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<b>Hint.</b>
+Perform an <code>eval</code> on the elements of <code>sys.argv[1:]</code> to
+get \( a \), \( b \), and \( c \) for each line as a list in the program.
+
+<p>
+<!-- --- end hint in exercise --- -->
+
+<p>
+<b>e)</b>
+Let \( \alpha \) be a positive number and
+consider the <em>level set</em> of the function \( f \), defined as the set
+
+$$
+\begin{equation*}
+        L_{\alpha}= \{(x,y) \in T: f(x,y)=\alpha\}.
+\end{equation*}
+$$
+
+This set consists of all feasible points having the same net revenue
+\( \alpha \). Extend the program with two new command-line arguments
+holding \( p \) and \( q \) for a function \( f(x,y)=px + qy \). Use this
+information to compute the level set lines \( y=\alpha /q - px/q \), and
+plot the level set lines for some different values of \( \alpha \) (use
+the \( \alpha \) value in the legend for each line).
+
+<p>
+<b>f)</b>
+Use what you saw in e) to solve the problem <a href="#mjx-eqn-4">(4)</a>
+geometrically.  This solution is called an <em>optimal solution</em>.
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<b>Hint.</b>
+How large can you choose \( \alpha \) such that
+\( L_{\alpha} \) is nonempty?
+
+<p>
+<!-- --- end hint in exercise --- -->
+
+<p>
+<b>g)</b>
+Assume that we have other values on the revenues and costs than the
+actual numbers in a).  Explain why
+<a href="#mjx-eqn-4">(4)</a>, with these new parameter values, still has an optimal
+solution lying in a corner point of \( T \).  Extend the program
+to calculate all the corner points of a
+region \( T \) in the plane determined by the linear inequalities like
+those listed above.  Moreover, the program
+shall compute the maximum of a given linear function \( f(x,y)=ax+by \)
+over \( T \) by calculating the function values in the corner points and
+finding the smallest function value.
+
+<p>
+Filename: <code>optimization.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<h1>References  <a name="___sec105"></a></h1>
+
+<p>
+<!-- begin bibliography -->
+
+<ol>
+ <li> <a name="Langtangen_TCSE6_oo"></a> <b>H. P. Langtangen</b>. 
+    Object-oriented programming,
+    <a href="http://hplgit.github.io/primer.html/doc/pub/oo" target="_self"><tt>http://hplgit.github.io/primer.html/doc/pub/oo</tt></a>.</li>
+ <li> <a name="Langtangen_TCSE6_varargs"></a> <b>H. P. Langtangen</b>. 
+    Variable number of function arguments in Python,
+    <a href="http://hplgit.github.io/primer.html/doc/pub/varargs" target="_self"><tt>http://hplgit.github.io/primer.html/doc/pub/varargs</tt></a>.</li>
+ <li> <a name="Langtangen_TCSE6_debug"></a> <b>H. P. Langtangen</b>. 
+    Debugging in Python,
+    <a href="http://hplgit.github.io/primer.html/doc/pub/debug" target="_self"><tt>http://hplgit.github.io/primer.html/doc/pub/debug</tt></a>.</li>
+ <li> <a name="Langtangen_TCSE6_input"></a> <b>H. P. Langtangen</b>. 
+    User input and error handling,
+    <a href="http://hplgit.github.io/primer.html/doc/pub/input" target="_self"><tt>http://hplgit.github.io/primer.html/doc/pub/input</tt></a>.</li>
+</ol>
+
+<!-- end bibliography -->
+
+<p>
+<!-- begin bottom navigation -->
+<table style="width: 100%"><tr><td>
+<div style="text-align: left;"><a href="._class-solarized007.html">&laquo; Previous</a></div>
+</td><td>
+</td></tr></table>
+<!-- end bottom navigation -->
+</p>
+
+<!-- ------------------- end of main content --------------- -->
+
+
+</body>
+</html>
+    
+

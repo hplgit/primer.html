@@ -1,15 +1,15 @@
 <!--
-Automatically generated HTML file from Doconce source
+Automatically generated HTML file from DocOnce source
 (https://github.com/hplgit/doconce/)
 -->
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="generator" content="Doconce: https://github.com/hplgit/doconce/" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
 <meta name="description" content="Computing with formulas">
 <meta name="keywords" content="directory,run Python program,execute Python program,terminal window,console (terminal) window,directory,comments,non-English characters,formatting text and numbers,printf syntax,string,triple-quoted strings,format string syntax,newline character (line break),line break,source code,application,statements,expression,syntax,whitespace,blanks,whitespace,input (data),output (data),user (of a program),operating system (OS),Windows,Mac OS X,Unix,Linux,objects,round-off errors,interactive sessions standard Python shell,type conversion,check an object's type,rounding float to integer,interactive sessions IPython,IPython,run Python program,execute Python program,IPython running Python programs,IPython start-up file,IPython executing operating system commands,IPython command history,complex numbers,Gaussian function">
 
-
+<title>Computing with formulas</title>
 
 <!-- Bootstrap style: bootswatch_readable -->
 <link href="http://netdna.bootstrapcdn.com/bootswatch/3.1.1/readable/bootstrap.min.css" rel="stylesheet">
@@ -21,6 +21,7 @@ Automatically generated HTML file from Doconce source
 /* Let inline verbatim have the same color as the surroundings */
 code { color: inherit; background-color: transparent; }
 </style>
+
 
 </head>
 
@@ -262,18 +263,6 @@ MathJax.Hub.Config({
 <!-- newcommands_keep.tex -->
 $$
 \newcommand{\tp}{\thinspace .}
-\renewcommand{\Re}{\bbbr}
-
-\newcommand{\rhodim}{\mbox{kgm}^{-3}}
-\newcommand{\mudim}{\mbox{kg}\,\mbox{s}^{-1}\mbox{m}^{-1}}
-\newcommand{\Cdim}{\mbox{kg}\,\mbox{s}^{-1}}
-
-
-\newcommand{\Oof}[1]{\mathcal{O}(#1)}
-\newcommand{\Prob}[1]{\hbox{P}(#1)}
-\newcommand{\Var}[1]{\hbox{Var}(#1)}
-\newcommand{\Cov}[2]{\hbox{Cov}(#1,#2)}
-\newcommand{\StDev}[1]{\hbox{StDev}(#1)}
 $$
 
 
@@ -322,6 +311,7 @@ $$
 
 <h1 id="sec:formula:c2f">Another formula: Celsius-Fahrenheit conversion<a name="sec:formula:c2f"></a></h1>
 
+<p>
 Our next example involves the formula for converting temperature
 measured in Celsius degrees to the corresponding value in Fahrenheit
 degrees:
@@ -342,15 +332,16 @@ to write a computer program that can compute \( F \) from
 
 <h3 id="___sec19">Straightforward coding of the formula <a name="___sec19"></a></h3>
 
+<p>
 A straightforward attempt at coding the formula
 <a href="#mjx-eqn-3">(3)</a> goes as follows:
 
 <p>
 
-<!-- code=text (!bc txt) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">C = 21
-F = (9/5)*C + 32
-print F
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">C <span style="color: #666666">=</span> <span style="color: #666666">21</span>
+F <span style="color: #666666">=</span> (<span style="color: #666666">9/5</span>)<span style="color: #666666">*</span>C <span style="color: #666666">+</span> <span style="color: #666666">32</span>
+<span style="color: #008000; font-weight: bold">print</span> F
 </pre></div>
 <p>
 The parentheses around <code>9/5</code> are not strictly needed, i.e.,
@@ -370,12 +361,14 @@ number in the final version of the program.
 
 <h3 id="___sec20">Verifying the results <a name="___sec20"></a></h3>
 
+<p>
 Testing the correctness is easy in this case since we can evaluate the
 formula on a calculator: \( \frac{9}{5}\cdot 21+32 \) is 69.8, not 53. What
 is wrong?  The formula in the program looks correct!
 
 <h3 id="___sec21">Float and integer division <a name="___sec21"></a></h3>
 
+<p>
 The error in our program above is one of the most common errors in
 mathematical software and is not at all obvious for a newcomer to
 programming. In many computer languages, there are two types of
@@ -415,6 +408,7 @@ frequently used term in Python programming: <em>object</em>.
 
 <h2 id="___sec22">Objects in Python <a name="___sec22"></a></h2>
 
+<p>
 When we write
 
 <p>
@@ -474,6 +468,7 @@ do this in two steps:
 
 <h2 id="sec:formula:c2f:correct">Avoiding integer division<a name="sec:formula:c2f:correct"></a></h2>
 
+<p>
 As a quite general rule of thumb, one should be careful to avoid
 integer division when programming mathematical formulas. In the rare
 cases when a mathematical algorithm does make use of integer division,
@@ -544,10 +539,10 @@ and what the remedy is. A correct program is
 
 <p>
 
-<!-- code=text (!bc txt) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">C = 21
-F = (9.0/5)*C + 32
-print F
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">C <span style="color: #666666">=</span> <span style="color: #666666">21</span>
+F <span style="color: #666666">=</span> (<span style="color: #666666">9.0/5</span>)<span style="color: #666666">*</span>C <span style="color: #666666">+</span> <span style="color: #666666">32</span>
+<span style="color: #008000; font-weight: bold">print</span> F
 </pre></div>
 <p>
 Instead of <code>9.0</code> we may just write <code>9.</code> (the dot implies a <code>float</code>
@@ -557,6 +552,7 @@ that the output becomes 69.8, which is correct.
 
 <h3 id="___sec24">Locating potential integer division <a name="___sec24"></a></h3>
 
+<p>
 Running a Python program with the <code>-Qwarnall</code> argument, say
 
 <p>
@@ -570,12 +566,14 @@ expression is encountered in Python version 2.
 
 <h3 id="___sec25">Remark <a name="___sec25"></a></h3>
 
+<p>
 We could easily have run into problems in our very first programs if
 we instead of writing the formula \( \frac{1}{2}gt^2 \) as <code>0.5*g*t**2</code>
 wrote <code>(1/2)*g*t**2</code>.  This term would then always be zero!
 
 <h2 id="sec:formula:operators">Arithmetic operators and precedence<a name="sec:formula:operators"></a></h2>
 
+<p>
 Formulas in Python programs are usually evaluated in the same way as
 we would evaluate them mathematically.  Python proceeds from left to
 right, term by term in an expression (terms are separated by plus or

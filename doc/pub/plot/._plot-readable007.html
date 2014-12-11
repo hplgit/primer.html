@@ -1,0 +1,952 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Array computing and curve plotting">
+<meta name="keywords" content="vectors,vector computing,scalar (math quantity),heterogeneous lists,Numerical Python,NumPy,array (datatype),array computing,vectorization,array slicing,subarrays,allocate,vectorization,scalar code,curve plotting,plotting,making graphs,backend (Easyviz),backend (Easyviz),remove files (in Python),delete files (in Python),boolean indexing,boolean indexing,in-place array arithmetics,check an object's type,shape (of an array),array shape,matrix,shape (of an array),array shape,least squares approximation,Trapezoidal rule for integration,Lagrange's interpolation formula,interpolation,Midpoint rule for integration,Trapezoidal rule for integration">
+
+<title>Array computing and curve plotting</title>
+
+<!-- Bootstrap style: bootswatch_readable -->
+<link href="http://netdna.bootstrapcdn.com/bootswatch/3.1.1/readable/bootstrap.min.css" rel="stylesheet">
+<!-- not necessary
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+
+<style type="text/css">
+/* Let inline verbatim have the same color as the surroundings */
+code { color: inherit; background-color: transparent; }
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [(' Vectors ', 1, None, '___sec0'),
+              (' The vector concept ', 2, None, '___sec1'),
+              (' Mathematical operations on vectors ',
+               2,
+               'sec:plot:vectors',
+               'sec:plot:vectors'),
+              (' Vector arithmetics and vector functions ',
+               2,
+               'sec:plot:arraycomp',
+               'sec:plot:arraycomp'),
+              (' Arrays in Python programs ', 1, None, '___sec4'),
+              (' Using lists for collecting function data ',
+               2,
+               'sec:plot:listdata',
+               'sec:plot:listdata'),
+              (' Basics of numerical Python arrays ',
+               2,
+               'sec:plot:array:basics',
+               'sec:plot:array:basics'),
+              (' Computing coordinates and function values ',
+               2,
+               None,
+               '___sec7'),
+              (' Vectorization ',
+               2,
+               'sec:plot:vectorization',
+               'sec:plot:vectorization'),
+              (' Curve plotting ',
+               1,
+               'sec:plot:curveplots',
+               'sec:plot:curveplots'),
+              (' Matplotlib; pylab ', 2, 'sec:plot:pylab', 'sec:plot:pylab'),
+              (' A basic plot ', 3, None, '___sec11'),
+              (' Decorating the plot ', 3, None, '___sec12'),
+              (' Plotting multiple curves ', 3, None, '___sec13'),
+              (' Placing several plots in one figure ', 3, None, '___sec14'),
+              (' Matplotlib; pyplot ',
+               2,
+               'sec:plot:pyplot',
+               'sec:plot:pyplot'),
+              (' SciTools and Easyviz ',
+               2,
+               'sec:plot:SciTools',
+               'sec:plot:SciTools'),
+              (' Importing SciTools and Easyviz ', 3, None, '___sec17'),
+              (' A basic plot ', 3, None, '___sec18'),
+              (' Decorating the plot ', 3, None, '___sec19'),
+              (' Plotting multiple curves ', 3, None, '___sec20'),
+              (' Changing backend ', 3, None, '___sec21'),
+              (' Placing several plots in one figure ', 3, None, '___sec22'),
+              (' Making animations ', 2, 'easyviz:movie', 'easyviz:movie'),
+              (' Example ', 3, None, '___sec24'),
+              (' Animation in Easyviz ', 3, None, '___sec25'),
+              (' Basic animation in Matplotlib ', 3, None, '___sec26'),
+              (' Using FuncAnimation in Matplotlib ', 3, None, '___sec27'),
+              (' Making videos ', 2, 'sec:plot:video', 'sec:plot:video'),
+              (' Animated GIF file ', 3, None, '___sec29'),
+              (' MP4, Ogg, WebM, and Flash videos ', 3, None, '___sec30'),
+              (' Curve plots in pure text ', 2, None, '___sec31'),
+              (' Plotting difficulties ',
+               1,
+               'sec:plot:difficulties',
+               'sec:plot:difficulties'),
+              (' Piecewisely defined functions ',
+               2,
+               'sec:plot:pwisefunc',
+               'sec:plot:pwisefunc'),
+              (' Example: The Heaviside function ', 3, None, '___sec34'),
+              (' Example: A hat function ', 3, None, '___sec35'),
+              (' Rapidly varying functions ',
+               2,
+               'sec:plot:sin1x',
+               'sec:plot:sin1x'),
+              (' More advanced vectorization of functions ',
+               1,
+               'sec:plot:if:vectorize',
+               'sec:plot:if:vectorize'),
+              (' Vectorization of StringFunction objects ',
+               2,
+               'sec:plot:StringFunction:vectorize',
+               'sec:plot:StringFunction:vectorize'),
+              (' Vectorization of the Heaviside function ',
+               2,
+               'sec:vec:Heaviside',
+               'sec:vec:Heaviside'),
+              (' Loop ', 3, None, '___sec40'),
+              (' Automatic vectorization ', 3, None, '___sec41'),
+              (' Mixing boolean and floating-point calculations ',
+               3,
+               None,
+               '___sec42'),
+              (' Manual vectorization ', 3, None, '___sec43'),
+              (' Vectorization of a hat function ',
+               2,
+               'sec:vec:hatfunc',
+               'sec:vec:hatfunc'),
+              (' More on numerical Python arrays ',
+               1,
+               'sec:plot:numpy:more',
+               'sec:plot:numpy:more'),
+              (' Copying arrays ', 2, None, '___sec46'),
+              (' In-place arithmetics ', 2, None, '___sec47'),
+              (' Allocating arrays ', 2, None, '___sec48'),
+              (' Generalized indexing ',
+               2,
+               'sec:plot:generalized:index',
+               'sec:plot:generalized:index'),
+              (' Testing for the array type ', 2, None, '___sec50'),
+              (' Example: Vectorizing a constant function ',
+               3,
+               None,
+               '___sec51'),
+              (' Compact syntax for array generation ', 2, None, '___sec52'),
+              (' Shape manipulation ', 2, None, '___sec53'),
+              (' Higher-dimensional arrays ',
+               1,
+               'sec:plot:2Darrays',
+               'sec:plot:2Darrays'),
+              (' Matrices and arrays ', 2, None, '___sec55'),
+              (' Two-dimensional numerical Python arrays ',
+               2,
+               'sec:plot:2D:arrays',
+               'sec:plot:2D:arrays'),
+              (' Array computing ',
+               2,
+               'sec:plot:array2comp',
+               'sec:plot:array2comp'),
+              (' Remark ', 3, None, '___sec58'),
+              (' Two-dimensional arrays and functions of two variables ',
+               2,
+               None,
+               '___sec59'),
+              (' Matrix objects ',
+               2,
+               'sec:plot:numpy:matrix',
+               'sec:plot:numpy:matrix'),
+              (' Summary ', 1, None, '___sec61'),
+              (' Chapter topics ', 2, None, '___sec62'),
+              (' Array computing ', 3, None, '___sec63'),
+              (' Plotting curves ', 3, None, '___sec64'),
+              (' Making movies ', 3, None, '___sec65'),
+              (' Terminology ', 3, None, '___sec66'),
+              (' Example: Animating a function ',
+               2,
+               'sec:plot:summarizing',
+               'sec:plot:summarizing'),
+              (' Problem ', 3, None, '___sec68'),
+              (' Solution ', 3, None, '___sec69'),
+              (' Scaling ', 3, None, '___sec70'),
+              (' Exercises ', 1, 'sec:plot:exer', 'sec:plot:exer'),
+              (' Exercise 1: Fill lists with function values ',
+               2,
+               'sec:plot:ex1',
+               'sec:plot:ex1'),
+              (' Exercise 2: Fill arrays; loop version ',
+               2,
+               'sec:plot:ex2',
+               'sec:plot:ex2'),
+              (' Exercise 3: Fill arrays; vectorized version ',
+               2,
+               'sec:plot:ex2b',
+               'sec:plot:ex2b'),
+              (' Exercise 4: Plot a function ',
+               2,
+               'sec:plot:ex2c',
+               'sec:plot:ex2c'),
+              (' Exercise 5: Apply a function to a vector ',
+               2,
+               'sec:plot:math:ex1',
+               'sec:plot:math:ex1'),
+              (' Exercise 6: Simulate by hand a vectorized expression ',
+               2,
+               'sec:plot:ex3',
+               'sec:plot:ex3'),
+              (' Exercise 7: Demonstrate array slicing ',
+               2,
+               'sec:plot:ex15d',
+               'sec:plot:ex15d'),
+              (' Exercise 8: Plot a formula ',
+               2,
+               'sec:plot:ex15',
+               'sec:plot:ex15'),
+              (' Exercise 9: Plot a formula for several parameters ',
+               2,
+               'sec:plot:ex15b',
+               'sec:plot:ex15b'),
+              (' Exercise 10: Specify the extent of the axes in a plot ',
+               2,
+               'sec:plot:ex15ba',
+               'sec:plot:ex15ba'),
+              (' Exercise 11: Plot exact and inexact Fahrenheit-Celsius conversion formulas ',
+               2,
+               'sec:plot:ex15c',
+               'sec:plot:ex15c'),
+              (' Exercise 12: Plot the trajectory of a ball ',
+               2,
+               'sec:plot:ex5',
+               'sec:plot:ex5'),
+              (' Exercise 13: Plot data in a two-column file ',
+               2,
+               'sec:files:ex12',
+               'sec:files:ex12'),
+              (' Remarks ', 3, None, '___sec85'),
+              (' Exercise 14: Plot data from a file ',
+               2,
+               'sec:files:ex12c',
+               'sec:files:ex12c'),
+              (' Exercise 15: Fit a polynomial to data points ',
+               2,
+               'sec:files:ex12c2',
+               'sec:files:ex12c2'),
+              (' Exercise 16: Fit a polynomial to experimental data ',
+               2,
+               'sec:files:ex19',
+               'sec:files:ex19'),
+              (' Exercise 17: Read acceleration data and find velocities ',
+               2,
+               'sec:files:ex22',
+               'sec:files:ex22'),
+              (' Exercise 18: Read acceleration data and plot velocities ',
+               2,
+               'sec:files:ex23',
+               'sec:files:ex23'),
+              (" Exercise 19: Plot a trip's path and velocity from GPS coordinates ",
+               2,
+               'sec:files:ex24',
+               'sec:files:ex24'),
+              (' Exercise 20: Vectorize the Midpoint rule for integration ',
+               2,
+               'sec:class:exer:sum',
+               'sec:class:exer:sum'),
+              (' Remarks ', 3, None, '___sec93'),
+              (" Exercise 21: Implement Lagrange's interpolation formula ",
+               2,
+               'sec:class:ex27a',
+               'sec:class:ex27a'),
+              (" Exercise 22: Plot Lagrange's interpolating polynomial ",
+               2,
+               'sec:class:ex27b',
+               'sec:class:ex27b'),
+              (" Exercise 23: Investigate the behavior of Lagrange's interpolating polynomials ",
+               2,
+               'sec:class:ex27c',
+               'sec:class:ex27c'),
+              (' Remarks ', 3, None, '___sec97'),
+              (' Exercise 24: Plot a wave packet ',
+               2,
+               'sec:plot:ex5d',
+               'sec:plot:ex5d'),
+              (' Exercise 25: Judge a plot ',
+               2,
+               'sec:plot:ex7',
+               'sec:plot:ex7'),
+              (' Exercise 26: Plot the viscosity of water ',
+               2,
+               'sec:plot:ex13c',
+               'sec:plot:ex13c'),
+              (' Exercise 27: Explore a complicated function graphically ',
+               2,
+               'sec:plot:ex16',
+               'sec:plot:ex16'),
+              (' Exercise 28: Plot Taylor polynomial approximations to $\\sin x$ ',
+               2,
+               'sec:plot:ex5b',
+               'sec:plot:ex5b'),
+              (' Exercise 29: Animate a wave packet ',
+               2,
+               'sec:plot:ex5e',
+               'sec:plot:ex5e'),
+              (' Exercise 30: Animate two-scale temperature variations ',
+               2,
+               'sec:plot:ex18',
+               'sec:plot:ex18'),
+              (' Remarks ', 3, None, '___sec105'),
+              (' Exercise 31: Use non-uniformly distributed coordinates for visualization ',
+               2,
+               'sec:plot:ex19',
+               'sec:plot:ex19'),
+              (" Exercise 32: Animate a planet's orbit ",
+               2,
+               'sec:plot:ex5g',
+               'sec:plot:ex5g'),
+              (' Exercise 33: Animate the evolution of Taylor polynomials ',
+               2,
+               'sec:plot:ex17',
+               'sec:plot:ex17'),
+              (' Exercise 34: Plot the velocity profile for pipeflow ',
+               2,
+               'sec:plot:ex4',
+               'sec:plot:ex4'),
+              (' Exercise 35: Plot sum-of-sines approximations to a function ',
+               2,
+               'sec:plot:ex8',
+               'sec:plot:ex8'),
+              (' Exercise 36: Animate the evolution of a sum-of-sine approximation to a function ',
+               2,
+               'sec:plot:ex8m',
+               'sec:plot:ex8m'),
+              (' Exercise 37: Plot functions from the command line ',
+               2,
+               'sec:plot:ex14',
+               'sec:plot:ex14'),
+              (' Exercise 38: Improve command-line input ',
+               2,
+               'sec:plot:ex14b',
+               'sec:plot:ex14b'),
+              (' Exercise 39: Demonstrate energy concepts from physics ',
+               2,
+               'sec:plot:ex20',
+               'sec:plot:ex20'),
+              (' Exercise 40: Plot a w-like function ',
+               2,
+               'sec:plot:math:ex9',
+               'sec:plot:math:ex9'),
+              (' Exercise 41: Visualize approximations in the Midpoint integration rule ',
+               2,
+               'sec:plot:ex:vizmidpoint',
+               'sec:plot:ex:vizmidpoint'),
+              (' Exercise 42: Visualize approximations in the Trapezoidal integration rule ',
+               2,
+               'sec:plot:ex:viztrapezoidal',
+               'sec:plot:ex:viztrapezoidal'),
+              (' Exercise 43: Experience overflow in a function ',
+               2,
+               'sec:plot:ex13',
+               'sec:plot:ex13'),
+              (' Remarks ', 3, None, '___sec119'),
+              (' Exercise 44: Apply a function to a rank 2 array ',
+               2,
+               'sec:plot:math:ex2',
+               'sec:plot:math:ex2'),
+              (' Exercise 45: Explain why array computations fail ',
+               2,
+               'sec:plot:ex11',
+               'sec:plot:ex11'),
+              (' References ', 1, None, '___sec122')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- newcommands_keep.tex -->
+$$
+\newcommand{\tp}{\thinspace .}
+$$
+
+
+
+
+    
+<!-- Bootstrap navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="plot-readable.html">Array computing and curve plotting</a>
+  </div>
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     <!-- navigation toc: --> <li><a href="._plot-readable001.html#___sec0" style="font-size: 80%;">Vectors</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-readable002.html#___sec4" style="font-size: 80%;">Arrays in Python programs</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-readable003.html#sec:plot:curveplots" style="font-size: 80%;">Curve plotting</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-readable004.html#sec:plot:difficulties" style="font-size: 80%;">Plotting difficulties</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-readable005.html#sec:plot:if:vectorize" style="font-size: 80%;">More advanced vectorization of functions</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-readable006.html#sec:plot:numpy:more" style="font-size: 80%;">More on numerical Python arrays</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:plot:2Darrays" style="font-size: 80%;">Higher-dimensional arrays</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-readable008.html#___sec61" style="font-size: 80%;">Summary</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-readable009.html#sec:plot:exer" style="font-size: 80%;">Exercises</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-readable009.html#___sec122" style="font-size: 80%;">References</a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div> <!-- end of navigation bar -->
+
+<div class="container">
+
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+
+<a name="part0007"></a>
+<!-- !split -->
+
+<h1 id="sec:plot:2Darrays">Higher-dimensional arrays<a name="sec:plot:2Darrays"></a></h1>
+
+<h2 id="___sec55">Matrices and arrays <a name="___sec55"></a></h2>
+
+<p>
+Vectors appeared when mathematicians needed to calculate with a list
+of numbers.  When they needed a table (or a list of lists in Python
+terminology), they invented the concept of <em>matrix</em> (singular) and
+<em>matrices</em> (plural).  A table of numbers has the numbers ordered into
+rows and columns. One example is
+
+$$
+\begin{equation*}
+\left\lbrack\begin{array}{cccc}
+0 & 12 & -1 & 5\\ 
+-1 & -1 & -1 & 0\\ 
+11 & 5 & 5 & -2
+\end{array}\right\rbrack
+\end{equation*}
+$$
+
+This table with three rows and four columns is called a \( 3\times4 \)
+matrix (mathematicians don't like this sentence, but it suffices for
+our purposes).  If the symbol \( A \) is associated with this matrix,
+\( A_{i,j} \) denotes the number in row number \( i \) and column number \( j \).
+Counting rows and columns from 0, we have, for instance, \( A_{0,0}=0 \)
+and \( A_{2,3}=-2 \). We can write a general \( m\times n \) matrix \( A \) as
+
+$$
+\begin{equation*}
+\left\lbrack\begin{array}{ccc}
+A_{0,0} & \cdots &  A_{0,n-1}\\ 
+\vdots & \ddots &  \vdots\\ 
+A_{m-1,0} & \cdots & A_{m-1,n-1}
+\end{array}\right\rbrack
+\end{equation*}
+$$
+
+Matrices can be added and subtracted. They can also be multiplied by a
+scalar (a number), and there is a concept of length or size.  The
+formulas are quite similar to those presented for vectors, but the
+exact form is not important here.
+
+<p>
+We can generalize the concept of table and matrix to <em>array</em>, which
+holds quantities with in general \( d \) indices.  Equivalently we say
+that the array has rank \( d \).  For \( d=3 \), an array \( A \) has elements
+with three indices: \( A_{p,q,r} \).  If \( p \) goes from 0 to \( n_p-1 \), \( q \)
+from 0 to \( n_q-1 \), and \( r \) from 0 to \( n_r-1 \), the \( A \) array has
+\( n_p\times n_q\times n_r \) elements in total.  We may speak about the
+<em>shape</em> of the array, which is a \( d \)-vector holding the number of
+elements in each &quot;array direction&quot;, i.e., the number of elements for
+each index. For the mentioned \( A \) array, the shape is \( (n_p,n_q,n_r) \).
+
+<p>
+The special case of \( d=1 \) is a vector, and \( d=2 \) corresponds to a
+matrix.  When we program we may skip thinking about vectors and
+matrices (if you are not so familiar with these concepts from a
+mathematical point of view) and instead just work with arrays. The
+number of indices corresponds to what is convenient in the programming
+problem we try to solve.
+
+<h2 id="sec:plot:2D:arrays">Two-dimensional numerical Python arrays<a name="sec:plot:2D:arrays"></a></h2>
+
+<p>
+Consider a nested list <code>table</code> of two-pairs <code>[C, F]</code>
+constructed by
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> Cdegrees <span style="color: #666666">=</span> [<span style="color: #666666">-30</span> <span style="color: #666666">+</span> i<span style="color: #666666">*10</span> <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">3</span>)]
+<span style="color: #666666">&gt;&gt;&gt;</span> Fdegrees <span style="color: #666666">=</span> [<span style="color: #666666">9./5*</span>C <span style="color: #666666">+</span> <span style="color: #666666">32</span> <span style="color: #008000; font-weight: bold">for</span> C <span style="color: #AA22FF; font-weight: bold">in</span> Cdegrees]
+<span style="color: #666666">&gt;&gt;&gt;</span> table <span style="color: #666666">=</span> [[C, F] <span style="color: #008000; font-weight: bold">for</span> C, F <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">zip</span>(Cdegrees, Fdegrees)]
+<span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">print</span> table
+[[<span style="color: #666666">-30</span>, <span style="color: #666666">-22.0</span>], [<span style="color: #666666">-20</span>, <span style="color: #666666">-4.0</span>], [<span style="color: #666666">-10</span>, <span style="color: #666666">14.0</span>]]
+</pre></div>
+<p>
+This nested list can be turned into an array,
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> table2 <span style="color: #666666">=</span> np<span style="color: #666666">.</span>array(table)
+<span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">print</span> table2
+[[<span style="color: #666666">-30.</span> <span style="color: #666666">-22.</span>]
+ [<span style="color: #666666">-20.</span>  <span style="color: #666666">-4.</span>]
+ [<span style="color: #666666">-10.</span>  <span style="color: #666666">14.</span>]]
+<span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000">type</span>(table2)
+<span style="color: #666666">&lt;</span><span style="color: #008000">type</span> <span style="color: #BA2121">&#39;numpy.ndarray&#39;</span><span style="color: #666666">&gt;</span>
+</pre></div>
+<p>
+We say that <code>table2</code> is a <em>two-dimensional</em> array, or an array
+of rank 2.
+
+<p>
+The <code>table</code> list and the <code>table2</code> array are stored very differently in
+memory. The <code>table</code> variable refers to a list object containing three
+elements.  Each of these elements is a reference to a separate list
+object with two elements, where each element refers to a separate
+<code>float</code> object.  The <code>table2</code> variable is a reference to a single
+array object that again refers to a consecutive sequence of bytes in
+memory where the six floating-point numbers are stored. The data
+associated with <code>table2</code> are found in one chunk in the computer's
+memory, while the data associated with <code>table</code> are scattered around in
+memory. On today's machines, it is much more expensive to find data in
+memory than to compute with the data. Arrays make the data fetching
+more efficient, and this is major reason for using arrays.  However,
+this efficiency gain is only present for very large arrays, not for a
+\( 3\times 2 \) array.
+
+<p>
+Indexing a nested list is done in two steps, first the outer list is
+indexed, giving access to an element that is another list, and then
+this latter list is indexed:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> table[<span style="color: #666666">1</span>][<span style="color: #666666">0</span>]     <span style="color: #408080; font-style: italic"># table[1] is [-20,4], whose index 0 holds -20</span>
+<span style="color: #666666">-20</span>
+</pre></div>
+<p>
+This syntax works for two-dimensional arrays too:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> table2[<span style="color: #666666">1</span>][<span style="color: #666666">0</span>]
+<span style="color: #666666">-20.0</span>
+</pre></div>
+<p>
+but there is another syntax that is more common for arrays:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> table2[<span style="color: #666666">1</span>,<span style="color: #666666">0</span>]
+<span style="color: #666666">-20.0</span>
+</pre></div>
+<p>
+A two-dimensional array reflects a table and has a certain number of
+rows and columns. We refer to rows as the <em>first dimension</em> of the
+array and columns as the <em>second dimension</em>. These two dimensions are
+available as <code>table2.shape</code>:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> table2<span style="color: #666666">.</span>shape
+(<span style="color: #666666">3</span>, <span style="color: #666666">2</span>)
+</pre></div>
+<p>
+Here, 3 is the number of rows and 2 is the number of columns.
+
+<p>
+A loop over all the elements in a two-dimensional array is usually
+expressed as two <em>nested</em> <code>for</code> loops, one for each index:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(table2<span style="color: #666666">.</span>shape[<span style="color: #666666">0</span>]):
+<span style="color: #666666">...</span>     <span style="color: #008000; font-weight: bold">for</span> j <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(table2<span style="color: #666666">.</span>shape[<span style="color: #666666">1</span>]):
+<span style="color: #666666">...</span>         <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;table2[</span><span style="color: #BB6688; font-weight: bold">%d</span><span style="color: #BA2121">,</span><span style="color: #BB6688; font-weight: bold">%d</span><span style="color: #BA2121">] = </span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> (i, j, table2[i,j])
+<span style="color: #666666">...</span>
+table2[<span style="color: #666666">0</span>,<span style="color: #666666">0</span>] <span style="color: #666666">=</span> <span style="color: #666666">-30</span>
+table2[<span style="color: #666666">0</span>,<span style="color: #666666">1</span>] <span style="color: #666666">=</span> <span style="color: #666666">-22</span>
+table2[<span style="color: #666666">1</span>,<span style="color: #666666">0</span>] <span style="color: #666666">=</span> <span style="color: #666666">-20</span>
+table2[<span style="color: #666666">1</span>,<span style="color: #666666">1</span>] <span style="color: #666666">=</span> <span style="color: #666666">-4</span>
+table2[<span style="color: #666666">2</span>,<span style="color: #666666">0</span>] <span style="color: #666666">=</span> <span style="color: #666666">-10</span>
+table2[<span style="color: #666666">2</span>,<span style="color: #666666">1</span>] <span style="color: #666666">=</span> <span style="color: #666666">14</span>
+</pre></div>
+<p>
+An alternative (but less efficient) way of visiting each element in an
+array with any number of dimensions makes use of a single <code>for</code> loop:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">for</span> index_tuple, value <span style="color: #AA22FF; font-weight: bold">in</span> np<span style="color: #666666">.</span>ndenumerate(table2):
+<span style="color: #666666">...</span>     <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;index </span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121"> has value </span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> \ 
+<span style="color: #666666">...</span>           (index_tuple, table2[index_tuple])
+<span style="color: #666666">...</span>
+index (<span style="color: #666666">0</span>,<span style="color: #666666">0</span>) has value <span style="color: #666666">-30</span>
+index (<span style="color: #666666">0</span>,<span style="color: #666666">1</span>) has value <span style="color: #666666">-22</span>
+index (<span style="color: #666666">1</span>,<span style="color: #666666">0</span>) has value <span style="color: #666666">-20</span>
+index (<span style="color: #666666">1</span>,<span style="color: #666666">1</span>) has value <span style="color: #666666">-4</span>
+index (<span style="color: #666666">2</span>,<span style="color: #666666">0</span>) has value <span style="color: #666666">-10</span>
+index (<span style="color: #666666">2</span>,<span style="color: #666666">1</span>) has value <span style="color: #666666">14</span>
+</pre></div>
+<p>
+In the same way as we can extract sublists of lists, we can extract
+subarrays of arrays using slices.
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">table2[<span style="color: #666666">0</span>:table2<span style="color: #666666">.</span>shape[<span style="color: #666666">0</span>], <span style="color: #666666">1</span>]  <span style="color: #408080; font-style: italic"># 2nd column (index 1)</span>
+array([<span style="color: #666666">-22.</span>,  <span style="color: #666666">-4.</span>,  <span style="color: #666666">14.</span>])
+
+<span style="color: #666666">&gt;&gt;&gt;</span> table2[<span style="color: #666666">0</span>:, <span style="color: #666666">1</span>]             <span style="color: #408080; font-style: italic"># same</span>
+array([<span style="color: #666666">-22.</span>,  <span style="color: #666666">-4.</span>,  <span style="color: #666666">14.</span>])
+
+<span style="color: #666666">&gt;&gt;&gt;</span> table2[:, <span style="color: #666666">1</span>]              <span style="color: #408080; font-style: italic"># same</span>
+array([<span style="color: #666666">-22.</span>,  <span style="color: #666666">-4.</span>,  <span style="color: #666666">14.</span>])
+</pre></div>
+<p>
+To illustrate array slicing further, we create a bigger array:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> t <span style="color: #666666">=</span> np<span style="color: #666666">.</span>linspace(<span style="color: #666666">1</span>, <span style="color: #666666">30</span>, <span style="color: #666666">30</span>)<span style="color: #666666">.</span>reshape(<span style="color: #666666">5</span>, <span style="color: #666666">6</span>)
+<span style="color: #666666">&gt;&gt;&gt;</span> t
+array([[  <span style="color: #666666">1.</span>,   <span style="color: #666666">2.</span>,   <span style="color: #666666">3.</span>,   <span style="color: #666666">4.</span>,   <span style="color: #666666">5.</span>,   <span style="color: #666666">6.</span>],
+       [  <span style="color: #666666">7.</span>,   <span style="color: #666666">8.</span>,   <span style="color: #666666">9.</span>,  <span style="color: #666666">10.</span>,  <span style="color: #666666">11.</span>,  <span style="color: #666666">12.</span>],
+       [ <span style="color: #666666">13.</span>,  <span style="color: #666666">14.</span>,  <span style="color: #666666">15.</span>,  <span style="color: #666666">16.</span>,  <span style="color: #666666">17.</span>,  <span style="color: #666666">18.</span>],
+       [ <span style="color: #666666">19.</span>,  <span style="color: #666666">20.</span>,  <span style="color: #666666">21.</span>,  <span style="color: #666666">22.</span>,  <span style="color: #666666">23.</span>,  <span style="color: #666666">24.</span>],
+       [ <span style="color: #666666">25.</span>,  <span style="color: #666666">26.</span>,  <span style="color: #666666">27.</span>,  <span style="color: #666666">28.</span>,  <span style="color: #666666">29.</span>,  <span style="color: #666666">30.</span>]])
+
+<span style="color: #666666">&gt;&gt;&gt;</span> t[<span style="color: #666666">1</span>:<span style="color: #666666">-1</span>:<span style="color: #666666">2</span>, <span style="color: #666666">2</span>:]
+array([[  <span style="color: #666666">9.</span>,  <span style="color: #666666">10.</span>,  <span style="color: #666666">11.</span>,  <span style="color: #666666">12.</span>],
+       [ <span style="color: #666666">21.</span>,  <span style="color: #666666">22.</span>,  <span style="color: #666666">23.</span>,  <span style="color: #666666">24.</span>]])
+</pre></div>
+<p>
+To understand the slice, look at the original <code>t</code> array and pick out
+the two rows corresponding to the first slice <code>1:-1:2</code>,
+
+<p>
+
+<!-- code=text (!bc ccq) typeset with pygments style "default" -->
+<blockquote>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">       [  7.,   8.,   9.,  10.,  11.,  12.]
+       [ 19.,  20.,  21.,  22.,  23.,  24.]
+</pre></div>
+</blockquote><p>
+Among the rows, pick the columns corresponding to the second slice <code>2:</code>,
+
+<p>
+
+<!-- code=text (!bc ccq) typeset with pygments style "default" -->
+<blockquote>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">       [  9.,  10.,  11.,  12.]
+       [ 21.,  22.,  23.,  24.]
+</pre></div>
+</blockquote><p>
+Another example is
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> t[:<span style="color: #666666">-2</span>, :<span style="color: #666666">-1</span>:<span style="color: #666666">2</span>]
+array([[  <span style="color: #666666">1.</span>,   <span style="color: #666666">3.</span>,   <span style="color: #666666">5.</span>],
+       [  <span style="color: #666666">7.</span>,   <span style="color: #666666">9.</span>,  <span style="color: #666666">11.</span>],
+       [ <span style="color: #666666">13.</span>,  <span style="color: #666666">15.</span>,  <span style="color: #666666">17.</span>]])
+</pre></div>
+<p>
+Generalized indexing as described for one-dimensional arrays in
+the section <a href="._plot-readable006.html#sec:plot:generalized:index">Generalized indexing</a> requires a more comprehensive
+syntax for higher-dimensional arrays.  Say we want to extract a
+subarray of <code>t</code> that consists of the rows with indices 0 and 3 and the
+columns with indices 1 and 2:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> t[np<span style="color: #666666">.</span>ix_([<span style="color: #666666">0</span>,<span style="color: #666666">3</span>], [<span style="color: #666666">1</span>,<span style="color: #666666">2</span>])]
+array([[  <span style="color: #666666">2.</span>,   <span style="color: #666666">3.</span>],
+       [ <span style="color: #666666">20.</span>,  <span style="color: #666666">21.</span>]])
+<span style="color: #666666">&gt;&gt;&gt;</span> t[np<span style="color: #666666">.</span>ix_([<span style="color: #666666">0</span>,<span style="color: #666666">3</span>], [<span style="color: #666666">1</span>,<span style="color: #666666">2</span>])] <span style="color: #666666">=</span> <span style="color: #666666">0</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> t
+array([[  <span style="color: #666666">1.</span>,   <span style="color: #666666">0.</span>,   <span style="color: #666666">0.</span>,   <span style="color: #666666">4.</span>,   <span style="color: #666666">5.</span>,   <span style="color: #666666">6.</span>],
+       [  <span style="color: #666666">7.</span>,   <span style="color: #666666">8.</span>,   <span style="color: #666666">9.</span>,  <span style="color: #666666">10.</span>,  <span style="color: #666666">11.</span>,  <span style="color: #666666">12.</span>],
+       [ <span style="color: #666666">13.</span>,  <span style="color: #666666">14.</span>,  <span style="color: #666666">15.</span>,  <span style="color: #666666">16.</span>,  <span style="color: #666666">17.</span>,  <span style="color: #666666">18.</span>],
+       [ <span style="color: #666666">19.</span>,   <span style="color: #666666">0.</span>,   <span style="color: #666666">0.</span>,  <span style="color: #666666">22.</span>,  <span style="color: #666666">23.</span>,  <span style="color: #666666">24.</span>],
+       [ <span style="color: #666666">25.</span>,  <span style="color: #666666">26.</span>,  <span style="color: #666666">27.</span>,  <span style="color: #666666">28.</span>,  <span style="color: #666666">29.</span>,  <span style="color: #666666">30.</span>]])
+</pre></div>
+<p>
+Recall that slices only gives a view to the array, not a copy of the values:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> a <span style="color: #666666">=</span> t[<span style="color: #666666">1</span>:<span style="color: #666666">-1</span>:<span style="color: #666666">2</span>, <span style="color: #666666">1</span>:<span style="color: #666666">-1</span>]
+<span style="color: #666666">&gt;&gt;&gt;</span> a
+array([[  <span style="color: #666666">8.</span>,   <span style="color: #666666">9.</span>,  <span style="color: #666666">10.</span>,  <span style="color: #666666">11.</span>],
+       [  <span style="color: #666666">0.</span>,   <span style="color: #666666">0.</span>,  <span style="color: #666666">22.</span>,  <span style="color: #666666">23.</span>]])
+<span style="color: #666666">&gt;&gt;&gt;</span> a[:,:] <span style="color: #666666">=</span> <span style="color: #666666">-99</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> a
+array([[<span style="color: #666666">-99.</span>, <span style="color: #666666">-99.</span>, <span style="color: #666666">-99.</span>, <span style="color: #666666">-99.</span>],
+       [<span style="color: #666666">-99.</span>, <span style="color: #666666">-99.</span>, <span style="color: #666666">-99.</span>, <span style="color: #666666">-99.</span>]])
+<span style="color: #666666">&gt;&gt;&gt;</span> t  <span style="color: #408080; font-style: italic"># is t changed to? yes!</span>
+array([[  <span style="color: #666666">1.</span>,   <span style="color: #666666">0.</span>,   <span style="color: #666666">0.</span>,   <span style="color: #666666">4.</span>,   <span style="color: #666666">5.</span>,   <span style="color: #666666">6.</span>],
+       [  <span style="color: #666666">7.</span>, <span style="color: #666666">-99.</span>, <span style="color: #666666">-99.</span>, <span style="color: #666666">-99.</span>, <span style="color: #666666">-99.</span>,  <span style="color: #666666">12.</span>],
+       [ <span style="color: #666666">13.</span>,  <span style="color: #666666">14.</span>,  <span style="color: #666666">15.</span>,  <span style="color: #666666">16.</span>,  <span style="color: #666666">17.</span>,  <span style="color: #666666">18.</span>],
+       [ <span style="color: #666666">19.</span>, <span style="color: #666666">-99.</span>, <span style="color: #666666">-99.</span>, <span style="color: #666666">-99.</span>, <span style="color: #666666">-99.</span>,  <span style="color: #666666">24.</span>],
+       [ <span style="color: #666666">25.</span>,  <span style="color: #666666">26.</span>,  <span style="color: #666666">27.</span>,  <span style="color: #666666">28.</span>,  <span style="color: #666666">29.</span>,  <span style="color: #666666">30.</span>]])
+</pre></div>
+
+<h2 id="sec:plot:array2comp">Array computing<a name="sec:plot:array2comp"></a></h2>
+
+<p>
+The operations on vectors in the section <a href="._plot-readable001.html#sec:plot:arraycomp">Vector arithmetics and vector functions</a> can quite
+straightforwardly be extended to arrays of any dimension.  Consider
+the definition of applying a function \( f(v) \) to a vector \( v \): we apply
+the function to each element \( v_i \) in \( v \).  For a two-dimensional
+array \( A \) with elements \( A_{i,j} \), \( i=0,\ldots,m \), \( j=0,\ldots,n \), the
+same definition yields
+
+$$
+\begin{equation*} f(A) = (f(A_{0,0}),\ldots,f(A_{m-1,0}),f(A_{1,0}),
+\ldots,f(A_{m-1,n-1}))\tp \end{equation*}
+$$
+
+For an array \( B \) with any rank, \( f(B) \) means applying \( f \) to
+each array entry.
+
+<p>
+The asterisk operation from the section <a href="._plot-readable001.html#sec:plot:arraycomp">Vector arithmetics and vector functions</a> is also
+naturally extended to arrays: \( A*B \) means multiplying an element in
+\( A \) by the corresponding element in \( B \), i.e., element \( (i,j) \) in
+\( A*B \) is \( A_{i,j}B_{i,j} \).  This definition naturally extends to
+arrays of any rank, provided the two arrays have the same shape.
+
+<p>
+Adding a scalar to an array implies adding the scalar to each element
+in the array. Compound expressions involving arrays, e.g.,
+\( \exp(-A^2)*A +1 \), work as for vectors. One can in fact just imagine
+that all the array elements are stored after each other in a long
+vector (this is actually the way the array elements are stored in the
+computer's memory), and the array operations can then easily be
+defined in terms of the vector operations from the section <a href="._plot-readable001.html#sec:plot:arraycomp">Vector arithmetics and vector functions</a>.
+
+<h3 id="___sec58">Remark <a name="___sec58"></a></h3>
+
+<p>
+Readers with knowledge of matrix computations may get confused by the
+meaning of \( A^2 \) in matrix computing and \( A^2 \) in array computing. The
+former is a matrix-matrix product, while the latter means squaring all
+elements of \( A \). Which rule to apply, depends on the context, i.e.,
+whether we are doing linear algebra or vectorized arithmetics. In
+mathematical typesetting, \( A^2 \) can be written as \( AA \), while the
+array computing expression \( A^2 \) can be alternatively written as
+\( A*A \).  In a program, <code>A*A</code> and <code>A**2</code> are identical computations,
+meaning squaring all elements (array arithmetics). With NumPy arrays
+the matrix-matrix product is obtained by <code>dot(A, A)</code>. The
+matrix-vector product \( Ax \), where \( x \) is a vector, is computed by
+<code>dot(A, x)</code>. However, with matrix objects (see the section <a href="#sec:plot:numpy:matrix">Matrix objects</a>) <code>A*A</code> implies the mathematical matrix
+multiplication \( AA \).
+
+<h2 id="___sec59">Two-dimensional arrays and functions of two variables <a name="___sec59"></a></h2>
+
+<p>
+Given a function of two variables, say
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f</span>(x, y):
+    <span style="color: #008000; font-weight: bold">return</span> sin(sqrt(x<span style="color: #666666">**2</span> <span style="color: #666666">+</span> y<span style="color: #666666">**2</span>))
+</pre></div>
+<p>
+we can plot this function by writing
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">scitools.std</span> <span style="color: #008000; font-weight: bold">import</span> sin, sqrt, linspace, ndgrid, mesh
+x <span style="color: #666666">=</span> y <span style="color: #666666">=</span> linspace(<span style="color: #666666">-5</span>, <span style="color: #666666">5</span>, <span style="color: #666666">21</span>)  <span style="color: #408080; font-style: italic"># coordinates in x and y direction</span>
+xv, yv <span style="color: #666666">=</span> ndgrid(x, y)
+z <span style="color: #666666">=</span> f(xv, yv)
+mesh(xv, yv, z)
+</pre></div>
+<p>
+There are two new things here: (i) the call to <code>ndgrid</code>, which is
+necessary to transform one-dimensional coordinate arrays in the \( x \)
+and \( y \) direction into arrays valid for evaluating <code>f</code> over a
+two-dimensional grid; and (ii) the plot function whose name now is
+<code>mesh</code>, which is one out of many plot functions for two-dimensional
+functions. Another plot type you can try out is
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">surf(xv, yv, z)
+</pre></div>
+<p>
+More material on visualizing \( f(x,y) \) functions is found in the
+section <em>Visualizing Scalar Fields</em> in the Easyviz tutorial.  This
+tutorial can be reached through the command <code>pydoc scitools.easyviz</code>
+in a terminal window or from <a href="http://code.google.com/p/scitools" target="_self"><tt>code.google.com/p/scitools</tt></a>.
+
+<h2 id="sec:plot:numpy:matrix">Matrix objects<a name="sec:plot:numpy:matrix"></a></h2>
+
+<p>
+This section only makes sense if you are familiar with basic linear
+algebra and the matrix concept.  The arrays created so far have been
+of type <code>ndarray</code>.  NumPy also has a matrix type called <code>matrix</code> or
+<code>mat</code> for one- and two-dimensional arrays. One-dimensional arrays are
+then extended with one extra dimension such that they become matrices,
+i.e., either a row vector or a column vector:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> x1 <span style="color: #666666">=</span> np<span style="color: #666666">.</span>array([<span style="color: #666666">1</span>, <span style="color: #666666">2</span>, <span style="color: #666666">3</span>], <span style="color: #008000">float</span>)
+<span style="color: #666666">&gt;&gt;&gt;</span> x2 <span style="color: #666666">=</span> np<span style="color: #666666">.</span>matrix(x1)               <span style="color: #408080; font-style: italic"># or mat(x1)</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> x2                               <span style="color: #408080; font-style: italic"># row vector</span>
+matrix([[ <span style="color: #666666">1.</span>,  <span style="color: #666666">2.</span>,  <span style="color: #666666">3.</span>]])
+<span style="color: #666666">&gt;&gt;&gt;</span> x3 <span style="color: #666666">=</span> mat(x1)<span style="color: #666666">.</span>transpose()         <span style="color: #408080; font-style: italic"># column vector</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> x3
+matrix([[ <span style="color: #666666">1.</span>],
+        [ <span style="color: #666666">2.</span>],
+        [ <span style="color: #666666">3.</span>]])
+
+<span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000">type</span>(x3)
+<span style="color: #666666">&lt;</span><span style="color: #008000; font-weight: bold">class</span> &#39;<span style="color: #0000FF; font-weight: bold">numpy</span><span style="color: #666666">.</span>matrixlib<span style="color: #666666">.</span>defmatrix<span style="color: #666666">.</span>matrix<span style="color: #BA2121">&#39;&gt;</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000">isinstance</span>(x3, np<span style="color: #666666">.</span>matrix)
+<span style="color: #008000">True</span>
+</pre></div>
+<p>
+A special feature of <code>matrix</code> objects is that the multiplication
+operator represents the matrix-matrix, vector-matrix, or matrix-vector
+product as we know from linear algebra:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> A <span style="color: #666666">=</span> eye(<span style="color: #666666">3</span>)                    <span style="color: #408080; font-style: italic"># identity matrix</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> A
+array([[ <span style="color: #666666">1.</span>,  <span style="color: #666666">0.</span>,  <span style="color: #666666">0.</span>],
+       [ <span style="color: #666666">0.</span>,  <span style="color: #666666">1.</span>,  <span style="color: #666666">0.</span>],
+       [ <span style="color: #666666">0.</span>,  <span style="color: #666666">0.</span>,  <span style="color: #666666">1.</span>]])
+<span style="color: #666666">&gt;&gt;&gt;</span> A <span style="color: #666666">=</span> mat(A)
+<span style="color: #666666">&gt;&gt;&gt;</span> A
+matrix([[ <span style="color: #666666">1.</span>,  <span style="color: #666666">0.</span>,  <span style="color: #666666">0.</span>],
+        [ <span style="color: #666666">0.</span>,  <span style="color: #666666">1.</span>,  <span style="color: #666666">0.</span>],
+        [ <span style="color: #666666">0.</span>,  <span style="color: #666666">0.</span>,  <span style="color: #666666">1.</span>]])
+<span style="color: #666666">&gt;&gt;&gt;</span> y2 <span style="color: #666666">=</span> x2<span style="color: #666666">*</span>A                     <span style="color: #408080; font-style: italic"># vector-matrix product</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> y2
+matrix([[ <span style="color: #666666">1.</span>,  <span style="color: #666666">2.</span>,  <span style="color: #666666">3.</span>]])
+<span style="color: #666666">&gt;&gt;&gt;</span> y3 <span style="color: #666666">=</span> A<span style="color: #666666">*</span>x3                     <span style="color: #408080; font-style: italic"># matrix-vector product</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> y3
+matrix([[ <span style="color: #666666">1.</span>],
+        [ <span style="color: #666666">2.</span>],
+        [ <span style="color: #666666">3.</span>]])
+</pre></div>
+<p>
+One should note here that the multiplication operator between standard
+<code>ndarray</code> objects is quite different, as the next interactive
+session demonstrates.
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> A<span style="color: #666666">*</span>x1                          <span style="color: #408080; font-style: italic"># no matrix-array product!</span>
+Traceback (most recent call last):
+<span style="color: #666666">...</span>
+<span style="color: #D2413A; font-weight: bold">ValueError</span>: matrices are <span style="color: #AA22FF; font-weight: bold">not</span> aligned
+
+<span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #408080; font-style: italic"># try array*array product:</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> A <span style="color: #666666">=</span> (zeros(<span style="color: #666666">9</span>) <span style="color: #666666">+</span> <span style="color: #666666">1</span>)<span style="color: #666666">.</span>reshape(<span style="color: #666666">3</span>,<span style="color: #666666">3</span>)
+<span style="color: #666666">&gt;&gt;&gt;</span> A
+array([[ <span style="color: #666666">1.</span>,  <span style="color: #666666">1.</span>,  <span style="color: #666666">1.</span>],
+       [ <span style="color: #666666">1.</span>,  <span style="color: #666666">1.</span>,  <span style="color: #666666">1.</span>],
+       [ <span style="color: #666666">1.</span>,  <span style="color: #666666">1.</span>,  <span style="color: #666666">1.</span>]])
+<span style="color: #666666">&gt;&gt;&gt;</span> A<span style="color: #666666">*</span>x1                      <span style="color: #408080; font-style: italic"># [A[0,:]*x1, A[1,:]*x1, A[2,:]*x1]</span>
+array([[ <span style="color: #666666">1.</span>,  <span style="color: #666666">2.</span>,  <span style="color: #666666">3.</span>],
+       [ <span style="color: #666666">1.</span>,  <span style="color: #666666">2.</span>,  <span style="color: #666666">3.</span>],
+       [ <span style="color: #666666">1.</span>,  <span style="color: #666666">2.</span>,  <span style="color: #666666">3.</span>]])
+<span style="color: #666666">&gt;&gt;&gt;</span> B <span style="color: #666666">=</span> A <span style="color: #666666">+</span> <span style="color: #666666">1</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> A<span style="color: #666666">*</span>B                       <span style="color: #408080; font-style: italic"># element-wise product</span>
+array([[ <span style="color: #666666">2.</span>,  <span style="color: #666666">2.</span>,  <span style="color: #666666">2.</span>],
+       [ <span style="color: #666666">2.</span>,  <span style="color: #666666">2.</span>,  <span style="color: #666666">2.</span>],
+       [ <span style="color: #666666">2.</span>,  <span style="color: #666666">2.</span>,  <span style="color: #666666">2.</span>]])
+<span style="color: #666666">&gt;&gt;&gt;</span> A <span style="color: #666666">=</span> mat(A);  B <span style="color: #666666">=</span> mat(B)
+<span style="color: #666666">&gt;&gt;&gt;</span> A<span style="color: #666666">*</span>B                       <span style="color: #408080; font-style: italic"># matrix-matrix product</span>
+matrix([[ <span style="color: #666666">6.</span>,  <span style="color: #666666">6.</span>,  <span style="color: #666666">6.</span>],
+        [ <span style="color: #666666">6.</span>,  <span style="color: #666666">6.</span>,  <span style="color: #666666">6.</span>],
+        [ <span style="color: #666666">6.</span>,  <span style="color: #666666">6.</span>,  <span style="color: #666666">6.</span>]])
+</pre></div>
+<p>
+Readers who are familiar with MATLAB, or intend to use Python and
+MATLAB together, should seriously think about programming with
+<code>matrix</code> objects instead of <code>ndarray</code> objects, because the <code>matrix</code>
+type behaves quite similar to matrices and vectors in MATLAB.
+Nevertheless, <code>matrix</code> cannot be used for arrays of larger dimension
+than two.
+
+<p>
+<p>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pager">
+  <li class="previous">
+    <a href="._plot-readable006.html">&larr; Prev</a>
+  </li>
+  <li class="next">
+    <a href="._plot-readable008.html">Next &rarr;</a>
+  </li>
+</ul>
+<!-- ------------------- end of main content --------------- -->
+
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap footer
+<footer>
+<a href="http://..."><img width="250" align=right src="http://..."></a>
+</footer>
+-->
+
+
+</body>
+</html>
+    
+

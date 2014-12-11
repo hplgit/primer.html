@@ -1,0 +1,906 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Array computing and curve plotting">
+<meta name="keywords" content="vectors,vector computing,scalar (math quantity),heterogeneous lists,Numerical Python,NumPy,array (datatype),array computing,vectorization,array slicing,subarrays,allocate,vectorization,scalar code,curve plotting,plotting,making graphs,backend (Easyviz),backend (Easyviz),remove files (in Python),delete files (in Python),boolean indexing,boolean indexing,in-place array arithmetics,check an object's type,shape (of an array),array shape,matrix,shape (of an array),array shape,least squares approximation,Trapezoidal rule for integration,Lagrange's interpolation formula,interpolation,Midpoint rule for integration,Trapezoidal rule for integration">
+
+<title>Array computing and curve plotting</title>
+
+<!-- Bootstrap style: bootstrap_bluegray -->
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://raw.github.com/hplgit/doconce/master/bundled/html_styles/style_bootstrap/css/bootstrap_bluegray.css" rel="stylesheet">
+<!-- not necessary
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+
+<style type="text/css">
+/* Let inline verbatim have the same color as the surroundings */
+code { color: inherit; background-color: transparent; }
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [(' Vectors ', 1, None, '___sec0'),
+              (' The vector concept ', 2, None, '___sec1'),
+              (' Mathematical operations on vectors ',
+               2,
+               'sec:plot:vectors',
+               'sec:plot:vectors'),
+              (' Vector arithmetics and vector functions ',
+               2,
+               'sec:plot:arraycomp',
+               'sec:plot:arraycomp'),
+              (' Arrays in Python programs ', 1, None, '___sec4'),
+              (' Using lists for collecting function data ',
+               2,
+               'sec:plot:listdata',
+               'sec:plot:listdata'),
+              (' Basics of numerical Python arrays ',
+               2,
+               'sec:plot:array:basics',
+               'sec:plot:array:basics'),
+              (' Computing coordinates and function values ',
+               2,
+               None,
+               '___sec7'),
+              (' Vectorization ',
+               2,
+               'sec:plot:vectorization',
+               'sec:plot:vectorization'),
+              (' Curve plotting ',
+               1,
+               'sec:plot:curveplots',
+               'sec:plot:curveplots'),
+              (' Matplotlib; pylab ', 2, 'sec:plot:pylab', 'sec:plot:pylab'),
+              (' A basic plot ', 3, None, '___sec11'),
+              (' Decorating the plot ', 3, None, '___sec12'),
+              (' Plotting multiple curves ', 3, None, '___sec13'),
+              (' Placing several plots in one figure ', 3, None, '___sec14'),
+              (' Matplotlib; pyplot ',
+               2,
+               'sec:plot:pyplot',
+               'sec:plot:pyplot'),
+              (' SciTools and Easyviz ',
+               2,
+               'sec:plot:SciTools',
+               'sec:plot:SciTools'),
+              (' Importing SciTools and Easyviz ', 3, None, '___sec17'),
+              (' A basic plot ', 3, None, '___sec18'),
+              (' Decorating the plot ', 3, None, '___sec19'),
+              (' Plotting multiple curves ', 3, None, '___sec20'),
+              (' Changing backend ', 3, None, '___sec21'),
+              (' Placing several plots in one figure ', 3, None, '___sec22'),
+              (' Making animations ', 2, 'easyviz:movie', 'easyviz:movie'),
+              (' Example ', 3, None, '___sec24'),
+              (' Animation in Easyviz ', 3, None, '___sec25'),
+              (' Basic animation in Matplotlib ', 3, None, '___sec26'),
+              (' Using FuncAnimation in Matplotlib ', 3, None, '___sec27'),
+              (' Making videos ', 2, 'sec:plot:video', 'sec:plot:video'),
+              (' Animated GIF file ', 3, None, '___sec29'),
+              (' MP4, Ogg, WebM, and Flash videos ', 3, None, '___sec30'),
+              (' Curve plots in pure text ', 2, None, '___sec31'),
+              (' Plotting difficulties ',
+               1,
+               'sec:plot:difficulties',
+               'sec:plot:difficulties'),
+              (' Piecewisely defined functions ',
+               2,
+               'sec:plot:pwisefunc',
+               'sec:plot:pwisefunc'),
+              (' Example: The Heaviside function ', 3, None, '___sec34'),
+              (' Example: A hat function ', 3, None, '___sec35'),
+              (' Rapidly varying functions ',
+               2,
+               'sec:plot:sin1x',
+               'sec:plot:sin1x'),
+              (' More advanced vectorization of functions ',
+               1,
+               'sec:plot:if:vectorize',
+               'sec:plot:if:vectorize'),
+              (' Vectorization of StringFunction objects ',
+               2,
+               'sec:plot:StringFunction:vectorize',
+               'sec:plot:StringFunction:vectorize'),
+              (' Vectorization of the Heaviside function ',
+               2,
+               'sec:vec:Heaviside',
+               'sec:vec:Heaviside'),
+              (' Loop ', 3, None, '___sec40'),
+              (' Automatic vectorization ', 3, None, '___sec41'),
+              (' Mixing boolean and floating-point calculations ',
+               3,
+               None,
+               '___sec42'),
+              (' Manual vectorization ', 3, None, '___sec43'),
+              (' Vectorization of a hat function ',
+               2,
+               'sec:vec:hatfunc',
+               'sec:vec:hatfunc'),
+              (' More on numerical Python arrays ',
+               1,
+               'sec:plot:numpy:more',
+               'sec:plot:numpy:more'),
+              (' Copying arrays ', 2, None, '___sec46'),
+              (' In-place arithmetics ', 2, None, '___sec47'),
+              (' Allocating arrays ', 2, None, '___sec48'),
+              (' Generalized indexing ',
+               2,
+               'sec:plot:generalized:index',
+               'sec:plot:generalized:index'),
+              (' Testing for the array type ', 2, None, '___sec50'),
+              (' Example: Vectorizing a constant function ',
+               3,
+               None,
+               '___sec51'),
+              (' Compact syntax for array generation ', 2, None, '___sec52'),
+              (' Shape manipulation ', 2, None, '___sec53'),
+              (' Higher-dimensional arrays ',
+               1,
+               'sec:plot:2Darrays',
+               'sec:plot:2Darrays'),
+              (' Matrices and arrays ', 2, None, '___sec55'),
+              (' Two-dimensional numerical Python arrays ',
+               2,
+               'sec:plot:2D:arrays',
+               'sec:plot:2D:arrays'),
+              (' Array computing ',
+               2,
+               'sec:plot:array2comp',
+               'sec:plot:array2comp'),
+              (' Remark ', 3, None, '___sec58'),
+              (' Two-dimensional arrays and functions of two variables ',
+               2,
+               None,
+               '___sec59'),
+              (' Matrix objects ',
+               2,
+               'sec:plot:numpy:matrix',
+               'sec:plot:numpy:matrix'),
+              (' Summary ', 1, None, '___sec61'),
+              (' Chapter topics ', 2, None, '___sec62'),
+              (' Array computing ', 3, None, '___sec63'),
+              (' Plotting curves ', 3, None, '___sec64'),
+              (' Making movies ', 3, None, '___sec65'),
+              (' Terminology ', 3, None, '___sec66'),
+              (' Example: Animating a function ',
+               2,
+               'sec:plot:summarizing',
+               'sec:plot:summarizing'),
+              (' Problem ', 3, None, '___sec68'),
+              (' Solution ', 3, None, '___sec69'),
+              (' Scaling ', 3, None, '___sec70'),
+              (' Exercises ', 1, 'sec:plot:exer', 'sec:plot:exer'),
+              (' Exercise 1: Fill lists with function values ',
+               2,
+               'sec:plot:ex1',
+               'sec:plot:ex1'),
+              (' Exercise 2: Fill arrays; loop version ',
+               2,
+               'sec:plot:ex2',
+               'sec:plot:ex2'),
+              (' Exercise 3: Fill arrays; vectorized version ',
+               2,
+               'sec:plot:ex2b',
+               'sec:plot:ex2b'),
+              (' Exercise 4: Plot a function ',
+               2,
+               'sec:plot:ex2c',
+               'sec:plot:ex2c'),
+              (' Exercise 5: Apply a function to a vector ',
+               2,
+               'sec:plot:math:ex1',
+               'sec:plot:math:ex1'),
+              (' Exercise 6: Simulate by hand a vectorized expression ',
+               2,
+               'sec:plot:ex3',
+               'sec:plot:ex3'),
+              (' Exercise 7: Demonstrate array slicing ',
+               2,
+               'sec:plot:ex15d',
+               'sec:plot:ex15d'),
+              (' Exercise 8: Plot a formula ',
+               2,
+               'sec:plot:ex15',
+               'sec:plot:ex15'),
+              (' Exercise 9: Plot a formula for several parameters ',
+               2,
+               'sec:plot:ex15b',
+               'sec:plot:ex15b'),
+              (' Exercise 10: Specify the extent of the axes in a plot ',
+               2,
+               'sec:plot:ex15ba',
+               'sec:plot:ex15ba'),
+              (' Exercise 11: Plot exact and inexact Fahrenheit-Celsius conversion formulas ',
+               2,
+               'sec:plot:ex15c',
+               'sec:plot:ex15c'),
+              (' Exercise 12: Plot the trajectory of a ball ',
+               2,
+               'sec:plot:ex5',
+               'sec:plot:ex5'),
+              (' Exercise 13: Plot data in a two-column file ',
+               2,
+               'sec:files:ex12',
+               'sec:files:ex12'),
+              (' Remarks ', 3, None, '___sec85'),
+              (' Exercise 14: Plot data from a file ',
+               2,
+               'sec:files:ex12c',
+               'sec:files:ex12c'),
+              (' Exercise 15: Fit a polynomial to data points ',
+               2,
+               'sec:files:ex12c2',
+               'sec:files:ex12c2'),
+              (' Exercise 16: Fit a polynomial to experimental data ',
+               2,
+               'sec:files:ex19',
+               'sec:files:ex19'),
+              (' Exercise 17: Read acceleration data and find velocities ',
+               2,
+               'sec:files:ex22',
+               'sec:files:ex22'),
+              (' Exercise 18: Read acceleration data and plot velocities ',
+               2,
+               'sec:files:ex23',
+               'sec:files:ex23'),
+              (" Exercise 19: Plot a trip's path and velocity from GPS coordinates ",
+               2,
+               'sec:files:ex24',
+               'sec:files:ex24'),
+              (' Exercise 20: Vectorize the Midpoint rule for integration ',
+               2,
+               'sec:class:exer:sum',
+               'sec:class:exer:sum'),
+              (' Remarks ', 3, None, '___sec93'),
+              (" Exercise 21: Implement Lagrange's interpolation formula ",
+               2,
+               'sec:class:ex27a',
+               'sec:class:ex27a'),
+              (" Exercise 22: Plot Lagrange's interpolating polynomial ",
+               2,
+               'sec:class:ex27b',
+               'sec:class:ex27b'),
+              (" Exercise 23: Investigate the behavior of Lagrange's interpolating polynomials ",
+               2,
+               'sec:class:ex27c',
+               'sec:class:ex27c'),
+              (' Remarks ', 3, None, '___sec97'),
+              (' Exercise 24: Plot a wave packet ',
+               2,
+               'sec:plot:ex5d',
+               'sec:plot:ex5d'),
+              (' Exercise 25: Judge a plot ',
+               2,
+               'sec:plot:ex7',
+               'sec:plot:ex7'),
+              (' Exercise 26: Plot the viscosity of water ',
+               2,
+               'sec:plot:ex13c',
+               'sec:plot:ex13c'),
+              (' Exercise 27: Explore a complicated function graphically ',
+               2,
+               'sec:plot:ex16',
+               'sec:plot:ex16'),
+              (' Exercise 28: Plot Taylor polynomial approximations to $\\sin x$ ',
+               2,
+               'sec:plot:ex5b',
+               'sec:plot:ex5b'),
+              (' Exercise 29: Animate a wave packet ',
+               2,
+               'sec:plot:ex5e',
+               'sec:plot:ex5e'),
+              (' Exercise 30: Animate two-scale temperature variations ',
+               2,
+               'sec:plot:ex18',
+               'sec:plot:ex18'),
+              (' Remarks ', 3, None, '___sec105'),
+              (' Exercise 31: Use non-uniformly distributed coordinates for visualization ',
+               2,
+               'sec:plot:ex19',
+               'sec:plot:ex19'),
+              (" Exercise 32: Animate a planet's orbit ",
+               2,
+               'sec:plot:ex5g',
+               'sec:plot:ex5g'),
+              (' Exercise 33: Animate the evolution of Taylor polynomials ',
+               2,
+               'sec:plot:ex17',
+               'sec:plot:ex17'),
+              (' Exercise 34: Plot the velocity profile for pipeflow ',
+               2,
+               'sec:plot:ex4',
+               'sec:plot:ex4'),
+              (' Exercise 35: Plot sum-of-sines approximations to a function ',
+               2,
+               'sec:plot:ex8',
+               'sec:plot:ex8'),
+              (' Exercise 36: Animate the evolution of a sum-of-sine approximation to a function ',
+               2,
+               'sec:plot:ex8m',
+               'sec:plot:ex8m'),
+              (' Exercise 37: Plot functions from the command line ',
+               2,
+               'sec:plot:ex14',
+               'sec:plot:ex14'),
+              (' Exercise 38: Improve command-line input ',
+               2,
+               'sec:plot:ex14b',
+               'sec:plot:ex14b'),
+              (' Exercise 39: Demonstrate energy concepts from physics ',
+               2,
+               'sec:plot:ex20',
+               'sec:plot:ex20'),
+              (' Exercise 40: Plot a w-like function ',
+               2,
+               'sec:plot:math:ex9',
+               'sec:plot:math:ex9'),
+              (' Exercise 41: Visualize approximations in the Midpoint integration rule ',
+               2,
+               'sec:plot:ex:vizmidpoint',
+               'sec:plot:ex:vizmidpoint'),
+              (' Exercise 42: Visualize approximations in the Trapezoidal integration rule ',
+               2,
+               'sec:plot:ex:viztrapezoidal',
+               'sec:plot:ex:viztrapezoidal'),
+              (' Exercise 43: Experience overflow in a function ',
+               2,
+               'sec:plot:ex13',
+               'sec:plot:ex13'),
+              (' Remarks ', 3, None, '___sec119'),
+              (' Exercise 44: Apply a function to a rank 2 array ',
+               2,
+               'sec:plot:math:ex2',
+               'sec:plot:math:ex2'),
+              (' Exercise 45: Explain why array computations fail ',
+               2,
+               'sec:plot:ex11',
+               'sec:plot:ex11'),
+              (' References ', 1, None, '___sec122')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- newcommands_keep.tex -->
+$$
+\newcommand{\tp}{\thinspace .}
+$$
+
+
+
+
+    
+<!-- Bootstrap navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="plot-bootstrap.html">Array computing and curve plotting</a>
+  </div>
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap001.html#___sec0" style="font-size: 80%;">Vectors</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap002.html#___sec4" style="font-size: 80%;">Arrays in Python programs</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap003.html#sec:plot:curveplots" style="font-size: 80%;">Curve plotting</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap004.html#sec:plot:difficulties" style="font-size: 80%;">Plotting difficulties</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap005.html#sec:plot:if:vectorize" style="font-size: 80%;">More advanced vectorization of functions</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap006.html#sec:plot:numpy:more" style="font-size: 80%;">More on numerical Python arrays</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap007.html#sec:plot:2Darrays" style="font-size: 80%;">Higher-dimensional arrays</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec61" style="font-size: 80%;">Summary</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:plot:exer" style="font-size: 80%;">Exercises</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#___sec122" style="font-size: 80%;">References</a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div> <!-- end of navigation bar -->
+
+<div class="container">
+
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+
+<a name="part0008"></a>
+<!-- !split -->
+
+<h1 id="___sec61">Summary <a name="___sec61"></a></h1>
+
+<h2 id="___sec62">Chapter topics <a name="___sec62"></a></h2>
+
+<p>
+This document has introduced computing with arrays and plotting
+curve data stored in arrays. The Numerical Python package contains
+lots of functions for array computing, including the ones listed in
+the table below.  Plotting has been done with tools that closely
+resemble the syntax of MATLAB.
+
+<p>
+
+<div class="row">
+  <div class="col-xs-12">
+    <table class="table table-striped table-hover table-condensed">
+<thead>
+<tr><td align="center"><b>            Construction            </b></td> <td align="center"><b>                                     Meaning                                     </b></td> </tr>
+</thead>
+<tbody>
+<tr><td align="left">   <code>array(ld)</code>                  </td> <td align="left">   copy list data <code>ld</code> to a <code>numpy</code> array                         </td> </tr>
+<tr><td align="left">   <code>asarray(d)</code>                 </td> <td align="left">   make array of data <code>d</code> (no data copy if already array)                    </td> </tr>
+<tr><td align="left">   <code>zeros(n)</code>                   </td> <td align="left">   make a <code>float</code> vector/array of length <code>n</code>, with zeros          </td> </tr>
+<tr><td align="left">   <code>zeros(n, int)</code>              </td> <td align="left">   make an <code>int</code> vector/array of length <code>n</code> with zeros            </td> </tr>
+<tr><td align="left">   <code>zeros((m,n))</code>               </td> <td align="left">   make a two-dimensional <code>float</code> array with shape (<code>m</code>,`n`)      </td> </tr>
+<tr><td align="left">   <code>zeros_like(x)</code>              </td> <td align="left">   make array of same shape and element type as <code>x</code>                          </td> </tr>
+<tr><td align="left">   <code>linspace(a,b,m)</code>            </td> <td align="left">   uniform sequence of <code>m</code> numbers in \( [a,b] \)                            </td> </tr>
+<tr><td align="left">   <code>a.shape</code>                    </td> <td align="left">   tuple containing <code>a</code>'s shape                                              </td> </tr>
+<tr><td align="left">   <code>a.size</code>                     </td> <td align="left">   total no of elements in <code>a</code>                                               </td> </tr>
+<tr><td align="left">   <code>len(a)</code>                     </td> <td align="left">   length of a one-dim. array <code>a</code> (same as <code>a.shape[0]</code>)          </td> </tr>
+<tr><td align="left">   <code>a.dtype</code>                    </td> <td align="left">   the type of elements in <code>a</code>                                               </td> </tr>
+<tr><td align="left">   <code>a.reshape(3,2)</code>             </td> <td align="left">   return <code>a</code> reshaped as \( 3\times 2 \) array                              </td> </tr>
+<tr><td align="left">   <code>a[i]</code>                       </td> <td align="left">   vector indexing                                                                      </td> </tr>
+<tr><td align="left">   <code>a[i,j]</code>                     </td> <td align="left">   two-dim. array indexing                                                              </td> </tr>
+<tr><td align="left">   <code>a[1:k]</code>                     </td> <td align="left">   slice: reference data with indices <code>1</code>,\ldots,`k-1`                       </td> </tr>
+<tr><td align="left">   <code>a[1:8:3]</code>                   </td> <td align="left">   slice: reference data with indices <code>1</code>, <code>4</code>,\ldots,`7`         </td> </tr>
+<tr><td align="left">   <code>b = a.copy()</code>               </td> <td align="left">   copy an array                                                                        </td> </tr>
+<tr><td align="left">   <code>sin(a), exp(a), ...</code>        </td> <td align="left">   <code>numpy</code> functions applicable to arrays                                    </td> </tr>
+<tr><td align="left">   <code>c = concatenate((a, b))</code>    </td> <td align="left">   <code>c</code> contains <code>a</code> with <code>b</code> appended                  </td> </tr>
+<tr><td align="left">   <code>c = where(cond, a1, a2)</code>    </td> <td align="left">   <code>c[i] = a1[i]</code> if <code>cond[i]</code>, else <code>c[i] = a2[i]</code>    </td> </tr>
+<tr><td align="left">   <code>isinstance(a, ndarray)</code>     </td> <td align="left">   is <code>True</code> if <code>a</code> is an array                                   </td> </tr>
+</tbody>
+    </table>
+  </div>
+</div> <!-- col-xs-12 -->
+
+<h3 id="___sec63">Array computing <a name="___sec63"></a></h3>
+
+<p>
+When we apply a Python function <code>f(x)</code> to a Numerical Python array
+<code>x</code>, the result is the same as if we apply <code>f</code> to each element in <code>x</code>
+separately.  However, when <code>f</code> contains <code>if</code> statements, these are in
+general invalid if an array <code>x</code> enters the boolean expression.  We
+then have to rewrite the function, often by applying the <code>where</code>
+function from Numerical Python.
+
+<h3 id="___sec64">Plotting curves <a name="___sec64"></a></h3>
+
+<p>
+The sections <a href="._plot-bootstrap003.html#sec:plot:pylab">Matplotlib; pylab</a> and <a href="._plot-bootstrap003.html#sec:plot:pyplot">Matplotlib; pyplot</a> provide a
+quick overview of how to plot curves with the aid of Matplotlib.
+The same examples coded with the Easyviz plotting interface
+appear in the section <a href="._plot-bootstrap003.html#sec:plot:SciTools">SciTools and Easyviz</a>.
+
+<h3 id="___sec65">Making movies <a name="___sec65"></a></h3>
+
+<p>
+Each frame in a movie must be a hardcopy of a plot in PNG format.
+These plot files should have names containing a counter padded with
+leading zeros. One example may be <code>tmp_0000.png</code>, <code>tmp_0001.png</code>,
+<code>tmp_0002.png</code>.  Having the plot files with names on this form, we can
+make an animated GIF movie in the file <code>movie.gif</code>, with two frames
+per second, by
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">os<span style="color: #666666">.</span>system(<span style="color: #BA2121">&#39;convert -delay 50 tmp_*.png movie.gif&#39;</span>)
+</pre></div>
+<p>
+Alternatively, we may combine the plot files to a Flash video:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">os<span style="color: #666666">.</span>system(<span style="color: #BA2121">&#39;ffmpeg -r 5 -i tmp_</span><span style="color: #BB6688; font-weight: bold">%04d</span><span style="color: #BA2121">.png -vcodec flv movie.flv&#39;</span>)
+</pre></div>
+<p>
+Other formats can be made using other codecs, see
+the section <a href="._plot-bootstrap003.html#sec:plot:video">Making videos</a>.
+
+<h3 id="___sec66">Terminology <a name="___sec66"></a></h3>
+
+<p>
+The important topics in this document are
+
+<ul>
+ <li> array computing</li>
+ <li> vectorization</li>
+ <li> plotting</li>
+ <li> animations</li>
+</ul>
+
+<h2 id="sec:plot:summarizing">Example: Animating a function<a name="sec:plot:summarizing"></a></h2>
+
+<h3 id="___sec68">Problem <a name="___sec68"></a></h3>
+
+<p>
+In this document's summarizing example we shall visualize how the
+temperature varies downward in the earth as the surface temperature
+oscillates between high day and low night values. One question may be:
+What is the temperature change 10 m down in the ground if the surface
+temperature varies between 2 C in the night and 15 C in the day?
+
+<p>
+Let the \( z \) axis point downwards, towards the center of the earth, and
+let \( z=0 \) correspond to the earth's surface. The temperature at some
+depth \( z \) in the ground at time \( t \) is denoted by \( T(z,t) \).  If the
+surface temperature has a periodic variation around some mean value
+\( T_0 \), according to
+
+$$
+\begin{equation*} T(0,t)=T_0+ A\cos (\omega t),\end{equation*}
+$$
+
+one can find, from a mathematical model for heat conduction,
+that the temperature
+at an arbitrary depth is
+
+$$
+\begin{equation}
+T(z,t) = T_0 + Ae^{-az}\cos (\omega t - az),\quad a =\sqrt{\omega\over 2k}\tp
+\tag{3}
+\end{equation}
+$$
+
+The parameter \( k \) reflects the ground's ability to conduct
+heat (\( k \) is called the <em>thermal diffusivity</em> or
+the <em>heat conduction coefficient</em>).
+
+<p>
+The task is to make an animation of how the temperature profile in the
+ground, i.e., \( T \) as a function of \( z \), varies in time.  Let \( \omega \)
+correspond to a time period of 24 hours.  The mean temperature \( T_0 \)
+is taken as 10 C, and the maximum variation \( A \) is assumed to be 10 C.
+The heat conduction coefficient \( k \) may be set as \( 1\hbox{
+mm}^2/\hbox{s} \) (which is \( 10^{-6} \hbox{ m}^2/\hbox{s} \) in proper SI
+units).
+
+<h3 id="___sec69">Solution <a name="___sec69"></a></h3>
+
+<p>
+To animate \( T(z,t) \) in time, we need to make a loop over points in
+time, and in each pass in the loop we must save a plot of \( T \), as a
+function of \( z \), to file. The plot files can then be combined to a
+movie.  The algorithm becomes
+
+<ul>
+ <li> for \( t_i=i\Delta t \), \( i=0,1,2\ldots,n \):</li>
+
+<ul>
+   <li> plot the curve \( y(z)=T(z,t_i) \)</li>
+   <li> store the plot in a file</li>
+</ul>
+
+ <li> combine all the plot files into a movie</li>
+</ul>
+
+It can be wise to make a general <code>animate</code> function where we just feed
+in some \( f(x,t) \) function and make all the plot files.  If <code>animate</code>
+has arguments for setting the labels on the axis and the extent of the
+\( y \) axis, we can easily use <code>animate</code> also for a function \( T(z,t) \) (we
+just use \( z \) as the name for the \( x \) axis and \( T \) as the name for the
+\( y \) axis in the plot). Recall that it is important to fix the extent
+of the \( y \) axis in a plot when we make animations, otherwise most
+plotting programs will automatically fit the extent of the axis to the
+current data, and the tick marks on the \( y \) axis will jump up and down
+during the movie. The result is a wrong visual impression of the
+function.
+
+<p>
+The names of the plot files must have a common stem appended with some
+frame number, and the frame number should have a fixed number of
+digits, such as 0001, 0002, etc. (if not, the sequence of the plot
+files will not be correct when we specify the collection of files with
+an asterisk for the frame numbers, e.g., as in <code>tmp*.png</code>).  We
+therefore include an argument to <code>animate</code> for setting the name stem
+of the plot files. By default, the stem is <code>tmp_</code>, resulting in the
+filenames <code>tmp_0000.png</code>, <code>tmp_0001.png</code>, <code>tmp_0002.png</code>, and so
+forth.  Other convenient arguments for the <code>animate</code> function are the
+initial time in the plot, the time lag \( \Delta t \) between the plot
+frames, and the coordinates along the \( x \) axis.  The <code>animate</code>
+function then takes the form
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">animate</span>(tmax, dt, x, function, ymin, ymax, t0<span style="color: #666666">=0</span>,
+            xlabel<span style="color: #666666">=</span><span style="color: #BA2121">&#39;x&#39;</span>, ylabel<span style="color: #666666">=</span><span style="color: #BA2121">&#39;y&#39;</span>, filename<span style="color: #666666">=</span><span style="color: #BA2121">&#39;tmp_&#39;</span>):
+    t <span style="color: #666666">=</span> t0
+    counter <span style="color: #666666">=</span> <span style="color: #666666">0</span>
+    <span style="color: #008000; font-weight: bold">while</span> t <span style="color: #666666">&lt;=</span> tmax:
+        y <span style="color: #666666">=</span> function(x, t)
+        plot(x, y, <span style="color: #BA2121">&#39;-&#39;</span>,
+             axis<span style="color: #666666">=</span>[x[<span style="color: #666666">0</span>], x[<span style="color: #666666">-1</span>], ymin, ymax],
+             title<span style="color: #666666">=</span><span style="color: #BA2121">&#39;time=</span><span style="color: #BB6688; font-weight: bold">%2d</span><span style="color: #BA2121"> h&#39;</span> <span style="color: #666666">%</span> (t<span style="color: #666666">/3600.0</span>),
+             xlabel<span style="color: #666666">=</span>xlabel, ylabel<span style="color: #666666">=</span>ylabel,
+             savefig<span style="color: #666666">=</span>filename <span style="color: #666666">+</span> <span style="color: #BA2121">&#39;</span><span style="color: #BB6688; font-weight: bold">%04d</span><span style="color: #BA2121">.png&#39;</span> <span style="color: #666666">%</span> counter)
+        savefig(<span style="color: #BA2121">&#39;tmp_</span><span style="color: #BB6688; font-weight: bold">%04d</span><span style="color: #BA2121">.pdf&#39;</span> <span style="color: #666666">%</span> counter)
+        t <span style="color: #666666">+=</span> dt
+        counter <span style="color: #666666">+=</span> <span style="color: #666666">1</span>
+</pre></div>
+<p>
+The \( T(z,t) \) function is easy to implement, but we need to decide
+whether the parameters \( A \), \( \omega \), \( T_0 \), and \( k \) shall be
+arguments to the Python implementation of \( T(z,t) \) or if they shall be
+global variables. Since the <code>animate</code> function expects that the
+function to be plotted has only two arguments, we must implement
+\( T(z,t) \) as <code>T(z,t)</code> in Python and let the other parameters be global
+variables
+(or one can let <code>T</code> be a class with the parameters as attributes
+and a method <code>__call__(self, x, t)</code>).
+The <code>T(z,t)</code> implementation
+then reads
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">T</span>(z, t):
+    <span style="color: #408080; font-style: italic"># T0, A, k, and omega are global variables</span>
+    a <span style="color: #666666">=</span> sqrt(omega<span style="color: #666666">/</span>(<span style="color: #666666">2*</span>k))
+    <span style="color: #008000; font-weight: bold">return</span> T0 <span style="color: #666666">+</span> A<span style="color: #666666">*</span>exp(<span style="color: #666666">-</span>a<span style="color: #666666">*</span>z)<span style="color: #666666">*</span>cos(omega<span style="color: #666666">*</span>t <span style="color: #666666">-</span> a<span style="color: #666666">*</span>z)
+</pre></div>
+<p>
+Suppose we plot \( T(z,t) \) at \( n \) points for \( z\in [0,D] \).  We make such
+plots for \( t\in [0,t_{\max}] \) with a time lag \( \Delta t \) between the
+them.  The frames in the movie are now made by
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #408080; font-style: italic"># set T0, A, k, omega, D, n, tmax, dt</span>
+z <span style="color: #666666">=</span> linspace(<span style="color: #666666">0</span>, D, n)
+animate(tmax, dt, z, T, T0<span style="color: #666666">-</span>A, T0<span style="color: #666666">+</span>A, <span style="color: #666666">0</span>, <span style="color: #BA2121">&#39;z&#39;</span>, <span style="color: #BA2121">&#39;T&#39;</span>)
+</pre></div>
+<p>
+We have here set the extent of the \( y \) axis in the plot as
+\( [T_0-A,T_0+A] \), which is in accordance with the \( T(z,t) \) function.
+
+<p>
+The call to <code>animate</code> above creates a set of files with names
+of the form <code>tmp_*.png</code>. Out of these files we can create an
+animated GIF movie or a video in, e.g., Flash format by
+running operating systems commands with <code>convert</code> and <code>avconv</code> (or
+<code>ffmpeg</code>):
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">os<span style="color: #666666">.</span>system(<span style="color: #BA2121">&#39;convert -delay 50 tmp_*.png movie.gif&#39;</span>)
+os<span style="color: #666666">.</span>system(<span style="color: #BA2121">&#39;avconv -r 5 -i tmp_</span><span style="color: #BB6688; font-weight: bold">%04d</span><span style="color: #BA2121">.png -vcodec flv movie.flv&#39;</span>)
+</pre></div>
+<p>
+See the section <a href="._plot-bootstrap003.html#sec:plot:video">Making videos</a> for how to create videos in
+other formats.
+
+<p>
+It now remains to assign proper values to all the global variables in
+the program: <code>n</code>, <code>D</code>, <code>T0</code>, <code>A</code>, <code>omega</code>, <code>dt</code>, <code>tmax</code>, and <code>k</code>.  The
+oscillation period is 24 hours, and \( \omega \) is related to the period
+\( P \) of the cosine function by \( \omega = 2\pi /P \) (realize that \( \cos
+(t2\pi/P) \) has period \( P \)).  We then express \( P=24 \) h as \( 24\cdot
+60\cdot 60 \) s and compute \( \omega \) as \( 2\pi/P \approx 7\cdot
+10^{-5}\hbox{ s}^{-1} \).  The total simulation time can be 3 periods,
+i.e., \( t_{\max} = 3P \).  The \( T(z,t) \) function decreases exponentially
+with the depth \( z \) so there is no point in having the maximum depth
+\( D \) larger than the depth where \( T \) is visually zero, say 0.001. We
+have that \( e^{-aD}=0.001 \) when \( D=-a^{-1}\ln 0.001 \), so we can use
+this estimate in the program.  The proper initialization of all
+parameters can then be expressed as follows:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">k <span style="color: #666666">=</span> <span style="color: #666666">1E-6</span>        <span style="color: #408080; font-style: italic"># thermal diffusivity (in m*m/s)</span>
+P <span style="color: #666666">=</span> <span style="color: #666666">24*60*60.</span>   <span style="color: #408080; font-style: italic"># oscillation period of 24 h (in seconds)</span>
+omega <span style="color: #666666">=</span> <span style="color: #666666">2*</span>pi<span style="color: #666666">/</span>P
+dt <span style="color: #666666">=</span> P<span style="color: #666666">/24</span>       <span style="color: #408080; font-style: italic"># time lag: 1 h</span>
+tmax <span style="color: #666666">=</span> <span style="color: #666666">3*</span>P      <span style="color: #408080; font-style: italic"># 3 day/night simulation</span>
+T0 <span style="color: #666666">=</span> <span style="color: #666666">10</span>         <span style="color: #408080; font-style: italic"># mean surface temperature in Celsius</span>
+A <span style="color: #666666">=</span> <span style="color: #666666">10</span>          <span style="color: #408080; font-style: italic"># amplitude of the temperature variations in Celsius</span>
+a <span style="color: #666666">=</span> sqrt(omega<span style="color: #666666">/</span>(<span style="color: #666666">2*</span>k))
+D <span style="color: #666666">=</span> <span style="color: #666666">-</span>(<span style="color: #666666">1/</span>a)<span style="color: #666666">*</span>log(<span style="color: #666666">0.001</span>) <span style="color: #408080; font-style: italic"># max depth</span>
+n <span style="color: #666666">=</span> <span style="color: #666666">501</span>         <span style="color: #408080; font-style: italic"># no of points in the z direction</span>
+</pre></div>
+<p>
+Note that it is very important to use consistent units. Here we
+express all units in terms of meter, second, and Kelvin or Celsius.
+
+<p>
+We encourage you to run the program
+<a href="http://tinyurl.com/pwyasaa/plot/heatwave.py" target="_self"><tt>heatwave.py</tt></a> to see the
+movie. The hardcopy of the movie is in the file <code>movie.gif</code>.
+Figure <a href="#fig:plot:heatwave:fig1">11</a> displays two snapshots in time of
+the \( T(z,t) \) function.
+
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 11:  Plot of the temperature \( T(z,t) \) in the ground for two different \( t \) values. <a name="fig:plot:heatwave:fig1"></a> </p></center>
+<p><img src="fig-plot/heatwave12.png" align="bottom" width=400></p>
+</center>
+
+<p>
+<a name="sec:plot:scaling"></a>
+
+<h3 id="___sec70">Scaling <a name="___sec70"></a></h3>
+
+<p>
+In this example, as in many other scientific problems, it was easier
+to write the code than to assign proper physical values to the input
+parameters in the program. To learn about the physical process, here
+how heat propagates from the surface and down in the ground, it is
+often advantageous to scale the variables in the problem so that we
+work with dimensionless variables. Through the scaling procedure we
+normally end up with much fewer physical parameters that must be
+assigned values. Let us show how we can take advantage of scaling the
+present problem.
+
+<p>
+Consider a variable \( x \) in a problem with some dimension.  The idea of
+scaling is to introduce a new variable \( \bar x = x/x_c \), where \( x_c \)
+is a <em>characteristic size</em> of \( x \). Since \( x \) and \( x_c \) have the same
+dimension, the dimension cancels in \( \bar x \) such that \( \bar x \) is
+dimensionless. Choosing \( x_c \) to be the expected maximum value of \( x \),
+ensures that \( \bar x\leq 1 \), which is usually considered a good
+idea. That is, we try to have all dimensionless variables varying
+between zero and one. For example, we can introduce a dimensionless
+\( z \) coordinate: \( \bar z= z/D \), and now \( \bar z \in [0,1] \). Doing a
+proper scaling of a problem is challenging so for now it is sufficient
+to just follow the steps below - and not worry why we choose a certain
+scaling.
+
+<p>
+In the present problem we introduce these dimensionless variables:
+
+$$
+\begin{align*}
+\bar z &= z/D\\ 
+\bar T &= {T-T_0\over A}\\ 
+\bar t &= {\omega t}
+\end{align*}
+$$
+
+We now insert \( z=\bar z D \) and \( t=\bar t/\omega \) in the expression
+for \( T(z,t) \) and get
+
+$$
+\begin{equation*} T = T_0 + Ae^{-b\bar z}\cos(\bar t - b\bar z),\quad b=aD\end{equation*}
+$$
+
+or
+
+$$
+\begin{equation*} \bar T(\bar z,\bar t)
+= {T-T_0\over A} = e^{-b\bar z}\cos(\bar t - b\bar z)\tp\end{equation*}
+$$
+
+We see that \( \bar T \) depends on only <em>one</em> dimensionless parameter \( b \)
+in addition to the independent dimensionless variables \( \bar z \) and
+\( \bar t \). It is common practice at this stage of the scaling to just
+drop the bars and write
+
+$$
+\begin{equation}
+T(z,t) = e^{-bz}\cos(t - bz)\tp
+\end{equation}
+$$
+
+This function is much simpler to plot than the one with lots of
+physical parameters, because now we know that \( T \) varies between \( -1 \)
+and 1, \( t \) varies between 0 and \( 2\pi \) for one period, and \( z \) varies
+between 0 and 1.  The scaled temperature has only one parameter \( b \) in
+addition to the independent variable.  That is, the shape of the graph
+is completely determined by \( b \).
+
+<p>
+In our previous movie example, we used specific values for \( D \),
+\( \omega \), and \( k \), which then implies a certain \( b=D\sqrt{\omega
+/(2k)} \) (\( \approx 6.9 \)).  However, we can now run different \( b \) values
+and see the effect on the heat propagation.  Different \( b \) values will
+in our problems imply different periods of the surface temperature
+variation and/or different heat conduction values in the ground's
+composition of rocks.  Note that doubling \( \omega \) and \( k \) leaves the
+same \( b \) - it is only the fraction \( \omega/k \) that influences the
+value of \( b \).
+
+<p>
+We can reuse the <code>animate</code> function also in the scaled case, but
+we need to make a new \( T(z,t) \) function and, e.g., a main program
+where \( b \) can be read from the command line:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">T</span>(z, t):
+    <span style="color: #008000; font-weight: bold">return</span> exp(<span style="color: #666666">-</span>b<span style="color: #666666">*</span>z)<span style="color: #666666">*</span>cos(t <span style="color: #666666">-</span> b<span style="color: #666666">*</span>z)  <span style="color: #408080; font-style: italic"># b is global</span>
+
+b <span style="color: #666666">=</span> <span style="color: #008000">float</span>(sys<span style="color: #666666">.</span>argv[<span style="color: #666666">1</span>])
+n <span style="color: #666666">=</span> <span style="color: #666666">401</span>
+z <span style="color: #666666">=</span> linspace(<span style="color: #666666">0</span>, <span style="color: #666666">1</span>, n)
+animate(<span style="color: #666666">3*2*</span>pi, <span style="color: #666666">0.05*2*</span>pi, z, T, <span style="color: #666666">-1.2</span>, <span style="color: #666666">1.2</span>, <span style="color: #666666">0</span>, <span style="color: #BA2121">&#39;z&#39;</span>, <span style="color: #BA2121">&#39;T&#39;</span>)
+movie(<span style="color: #BA2121">&#39;tmp_*.png&#39;</span>, encoder<span style="color: #666666">=</span><span style="color: #BA2121">&#39;convert&#39;</span>, fps<span style="color: #666666">=2</span>,
+      output_file<span style="color: #666666">=</span><span style="color: #BA2121">&#39;tmp_heatwave.gif&#39;</span>)
+os<span style="color: #666666">.</span>system(<span style="color: #BA2121">&#39;convert -delay 50 tmp_*.png movie.gif&#39;</span>)
+</pre></div>
+<p>
+Running the program, found as the file <a href="http://tinyurl.com/pwyasaa/plot/heatwave_scaled.py" target="_self"><tt>heatwave_scaled.py</tt></a>, for different \( b \) values shows
+that \( b \) governs how deep the temperature variations on the surface
+\( z=0 \) penetrate. A large \( b \) makes the temperature changes confined to
+a thin layer close to the surface, while a small \( b \) leads to
+temperature variations also deep down in the ground.
+You are encouraged to run the program with \( b=2 \) and \( b=20 \)
+to experience the major difference, or just view the
+<a href="http://hplgit.github.io/scipro-primer/video/heatwave.html" target="_self">ready-made animations</a>.
+
+<p>
+We can understand the results from a physical perspective.  Think of
+increasing \( \omega \), which means reducing the oscillation period so we
+get a more rapid temperature variation. To preserve the value of \( b \)
+we must increase \( k \) by the same factor. Since a large \( k \) means that
+heat quickly spreads down in the ground, and a small \( k \) implies the
+opposite, we see that more rapid variations at the surface requires a
+larger \( k \) to more quickly conduct the variations down in the
+ground. Similarly, slow temperature variations on the surface can
+penetrate deep in the ground even if the ground's ability to conduct
+(\( k \)) is low.
+
+<p>
+<!-- FIGURE: [fig-plot/heatwave34, width=400 frac=0.9] Plot of the dimensionless temperature \( T(z,t) \)   in the ground for two different \( t \) values and \( b=20 \). <a name="fig:plot:heatwave:fig2"></a> -->
+
+<p>
+<!-- FIGURE: [fig-plot/heatwave56, width=400 frac=0.9] Plot of the dimensionless temperature \( T(z,t) \)   in the ground for two different \( t \) values and \( b=2 \). <a name="fig:plot:heatwave:fig3"></a> -->
+
+<p>
+<p>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pager">
+  <li class="previous">
+    <a href="._plot-bootstrap007.html">&larr; Prev</a>
+  </li>
+  <li class="next">
+    <a href="._plot-bootstrap009.html">Next &rarr;</a>
+  </li>
+</ul>
+<!-- ------------------- end of main content --------------- -->
+
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap footer
+<footer>
+<a href="http://..."><img width="250" align=right src="http://..."></a>
+</footer>
+-->
+
+
+</body>
+</html>
+    
+

@@ -1,0 +1,2204 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Object-oriented programming">
+<meta name="keywords" content="object-based programming,class hierarchy,class relationship superclass,class relationship derived class,class relationship inheritance,derived class,parent class,base class,superclass,subclass,class relationship subclass,Online Python Tutor,check an object's type,is-a class relationship,has-a class relationship,class relationship is-a,class relationship has-a,dynamic binding,factory function,closure,functional programming,Midpoint rule for integration,Trapezoidal rule for integration,overloading (of methods),polymorphism,Midpoint rule for integration,Trapezoidal rule for integration,recursive function calls,multiple inheritance,convergence rate,Trapezoidal rule for integration,Midpoint rule for integration,object-oriented programming">
+
+<title>Object-oriented programming</title>
+
+<!-- Bootstrap style: bootstrap_bluegray -->
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://raw.github.com/hplgit/doconce/master/bundled/html_styles/style_bootstrap/css/bootstrap_bluegray.css" rel="stylesheet">
+<!-- not necessary
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+
+<style type="text/css">
+/* Let inline verbatim have the same color as the surroundings */
+code { color: inherit; background-color: transparent; }
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [(' Inheritance and class hierarchies ',
+               1,
+               'sec:oo:inheritance',
+               'sec:oo:inheritance'),
+              (' A class for straight lines ',
+               2,
+               'sec:oo:Line',
+               'sec:oo:Line'),
+              (' A first try on a class for parabolas ',
+               2,
+               'sec:oo:Parabola1',
+               'sec:oo:Parabola1'),
+              (' A class for parabolas using inheritance ',
+               2,
+               None,
+               '___sec3'),
+              (' Program flow ', 3, None, '___sec4'),
+              (' Checking the class type ', 2, None, '___sec5'),
+              (' Attribute vs inheritance: has-a vs is-a relationship ',
+               2,
+               None,
+               '___sec6'),
+              (' Superclass for defining an interface ',
+               2,
+               'sec:oo:Func',
+               'sec:oo:Func'),
+              (' Class hierarchy for numerical differentiation ',
+               1,
+               'sec:oo:numdiff',
+               'sec:oo:numdiff'),
+              (' Classes for differentiation ',
+               2,
+               'sec:oo:Diff',
+               'sec:oo:Diff'),
+              (' Computer science remark ', 3, None, '___sec10'),
+              (' Verification ', 2, None, '___sec11'),
+              (' A flexible main program ', 2, None, '___sec12'),
+              (' Extensions ', 2, 'sec:oo:Diff:extend', 'sec:oo:Diff:extend'),
+              (' Application ', 3, None, '___sec14'),
+              (' Alternative implementation via functions ',
+               2,
+               'sec:oo:diff:alt:func',
+               'sec:oo:diff:alt:func'),
+              (' Alternative implementation via functional programming ',
+               2,
+               'sec:oo:diff:alt:FP',
+               'sec:oo:diff:alt:FP'),
+              (' Alternative implementation via a single class ',
+               2,
+               'sec:oo:diff:oneclass',
+               'sec:oo:diff:oneclass'),
+              (' Remark ', 3, None, '___sec18'),
+              (' Class hierarchy for numerical integration ',
+               1,
+               'sec:oo:int',
+               'sec:oo:int'),
+              (' Numerical integration methods ',
+               2,
+               'sec:oo:int:methods',
+               'sec:oo:int:methods'),
+              (' Classes for integration ',
+               2,
+               'sec:oo:Integrator',
+               'sec:oo:Integrator'),
+              (' Verification ', 2, None, '___sec22'),
+              (' Using the class hierarchy ', 2, None, '___sec23'),
+              (' About object-oriented programming ', 2, None, '___sec24'),
+              (' Class hierarchy for making drawings ',
+               1,
+               'sec:oo:shapes',
+               'sec:oo:shapes'),
+              (' Using the object collection ', 2, None, '___sec26'),
+              (' Basic drawing ', 3, None, '___sec27'),
+              (' Groups of objects ', 3, None, '___sec28'),
+              (' Changing line styles and colors ', 3, None, '___sec29'),
+              (' The figure composition as an object hierarchy ',
+               3,
+               None,
+               '___sec30'),
+              (' Animation: translating the vehicle ', 3, None, '___sec31'),
+              (' Animation: rolling the wheels ',
+               3,
+               'sketcher:vehicle1:anim',
+               'sketcher:vehicle1:anim'),
+              (' Example of classes for geometric objects ',
+               2,
+               None,
+               '___sec33'),
+              (' Simple geometric objects ', 3, None, '___sec34'),
+              (' Class curve ', 3, None, '___sec35'),
+              (' Compound geometric objects ', 3, None, '___sec36'),
+              (' Adding functionality via recursion ', 2, None, '___sec37'),
+              (' Basic principles of recursion ', 3, None, '___sec38'),
+              (' Explaining recursion ', 3, None, '___sec39'),
+              (' Scaling, translating, and rotating a figure ',
+               2,
+               'sketcher:scaling',
+               'sketcher:scaling'),
+              (' Scaling ', 3, None, '___sec41'),
+              (' Translation ', 3, None, '___sec42'),
+              (' Rotation ', 3, None, '___sec43'),
+              (' Classes for DNA analysis ', 1, 'bioinf:oo', 'bioinf:oo'),
+              (' Class for regions ', 2, None, '___sec45'),
+              (' Class for genes ', 2, None, '___sec46'),
+              (' Basic features of class gene ', 3, None, '___sec47'),
+              (' Flexible constructor ', 3, None, '___sec48'),
+              (' Other methods ', 3, None, '___sec49'),
+              (' Subclasses ', 2, None, '___sec50'),
+              (' Summary ', 1, None, '___sec51'),
+              (' Chapter topics ', 2, None, '___sec52'),
+              (' Subclass example ', 3, None, '___sec53'),
+              (' Subclassing in general ', 3, None, '___sec54'),
+              (' Terminology ', 3, None, '___sec55'),
+              (' Example: Input data reader ',
+               2,
+               'sec:oo:ReadInput',
+               'sec:oo:ReadInput'),
+              (' Problem ', 3, None, '___sec57'),
+              (' Solution ', 3, None, '___sec58'),
+              (' Prompting the user ', 3, None, '___sec59'),
+              (' Reading from file ', 3, None, '___sec60'),
+              (' Reading from the command line ', 3, None, '___sec61'),
+              (' Reading from a gui ', 3, None, '___sec62'),
+              (' More flexibility in the superclass ', 3, None, '___sec63'),
+              (' Demonstrating the tool ', 3, None, '___sec64'),
+              (' Exercises ', 1, None, '___sec65'),
+              (' Exercise 1: Demonstrate the magic of inheritance ',
+               2,
+               'sec:oo:ex1',
+               'sec:oo:ex1'),
+              (' Exercise 2: Make polynomial subclasses of parabolas ',
+               2,
+               'sec:oo:ex2',
+               'sec:oo:ex2'),
+              (' Remarks ', 3, None, '___sec68'),
+              (' Exercise 3: Implement a class for a function as a subclass ',
+               2,
+               'sec:oo:ex3',
+               'sec:oo:ex3'),
+              (' Exercise 4: Create an alternative class hierarchy for polynomials ',
+               2,
+               'sec:oo:ex5',
+               'sec:oo:ex5'),
+              (' Exercise 5: Make circle a subclass of an ellipse ',
+               2,
+               'sec:oo:ex5b',
+               'sec:oo:ex5b'),
+              (' Exercise 6: Make super- and subclass for a point ',
+               2,
+               'sec:oo:ex17',
+               'sec:oo:ex17'),
+              (' Exercise 7: Modify a function class by subclassing ',
+               2,
+               'sec:oo:ex7',
+               'sec:oo:ex7'),
+              (' Exercise 8: Explore the accuracy of difference formulas ',
+               2,
+               'sec:oo:ex18',
+               'sec:oo:ex18'),
+              (' Exercise 9: Implement a subclass ',
+               2,
+               'sec:oo:ex15b',
+               'sec:oo:ex15b'),
+              (' Exercise 10: Make classes for numerical differentiation ',
+               2,
+               'sec:oo:ex33',
+               'sec:oo:ex33'),
+              (' Exercise 11: Implement a new subclass for differentiation ',
+               2,
+               'sec:oo:ex31',
+               'sec:oo:ex31'),
+              (' Exercise 12: Understand if a class can be used recursively ',
+               2,
+               'sec:oo:ex14',
+               'sec:oo:ex14'),
+              (' Exercise 13: Represent people by a class hierarchy ',
+               2,
+               'sec:oo:ex4',
+               'sec:oo:ex4'),
+              (' Remark ', 3, None, '___sec80'),
+              (' Exercise 14: Add a new class in a class hierarchy ',
+               2,
+               'sec:oo:ex15',
+               'sec:oo:ex15'),
+              (' Exercise 15: Compute convergence rates of numerical integration methods ',
+               2,
+               'sec:oo:ex16',
+               'sec:oo:ex16'),
+              (' Exercise 16: Add common functionality in a class hierarchy ',
+               2,
+               'sec:oo:ex6',
+               'sec:oo:ex6'),
+              (' Exercise 17: Make a class hierarchy for root finding ',
+               2,
+               'sec:oo:ex41',
+               'sec:oo:ex41'),
+              (' Exercise 18: Make a calculus calculator class ',
+               2,
+               'sec:plot:ex30',
+               'sec:plot:ex30'),
+              (' Exercise 19: Compute inverse functions ',
+               2,
+               'sec:plot:ex30b',
+               'sec:plot:ex30b'),
+              (' Exercise 20: Make line drawing of a person; program ',
+               2,
+               'pysketcher:exer:person:prog',
+               'pysketcher:exer:person:prog'),
+              (' Exercise 21: Make line drawing of a person; class ',
+               2,
+               'pysketcher:exer:person:class',
+               'pysketcher:exer:person:class'),
+              (' Exercise 22: Animate a person with waving hands ',
+               2,
+               'pysketcher:exer:person:anim',
+               'pysketcher:exer:person:anim'),
+              (' References ', 1, None, '___sec90')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- newcommands_keep.tex -->
+$$
+\newcommand{\tp}{\thinspace .}
+$$
+
+
+
+
+    
+<!-- Bootstrap navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="oo-bootstrap.html">Object-oriented programming</a>
+  </div>
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     <!-- navigation toc: --> <li><a href="._oo-bootstrap001.html#sec:oo:inheritance" style="font-size: 80%;">Inheritance and class hierarchies</a></li>
+     <!-- navigation toc: --> <li><a href="._oo-bootstrap002.html#sec:oo:numdiff" style="font-size: 80%;">Class hierarchy for numerical differentiation</a></li>
+     <!-- navigation toc: --> <li><a href="._oo-bootstrap003.html#sec:oo:int" style="font-size: 80%;">Class hierarchy for numerical integration</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:oo:shapes" style="font-size: 80%;">Class hierarchy for making drawings</a></li>
+     <!-- navigation toc: --> <li><a href="#bioinf:oo" style="font-size: 80%;">Classes for DNA analysis</a></li>
+     <!-- navigation toc: --> <li><a href="._oo-bootstrap005.html#___sec51" style="font-size: 80%;">Summary</a></li>
+     <!-- navigation toc: --> <li><a href="._oo-bootstrap006.html#___sec65" style="font-size: 80%;">Exercises</a></li>
+     <!-- navigation toc: --> <li><a href="._oo-bootstrap006.html#___sec90" style="font-size: 80%;">References</a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div> <!-- end of navigation bar -->
+
+<div class="container">
+
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+
+<a name="part0004"></a>
+<!-- !split -->
+
+<h1 id="sec:oo:shapes">Class hierarchy for making drawings<a name="sec:oo:shapes"></a></h1>
+
+<p>
+Implementing a drawing program provides a very good example on the
+usefulness of object-oriented programming. In the following we shall
+develop the simpler parts of a relatively small and compact drawing
+program for making sketches of the type shown in Figure
+<a href="#sketcher:fig:inclinedplane">6</a>.  This is a typical <em>principal sketch</em>
+of a physics problem, here involving a rolling wheel on an inclined
+plane. The sketch
+is made up many individual elements: a rectangle
+filled with a pattern (the inclined plane), a hollow circle with color
+(the wheel), arrows with labels (the \( N \) and \( Mg \) forces, and the \( x \)
+axis), an angle with symbol \( \theta \), and a dashed line indicating the
+starting location of the wheel.
+
+<p>
+Drawing software and plotting programs can produce such figures quite
+easily in principle, but the amount of details the user needs to
+control with the mouse can be substantial. Software more tailored to
+producing sketches of this type would work with more convenient
+abstractions, such as circle, wall, angle, force arrow, axis, and so
+forth. And as soon we start <em>programming</em> to construct the figure we
+get a range of other powerful tools at disposal. For example, we can
+easily translate and rotate parts of the figure and make an animation
+that illustrates the physics of the problem.
+Programming as a superior alternative to interactive drawing is
+the mantra of this section.
+
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 6:  Sketch of a physics problem. <a name="sketcher:fig:inclinedplane"></a> </p></center>
+<p><img src="fig-oo/wheel_on_inclined_plane.png" align="bottom" width=600></p>
+</center>
+
+<p>
+Classes are very suitable for implementing the various components that
+build up a sketch. In particular, we shall demonstrate that as soon as
+some classes are established, more are easily added. Enhanced
+functionality for all the classes is also easy to implement in common,
+generic code that can immediately be shared by all present and future
+classes.
+
+<p>
+The fundamental data structure involved in this case study is a
+hierarchical tree, and much of the material on implementation issues
+targets how to traverse tree structures with recursive function calls.
+This topic is of key relevance in a wide range of other applications
+as well.
+
+<h2 id="___sec26">Using the object collection <a name="___sec26"></a></h2>
+
+<p>
+We start by demonstrating a convenient user interface for making
+sketches of the type in Figure <a href="#sketcher:fig:inclinedplane">6</a>.
+However, it is more appropriate to start with a significantly simpler
+example as depicted in Figure <a href="#sketcher:fig:vehicle0">7</a>.  This toy
+sketch consists of several elements: two circles, two rectangles, and
+a &quot;ground&quot; element.
+
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 7:  Sketch of a simple figure. <a name="sketcher:fig:vehicle0"></a> </p></center>
+<p><img src="fig-oo/vehicle0_dim.png" align="bottom" width=600></p>
+</center>
+
+<h3 id="___sec27">Basic drawing <a name="___sec27"></a></h3>
+
+<p>
+A typical program creating these five elements is shown next.
+After importing the <code>pysketcher</code> package, the first task is always to
+define a coordinate system:
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">pysketcher</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #666666">*</span>
+
+drawing_tool<span style="color: #666666">.</span>set_coordinate_system(
+    xmin<span style="color: #666666">=0</span>, xmax<span style="color: #666666">=10</span>, ymin<span style="color: #666666">=-1</span>, ymax<span style="color: #666666">=8</span>)
+</pre></div>
+<p>
+Instead of working with lengths expressed by specific numbers it is
+highly recommended to use variables to parameterize lengths as
+this makes it easier to change dimensions later.
+Here we introduce some key lengths for the radius of the wheels,
+distance between the wheels, etc.:
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">R <span style="color: #666666">=</span> <span style="color: #666666">1</span>    <span style="color: #408080; font-style: italic"># radius of wheel</span>
+L <span style="color: #666666">=</span> <span style="color: #666666">4</span>    <span style="color: #408080; font-style: italic"># distance between wheels</span>
+H <span style="color: #666666">=</span> <span style="color: #666666">2</span>    <span style="color: #408080; font-style: italic"># height of vehicle body</span>
+w_1 <span style="color: #666666">=</span> <span style="color: #666666">5</span>  <span style="color: #408080; font-style: italic"># position of front wheel</span>
+drawing_tool<span style="color: #666666">.</span>set_coordinate_system(xmin<span style="color: #666666">=0</span>, xmax<span style="color: #666666">=</span>w_1 <span style="color: #666666">+</span> <span style="color: #666666">2*</span>L <span style="color: #666666">+</span> <span style="color: #666666">3*</span>R,
+                                   ymin<span style="color: #666666">=-1</span>, ymax<span style="color: #666666">=2*</span>R <span style="color: #666666">+</span> <span style="color: #666666">3*</span>H)
+</pre></div>
+<p>
+With the drawing area in place we can make the first <code>Circle</code> object
+in an intuitive fashion:
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">wheel1 <span style="color: #666666">=</span> Circle(center<span style="color: #666666">=</span>(w_1, R), radius<span style="color: #666666">=</span>R)
+</pre></div>
+<p>
+to change dimensions later.
+
+<p>
+To translate the geometric information about the <code>wheel1</code> object to
+instructions for the plotting engine (in this case Matplotlib), one calls the
+<code>wheel1.draw()</code>. To display all drawn objects, one issues
+<code>drawing_tool.display()</code>. The typical steps are hence:
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">wheel1 <span style="color: #666666">=</span> Circle(center<span style="color: #666666">=</span>(w_1, R), radius<span style="color: #666666">=</span>R)
+wheel1<span style="color: #666666">.</span>draw()
+
+<span style="color: #408080; font-style: italic"># Define other objects and call their draw() methods</span>
+drawing_tool<span style="color: #666666">.</span>display()
+drawing_tool<span style="color: #666666">.</span>savefig(<span style="color: #BA2121">&#39;tmp.png&#39;</span>)  <span style="color: #408080; font-style: italic"># store picture</span>
+</pre></div>
+<p>
+The next wheel can be made by taking a copy of <code>wheel1</code> and
+translating the object to the right according to a
+displacement vector \( (L,0) \):
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">wheel2 <span style="color: #666666">=</span> wheel1<span style="color: #666666">.</span>copy()
+wheel2<span style="color: #666666">.</span>translate((L,<span style="color: #666666">0</span>))
+</pre></div>
+<p>
+The two rectangles are also made in an intuitive way:
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">under <span style="color: #666666">=</span> Rectangle(lower_left_corner<span style="color: #666666">=</span>(w_1<span style="color: #666666">-2*</span>R, <span style="color: #666666">2*</span>R),
+                  width<span style="color: #666666">=2*</span>R <span style="color: #666666">+</span> L <span style="color: #666666">+</span> <span style="color: #666666">2*</span>R, height<span style="color: #666666">=</span>H)
+over  <span style="color: #666666">=</span> Rectangle(lower_left_corner<span style="color: #666666">=</span>(w_1, <span style="color: #666666">2*</span>R <span style="color: #666666">+</span> H),
+                  width<span style="color: #666666">=2.5*</span>R, height<span style="color: #666666">=1.25*</span>H)
+</pre></div>
+
+<h3 id="___sec28">Groups of objects <a name="___sec28"></a></h3>
+
+<p>
+Instead of calling the <code>draw</code> method of every object, we can
+group objects and call <code>draw</code>, or perform other operations, for
+the whole group. For example, we may collect the two wheels
+in a <code>wheels</code> group and the <code>over</code> and <code>under</code> rectangles
+in a <code>body</code> group. The whole vehicle is a composition
+of its <code>wheels</code> and <code>body</code> groups. The code goes like
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">wheels  <span style="color: #666666">=</span> Composition({<span style="color: #BA2121">&#39;wheel1&#39;</span>: wheel1, <span style="color: #BA2121">&#39;wheel2&#39;</span>: wheel2})
+body    <span style="color: #666666">=</span> Composition({<span style="color: #BA2121">&#39;under&#39;</span>: under, <span style="color: #BA2121">&#39;over&#39;</span>: over})
+
+vehicle <span style="color: #666666">=</span> Composition({<span style="color: #BA2121">&#39;wheels&#39;</span>: wheels, <span style="color: #BA2121">&#39;body&#39;</span>: body})
+</pre></div>
+<p>
+The ground is illustrated by an object of type <code>Wall</code>,
+mostly used to indicate walls in sketches of mechanical systems.
+A <code>Wall</code> takes the <code>x</code> and <code>y</code> coordinates of some curve,
+and a <code>thickness</code> parameter, and creates a thick curve filled
+with a simple pattern. In this case the curve is just a flat
+line so the construction is made of two points on the
+ground line (\( (w_1-L,0) \) and \( (w_1+3L,0) \)):
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">ground <span style="color: #666666">=</span> Wall(x<span style="color: #666666">=</span>[w_1 <span style="color: #666666">-</span> L, w_1 <span style="color: #666666">+</span> <span style="color: #666666">3*</span>L], y<span style="color: #666666">=</span>[<span style="color: #666666">0</span>, <span style="color: #666666">0</span>], thickness<span style="color: #666666">=-0.3*</span>R)
+</pre></div>
+<p>
+The negative thickness makes the pattern-filled rectangle appear below
+the defined line, otherwise it appears above.
+
+<p>
+We may now collect all the objects in a &quot;top&quot; object that contains
+the whole figure:
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">fig <span style="color: #666666">=</span> Composition({<span style="color: #BA2121">&#39;vehicle&#39;</span>: vehicle, <span style="color: #BA2121">&#39;ground&#39;</span>: ground})
+fig<span style="color: #666666">.</span>draw()  <span style="color: #408080; font-style: italic"># send all figures to plotting backend</span>
+drawing_tool<span style="color: #666666">.</span>display()
+drawing_tool<span style="color: #666666">.</span>savefig(<span style="color: #BA2121">&#39;tmp.png&#39;</span>)
+</pre></div>
+<p>
+The <code>fig.draw()</code> call will visit
+all subgroups, their subgroups,
+and so forth in the hierarchical tree structure of
+figure elements,
+and call <code>draw</code> for every object.
+
+<h3 id="___sec29">Changing line styles and colors <a name="___sec29"></a></h3>
+
+<p>
+Controlling the line style, line color, and line width is
+fundamental when designing figures. The <code>pysketcher</code>
+package allows the user to control such properties in
+single objects, but also set global properties that are
+used if the object has no particular specification of
+the properties. Setting the global properties are done like
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">drawing_tool<span style="color: #666666">.</span>set_linestyle(<span style="color: #BA2121">&#39;dashed&#39;</span>)
+drawing_tool<span style="color: #666666">.</span>set_linecolor(<span style="color: #BA2121">&#39;black&#39;</span>)
+drawing_tool<span style="color: #666666">.</span>set_linewidth(<span style="color: #666666">4</span>)
+</pre></div>
+<p>
+At the object level the properties are specified in a similar
+way:
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">wheels<span style="color: #666666">.</span>set_linestyle(<span style="color: #BA2121">&#39;solid&#39;</span>)
+wheels<span style="color: #666666">.</span>set_linecolor(<span style="color: #BA2121">&#39;red&#39;</span>)
+</pre></div>
+<p>
+and so on.
+
+<p>
+Geometric figures can be specified as <em>filled</em>, either with a color or with a
+special visual pattern:
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #408080; font-style: italic"># Set filling of all curves</span>
+drawing_tool<span style="color: #666666">.</span>set_filled_curves(color<span style="color: #666666">=</span><span style="color: #BA2121">&#39;blue&#39;</span>, pattern<span style="color: #666666">=</span><span style="color: #BA2121">&#39;/&#39;</span>)
+
+<span style="color: #408080; font-style: italic"># Turn off filling of all curves</span>
+drawing_tool<span style="color: #666666">.</span>set_filled_curves(<span style="color: #008000">False</span>)
+
+<span style="color: #408080; font-style: italic"># Fill the wheel with red color</span>
+wheel1<span style="color: #666666">.</span>set_filled_curves(<span style="color: #BA2121">&#39;red&#39;</span>)
+</pre></div>
+<p>
+<!-- <a href="http://packages.python.org/ete2/" target="_self"><tt>http://packages.python.org/ete2/</tt></a> for visualizing tree structures! -->
+
+<h3 id="___sec30">The figure composition as an object hierarchy <a name="___sec30"></a></h3>
+
+<p>
+The composition of objects making up the figure
+is hierarchical, similar to a family, where
+each object has a parent and a number of children. Do a
+<code>print fig</code> to display the relations:
+<p>
+
+<!-- code=text (!bc dat) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">ground
+    wall
+vehicle
+    body
+        over
+            rectangle
+        under
+            rectangle
+    wheels
+        wheel1
+            arc
+        wheel2
+            arc
+</pre></div>
+<p>
+The indentation reflects how deep down in the hierarchy (family)
+we are.
+This output is to be interpreted as follows:
+
+<ul>
+  <li> <code>fig</code> contains two objects, <code>ground</code> and <code>vehicle</code></li>
+  <li> <code>ground</code> contains an object <code>wall</code></li>
+  <li> <code>vehicle</code> contains two objects, <code>body</code> and <code>wheels</code></li>
+  <li> <code>body</code> contains two objects, <code>over</code> and <code>under</code></li>
+  <li> <code>wheels</code> contains two objects, <code>wheel1</code> and <code>wheel2</code></li>
+</ul>
+
+In this listing there are also objects not defined by the
+programmer: <code>rectangle</code> and <code>arc</code>. These are of type <code>Curve</code>
+and automatically generated by the classes <code>Rectangle</code> and <code>Circle</code>.
+
+<p>
+More detailed information can be printed by
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">print</span> fig<span style="color: #666666">.</span>show_hierarchy(<span style="color: #BA2121">&#39;std&#39;</span>)
+</pre></div>
+<p>
+yielding the output
+<p>
+
+<!-- code=text (!bc dat) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">ground (Wall):
+    wall (Curve): 4 coords fillcolor=&#39;white&#39; fillpattern=&#39;/&#39;
+vehicle (Composition):
+    body (Composition):
+        over (Rectangle):
+            rectangle (Curve): 5 coords
+        under (Rectangle):
+            rectangle (Curve): 5 coords
+    wheels (Composition):
+        wheel1 (Circle):
+            arc (Curve): 181 coords
+        wheel2 (Circle):
+            arc (Curve): 181 coords
+</pre></div>
+<p>
+Here we can see the class type for each figure object, how many
+coordinates that are involved in basic figures (<code>Curve</code> objects), and
+special settings of the basic figure (fillcolor, line types, etc.).
+For example, <code>wheel2</code> is a <code>Circle</code> object consisting of an <code>arc</code>,
+which is a <code>Curve</code> object consisting of 181 coordinates (the
+points needed to draw a smooth circle). The <code>Curve</code> objects are the
+only objects that really holds specific coordinates to be drawn.
+The other object types are just compositions used to group
+parts of the complete figure.
+
+<p>
+One can also get a graphical overview of the hierarchy of figure objects
+that build up a particular figure <code>fig</code>.
+Just call <code>fig.graphviz_dot('fig')</code> to produce a file <code>fig.dot</code> in
+the <em>dot format</em>. This file contains relations between parent and
+child objects in the figure and can be turned into an image,
+as in Figure <a href="#sketcher:fig:vehicle0:hier1">8</a>, by
+running the <code>dot</code> program:
+<p>
+
+<!-- code=text (!bc sys) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">Terminal&gt; dot -Tpng -o fig.png fig.dot
+</pre></div>
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 8:  Hierarchical relation between figure objects. <a name="sketcher:fig:vehicle0:hier1"></a> </p></center>
+<p><img src="fig-oo/vehicle0_hier1.png" align="bottom" width=500></p>
+</center>
+
+<p>
+The call <code>fig.graphviz_dot('fig', classname=True)</code> makes a <code>fig.dot</code> file
+where the class type of each object is also visible, see
+Figure <a href="#sketcher:fig:vehicle0:hier2">9</a>. The ability to write out the
+object hierarchy or view it graphically can be of great help when
+working with complex figures that involve layers of subfigures.
+
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 9:  Hierarchical relation between figure objects, including their class names. <a name="sketcher:fig:vehicle0:hier2"></a> </p></center>
+<p><img src="fig-oo/vehicle0_hier2.png" align="bottom" width=500></p>
+</center>
+
+<p>
+Any of the objects can in the program be reached through their names, e.g.,
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">fig[<span style="color: #BA2121">&#39;vehicle&#39;</span>]
+fig[<span style="color: #BA2121">&#39;vehicle&#39;</span>][<span style="color: #BA2121">&#39;wheels&#39;</span>]
+fig[<span style="color: #BA2121">&#39;vehicle&#39;</span>][<span style="color: #BA2121">&#39;wheels&#39;</span>][<span style="color: #BA2121">&#39;wheel2&#39;</span>]
+fig[<span style="color: #BA2121">&#39;vehicle&#39;</span>][<span style="color: #BA2121">&#39;wheels&#39;</span>][<span style="color: #BA2121">&#39;wheel2&#39;</span>][<span style="color: #BA2121">&#39;arc&#39;</span>]
+fig[<span style="color: #BA2121">&#39;vehicle&#39;</span>][<span style="color: #BA2121">&#39;wheels&#39;</span>][<span style="color: #BA2121">&#39;wheel2&#39;</span>][<span style="color: #BA2121">&#39;arc&#39;</span>]<span style="color: #666666">.</span>x  <span style="color: #408080; font-style: italic"># x coords</span>
+fig[<span style="color: #BA2121">&#39;vehicle&#39;</span>][<span style="color: #BA2121">&#39;wheels&#39;</span>][<span style="color: #BA2121">&#39;wheel2&#39;</span>][<span style="color: #BA2121">&#39;arc&#39;</span>]<span style="color: #666666">.</span>y  <span style="color: #408080; font-style: italic"># y coords</span>
+fig[<span style="color: #BA2121">&#39;vehicle&#39;</span>][<span style="color: #BA2121">&#39;wheels&#39;</span>][<span style="color: #BA2121">&#39;wheel2&#39;</span>][<span style="color: #BA2121">&#39;arc&#39;</span>]<span style="color: #666666">.</span>linestyle
+fig[<span style="color: #BA2121">&#39;vehicle&#39;</span>][<span style="color: #BA2121">&#39;wheels&#39;</span>][<span style="color: #BA2121">&#39;wheel2&#39;</span>][<span style="color: #BA2121">&#39;arc&#39;</span>]<span style="color: #666666">.</span>linetype
+</pre></div>
+<p>
+Grabbing a part of the figure this way is handy for
+changing properties of that part, for example, colors, line styles
+(see Figure <a href="#sketcher:fig:vehicle0:v2">10</a>):
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">fig[<span style="color: #BA2121">&#39;vehicle&#39;</span>][<span style="color: #BA2121">&#39;wheels&#39;</span>]<span style="color: #666666">.</span>set_filled_curves(<span style="color: #BA2121">&#39;blue&#39;</span>)
+fig[<span style="color: #BA2121">&#39;vehicle&#39;</span>][<span style="color: #BA2121">&#39;wheels&#39;</span>]<span style="color: #666666">.</span>set_linewidth(<span style="color: #666666">6</span>)
+fig[<span style="color: #BA2121">&#39;vehicle&#39;</span>][<span style="color: #BA2121">&#39;wheels&#39;</span>]<span style="color: #666666">.</span>set_linecolor(<span style="color: #BA2121">&#39;black&#39;</span>)
+
+fig[<span style="color: #BA2121">&#39;vehicle&#39;</span>][<span style="color: #BA2121">&#39;body&#39;</span>][<span style="color: #BA2121">&#39;under&#39;</span>]<span style="color: #666666">.</span>set_filled_curves(<span style="color: #BA2121">&#39;red&#39;</span>)
+
+fig[<span style="color: #BA2121">&#39;vehicle&#39;</span>][<span style="color: #BA2121">&#39;body&#39;</span>][<span style="color: #BA2121">&#39;over&#39;</span>]<span style="color: #666666">.</span>set_filled_curves(pattern<span style="color: #666666">=</span><span style="color: #BA2121">&#39;/&#39;</span>)
+fig[<span style="color: #BA2121">&#39;vehicle&#39;</span>][<span style="color: #BA2121">&#39;body&#39;</span>][<span style="color: #BA2121">&#39;over&#39;</span>]<span style="color: #666666">.</span>set_linewidth(<span style="color: #666666">14</span>)
+fig[<span style="color: #BA2121">&#39;vehicle&#39;</span>][<span style="color: #BA2121">&#39;body&#39;</span>][<span style="color: #BA2121">&#39;over&#39;</span>][<span style="color: #BA2121">&#39;rectangle&#39;</span>]<span style="color: #666666">.</span>linewidth <span style="color: #666666">=</span> <span style="color: #666666">4</span>
+</pre></div>
+<p>
+The last line accesses the <code>Curve</code> object directly, while the line above,
+accesses the <code>Rectangle</code> object, which will then set the linewidth of
+its <code>Curve</code> object, and other objects if it had any.
+The result of the actions above is shown in Figure <a href="#sketcher:fig:vehicle0:v2">10</a>.
+
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 10:  Left: Basic line-based drawing. Right: Thicker lines and filled parts. <a name="sketcher:fig:vehicle0:v2"></a> </p></center>
+<p><img src="fig-oo/vehicle0.png" align="bottom" width=700></p>
+</center>
+
+<p>
+We can also change position of parts of the figure and thereby make
+animations, as shown next.
+
+<h3 id="___sec31">Animation: translating the vehicle <a name="___sec31"></a></h3>
+
+<p>
+Can we make our little vehicle roll? A first attempt will be to
+fake rolling by just displacing all parts of the vehicle.
+The relevant parts constitute the <code>fig['vehicle']</code> object.
+This part of the figure can be translated, rotated, and scaled.
+A translation along the ground means a translation in \( x \) direction,
+say a length \( L \) to the right:
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">fig[<span style="color: #BA2121">&#39;vehicle&#39;</span>]<span style="color: #666666">.</span>translate((L,<span style="color: #666666">0</span>))
+</pre></div>
+<p>
+You need to erase, draw, and display to see the movement:
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">drawing_tool<span style="color: #666666">.</span>erase()
+fig<span style="color: #666666">.</span>draw()
+drawing_tool<span style="color: #666666">.</span>display()
+</pre></div>
+<p>
+Without erasing, the old drawing of the vehicle will remain in
+the figure so you get two vehicles. Without <code>fig.draw()</code> the
+new coordinates of the vehicle will not be communicated to
+the drawing tool, and without calling display the updated
+drawing will not be visible.
+
+<p>
+A figure that moves in time is conveniently realized by the
+function <code>animate</code>:
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">animate(fig, tp, action)
+</pre></div>
+<p>
+Here, <code>fig</code> is the entire figure, <code>tp</code> is an array of
+time points, and <code>action</code> is a user-specified function that changes
+<code>fig</code> at a specific time point. Typically, <code>action</code> will move
+parts of <code>fig</code>.
+
+<p>
+In the present case we can define the movement through a velocity
+function <code>v(t)</code> and displace the figure <code>v(t)*dt</code> for small time
+intervals <code>dt</code>. A possible velocity function is
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">v</span>(t):
+    <span style="color: #008000; font-weight: bold">return</span> <span style="color: #666666">-8*</span>R<span style="color: #666666">*</span>t<span style="color: #666666">*</span>(<span style="color: #666666">1</span> <span style="color: #666666">-</span> t<span style="color: #666666">/</span>(<span style="color: #666666">2*</span>R))
+</pre></div>
+<p>
+Our action function for horizontal displacements <code>v(t)*dt</code> becomes
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">move</span>(t, fig):
+    x_displacement <span style="color: #666666">=</span> dt<span style="color: #666666">*</span>v(t)
+    fig[<span style="color: #BA2121">&#39;vehicle&#39;</span>]<span style="color: #666666">.</span>translate((x_displacement, <span style="color: #666666">0</span>))
+</pre></div>
+<p>
+Since our velocity is negative for \( t\in [0,2R] \) the displacement is
+to the left.
+
+<p>
+The <code>animate</code> function will for each time point <code>t</code> in <code>tp</code> erase
+the drawing, call <code>action(t, fig)</code>, and show the new figure by
+<code>fig.draw()</code> and <code>drawing_tool.display()</code>.
+Here we choose a resolution of the animation corresponding to
+25 time points in the time interval \( [0,2R] \):
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span>
+tp <span style="color: #666666">=</span> numpy<span style="color: #666666">.</span>linspace(<span style="color: #666666">0</span>, <span style="color: #666666">2*</span>R, <span style="color: #666666">25</span>)
+dt <span style="color: #666666">=</span> tp[<span style="color: #666666">1</span>] <span style="color: #666666">-</span> tp[<span style="color: #666666">0</span>]  <span style="color: #408080; font-style: italic"># time step</span>
+
+animate(fig, tp, move, pause_per_frame<span style="color: #666666">=0.2</span>)
+</pre></div>
+<p>
+The <code>pause_per_frame</code> adds a pause, here 0.2 seconds, between
+each frame in the animation.
+
+<p>
+We can also ask <code>animate</code> to store each frame in a file:
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">files <span style="color: #666666">=</span> animate(fig, tp, move_vehicle, moviefiles<span style="color: #666666">=</span><span style="color: #008000">True</span>,
+                pause_per_frame<span style="color: #666666">=0.2</span>)
+</pre></div>
+<p>
+The <code>files</code> variable, here <code>'tmp_frame_%04d.png'</code>,
+is the printf-specification used to generate the individual
+plot files. We can use this specification to make a video
+file via <code>ffmpeg</code> (or <code>avconv</code> on Debian-based Linux systems such
+as Ubuntu). Videos in the Flash and WebM formats can be created
+by
+
+<p>
+
+<!-- code=text (!bc sys) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">Terminal&gt; ffmpeg -r 12 -i tmp_frame_%04d.png -vcodec flv mov.flv
+Terminal&gt; ffmpeg -r 12 -i tmp_frame_%04d.png -vcodec libvpx mov.webm
+</pre></div>
+<p>
+An animated GIF movie can also be made using the <code>convert</code> program
+from the ImageMagick software suite:
+
+<p>
+
+<!-- code=text (!bc sys) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">Terminal&gt; convert -delay 20 tmp_frame*.png mov.gif
+Terminal&gt; animate mov.gif  # play movie
+</pre></div>
+<p>
+The delay between frames, in units of 1/100 s,
+governs the speed of the movie.
+To play the animated GIF file in a web page, simply insert
+<code>&lt;img src=&quot;mov.gif&quot;&gt;</code> in the HTML code.
+
+<p>
+The individual PNG frames can be directly played in a web
+browser by running
+
+<p>
+
+<!-- code=text (!bc sys) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">Terminal&gt; scitools movie output_file=mov.html fps=5 tmp_frame*
+</pre></div>
+<p>
+or calling
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">scitools.std</span> <span style="color: #008000; font-weight: bold">import</span> movie
+movie(files, encoder<span style="color: #666666">=</span><span style="color: #BA2121">&#39;html&#39;</span>, output_file<span style="color: #666666">=</span><span style="color: #BA2121">&#39;mov.html&#39;</span>)
+</pre></div>
+<p>
+in Python. Load the resulting file <code>mov.html</code> into a web browser
+to play the movie.
+
+<p>
+Try to run <a href="http://tinyurl.com/pwyasaa/oo/vehicle0.py" target="_self"><tt>vehicle0.py</tt></a> and
+then load <code>mov.html</code> into a browser, or play one of the <code>mov.*</code>
+video files.  Alternatively, you can view a ready-made <a href="http://tinyurl.com/oou9lp7/mov-tut/vehicle0.html" target="_self">movie</a>.
+
+<h3 id="sketcher:vehicle1:anim">Animation: rolling the wheels<a name="sketcher:vehicle1:anim"></a></h3>
+
+<p>
+It is time to show rolling wheels. To this end, we add spokes to the
+wheels, formed by two crossing lines, see Figure <a href="#sketcher:fig:vehicle1">11</a>.
+The construction of the wheels will now involve a circle and two lines:
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">wheel1 <span style="color: #666666">=</span> Composition({
+    <span style="color: #BA2121">&#39;wheel&#39;</span>: Circle(center<span style="color: #666666">=</span>(w_1, R), radius<span style="color: #666666">=</span>R),
+    <span style="color: #BA2121">&#39;cross&#39;</span>: Composition({<span style="color: #BA2121">&#39;cross1&#39;</span>: Line((w_1,<span style="color: #666666">0</span>),   (w_1,<span style="color: #666666">2*</span>R)),
+                          <span style="color: #BA2121">&#39;cross2&#39;</span>: Line((w_1<span style="color: #666666">-</span>R,R), (w_1<span style="color: #666666">+</span>R,R))})})
+wheel2 <span style="color: #666666">=</span> wheel1<span style="color: #666666">.</span>copy()
+wheel2<span style="color: #666666">.</span>translate((L,<span style="color: #666666">0</span>))
+</pre></div>
+<p>
+Observe that <code>wheel1.copy()</code> copies all the objects that make
+up the first wheel, and <code>wheel2.translate</code> translates all
+the copied objects.
+
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 11:  Wheels with spokes to illustrate rolling. <a name="sketcher:fig:vehicle1"></a> </p></center>
+<p><img src="fig-oo/vehicle1.png" align="bottom" width=400></p>
+</center>
+
+<p>
+The <code>move</code> function now needs to displace all the objects in the
+entire vehicle and also rotate the <code>cross1</code> and <code>cross2</code>
+objects in both wheels.
+The rotation angle follows from the fact that the arc length
+of a rolling wheel equals the displacement of the center of
+the wheel, leading to a rotation angle
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">angle <span style="color: #666666">=</span> <span style="color: #666666">-</span> x_displacement<span style="color: #666666">/</span>R
+</pre></div>
+<p>
+With <code>w_1</code> tracking the \( x \) coordinate of the center
+of the front wheel, we can rotate that wheel by
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">w1 <span style="color: #666666">=</span> fig[<span style="color: #BA2121">&#39;vehicle&#39;</span>][<span style="color: #BA2121">&#39;wheels&#39;</span>][<span style="color: #BA2121">&#39;wheel1&#39;</span>]
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">math</span> <span style="color: #008000; font-weight: bold">import</span> degrees
+w1<span style="color: #666666">.</span>rotate(degrees(angle), center<span style="color: #666666">=</span>(w_1, R))
+</pre></div>
+<p>
+The <code>rotate</code> function takes two parameters: the rotation angle
+(in degrees) and the center point of the rotation, which is the
+center of the wheel in this case. The other wheel is rotated by
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">w2 <span style="color: #666666">=</span> fig[<span style="color: #BA2121">&#39;vehicle&#39;</span>][<span style="color: #BA2121">&#39;wheels&#39;</span>][<span style="color: #BA2121">&#39;wheel2&#39;</span>]
+w2<span style="color: #666666">.</span>rotate(degrees(angle), center<span style="color: #666666">=</span>(w_1 <span style="color: #666666">+</span> L, R))
+</pre></div>
+<p>
+That is, the angle is the same, but the rotation point is different.
+The update of the center point is done by <code>w_1 += x_displacement</code>.
+The complete <code>move</code> function with translation of the entire
+vehicle and rotation of the wheels then becomes
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">w_1 <span style="color: #666666">=</span> w_1 <span style="color: #666666">+</span> L   <span style="color: #408080; font-style: italic"># start position</span>
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">move</span>(t, fig):
+    x_displacement <span style="color: #666666">=</span> dt<span style="color: #666666">*</span>v(t)
+    fig[<span style="color: #BA2121">&#39;vehicle&#39;</span>]<span style="color: #666666">.</span>translate((x_displacement, <span style="color: #666666">0</span>))
+
+    <span style="color: #408080; font-style: italic"># Rotate wheels</span>
+    <span style="color: #008000; font-weight: bold">global</span> w_1
+    w_1 <span style="color: #666666">+=</span> x_displacement
+    <span style="color: #408080; font-style: italic"># R*angle = -x_displacement</span>
+    angle <span style="color: #666666">=</span> <span style="color: #666666">-</span> x_displacement<span style="color: #666666">/</span>R
+    w1 <span style="color: #666666">=</span> fig[<span style="color: #BA2121">&#39;vehicle&#39;</span>][<span style="color: #BA2121">&#39;wheels&#39;</span>][<span style="color: #BA2121">&#39;wheel1&#39;</span>]
+    w1<span style="color: #666666">.</span>rotate(degrees(angle), center<span style="color: #666666">=</span>(w_1, R))
+    w2 <span style="color: #666666">=</span> fig[<span style="color: #BA2121">&#39;vehicle&#39;</span>][<span style="color: #BA2121">&#39;wheels&#39;</span>][<span style="color: #BA2121">&#39;wheel2&#39;</span>]
+    w2<span style="color: #666666">.</span>rotate(degrees(angle), center<span style="color: #666666">=</span>(w_1 <span style="color: #666666">+</span> L, R))
+</pre></div>
+<p>
+The complete example is found in the file
+<a href="http://tinyurl.com/pwyasaa/oo/vehicle1.py" target="_self"><tt>vehicle1.py</tt></a>. You may run this file or watch a <a href="http://tinyurl.com/oou9lp7/mov-tut/vehicle1.html" target="_self">ready-made movie</a>.
+
+<p>
+The advantages with making figures this way, through programming
+rather than using interactive drawing programs, are numerous.  For
+example, the objects are parameterized by variables so that various
+dimensions can easily be changed.  Subparts of the figure, possible
+involving a lot of figure objects, can change color, linetype, filling
+or other properties through a <em>single</em> function call.  Subparts of the
+figure can be rotated, translated, or scaled.  Subparts of the figure
+can also be copied and moved to other parts of the drawing
+area. However, the single most important feature is probably the
+ability to make animations governed by mathematical formulas or data
+coming from physics simulations of the problem, as shown in the example above.
+
+<h2 id="___sec33">Example of classes for geometric objects <a name="___sec33"></a></h2>
+
+<p>
+We shall now explain how we can, quite easily, realize software with
+the capabilities demonstrated in the previous examples. Each object in
+the figure is represented as a class in a class hierarchy. Using
+inheritance, classes can inherit properties from parent classes and
+add new geometric features.
+
+<p>
+We introduce class <code>Shape</code> as superclass for all specialized objects
+in a figure. This class does not store any data, but provides a
+series of functions that add functionality to all the subclasses.
+This will be shown later.
+
+<h3 id="___sec34">Simple geometric objects <a name="___sec34"></a></h3>
+
+<p>
+One simple subclass is <code>Rectangle</code>, specified by the coordinates of
+the lower left corner and its width and height:
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Rectangle</span>(Shape):
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__init__</span>(<span style="color: #008000">self</span>, lower_left_corner, width, height):
+        p <span style="color: #666666">=</span> lower_left_corner  <span style="color: #408080; font-style: italic"># short form</span>
+        x <span style="color: #666666">=</span> [p[<span style="color: #666666">0</span>], p[<span style="color: #666666">0</span>] <span style="color: #666666">+</span> width,
+             p[<span style="color: #666666">0</span>] <span style="color: #666666">+</span> width, p[<span style="color: #666666">0</span>], p[<span style="color: #666666">0</span>]]
+        y <span style="color: #666666">=</span> [p[<span style="color: #666666">1</span>], p[<span style="color: #666666">1</span>], p[<span style="color: #666666">1</span>] <span style="color: #666666">+</span> height,
+             p[<span style="color: #666666">1</span>] <span style="color: #666666">+</span> height, p[<span style="color: #666666">1</span>]]
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>shapes <span style="color: #666666">=</span> {<span style="color: #BA2121">&#39;rectangle&#39;</span>: Curve(x,y)}
+</pre></div>
+<p>
+Any subclass of <code>Shape</code> will have a constructor that takes geometric
+information about the shape of the object and creates a dictionary
+<code>self.shapes</code> with the shape built of simpler shapes. The most
+fundamental shape is <code>Curve</code>, which is just a collection of \( (x,y) \)
+coordinates in two arrays <code>x</code> and <code>y</code>.  Drawing the <code>Curve</code> object is
+a matter of plotting <code>y</code> versus <code>x</code>.  For class <code>Rectangle</code> the <code>x</code>
+and <code>y</code> arrays contain the corner points of the rectangle in
+counterclockwise direction, starting and ending with in the lower left
+corner.
+
+<p>
+Class <code>Line</code> is also a simple class:
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Line</span>(Shape):
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__init__</span>(<span style="color: #008000">self</span>, start, end):
+        x <span style="color: #666666">=</span> [start[<span style="color: #666666">0</span>], end[<span style="color: #666666">0</span>]]
+        y <span style="color: #666666">=</span> [start[<span style="color: #666666">1</span>], end[<span style="color: #666666">1</span>]]
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>shapes <span style="color: #666666">=</span> {<span style="color: #BA2121">&#39;line&#39;</span>: Curve(x, y)}
+</pre></div>
+<p>
+Here we only need two points, the start and end point on the line.
+However, we may want to add some useful functionality, e.g., the ability
+to give an \( x \) coordinate and have the class calculate the
+corresponding \( y \) coordinate:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__call__</span>(<span style="color: #008000">self</span>, x):
+        <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Given x, return y on the line.&quot;&quot;&quot;</span>
+        x, y <span style="color: #666666">=</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>shapes[<span style="color: #BA2121">&#39;line&#39;</span>]<span style="color: #666666">.</span>x, <span style="color: #008000">self</span><span style="color: #666666">.</span>shapes[<span style="color: #BA2121">&#39;line&#39;</span>]<span style="color: #666666">.</span>y
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>a <span style="color: #666666">=</span> (y[<span style="color: #666666">1</span>] <span style="color: #666666">-</span> y[<span style="color: #666666">0</span>])<span style="color: #666666">/</span>(x[<span style="color: #666666">1</span>] <span style="color: #666666">-</span> x[<span style="color: #666666">0</span>])
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>b <span style="color: #666666">=</span> y[<span style="color: #666666">0</span>] <span style="color: #666666">-</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>a<span style="color: #666666">*</span>x[<span style="color: #666666">0</span>]
+        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>a<span style="color: #666666">*</span>x <span style="color: #666666">+</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>b
+</pre></div>
+<p>
+Unfortunately, this is too simplistic because vertical lines cannot be
+handled (infinite <code>self.a</code>). The true source code of <code>Line</code> therefore
+provides a more general solution at the cost of significantly longer
+code with more tests.
+
+<p>
+A circle implies a somewhat increased complexity. Again we represent
+the geometric object by a <code>Curve</code> object, but this time the <code>Curve</code>
+object needs to store a large number of points on the curve such that
+a plotting program produces a visually smooth curve.  The points on
+the circle must be calculated manually in the constructor of class
+<code>Circle</code>. The formulas for points \( (x,y) \) on a curve with radius \( R \)
+and center at \( (x_0, y_0) \) are given by
+
+$$
+\begin{align*}
+x &= x_0 + R\cos (t),\\ 
+y &= y_0 + R\sin (t),
+\end{align*}
+$$
+
+where \( t\in [0, 2\pi] \). A discrete set of \( t \) values in this
+interval gives the corresponding set of \( (x,y) \) coordinates on
+the circle. The user must specify the resolution as the number
+of \( t \) values. The circle's radius and center must of course
+also be specified.
+
+<p>
+We can write the <code>Circle</code> class as
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Circle</span>(Shape):
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__init__</span>(<span style="color: #008000">self</span>, center, radius, resolution<span style="color: #666666">=180</span>):
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>center, <span style="color: #008000">self</span><span style="color: #666666">.</span>radius <span style="color: #666666">=</span> center, radius
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>resolution <span style="color: #666666">=</span> resolution
+
+        t <span style="color: #666666">=</span> linspace(<span style="color: #666666">0</span>, <span style="color: #666666">2*</span>pi, resolution<span style="color: #666666">+1</span>)
+        x0 <span style="color: #666666">=</span> center[<span style="color: #666666">0</span>];  y0 <span style="color: #666666">=</span> center[<span style="color: #666666">1</span>]
+        R <span style="color: #666666">=</span> radius
+        x <span style="color: #666666">=</span> x0 <span style="color: #666666">+</span> R<span style="color: #666666">*</span>cos(t)
+        y <span style="color: #666666">=</span> y0 <span style="color: #666666">+</span> R<span style="color: #666666">*</span>sin(t)
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>shapes <span style="color: #666666">=</span> {<span style="color: #BA2121">&#39;circle&#39;</span>: Curve(x, y)}
+</pre></div>
+<p>
+As in class <code>Line</code> we can offer the possibility to give an angle
+\( \theta \) (equivalent to \( t \) in the formulas above)
+and then get the corresponding \( x \) and \( y \) coordinates:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__call__</span>(<span style="color: #008000">self</span>, theta):
+        <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Return (x, y) point corresponding to angle theta.&quot;&quot;&quot;</span>
+        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>center[<span style="color: #666666">0</span>] <span style="color: #666666">+</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>radius<span style="color: #666666">*</span>cos(theta), \ 
+               <span style="color: #008000">self</span><span style="color: #666666">.</span>center[<span style="color: #666666">1</span>] <span style="color: #666666">+</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>radius<span style="color: #666666">*</span>sin(theta)
+</pre></div>
+<p>
+There is one flaw with this method: it yields illegal values after
+a translation, scaling, or rotation of the circle.
+
+<p>
+A part of a circle, an arc, is a frequent geometric object when
+drawing mechanical systems. The arc is constructed much like
+a circle, but \( t \) runs in \( [\theta_s, \theta_s + \theta_a] \). Giving
+\( \theta_s \) and \( \theta_a \) the slightly more descriptive names
+<code>start_angle</code> and <code>arc_angle</code>, the code looks like this:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Arc</span>(Shape):
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__init__</span>(<span style="color: #008000">self</span>, center, radius,
+                 start_angle, arc_angle,
+                 resolution<span style="color: #666666">=180</span>):
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>start_angle <span style="color: #666666">=</span> radians(start_angle)
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>arc_angle <span style="color: #666666">=</span> radians(arc_angle)
+
+        t <span style="color: #666666">=</span> linspace(<span style="color: #008000">self</span><span style="color: #666666">.</span>start_angle,
+                     <span style="color: #008000">self</span><span style="color: #666666">.</span>start_angle <span style="color: #666666">+</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>arc_angle,
+                     resolution<span style="color: #666666">+1</span>)
+        x0 <span style="color: #666666">=</span> center[<span style="color: #666666">0</span>];  y0 <span style="color: #666666">=</span> center[<span style="color: #666666">1</span>]
+        R <span style="color: #666666">=</span> radius
+        x <span style="color: #666666">=</span> x0 <span style="color: #666666">+</span> R<span style="color: #666666">*</span>cos(t)
+        y <span style="color: #666666">=</span> y0 <span style="color: #666666">+</span> R<span style="color: #666666">*</span>sin(t)
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>shapes <span style="color: #666666">=</span> {<span style="color: #BA2121">&#39;arc&#39;</span>: Curve(x, y)}
+</pre></div>
+<p>
+Having the <code>Arc</code> class, a <code>Circle</code> can alternatively be defined as
+a subclass specializing the arc to a circle:
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Circle</span>(Arc):
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__init__</span>(<span style="color: #008000">self</span>, center, radius, resolution<span style="color: #666666">=180</span>):
+        Arc<span style="color: #666666">.</span>__init__(<span style="color: #008000">self</span>, center, radius, <span style="color: #666666">0</span>, <span style="color: #666666">360</span>, resolution)
+</pre></div>
+
+<h3 id="___sec35">Class curve <a name="___sec35"></a></h3>
+
+<p>
+Class <code>Curve</code> sits on the coordinates to be drawn, but how is that
+done? The constructor of class <code>Curve</code> just stores the coordinates,
+while a method <code>draw</code> sends the coordinates to the plotting program to
+make a graph.  Or more precisely, to avoid a lot of (e.g.)
+Matplotlib-specific plotting commands in class <code>Curve</code> we have created
+a small layer with a simple programming interface to plotting
+programs. This makes it straightforward to change from Matplotlib to
+another plotting program. The programming interface is represented by
+the <code>drawing_tool</code> object and has a few functions:
+
+<ul>
+  <li> <code>plot_curve</code> for sending a curve in terms of \( x \) and \( y \) coordinates
+    to the plotting program,</li>
+  <li> <code>set_coordinate_system</code> for specifying the graphics area,</li>
+  <li> <code>erase</code> for deleting all elements of the graph,</li>
+  <li> <code>set_grid</code> for turning on a grid (convenient while constructing the figure),</li>
+  <li> <code>set_instruction_file</code> for creating a separate file with all
+    plotting commands (Matplotlib commands in our case),</li>
+  <li> a series of <code>set_X</code> functions where <code>X</code> is some property like
+    <code>linecolor</code>, <code>linestyle</code>, <code>linewidth</code>, <code>filled_curves</code>.</li>
+</ul>
+
+This is basically all we need to communicate to a plotting program.
+
+<p>
+Any class in the <code>Shape</code> hierarchy inherits <code>set_X</code> functions for
+setting properties of curves. This information is propagated to
+all other shape objects in the <code>self.shapes</code> dictionary. Class
+<code>Curve</code> stores the line properties together with the coordinates
+of its curve and propagates this information to the plotting program.
+When saying <code>vehicle.set_linewidth(10)</code>, all objects that make
+up the <code>vehicle</code> object will get a <code>set_linewidth(10)</code> call,
+but only the <code>Curve</code> object at the end of the chain will actually
+store the information and send it to the plotting program.
+
+<p>
+A rough sketch of class <code>Curve</code> reads
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Curve</span>(Shape):
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;General curve as a sequence of (x,y) coordintes.&quot;&quot;&quot;</span>
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__init__</span>(<span style="color: #008000">self</span>, x, y):
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>x <span style="color: #666666">=</span> asarray(x, dtype<span style="color: #666666">=</span><span style="color: #008000">float</span>)
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>y <span style="color: #666666">=</span> asarray(y, dtype<span style="color: #666666">=</span><span style="color: #008000">float</span>)
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">draw</span>(<span style="color: #008000">self</span>):
+        drawing_tool<span style="color: #666666">.</span>plot_curve(
+            <span style="color: #008000">self</span><span style="color: #666666">.</span>x, <span style="color: #008000">self</span><span style="color: #666666">.</span>y,
+            <span style="color: #008000">self</span><span style="color: #666666">.</span>linestyle, <span style="color: #008000">self</span><span style="color: #666666">.</span>linewidth, <span style="color: #008000">self</span><span style="color: #666666">.</span>linecolor, <span style="color: #666666">...</span>)
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">set_linewidth</span>(<span style="color: #008000">self</span>, width):
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>linewidth <span style="color: #666666">=</span> width
+
+    det set_linestyle(<span style="color: #008000">self</span>, style):
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>linestyle <span style="color: #666666">=</span> style
+    <span style="color: #666666">...</span>
+</pre></div>
+
+<h3 id="___sec36">Compound geometric objects <a name="___sec36"></a></h3>
+
+<p>
+The simple classes <code>Line</code>, <code>Arc</code>, and <code>Circle</code> could can the geometric
+shape through just one <code>Curve</code> object. More complicated shapes are
+built from instances of various subclasses of <code>Shape</code>. Classes used
+for professional drawings soon get quite complex in composition and
+have a lot of geometric details, so here we prefer to make a very
+simple composition: the already drawn vehicle from Figure
+<a href="#sketcher:fig:vehicle0">7</a>.  That is, instead of composing the drawing
+in a Python program as shown above, we make a subclass <code>Vehicle0</code> in
+the <code>Shape</code> hierarchy for doing the same thing.
+
+<p>
+The <code>Shape</code> hierarchy is found in the <code>pysketcher</code> package, so to use these
+classes or derive a new one, we need to import <code>pysketcher</code>. The constructor
+of class <code>Vehicle0</code> performs approximately the same statements as
+in the example program we developed for making the drawing in
+Figure <a href="#sketcher:fig:vehicle0">7</a>.
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">pysketcher</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #666666">*</span>
+
+<span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Vehicle0</span>(Shape):
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__init__</span>(<span style="color: #008000">self</span>, w_1, R, L, H):
+        wheel1 <span style="color: #666666">=</span> Circle(center<span style="color: #666666">=</span>(w_1, R), radius<span style="color: #666666">=</span>R)
+        wheel2 <span style="color: #666666">=</span> wheel1<span style="color: #666666">.</span>copy()
+        wheel2<span style="color: #666666">.</span>translate((L,<span style="color: #666666">0</span>))
+
+        under <span style="color: #666666">=</span> Rectangle(lower_left_corner<span style="color: #666666">=</span>(w_1<span style="color: #666666">-2*</span>R, <span style="color: #666666">2*</span>R),
+                          width<span style="color: #666666">=2*</span>R <span style="color: #666666">+</span> L <span style="color: #666666">+</span> <span style="color: #666666">2*</span>R, height<span style="color: #666666">=</span>H)
+        over  <span style="color: #666666">=</span> Rectangle(lower_left_corner<span style="color: #666666">=</span>(w_1, <span style="color: #666666">2*</span>R <span style="color: #666666">+</span> H),
+                          width<span style="color: #666666">=2.5*</span>R, height<span style="color: #666666">=1.25*</span>H)
+
+        wheels <span style="color: #666666">=</span> Composition(
+            {<span style="color: #BA2121">&#39;wheel1&#39;</span>: wheel1, <span style="color: #BA2121">&#39;wheel2&#39;</span>: wheel2})
+        body <span style="color: #666666">=</span> Composition(
+            {<span style="color: #BA2121">&#39;under&#39;</span>: under, <span style="color: #BA2121">&#39;over&#39;</span>: over})
+
+        vehicle <span style="color: #666666">=</span> Composition({<span style="color: #BA2121">&#39;wheels&#39;</span>: wheels, <span style="color: #BA2121">&#39;body&#39;</span>: body})
+        xmax <span style="color: #666666">=</span> w_1 <span style="color: #666666">+</span> <span style="color: #666666">2*</span>L <span style="color: #666666">+</span> <span style="color: #666666">3*</span>R
+        ground <span style="color: #666666">=</span> Wall(x<span style="color: #666666">=</span>[R, xmax], y<span style="color: #666666">=</span>[<span style="color: #666666">0</span>, <span style="color: #666666">0</span>], thickness<span style="color: #666666">=-0.3*</span>R)
+
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>shapes <span style="color: #666666">=</span> {<span style="color: #BA2121">&#39;vehicle&#39;</span>: vehicle, <span style="color: #BA2121">&#39;ground&#39;</span>: ground}
+</pre></div>
+<p>
+Any subclass of <code>Shape</code> <em>must</em> define the <code>shapes</code> attribute, otherwise
+the inherited <code>draw</code> method (and a lot of other methods too) will
+not work.
+
+<p>
+The painting of the vehicle, as shown in the right part of
+Figure <a href="#sketcher:fig:vehicle0:v2">10</a>, could in class <code>Vehicle0</code>
+be offered by a method:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">colorful</span>(<span style="color: #008000">self</span>):
+        wheels <span style="color: #666666">=</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>shapes[<span style="color: #BA2121">&#39;vehicle&#39;</span>][<span style="color: #BA2121">&#39;wheels&#39;</span>]
+        wheels<span style="color: #666666">.</span>set_filled_curves(<span style="color: #BA2121">&#39;blue&#39;</span>)
+        wheels<span style="color: #666666">.</span>set_linewidth(<span style="color: #666666">6</span>)
+        wheels<span style="color: #666666">.</span>set_linecolor(<span style="color: #BA2121">&#39;black&#39;</span>)
+        under <span style="color: #666666">=</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>shapes[<span style="color: #BA2121">&#39;vehicle&#39;</span>][<span style="color: #BA2121">&#39;body&#39;</span>][<span style="color: #BA2121">&#39;under&#39;</span>]
+        under<span style="color: #666666">.</span>set_filled_curves(<span style="color: #BA2121">&#39;red&#39;</span>)
+        over <span style="color: #666666">=</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>shapes[<span style="color: #BA2121">&#39;vehicle&#39;</span>][<span style="color: #BA2121">&#39;body&#39;</span>][<span style="color: #BA2121">&#39;over&#39;</span>]
+        over<span style="color: #666666">.</span>set_filled_curves(pattern<span style="color: #666666">=</span><span style="color: #BA2121">&#39;/&#39;</span>)
+        over<span style="color: #666666">.</span>set_linewidth(<span style="color: #666666">14</span>)
+</pre></div>
+<p>
+The usage of the class is simple: after having set up an appropriate
+coordinate system as previously shown, we can do
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">vehicle <span style="color: #666666">=</span> Vehicle0(w_1, R, L, H)
+vehicle<span style="color: #666666">.</span>draw()
+drawing_tool<span style="color: #666666">.</span>display()
+</pre></div>
+<p>
+and go on the make a painted version by
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">drawing_tool<span style="color: #666666">.</span>erase()
+vehicle<span style="color: #666666">.</span>colorful()
+vehicle<span style="color: #666666">.</span>draw()
+drawing_tool<span style="color: #666666">.</span>display()
+</pre></div>
+<p>
+A complete code defining and using class <code>Vehicle0</code> is found in the file
+<a href="http://tinyurl.com/pwyasaa/oo/vehicle2.py" target="_self"><tt>vehicle2.py</tt></a>.
+
+<p>
+The <code>pysketcher</code> package contains a wide range of classes for various
+geometrical objects, particularly those that are frequently used in
+drawings of mechanical systems.
+
+<h2 id="___sec37">Adding functionality via recursion <a name="___sec37"></a></h2>
+
+<p>
+The really powerful feature of our class hierarchy is that we can add
+much functionality to the superclass <code>Shape</code> and to the &quot;bottom&quot; class
+<code>Curve</code>, and then all other classes for various types of geometrical shapes
+immediately get the new functionality. To explain the idea we may
+look at the <code>draw</code> method, which all classes in the <code>Shape</code>
+hierarchy must have. The inner workings of the <code>draw</code> method explain
+the secrets of how a series of other useful operations on figures
+can be implemented.
+
+<h3 id="___sec38">Basic principles of recursion <a name="___sec38"></a></h3>
+
+<p>
+Note that we work with two types of hierarchies in the
+present documentation: one Python <em>class hierarchy</em>,
+with <code>Shape</code> as superclass, and one <em>object hierarchy</em> of figure elements
+in a specific figure. A subclass of <code>Shape</code> stores its figure in the
+<code>self.shapes</code> dictionary. This dictionary represents the object hierarchy
+of figure elements for that class. We want to make one <code>draw</code> call
+for an instance, say our class <code>Vehicle0</code>, and then we want this call
+to be propagated to <em>all</em> objects that are contained in
+<code>self.shapes</code> and all is nested subdictionaries. How is this done?
+
+<p>
+The natural starting point is to call <code>draw</code> for each <code>Shape</code> object
+in the <code>self.shapes</code> dictionary:
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">draw</span>(<span style="color: #008000">self</span>):
+    <span style="color: #008000; font-weight: bold">for</span> shape <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>shapes:
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>shapes[shape]<span style="color: #666666">.</span>draw()
+</pre></div>
+<p>
+This general method can be provided by class <code>Shape</code> and inherited in
+subclasses like <code>Vehicle0</code>. Let <code>v</code> be a <code>Vehicle0</code> instance.
+Seemingly, a call <code>v.draw()</code> just calls
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">v<span style="color: #666666">.</span>shapes[<span style="color: #BA2121">&#39;vehicle&#39;</span>]<span style="color: #666666">.</span>draw()
+v<span style="color: #666666">.</span>shapes[<span style="color: #BA2121">&#39;ground&#39;</span>]<span style="color: #666666">.</span>draw()
+</pre></div>
+<p>
+However, in the former call we call the <code>draw</code> method of a <code>Composition</code> object
+whose <code>self.shapes</code> attributed has two elements: <code>wheels</code> and <code>body</code>.
+Since class <code>Composition</code> inherits the same <code>draw</code> method, this method will
+run through <code>self.shapes</code> and call <code>wheels.draw()</code> and <code>body.draw()</code>.
+Now, the <code>wheels</code> object is also a <code>Composition</code> with the same <code>draw</code>
+method, which will run through <code>self.shapes</code>, now containing
+the <code>wheel1</code> and <code>wheel2</code> objects. The <code>wheel1</code> object is a <code>Circle</code>,
+so calling <code>wheel1.draw()</code> calls the <code>draw</code> method in class <code>Circle</code>,
+but this is the same <code>draw</code> method as shown above. This method will
+therefore traverse the circle's <code>shapes</code> dictionary, which we have seen
+consists of one <code>Curve</code> element.
+
+<p>
+The <code>Curve</code> object holds the coordinates to be plotted so here <code>draw</code>
+really needs to do something &quot;physical&quot;, namely send the coordinates to
+the plotting program. The <code>draw</code> method is outlined in the short listing
+of class <code>Curve</code> shown previously.
+
+<p>
+We can go to any of the other shape objects that appear in the figure
+hierarchy and follow their <code>draw</code> calls in the similar way. Every time,
+a <code>draw</code> call will invoke a new <code>draw</code> call, until we eventually hit
+a <code>Curve</code> object at the &quot;bottom&quot; of the figure hierarchy, and then that part
+of the figure is really plotted (or more precisely, the coordinates
+are sent to a plotting program).
+
+<p>
+When a method calls itself, such as <code>draw</code> does, the calls are known as
+<em>recursive</em> and the programming principle is referred to as
+<em>recursion</em>. This technique is very often used to traverse hierarchical
+structures like the figure structures we work with here. Even though the
+hierarchy of objects building up a figure are of different types, they
+all inherit the same <code>draw</code> method and therefore exhibit the same
+behavior with respect to drawing. Only the <code>Curve</code> object has a different
+<code>draw</code> method, which does not lead to more recursion.
+
+<h3 id="___sec39">Explaining recursion <a name="___sec39"></a></h3>
+
+<p>
+Understanding recursion is usually a challenge. To get a better idea of
+how recursion works, we have equipped class <code>Shape</code> with a method <code>recurse</code>
+that just visits all the objects in the <code>shapes</code> dictionary and prints
+out a message for each object.
+This feature allows us to trace the execution and see exactly where
+we are in the hierarchy and which objects that are visited.
+
+<p>
+The <code>recurse</code> method is very similar to <code>draw</code>:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">recurse</span>(<span style="color: #008000">self</span>, name, indent<span style="color: #666666">=0</span>):
+        <span style="color: #408080; font-style: italic"># print message where we are (name is where we come from)</span>
+        <span style="color: #008000; font-weight: bold">for</span> shape <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>shapes:
+            <span style="color: #408080; font-style: italic"># print message about which object to visit</span>
+            <span style="color: #008000">self</span><span style="color: #666666">.</span>shapes[shape]<span style="color: #666666">.</span>recurse(indent<span style="color: #666666">+2</span>, shape)
+</pre></div>
+<p>
+The <code>indent</code> parameter governs how much the message from this
+<code>recurse</code> method is intended. We increase <code>indent</code> by 2 for every
+level in the hierarchy, i.e., every row of objects in Figure
+<a href="#sketcher:fig:Vehicle0:hier2">12</a>. This indentation makes it easy to
+see on the printout how far down in the hierarchy we are.
+
+<p>
+A typical message written by <code>recurse</code> when <code>name</code> is <code>'body'</code> and
+the <code>shapes</code> dictionary has the keys <code>'over'</code> and <code>'under'</code>,
+will be
+
+<p>
+
+<!-- code=text (!bc dat) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">     Composition: body.shapes has entries &#39;over&#39;, &#39;under&#39;
+     call body.shapes[&quot;over&quot;].recurse(&quot;over&quot;, 6)
+</pre></div>
+<p>
+The number of leading blanks on each line corresponds to the value of
+<code>indent</code>. The code printing out such messages looks like
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">recurse</span>(<span style="color: #008000">self</span>, name, indent<span style="color: #666666">=0</span>):
+        space <span style="color: #666666">=</span> <span style="color: #BA2121">&#39; &#39;</span><span style="color: #666666">*</span>indent
+        <span style="color: #008000; font-weight: bold">print</span> space, <span style="color: #BA2121">&#39;</span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121">: </span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121">.shapes has entries&#39;</span> <span style="color: #666666">%</span> \ 
+              (<span style="color: #008000">self</span><span style="color: #666666">.</span>__class__<span style="color: #666666">.</span>__name__, name), \ 
+              <span style="color: #008000">str</span>(<span style="color: #008000">list</span>(<span style="color: #008000">self</span><span style="color: #666666">.</span>shapes<span style="color: #666666">.</span>keys()))[<span style="color: #666666">1</span>:<span style="color: #666666">-1</span>]
+
+        <span style="color: #008000; font-weight: bold">for</span> shape <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>shapes:
+            <span style="color: #008000; font-weight: bold">print</span> space,
+            <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;call </span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121">.shapes[&quot;</span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121">&quot;].recurse(&quot;</span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121">&quot;, </span><span style="color: #BB6688; font-weight: bold">%d</span><span style="color: #BA2121">)&#39;</span> <span style="color: #666666">%</span> \ 
+                  (name, shape, shape, indent<span style="color: #666666">+2</span>)
+            <span style="color: #008000">self</span><span style="color: #666666">.</span>shapes[shape]<span style="color: #666666">.</span>recurse(shape, indent<span style="color: #666666">+2</span>)
+</pre></div>
+<p>
+Let us follow a <code>v.recurse('vehicle')</code> call in detail, <code>v</code> being
+a <code>Vehicle0</code> instance. Before looking into the output from <code>recurse</code>,
+let us get an overview of the figure hierarchy in the <code>v</code> object
+(as produced by <code>print v</code>)
+
+<p>
+
+<!-- code=text (!bc dat) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">ground
+    wall
+vehicle
+    body
+        over
+            rectangle
+        under
+            rectangle
+    wheels
+        wheel1
+            arc
+        wheel2
+            arc
+</pre></div>
+<p>
+The <code>recurse</code> method performs the same kind of traversal of the
+hierarchy, but writes out and explains a lot more.
+
+<p>
+The data structure represented by <code>v.shapes</code> is known as a <em>tree</em>.
+As in physical trees, there is a <em>root</em>, here the <code>v.shapes</code>
+dictionary. A graphical illustration of the tree (upside down) is
+shown in Figure <a href="#sketcher:fig:Vehicle0:hier2">12</a>.
+From the root there are one or more branches, here two:
+<code>ground</code> and <code>vehicle</code>. Following the <code>vehicle</code> branch, it has two new
+branches, <code>body</code> and <code>wheels</code>. Relationships as in family trees
+are often used to describe the relations in object trees too: we say
+that <code>vehicle</code> is the parent of <code>body</code> and that <code>body</code> is a child of
+<code>vehicle</code>. The term <em>node</em> is also often used to describe an element
+in a tree. A node may have several other nodes as <em>descendants</em>.
+
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 12:  Hierarchy of figure elements in an instance of class <code>Vehicle0</code>. <a name="sketcher:fig:Vehicle0:hier2"></a> </p></center>
+<p><img src="fig-oo/Vehicle0_hier2.png" align="bottom" width=600></p>
+</center>
+
+<p>
+Recursion is the principal programming technique to traverse tree structures.
+Any object in the tree can be viewed as a root of a subtree. For
+example, <code>wheels</code> is the root of a subtree that branches into
+<code>wheel1</code> and <code>wheel2</code>. So when processing an object in the tree,
+we imagine we process the root and then recurse into a subtree, but the
+first object we recurse into can be viewed as the root of the subtree, so the
+processing procedure of the parent object can be repeated.
+
+<p>
+A recommended next step is to simulate the <code>recurse</code> method by hand and
+carefully check that what happens in the visits to <code>recurse</code> is
+consistent with the output listed below. Although tedious, this is
+a major exercise that guaranteed will help to demystify recursion.
+
+<p>
+A part of the printout of <code>v.recurse('vehicle')</code> looks like
+
+<p>
+
+<!-- code=text (!bc dat) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"> Vehicle0: vehicle.shapes has entries &#39;ground&#39;, &#39;vehicle&#39;
+ call vehicle.shapes[&quot;ground&quot;].recurse(&quot;ground&quot;, 2)
+   Wall: ground.shapes has entries &#39;wall&#39;
+   call ground.shapes[&quot;wall&quot;].recurse(&quot;wall&quot;, 4)
+     reached &quot;bottom&quot; object Curve
+ call vehicle.shapes[&quot;vehicle&quot;].recurse(&quot;vehicle&quot;, 2)
+   Composition: vehicle.shapes has entries &#39;body&#39;, &#39;wheels&#39;
+   call vehicle.shapes[&quot;body&quot;].recurse(&quot;body&quot;, 4)
+     Composition: body.shapes has entries &#39;over&#39;, &#39;under&#39;
+     call body.shapes[&quot;over&quot;].recurse(&quot;over&quot;, 6)
+       Rectangle: over.shapes has entries &#39;rectangle&#39;
+       call over.shapes[&quot;rectangle&quot;].recurse(&quot;rectangle&quot;, 8)
+         reached &quot;bottom&quot; object Curve
+     call body.shapes[&quot;under&quot;].recurse(&quot;under&quot;, 6)
+       Rectangle: under.shapes has entries &#39;rectangle&#39;
+       call under.shapes[&quot;rectangle&quot;].recurse(&quot;rectangle&quot;, 8)
+         reached &quot;bottom&quot; object Curve
+...
+</pre></div>
+<p>
+This example should clearly demonstrate the principle that we
+can start at any object in the tree and do a recursive set
+of calls with that object as root.
+
+<h2 id="sketcher:scaling">Scaling, translating, and rotating a figure<a name="sketcher:scaling"></a></h2>
+
+<p>
+With recursion, as explained in the previous section, we can within
+minutes equip <em>all</em> classes in the <code>Shape</code> hierarchy, both present and
+future ones, with the ability to scale the figure, translate it,
+or rotate it. This added functionality requires only a few lines
+of code.
+
+<h3 id="___sec41">Scaling <a name="___sec41"></a></h3>
+
+<p>
+We start with the simplest of the three geometric transformations,
+namely scaling.  For a <code>Curve</code> instance containing a set of \( n \)
+coordinates \( (x_i,y_i) \) that make up a curve, scaling by a factor \( a \)
+means that we multiply all the \( x \) and \( y \) coordinates by \( a \):
+
+$$
+x_i \leftarrow ax_i,\quad y_i\leftarrow ay_i,
+\quad i=0,\ldots,n-1\thinspace .
+$$
+
+Here we apply the arrow as an assignment operator.
+The corresponding Python implementation in
+class <code>Curve</code> reads
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Curve</span>:
+    <span style="color: #666666">...</span>
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">scale</span>(<span style="color: #008000">self</span>, factor):
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>x <span style="color: #666666">=</span> factor<span style="color: #666666">*</span><span style="color: #008000">self</span><span style="color: #666666">.</span>x
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>y <span style="color: #666666">=</span> factor<span style="color: #666666">*</span><span style="color: #008000">self</span><span style="color: #666666">.</span>y
+</pre></div>
+<p>
+Note here that <code>self.x</code> and <code>self.y</code> are Numerical Python arrays,
+so that multiplication by a scalar number <code>factor</code> is
+a vectorized operation.
+
+<p>
+An even more efficient implementation is to make use of in-place
+multiplication in the arrays,
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Curve</span>:
+    <span style="color: #666666">...</span>
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">scale</span>(<span style="color: #008000">self</span>, factor):
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>x <span style="color: #666666">*=</span> factor
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>y <span style="color: #666666">*=</span> factor
+</pre></div>
+<p>
+as this saves the creation of temporary arrays like <code>factor*self.x</code>.
+
+<p>
+In an instance of a subclass of <code>Shape</code>, the meaning of a method
+<code>scale</code> is to run through all objects in the dictionary <code>shapes</code> and
+ask each object to scale itself. This is the same delegation of
+actions to subclass instances as we do in the <code>draw</code> (or <code>recurse</code>)
+method. All objects, except <code>Curve</code> instances, can share the same
+implementation of the <code>scale</code> method. Therefore, we place the <code>scale</code>
+method in the superclass <code>Shape</code> such that all subclasses inherit the
+method.  Since <code>scale</code> and <code>draw</code> are so similar, we can easily
+implement the <code>scale</code> method in class <code>Shape</code> by copying and editing
+the <code>draw</code> method:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Shape</span>:
+    <span style="color: #666666">...</span>
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">scale</span>(<span style="color: #008000">self</span>, factor):
+        <span style="color: #008000; font-weight: bold">for</span> shape <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>shapes:
+            <span style="color: #008000">self</span><span style="color: #666666">.</span>shapes[shape]<span style="color: #666666">.</span>scale(factor)
+</pre></div>
+<p>
+This is all we have to do in order to equip all subclasses of
+<code>Shape</code> with scaling functionality!
+Any piece of the figure will scale itself, in the same manner
+as it can draw itself.
+
+<h3 id="___sec42">Translation <a name="___sec42"></a></h3>
+
+<p>
+A set of coordinates \( (x_i, y_i) \) can be translated \( v_0 \) units in
+the \( x \) direction and \( v_1 \) units in the \( y \) direction using the formulas
+
+$$
+\begin{equation*}
+x_i\leftarrow x_i+v_0,\quad y_i\leftarrow y_i+v_1,
+\quad i=0,\ldots,n-1\thinspace .
+\end{equation*}
+$$
+
+The natural specification of the translation is in terms of the
+vector \( v=(v_0,v_1) \).
+The corresponding Python implementation in class <code>Curve</code> becomes
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Curve</span>:
+    <span style="color: #666666">...</span>
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">translate</span>(<span style="color: #008000">self</span>, v):
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>x <span style="color: #666666">+=</span> v[<span style="color: #666666">0</span>]
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>y <span style="color: #666666">+=</span> v[<span style="color: #666666">1</span>]
+</pre></div>
+<p>
+The translation operation for a shape object is very similar to the
+scaling and drawing operations. This means that we can implement a
+common method <code>translate</code> in the superclass <code>Shape</code>. The code
+is parallel to the <code>scale</code> method:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Shape</span>:
+    <span style="color: #666666">....</span>
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">translate</span>(<span style="color: #008000">self</span>, v):
+        <span style="color: #008000; font-weight: bold">for</span> shape <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>shapes:
+            <span style="color: #008000">self</span><span style="color: #666666">.</span>shapes[shape]<span style="color: #666666">.</span>translate(v)
+</pre></div>
+
+<h3 id="___sec43">Rotation <a name="___sec43"></a></h3>
+
+<p>
+Rotating a figure is more complicated than scaling and translating.
+A counter clockwise rotation of \( \theta \) degrees for a set of
+coordinates \( (x_i,y_i) \) is given by
+
+$$
+\begin{align*}
+ \bar x_i &\leftarrow x_i\cos\theta - y_i\sin\theta,\\ 
+ \bar y_i &\leftarrow x_i\sin\theta + y_i\cos\theta\thinspace .
+\end{align*}
+$$
+
+This rotation is performed around the origin. If we want the figure
+to be rotated with respect to a general point \( (x,y) \), we need to
+extend the formulas above:
+
+$$
+\begin{align*}
+ \bar x_i &\leftarrow x + (x_i -x)\cos\theta - (y_i -y)\sin\theta,\\ 
+ \bar y_i &\leftarrow y + (x_i -x)\sin\theta + (y_i -y)\cos\theta\thinspace .
+\end{align*}
+$$
+
+The Python implementation in class <code>Curve</code>, assuming that \( \theta \)
+is given in degrees and not in radians, becomes
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">rotate</span>(<span style="color: #008000">self</span>, angle, center):
+        angle <span style="color: #666666">=</span> radians(angle)
+        x, y <span style="color: #666666">=</span> center
+        c <span style="color: #666666">=</span> cos(angle);  s <span style="color: #666666">=</span> sin(angle)
+        xnew <span style="color: #666666">=</span> x <span style="color: #666666">+</span> (<span style="color: #008000">self</span><span style="color: #666666">.</span>x <span style="color: #666666">-</span> x)<span style="color: #666666">*</span>c <span style="color: #666666">-</span> (<span style="color: #008000">self</span><span style="color: #666666">.</span>y <span style="color: #666666">-</span> y)<span style="color: #666666">*</span>s
+        ynew <span style="color: #666666">=</span> y <span style="color: #666666">+</span> (<span style="color: #008000">self</span><span style="color: #666666">.</span>x <span style="color: #666666">-</span> x)<span style="color: #666666">*</span>s <span style="color: #666666">+</span> (<span style="color: #008000">self</span><span style="color: #666666">.</span>y <span style="color: #666666">-</span> y)<span style="color: #666666">*</span>c
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>x <span style="color: #666666">=</span> xnew
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>y <span style="color: #666666">=</span> ynew
+</pre></div>
+<p>
+The <code>rotate</code> method in class <code>Shape</code> follows the principle of the
+<code>draw</code>, <code>scale</code>, and <code>translate</code> methods.
+
+<p>
+We have already seen the <code>rotate</code> method in action when animating the
+rolling wheel at the end of the section <a href="#sketcher:vehicle1:anim">Animation: rolling the wheels</a>.
+
+<h1 id="bioinf:oo">Classes for DNA analysis<a name="bioinf:oo"></a></h1>
+
+<p>
+We shall here exemplify the use of classes for performing
+DNA analysis as explained in the document <a href="http://tcse6.on.net/funcif" target="_self">Functions and branching</a> <a href="._oo-bootstrap006.html#Langtangen_TCSE6_funcif">[5]</a>, ref{bioinf:freqm}, ref{bioinf:freq:analysis}, ref{bioinf:basefreq}, ref{bioinf:gene2protein}, ref{bioinf:lactase:milk}, the document <a href="http://tcse6.on.net/random" target="_self">Random numbers and simple games</a> <a href="._oo-bootstrap006.html#Langtangen_TCSE6_random">[6]</a>. 
+Basically, we create a class <code>Gene</code> to represent a DNA sequence (string)
+and a class <code>Region</code> to represent a subsequence (substring), typically an
+exon or intron.
+
+<h2 id="___sec45">Class for regions <a name="___sec45"></a></h2>
+
+<p>
+The class for representing a region of a DNA string is quite simple:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Region</span>:
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__init__</span>(<span style="color: #008000">self</span>, dna, start, end):
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>_region <span style="color: #666666">=</span> dna[start:end]
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">get_region</span>(<span style="color: #008000">self</span>):
+        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>_region
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__len__</span>(<span style="color: #008000">self</span>):
+        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">len</span>(<span style="color: #008000">self</span><span style="color: #666666">.</span>_region)
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__eq__</span>(<span style="color: #008000">self</span>, other):
+        <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Check if two Region instances are equal.&quot;&quot;&quot;</span>
+        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>_region <span style="color: #666666">==</span> other<span style="color: #666666">.</span>_region
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__add__</span>(<span style="color: #008000">self</span>, other):
+        <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Add Region instances: self + other&quot;&quot;&quot;</span>
+        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>_region <span style="color: #666666">+</span> other<span style="color: #666666">.</span>_region
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__iadd__</span>(<span style="color: #008000">self</span>, other):
+        <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Increment Region instance: self += other&quot;&quot;&quot;</span>
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>_region <span style="color: #666666">+=</span> other<span style="color: #666666">.</span>_region
+        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">self</span>
+</pre></div>
+<p>
+Besides storing the substring and giving access to it through <code>get_region</code>,
+we have also included the possibility to
+
+<ul>
+  <li> say <code>len(r)</code> if <code>r</code> is a <code>Region</code> instance</li>
+  <li> check if two <code>Region</code> instances are equal</li>
+  <li> write <code>r1 + r2</code> for two instances <code>r1</code> and <code>r2</code> of type <code>Region</code></li>
+  <li> perform <code>r1 += r2</code></li>
+</ul>
+
+The latter two operations are convenient for making one large string out
+of all exon or intron regions.
+
+<h2 id="___sec46">Class for genes <a name="___sec46"></a></h2>
+
+<p>
+The class for gene will be longer and more complex than class
+<code>Region</code>. We already have a bunch of functions performing various
+types of analysis. The idea of the <code>Gene</code> class is that these
+functions are methods in the class operating on the DNA string and the
+exon regions stored in the class.  Rather than recoding all the
+functions as methods in the class we shall just let the class &quot;wrap&quot;
+the functions. That is, the class methods call up the functions we
+already have.  This approach has two advantages: users can either
+choose the function-based or the class-based interface, and the
+programmer can reuse all the ready-made functions when implementing
+the class-based interface.
+
+<p>
+The selection of functions include
+
+<ul>
+ <li> <code>generate_string</code> for generating a random string from some alphabet</li>
+ <li> <code>download</code> and <code>read_dnafile</code>
+   (version <code>read_dnafile_v1</code>)
+   for downloading data from the Internet and reading from file</li>
+ <li> <code>read_exon_regions</code> (version <code>read_exon_regions_v2</code>)
+   for reading exon regions from file</li>
+ <li> <code>tofile_with_line_sep</code> (version <code>tofile_with_line_sep_v2</code>)
+   for writing strings to file</li>
+ <li> <code>read_genetic_code</code> (version <code>read_genetic_code_v2</code>) for loading
+   the mapping from triplet codes to 1-letter symbols for amino acids</li>
+ <li> <code>get_base_frequencies</code> (version <code>get_base_frequencies_v2</code>)
+   for finding frequencies of each base</li>
+ <li> <code>format_frequencies</code> for formatting base frequencies with two decimals</li>
+ <li> <code>create_mRNA</code> for computing an mRNA string from DNA and exon regions</li>
+ <li> <code>mutate</code> for mutating a base at a random position</li>
+ <li> <code>create_markov_chain</code>, <code>transition</code>, and <code>mutate_via_markov_chain</code>
+   for mutating a base at a random position according to randomly
+   generated transition probabilities</li>
+ <li> <code>create_protein_fixed</code> for proper creation of a protein sequence (string)</li>
+</ul>
+
+The set of plain functions for DNA analysis is found
+in the file <a href="http://tinyurl.com/pwyasaa/oo/dna_functions.py" target="_self"><tt>dna_functions.py</tt></a>, while
+<a href="http://tinyurl.com/pwyasaa/oo/dna_classes.py" target="_self"><tt>dna_classes.py</tt></a> contains the implementations
+of classes <code>Gene</code> and <code>Region</code>.
+
+<h3 id="___sec47">Basic features of class gene <a name="___sec47"></a></h3>
+
+<p>
+Class <code>Gene</code> is supposed to hold the DNA sequence and
+the associated exon regions. A simple constructor expects the
+exon regions to be specified as a list of (start, end) tuples
+indicating the start and end of each region:
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Gene</span>:
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__init__</span>(<span style="color: #008000">self</span>, dna, exon_regions):
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>_dna <span style="color: #666666">=</span> dna
+
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>_exon_regions <span style="color: #666666">=</span> exon_regions
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>_exons <span style="color: #666666">=</span> []
+        <span style="color: #008000; font-weight: bold">for</span> start, end <span style="color: #AA22FF; font-weight: bold">in</span> exon_regions:
+            <span style="color: #008000">self</span><span style="color: #666666">.</span>_exons<span style="color: #666666">.</span>append(Region(dna, start, end))
+
+        <span style="color: #408080; font-style: italic"># Compute the introns (regions between the exons)</span>
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>_introns <span style="color: #666666">=</span> []
+        prev_end <span style="color: #666666">=</span> <span style="color: #666666">0</span>
+        <span style="color: #008000; font-weight: bold">for</span> start, end <span style="color: #AA22FF; font-weight: bold">in</span> exon_regions:
+            <span style="color: #008000">self</span><span style="color: #666666">.</span>_introns<span style="color: #666666">.</span>append(Region(dna, prev_end, start))
+            prev_end <span style="color: #666666">=</span> end
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>_introns<span style="color: #666666">.</span>append(Region(dna, end, <span style="color: #008000">len</span>(dna)))
+</pre></div>
+<p>
+The methods in class <code>Gene</code> are trivial to implement when we already
+have the functionality in stand-alone functions.
+Here are a few examples on methods:
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">dna_functions</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #666666">*</span>
+
+<span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Gene</span>:
+    <span style="color: #666666">...</span>
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">write</span>(<span style="color: #008000">self</span>, filename, chars_per_line<span style="color: #666666">=70</span>):
+        <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Write DNA sequence to file with name filename.&quot;&quot;&quot;</span>
+        tofile_with_line_sep(<span style="color: #008000">self</span><span style="color: #666666">.</span>_dna, filename, chars_per_line)
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">count</span>(<span style="color: #008000">self</span>, base):
+        <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Return no of occurrences of base in DNA.&quot;&quot;&quot;</span>
+        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>_dna<span style="color: #666666">.</span>count(base)
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">get_base_frequencies</span>(<span style="color: #008000">self</span>):
+        <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Return dict of base frequencies in DNA.&quot;&quot;&quot;</span>
+        <span style="color: #008000; font-weight: bold">return</span> get_base_frequencies(<span style="color: #008000">self</span><span style="color: #666666">.</span>_dna)
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">format_base_frequencies</span>(<span style="color: #008000">self</span>):
+        <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Return base frequencies formatted with two decimals.&quot;&quot;&quot;</span>
+        <span style="color: #008000; font-weight: bold">return</span> format_frequencies(<span style="color: #008000">self</span><span style="color: #666666">.</span>get_base_frequencies())
+</pre></div>
+
+<h3 id="___sec48">Flexible constructor <a name="___sec48"></a></h3>
+
+<p>
+The constructor can be made more flexible. First, the exon regions
+may not be known so we should allow <code>None</code> as value and in fact
+use that as default value. Second, exon regions at the start and/or
+end of the DNA string will lead to empty intron <code>Region</code> objects so a proper
+test on nonzero length of the introns must be inserted.
+Third, the data for the DNA string and
+the exon regions can either be passed as arguments or downloaded and read
+from file.
+Two different initializations of <code>Gene</code> objects are therefore
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">g1 <span style="color: #666666">=</span> Gene(dna, exon_regions)  <span style="color: #408080; font-style: italic"># user has read data from file</span>
+g2 <span style="color: #666666">=</span> Gene((urlbase, dna_file), (urlbase, exon_file))  <span style="color: #408080; font-style: italic"># download</span>
+</pre></div>
+<p>
+One can pass <code>None</code> for <code>urlbase</code> if the files are already at the
+computer. The flexible constructor has, not surprisingly, much longer code
+than the first version. The implementation illustrates well how the concept of
+overloaded constructors in other languages, like C++ and Java, are
+dealt with in Python (overloaded constructors take different types
+of arguments to initialize an instance):
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Gene</span>:
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__init__</span>(<span style="color: #008000">self</span>, dna, exon_regions):
+        <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">        dna: string or (urlbase,filename) tuple</span>
+<span style="color: #BA2121; font-style: italic">        exon_regions: None, list of (start,end) tuples</span>
+<span style="color: #BA2121; font-style: italic">                      or (urlbase,filename) tuple</span>
+<span style="color: #BA2121; font-style: italic">        In case of (urlbase,filename) tuple the file</span>
+<span style="color: #BA2121; font-style: italic">        is downloaded and read.</span>
+<span style="color: #BA2121; font-style: italic">        &quot;&quot;&quot;</span>
+        <span style="color: #008000; font-weight: bold">if</span> <span style="color: #008000">isinstance</span>(dna, (<span style="color: #008000">list</span>,<span style="color: #008000">tuple</span>)) <span style="color: #AA22FF; font-weight: bold">and</span> \ 
+           <span style="color: #008000">len</span>(dna) <span style="color: #666666">==</span> <span style="color: #666666">2</span> <span style="color: #AA22FF; font-weight: bold">and</span> <span style="color: #008000">isinstance</span>(dna[<span style="color: #666666">0</span>], <span style="color: #008000">str</span>) <span style="color: #AA22FF; font-weight: bold">and</span> \ 
+           <span style="color: #008000">isinstance</span>(dna[<span style="color: #666666">1</span>], <span style="color: #008000">str</span>):
+            download(urlbase<span style="color: #666666">=</span>dna[<span style="color: #666666">0</span>], filename<span style="color: #666666">=</span>dna[<span style="color: #666666">1</span>])
+            dna <span style="color: #666666">=</span> read_dnafile(dna[<span style="color: #666666">1</span>])
+        <span style="color: #008000; font-weight: bold">elif</span> <span style="color: #008000">isinstance</span>(dna, <span style="color: #008000">str</span>):
+            <span style="color: #008000; font-weight: bold">pass</span> <span style="color: #408080; font-style: italic"># ok type (the other possibility)</span>
+        <span style="color: #008000; font-weight: bold">else</span>:
+            <span style="color: #008000; font-weight: bold">raise</span> <span style="color: #D2413A; font-weight: bold">TypeError</span>(
+                <span style="color: #BA2121">&#39;dna=</span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121"> </span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121"> is not string or (urlbase,filename) &#39;</span>\ 
+                <span style="color: #BA2121">&#39;tuple&#39;</span> <span style="color: #666666">%</span> (dna, <span style="color: #008000">type</span>(dna)))
+
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>_dna <span style="color: #666666">=</span> dna
+
+        er <span style="color: #666666">=</span> exon_regions
+        <span style="color: #008000; font-weight: bold">if</span> er <span style="color: #AA22FF; font-weight: bold">is</span> <span style="color: #008000">None</span>:
+            <span style="color: #008000">self</span><span style="color: #666666">.</span>_exons <span style="color: #666666">=</span> <span style="color: #008000">None</span>
+            <span style="color: #008000">self</span><span style="color: #666666">.</span>_introns <span style="color: #666666">=</span> <span style="color: #008000">None</span>
+        <span style="color: #008000; font-weight: bold">else</span>:
+            <span style="color: #008000; font-weight: bold">if</span> <span style="color: #008000">isinstance</span>(er, (<span style="color: #008000">list</span>,<span style="color: #008000">tuple</span>)) <span style="color: #AA22FF; font-weight: bold">and</span> \ 
+                <span style="color: #008000">len</span>(er) <span style="color: #666666">==</span> <span style="color: #666666">2</span> <span style="color: #AA22FF; font-weight: bold">and</span> <span style="color: #008000">isinstance</span>(er[<span style="color: #666666">0</span>], <span style="color: #008000">str</span>) <span style="color: #AA22FF; font-weight: bold">and</span> \ 
+                <span style="color: #008000">isinstance</span>(er[<span style="color: #666666">1</span>], <span style="color: #008000">str</span>):
+                download(urlbase<span style="color: #666666">=</span>er[<span style="color: #666666">0</span>], filename<span style="color: #666666">=</span>er[<span style="color: #666666">1</span>])
+                exon_regions <span style="color: #666666">=</span> read_exon_regions(er[<span style="color: #666666">1</span>])
+            <span style="color: #008000; font-weight: bold">elif</span> <span style="color: #008000">isinstance</span>(er, (<span style="color: #008000">list</span>,<span style="color: #008000">tuple</span>)) <span style="color: #AA22FF; font-weight: bold">and</span> \ 
+                <span style="color: #008000">isinstance</span>(er[<span style="color: #666666">0</span>], (<span style="color: #008000">list</span>,<span style="color: #008000">tuple</span>)) <span style="color: #AA22FF; font-weight: bold">and</span> \ 
+                <span style="color: #008000">isinstance</span>(er[<span style="color: #666666">0</span>][<span style="color: #666666">0</span>], <span style="color: #008000">int</span>) <span style="color: #AA22FF; font-weight: bold">and</span> \ 
+                <span style="color: #008000">isinstance</span>(er[<span style="color: #666666">0</span>][<span style="color: #666666">1</span>], <span style="color: #008000">int</span>):
+                <span style="color: #008000; font-weight: bold">pass</span> <span style="color: #408080; font-style: italic"># ok type (the other possibility)</span>
+            <span style="color: #008000; font-weight: bold">else</span>:
+                <span style="color: #008000; font-weight: bold">raise</span> <span style="color: #D2413A; font-weight: bold">TypeError</span>(
+                    <span style="color: #BA2121">&#39;exon_regions=</span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121"> </span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121"> is not list of (int,int) &#39;</span>
+                    <span style="color: #BA2121">&#39;or (urlbase,filename) tuple&#39;</span> <span style="color: #666666">%</span> (er, <span style="color: #008000">type</span>(era)))
+
+            <span style="color: #008000">self</span><span style="color: #666666">.</span>_exon_regions <span style="color: #666666">=</span> exon_regions
+            <span style="color: #008000">self</span><span style="color: #666666">.</span>_exons <span style="color: #666666">=</span> []
+            <span style="color: #008000; font-weight: bold">for</span> start, end <span style="color: #AA22FF; font-weight: bold">in</span> exon_regions:
+                <span style="color: #008000">self</span><span style="color: #666666">.</span>_exons<span style="color: #666666">.</span>append(Region(dna, start, end))
+
+            <span style="color: #408080; font-style: italic"># Compute the introns (regions between the exons)</span>
+            <span style="color: #008000">self</span><span style="color: #666666">.</span>_introns <span style="color: #666666">=</span> []
+            prev_end <span style="color: #666666">=</span> <span style="color: #666666">0</span>
+            <span style="color: #008000; font-weight: bold">for</span> start, end <span style="color: #AA22FF; font-weight: bold">in</span> exon_regions:
+                <span style="color: #008000; font-weight: bold">if</span> start <span style="color: #666666">-</span> prev_end <span style="color: #666666">&gt;</span> <span style="color: #666666">0</span>:
+                    <span style="color: #008000">self</span><span style="color: #666666">.</span>_introns<span style="color: #666666">.</span>append(
+                        Region(dna, prev_end, start))
+                prev_end <span style="color: #666666">=</span> end
+            <span style="color: #008000; font-weight: bold">if</span> <span style="color: #008000">len</span>(dna) <span style="color: #666666">-</span> end <span style="color: #666666">&gt;</span> <span style="color: #666666">0</span>:
+                <span style="color: #008000">self</span><span style="color: #666666">.</span>_introns<span style="color: #666666">.</span>append(Region(dna, end, <span style="color: #008000">len</span>(dna)))
+</pre></div>
+<p>
+Note that we perform quite detailed testing of the object type
+of the data structures supplied as the <code>dna</code> and <code>exon_regions</code>
+arguments. This can well be done to ensure safe use also when there is only
+one allowed type per argument.
+
+<h3 id="___sec49">Other methods <a name="___sec49"></a></h3>
+
+<p>
+A <code>create_mRNA</code> method, returning the mRNA as a string, can be coded as
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">create_mRNA</span>(<span style="color: #008000">self</span>):
+        <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Return string for mRNA.&quot;&quot;&quot;</span>
+        <span style="color: #008000; font-weight: bold">if</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>_exons <span style="color: #AA22FF; font-weight: bold">is</span> <span style="color: #AA22FF; font-weight: bold">not</span> <span style="color: #008000">None</span>:
+            <span style="color: #008000; font-weight: bold">return</span> create_mRNA(<span style="color: #008000">self</span><span style="color: #666666">.</span>_dna, <span style="color: #008000">self</span><span style="color: #666666">.</span>_exon_regions)
+        <span style="color: #008000; font-weight: bold">else</span>:
+            <span style="color: #008000; font-weight: bold">raise</span> <span style="color: #D2413A; font-weight: bold">ValueError</span>(
+                <span style="color: #BA2121">&#39;Cannot create mRNA for gene with no exon regions&#39;</span>)
+</pre></div>
+<p>
+Also here we rely on calling an already implemented function, but include
+some testing whether asking for mRNA is appropriate.
+
+<p>
+Methods for creating a mutated gene are also included:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">mutate_pos</span>(<span style="color: #008000">self</span>, pos, base):
+        <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Return Gene with a mutation to base at position pos.&quot;&quot;&quot;</span>
+        dna <span style="color: #666666">=</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>_dna[:pos] <span style="color: #666666">+</span> base <span style="color: #666666">+</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>_dna[pos<span style="color: #666666">+1</span>:]
+        <span style="color: #008000; font-weight: bold">return</span> Gene(dna, <span style="color: #008000">self</span><span style="color: #666666">.</span>_exon_regions)
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">mutate_random</span>(<span style="color: #008000">self</span>, n<span style="color: #666666">=1</span>):
+        <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">        Return Gene with n mutations at a random position.</span>
+<span style="color: #BA2121; font-style: italic">        All mutations are equally probable.</span>
+<span style="color: #BA2121; font-style: italic">        &quot;&quot;&quot;</span>
+        mutated_dna <span style="color: #666666">=</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>_dna
+        <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(n):
+            mutated_dna <span style="color: #666666">=</span> mutate(mutated_dna)
+        <span style="color: #008000; font-weight: bold">return</span> Gene(mutated_dna, <span style="color: #008000">self</span><span style="color: #666666">.</span>_exon_regions)
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">mutate_via_markov_chain</span>(markov_chain):
+        <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">        Return Gene with a mutation at a random position.</span>
+<span style="color: #BA2121; font-style: italic">        Mutation into new base based on transition</span>
+<span style="color: #BA2121; font-style: italic">        probabilities in the markov_chain dict of dicts.</span>
+<span style="color: #BA2121; font-style: italic">        &quot;&quot;&quot;</span>
+        mutated_dna <span style="color: #666666">=</span> mutate_via_markov_chain(
+            <span style="color: #008000">self</span><span style="color: #666666">.</span>_dna, markov_chain)
+        <span style="color: #008000; font-weight: bold">return</span> Gene(mutated_dna, <span style="color: #008000">self</span><span style="color: #666666">.</span>_exon_regions)
+</pre></div>
+<p>
+Some &quot;get&quot; methods that give access to the fundamental attributes
+of the class can be included:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">get_dna</span>(<span style="color: #008000">self</span>):
+        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>_dna
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">get_exons</span>(<span style="color: #008000">self</span>):
+        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>_exons
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">get_introns</span>(<span style="color: #008000">self</span>):
+        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>_introns
+</pre></div>
+<p>
+Alternatively, one could access the attributes directly: <code>gene._dna</code>,
+<code>gene._exons</code>, etc. In that case we should remove the leading underscore as
+this underscore signals that these
+attributes are considered &quot;protected&quot;, i.e., not to be directly accessed
+by the user. The &quot;protection&quot; in &quot;get&quot; functions is more mental
+than actual since we anyway give the data structures in the hands of
+the user and she can do whatever she wants (even delete them).
+
+<p>
+Special methods for the length of a gene, adding genes, checking if
+two genes are identical, and printing of compact gene information
+are relevant to add:
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__len__</span>(<span style="color: #008000">self</span>):
+        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">len</span>(<span style="color: #008000">self</span><span style="color: #666666">.</span>_dna)
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__add__</span>(<span style="color: #008000">self</span>, other):
+        <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;self + other: append other to self (DNA string).&quot;&quot;&quot;</span>
+        <span style="color: #008000; font-weight: bold">if</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>_exons <span style="color: #AA22FF; font-weight: bold">is</span> <span style="color: #008000">None</span> <span style="color: #AA22FF; font-weight: bold">and</span> other<span style="color: #666666">.</span>_exons <span style="color: #AA22FF; font-weight: bold">is</span> <span style="color: #008000">None</span>:
+            <span style="color: #008000; font-weight: bold">return</span> Gene(<span style="color: #008000">self</span><span style="color: #666666">.</span>_dna <span style="color: #666666">+</span> other<span style="color: #666666">.</span>_dna, <span style="color: #008000">None</span>)
+        <span style="color: #008000; font-weight: bold">else</span>:
+            <span style="color: #008000; font-weight: bold">raise</span> <span style="color: #D2413A; font-weight: bold">ValueError</span>(
+                <span style="color: #BA2121">&#39;cannot do Gene + Gene with exon regions&#39;</span>)
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__iadd__</span>(<span style="color: #008000">self</span>, other):
+        <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;self += other: append other to self (DNA string).&quot;&quot;&quot;</span>
+        <span style="color: #008000; font-weight: bold">if</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>_exons <span style="color: #AA22FF; font-weight: bold">is</span> <span style="color: #008000">None</span> <span style="color: #AA22FF; font-weight: bold">and</span> other<span style="color: #666666">.</span>_exons <span style="color: #AA22FF; font-weight: bold">is</span> <span style="color: #008000">None</span>:
+            <span style="color: #008000">self</span><span style="color: #666666">.</span>_dna <span style="color: #666666">+=</span> other<span style="color: #666666">.</span>_dna
+            <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">self</span>
+        <span style="color: #008000; font-weight: bold">else</span>:
+            <span style="color: #008000; font-weight: bold">raise</span> <span style="color: #D2413A; font-weight: bold">ValueError</span>(
+                <span style="color: #BA2121">&#39;cannot do Gene += Gene with exon regions&#39;</span>)
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__eq__</span>(<span style="color: #008000">self</span>, other):
+        <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Check if two Gene instances are equal.&quot;&quot;&quot;</span>
+        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>_dna <span style="color: #666666">==</span> other<span style="color: #666666">.</span>_dna <span style="color: #AA22FF; font-weight: bold">and</span> \ 
+               <span style="color: #008000">self</span><span style="color: #666666">.</span>_exons <span style="color: #666666">==</span> other<span style="color: #666666">.</span>_exons
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__str__</span>(<span style="color: #008000">self</span>):
+        <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Pretty print (condensed info).&quot;&quot;&quot;</span>
+        s <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;Gene: &#39;</span> <span style="color: #666666">+</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>_dna[:<span style="color: #666666">6</span>] <span style="color: #666666">+</span> <span style="color: #BA2121">&#39;...&#39;</span> <span style="color: #666666">+</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>_dna[<span style="color: #666666">-6</span>:] <span style="color: #666666">+</span> \ 
+            <span style="color: #BA2121">&#39;, length=</span><span style="color: #BB6688; font-weight: bold">%d</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> <span style="color: #008000">len</span>(<span style="color: #008000">self</span><span style="color: #666666">.</span>_dna)
+        <span style="color: #008000; font-weight: bold">if</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>_exons <span style="color: #AA22FF; font-weight: bold">is</span> <span style="color: #AA22FF; font-weight: bold">not</span> <span style="color: #008000">None</span>:
+            s <span style="color: #666666">+=</span> <span style="color: #BA2121">&#39;, </span><span style="color: #BB6688; font-weight: bold">%d</span><span style="color: #BA2121"> exon regions&#39;</span> <span style="color: #666666">%</span> <span style="color: #008000">len</span>(<span style="color: #008000">self</span><span style="color: #666666">.</span>_exons)
+        <span style="color: #008000; font-weight: bold">return</span> s
+</pre></div>
+<p>
+Here is an interactive session demonstrating how we can work with
+class <code>Gene</code> objects:
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">dna_classes</span> <span style="color: #008000; font-weight: bold">import</span> Gene
+<span style="color: #666666">&gt;&gt;&gt;</span> g1 <span style="color: #666666">=</span> Gene(<span style="color: #BA2121">&#39;ATCCGTAATTGCGCA&#39;</span>, [(<span style="color: #666666">2</span>,<span style="color: #666666">4</span>), (<span style="color: #666666">6</span>,<span style="color: #666666">9</span>)])
+<span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">print</span> g1
+Gene: ATCCGT<span style="color: #666666">...</span>TGCGCA, length<span style="color: #666666">=15</span>, <span style="color: #666666">2</span> exon regions
+<span style="color: #666666">&gt;&gt;&gt;</span> g2 <span style="color: #666666">=</span> g1<span style="color: #666666">.</span>mutate_random(<span style="color: #666666">10</span>)
+<span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">print</span> g2
+Gene: ATCCGT<span style="color: #666666">...</span>TGTGCT, length<span style="color: #666666">=15</span>, <span style="color: #666666">2</span> exon regions
+<span style="color: #666666">&gt;&gt;&gt;</span> g1 <span style="color: #666666">==</span> g2
+<span style="color: #008000">False</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> g1 <span style="color: #666666">+=</span> g2  <span style="color: #408080; font-style: italic"># expect exception</span>
+Traceback (most recent call last):
+<span style="color: #666666">...</span>
+<span style="color: #D2413A; font-weight: bold">ValueError</span>: cannot do Gene <span style="color: #666666">+=</span> Gene <span style="color: #008000; font-weight: bold">with</span> exon regions
+<span style="color: #666666">&gt;&gt;&gt;</span> g1b <span style="color: #666666">=</span> Gene(g1<span style="color: #666666">.</span>get_dna(), <span style="color: #008000">None</span>)
+<span style="color: #666666">&gt;&gt;&gt;</span> g2b <span style="color: #666666">=</span> Gene(g2<span style="color: #666666">.</span>get_dna(), <span style="color: #008000">None</span>)
+<span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">print</span> g1b
+Gene: ATCCGT<span style="color: #666666">...</span>TGCGCA, length<span style="color: #666666">=15</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> g3 <span style="color: #666666">=</span> g1b <span style="color: #666666">+</span> g2b
+<span style="color: #666666">&gt;&gt;&gt;</span> g3<span style="color: #666666">.</span>format_base_frequencies()
+<span style="color: #BA2121">&#39;A: 0.17, C: 0.23, T: 0.33, G: 0.27&#39;</span>
+</pre></div>
+
+<h2 id="___sec50">Subclasses <a name="___sec50"></a></h2>
+
+<p>
+There are two fundamental types of genes: the most common type that
+codes for proteins (indirectly via mRNA) and the type that only codes
+for RNA (without being further processed to proteins).
+The product of a gene, mRNA or protein, depends on the type of gene we have.
+It is then natural to create two subclasses for the two types of
+gene and have a method <code>get_product</code> which returns the product
+of that type of gene.
+
+<p>
+The <code>get_product</code> method can be declared in class <code>Gene</code>:
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">get_product</span>(<span style="color: #008000">self</span>):
+        <span style="color: #008000; font-weight: bold">raise</span> <span style="color: #D2413A; font-weight: bold">NotImplementedError</span>(
+            <span style="color: #BA2121">&#39;Subclass </span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121"> must implement get_product&#39;</span> <span style="color: #666666">%</span> \ 
+            <span style="color: #008000">self</span><span style="color: #666666">.</span>__class__<span style="color: #666666">.</span>__name__)
+</pre></div>
+<p>
+The exception here will be triggered by an instance (<code>self</code>)
+of any subclass that just inherits <code>get_product</code> from class <code>Gene</code>
+without implementing a subclass version of this method.
+
+<p>
+The two subclasses of <code>Gene</code> may take this simple form:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">RNACodingGene</span>(Gene):
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">get_product</span>(<span style="color: #008000">self</span>):
+        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>create_mRNA()
+
+<span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">ProteinCodingGene</span>(Gene):
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__init__</span>(<span style="color: #008000">self</span>, dna, exon_positions):
+        Gene<span style="color: #666666">.</span>__init__(<span style="color: #008000">self</span>, dna, exon_positions)
+        urlbase <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;http://hplgit.github.com/bioinf-py/data/&#39;</span>
+        genetic_code_file <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;genetic_code.tsv&#39;</span>
+        download(urlbase, genetic_code_file)
+        code <span style="color: #666666">=</span> read_genetic_code(genetic_code_file)
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>genetic_code <span style="color: #666666">=</span> code
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">get_product</span>(<span style="color: #008000">self</span>):
+        <span style="color: #008000; font-weight: bold">return</span> create_protein_fixed(<span style="color: #008000">self</span><span style="color: #666666">.</span>create_mRNA(),
+                                    <span style="color: #008000">self</span><span style="color: #666666">.</span>genetic_code)
+</pre></div>
+<p>
+A demonstration of how to load the lactase gene and create the
+lactase protein is done with
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">test_lactase_gene</span>():
+    urlbase <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;http://hplgit.github.com/bioinf-py/data/&#39;</span>
+    lactase_gene_file <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;lactase_gene.txt&#39;</span>
+    lactase_exon_file <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;lactase_exon.tsv&#39;</span>
+    lactase_gene <span style="color: #666666">=</span> ProteinCodingGene(
+        (urlbase, lactase_gene_file),
+        (urlbase, lactase_exon_file))
+
+    protein <span style="color: #666666">=</span> lactase_gene<span style="color: #666666">.</span>get_product()
+    tofile_with_line_sep(protein, <span style="color: #BA2121">&#39;output&#39;</span>, <span style="color: #BA2121">&#39;lactase_protein.txt&#39;</span>)
+</pre></div>
+<p>
+Now, envision that the Lactase gene would instead have been an
+RNA-coding gene. The only necessary changes would have been to exchange
+<code>ProteinCodingGene</code> by <code>RNACodingGene</code> in the assignment to
+<code>lactase_gene</code>, and one would get out a final RNA product instead of a
+protein.
+
+<p>
+<p>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pager">
+  <li class="previous">
+    <a href="._oo-bootstrap003.html">&larr; Prev</a>
+  </li>
+  <li class="next">
+    <a href="._oo-bootstrap005.html">Next &rarr;</a>
+  </li>
+</ul>
+<!-- ------------------- end of main content --------------- -->
+
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap footer
+<footer>
+<a href="http://..."><img width="250" align=right src="http://..."></a>
+</footer>
+-->
+
+
+</body>
+</html>
+    
+

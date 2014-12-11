@@ -1,0 +1,898 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Object-oriented programming">
+<meta name="keywords" content="object-based programming,class hierarchy,class relationship superclass,class relationship derived class,class relationship inheritance,derived class,parent class,base class,superclass,subclass,class relationship subclass,Online Python Tutor,check an object's type,is-a class relationship,has-a class relationship,class relationship is-a,class relationship has-a,dynamic binding,factory function,closure,functional programming,Midpoint rule for integration,Trapezoidal rule for integration,overloading (of methods),polymorphism,Midpoint rule for integration,Trapezoidal rule for integration,recursive function calls,multiple inheritance,convergence rate,Trapezoidal rule for integration,Midpoint rule for integration,object-oriented programming">
+
+<title>Object-oriented programming</title>
+
+
+<link href="https://raw.githubusercontent.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/css/solarized_light_code.css" rel="stylesheet" type="text/css" title="light"/>
+<script src="https://rawgit.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<link href="http://thomasf.github.io/solarized-css/solarized-light.min.css" rel="stylesheet">
+<style type="text/css">
+h1 {color: #b58900;}  /* yellow */
+/* h1 {color: #cb4b16;}  orange */
+/* h1 {color: #d33682;}  magenta, the original choice of thomasf */
+.alert-text-small   { font-size: 80%;  }
+.alert-text-large   { font-size: 130%; }
+.alert-text-normal  { font-size: 90%;  }
+.alert {
+  padding:8px 35px 8px 14px; margin-bottom:18px;
+  text-shadow:0 1px 0 rgba(255,255,255,0.5);
+  border:1px solid #93a1a1;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  color: #555;
+  background-color: #eee8d5;
+  background-position: 10px 5px;
+  background-repeat: no-repeat;
+  background-size: 38px;
+  padding-left: 55px;
+  width: 75%;
+ }
+.alert-block {padding-top:14px; padding-bottom:14px}
+.alert-block > p, .alert-block > ul {margin-bottom:1em}
+.alert li {margin-top: 1em}
+.alert-block p+p {margin-top:5px}
+.alert-notice { background-image: url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_notice.png); }
+.alert-summary  { background-image:url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_summary.png); }
+.alert-warning { background-image: url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_warning.png); }
+.alert-question {background-image:url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_question.png); }
+
+div { text-align: justify; text-justify: inter-word; }
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [(' Inheritance and class hierarchies ',
+               1,
+               'sec:oo:inheritance',
+               'sec:oo:inheritance'),
+              (' A class for straight lines ',
+               2,
+               'sec:oo:Line',
+               'sec:oo:Line'),
+              (' A first try on a class for parabolas ',
+               2,
+               'sec:oo:Parabola1',
+               'sec:oo:Parabola1'),
+              (' A class for parabolas using inheritance ',
+               2,
+               None,
+               '___sec3'),
+              (' Program flow ', 3, None, '___sec4'),
+              (' Checking the class type ', 2, None, '___sec5'),
+              (' Attribute vs inheritance: has-a vs is-a relationship ',
+               2,
+               None,
+               '___sec6'),
+              (' Superclass for defining an interface ',
+               2,
+               'sec:oo:Func',
+               'sec:oo:Func'),
+              (' Class hierarchy for numerical differentiation ',
+               1,
+               'sec:oo:numdiff',
+               'sec:oo:numdiff'),
+              (' Classes for differentiation ',
+               2,
+               'sec:oo:Diff',
+               'sec:oo:Diff'),
+              (' Computer science remark ', 3, None, '___sec10'),
+              (' Verification ', 2, None, '___sec11'),
+              (' A flexible main program ', 2, None, '___sec12'),
+              (' Extensions ', 2, 'sec:oo:Diff:extend', 'sec:oo:Diff:extend'),
+              (' Application ', 3, None, '___sec14'),
+              (' Alternative implementation via functions ',
+               2,
+               'sec:oo:diff:alt:func',
+               'sec:oo:diff:alt:func'),
+              (' Alternative implementation via functional programming ',
+               2,
+               'sec:oo:diff:alt:FP',
+               'sec:oo:diff:alt:FP'),
+              (' Alternative implementation via a single class ',
+               2,
+               'sec:oo:diff:oneclass',
+               'sec:oo:diff:oneclass'),
+              (' Remark ', 3, None, '___sec18'),
+              (' Class hierarchy for numerical integration ',
+               1,
+               'sec:oo:int',
+               'sec:oo:int'),
+              (' Numerical integration methods ',
+               2,
+               'sec:oo:int:methods',
+               'sec:oo:int:methods'),
+              (' Classes for integration ',
+               2,
+               'sec:oo:Integrator',
+               'sec:oo:Integrator'),
+              (' Verification ', 2, None, '___sec22'),
+              (' Using the class hierarchy ', 2, None, '___sec23'),
+              (' About object-oriented programming ', 2, None, '___sec24'),
+              (' Class hierarchy for making drawings ',
+               1,
+               'sec:oo:shapes',
+               'sec:oo:shapes'),
+              (' Using the object collection ', 2, None, '___sec26'),
+              (' Basic drawing ', 3, None, '___sec27'),
+              (' Groups of objects ', 3, None, '___sec28'),
+              (' Changing line styles and colors ', 3, None, '___sec29'),
+              (' The figure composition as an object hierarchy ',
+               3,
+               None,
+               '___sec30'),
+              (' Animation: translating the vehicle ', 3, None, '___sec31'),
+              (' Animation: rolling the wheels ',
+               3,
+               'sketcher:vehicle1:anim',
+               'sketcher:vehicle1:anim'),
+              (' Example of classes for geometric objects ',
+               2,
+               None,
+               '___sec33'),
+              (' Simple geometric objects ', 3, None, '___sec34'),
+              (' Class curve ', 3, None, '___sec35'),
+              (' Compound geometric objects ', 3, None, '___sec36'),
+              (' Adding functionality via recursion ', 2, None, '___sec37'),
+              (' Basic principles of recursion ', 3, None, '___sec38'),
+              (' Explaining recursion ', 3, None, '___sec39'),
+              (' Scaling, translating, and rotating a figure ',
+               2,
+               'sketcher:scaling',
+               'sketcher:scaling'),
+              (' Scaling ', 3, None, '___sec41'),
+              (' Translation ', 3, None, '___sec42'),
+              (' Rotation ', 3, None, '___sec43'),
+              (' Classes for DNA analysis ', 1, 'bioinf:oo', 'bioinf:oo'),
+              (' Class for regions ', 2, None, '___sec45'),
+              (' Class for genes ', 2, None, '___sec46'),
+              (' Basic features of class gene ', 3, None, '___sec47'),
+              (' Flexible constructor ', 3, None, '___sec48'),
+              (' Other methods ', 3, None, '___sec49'),
+              (' Subclasses ', 2, None, '___sec50'),
+              (' Summary ', 1, None, '___sec51'),
+              (' Chapter topics ', 2, None, '___sec52'),
+              (' Subclass example ', 3, None, '___sec53'),
+              (' Subclassing in general ', 3, None, '___sec54'),
+              (' Terminology ', 3, None, '___sec55'),
+              (' Example: Input data reader ',
+               2,
+               'sec:oo:ReadInput',
+               'sec:oo:ReadInput'),
+              (' Problem ', 3, None, '___sec57'),
+              (' Solution ', 3, None, '___sec58'),
+              (' Prompting the user ', 3, None, '___sec59'),
+              (' Reading from file ', 3, None, '___sec60'),
+              (' Reading from the command line ', 3, None, '___sec61'),
+              (' Reading from a gui ', 3, None, '___sec62'),
+              (' More flexibility in the superclass ', 3, None, '___sec63'),
+              (' Demonstrating the tool ', 3, None, '___sec64'),
+              (' Exercises ', 1, None, '___sec65'),
+              (' Exercise 1: Demonstrate the magic of inheritance ',
+               2,
+               'sec:oo:ex1',
+               'sec:oo:ex1'),
+              (' Exercise 2: Make polynomial subclasses of parabolas ',
+               2,
+               'sec:oo:ex2',
+               'sec:oo:ex2'),
+              (' Remarks ', 3, None, '___sec68'),
+              (' Exercise 3: Implement a class for a function as a subclass ',
+               2,
+               'sec:oo:ex3',
+               'sec:oo:ex3'),
+              (' Exercise 4: Create an alternative class hierarchy for polynomials ',
+               2,
+               'sec:oo:ex5',
+               'sec:oo:ex5'),
+              (' Exercise 5: Make circle a subclass of an ellipse ',
+               2,
+               'sec:oo:ex5b',
+               'sec:oo:ex5b'),
+              (' Exercise 6: Make super- and subclass for a point ',
+               2,
+               'sec:oo:ex17',
+               'sec:oo:ex17'),
+              (' Exercise 7: Modify a function class by subclassing ',
+               2,
+               'sec:oo:ex7',
+               'sec:oo:ex7'),
+              (' Exercise 8: Explore the accuracy of difference formulas ',
+               2,
+               'sec:oo:ex18',
+               'sec:oo:ex18'),
+              (' Exercise 9: Implement a subclass ',
+               2,
+               'sec:oo:ex15b',
+               'sec:oo:ex15b'),
+              (' Exercise 10: Make classes for numerical differentiation ',
+               2,
+               'sec:oo:ex33',
+               'sec:oo:ex33'),
+              (' Exercise 11: Implement a new subclass for differentiation ',
+               2,
+               'sec:oo:ex31',
+               'sec:oo:ex31'),
+              (' Exercise 12: Understand if a class can be used recursively ',
+               2,
+               'sec:oo:ex14',
+               'sec:oo:ex14'),
+              (' Exercise 13: Represent people by a class hierarchy ',
+               2,
+               'sec:oo:ex4',
+               'sec:oo:ex4'),
+              (' Remark ', 3, None, '___sec80'),
+              (' Exercise 14: Add a new class in a class hierarchy ',
+               2,
+               'sec:oo:ex15',
+               'sec:oo:ex15'),
+              (' Exercise 15: Compute convergence rates of numerical integration methods ',
+               2,
+               'sec:oo:ex16',
+               'sec:oo:ex16'),
+              (' Exercise 16: Add common functionality in a class hierarchy ',
+               2,
+               'sec:oo:ex6',
+               'sec:oo:ex6'),
+              (' Exercise 17: Make a class hierarchy for root finding ',
+               2,
+               'sec:oo:ex41',
+               'sec:oo:ex41'),
+              (' Exercise 18: Make a calculus calculator class ',
+               2,
+               'sec:plot:ex30',
+               'sec:plot:ex30'),
+              (' Exercise 19: Compute inverse functions ',
+               2,
+               'sec:plot:ex30b',
+               'sec:plot:ex30b'),
+              (' Exercise 20: Make line drawing of a person; program ',
+               2,
+               'pysketcher:exer:person:prog',
+               'pysketcher:exer:person:prog'),
+              (' Exercise 21: Make line drawing of a person; class ',
+               2,
+               'pysketcher:exer:person:class',
+               'pysketcher:exer:person:class'),
+              (' Exercise 22: Animate a person with waving hands ',
+               2,
+               'pysketcher:exer:person:anim',
+               'pysketcher:exer:person:anim'),
+              (' References ', 1, None, '___sec90')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- newcommands_keep.tex -->
+$$
+\newcommand{\tp}{\thinspace .}
+$$
+
+
+
+
+    
+<a name="part0005"></a>
+<p>
+<!-- begin top navigation -->
+<table style="width: 100%"><tr><td>
+<div style="text-align: left;"><a href="._oo-solarized004.html">&laquo; Previous</a></div>
+</td><td>
+<div style="text-align: right;"><a href="._oo-solarized006.html">Next &raquo;</a></div>
+</td></tr></table>
+<!-- end top navigation -->
+</p>
+
+<p>
+<!-- !split -->
+
+<h1>Summary  <a name="___sec51"></a></h1>
+
+<h2>Chapter topics  <a name="___sec52"></a></h2>
+
+<p>
+A subclass inherits everything from its superclass, both attributes
+and methods. The subclass can add new attributes, overload methods,
+and thereby enrich or restrict functionality of the superclass.
+
+<h3>Subclass example  <a name="___sec53"></a></h3>
+
+<p>
+Consider class <code>Gravity</code> from the final section of the document
+<a href="http://tcse6.on.net/class" target="_self">Introduction to classes in Python</a>
+<a href="._oo-solarized006.html#Langtangen_TCSE6_class">[2]</a> for representing the gravity force
+\( GMm/r^2 \) between two masses \( m \) and \( M \) being a distance \( r \) apart.
+Suppose we want to make a class for the electric force between two
+charges \( q_1 \) and \( q_2 \), being a distance \( r \) apart in a medium with
+permittivity \( \epsilon_0 \) is \( Gq_1q_2/r^2 \), where
+\( G^{-1}=4\pi\epsilon_0 \). We use the approximate value \( G=8.99\cdot
+10^9\hbox{ Nm}^2/\hbox{C}^2 \) (C is the Coulomb unit used to measure
+electric charges such as \( q_1 \) and \( q_2 \)).  Since the electric force
+is similar to the gravity force, we can easily implement the electric
+force as a subclass of <code>Gravity</code>.  The implementation just needs to
+redefine the value of \( G \)!
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>class CoulombsLaw(Gravity):
+    def __init__(self, q1, q2):
+        Gravity.__init__(self, q1, q2)
+        self.G = 8.99E9
+</code></pre>
+<!-- end verbatim block -->
+We can now call the inherited <code>force(r)</code> method to compute the electric
+force and the <code>visualize</code> method to make a plot of the force:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>c = CoulombsLaw(1E-6, -2E-6)
+print 'Electric force:', c.force(0.1)
+c.visualize(0.01, 0.2)
+</code></pre>
+<!-- end verbatim block -->
+However, the <code>plot</code> method inherited from class <code>Gravity</code> has
+an inappropriate title referring to &quot;Gravity force&quot; and the masses
+\( m \) and \( M \). An easy fix could be to have the plot title as an
+attribute set in the constructor. The subclass can then override
+the contents of this attribute, as it overrides <code>self.G</code>.
+It is quite common to discover that a class needs adjustments if it
+is to be used as superclass.
+
+<h3>Subclassing in general  <a name="___sec54"></a></h3>
+
+<p>
+The typical sketch of creating a subclass goes as follows:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>class SuperClass:
+    def __init__(self, p, q):
+        self.p, self.q = p, q
+
+    def where(self):
+        print 'In superclass', self.__class__.__name__
+
+    def compute(self, x):
+        self.where()
+        return self.p*x + self.q
+
+
+class SubClass(SuperClass):
+    def __init__(self, p, q, a):
+        SuperClass.__init__(self, p, q)
+        self.a = a
+
+    def where(self):
+        print 'In subclass', self.__class__.__name__
+
+    def compute(self, x):
+        self.where()
+        return SuperClass.compute(self, x) + self.a*x**2
+</code></pre>
+<!-- end verbatim block -->
+This example shows how a subclass extends a superclass with one
+attribute (<code>a</code>). The subclass' <code>compute</code> method calls the
+corresponding superclass method, as well as the overloaded method
+<code>where</code>. Let us invoke the <code>compute</code> method through superclass and
+subclass instances:
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; super = SuperClass(1, 2)
+&gt;&gt;&gt; sub = SubClass(1, 2, 3)
+&gt;&gt;&gt; v1 = super.compute(0)
+In superclass SuperClass
+&gt;&gt;&gt; v2 = sub.compute(0)
+In subclass SubClass
+In subclass SubClass
+</code></pre>
+<!-- end verbatim block -->
+Observe that in the subclass <code>sub</code>, method <code>compute</code> calls
+<code>self.where</code>, which translates to the <code>where</code> method in
+<code>SubClass</code>. Then the <code>compute</code> method in <code>SuperClass</code>
+is invoked, and this method also makes a <code>self.where</code> call,
+which is a call to <code>SubClass</code>' <code>where</code> method (think of
+what <code>self</code> is here, it is <code>sub</code>, so it is natural that
+we get <code>where</code> in the subclass (<code>sub.where</code>) and not
+<code>where</code> in the superclass part of <code>sub</code>).
+
+<p>
+In this example, classes <code>SuperClass</code> and <code>SubClass</code> constitute a
+class hierarchy. Class <code>SubClass</code> inherits the attributes <code>p</code> and <code>q</code>
+from its superclass, and overrides the methods <code>where</code> and <code>compute</code>.
+
+<h3>Terminology  <a name="___sec55"></a></h3>
+
+<p>
+The important computer science topics in this document are
+
+<ul>
+  <li> superclass</li>
+  <li> subclass</li>
+  <li> inheritance</li>
+  <li> class hierarchies</li>
+  <li> tree structures</li>
+  <li> recursion</li>
+</ul>
+
+<h2>Example: Input data reader <a name="sec:oo:ReadInput"></a></h2>
+
+<p>
+The summarizing example of this document concerns a class hierarchy
+for simplifying reading input data into programs. Input data may come
+from several different sources: the command line, a file, or from a
+dialog with the user, either of <code>input</code> form or in a graphical user
+interface (GUI). Therefore it makes sense to create a class hierarchy
+where subclasses are specialized to read from different sources and
+where the common code is placed in a superclass. The resulting tool
+will make it easy for you to let your programs read from many
+different input sources by adding just a few lines.
+
+<p>
+<!-- === A Motivating Example === -->
+
+<h3>Problem  <a name="___sec57"></a></h3>
+
+<p>
+Let us motivate the problem by a case where we want to write a program
+for dumping \( n \) function values of \( f(x) \) to a file for \( x\in [a,b] \).
+The core part of the program typically reads
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>import numpy as np
+with open(filename, 'w') as outfile:
+    for x in np.linspace(a, b, n):
+        outfile.write('%12g  %12g\n' % (x, f(x)))
+</code></pre>
+<!-- end verbatim block -->
+Our purpose is to read data into the variables <code>a</code>, <code>b</code>, <code>n</code>,
+<code>filename</code>, and <code>f</code>. For the latter we want to specify a
+formula and use the <code>StringFunction</code> tool
+(the section ref{sec:input:StringFunction})
+to make the function <code>f</code>:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>from scitools.StringFunction import StringFunction
+f = StringFunction(formula)
+</code></pre>
+<!-- end verbatim block -->
+How can we read <code>a</code>, <code>b</code>, <code>n</code>, <code>formula</code>, and <code>filename</code>
+conveniently into the program?
+
+<p>
+The basic idea is that we place the input data in a dictionary, and create
+a tool that can update this dictionary from sources like the command line,
+a file, a GUI, etc.
+Our dictionary is then
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>p = dict(formula='x+1', a=0, b=1, n=2, filename='tmp.dat')
+</code></pre>
+<!-- end verbatim block -->
+This dictionary specifies the names of the input parameters
+to the program and the default values of these parameters.
+
+<p>
+Using the tool is a matter of feeding <code>p</code> into the constructor
+of a subclass in the tools' class hierarchy and extract the parameters
+into, for example, distinct variables:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>inp = Subclassname(p)
+a, b, filename, formula, n = inp.get_all()
+</code></pre>
+<!-- end verbatim block -->
+Depending on what we write as <code>Subclassname</code>, the five
+variables can be read from the command line, the terminal window,
+a file, or a GUI.
+The task now is to implement a class hierarchy to facilitate
+the described flexible reading of input data.
+
+<p>
+<!-- === The Superclass === -->
+
+<h3>Solution  <a name="___sec58"></a></h3>
+
+<p>
+We first create a very simple superclass <code>ReadInput</code>. Its main purpose
+is to store the parameter dictionary as an attribute, provide a
+method <code>get</code> to extract single values, and a method <code>get_all</code>
+to extract all parameters into distinct variables:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>class ReadInput:
+    def __init__(self, parameters):
+        self.p = parameters
+
+    def get(self, parameter_name):
+        return self.p[parameter_name]
+
+    def get_all(self):
+        return [self.p[name] for name in sorted(self.p)]
+
+    def __str__(self):
+        import pprint
+        return pprint.pformat(self.p)
+</code></pre>
+<!-- end verbatim block -->
+Note that we in the <code>get_all</code> method must sort the keys in
+<code>self.p</code> such that the list of returned variables is well defined.
+In the calling program we can then list variables in the same
+order as the alphabetic order of the parameter names, for example:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>a, b, filename, formula, n = inp.get_all()
+</code></pre>
+<!-- end verbatim block -->
+The <code>__str__</code> method applies the <code>pprint</code> module to
+get a pretty print of all the parameter names and their values.
+
+<p>
+Class <code>ReadInput</code> cannot read from any source - subclasses are supposed
+to do this. The forthcoming text describes various types of subclasses
+for various types of reading input.
+
+<h3>Prompting the user  <a name="___sec59"></a></h3>
+
+<p>
+The perhaps simplest way of getting data into a program is
+to use <code>raw_input</code>. We then prompt the user with a text <code>Give name:</code>
+and get an appropriate object back (recall that strings must be
+enclosed in quotes).  The subclass <code>PromptUser</code> for doing this
+then reads
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>class PromptUser(ReadInput):
+    def __init__(self, parameters):
+        ReadInput.__init__(self, parameters)
+        self._prompt_user()
+
+    def _prompt_user(self):
+        for name in self.p:
+            self.p[name] = eval(raw_input(&quot;Give &quot; + name + &quot;: &quot;))
+</code></pre>
+<!-- end verbatim block -->
+Note the underscore in <code>_prompt_user</code>: the underscore signifies
+that this is a &quot;private&quot; method in the <code>PromptUser</code> class, not
+intended to be called by users of the class.
+
+<p>
+There is a major difficulty with using <code>eval</code> on the input from the
+user. When the input is intended to be a string object, such as a
+filename, say <code>tmp.inp</code>, the program will perform the operation
+<code>eval(tmp.inp)</code>, which leads to an exception because <code>tmp.inp</code> is
+treated as a variable <code>inp</code> in a module <code>tmp</code> and not as the string
+<code>'tmp.inp'</code>.  To solve this problem, we use the <code>str2obj</code> function
+from the <code>scitools.misc</code> module. This function will return the right
+Python object also in the case where the argument should result in a
+string
+object (see the section ref{sec:input:summary:topics} for
+some information about <code>str2obj</code>).
+The bottom line is that <code>str2obj</code> acts as a safer
+<code>eval(raw_input(...))</code> call. The key assignment in class <code>PromptUser</code>
+is then changed to
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>self.p[name] = str2obj(raw_input(&quot;Give &quot; + name + &quot;: &quot;))
+</code></pre>
+<!-- end verbatim block -->
+
+<h3>Reading from file  <a name="___sec60"></a></h3>
+
+<p>
+We can also place <code>name = value</code> commands in a file and load this
+information into the dictionary <code>self.p</code>.  An example of a file can be
+
+<p>
+<!-- begin verbatim block  ccq-->
+<pre><code>formula    = sin(x) + cos(x)
+filename   = tmp.dat
+a          = 0
+b          = 1
+</code></pre>
+<!-- end verbatim block -->
+In this example we have omitted <code>n</code>, so we rely on its default value.
+
+<p>
+A problem is how to give the filename. The easy way out of this
+problem is to read from standard input, and just redirect standard
+input from a file when we run the program. For example, if the
+filename is <code>tmp.inp</code>, we run the program as follows in a terminal
+window
+
+<p>
+<!-- begin verbatim block  sys-->
+<pre><code>Terminal&gt; python myprog.py &lt; tmp.inp
+</code></pre>
+<!-- end verbatim block -->
+(The redirection
+of standard input from a file does not work in IPython so we are in this
+case forced
+to run the program in a terminal window.)
+
+<p>
+To interpret the contents of the file, we read line by line, split
+each line with respect to <code>=</code>, use the left-hand side as the parameter
+name and the right-hand side as the corresponding value.  It is
+important to strip away unnecessary blanks in the name and value.  The
+complete class now reads
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>class ReadInputFile(ReadInput):
+    def __init__(self, parameters):
+        ReadInput.__init__(self, parameters)
+        self._read_file()
+
+    def _read_file(self, infile=sys.stdin):
+        for line in infile:
+            if &quot;=&quot; in line:
+                name, value = line.split(&quot;=&quot;)
+                self.p[name.strip()] = str2obj(value.strip())
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+A nice feature with reading from standard input is that if we do not
+redirect standard input to a file, the program will prompt the user in
+the terminal window, where the user can give commands of the type
+<code>name = value</code> for setting selected input data.  A <code>Ctrl+d</code> is needed
+to terminate the interactive session in the terminal window and
+continue execution of the program.
+
+<h3>Reading from the command line  <a name="___sec61"></a></h3>
+
+<p>
+For input from the command line we assume that parameters and values
+are given as option-value pairs, e.g., as in
+
+<p>
+<!-- begin verbatim block  ccq-->
+<pre><code>--a 1 --b 10 --n 101 --formula &quot;sin(x) + cos(x)&quot;
+</code></pre>
+<!-- end verbatim block -->
+We apply the <code>argparse</code> module
+(see the section ref{sec:input:argparse})
+to parse the command-line arguments. The list of legal option names
+must be constructed from the list of keys in the <code>self.p</code> dictionary.
+The complete class takes the form
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>class ReadCommandLine(ReadInput):
+    def __init__(self, parameters):
+        self.sys_argv = sys.argv[1:]  # copy
+        ReadInput.__init__(self, parameters)
+        self._read_command_line()
+
+    def _read_command_line(self):
+        parser = argparse.ArgumentParser()
+        # Make argparse list of options
+        for name in self.p:
+            # Default type: str
+            parser.add_argument('--'+name, default=self.p[name])
+
+        args = parser.parse_args()
+        for name in self.p:
+            self.p[name] = str2obj(getattr(args, name))
+
+import Tkinter
+try:
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+We could specify the type of a parameter as <code>type(self.p[name])</code> or
+<code>self.p[name].__class__</code>, but if a <code>float</code> parameter has been given an
+integer default value, the type will be <code>int</code> and <code>argparse</code> will not
+accept a decimal number as input. Our more general strategy is to drop
+specifying the type, which implies that all parameters in the <code>args</code>
+object become strings. We then use the <code>str2obj</code> function to convert
+to the right type, a technique that is used throughout the <code>ReadInput</code>
+module.
+
+<h3>Reading from a gui  <a name="___sec62"></a></h3>
+
+<p>
+We can with a little extra effort also make a graphical user interface
+(GUI) for reading the input data. An example of a user interface is
+displayed in Figure <a href="#sec:oo:summary:GUI:fig1">13</a>.  Since the
+technicalities of the implementation is beyond the scope of this
+document, we do not show the subclass <code>GUI</code> that creates the GUI and
+loads the user input into the <code>self.p</code> dictionary.
+
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 13:  Screen dump of a graphical user interface to read input data into a program (class <code>GUI</code> in the <code>ReadInput</code> hierarchy). <a name="sec:oo:summary:GUI:fig1"></a> </p></center>
+<p><img src="fig-oo/ReadInputGUI.png" align="bottom" width=400></p>
+</center>
+
+<h3>More flexibility in the superclass  <a name="___sec63"></a></h3>
+
+<p>
+Some extra flexibility can easily be added to the <code>get</code> method
+in the superclass. Say we want to extract a variable number of
+parameters:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>a, b, n = inp.get('a', 'b', 'n')  # 3 variables
+n = inp.get('n')                  # 1 variable
+</code></pre>
+<!-- end verbatim block -->
+The key to this extension is to use a variable number of arguments as
+explained in the document <a href="http://tcse6.on.net/varargs" target="_self">Variable number of
+function arguments in Python</a>
+<a href="._oo-solarized006.html#Langtangen_TCSE6_varargs">[7]</a>:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>class ReadInput:
+    ...
+    def get(self, *parameter_names):
+        if len(parameter_names) == 1:
+            return self.p[parameter_names[0]]
+        else:
+            return [self.p[name] for name in parameter_names]
+</code></pre>
+<!-- end verbatim block -->
+
+<h3>Demonstrating the tool  <a name="___sec64"></a></h3>
+
+<p>
+Let us show how we can use the classes in the <code>ReadInput</code>
+hierarchy. We apply the motivating example described earlier.  The
+name of the program is <a href="http://tinyurl.com/pwyasaa/oo/demo_ReadInput.py" target="_self"><tt>demo_ReadInput.py</tt></a>.  As first command-line argument it
+takes the name of the input source, given as the name of a subclass in
+the <code>ReadInput</code> hierarchy. The code for loading input data from any of
+the sources supported by the <code>ReadInput</code> hierarchy goes as follows:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>p = dict(formula='x+1', a=0, b=1, n=2, filename='tmp.dat')
+from ReadInput import *
+input_reader = eval(sys.argv[1])  # PromptUser, ReadInputFile, ...
+del sys.argv[1]  # otherwise argparse don't like our extra option
+inp = input_reader(p)
+a, b, filename, formula, n = inp.get_all()
+print inp
+</code></pre>
+<!-- end verbatim block -->
+Note how convenient <code>eval</code> is to automatically create the right
+subclass for reading input data.
+
+<p>
+Our first try on running this program applies the <code>PromptUser</code> class:
+
+<p>
+<!-- begin verbatim block  sys-->
+<pre><code>demo_ReadInput.py PromptUser
+Give a: 0
+Give formula: sin(x) + cos(x)
+Give b: 10
+Give filename: function_data
+Give n: 101
+{'a': 0,
+ 'b': 10,
+ 'filename': 'function_data',
+ 'formula': 'sin(x) + cos(x)',
+ 'n': 101}
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+The next example reads data from a file <code>tmp.inp</code> with the same
+contents as shown in paragraph above about reading from file.
+
+<p>
+<!-- begin verbatim block  sys-->
+<pre><code>Terminal&gt; demo_ReadInput.py ReadFileInput &lt; tmp.inp
+{'a': 0, 'b': 1, 'filename': 'tmp.dat',
+ 'formula': 'sin(x) + cos(x)', 'n': 2}
+</code></pre>
+<!-- end verbatim block -->
+We can also drop the redirection of standard input to a file, and
+instead run an interactive session in IPython or the terminal window:
+
+<p>
+<!-- begin verbatim block  sys-->
+<pre><code>demo_ReadInput.py ReadFileInput
+n = 101
+filename = myfunction_data_file.dat
+^D
+{'a': 0,
+ 'b': 1,
+ 'filename': 'myfunction_data_file.dat',
+ 'formula': 'x+1',
+ 'n': 101}
+</code></pre>
+<!-- end verbatim block -->
+Note that <code>Ctrl+d</code> is needed to end the interactive
+session with the user and continue program execution.
+
+<p>
+Command-line arguments can also be specified:
+
+<p>
+<!-- begin verbatim block  sys-->
+<pre><code>demo_ReadInput.py ReadCommandLine \ 
+          --a -1 --b 1 --formula &quot;sin(x) + cos(x)&quot;
+{'a': -1, 'b': 1, 'filename': 'tmp.dat',
+ 'formula': 'sin(x) + cos(x)', 'n': 2}
+</code></pre>
+<!-- end verbatim block -->
+Finally, we can run the program with a GUI,
+
+<p>
+<!-- begin verbatim block  sys-->
+<pre><code>demo_ReadInput.py GUI
+{'a': -1, 'b': 10, 'filename': 'tmp.dat',
+ 'formula': 'x+1', 'n': 2}
+</code></pre>
+<!-- end verbatim block -->
+The GUI is shown in Figure <a href="#sec:oo:summary:GUI:fig1">13</a>.
+
+<p>
+Fortunately, it is now quite obvious how to apply the <code>ReadInput</code>
+hierarchy of classes in your own programs to simplify input.
+Especially in applications with a large number of parameters one can
+initially define these in a dictionary and then automatically create
+quite comprehensive user interfaces where the user can specify only
+some subset of the parameters (if the default values for the rest of
+the parameters are suitable).
+
+<p>
+<p>
+<!-- begin bottom navigation -->
+<table style="width: 100%"><tr><td>
+<div style="text-align: left;"><a href="._oo-solarized004.html">&laquo; Previous</a></div>
+</td><td>
+<div style="text-align: right;"><a href="._oo-solarized006.html">Next &raquo;</a></div>
+</td></tr></table>
+<!-- end bottom navigation -->
+</p>
+
+<!-- ------------------- end of main content --------------- -->
+
+
+</body>
+</html>
+    
+

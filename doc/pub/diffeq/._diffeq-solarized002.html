@@ -1,0 +1,682 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Sequences and difference equations">
+<meta name="keywords" content="sequence (mathematical),initial condition,difference equations,scaling,Trapezoidal rule for integration,Newton's method,difference equations nonlinear,nonlinear difference equations,Secant method,Midpoint rule for integration,remove files (in Python),delete files (in Python)">
+
+<title>Sequences and difference equations</title>
+
+
+<link href="https://raw.githubusercontent.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/css/solarized_light_code.css" rel="stylesheet" type="text/css" title="light"/>
+<script src="https://rawgit.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<link href="http://thomasf.github.io/solarized-css/solarized-light.min.css" rel="stylesheet">
+<style type="text/css">
+h1 {color: #b58900;}  /* yellow */
+/* h1 {color: #cb4b16;}  orange */
+/* h1 {color: #d33682;}  magenta, the original choice of thomasf */
+
+div { text-align: justify; text-justify: inter-word; }
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [(' Mathematical models based on difference equations ',
+               1,
+               None,
+               '___sec0'),
+              (' Interest rates ',
+               2,
+               'sec:diffeq:irates',
+               'sec:diffeq:irates'),
+              (' The factorial as a difference equation ',
+               2,
+               None,
+               '___sec2'),
+              (' Fibonacci numbers ', 2, None, '___sec3'),
+              (' Growth of a population ',
+               2,
+               'sec:diffeq:growth',
+               'sec:diffeq:growth'),
+              (' Logistic growth ',
+               2,
+               'sec:diffeq:logistic',
+               'sec:diffeq:logistic'),
+              (' Payback of a loan ',
+               2,
+               'sec:diffeq:loan:sec',
+               'sec:diffeq:loan:sec'),
+              (' The integral as a difference equation ',
+               2,
+               'sec:diffeq:integral',
+               'sec:diffeq:integral'),
+              (' Taylor series as a difference equation ',
+               2,
+               'sec:diffeq:Taylor:exp',
+               'sec:diffeq:Taylor:exp'),
+              (' Making a living from a fortune ', 2, None, '___sec9'),
+              (" Newton's method ",
+               2,
+               'sec:diffeq:Newtonsmethod:sec',
+               'sec:diffeq:Newtonsmethod:sec'),
+              (' The inverse of a function ',
+               2,
+               'sec:diffeq:inversefunc',
+               'sec:diffeq:inversefunc'),
+              (' Programming with sound ',
+               1,
+               'sec:diffeq:sound',
+               'sec:diffeq:sound'),
+              (' Writing sound to file ', 2, None, '___sec13'),
+              (' Reading sound from file ', 2, None, '___sec14'),
+              (' Playing many notes ',
+               2,
+               'sec:diffeq:sound:create',
+               'sec:diffeq:sound:create'),
+              (' Music of a sequence ', 2, None, '___sec16'),
+              (' Problem ', 3, None, '___sec17'),
+              (' Solution ', 3, None, '___sec18'),
+              (' Exercises ', 1, None, '___sec19'),
+              (' Exercise 1: Determine the limit of a sequence ',
+               2,
+               'sec:diffeq:ex8a',
+               'sec:diffeq:ex8a'),
+              (' Exercise 2: Compute $\\pi$ via sequences ',
+               2,
+               'sec:diffeq:ex9',
+               'sec:diffeq:ex9'),
+              (' Exercise 3: Reduce memory usage of difference equations ',
+               2,
+               'sec:diffeq:ex7',
+               'sec:diffeq:ex7'),
+              (' Exercise 4: Compute the development of a loan ',
+               2,
+               'sec:diffeq:ex3',
+               'sec:diffeq:ex3'),
+              (' Exercise 5: Solve a system of difference equations ',
+               2,
+               'sec:diffeq:ex4',
+               'sec:diffeq:ex4'),
+              (' Exercise 6: Modify a model for fortune development ',
+               2,
+               'sec:diffeq:ex4c',
+               'sec:diffeq:ex4c'),
+              (' Exercise 7: Change index in a difference equation ',
+               2,
+               'sec:diffeq:ex1',
+               'sec:diffeq:ex1'),
+              (' Exercise 8: Construct time points from dates ',
+               2,
+               'sec:diffeq:ex2',
+               'sec:diffeq:ex2'),
+              (" Exercise 9: Visualize the convergence of Newton's method ",
+               2,
+               'sec:diffeq:ex13',
+               'sec:diffeq:ex13'),
+              (' Exercise 10: Implement the secant method ',
+               2,
+               'sec:diffeq:ex14b',
+               'sec:diffeq:ex14b'),
+              (' Exercise 11: Test different methods for root finding ',
+               2,
+               'sec:diffeq:ex14c',
+               'sec:diffeq:ex14c'),
+              (' Exercise 12: Make difference equations for the Midpoint rule ',
+               2,
+               'sec:diffeq:ex:midpoint:int',
+               'sec:diffeq:ex:midpoint:int'),
+              (' Exercise 13: Compute the arc length of a curve ',
+               2,
+               'sec:diffeq:ex:arclength',
+               'sec:diffeq:ex:arclength'),
+              (' Exercise 14: Find difference equations for computing $\\sin x$ ',
+               2,
+               'sec:diffeq:ex11b',
+               'sec:diffeq:ex11b'),
+              (' Exercise 15: Find difference equations for computing $\\cos x$ ',
+               2,
+               'sec:diffeq:ex15',
+               'sec:diffeq:ex15'),
+              (' Exercise 16: Make a guitar-like sound ',
+               2,
+               'sec:sound:ex1',
+               'sec:sound:ex1'),
+              (' Exercise 17: Damp the bass in a sound file ',
+               2,
+               'sec:sound:ex2',
+               'sec:sound:ex2'),
+              (' Exercise 18: Damp the treble in a sound file ',
+               2,
+               'sec:sound:ex3',
+               'sec:sound:ex3'),
+              (' Exercise 19: Demonstrate oscillatory solutions of (ref{sec:diffeq:logistic:eq2}) ',
+               2,
+               'sec:diffeq:ex16',
+               'sec:diffeq:ex16'),
+              (' Exercise 20: Automate computer experiments ',
+               2,
+               'sec:diffeq:ex17',
+               'sec:diffeq:ex17'),
+              (' Exercise 21: Generate an HTML report ',
+               2,
+               'sec:diffeq:ex18',
+               'sec:diffeq:ex18'),
+              (' Exercise 22: Use a class to archive and report experiments ',
+               2,
+               'sec:diffeq:ex19',
+               'sec:diffeq:ex19'),
+              (' Exercise 23: Explore logistic growth interactively ',
+               2,
+               'sec:diffeq:ex20',
+               'sec:diffeq:ex20'),
+              (' Exercise 24: Simulate the price of wheat ',
+               2,
+               'sec:diffeq:ex21',
+               'sec:diffeq:ex21'),
+              (' References ', 1, None, '___sec44')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- newcommands_keep.tex -->
+$$
+\newcommand{\tp}{\thinspace .}
+$$
+
+
+
+
+    
+<a name="part0002"></a>
+<p>
+<!-- begin top navigation -->
+<table style="width: 100%"><tr><td>
+<div style="text-align: left;"><a href="._diffeq-solarized001.html">&laquo; Previous</a></div>
+</td><td>
+<div style="text-align: right;"><a href="._diffeq-solarized003.html">Next &raquo;</a></div>
+</td></tr></table>
+<!-- end top navigation -->
+</p>
+
+<p>
+<!-- !split -->
+
+<h1>Programming with sound <a name="sec:diffeq:sound"></a></h1>
+
+<p>
+Sound on a computer is nothing but a sequence of numbers.
+As an example, consider the famous A tone at 440 Hz.
+Physically, this is an oscillation of a tuning fork, loudspeaker, string
+or another mechanical medium that makes the surrounding air also oscillate
+and transport the sound as a compression wave. This wave may hit
+our ears and through complicated physiological processes be transformed
+to an electrical signal that the brain can recognize as sound.
+Mathematically, the oscillations are described by
+a sine function of time:
+
+$$
+\begin{equation} s(t) = A\sin\left( 2\pi f t\right),\end{equation}
+$$
+
+where \( A \) is the amplitude or strength of the sound and \( f \) is the
+frequency (440 Hz for the A in our example).
+In a computer, \( s(t) \) is represented at discrete points of time.
+CD quality means 44100 samples per second. Other sample rates are
+also possible, so we introduce \( r \) as the sample rate.
+An \( f \) Hz tone
+lasting for \( m \) seconds with sample rate \( r \) can then be computed as the
+sequence
+
+$$
+\begin{equation} s_n =
+A\sin\left( 2\pi f {n\over r}\right),
+\quad n=0,1,\ldots, m\cdot r\tp\end{equation}
+$$
+
+With Numerical Python this computation is straightforward and very
+efficient.
+Introducing some more explanatory variable names than \( r \), \( A \), and \( m \),
+we can write a function for generating a note:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>import numpy as np
+
+def note(frequency, length, amplitude=1, sample_rate=44100):
+    time_points = np.linspace(0, length, length*sample_rate)
+    data = np.sin(2*np.pi*frequency*time_points)
+    data = amplitude*data
+    return data
+</code></pre>
+<!-- end verbatim block -->
+
+<h2>Writing sound to file  <a name="___sec13"></a></h2>
+
+<p>
+The <code>note</code> function above generates an array of <code>float</code> data
+representing a note. The sound card in the computer cannot
+play these data, because the card assumes that the information about
+the oscillations appears as a sequence of
+two-byte integers. With an array's <code>astype</code> method we can easily convert
+our data to two-byte integers instead of <code>floats</code>:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>data = data.astype(numpy.int16)
+</code></pre>
+<!-- end verbatim block -->
+That is, the name of the two-byte integer data type in <code>numpy</code> is
+<code>int16</code> (two bytes are 16 bits).
+The maximum
+value of a two-byte integer is \( 2^{15}-1 \), so this is also the
+maximum amplitude.
+Assuming that <code>amplitude</code> in the <code>note</code> function is a relative
+measure of intensity, such that the value lies between 0 and 1,
+we must adjust this amplitude to the scale of two-byte integers:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>max_amplitude = 2**15 - 1
+data = max_amplitude*data
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+The <code>data</code>
+array of <code>int16</code> numbers can be written to a file and played
+as an ordinary file in CD quality. Such a file is known as a
+wave file or simply a  WAV file since the extension is <code>.wav</code>.
+Python has a module <code>wave</code> for creating such files.
+Given an array of sound, <code>data</code>, we have in SciTools a
+module <code>sound</code> with a function <code>write</code>
+for writing the data to a WAV file (using functionality from the
+<code>wave</code> module):
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>import scitools.sound
+scitools.sound.write(data, 'Atone.wav')
+</code></pre>
+<!-- end verbatim block -->
+You can now use your favorite music player to play the <code>Atone.wav</code>
+file, or you can play it from within a Python program using
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>scitools.sound.play('Atone.wav')
+</code></pre>
+<!-- end verbatim block -->
+The <code>write</code> function can take more arguments and write, e.g.,
+a stereo file with two channels, but we do not dive into these details here.
+
+<h2>Reading sound from file  <a name="___sec14"></a></h2>
+
+<p>
+Given a sound signal in a WAV file, we can easily read this signal
+into an array and mathematically manipulate the data in the array to change the
+flavor of the sound, e.g., add echo, treble, or bass.
+The recipe for reading a WAV file with name <code>filename</code> is
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>data = scitools.sound.read(filename)
+</code></pre>
+<!-- end verbatim block -->
+The <code>data</code> array has elements of type <code>int16</code>. Often we want to
+compute with this array, and then we need
+elements of <code>float</code> type, obtained by the conversion
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>data = data.astype(float)
+</code></pre>
+<!-- end verbatim block -->
+The <code>write</code> function automatically transforms the element type back
+to <code>int16</code> if we have not done this explicitly.
+
+<p>
+One operation that we can easily do is adding an echo.
+Mathematically this means that we add a damped delayed sound,
+where the original sound has weight \( \beta \) and the delayed
+part has weight \( 1-\beta \), such that the overall amplitude is not
+altered.
+Let \( d \) be the delay
+in seconds. With a sampling rate \( r \) the number of indices in the
+delay becomes \( dr \), which we denote by \( b \). Given an original sound
+sequence \( s_n \), the sound with echo is the sequence
+
+$$
+\begin{equation}
+e_n = \beta s_n + (1-\beta) s_{n-b}\tp
+\end{equation}
+$$
+
+We cannot start \( n \) at 0 since \( e_0=s_{0-b}=s_{-b} \) which is a value outside
+the sound data. Therefore we define \( e_n=s_n \) for \( n=0,1,\ldots,b \),
+and add the echo thereafter.
+A simple loop can do this (again we use descriptive variable names instead
+of the mathematical symbols introduced):
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>def add_echo(data, beta=0.8, delay=0.002, sample_rate=44100):
+    newdata = data.copy()
+    shift = int(delay*sample_rate)  # b (math symbol)
+    for i in range(shift, len(data)):
+        newdata[i] = beta*data[i] + (1-beta)*data[i-shift]
+    return newdata
+</code></pre>
+<!-- end verbatim block -->
+The problem with this function is that it runs slowly, especially when
+we have sound clips lasting several seconds (recall that
+for CD quality we need 44100 numbers per second). It is therefore necessary
+to vectorize the implementation of the difference equation for adding echo.
+The update is then based on adding slices:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>newdata[shift:] = beta*data[shift:] + \ 
+                  (1-beta)*data[:len(data)-shift]
+</code></pre>
+<!-- end verbatim block -->
+
+<h2>Playing many notes <a name="sec:diffeq:sound:create"></a></h2>
+
+<p>
+How do we generate a melody mathematically in a computer program?
+With the <code>note</code> function we can generate a note with a
+certain amplitude, frequency, and duration. The note is represented
+as an array. Putting sound arrays for different notes
+after each other will make up a melody.
+If we have
+several sound arrays <code>data1</code>, <code>data2</code>, <code>data3</code>, \( \ldots \),
+we can make
+a new array consisting of the elements in the first array followed
+by the elements of the next array followed by the elements in the next
+array and so forth:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>data = numpy.concatenate((data1, data2, data3, ...))
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+The <a href="http://en.wikipedia.org/wiki/Note" target="_self">frequency of a note</a>
+that is \( h \) half tones up from a base frequency \( f \) is given by
+\( f2^{h/12} \). With the tone A at 440 Hz, we can define notes
+and the corresponding frequencies as
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>base_freq = 440.0
+notes = ['A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E',
+         'F', 'F#', 'G', 'G#']
+notes2freq = {notes[i]: base_freq*2**(i/12.0)
+              for i in range(len(notes))}
+</code></pre>
+<!-- end verbatim block -->
+With the notes to frequency mapping a melody can
+be made as a series of notes with specified duration:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>l = .2  # basic duration unit
+tones = [('E', 3*l), ('D', l), ('C#', 2*l), ('B', 2*l), ('A', 2*l),
+         ('B', 2*l), ('C#', 2*l), ('D', 2*l), ('E', 3*l),
+         ('F#', l), ('E', 2*l), ('D', 2*l), ('C#', 4*l)]
+
+samples = []
+for tone, duration in tones :
+    s = note(notes2freq[tone], duration)
+    samples.append(s)
+
+data = np.concatenate(samples)
+data *= 2**15-1
+scitools.sound.write(data, &quot;melody.wav&quot;)
+</code></pre>
+<!-- end verbatim block -->
+Playing the resulting file <code>melody.wav</code> reveals that this is the
+opening of the most-played tune during
+international cross country skiing competitions.
+
+<p>
+All the notes had the same amplitude in this example, but more
+dynamics can easily be added by letting the elements in <code>tones</code> be
+triplets with tone, duration, and amplitude. The basic code above is
+found in the file <a href="http://tinyurl.com/pwyasaa/diffeq/melody.py" target="_self"><tt>melody.py</tt></a>.
+
+<h2>Music of a sequence  <a name="___sec16"></a></h2>
+
+<h3>Problem  <a name="___sec17"></a></h3>
+
+<p>
+The purpose of this example is to listen to the sound
+generated by two mathematical
+sequences. The first one
+is given by an explicit formula, constructed to oscillate around 0 with
+decreasing amplitude:
+
+$$
+\begin{equation}
+x_n = e^{-4n/N}\sin(8\pi n/N)\tp
+\tag{28}
+\end{equation}
+$$
+
+The other sequence is generated by the difference equation
+<a href="._diffeq-solarized001.html#mjx-eqn-10">(10)</a> for logistic growth, repeated here for
+convenience:
+
+$$
+\begin{equation}
+x_n = x_{n-1} + q x_{n-1}\left(1 - x_{n-1}\right),\quad x = x_0\tp
+\tag{29}
+\end{equation}
+$$
+
+We let \( x_0=0.01 \) and \( q=2 \). This leads to fast initial growth toward
+the limit 1, and then oscillations around this limit (this problem
+is studied in <a href="._diffeq-solarized003.html#sec:diffeq:ex16">Exercise 19: Demonstrate oscillatory solutions of <a href="._diffeq-solarized001.html#mjx-eqn-10">(10)</a></a>).
+
+<p>
+The absolute value of the sequence elements \( x_n \)
+are of size between 0 and 1, approximately. We want to transform these
+sequence elements to tones, using the techniques of the section <a href="#sec:diffeq:sound">Programming with sound</a>. First we convert \( x_n \) to a frequency the human ear can hear.
+The transformation
+
+$$
+\begin{equation}
+y_n = 440 + 200 x_n
+\tag{30}
+\end{equation}
+$$
+
+will make a standard A reference tone out of \( x_n=0 \), and for
+the maximum value of \( x_n \) around 1 we get a tone of 640 Hz.
+Elements of the sequence generated by <a href="#mjx-eqn-28">(28)</a> lie
+between -1 and 1, so the corresponding frequencies lie between
+240 Hz and 640 Hz.
+The task now is to make a program that can generate and play the sounds.
+
+<h3>Solution  <a name="___sec18"></a></h3>
+
+<p>
+Tones can be generated by the <code>note</code> function from
+the <code>scitools.sound</code> module. We collect all tones corresponding to
+all the \( y_n \) frequencies in a list <code>tones</code>. Letting <code>N</code>
+denote the number of sequence elements,
+the relevant code segment
+reads
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>from scitools.sound import *
+freqs = 440 + x*200
+tones = []
+duration = 30.0/N     # 30 sec sound in total
+for n in range(N+1):
+    tones.append(max_amplitude*note(freqs[n], duration, 1))
+data = concatenate(tones)
+write(data, filename)
+data = read(filename)
+play(filename)
+</code></pre>
+<!-- end verbatim block -->
+It is illustrating to plot the sequences too,
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>plot(range(N+1), freqs, 'ro')
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+To generate the sequences <a href="#mjx-eqn-28">(28)</a>
+and <a href="#mjx-eqn-29">(29)</a>, we make two functions,
+<code>oscillations</code> and <code>logistic</code>, respectively.
+These functions take the number of sequence elements (<code>N</code>)
+as input and return the sequence stored in an array.
+
+<p>
+In another function <code>make_sound</code> we compute the sequence,
+transform the elements to frequencies, generate tones, write
+the tones to file, and play the sound file.
+
+<p>
+As always, we collect the functions in a module and include
+a test block where we can read the choice of sequence and the
+sequence length from the command line.
+The complete module file looks as follows:
+
+<p>
+<!-- begin verbatim block  pypro-->
+<pre><code>from scitools.sound import *
+from scitools.std import *
+
+def oscillations(N):
+    x = zeros(N+1)
+    for n in range(N+1):
+        x[n] = exp(-4*n/float(N))*sin(8*pi*n/float(N))
+    return x
+
+def logistic(N):
+    x = zeros(N+1)
+    x[0] = 0.01
+    q = 2
+    for n in range(1, N+1):
+        x[n] = x[n-1] + q*x[n-1]*(1 - x[n-1])
+    return x
+
+def make_sound(N, seqtype):
+    filename = 'tmp.wav'
+    x = eval(seqtype)(N)
+    # Convert x values to frequences around 440
+    freqs = 440 + x*200
+    plot(range(N+1), freqs, 'ro')
+    # Generate tones
+    tones = []
+    duration = 30.0/N     # 30 sec sound in total
+    for n in range(N+1):
+        tones.append(max_amplitude*note(freqs[n], duration, 1))
+    data = concatenate(tones)
+    write(data, filename)
+    data = read(filename)
+    play(filename)
+
+if __name__ == '__main__':
+    try:
+        seqtype = sys.argv[1]
+        N = int(sys.argv[2])
+    except IndexError:
+        print 'Usage: %s oscillations|logistic N' % sys.argv[0]
+        sys.exit(1)
+    make_sound(N, seqtype)
+</code></pre>
+<!-- end verbatim block -->
+This code should be quite easy to read at the present stage in the document.
+However, there is one statement that deserves a comment:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>    x = eval(seqtype)(N)
+</code></pre>
+<!-- end verbatim block -->
+The <code>seqtype</code> argument reflects the type of sequence
+and is a string that the user provides on
+the command line. The values of the string equal the function
+names <code>oscillations</code> and <code>logistic</code>. With
+<code>eval(seqtype)</code> we turn the string into a function name.
+For example, if <code>seqtype</code> is <code>'logistic'</code>,
+performing an <code>eval(seqtype)(N)</code> is the same as if we had written
+<code>logistic(N)</code>. This technique allows the user of the program
+to choose a function call inside the code. Without <code>eval</code> we
+would need to explicitly test on values:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>if seqtype == 'logistic':
+    x = logistic(N)
+elif seqtype == 'oscillations':
+    x = oscillations(N)
+</code></pre>
+<!-- end verbatim block -->
+This is not much extra code to write in the present example, but if we
+have a large number of functions generating sequences, we can save
+a lot of boring if-else code by using the <code>eval</code> construction.
+
+<p>
+The next step, as a reader who have understood the problem and the
+implementation above, is to run the program for two cases:
+the <code>oscillations</code> sequence with \( N=40 \) and the
+<code>logistic</code> sequence with \( N=100 \).
+By altering the \( q \) parameter to lower values, you get other sounds,
+typically quite boring sounds for non-oscillating logistic growth (\( q < 1 \)).
+You can also experiment with other transformations of the form
+<a href="#mjx-eqn-30">(30)</a>, e.g., increasing the frequency variation
+from 200 to 400.
+
+<p>
+<!-- do that in the lecture! -->
+
+<p>
+<p>
+<!-- begin bottom navigation -->
+<table style="width: 100%"><tr><td>
+<div style="text-align: left;"><a href="._diffeq-solarized001.html">&laquo; Previous</a></div>
+</td><td>
+<div style="text-align: right;"><a href="._diffeq-solarized003.html">Next &raquo;</a></div>
+</td></tr></table>
+<!-- end bottom navigation -->
+</p>
+
+<!-- ------------------- end of main content --------------- -->
+
+
+</body>
+</html>
+    
+

@@ -1,0 +1,1018 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Introduction to classes in Python">
+<meta name="keywords" content="constructor (class),UML class diagram,instance (class),user-defined datatype (class),method class),attribute (class),namespace,test function,nose tests,pytest tests,special methods (class),callable objects,test function,closure,Newton's method,wrapper code,integration numerical,symbolic computing,integration symbolic,mutable objects,immutable objects,protected attributes (class),test function,information hiding,private attributes (class),API,application programming interface,protected attributes (class),check an object's type,static typing,weak typing,strong typing,dynamic typing,duck typing,static class attributes,static class variables,static class methods,interval arithmetic">
+
+<title>Introduction to classes in Python</title>
+
+<!-- Bootstrap style: bootstrap_bluegray -->
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://raw.github.com/hplgit/doconce/master/bundled/html_styles/style_bootstrap/css/bootstrap_bluegray.css" rel="stylesheet">
+<!-- not necessary
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+
+<style type="text/css">
+/* Let inline verbatim have the same color as the surroundings */
+code { color: inherit; background-color: transparent; }
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [(' Simple function classes ',
+               1,
+               'sec:class:functors',
+               'sec:class:functors'),
+              (' Challenge: functions with parameters ',
+               2,
+               'sec:class:func1',
+               'sec:class:func1'),
+              (' Problem ', 3, None, '___sec2'),
+              (' A bad solution: global variables ', 3, None, '___sec3'),
+              (' Representing a function as a class ',
+               2,
+               'sec:class:func2',
+               'sec:class:func2'),
+              (' Implementation ', 3, None, '___sec5'),
+              (' Usage and dissection ', 3, None, '___sec6'),
+              (' The self  variable ', 3, None, '___sec7'),
+              (' Extension of the class ', 3, None, '___sec8'),
+              (' Remark ', 3, None, '___sec9'),
+              (' Using methods as ordinary functions ', 3, None, '___sec10'),
+              (' Doc strings ', 3, None, '___sec11'),
+              (' Another function class example ',
+               2,
+               'sec:class:func3',
+               'sec:class:func3'),
+              (' Remark ', 3, None, '___sec13'),
+              (' Alternative function class implementations ',
+               2,
+               'sec:class:func2b',
+               'sec:class:func2b'),
+              (' Making classes without the class construct ',
+               2,
+               'sec:class:whatis',
+               'sec:class:whatis'),
+              (' First remark ', 3, None, '___sec16'),
+              (' Second remark ', 3, None, '___sec17'),
+              (' More examples on classes ',
+               1,
+               'sec:class:addex',
+               'sec:class:addex'),
+              (' Bank accounts ',
+               2,
+               'sec:class:account',
+               'sec:class:account'),
+              (' Phone book ',
+               2,
+               'sec:class:phonebook',
+               'sec:class:phonebook'),
+              (' A circle ', 2, 'sec:class:circle', 'sec:class:circle'),
+              (' Verification ', 3, None, '___sec22'),
+              (' Remark ', 3, None, '___sec23'),
+              (' Special methods ',
+               1,
+               'sec:class:specialmethods',
+               'sec:class:specialmethods'),
+              (' The call special method ',
+               2,
+               'sec:class:call',
+               'sec:class:call'),
+              (' Example: Automagic differentiation ',
+               2,
+               'sec:class:autodF',
+               'sec:class:autodF'),
+              (' Problem ', 3, None, '___sec27'),
+              (' Solution ', 3, None, '___sec28'),
+              (' Verification ', 3, None, '___sec29'),
+              (" Application: Newton's method ", 3, None, '___sec30'),
+              (' Example: Automagic integration ',
+               2,
+               'sec:class:autoint',
+               'sec:class:autoint'),
+              (' A simple implementation ', 3, None, '___sec32'),
+              (' Verification via symbolic computing ', 3, None, '___sec33'),
+              (' Remark ', 3, None, '___sec34'),
+              (' Turning an instance into a string ',
+               2,
+               'sec:class:str',
+               'sec:class:str'),
+              (' Example: Phone book with special methods ',
+               2,
+               'sec:class:phonebook2',
+               'sec:class:phonebook2'),
+              (' Remark ', 3, None, '___sec37'),
+              (' Adding objects ', 2, 'sec:class:add', 'sec:class:add'),
+              (' Example: Class for polynomials ',
+               2,
+               'sec:class:Polynomial',
+               'sec:class:Polynomial'),
+              (' Implementation ', 3, None, '___sec40'),
+              (' Usage ', 3, None, '___sec41'),
+              (' Pretty print of polynomials ', 3, None, '___sec42'),
+              (' Verifying the implementation ', 3, None, '___sec43'),
+              (' Arithmetic operations and other special methods ',
+               2,
+               'sec:class:arithmetics',
+               'sec:class:arithmetics'),
+              (' Special methods for string conversion ',
+               2,
+               'sec:class:repr',
+               'sec:class:repr'),
+              (' Recreating objects from strings ', 3, None, '___sec46'),
+              (' Example: Class for vectors in the plane ',
+               1,
+               'sec:class:Vec2D',
+               'sec:class:Vec2D'),
+              (' Some mathematical operations on vectors ',
+               2,
+               None,
+               '___sec48'),
+              (' Implementation ', 2, None, '___sec49'),
+              (' Usage ', 2, None, '___sec50'),
+              (' Comment ', 3, None, '___sec51'),
+              (' Example: Class for complex numbers ', 1, None, '___sec52'),
+              (' Implementation ',
+               2,
+               'sec:class:Complex',
+               'sec:class:Complex'),
+              (' Illegal operations ',
+               2,
+               'sec:class:illegalop',
+               'sec:class:illegalop'),
+              (' Mixing complex and real numbers ',
+               2,
+               'sec:class:complex:mixed',
+               'sec:class:complex:mixed'),
+              (' Dynamic, static, strong, weak, and duck typing ',
+               2,
+               None,
+               '___sec56'),
+              (" Special methods for ``right'' operands ",
+               2,
+               'sec:class:complex:rightop',
+               'sec:class:complex:rightop'),
+              (' Remark ', 3, None, '___sec58'),
+              (' Inspecting instances ',
+               2,
+               'sec:class:inspect',
+               'sec:class:inspect'),
+              (' Static methods and attributes ',
+               1,
+               'sec:class:static',
+               'sec:class:static'),
+              (' Summary ', 1, None, '___sec61'),
+              (' Chapter topics ',
+               2,
+               'sec:class:summary',
+               'sec:class:summary'),
+              (' Classes ', 3, None, '___sec63'),
+              (' Special methods ', 3, None, '___sec64'),
+              (' Terminology ', 3, None, '___sec65'),
+              (' Example: interval arithmetic ', 2, None, '___sec66'),
+              (' Problem ', 3, None, '___sec67'),
+              (' Solution ', 3, None, '___sec68'),
+              (' Exercises ', 1, None, '___sec69'),
+              (' Exercise 1: Make a function class ',
+               2,
+               'sec:class:ex2',
+               'sec:class:ex2'),
+              (' Exercise 2: Add an attribute to a class ',
+               2,
+               'sec:class:ex25q',
+               'sec:class:ex25q'),
+              (' Exercise 3: Add functionality to a class ',
+               2,
+               'sec:class:ex25q2',
+               'sec:class:ex25q2'),
+              (' Exercise 4: Make classes for a rectangle and a triangle ',
+               2,
+               'sec:class:ex23',
+               'sec:class:ex23'),
+              (' Exercise 5: Make a class for quadratic functions ',
+               2,
+               'sec:class:ex11',
+               'sec:class:ex11'),
+              (' Exercise 6: Make a class for straight lines ',
+               2,
+               'sec:class:ex25',
+               'sec:class:ex25'),
+              (' Exercise 7: Flexible handling of function arguments ',
+               2,
+               'sec:class:ex25b',
+               'sec:class:ex25b'),
+              (' Exercise 8: Wrap functions in a class ',
+               2,
+               'sec:class:ex27d',
+               'sec:class:ex27d'),
+              (' Exercise 9: Flexible handling of function arguments ',
+               2,
+               'sec:class:ex27e',
+               'sec:class:ex27e'),
+              (' Exercise 10: Deduce a class implementation ',
+               2,
+               'sec:class:ex1',
+               'sec:class:ex1'),
+              (' Exercise 11: Implement special methods in a class ',
+               2,
+               'sec:class:ex2b2',
+               'sec:class:ex2b2'),
+              (' Exercise 12: Make a class for summation of series ',
+               2,
+               'sec:class:ex2b',
+               'sec:class:ex2b'),
+              (' Exercise 13: Apply a numerical differentiation class ',
+               2,
+               'sec:class:ex10',
+               'sec:class:ex10'),
+              (' Exercise 14: Apply symbolic differentiation ',
+               2,
+               'sec:class:exer:sympy:diff',
+               'sec:class:exer:sympy:diff'),
+              (' Exercise 15: Implement in-place `+=` and `-=` operators ',
+               2,
+               'sec:class:ex25qb',
+               'sec:class:ex25qb'),
+              (' Exercise 16: Implement a class for numerical differentiation ',
+               2,
+               'sec:class:ex21',
+               'sec:class:ex21'),
+              (' Exercise 17: Examine a program ',
+               2,
+               'sec:class:ex21b',
+               'sec:class:ex21b'),
+              (' Exercise 18: Modify a class for numerical differentiation ',
+               2,
+               'sec:class:ex23s',
+               'sec:class:ex23s'),
+              (' Exercise 19: Make a class for the Heaviside function ',
+               2,
+               'sec:basic:exHclass',
+               'sec:basic:exHclass'),
+              (' Exercise 20: Make a class for the indicator function ',
+               2,
+               'sec:basic:exIndclass',
+               'sec:basic:exIndclass'),
+              (' Exercise 21: Make a class for piecewise constant functions ',
+               2,
+               'sec:basic:ex:piecewisefunc',
+               'sec:basic:ex:piecewisefunc'),
+              (' Exercise 22: Speed up repeated integral calculations ',
+               2,
+               'sec:class:ex13c',
+               'sec:class:ex13c'),
+              (' Exercise 23: Apply a class for polynomials ',
+               2,
+               'sec:class:ex5',
+               'sec:class:ex5'),
+              (' Exercise 24: Find a bug in a class for polynomials ',
+               2,
+               'sec:class:ex4',
+               'sec:class:ex4'),
+              (' Exercise 25: Implement subtraction of polynomials ',
+               2,
+               'sec:class:ex6a',
+               'sec:class:ex6a'),
+              (' Exercise 26: Test the functionality of pretty print of polynomials ',
+               2,
+               'sec:class:exer:str',
+               'sec:class:exer:str'),
+              (' Exercise 27: Vectorize a class for polynomials ',
+               2,
+               'sec:class:ex7v',
+               'sec:class:ex7v'),
+              (' Remarks ', 3, None, '___sec97'),
+              (' Exercise 28: Use a dict to hold polynomial coefficients ',
+               2,
+               'sec:class:ex8',
+               'sec:class:ex8'),
+              (' Exercise 29: Extend class Vec2D to work with lists/tuples ',
+               2,
+               'sec:class:ex16',
+               'sec:class:ex16'),
+              (' Exercise 30: Extend class Vec2D to 3D vectors ',
+               2,
+               'sec:class:ex17b',
+               'sec:class:ex17b'),
+              (' Exercise 31: Use NumPy arrays in class Vec2D ',
+               2,
+               'sec:class:ex17',
+               'sec:class:ex17'),
+              (' Exercise 32: Make classes for students and courses ',
+               2,
+               'sec:class:ex15',
+               'sec:class:ex15'),
+              (' Exercise 33: Find local and global extrema of a function ',
+               2,
+               'sec:plot:ex28',
+               'sec:plot:ex28'),
+              (' Exercise 34: Find the optimal production for a company ',
+               2,
+               'sec:class:ex18a',
+               'sec:class:ex18a'),
+              (' References ', 1, None, '___sec105')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- newcommands_keep.tex -->
+$$
+\newcommand{\tp}{\thinspace .}
+$$
+
+
+
+
+    
+<!-- Bootstrap navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="class-bootstrap.html">Introduction to classes in Python</a>
+  </div>
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     <!-- navigation toc: --> <li><a href="._class-bootstrap001.html#sec:class:functors" style="font-size: 80%;">Simple function classes</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap002.html#sec:class:addex" style="font-size: 80%;">More examples on classes</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap003.html#sec:class:specialmethods" style="font-size: 80%;">Special methods</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap004.html#sec:class:Vec2D" style="font-size: 80%;">Example: Class for vectors in the plane</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec52" style="font-size: 80%;">Example: Class for complex numbers</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap006.html#sec:class:static" style="font-size: 80%;">Static methods and attributes</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap007.html#___sec61" style="font-size: 80%;">Summary</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap008.html#___sec69" style="font-size: 80%;">Exercises</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap008.html#___sec105" style="font-size: 80%;">References</a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div> <!-- end of navigation bar -->
+
+<div class="container">
+
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+
+<a name="part0005"></a>
+<!-- !split -->
+
+<h1 id="___sec52">Example: Class for complex numbers <a name="___sec52"></a></h1>
+
+<p>
+Imagine that Python did not already have complex numbers. We could
+then make a class for such numbers and support the standard
+mathematical operations.  This exercise turns out to be a very good
+pedagogical example of programming with classes and special methods,
+so we shall make our own class for complex numbers and go through
+all the details of the implementation.
+
+<p>
+The class must contain two attributes:
+the real and imaginary part of the complex number. In addition, we would
+like to add, subtract, multiply, and divide complex numbers.
+We would also like to write out a complex number in some suitable format.
+A session involving our own complex numbers may take the form
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> u <span style="color: #666666">=</span> Complex(<span style="color: #666666">2</span>,<span style="color: #666666">-1</span>)
+<span style="color: #666666">&gt;&gt;&gt;</span> v <span style="color: #666666">=</span> Complex(<span style="color: #666666">1</span>)     <span style="color: #408080; font-style: italic"># zero imaginary part</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> w <span style="color: #666666">=</span> u <span style="color: #666666">+</span> v
+<span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">print</span> w
+(<span style="color: #666666">3</span>, <span style="color: #666666">-1</span>)
+<span style="color: #666666">&gt;&gt;&gt;</span> w <span style="color: #666666">!=</span> u
+<span style="color: #008000">True</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> u<span style="color: #666666">*</span>v
+Complex(<span style="color: #666666">2</span>, <span style="color: #666666">-1</span>)
+<span style="color: #666666">&gt;&gt;&gt;</span> u <span style="color: #666666">&lt;</span> v
+illegal operation <span style="color: #BA2121">&quot;&lt;&quot;</span> <span style="color: #008000; font-weight: bold">for</span> <span style="color: #008000">complex</span> numbers
+<span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">print</span> w <span style="color: #666666">+</span> <span style="color: #666666">4</span>
+(<span style="color: #666666">7</span>, <span style="color: #666666">-1</span>)
+<span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">print</span> <span style="color: #666666">4</span> <span style="color: #666666">-</span> w
+(<span style="color: #666666">1</span>, <span style="color: #666666">1</span>)
+</pre></div>
+<p>
+We do not manage to use exactly the same syntax with <code>j</code> as
+imaginary unit as in Python's built-in complex numbers so
+to specify a complex number we must create a <code>Complex</code> instance.
+
+<h2 id="sec:class:Complex">Implementation<a name="sec:class:Complex"></a></h2>
+
+<p>
+Here is the complete implementation of our class for complex numbers:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Complex</span>:
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__init__</span>(<span style="color: #008000">self</span>, real, imag<span style="color: #666666">=0.0</span>):
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>real <span style="color: #666666">=</span> real
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>imag <span style="color: #666666">=</span> imag
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__add__</span>(<span style="color: #008000">self</span>, other):
+        <span style="color: #008000; font-weight: bold">return</span> Complex(<span style="color: #008000">self</span><span style="color: #666666">.</span>real <span style="color: #666666">+</span> other<span style="color: #666666">.</span>real,
+                       <span style="color: #008000">self</span><span style="color: #666666">.</span>imag <span style="color: #666666">+</span> other<span style="color: #666666">.</span>imag)
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__sub__</span>(<span style="color: #008000">self</span>, other):
+        <span style="color: #008000; font-weight: bold">return</span> Complex(<span style="color: #008000">self</span><span style="color: #666666">.</span>real <span style="color: #666666">-</span> other<span style="color: #666666">.</span>real,
+                       <span style="color: #008000">self</span><span style="color: #666666">.</span>imag <span style="color: #666666">-</span> other<span style="color: #666666">.</span>imag)
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__mul__</span>(<span style="color: #008000">self</span>, other):
+        <span style="color: #008000; font-weight: bold">return</span> Complex(<span style="color: #008000">self</span><span style="color: #666666">.</span>real<span style="color: #666666">*</span>other<span style="color: #666666">.</span>real <span style="color: #666666">-</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>imag<span style="color: #666666">*</span>other<span style="color: #666666">.</span>imag,
+                       <span style="color: #008000">self</span><span style="color: #666666">.</span>imag<span style="color: #666666">*</span>other<span style="color: #666666">.</span>real <span style="color: #666666">+</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>real<span style="color: #666666">*</span>other<span style="color: #666666">.</span>imag)
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__div__</span>(<span style="color: #008000">self</span>, other):
+        sr, si, <span style="color: #AA22FF; font-weight: bold">or</span>, oi <span style="color: #666666">=</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>real, <span style="color: #008000">self</span><span style="color: #666666">.</span>imag, \ 
+                         other<span style="color: #666666">.</span>real, other<span style="color: #666666">.</span>imag <span style="color: #408080; font-style: italic"># short forms</span>
+        r <span style="color: #666666">=</span> <span style="color: #008000">float</span>(<span style="color: #AA22FF; font-weight: bold">or</span><span style="color: #666666">**2</span> <span style="color: #666666">+</span> oi<span style="color: #666666">**2</span>)
+        <span style="color: #008000; font-weight: bold">return</span> Complex((sr<span style="color: #666666">*</span><span style="color: #AA22FF; font-weight: bold">or</span><span style="color: #666666">+</span>si<span style="color: #666666">*</span>oi)<span style="color: #666666">/</span>r, (si<span style="color: #666666">*</span><span style="color: #AA22FF; font-weight: bold">or</span><span style="color: #666666">-</span>sr<span style="color: #666666">*</span>oi)<span style="color: #666666">/</span>r)
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__abs__</span>(<span style="color: #008000">self</span>):
+        <span style="color: #008000; font-weight: bold">return</span> sqrt(<span style="color: #008000">self</span><span style="color: #666666">.</span>real<span style="color: #666666">**2</span> <span style="color: #666666">+</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>imag<span style="color: #666666">**2</span>)
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__neg__</span>(<span style="color: #008000">self</span>):   <span style="color: #408080; font-style: italic"># defines -c (c is Complex)</span>
+        <span style="color: #008000; font-weight: bold">return</span> Complex(<span style="color: #666666">-</span><span style="color: #008000">self</span><span style="color: #666666">.</span>real, <span style="color: #666666">-</span><span style="color: #008000">self</span><span style="color: #666666">.</span>imag)
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__eq__</span>(<span style="color: #008000">self</span>, other):
+        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>real <span style="color: #666666">==</span> other<span style="color: #666666">.</span>real <span style="color: #AA22FF; font-weight: bold">and</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>imag <span style="color: #666666">==</span> other<span style="color: #666666">.</span>imag
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__ne__</span>(<span style="color: #008000">self</span>, other):
+        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #AA22FF; font-weight: bold">not</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>__eq__(other)
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__str__</span>(<span style="color: #008000">self</span>):
+        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #BA2121">&#39;(</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">, </span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">)&#39;</span> <span style="color: #666666">%</span> (<span style="color: #008000">self</span><span style="color: #666666">.</span>real, <span style="color: #008000">self</span><span style="color: #666666">.</span>imag)
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__repr__</span>(<span style="color: #008000">self</span>):
+        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #BA2121">&#39;Complex&#39;</span> <span style="color: #666666">+</span> <span style="color: #008000">str</span>(<span style="color: #008000">self</span>)
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__pow__</span>(<span style="color: #008000">self</span>, power):
+        <span style="color: #008000; font-weight: bold">raise</span> <span style="color: #D2413A; font-weight: bold">NotImplementedError</span>\ 
+              (<span style="color: #BA2121">&#39;self**power is not yet impl. for Complex&#39;</span>)
+</pre></div>
+<p>
+The special methods for addition, subtraction, multiplication,
+division, and the absolute value
+follow easily from the mathematical definitions of these
+operations for complex
+numbers (see the section ref{sec:formula:complex}).
+What <code>-c</code> means when <code>c</code> is of type <code>Complex</code>,
+is also easy to
+define and implement. The <code>__eq__</code> method needs a word of
+caution: the method is mathematically correct, but comparison of real numbers
+on a computer should always employ a tolerance.
+The version of <code>__eq__</code> shown above is about compact
+code and equivalence to the mathematics. Any real-world numerical
+computations should employ a test that
+<code>abs(self.real - other.real) &lt; eps</code> <em>and</em>
+<code>abs(self.imag - other.imag) &lt; eps</code>, where <code>eps</code> is some
+small tolerance, say <code>eps = 1E-14</code>.
+
+<p>
+The final <code>__pow__</code> method exemplifies a way to
+introduce a method in a class, while we postpone its implementation. The simplest
+way to do this is by inserting an empty function body using the
+<code>pass</code> ("do nothing") statement:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Polynomial</span>:
+    <span style="color: #666666">...</span>
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__pow__</span>(<span style="color: #008000">self</span>, power):
+        <span style="color: #408080; font-style: italic"># Postpone implementation of self**power</span>
+        <span style="color: #008000; font-weight: bold">pass</span>
+</pre></div>
+<p>
+However, the preferred method is to raise a <code>NotImplementedError</code>
+exception so that users writing power expressions are notified that
+this operation is not available. The simple <code>pass</code> will just
+silently bypass this serious fact!
+
+<h2 id="sec:class:illegalop">Illegal operations<a name="sec:class:illegalop"></a></h2>
+
+<p>
+Some mathematical operations, like the comparison operators
+<code>&gt;</code>, <code>&gt;=</code>, etc., do not have a meaning for complex numbers.
+By default, Python allows us to use these comparison operators
+for our <code>Complex</code> instances, but the boolean result will be
+mathematical nonsense.
+Therefore, we should implement the corresponding special methods and
+give a sensible error message that the operations are not available
+for complex numbers. Since the messages are quite similar, we
+make a separate method to gather common operations:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">_illegal</span>(<span style="color: #008000">self</span>, op):
+        <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;illegal operation &quot;</span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121">&quot; for complex numbers&#39;</span> <span style="color: #666666">%</span> op
+</pre></div>
+<p>
+Note the underscore prefix: this is a Python convention telling
+that the <code>_illegal</code> method is local to the class in the sense
+that it is not supposed to be used outside the class, just by other
+class methods.
+In computer science terms, we say that names starting with an underscore
+are not part of the <em>application programming interface</em>, known as
+the API.
+Other programming languages, such as Java, C++, and C#, have special
+keywords, like <code>private</code> and <code>protected</code>
+that can be used
+to technically hide both data and methods from users of the class.
+Python will never restrict anybody who tries to access data or
+methods that are considered private to the class, but the leading underscore
+in the name reminds any user of the class that she now touches parts
+of the class that are not meant to be used &quot;from the outside&quot;.
+
+<p>
+Various special methods for comparison operators can now call
+up <code>_illegal</code> to issue the error message:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__gt__</span>(<span style="color: #008000">self</span>, other):  <span style="color: #008000">self</span><span style="color: #666666">.</span>_illegal(<span style="color: #BA2121">&#39;&gt;&#39;</span>)
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__ge__</span>(<span style="color: #008000">self</span>, other):  <span style="color: #008000">self</span><span style="color: #666666">.</span>_illegal(<span style="color: #BA2121">&#39;&gt;=&#39;</span>)
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__lt__</span>(<span style="color: #008000">self</span>, other):  <span style="color: #008000">self</span><span style="color: #666666">.</span>_illegal(<span style="color: #BA2121">&#39;&lt;&#39;</span>)
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__le__</span>(<span style="color: #008000">self</span>, other):  <span style="color: #008000">self</span><span style="color: #666666">.</span>_illegal(<span style="color: #BA2121">&#39;&lt;=&#39;</span>)
+</pre></div>
+
+<h2 id="sec:class:complex:mixed">Mixing complex and real numbers<a name="sec:class:complex:mixed"></a></h2>
+
+<p>
+The implementation of class <code>Complex</code> is far from perfect.
+Suppose we add a complex number and a real number, which is
+a mathematically perfectly valid operation:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">w <span style="color: #666666">=</span> u <span style="color: #666666">+</span> <span style="color: #666666">4.5</span>
+</pre></div>
+<p>
+This statement leads to an exception,
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #D2413A; font-weight: bold">AttributeError</span>: <span style="color: #BA2121">&#39;float&#39;</span> <span style="color: #008000">object</span> has no attribute <span style="color: #BA2121">&#39;real&#39;</span>
+</pre></div>
+<p>
+In this case, Python sees <code>u + 4.5</code> and tries to
+use <code>u.__add__(4.5)</code>, which causes trouble because
+the <code>other</code> argument in the <code>__add__</code> method
+is 4.5, i.e., a <code>float</code> object, and <code>float</code> objects
+do not contain an attribute with the name <code>real</code> (<code>other.real</code>
+is used in our <code>__add__</code> method, and accessing
+<code>other.real</code> is what causes the error).
+
+<p>
+One idea for a remedy could be to set
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">other <span style="color: #666666">=</span> Complex(other)
+</pre></div>
+<p>
+since this construction turns a real number <code>other</code> into a
+<code>Complex</code> object. However, when we add two <code>Complex</code>
+instances, <code>other</code> is of type <code>Complex</code>, and
+the constructor simply stores this <code>Complex</code> instance as
+<code>self.real</code> (look at the method <code>__init__</code>).
+This is not what we want!
+
+<p>
+A better idea is to test for the type of <code>other</code> and perform the
+right conversion to <code>Complex</code>:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__add__</span>(<span style="color: #008000">self</span>, other):
+        <span style="color: #008000; font-weight: bold">if</span> <span style="color: #008000">isinstance</span>(other, (<span style="color: #008000">float</span>,<span style="color: #008000">int</span>)):
+            other <span style="color: #666666">=</span> Complex(other)
+        <span style="color: #008000; font-weight: bold">return</span> Complex(<span style="color: #008000">self</span><span style="color: #666666">.</span>real <span style="color: #666666">+</span> other<span style="color: #666666">.</span>real,
+                       <span style="color: #008000">self</span><span style="color: #666666">.</span>imag <span style="color: #666666">+</span> other<span style="color: #666666">.</span>imag)
+</pre></div>
+<p>
+We could alternatively drop the conversion of <code>other</code> and
+instead implement two addition rules, depending on
+the type of <code>other</code>:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__add__</span>(<span style="color: #008000">self</span>, other):
+        <span style="color: #008000; font-weight: bold">if</span> <span style="color: #008000">isinstance</span>(other, (<span style="color: #008000">float</span>,<span style="color: #008000">int</span>)):
+            <span style="color: #008000; font-weight: bold">return</span> Complex(<span style="color: #008000">self</span><span style="color: #666666">.</span>real <span style="color: #666666">+</span> other, <span style="color: #008000">self</span><span style="color: #666666">.</span>imag)
+        <span style="color: #008000; font-weight: bold">else</span>:
+            <span style="color: #008000; font-weight: bold">return</span> Complex(<span style="color: #008000">self</span><span style="color: #666666">.</span>real <span style="color: #666666">+</span> other<span style="color: #666666">.</span>real,
+                           <span style="color: #008000">self</span><span style="color: #666666">.</span>imag <span style="color: #666666">+</span> other<span style="color: #666666">.</span>imag)
+</pre></div>
+<p>
+A third way is to look for what we require from the <code>other</code> object,
+and check that this demand is fulfilled. Mathematically, we require
+<code>other</code> to be a complex or real number, but from a programming
+point of view, all we demand (in the original <code>__add__</code>
+implementation) is that <code>other</code> has <code>real</code> and
+<code>imag</code> attributes. To check if an object <code>a</code> has an attribute
+with name stored in the string <code>attr</code>, one can use the function
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000">hasattr</span>(a, attr)
+</pre></div>
+<p>
+In our context, we need to perform the test
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">if</span> <span style="color: #008000">hasattr</span>(other, <span style="color: #BA2121">&#39;real&#39;</span>) <span style="color: #AA22FF; font-weight: bold">and</span> <span style="color: #008000">hasattr</span>(other, <span style="color: #BA2121">&#39;imag&#39;</span>):
+</pre></div>
+<p>
+Our third implementation of the <code>__add__</code> method therefore becomes
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__add__</span>(<span style="color: #008000">self</span>, other):
+        <span style="color: #008000; font-weight: bold">if</span> <span style="color: #008000">isinstance</span>(other, (<span style="color: #008000">float</span>,<span style="color: #008000">int</span>)):
+            other <span style="color: #666666">=</span> Complex(other)
+        <span style="color: #008000; font-weight: bold">elif</span> <span style="color: #AA22FF; font-weight: bold">not</span> (<span style="color: #008000">hasattr</span>(other, <span style="color: #BA2121">&#39;real&#39;</span>) <span style="color: #AA22FF; font-weight: bold">and</span> \ 
+                  <span style="color: #008000">hasattr</span>(other, <span style="color: #BA2121">&#39;imag&#39;</span>)):
+            <span style="color: #008000; font-weight: bold">raise</span> <span style="color: #D2413A; font-weight: bold">TypeError</span>(<span style="color: #BA2121">&#39;other must have real and imag attr.&#39;</span>)
+        <span style="color: #008000; font-weight: bold">return</span> Complex(<span style="color: #008000">self</span><span style="color: #666666">.</span>real <span style="color: #666666">+</span> other<span style="color: #666666">.</span>real,
+                       <span style="color: #008000">self</span><span style="color: #666666">.</span>imag <span style="color: #666666">+</span> other<span style="color: #666666">.</span>imag)
+</pre></div>
+<p>
+The advantage with this third alternative is that we may add
+instances of class <code>Complex</code> and Python's own complex class (<code>complex</code>),
+since all we need is an object with <code>real</code> and <code>imag</code> attributes.
+
+<h2 id="___sec56">Dynamic, static, strong, weak, and duck typing <a name="___sec56"></a></h2>
+
+<p>
+The presentations of alternative implementations of the
+<code>__add__</code> actually touch some very important computer science
+topics. In Python, function arguments can refer to
+objects of any type, and the type of an argument can change
+during program execution. This feature is known as <em>dynamic typing</em>
+and supported by languages such as Python, Perl, Ruby, and Tcl.
+Many other languages, C, C++, Java, and C# for instance, restrict
+a function argument to be of one type, which must be known when we write
+the program. Any attempt to call the function with an argument of another
+type is flagged as an error. One says that the language employs
+<em>static typing</em>, since the type cannot change as in languages
+having dynamic typing. The code snippet
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">a <span style="color: #666666">=</span> <span style="color: #666666">6</span>    <span style="color: #408080; font-style: italic"># a is integer</span>
+a <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;b&#39;</span>  <span style="color: #408080; font-style: italic"># a is string</span>
+</pre></div>
+<p>
+is valid in a language with dynamic typing, but not in a language with
+static typing.
+
+<p>
+Our next point is easiest illustrated through an example. Consider
+the code
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">a <span style="color: #666666">=</span> <span style="color: #666666">6</span>
+b <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;9&#39;</span>
+c <span style="color: #666666">=</span> a <span style="color: #666666">+</span> b
+</pre></div>
+<p>
+The expression <code>a + b</code> adds an integer and a string, which is
+illegal in Python. However, since <code>b</code> is the string <code>'9'</code>,
+it is natural to interpret <code>a + b</code> as <code>6 + 9</code>.
+That is, if the string <code>b</code> is converted to an integer, we may
+calculate <code>a + b</code>. Languages performing this conversion automatically
+are said to employ <em>weak typing</em>, while languages that require
+the programmer to explicit perform the conversion, as in
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">c <span style="color: #666666">=</span> a <span style="color: #666666">+</span> <span style="color: #008000">float</span>(b)
+</pre></div>
+<p>
+are known to have <em>strong typing</em>. Python, Java, C, and C# are
+examples of languages with strong typing, while Perl and C++ allow
+weak typing. However, in our third
+implementation of the <code>__add__</code> method,
+certain types - <code>int</code> and <code>float</code> --
+are automatically converted to the right type <code>Complex</code>.
+The programmer has therefore imposed a kind of weak typing in the
+behavior of the addition operation for complex numbers.
+
+<p>
+There is also something called <em>duck typing</em> where the code only
+imposes a requirement of some data or methods in the object, rather
+than demanding the object to be of a particular type.  The explanation
+of the term duck typing is the principle: <em>if it walks like a duck,
+and quacks like a duck, it's a duck</em>.  An operation <code>a + b</code> may be
+valid if <code>a</code> and <code>b</code> have certain properties that make it possible to
+add the objects, regardless of the type of <code>a</code> or <code>b</code>.  To enable
+<code>a + b</code> in our third implementation of the <code>__add__</code> method, it is
+sufficient that <code>b</code> has <code>real</code> and <code>imag</code> attributes.  That is,
+objects with <code>real</code> and <code>imag</code> look like <code>Complex</code> objects. Whether
+they really are of type <code>Complex</code> is not considered important in this
+context.
+
+<p>
+There is a continuously ongoing debate in computer science which kind
+of typing that is preferable: dynamic versus static, and weak versus
+strong.  Static and strong typing, as found in Java and C#, support
+coding safety and reliability at the expense of long and sometimes
+repetitive code, while dynamic and weak typing support programming
+flexibility and short code. Many will argue that short code is more
+readable and reliable than long code, so there is no simple conclusion.
+
+<h2 id="sec:class:complex:rightop">Special methods for &quot;right&quot; operands<a name="sec:class:complex:rightop"></a></h2>
+
+<p>
+What happens if we add a <code>float</code> and a <code>Complex</code> in that order?
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">w <span style="color: #666666">=</span> <span style="color: #666666">4.5</span> <span style="color: #666666">+</span> u
+</pre></div>
+<p>
+This statement causes the exception
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #D2413A; font-weight: bold">TypeError</span>: unsupported operand <span style="color: #008000">type</span>(s) <span style="color: #008000; font-weight: bold">for</span> <span style="color: #666666">+</span>: <span style="color: #BA2121">&#39;float&#39;</span> <span style="color: #AA22FF; font-weight: bold">and</span> <span style="color: #BA2121">&#39;instance&#39;</span>
+</pre></div>
+<p>
+This time Python cannot find any definition of what the plus operation
+means with a  <code>float</code> on the left-hand side  and a <code>Complex</code> object
+on the right-hand side of the plus sign.
+The <code>float</code> class was created many years ago without any
+knowledge of our <code>Complex</code> objects, and we are not allowed
+to extend the <code>__add__</code> method
+in the <code>float</code> class to handle
+<code>Complex</code> instances. Nevertheless, Python has a special method
+<code>__radd__</code> for the case where the class instance (<code>self</code>)
+is on the right-hand side of the operator and the
+<code>other</code> object is on the left-hand side. That is, we may implement
+a possible <code>float</code> or <code>int</code> plus a <code>Complex</code> by
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__radd__</span>(<span style="color: #008000">self</span>, other):        <span style="color: #408080; font-style: italic"># defines other + self</span>
+        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>__add__(other)    <span style="color: #408080; font-style: italic"># other + self = self + other</span>
+</pre></div>
+<p>
+Similar special methods exist for subtraction, multiplication, and
+division. For the subtraction operator, observe that <code>other - self</code>,
+which is the operation assumed to implemented
+in <code>__rsub__</code>, can be realized by
+<code>other.__sub__(self)</code>. A possible implementation is
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__sub__</span>(<span style="color: #008000">self</span>, other):
+        <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;in sub, self=</span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121">, other=</span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> (<span style="color: #008000">self</span>, other)
+        <span style="color: #008000; font-weight: bold">if</span> <span style="color: #008000">isinstance</span>(other, (<span style="color: #008000">float</span>,<span style="color: #008000">int</span>)):
+            other <span style="color: #666666">=</span> Complex(other)
+        <span style="color: #008000; font-weight: bold">return</span> Complex(<span style="color: #008000">self</span><span style="color: #666666">.</span>real <span style="color: #666666">-</span> other<span style="color: #666666">.</span>real,
+                       <span style="color: #008000">self</span><span style="color: #666666">.</span>imag <span style="color: #666666">-</span> other<span style="color: #666666">.</span>imag)
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__rsub__</span>(<span style="color: #008000">self</span>, other):
+        <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;in rsub, self=</span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121">, other=</span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> (<span style="color: #008000">self</span>, other)
+        <span style="color: #008000; font-weight: bold">if</span> <span style="color: #008000">isinstance</span>(other, (<span style="color: #008000">float</span>,<span style="color: #008000">int</span>)):
+            other <span style="color: #666666">=</span> Complex(other)
+        <span style="color: #008000; font-weight: bold">return</span> other<span style="color: #666666">.</span>__sub__(<span style="color: #008000">self</span>)
+</pre></div>
+<p>
+The <code>print</code> statements are inserted to better understand how these
+methods are visited. A quick test demonstrates what happens:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> w <span style="color: #666666">=</span> u <span style="color: #666666">-</span> <span style="color: #666666">4.5</span>
+<span style="color: #AA22FF; font-weight: bold">in</span> sub, <span style="color: #008000">self</span><span style="color: #666666">=</span>(<span style="color: #666666">2</span>, <span style="color: #666666">-1</span>), other<span style="color: #666666">=4.5</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">print</span> w
+(<span style="color: #666666">-2.5</span>, <span style="color: #666666">-1</span>)
+<span style="color: #666666">&gt;&gt;&gt;</span> w <span style="color: #666666">=</span> <span style="color: #666666">4.5</span> <span style="color: #666666">-</span> u
+<span style="color: #AA22FF; font-weight: bold">in</span> rsub, <span style="color: #008000">self</span><span style="color: #666666">=</span>(<span style="color: #666666">2</span>, <span style="color: #666666">-1</span>), other<span style="color: #666666">=4.5</span>
+<span style="color: #AA22FF; font-weight: bold">in</span> sub, <span style="color: #008000">self</span><span style="color: #666666">=</span>(<span style="color: #666666">4.5</span>, <span style="color: #666666">0</span>), other<span style="color: #666666">=</span>(<span style="color: #666666">2</span>, <span style="color: #666666">-1</span>)
+<span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">print</span> w
+(<span style="color: #666666">2.5</span>, <span style="color: #666666">1</span>)
+</pre></div>
+
+<h3 id="___sec58">Remark <a name="___sec58"></a></h3>
+
+<p>
+As you probably realize, there is quite some code to be implemented
+and lots of considerations to be resolved before we have a class
+<code>Complex</code> for professional use in the real world. Fortunately,
+Python provides its <code>complex</code> class, which offers everything we need
+for computing with complex numbers. This fact reminds us that it is
+important to know what others already have implemented, so that we
+avoid &quot;reinventing the wheel&quot;.
+In a learning process, however, it is a probably a very
+good idea to look into
+the details of a class <code>Complex</code> as we did above.
+
+<h2 id="sec:class:inspect">Inspecting instances<a name="sec:class:inspect"></a></h2>
+
+<p>
+The purpose of this section is to explain how we can easily look at
+the contents of a class instance, i.e., the data attributes and the methods.
+As usual, we look at an example - this time involving
+a very simple class:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">A</span>:
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;A class for demo purposes.&quot;&quot;&quot;</span>
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__init__</span>(<span style="color: #008000">self</span>, value):
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>v <span style="color: #666666">=</span> value
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">dump</span>(<span style="color: #008000">self</span>):
+        <span style="color: #008000; font-weight: bold">print</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>__dict__
+</pre></div>
+<p>
+The <code>self.__dict__</code> attribute is briefly mentioned in
+the section <a href="._class-bootstrap001.html#sec:class:whatis">Making classes without the class construct</a>.
+Every instance is automatically equipped with this attribute, which
+is a dictionary that stores all the ordinary attributes of the instance
+(the variable names are keys, and the object references are values).
+In class <code>A</code> there is only one attribute, so the
+<code>self.__dict__</code> dictionary contains one key, <code>'v'</code>:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> a <span style="color: #666666">=</span> A([<span style="color: #666666">1</span>,<span style="color: #666666">2</span>])
+<span style="color: #666666">&gt;&gt;&gt;</span> a<span style="color: #666666">.</span>dump()
+{<span style="color: #BA2121">&#39;v&#39;</span>: [<span style="color: #666666">1</span>, <span style="color: #666666">2</span>]}
+</pre></div>
+<p>
+Another way of inspecting what an instance <code>a</code> contains is to call
+<code>dir(a)</code>. This Python function
+writes out the names of all methods and variables
+(and more) of an object:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000">dir</span>(a)
+<span style="color: #BA2121">&#39;__doc__&#39;</span>, <span style="color: #BA2121">&#39;__init__&#39;</span>, <span style="color: #BA2121">&#39;__module__&#39;</span>, <span style="color: #BA2121">&#39;dump&#39;</span>, <span style="color: #BA2121">&#39;v&#39;</span>]
+</pre></div>
+<p>
+The <code>__doc__</code> variable
+is a docstring, similar to docstrings in
+functions (see the section ref{sec:basic:docstring}),
+i.e., a description of the class
+appearing as a first string right after the <code>class</code> headline:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> a<span style="color: #666666">.</span>__doc__
+<span style="color: #BA2121">&#39;A class for demo purposes.&#39;</span>
+</pre></div>
+<p>
+The <code>__module__</code> variable holds the name of the module in
+which the class is defined. If the class is defined in the program itself and
+not in an imported module,  <code>__module__</code> equals
+<code>'__main__'</code>.
+
+<p>
+The rest of the entries in the list returned
+from <code>dir(a)</code> correspond to method and attribute names defined by
+the programmer of the class, in this example the methods
+<code>__init__</code> and  <code>dump</code>, and
+the attribute <code>v</code>.
+
+<p>
+Now, let us try to add new variables to an existing instance:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> a<span style="color: #666666">.</span>myvar <span style="color: #666666">=</span> <span style="color: #666666">10</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> a<span style="color: #666666">.</span>dump()
+{<span style="color: #BA2121">&#39;myvar&#39;</span>: <span style="color: #666666">10</span>, <span style="color: #BA2121">&#39;v&#39;</span>: [<span style="color: #666666">1</span>, <span style="color: #666666">2</span>]}
+<span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000">dir</span>(a)
+[<span style="color: #BA2121">&#39;__doc__&#39;</span>, <span style="color: #BA2121">&#39;__init__&#39;</span>, <span style="color: #BA2121">&#39;__module__&#39;</span>, <span style="color: #BA2121">&#39;dump&#39;</span>, <span style="color: #BA2121">&#39;myvar&#39;</span>, <span style="color: #BA2121">&#39;v&#39;</span>]
+</pre></div>
+<p>
+The output of <code>a.dump()</code> and <code>dir(a)</code> show that we were
+successful in adding a new variable to this instance on the fly.
+If we make
+a new instance, it contains only the variables and methods that
+we find in the definition of class <code>A</code>:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> b <span style="color: #666666">=</span> A(<span style="color: #666666">-1</span>)
+<span style="color: #666666">&gt;&gt;&gt;</span> b<span style="color: #666666">.</span>dump()
+{<span style="color: #BA2121">&#39;v&#39;</span>: <span style="color: #666666">-1</span>}
+<span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000">dir</span>(b)
+[<span style="color: #BA2121">&#39;__doc__&#39;</span>, <span style="color: #BA2121">&#39;__init__&#39;</span>, <span style="color: #BA2121">&#39;__module__&#39;</span>, <span style="color: #BA2121">&#39;dump&#39;</span>, <span style="color: #BA2121">&#39;v&#39;</span>]
+</pre></div>
+<p>
+We may also add new methods to an instance, but this will not be shown here.
+
+<p>
+Adding or removing attributes and methods
+may sound scary and highly illegal to C, C++, and Java programmers,
+but more dynamic classes is natural and legal in many other languages -
+and often useful.
+
+<p>
+<div class="alert alert-block alert-success alert-text-normal"><b>Python classes are dynamic and their contents can be inspected.</b>
+As seen by the examples above,
+
+<ol>
+<li> a class instance is dynamic and allows attributes to be added or
+   removed while the program is running,</li>
+<li> the contents of an instance can be inspected by the <code>dir</code> function,
+   and the data attributes are available through the <code>__dict__</code> dictionary.</li>
+</ol>
+
+There is a special module, <code>inspect</code>, doing more detailed inspection
+of Python objects. One can, for example, get the arguments of
+functions or methods and even inspect the code of the object.
+</div>
+
+
+<p>
+<p>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pager">
+  <li class="previous">
+    <a href="._class-bootstrap004.html">&larr; Prev</a>
+  </li>
+  <li class="next">
+    <a href="._class-bootstrap006.html">Next &rarr;</a>
+  </li>
+</ul>
+<!-- ------------------- end of main content --------------- -->
+
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap footer
+<footer>
+<a href="http://..."><img width="250" align=right src="http://..."></a>
+</footer>
+-->
+
+
+</body>
+</html>
+    
+

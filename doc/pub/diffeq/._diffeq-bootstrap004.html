@@ -1,0 +1,1370 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Sequences and difference equations">
+<meta name="keywords" content="sequence (mathematical),initial condition,difference equations,scaling,Trapezoidal rule for integration,Newton's method,difference equations nonlinear,nonlinear difference equations,Secant method,Midpoint rule for integration,remove files (in Python),delete files (in Python)">
+
+<title>Sequences and difference equations</title>
+
+<!-- Bootstrap style: bootstrap_bluegray -->
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://raw.github.com/hplgit/doconce/master/bundled/html_styles/style_bootstrap/css/bootstrap_bluegray.css" rel="stylesheet">
+<!-- not necessary
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+
+<style type="text/css">
+/* Let inline verbatim have the same color as the surroundings */
+code { color: inherit; background-color: transparent; }
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [(' Mathematical models based on difference equations ',
+               1,
+               None,
+               '___sec0'),
+              (' Interest rates ',
+               2,
+               'sec:diffeq:irates',
+               'sec:diffeq:irates'),
+              (' The factorial as a difference equation ',
+               2,
+               None,
+               '___sec2'),
+              (' Fibonacci numbers ', 2, None, '___sec3'),
+              (' Growth of a population ',
+               2,
+               'sec:diffeq:growth',
+               'sec:diffeq:growth'),
+              (' Logistic growth ',
+               2,
+               'sec:diffeq:logistic',
+               'sec:diffeq:logistic'),
+              (' Payback of a loan ',
+               2,
+               'sec:diffeq:loan:sec',
+               'sec:diffeq:loan:sec'),
+              (' The integral as a difference equation ',
+               2,
+               'sec:diffeq:integral',
+               'sec:diffeq:integral'),
+              (' Taylor series as a difference equation ',
+               2,
+               'sec:diffeq:Taylor:exp',
+               'sec:diffeq:Taylor:exp'),
+              (' Making a living from a fortune ', 2, None, '___sec9'),
+              (" Newton's method ",
+               2,
+               'sec:diffeq:Newtonsmethod:sec',
+               'sec:diffeq:Newtonsmethod:sec'),
+              (' The inverse of a function ',
+               2,
+               'sec:diffeq:inversefunc',
+               'sec:diffeq:inversefunc'),
+              (' Programming with sound ',
+               1,
+               'sec:diffeq:sound',
+               'sec:diffeq:sound'),
+              (' Writing sound to file ', 2, None, '___sec13'),
+              (' Reading sound from file ', 2, None, '___sec14'),
+              (' Playing many notes ',
+               2,
+               'sec:diffeq:sound:create',
+               'sec:diffeq:sound:create'),
+              (' Music of a sequence ', 2, None, '___sec16'),
+              (' Problem ', 3, None, '___sec17'),
+              (' Solution ', 3, None, '___sec18'),
+              (' Exercises ', 1, None, '___sec19'),
+              (' Exercise 1: Determine the limit of a sequence ',
+               2,
+               'sec:diffeq:ex8a',
+               'sec:diffeq:ex8a'),
+              (' Exercise 2: Compute $\\pi$ via sequences ',
+               2,
+               'sec:diffeq:ex9',
+               'sec:diffeq:ex9'),
+              (' Exercise 3: Reduce memory usage of difference equations ',
+               2,
+               'sec:diffeq:ex7',
+               'sec:diffeq:ex7'),
+              (' Exercise 4: Compute the development of a loan ',
+               2,
+               'sec:diffeq:ex3',
+               'sec:diffeq:ex3'),
+              (' Exercise 5: Solve a system of difference equations ',
+               2,
+               'sec:diffeq:ex4',
+               'sec:diffeq:ex4'),
+              (' Exercise 6: Modify a model for fortune development ',
+               2,
+               'sec:diffeq:ex4c',
+               'sec:diffeq:ex4c'),
+              (' Exercise 7: Change index in a difference equation ',
+               2,
+               'sec:diffeq:ex1',
+               'sec:diffeq:ex1'),
+              (' Exercise 8: Construct time points from dates ',
+               2,
+               'sec:diffeq:ex2',
+               'sec:diffeq:ex2'),
+              (" Exercise 9: Visualize the convergence of Newton's method ",
+               2,
+               'sec:diffeq:ex13',
+               'sec:diffeq:ex13'),
+              (' Exercise 10: Implement the secant method ',
+               2,
+               'sec:diffeq:ex14b',
+               'sec:diffeq:ex14b'),
+              (' Exercise 11: Test different methods for root finding ',
+               2,
+               'sec:diffeq:ex14c',
+               'sec:diffeq:ex14c'),
+              (' Exercise 12: Make difference equations for the Midpoint rule ',
+               2,
+               'sec:diffeq:ex:midpoint:int',
+               'sec:diffeq:ex:midpoint:int'),
+              (' Exercise 13: Compute the arc length of a curve ',
+               2,
+               'sec:diffeq:ex:arclength',
+               'sec:diffeq:ex:arclength'),
+              (' Exercise 14: Find difference equations for computing $\\sin x$ ',
+               2,
+               'sec:diffeq:ex11b',
+               'sec:diffeq:ex11b'),
+              (' Exercise 15: Find difference equations for computing $\\cos x$ ',
+               2,
+               'sec:diffeq:ex15',
+               'sec:diffeq:ex15'),
+              (' Exercise 16: Make a guitar-like sound ',
+               2,
+               'sec:sound:ex1',
+               'sec:sound:ex1'),
+              (' Exercise 17: Damp the bass in a sound file ',
+               2,
+               'sec:sound:ex2',
+               'sec:sound:ex2'),
+              (' Exercise 18: Damp the treble in a sound file ',
+               2,
+               'sec:sound:ex3',
+               'sec:sound:ex3'),
+              (' Exercise 19: Demonstrate oscillatory solutions of (ref{sec:diffeq:logistic:eq2}) ',
+               2,
+               'sec:diffeq:ex16',
+               'sec:diffeq:ex16'),
+              (' Exercise 20: Automate computer experiments ',
+               2,
+               'sec:diffeq:ex17',
+               'sec:diffeq:ex17'),
+              (' Exercise 21: Generate an HTML report ',
+               2,
+               'sec:diffeq:ex18',
+               'sec:diffeq:ex18'),
+              (' Exercise 22: Use a class to archive and report experiments ',
+               2,
+               'sec:diffeq:ex19',
+               'sec:diffeq:ex19'),
+              (' Exercise 23: Explore logistic growth interactively ',
+               2,
+               'sec:diffeq:ex20',
+               'sec:diffeq:ex20'),
+              (' Exercise 24: Simulate the price of wheat ',
+               2,
+               'sec:diffeq:ex21',
+               'sec:diffeq:ex21'),
+              (' References ', 1, None, '___sec44')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- newcommands_keep.tex -->
+$$
+\newcommand{\tp}{\thinspace .}
+$$
+
+
+
+
+    
+<!-- Bootstrap navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="diffeq-bootstrap.html">Sequences and difference equations</a>
+  </div>
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     <!-- navigation toc: --> <li><a href="._diffeq-bootstrap002.html#___sec0" style="font-size: 80%;">Mathematical models based on difference equations</a></li>
+     <!-- navigation toc: --> <li><a href="._diffeq-bootstrap003.html#sec:diffeq:sound" style="font-size: 80%;">Programming with sound</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec19" style="font-size: 80%;">Exercises</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec44" style="font-size: 80%;">References</a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div> <!-- end of navigation bar -->
+
+<div class="container">
+
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+
+<a name="part0004"></a>
+<!-- !split -->
+
+<h1 id="___sec19">Exercises <a name="___sec19"></a></h1>
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:diffeq:ex8a">Exercise 1: Determine the limit of a sequence<a name="sec:diffeq:ex8a"></a></h2>
+
+<p>
+<b>a)</b>
+Write a Python function for computing and returning the
+sequence
+
+$$
+\begin{equation*}
+a_n = {7 + 1/(n+1)\over 3 - 1/(n+1)^2},\quad n=0,2,\ldots,N\tp
+\end{equation*}
+$$
+
+Write out the sequence for \( N=100 \). Find the exact limit as \( N\rightarrow\infty \)
+and compare with \( a_{N} \).
+
+<p>
+<b>b)</b>
+Write a Python function <code>limit(seq)</code> that takes a sequence of
+numbers as input, stored in a list or array <code>seq</code>, and returns
+the limit of the sequence, if it exists, otherwise <code>None</code> is returned.
+Test the <code>limit</code> function on the sequence in a) and on
+the divergent sequence \( b_n = n \).
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<b>Hint.</b>
+One possible quite strict test for determining if a sequence
+\( (a_n)_{n=0}^N \) has a limit is to check
+
+$$ \left| |a_n| - |a_{n+1}|\right| < \left| |a_{n-1}| - |a_n|\right| ,$$
+
+for \( n=1,\ldots,N-1 \).
+
+<p>
+<!-- --- end hint in exercise --- -->
+
+<p>
+<b>c)</b>
+Write a Python function for computing and returning the sequence
+
+$$
+\begin{equation*}
+D_n = {\sin (2^{-n})\over 2^{-n}},\quad n=0,\ldots,N
+\tp
+\end{equation*}
+$$
+
+Call <code>limit</code> from b) to determine the limit of the sequence (for a
+sufficiently large \( N \)).
+
+<p>
+<b>d)</b>
+Given the sequence
+
+$$
+\begin{equation}
+D_n = {f(x+h)-f(x)\over h},\quad h = 2^{-n},
+\tag{31}
+\end{equation}
+$$
+
+make a function <code>D(f, x, N)</code>
+that takes a function \( f(x) \), a value \( x \), and the number \( N \) of terms in the
+sequence as arguments, and returns
+the sequence \( D_n \) for \( n=0,1,\ldots,N \).
+Make a call to the <code>D</code> function with
+\( f(x)=\sin x \),
+\( x=0 \), and \( N=80 \). Find the limit with aid of the <code>limit</code> function
+above. Plot the evolution of the computed \( D_n \) values,
+using small circles for the data points.
+
+<p>
+<b>e)</b>
+Make another call to <code>D</code> where \( x=\pi \), let the <code>limit</code> function
+analyze the sequence, and plot this sequence in a separate figure.
+What would be your expected limit?
+
+<p>
+<b>f)</b>
+Explain why the computations for \( x=\pi \) go wrong
+for large \( N \).
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<b>Hint.</b>
+Print out the numerator and denominator in \( D_n \).
+
+<p>
+<!-- --- end hint in exercise --- -->
+
+<p>
+Filename: <code>sequence_limits.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:diffeq:ex9">Exercise 2: Compute \( \pi \) via sequences<a name="sec:diffeq:ex9"></a></h2>
+
+<p>
+The following sequences all converge to \( \pi \):
+
+$$
+\begin{align*}
+(a_n)_{n=1}^\infty, \quad a_n &= 4\sum_{k=1}^n {(-1)^{k+1}\over 2k-1},\\ 
+(b_n)_{n=1}^\infty, \quad b_n &= \left(6\sum_{k=1}^n k^{-2}
+\right)^{1/2},\\ 
+(c_n)_{n=1}^\infty, \quad c_n &= \left(
+90\sum_{k=1}^n k^{-4}\right)^{1/4},\\ 
+(d_n)_{n=1}^\infty, \quad d_n &= {6\over\sqrt{3}}
+\sum_{k=0}^n {(-1)^{k}\over 3^k(2k+1)},\\ 
+(e_n)_{n=1}^\infty, \quad e_n &= 16
+\sum_{k=0}^n {(-1)^{k}\over 5^{2k+1}(2k+1)}
+- 4\sum_{k=0}^n {(-1)^{k}\over 239^{2k+1}(2k+1)}\tp
+\end{align*}
+$$
+
+Make a function for each sequence that returns an array with the
+elements in the sequence. Plot all the sequences, and find the one
+that converges fastest toward the limit \( \pi \).
+Filename: <code>pi_sequences.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:diffeq:ex7">Exercise 3: Reduce memory usage of difference equations<a name="sec:diffeq:ex7"></a></h2>
+
+<p>
+Consider the program <code>growth_years.py</code> from the section <a href="._diffeq-bootstrap002.html#sec:diffeq:irates">Interest rates</a>. Since \( x_n \) depends on \( x_{n-1} \) only, we do
+not need to store all the \( N+1 \) $x_n$ values. We actually only need to
+store \( x_n \) and its previous value \( x_{n-1} \).  Modify the program to
+use two variables and not an array for the entire sequence.  Also
+avoid the <code>index_set</code> list and use an integer counter for \( n \) and a
+<code>while</code> loop instead.  Write the sequence to file such that it can be
+visualized later.
+Filename: <code>growth_years_efficient.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:diffeq:ex3">Exercise 4: Compute the development of a loan<a name="sec:diffeq:ex3"></a></h2>
+
+<p>
+Solve <a href="._diffeq-bootstrap002.html#mjx-eqn-12">(12)</a>-<a href="._diffeq-bootstrap002.html#mjx-eqn-13">(13)</a>
+in a Python function.
+Filename: <code>loan.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:diffeq:ex4">Exercise 5: Solve a system of difference equations<a name="sec:diffeq:ex4"></a></h2>
+
+<p>
+Solve <a href="._diffeq-bootstrap002.html#mjx-eqn-20">(20)</a>-<a href="._diffeq-bootstrap002.html#mjx-eqn-21">(21)</a>
+in a Python function and plot the \( x_n \) sequence.
+Filename: <code>fortune_and_inflation1.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:diffeq:ex4c">Exercise 6: Modify a model for fortune development<a name="sec:diffeq:ex4c"></a></h2>
+
+<p>
+In the model <a href="._diffeq-bootstrap002.html#mjx-eqn-20">(20)</a>-<a href="._diffeq-bootstrap002.html#mjx-eqn-21">(21)</a>
+the new fortune is the old one, plus the interest, minus the consumption.
+During year \( n \), \( x_n \) is normally also reduced with \( t \) percent
+tax on the earnings \( x_{n-1}-x_{n-2} \) in year \( n-1 \).
+
+<p>
+<b>a)</b>
+Extend the model with an appropriate tax term, implement the model,
+and demonstrate in a plot the effect of tax (\( t=27 \))
+versus no tax (\( t=0 \)).
+
+<p>
+<b>b)</b>
+Suppose you expect to live for \( N \) years and can accept that the
+fortune \( x_n \) vanishes after \( N \) years.
+Choose some appropriate values for \( p \), \( q \), \( I \), and \( t \),
+and experiment with the program to find
+how large the initial \( c_0 \) can be in this case.
+
+<p>
+Filename: <code>fortune_and_inflation2.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:diffeq:ex1">Exercise 7: Change index in a difference equation<a name="sec:diffeq:ex1"></a></h2>
+
+<p>
+A mathematically equivalent equation to
+<a href="._diffeq-bootstrap002.html#mjx-eqn-3">(3)</a> is
+
+$$
+\begin{equation}
+x_{i+1} = x_{i} + {p\over 100}x_{i},
+\tag{32}
+\end{equation}
+$$
+
+since the name of the index can be chosen arbitrarily.
+Suppose someone has made the following program for solving
+<a href="#mjx-eqn-32">(32)</a>:
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">scitools.std</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #666666">*</span>
+x0 <span style="color: #666666">=</span> <span style="color: #666666">100</span>              <span style="color: #408080; font-style: italic"># initial amount</span>
+p <span style="color: #666666">=</span> <span style="color: #666666">5</span>                 <span style="color: #408080; font-style: italic"># interest rate</span>
+N <span style="color: #666666">=</span> <span style="color: #666666">4</span>                 <span style="color: #408080; font-style: italic"># number of years</span>
+index_set <span style="color: #666666">=</span> <span style="color: #008000">range</span>(N<span style="color: #666666">+1</span>)
+x <span style="color: #666666">=</span> zeros(<span style="color: #008000">len</span>(index_set))
+
+<span style="color: #408080; font-style: italic"># Compute solution</span>
+x[<span style="color: #666666">0</span>] <span style="color: #666666">=</span> x0
+<span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> index_set[<span style="color: #666666">1</span>:]:
+    x[i<span style="color: #666666">+1</span>] <span style="color: #666666">=</span> x[i] <span style="color: #666666">+</span> (p<span style="color: #666666">/100.0</span>)<span style="color: #666666">*</span>x[i]
+<span style="color: #008000; font-weight: bold">print</span> x
+plot(index_set, x, <span style="color: #BA2121">&#39;ro&#39;</span>, xlabel<span style="color: #666666">=</span><span style="color: #BA2121">&#39;years&#39;</span>, ylabel<span style="color: #666666">=</span><span style="color: #BA2121">&#39;amount&#39;</span>)
+</pre></div>
+<p>
+This program does not work. Make a correct version, but keep the
+difference equations in its present form with the indices
+<code>i+1</code> and <code>i</code>.
+Filename: <code>growth1_index_ip1.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:diffeq:ex2">Exercise 8: Construct time points from dates<a name="sec:diffeq:ex2"></a></h2>
+
+<p>
+A certain quantity \( p \) (which may be an interest rate) is piecewise
+constant and undergoes changes at some specific dates, e.g.,
+
+$$
+\begin{equation}
+p \hbox{ changes to }
+\left\lbrace\begin{array}{ll}
+4.5 & \hbox{on Jan 4, 2019}\\ 
+4.75\  & \hbox{on March 21, 2019}\\ 
+6.0 & \hbox{on April 1, 2019}\\ 
+5.0 & \hbox{on June 30, 2019}\\ 
+4.5 & \hbox{on Nov 1, 2019}\\ 
+2.0 & \hbox{on April 1, 2020}
+\end{array}\right.
+\end{equation}
+$$
+
+Given a start date \( d_1 \) and an end date \( d_2 \), fill an array
+<code>p</code> with the right \( p \) values, where the array index counts days.
+Use the <code>datetime</code> module to compute the number of days between
+dates.
+Filename: <code>dates2days.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:diffeq:ex13">Exercise 9: Visualize the convergence of Newton's method<a name="sec:diffeq:ex13"></a></h2>
+
+<p>
+Let \( x_0,x_1,\ldots,x_N \) be the sequence of roots generated
+by Newton's method applied to a nonlinear algebraic equation
+\( f(x)=0 \) (see the section <a href="._diffeq-bootstrap002.html#sec:diffeq:Newtonsmethod:sec">Newton's method</a>).
+In this exercise, the purpose is to plot the sequences
+\( (x_n)_{n=0}^N \) and \( (|f(x_n)|)_{n=0}^N \) such that we can understand
+how Newton's method converges or diverges.
+
+<p>
+<b>a)</b>
+Make a general function
+
+<p>
+
+<!-- code=text (!bc ccq) typeset with pygments style "default" -->
+<blockquote>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">Newton_plot(f, x, dfdx, xmin, xmax, epsilon=1E-7)
+</pre></div>
+</blockquote><p>
+for this purpose.  The arguments <code>f</code> and <code>dfdx</code> are
+Python functions representing the \( f(x) \) function in the equation and
+its derivative \( f'(x) \), respectively.  Newton's method is run until
+\( |f(x_N)|\leq\epsilon \), and the \( \epsilon \) value is available as the
+<code>epsilon</code> argument.  The <code>Newton_plot</code> function should make three
+separate plots of \( f(x) \), \( (x_n)_{n=0}^N \), and \( (|f(x_n)|)_{n=0}^N \) on the
+screen and also save these plots to PNG files.
+The relevant \( x \) interval for plotting of \( f(x) \) is given by the
+arguments <code>xmin</code> and <code>xmax</code>.
+Because of the
+potentially wide scale of values that \( |f(x_n)| \) may exhibit, it may
+be wise to use a logarithmic scale on the \( y \) axis.
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<b>Hint.</b>
+You can save quite some coding by calling the improved <code>Newton</code>
+function from the section <a href="._diffeq-bootstrap002.html#sec:diffeq:Newtonsmethod:sec">Newton's method</a>, which is
+available in the module file <a href="http://tinyurl.com/pwyasaa/diffeq/Newton.py" target="_self"><tt>Newton.py</tt></a>.
+
+<p>
+<!-- --- end hint in exercise --- -->
+
+<p>
+<b>b)</b>
+Demonstrate the function on the equation \( x^6\sin\pi x=0 \), with
+\( \epsilon = 10^{-13} \). Try
+different starting values
+for Newton's method: \( x_0=-2.6, -1.2, 1.5, 1.7, 0.6 \).
+Compare the results with the exact solutions \( x=\ldots,-2-1,0,1,2,\ldots \).
+
+<p>
+<b>c)</b>
+Use the <code>Newton_plot</code> function to explore the impact of the
+starting point \( x_0 \) when solving the following nonlinear algebraic
+equations:
+
+$$
+\begin{align}
+\sin x &= 0,\\ 
+x &= \sin x,\\ 
+x^5 &= \sin x,\\ 
+x^4\sin x &= 0,\\ 
+x^4 &= 16,\\ 
+x^{10} &= 1,\\ 
+\tanh x &= 0\tp
+\tanh x &= x^{10}\tp
+\end{align}
+$$
+
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<b>Hint.</b>
+Such an experimental investigation is conveniently recorded in an
+IPython notebook.
+See the section ref{sec:accesspy:ipynb} for a quick introduction to
+notebooks.
+
+<p>
+<!-- --- end hint in exercise --- -->
+
+<p>
+Filename: <code>Newton2.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:diffeq:ex14b">Exercise 10: Implement the secant method<a name="sec:diffeq:ex14b"></a></h2>
+
+<p>
+Newton's method <a href="._diffeq-bootstrap002.html#mjx-eqn-22">(22)</a> for solving \( f(x)=0 \)
+requires the derivative of the function \( f(x) \). Sometimes this is
+difficult or inconvenient. The derivative can be approximated using
+the last two approximations to the root, \( x_{n-2} \) and \( x_{n-1} \):
+
+$$
+\begin{equation*} f'(x_{n-1})\approx {f(x_{n-1}) - f(x_{n-2})\over x_{n-1} - x_{n-2}}\tp\end{equation*}
+$$
+
+Using this approximation in <a href="._diffeq-bootstrap002.html#mjx-eqn-22">(22)</a> leads
+to the Secant method:
+
+$$
+\begin{equation}
+x_n = x_{n-1} - {f(x_{n-1})(x_{n-1} - x_{n-2})
+\over f(x_{n-1}) - f(x_{n-2})},\quad x_0,x_1 \hbox{ given}\tp
+\tag{33}
+\end{equation}
+$$
+
+Here \( n=2,3,\ldots \).
+Make a program that applies the Secant method to solve \( x^5 = \sin x \).
+Filename: <code>Secant.py</code>.
+
+<p>
+<!-- should have a try-except for ZeroDivisionError -->
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:diffeq:ex14c">Exercise 11: Test different methods for root finding<a name="sec:diffeq:ex14c"></a></h2>
+
+<p>
+Make a program for solving \( f(x)=0 \) by
+Newton's method (the section <a href="._diffeq-bootstrap002.html#sec:diffeq:Newtonsmethod:sec">Newton's method</a>),
+the Bisection method (the section ref{sec:input:summarizingex}),
+and the Secant method (<a href="#sec:diffeq:ex14b">Exercise 10: Implement the secant method</a>).
+For each method, the sequence of root approximations should be
+written out (nicely formatted) on the screen.
+Read \( f(x) \), \( f'(x) \), \( a \), \( b \), \( x_0 \), and \( x_1 \) from
+the command line.
+Newton's method starts with \( x_0 \),
+the Bisection method starts with the interval \( [a,b] \),
+whereas the Secant method starts with \( x_0 \) and \( x_1 \).
+<!-- Use a numerical derivative in Newton's method if \( f'(x) \) is not given. -->
+<!-- An appropriate numerical derivative is \( f'(x)\approx (f(x+h)-f(x-h))/(2h) \) -->
+<!-- for a small \( h \), say \( h=10^{-10} \). -->
+
+<p>
+Run the program for each of the equations listed in
+<a href="#sec:diffeq:ex13">Exercise 9: Visualize the convergence of Newton's method</a>d.
+You should first plot the \( f(x) \) functions
+so you know how to choose \( x_0 \), \( x_1 \), \( a \), and \( b \) in each case.
+Filename: <code>root_finder_examples.py</code>.
+
+<p>
+<!-- previous exercise -->
+<!-- even if a special-case Secant main program is sufficient to solve the -->
+<!-- this program requires Secant to be a function returning the approximations, -->
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:diffeq:ex:midpoint:int">Exercise 12: Make difference equations for the Midpoint rule<a name="sec:diffeq:ex:midpoint:int"></a></h2>
+
+<p>
+Use the ideas of the section <a href="._diffeq-bootstrap002.html#sec:diffeq:integral">The integral as a difference equation</a> to make a similar
+system of difference equations and corresponding implementation for
+the Midpoint integration rule:
+
+$$
+\int_a^b f(x)dx \approx h\sum_{i=0}^{n-1} f(a - \frac{1}{2}h + ih),
+$$
+
+where \( h=(b-a)/n \) and \( n \) counts the number of function evaluations
+(i.e., rectangles that approximate the area under the curve).
+Filename: <code>diffeq_midpoint.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:diffeq:ex:arclength">Exercise 13: Compute the arc length of a curve<a name="sec:diffeq:ex:arclength"></a></h2>
+
+<p>
+Sometimes one wants to measure the length of a curve \( y=f(x) \) for
+\( x\in[a,b] \). The arc length from \( f(a) \) to some point \( f(x) \) is
+denoted by \( s(x) \) and defined through an integral
+
+$$
+\begin{equation}
+s(x)= \int_a^x \sqrt{1 + [f'(\xi )]^2}d\xi\tp
+\tag{34}
+\end{equation}
+$$
+
+We can compute \( s(x) \) via difference equations as explained in
+the section <a href="._diffeq-bootstrap002.html#sec:diffeq:integral">The integral as a difference equation</a>.
+
+<p>
+<b>a)</b>
+Make a Python function
+<code>arclength(f, a, b, n)</code> that returns an array <code>s</code> with
+\( s(x) \) values for \( n \) uniformly spaced coordinates \( x \) in \( [a,b] \).
+Here <code>f(x)</code> is the Python implementation of the function that
+defines the curve we want to compute the arc length of.
+
+<p>
+<b>b)</b>
+How can you verify that the <code>arclength</code> function works correctly?
+Construct test case(s) and write corresponding test functions for
+automating the tests.
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<b>Hint.</b>
+Check the implementation for curves with known arc length, e.g.,
+a semi-circle and a straight line.
+
+<p>
+<!-- --- end hint in exercise --- -->
+
+<p>
+<b>c)</b>
+Apply the function to
+
+$$
+\begin{equation*} f(x) = \int_{-2}^x = \frac{1}{\sqrt{2\pi}} e^{-4t^2}dt,\quad x\in[-2,2]\tp\end{equation*}
+$$
+
+Compute \( s(x) \) and plot it together with \( f(x) \).
+
+<p>
+Filename: <code>arclength.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:diffeq:ex11b">Exercise 14: Find difference equations for computing \( \sin x \)<a name="sec:diffeq:ex11b"></a></h2>
+
+<p>
+The purpose of this exercise is to derive and implement difference
+equations for computing a Taylor polynomial approximation to \( \sin x \):
+
+$$
+\begin{equation}
+\sin x \approx S(x;n) = \sum_{j=0}^{n} (-1)^j {x^{2j+1}\over (2j+1)!}\tp
+\tag{35}
+\end{equation}
+$$
+
+To compute \( S(x;n) \) efficiently, write the sum as
+\( S(x;n)=\sum_{j=0}^n a_j \), and
+derive a relation between two consecutive terms in the
+series:
+
+$$
+\begin{equation}
+a_j = -{x^2\over(2j+1)2j}a_{j-1}\tp
+\tag{36}
+\end{equation}
+$$
+
+Introduce \( s_{j}=S(x;j-1) \) and \( a_j \) as the two sequences
+to compute. We have \( s_0=0 \) and \( a_0=x \).
+
+<p>
+<b>a)</b>
+Formulate the two difference equations
+for \( s_j \) and \( a_j \).
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<b>Hint.</b>
+the section <a href="._diffeq-bootstrap002.html#sec:diffeq:Taylor:exp">Taylor series as a difference equation</a> explains how this task and the
+associated programming can
+be solved for the Taylor polynomial approximation of \( e^x \).
+
+<p>
+<!-- --- end hint in exercise --- -->
+
+<p>
+<b>b)</b>
+Implement the system of difference equations
+in a function <code>sin_Taylor(x, n)</code>, which returns
+\( s_{n+1} \) and \( |a_{n+1}| \). The latter is the first neglected term
+in the sum (since \( s_{n+1}=\sum_{j=0}^n a_j \)) and may act as
+a rough measure of the size of the error in the
+Taylor polynomial approximation.
+
+<p>
+<b>c)</b>
+Verify the implementation by computing the
+difference equations for \( n=2 \) by hand (or in a separate program)
+and comparing with the output from the <code>sin_Taylor</code> function.
+Automate this comparison in a test function.
+
+<p>
+<b>d)</b>
+Make a table of \( s_n \) for various \( x \) and \( n \) values to verify
+that the accuracy of a Taylor polynomial improves as \( n \) increases and
+\( x \) decreases. Be aware of the fact that <code>sin_Taylor(x, n)</code>
+can give extremely inaccurate approximations to \( \sin x \) if \( x \) is
+not sufficiently small and \( n \) sufficiently large.
+
+<p>
+Filename: <code>sin_Taylor_series_diffeq.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:diffeq:ex15">Exercise 15: Find difference equations for computing \( \cos x \)<a name="sec:diffeq:ex15"></a></h2>
+
+<p>
+Solve <a href="#sec:diffeq:ex11b">Exercise 14: Find difference equations for computing \( \sin x \)</a> for the
+Taylor polynomial approximation to \( \cos x \).
+(The relevant expression for the
+Taylor series is easily found in a mathematics textbook or
+by searching on the Internet.)
+Filename: <code>cos_Taylor_series_diffeq.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:sound:ex1">Exercise 16: Make a guitar-like sound<a name="sec:sound:ex1"></a></h2>
+
+<p>
+Given start values \( x_0, x_1,\ldots, x_p \),
+the following difference equation is known to create guitar-like sound:
+
+$$
+\begin{equation}
+x_n = \frac{1}{2}(x_{n-p} + x_{n-p-1}),\quad n=p+1,\ldots,N\tp
+\tag{37}
+\end{equation}
+$$
+
+With a sampling rate \( r \), the frequency of this sound is given by
+\( r/p \).
+Make a program with a function <code>solve(x, p)</code> which returns
+the solution array <code>x</code> of <a href="#mjx-eqn-37">(37)</a>.
+To initialize the array <code>x[0:p+1]</code> we look at two methods,
+which can be implemented in two alternative functions:
+
+<ul>
+  <li> \( x_0=1 \), \( x_1=x_2=\cdots =x_p=0 \)</li>
+  <li> \( x_0,\ldots,x_p \) are uniformly distributed random numbers in \( [-1,1] \)</li>
+</ul>
+
+Import <code>max_amplitude</code>, <code>write</code>, and <code>play</code> from
+the <code>scitools.sound</code> module.
+Choose a sampling rate \( r \) and set \( p=r/440 \) to create a 440 Hz tone (A).
+Create an array <code>x1</code> of zeros with length \( 3r \) such that the tone
+will last for 3 seconds.
+Initialize <code>x1</code> according to method 1 above
+and solve <a href="#mjx-eqn-37">(37)</a>.
+Multiply the <code>x1</code> array by <code>max_amplitude</code>.
+Repeat this process for an array <code>x2</code> of length \( 2r \),
+but use method 2 for the initial values and choose \( p \) such that the
+tone is 392 Hz (G). Concatenate <code>x1</code> and <code>x2</code>,
+call <code>write</code> and then <code>play</code> to play the sound.
+As you will experience, this sound is amazingly similar to the sound
+of a guitar string, first playing A for 3 seconds and then playing G for
+2 seconds.
+
+<p>
+The method <a href="#mjx-eqn-37">(37)</a> is called the Karplus-Strong algorithm
+and was discovered in 1979 by a researcher, Kevin Karplus, and his
+student Alexander Strong, at Stanford University.
+Filename: <code>guitar_sound.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:sound:ex2">Exercise 17: Damp the bass in a sound file<a name="sec:sound:ex2"></a></h2>
+
+<p>
+Given a sequence \( x_0,\ldots,x_{N-1} \), the following
+<em>filter</em> transforms the sequence to a new sequence \( y_0,\ldots,y_{N-1} \):
+
+$$
+\begin{equation}
+y_n = \left\lbrace\begin{array}{ll}
+x_n, & n=0\\ 
+-\frac{1}{4}(x_{n-1} -2x_n + x_{n+1}),& 1\leq n\leq N-2\\ 
+x_n, & n=N-1
+\end{array}\right.
+\tag{38}
+\end{equation}
+$$
+
+If \( x_n \) represents sound, \( y_n \) is the same sound but with the bass damped.
+Load some sound file, e.g.,
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">x <span style="color: #666666">=</span> scitools<span style="color: #666666">.</span>sound<span style="color: #666666">.</span>Nothing_Else_Matters()
+<span style="color: #408080; font-style: italic"># or</span>
+x <span style="color: #666666">=</span> scitools<span style="color: #666666">.</span>sound<span style="color: #666666">.</span>Ja_vi_elsker()
+</pre></div>
+<p>
+to get a sound sequence. Apply the filter <a href="#mjx-eqn-38">(38)</a> and
+play the resulting sound.
+Plot the first 300 values in the \( x_n \) and \( y_n \) signals
+to see graphically what the filter does with the signal.
+Filename: <code>damp_bass.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:sound:ex3">Exercise 18: Damp the treble in a sound file<a name="sec:sound:ex3"></a></h2>
+
+<p>
+Solve <a href="#sec:sound:ex2">Exercise 17: Damp the bass in a sound file</a> to get some experience with coding a
+filter and trying it out on a sound.  The purpose of this exercise is
+to explore some other filters that reduce the treble instead of the
+bass.  Smoothing the sound signal will in general damp the treble, and
+smoothing is typically obtained by letting the values in the new
+filtered sound sequence be an average of the neighboring values in the
+original sequence.
+
+<p>
+The simplest smoothing filter can apply a standard average of
+three neighboring values:
+
+$$
+\begin{equation}
+y_n = \left\lbrace\begin{array}{ll}
+x_n, & n=0\\ 
+\frac{1}{3}(x_{n-1} +x_n + x_{n+1}),& 1\leq n\leq N-2\\ 
+x_n, & n=N-1
+\end{array}\right.
+\tag{39}
+\end{equation}
+$$
+
+Two other filters put less emphasis on the surrounding values:
+
+$$
+\begin{equation}
+y_n = \left\lbrace\begin{array}{ll}
+x_n, & n=0\\ 
+\frac{1}{4}(x_{n-1} +2x_n + x_{n+1}),& 1\leq n\leq N-2\\ 
+x_n, & n=N-1
+\end{array}\right.
+\tag{40}
+\end{equation}
+$$
+
+
+$$
+\begin{equation}
+y_n = \left\lbrace\begin{array}{ll}
+x_n, & n=0,1\\ 
+\frac{1}{16}(x_{n-2} + 4x_{n-1} +6x_n + 4x_{n+1} + x_{n+2}),& 2\leq n\leq N-3\\ 
+x_n, & n=N-2,N-1
+\end{array}\right.
+\tag{41}
+\end{equation}
+$$
+
+Apply all these three filters to a sound file and listen to the result.
+Plot the first 300 values in the \( x_n \) and \( y_n \) signals for each
+of the three filters to see graphically what the filter does with the signal.
+Filename: <code>damp_treble.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:diffeq:ex16">Exercise 19: Demonstrate oscillatory solutions of <a href="._diffeq-bootstrap002.html#mjx-eqn-10">(10)</a><a name="sec:diffeq:ex16"></a></h2>
+
+<p>
+<b>a)</b>
+Write a program to solve the difference equation
+<a href="._diffeq-bootstrap002.html#mjx-eqn-10">(10)</a>:
+
+$$
+\begin{equation*} y_n = y_{n-1} + q y_{n-1}\left(1 - y_{n-1}\right),\quad n=0,\ldots,N\tp\end{equation*}
+$$
+
+Read the input parameters \( y_0 \), \( q \), and \( N \) from the
+command line. The variables and the equation are explained in
+the section <a href="._diffeq-bootstrap002.html#sec:diffeq:logistic">Logistic growth</a>.
+
+<p>
+<b>b)</b>
+Equation <a href="._diffeq-bootstrap002.html#mjx-eqn-10">(10)</a> has the solution \( y_n=1 \) as
+\( n\rightarrow\infty \).
+Demonstrate, by running the program, that this is the case
+when \( y_0=0.3 \), \( q=1 \), and \( N=50 \).
+
+<p>
+<b>c)</b>
+For larger \( q \) values, \( y_n \) does not approach a constant limit,
+but \( y_n \) oscillates instead around the limiting value.  Such oscillations are
+sometimes observed in wildlife populations.
+Demonstrate oscillatory solutions when \( q \) is changed to 2 and 3.
+
+<p>
+<b>d)</b>
+It could happen that \( y_n \) stabilizes at a constant level
+for larger \( N \). Demonstrate that this is not the case by running
+the program with \( N=1000 \).
+
+<p>
+Filename: <code>growth_logistic2.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:diffeq:ex17">Exercise 20: Automate computer experiments<a name="sec:diffeq:ex17"></a></h2>
+
+<p>
+It is tedious to run a program like the one from
+<a href="#sec:diffeq:ex16">Exercise 19: Demonstrate oscillatory solutions of <a href="._diffeq-bootstrap002.html#mjx-eqn-10">(10)</a></a> repeatedly
+for a wide range of input parameters.
+A better approach is to let
+the computer do the manual work. Modify the program from
+<a href="#sec:diffeq:ex16">Exercise 19: Demonstrate oscillatory solutions of <a href="._diffeq-bootstrap002.html#mjx-eqn-10">(10)</a></a>
+such that the computation of \( y_n \) and the plot is made in a function.
+Let the title in the plot contain the parameters \( y_0 \) and \( q \) (\( N \) is
+easily visible from the \( x \) axis).
+Also let the name of the plot file reflect the values of \( y_0 \), \( q \), and \( N \).
+Then make loops over \( y_0 \) and \( q \) to perform the following more
+comprehensive set of experiments:
+
+<ul>
+  <li> \( y_0=0.01, 0.3 \)</li>
+  <li> \( q=0.1, 1, 1.5, 1.8, 2, 2.5, 3 \)</li>
+  <li> \( N=50 \)</li>
+</ul>
+
+How does the initial condition (the value \( y_0 \)) seem to
+influence the solution?
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<b>Hint.</b>
+If you do no want to get a lot of plots on the screen, which must be
+killed, drop the call to <code>show()</code> in Matplotlib or use
+<code>show=False</code> as argument to <code>plot</code> in SciTools.
+
+<p>
+<!-- --- end hint in exercise --- -->
+Filename: <code>growth_logistic3.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:diffeq:ex18">Exercise 21: Generate an HTML report<a name="sec:diffeq:ex18"></a></h2>
+
+<p>
+Extend the program made in <a href="#sec:diffeq:ex17">Exercise 20: Automate computer experiments</a>
+with a report containing all the plots. The report can be written
+in HTML and displayed by a web browser. The plots must then be generated
+in PNG format. The source of the HTML file will typically look
+as follows:
+
+<p>
+
+<!-- code=text (!bc dat) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">&lt;html&gt;
+&lt;body&gt;
+&lt;p&gt;&lt;img src=&quot;tmp_y0_0.01_q_0.1_N_50.png&quot;&gt;
+&lt;p&gt;&lt;img src=&quot;tmp_y0_0.01_q_1_N_50.png&quot;&gt;
+&lt;p&gt;&lt;img src=&quot;tmp_y0_0.01_q_1.5_N_50.png&quot;&gt;
+&lt;p&gt;&lt;img src=&quot;tmp_y0_0.01_q_1.8_N_50.png&quot;&gt;
+...
+&lt;p&gt;&lt;img src=&quot;tmp_y0_0.01_q_3_N_1000.png&quot;&gt;
+&lt;/html&gt;
+&lt;/body&gt;
+</pre></div>
+<p>
+Let the program write out the HTML text to a file.
+You may let the function
+making the plots return the name of the plot file such that this string
+can be inserted in the HTML file.
+Filename: <code>growth_logistic4.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:diffeq:ex19">Exercise 22: Use a class to archive and report experiments<a name="sec:diffeq:ex19"></a></h2>
+
+<p>
+The purpose of this exercise is to make the program
+from <a href="#sec:diffeq:ex18">Exercise 21: Generate an HTML report</a>
+more flexible by creating a Python class
+that runs and archives all the experiments
+(provided you know how to program with Python classes).
+Here is a sketch of the class:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">GrowthLogistic</span>:
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__init__</span>(<span style="color: #008000">self</span>, show_plot_on_screen<span style="color: #666666">=</span><span style="color: #008000">False</span>):
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>experiments <span style="color: #666666">=</span> []
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>show_plot_on_screen <span style="color: #666666">=</span> show_plot_on_screen
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>remove_plot_files()
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">run_one</span>(<span style="color: #008000">self</span>, y0, q, N):
+        <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Run one experiment.&quot;&quot;&quot;</span>
+        <span style="color: #408080; font-style: italic"># Compute y[n] in a loop...</span>
+        plotfile <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;tmp_y0_</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">_q_</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">_N_</span><span style="color: #BB6688; font-weight: bold">%d</span><span style="color: #BA2121">.png&#39;</span> <span style="color: #666666">%</span> (y0, q, N)
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>experiments<span style="color: #666666">.</span>append({<span style="color: #BA2121">&#39;y0&#39;</span>: y0, <span style="color: #BA2121">&#39;q&#39;</span>: q, <span style="color: #BA2121">&#39;N&#39;</span>: N,
+	                          <span style="color: #BA2121">&#39;mean&#39;</span>: mean(y[<span style="color: #666666">20</span>:]),
+                                  <span style="color: #BA2121">&#39;y&#39;</span>: y, <span style="color: #BA2121">&#39;plotfile&#39;</span>: plotfile})
+        <span style="color: #408080; font-style: italic"># Make plot...</span>
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">run_many</span>(<span style="color: #008000">self</span>, y0_list, q_list, N):
+        <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Run many experiments.&quot;&quot;&quot;</span>
+        <span style="color: #008000; font-weight: bold">for</span> q <span style="color: #AA22FF; font-weight: bold">in</span> q_list:
+            <span style="color: #008000; font-weight: bold">for</span> y0 <span style="color: #AA22FF; font-weight: bold">in</span> y0_list:
+                <span style="color: #008000">self</span><span style="color: #666666">.</span>run_one(y0, q, N)
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">remove_plot_files</span>(<span style="color: #008000">self</span>):
+        <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Remove plot files with names tmp_y0*.png.&quot;&quot;&quot;</span>
+        <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">os</span><span style="color: #666666">,</span> <span style="color: #0000FF; font-weight: bold">glob</span>
+        <span style="color: #008000; font-weight: bold">for</span> plotfile <span style="color: #AA22FF; font-weight: bold">in</span> glob<span style="color: #666666">.</span>glob(<span style="color: #BA2121">&#39;tmp_y0*.png&#39;</span>):
+            os<span style="color: #666666">.</span>remove(plotfile)
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">report</span>(<span style="color: #008000">self</span>, filename<span style="color: #666666">=</span><span style="color: #BA2121">&#39;tmp.html&#39;</span>):
+        <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">        Generate an HTML report with plots of all</span>
+<span style="color: #BA2121; font-style: italic">        experiments generated so far.</span>
+<span style="color: #BA2121; font-style: italic">        &quot;&quot;&quot;</span>
+        <span style="color: #408080; font-style: italic"># Open file and write HTML header...</span>
+        <span style="color: #008000; font-weight: bold">for</span> e <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>experiments:
+            html<span style="color: #666666">.</span>write(<span style="color: #BA2121">&#39;&lt;p&gt;&lt;img src=&quot;</span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121">&quot;&gt;</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> e[<span style="color: #BA2121">&#39;plotfile&#39;</span>])
+        <span style="color: #408080; font-style: italic"># Write HTML footer and close file...</span>
+</pre></div>
+<p>
+Each time the <code>run_one</code> method is called, data about the
+current experiment is stored in the <code>experiments</code> list.
+Note that <code>experiments</code> contains a list of dictionaries.
+When desired, we can call the <code>report</code> method to collect all
+the plots made so far in an HTML report. A typical use of the class
+goes as follows:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">N <span style="color: #666666">=</span> <span style="color: #666666">50</span>
+g <span style="color: #666666">=</span> GrowthLogistic()
+g<span style="color: #666666">.</span>run_many(y0_list<span style="color: #666666">=</span>[<span style="color: #666666">0.01</span>, <span style="color: #666666">0.3</span>],
+           q_list<span style="color: #666666">=</span>[<span style="color: #666666">0.1</span>, <span style="color: #666666">1</span>, <span style="color: #666666">1.5</span>, <span style="color: #666666">1.8</span>] <span style="color: #666666">+</span> [<span style="color: #666666">2</span>, <span style="color: #666666">2.5</span>, <span style="color: #666666">3</span>], N<span style="color: #666666">=</span>N)
+g<span style="color: #666666">.</span>run_one(y0<span style="color: #666666">=0.01</span>, q<span style="color: #666666">=3</span>, N<span style="color: #666666">=1000</span>)
+g<span style="color: #666666">.</span>report()
+</pre></div>
+<p>
+Make a complete implementation of class <code>GrowthLogistic</code>
+and test it with the small program above. The program file should be
+constructed as a module.
+Filename: <code>growth_logistic5.py</code>.
+
+<p>
+<!-- plenum after exer above is compulsory: -->
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:diffeq:ex20">Exercise 23: Explore logistic growth interactively<a name="sec:diffeq:ex20"></a></h2>
+
+<p>
+Class <code>GrowthLogistic</code>
+from <a href="#sec:diffeq:ex19">Exercise 22: Use a class to archive and report experiments</a>
+is very well suited for interactive exploration.
+Here is a possible sample session for illustration:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">growth_logistic5</span> <span style="color: #008000; font-weight: bold">import</span> GrowthLogistic
+<span style="color: #666666">&gt;&gt;&gt;</span> g <span style="color: #666666">=</span> GrowthLogistic(show_plot_on_screen<span style="color: #666666">=</span><span style="color: #008000">True</span>)
+<span style="color: #666666">&gt;&gt;&gt;</span> q <span style="color: #666666">=</span> <span style="color: #666666">3</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> g<span style="color: #666666">.</span>run_one(<span style="color: #666666">0.01</span>, q, <span style="color: #666666">100</span>)
+<span style="color: #666666">&gt;&gt;&gt;</span> y <span style="color: #666666">=</span> g<span style="color: #666666">.</span>experiments[<span style="color: #666666">-1</span>][<span style="color: #BA2121">&#39;y&#39;</span>]
+<span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000">max</span>(y)
+<span style="color: #666666">1.3326056469620293</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000">min</span>(y)
+<span style="color: #666666">0.0029091569028512065</span>
+</pre></div>
+<p>
+Extend this session with an investigation of the oscillations in the
+solution \( y_n \). For this purpose, make a function for computing the
+local maximum values \( y_n \) and the corresponding indices where these
+local maximum values occur. We can say that \( y_i \) is a local maximum
+value if
+
+$$
+\begin{equation*} y_{i-1} < y_i > y_{i+1} \thinspace . \end{equation*}
+$$
+
+Plot the sequence of local maximum values in a new plot.
+If \( I_0,I_1,I_2,\ldots \)
+constitute the set of increasing indices corresponding to the local maximum
+values, we can define the periods of
+the oscillations as \( I_1-I_0 \), \( I_2-I_1 \), and so forth.
+Plot the length of the periods in a separate plot.
+Repeat this investigation for \( q=2.5 \).
+Filename: <code>GrowthLogistic_interactive.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:diffeq:ex21">Exercise 24: Simulate the price of wheat<a name="sec:diffeq:ex21"></a></h2>
+
+<p>
+The demand for wheat in year \( t \) is given by
+
+$$
+\begin{equation*} D_t = ap_t + b,\end{equation*}
+$$
+
+where \( a < 0 \), \( b>0 \), and \( p_t \) is the price of wheat.
+Let the supply of wheat be
+
+$$
+\begin{equation*} S_t = Ap_{t-1} + B + \ln (1+p_{t-1}),\end{equation*}
+$$
+
+where \( A \) and \( B \) are given constants.
+We assume that the price \( p_t \) adjusts such that all the produced wheat
+is sold. That is, \( D_t=S_t \).
+
+<p>
+<b>a)</b>
+For \( A=1, \) $a=-3,b=5,B=0$, find from numerical computations,
+a stable price such that the production of wheat from year to year is
+constant. That is, find \( p \) such that \( ap+b = Ap + B + \ln (1+p) \).
+
+<p>
+<b>b)</b>
+Assume that in a very dry year the production of wheat is
+much less than planned.
+Given that price this year, \( p_0 \), is \( 4.5 \) and \( D_t=S_t \),
+compute in a program how
+the prices \( p_1, p_2,\ldots,p_N \) develop. This implies solving the
+difference equation
+
+$$
+\begin{equation*} ap_t + b = Ap_{t-1} + B + \ln (1+p_{t-1})\tp\end{equation*}
+$$
+
+From the \( p_t \) values, compute \( S_t \) and plot the points
+\( (p_t,S_t) \) for \( t=0,1,2,\ldots,N \).
+How do the prices move when \( N\rightarrow\infty \)?
+
+<p>
+Filename: <code>wheat.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<h1 id="___sec44">References <a name="___sec44"></a></h1>
+
+<p>
+<!-- begin bibliography -->
+
+<p>
+<!-- end bibliography -->
+
+<p>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pager">
+  <li class="previous">
+    <a href="._diffeq-bootstrap003.html">&larr; Prev</a>
+  </li>
+</ul>
+<!-- ------------------- end of main content --------------- -->
+
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap footer
+<footer>
+<a href="http://..."><img width="250" align=right src="http://..."></a>
+</footer>
+-->
+
+
+</body>
+</html>
+    
+

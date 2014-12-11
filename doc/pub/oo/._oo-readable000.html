@@ -1,0 +1,499 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Object-oriented programming">
+<meta name="keywords" content="object-based programming,class hierarchy,class relationship superclass,class relationship derived class,class relationship inheritance,derived class,parent class,base class,superclass,subclass,class relationship subclass,Online Python Tutor,check an object's type,is-a class relationship,has-a class relationship,class relationship is-a,class relationship has-a,dynamic binding,factory function,closure,functional programming,Midpoint rule for integration,Trapezoidal rule for integration,overloading (of methods),polymorphism,Midpoint rule for integration,Trapezoidal rule for integration,recursive function calls,multiple inheritance,convergence rate,Trapezoidal rule for integration,Midpoint rule for integration,object-oriented programming">
+
+<title>Object-oriented programming</title>
+
+<!-- Bootstrap style: bootswatch_readable -->
+<link href="http://netdna.bootstrapcdn.com/bootswatch/3.1.1/readable/bootstrap.min.css" rel="stylesheet">
+<!-- not necessary
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+
+<style type="text/css">
+/* Let inline verbatim have the same color as the surroundings */
+code { color: inherit; background-color: transparent; }
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [(' Inheritance and class hierarchies ',
+               1,
+               'sec:oo:inheritance',
+               'sec:oo:inheritance'),
+              (' A class for straight lines ',
+               2,
+               'sec:oo:Line',
+               'sec:oo:Line'),
+              (' A first try on a class for parabolas ',
+               2,
+               'sec:oo:Parabola1',
+               'sec:oo:Parabola1'),
+              (' A class for parabolas using inheritance ',
+               2,
+               None,
+               '___sec3'),
+              (' Program flow ', 3, None, '___sec4'),
+              (' Checking the class type ', 2, None, '___sec5'),
+              (' Attribute vs inheritance: has-a vs is-a relationship ',
+               2,
+               None,
+               '___sec6'),
+              (' Superclass for defining an interface ',
+               2,
+               'sec:oo:Func',
+               'sec:oo:Func'),
+              (' Class hierarchy for numerical differentiation ',
+               1,
+               'sec:oo:numdiff',
+               'sec:oo:numdiff'),
+              (' Classes for differentiation ',
+               2,
+               'sec:oo:Diff',
+               'sec:oo:Diff'),
+              (' Computer science remark ', 3, None, '___sec10'),
+              (' Verification ', 2, None, '___sec11'),
+              (' A flexible main program ', 2, None, '___sec12'),
+              (' Extensions ', 2, 'sec:oo:Diff:extend', 'sec:oo:Diff:extend'),
+              (' Application ', 3, None, '___sec14'),
+              (' Alternative implementation via functions ',
+               2,
+               'sec:oo:diff:alt:func',
+               'sec:oo:diff:alt:func'),
+              (' Alternative implementation via functional programming ',
+               2,
+               'sec:oo:diff:alt:FP',
+               'sec:oo:diff:alt:FP'),
+              (' Alternative implementation via a single class ',
+               2,
+               'sec:oo:diff:oneclass',
+               'sec:oo:diff:oneclass'),
+              (' Remark ', 3, None, '___sec18'),
+              (' Class hierarchy for numerical integration ',
+               1,
+               'sec:oo:int',
+               'sec:oo:int'),
+              (' Numerical integration methods ',
+               2,
+               'sec:oo:int:methods',
+               'sec:oo:int:methods'),
+              (' Classes for integration ',
+               2,
+               'sec:oo:Integrator',
+               'sec:oo:Integrator'),
+              (' Verification ', 2, None, '___sec22'),
+              (' Using the class hierarchy ', 2, None, '___sec23'),
+              (' About object-oriented programming ', 2, None, '___sec24'),
+              (' Class hierarchy for making drawings ',
+               1,
+               'sec:oo:shapes',
+               'sec:oo:shapes'),
+              (' Using the object collection ', 2, None, '___sec26'),
+              (' Basic drawing ', 3, None, '___sec27'),
+              (' Groups of objects ', 3, None, '___sec28'),
+              (' Changing line styles and colors ', 3, None, '___sec29'),
+              (' The figure composition as an object hierarchy ',
+               3,
+               None,
+               '___sec30'),
+              (' Animation: translating the vehicle ', 3, None, '___sec31'),
+              (' Animation: rolling the wheels ',
+               3,
+               'sketcher:vehicle1:anim',
+               'sketcher:vehicle1:anim'),
+              (' Example of classes for geometric objects ',
+               2,
+               None,
+               '___sec33'),
+              (' Simple geometric objects ', 3, None, '___sec34'),
+              (' Class curve ', 3, None, '___sec35'),
+              (' Compound geometric objects ', 3, None, '___sec36'),
+              (' Adding functionality via recursion ', 2, None, '___sec37'),
+              (' Basic principles of recursion ', 3, None, '___sec38'),
+              (' Explaining recursion ', 3, None, '___sec39'),
+              (' Scaling, translating, and rotating a figure ',
+               2,
+               'sketcher:scaling',
+               'sketcher:scaling'),
+              (' Scaling ', 3, None, '___sec41'),
+              (' Translation ', 3, None, '___sec42'),
+              (' Rotation ', 3, None, '___sec43'),
+              (' Classes for DNA analysis ', 1, 'bioinf:oo', 'bioinf:oo'),
+              (' Class for regions ', 2, None, '___sec45'),
+              (' Class for genes ', 2, None, '___sec46'),
+              (' Basic features of class gene ', 3, None, '___sec47'),
+              (' Flexible constructor ', 3, None, '___sec48'),
+              (' Other methods ', 3, None, '___sec49'),
+              (' Subclasses ', 2, None, '___sec50'),
+              (' Summary ', 1, None, '___sec51'),
+              (' Chapter topics ', 2, None, '___sec52'),
+              (' Subclass example ', 3, None, '___sec53'),
+              (' Subclassing in general ', 3, None, '___sec54'),
+              (' Terminology ', 3, None, '___sec55'),
+              (' Example: Input data reader ',
+               2,
+               'sec:oo:ReadInput',
+               'sec:oo:ReadInput'),
+              (' Problem ', 3, None, '___sec57'),
+              (' Solution ', 3, None, '___sec58'),
+              (' Prompting the user ', 3, None, '___sec59'),
+              (' Reading from file ', 3, None, '___sec60'),
+              (' Reading from the command line ', 3, None, '___sec61'),
+              (' Reading from a gui ', 3, None, '___sec62'),
+              (' More flexibility in the superclass ', 3, None, '___sec63'),
+              (' Demonstrating the tool ', 3, None, '___sec64'),
+              (' Exercises ', 1, None, '___sec65'),
+              (' Exercise 1: Demonstrate the magic of inheritance ',
+               2,
+               'sec:oo:ex1',
+               'sec:oo:ex1'),
+              (' Exercise 2: Make polynomial subclasses of parabolas ',
+               2,
+               'sec:oo:ex2',
+               'sec:oo:ex2'),
+              (' Remarks ', 3, None, '___sec68'),
+              (' Exercise 3: Implement a class for a function as a subclass ',
+               2,
+               'sec:oo:ex3',
+               'sec:oo:ex3'),
+              (' Exercise 4: Create an alternative class hierarchy for polynomials ',
+               2,
+               'sec:oo:ex5',
+               'sec:oo:ex5'),
+              (' Exercise 5: Make circle a subclass of an ellipse ',
+               2,
+               'sec:oo:ex5b',
+               'sec:oo:ex5b'),
+              (' Exercise 6: Make super- and subclass for a point ',
+               2,
+               'sec:oo:ex17',
+               'sec:oo:ex17'),
+              (' Exercise 7: Modify a function class by subclassing ',
+               2,
+               'sec:oo:ex7',
+               'sec:oo:ex7'),
+              (' Exercise 8: Explore the accuracy of difference formulas ',
+               2,
+               'sec:oo:ex18',
+               'sec:oo:ex18'),
+              (' Exercise 9: Implement a subclass ',
+               2,
+               'sec:oo:ex15b',
+               'sec:oo:ex15b'),
+              (' Exercise 10: Make classes for numerical differentiation ',
+               2,
+               'sec:oo:ex33',
+               'sec:oo:ex33'),
+              (' Exercise 11: Implement a new subclass for differentiation ',
+               2,
+               'sec:oo:ex31',
+               'sec:oo:ex31'),
+              (' Exercise 12: Understand if a class can be used recursively ',
+               2,
+               'sec:oo:ex14',
+               'sec:oo:ex14'),
+              (' Exercise 13: Represent people by a class hierarchy ',
+               2,
+               'sec:oo:ex4',
+               'sec:oo:ex4'),
+              (' Remark ', 3, None, '___sec80'),
+              (' Exercise 14: Add a new class in a class hierarchy ',
+               2,
+               'sec:oo:ex15',
+               'sec:oo:ex15'),
+              (' Exercise 15: Compute convergence rates of numerical integration methods ',
+               2,
+               'sec:oo:ex16',
+               'sec:oo:ex16'),
+              (' Exercise 16: Add common functionality in a class hierarchy ',
+               2,
+               'sec:oo:ex6',
+               'sec:oo:ex6'),
+              (' Exercise 17: Make a class hierarchy for root finding ',
+               2,
+               'sec:oo:ex41',
+               'sec:oo:ex41'),
+              (' Exercise 18: Make a calculus calculator class ',
+               2,
+               'sec:plot:ex30',
+               'sec:plot:ex30'),
+              (' Exercise 19: Compute inverse functions ',
+               2,
+               'sec:plot:ex30b',
+               'sec:plot:ex30b'),
+              (' Exercise 20: Make line drawing of a person; program ',
+               2,
+               'pysketcher:exer:person:prog',
+               'pysketcher:exer:person:prog'),
+              (' Exercise 21: Make line drawing of a person; class ',
+               2,
+               'pysketcher:exer:person:class',
+               'pysketcher:exer:person:class'),
+              (' Exercise 22: Animate a person with waving hands ',
+               2,
+               'pysketcher:exer:person:anim',
+               'pysketcher:exer:person:anim'),
+              (' References ', 1, None, '___sec90')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- newcommands_keep.tex -->
+$$
+\newcommand{\tp}{\thinspace .}
+$$
+
+
+
+
+    
+<!-- Bootstrap navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="oo-readable.html">Object-oriented programming</a>
+  </div>
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     <!-- navigation toc: --> <li><a href="._oo-readable001.html#sec:oo:inheritance" style="font-size: 80%;">Inheritance and class hierarchies</a></li>
+     <!-- navigation toc: --> <li><a href="._oo-readable002.html#sec:oo:numdiff" style="font-size: 80%;">Class hierarchy for numerical differentiation</a></li>
+     <!-- navigation toc: --> <li><a href="._oo-readable003.html#sec:oo:int" style="font-size: 80%;">Class hierarchy for numerical integration</a></li>
+     <!-- navigation toc: --> <li><a href="._oo-readable004.html#sec:oo:shapes" style="font-size: 80%;">Class hierarchy for making drawings</a></li>
+     <!-- navigation toc: --> <li><a href="._oo-readable004.html#bioinf:oo" style="font-size: 80%;">Classes for DNA analysis</a></li>
+     <!-- navigation toc: --> <li><a href="._oo-readable005.html#___sec51" style="font-size: 80%;">Summary</a></li>
+     <!-- navigation toc: --> <li><a href="._oo-readable006.html#___sec65" style="font-size: 80%;">Exercises</a></li>
+     <!-- navigation toc: --> <li><a href="._oo-readable006.html#___sec90" style="font-size: 80%;">References</a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div> <!-- end of navigation bar -->
+
+<div class="container">
+
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+
+<a name="part0000"></a>
+<!-- ------------------- main content ---------------------- -->
+
+
+
+<div class="jumbotron">
+<center><h1>Object-oriented programming</h1></center>  <!-- document title -->
+
+<p>
+<!-- author(s): Hans Petter Langtangen -->
+
+<center>
+<b>Hans Petter Langtangen</b> [1, 2]
+</center>
+
+
+<p>
+<!-- institution(s) -->
+
+<center>[1] <b>Center for Biomedical Computing, Simula Research Laboratory</b></center>
+<center>[2] <b>Department of Informatics, University of Oslo</b></center>
+<p>
+<center><h4>Dec 11, 2014</h4></center> <!-- date -->
+
+<h2>Table of contents</h2>
+
+<p>
+<a href="._oo-readable001.html#sec:oo:inheritance"> Inheritance and class hierarchies </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._oo-readable001.html#sec:oo:Line"> A class for straight lines </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._oo-readable001.html#sec:oo:Parabola1"> A first try on a class for parabolas </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._oo-readable001.html#___sec3"> A class for parabolas using inheritance </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._oo-readable001.html#___sec4"> Program flow </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._oo-readable001.html#___sec5"> Checking the class type </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._oo-readable001.html#___sec6"> Attribute vs inheritance: has-a vs is-a relationship </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._oo-readable001.html#sec:oo:Func"> Superclass for defining an interface </a><br>
+<a href="._oo-readable002.html#sec:oo:numdiff"> Class hierarchy for numerical differentiation </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._oo-readable002.html#sec:oo:Diff"> Classes for differentiation </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._oo-readable002.html#___sec10"> Computer science remark </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._oo-readable002.html#___sec11"> Verification </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._oo-readable002.html#___sec12"> A flexible main program </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._oo-readable002.html#sec:oo:Diff:extend"> Extensions </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._oo-readable002.html#___sec14"> Application </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._oo-readable002.html#sec:oo:diff:alt:func"> Alternative implementation via functions </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._oo-readable002.html#sec:oo:diff:alt:FP"> Alternative implementation via functional programming </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._oo-readable002.html#sec:oo:diff:oneclass"> Alternative implementation via a single class </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._oo-readable002.html#___sec18"> Remark </a><br>
+<a href="._oo-readable003.html#sec:oo:int"> Class hierarchy for numerical integration </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._oo-readable003.html#sec:oo:int:methods"> Numerical integration methods </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._oo-readable003.html#sec:oo:Integrator"> Classes for integration </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._oo-readable003.html#___sec22"> Verification </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._oo-readable003.html#___sec23"> Using the class hierarchy </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._oo-readable003.html#___sec24"> About object-oriented programming </a><br>
+<a href="._oo-readable004.html#sec:oo:shapes"> Class hierarchy for making drawings </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._oo-readable004.html#___sec26"> Using the object collection </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._oo-readable004.html#___sec27"> Basic drawing </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._oo-readable004.html#___sec28"> Groups of objects </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._oo-readable004.html#___sec29"> Changing line styles and colors </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._oo-readable004.html#___sec30"> The figure composition as an object hierarchy </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._oo-readable004.html#___sec31"> Animation: translating the vehicle </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._oo-readable004.html#sketcher:vehicle1:anim"> Animation: rolling the wheels </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._oo-readable004.html#___sec33"> Example of classes for geometric objects </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._oo-readable004.html#___sec34"> Simple geometric objects </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._oo-readable004.html#___sec35"> Class curve </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._oo-readable004.html#___sec36"> Compound geometric objects </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._oo-readable004.html#___sec37"> Adding functionality via recursion </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._oo-readable004.html#___sec38"> Basic principles of recursion </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._oo-readable004.html#___sec39"> Explaining recursion </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._oo-readable004.html#sketcher:scaling"> Scaling, translating, and rotating a figure </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._oo-readable004.html#___sec41"> Scaling </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._oo-readable004.html#___sec42"> Translation </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._oo-readable004.html#___sec43"> Rotation </a><br>
+<a href="._oo-readable004.html#bioinf:oo"> Classes for DNA analysis </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._oo-readable004.html#___sec45"> Class for regions </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._oo-readable004.html#___sec46"> Class for genes </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._oo-readable004.html#___sec47"> Basic features of class gene </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._oo-readable004.html#___sec48"> Flexible constructor </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._oo-readable004.html#___sec49"> Other methods </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._oo-readable004.html#___sec50"> Subclasses </a><br>
+<a href="._oo-readable005.html#___sec51"> Summary </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._oo-readable005.html#___sec52"> Chapter topics </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._oo-readable005.html#___sec53"> Subclass example </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._oo-readable005.html#___sec54"> Subclassing in general </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._oo-readable005.html#___sec55"> Terminology </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._oo-readable005.html#sec:oo:ReadInput"> Example: Input data reader </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._oo-readable005.html#___sec57"> Problem </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._oo-readable005.html#___sec58"> Solution </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._oo-readable005.html#___sec59"> Prompting the user </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._oo-readable005.html#___sec60"> Reading from file </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._oo-readable005.html#___sec61"> Reading from the command line </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._oo-readable005.html#___sec62"> Reading from a gui </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._oo-readable005.html#___sec63"> More flexibility in the superclass </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._oo-readable005.html#___sec64"> Demonstrating the tool </a><br>
+<a href="._oo-readable006.html#___sec65"> Exercises </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._oo-readable006.html#sec:oo:ex1"> Exercise 1: Demonstrate the magic of inheritance </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._oo-readable006.html#sec:oo:ex2"> Exercise 2: Make polynomial subclasses of parabolas </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._oo-readable006.html#___sec68"> Remarks </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._oo-readable006.html#sec:oo:ex3"> Exercise 3: Implement a class for a function as a subclass </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._oo-readable006.html#sec:oo:ex5"> Exercise 4: Create an alternative class hierarchy for polynomials </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._oo-readable006.html#sec:oo:ex5b"> Exercise 5: Make circle a subclass of an ellipse </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._oo-readable006.html#sec:oo:ex17"> Exercise 6: Make super- and subclass for a point </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._oo-readable006.html#sec:oo:ex7"> Exercise 7: Modify a function class by subclassing </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._oo-readable006.html#sec:oo:ex18"> Exercise 8: Explore the accuracy of difference formulas </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._oo-readable006.html#sec:oo:ex15b"> Exercise 9: Implement a subclass </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._oo-readable006.html#sec:oo:ex33"> Exercise 10: Make classes for numerical differentiation </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._oo-readable006.html#sec:oo:ex31"> Exercise 11: Implement a new subclass for differentiation </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._oo-readable006.html#sec:oo:ex14"> Exercise 12: Understand if a class can be used recursively </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._oo-readable006.html#sec:oo:ex4"> Exercise 13: Represent people by a class hierarchy </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._oo-readable006.html#___sec80"> Remark </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._oo-readable006.html#sec:oo:ex15"> Exercise 14: Add a new class in a class hierarchy </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._oo-readable006.html#sec:oo:ex16"> Exercise 15: Compute convergence rates of numerical integration methods </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._oo-readable006.html#sec:oo:ex6"> Exercise 16: Add common functionality in a class hierarchy </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._oo-readable006.html#sec:oo:ex41"> Exercise 17: Make a class hierarchy for root finding </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._oo-readable006.html#sec:plot:ex30"> Exercise 18: Make a calculus calculator class </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._oo-readable006.html#sec:plot:ex30b"> Exercise 19: Compute inverse functions </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._oo-readable006.html#pysketcher:exer:person:prog"> Exercise 20: Make line drawing of a person; program </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._oo-readable006.html#pysketcher:exer:person:class"> Exercise 21: Make line drawing of a person; class </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._oo-readable006.html#pysketcher:exer:person:anim"> Exercise 22: Animate a person with waving hands </a><br>
+<a href="._oo-readable006.html#___sec90"> References </a><br>
+</p>
+<p>
+<!-- Externaldocuments: ../formulas/main_formulas, ../looplist/main_looplist, ../funcif/main_funcif, ../input/main_input, ../plot/main_plot, ../files/main_files, ../class/main_class, ../random/main_random, ../diffeq/main_diffeq, ../discalc/main_discalc, ../ode1/main_ode1, ../boxspring/main_boxspring, ../ode2/main_ode2, ../debug/main_debug, ../cython/main_cython, ../tech/main_timing, ../tech/main_varargs, ../tech/main_runpy, ../tech/main_ostasks, ../tech/main_accesspy, ../tech/main_nose -->
+
+<p>
+<a name="ch:oo"></a>
+
+<p>
+This document introduces the basic ideas of object-oriented
+programming.  Different people put different meanings into the term
+object-oriented programming: some use the term for programming with
+objects in general, while others use the term for programming with
+class hierarchies. The author applies the second meaning, which is the
+most widely accepted one in computer science. The first meaning is
+better named <em>object-based</em> programming.  Since everything in Python
+is an object, we do object-based programming all the time, yet one
+usually reserves this term for the case when classes different from
+Python's basic types (<code>int</code>, <code>float</code>, <code>str</code>, <code>list</code>, <code>tuple</code>, <code>dict</code>)
+are involved.
+
+<p>
+Necessary background for the present document includes basic knowledge
+about classes in Python, at least concepts such as attributes,
+methods, constructors, the <code>self</code> object, and the <code>__call__</code>
+special method.
+Suitable material for this background is
+the sections ref{sec:class:functors}, ref{sec:class:addex},
+and ref{sec:class:call}.
+For the sections <a href="._oo-readable002.html#sec:oo:numdiff">Class hierarchy for numerical differentiation</a>
+and <a href="._oo-readable003.html#sec:oo:int">Class hierarchy for numerical integration</a> one must know the most basic methods for numerical
+differentiation and
+integration, for example from  ref{ch:dcalculus}.
+During an initial reading of the document, it can be beneficial to skip
+the more advanced material in
+the sections <a href="._oo-readable002.html#sec:oo:Diff:extend">Extensions</a>-<a href="._oo-readable002.html#sec:oo:diff:oneclass">Alternative implementation via a single class</a>.
+
+<p>
+All the programs associated with this document
+are found in the folder <a href="http://tinyurl.com/pwyasaa/oo" target="_self"><tt>src/oo</tt></a>.
+
+<p>
+
+
+<p><a href="._oo-readable001.html" class="btn btn-primary btn-lg">Read &raquo;</a></p>
+
+
+</div> <!-- end jumbotron -->
+
+<p>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pager">
+  <li class="next">
+    <a href="._oo-readable001.html">Next &rarr;</a>
+  </li>
+</ul>
+<!-- ------------------- end of main content --------------- -->
+
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap footer
+<footer>
+<a href="http://..."><img width="250" align=right src="http://..."></a>
+</footer>
+-->
+
+
+</body>
+</html>
+    
+

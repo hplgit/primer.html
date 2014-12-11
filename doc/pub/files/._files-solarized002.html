@@ -1,0 +1,926 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Dictionaries and strings">
+<meta name="keywords" content="dictionary,keys (dictionaries),immutable objects,mutable objects,dictionary comprehensions,nested dictionaries,dictionary nested,date conversion,plotting data vs date,string slicing,slicing,substrings,string substrings,string searching,string substitution,substitution (in text),string splitting,string case change,string testing for number,whitespace,blank lines in files,string stripping leading/trailing blanks,string joining list elements,dictionary functionality">
+
+<title>Dictionaries and strings</title>
+
+
+<link href="https://raw.githubusercontent.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/css/solarized_light_code.css" rel="stylesheet" type="text/css" title="light"/>
+<script src="https://rawgit.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<link href="http://thomasf.github.io/solarized-css/solarized-light.min.css" rel="stylesheet">
+<style type="text/css">
+h1 {color: #b58900;}  /* yellow */
+/* h1 {color: #cb4b16;}  orange */
+/* h1 {color: #d33682;}  magenta, the original choice of thomasf */
+
+div { text-align: justify; text-justify: inter-word; }
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [(u' Dictionaries ', 1, u'sec:files:dicts', u'sec:files:dicts'),
+              (u' Making dictionaries ', 2, None, '___sec1'),
+              (u' Dictionary operations ', 2, None, '___sec2'),
+              (u' Remark ', 3, None, '___sec3'),
+              (u' Example: Polynomials as dictionaries ',
+               2,
+               u'sec:files:poly',
+               u'sec:files:poly'),
+              (u' Dictionaries with default values and ordering ',
+               2,
+               u'sec:files:dict:default:order',
+               u'sec:files:dict:default:order'),
+              (u' Dictionaries with default values ', 3, None, '___sec6'),
+              (u' Ordered dictionaries ', 3, None, '___sec7'),
+              (u' Example: File data in dictionaries ',
+               2,
+               u'sec:files:dict:density',
+               u'sec:files:dict:density'),
+              (u' Problem ', 3, None, '___sec9'),
+              (u' Solution ', 3, None, '___sec10'),
+              (u' Example: File data in nested dictionaries ',
+               2,
+               u'sec:files:dictdict',
+               u'sec:files:dictdict'),
+              (u' Problem ', 3, None, '___sec12'),
+              (u' Algorithm ', 3, None, '___sec13'),
+              (u' Implementation ', 3, None, '___sec14'),
+              (u' Dissection ', 3, None, '___sec15'),
+              (u' Example: Reading and plotting data recorded at specific dates ',
+               2,
+               u'sec:files:stockprices',
+               u'sec:files:stockprices'),
+              (u' Problem ', 3, None, '___sec17'),
+              (u' Solution ', 3, None, '___sec18'),
+              (u' Strings ', 1, u'sec:files:str', u'sec:files:str'),
+              (u' Common operations on strings ',
+               2,
+               u'sec:files:stringop',
+               u'sec:files:stringop'),
+              (u' Substring specification ', 3, None, '___sec21'),
+              (u' Searching for substrings ', 3, None, '___sec22'),
+              (u' Substitution ', 3, None, '___sec23'),
+              (u' String splitting ', 3, None, '___sec24'),
+              (u' Upper and lower case ', 3, None, '___sec25'),
+              (u' Strings are constant ', 3, None, '___sec26'),
+              (u' Strings with digits only ', 3, None, '___sec27'),
+              (u' Whitespace ', 3, None, '___sec28'),
+              (u' Joining strings ', 3, None, '___sec29'),
+              (u' Example: Reading pairs of numbers ',
+               2,
+               u'sec:files:pairs',
+               u'sec:files:pairs'),
+              (u' Problem ', 3, None, '___sec31'),
+              (u' Solution ', 3, None, '___sec32'),
+              (u' Example: Reading coordinates ', 2, None, '___sec33'),
+              (u' Problem ', 3, None, '___sec34'),
+              (u' Solution 1: substring extraction ', 3, None, '___sec35'),
+              (u' Solution 2: string search ', 3, None, '___sec36'),
+              (u' Solution 3: string split ', 3, None, '___sec37'),
+              (u' Reading data from web pages ',
+               1,
+               u'sec:files:webtxt',
+               u'sec:files:webtxt'),
+              (u' About web pages ',
+               2,
+               u'sec:files:HTMLintro',
+               u'sec:files:HTMLintro'),
+              (u' How to access web pages in programs ',
+               2,
+               u'sec:files:urllib',
+               u'sec:files:urllib'),
+              (u' Alternative 1 ', 3, None, '___sec41'),
+              (u' Alternative 2 ', 3, None, '___sec42'),
+              (u' Example: Reading pure text files ',
+               2,
+               u'sec:files:url:weather',
+               u'sec:files:url:weather'),
+              (u' Example: Extracting data from HTML ',
+               2,
+               u'sec:files:url:interpret',
+               u'sec:files:url:interpret'),
+              (u' Handling non-English text ',
+               2,
+               u'sec:files:encoding',
+               u'sec:files:encoding'),
+              (u' Reading and writing spreadsheet files ',
+               1,
+               u'sec:files:csv',
+               u'sec:files:csv'),
+              (u' CSV files ', 2, None, '___sec47'),
+              (u' Reading CSV files ', 2, None, '___sec48'),
+              (u' Processing spreadsheet data ', 2, None, '___sec49'),
+              (u' Writing CSV files ', 2, None, '___sec50'),
+              (u' Remark ', 3, None, '___sec51'),
+              (u' Representing number cells with Numerical Python arrays ',
+               2,
+               None,
+               '___sec52'),
+              (u' Using more high-level Numerical Python functionality ',
+               2,
+               None,
+               '___sec53'),
+              (u' Summary ', 1, None, '___sec54'),
+              (u' Chapter topics ', 2, None, '___sec55'),
+              (u' Dictionaries ', 3, None, '___sec56'),
+              (u' Strings ', 3, None, '___sec57'),
+              (u' Downloading Internet files ', 3, None, '___sec58'),
+              (u' Terminology ', 3, None, '___sec59'),
+              (u' Example: A file database ',
+               2,
+               u'sec:files:sumex',
+               u'sec:files:sumex'),
+              (u' Problem ', 3, None, '___sec61'),
+              (u' Solution ', 3, None, '___sec62'),
+              (u' Exercises ',
+               1,
+               u'sec:files:exercises',
+               u'sec:files:exercises'),
+              (u' Exercise 1: Make a dictionary from a table ',
+               2,
+               u'sec:files:ex2b:basic',
+               u'sec:files:ex2b:basic'),
+              (u' Exercise 2: Explore syntax differences: lists vs. dicts ',
+               2,
+               u'sec:files:ex2',
+               u'sec:files:ex2'),
+              (u' Exercise 3: Use string operations to improve a program ',
+               2,
+               u'sec:files:ex17',
+               u'sec:files:ex17'),
+              (u' Exercise 4: Interpret output from a program ',
+               2,
+               u'sec:files:ex13',
+               u'sec:files:ex13'),
+              (u' Exercise 5: Make a nested dictionary from a file ',
+               2,
+               u'sec:files:ex2d:nested',
+               u'sec:files:ex2d:nested'),
+              (u' Exercise 6: Make a nested dictionary from a file ',
+               2,
+               u'sec:files:ex2d:nested2',
+               u'sec:files:ex2d:nested2'),
+              (u' Exercise 7: Compare data structures for polynomials ',
+               2,
+               u'sec:files:ex16',
+               u'sec:files:ex16'),
+              (u' Exercise 8: Compute the derivative of a polynomial ',
+               2,
+               u'sec:files:ex3',
+               u'sec:files:ex3'),
+              (u' Exercise 9: Specify functions on the command line ',
+               2,
+               u'sec:basic:ex10',
+               u'sec:basic:ex10'),
+              (u' Exercise 10: Interpret function specifications ',
+               2,
+               u'sec:basic:ex10b',
+               u'sec:basic:ex10b'),
+              (u' Exercise 11: Compare average temperatures in cities ',
+               2,
+               u'sec:files:ex8',
+               u'sec:files:ex8'),
+              (u' References ', 1, None, '___sec75')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- newcommands_keep.tex -->
+$$
+\newcommand{\tp}{\thinspace .}
+$$
+
+
+
+
+    
+<a name="part0002"></a>
+<p>
+<!-- begin top navigation -->
+<table style="width: 100%"><tr><td>
+<div style="text-align: left;"><a href="._files-solarized001.html">&laquo; Previous</a></div>
+</td><td>
+<div style="text-align: right;"><a href="._files-solarized003.html">Next &raquo;</a></div>
+</td></tr></table>
+<!-- end top navigation -->
+</p>
+
+<p>
+<!-- !split -->
+
+<h1>Strings <a name="sec:files:str"></a></h1>
+
+<p>
+Many programs need to manipulate text. For example, when we read the
+contents of a file into a string or list of strings (lines),
+we may want to change parts of the
+text in the string(s) - and maybe write out the modified text to a new file.
+So far in this document we have converted parts of the text to numbers
+and computed with the numbers. Now it is time to learn how to
+manipulate the text strings themselves.
+
+<h2>Common operations on strings <a name="sec:files:stringop"></a></h2>
+
+<p>
+Python has a rich set of operations on string objects.
+<!-- Suppose <code>s</code> is the string <code>Berlin: 18.4 C at 4 pm</code>. -->
+Some of the most common operations are listed below.
+
+<h3>Substring specification  <a name="___sec21"></a></h3>
+
+<p>
+The expression <code>s[i:j]</code> extracts the
+substring starting with character number <code>i</code>
+and ending with character number <code>j-1</code> (similarly to lists, <code>0</code> is the
+index of the first character):
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; s = 'Berlin: 18.4 C at 4 pm'
+&gt;&gt;&gt; s[8:]     # from index 8 to the end of the string
+'18.4 C at 4 pm'
+&gt;&gt;&gt; s[8:12]   # index 8, 9, 10 and 11 (not 12!)
+'18.4'
+</code></pre>
+<!-- end verbatim block -->
+A negative upper index
+counts, as usual, from the right such that <code>s[-1]</code> is the last
+element, <code>s[-2]</code> is the next last element, and so on.
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; s[8:-1]
+'18.4 C at 4 p'
+&gt;&gt;&gt; s[8:-8]
+'18.4 C'
+</code></pre>
+<!-- end verbatim block -->
+
+<h3>Searching for substrings  <a name="___sec22"></a></h3>
+
+<p>
+The call
+<code>s.find(s1)</code> returns
+the index where
+the substring <code>s1</code> first appears in <code>s</code>. If the substring is
+not found, -1 is returned.
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; s.find('Berlin')  # where does 'Berlin' start?
+0
+&gt;&gt;&gt; s.find('pm')
+20
+&gt;&gt;&gt; s.find('Oslo')    # not found
+-1
+</code></pre>
+<!-- end verbatim block -->
+Sometimes the aim is to just check if a string is contained in
+another string, and then we can use the syntax:
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; 'Berlin' in s:
+True
+&gt;&gt;&gt; 'Oslo' in s:
+False
+</code></pre>
+<!-- end verbatim block -->
+Here is a typical use of the latter construction in an <code>if</code> test:
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; if 'C' in s:
+...     print 'C found'
+... else:
+...     print 'no C'
+...
+C found
+</code></pre>
+<!-- end verbatim block -->
+Two other convenient methods
+for checking if a string starts with or ends with a specified string
+are <code>startswith</code> and <code>endswith</code>:
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; s.startswith('Berlin')
+True
+&gt;&gt;&gt; s.endswith('am')
+False
+</code></pre>
+<!-- end verbatim block -->
+
+<h3>Substitution  <a name="___sec23"></a></h3>
+
+<p>
+The call
+<code>s.replace(s1, s2)</code> replaces substring
+<code>s1</code> by
+<code>s2</code> everywhere in <code>s</code>:
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; s.replace(' ', '_')
+'Berlin:_18.4_C__at_4_pm'
+&gt;&gt;&gt; s.replace('Berlin', 'Bonn')
+'Bonn: 18.4 C at 4 pm'
+</code></pre>
+<!-- end verbatim block -->
+A variant of the last example, where several string operations are
+put together, consists of replacing the text before the first colon:
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; s.replace(s[:s.find(':')], 'Bonn')
+'Bonn: 18.4 C at 4 pm'
+</code></pre>
+<!-- end verbatim block -->
+Take a break at this point and convince yourself that you understand how we
+specify the substring to be replaced!
+
+<h3>String splitting  <a name="___sec24"></a></h3>
+
+<p>
+The call <code>s.split()</code> splits the string <code>s</code> into words separated by
+whitespace (space, tabulator, or newline):
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; s.split()
+['Berlin:', '18.4', 'C', 'at', '4', 'pm']
+</code></pre>
+<!-- end verbatim block -->
+Splitting a string <code>s</code> into words separated by a text <code>t</code> can be
+done by <code>s.split(t)</code>. For example, we may split with respect to colon:
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; s.split(':')
+['Berlin', ' 18.4 C at 4 pm']
+</code></pre>
+<!-- end verbatim block -->
+We know that <code>s</code> contains a city name, a colon, a temperature,
+and then <code>C</code>:
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; s = 'Berlin: 18.4 C at 4 pm'
+</code></pre>
+<!-- end verbatim block -->
+With <code>s.splitlines()</code>, a multi-line string is split into
+lines (very useful when a file has been read into a string and we want
+a list of lines):
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; t = '1st line\n2nd line\n3rd line'
+&gt;&gt;&gt; print t
+1st line
+2nd line
+3rd line
+&gt;&gt;&gt; t.splitlines()
+['1st line', '2nd line', '3rd line']
+</code></pre>
+<!-- end verbatim block -->
+
+<h3>Upper and lower case  <a name="___sec25"></a></h3>
+
+<p>
+<code>s.lower()</code> transforms all characters to their lower case
+equivalents, and <code>s.upper()</code> performs a similar transformation to
+upper case letters:
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; s.lower()
+'berlin: 18.4 c at 4 pm'
+&gt;&gt;&gt; s.upper()
+'BERLIN: 18.4 C AT 4 PM'
+</code></pre>
+<!-- end verbatim block -->
+
+<h3>Strings are constant  <a name="___sec26"></a></h3>
+
+<p>
+A string cannot be changed, i.e., any change always results in a new string.
+Replacement of a character is not possible:
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; s[18] = 5
+...
+TypeError: 'str' object does not support item assignment
+</code></pre>
+<!-- end verbatim block -->
+If we want to replace <code>s[18]</code>, a new string must
+be constructed, for example by keeping the substrings on
+either side of <code>s[18]</code> and inserting a <code>'5'</code> in between:
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; s[:18] + '5' + s[19:]
+'Berlin: 18.4 C at 5 pm'
+</code></pre>
+<!-- end verbatim block -->
+
+<h3>Strings with digits only  <a name="___sec27"></a></h3>
+
+<p>
+One can easily test whether a string contains digits only or not:
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; '214'.isdigit()
+True
+&gt;&gt;&gt; '  214 '.isdigit()
+False
+&gt;&gt;&gt; '2.14'.isdigit()
+False
+</code></pre>
+<!-- end verbatim block -->
+
+<h3>Whitespace  <a name="___sec28"></a></h3>
+
+<p>
+We can also check if a string contains spaces only by calling the
+<code>isspace</code> method.
+More precisely, <code>isspace</code> tests for <em>whitespace</em>, which means the
+space character, newline, or the TAB character:
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; '    '.isspace()   # blanks
+True
+&gt;&gt;&gt; '  \n'.isspace()   # newline
+True
+&gt;&gt;&gt; '  \t '.isspace()  # TAB
+True
+&gt;&gt;&gt; ''.isspace()       # empty string
+False
+</code></pre>
+<!-- end verbatim block -->
+The <code>isspace</code> is handy for testing for blank lines in files.
+An alternative is to strip first and then test for an empty string:
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; line = '   \n'
+&gt;&gt;&gt; line.strip() == ''
+True
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+Stripping off leading and/or trailing spaces in a string is sometimes useful:
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; s = '   text with leading/trailing space   \n'
+&gt;&gt;&gt; s.strip()
+'text with leading/trailing space'
+&gt;&gt;&gt; s.lstrip()   # left strip
+'text with leading/trailing space   \n'
+&gt;&gt;&gt; s.rstrip()   # right strip
+'   text with leading/trailing space'
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+<a name="sec:files:join"></a>
+
+<h3>Joining strings  <a name="___sec29"></a></h3>
+
+<p>
+The opposite of the <code>split</code> method is <code>join</code>, which joins elements
+in a list of strings with a specified delimiter in between.
+That is,
+the following two types of statements are inverse operations:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>t = delimiter.join(words)
+words = t.split(delimiter)
+</code></pre>
+<!-- end verbatim block -->
+An example on using <code>join</code> may be
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; strings = ['Newton', 'Secant', 'Bisection']
+&gt;&gt;&gt; t = ', '.join(strings)
+&gt;&gt;&gt; t
+'Newton, Secant, Bisection'
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+As an illustration of the usefulness of <code>split</code> and <code>join</code>,
+we want to remove the first two words on a line.
+This task can be done by
+first splitting the line into words and then joining the words of interest:
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; line = 'This is a line of words separated by space'
+&gt;&gt;&gt; words = line.split()
+&gt;&gt;&gt; line2 = ' '.join(words[2:])
+&gt;&gt;&gt; line2
+'a line of words separated by space'
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+There are many more methods in string objects. All methods are described
+in the
+<a href="http://docs.python.org/2/library/stdtypes.html#string-methods" target="_self">String Methods</a> section of the Python Standard Library online document.
+
+<h2>Example: Reading pairs of numbers <a name="sec:files:pairs"></a></h2>
+
+<h3>Problem  <a name="___sec31"></a></h3>
+
+<p>
+Suppose we have a file consisting of pairs of real numbers, i.e.,
+text of the form \( (a,b) \), where \( a \) and \( b \) are real numbers.
+This notation for a pair of numbers is often used for points in the
+plane, vectors in the plane, and complex
+numbers. A sample file may look as follows:
+
+<p>
+<!-- begin verbatim block  dat-->
+<pre><code>(1.3,0)    (-1,2)    (3,-1.5)
+(0,1)      (1,0)     (1,1)
+(0,-0.01)  (10.5,-1) (2.5,-2.5)
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+The file can be found as <code>read_pairs1.dat</code>.  Our task is to read this
+text into a nested list <code>pairs</code> such that <code>pairs[i]</code> holds the pair
+with index <code>i</code>, and this pair is a tuple of two <code>float</code> objects.  We
+assume that there are no blanks inside the parentheses of a pair of
+numbers (we rely on a split operation, which would otherwise not work).
+
+<h3>Solution  <a name="___sec32"></a></h3>
+
+<p>
+To solve this programming problem, we can read in the file line by
+line; for each line: split the line into words (i.e., split with
+respect to whitespace); for each word: strip off the parentheses,
+split with respect to comma, and convert the resulting two words to
+floats.  Our brief algorithm can be almost directly translated to
+Python code:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code># Load the file into list of lines
+with open('read_pairs1.dat', 'r') as infile:
+    lines = infile.readlines()
+
+# Analyze the contents of each line
+pairs = []   # list of (n1, n2) pairs of numbers
+for line in lines:
+    words = line.split()
+    for word in words:
+        word = word[1:-1]  # strip off parenthesis
+        n1, n2 = word.split(',')
+        n1 = float(n1);  n2 = float(n2)
+        pair = (n1, n2)
+        pairs.append(pair)  # add 2-tuple to last row
+</code></pre>
+<!-- end verbatim block -->
+This code is available in the file
+<a href="http://tinyurl.com/pwyasaa/files/read_pairs1.py" target="_self"><tt>read_pairs1.py</tt></a>.
+The <code>width</code> statement is the modern Python way of reading files,
+with the advantage that we do not need to think about closing the file.
+Figure <a href="#sec:files:fig1">3</a> shows a snapshot of the state of the
+variables in the program after having treated the first line.
+You should explain each line in the program to yourself, and
+compare your understanding with the figure.
+
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 3:  Illustration of the variables in the <code>read_pairs.py</code> program after the first pass in the loop over words in the first line of the data file. <a name="sec:files:fig1"></a> </p></center>
+<p><img src="fig-files/lumpy_read_pairs.png" align="bottom" width=400></p>
+</center>
+
+<p>
+The output from the program becomes
+
+<p>
+<!-- begin verbatim block  ccq-->
+<pre><code>[(1.3, 0.0),
+ (-1.0, 2.0),
+ (3.0, -1.5),
+ (0.0, 1.0),
+ (1.0, 0.0),
+ (1.0, 1.0),
+ (0.0, -0.01),
+ (10.5, -1.0),
+ (2.5, -2.5)]
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+We remark that our solution to this programming problem relies heavily
+on the fact that spaces inside the parentheses are not allowed.  If
+spaces were allowed, the simple split to obtain the pairs on a line as
+words would not work. What can we then do?
+
+<p>
+We can first strip off all blanks on a line, and then observe that the
+pairs are separated by the text <code>')('</code>.  The first and last pair on a
+line will have an extra parenthesis that we need to remove. The rest
+of code is similar to the previous code and can be found in
+<a href="http://tinyurl.com/pwyasaa/files/read_pairs2.py" target="_self"><tt>read_pairs2.py</tt></a>:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>with open('read_pairs2.dat', 'r') as infile:
+    lines = infile.readlines()
+
+# Analyze the contents of each line
+pairs = []   # list of (n1, n2) pairs of numbers
+for line in lines:
+    line = line.strip()  # remove whitespace such as newline
+    line = line.replace(' ', '')  # remove all blanks
+    words = line.split(')(')
+    # strip off leading/trailing parenthesis in first/last word:
+    words[0] = words[0][1:]      # (-1,3  -&gt;  -1,3
+    words[-1] = words[-1][:-1]   # 8.5,9) -&gt;  8.5,9
+    for word in words:
+        n1, n2 = word.split(',')
+        n1 = float(n1);  n2 = float(n2)
+        pair = (n1, n2)
+        pairs.append(pair)
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+The program can be tested on the file <code>read_pairs2.dat</code>:
+
+<p>
+<!-- begin verbatim block  dat-->
+<pre><code>   (1.3 , 0)    (-1 , 2 )    (3, -1.5)
+(0 , 1)      ( 1, 0)     ( 1 , 1 )
+(0,-0.01)  (10.5,-1) (2.5, -2.5)
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+A third approach is to notice that if the pairs were separated
+by commas,
+
+<p>
+<!-- begin verbatim block  ccq-->
+<pre><code>(1, 3.0),    (-1, 2),    (3, -1.5)
+(0, 1),      (1, 0),     (1, 1)
+</code></pre>
+<!-- end verbatim block -->
+the file text is very close to the Python syntax of a list
+of 2-tuples. By adding enclosing brackets, plus a comma at the
+end of each line,
+
+<p>
+<!-- begin verbatim block  ccq-->
+<pre><code>[(1, 3.0),    (-1, 2),    (3, -1.5),
+(0, 1),      (1, 0),     (1, 1),]
+</code></pre>
+<!-- end verbatim block -->
+we have a string to which we can apply <code>eval</code> to get the <code>pairs</code> list
+directly.  Here is the code doing this (program <a href="http://tinyurl.com/pwyasaa/files/read_pairs3.py" target="_self"><tt>read_pairs3.py</tt></a>):
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>with open('read_pairs3.dat', 'r') as infile:
+    listtext = '['
+    for line in infile:
+        # add line, without \n (line[:-1]), with a trailing comma:
+        listtext += line[:-1] + ', '
+listtext = listtext + ']'
+pairs = eval(listtext)
+</code></pre>
+<!-- end verbatim block -->
+In general, it is a good idea to construct file formats that are as close
+as possible to valid Python syntax such that one can take advantage
+of the <code>eval</code> or <code>exec</code> functions to turn text into &quot;live objects&quot;.
+
+<h2>Example: Reading coordinates  <a name="___sec33"></a></h2>
+
+<h3>Problem  <a name="___sec34"></a></h3>
+
+<p>
+Suppose we have a file with coordinates \( (x,y,z) \)
+in three-dimensional space. The file format looks as follows:
+
+<p>
+<!-- begin verbatim block  dat-->
+<pre><code>  x=-1.345      y= 0.1112      z= 9.1928
+  x=-1.231      y=-0.1251      z= 1001.2
+  x= 0.100      y= 1.4344E+6   z=-1.0100
+  x= 0.200      y= 0.0012      z=-1.3423E+4
+  x= 1.5E+5     y=-0.7666      z= 1027
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+The goal is to read this file and create a list with <code>(x,y,z)</code>
+3-tuples, and thereafter convert the nested list to a two-dimensional
+array with which we can compute.
+
+<p>
+Note that there is sometimes a space between the <code>=</code> signs and the
+following number and sometimes not. Splitting with respect to space and
+extracting every second word is therefore not an option.
+We shall present three solutions.
+
+<h3>Solution 1: substring extraction  <a name="___sec35"></a></h3>
+
+<p>
+The file format looks very regular with the <code>x=</code>, <code>y=</code>,
+and <code>z=</code> texts starting in the same columns at every line.
+By counting characters, we realize that the <code>x=</code> text starts
+in column 2, the <code>y=</code> text starts in column 16, while the
+<code>z=</code> text starts in column 31. Introducing
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>x_start = 2
+y_start = 16
+z_start = 31
+</code></pre>
+<!-- end verbatim block -->
+the three numbers in a <code>line</code> string are obtained as the substrings
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>x = line[x_start+2:y_start]
+y = line[y_start+2:z_start]
+z = line[z_start+2:]
+</code></pre>
+<!-- end verbatim block -->
+The following code, found in file
+<a href="http://tinyurl.com/pwyasaa/files/file2coor_v1.py" target="_self"><tt>file2coor_v1.py</tt></a>,
+creates the <code>coor</code> array with shape \( (n,3) \),
+where \( n \) is the number of \( (x,y,z) \) coordinates.
+
+<p>
+<!-- begin verbatim block  pypro-->
+<pre><code>infile = open('xyz.dat', 'r')
+coor = []  # list of (x,y,z) tuples
+for line in infile:
+    x_start = 2
+    y_start = 16
+    z_start = 31
+    x = line[x_start+2:y_start]
+    y = line[y_start+2:z_start]
+    z = line[z_start+2:]
+    print 'debug: x=&quot;%s&quot;, y=&quot;%s&quot;, z=&quot;%s&quot;' % (x,y,z)
+    coor.append((float(x), float(y), float(z)))
+infile.close()
+
+import numpy as np
+coor = np.array(coor)
+print coor.shape, coor
+</code></pre>
+<!-- end verbatim block -->
+The <code>print</code> statement inside the loop
+is always wise to include when doing string manipulations,
+simply
+because counting indices for substring limits quickly leads to errors.
+Running the program, the output from the loop looks like this
+
+<p>
+<!-- begin verbatim block  ccq-->
+<pre><code>debug: x=&quot;-1.345   &quot;, y=&quot; 0.1112   &quot;, z=&quot; 9.1928
+&quot;
+</code></pre>
+<!-- end verbatim block -->
+for the first line in the file. The double quotes show the exact
+extent of the extracted coordinates. Note that the last quote
+appears on the next line. This is because <code>line</code> has a newline
+at the end (this newline must be there to define the end of the line),
+and the substring <code>line[z_start:]</code> contains the newline at the
+of <code>line</code>. Writing <code>line[z_start:-1]</code> would leave the
+newline out of the \( z \) coordinate. However, this has no effect in
+practice since we transform the substrings to <code>float</code>, and an extra
+newline or other blanks make no harm.
+
+<p>
+The <code>coor</code> object at the end of the program has the value
+
+<p>
+<!-- begin verbatim block  ccq-->
+<pre><code>[[ -1.34500000e+00   1.11200000e-01   9.19280000e+00]
+ [ -1.23100000e+00  -1.25100000e-01   1.00120000e+03]
+ [  1.00000000e-01   1.43440000e+06  -1.01000000e+00]
+ [  2.00000000e-01   1.20000000e-03  -1.34230000e+04]
+ [  1.50000000e+05  -7.66600000e-01   1.02700000e+03]]
+</code></pre>
+<!-- end verbatim block -->
+
+<h3>Solution 2: string search  <a name="___sec36"></a></h3>
+
+<p>
+One problem with the solution approach above is that the program
+will not work if the file format is subject to a
+change in the
+column positions of <code>x=</code>, <code>y=</code>, or <code>z=</code>.
+Instead of hardcoding numbers for the column positions, we can use
+the <code>find</code> method in string objects to locate these column positions:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>x_start = line.find('x=')
+y_start = line.find('y=')
+z_start = line.find('z=')
+</code></pre>
+<!-- end verbatim block -->
+The rest of the code is similar to the complete program listed above,
+and the complete code is stored in the file
+<a href="http://tinyurl.com/pwyasaa/files/file2coor_v2.py" target="_self"><tt>file2coor_v2.py</tt></a>.
+
+<h3>Solution 3: string split  <a name="___sec37"></a></h3>
+
+<p>
+String splitting is a powerful tool, also in the present case.
+Let us split with respect to the equal sign. The first line in the file
+then gives us the words
+
+<p>
+<!-- begin verbatim block  ccq-->
+<pre><code>['x', '-1.345   y', ' 0.1112   z', ' 9.1928']
+</code></pre>
+<!-- end verbatim block -->
+We throw away the first word, and strip off the last character in the
+next word. The final word can be used as is. The complete program
+is found in the file
+<a href="http://tinyurl.com/pwyasaa/files/file2coor_v3.py" target="_self"><tt>file2coor_v3.py</tt></a> and looks like
+
+<p>
+<!-- begin verbatim block  pypro-->
+<pre><code>infile = open('xyz.dat', 'r')
+coor = []  # list of (x,y,z) tuples
+for line in infile:
+    words = line.split('=')
+    x = float(words[1][:-1])
+    y = float(words[2][:-1])
+    z = float(words[3])
+    coor.append((x, y, z))
+infile.close()
+
+import numpy as np
+coor = np.array(coor)
+print coor.shape, coor
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+More sophisticated examples of string operations appear in
+the section <a href="._files-solarized003.html#sec:files:url:interpret">Example: Extracting data from HTML</a>.
+
+<p>
+<p>
+<!-- begin bottom navigation -->
+<table style="width: 100%"><tr><td>
+<div style="text-align: left;"><a href="._files-solarized001.html">&laquo; Previous</a></div>
+</td><td>
+<div style="text-align: right;"><a href="._files-solarized003.html">Next &raquo;</a></div>
+</td></tr></table>
+<!-- end bottom navigation -->
+</p>
+
+<!-- ------------------- end of main content --------------- -->
+
+
+</body>
+</html>
+    
+

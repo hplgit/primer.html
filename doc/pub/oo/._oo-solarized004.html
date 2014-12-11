@@ -1,0 +1,2125 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Object-oriented programming">
+<meta name="keywords" content="object-based programming,class hierarchy,class relationship superclass,class relationship derived class,class relationship inheritance,derived class,parent class,base class,superclass,subclass,class relationship subclass,Online Python Tutor,check an object's type,is-a class relationship,has-a class relationship,class relationship is-a,class relationship has-a,dynamic binding,factory function,closure,functional programming,Midpoint rule for integration,Trapezoidal rule for integration,overloading (of methods),polymorphism,Midpoint rule for integration,Trapezoidal rule for integration,recursive function calls,multiple inheritance,convergence rate,Trapezoidal rule for integration,Midpoint rule for integration,object-oriented programming">
+
+<title>Object-oriented programming</title>
+
+
+<link href="https://raw.githubusercontent.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/css/solarized_light_code.css" rel="stylesheet" type="text/css" title="light"/>
+<script src="https://rawgit.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<link href="http://thomasf.github.io/solarized-css/solarized-light.min.css" rel="stylesheet">
+<style type="text/css">
+h1 {color: #b58900;}  /* yellow */
+/* h1 {color: #cb4b16;}  orange */
+/* h1 {color: #d33682;}  magenta, the original choice of thomasf */
+.alert-text-small   { font-size: 80%;  }
+.alert-text-large   { font-size: 130%; }
+.alert-text-normal  { font-size: 90%;  }
+.alert {
+  padding:8px 35px 8px 14px; margin-bottom:18px;
+  text-shadow:0 1px 0 rgba(255,255,255,0.5);
+  border:1px solid #93a1a1;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  color: #555;
+  background-color: #eee8d5;
+  background-position: 10px 5px;
+  background-repeat: no-repeat;
+  background-size: 38px;
+  padding-left: 55px;
+  width: 75%;
+ }
+.alert-block {padding-top:14px; padding-bottom:14px}
+.alert-block > p, .alert-block > ul {margin-bottom:1em}
+.alert li {margin-top: 1em}
+.alert-block p+p {margin-top:5px}
+.alert-notice { background-image: url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_notice.png); }
+.alert-summary  { background-image:url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_summary.png); }
+.alert-warning { background-image: url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_warning.png); }
+.alert-question {background-image:url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_question.png); }
+
+div { text-align: justify; text-justify: inter-word; }
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [(' Inheritance and class hierarchies ',
+               1,
+               'sec:oo:inheritance',
+               'sec:oo:inheritance'),
+              (' A class for straight lines ',
+               2,
+               'sec:oo:Line',
+               'sec:oo:Line'),
+              (' A first try on a class for parabolas ',
+               2,
+               'sec:oo:Parabola1',
+               'sec:oo:Parabola1'),
+              (' A class for parabolas using inheritance ',
+               2,
+               None,
+               '___sec3'),
+              (' Program flow ', 3, None, '___sec4'),
+              (' Checking the class type ', 2, None, '___sec5'),
+              (' Attribute vs inheritance: has-a vs is-a relationship ',
+               2,
+               None,
+               '___sec6'),
+              (' Superclass for defining an interface ',
+               2,
+               'sec:oo:Func',
+               'sec:oo:Func'),
+              (' Class hierarchy for numerical differentiation ',
+               1,
+               'sec:oo:numdiff',
+               'sec:oo:numdiff'),
+              (' Classes for differentiation ',
+               2,
+               'sec:oo:Diff',
+               'sec:oo:Diff'),
+              (' Computer science remark ', 3, None, '___sec10'),
+              (' Verification ', 2, None, '___sec11'),
+              (' A flexible main program ', 2, None, '___sec12'),
+              (' Extensions ', 2, 'sec:oo:Diff:extend', 'sec:oo:Diff:extend'),
+              (' Application ', 3, None, '___sec14'),
+              (' Alternative implementation via functions ',
+               2,
+               'sec:oo:diff:alt:func',
+               'sec:oo:diff:alt:func'),
+              (' Alternative implementation via functional programming ',
+               2,
+               'sec:oo:diff:alt:FP',
+               'sec:oo:diff:alt:FP'),
+              (' Alternative implementation via a single class ',
+               2,
+               'sec:oo:diff:oneclass',
+               'sec:oo:diff:oneclass'),
+              (' Remark ', 3, None, '___sec18'),
+              (' Class hierarchy for numerical integration ',
+               1,
+               'sec:oo:int',
+               'sec:oo:int'),
+              (' Numerical integration methods ',
+               2,
+               'sec:oo:int:methods',
+               'sec:oo:int:methods'),
+              (' Classes for integration ',
+               2,
+               'sec:oo:Integrator',
+               'sec:oo:Integrator'),
+              (' Verification ', 2, None, '___sec22'),
+              (' Using the class hierarchy ', 2, None, '___sec23'),
+              (' About object-oriented programming ', 2, None, '___sec24'),
+              (' Class hierarchy for making drawings ',
+               1,
+               'sec:oo:shapes',
+               'sec:oo:shapes'),
+              (' Using the object collection ', 2, None, '___sec26'),
+              (' Basic drawing ', 3, None, '___sec27'),
+              (' Groups of objects ', 3, None, '___sec28'),
+              (' Changing line styles and colors ', 3, None, '___sec29'),
+              (' The figure composition as an object hierarchy ',
+               3,
+               None,
+               '___sec30'),
+              (' Animation: translating the vehicle ', 3, None, '___sec31'),
+              (' Animation: rolling the wheels ',
+               3,
+               'sketcher:vehicle1:anim',
+               'sketcher:vehicle1:anim'),
+              (' Example of classes for geometric objects ',
+               2,
+               None,
+               '___sec33'),
+              (' Simple geometric objects ', 3, None, '___sec34'),
+              (' Class curve ', 3, None, '___sec35'),
+              (' Compound geometric objects ', 3, None, '___sec36'),
+              (' Adding functionality via recursion ', 2, None, '___sec37'),
+              (' Basic principles of recursion ', 3, None, '___sec38'),
+              (' Explaining recursion ', 3, None, '___sec39'),
+              (' Scaling, translating, and rotating a figure ',
+               2,
+               'sketcher:scaling',
+               'sketcher:scaling'),
+              (' Scaling ', 3, None, '___sec41'),
+              (' Translation ', 3, None, '___sec42'),
+              (' Rotation ', 3, None, '___sec43'),
+              (' Classes for DNA analysis ', 1, 'bioinf:oo', 'bioinf:oo'),
+              (' Class for regions ', 2, None, '___sec45'),
+              (' Class for genes ', 2, None, '___sec46'),
+              (' Basic features of class gene ', 3, None, '___sec47'),
+              (' Flexible constructor ', 3, None, '___sec48'),
+              (' Other methods ', 3, None, '___sec49'),
+              (' Subclasses ', 2, None, '___sec50'),
+              (' Summary ', 1, None, '___sec51'),
+              (' Chapter topics ', 2, None, '___sec52'),
+              (' Subclass example ', 3, None, '___sec53'),
+              (' Subclassing in general ', 3, None, '___sec54'),
+              (' Terminology ', 3, None, '___sec55'),
+              (' Example: Input data reader ',
+               2,
+               'sec:oo:ReadInput',
+               'sec:oo:ReadInput'),
+              (' Problem ', 3, None, '___sec57'),
+              (' Solution ', 3, None, '___sec58'),
+              (' Prompting the user ', 3, None, '___sec59'),
+              (' Reading from file ', 3, None, '___sec60'),
+              (' Reading from the command line ', 3, None, '___sec61'),
+              (' Reading from a gui ', 3, None, '___sec62'),
+              (' More flexibility in the superclass ', 3, None, '___sec63'),
+              (' Demonstrating the tool ', 3, None, '___sec64'),
+              (' Exercises ', 1, None, '___sec65'),
+              (' Exercise 1: Demonstrate the magic of inheritance ',
+               2,
+               'sec:oo:ex1',
+               'sec:oo:ex1'),
+              (' Exercise 2: Make polynomial subclasses of parabolas ',
+               2,
+               'sec:oo:ex2',
+               'sec:oo:ex2'),
+              (' Remarks ', 3, None, '___sec68'),
+              (' Exercise 3: Implement a class for a function as a subclass ',
+               2,
+               'sec:oo:ex3',
+               'sec:oo:ex3'),
+              (' Exercise 4: Create an alternative class hierarchy for polynomials ',
+               2,
+               'sec:oo:ex5',
+               'sec:oo:ex5'),
+              (' Exercise 5: Make circle a subclass of an ellipse ',
+               2,
+               'sec:oo:ex5b',
+               'sec:oo:ex5b'),
+              (' Exercise 6: Make super- and subclass for a point ',
+               2,
+               'sec:oo:ex17',
+               'sec:oo:ex17'),
+              (' Exercise 7: Modify a function class by subclassing ',
+               2,
+               'sec:oo:ex7',
+               'sec:oo:ex7'),
+              (' Exercise 8: Explore the accuracy of difference formulas ',
+               2,
+               'sec:oo:ex18',
+               'sec:oo:ex18'),
+              (' Exercise 9: Implement a subclass ',
+               2,
+               'sec:oo:ex15b',
+               'sec:oo:ex15b'),
+              (' Exercise 10: Make classes for numerical differentiation ',
+               2,
+               'sec:oo:ex33',
+               'sec:oo:ex33'),
+              (' Exercise 11: Implement a new subclass for differentiation ',
+               2,
+               'sec:oo:ex31',
+               'sec:oo:ex31'),
+              (' Exercise 12: Understand if a class can be used recursively ',
+               2,
+               'sec:oo:ex14',
+               'sec:oo:ex14'),
+              (' Exercise 13: Represent people by a class hierarchy ',
+               2,
+               'sec:oo:ex4',
+               'sec:oo:ex4'),
+              (' Remark ', 3, None, '___sec80'),
+              (' Exercise 14: Add a new class in a class hierarchy ',
+               2,
+               'sec:oo:ex15',
+               'sec:oo:ex15'),
+              (' Exercise 15: Compute convergence rates of numerical integration methods ',
+               2,
+               'sec:oo:ex16',
+               'sec:oo:ex16'),
+              (' Exercise 16: Add common functionality in a class hierarchy ',
+               2,
+               'sec:oo:ex6',
+               'sec:oo:ex6'),
+              (' Exercise 17: Make a class hierarchy for root finding ',
+               2,
+               'sec:oo:ex41',
+               'sec:oo:ex41'),
+              (' Exercise 18: Make a calculus calculator class ',
+               2,
+               'sec:plot:ex30',
+               'sec:plot:ex30'),
+              (' Exercise 19: Compute inverse functions ',
+               2,
+               'sec:plot:ex30b',
+               'sec:plot:ex30b'),
+              (' Exercise 20: Make line drawing of a person; program ',
+               2,
+               'pysketcher:exer:person:prog',
+               'pysketcher:exer:person:prog'),
+              (' Exercise 21: Make line drawing of a person; class ',
+               2,
+               'pysketcher:exer:person:class',
+               'pysketcher:exer:person:class'),
+              (' Exercise 22: Animate a person with waving hands ',
+               2,
+               'pysketcher:exer:person:anim',
+               'pysketcher:exer:person:anim'),
+              (' References ', 1, None, '___sec90')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- newcommands_keep.tex -->
+$$
+\newcommand{\tp}{\thinspace .}
+$$
+
+
+
+
+    
+<a name="part0004"></a>
+<p>
+<!-- begin top navigation -->
+<table style="width: 100%"><tr><td>
+<div style="text-align: left;"><a href="._oo-solarized003.html">&laquo; Previous</a></div>
+</td><td>
+<div style="text-align: right;"><a href="._oo-solarized005.html">Next &raquo;</a></div>
+</td></tr></table>
+<!-- end top navigation -->
+</p>
+
+<p>
+<!-- !split -->
+
+<h1>Class hierarchy for making drawings <a name="sec:oo:shapes"></a></h1>
+
+<p>
+Implementing a drawing program provides a very good example on the
+usefulness of object-oriented programming. In the following we shall
+develop the simpler parts of a relatively small and compact drawing
+program for making sketches of the type shown in Figure
+<a href="#sketcher:fig:inclinedplane">6</a>.  This is a typical <em>principal sketch</em>
+of a physics problem, here involving a rolling wheel on an inclined
+plane. The sketch
+is made up many individual elements: a rectangle
+filled with a pattern (the inclined plane), a hollow circle with color
+(the wheel), arrows with labels (the \( N \) and \( Mg \) forces, and the \( x \)
+axis), an angle with symbol \( \theta \), and a dashed line indicating the
+starting location of the wheel.
+
+<p>
+Drawing software and plotting programs can produce such figures quite
+easily in principle, but the amount of details the user needs to
+control with the mouse can be substantial. Software more tailored to
+producing sketches of this type would work with more convenient
+abstractions, such as circle, wall, angle, force arrow, axis, and so
+forth. And as soon we start <em>programming</em> to construct the figure we
+get a range of other powerful tools at disposal. For example, we can
+easily translate and rotate parts of the figure and make an animation
+that illustrates the physics of the problem.
+Programming as a superior alternative to interactive drawing is
+the mantra of this section.
+
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 6:  Sketch of a physics problem. <a name="sketcher:fig:inclinedplane"></a> </p></center>
+<p><img src="fig-oo/wheel_on_inclined_plane.png" align="bottom" width=600></p>
+</center>
+
+<p>
+Classes are very suitable for implementing the various components that
+build up a sketch. In particular, we shall demonstrate that as soon as
+some classes are established, more are easily added. Enhanced
+functionality for all the classes is also easy to implement in common,
+generic code that can immediately be shared by all present and future
+classes.
+
+<p>
+The fundamental data structure involved in this case study is a
+hierarchical tree, and much of the material on implementation issues
+targets how to traverse tree structures with recursive function calls.
+This topic is of key relevance in a wide range of other applications
+as well.
+
+<h2>Using the object collection  <a name="___sec26"></a></h2>
+
+<p>
+We start by demonstrating a convenient user interface for making
+sketches of the type in Figure <a href="#sketcher:fig:inclinedplane">6</a>.
+However, it is more appropriate to start with a significantly simpler
+example as depicted in Figure <a href="#sketcher:fig:vehicle0">7</a>.  This toy
+sketch consists of several elements: two circles, two rectangles, and
+a &quot;ground&quot; element.
+
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 7:  Sketch of a simple figure. <a name="sketcher:fig:vehicle0"></a> </p></center>
+<p><img src="fig-oo/vehicle0_dim.png" align="bottom" width=600></p>
+</center>
+
+<h3>Basic drawing  <a name="___sec27"></a></h3>
+
+<p>
+A typical program creating these five elements is shown next.
+After importing the <code>pysketcher</code> package, the first task is always to
+define a coordinate system:
+<!-- begin verbatim block  pycod-->
+<pre><code>from pysketcher import *
+
+drawing_tool.set_coordinate_system(
+    xmin=0, xmax=10, ymin=-1, ymax=8)
+</code></pre>
+<!-- end verbatim block -->
+Instead of working with lengths expressed by specific numbers it is
+highly recommended to use variables to parameterize lengths as
+this makes it easier to change dimensions later.
+Here we introduce some key lengths for the radius of the wheels,
+distance between the wheels, etc.:
+<!-- begin verbatim block  pycod-->
+<pre><code>R = 1    # radius of wheel
+L = 4    # distance between wheels
+H = 2    # height of vehicle body
+w_1 = 5  # position of front wheel
+drawing_tool.set_coordinate_system(xmin=0, xmax=w_1 + 2*L + 3*R,
+                                   ymin=-1, ymax=2*R + 3*H)
+</code></pre>
+<!-- end verbatim block -->
+With the drawing area in place we can make the first <code>Circle</code> object
+in an intuitive fashion:
+<!-- begin verbatim block  pycod-->
+<pre><code>wheel1 = Circle(center=(w_1, R), radius=R)
+</code></pre>
+<!-- end verbatim block -->
+to change dimensions later.
+
+<p>
+To translate the geometric information about the <code>wheel1</code> object to
+instructions for the plotting engine (in this case Matplotlib), one calls the
+<code>wheel1.draw()</code>. To display all drawn objects, one issues
+<code>drawing_tool.display()</code>. The typical steps are hence:
+<!-- begin verbatim block  pycod-->
+<pre><code>wheel1 = Circle(center=(w_1, R), radius=R)
+wheel1.draw()
+
+# Define other objects and call their draw() methods
+drawing_tool.display()
+drawing_tool.savefig('tmp.png')  # store picture
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+The next wheel can be made by taking a copy of <code>wheel1</code> and
+translating the object to the right according to a
+displacement vector \( (L,0) \):
+<!-- begin verbatim block  pycod-->
+<pre><code>wheel2 = wheel1.copy()
+wheel2.translate((L,0))
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+The two rectangles are also made in an intuitive way:
+<!-- begin verbatim block  pycod-->
+<pre><code>under = Rectangle(lower_left_corner=(w_1-2*R, 2*R),
+                  width=2*R + L + 2*R, height=H)
+over  = Rectangle(lower_left_corner=(w_1, 2*R + H),
+                  width=2.5*R, height=1.25*H)
+</code></pre>
+<!-- end verbatim block -->
+
+<h3>Groups of objects  <a name="___sec28"></a></h3>
+
+<p>
+Instead of calling the <code>draw</code> method of every object, we can
+group objects and call <code>draw</code>, or perform other operations, for
+the whole group. For example, we may collect the two wheels
+in a <code>wheels</code> group and the <code>over</code> and <code>under</code> rectangles
+in a <code>body</code> group. The whole vehicle is a composition
+of its <code>wheels</code> and <code>body</code> groups. The code goes like
+<!-- begin verbatim block  pycod-->
+<pre><code>wheels  = Composition({'wheel1': wheel1, 'wheel2': wheel2})
+body    = Composition({'under': under, 'over': over})
+
+vehicle = Composition({'wheels': wheels, 'body': body})
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+The ground is illustrated by an object of type <code>Wall</code>,
+mostly used to indicate walls in sketches of mechanical systems.
+A <code>Wall</code> takes the <code>x</code> and <code>y</code> coordinates of some curve,
+and a <code>thickness</code> parameter, and creates a thick curve filled
+with a simple pattern. In this case the curve is just a flat
+line so the construction is made of two points on the
+ground line (\( (w_1-L,0) \) and \( (w_1+3L,0) \)):
+<!-- begin verbatim block  pycod-->
+<pre><code>ground = Wall(x=[w_1 - L, w_1 + 3*L], y=[0, 0], thickness=-0.3*R)
+</code></pre>
+<!-- end verbatim block -->
+The negative thickness makes the pattern-filled rectangle appear below
+the defined line, otherwise it appears above.
+
+<p>
+We may now collect all the objects in a &quot;top&quot; object that contains
+the whole figure:
+<!-- begin verbatim block  pycod-->
+<pre><code>fig = Composition({'vehicle': vehicle, 'ground': ground})
+fig.draw()  # send all figures to plotting backend
+drawing_tool.display()
+drawing_tool.savefig('tmp.png')
+</code></pre>
+<!-- end verbatim block -->
+The <code>fig.draw()</code> call will visit
+all subgroups, their subgroups,
+and so forth in the hierarchical tree structure of
+figure elements,
+and call <code>draw</code> for every object.
+
+<h3>Changing line styles and colors  <a name="___sec29"></a></h3>
+
+<p>
+Controlling the line style, line color, and line width is
+fundamental when designing figures. The <code>pysketcher</code>
+package allows the user to control such properties in
+single objects, but also set global properties that are
+used if the object has no particular specification of
+the properties. Setting the global properties are done like
+<!-- begin verbatim block  pycod-->
+<pre><code>drawing_tool.set_linestyle('dashed')
+drawing_tool.set_linecolor('black')
+drawing_tool.set_linewidth(4)
+</code></pre>
+<!-- end verbatim block -->
+At the object level the properties are specified in a similar
+way:
+<!-- begin verbatim block  pycod-->
+<pre><code>wheels.set_linestyle('solid')
+wheels.set_linecolor('red')
+</code></pre>
+<!-- end verbatim block -->
+and so on.
+
+<p>
+Geometric figures can be specified as <em>filled</em>, either with a color or with a
+special visual pattern:
+<!-- begin verbatim block  pycod-->
+<pre><code># Set filling of all curves
+drawing_tool.set_filled_curves(color='blue', pattern='/')
+
+# Turn off filling of all curves
+drawing_tool.set_filled_curves(False)
+
+# Fill the wheel with red color
+wheel1.set_filled_curves('red')
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+<!-- <a href="http://packages.python.org/ete2/" target="_self"><tt>http://packages.python.org/ete2/</tt></a> for visualizing tree structures! -->
+
+<h3>The figure composition as an object hierarchy  <a name="___sec30"></a></h3>
+
+<p>
+The composition of objects making up the figure
+is hierarchical, similar to a family, where
+each object has a parent and a number of children. Do a
+<code>print fig</code> to display the relations:
+<!-- begin verbatim block  dat-->
+<pre><code>ground
+    wall
+vehicle
+    body
+        over
+            rectangle
+        under
+            rectangle
+    wheels
+        wheel1
+            arc
+        wheel2
+            arc
+</code></pre>
+<!-- end verbatim block -->
+The indentation reflects how deep down in the hierarchy (family)
+we are.
+This output is to be interpreted as follows:
+
+<ul>
+  <li> <code>fig</code> contains two objects, <code>ground</code> and <code>vehicle</code></li>
+  <li> <code>ground</code> contains an object <code>wall</code></li>
+  <li> <code>vehicle</code> contains two objects, <code>body</code> and <code>wheels</code></li>
+  <li> <code>body</code> contains two objects, <code>over</code> and <code>under</code></li>
+  <li> <code>wheels</code> contains two objects, <code>wheel1</code> and <code>wheel2</code></li>
+</ul>
+
+In this listing there are also objects not defined by the
+programmer: <code>rectangle</code> and <code>arc</code>. These are of type <code>Curve</code>
+and automatically generated by the classes <code>Rectangle</code> and <code>Circle</code>.
+
+<p>
+More detailed information can be printed by
+<!-- begin verbatim block  pycod-->
+<pre><code>print fig.show_hierarchy('std')
+</code></pre>
+<!-- end verbatim block -->
+yielding the output
+<!-- begin verbatim block  dat-->
+<pre><code>ground (Wall):
+    wall (Curve): 4 coords fillcolor='white' fillpattern='/'
+vehicle (Composition):
+    body (Composition):
+        over (Rectangle):
+            rectangle (Curve): 5 coords
+        under (Rectangle):
+            rectangle (Curve): 5 coords
+    wheels (Composition):
+        wheel1 (Circle):
+            arc (Curve): 181 coords
+        wheel2 (Circle):
+            arc (Curve): 181 coords
+</code></pre>
+<!-- end verbatim block -->
+Here we can see the class type for each figure object, how many
+coordinates that are involved in basic figures (<code>Curve</code> objects), and
+special settings of the basic figure (fillcolor, line types, etc.).
+For example, <code>wheel2</code> is a <code>Circle</code> object consisting of an <code>arc</code>,
+which is a <code>Curve</code> object consisting of 181 coordinates (the
+points needed to draw a smooth circle). The <code>Curve</code> objects are the
+only objects that really holds specific coordinates to be drawn.
+The other object types are just compositions used to group
+parts of the complete figure.
+
+<p>
+One can also get a graphical overview of the hierarchy of figure objects
+that build up a particular figure <code>fig</code>.
+Just call <code>fig.graphviz_dot('fig')</code> to produce a file <code>fig.dot</code> in
+the <em>dot format</em>. This file contains relations between parent and
+child objects in the figure and can be turned into an image,
+as in Figure <a href="#sketcher:fig:vehicle0:hier1">8</a>, by
+running the <code>dot</code> program:
+<!-- begin verbatim block  sys-->
+<pre><code>Terminal&gt; dot -Tpng -o fig.png fig.dot
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 8:  Hierarchical relation between figure objects. <a name="sketcher:fig:vehicle0:hier1"></a> </p></center>
+<p><img src="fig-oo/vehicle0_hier1.png" align="bottom" width=500></p>
+</center>
+
+<p>
+The call <code>fig.graphviz_dot('fig', classname=True)</code> makes a <code>fig.dot</code> file
+where the class type of each object is also visible, see
+Figure <a href="#sketcher:fig:vehicle0:hier2">9</a>. The ability to write out the
+object hierarchy or view it graphically can be of great help when
+working with complex figures that involve layers of subfigures.
+
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 9:  Hierarchical relation between figure objects, including their class names. <a name="sketcher:fig:vehicle0:hier2"></a> </p></center>
+<p><img src="fig-oo/vehicle0_hier2.png" align="bottom" width=500></p>
+</center>
+
+<p>
+Any of the objects can in the program be reached through their names, e.g.,
+<!-- begin verbatim block  pycod-->
+<pre><code>fig['vehicle']
+fig['vehicle']['wheels']
+fig['vehicle']['wheels']['wheel2']
+fig['vehicle']['wheels']['wheel2']['arc']
+fig['vehicle']['wheels']['wheel2']['arc'].x  # x coords
+fig['vehicle']['wheels']['wheel2']['arc'].y  # y coords
+fig['vehicle']['wheels']['wheel2']['arc'].linestyle
+fig['vehicle']['wheels']['wheel2']['arc'].linetype
+</code></pre>
+<!-- end verbatim block -->
+Grabbing a part of the figure this way is handy for
+changing properties of that part, for example, colors, line styles
+(see Figure <a href="#sketcher:fig:vehicle0:v2">10</a>):
+<!-- begin verbatim block  pycod-->
+<pre><code>fig['vehicle']['wheels'].set_filled_curves('blue')
+fig['vehicle']['wheels'].set_linewidth(6)
+fig['vehicle']['wheels'].set_linecolor('black')
+
+fig['vehicle']['body']['under'].set_filled_curves('red')
+
+fig['vehicle']['body']['over'].set_filled_curves(pattern='/')
+fig['vehicle']['body']['over'].set_linewidth(14)
+fig['vehicle']['body']['over']['rectangle'].linewidth = 4
+</code></pre>
+<!-- end verbatim block -->
+The last line accesses the <code>Curve</code> object directly, while the line above,
+accesses the <code>Rectangle</code> object, which will then set the linewidth of
+its <code>Curve</code> object, and other objects if it had any.
+The result of the actions above is shown in Figure <a href="#sketcher:fig:vehicle0:v2">10</a>.
+
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 10:  Left: Basic line-based drawing. Right: Thicker lines and filled parts. <a name="sketcher:fig:vehicle0:v2"></a> </p></center>
+<p><img src="fig-oo/vehicle0.png" align="bottom" width=700></p>
+</center>
+
+<p>
+We can also change position of parts of the figure and thereby make
+animations, as shown next.
+
+<h3>Animation: translating the vehicle  <a name="___sec31"></a></h3>
+
+<p>
+Can we make our little vehicle roll? A first attempt will be to
+fake rolling by just displacing all parts of the vehicle.
+The relevant parts constitute the <code>fig['vehicle']</code> object.
+This part of the figure can be translated, rotated, and scaled.
+A translation along the ground means a translation in \( x \) direction,
+say a length \( L \) to the right:
+<!-- begin verbatim block  pycod-->
+<pre><code>fig['vehicle'].translate((L,0))
+</code></pre>
+<!-- end verbatim block -->
+You need to erase, draw, and display to see the movement:
+<!-- begin verbatim block  pycod-->
+<pre><code>drawing_tool.erase()
+fig.draw()
+drawing_tool.display()
+</code></pre>
+<!-- end verbatim block -->
+Without erasing, the old drawing of the vehicle will remain in
+the figure so you get two vehicles. Without <code>fig.draw()</code> the
+new coordinates of the vehicle will not be communicated to
+the drawing tool, and without calling display the updated
+drawing will not be visible.
+
+<p>
+A figure that moves in time is conveniently realized by the
+function <code>animate</code>:
+<!-- begin verbatim block  pycod-->
+<pre><code>animate(fig, tp, action)
+</code></pre>
+<!-- end verbatim block -->
+Here, <code>fig</code> is the entire figure, <code>tp</code> is an array of
+time points, and <code>action</code> is a user-specified function that changes
+<code>fig</code> at a specific time point. Typically, <code>action</code> will move
+parts of <code>fig</code>.
+
+<p>
+In the present case we can define the movement through a velocity
+function <code>v(t)</code> and displace the figure <code>v(t)*dt</code> for small time
+intervals <code>dt</code>. A possible velocity function is
+<!-- begin verbatim block  pycod-->
+<pre><code>def v(t):
+    return -8*R*t*(1 - t/(2*R))
+
+</code></pre>
+<!-- end verbatim block -->
+Our action function for horizontal displacements <code>v(t)*dt</code> becomes
+<!-- begin verbatim block  pycod-->
+<pre><code>def move(t, fig):
+    x_displacement = dt*v(t)
+    fig['vehicle'].translate((x_displacement, 0))
+</code></pre>
+<!-- end verbatim block -->
+Since our velocity is negative for \( t\in [0,2R] \) the displacement is
+to the left.
+
+<p>
+The <code>animate</code> function will for each time point <code>t</code> in <code>tp</code> erase
+the drawing, call <code>action(t, fig)</code>, and show the new figure by
+<code>fig.draw()</code> and <code>drawing_tool.display()</code>.
+Here we choose a resolution of the animation corresponding to
+25 time points in the time interval \( [0,2R] \):
+<!-- begin verbatim block  pycod-->
+<pre><code>import numpy
+tp = numpy.linspace(0, 2*R, 25)
+dt = tp[1] - tp[0]  # time step
+
+animate(fig, tp, move, pause_per_frame=0.2)
+</code></pre>
+<!-- end verbatim block -->
+The <code>pause_per_frame</code> adds a pause, here 0.2 seconds, between
+each frame in the animation.
+
+<p>
+We can also ask <code>animate</code> to store each frame in a file:
+<!-- begin verbatim block  pycod-->
+<pre><code>files = animate(fig, tp, move_vehicle, moviefiles=True,
+                pause_per_frame=0.2)
+</code></pre>
+<!-- end verbatim block -->
+The <code>files</code> variable, here <code>'tmp_frame_%04d.png'</code>,
+is the printf-specification used to generate the individual
+plot files. We can use this specification to make a video
+file via <code>ffmpeg</code> (or <code>avconv</code> on Debian-based Linux systems such
+as Ubuntu). Videos in the Flash and WebM formats can be created
+by
+
+<p>
+<!-- begin verbatim block  sys-->
+<pre><code>Terminal&gt; ffmpeg -r 12 -i tmp_frame_%04d.png -vcodec flv mov.flv
+Terminal&gt; ffmpeg -r 12 -i tmp_frame_%04d.png -vcodec libvpx mov.webm
+</code></pre>
+<!-- end verbatim block -->
+An animated GIF movie can also be made using the <code>convert</code> program
+from the ImageMagick software suite:
+
+<p>
+<!-- begin verbatim block  sys-->
+<pre><code>Terminal&gt; convert -delay 20 tmp_frame*.png mov.gif
+Terminal&gt; animate mov.gif  # play movie
+</code></pre>
+<!-- end verbatim block -->
+The delay between frames, in units of 1/100 s,
+governs the speed of the movie.
+To play the animated GIF file in a web page, simply insert
+<code>&lt;img src=&quot;mov.gif&quot;&gt;</code> in the HTML code.
+
+<p>
+The individual PNG frames can be directly played in a web
+browser by running
+
+<p>
+<!-- begin verbatim block  sys-->
+<pre><code>Terminal&gt; scitools movie output_file=mov.html fps=5 tmp_frame*
+</code></pre>
+<!-- end verbatim block -->
+or calling
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>from scitools.std import movie
+movie(files, encoder='html', output_file='mov.html')
+</code></pre>
+<!-- end verbatim block -->
+in Python. Load the resulting file <code>mov.html</code> into a web browser
+to play the movie.
+
+<p>
+Try to run <a href="http://tinyurl.com/pwyasaa/oo/vehicle0.py" target="_self"><tt>vehicle0.py</tt></a> and
+then load <code>mov.html</code> into a browser, or play one of the <code>mov.*</code>
+video files.  Alternatively, you can view a ready-made <a href="http://tinyurl.com/oou9lp7/mov-tut/vehicle0.html" target="_self">movie</a>.
+
+<h3>Animation: rolling the wheels <a name="sketcher:vehicle1:anim"></a></h3>
+
+<p>
+It is time to show rolling wheels. To this end, we add spokes to the
+wheels, formed by two crossing lines, see Figure <a href="#sketcher:fig:vehicle1">11</a>.
+The construction of the wheels will now involve a circle and two lines:
+<!-- begin verbatim block  pycod-->
+<pre><code>wheel1 = Composition({
+    'wheel': Circle(center=(w_1, R), radius=R),
+    'cross': Composition({'cross1': Line((w_1,0),   (w_1,2*R)),
+                          'cross2': Line((w_1-R,R), (w_1+R,R))})})
+wheel2 = wheel1.copy()
+wheel2.translate((L,0))
+</code></pre>
+<!-- end verbatim block -->
+Observe that <code>wheel1.copy()</code> copies all the objects that make
+up the first wheel, and <code>wheel2.translate</code> translates all
+the copied objects.
+
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 11:  Wheels with spokes to illustrate rolling. <a name="sketcher:fig:vehicle1"></a> </p></center>
+<p><img src="fig-oo/vehicle1.png" align="bottom" width=400></p>
+</center>
+
+<p>
+The <code>move</code> function now needs to displace all the objects in the
+entire vehicle and also rotate the <code>cross1</code> and <code>cross2</code>
+objects in both wheels.
+The rotation angle follows from the fact that the arc length
+of a rolling wheel equals the displacement of the center of
+the wheel, leading to a rotation angle
+<!-- begin verbatim block  pycod-->
+<pre><code>angle = - x_displacement/R
+</code></pre>
+<!-- end verbatim block -->
+With <code>w_1</code> tracking the \( x \) coordinate of the center
+of the front wheel, we can rotate that wheel by
+<!-- begin verbatim block  pycod-->
+<pre><code>w1 = fig['vehicle']['wheels']['wheel1']
+from math import degrees
+w1.rotate(degrees(angle), center=(w_1, R))
+</code></pre>
+<!-- end verbatim block -->
+The <code>rotate</code> function takes two parameters: the rotation angle
+(in degrees) and the center point of the rotation, which is the
+center of the wheel in this case. The other wheel is rotated by
+<!-- begin verbatim block  pycod-->
+<pre><code>w2 = fig['vehicle']['wheels']['wheel2']
+w2.rotate(degrees(angle), center=(w_1 + L, R))
+</code></pre>
+<!-- end verbatim block -->
+That is, the angle is the same, but the rotation point is different.
+The update of the center point is done by <code>w_1 += x_displacement</code>.
+The complete <code>move</code> function with translation of the entire
+vehicle and rotation of the wheels then becomes
+<!-- begin verbatim block  pycod-->
+<pre><code>w_1 = w_1 + L   # start position
+
+def move(t, fig):
+    x_displacement = dt*v(t)
+    fig['vehicle'].translate((x_displacement, 0))
+
+    # Rotate wheels
+    global w_1
+    w_1 += x_displacement
+    # R*angle = -x_displacement
+    angle = - x_displacement/R
+    w1 = fig['vehicle']['wheels']['wheel1']
+    w1.rotate(degrees(angle), center=(w_1, R))
+    w2 = fig['vehicle']['wheels']['wheel2']
+    w2.rotate(degrees(angle), center=(w_1 + L, R))
+</code></pre>
+<!-- end verbatim block -->
+The complete example is found in the file
+<a href="http://tinyurl.com/pwyasaa/oo/vehicle1.py" target="_self"><tt>vehicle1.py</tt></a>. You may run this file or watch a <a href="http://tinyurl.com/oou9lp7/mov-tut/vehicle1.html" target="_self">ready-made movie</a>.
+
+<p>
+The advantages with making figures this way, through programming
+rather than using interactive drawing programs, are numerous.  For
+example, the objects are parameterized by variables so that various
+dimensions can easily be changed.  Subparts of the figure, possible
+involving a lot of figure objects, can change color, linetype, filling
+or other properties through a <em>single</em> function call.  Subparts of the
+figure can be rotated, translated, or scaled.  Subparts of the figure
+can also be copied and moved to other parts of the drawing
+area. However, the single most important feature is probably the
+ability to make animations governed by mathematical formulas or data
+coming from physics simulations of the problem, as shown in the example above.
+
+<h2>Example of classes for geometric objects  <a name="___sec33"></a></h2>
+
+<p>
+We shall now explain how we can, quite easily, realize software with
+the capabilities demonstrated in the previous examples. Each object in
+the figure is represented as a class in a class hierarchy. Using
+inheritance, classes can inherit properties from parent classes and
+add new geometric features.
+
+<p>
+We introduce class <code>Shape</code> as superclass for all specialized objects
+in a figure. This class does not store any data, but provides a
+series of functions that add functionality to all the subclasses.
+This will be shown later.
+
+<h3>Simple geometric objects  <a name="___sec34"></a></h3>
+
+<p>
+One simple subclass is <code>Rectangle</code>, specified by the coordinates of
+the lower left corner and its width and height:
+<!-- begin verbatim block  pycod-->
+<pre><code>class Rectangle(Shape):
+    def __init__(self, lower_left_corner, width, height):
+        p = lower_left_corner  # short form
+        x = [p[0], p[0] + width,
+             p[0] + width, p[0], p[0]]
+        y = [p[1], p[1], p[1] + height,
+             p[1] + height, p[1]]
+        self.shapes = {'rectangle': Curve(x,y)}
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+Any subclass of <code>Shape</code> will have a constructor that takes geometric
+information about the shape of the object and creates a dictionary
+<code>self.shapes</code> with the shape built of simpler shapes. The most
+fundamental shape is <code>Curve</code>, which is just a collection of \( (x,y) \)
+coordinates in two arrays <code>x</code> and <code>y</code>.  Drawing the <code>Curve</code> object is
+a matter of plotting <code>y</code> versus <code>x</code>.  For class <code>Rectangle</code> the <code>x</code>
+and <code>y</code> arrays contain the corner points of the rectangle in
+counterclockwise direction, starting and ending with in the lower left
+corner.
+
+<p>
+Class <code>Line</code> is also a simple class:
+<!-- begin verbatim block  pycod-->
+<pre><code>class Line(Shape):
+    def __init__(self, start, end):
+        x = [start[0], end[0]]
+        y = [start[1], end[1]]
+        self.shapes = {'line': Curve(x, y)}
+</code></pre>
+<!-- end verbatim block -->
+Here we only need two points, the start and end point on the line.
+However, we may want to add some useful functionality, e.g., the ability
+to give an \( x \) coordinate and have the class calculate the
+corresponding \( y \) coordinate:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>    def __call__(self, x):
+        &quot;&quot;&quot;Given x, return y on the line.&quot;&quot;&quot;
+        x, y = self.shapes['line'].x, self.shapes['line'].y
+        self.a = (y[1] - y[0])/(x[1] - x[0])
+        self.b = y[0] - self.a*x[0]
+        return self.a*x + self.b
+</code></pre>
+<!-- end verbatim block -->
+Unfortunately, this is too simplistic because vertical lines cannot be
+handled (infinite <code>self.a</code>). The true source code of <code>Line</code> therefore
+provides a more general solution at the cost of significantly longer
+code with more tests.
+
+<p>
+A circle implies a somewhat increased complexity. Again we represent
+the geometric object by a <code>Curve</code> object, but this time the <code>Curve</code>
+object needs to store a large number of points on the curve such that
+a plotting program produces a visually smooth curve.  The points on
+the circle must be calculated manually in the constructor of class
+<code>Circle</code>. The formulas for points \( (x,y) \) on a curve with radius \( R \)
+and center at \( (x_0, y_0) \) are given by
+
+$$
+\begin{align*}
+x &= x_0 + R\cos (t),\\ 
+y &= y_0 + R\sin (t),
+\end{align*}
+$$
+
+where \( t\in [0, 2\pi] \). A discrete set of \( t \) values in this
+interval gives the corresponding set of \( (x,y) \) coordinates on
+the circle. The user must specify the resolution as the number
+of \( t \) values. The circle's radius and center must of course
+also be specified.
+
+<p>
+We can write the <code>Circle</code> class as
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>class Circle(Shape):
+    def __init__(self, center, radius, resolution=180):
+        self.center, self.radius = center, radius
+        self.resolution = resolution
+
+        t = linspace(0, 2*pi, resolution+1)
+        x0 = center[0];  y0 = center[1]
+        R = radius
+        x = x0 + R*cos(t)
+        y = y0 + R*sin(t)
+        self.shapes = {'circle': Curve(x, y)}
+</code></pre>
+<!-- end verbatim block -->
+As in class <code>Line</code> we can offer the possibility to give an angle
+\( \theta \) (equivalent to \( t \) in the formulas above)
+and then get the corresponding \( x \) and \( y \) coordinates:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>    def __call__(self, theta):
+        &quot;&quot;&quot;Return (x, y) point corresponding to angle theta.&quot;&quot;&quot;
+        return self.center[0] + self.radius*cos(theta), \ 
+               self.center[1] + self.radius*sin(theta)
+</code></pre>
+<!-- end verbatim block -->
+There is one flaw with this method: it yields illegal values after
+a translation, scaling, or rotation of the circle.
+
+<p>
+A part of a circle, an arc, is a frequent geometric object when
+drawing mechanical systems. The arc is constructed much like
+a circle, but \( t \) runs in \( [\theta_s, \theta_s + \theta_a] \). Giving
+\( \theta_s \) and \( \theta_a \) the slightly more descriptive names
+<code>start_angle</code> and <code>arc_angle</code>, the code looks like this:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>class Arc(Shape):
+    def __init__(self, center, radius,
+                 start_angle, arc_angle,
+                 resolution=180):
+        self.start_angle = radians(start_angle)
+        self.arc_angle = radians(arc_angle)
+
+        t = linspace(self.start_angle,
+                     self.start_angle + self.arc_angle,
+                     resolution+1)
+        x0 = center[0];  y0 = center[1]
+        R = radius
+        x = x0 + R*cos(t)
+        y = y0 + R*sin(t)
+        self.shapes = {'arc': Curve(x, y)}
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+Having the <code>Arc</code> class, a <code>Circle</code> can alternatively be defined as
+a subclass specializing the arc to a circle:
+<!-- begin verbatim block  pycod-->
+<pre><code>class Circle(Arc):
+    def __init__(self, center, radius, resolution=180):
+        Arc.__init__(self, center, radius, 0, 360, resolution)
+</code></pre>
+<!-- end verbatim block -->
+
+<h3>Class curve  <a name="___sec35"></a></h3>
+
+<p>
+Class <code>Curve</code> sits on the coordinates to be drawn, but how is that
+done? The constructor of class <code>Curve</code> just stores the coordinates,
+while a method <code>draw</code> sends the coordinates to the plotting program to
+make a graph.  Or more precisely, to avoid a lot of (e.g.)
+Matplotlib-specific plotting commands in class <code>Curve</code> we have created
+a small layer with a simple programming interface to plotting
+programs. This makes it straightforward to change from Matplotlib to
+another plotting program. The programming interface is represented by
+the <code>drawing_tool</code> object and has a few functions:
+
+<ul>
+  <li> <code>plot_curve</code> for sending a curve in terms of \( x \) and \( y \) coordinates
+    to the plotting program,</li>
+  <li> <code>set_coordinate_system</code> for specifying the graphics area,</li>
+  <li> <code>erase</code> for deleting all elements of the graph,</li>
+  <li> <code>set_grid</code> for turning on a grid (convenient while constructing the figure),</li>
+  <li> <code>set_instruction_file</code> for creating a separate file with all
+    plotting commands (Matplotlib commands in our case),</li>
+  <li> a series of <code>set_X</code> functions where <code>X</code> is some property like
+    <code>linecolor</code>, <code>linestyle</code>, <code>linewidth</code>, <code>filled_curves</code>.</li>
+</ul>
+
+This is basically all we need to communicate to a plotting program.
+
+<p>
+Any class in the <code>Shape</code> hierarchy inherits <code>set_X</code> functions for
+setting properties of curves. This information is propagated to
+all other shape objects in the <code>self.shapes</code> dictionary. Class
+<code>Curve</code> stores the line properties together with the coordinates
+of its curve and propagates this information to the plotting program.
+When saying <code>vehicle.set_linewidth(10)</code>, all objects that make
+up the <code>vehicle</code> object will get a <code>set_linewidth(10)</code> call,
+but only the <code>Curve</code> object at the end of the chain will actually
+store the information and send it to the plotting program.
+
+<p>
+A rough sketch of class <code>Curve</code> reads
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>class Curve(Shape):
+    &quot;&quot;&quot;General curve as a sequence of (x,y) coordintes.&quot;&quot;&quot;
+    def __init__(self, x, y):
+        self.x = asarray(x, dtype=float)
+        self.y = asarray(y, dtype=float)
+
+    def draw(self):
+        drawing_tool.plot_curve(
+            self.x, self.y,
+            self.linestyle, self.linewidth, self.linecolor, ...)
+
+    def set_linewidth(self, width):
+        self.linewidth = width
+
+    det set_linestyle(self, style):
+        self.linestyle = style
+    ...
+</code></pre>
+<!-- end verbatim block -->
+
+<h3>Compound geometric objects  <a name="___sec36"></a></h3>
+
+<p>
+The simple classes <code>Line</code>, <code>Arc</code>, and <code>Circle</code> could can the geometric
+shape through just one <code>Curve</code> object. More complicated shapes are
+built from instances of various subclasses of <code>Shape</code>. Classes used
+for professional drawings soon get quite complex in composition and
+have a lot of geometric details, so here we prefer to make a very
+simple composition: the already drawn vehicle from Figure
+<a href="#sketcher:fig:vehicle0">7</a>.  That is, instead of composing the drawing
+in a Python program as shown above, we make a subclass <code>Vehicle0</code> in
+the <code>Shape</code> hierarchy for doing the same thing.
+
+<p>
+The <code>Shape</code> hierarchy is found in the <code>pysketcher</code> package, so to use these
+classes or derive a new one, we need to import <code>pysketcher</code>. The constructor
+of class <code>Vehicle0</code> performs approximately the same statements as
+in the example program we developed for making the drawing in
+Figure <a href="#sketcher:fig:vehicle0">7</a>.
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>from pysketcher import *
+
+class Vehicle0(Shape):
+    def __init__(self, w_1, R, L, H):
+        wheel1 = Circle(center=(w_1, R), radius=R)
+        wheel2 = wheel1.copy()
+        wheel2.translate((L,0))
+
+        under = Rectangle(lower_left_corner=(w_1-2*R, 2*R),
+                          width=2*R + L + 2*R, height=H)
+        over  = Rectangle(lower_left_corner=(w_1, 2*R + H),
+                          width=2.5*R, height=1.25*H)
+
+        wheels = Composition(
+            {'wheel1': wheel1, 'wheel2': wheel2})
+        body = Composition(
+            {'under': under, 'over': over})
+
+        vehicle = Composition({'wheels': wheels, 'body': body})
+        xmax = w_1 + 2*L + 3*R
+        ground = Wall(x=[R, xmax], y=[0, 0], thickness=-0.3*R)
+
+        self.shapes = {'vehicle': vehicle, 'ground': ground}
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+Any subclass of <code>Shape</code> <em>must</em> define the <code>shapes</code> attribute, otherwise
+the inherited <code>draw</code> method (and a lot of other methods too) will
+not work.
+
+<p>
+The painting of the vehicle, as shown in the right part of
+Figure <a href="#sketcher:fig:vehicle0:v2">10</a>, could in class <code>Vehicle0</code>
+be offered by a method:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>    def colorful(self):
+        wheels = self.shapes['vehicle']['wheels']
+        wheels.set_filled_curves('blue')
+        wheels.set_linewidth(6)
+        wheels.set_linecolor('black')
+        under = self.shapes['vehicle']['body']['under']
+        under.set_filled_curves('red')
+        over = self.shapes['vehicle']['body']['over']
+        over.set_filled_curves(pattern='/')
+        over.set_linewidth(14)
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+The usage of the class is simple: after having set up an appropriate
+coordinate system as previously shown, we can do
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>vehicle = Vehicle0(w_1, R, L, H)
+vehicle.draw()
+drawing_tool.display()
+</code></pre>
+<!-- end verbatim block -->
+and go on the make a painted version by
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>drawing_tool.erase()
+vehicle.colorful()
+vehicle.draw()
+drawing_tool.display()
+</code></pre>
+<!-- end verbatim block -->
+A complete code defining and using class <code>Vehicle0</code> is found in the file
+<a href="http://tinyurl.com/pwyasaa/oo/vehicle2.py" target="_self"><tt>vehicle2.py</tt></a>.
+
+<p>
+The <code>pysketcher</code> package contains a wide range of classes for various
+geometrical objects, particularly those that are frequently used in
+drawings of mechanical systems.
+
+<h2>Adding functionality via recursion  <a name="___sec37"></a></h2>
+
+<p>
+The really powerful feature of our class hierarchy is that we can add
+much functionality to the superclass <code>Shape</code> and to the &quot;bottom&quot; class
+<code>Curve</code>, and then all other classes for various types of geometrical shapes
+immediately get the new functionality. To explain the idea we may
+look at the <code>draw</code> method, which all classes in the <code>Shape</code>
+hierarchy must have. The inner workings of the <code>draw</code> method explain
+the secrets of how a series of other useful operations on figures
+can be implemented.
+
+<h3>Basic principles of recursion  <a name="___sec38"></a></h3>
+
+<p>
+Note that we work with two types of hierarchies in the
+present documentation: one Python <em>class hierarchy</em>,
+with <code>Shape</code> as superclass, and one <em>object hierarchy</em> of figure elements
+in a specific figure. A subclass of <code>Shape</code> stores its figure in the
+<code>self.shapes</code> dictionary. This dictionary represents the object hierarchy
+of figure elements for that class. We want to make one <code>draw</code> call
+for an instance, say our class <code>Vehicle0</code>, and then we want this call
+to be propagated to <em>all</em> objects that are contained in
+<code>self.shapes</code> and all is nested subdictionaries. How is this done?
+
+<p>
+The natural starting point is to call <code>draw</code> for each <code>Shape</code> object
+in the <code>self.shapes</code> dictionary:
+<!-- begin verbatim block  pycod-->
+<pre><code>def draw(self):
+    for shape in self.shapes:
+        self.shapes[shape].draw()
+</code></pre>
+<!-- end verbatim block -->
+This general method can be provided by class <code>Shape</code> and inherited in
+subclasses like <code>Vehicle0</code>. Let <code>v</code> be a <code>Vehicle0</code> instance.
+Seemingly, a call <code>v.draw()</code> just calls
+<!-- begin verbatim block  pycod-->
+<pre><code>v.shapes['vehicle'].draw()
+v.shapes['ground'].draw()
+</code></pre>
+<!-- end verbatim block -->
+However, in the former call we call the <code>draw</code> method of a <code>Composition</code> object
+whose <code>self.shapes</code> attributed has two elements: <code>wheels</code> and <code>body</code>.
+Since class <code>Composition</code> inherits the same <code>draw</code> method, this method will
+run through <code>self.shapes</code> and call <code>wheels.draw()</code> and <code>body.draw()</code>.
+Now, the <code>wheels</code> object is also a <code>Composition</code> with the same <code>draw</code>
+method, which will run through <code>self.shapes</code>, now containing
+the <code>wheel1</code> and <code>wheel2</code> objects. The <code>wheel1</code> object is a <code>Circle</code>,
+so calling <code>wheel1.draw()</code> calls the <code>draw</code> method in class <code>Circle</code>,
+but this is the same <code>draw</code> method as shown above. This method will
+therefore traverse the circle's <code>shapes</code> dictionary, which we have seen
+consists of one <code>Curve</code> element.
+
+<p>
+The <code>Curve</code> object holds the coordinates to be plotted so here <code>draw</code>
+really needs to do something &quot;physical&quot;, namely send the coordinates to
+the plotting program. The <code>draw</code> method is outlined in the short listing
+of class <code>Curve</code> shown previously.
+
+<p>
+We can go to any of the other shape objects that appear in the figure
+hierarchy and follow their <code>draw</code> calls in the similar way. Every time,
+a <code>draw</code> call will invoke a new <code>draw</code> call, until we eventually hit
+a <code>Curve</code> object at the &quot;bottom&quot; of the figure hierarchy, and then that part
+of the figure is really plotted (or more precisely, the coordinates
+are sent to a plotting program).
+
+<p>
+When a method calls itself, such as <code>draw</code> does, the calls are known as
+<em>recursive</em> and the programming principle is referred to as
+<em>recursion</em>. This technique is very often used to traverse hierarchical
+structures like the figure structures we work with here. Even though the
+hierarchy of objects building up a figure are of different types, they
+all inherit the same <code>draw</code> method and therefore exhibit the same
+behavior with respect to drawing. Only the <code>Curve</code> object has a different
+<code>draw</code> method, which does not lead to more recursion.
+
+<h3>Explaining recursion  <a name="___sec39"></a></h3>
+
+<p>
+Understanding recursion is usually a challenge. To get a better idea of
+how recursion works, we have equipped class <code>Shape</code> with a method <code>recurse</code>
+that just visits all the objects in the <code>shapes</code> dictionary and prints
+out a message for each object.
+This feature allows us to trace the execution and see exactly where
+we are in the hierarchy and which objects that are visited.
+
+<p>
+The <code>recurse</code> method is very similar to <code>draw</code>:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>    def recurse(self, name, indent=0):
+        # print message where we are (name is where we come from)
+        for shape in self.shapes:
+            # print message about which object to visit
+            self.shapes[shape].recurse(indent+2, shape)
+</code></pre>
+<!-- end verbatim block -->
+The <code>indent</code> parameter governs how much the message from this
+<code>recurse</code> method is intended. We increase <code>indent</code> by 2 for every
+level in the hierarchy, i.e., every row of objects in Figure
+<a href="#sketcher:fig:Vehicle0:hier2">12</a>. This indentation makes it easy to
+see on the printout how far down in the hierarchy we are.
+
+<p>
+A typical message written by <code>recurse</code> when <code>name</code> is <code>'body'</code> and
+the <code>shapes</code> dictionary has the keys <code>'over'</code> and <code>'under'</code>,
+will be
+
+<p>
+<!-- begin verbatim block  dat-->
+<pre><code>     Composition: body.shapes has entries 'over', 'under'
+     call body.shapes[&quot;over&quot;].recurse(&quot;over&quot;, 6)
+</code></pre>
+<!-- end verbatim block -->
+The number of leading blanks on each line corresponds to the value of
+<code>indent</code>. The code printing out such messages looks like
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>    def recurse(self, name, indent=0):
+        space = ' '*indent
+        print space, '%s: %s.shapes has entries' % \ 
+              (self.__class__.__name__, name), \ 
+              str(list(self.shapes.keys()))[1:-1]
+
+        for shape in self.shapes:
+            print space,
+            print 'call %s.shapes[&quot;%s&quot;].recurse(&quot;%s&quot;, %d)' % \ 
+                  (name, shape, shape, indent+2)
+            self.shapes[shape].recurse(shape, indent+2)
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+Let us follow a <code>v.recurse('vehicle')</code> call in detail, <code>v</code> being
+a <code>Vehicle0</code> instance. Before looking into the output from <code>recurse</code>,
+let us get an overview of the figure hierarchy in the <code>v</code> object
+(as produced by <code>print v</code>)
+
+<p>
+<!-- begin verbatim block  dat-->
+<pre><code>ground
+    wall
+vehicle
+    body
+        over
+            rectangle
+        under
+            rectangle
+    wheels
+        wheel1
+            arc
+        wheel2
+            arc
+</code></pre>
+<!-- end verbatim block -->
+The <code>recurse</code> method performs the same kind of traversal of the
+hierarchy, but writes out and explains a lot more.
+
+<p>
+The data structure represented by <code>v.shapes</code> is known as a <em>tree</em>.
+As in physical trees, there is a <em>root</em>, here the <code>v.shapes</code>
+dictionary. A graphical illustration of the tree (upside down) is
+shown in Figure <a href="#sketcher:fig:Vehicle0:hier2">12</a>.
+From the root there are one or more branches, here two:
+<code>ground</code> and <code>vehicle</code>. Following the <code>vehicle</code> branch, it has two new
+branches, <code>body</code> and <code>wheels</code>. Relationships as in family trees
+are often used to describe the relations in object trees too: we say
+that <code>vehicle</code> is the parent of <code>body</code> and that <code>body</code> is a child of
+<code>vehicle</code>. The term <em>node</em> is also often used to describe an element
+in a tree. A node may have several other nodes as <em>descendants</em>.
+
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 12:  Hierarchy of figure elements in an instance of class <code>Vehicle0</code>. <a name="sketcher:fig:Vehicle0:hier2"></a> </p></center>
+<p><img src="fig-oo/Vehicle0_hier2.png" align="bottom" width=600></p>
+</center>
+
+<p>
+Recursion is the principal programming technique to traverse tree structures.
+Any object in the tree can be viewed as a root of a subtree. For
+example, <code>wheels</code> is the root of a subtree that branches into
+<code>wheel1</code> and <code>wheel2</code>. So when processing an object in the tree,
+we imagine we process the root and then recurse into a subtree, but the
+first object we recurse into can be viewed as the root of the subtree, so the
+processing procedure of the parent object can be repeated.
+
+<p>
+A recommended next step is to simulate the <code>recurse</code> method by hand and
+carefully check that what happens in the visits to <code>recurse</code> is
+consistent with the output listed below. Although tedious, this is
+a major exercise that guaranteed will help to demystify recursion.
+
+<p>
+A part of the printout of <code>v.recurse('vehicle')</code> looks like
+
+<p>
+<!-- begin verbatim block  dat-->
+<pre><code> Vehicle0: vehicle.shapes has entries 'ground', 'vehicle'
+ call vehicle.shapes[&quot;ground&quot;].recurse(&quot;ground&quot;, 2)
+   Wall: ground.shapes has entries 'wall'
+   call ground.shapes[&quot;wall&quot;].recurse(&quot;wall&quot;, 4)
+     reached &quot;bottom&quot; object Curve
+ call vehicle.shapes[&quot;vehicle&quot;].recurse(&quot;vehicle&quot;, 2)
+   Composition: vehicle.shapes has entries 'body', 'wheels'
+   call vehicle.shapes[&quot;body&quot;].recurse(&quot;body&quot;, 4)
+     Composition: body.shapes has entries 'over', 'under'
+     call body.shapes[&quot;over&quot;].recurse(&quot;over&quot;, 6)
+       Rectangle: over.shapes has entries 'rectangle'
+       call over.shapes[&quot;rectangle&quot;].recurse(&quot;rectangle&quot;, 8)
+         reached &quot;bottom&quot; object Curve
+     call body.shapes[&quot;under&quot;].recurse(&quot;under&quot;, 6)
+       Rectangle: under.shapes has entries 'rectangle'
+       call under.shapes[&quot;rectangle&quot;].recurse(&quot;rectangle&quot;, 8)
+         reached &quot;bottom&quot; object Curve
+...
+</code></pre>
+<!-- end verbatim block -->
+This example should clearly demonstrate the principle that we
+can start at any object in the tree and do a recursive set
+of calls with that object as root.
+
+<h2>Scaling, translating, and rotating a figure <a name="sketcher:scaling"></a></h2>
+
+<p>
+With recursion, as explained in the previous section, we can within
+minutes equip <em>all</em> classes in the <code>Shape</code> hierarchy, both present and
+future ones, with the ability to scale the figure, translate it,
+or rotate it. This added functionality requires only a few lines
+of code.
+
+<h3>Scaling  <a name="___sec41"></a></h3>
+
+<p>
+We start with the simplest of the three geometric transformations,
+namely scaling.  For a <code>Curve</code> instance containing a set of \( n \)
+coordinates \( (x_i,y_i) \) that make up a curve, scaling by a factor \( a \)
+means that we multiply all the \( x \) and \( y \) coordinates by \( a \):
+
+$$
+x_i \leftarrow ax_i,\quad y_i\leftarrow ay_i,
+\quad i=0,\ldots,n-1\thinspace .
+$$
+
+Here we apply the arrow as an assignment operator.
+The corresponding Python implementation in
+class <code>Curve</code> reads
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>class Curve:
+    ...
+    def scale(self, factor):
+        self.x = factor*self.x
+        self.y = factor*self.y
+</code></pre>
+<!-- end verbatim block -->
+Note here that <code>self.x</code> and <code>self.y</code> are Numerical Python arrays,
+so that multiplication by a scalar number <code>factor</code> is
+a vectorized operation.
+
+<p>
+An even more efficient implementation is to make use of in-place
+multiplication in the arrays,
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>class Curve:
+    ...
+    def scale(self, factor):
+        self.x *= factor
+        self.y *= factor
+</code></pre>
+<!-- end verbatim block -->
+as this saves the creation of temporary arrays like <code>factor*self.x</code>.
+
+<p>
+In an instance of a subclass of <code>Shape</code>, the meaning of a method
+<code>scale</code> is to run through all objects in the dictionary <code>shapes</code> and
+ask each object to scale itself. This is the same delegation of
+actions to subclass instances as we do in the <code>draw</code> (or <code>recurse</code>)
+method. All objects, except <code>Curve</code> instances, can share the same
+implementation of the <code>scale</code> method. Therefore, we place the <code>scale</code>
+method in the superclass <code>Shape</code> such that all subclasses inherit the
+method.  Since <code>scale</code> and <code>draw</code> are so similar, we can easily
+implement the <code>scale</code> method in class <code>Shape</code> by copying and editing
+the <code>draw</code> method:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>class Shape:
+    ...
+    def scale(self, factor):
+        for shape in self.shapes:
+            self.shapes[shape].scale(factor)
+</code></pre>
+<!-- end verbatim block -->
+This is all we have to do in order to equip all subclasses of
+<code>Shape</code> with scaling functionality!
+Any piece of the figure will scale itself, in the same manner
+as it can draw itself.
+
+<h3>Translation  <a name="___sec42"></a></h3>
+
+<p>
+A set of coordinates \( (x_i, y_i) \) can be translated \( v_0 \) units in
+the \( x \) direction and \( v_1 \) units in the \( y \) direction using the formulas
+
+$$
+\begin{equation*}
+x_i\leftarrow x_i+v_0,\quad y_i\leftarrow y_i+v_1,
+\quad i=0,\ldots,n-1\thinspace .
+\end{equation*}
+$$
+
+The natural specification of the translation is in terms of the
+vector \( v=(v_0,v_1) \).
+The corresponding Python implementation in class <code>Curve</code> becomes
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>class Curve:
+    ...
+    def translate(self, v):
+        self.x += v[0]
+        self.y += v[1]
+</code></pre>
+<!-- end verbatim block -->
+The translation operation for a shape object is very similar to the
+scaling and drawing operations. This means that we can implement a
+common method <code>translate</code> in the superclass <code>Shape</code>. The code
+is parallel to the <code>scale</code> method:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>class Shape:
+    ....
+    def translate(self, v):
+        for shape in self.shapes:
+            self.shapes[shape].translate(v)
+</code></pre>
+<!-- end verbatim block -->
+
+<h3>Rotation  <a name="___sec43"></a></h3>
+
+<p>
+Rotating a figure is more complicated than scaling and translating.
+A counter clockwise rotation of \( \theta \) degrees for a set of
+coordinates \( (x_i,y_i) \) is given by
+
+$$
+\begin{align*}
+ \bar x_i &\leftarrow x_i\cos\theta - y_i\sin\theta,\\ 
+ \bar y_i &\leftarrow x_i\sin\theta + y_i\cos\theta\thinspace .
+\end{align*}
+$$
+
+This rotation is performed around the origin. If we want the figure
+to be rotated with respect to a general point \( (x,y) \), we need to
+extend the formulas above:
+
+$$
+\begin{align*}
+ \bar x_i &\leftarrow x + (x_i -x)\cos\theta - (y_i -y)\sin\theta,\\ 
+ \bar y_i &\leftarrow y + (x_i -x)\sin\theta + (y_i -y)\cos\theta\thinspace .
+\end{align*}
+$$
+
+The Python implementation in class <code>Curve</code>, assuming that \( \theta \)
+is given in degrees and not in radians, becomes
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>    def rotate(self, angle, center):
+        angle = radians(angle)
+        x, y = center
+        c = cos(angle);  s = sin(angle)
+        xnew = x + (self.x - x)*c - (self.y - y)*s
+        ynew = y + (self.x - x)*s + (self.y - y)*c
+        self.x = xnew
+        self.y = ynew
+</code></pre>
+<!-- end verbatim block -->
+The <code>rotate</code> method in class <code>Shape</code> follows the principle of the
+<code>draw</code>, <code>scale</code>, and <code>translate</code> methods.
+
+<p>
+We have already seen the <code>rotate</code> method in action when animating the
+rolling wheel at the end of the section <a href="#sketcher:vehicle1:anim">Animation: rolling the wheels</a>.
+
+<h1>Classes for DNA analysis <a name="bioinf:oo"></a></h1>
+
+<p>
+We shall here exemplify the use of classes for performing
+DNA analysis as explained in the document <a href="http://tcse6.on.net/funcif" target="_self">Functions and branching</a> <a href="._oo-solarized006.html#Langtangen_TCSE6_funcif">[5]</a>, ref{bioinf:freqm}, ref{bioinf:freq:analysis}, ref{bioinf:basefreq}, ref{bioinf:gene2protein}, ref{bioinf:lactase:milk}, the document <a href="http://tcse6.on.net/random" target="_self">Random numbers and simple games</a> <a href="._oo-solarized006.html#Langtangen_TCSE6_random">[6]</a>. 
+Basically, we create a class <code>Gene</code> to represent a DNA sequence (string)
+and a class <code>Region</code> to represent a subsequence (substring), typically an
+exon or intron.
+
+<h2>Class for regions  <a name="___sec45"></a></h2>
+
+<p>
+The class for representing a region of a DNA string is quite simple:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>class Region:
+    def __init__(self, dna, start, end):
+        self._region = dna[start:end]
+
+    def get_region(self):
+        return self._region
+
+    def __len__(self):
+        return len(self._region)
+
+    def __eq__(self, other):
+        &quot;&quot;&quot;Check if two Region instances are equal.&quot;&quot;&quot;
+        return self._region == other._region
+
+    def __add__(self, other):
+        &quot;&quot;&quot;Add Region instances: self + other&quot;&quot;&quot;
+        return self._region + other._region
+
+    def __iadd__(self, other):
+        &quot;&quot;&quot;Increment Region instance: self += other&quot;&quot;&quot;
+        self._region += other._region
+        return self
+</code></pre>
+<!-- end verbatim block -->
+Besides storing the substring and giving access to it through <code>get_region</code>,
+we have also included the possibility to
+
+<ul>
+  <li> say <code>len(r)</code> if <code>r</code> is a <code>Region</code> instance</li>
+  <li> check if two <code>Region</code> instances are equal</li>
+  <li> write <code>r1 + r2</code> for two instances <code>r1</code> and <code>r2</code> of type <code>Region</code></li>
+  <li> perform <code>r1 += r2</code></li>
+</ul>
+
+The latter two operations are convenient for making one large string out
+of all exon or intron regions.
+
+<h2>Class for genes  <a name="___sec46"></a></h2>
+
+<p>
+The class for gene will be longer and more complex than class
+<code>Region</code>. We already have a bunch of functions performing various
+types of analysis. The idea of the <code>Gene</code> class is that these
+functions are methods in the class operating on the DNA string and the
+exon regions stored in the class.  Rather than recoding all the
+functions as methods in the class we shall just let the class &quot;wrap&quot;
+the functions. That is, the class methods call up the functions we
+already have.  This approach has two advantages: users can either
+choose the function-based or the class-based interface, and the
+programmer can reuse all the ready-made functions when implementing
+the class-based interface.
+
+<p>
+The selection of functions include
+
+<ul>
+ <li> <code>generate_string</code> for generating a random string from some alphabet</li>
+ <li> <code>download</code> and <code>read_dnafile</code>
+   (version <code>read_dnafile_v1</code>)
+   for downloading data from the Internet and reading from file</li>
+ <li> <code>read_exon_regions</code> (version <code>read_exon_regions_v2</code>)
+   for reading exon regions from file</li>
+ <li> <code>tofile_with_line_sep</code> (version <code>tofile_with_line_sep_v2</code>)
+   for writing strings to file</li>
+ <li> <code>read_genetic_code</code> (version <code>read_genetic_code_v2</code>) for loading
+   the mapping from triplet codes to 1-letter symbols for amino acids</li>
+ <li> <code>get_base_frequencies</code> (version <code>get_base_frequencies_v2</code>)
+   for finding frequencies of each base</li>
+ <li> <code>format_frequencies</code> for formatting base frequencies with two decimals</li>
+ <li> <code>create_mRNA</code> for computing an mRNA string from DNA and exon regions</li>
+ <li> <code>mutate</code> for mutating a base at a random position</li>
+ <li> <code>create_markov_chain</code>, <code>transition</code>, and <code>mutate_via_markov_chain</code>
+   for mutating a base at a random position according to randomly
+   generated transition probabilities</li>
+ <li> <code>create_protein_fixed</code> for proper creation of a protein sequence (string)</li>
+</ul>
+
+The set of plain functions for DNA analysis is found
+in the file <a href="http://tinyurl.com/pwyasaa/oo/dna_functions.py" target="_self"><tt>dna_functions.py</tt></a>, while
+<a href="http://tinyurl.com/pwyasaa/oo/dna_classes.py" target="_self"><tt>dna_classes.py</tt></a> contains the implementations
+of classes <code>Gene</code> and <code>Region</code>.
+
+<h3>Basic features of class gene  <a name="___sec47"></a></h3>
+
+<p>
+Class <code>Gene</code> is supposed to hold the DNA sequence and
+the associated exon regions. A simple constructor expects the
+exon regions to be specified as a list of (start, end) tuples
+indicating the start and end of each region:
+<!-- begin verbatim block  pycod-->
+<pre><code>class Gene:
+    def __init__(self, dna, exon_regions):
+        self._dna = dna
+
+        self._exon_regions = exon_regions
+        self._exons = []
+        for start, end in exon_regions:
+            self._exons.append(Region(dna, start, end))
+
+        # Compute the introns (regions between the exons)
+        self._introns = []
+        prev_end = 0
+        for start, end in exon_regions:
+            self._introns.append(Region(dna, prev_end, start))
+            prev_end = end
+        self._introns.append(Region(dna, end, len(dna)))
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+The methods in class <code>Gene</code> are trivial to implement when we already
+have the functionality in stand-alone functions.
+Here are a few examples on methods:
+<!-- begin verbatim block  pycod-->
+<pre><code>from dna_functions import *
+
+class Gene:
+    ...
+
+    def write(self, filename, chars_per_line=70):
+        &quot;&quot;&quot;Write DNA sequence to file with name filename.&quot;&quot;&quot;
+        tofile_with_line_sep(self._dna, filename, chars_per_line)
+
+    def count(self, base):
+        &quot;&quot;&quot;Return no of occurrences of base in DNA.&quot;&quot;&quot;
+        return self._dna.count(base)
+
+    def get_base_frequencies(self):
+        &quot;&quot;&quot;Return dict of base frequencies in DNA.&quot;&quot;&quot;
+        return get_base_frequencies(self._dna)
+
+    def format_base_frequencies(self):
+        &quot;&quot;&quot;Return base frequencies formatted with two decimals.&quot;&quot;&quot;
+        return format_frequencies(self.get_base_frequencies())
+</code></pre>
+<!-- end verbatim block -->
+
+<h3>Flexible constructor  <a name="___sec48"></a></h3>
+
+<p>
+The constructor can be made more flexible. First, the exon regions
+may not be known so we should allow <code>None</code> as value and in fact
+use that as default value. Second, exon regions at the start and/or
+end of the DNA string will lead to empty intron <code>Region</code> objects so a proper
+test on nonzero length of the introns must be inserted.
+Third, the data for the DNA string and
+the exon regions can either be passed as arguments or downloaded and read
+from file.
+Two different initializations of <code>Gene</code> objects are therefore
+<!-- begin verbatim block  pycod-->
+<pre><code>g1 = Gene(dna, exon_regions)  # user has read data from file
+g2 = Gene((urlbase, dna_file), (urlbase, exon_file))  # download
+</code></pre>
+<!-- end verbatim block -->
+One can pass <code>None</code> for <code>urlbase</code> if the files are already at the
+computer. The flexible constructor has, not surprisingly, much longer code
+than the first version. The implementation illustrates well how the concept of
+overloaded constructors in other languages, like C++ and Java, are
+dealt with in Python (overloaded constructors take different types
+of arguments to initialize an instance):
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>class Gene:
+    def __init__(self, dna, exon_regions):
+        &quot;&quot;&quot;
+        dna: string or (urlbase,filename) tuple
+        exon_regions: None, list of (start,end) tuples
+                      or (urlbase,filename) tuple
+        In case of (urlbase,filename) tuple the file
+        is downloaded and read.
+        &quot;&quot;&quot;
+        if isinstance(dna, (list,tuple)) and \ 
+           len(dna) == 2 and isinstance(dna[0], str) and \ 
+           isinstance(dna[1], str):
+            download(urlbase=dna[0], filename=dna[1])
+            dna = read_dnafile(dna[1])
+        elif isinstance(dna, str):
+            pass # ok type (the other possibility)
+        else:
+            raise TypeError(
+                'dna=%s %s is not string or (urlbase,filename) '\ 
+                'tuple' % (dna, type(dna)))
+
+        self._dna = dna
+
+        er = exon_regions
+        if er is None:
+            self._exons = None
+            self._introns = None
+        else:
+            if isinstance(er, (list,tuple)) and \ 
+                len(er) == 2 and isinstance(er[0], str) and \ 
+                isinstance(er[1], str):
+                download(urlbase=er[0], filename=er[1])
+                exon_regions = read_exon_regions(er[1])
+            elif isinstance(er, (list,tuple)) and \ 
+                isinstance(er[0], (list,tuple)) and \ 
+                isinstance(er[0][0], int) and \ 
+                isinstance(er[0][1], int):
+                pass # ok type (the other possibility)
+            else:
+                raise TypeError(
+                    'exon_regions=%s %s is not list of (int,int) '
+                    'or (urlbase,filename) tuple' % (er, type(era)))
+
+            self._exon_regions = exon_regions
+            self._exons = []
+            for start, end in exon_regions:
+                self._exons.append(Region(dna, start, end))
+
+            # Compute the introns (regions between the exons)
+            self._introns = []
+            prev_end = 0
+            for start, end in exon_regions:
+                if start - prev_end &gt; 0:
+                    self._introns.append(
+                        Region(dna, prev_end, start))
+                prev_end = end
+            if len(dna) - end &gt; 0:
+                self._introns.append(Region(dna, end, len(dna)))
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+Note that we perform quite detailed testing of the object type
+of the data structures supplied as the <code>dna</code> and <code>exon_regions</code>
+arguments. This can well be done to ensure safe use also when there is only
+one allowed type per argument.
+
+<h3>Other methods  <a name="___sec49"></a></h3>
+
+<p>
+A <code>create_mRNA</code> method, returning the mRNA as a string, can be coded as
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>    def create_mRNA(self):
+        &quot;&quot;&quot;Return string for mRNA.&quot;&quot;&quot;
+        if self._exons is not None:
+            return create_mRNA(self._dna, self._exon_regions)
+        else:
+            raise ValueError(
+                'Cannot create mRNA for gene with no exon regions')
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+Also here we rely on calling an already implemented function, but include
+some testing whether asking for mRNA is appropriate.
+
+<p>
+Methods for creating a mutated gene are also included:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>    def mutate_pos(self, pos, base):
+        &quot;&quot;&quot;Return Gene with a mutation to base at position pos.&quot;&quot;&quot;
+        dna = self._dna[:pos] + base + self._dna[pos+1:]
+        return Gene(dna, self._exon_regions)
+
+    def mutate_random(self, n=1):
+        &quot;&quot;&quot;
+        Return Gene with n mutations at a random position.
+        All mutations are equally probable.
+        &quot;&quot;&quot;
+        mutated_dna = self._dna
+        for i in range(n):
+            mutated_dna = mutate(mutated_dna)
+        return Gene(mutated_dna, self._exon_regions)
+
+    def mutate_via_markov_chain(markov_chain):
+        &quot;&quot;&quot;
+        Return Gene with a mutation at a random position.
+        Mutation into new base based on transition
+        probabilities in the markov_chain dict of dicts.
+        &quot;&quot;&quot;
+        mutated_dna = mutate_via_markov_chain(
+            self._dna, markov_chain)
+        return Gene(mutated_dna, self._exon_regions)
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+Some &quot;get&quot; methods that give access to the fundamental attributes
+of the class can be included:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>    def get_dna(self):
+        return self._dna
+
+    def get_exons(self):
+        return self._exons
+
+    def get_introns(self):
+        return self._introns
+</code></pre>
+<!-- end verbatim block -->
+Alternatively, one could access the attributes directly: <code>gene._dna</code>,
+<code>gene._exons</code>, etc. In that case we should remove the leading underscore as
+this underscore signals that these
+attributes are considered &quot;protected&quot;, i.e., not to be directly accessed
+by the user. The &quot;protection&quot; in &quot;get&quot; functions is more mental
+than actual since we anyway give the data structures in the hands of
+the user and she can do whatever she wants (even delete them).
+
+<p>
+Special methods for the length of a gene, adding genes, checking if
+two genes are identical, and printing of compact gene information
+are relevant to add:
+<!-- begin verbatim block  pycod-->
+<pre><code>    def __len__(self):
+        return len(self._dna)
+
+    def __add__(self, other):
+        &quot;&quot;&quot;self + other: append other to self (DNA string).&quot;&quot;&quot;
+        if self._exons is None and other._exons is None:
+            return Gene(self._dna + other._dna, None)
+        else:
+            raise ValueError(
+                'cannot do Gene + Gene with exon regions')
+
+    def __iadd__(self, other):
+        &quot;&quot;&quot;self += other: append other to self (DNA string).&quot;&quot;&quot;
+        if self._exons is None and other._exons is None:
+            self._dna += other._dna
+            return self
+        else:
+            raise ValueError(
+                'cannot do Gene += Gene with exon regions')
+
+    def __eq__(self, other):
+        &quot;&quot;&quot;Check if two Gene instances are equal.&quot;&quot;&quot;
+        return self._dna == other._dna and \ 
+               self._exons == other._exons
+
+    def __str__(self):
+        &quot;&quot;&quot;Pretty print (condensed info).&quot;&quot;&quot;
+        s = 'Gene: ' + self._dna[:6] + '...' + self._dna[-6:] + \ 
+            ', length=%d' % len(self._dna)
+        if self._exons is not None:
+            s += ', %d exon regions' % len(self._exons)
+        return s
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+Here is an interactive session demonstrating how we can work with
+class <code>Gene</code> objects:
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; from dna_classes import Gene
+&gt;&gt;&gt; g1 = Gene('ATCCGTAATTGCGCA', [(2,4), (6,9)])
+&gt;&gt;&gt; print g1
+Gene: ATCCGT...TGCGCA, length=15, 2 exon regions
+&gt;&gt;&gt; g2 = g1.mutate_random(10)
+&gt;&gt;&gt; print g2
+Gene: ATCCGT...TGTGCT, length=15, 2 exon regions
+&gt;&gt;&gt; g1 == g2
+False
+&gt;&gt;&gt; g1 += g2  # expect exception
+Traceback (most recent call last):
+...
+ValueError: cannot do Gene += Gene with exon regions
+&gt;&gt;&gt; g1b = Gene(g1.get_dna(), None)
+&gt;&gt;&gt; g2b = Gene(g2.get_dna(), None)
+&gt;&gt;&gt; print g1b
+Gene: ATCCGT...TGCGCA, length=15
+&gt;&gt;&gt; g3 = g1b + g2b
+&gt;&gt;&gt; g3.format_base_frequencies()
+'A: 0.17, C: 0.23, T: 0.33, G: 0.27'
+</code></pre>
+<!-- end verbatim block -->
+
+<h2>Subclasses  <a name="___sec50"></a></h2>
+
+<p>
+There are two fundamental types of genes: the most common type that
+codes for proteins (indirectly via mRNA) and the type that only codes
+for RNA (without being further processed to proteins).
+The product of a gene, mRNA or protein, depends on the type of gene we have.
+It is then natural to create two subclasses for the two types of
+gene and have a method <code>get_product</code> which returns the product
+of that type of gene.
+
+<p>
+The <code>get_product</code> method can be declared in class <code>Gene</code>:
+<!-- begin verbatim block  pycod-->
+<pre><code>    def get_product(self):
+        raise NotImplementedError(
+            'Subclass %s must implement get_product' % \ 
+            self.__class__.__name__)
+</code></pre>
+<!-- end verbatim block -->
+The exception here will be triggered by an instance (<code>self</code>)
+of any subclass that just inherits <code>get_product</code> from class <code>Gene</code>
+without implementing a subclass version of this method.
+
+<p>
+The two subclasses of <code>Gene</code> may take this simple form:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>class RNACodingGene(Gene):
+    def get_product(self):
+        return self.create_mRNA()
+
+class ProteinCodingGene(Gene):
+    def __init__(self, dna, exon_positions):
+        Gene.__init__(self, dna, exon_positions)
+        urlbase = 'http://hplgit.github.com/bioinf-py/data/'
+        genetic_code_file = 'genetic_code.tsv'
+        download(urlbase, genetic_code_file)
+        code = read_genetic_code(genetic_code_file)
+        self.genetic_code = code
+
+    def get_product(self):
+        return create_protein_fixed(self.create_mRNA(),
+                                    self.genetic_code)
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+A demonstration of how to load the lactase gene and create the
+lactase protein is done with
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>def test_lactase_gene():
+    urlbase = 'http://hplgit.github.com/bioinf-py/data/'
+    lactase_gene_file = 'lactase_gene.txt'
+    lactase_exon_file = 'lactase_exon.tsv'
+    lactase_gene = ProteinCodingGene(
+        (urlbase, lactase_gene_file),
+        (urlbase, lactase_exon_file))
+
+    protein = lactase_gene.get_product()
+    tofile_with_line_sep(protein, 'output', 'lactase_protein.txt')
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+Now, envision that the Lactase gene would instead have been an
+RNA-coding gene. The only necessary changes would have been to exchange
+<code>ProteinCodingGene</code> by <code>RNACodingGene</code> in the assignment to
+<code>lactase_gene</code>, and one would get out a final RNA product instead of a
+protein.
+
+<p>
+<p>
+<!-- begin bottom navigation -->
+<table style="width: 100%"><tr><td>
+<div style="text-align: left;"><a href="._oo-solarized003.html">&laquo; Previous</a></div>
+</td><td>
+<div style="text-align: right;"><a href="._oo-solarized005.html">Next &raquo;</a></div>
+</td></tr></table>
+<!-- end bottom navigation -->
+</p>
+
+<!-- ------------------- end of main content --------------- -->
+
+
+</body>
+</html>
+    
+

@@ -1,15 +1,15 @@
 <!--
-Automatically generated HTML file from Doconce source
+Automatically generated HTML file from DocOnce source
 (https://github.com/hplgit/doconce/)
 -->
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="generator" content="Doconce: https://github.com/hplgit/doconce/" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
 <meta name="description" content="Computing with formulas">
 <meta name="keywords" content="directory,run Python program,execute Python program,terminal window,console (terminal) window,directory,comments,non-English characters,formatting text and numbers,printf syntax,string,triple-quoted strings,format string syntax,newline character (line break),line break,source code,application,statements,expression,syntax,whitespace,blanks,whitespace,input (data),output (data),user (of a program),operating system (OS),Windows,Mac OS X,Unix,Linux,objects,round-off errors,interactive sessions standard Python shell,type conversion,check an object's type,rounding float to integer,interactive sessions IPython,IPython,run Python program,execute Python program,IPython running Python programs,IPython start-up file,IPython executing operating system commands,IPython command history,complex numbers,Gaussian function">
 
-
+<title>Computing with formulas</title>
 
 <!-- Bootstrap style: bootswatch_readable -->
 <link href="http://netdna.bootstrapcdn.com/bootswatch/3.1.1/readable/bootstrap.min.css" rel="stylesheet">
@@ -21,6 +21,7 @@ Automatically generated HTML file from Doconce source
 /* Let inline verbatim have the same color as the surroundings */
 code { color: inherit; background-color: transparent; }
 </style>
+
 
 </head>
 
@@ -262,18 +263,6 @@ MathJax.Hub.Config({
 <!-- newcommands_keep.tex -->
 $$
 \newcommand{\tp}{\thinspace .}
-\renewcommand{\Re}{\bbbr}
-
-\newcommand{\rhodim}{\mbox{kgm}^{-3}}
-\newcommand{\mudim}{\mbox{kg}\,\mbox{s}^{-1}\mbox{m}^{-1}}
-\newcommand{\Cdim}{\mbox{kg}\,\mbox{s}^{-1}}
-
-
-\newcommand{\Oof}[1]{\mathcal{O}(#1)}
-\newcommand{\Prob}[1]{\hbox{P}(#1)}
-\newcommand{\Var}[1]{\hbox{Var}(#1)}
-\newcommand{\Cov}[2]{\hbox{Cov}(#1,#2)}
-\newcommand{\StDev}[1]{\hbox{StDev}(#1)}
 $$
 
 
@@ -322,6 +311,7 @@ $$
 
 <h1 id="sec:formula:stdmath">Evaluating standard mathematical functions<a name="sec:formula:stdmath"></a></h1>
 
+<p>
 Mathematical formulas frequently involve functions such as sin, cos,
 tan, sinh, cosh, exp, log, etc. On a pocket calculator you have
 special buttons for such functions. Similarly, in a program you also
@@ -337,6 +327,7 @@ sin, cos, and similar functions in a Python context.
 
 <h3 id="___sec29">Problem <a name="___sec29"></a></h3>
 
+<p>
 Consider the formula for the height \( y \) of a ball in vertical motion,
 with initial upward velocity \( v_0 \):
 
@@ -379,6 +370,7 @@ its way up \( (t=t_1 \)) and on its way down (\( t=t_2 > t_1 \)).
 
 <h3>The program</h3>
 
+<p>
 To evaluate the expressions for \( t_1 \) and \( t_2 \) from
 <a href="#mjx-eqn-4">(4)</a> in a computer program, we need access to the
 square root function.  In Python, the square root function and lots of
@@ -391,14 +383,14 @@ and \( t_2 \):
 
 <p>
 
-<!-- code=text (!bc txt) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">v0 = 5
-g = 9.81
-yc = 0.2
-import math
-t1 = (v0 - math.sqrt(v0**2 - 2*g*yc))/g
-t2 = (v0 + math.sqrt(v0**2 - 2*g*yc))/g
-print &#39;At t=%g s and %g s, the height is %g m.&#39; % (t1, t2, yc)
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">v0 <span style="color: #666666">=</span> <span style="color: #666666">5</span>
+g <span style="color: #666666">=</span> <span style="color: #666666">9.81</span>
+yc <span style="color: #666666">=</span> <span style="color: #666666">0.2</span>
+<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">math</span>
+t1 <span style="color: #666666">=</span> (v0 <span style="color: #666666">-</span> math<span style="color: #666666">.</span>sqrt(v0<span style="color: #666666">**2</span> <span style="color: #666666">-</span> <span style="color: #666666">2*</span>g<span style="color: #666666">*</span>yc))<span style="color: #666666">/</span>g
+t2 <span style="color: #666666">=</span> (v0 <span style="color: #666666">+</span> math<span style="color: #666666">.</span>sqrt(v0<span style="color: #666666">**2</span> <span style="color: #666666">-</span> <span style="color: #666666">2*</span>g<span style="color: #666666">*</span>yc))<span style="color: #666666">/</span>g
+<span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;At t=</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121"> s and </span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121"> s, the height is </span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121"> m.&#39;</span> <span style="color: #666666">%</span> (t1, t2, yc)
 </pre></div>
 <p>
 The output from this program becomes
@@ -414,6 +406,7 @@ You can find the program as the file <a href="http://tinyurl.com/pwyasaa/formula
 
 <h3 id="___sec31">Two ways of importing a module <a name="___sec31"></a></h3>
 
+<p>
 The standard way to import a module, say <code>math</code>, is to write
 
 <p>
@@ -484,6 +477,7 @@ t2 <span style="color: #666666">=</span> (v0 <span style="color: #666666">+</spa
 
 <h3 id="___sec32">Import with new names <a name="___sec32"></a></h3>
 
+<p>
 Imported modules and functions can be given new names in the import
 statement, e.g.,
 
@@ -517,6 +511,7 @@ c <span style="color: #666666">=</span> m<span style="color: #666666">.</span>co
 
 <h2 id="___sec33">Example: Computing with \( \sinh x \) <a name="___sec33"></a></h2>
 
+<p>
 Our next examples involve calling some more mathematical functions
 from the <code>math</code> module. We look at the definition of the \( \sinh (x) \)
 function:
@@ -558,6 +553,7 @@ shows that all three computations give identical results:
 </pre></div>
 </blockquote><h2 id="sec:formula:roundoff">A first glimpse of round-off errors<a name="sec:formula:roundoff"></a></h2>
 
+<p>
 The previous example computes a function in three different yet
 mathematically equivalent ways, and the output from the <code>print</code>
 statement shows that the three resulting numbers are equal.
@@ -633,7 +629,7 @@ Python has a special module <code>decimal</code> which allows real numbers to be
 represented with adjustable accuracy so that round-off errors can be
 made as small as desired (an example appears the document
 <a href="http://tcse6.on.net/funcif" target="_self">Functions and branching</a>
-<a href="._formulas-readable009.html#Langtangen_TCSE6_funcif">[8]</a>).  However, we will hardly use this
+<a href="._formulas-readable009.html#Langtangen_TCSE6_funcif">[5]</a>).  However, we will hardly use this
 module because approximations implied by many mathematical methods
 applied throughout this document normally lead to (much) larger errors
 than those caused by round-off.

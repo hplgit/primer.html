@@ -1,0 +1,681 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Dictionaries and strings">
+<meta name="keywords" content="dictionary,keys (dictionaries),immutable objects,mutable objects,dictionary comprehensions,nested dictionaries,dictionary nested,date conversion,plotting data vs date,string slicing,slicing,substrings,string substrings,string searching,string substitution,substitution (in text),string splitting,string case change,string testing for number,whitespace,blank lines in files,string stripping leading/trailing blanks,string joining list elements,dictionary functionality">
+
+<title>Dictionaries and strings</title>
+
+<!-- Bootstrap style: bootswatch_readable -->
+<link href="http://netdna.bootstrapcdn.com/bootswatch/3.1.1/readable/bootstrap.min.css" rel="stylesheet">
+<!-- not necessary
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+
+<style type="text/css">
+/* Let inline verbatim have the same color as the surroundings */
+code { color: inherit; background-color: transparent; }
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [(u' Dictionaries ', 1, u'sec:files:dicts', u'sec:files:dicts'),
+              (u' Making dictionaries ', 2, None, '___sec1'),
+              (u' Dictionary operations ', 2, None, '___sec2'),
+              (u' Remark ', 3, None, '___sec3'),
+              (u' Example: Polynomials as dictionaries ',
+               2,
+               u'sec:files:poly',
+               u'sec:files:poly'),
+              (u' Dictionaries with default values and ordering ',
+               2,
+               u'sec:files:dict:default:order',
+               u'sec:files:dict:default:order'),
+              (u' Dictionaries with default values ', 3, None, '___sec6'),
+              (u' Ordered dictionaries ', 3, None, '___sec7'),
+              (u' Example: File data in dictionaries ',
+               2,
+               u'sec:files:dict:density',
+               u'sec:files:dict:density'),
+              (u' Problem ', 3, None, '___sec9'),
+              (u' Solution ', 3, None, '___sec10'),
+              (u' Example: File data in nested dictionaries ',
+               2,
+               u'sec:files:dictdict',
+               u'sec:files:dictdict'),
+              (u' Problem ', 3, None, '___sec12'),
+              (u' Algorithm ', 3, None, '___sec13'),
+              (u' Implementation ', 3, None, '___sec14'),
+              (u' Dissection ', 3, None, '___sec15'),
+              (u' Example: Reading and plotting data recorded at specific dates ',
+               2,
+               u'sec:files:stockprices',
+               u'sec:files:stockprices'),
+              (u' Problem ', 3, None, '___sec17'),
+              (u' Solution ', 3, None, '___sec18'),
+              (u' Strings ', 1, u'sec:files:str', u'sec:files:str'),
+              (u' Common operations on strings ',
+               2,
+               u'sec:files:stringop',
+               u'sec:files:stringop'),
+              (u' Substring specification ', 3, None, '___sec21'),
+              (u' Searching for substrings ', 3, None, '___sec22'),
+              (u' Substitution ', 3, None, '___sec23'),
+              (u' String splitting ', 3, None, '___sec24'),
+              (u' Upper and lower case ', 3, None, '___sec25'),
+              (u' Strings are constant ', 3, None, '___sec26'),
+              (u' Strings with digits only ', 3, None, '___sec27'),
+              (u' Whitespace ', 3, None, '___sec28'),
+              (u' Joining strings ', 3, None, '___sec29'),
+              (u' Example: Reading pairs of numbers ',
+               2,
+               u'sec:files:pairs',
+               u'sec:files:pairs'),
+              (u' Problem ', 3, None, '___sec31'),
+              (u' Solution ', 3, None, '___sec32'),
+              (u' Example: Reading coordinates ', 2, None, '___sec33'),
+              (u' Problem ', 3, None, '___sec34'),
+              (u' Solution 1: substring extraction ', 3, None, '___sec35'),
+              (u' Solution 2: string search ', 3, None, '___sec36'),
+              (u' Solution 3: string split ', 3, None, '___sec37'),
+              (u' Reading data from web pages ',
+               1,
+               u'sec:files:webtxt',
+               u'sec:files:webtxt'),
+              (u' About web pages ',
+               2,
+               u'sec:files:HTMLintro',
+               u'sec:files:HTMLintro'),
+              (u' How to access web pages in programs ',
+               2,
+               u'sec:files:urllib',
+               u'sec:files:urllib'),
+              (u' Alternative 1 ', 3, None, '___sec41'),
+              (u' Alternative 2 ', 3, None, '___sec42'),
+              (u' Example: Reading pure text files ',
+               2,
+               u'sec:files:url:weather',
+               u'sec:files:url:weather'),
+              (u' Example: Extracting data from HTML ',
+               2,
+               u'sec:files:url:interpret',
+               u'sec:files:url:interpret'),
+              (u' Handling non-English text ',
+               2,
+               u'sec:files:encoding',
+               u'sec:files:encoding'),
+              (u' Reading and writing spreadsheet files ',
+               1,
+               u'sec:files:csv',
+               u'sec:files:csv'),
+              (u' CSV files ', 2, None, '___sec47'),
+              (u' Reading CSV files ', 2, None, '___sec48'),
+              (u' Processing spreadsheet data ', 2, None, '___sec49'),
+              (u' Writing CSV files ', 2, None, '___sec50'),
+              (u' Remark ', 3, None, '___sec51'),
+              (u' Representing number cells with Numerical Python arrays ',
+               2,
+               None,
+               '___sec52'),
+              (u' Using more high-level Numerical Python functionality ',
+               2,
+               None,
+               '___sec53'),
+              (u' Summary ', 1, None, '___sec54'),
+              (u' Chapter topics ', 2, None, '___sec55'),
+              (u' Dictionaries ', 3, None, '___sec56'),
+              (u' Strings ', 3, None, '___sec57'),
+              (u' Downloading Internet files ', 3, None, '___sec58'),
+              (u' Terminology ', 3, None, '___sec59'),
+              (u' Example: A file database ',
+               2,
+               u'sec:files:sumex',
+               u'sec:files:sumex'),
+              (u' Problem ', 3, None, '___sec61'),
+              (u' Solution ', 3, None, '___sec62'),
+              (u' Exercises ',
+               1,
+               u'sec:files:exercises',
+               u'sec:files:exercises'),
+              (u' Exercise 1: Make a dictionary from a table ',
+               2,
+               u'sec:files:ex2b:basic',
+               u'sec:files:ex2b:basic'),
+              (u' Exercise 2: Explore syntax differences: lists vs. dicts ',
+               2,
+               u'sec:files:ex2',
+               u'sec:files:ex2'),
+              (u' Exercise 3: Use string operations to improve a program ',
+               2,
+               u'sec:files:ex17',
+               u'sec:files:ex17'),
+              (u' Exercise 4: Interpret output from a program ',
+               2,
+               u'sec:files:ex13',
+               u'sec:files:ex13'),
+              (u' Exercise 5: Make a nested dictionary from a file ',
+               2,
+               u'sec:files:ex2d:nested',
+               u'sec:files:ex2d:nested'),
+              (u' Exercise 6: Make a nested dictionary from a file ',
+               2,
+               u'sec:files:ex2d:nested2',
+               u'sec:files:ex2d:nested2'),
+              (u' Exercise 7: Compare data structures for polynomials ',
+               2,
+               u'sec:files:ex16',
+               u'sec:files:ex16'),
+              (u' Exercise 8: Compute the derivative of a polynomial ',
+               2,
+               u'sec:files:ex3',
+               u'sec:files:ex3'),
+              (u' Exercise 9: Specify functions on the command line ',
+               2,
+               u'sec:basic:ex10',
+               u'sec:basic:ex10'),
+              (u' Exercise 10: Interpret function specifications ',
+               2,
+               u'sec:basic:ex10b',
+               u'sec:basic:ex10b'),
+              (u' Exercise 11: Compare average temperatures in cities ',
+               2,
+               u'sec:files:ex8',
+               u'sec:files:ex8'),
+              (u' References ', 1, None, '___sec75')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- newcommands_keep.tex -->
+$$
+\newcommand{\tp}{\thinspace .}
+$$
+
+
+
+
+    
+<!-- Bootstrap navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="files-readable.html">Dictionaries and strings</a>
+  </div>
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     <!-- navigation toc: --> <li><a href="._files-readable001.html#sec:files:dicts" style="font-size: 80%;">Dictionaries</a></li>
+     <!-- navigation toc: --> <li><a href="._files-readable002.html#sec:files:str" style="font-size: 80%;">Strings</a></li>
+     <!-- navigation toc: --> <li><a href="._files-readable003.html#sec:files:webtxt" style="font-size: 80%;">Reading data from web pages</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:files:csv" style="font-size: 80%;">Reading and writing spreadsheet files</a></li>
+     <!-- navigation toc: --> <li><a href="._files-readable005.html#___sec54" style="font-size: 80%;">Summary</a></li>
+     <!-- navigation toc: --> <li><a href="._files-readable006.html#sec:files:exercises" style="font-size: 80%;">Exercises</a></li>
+     <!-- navigation toc: --> <li><a href="._files-readable006.html#___sec75" style="font-size: 80%;">References</a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div> <!-- end of navigation bar -->
+
+<div class="container">
+
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+
+<a name="part0004"></a>
+<!-- !split -->
+
+<h1 id="sec:files:csv">Reading and writing spreadsheet files<a name="sec:files:csv"></a></h1>
+
+<p>
+From school you are probably used to spreadsheet programs such as
+Microsoft Excel or LibreOffice. This type of program is used to represent
+a table of numbers and text. Each table entry is known as a <em>cell</em>,
+and one can easily perform calculations with cells that contain numbers.
+The application of spreadsheet programs for mathematical computations
+and graphics is steadily growing.
+
+<p>
+Also Python may be used to do spreadsheet-type calculations on tabular
+data.  The advantage of using Python is that you can easily extend the
+calculations far beyond what a spreadsheet program can do. However,
+even if you can view Python as a substitute for a spreadsheet program,
+it may be beneficial to combine the two. Suppose you have some data in
+a spreadsheet. How can you read these data into a Python program,
+perform calculations on the data, and thereafter read the data back to
+the spreadsheet program? This is exactly what we will explain below
+through an example. With this example, you should understand how easy
+it is to combine Excel or LibreOffice with your own Python programs.
+
+<h2 id="___sec47">CSV files <a name="___sec47"></a></h2>
+
+<p>
+The table of data in a spreadsheet can be saved in so-called CSV files,
+where CSV stands for <em>comma separated values</em>.
+The CSV file format is very simple:
+each row in the spreadsheet table is a line in the file, and each cell
+in the row is separated by a comma or some other specified
+separation character.
+CSV files can easily be read into Python programs, and the
+table of
+cell data can be stored in a nested list
+(table),
+which can be processed as we desire.
+The modified table of cell data can be written back to a CSV file and read into
+the spreadsheet program for further processing.
+
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 5:  A simple spreadsheet in LibreOffice. <a name="sec:io:fig1"></a> </p></center>
+<p><img src="fig-files/spreadsheet1.png" align="bottom" width=400></p>
+</center>
+
+<p>
+Figure <a href="#sec:io:fig1">5</a> shows a simple
+spreadsheet in the LibreOffice program. The table contains \( 4\times 4 \)
+cells, where the first row contains column headings and the first column contains
+row headings. The remaining \( 3\times 3 \) subtable contains numbers that
+we may compute with.
+Let us save this spreadsheet to a file in the CSV format.
+The complete file will typically look as follows:
+
+<p>
+
+<!-- code=text (!bc txt) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">,&quot;year 1&quot;,&quot;year 2&quot;,&quot;year 3&quot;
+&quot;person 1&quot;,651000,651000,651000
+&quot;person 2&quot;,1100500,950100,340000
+&quot;person 3&quot;,740000,780000,800000
+</pre></div>
+<p>
+Our primary task is now to load these data into a Python program,
+compute the sum of each column, and write the data out again in the
+CSV format.
+
+<h2 id="___sec48">Reading CSV files <a name="___sec48"></a></h2>
+
+<p>
+We start with loading the data into a table, represented as
+a nested list, with aid of the
+<code>csv</code> module from Python's standard library.
+This approach gives us complete control of all
+details. Later, we will use more high-level <code>numpy</code> functionality
+for accomplishing the same thing with less lines.
+
+<p>
+The <code>csv</code> module offers functionality for reading one line at a time
+from a CSV file:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">infile <span style="color: #666666">=</span> <span style="color: #008000">open</span>(<span style="color: #BA2121">&#39;budget.csv&#39;</span>, <span style="color: #BA2121">&#39;r&#39;</span>)  <span style="color: #408080; font-style: italic"># CSV file</span>
+<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">csv</span>
+table <span style="color: #666666">=</span> []
+<span style="color: #008000; font-weight: bold">for</span> row <span style="color: #AA22FF; font-weight: bold">in</span> csv<span style="color: #666666">.</span>reader(infile):
+    table<span style="color: #666666">.</span>append(row)
+infile<span style="color: #666666">.</span>close()
+</pre></div>
+<p>
+The <code>row</code> variable is a list of column values that are
+read from the file by the <code>csv</code> module.
+The three lines computing <code>table</code> can be condensed to one using
+a list comprehension:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">table <span style="color: #666666">=</span> [row <span style="color: #008000; font-weight: bold">for</span> row <span style="color: #AA22FF; font-weight: bold">in</span> csv<span style="color: #666666">.</span>reader(infile)]
+</pre></div>
+<p>
+We can easily print <code>table</code>,
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">pprint</span>
+pprint<span style="color: #666666">.</span>pprint(table)
+</pre></div>
+<p>
+to see what the spreadsheet looks like
+when it is represented as a nested list in a Python program:
+
+<p>
+
+<!-- code=text (!bc ccq) typeset with pygments style "default" -->
+<blockquote>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">[[&#39;&#39;, &#39;year 1&#39;, &#39;year 2&#39;, &#39;year 3&#39;],
+ [&#39;person 1&#39;, &#39;651000&#39;, &#39;651000&#39;, &#39;651000&#39;],
+ [&#39;person 2&#39;, &#39;1100500&#39;, &#39;950100&#39;, &#39;340000&#39;],
+ [&#39;person 3&#39;, &#39;740000&#39;, &#39;780000&#39;, &#39;800000&#39;]]
+</pre></div>
+</blockquote><p>
+Observe now that all entries are surrounded by quotes, which means that
+all entries are string (<code>str</code>) objects. This is a general rule:
+the <code>csv</code> module reads all cells into string objects.
+To compute with the numbers, we need to transform the string objects
+to <code>float</code> objects. The transformation
+should not be applied to the first row and first column, since the
+cells here hold text.
+The transformation from strings to numbers
+therefore applies to the indices <code>r</code> and <code>c</code>
+in <code>table</code> (<code>table[r][c]</code>), such that the row counter
+<code>r</code> goes from 1 to <code>len(table)-1</code>,
+and the column counter <code>c</code>
+goes from 1 to <code>len(table[0])-1</code> (<code>len(table[0])</code> is
+the length of the first row, assuming the lengths of all rows are
+equal to the length of the first row).
+The relevant Python code for this transformation task becomes
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"> <span style="color: #008000; font-weight: bold">for</span> r <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">1</span>,<span style="color: #008000">len</span>(table)):
+    <span style="color: #008000; font-weight: bold">for</span> c <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">1</span>, <span style="color: #008000">len</span>(table[<span style="color: #666666">0</span>])):
+        table[r][c] <span style="color: #666666">=</span> <span style="color: #008000">float</span>(table[r][c])
+</pre></div>
+<p>
+A <code>pprint.pprint(table)</code> statement after this transformation yields
+
+<p>
+
+<!-- code=text (!bc ccq) typeset with pygments style "default" -->
+<blockquote>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">[[&#39;&#39;, &#39;year 1&#39;, &#39;year 2&#39;, &#39;year 3&#39;],
+ [&#39;person 1&#39;, 651000.0, 651000.0, 651000.0],
+ [&#39;person 2&#39;, 1100500.0, 950100.0, 340000.0],
+ [&#39;person 3&#39;, 740000.0, 780000.0, 800000.0]]
+</pre></div>
+</blockquote><p>
+The numbers now have a decimal and no quotes, indicating
+that the numbers are <code>float</code> objects and hence ready for mathematical
+calculations.
+
+<h2 id="___sec49">Processing spreadsheet data <a name="___sec49"></a></h2>
+
+<p>
+Let us perform a very simple calculation with <code>table</code>,
+namely adding a final row
+with the sum of the numbers in the columns:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">row <span style="color: #666666">=</span> [<span style="color: #666666">0.0</span>]<span style="color: #666666">*</span><span style="color: #008000">len</span>(table[<span style="color: #666666">0</span>])
+row[<span style="color: #666666">0</span>] <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;sum&#39;</span>
+<span style="color: #008000; font-weight: bold">for</span> c <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">1</span>, <span style="color: #008000">len</span>(row)):
+    s <span style="color: #666666">=</span> <span style="color: #666666">0</span>
+    <span style="color: #008000; font-weight: bold">for</span> r <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">1</span>, <span style="color: #008000">len</span>(table)):
+        s <span style="color: #666666">+=</span> table[r][c]
+    row[c] <span style="color: #666666">=</span> s
+</pre></div>
+<p>
+As seen, we first create a list <code>row</code> consisting of zeros.
+Then we insert a text in the first column, before we invoke a
+loop over the numbers in the table and compute the sum of each column.
+The <code>table</code> list now represents a spreadsheet with four columns and
+five rows:
+
+<p>
+
+<!-- code=text (!bc ccq) typeset with pygments style "default" -->
+<blockquote>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">[[&#39;&#39;, &#39;year 1&#39;, &#39;year 2&#39;, &#39;year 3&#39;],
+ [&#39;person 1&#39;, 651000.0, 651000.0, 651000.0],
+ [&#39;person 2&#39;, 1100500.0, 950100.0, 340000.0],
+ [&#39;person 3&#39;, 740000.0, 780000.0, 800000.0],
+ [&#39;sum&#39;, 2491500.0, 2381100.0, 1791000.0]]
+</pre></div>
+</blockquote><h2 id="___sec50">Writing CSV files <a name="___sec50"></a></h2>
+
+<p>
+Our final task is to write the modified <code>table</code> list
+back to a CSV file so that the data can be loaded in a spreadsheet program.
+The write task is done by the code segment
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">outfile <span style="color: #666666">=</span> <span style="color: #008000">open</span>(<span style="color: #BA2121">&#39;budget2.csv&#39;</span>, <span style="color: #BA2121">&#39;w&#39;</span>)
+writer <span style="color: #666666">=</span> csv<span style="color: #666666">.</span>writer(outfile)
+<span style="color: #008000; font-weight: bold">for</span> row <span style="color: #AA22FF; font-weight: bold">in</span> table:
+    writer<span style="color: #666666">.</span>writerow(row)
+outfile<span style="color: #666666">.</span>close()
+</pre></div>
+<p>
+The <code>budget2.csv</code> looks like this:
+
+<p>
+
+<!-- code=text (!bc txt) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">year 1,year 2,year 3
+person 1,651000.0,651000.0,651000.0
+person 2,1100500.0,950100.0,340000.0
+person 3,740000.0,780000.0,800000.0
+sum,2491500.0,2381100.0,1791000.0
+</pre></div>
+<p>
+The final step is to read <code>budget2.csv</code> into a spreadsheet.
+The result is displayed in Figure <a href="#sec:io:fig2">6</a>
+(in LibreOffice one must specify in the <em>Open</em> dialog that
+the spreadsheet data are separated by commas, i.e., that the file
+is in CSV format).
+
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 6:  A spreadsheet processed in a Python program and loaded back into LibreOffice. <a name="sec:io:fig2"></a> </p></center>
+<p><img src="fig-files/spreadsheet2.png" align="bottom" width=400></p>
+</center>
+
+<p>
+The complete program reading the <code>budget.csv</code> file, processing its
+data, and writing the <code>budget2.csv</code> file can be found in
+<a href="http://tinyurl.com/pwyasaa/files/rw_csw.py" target="_self"><tt>rw_csv.py</tt></a>.  With this example at
+hand, you should be in a good position to combine spreadsheet programs
+with your own Python programs.
+
+<h3 id="___sec51">Remark <a name="___sec51"></a></h3>
+
+<p>
+You may wonder why we used the <code>csv</code> module to read and write CSV
+files when such files have comma separated values, which we can
+extract by splitting lines with respect to the comma (this technique
+is used in the section <a href="._files-readable001.html#sec:files:stockprices">Example: Reading and plotting data recorded at specific dates</a> to read a CSV file):
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">infile <span style="color: #666666">=</span> <span style="color: #008000">open</span>(<span style="color: #BA2121">&#39;budget.csv&#39;</span>, <span style="color: #BA2121">&#39;r&#39;</span>)
+<span style="color: #008000; font-weight: bold">for</span> line <span style="color: #AA22FF; font-weight: bold">in</span> infile:
+    row <span style="color: #666666">=</span> line<span style="color: #666666">.</span>split(<span style="color: #BA2121">&#39;,&#39;</span>)
+</pre></div>
+<p>
+This works well for the present <code>budget.csv</code> file, but the technique
+breaks down when a text in a cell contains a comma, for instance
+<code>&quot;Aug 8, 2007&quot;</code>. The <code>line.split(',')</code> will split this cell text, while
+the <code>csv.reader</code> functionality is smart enough to avoid splitting
+text cells with a comma.
+
+<h2 id="___sec52">Representing number cells with Numerical Python arrays <a name="___sec52"></a></h2>
+
+<p>
+Instead of putting the whole spreadsheet into a single nested list,
+we can make a Python data structure more tailored to the data at hand.
+What we have are two headers (for rows and columns, respectively) and
+a subtable of numbers. The headers can be represented as lists of strings,
+while the subtable could be a two-dimensional Numerical Python array.
+The latter makes it easier to implement various mathematical operations
+on the numbers. A dictionary can hold all the three items: two header
+lists and one array. The relevant code for reading, processing, and
+writing the data is shown below and can be found in the file
+<a href="http://tinyurl.com/pwyasaa/files/rw_csv_numpy.py" target="_self"><tt>rw_csv_numpy.py</tt></a>:
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">infile <span style="color: #666666">=</span> <span style="color: #008000">open</span>(<span style="color: #BA2121">&#39;budget.csv&#39;</span>, <span style="color: #BA2121">&#39;r&#39;</span>)
+<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">csv</span>
+table <span style="color: #666666">=</span> [row <span style="color: #008000; font-weight: bold">for</span> row <span style="color: #AA22FF; font-weight: bold">in</span> csv<span style="color: #666666">.</span>reader(infile)]
+infile<span style="color: #666666">.</span>close()
+
+<span style="color: #408080; font-style: italic"># Convert subtable of numbers (string to float)</span>
+<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span>
+subtable <span style="color: #666666">=</span> [[<span style="color: #008000">float</span>(c) <span style="color: #008000; font-weight: bold">for</span> c <span style="color: #AA22FF; font-weight: bold">in</span> row[<span style="color: #666666">1</span>:]] <span style="color: #008000; font-weight: bold">for</span> row <span style="color: #AA22FF; font-weight: bold">in</span> table[<span style="color: #666666">1</span>:]]
+
+data <span style="color: #666666">=</span> {<span style="color: #BA2121">&#39;column headings&#39;</span>: table[<span style="color: #666666">0</span>][<span style="color: #666666">1</span>:],
+        <span style="color: #BA2121">&#39;row headings&#39;</span>: [row[<span style="color: #666666">0</span>] <span style="color: #008000; font-weight: bold">for</span> row <span style="color: #AA22FF; font-weight: bold">in</span> table[<span style="color: #666666">1</span>:]],
+        <span style="color: #BA2121">&#39;array&#39;</span>: numpy<span style="color: #666666">.</span>array(subtable)}
+
+<span style="color: #408080; font-style: italic"># Add a new row with sums</span>
+data[<span style="color: #BA2121">&#39;row headings&#39;</span>]<span style="color: #666666">.</span>append(<span style="color: #BA2121">&#39;sum&#39;</span>)
+a <span style="color: #666666">=</span> data[<span style="color: #BA2121">&#39;array&#39;</span>]   <span style="color: #408080; font-style: italic"># short form</span>
+data[<span style="color: #BA2121">&#39;column sum&#39;</span>] <span style="color: #666666">=</span> [<span style="color: #008000">sum</span>(a[:,c]) <span style="color: #008000; font-weight: bold">for</span> c <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(a<span style="color: #666666">.</span>shape[<span style="color: #666666">1</span>])]
+
+outfile <span style="color: #666666">=</span> <span style="color: #008000">open</span>(<span style="color: #BA2121">&#39;budget2.csv&#39;</span>, <span style="color: #BA2121">&#39;w&#39;</span>)
+writer <span style="color: #666666">=</span> csv<span style="color: #666666">.</span>writer(outfile)
+<span style="color: #408080; font-style: italic"># Turn data dictionary into a nested list first (for easy writing)</span>
+table <span style="color: #666666">=</span> a<span style="color: #666666">.</span>tolist()   <span style="color: #408080; font-style: italic"># transform array to nested list</span>
+table<span style="color: #666666">.</span>append(data[<span style="color: #BA2121">&#39;column sum&#39;</span>])
+table<span style="color: #666666">.</span>insert(<span style="color: #666666">0</span>, data[<span style="color: #BA2121">&#39;column headings&#39;</span>])
+<span style="color: #408080; font-style: italic"># Extend table with row headings (a new column)</span>
+[table[r<span style="color: #666666">+1</span>]<span style="color: #666666">.</span>insert(<span style="color: #666666">0</span>, data[<span style="color: #BA2121">&#39;row headings&#39;</span>][r])
+ <span style="color: #008000; font-weight: bold">for</span> r <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #008000">len</span>(table)<span style="color: #666666">-1</span>)]
+<span style="color: #008000; font-weight: bold">for</span> row <span style="color: #AA22FF; font-weight: bold">in</span> table:
+    writer<span style="color: #666666">.</span>writerow(row)
+outfile<span style="color: #666666">.</span>close()
+</pre></div>
+<p>
+The code makes heavy use of list comprehensions, and the
+transformation between a nested list, for file reading and writing,
+and the <code>data</code> dictionary, for representing the data in the
+Python program, is non-trivial. If you manage to understand every
+line in this program, you have digested a lot of topics in
+Python programming!
+
+<h2 id="___sec53">Using more high-level Numerical Python functionality <a name="___sec53"></a></h2>
+
+<p>
+The previous program can be shortened significantly by applying
+the <code>genfromtxt</code> function from Numerical Python:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
+arr <span style="color: #666666">=</span> np<span style="color: #666666">.</span>genfromtxt(<span style="color: #BA2121">&#39;budget.csv&#39;</span>, delimiter<span style="color: #666666">=</span><span style="color: #BA2121">&#39;,&#39;</span>, dtype<span style="color: #666666">=</span><span style="color: #008000">str</span>)
+
+data <span style="color: #666666">=</span> {<span style="color: #BA2121">&#39;column headings&#39;</span>: arr[<span style="color: #666666">0</span>,<span style="color: #666666">1</span>:]<span style="color: #666666">.</span>tolist(),
+        <span style="color: #BA2121">&#39;row headings&#39;</span>: arr[<span style="color: #666666">1</span>:,<span style="color: #666666">0</span>]<span style="color: #666666">.</span>tolist(),
+        <span style="color: #BA2121">&#39;array&#39;</span>: np<span style="color: #666666">.</span>asarray(arr[<span style="color: #666666">1</span>:,<span style="color: #666666">1</span>:], dtype<span style="color: #666666">=</span>np<span style="color: #666666">.</span>float)}
+
+data[<span style="color: #BA2121">&#39;row headings&#39;</span>]<span style="color: #666666">.</span>append(<span style="color: #BA2121">&#39;sum&#39;</span>)
+data[<span style="color: #BA2121">&#39;column sum&#39;</span>] <span style="color: #666666">=</span> np<span style="color: #666666">.</span>sum(data[<span style="color: #BA2121">&#39;array&#39;</span>], axis<span style="color: #666666">=1</span>)<span style="color: #666666">.</span>tolist()
+</pre></div>
+<p>
+Doing a <code>repr(arr)</code> on the array returned from <code>genfromtxt</code>
+results in
+
+<p>
+
+<!-- code=text (!bc dat) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">array([[&#39;&#39;, &#39;&quot;year 1&quot;&#39;, &#39;&quot;year 2&quot;&#39;, &#39;&quot;year 3&quot;&#39;],
+       [&#39;&quot;person 1&quot;&#39;, &#39;651000&#39;, &#39;651000&#39;, &#39;651000&#39;],
+       [&#39;&quot;person 2&quot;&#39;, &#39;1100500&#39;, &#39;950100&#39;, &#39;340000&#39;],
+       [&#39;&quot;person 3&quot;&#39;, &#39;740000&#39;, &#39;780000&#39;, &#39;800000&#39;]],
+      dtype=&#39;|S10&#39;)
+</pre></div>
+<p>
+That is, the data in the CSV file are available as an array of
+strings.  The code shows how we can easily use slices to extract the
+row and column headings, convert the numbers to a floating-point array
+for computations, compute the sums, and store various object in the
+<code>data</code> dictionary. Then we may write a CSV file as described in the
+previous example (see <a href="http://tinyurl.com/pwyasaa/files/rw_csv_numpy2.py" target="_self"><tt>rw_csv_numpy2.py</tt></a>) or we may take a different
+approach and extend the <code>arr</code> array with an extra row and fill in the
+row heading and the sums (see <a href="http://tinyurl.com/pwyasaa/files/rw_csv_numpy3.py" target="_self"><tt>rw_csv_numpy3.py</tt></a> for the complete code):
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">arr <span style="color: #666666">=</span> np<span style="color: #666666">.</span>genfromtxt(<span style="color: #BA2121">&#39;budget.csv&#39;</span>, delimiter<span style="color: #666666">=</span><span style="color: #BA2121">&#39;,&#39;</span>, dtype<span style="color: #666666">=</span><span style="color: #008000">str</span>)
+
+<span style="color: #408080; font-style: italic"># Add row for sum of columns</span>
+arr<span style="color: #666666">.</span>resize((arr<span style="color: #666666">.</span>shape[<span style="color: #666666">0</span>]<span style="color: #666666">+1</span>, arr<span style="color: #666666">.</span>shape[<span style="color: #666666">1</span>]))
+arr[<span style="color: #666666">-1</span>,<span style="color: #666666">0</span>] <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;&quot;sum&quot;&#39;</span>
+subtable <span style="color: #666666">=</span> np<span style="color: #666666">.</span>asarray(arr[<span style="color: #666666">1</span>:<span style="color: #666666">-1</span>,<span style="color: #666666">1</span>:], dtype<span style="color: #666666">=</span>np<span style="color: #666666">.</span>float)
+sum_row <span style="color: #666666">=</span> np<span style="color: #666666">.</span>sum(subtable, axis<span style="color: #666666">=1</span>)
+arr[<span style="color: #666666">-1</span>,<span style="color: #666666">1</span>:] <span style="color: #666666">=</span> np<span style="color: #666666">.</span>asarray(sum_row, dtype<span style="color: #666666">=</span><span style="color: #008000">str</span>)
+
+<span style="color: #408080; font-style: italic"># numpy.savetxt writes table with a delimiter between entires</span>
+np<span style="color: #666666">.</span>savetxt(<span style="color: #BA2121">&#39;budget2c.csv&#39;</span>, arr, delimiter<span style="color: #666666">=</span><span style="color: #BA2121">&#39;,&#39;</span>, fmt<span style="color: #666666">=</span><span style="color: #BA2121">&#39;</span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121">&#39;</span>)
+</pre></div>
+<p>
+Observe how we extract the numbers in <code>subtable</code>, compute with them,
+and put the results back into the <code>arr</code> array as strings. The
+<code>savetxt</code> function saves a two-dimensional array as a plain table in
+a text file, here with
+comma as delimiter. The function suffices in this example, none of
+the approaches with <code>genfromtxt</code> and <code>savetxt</code> work with
+column or row headings containing a comma. Then we need to use the
+<code>csv</code> module.
+
+<p>
+<p>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pager">
+  <li class="previous">
+    <a href="._files-readable003.html">&larr; Prev</a>
+  </li>
+  <li class="next">
+    <a href="._files-readable005.html">Next &rarr;</a>
+  </li>
+</ul>
+<!-- ------------------- end of main content --------------- -->
+
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap footer
+<footer>
+<a href="http://..."><img width="250" align=right src="http://..."></a>
+</footer>
+-->
+
+
+</body>
+</html>
+    
+

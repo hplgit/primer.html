@@ -1,0 +1,850 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Array computing and curve plotting">
+<meta name="keywords" content="vectors,vector computing,scalar (math quantity),heterogeneous lists,Numerical Python,NumPy,array (datatype),array computing,vectorization,array slicing,subarrays,allocate,vectorization,scalar code,curve plotting,plotting,making graphs,backend (Easyviz),backend (Easyviz),remove files (in Python),delete files (in Python),boolean indexing,boolean indexing,in-place array arithmetics,check an object's type,shape (of an array),array shape,matrix,shape (of an array),array shape,least squares approximation,Trapezoidal rule for integration,Lagrange's interpolation formula,interpolation,Midpoint rule for integration,Trapezoidal rule for integration">
+
+<title>Array computing and curve plotting</title>
+
+
+<link href="https://raw.githubusercontent.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/css/solarized_light_code.css" rel="stylesheet" type="text/css" title="light"/>
+<script src="https://rawgit.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<link href="http://thomasf.github.io/solarized-css/solarized-light.min.css" rel="stylesheet">
+<style type="text/css">
+h1 {color: #b58900;}  /* yellow */
+/* h1 {color: #cb4b16;}  orange */
+/* h1 {color: #d33682;}  magenta, the original choice of thomasf */
+.alert-text-small   { font-size: 80%;  }
+.alert-text-large   { font-size: 130%; }
+.alert-text-normal  { font-size: 90%;  }
+.alert {
+  padding:8px 35px 8px 14px; margin-bottom:18px;
+  text-shadow:0 1px 0 rgba(255,255,255,0.5);
+  border:1px solid #93a1a1;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  color: #555;
+  background-color: #eee8d5;
+  background-position: 10px 5px;
+  background-repeat: no-repeat;
+  background-size: 38px;
+  padding-left: 55px;
+  width: 75%;
+ }
+.alert-block {padding-top:14px; padding-bottom:14px}
+.alert-block > p, .alert-block > ul {margin-bottom:1em}
+.alert li {margin-top: 1em}
+.alert-block p+p {margin-top:5px}
+.alert-notice { background-image: url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_notice.png); }
+.alert-summary  { background-image:url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_summary.png); }
+.alert-warning { background-image: url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_warning.png); }
+.alert-question {background-image:url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_question.png); }
+
+div { text-align: justify; text-justify: inter-word; }
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [(' Vectors ', 1, None, '___sec0'),
+              (' The vector concept ', 2, None, '___sec1'),
+              (' Mathematical operations on vectors ',
+               2,
+               'sec:plot:vectors',
+               'sec:plot:vectors'),
+              (' Vector arithmetics and vector functions ',
+               2,
+               'sec:plot:arraycomp',
+               'sec:plot:arraycomp'),
+              (' Arrays in Python programs ', 1, None, '___sec4'),
+              (' Using lists for collecting function data ',
+               2,
+               'sec:plot:listdata',
+               'sec:plot:listdata'),
+              (' Basics of numerical Python arrays ',
+               2,
+               'sec:plot:array:basics',
+               'sec:plot:array:basics'),
+              (' Computing coordinates and function values ',
+               2,
+               None,
+               '___sec7'),
+              (' Vectorization ',
+               2,
+               'sec:plot:vectorization',
+               'sec:plot:vectorization'),
+              (' Curve plotting ',
+               1,
+               'sec:plot:curveplots',
+               'sec:plot:curveplots'),
+              (' Matplotlib; pylab ', 2, 'sec:plot:pylab', 'sec:plot:pylab'),
+              (' A basic plot ', 3, None, '___sec11'),
+              (' Decorating the plot ', 3, None, '___sec12'),
+              (' Plotting multiple curves ', 3, None, '___sec13'),
+              (' Placing several plots in one figure ', 3, None, '___sec14'),
+              (' Matplotlib; pyplot ',
+               2,
+               'sec:plot:pyplot',
+               'sec:plot:pyplot'),
+              (' SciTools and Easyviz ',
+               2,
+               'sec:plot:SciTools',
+               'sec:plot:SciTools'),
+              (' Importing SciTools and Easyviz ', 3, None, '___sec17'),
+              (' A basic plot ', 3, None, '___sec18'),
+              (' Decorating the plot ', 3, None, '___sec19'),
+              (' Plotting multiple curves ', 3, None, '___sec20'),
+              (' Changing backend ', 3, None, '___sec21'),
+              (' Placing several plots in one figure ', 3, None, '___sec22'),
+              (' Making animations ', 2, 'easyviz:movie', 'easyviz:movie'),
+              (' Example ', 3, None, '___sec24'),
+              (' Animation in Easyviz ', 3, None, '___sec25'),
+              (' Basic animation in Matplotlib ', 3, None, '___sec26'),
+              (' Using FuncAnimation in Matplotlib ', 3, None, '___sec27'),
+              (' Making videos ', 2, 'sec:plot:video', 'sec:plot:video'),
+              (' Animated GIF file ', 3, None, '___sec29'),
+              (' MP4, Ogg, WebM, and Flash videos ', 3, None, '___sec30'),
+              (' Curve plots in pure text ', 2, None, '___sec31'),
+              (' Plotting difficulties ',
+               1,
+               'sec:plot:difficulties',
+               'sec:plot:difficulties'),
+              (' Piecewisely defined functions ',
+               2,
+               'sec:plot:pwisefunc',
+               'sec:plot:pwisefunc'),
+              (' Example: The Heaviside function ', 3, None, '___sec34'),
+              (' Example: A hat function ', 3, None, '___sec35'),
+              (' Rapidly varying functions ',
+               2,
+               'sec:plot:sin1x',
+               'sec:plot:sin1x'),
+              (' More advanced vectorization of functions ',
+               1,
+               'sec:plot:if:vectorize',
+               'sec:plot:if:vectorize'),
+              (' Vectorization of StringFunction objects ',
+               2,
+               'sec:plot:StringFunction:vectorize',
+               'sec:plot:StringFunction:vectorize'),
+              (' Vectorization of the Heaviside function ',
+               2,
+               'sec:vec:Heaviside',
+               'sec:vec:Heaviside'),
+              (' Loop ', 3, None, '___sec40'),
+              (' Automatic vectorization ', 3, None, '___sec41'),
+              (' Mixing boolean and floating-point calculations ',
+               3,
+               None,
+               '___sec42'),
+              (' Manual vectorization ', 3, None, '___sec43'),
+              (' Vectorization of a hat function ',
+               2,
+               'sec:vec:hatfunc',
+               'sec:vec:hatfunc'),
+              (' More on numerical Python arrays ',
+               1,
+               'sec:plot:numpy:more',
+               'sec:plot:numpy:more'),
+              (' Copying arrays ', 2, None, '___sec46'),
+              (' In-place arithmetics ', 2, None, '___sec47'),
+              (' Allocating arrays ', 2, None, '___sec48'),
+              (' Generalized indexing ',
+               2,
+               'sec:plot:generalized:index',
+               'sec:plot:generalized:index'),
+              (' Testing for the array type ', 2, None, '___sec50'),
+              (' Example: Vectorizing a constant function ',
+               3,
+               None,
+               '___sec51'),
+              (' Compact syntax for array generation ', 2, None, '___sec52'),
+              (' Shape manipulation ', 2, None, '___sec53'),
+              (' Higher-dimensional arrays ',
+               1,
+               'sec:plot:2Darrays',
+               'sec:plot:2Darrays'),
+              (' Matrices and arrays ', 2, None, '___sec55'),
+              (' Two-dimensional numerical Python arrays ',
+               2,
+               'sec:plot:2D:arrays',
+               'sec:plot:2D:arrays'),
+              (' Array computing ',
+               2,
+               'sec:plot:array2comp',
+               'sec:plot:array2comp'),
+              (' Remark ', 3, None, '___sec58'),
+              (' Two-dimensional arrays and functions of two variables ',
+               2,
+               None,
+               '___sec59'),
+              (' Matrix objects ',
+               2,
+               'sec:plot:numpy:matrix',
+               'sec:plot:numpy:matrix'),
+              (' Summary ', 1, None, '___sec61'),
+              (' Chapter topics ', 2, None, '___sec62'),
+              (' Array computing ', 3, None, '___sec63'),
+              (' Plotting curves ', 3, None, '___sec64'),
+              (' Making movies ', 3, None, '___sec65'),
+              (' Terminology ', 3, None, '___sec66'),
+              (' Example: Animating a function ',
+               2,
+               'sec:plot:summarizing',
+               'sec:plot:summarizing'),
+              (' Problem ', 3, None, '___sec68'),
+              (' Solution ', 3, None, '___sec69'),
+              (' Scaling ', 3, None, '___sec70'),
+              (' Exercises ', 1, 'sec:plot:exer', 'sec:plot:exer'),
+              (' Exercise 1: Fill lists with function values ',
+               2,
+               'sec:plot:ex1',
+               'sec:plot:ex1'),
+              (' Exercise 2: Fill arrays; loop version ',
+               2,
+               'sec:plot:ex2',
+               'sec:plot:ex2'),
+              (' Exercise 3: Fill arrays; vectorized version ',
+               2,
+               'sec:plot:ex2b',
+               'sec:plot:ex2b'),
+              (' Exercise 4: Plot a function ',
+               2,
+               'sec:plot:ex2c',
+               'sec:plot:ex2c'),
+              (' Exercise 5: Apply a function to a vector ',
+               2,
+               'sec:plot:math:ex1',
+               'sec:plot:math:ex1'),
+              (' Exercise 6: Simulate by hand a vectorized expression ',
+               2,
+               'sec:plot:ex3',
+               'sec:plot:ex3'),
+              (' Exercise 7: Demonstrate array slicing ',
+               2,
+               'sec:plot:ex15d',
+               'sec:plot:ex15d'),
+              (' Exercise 8: Plot a formula ',
+               2,
+               'sec:plot:ex15',
+               'sec:plot:ex15'),
+              (' Exercise 9: Plot a formula for several parameters ',
+               2,
+               'sec:plot:ex15b',
+               'sec:plot:ex15b'),
+              (' Exercise 10: Specify the extent of the axes in a plot ',
+               2,
+               'sec:plot:ex15ba',
+               'sec:plot:ex15ba'),
+              (' Exercise 11: Plot exact and inexact Fahrenheit-Celsius conversion formulas ',
+               2,
+               'sec:plot:ex15c',
+               'sec:plot:ex15c'),
+              (' Exercise 12: Plot the trajectory of a ball ',
+               2,
+               'sec:plot:ex5',
+               'sec:plot:ex5'),
+              (' Exercise 13: Plot data in a two-column file ',
+               2,
+               'sec:files:ex12',
+               'sec:files:ex12'),
+              (' Remarks ', 3, None, '___sec85'),
+              (' Exercise 14: Plot data from a file ',
+               2,
+               'sec:files:ex12c',
+               'sec:files:ex12c'),
+              (' Exercise 15: Fit a polynomial to data points ',
+               2,
+               'sec:files:ex12c2',
+               'sec:files:ex12c2'),
+              (' Exercise 16: Fit a polynomial to experimental data ',
+               2,
+               'sec:files:ex19',
+               'sec:files:ex19'),
+              (' Exercise 17: Read acceleration data and find velocities ',
+               2,
+               'sec:files:ex22',
+               'sec:files:ex22'),
+              (' Exercise 18: Read acceleration data and plot velocities ',
+               2,
+               'sec:files:ex23',
+               'sec:files:ex23'),
+              (" Exercise 19: Plot a trip's path and velocity from GPS coordinates ",
+               2,
+               'sec:files:ex24',
+               'sec:files:ex24'),
+              (' Exercise 20: Vectorize the Midpoint rule for integration ',
+               2,
+               'sec:class:exer:sum',
+               'sec:class:exer:sum'),
+              (' Remarks ', 3, None, '___sec93'),
+              (" Exercise 21: Implement Lagrange's interpolation formula ",
+               2,
+               'sec:class:ex27a',
+               'sec:class:ex27a'),
+              (" Exercise 22: Plot Lagrange's interpolating polynomial ",
+               2,
+               'sec:class:ex27b',
+               'sec:class:ex27b'),
+              (" Exercise 23: Investigate the behavior of Lagrange's interpolating polynomials ",
+               2,
+               'sec:class:ex27c',
+               'sec:class:ex27c'),
+              (' Remarks ', 3, None, '___sec97'),
+              (' Exercise 24: Plot a wave packet ',
+               2,
+               'sec:plot:ex5d',
+               'sec:plot:ex5d'),
+              (' Exercise 25: Judge a plot ',
+               2,
+               'sec:plot:ex7',
+               'sec:plot:ex7'),
+              (' Exercise 26: Plot the viscosity of water ',
+               2,
+               'sec:plot:ex13c',
+               'sec:plot:ex13c'),
+              (' Exercise 27: Explore a complicated function graphically ',
+               2,
+               'sec:plot:ex16',
+               'sec:plot:ex16'),
+              (' Exercise 28: Plot Taylor polynomial approximations to $\\sin x$ ',
+               2,
+               'sec:plot:ex5b',
+               'sec:plot:ex5b'),
+              (' Exercise 29: Animate a wave packet ',
+               2,
+               'sec:plot:ex5e',
+               'sec:plot:ex5e'),
+              (' Exercise 30: Animate two-scale temperature variations ',
+               2,
+               'sec:plot:ex18',
+               'sec:plot:ex18'),
+              (' Remarks ', 3, None, '___sec105'),
+              (' Exercise 31: Use non-uniformly distributed coordinates for visualization ',
+               2,
+               'sec:plot:ex19',
+               'sec:plot:ex19'),
+              (" Exercise 32: Animate a planet's orbit ",
+               2,
+               'sec:plot:ex5g',
+               'sec:plot:ex5g'),
+              (' Exercise 33: Animate the evolution of Taylor polynomials ',
+               2,
+               'sec:plot:ex17',
+               'sec:plot:ex17'),
+              (' Exercise 34: Plot the velocity profile for pipeflow ',
+               2,
+               'sec:plot:ex4',
+               'sec:plot:ex4'),
+              (' Exercise 35: Plot sum-of-sines approximations to a function ',
+               2,
+               'sec:plot:ex8',
+               'sec:plot:ex8'),
+              (' Exercise 36: Animate the evolution of a sum-of-sine approximation to a function ',
+               2,
+               'sec:plot:ex8m',
+               'sec:plot:ex8m'),
+              (' Exercise 37: Plot functions from the command line ',
+               2,
+               'sec:plot:ex14',
+               'sec:plot:ex14'),
+              (' Exercise 38: Improve command-line input ',
+               2,
+               'sec:plot:ex14b',
+               'sec:plot:ex14b'),
+              (' Exercise 39: Demonstrate energy concepts from physics ',
+               2,
+               'sec:plot:ex20',
+               'sec:plot:ex20'),
+              (' Exercise 40: Plot a w-like function ',
+               2,
+               'sec:plot:math:ex9',
+               'sec:plot:math:ex9'),
+              (' Exercise 41: Visualize approximations in the Midpoint integration rule ',
+               2,
+               'sec:plot:ex:vizmidpoint',
+               'sec:plot:ex:vizmidpoint'),
+              (' Exercise 42: Visualize approximations in the Trapezoidal integration rule ',
+               2,
+               'sec:plot:ex:viztrapezoidal',
+               'sec:plot:ex:viztrapezoidal'),
+              (' Exercise 43: Experience overflow in a function ',
+               2,
+               'sec:plot:ex13',
+               'sec:plot:ex13'),
+              (' Remarks ', 3, None, '___sec119'),
+              (' Exercise 44: Apply a function to a rank 2 array ',
+               2,
+               'sec:plot:math:ex2',
+               'sec:plot:math:ex2'),
+              (' Exercise 45: Explain why array computations fail ',
+               2,
+               'sec:plot:ex11',
+               'sec:plot:ex11'),
+              (' References ', 1, None, '___sec122')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- newcommands_keep.tex -->
+$$
+\newcommand{\tp}{\thinspace .}
+$$
+
+
+
+
+    
+<a name="part0002"></a>
+<p>
+<!-- begin top navigation -->
+<table style="width: 100%"><tr><td>
+<div style="text-align: left;"><a href="._plot-solarized001.html">&laquo; Previous</a></div>
+</td><td>
+<div style="text-align: right;"><a href="._plot-solarized003.html">Next &raquo;</a></div>
+</td></tr></table>
+<!-- end top navigation -->
+</p>
+
+<p>
+<!-- !split -->
+
+<h1>Arrays in Python programs  <a name="___sec4"></a></h1>
+
+<p>
+This section introduces array programming in Python, but first we
+create some lists and show how arrays differ from lists.
+
+<h2>Using lists for collecting function data <a name="sec:plot:listdata"></a></h2>
+
+<p>
+Suppose we have a function \( f(x) \) and want to evaluate this function
+at a number of \( x \) points \( x_0,x_1,\ldots,x_{n-1} \).  We could collect
+the \( n \) pairs \( (x_i,f(x_i)) \) in a list, or we could collect all the
+\( x_i \) values, for \( i=0,\ldots,n-1 \), in a list and all the associated
+\( f(x_i) \) values in another list.  The following interactive session
+demonstrates how to create these three types of lists:
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; def f(x):
+...     return x**3       # sample function
+...
+&gt;&gt;&gt; n = 5                 # no of points along the x axis
+&gt;&gt;&gt; dx = 1.0/(n-1)        # spacing between x points in [0,1]
+&gt;&gt;&gt; xlist = [i*dx for i in range(n)]
+&gt;&gt;&gt; ylist = [f(x) for x in xlist]
+&gt;&gt;&gt; pairs = [[x, y] for x, y in zip(xlist, ylist)]
+</code></pre>
+<!-- end verbatim block -->
+Here we have used list comprehensions for achieving compact code. Make
+sure that you understand what is going on in these list comprehensions
+(if not, try to write the same code using standard <code>for</code> loops and
+appending new list elements in each pass of the loops).
+
+<p>
+The list elements consist of objects of the same type: any element in
+<code>pairs</code> is a list of two <code>float</code> objects, while any element in <code>xlist</code>
+or <code>ylist</code> is a <code>float</code>. Lists are more flexible than that, because an
+element can be an object of any type, e.g.,
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>mylist = [2, 6.0, 'tmp.pdf', [0,1]]
+</code></pre>
+<!-- end verbatim block -->
+Here <code>mylist</code> holds an <code>int</code>, a <code>float</code>, a string, and a list. This
+combination of diverse object types makes up what is known as
+<em>heterogeneous</em> lists.  We can also easily remove elements from a list
+or add new elements anywhere in the list.  This flexibility of lists
+is in general convenient to have as a programmer, but in cases where
+the elements are of the same type and the number of elements is fixed,
+arrays can be used instead. The benefits of arrays are faster
+computations, less memory demands, and extensive support for
+mathematical operations on the data.  Because of greater efficiency
+and mathematical convenience, arrays will be used to a large extent in
+this document.  The great use of arrays is also prominent in other
+programming environments such as MATLAB, Octave, and R, for instance.
+Lists will be our choice instead of arrays when we need the
+flexibility of adding or removing elements or when the elements may be
+of different object types.
+
+<h2>Basics of numerical Python arrays <a name="sec:plot:array:basics"></a></h2>
+
+<p>
+An <em>array</em> object can be viewed as a variant of a list, but with the
+following assumptions and features:
+
+<ul>
+  <li> All elements must be of the same type, preferably integer, real, or complex numbers, for efficient numerical computing and storage.</li>
+  <li> The number of elements must be known when the array is created.</li>
+  <li> Arrays are not part of standard Python - one needs an additional package called <em>Numerical Python</em>, often abbreviated as NumPy. The Python name of the package, to be used in <code>import</code> statements, is <code>numpy</code>.</li>
+  <li> With <code>numpy</code>, a wide range of mathematical operations can be done directly on complete arrays, thereby removing the need for loops over array elements. This is commonly called <em>vectorization</em> %or <em>array computing</em> and may cause a dramatic speed-up of Python programs. Vectorization makes use of the vector computing concepts from the section <a href="._plot-solarized001.html#sec:plot:arraycomp">Vector arithmetics and vector functions</a>.</li>
+  <li> Arrays with one index are often called vectors. Arrays with two indices are used as an efficient data structure for tables, instead of lists of lists. Arrays can also have three or more indices.</li>
+</ul>
+
+We have two remarks to the above list.  First, there is actually an
+object type called <code>array</code> in standard Python, but this data type is
+not so efficient for mathematical computations, and we will not use it
+in this document.  Second, the number of elements in an array <em>can</em> be
+changed, but at a substantial computational cost.
+
+<p>
+The following text lists some important functionality of NumPy arrays.
+A more comprehensive treatment is found in the excellent <em>NumPy
+Tutorial</em>, <em>NumPy User Guide</em>, <em>NumPy Reference</em>, <em>Guide to NumPy</em>,
+and <em>NumPy for MATLAB Users</em>, all accessible at <a href="http://scipy.org" target="_self">scipy.org</a>.
+
+<p>
+The standard import statement for Numerical Python reads
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>import numpy as np
+</code></pre>
+<!-- end verbatim block -->
+To convert a list <code>r</code> to an array,
+we use the <code>array</code> function
+from <code>numpy</code>:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>a = np.array(r)
+</code></pre>
+<!-- end verbatim block -->
+To create a new array of length <code>n</code>, filled with zeros, we write
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>a = np.zeros(n)
+</code></pre>
+<!-- end verbatim block -->
+The array elements are of a type that corresponds to Python's
+<code>float</code> type. A second argument to <code>np.zeros</code> can be used to
+specify other element types, e.g., <code>int</code>.
+A similar function,
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>a = np.zeros_like(c)
+</code></pre>
+<!-- end verbatim block -->
+generates an array of zeros where the length is that of the array <code>c</code>
+and the element type is the same as those in <code>c</code>.  Arrays with more
+than one index are treated in the section <a href="._plot-solarized007.html#sec:plot:2Darrays">Higher-dimensional arrays</a>.
+
+<p>
+Often one wants an array to have \( n \) elements with uniformly
+distributed values in an interval \( [p,q] \). The <code>numpy</code> function
+<code>linspace</code> creates such arrays:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>a = np.linspace(p, q, n)
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+Array elements are accessed by square brackets as for lists:
+<code>a[i]</code>. Slices also work as for lists, for example, <code>a[1:-1]</code> picks
+out all elements except the first and the last, but contrary to lists,
+<code>a[1:-1]</code> is not a copy of the data in <code>a</code>. Hence,
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>b = a[1:-1]
+b[2] = 0.1
+</code></pre>
+<!-- end verbatim block -->
+will also change <code>a[3]</code> to <code>0.1</code>.  A slice <code>a[i:j:s]</code> picks out the
+elements starting with index <code>i</code> and stepping <code>s</code> indices at the time
+up to, but not including, <code>j</code>. Omitting <code>i</code> implies <code>i=0</code>, and
+omitting <code>j</code> implies <code>j=n</code> if <code>n</code> is the number of elements in the
+array.  For example, <code>a[0:-1:2]</code> picks out every two elements up to,
+but not including, the last element, while <code>a[::4]</code> picks out every
+four elements in the whole array.
+
+<p>
+<div class="alert alert-block alert-notice alert-text-normal">
+<b>Remarks on importing NumPy.</b>
+<p>
+The statement
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>import numpy as np
+</code></pre>
+<!-- end verbatim block -->
+with subsequent prefixing of all NumPy functions and variables by <code>np</code>,
+has evolved as a standard syntax in the Python scientific computing
+community. However, to make Python programs look closer to MATLAB
+and ease the transition to and from that language, one can do
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>from numpy import *
+</code></pre>
+<!-- end verbatim block -->
+to get rid of the prefix (this is evolved as the standard in
+<em>interactive</em> Python shells). This author prefers mathematical
+functions from <code>numpy</code> to be written without the prefix to
+make the formulas as close as possible to the mathematics.
+So, \( f(x)=\sinh(x-1)\sin(w t) \) would be coded as
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>from numpy import sinh, sin
+
+def f(x):
+    return sinh(x-1)*sin(w*t)
+</code></pre>
+<!-- end verbatim block -->
+or one may take the less recommended
+lazy approach <code>from numpy import *</code> and fill up
+the program with <em>a lot</em> of functions and variables from <code>numpy</code>.
+</div>
+
+
+<h2>Computing coordinates and function values  <a name="___sec7"></a></h2>
+
+<p>
+With these basic operations at hand, we can continue the session from
+the previous section and make arrays out of the lists <code>xlist</code> and
+<code>ylist</code>:
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; import numpy as np
+&gt;&gt;&gt; x2 = np.array(xlist)      # turn list xlist into array x2
+&gt;&gt;&gt; y2 = np.array(ylist)
+&gt;&gt;&gt; x2
+array([ 0.  ,  0.25,  0.5 ,  0.75,  1.  ])
+&gt;&gt;&gt; y2
+array([ 0.      ,  0.015625,  0.125   ,  0.421875,  1.      ])
+</code></pre>
+<!-- end verbatim block -->
+Instead of first making a list and then converting the list to an
+array, we can compute the arrays directly.  The equally spaced
+coordinates in <code>x2</code> are naturally computed by the <code>np.linspace</code>
+function. The <code>y2</code> array can be created by <code>np.zeros</code>, to ensure that
+<code>y2</code> has the right length <code>len(x2)</code>, and then we can run a <code>for</code> loop
+to fill in all elements in <code>y2</code> with <code>f</code> values:
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; n = len(xlist)
+&gt;&gt;&gt; x2 = np.linspace(0, 1, n)
+&gt;&gt;&gt; y2 = np.zeros(n)
+&gt;&gt;&gt; for i in xrange(n):
+...     y2[i] = f(x2[i])
+...
+&gt;&gt;&gt; y2
+array([ 0.      ,  0.015625,  0.125   ,  0.421875,  1.      ])
+</code></pre>
+<!-- end verbatim block -->
+Note that we here in the <code>for</code> loop have used <code>xrange</code> instead of
+<code>range</code>. The former is faster for long loops because it avoids
+generating <em>and storing</em> a list of integers, it just generates the
+values one by one. Hence, we prefer <code>xrange</code> over <code>range</code> for loops
+over long arrays.  In Python version 3.x, <code>range</code> is the same as
+<code>xrange</code>.
+
+<p>
+Creating an array of a given length is frequently referred to as
+<em>allocating</em> the array. It simply means that a part of the computer's
+memory is marked for being occupied by this array.  Mathematical
+computations will often fill up most of the computer's memory by
+allocating long arrays.
+
+<p>
+We can shorten the previous code by creating the <code>y2</code> data in a list
+comprehension, but list comprehensions produce lists, not arrays, so
+we need to transform the list object to an array object:
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; x2 = np.linspace(0, 1, n)
+&gt;&gt;&gt; y2 = np.array([f(xi) for xi in x2])
+</code></pre>
+<!-- end verbatim block -->
+Nevertheless, there is a much faster way of computing <code>y2</code> as the next
+paragraph explains.
+
+<h2>Vectorization <a name="sec:plot:vectorization"></a></h2>
+
+<p>
+Loops over very long arrays may run slowly. A great advantage with
+arrays is that we can get rid of the loops and apply <code>f</code> directly to
+the whole array:
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; y2 = f(x2)
+&gt;&gt;&gt; y2
+array([ 0.      ,  0.015625,  0.125   ,  0.421875,  1.      ])
+</code></pre>
+<!-- end verbatim block -->
+The magic that makes <code>f(x2)</code> work builds on the vector computing
+concepts from the section <a href="._plot-solarized001.html#sec:plot:arraycomp">Vector arithmetics and vector functions</a>.  Instead of calling
+<code>f(x2)</code> we can equivalently write the function formula <code>x2**3</code>
+directly.
+
+<p>
+The point is that <code>numpy</code> implements vector arithmetics <em>for arrays</em>
+of any dimension. Moreover, <code>numpy</code> provides its own versions of
+mathematical functions like <code>cos</code>, <code>sin</code>, <code>exp</code>, <code>log</code>, etc., which
+work for array arguments and apply the mathematical function to each
+element. The following code, computes each array element separately:
+
+<p>
+<!-- begin verbatim block  pypro-->
+<pre><code>from math import sin, cos, exp
+import numpy as np
+x = np.linspace(0, 2, 201)
+r = np.zeros(len(x))
+for i in xrange(len(x)):
+    r[i] = sin(np.pi*x[i])*cos(x[i])*exp(-x[i]**2) + 2 + x[i]**2
+</code></pre>
+<!-- end verbatim block -->
+while here is a corresponding code that operates on arrays directly:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>r = np.sin(np.pi*x)*np.cos(x)*np.exp(-x**2) + 2 + x**2
+</code></pre>
+<!-- end verbatim block -->
+Many will prefer to see such formulas without the <code>np</code> prefix:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>from numpy import sin, cos, exp, pi
+r = sin(pi*x)*cos(x)*exp(-x**2) + 2 + x**2
+</code></pre>
+<!-- end verbatim block -->
+An important thing to understand is that <code>sin</code> from the <code>math</code> module
+is different from the <code>sin</code> function provided by <code>numpy</code>.  The former
+does not allow array arguments, while the latter accepts both real
+numbers and arrays.
+
+<p>
+Replacing a loop like the one above, for computing <code>r[i]</code>, by a
+vector/array expression like <code>sin(x)*cos(x)*exp(-x**2) + 2 + x**2</code>, is
+called <em>vectorization</em>.  The loop version is often referred to as
+<em>scalar code</em>.  For example,
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>import numpy as np
+import math
+x = np.zeros(N);  y = np.zeros(N)
+dx = 2.0/(N-1) # spacing of x coordinates
+for i in range(N):
+    x[i] = -1 + dx*i
+    y[i] = math.exp(-x[i])*x[i]
+</code></pre>
+<!-- end verbatim block -->
+is scalar code, while the corresponding vectorized version reads
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>x = np.linspace(-1, 1, N)
+y = np.exp(-x)*x
+</code></pre>
+<!-- end verbatim block -->
+We remark that list comprehensions,
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>x = array([-1 + dx*i for i in range(N)])
+y = array([np.exp(-xi)*xi for xi in x])
+</code></pre>
+<!-- end verbatim block -->
+result in scalar code because we still have explicit, slow Python
+<code>for</code> loops operating on scalar quantities.  The requirement of
+vectorized code is that there are no explicit Python <code>for</code> loops. The
+loops required to compute each array element are performed in fast C
+or Fortran code in the <code>numpy</code> package.
+
+<p>
+Most Python functions intended for a scalar argument <code>x</code>, like
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>def f(x):
+    return x**4*exp(-x)
+</code></pre>
+<!-- end verbatim block -->
+automatically work for an array argument <code>x</code>:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>x = np.linspace(-3, 3, 101)
+y = f(x)
+</code></pre>
+<!-- end verbatim block -->
+provided that the <code>exp</code> function in the definition of <code>f</code> accepts an
+array argument.  This means that <code>exp</code> must have been imported as
+<code>from numpy import *</code> or explicitly as <code>from numpy import exp</code>.  One
+can, of course, prefix <code>exp</code> as in <code>np.exp</code>, at the loss of a less
+attractive mathematical syntax in the formula.
+
+<p>
+When a Python function <code>f(x)</code> works for an array argument <code>x</code>, we say
+that the function <code>f</code> is vectorized. Provided that the mathematical
+expressions in <code>f</code> involve arithmetic operations and basic
+mathematical functions from the <code>math</code> module, <code>f</code> will be
+automatically vectorized by just importing the functions from <code>numpy</code>
+instead of <code>math</code>.  However, if the expressions inside <code>f</code> involve
+<code>if</code> tests, the code needs a rewrite to work with arrays.  The section <a href="._plot-solarized004.html#sec:plot:pwisefunc">Piecewisely defined functions</a> presents examples where we have to do special
+actions in order to vectorize functions.
+
+<p>
+Vectorization is very important for speeding up Python programs that
+perform heavy computations with arrays. Moreover, vectorization gives
+more compact code that is easier to read.  Vectorization is
+particularly important for statistical simulations, as demonstrated in
+the
+document <a href="http://tcse6.on.net/random" target="_self">Random numbers and simple games</a> <a href="._plot-solarized009.html#Langtangen_TCSE6_random">[1]</a>.
+
+<p>
+<p>
+<!-- begin bottom navigation -->
+<table style="width: 100%"><tr><td>
+<div style="text-align: left;"><a href="._plot-solarized001.html">&laquo; Previous</a></div>
+</td><td>
+<div style="text-align: right;"><a href="._plot-solarized003.html">Next &raquo;</a></div>
+</td></tr></table>
+<!-- end bottom navigation -->
+</p>
+
+<!-- ------------------- end of main content --------------- -->
+
+
+</body>
+</html>
+    
+

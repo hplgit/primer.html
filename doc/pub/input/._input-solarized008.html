@@ -1,0 +1,565 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="User input and error handling">
+<meta name="keywords" content="command-line arguments,option-value pairs (command line),standard input,standard output,standard error,bytes,bits,exceptions,widgets,event loop,modules,test block (in module files),test function,nose tests,pytest tests,search for module files,module folders,refactoring,binomial distribution,Bernoulli trials,Poisson distribution,Poisson process">
+
+<title>User input and error handling</title>
+
+
+<link href="https://raw.githubusercontent.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/css/solarized_light_code.css" rel="stylesheet" type="text/css" title="light"/>
+<script src="https://rawgit.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<link href="http://thomasf.github.io/solarized-css/solarized-light.min.css" rel="stylesheet">
+<style type="text/css">
+h1 {color: #b58900;}  /* yellow */
+/* h1 {color: #cb4b16;}  orange */
+/* h1 {color: #d33682;}  magenta, the original choice of thomasf */
+.alert-text-small   { font-size: 80%;  }
+.alert-text-large   { font-size: 130%; }
+.alert-text-normal  { font-size: 90%;  }
+.alert {
+  padding:8px 35px 8px 14px; margin-bottom:18px;
+  text-shadow:0 1px 0 rgba(255,255,255,0.5);
+  border:1px solid #93a1a1;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  color: #555;
+  background-color: #eee8d5;
+  background-position: 10px 5px;
+  background-repeat: no-repeat;
+  background-size: 38px;
+  padding-left: 55px;
+  width: 75%;
+ }
+.alert-block {padding-top:14px; padding-bottom:14px}
+.alert-block > p, .alert-block > ul {margin-bottom:1em}
+.alert li {margin-top: 1em}
+.alert-block p+p {margin-top:5px}
+.alert-notice { background-image: url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_notice.png); }
+.alert-summary  { background-image:url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_summary.png); }
+.alert-warning { background-image: url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_warning.png); }
+.alert-question {background-image:url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_question.png); }
+
+div { text-align: justify; text-justify: inter-word; }
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [(' Asking questions and reading answers ',
+               1,
+               'sec:input:rawinput',
+               'sec:input:rawinput'),
+              (' Reading keyboard input ',
+               2,
+               'sec:input:rawinput2',
+               'sec:input:rawinput2'),
+              (' Reading from the command line ',
+               1,
+               'sec:input:sysargv',
+               'sec:input:sysargv'),
+              (' Providing input on the command line ',
+               2,
+               'sec:input:cml',
+               'sec:input:cml'),
+              (' A variable number of command-line arguments ',
+               2,
+               None,
+               '___sec4'),
+              (' More on command-line arguments ', 2, None, '___sec5'),
+              (' Turning user text into live objects ', 1, None, '___sec6'),
+              (' The magic eval function ',
+               2,
+               'sec:input:eval',
+               'sec:input:eval'),
+              (' Applying eval to strings ', 3, None, '___sec8'),
+              (' Applying eval to user input ', 3, None, '___sec9'),
+              (' The magic exec function ',
+               2,
+               'sec:input:exec',
+               'sec:input:exec'),
+              (' Turning string expressions into functions ',
+               2,
+               'sec:input:StringFunction',
+               'sec:input:StringFunction'),
+              (' Option-value pairs on the command line ',
+               1,
+               'sec:input:argparse',
+               'sec:input:argparse'),
+              (' Basic usage of the argparse module ', 2, None, '___sec13'),
+              (' Mathematical expressions as values ', 2, None, '___sec14'),
+              (' Reading data from file ',
+               1,
+               'sec:files:reading',
+               'sec:files:reading'),
+              (' Reading a file line by line ', 2, None, '___sec16'),
+              (' Alternative ways of reading a file ',
+               2,
+               'sec:files:reading:other',
+               'sec:files:reading:other'),
+              (' The modern with statement ', 3, None, '___sec18'),
+              (' The old while construction ', 3, None, '___sec19'),
+              (' Reading a file into a string ', 3, None, '___sec20'),
+              (' Reading a mixture of text and numbers ',
+               2,
+               'sec:files:textnum',
+               'sec:files:textnum'),
+              (' Is it more to file reading? ', 3, None, '___sec22'),
+              (' Writing data to file ',
+               1,
+               'sec:files:writing',
+               'sec:files:writing'),
+              (' Example: Writing a table to file ', 2, None, '___sec24'),
+              (' Problem ', 3, None, '___sec25'),
+              (' Solution ', 3, None, '___sec26'),
+              (' Standard input and output as file objects ',
+               2,
+               None,
+               '___sec27'),
+              (' Redirecting standard input, output, and error ',
+               3,
+               None,
+               '___sec28'),
+              (' Note ', 3, None, '___sec29'),
+              (' What is a file, really? ',
+               2,
+               'sec:files:really',
+               'sec:files:really'),
+              (' Pure text files ', 3, None, '___sec31'),
+              (' Word processor files ', 3, None, '___sec32'),
+              (' Image files ', 3, None, '___sec33'),
+              (' Music files ', 3, None, '___sec34'),
+              (' PDF files ', 3, None, '___sec35'),
+              (' Remarks ', 3, None, '___sec36'),
+              (' Handling errors ',
+               1,
+               'sec:input:except',
+               'sec:input:except'),
+              (' Exception handling ',
+               2,
+               'sec:input:except:handling',
+               'sec:input:except:handling'),
+              (' Testing for a specific exception ', 3, None, '___sec39'),
+              (' Examples on exception types ', 3, None, '___sec40'),
+              (' Digression ', 3, None, '___sec41'),
+              (' Raising exceptions ', 2, None, '___sec42'),
+              (' Example ', 3, None, '___sec43'),
+              (' A glimpse of graphical user interfaces ',
+               1,
+               'sec:input:GUI',
+               'sec:input:GUI'),
+              (' Making modules ',
+               1,
+               'sec:input:modules',
+               'sec:input:modules'),
+              (' Example: Interest on bank deposits ', 2, None, '___sec46'),
+              (' Collecting functions in a module file ',
+               2,
+               'sec:input:module:create',
+               'sec:input:module:create'),
+              (' Test block ',
+               2,
+               'sec:input:module:testblock',
+               'sec:input:module:testblock'),
+              (' Example on a test block in a minimalistic module ',
+               3,
+               None,
+               '___sec49'),
+              (' A test block in the `interest` module ',
+               3,
+               None,
+               '___sec50'),
+              (' Verification of the module code ',
+               2,
+               'sec:input:modules:testfunc',
+               'sec:input:modules:testfunc'),
+              (' Getting input data ',
+               2,
+               'sec:input:modules:inputdata',
+               'sec:input:modules:inputdata'),
+              (' Doc strings in modules ', 2, None, '___sec53'),
+              (' Using modules ',
+               2,
+               'sec:input:modules:usage',
+               'sec:input:modules:usage'),
+              (' What gets imported by various import statements? ',
+               3,
+               None,
+               '___sec55'),
+              (' How to make Python find a module file ',
+               3,
+               None,
+               '___sec56'),
+              (' How to make Python run the module file ',
+               3,
+               None,
+               '___sec57'),
+              (' Distributing modules ',
+               2,
+               'sec:input:modules:setuppy',
+               'sec:input:modules:setuppy'),
+              (' Making software available on the Internet ',
+               2,
+               None,
+               '___sec59'),
+              (' Summary ', 1, 'sec:input:summary', 'sec:input:summary'),
+              (' Chapter topics ',
+               2,
+               'sec:input:summary:topics',
+               'sec:input:summary:topics'),
+              (' Question and answer input ', 3, None, '___sec62'),
+              (' Getting command-line arguments ', 3, None, '___sec63'),
+              (' Using option-value pairs ', 3, None, '___sec64'),
+              (' Generating code on the fly ', 3, None, '___sec65'),
+              (' Turning string formulas into Python functions ',
+               3,
+               None,
+               '___sec66'),
+              (' File operations ', 3, None, '___sec67'),
+              (' Handling exceptions ', 3, None, '___sec68'),
+              (' Raising exceptions ', 3, None, '___sec69'),
+              (' Modules ', 3, None, '___sec70'),
+              (' Terminology ', 3, None, '___sec71'),
+              (' Example: Bisection root finding ',
+               2,
+               'sec:input:summarizingex',
+               'sec:input:summarizingex'),
+              (' Problem ', 3, None, '___sec73'),
+              (' Solution ', 3, None, '___sec74'),
+              (' Verification ', 3, None, '___sec75'),
+              (' Making a function ', 3, None, '___sec76'),
+              (' Making a test function ', 3, None, '___sec77'),
+              (' Making a module ', 3, None, '___sec78'),
+              (' Defining a user interface ', 3, None, '___sec79'),
+              (' Using the module ', 3, None, '___sec80'),
+              (' Potential problems with the software ', 3, None, '___sec81'),
+              (' Distributing the bisection module to others ',
+               3,
+               None,
+               '___sec82'),
+              (' Exercises ', 1, None, '___sec83'),
+              (' Exercise 1: Make an interactive program ',
+               2,
+               'sec:input:ex24',
+               'sec:input:ex24'),
+              (' Exercise 2: Read a number from the command line ',
+               2,
+               'sec:input:ex24b',
+               'sec:input:ex24b'),
+              (' Exercise 3: Read a number from a file ',
+               2,
+               'sec:input:ex24bfile',
+               'sec:input:ex24bfile'),
+              (' Exercise 4: Read and write several numbers from and to file ',
+               2,
+               'sec:input:ex24bfile2',
+               'sec:input:ex24bfile2'),
+              (' Exercise 5: Use exceptions to handle wrong input ',
+               2,
+               'sec:input:ex24c',
+               'sec:input:ex24c'),
+              (' Exercise 6: Read input from the keyboard ',
+               2,
+               'sec:input:ex25',
+               'sec:input:ex25'),
+              (' Exercise 7: Read input from the command line ',
+               2,
+               'sec:input:ex26',
+               'sec:input:ex26'),
+              (' Exercise 8: Try MSWord or LibreOffice to write a program ',
+               2,
+               'sec:files:ex7',
+               'sec:files:ex7'),
+              (' Exercise 9: Prompt the user for input to a formula ',
+               2,
+               'sec:input:ex6',
+               'sec:input:ex6'),
+              (' Exercise 10: Read parameters in a formula from the command line ',
+               2,
+               'sec:input:ex5',
+               'sec:input:ex5'),
+              (' Exercise 11: Use exceptions to handle wrong input ',
+               2,
+               'sec:input:ex8b',
+               'sec:input:ex8b'),
+              (' Exercise 12: Test validity of input data ',
+               2,
+               'sec:input:ex7',
+               'sec:input:ex7'),
+              (' Exercise 13: Raise an exception in case of wrong input ',
+               2,
+               'sec:input:ex8',
+               'sec:input:ex8'),
+              (' Exercise 14: Evaluate a formula for data in a file ',
+               2,
+               'sec:input:ex:ball:file',
+               'sec:input:ex:ball:file'),
+              (' Exercise 15: Compute the distance it takes to stop a car ',
+               2,
+               'sec:input:ex21',
+               'sec:input:ex21'),
+              (' Exercise 16: Look up calendar functionality ',
+               2,
+               'sec:input:ex48',
+               'sec:input:ex48'),
+              (' Exercise 17: Use the StringFunction tool ',
+               2,
+               'sec:input:ex28b',
+               'sec:input:ex28b'),
+              (' Exercise 18: Why we test for specific exception types ',
+               2,
+               'sec:input:ex11',
+               'sec:input:ex11'),
+              (' Exercise 19: Make a complete module ',
+               2,
+               'sec:input:ex27',
+               'sec:input:ex27'),
+              (' Exercise 20: Check if mathematical identities hold ',
+               2,
+               'sec:input:ex2',
+               'sec:input:ex2'),
+              (' Exercise 21: Compute probabilities with the binomial distribution ',
+               2,
+               'sec:input:ex15',
+               'sec:input:ex15'),
+              (' Exercise 22: Compute probabilities with the Poisson distribution ',
+               2,
+               'sec:input:ex16',
+               'sec:input:ex16'),
+              (' References ', 1, None, '___sec106')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- newcommands_keep.tex -->
+$$
+\newcommand{\tp}{\thinspace .}
+$$
+
+
+
+
+    
+<a name="part0008"></a>
+<p>
+<!-- begin top navigation -->
+<table style="width: 100%"><tr><td>
+<div style="text-align: left;"><a href="._input-solarized007.html">&laquo; Previous</a></div>
+</td><td>
+<div style="text-align: right;"><a href="._input-solarized009.html">Next &raquo;</a></div>
+</td></tr></table>
+<!-- end top navigation -->
+</p>
+
+<p>
+<!-- !split -->
+
+<h1>A glimpse of graphical user interfaces <a name="sec:input:GUI"></a></h1>
+
+<p>
+Maybe you find it somewhat strange that the usage of the
+programs we have made so
+far in this document - and the programs we will make in the rest of the
+book - are less graphical and intuitive than the computer programs you are
+used to from school or entertainment.  Those programs are operated
+through some self-explaining graphics, and most of the things you
+want to do involve pointing with the mouse, clicking on graphical
+elements on the screen, and maybe filling in some text fields.
+The programs in this document, on the other hand,  are run from the
+command line in a terminal window or inside IPython,
+and input is also given here in
+form of plain text.
+
+<p>
+The reason why we do not equip the programs in this document with graphical
+interfaces for providing input, is that such graphics is both complicated
+and tedious to write. If the aim is to solve problems from mathematics
+and science, we think it is better to focus on this part rather
+than large amounts
+of code that merely offers some &quot;expected&quot; graphical
+cosmetics for putting data into the program.
+Textual input from the command line is also quicker to provide.
+Also remember that the computational functionality of a program
+is obviously independent from the type of user interface, textual or
+graphic.
+
+<p>
+As an illustration, we shall now show a Celsius to Fahrenheit
+conversion program with a graphical user interface (often called a
+GUI).  The GUI is shown in Figure <a href="#sec:input:fig1">1</a>. We encourage
+you to try out the graphical interface - the name of the program is
+<a href="http://tinyurl.com/pwyasaa/input/c2f_gui.py" target="_self"><tt>c2f_gui.py</tt></a>.  The complete program
+text is listed below.
+
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 1:  Screen dump of the graphical interface for a Celsius to Fahrenheit conversion program. The user can type in the temperature in Celsius degrees, and when clicking on the <em>is</em> button, the corresponding Fahrenheit  value is displayed. <a name="sec:input:fig1"></a> </p></center>
+<p><img src="fig-input/c2f_gui.png" align="bottom" width=400></p>
+</center>
+
+<p>
+<!-- begin verbatim block  pypro-->
+<pre><code>from Tkinter import *
+root = Tk()
+C_entry = Entry(root, width=4)
+C_entry.pack(side='left')
+Cunit_label = Label(root, text='Celsius')
+Cunit_label.pack(side='left')
+
+def compute():
+    C = float(C_entry.get())
+    F = (9./5)*C + 32
+    F_label.configure(text='%g' % F)
+
+compute = Button(root, text=' is ', command=compute)
+compute.pack(side='left', padx=4)
+
+F_label = Label(root, width=4)
+F_label.pack(side='left')
+Funit_label = Label(root, text='Fahrenheit')
+Funit_label.pack(side='left')
+
+root.mainloop()
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+The goal of the forthcoming dissection of this program is to give a
+taste of how graphical user interfaces are coded. The aim is not to
+equip you with knowledge on how you can make such programs on your
+own.
+
+<p>
+A GUI is built of many small graphical elements,
+called <em>widgets</em>.
+The graphical window generated by the program above and
+shown in Figure <a href="#sec:input:fig1">1</a> has five such widgets.
+To the left there is an <em>entry</em> widget where the user can write
+in text. To the right of this entry widget is a <em>label</em> widget,
+which just displays some text, here &quot;Celsius&quot;. Then we have
+a <em>button</em> widget, which when being clicked leads to computations
+in the program. The result of these computations is displayed as
+text in a <em>label</em> widget to the right of the button widget.
+Finally, to the right of this result text we have another <em>label</em> widget
+displaying the text &quot;Fahrenheit&quot;.
+The program must construct each widget and pack it correctly into the
+complete window. In the present case, all widgets are packed from left
+to right.
+
+<p>
+The first statement in the program imports functionality from the GUI
+toolkit <code>Tkinter</code> to construct widgets. First, we need to make
+a root widget that holds the complete window with all the other widgets.
+This root widget is of type <code>Tk</code>. The first entry widget is
+then made and referred to by a variable <code>C_entry</code>.
+This widget is an object of type <code>Entry</code>, provided by the
+<code>Tkinter</code> module. Widgets constructions follow the syntax
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>variable_name = Widget_type(parent_widget, option1, option2, ...)
+variable_name.pack(side='left')
+</code></pre>
+<!-- end verbatim block -->
+When creating a widget, we must bind it to a <em>parent widget</em>, which
+is the graphical element in which this new widget is to be packed.
+Our widgets in the present program have the <code>root</code> widget as
+parent widget. Various widgets have different types of options
+that we can set. For example, the <code>Entry</code> widget has a possibility
+for setting the width of the text field, here <code>width=4</code> means that
+the text field is 4 characters wide.
+The pack statement is important to remember - without it,
+the widget remains invisible.
+
+<p>
+The other widgets are constructed in similar ways. The next fundamental
+feature of our program is how computations are tied to the event of
+clicking the button <em>is</em>. The <code>Button</code> widget has naturally a text,
+but more important, it binds the button to a function <code>compute</code>
+through the <code>command=compute</code> option.
+This means that when the user clicks the button <em>is</em>, the
+function <code>compute</code> is called. Inside the <code>compute</code> function
+we first fetch the Celsius value from the <code>C_entry</code> widget,
+using this widget's <code>get</code> function, then we transform this string
+(everything typed in by the user is interpreted as text and stored in
+strings) to a <code>float</code> before we compute the corresponding
+Fahrenheit value. Finally, we can update (<code>configure</code>) the text in
+the <code>Label</code> widget <code>F_label</code> with a new text, namely the
+computed degrees in Fahrenheit.
+
+<p>
+A program with a GUI behaves differently from the programs we construct
+in this document. First, all the statements are executed from top to bottom,
+as in all our other programs, but these statements just construct the
+GUI and define functions.
+No computations are performed. Then the program enters a so-called
+<em>event loop</em>: <code>root.mainloop()</code>.
+This is an infinite loop that &quot;listens&quot; to
+user events, such as moving the mouse, clicking the mouse, typing characters
+on the keyboard, etc. When an event is recorded, the program starts
+performing associated actions.
+In the present case, the program waits for only one event: clicking the
+button <em>is</em>. As soon as we click on the button, the <code>compute</code>
+function is called and the program starts doing mathematical work.
+The GUI will appear on the screen
+until we destroy the window by click on the X up in the
+corner of the window decoration.
+More complicated GUIs will normally have a special
+<em>Quit</em> button to terminate the event loop.
+
+<p>
+In all GUI programs, we must first create a hierarchy of widgets to build up
+all elements of the user interface. Then the program enters an event
+loop and waits for user events. Lots of such events are registered
+as actions in the program when creating the widgets,
+so when the user clicks on buttons, move
+the mouse into certain areas, etc., functions in the program are called
+and &quot;things happen&quot;.
+
+<p>
+Many books explain how to make GUIs in Python programs, see for instance
+<a href="._input-solarized011.html#PythonTk">[3]</a> <a href="._input-solarized011.html#QuickPython">[4]</a> <a href="._input-solarized011.html#TCSE3">[5]</a> <a href="._input-solarized011.html#PythonBook">[6]</a>.
+
+<p>
+<p>
+<!-- begin bottom navigation -->
+<table style="width: 100%"><tr><td>
+<div style="text-align: left;"><a href="._input-solarized007.html">&laquo; Previous</a></div>
+</td><td>
+<div style="text-align: right;"><a href="._input-solarized009.html">Next &raquo;</a></div>
+</td></tr></table>
+<!-- end bottom navigation -->
+</p>
+
+<!-- ------------------- end of main content --------------- -->
+
+
+</body>
+</html>
+    
+

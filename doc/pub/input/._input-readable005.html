@@ -1,0 +1,852 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="User input and error handling">
+<meta name="keywords" content="command-line arguments,option-value pairs (command line),standard input,standard output,standard error,bytes,bits,exceptions,widgets,event loop,modules,test block (in module files),test function,nose tests,pytest tests,search for module files,module folders,refactoring,binomial distribution,Bernoulli trials,Poisson distribution,Poisson process">
+
+<title>User input and error handling</title>
+
+<!-- Bootstrap style: bootswatch_readable -->
+<link href="http://netdna.bootstrapcdn.com/bootswatch/3.1.1/readable/bootstrap.min.css" rel="stylesheet">
+<!-- not necessary
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+
+<style type="text/css">
+/* Let inline verbatim have the same color as the surroundings */
+code { color: inherit; background-color: transparent; }
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [(' Asking questions and reading answers ',
+               1,
+               'sec:input:rawinput',
+               'sec:input:rawinput'),
+              (' Reading keyboard input ',
+               2,
+               'sec:input:rawinput2',
+               'sec:input:rawinput2'),
+              (' Reading from the command line ',
+               1,
+               'sec:input:sysargv',
+               'sec:input:sysargv'),
+              (' Providing input on the command line ',
+               2,
+               'sec:input:cml',
+               'sec:input:cml'),
+              (' A variable number of command-line arguments ',
+               2,
+               None,
+               '___sec4'),
+              (' More on command-line arguments ', 2, None, '___sec5'),
+              (' Turning user text into live objects ', 1, None, '___sec6'),
+              (' The magic eval function ',
+               2,
+               'sec:input:eval',
+               'sec:input:eval'),
+              (' Applying eval to strings ', 3, None, '___sec8'),
+              (' Applying eval to user input ', 3, None, '___sec9'),
+              (' The magic exec function ',
+               2,
+               'sec:input:exec',
+               'sec:input:exec'),
+              (' Turning string expressions into functions ',
+               2,
+               'sec:input:StringFunction',
+               'sec:input:StringFunction'),
+              (' Option-value pairs on the command line ',
+               1,
+               'sec:input:argparse',
+               'sec:input:argparse'),
+              (' Basic usage of the argparse module ', 2, None, '___sec13'),
+              (' Mathematical expressions as values ', 2, None, '___sec14'),
+              (' Reading data from file ',
+               1,
+               'sec:files:reading',
+               'sec:files:reading'),
+              (' Reading a file line by line ', 2, None, '___sec16'),
+              (' Alternative ways of reading a file ',
+               2,
+               'sec:files:reading:other',
+               'sec:files:reading:other'),
+              (' The modern with statement ', 3, None, '___sec18'),
+              (' The old while construction ', 3, None, '___sec19'),
+              (' Reading a file into a string ', 3, None, '___sec20'),
+              (' Reading a mixture of text and numbers ',
+               2,
+               'sec:files:textnum',
+               'sec:files:textnum'),
+              (' Is it more to file reading? ', 3, None, '___sec22'),
+              (' Writing data to file ',
+               1,
+               'sec:files:writing',
+               'sec:files:writing'),
+              (' Example: Writing a table to file ', 2, None, '___sec24'),
+              (' Problem ', 3, None, '___sec25'),
+              (' Solution ', 3, None, '___sec26'),
+              (' Standard input and output as file objects ',
+               2,
+               None,
+               '___sec27'),
+              (' Redirecting standard input, output, and error ',
+               3,
+               None,
+               '___sec28'),
+              (' Note ', 3, None, '___sec29'),
+              (' What is a file, really? ',
+               2,
+               'sec:files:really',
+               'sec:files:really'),
+              (' Pure text files ', 3, None, '___sec31'),
+              (' Word processor files ', 3, None, '___sec32'),
+              (' Image files ', 3, None, '___sec33'),
+              (' Music files ', 3, None, '___sec34'),
+              (' PDF files ', 3, None, '___sec35'),
+              (' Remarks ', 3, None, '___sec36'),
+              (' Handling errors ',
+               1,
+               'sec:input:except',
+               'sec:input:except'),
+              (' Exception handling ',
+               2,
+               'sec:input:except:handling',
+               'sec:input:except:handling'),
+              (' Testing for a specific exception ', 3, None, '___sec39'),
+              (' Examples on exception types ', 3, None, '___sec40'),
+              (' Digression ', 3, None, '___sec41'),
+              (' Raising exceptions ', 2, None, '___sec42'),
+              (' Example ', 3, None, '___sec43'),
+              (' A glimpse of graphical user interfaces ',
+               1,
+               'sec:input:GUI',
+               'sec:input:GUI'),
+              (' Making modules ',
+               1,
+               'sec:input:modules',
+               'sec:input:modules'),
+              (' Example: Interest on bank deposits ', 2, None, '___sec46'),
+              (' Collecting functions in a module file ',
+               2,
+               'sec:input:module:create',
+               'sec:input:module:create'),
+              (' Test block ',
+               2,
+               'sec:input:module:testblock',
+               'sec:input:module:testblock'),
+              (' Example on a test block in a minimalistic module ',
+               3,
+               None,
+               '___sec49'),
+              (' A test block in the `interest` module ',
+               3,
+               None,
+               '___sec50'),
+              (' Verification of the module code ',
+               2,
+               'sec:input:modules:testfunc',
+               'sec:input:modules:testfunc'),
+              (' Getting input data ',
+               2,
+               'sec:input:modules:inputdata',
+               'sec:input:modules:inputdata'),
+              (' Doc strings in modules ', 2, None, '___sec53'),
+              (' Using modules ',
+               2,
+               'sec:input:modules:usage',
+               'sec:input:modules:usage'),
+              (' What gets imported by various import statements? ',
+               3,
+               None,
+               '___sec55'),
+              (' How to make Python find a module file ',
+               3,
+               None,
+               '___sec56'),
+              (' How to make Python run the module file ',
+               3,
+               None,
+               '___sec57'),
+              (' Distributing modules ',
+               2,
+               'sec:input:modules:setuppy',
+               'sec:input:modules:setuppy'),
+              (' Making software available on the Internet ',
+               2,
+               None,
+               '___sec59'),
+              (' Summary ', 1, 'sec:input:summary', 'sec:input:summary'),
+              (' Chapter topics ',
+               2,
+               'sec:input:summary:topics',
+               'sec:input:summary:topics'),
+              (' Question and answer input ', 3, None, '___sec62'),
+              (' Getting command-line arguments ', 3, None, '___sec63'),
+              (' Using option-value pairs ', 3, None, '___sec64'),
+              (' Generating code on the fly ', 3, None, '___sec65'),
+              (' Turning string formulas into Python functions ',
+               3,
+               None,
+               '___sec66'),
+              (' File operations ', 3, None, '___sec67'),
+              (' Handling exceptions ', 3, None, '___sec68'),
+              (' Raising exceptions ', 3, None, '___sec69'),
+              (' Modules ', 3, None, '___sec70'),
+              (' Terminology ', 3, None, '___sec71'),
+              (' Example: Bisection root finding ',
+               2,
+               'sec:input:summarizingex',
+               'sec:input:summarizingex'),
+              (' Problem ', 3, None, '___sec73'),
+              (' Solution ', 3, None, '___sec74'),
+              (' Verification ', 3, None, '___sec75'),
+              (' Making a function ', 3, None, '___sec76'),
+              (' Making a test function ', 3, None, '___sec77'),
+              (' Making a module ', 3, None, '___sec78'),
+              (' Defining a user interface ', 3, None, '___sec79'),
+              (' Using the module ', 3, None, '___sec80'),
+              (' Potential problems with the software ', 3, None, '___sec81'),
+              (' Distributing the bisection module to others ',
+               3,
+               None,
+               '___sec82'),
+              (' Exercises ', 1, None, '___sec83'),
+              (' Exercise 1: Make an interactive program ',
+               2,
+               'sec:input:ex24',
+               'sec:input:ex24'),
+              (' Exercise 2: Read a number from the command line ',
+               2,
+               'sec:input:ex24b',
+               'sec:input:ex24b'),
+              (' Exercise 3: Read a number from a file ',
+               2,
+               'sec:input:ex24bfile',
+               'sec:input:ex24bfile'),
+              (' Exercise 4: Read and write several numbers from and to file ',
+               2,
+               'sec:input:ex24bfile2',
+               'sec:input:ex24bfile2'),
+              (' Exercise 5: Use exceptions to handle wrong input ',
+               2,
+               'sec:input:ex24c',
+               'sec:input:ex24c'),
+              (' Exercise 6: Read input from the keyboard ',
+               2,
+               'sec:input:ex25',
+               'sec:input:ex25'),
+              (' Exercise 7: Read input from the command line ',
+               2,
+               'sec:input:ex26',
+               'sec:input:ex26'),
+              (' Exercise 8: Try MSWord or LibreOffice to write a program ',
+               2,
+               'sec:files:ex7',
+               'sec:files:ex7'),
+              (' Exercise 9: Prompt the user for input to a formula ',
+               2,
+               'sec:input:ex6',
+               'sec:input:ex6'),
+              (' Exercise 10: Read parameters in a formula from the command line ',
+               2,
+               'sec:input:ex5',
+               'sec:input:ex5'),
+              (' Exercise 11: Use exceptions to handle wrong input ',
+               2,
+               'sec:input:ex8b',
+               'sec:input:ex8b'),
+              (' Exercise 12: Test validity of input data ',
+               2,
+               'sec:input:ex7',
+               'sec:input:ex7'),
+              (' Exercise 13: Raise an exception in case of wrong input ',
+               2,
+               'sec:input:ex8',
+               'sec:input:ex8'),
+              (' Exercise 14: Evaluate a formula for data in a file ',
+               2,
+               'sec:input:ex:ball:file',
+               'sec:input:ex:ball:file'),
+              (' Exercise 15: Compute the distance it takes to stop a car ',
+               2,
+               'sec:input:ex21',
+               'sec:input:ex21'),
+              (' Exercise 16: Look up calendar functionality ',
+               2,
+               'sec:input:ex48',
+               'sec:input:ex48'),
+              (' Exercise 17: Use the StringFunction tool ',
+               2,
+               'sec:input:ex28b',
+               'sec:input:ex28b'),
+              (' Exercise 18: Why we test for specific exception types ',
+               2,
+               'sec:input:ex11',
+               'sec:input:ex11'),
+              (' Exercise 19: Make a complete module ',
+               2,
+               'sec:input:ex27',
+               'sec:input:ex27'),
+              (' Exercise 20: Check if mathematical identities hold ',
+               2,
+               'sec:input:ex2',
+               'sec:input:ex2'),
+              (' Exercise 21: Compute probabilities with the binomial distribution ',
+               2,
+               'sec:input:ex15',
+               'sec:input:ex15'),
+              (' Exercise 22: Compute probabilities with the Poisson distribution ',
+               2,
+               'sec:input:ex16',
+               'sec:input:ex16'),
+              (' References ', 1, None, '___sec106')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- newcommands_keep.tex -->
+$$
+\newcommand{\tp}{\thinspace .}
+$$
+
+
+
+
+    
+<!-- Bootstrap navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="input-readable.html">User input and error handling</a>
+  </div>
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     <!-- navigation toc: --> <li><a href="._input-readable001.html#sec:input:rawinput" style="font-size: 80%;">Asking questions and reading answers</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable002.html#sec:input:sysargv" style="font-size: 80%;">Reading from the command line</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable003.html#___sec6" style="font-size: 80%;">Turning user text into live objects</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable004.html#sec:input:argparse" style="font-size: 80%;">Option-value pairs on the command line</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:files:reading" style="font-size: 80%;">Reading data from file</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable006.html#sec:files:writing" style="font-size: 80%;">Writing data to file</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable007.html#sec:input:except" style="font-size: 80%;">Handling errors</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable008.html#sec:input:GUI" style="font-size: 80%;">A glimpse of graphical user interfaces</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable009.html#sec:input:modules" style="font-size: 80%;">Making modules</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable010.html#sec:input:summary" style="font-size: 80%;">Summary</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable011.html#___sec83" style="font-size: 80%;">Exercises</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable011.html#___sec106" style="font-size: 80%;">References</a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div> <!-- end of navigation bar -->
+
+<div class="container">
+
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+
+<a name="part0005"></a>
+<!-- !split -->
+
+<h1 id="sec:files:reading">Reading data from file<a name="sec:files:reading"></a></h1>
+
+<p>
+Getting input data into a program from the command line, or from questions
+and answers in the terminal window, works for small amounts of data.
+Otherwise, input data must be available in files. Anyone with some
+computer experience is used to save and load data files in programs.
+The task now is to understand how Python programs can read and write files.
+The basic recipes are quite simple and illustrated through examples.
+
+<p>
+Suppose we have
+recorded some measurement data in the file
+<a href="http://tinyurl.com/pwyasaa/input/data.txt" target="_self"><tt>src/input/data.txt</tt></a>.
+The goal of our first example of reading files
+is to read the measurement values in <code>data.txt</code>,
+find the average value, and print it out in the terminal window.
+
+<p>
+Before trying to let a program read a file, we must know the <em>file
+format</em>, i.e., what the contents of the file looks like, because the
+structure of the text in the file greatly influences the set of
+statements needed to read the file.  We therefore start with viewing
+the contents of the file <code>data.txt</code>. To this end, load the file into a
+text editor or viewer (one can use <code>emacs</code>, <code>vim</code>, <code>more</code>, or <code>less</code>
+on Unix and Mac, while on Windows, <code>WordPad</code> is appropriate, or the
+<code>type</code> command in a DOS or PowerShell window, and even Word processors
+such as LibreOffice or Microsoft Word can also be used on
+Windows). What we see is a column with numbers:
+
+<p>
+
+<!-- code=text (!bc txt) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">21.8
+18.1
+19
+23
+26
+17.8
+</pre></div>
+<p>
+Our task is to read this column of numbers into a list in the program
+and compute the average of the list items.
+
+<h2 id="___sec16">Reading a file line by line <a name="___sec16"></a></h2>
+
+<p>
+To read a file, we first
+need to <em>open</em> the file. This action creates
+a file object, here stored in the variable <code>infile</code>:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">infile <span style="color: #666666">=</span> <span style="color: #008000">open</span>(<span style="color: #BA2121">&#39;data.txt&#39;</span>, <span style="color: #BA2121">&#39;r&#39;</span>)
+</pre></div>
+<p>
+The second argument to the <code>open</code> function, the string <code>'r'</code>,
+tells that we want to open the file for reading. We shall later see
+that a file can be opened for writing instead, by providing <code>'w'</code> as the
+second argument. After the file is
+read, one should close the file object with <code>infile.close()</code>.
+
+<p>
+The basic technique for reading the file line by line applies a <code>for</code> loop
+like this:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">for</span> line <span style="color: #AA22FF; font-weight: bold">in</span> infile:
+    <span style="color: #408080; font-style: italic"># do something with line</span>
+</pre></div>
+<p>
+The <code>line</code> variable is a string holding the current line in the file.
+The <code>for</code> loop over lines in a file has the same syntax as when we go through
+a list. Just think of the file object <code>infile</code> as a collection of
+elements, here lines in a file, and the <code>for</code> loop visits these
+elements in sequence such that the <code>line</code> variable
+refers to one line at a time.
+If something seemingly goes wrong in such a loop
+over lines in a file, it is useful to do a <code>print line</code> inside the loop.
+
+<p>
+Instead of reading one line at a time, we can load all lines into
+a list of strings (lines) by
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">lines <span style="color: #666666">=</span> infile<span style="color: #666666">.</span>readlines()
+</pre></div>
+<p>
+This statement is equivalent to
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">lines <span style="color: #666666">=</span> []
+<span style="color: #008000; font-weight: bold">for</span> line <span style="color: #AA22FF; font-weight: bold">in</span> infile:
+    lines<span style="color: #666666">.</span>append(line)
+</pre></div>
+<p>
+or the list comprehension:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">lines <span style="color: #666666">=</span> [line <span style="color: #008000; font-weight: bold">for</span> line <span style="color: #AA22FF; font-weight: bold">in</span> infile]
+</pre></div>
+<p>
+In the present example, we load the file into the list <code>lines</code>.
+The next task is to compute the average of the numbers in the file. Trying
+a straightforward sum of all numbers on all lines,
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">mean <span style="color: #666666">=</span> <span style="color: #666666">0</span>
+<span style="color: #008000; font-weight: bold">for</span> number <span style="color: #AA22FF; font-weight: bold">in</span> lines:
+    mean <span style="color: #666666">=</span> mean <span style="color: #666666">+</span> number
+mean <span style="color: #666666">=</span> mean<span style="color: #666666">/</span><span style="color: #008000">len</span>(lines)
+</pre></div>
+<p>
+gives an error message:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #D2413A; font-weight: bold">TypeError</span>: unsupported operand <span style="color: #008000">type</span>(s) <span style="color: #008000; font-weight: bold">for</span> <span style="color: #666666">+</span>: <span style="color: #BA2121">&#39;int&#39;</span> <span style="color: #AA22FF; font-weight: bold">and</span> <span style="color: #BA2121">&#39;str&#39;</span>
+</pre></div>
+<p>
+The reason is that <code>lines</code> holds each line (<code>number</code>) as a string, not
+a <code>float</code> or <code>int</code> that we can add to other numbers.
+A fix is to convert each line to a <code>float</code>:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">mean <span style="color: #666666">=</span> <span style="color: #666666">0</span>
+<span style="color: #008000; font-weight: bold">for</span> line <span style="color: #AA22FF; font-weight: bold">in</span> lines:
+    number <span style="color: #666666">=</span> <span style="color: #008000">float</span>(line)
+    mean <span style="color: #666666">=</span> mean <span style="color: #666666">+</span> number
+mean <span style="color: #666666">=</span> mean<span style="color: #666666">/</span><span style="color: #008000">len</span>(lines)
+</pre></div>
+<p>
+This code snippet works fine. The complete code can be found in the
+file <a href="http://tinyurl.com/pwyasaa/input/mean1.py" target="_self"><tt>mean1.py</tt></a>.
+
+<p>
+Summing up a list of numbers is often done in numerical programs, so
+Python has a special function <code>sum</code> for performing this task. However,
+<code>sum</code> must in the present case operate on a list of floats, not
+strings. We can use a list comprehension to turn all elements in
+<code>lines</code> into corresponding <code>float</code> objects:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">mean <span style="color: #666666">=</span> <span style="color: #008000">sum</span>([<span style="color: #008000">float</span>(line) <span style="color: #008000; font-weight: bold">for</span> line <span style="color: #AA22FF; font-weight: bold">in</span> lines])<span style="color: #666666">/</span><span style="color: #008000">len</span>(lines)
+</pre></div>
+<p>
+An alternative implementation is to load the lines into a list of
+<code>float</code> objects directly. Using this strategy, the complete program
+(found in file <a href="http://tinyurl.com/pwyasaa/input/mean2.py" target="_self"><tt>mean2.py</tt></a>) takes the form
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">infile <span style="color: #666666">=</span> <span style="color: #008000">open</span>(<span style="color: #BA2121">&#39;data.txt&#39;</span>, <span style="color: #BA2121">&#39;r&#39;</span>)
+numbers <span style="color: #666666">=</span> [<span style="color: #008000">float</span>(line) <span style="color: #008000; font-weight: bold">for</span> line <span style="color: #AA22FF; font-weight: bold">in</span> infile<span style="color: #666666">.</span>readlines()]
+infile<span style="color: #666666">.</span>close()
+mean <span style="color: #666666">=</span> <span style="color: #008000">sum</span>(numbers)<span style="color: #666666">/</span><span style="color: #008000">len</span>(numbers)
+<span style="color: #008000; font-weight: bold">print</span> mean
+</pre></div>
+
+<h2 id="sec:files:reading:other">Alternative ways of reading a file<a name="sec:files:reading:other"></a></h2>
+
+<p>
+A newcomer to programming might find it confusing to see that one
+problem is solved by many alternative sets of statements, but this is
+the very nature of programming. A clever programmer will judge several
+alternative solutions to a programming task and choose one that is
+either particularly compact, easy to understand, and/or easy to extend
+later.  We therefore present more examples on how to read the
+<code>data.txt</code> file and compute with the data.
+
+<h3 id="___sec18">The modern with statement <a name="___sec18"></a></h3>
+
+<p>
+Modern Python code applies the <code>with</code> statement to deal with files:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">with</span> <span style="color: #008000">open</span>(<span style="color: #BA2121">&#39;data.txt&#39;</span>, <span style="color: #BA2121">&#39;r&#39;</span>) <span style="color: #008000; font-weight: bold">as</span> infile:
+    <span style="color: #008000; font-weight: bold">for</span> line <span style="color: #AA22FF; font-weight: bold">in</span> infile:
+        <span style="color: #408080; font-style: italic"># process line</span>
+</pre></div>
+<p>
+This snippet is equivalent to
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">infile <span style="color: #666666">=</span> <span style="color: #008000">open</span>(<span style="color: #BA2121">&#39;data.txt&#39;</span>, <span style="color: #BA2121">&#39;r&#39;</span>)
+<span style="color: #008000; font-weight: bold">for</span> line <span style="color: #AA22FF; font-weight: bold">in</span> infile:
+    <span style="color: #408080; font-style: italic"># process line</span>
+infile<span style="color: #666666">.</span>close()
+</pre></div>
+<p>
+Note that there is no need to close the file when using the <code>with</code>
+statement. The advantage of the <code>with</code> construction is shorter code
+and better handling of errors if something goes wrong with opening or
+working with the file. A downside is that the syntax differs from the
+very classical open-close pattern that one finds in most other
+programming languages. Remembering to close a file is key in
+programming, and to train that task, we mostly apply the open-close
+construction in this document.
+
+<h3 id="___sec19">The old while construction <a name="___sec19"></a></h3>
+
+<p>
+The call <code>infile.readline()</code> returns a string containing the text at
+the current line.  A new <code>infile.readline()</code> will read the next line.
+When <code>infile.readline()</code> returns an empty string, the end of the file
+is reached and we must stop further reading.  The following <code>while</code>
+loop reads the file line by line using <code>infile.readline()</code>:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">while</span> <span style="color: #008000">True</span>:
+    line <span style="color: #666666">=</span> infile<span style="color: #666666">.</span>readline()
+    <span style="color: #008000; font-weight: bold">if</span> <span style="color: #AA22FF; font-weight: bold">not</span> line:
+        <span style="color: #008000; font-weight: bold">break</span>
+    <span style="color: #408080; font-style: italic"># process line</span>
+</pre></div>
+<p>
+This is perhaps a somewhat strange loop, but it is a well-established
+way of reading a file in Python, especially in older code.  The shown
+<code>while</code> loop runs forever since the condition is always
+<code>True</code>. However, inside the loop we test if <code>line</code> is <code>False</code>, and it
+is <code>False</code> when we reach the end of the file, because <code>line</code> then
+becomes an empty string, which in Python evaluates to <code>False</code>. When
+<code>line</code> is <code>False</code>, the <code>break</code> statement breaks the loop and makes the
+program flow jump to the first statement after the <code>while</code> block.
+
+<p>
+Computing the average of the numbers in the <code>data.txt</code> file can now be done
+in yet another way:
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">infile <span style="color: #666666">=</span> <span style="color: #008000">open</span>(<span style="color: #BA2121">&#39;data.txt&#39;</span>, <span style="color: #BA2121">&#39;r&#39;</span>)
+mean <span style="color: #666666">=</span> <span style="color: #666666">0</span>
+n <span style="color: #666666">=</span> <span style="color: #666666">0</span>
+<span style="color: #008000; font-weight: bold">while</span> <span style="color: #008000">True</span>:
+    line <span style="color: #666666">=</span> infile<span style="color: #666666">.</span>readline()
+    <span style="color: #008000; font-weight: bold">if</span> <span style="color: #AA22FF; font-weight: bold">not</span> line:
+        <span style="color: #008000; font-weight: bold">break</span>
+    mean <span style="color: #666666">+=</span> <span style="color: #008000">float</span>(line)
+    n <span style="color: #666666">+=</span> <span style="color: #666666">1</span>
+mean <span style="color: #666666">=</span> mean<span style="color: #666666">/</span><span style="color: #008000">float</span>(n)
+</pre></div>
+
+<h3 id="___sec20">Reading a file into a string <a name="___sec20"></a></h3>
+
+<p>
+The call <code>infile.read()</code> reads the whole file and returns the text
+as a string object.
+The following interactive session illustrates the use and result
+of <code>infile.read()</code>:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> infile <span style="color: #666666">=</span> <span style="color: #008000">open</span>(<span style="color: #BA2121">&#39;data.txt&#39;</span>, <span style="color: #BA2121">&#39;r&#39;</span>)
+<span style="color: #666666">&gt;&gt;&gt;</span> filestr <span style="color: #666666">=</span> infile<span style="color: #666666">.</span>read()
+<span style="color: #666666">&gt;&gt;&gt;</span> filestr
+<span style="color: #BA2121">&#39;21.8</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121">18.1</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121">19</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121">23</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121">26</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121">17.8</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121">&#39;</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">print</span> filestr
+<span style="color: #666666">21.8</span>
+<span style="color: #666666">18.1</span>
+<span style="color: #666666">19</span>
+<span style="color: #666666">23</span>
+<span style="color: #666666">26</span>
+<span style="color: #666666">17.8</span>
+</pre></div>
+<p>
+Note the difference between just writing <code>filestr</code> and writing
+<code>print filestr</code>. The former dumps the string with newlines as
+<em>backslash n</em> characters, while the latter is a <em>pretty print</em>
+where the string is written out without quotes and with the newline
+characters as visible line shifts.
+
+<p>
+Having the numbers inside a string instead of inside a file does
+not look like a major step forward. However, string objects have
+many useful functions for extracting information. A very useful
+feature is <em>split</em>: <code>filestr.split()</code> will split the
+string into words (separated by blanks or any other sequence of characters
+you have defined). The &quot;words&quot; in this file are the numbers:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> words <span style="color: #666666">=</span> filestr<span style="color: #666666">.</span>split()
+<span style="color: #666666">&gt;&gt;&gt;</span> words
+[<span style="color: #BA2121">&#39;21.8&#39;</span>, <span style="color: #BA2121">&#39;18.1&#39;</span>, <span style="color: #BA2121">&#39;19&#39;</span>, <span style="color: #BA2121">&#39;23&#39;</span>, <span style="color: #BA2121">&#39;26&#39;</span>, <span style="color: #BA2121">&#39;17.8&#39;</span>]
+<span style="color: #666666">&gt;&gt;&gt;</span> numbers <span style="color: #666666">=</span> [<span style="color: #008000">float</span>(w) <span style="color: #008000; font-weight: bold">for</span> w <span style="color: #AA22FF; font-weight: bold">in</span> words]
+<span style="color: #666666">&gt;&gt;&gt;</span> mean <span style="color: #666666">=</span> <span style="color: #008000">sum</span>(numbers)<span style="color: #666666">/</span><span style="color: #008000">len</span>(numbers)
+<span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">print</span> mean
+<span style="color: #666666">20.95</span>
+</pre></div>
+<p>
+A more compact program looks as follows
+(<a href="http://tinyurl.com/pwyasaa/input/mean3.py" target="_self"><tt>mean3.py</tt></a>):
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">infile <span style="color: #666666">=</span> <span style="color: #008000">open</span>(<span style="color: #BA2121">&#39;data.txt&#39;</span>, <span style="color: #BA2121">&#39;r&#39;</span>)
+numbers <span style="color: #666666">=</span> [<span style="color: #008000">float</span>(w) <span style="color: #008000; font-weight: bold">for</span> w <span style="color: #AA22FF; font-weight: bold">in</span> infile<span style="color: #666666">.</span>read()<span style="color: #666666">.</span>split()]
+mean <span style="color: #666666">=</span> <span style="color: #008000">sum</span>(numbers)<span style="color: #666666">/</span><span style="color: #008000">len</span>(numbers)
+</pre></div>
+<p>
+The next section tells you more about splitting strings.
+
+<h2 id="sec:files:textnum">Reading a mixture of text and numbers<a name="sec:files:textnum"></a></h2>
+
+<p>
+The <code>data.txt</code> file has a very simple structure since it contains
+numbers only. Many data files contain a mix of text and numbers.
+The file <code>rainfall.dat</code> from
+<a href="http://www.worldclimate.com/cgi-bin/data.pl?ref=N41E012+2100+1623501G1" target="_self"><tt>www.worldclimate.com</tt></a> provides an example:
+
+<p>
+
+<!-- code=text (!bc dat) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">Average rainfall (in mm) in Rome: 1188 months between 1782 and 1970
+Jan  81.2
+Feb  63.2
+Mar  70.3
+Apr  55.7
+May  53.0
+Jun  36.4
+Jul  17.5
+Aug  27.5
+Sep  60.9
+Oct  117.7
+Nov  111.0
+Dec  97.9
+Year 792.9
+</pre></div>
+<p>
+How can we read the rainfall data in this file and store the information
+in lists suitable for further analysis?
+The most straightforward solution is to read the file line by line,
+and for each line split the line into words, store the first word
+(the month) in one list and the second word (the average rainfall)
+in another list. The elements in this latter list needs to be
+<code>float</code> objects if we want to compute with them.
+
+<p>
+The complete code, wrapped in a function, may look like this
+(file <a href="http://tinyurl.com/pwyasaa/input/rainfall1.py" target="_self"><tt>rainfall1.py</tt></a>):
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">extract_data</span>(filename):
+    infile <span style="color: #666666">=</span> <span style="color: #008000">open</span>(filename, <span style="color: #BA2121">&#39;r&#39;</span>)
+    infile<span style="color: #666666">.</span>readline() <span style="color: #408080; font-style: italic"># skip the first line</span>
+    months <span style="color: #666666">=</span> []
+    rainfall <span style="color: #666666">=</span> []
+    <span style="color: #008000; font-weight: bold">for</span> line <span style="color: #AA22FF; font-weight: bold">in</span> infile:
+        words <span style="color: #666666">=</span> line<span style="color: #666666">.</span>split()
+        <span style="color: #408080; font-style: italic"># words[0]: month, words[1]: rainfall</span>
+        months<span style="color: #666666">.</span>append(words[<span style="color: #666666">0</span>])
+        rainfall<span style="color: #666666">.</span>append(<span style="color: #008000">float</span>(words[<span style="color: #666666">1</span>]))
+    infile<span style="color: #666666">.</span>close()
+    months <span style="color: #666666">=</span> months[:<span style="color: #666666">-1</span>]      <span style="color: #408080; font-style: italic"># Drop the &quot;Year&quot; entry</span>
+    annual_avg <span style="color: #666666">=</span> rainfall[<span style="color: #666666">-1</span>] <span style="color: #408080; font-style: italic"># Store the annual average</span>
+    rainfall <span style="color: #666666">=</span> rainfall[:<span style="color: #666666">-1</span>]  <span style="color: #408080; font-style: italic"># Redefine to contain monthly data</span>
+    <span style="color: #008000; font-weight: bold">return</span> months, rainfall, annual_avg
+
+months, values, avg <span style="color: #666666">=</span> extract_data(<span style="color: #BA2121">&#39;rainfall.dat&#39;</span>)
+<span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;The average rainfall for the months:&#39;</span>
+<span style="color: #008000; font-weight: bold">for</span> month, value <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">zip</span>(months, values):
+    <span style="color: #008000; font-weight: bold">print</span> month, value
+<span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;The average rainfall for the year:&#39;</span>, avg
+</pre></div>
+<p>
+Note that the first line in the file is just a comment line and of no
+interest to us. We therefore read this line by <code>infile.readline()</code>
+and do not store the content in any object.
+The <code>for</code> loop over the lines in the file will then start from the
+next (second) line.
+
+<p>
+We store all the data into 13 elements in the <code>months</code> and
+<code>rainfall</code> lists. Thereafter, we manipulate these lists a
+bit since we want <code>months</code> to contain the name of the 12
+months only. The <code>rainfall</code> list should correspond to this
+<code>month</code> list. The annual average is taken out of <code>rainfall</code> and
+stored in a separate variable.
+Recall that the <code>-1</code> index corresponds to the last element of
+a list, and the slice <code>:-1</code> picks out all elements from the
+start up to, but not including, the last element.
+
+<p>
+We could, alternatively, have written a shorter code where
+the name of the months and the rainfall numbers are stored in
+a nested list:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">extract_data</span>(filename):
+    infile <span style="color: #666666">=</span> <span style="color: #008000">open</span>(filename, <span style="color: #BA2121">&#39;r&#39;</span>)
+    infile<span style="color: #666666">.</span>readline()  <span style="color: #408080; font-style: italic"># skip the first line</span>
+    data <span style="color: #666666">=</span> [line<span style="color: #666666">.</span>split() <span style="color: #008000; font-weight: bold">for</span> line <span style="color: #AA22FF; font-weight: bold">in</span> infile]
+    annual_avg <span style="color: #666666">=</span> data[<span style="color: #666666">-1</span>][<span style="color: #666666">1</span>]
+    data <span style="color: #666666">=</span> [(m, <span style="color: #008000">float</span>(r)) <span style="color: #008000; font-weight: bold">for</span> m, r <span style="color: #AA22FF; font-weight: bold">in</span> data[:<span style="color: #666666">-1</span>]]
+    infile<span style="color: #666666">.</span>close()
+    <span style="color: #008000; font-weight: bold">return</span> data, annual_avg
+</pre></div>
+<p>
+This is more advanced code, but understanding what is going on
+is a good test on the understanding of nested lists indexing
+and list comprehensions. An executable program is found in
+the file <a href="http://tinyurl.com/pwyasaa/input/rainfall2.py" target="_self"><tt>rainfall2.py</tt></a>.
+
+<h3 id="___sec22">Is it more to file reading? <a name="___sec22"></a></h3>
+
+<p>
+With the example code in this section, you have the very basic tools
+for reading files with a simple structure: columns of text or numbers.
+Many files used in scientific computations have such a format, but
+many files are more complicated too. Then you need the techniques
+of string processing.
+
+<p>
+<p>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pager">
+  <li class="previous">
+    <a href="._input-readable004.html">&larr; Prev</a>
+  </li>
+  <li class="next">
+    <a href="._input-readable006.html">Next &rarr;</a>
+  </li>
+</ul>
+<!-- ------------------- end of main content --------------- -->
+
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap footer
+<footer>
+<a href="http://..."><img width="250" align=right src="http://..."></a>
+</footer>
+-->
+
+
+</body>
+</html>
+    
+

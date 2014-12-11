@@ -1,0 +1,2069 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Array computing and curve plotting">
+<meta name="keywords" content="vectors,vector computing,scalar (math quantity),heterogeneous lists,Numerical Python,NumPy,array (datatype),array computing,vectorization,array slicing,subarrays,allocate,vectorization,scalar code,curve plotting,plotting,making graphs,backend (Easyviz),backend (Easyviz),remove files (in Python),delete files (in Python),boolean indexing,boolean indexing,in-place array arithmetics,check an object's type,shape (of an array),array shape,matrix,shape (of an array),array shape,least squares approximation,Trapezoidal rule for integration,Lagrange's interpolation formula,interpolation,Midpoint rule for integration,Trapezoidal rule for integration">
+
+<title>Array computing and curve plotting</title>
+
+<!-- Bootstrap style: bootstrap_bluegray -->
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://raw.github.com/hplgit/doconce/master/bundled/html_styles/style_bootstrap/css/bootstrap_bluegray.css" rel="stylesheet">
+<!-- not necessary
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+
+<style type="text/css">
+/* Let inline verbatim have the same color as the surroundings */
+code { color: inherit; background-color: transparent; }
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [(' Vectors ', 1, None, '___sec0'),
+              (' The vector concept ', 2, None, '___sec1'),
+              (' Mathematical operations on vectors ',
+               2,
+               'sec:plot:vectors',
+               'sec:plot:vectors'),
+              (' Vector arithmetics and vector functions ',
+               2,
+               'sec:plot:arraycomp',
+               'sec:plot:arraycomp'),
+              (' Arrays in Python programs ', 1, None, '___sec4'),
+              (' Using lists for collecting function data ',
+               2,
+               'sec:plot:listdata',
+               'sec:plot:listdata'),
+              (' Basics of numerical Python arrays ',
+               2,
+               'sec:plot:array:basics',
+               'sec:plot:array:basics'),
+              (' Computing coordinates and function values ',
+               2,
+               None,
+               '___sec7'),
+              (' Vectorization ',
+               2,
+               'sec:plot:vectorization',
+               'sec:plot:vectorization'),
+              (' Curve plotting ',
+               1,
+               'sec:plot:curveplots',
+               'sec:plot:curveplots'),
+              (' Matplotlib; pylab ', 2, 'sec:plot:pylab', 'sec:plot:pylab'),
+              (' A basic plot ', 3, None, '___sec11'),
+              (' Decorating the plot ', 3, None, '___sec12'),
+              (' Plotting multiple curves ', 3, None, '___sec13'),
+              (' Placing several plots in one figure ', 3, None, '___sec14'),
+              (' Matplotlib; pyplot ',
+               2,
+               'sec:plot:pyplot',
+               'sec:plot:pyplot'),
+              (' SciTools and Easyviz ',
+               2,
+               'sec:plot:SciTools',
+               'sec:plot:SciTools'),
+              (' Importing SciTools and Easyviz ', 3, None, '___sec17'),
+              (' A basic plot ', 3, None, '___sec18'),
+              (' Decorating the plot ', 3, None, '___sec19'),
+              (' Plotting multiple curves ', 3, None, '___sec20'),
+              (' Changing backend ', 3, None, '___sec21'),
+              (' Placing several plots in one figure ', 3, None, '___sec22'),
+              (' Making animations ', 2, 'easyviz:movie', 'easyviz:movie'),
+              (' Example ', 3, None, '___sec24'),
+              (' Animation in Easyviz ', 3, None, '___sec25'),
+              (' Basic animation in Matplotlib ', 3, None, '___sec26'),
+              (' Using FuncAnimation in Matplotlib ', 3, None, '___sec27'),
+              (' Making videos ', 2, 'sec:plot:video', 'sec:plot:video'),
+              (' Animated GIF file ', 3, None, '___sec29'),
+              (' MP4, Ogg, WebM, and Flash videos ', 3, None, '___sec30'),
+              (' Curve plots in pure text ', 2, None, '___sec31'),
+              (' Plotting difficulties ',
+               1,
+               'sec:plot:difficulties',
+               'sec:plot:difficulties'),
+              (' Piecewisely defined functions ',
+               2,
+               'sec:plot:pwisefunc',
+               'sec:plot:pwisefunc'),
+              (' Example: The Heaviside function ', 3, None, '___sec34'),
+              (' Example: A hat function ', 3, None, '___sec35'),
+              (' Rapidly varying functions ',
+               2,
+               'sec:plot:sin1x',
+               'sec:plot:sin1x'),
+              (' More advanced vectorization of functions ',
+               1,
+               'sec:plot:if:vectorize',
+               'sec:plot:if:vectorize'),
+              (' Vectorization of StringFunction objects ',
+               2,
+               'sec:plot:StringFunction:vectorize',
+               'sec:plot:StringFunction:vectorize'),
+              (' Vectorization of the Heaviside function ',
+               2,
+               'sec:vec:Heaviside',
+               'sec:vec:Heaviside'),
+              (' Loop ', 3, None, '___sec40'),
+              (' Automatic vectorization ', 3, None, '___sec41'),
+              (' Mixing boolean and floating-point calculations ',
+               3,
+               None,
+               '___sec42'),
+              (' Manual vectorization ', 3, None, '___sec43'),
+              (' Vectorization of a hat function ',
+               2,
+               'sec:vec:hatfunc',
+               'sec:vec:hatfunc'),
+              (' More on numerical Python arrays ',
+               1,
+               'sec:plot:numpy:more',
+               'sec:plot:numpy:more'),
+              (' Copying arrays ', 2, None, '___sec46'),
+              (' In-place arithmetics ', 2, None, '___sec47'),
+              (' Allocating arrays ', 2, None, '___sec48'),
+              (' Generalized indexing ',
+               2,
+               'sec:plot:generalized:index',
+               'sec:plot:generalized:index'),
+              (' Testing for the array type ', 2, None, '___sec50'),
+              (' Example: Vectorizing a constant function ',
+               3,
+               None,
+               '___sec51'),
+              (' Compact syntax for array generation ', 2, None, '___sec52'),
+              (' Shape manipulation ', 2, None, '___sec53'),
+              (' Higher-dimensional arrays ',
+               1,
+               'sec:plot:2Darrays',
+               'sec:plot:2Darrays'),
+              (' Matrices and arrays ', 2, None, '___sec55'),
+              (' Two-dimensional numerical Python arrays ',
+               2,
+               'sec:plot:2D:arrays',
+               'sec:plot:2D:arrays'),
+              (' Array computing ',
+               2,
+               'sec:plot:array2comp',
+               'sec:plot:array2comp'),
+              (' Remark ', 3, None, '___sec58'),
+              (' Two-dimensional arrays and functions of two variables ',
+               2,
+               None,
+               '___sec59'),
+              (' Matrix objects ',
+               2,
+               'sec:plot:numpy:matrix',
+               'sec:plot:numpy:matrix'),
+              (' Summary ', 1, None, '___sec61'),
+              (' Chapter topics ', 2, None, '___sec62'),
+              (' Array computing ', 3, None, '___sec63'),
+              (' Plotting curves ', 3, None, '___sec64'),
+              (' Making movies ', 3, None, '___sec65'),
+              (' Terminology ', 3, None, '___sec66'),
+              (' Example: Animating a function ',
+               2,
+               'sec:plot:summarizing',
+               'sec:plot:summarizing'),
+              (' Problem ', 3, None, '___sec68'),
+              (' Solution ', 3, None, '___sec69'),
+              (' Scaling ', 3, None, '___sec70'),
+              (' Exercises ', 1, 'sec:plot:exer', 'sec:plot:exer'),
+              (' Exercise 1: Fill lists with function values ',
+               2,
+               'sec:plot:ex1',
+               'sec:plot:ex1'),
+              (' Exercise 2: Fill arrays; loop version ',
+               2,
+               'sec:plot:ex2',
+               'sec:plot:ex2'),
+              (' Exercise 3: Fill arrays; vectorized version ',
+               2,
+               'sec:plot:ex2b',
+               'sec:plot:ex2b'),
+              (' Exercise 4: Plot a function ',
+               2,
+               'sec:plot:ex2c',
+               'sec:plot:ex2c'),
+              (' Exercise 5: Apply a function to a vector ',
+               2,
+               'sec:plot:math:ex1',
+               'sec:plot:math:ex1'),
+              (' Exercise 6: Simulate by hand a vectorized expression ',
+               2,
+               'sec:plot:ex3',
+               'sec:plot:ex3'),
+              (' Exercise 7: Demonstrate array slicing ',
+               2,
+               'sec:plot:ex15d',
+               'sec:plot:ex15d'),
+              (' Exercise 8: Plot a formula ',
+               2,
+               'sec:plot:ex15',
+               'sec:plot:ex15'),
+              (' Exercise 9: Plot a formula for several parameters ',
+               2,
+               'sec:plot:ex15b',
+               'sec:plot:ex15b'),
+              (' Exercise 10: Specify the extent of the axes in a plot ',
+               2,
+               'sec:plot:ex15ba',
+               'sec:plot:ex15ba'),
+              (' Exercise 11: Plot exact and inexact Fahrenheit-Celsius conversion formulas ',
+               2,
+               'sec:plot:ex15c',
+               'sec:plot:ex15c'),
+              (' Exercise 12: Plot the trajectory of a ball ',
+               2,
+               'sec:plot:ex5',
+               'sec:plot:ex5'),
+              (' Exercise 13: Plot data in a two-column file ',
+               2,
+               'sec:files:ex12',
+               'sec:files:ex12'),
+              (' Remarks ', 3, None, '___sec85'),
+              (' Exercise 14: Plot data from a file ',
+               2,
+               'sec:files:ex12c',
+               'sec:files:ex12c'),
+              (' Exercise 15: Fit a polynomial to data points ',
+               2,
+               'sec:files:ex12c2',
+               'sec:files:ex12c2'),
+              (' Exercise 16: Fit a polynomial to experimental data ',
+               2,
+               'sec:files:ex19',
+               'sec:files:ex19'),
+              (' Exercise 17: Read acceleration data and find velocities ',
+               2,
+               'sec:files:ex22',
+               'sec:files:ex22'),
+              (' Exercise 18: Read acceleration data and plot velocities ',
+               2,
+               'sec:files:ex23',
+               'sec:files:ex23'),
+              (" Exercise 19: Plot a trip's path and velocity from GPS coordinates ",
+               2,
+               'sec:files:ex24',
+               'sec:files:ex24'),
+              (' Exercise 20: Vectorize the Midpoint rule for integration ',
+               2,
+               'sec:class:exer:sum',
+               'sec:class:exer:sum'),
+              (' Remarks ', 3, None, '___sec93'),
+              (" Exercise 21: Implement Lagrange's interpolation formula ",
+               2,
+               'sec:class:ex27a',
+               'sec:class:ex27a'),
+              (" Exercise 22: Plot Lagrange's interpolating polynomial ",
+               2,
+               'sec:class:ex27b',
+               'sec:class:ex27b'),
+              (" Exercise 23: Investigate the behavior of Lagrange's interpolating polynomials ",
+               2,
+               'sec:class:ex27c',
+               'sec:class:ex27c'),
+              (' Remarks ', 3, None, '___sec97'),
+              (' Exercise 24: Plot a wave packet ',
+               2,
+               'sec:plot:ex5d',
+               'sec:plot:ex5d'),
+              (' Exercise 25: Judge a plot ',
+               2,
+               'sec:plot:ex7',
+               'sec:plot:ex7'),
+              (' Exercise 26: Plot the viscosity of water ',
+               2,
+               'sec:plot:ex13c',
+               'sec:plot:ex13c'),
+              (' Exercise 27: Explore a complicated function graphically ',
+               2,
+               'sec:plot:ex16',
+               'sec:plot:ex16'),
+              (' Exercise 28: Plot Taylor polynomial approximations to $\\sin x$ ',
+               2,
+               'sec:plot:ex5b',
+               'sec:plot:ex5b'),
+              (' Exercise 29: Animate a wave packet ',
+               2,
+               'sec:plot:ex5e',
+               'sec:plot:ex5e'),
+              (' Exercise 30: Animate two-scale temperature variations ',
+               2,
+               'sec:plot:ex18',
+               'sec:plot:ex18'),
+              (' Remarks ', 3, None, '___sec105'),
+              (' Exercise 31: Use non-uniformly distributed coordinates for visualization ',
+               2,
+               'sec:plot:ex19',
+               'sec:plot:ex19'),
+              (" Exercise 32: Animate a planet's orbit ",
+               2,
+               'sec:plot:ex5g',
+               'sec:plot:ex5g'),
+              (' Exercise 33: Animate the evolution of Taylor polynomials ',
+               2,
+               'sec:plot:ex17',
+               'sec:plot:ex17'),
+              (' Exercise 34: Plot the velocity profile for pipeflow ',
+               2,
+               'sec:plot:ex4',
+               'sec:plot:ex4'),
+              (' Exercise 35: Plot sum-of-sines approximations to a function ',
+               2,
+               'sec:plot:ex8',
+               'sec:plot:ex8'),
+              (' Exercise 36: Animate the evolution of a sum-of-sine approximation to a function ',
+               2,
+               'sec:plot:ex8m',
+               'sec:plot:ex8m'),
+              (' Exercise 37: Plot functions from the command line ',
+               2,
+               'sec:plot:ex14',
+               'sec:plot:ex14'),
+              (' Exercise 38: Improve command-line input ',
+               2,
+               'sec:plot:ex14b',
+               'sec:plot:ex14b'),
+              (' Exercise 39: Demonstrate energy concepts from physics ',
+               2,
+               'sec:plot:ex20',
+               'sec:plot:ex20'),
+              (' Exercise 40: Plot a w-like function ',
+               2,
+               'sec:plot:math:ex9',
+               'sec:plot:math:ex9'),
+              (' Exercise 41: Visualize approximations in the Midpoint integration rule ',
+               2,
+               'sec:plot:ex:vizmidpoint',
+               'sec:plot:ex:vizmidpoint'),
+              (' Exercise 42: Visualize approximations in the Trapezoidal integration rule ',
+               2,
+               'sec:plot:ex:viztrapezoidal',
+               'sec:plot:ex:viztrapezoidal'),
+              (' Exercise 43: Experience overflow in a function ',
+               2,
+               'sec:plot:ex13',
+               'sec:plot:ex13'),
+              (' Remarks ', 3, None, '___sec119'),
+              (' Exercise 44: Apply a function to a rank 2 array ',
+               2,
+               'sec:plot:math:ex2',
+               'sec:plot:math:ex2'),
+              (' Exercise 45: Explain why array computations fail ',
+               2,
+               'sec:plot:ex11',
+               'sec:plot:ex11'),
+              (' References ', 1, None, '___sec122')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- newcommands_keep.tex -->
+$$
+\newcommand{\tp}{\thinspace .}
+$$
+
+
+
+
+    
+<!-- Bootstrap navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="plot-bootstrap.html">Array computing and curve plotting</a>
+  </div>
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap001.html#___sec0" style="font-size: 80%;">Vectors</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap002.html#___sec4" style="font-size: 80%;">Arrays in Python programs</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap003.html#sec:plot:curveplots" style="font-size: 80%;">Curve plotting</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap004.html#sec:plot:difficulties" style="font-size: 80%;">Plotting difficulties</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap005.html#sec:plot:if:vectorize" style="font-size: 80%;">More advanced vectorization of functions</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap006.html#sec:plot:numpy:more" style="font-size: 80%;">More on numerical Python arrays</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap007.html#sec:plot:2Darrays" style="font-size: 80%;">Higher-dimensional arrays</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap008.html#___sec61" style="font-size: 80%;">Summary</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:plot:exer" style="font-size: 80%;">Exercises</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec122" style="font-size: 80%;">References</a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div> <!-- end of navigation bar -->
+
+<div class="container">
+
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+
+<a name="part0009"></a>
+<!-- !split -->
+
+<h1 id="sec:plot:exer">Exercises<a name="sec:plot:exer"></a></h1>
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:plot:ex1">Exercise 1: Fill lists with function values<a name="sec:plot:ex1"></a></h2>
+
+<p>
+Define
+
+$$
+\begin{equation}
+h(x) = {1\over\sqrt{2\pi}}e^{-\frac{1}{2}x^2}\tp
+\tag{4}
+\end{equation}
+$$
+
+Fill lists <code>xlist</code> and <code>hlist</code> with \( x \) and \( h(x) \) values
+for 41 uniformly spaced \( x \) coordinates in \( [-4,4] \).
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<b>Hint.</b>
+You may adapt the example in the section <a href="._plot-bootstrap002.html#sec:plot:listdata">Using lists for collecting function data</a>.
+
+<p>
+<!-- --- end hint in exercise --- -->
+Filename: <code>fill_lists.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:plot:ex2">Exercise 2: Fill arrays; loop version<a name="sec:plot:ex2"></a></h2>
+
+<p>
+The aim is to fill two arrays <code>x</code> and <code>y</code> with \( x \) and \( h(x) \) values,
+respectively, where \( h(x) \) is defined in <a href="#mjx-eqn-4">(4)</a>.  Let
+the \( x \) values be as in <a href="#sec:plot:ex1">Exercise 1: Fill lists with function values</a>.  Create empty <code>x</code>
+and <code>y</code> arrays and compute each element in <code>x</code> and <code>y</code> with a <code>for</code>
+loop.
+Filename: <code>fill_arrays_loop.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:plot:ex2b">Exercise 3: Fill arrays; vectorized version<a name="sec:plot:ex2b"></a></h2>
+
+<p>
+Vectorize the code in <a href="#sec:plot:ex2">Exercise 2: Fill arrays; loop version</a> by creating the \( x \)
+values using the <code>linspace</code> function from the <code>numpy</code> package and by
+evaluating \( h(x) \) for an array argument.
+Filename: <code>fill_arrays_vectorized.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:plot:ex2c">Exercise 4: Plot a function<a name="sec:plot:ex2c"></a></h2>
+
+<p>
+Make a plot of the function in <a href="#sec:plot:ex1">Exercise 1: Fill lists with function values</a>
+for \( x\in [-4,4] \).
+Filename: <code>plot_Gaussian.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:plot:math:ex1">Exercise 5: Apply a function to a vector<a name="sec:plot:math:ex1"></a></h2>
+
+<p>
+Given a vector \( v=(2,3,-1) \) and a function \( f(x)=x^3 + xe^x + 1 \),
+apply \( f \) to each element in \( v \). Then calculate by hand \( f(v) \) as the
+NumPy expression <code>v**3 + v*exp(v) + 1</code> using vector computing rules.
+Demonstrate that the two results are equal.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:plot:ex3">Exercise 6: Simulate by hand a vectorized expression<a name="sec:plot:ex3"></a></h2>
+
+<p>
+Suppose <code>x</code> and <code>t</code> are two arrays of the same length, entering a
+vectorized expression
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">y <span style="color: #666666">=</span> cos(sin(x)) <span style="color: #666666">+</span> exp(<span style="color: #666666">1/</span>t)
+</pre></div>
+<p>
+If <code>x</code> holds two elements, 0 and 2, and <code>t</code> holds the elements 1 and
+1.5, calculate by hand (using a calculator) the <code>y</code> array. Thereafter,
+write a program that mimics the series of computations you did by hand
+(typically a sequence of operations of the kind we listed in the section <a href="._plot-bootstrap001.html#sec:plot:arraycomp">Vector arithmetics and vector functions</a> - use explicit loops, but at the end you can
+use Numerical Python functionality to check the results).
+Filename: <code>simulate_vector_computing.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:plot:ex15d">Exercise 7: Demonstrate array slicing<a name="sec:plot:ex15d"></a></h2>
+
+<p>
+Create an array <code>w</code> with values \( 0,0.1,0.2,\ldots,3 \).  Write out
+<code>w[:]</code>, <code>w[:-2]</code>, <code>w[::5]</code>, <code>w[2:-2:6]</code>.  Convince yourself in each
+case that you understand which elements of the array that are printed.
+Filename: <code>slicing.py</code>.
+
+<p>
+<!-- plot it! -->
+<!-- Bouncing ball: reduce \( v_0 \) by \( p \) every bounce, define the function!!! -->
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:plot:ex15">Exercise 8: Plot a formula<a name="sec:plot:ex15"></a></h2>
+
+<p>
+Make a plot of the function \( y(t)=v_0t - \frac{1}{2}gt^2 \) for
+\( v_0=10 \), \( g=9.81 \), and \( t\in [0,2v_0/g] \).  Set the axes labels as
+<code>time (s)</code> and <code>height (m)</code>.
+Filename: <code>plot_ball1.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:plot:ex15b">Exercise 9: Plot a formula for several parameters<a name="sec:plot:ex15b"></a></h2>
+
+<p>
+Make a program that reads a set of \( v_0 \) values from the command line
+and plots the corresponding curves \( y(t)=v_0t - \frac{1}{2}gt^2 \) in
+the same figure, with \( t\in [0,2v_0/g] \) for each curve.  Set \( g=9.81 \).
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<b>Hint.</b>
+You need a different vector of \( t \) coordinates for each curve.
+
+<p>
+<!-- --- end hint in exercise --- -->
+Filename: <code>plot_ball2.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:plot:ex15ba">Exercise 10: Specify the extent of the axes in a plot<a name="sec:plot:ex15ba"></a></h2>
+
+<p>
+Extend the program from <a href="#sec:plot:ex15b">Exercise 9: Plot a formula for several parameters</a> such that the
+minimum and maximum \( t \) and \( y \) values are computed, and use the
+extreme values to specify the extent of the axes. Add some
+space above the highest curve to make the plot look better.
+Filename: <code>plot_ball3.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:plot:ex15c">Exercise 11: Plot exact and inexact Fahrenheit-Celsius conversion formulas<a name="sec:plot:ex15c"></a></h2>
+
+<p>
+A simple rule to quickly compute the Celsius temperature from the
+Fahrenheit degrees is to subtract 30 and then divide by 2: \( C =
+(F-30)/2 \).  Compare this curve against the exact curve \( C = (F-32)5/9 \)
+in a plot. Let \( F \) vary between \( -20 \) and \( 120 \).
+Filename: <code>f2c_shortcut_plot.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:plot:ex5">Exercise 12: Plot the trajectory of a ball<a name="sec:plot:ex5"></a></h2>
+
+<p>
+The formula for the trajectory of a ball is given by
+
+$$
+\begin{equation}
+f(x) = x\tan\theta - {1\over 2v_0^2}{gx^2\over\cos^2\theta} + y_0,
+\tag{5}
+\end{equation}
+$$
+
+where \( x \) is a coordinate along the ground, \( g \) is the acceleration
+of gravity, \( v_0 \) is the size of the initial velocity, which makes an
+angle \( \theta \) with the \( x \) axis, and \( (0,y_0) \) is the initial position
+of the ball.
+
+<p>
+In a program, first read the input data \( y_0 \), \( \theta \), and \( v_0 \)
+from the command line.  Then plot the trajectory \( y=f(x) \) for \( y\geq
+0 \).
+Filename: <code>plot_trajectory.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:files:ex12">Exercise 13: Plot data in a two-column file<a name="sec:files:ex12"></a></h2>
+
+<p>
+The file <a href="http://tinyurl.com/pwyasaa/plot/xy.dat" target="_self"><tt>src/plot/xy.dat</tt></a> contains two
+columns of numbers, corresponding to \( x \) and \( y \) coordinates on a
+curve. The start of the file looks as this:
+
+<p>
+
+<!-- code=text (!bc dat) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">     -1.0000       -0.0000
+     -0.9933       -0.0087
+     -0.9867       -0.0179
+     -0.9800       -0.0274
+     -0.9733       -0.0374
+</pre></div>
+<p>
+Make a program that reads the first column into a list <code>x</code> and
+the second column into a list <code>y</code>. Plot
+the curve. Print out the mean \( y \) value as well as the
+maximum and minimum \( y \) values.
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<b>Hint.</b>
+Read the file line by line, split each line
+into words, convert to <code>float</code>, and append to <code>x</code> and <code>y</code>.
+The computations with <code>y</code> are simpler if the list is converted
+to an array.
+
+<p>
+<!-- --- end hint in exercise --- -->
+Filename: <code>read_2columns.py</code>.
+
+<p>
+<!-- Closing remarks for this Exercise -->
+
+<h3 id="___sec85">Remarks <a name="___sec85"></a></h3>
+
+<p>
+The function <code>loadtxt</code> in <code>numpy</code> can read files with tabular data
+(any number of columns) and return the data in a two-dimensional
+array:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
+data <span style="color: #666666">=</span> np<span style="color: #666666">.</span>loadtxt(<span style="color: #BA2121">&#39;xy.dat&#39;</span>, dtype<span style="color: #666666">=</span>np<span style="color: #666666">.</span>float)  <span style="color: #408080; font-style: italic"># read table of floats</span>
+x <span style="color: #666666">=</span> data[:,<span style="color: #666666">0</span>]  <span style="color: #408080; font-style: italic"># column with index 0</span>
+y <span style="color: #666666">=</span> data[:,<span style="color: #666666">1</span>]  <span style="color: #408080; font-style: italic"># column with index 1</span>
+</pre></div>
+<p>
+The present exercise asks you to implement a simplified version
+of <code>loadtxt</code>, but for later loading of a file with tabular data into
+an array you will certainly use <code>loadtxt</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:files:ex12c">Exercise 14: Plot data from a file<a name="sec:files:ex12c"></a></h2>
+
+<p>
+The files <code>density_water.dat</code> and <code>density_air.dat</code> files in the
+folder <a href="http://tinyurl.com/pwyasaa/plot" target="_self"><tt>src/plot</tt></a> contain data about the density
+of water and air (respectively) for different temperatures. The data
+files have some comment lines starting with <code>#</code> and some lines are
+blank. The rest of the lines contain density data: the temperature in
+the first column and the corresponding density in the second column.
+The goal of this exercise is to read the data in such a file and plot
+the density versus the temperature as distinct (small) circles for
+each data point.  Let the program take the name of the data file as
+command-line argument.  Apply the program to both files.
+Filename: <code>read_density_data.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:files:ex12c2">Exercise 15: Fit a polynomial to data points<a name="sec:files:ex12c2"></a></h2>
+
+<p>
+The purpose of this exercise is to find a simple mathematical formula
+for how the density of water or air depends on the temperature.
+The idea is to load density and temperature data from file as
+explained in <a href="#sec:files:ex12c">Exercise 14: Plot data from a file</a> and then apply some NumPy
+utilities that can find a polynomial that approximates the density as
+a function of the temperature.
+
+<p>
+NumPy has a function <code>polyfit(x, y, deg)</code> for finding a &quot;best fit&quot;
+of a polynomial of degree <code>deg</code> to a set of data points given by the
+array arguments <code>x</code> and <code>y</code>. The <code>polyfit</code> function returns a list of
+the coefficients in the fitted polynomial, where the first element is
+the coefficient for the term with the highest degree, and the last
+element corresponds to the constant term. For example, given points in
+<code>x</code> and <code>y</code>, <code>polyfit(x, y, 1)</code> returns the coefficients <code>a, b</code> in a
+polynomial <code>a*x + b</code> that fits the data in the best way.  (More
+precisely, a line \( y=ax+b \) is a &quot;best fit&quot; to the data points
+\( (x_i,y_i) \), \( i=0,\ldots,n-1 \) if \( a \) and \( b \) are chosen to make the
+sum of squared errors \( R=\sum_{j=0}^{n-1} (y_j - (ax_j + b))^2 \) as
+small as possible.  This approach is known as <em>least squares
+approximation</em> to data and proves to be extremely useful throughout
+science and technology.)
+
+<p>
+NumPy also has a utility <code>poly1d</code>, which can take the tuple or list of
+coefficients calculated by, e.g., <code>polyfit</code> and return the polynomial
+as a Python function that can be evaluated. The following code snippet
+demonstrates the use of <code>polyfit</code> and <code>poly1d</code>:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">coeff <span style="color: #666666">=</span> polyfit(x, y, deg)
+p <span style="color: #666666">=</span> poly1d(coeff)
+<span style="color: #008000; font-weight: bold">print</span> p             <span style="color: #408080; font-style: italic"># prints the polynomial expression</span>
+y_fitted <span style="color: #666666">=</span> p(x)     <span style="color: #408080; font-style: italic"># computes the polynomial at the x points</span>
+<span style="color: #408080; font-style: italic"># use red circles for data points and a blue line for the polynomial</span>
+plot(x, y, <span style="color: #BA2121">&#39;ro&#39;</span>, x, y_fitted, <span style="color: #BA2121">&#39;b-&#39;</span>,
+     legend<span style="color: #666666">=</span>(<span style="color: #BA2121">&#39;data&#39;</span>, <span style="color: #BA2121">&#39;fitted polynomial of degree </span><span style="color: #BB6688; font-weight: bold">%d</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> deg))
+</pre></div>
+<p>
+<b>a)</b>
+Write a function <code>fit(x, y, deg)</code> that creates a plot of data
+in <code>x</code> and <code>y</code> arrays along with polynomial approximations of
+degrees collected in the list <code>deg</code> as explained above.
+
+<p>
+<b>b)</b>
+We want to call <code>fit</code> to make a plot of the density of water versus
+temperature and another plot of the density of air versus
+temperature. In both calls, use <code>deg=[1,2]</code> such that we can compare
+linear and quadratic approximations to the data.
+
+<p>
+<b>c)</b>
+From a visual inspection of the plots, can you suggest simple
+mathematical formulas that relate the density of
+air to temperature and the density of water to temperature?
+
+<p>
+Filename: <code>fit_density_data.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:files:ex19">Exercise 16: Fit a polynomial to experimental data<a name="sec:files:ex19"></a></h2>
+
+<p>
+Suppose we have measured the oscillation period \( T \) of a simple
+pendulum with a mass \( m \) at the end of a massless rod of length
+\( L \). We have varied \( L \) and recorded the corresponding \( T \) value. The
+measurements are found in a file <a href="http://tinyurl.com/pwyasaa/plot/pendulum.dat" target="_self"><tt>src/plot/pendulum.dat</tt></a>.  The first column in the file
+contains \( L \) values and the second column has the corresponding \( T \)
+values.
+
+<p>
+<b>a)</b>
+Plot \( L \) versus \( T \) using circles for the data points.
+
+<p>
+<b>b)</b>
+We shall assume that \( L \) as a function of \( T \) is a polynomial.
+Use the NumPy utilities <code>polyfit</code> and <code>poly1d</code>, as explained in
+<a href="#sec:files:ex12c2">Exercise 15: Fit a polynomial to data points</a>, to fit polynomials of degree 1, 2, and
+3 to the \( L \) and \( T \) data.  Visualize the polynomial curves together
+with the experimental data. Which polynomial fits the measured data
+best?
+
+<p>
+Filename: <code>fit_pendulum_data.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:files:ex22">Exercise 17: Read acceleration data and find velocities<a name="sec:files:ex22"></a></h2>
+
+<p>
+A file <a href="http://tinyurl.com/pwyasaa/plot/acc.dat" target="_self"><tt>src/plot/acc.dat</tt></a> contains
+measurements \( a_0,a_1,\ldots,a_{n-1} \) of the acceleration of an object
+moving along a straight line. The measurement \( a_k \) is taken at time
+point \( t_k=k\Delta t \), where \( \Delta t \) is the time spacing between
+the measurements.  The purpose of the exercise is to load the
+acceleration data into a program and compute the velocity \( v(t) \) of
+the object at some time \( t \).
+
+<p>
+In general, the acceleration \( a(t) \) is related to the velocity \( v(t) \)
+through \( v'(t)=a(t) \). This means that
+
+$$
+\begin{equation} v(t) = v(0) + \int_0^t a(\tau) d\tau\tp
+\tag{6}
+\end{equation}
+$$
+
+If \( a(t) \) is only known at some discrete, equally spaced points in time,
+\( a_0,\ldots,a_{n-1} \) (which is the case in this exercise), we must
+compute the integral in <a href="#mjx-eqn-6">(6)</a> numerically, for example
+by the Trapezoidal rule:
+
+$$
+\begin{equation}
+v(t_k) \approx \Delta t\left( \frac{1}{2}a_0 + \frac{1}{2}a_{k}
++ \sum_{i=1}^{k-1} a_i\right),\quad 1 \leq k \leq n-1\tp
+\tag{7}
+\end{equation}
+$$
+
+We assume \( v(0)=0 \) so that also \( v_0=0 \).
+
+<p>
+Read the values \( a_0,\ldots,a_{n-1} \) from file into an array, plot the
+acceleration versus time, and use <a href="#mjx-eqn-7">(7)</a> to
+compute one \( v(t_k) \) value, where \( \Delta t \) and \( k\geq 1 \) are
+specified on the command line.
+Filename: <code>acc2vel_v1.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:files:ex23">Exercise 18: Read acceleration data and plot velocities<a name="sec:files:ex23"></a></h2>
+
+<p>
+The task in this exercise is the same as in <a href="#sec:files:ex22">Exercise 17: Read acceleration data and find velocities</a>, except that we now want to compute \( v(t_k) \) for
+all time points \( t_k=k\Delta t \) and plot the velocity versus time.
+Now only \( \Delta t \) is given on the command line, and the \( a_0,\ldots,
+a_{n-1} \) values must be read from file as in <a href="#sec:files:ex22">Exercise 17: Read acceleration data and find velocities</a>.
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<b>Hint.</b>
+Repeated use of <a href="#mjx-eqn-7">(7)</a> for all \( k \) values
+is very inefficient. A more efficient formula arises if we add the area of
+a new trapezoid to the previous
+
+$$
+\begin{equation}
+v(t_{k}) = v(t_{k-1}) + \int\limits_{t_{k-1}}^{t_k} a(\tau) d\tau
+\approx v(t_{k-1}) + \Delta t \frac{1}{2}(a_{k-1} + a_{k}),
+\end{equation}
+$$
+
+for \( k=1,2,\ldots,n-1 \), while
+\( v_0=0 \).
+Use this formula to fill an array <code>v</code> with velocity values.
+
+<p>
+<!-- --- end hint in exercise --- -->
+Filename: <code>acc2vel.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:files:ex24">Exercise 19: Plot a trip's path and velocity from GPS coordinates<a name="sec:files:ex24"></a></h2>
+
+<p>
+A GPS device measures your position at every \( s \) seconds.  Imagine
+that the positions corresponding to a specific trip are stored as
+\( (x,y) \) coordinates in a file <a href="http://tinyurl.com/pwyasaa/plot/pos.dat" target="_self"><tt>src/plot/pos.dat</tt></a> with an \( x \) and \( y \) number on each line,
+except for the first line, which contains the value of \( s \).
+
+<p>
+<b>a)</b>
+Plot the two-dimensional curve of
+corresponding to the data in the file.
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<b>Hint.</b>
+Load \( s \) into a <code>float</code> variable
+and then the \( x \) and \( y \) numbers into two arrays. Draw a straight line
+between the points, i.e., plot the \( y \) coordinates versus the \( x \)
+coordinates.
+
+<p>
+<!-- --- end hint in exercise --- -->
+
+<p>
+<b>b)</b>
+Plot the velocity in \( x \) direction versus time in one plot and the
+velocity in \( y \) direction versus time in another plot.
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<b>Hint.</b>
+If \( x(t) \) and \( y(t) \) are the coordinates of the positions as a function
+of time, we have that the velocity in \( x \) direction is \( v_x(t)=dx/dt \),
+and the velocity in \( y \) direction is \( v_y=dy/dt \).
+Since \( x \) and \( y \) are only known for some discrete times,
+\( t_k=ks \), \( k=0,\ldots,n-1 \), we must use numerical differentiation. A
+simple (forward) formula is
+
+$$
+\begin{equation*} v_x(t_k) \approx {x(t_{k+1})-x(t_k)\over s},\quad
+v_y(t_k) \approx {y(t_{k+1})-y(t_k)\over s},\quad k=0,\ldots,n-2\tp \end{equation*}
+$$
+
+Compute arrays <code>vx</code> and <code>vy</code> with velocities based on the
+formulas above for
+\( v_x(t_k) \) and \( v_y(t_k) \), \( k=0,\ldots,n-2 \).
+
+<p>
+<!-- --- end hint in exercise --- -->
+
+<p>
+Filename: <code>position2velocity.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:class:exer:sum">Exercise 20: Vectorize the Midpoint rule for integration<a name="sec:class:exer:sum"></a></h2>
+
+<p>
+The Midpoint rule for approximating an integral can be expressed as
+$$
+\begin{equation}
+\int_a^b f(x)dx \approx h\sum_{i=1}^n f(a - \frac{1}{2}h + ih),
+\end{equation}
+$$
+
+where \( h=(b-a)/n \).
+
+<p>
+<b>a)</b>
+Write a function <code>midpointint(f, a, b, n)</code> to compute
+Midpoint rule. Use a plain Python <code>for</code> loop to implement the sum.
+
+<p>
+<b>b)</b>
+Make a vectorized implementation of the Midpoint rule where you
+compute the sum by Python's built-in function <code>sum</code>.
+
+<p>
+<b>c)</b>
+Make another vectorized implementation of the Midpoint rule where you
+compute the sum by the <code>sum</code> function in the <code>numpy</code> package.
+
+<p>
+<b>d)</b>
+Organize the three implementations above in a module file <code>midpoint_vec.py</code>.
+
+<p>
+<b>e)</b>
+Start IPython, import the functions from <code>midpoint_vec.py</code>,
+define some Python implementation of a mathematical function \( f(x) \)
+to integrate, and use the <code>%timeit</code> feature of IPython to measure
+the efficiency of the three alternative implementations.
+
+<p>
+Filename: <code>midpoint_vec.py</code>.
+
+<p>
+<!-- Closing remarks for this Exercise -->
+
+<h3 id="___sec93">Remarks <a name="___sec93"></a></h3>
+
+<p>
+The lesson learned from the experiments in e) is that <code>numpy.sum</code> is
+much more efficient than Python's built-in function <code>sum</code>. Vectorized
+implementations must always make use of <code>numpy.sum</code> to compute sums.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:class:ex27a">Exercise 21: Implement Lagrange's interpolation formula<a name="sec:class:ex27a"></a></h2>
+
+<p>
+Imagine we have \( n+1 \) measurements of some quantity \( y \) that depends
+on \( x \): \( (x_0,y_0), (x_1,y_1),\ldots,(x_{n}, y_n) \). We may think of
+\( y \) as a function of \( x \) and ask what \( y \) is at some arbitrary point
+\( x \) not coinciding with any of the points \( x_0,\ldots,x_n \).  It is not
+clear how \( y \) varies between the measurement points, but we can
+make assumptions or models for this behavior. Such a problem
+is known as <em>interpolation</em>.
+
+<p>
+One way to solve the interpolation problem is to fit a continuous
+function that goes through all the \( n+1 \) points and then evaluate this
+function for any desired \( x \).  A candidate for such a function is the
+polynomial of degree \( n \) that goes through all the points. It turns
+out that this polynomial can be written
+
+$$
+\begin{equation}
+p_L(x) = \sum_{k=0}^n y_kL_k(x),
+\tag{8}
+\end{equation}
+$$
+
+where
+
+$$
+\begin{equation} L_k(x) =
+\prod_{i=0,i\neq k}^n\frac{x-x_i}{x_k -x_i}
+\tag{9} \thinspace .
+\end{equation}
+$$
+
+The \( \prod \) notation corresponds to \( \sum \), but the terms are multiplied.
+For example,
+
+$$
+\begin{equation*} \prod_{i=0,i\neq k}^n x_i = x_0x_1\cdots x_{k-1}x_{k+1}\cdots x_n\thinspace .
+\end{equation*}
+$$
+
+The polynomial \( p_L(x) \) is known as Lagrange's interpolation formula,
+and the points \( (x_0,y_0),\ldots,(x_n,y_n) \) are called interpolation points.
+
+<p>
+<b>a)</b>
+Make functions <code>p_L(x, xp, yp)</code> and <code>L_k(x, k, xp, yp)</code>
+that evaluate \( p_L(x) \) and \( L_k(x) \) by <a href="#mjx-eqn-8">(8)</a>
+and <a href="#mjx-eqn-9">(9)</a>, respectively,
+at the point <code>x</code>. The arrays <code>xp</code> and <code>yp</code>
+contain the \( x \) and \( y \) coordinates of the \( n+1 \) interpolation points,
+respectively. That is, <code>xp</code> holds \( x_0,\ldots,x_n \), and <code>yp</code>
+holds \( y_0,\ldots,y_n \).
+
+<p>
+<b>b)</b>
+To verify the program, we observe that \( L_k(x_k)=1 \) and that
+\( L_k(x_i)=0 \) for \( i\neq k \), implying that \( p_L(x_k)=y_k \).  That is,
+the polynomial \( p_L \) goes through all the points
+\( (x_0,y_0),\ldots,(x_n,y_n) \).  Write a function <code>test_p_L(xp, yp)</code>
+that computes \( |p_L(x_k)-y_k| \) at all the interpolation points
+\( (x_k,y_k) \) and checks that the value is approximately zero.  Call
+<code>test_p_L</code> with <code>xp</code> and <code>yp</code> corresponding to \( 5 \) equally
+spaced points along the curve \( y=\sin(x) \) for \( x\in [0,\pi] \).
+Thereafter, evaluate \( p_L(x) \) for an \( x \) in the middle of two
+interpolation points and compare the value of \( p_L(x) \) with the exact
+one.
+
+<p>
+Filename: <code>Lagrange_poly1.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:class:ex27b">Exercise 22: Plot Lagrange's interpolating polynomial<a name="sec:class:ex27b"></a></h2>
+
+<p>
+<b>a)</b>
+Write a function <code>graph(f, n, xmin, xmax, resolution=1001)</code> for
+plotting \( p_L(x) \) in <a href="#sec:class:ex27a">Exercise 21: Implement Lagrange's interpolation formula</a>,
+based on interpolation points taken from some mathematical function
+\( f(x) \) represented by the argument <code>f</code>. The argument <code>n</code>
+denotes the number of interpolation points sampled from the \( f(x) \)
+function, and <code>resolution</code> is the number of points between
+<code>xmin</code> and <code>xmax</code> used to plot \( p_L(x) \).  The \( x \) coordinates
+of the <code>n</code> interpolation points can be uniformly distributed
+between <code>xmin</code> and <code>xmax</code>. In the graph, the interpolation
+points \( (x_0,y_0),\ldots,(x_n,y_n) \) should be marked by small
+circles.  Test the <code>graph</code> function by choosing 5
+points in \( [0,\pi] \) and <code>f</code> as \( \sin x \).
+
+<p>
+<b>b)</b>
+Make a module <code>Lagrange_poly2</code> containing the <code>p_L</code>,
+<code>L_k</code>, <code>test_p_L</code>, and <code>graph</code> functions. The call to
+<code>test_p_L</code> described in <a href="#sec:class:ex27a">Exercise 21: Implement Lagrange's interpolation formula</a> and the
+call to <code>graph</code> described above should appear in the module's test block.
+
+<p>
+Filename: <code>Lagrange_poly2.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:class:ex27c">Exercise 23: Investigate the behavior of Lagrange's interpolating polynomials<a name="sec:class:ex27c"></a></h2>
+
+<p>
+Unfortunately, the polynomial \( p_L(x) \) defined and implemented in
+<a href="#sec:class:ex27a">Exercise 21: Implement Lagrange's interpolation formula</a> can exhibit some undesired oscillatory
+behavior that we shall explore graphically in this exercise.  Call
+the <code>graph</code> function from <a href="#sec:class:ex27b">Exercise 22: Plot Lagrange's interpolating polynomial</a> with
+\( f(x)=|x| \), \( x\in [-2,2] \), for \( n=2,4,6,10 \). All the graphs of
+\( p_L(x) \) should appear in the same plot for comparison. In addition,
+make a new figure with calls to <code>graph</code> for \( n=13 \) and \( n=20 \). All the
+code necessary for solving this exercise should appear in some
+separate program file, which imports the <code>Lagrange_poly2</code> module made
+in <a href="#sec:class:ex27b">Exercise 22: Plot Lagrange's interpolating polynomial</a>.
+Filename: <code>Lagrange_poly2b.py</code>.
+
+<p>
+<!-- Closing remarks for this Exercise -->
+
+<h3 id="___sec97">Remarks <a name="___sec97"></a></h3>
+
+<p>
+The purpose of the \( p_L(x) \) function is to compute \( (x,y) \) between
+some given (often measured) data points \( (x_0,y_0),\ldots,(x_n,y_n) \).
+We see from the graphs that for a small number of interpolation
+points, \( p_L(x) \) is
+quite close to the curve \( y=|x| \) we used to generate the data points,
+but as \( n \) increases, \( p_L(x) \) starts to oscillate, especially toward
+the end points \( (x_0,y_0) \) and \( (x_n,y_n) \). Much research has
+historically been focused on methods that do not result in such
+strange oscillations when fitting a polynomial to a set of points.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:plot:ex5d">Exercise 24: Plot a wave packet<a name="sec:plot:ex5d"></a></h2>
+
+<p>
+The function
+
+$$
+\begin{equation}
+f(x, t) = e^{-(x-3t)^2}\sin\left( 3\pi (x-t)\right)
+\end{equation}
+$$
+
+describes for a fixed value of \( t \) a wave localized in space.  Make a
+program that visualizes this function as a function of \( x \) on the
+interval \( [-4,4] \) when \( t=0 \).
+Filename: <code>plot_wavepacket.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:plot:ex7">Exercise 25: Judge a plot<a name="sec:plot:ex7"></a></h2>
+
+<p>
+Assume you have the following program for plotting a parabola:
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
+x <span style="color: #666666">=</span> np<span style="color: #666666">.</span>linspace(<span style="color: #666666">0</span>, <span style="color: #666666">2</span>, <span style="color: #666666">20</span>)
+y <span style="color: #666666">=</span> x<span style="color: #666666">*</span>(<span style="color: #666666">2</span> <span style="color: #666666">-</span> x)
+<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">plt</span>
+plt<span style="color: #666666">.</span>plot(x, y)
+plt<span style="color: #666666">.</span>show()
+</pre></div>
+<p>
+Then you switch to the function \( \cos (18\pi x) \) by altering the
+computation of <code>y</code> to <code>y = cos(18*pi*x)</code>.  Judge the resulting
+plot. Is it correct?  Display the \( \cos (18\pi x) \) function with 1000
+points in the same plot.
+Filename: <code>judge_plot.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:plot:ex13c">Exercise 26: Plot the viscosity of water<a name="sec:plot:ex13c"></a></h2>
+
+<p>
+The viscosity of water, \( \mu \), varies with the temperature \( T \) (in
+Kelvin) according to
+
+$$
+\begin{equation}
+\mu (T) = A\cdot 10^{B/(T-C)},
+\end{equation}
+$$
+
+where \( A=2.414\cdot 10^{-5}\hbox{ Pa s} \), \( B=247.8 \) K, and \( C=140 \)
+K. Plot \( \mu (T) \) for \( T \) between 0 and 100 degrees Celsius. Label the
+\( x \) axis with 'temperature (C)' and the \( y \) axis with 'viscosity (Pa
+s)'. Note that \( T \) in the formula for \( \mu \) must be in Kelvin.
+Filename: <code>water_viscosity.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:plot:ex16">Exercise 27: Explore a complicated function graphically<a name="sec:plot:ex16"></a></h2>
+
+<p>
+The wave speed \( c \) of water surface waves depends on the length
+\( \lambda \) of the waves.  The following formula relates \( c \) to
+\( \lambda \):
+
+$$
+\begin{equation}
+c(\lambda) =
+\sqrt{{g\lambda\over 2\pi}\left( 1 + s{4\pi^2\over\rho g \lambda^2}\right)
+\tanh\left( {2\pi h\over\lambda}\right)}\tp
+\end{equation}
+$$
+
+Here, \( g \) is the acceleration of gravity (\( 9.81\hbox{ m/s}^2 \)), \( s \) is
+the air-water surface tension (\( 7.9\cdot 10^{-2} \hbox{ N/m} \)) ,
+\( \rho \) is the density of water (can be taken as \( 1000 \hbox{
+kg/m}^3 \)), and \( h \) is the water depth.  Let us fix \( h \) at 50 m.  First
+make a plot of \( c(\lambda) \) (in m/s) for small \( \lambda \) (0.001 m to
+0.1 m).  Then make a plot \( c(\lambda) \) for larger \( \lambda \) (1 m to 2
+km.
+Filename: <code>water_wave_velocity.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:plot:ex5b">Exercise 28: Plot Taylor polynomial approximations to \( \sin x \)<a name="sec:plot:ex5b"></a></h2>
+
+<p>
+The sine function can be approximated by a polynomial according to the
+following formula:
+
+$$
+\begin{equation}
+\sin x \approx S(x;n) = \sum_{j=0}^{n} (-1)^j {x^{2j+1}\over (2j+1)!}\tp
+\tag{10}
+\end{equation}
+$$
+
+The expression \( (2j+1)! \) is the factorial (<code>math.factorial</code> can
+compute this quantity).
+The error in the approximation \( S(x;n) \) decreases as \( n \) increases and
+in the limit we have that \( \lim_{n\rightarrow\infty} S(x;n) = \sin x \).
+The purpose of this exercise is to visualize the quality of various
+approximations \( S(x;n) \) as \( n \) increases.
+
+<p>
+<b>a)</b>
+Write a Python function <code>S(x, n)</code> that computes \( S(x;n) \).
+Use a straightforward approach where you compute each
+term as it stands in the formula, i.e., \( (-1)^j x^{2j+1} \) divided
+by the factorial \( (2j+1)! \).
+
+<p>
+<b>b)</b>
+Plot \( \sin x \) on \( [0,4\pi] \) together
+with the approximations \( S(x;1) \), \( S(x;2) \), \( S(x;3) \), \( S(x;6) \), and \( S(x;12) \).
+
+<p>
+Filename: <code>plot_Taylor_sin.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:plot:ex5e">Exercise 29: Animate a wave packet<a name="sec:plot:ex5e"></a></h2>
+
+<p>
+Display an animation of the function \( f(x,t) \) in <a href="#sec:plot:ex5d">Exercise 24: Plot a wave packet</a> by plotting \( f \) as a function of \( x \) on \( [-6,6] \)
+for a set of \( t \) values in \( [-1,1] \). Also make an animated GIF file.
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<b>Hint.</b>
+A suitable resolution can be 1000 intervals (1001 points)
+along the \( x \) axis, 60 intervals (61 points) in
+time, and 6 frames per second in the animated GIF file.
+Use the recipe in the section <a href="._plot-bootstrap003.html#easyviz:movie">Making animations</a> and remember to remove
+the family of old plot files in the beginning of the program.
+
+<p>
+<!-- --- end hint in exercise --- -->
+Filename: <code>plot_wavepacket_movie.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:plot:ex18">Exercise 30: Animate two-scale temperature variations<a name="sec:plot:ex18"></a></h2>
+
+<p>
+We consider temperature oscillations in the ground as addressed in
+the section <a href="._plot-bootstrap008.html#sec:plot:summarizing">Example: Animating a function</a>. Now we want to visualize daily and
+annual variations. Let \( A_1 \) be the amplitude of annual variations and
+\( A_2 \) the amplitude of the day/night variations.  Let also \( P_1 = 365 \)
+days and \( P_2=24 \) h be the periods of the annual and the daily
+oscillations.  The temperature at time \( t \) and depth \( z \) is then given
+by
+
+$$
+\begin{equation}
+T(z,t) = T_0 + A_1e^{-a_1z}\sin (\omega_1 t - a_1z) +
+A_2e^{-a_2z}\sin (\omega_2 t - a_2z),
+\end{equation}
+$$
+
+where
+
+$$
+\begin{align*}
+ \omega_1 &= {2\pi P_1},\\ 
+ \omega_2 &= {2\pi P_2},\\ 
+ a_1 &=\sqrt{\omega_1\over 2k},\\ 
+ a_2 &=\sqrt{\omega_2\over 2k}\tp\\ 
+\end{align*}
+$$
+
+Choose \( k = 10^{-6} \hbox{ m}^2/\hbox{s} \), \( A_1=15 \) C,
+\( A_2=7 \) C, and the resolution \( \Delta t \) as \( P_2/10 \).
+Modify the <code>heatwave.py</code> program in order to
+animate this new temperature function.
+Filename: <code>heatwave2.py</code>.
+
+<p>
+<!-- Closing remarks for this Exercise -->
+
+<h3 id="___sec105">Remarks <a name="___sec105"></a></h3>
+
+<p>
+We assume in this problem that the temperature
+\( T \) equals the reference temperature \( T_0 \) at \( t=0 \), resulting in
+a sine variation rather than the cosine variation in
+<a href="._plot-bootstrap008.html#mjx-eqn-3">(3)</a>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:plot:ex19">Exercise 31: Use non-uniformly distributed coordinates for visualization<a name="sec:plot:ex19"></a></h2>
+
+<p>
+Watching the animation in <a href="#sec:plot:ex18">Exercise 30: Animate two-scale temperature variations</a> reveals that
+there are rapid oscillations in a small layer close to \( z=0 \).  The
+variations away from \( z=0 \) are much smaller in time and space.  It
+would therefore be wise to use more \( z \) coordinates close to \( z=0 \)
+than for larger \( z \) values. Given a set \( x_0 < x_1 < \cdots < x_n \) of
+uniformly spaced coordinates in \( [a, b] \), we can compute new
+coordinates \( \bar x_i \), stretched toward \( x=a \), by the formula
+
+$$
+\begin{equation*} \bar x_i = a + (b-a)\left({x_i-a\over b-a}\right)^s,\end{equation*}
+$$
+
+for some \( s>1 \). In the present example, we can use this formula to stretch
+the \( z \) coordinates to the left.
+
+<p>
+<b>a)</b>
+Experiment with \( s\in [1.2,3] \) and few points
+(say 15) and visualize the curve as a line with circles at the
+points so that you can easily see the distribution of points toward
+the left end. Identify a suitable value of \( s \).
+
+<p>
+<b>b)</b>
+Run the animation with no circles and (say) 501 points
+with the found \( s \) value.
+
+<p>
+Filename: <code>heatwave2a.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:plot:ex5g">Exercise 32: Animate a planet's orbit<a name="sec:plot:ex5g"></a></h2>
+
+<p>
+A planet's orbit around a star has the shape of an ellipse. The
+purpose of this exercise is to make an animation of the movement along
+the orbit.  One should see a small disk, representing the planet,
+moving along an elliptic curve.  An evolving solid line shows the
+development of the planet's orbit as the planet moves and the title
+displays the planet's instantaneous velocity magnitude.  As a test,
+run the special case of a circle and verify that the magnitude of the
+velocity remains constant as the planet moves.
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<b>Hint 1.</b>
+The points \( (x,y) \) along the ellipse are given
+by the expressions
+
+$$
+\begin{equation*} x=a\cos (\omega t),\quad y = b\sin (\omega t),\end{equation*}
+$$
+
+where \( a \) is the semi-major axis of the ellipse, \( b \) is the semi-minor
+axis, \( \omega \) is an angular velocity of the planet around the star,
+and \( t \) denotes time. One complete orbit corresponds
+to \( t\in [0, 2\pi/\omega] \). Let us discretize time into time points
+\( t_k = k\Delta t \), where
+\( \Delta t = 2\pi/(\omega n) \). Each frame in the movie corresponds to
+\( (x,y) \) points along the curve with
+\( t \) values \( t_0,t_1,\ldots,t_i \), \( i \) representing the frame number
+(\( i=1,\ldots,n \)).
+
+<p>
+<!-- --- end hint in exercise --- -->
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<b>Hint 2.</b>
+The velocity vector is
+
+$$
+\begin{equation*} (\frac{dx}{dt}, \frac{dy}{dt}) = (-\omega a\sin(\omega t), \omega b\cos(\omega t)),\end{equation*}
+$$
+
+and the magnitude of this vector becomes
+\( \omega\sqrt{a^2\sin^2(\omega t) + b^2\cos^2(\omega t)} \).
+
+<p>
+<!-- --- end hint in exercise --- -->
+Filename: <code>planet_orbit.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:plot:ex17">Exercise 33: Animate the evolution of Taylor polynomials<a name="sec:plot:ex17"></a></h2>
+
+<p>
+A general series approximation (to a function) can be written as
+
+$$
+\begin{equation*}
+S(x; M, N)=\sum_{k=M}^{N} f_k(x)\tp
+\end{equation*}
+$$
+
+For example, the Taylor polynomial of degree \( N \) for \( e^x \) equals
+\( S(x; 0, N) \) with \( f_k(x)=x^k/k! \).  The purpose of the exercise is to
+make a movie of how \( S(x;M,N) \) develops and improves as an
+approximation as we add terms in the sum. That is, the frames in the
+movie correspond to plots of \( S(x; M, M) \), \( S(x; M, M+1) \), \( S(x;
+M,M+2) \), \( \ldots \), \( S(x; M, N) \).
+
+<p>
+<b>a)</b>
+Make a function
+
+<p>
+
+<!-- code=text (!bc ccq) typeset with pygments style "default" -->
+<blockquote>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">animate_series(fk, M, N, xmin, xmax, ymin, ymax, n, exact)
+</pre></div>
+</blockquote><p>
+for creating such animations. The argument <code>fk</code> holds a Python
+function implementing the term \( f_k(x) \) in the sum, <code>M</code> and <code>N</code> are
+the summation limits, the next arguments are the minimum and maximum
+\( x \) and \( y \) values in the plot, <code>n</code> is the number of \( x \) points in the
+curves to be plotted, and <code>exact</code> holds the function that \( S(x) \) aims
+at approximating.
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<b>Hint.</b>
+Here is some more information on how to write the <code>animate_series</code>
+function. The function must accumulate the \( f_k(x) \) terms in a
+variable \( s \), and for each \( k \) value, \( s \) is plotted against \( x \)
+together with a curve reflecting the exact function.  Each plot must
+be saved in a file, say with names <code>tmp_0000.png</code>, <code>tmp_0001.png</code>, and
+so on (these filenames can be generated by <code>tmp_%04d.png</code>, using an
+appropriate counter). Use the <code>movie</code> function to combine all the plot
+files into a movie in a desired movie format.
+
+<p>
+In the beginning of the <code>animate_series</code> function, it is necessary to
+remove all old plot files of the form <code>tmp_*.png</code>. This can be done by
+the <code>glob</code> module and the <code>os.remove</code> function as exemplified in
+the section <a href="._plot-bootstrap003.html#easyviz:movie">Making animations</a>.
+
+<p>
+<!-- --- end hint in exercise --- -->
+
+<p>
+<b>b)</b>
+Call the <code>animate_series</code> function for the Taylor series for \( \sin x \),
+where \( f_k(x) = (-1)^k {x^{2k+1}/(2k+1)!} \), and \( x\in [0,13\pi] \),
+\( M=0 \), \( N=40 \), \( y\in [-2,2] \).
+
+<p>
+<b>c)</b>
+Call the <code>animate_series</code> function for
+the Taylor series for \( e^{-x} \), where \( f_k(x)=(-x)^k/k! \),
+and \( x\in [0, 15] \), \( M=0 \), \( N=30 \), \( y\in [-0.5,1.4] \).
+
+<p>
+Filename: <code>animate_Taylor_series.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:plot:ex4">Exercise 34: Plot the velocity profile for pipeflow<a name="sec:plot:ex4"></a></h2>
+
+<p>
+A fluid that flows through a (very long) pipe has zero velocity on the
+pipe wall and a maximum velocity along the centerline of the pipe. The
+velocity \( v \) varies through the pipe cross section according to the
+following formula:
+
+$$
+\begin{equation}
+v(r) = \left({\beta\over 2\mu_0}\right)^{{1/ n}}
+{n \over n+1}\left( R^{1 + 1/n} - r^{1 + 1/n}\right),
+\tag{11}
+\end{equation}
+$$
+
+where \( R \) is the radius of the pipe, \( \beta \) is the pressure gradient
+(the force that drives the flow through the pipe), \( \mu_0 \) is a
+viscosity coefficient (small for air, larger for water and even larger
+for toothpaste), \( n \) is a real number reflecting the viscous
+properties of the fluid (\( n=1 \) for water and air, \( n < 1 \) for many modern
+plastic materials), and \( r \) is a radial coordinate that measures the
+distance from the centerline (\( r=0 \) is the centerline, \( r=R \) is the
+pipe wall).
+
+<p>
+<b>a)</b>
+Make a Python function that evaluates \( v(r) \).
+
+<p>
+<b>b)</b>
+Plot \( v(r) \) as a function of
+\( r\in [0,R] \), with \( R=1 \), \( \beta =0.02 \), \( \mu_0 =0.02 \), and \( n=0.1 \).
+
+<p>
+<b>c)</b>
+Make an animation of how the \( v(r) \) curves
+varies as \( n \) goes from 1 and down to 0.01. Because the maximum value of
+\( v(r) \) decreases rapidly as \( n \) decreases, each curve can be normalized
+by its \( v(0) \) value such that the maximum value is always unity.
+
+<p>
+Filename: <code>plot_velocity_pipeflow.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:plot:ex8">Exercise 35: Plot sum-of-sines approximations to a function<a name="sec:plot:ex8"></a></h2>
+
+<p>
+The function
+$$
+\begin{equation*}
+S(t;n) = {4\over\pi}\sum_{i=1}^n {1\over 2i-1}
+\sin\left( {2(2i-1)\pi t\over T}\right)\tp
+\end{equation*}
+$$
+
+is as approximation to
+
+$$
+\begin{equation*}
+f(t) = \left\lbrace\begin{array}{ll}
+1, & 0 < t < T/2,\\ 
+0, & t = T/2,\\ 
+-1, & T/2 < t < T
+\end{array}\right.
+\end{equation*}
+$$
+
+It can be shown that \( S(t;n)\rightarrow f(t) \) as \( n\rightarrow\infty \).
+
+<p>
+Plot \( S(t;1) \), \( S(t;3) \), \( S(t;20) \), \( S(t;200) \), and
+the exact \( f(t) \) function in the same plot. Use \( T=2\pi \).
+Filename: <code>sinesum1_plot.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:plot:ex8m">Exercise 36: Animate the evolution of a sum-of-sine approximation to a function<a name="sec:plot:ex8m"></a></h2>
+
+<p>
+First perform <a href="#sec:plot:ex8">Exercise 35: Plot sum-of-sines approximations to a function</a>.  A natural next step is to
+animate the evolution of \( S(t;n) \) as \( n \) increases.  Create such an
+animation and observe how the discontinuity in \( f(t) \) is poorly
+approximated by \( S(t;n) \), even when \( n \) grows large (plot \( f(t) \) in
+each frame).  This is a well-known deficiency, called Gibb's
+phenomenon, when approximating discontinuous functions by sine or
+cosine (Fourier) series.
+Filename: <code>sinesum1_movie.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:plot:ex14">Exercise 37: Plot functions from the command line<a name="sec:plot:ex14"></a></h2>
+
+<p>
+For quickly getting a plot a function \( f(x) \) for \( x\in [x_{\rm
+min},x_{\rm max}] \) it could be nice to a have a program that takes the
+minimum amount of information from the command line and produces a
+plot on the screen and saves the plot to a file <code>tmp.png</code>.  The usage
+of the program goes as follows:
+
+<p>
+
+<!-- code=text (!bc sys) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">plotf.py &quot;f(x)&quot; xmin xmax
+</pre></div>
+<p>
+A specific example is
+
+<p>
+
+<!-- code=text (!bc sys) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">plotf.py &quot;exp(-0.2*x)*sin(2*pi*x)&quot; 0 4*pi
+</pre></div>
+<p>
+Write the <code>plotf.py</code> program with as short code as possible (we leave
+it to <a href="#sec:plot:ex14b">Exercise 38: Improve command-line input</a> to test for valid input).
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<b>Hint.</b>
+Make \( x \) coordinates from the second and third command-line arguments and
+then use <code>eval</code>
+on the first argument.
+
+<p>
+<!-- --- end hint in exercise --- -->
+Filename: <code>plotf.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:plot:ex14b">Exercise 38: Improve command-line input<a name="sec:plot:ex14b"></a></h2>
+
+<p>
+Equip the program from <a href="#sec:plot:ex14">Exercise 37: Plot functions from the command line</a> with tests on valid
+input on the command line. Also allow an optional fourth command-line
+argument for the number of points along the function curve.  Set this
+number to 501 if it is not given.
+Filename: <code>plotf2.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:plot:ex20">Exercise 39: Demonstrate energy concepts from physics<a name="sec:plot:ex20"></a></h2>
+
+<p>
+The vertical position \( y(t) \) of a ball thrown upward is given by \( y(t)
+= v_0t - \frac{1}{2}gt^2 \), where \( g \) is the acceleration of gravity
+and \( v_0 \) is the velocity at \( t=0 \).  Two important physical quantities
+in this context are the potential energy, obtained by doing work
+against gravity, and the kinetic energy, arising from motion.  The
+potential energy is defined as \( P=mgy \), where \( m \) is the mass of the
+ball. The kinetic energy is defined as \( K=\frac{1}{2}mv^2 \), where \( v \)
+is the velocity of the ball, related to \( y \) by \( v(t)=y'(t) \).
+
+<p>
+Make a program that can plot \( P(t) \) and \( K(t) \) in the same plot, along
+with their sum \( P+K \). Let \( t\in [0,2v_0/g] \). Read \( m \) and \( v_0 \) from
+the command line. Run the program with various choices of \( m \) and
+\( v_0 \) and observe that \( P+K \) is always constant in this motion. (In
+fact, it turns out that \( P+K \) is constant for a large class of
+motions, and this is a very important result in physics.)
+Filename: <code>energy_physics.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:plot:math:ex9">Exercise 40: Plot a w-like function<a name="sec:plot:math:ex9"></a></h2>
+
+<p>
+Define mathematically a function that looks like the &quot;w&quot; character.
+Plot this function.
+Filename: <code>plot_w.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:plot:ex:vizmidpoint">Exercise 41: Visualize approximations in the Midpoint integration rule<a name="sec:plot:ex:vizmidpoint"></a></h2>
+
+<p>
+Consider the midpoint rule for
+numerical integration.
+Use Matplotlib to make an illustration of the midpoint rule
+as shown to the left in Figure <a href="#sec:plot:ex:int:fig">12</a>.
+
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 12:  Visualization of numerical integration rules, with the Midpoint rule to   the left and the Trapezoidal rule to the right.   The filled areas illustrate the deviations  in the approximation of the area under the curve. <a name="sec:plot:ex:int:fig"></a> </p></center>
+<p><img src="fig-plot/viz_midpoint_trapez.png" align="bottom" width=400></p>
+</center>
+
+<p>
+The \( f(x) \) function used
+in Figure <a href="#sec:plot:ex:int:fig">12</a> is
+
+$$
+\begin{equation*} f(x) = x(12-x) + \sin(\pi x),\quad x\in[0,10]\tp\end{equation*}
+$$
+
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<b>Hint.</b>
+Look up the documentation of the Matplotlib function <code>fill_between</code>
+and use this function to create the filled areas between \( f(x) \)
+and the approximating rectangles.
+
+<p>
+Note that the <code>fill_between</code> requires the two curves to have the same
+number of points.  For accurate visualization of \( f(x) \) you need quite
+many \( x \) coordinates, and the rectangular approximation to \( f(x) \) must
+be drawn using the same set of \( x \) coordinates.
+
+<p>
+<!-- --- end hint in exercise --- -->
+Filename: <code>viz_midpoint.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:plot:ex:viztrapezoidal">Exercise 42: Visualize approximations in the Trapezoidal integration rule<a name="sec:plot:ex:viztrapezoidal"></a></h2>
+
+<p>
+Redo <a href="#sec:plot:ex:vizmidpoint">Exercise 41: Visualize approximations in the Midpoint integration rule</a> for the Trapezoidal rule
+to produce the graph shown to the right in Figure <a href="#sec:plot:ex:int:fig">12</a>.
+Filename: <code>viz_trapezoidal.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:plot:ex13">Exercise 43: Experience overflow in a function<a name="sec:plot:ex13"></a></h2>
+
+<p>
+We are give the mathematical function
+
+$$
+\begin{equation*} v(x)={1-e^{x/\mu}\over 1-e^{1/\mu}},\end{equation*}
+$$
+
+where \( \mu \) is a parameter.
+
+<p>
+<b>a)</b>
+Make a Python function <code>v(x, mu=1E-6, exp=math.exp)</code> for calculating the
+formula for \( v(x) \) using <code>exp</code> as a possibly user-given exponential
+function.  Let the <code>v</code> function return the nominator and denominator
+in the formula as well as the fraction.
+
+<p>
+<b>b)</b>
+Call the <code>v</code> function for various <code>x</code> values between 0 and 1 in a
+<code>for</code> loop, let <code>mu</code> be <code>1E-3</code>, and have an inner <code>for</code> loop over two
+different <code>exp</code> functions: <code>math.exp</code> and <code>numpy.exp</code>.  The output
+will demonstrate how the denominator is subject to overflow and how
+difficult it is to calculate this function on a computer.
+
+<p>
+<b>c)</b>
+Plot \( v(x) \) for \( \mu =1,0.01, 0.001 \) on \( [0,1] \) using 10,000 points
+to see what the function looks like.
+
+<p>
+<b>d)</b>
+Convert <code>x</code> and <code>eps</code> to a higher precision representation of
+real numbers, with the aid of the NumPy type <code>float96</code>, before
+calling <code>v</code>:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span>
+x <span style="color: #666666">=</span> numpy<span style="color: #666666">.</span>float96(x); mu <span style="color: #666666">=</span> numpy<span style="color: #666666">.</span>float96(e)
+</pre></div>
+<p>
+Repeat point b) with these type of variables and observe how much better
+results we get with <code>float96</code> compared with the standard <code>float</code> value,
+which is <code>float64</code> (the number reflects the number of bits in the
+machine's representation of a real number).
+
+<p>
+<b>e)</b>
+Call the <code>v</code> function with <code>x</code> and <code>mu</code> as
+<code>float32</code> variables and report how the function now behaves.
+
+<p>
+Filename: <code>boundary_layer_func1.py</code>.
+
+<p>
+<!-- Closing remarks for this Exercise -->
+
+<h3 id="___sec119">Remarks <a name="___sec119"></a></h3>
+
+<p>
+When an object (ball, car, airplane) moves through the air, there is a
+very, very thin layer of air close to the object's surface where the
+air velocity varies dramatically, from the same value as the velocity
+of the object at the object's surface to zero a few centimeters away.
+This layer is called a <em>boundary layer</em>. The physics in the boundary
+layer is important for air resistance and cooling/heating of objects.
+The change in velocity in the boundary layer is quite abrupt and can
+be modeled by the functiion \( v(x) \), where \( x=1 \) is the object's
+surface, and \( x=0 \) is some distance away where one cannot notice any
+wind velocity \( v \) because of the passing object (\( v= 0 \)).  The wind
+velocity coincides with the velocity of the object at \( x=1 \), here set
+to \( v=1 \).  The parameter \( \mu \) is very small and related to the
+viscosity of air.  With a small value of \( \mu  \), it becomes difficult
+to calculate \( v(x) \) on a computer. The exercise demonstrates the
+difficulties and provides a remedy.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:plot:math:ex2">Exercise 44: Apply a function to a rank 2 array<a name="sec:plot:math:ex2"></a></h2>
+
+<p>
+Let \( A \) be the two-dimensional array
+
+$$
+\begin{equation*}
+\left\lbrack\begin{array}{ccc}
+0 & 2 & -1  \\ 
+-1 & -1 & 0 \\ 
+0 & 5 & 0
+\end{array}\right\rbrack
+\end{equation*}
+$$
+
+Apply the function \( f \) from <a href="#sec:plot:math:ex1">Exercise 5: Apply a function to a vector</a>
+to each element in \( A \). Then
+calculate the result of the array expression <code>A**3 + A*exp(A) + 1</code>,
+and demonstrate that the end result of the two methods are the same.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:plot:ex11">Exercise 45: Explain why array computations fail<a name="sec:plot:ex11"></a></h2>
+
+<p>
+The following loop computes the array <code>y</code> from <code>x</code>:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> x <span style="color: #666666">=</span> np<span style="color: #666666">.</span>linspace(<span style="color: #666666">0</span>, <span style="color: #666666">1</span>, <span style="color: #666666">3</span>)
+<span style="color: #666666">&gt;&gt;&gt;</span> y <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros(<span style="color: #008000">len</span>(x))
+<span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #008000">len</span>(x)):
+<span style="color: #666666">...</span>     y[i] <span style="color: #666666">=</span> x[i] <span style="color: #666666">+</span> <span style="color: #666666">4</span>
+</pre></div>
+<p>
+However, the alternative loop
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">for</span> xi, yi <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">zip</span>(x, y):
+<span style="color: #666666">...</span>     yi <span style="color: #666666">=</span> xi <span style="color: #666666">+</span> <span style="color: #666666">5</span>
+</pre></div>
+<p>
+leaves <code>y</code> unchanged. Why? Explain in detail what happens in each
+pass of this loop and write down the contents of <code>xi</code>, <code>yi</code>,
+<code>x</code>, and <code>y</code> as the loop progresses.
+
+<p>
+<!-- --- end exercise --- -->
+
+<h1 id="___sec122">References <a name="___sec122"></a></h1>
+
+<p>
+<!-- begin bibliography -->
+
+<ol>
+ <li> <a name="Langtangen_TCSE6_random"></a> <b>H. P. Langtangen</b>. 
+    Random numbers and simple games,
+    <a href="http://hplgit.github.io/primer.html/doc/pub/random" target="_self"><tt>http://hplgit.github.io/primer.html/doc/pub/random</tt></a>.</li>
+ <li> <a name="TCSE3"></a> <b>H. P. Langtangen</b>. 
+    <em>Python Scripting for Computational Science</em>,
+    Springer,
+    2009.</li>
+ <li> <a name="Langtangen_TCSE6_input"></a> <b>H. P. Langtangen</b>. 
+    User input and error handling,
+    <a href="http://hplgit.github.io/primer.html/doc/pub/input" target="_self"><tt>http://hplgit.github.io/primer.html/doc/pub/input</tt></a>.</li>
+</ol>
+
+<!-- end bibliography -->
+
+<p>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pager">
+  <li class="previous">
+    <a href="._plot-bootstrap008.html">&larr; Prev</a>
+  </li>
+</ul>
+<!-- ------------------- end of main content --------------- -->
+
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap footer
+<footer>
+<a href="http://..."><img width="250" align=right src="http://..."></a>
+</footer>
+-->
+
+
+</body>
+</html>
+    
+

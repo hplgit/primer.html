@@ -1,0 +1,1365 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="User input and error handling">
+<meta name="keywords" content="command-line arguments,option-value pairs (command line),standard input,standard output,standard error,bytes,bits,exceptions,widgets,event loop,modules,test block (in module files),test function,nose tests,pytest tests,search for module files,module folders,refactoring,binomial distribution,Bernoulli trials,Poisson distribution,Poisson process">
+
+<title>User input and error handling</title>
+
+<!-- Bootstrap style: bootswatch_readable -->
+<link href="http://netdna.bootstrapcdn.com/bootswatch/3.1.1/readable/bootstrap.min.css" rel="stylesheet">
+<!-- not necessary
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+
+<style type="text/css">
+/* Let inline verbatim have the same color as the surroundings */
+code { color: inherit; background-color: transparent; }
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [(' Asking questions and reading answers ',
+               1,
+               'sec:input:rawinput',
+               'sec:input:rawinput'),
+              (' Reading keyboard input ',
+               2,
+               'sec:input:rawinput2',
+               'sec:input:rawinput2'),
+              (' Reading from the command line ',
+               1,
+               'sec:input:sysargv',
+               'sec:input:sysargv'),
+              (' Providing input on the command line ',
+               2,
+               'sec:input:cml',
+               'sec:input:cml'),
+              (' A variable number of command-line arguments ',
+               2,
+               None,
+               '___sec4'),
+              (' More on command-line arguments ', 2, None, '___sec5'),
+              (' Turning user text into live objects ', 1, None, '___sec6'),
+              (' The magic eval function ',
+               2,
+               'sec:input:eval',
+               'sec:input:eval'),
+              (' Applying eval to strings ', 3, None, '___sec8'),
+              (' Applying eval to user input ', 3, None, '___sec9'),
+              (' The magic exec function ',
+               2,
+               'sec:input:exec',
+               'sec:input:exec'),
+              (' Turning string expressions into functions ',
+               2,
+               'sec:input:StringFunction',
+               'sec:input:StringFunction'),
+              (' Option-value pairs on the command line ',
+               1,
+               'sec:input:argparse',
+               'sec:input:argparse'),
+              (' Basic usage of the argparse module ', 2, None, '___sec13'),
+              (' Mathematical expressions as values ', 2, None, '___sec14'),
+              (' Reading data from file ',
+               1,
+               'sec:files:reading',
+               'sec:files:reading'),
+              (' Reading a file line by line ', 2, None, '___sec16'),
+              (' Alternative ways of reading a file ',
+               2,
+               'sec:files:reading:other',
+               'sec:files:reading:other'),
+              (' The modern with statement ', 3, None, '___sec18'),
+              (' The old while construction ', 3, None, '___sec19'),
+              (' Reading a file into a string ', 3, None, '___sec20'),
+              (' Reading a mixture of text and numbers ',
+               2,
+               'sec:files:textnum',
+               'sec:files:textnum'),
+              (' Is it more to file reading? ', 3, None, '___sec22'),
+              (' Writing data to file ',
+               1,
+               'sec:files:writing',
+               'sec:files:writing'),
+              (' Example: Writing a table to file ', 2, None, '___sec24'),
+              (' Problem ', 3, None, '___sec25'),
+              (' Solution ', 3, None, '___sec26'),
+              (' Standard input and output as file objects ',
+               2,
+               None,
+               '___sec27'),
+              (' Redirecting standard input, output, and error ',
+               3,
+               None,
+               '___sec28'),
+              (' Note ', 3, None, '___sec29'),
+              (' What is a file, really? ',
+               2,
+               'sec:files:really',
+               'sec:files:really'),
+              (' Pure text files ', 3, None, '___sec31'),
+              (' Word processor files ', 3, None, '___sec32'),
+              (' Image files ', 3, None, '___sec33'),
+              (' Music files ', 3, None, '___sec34'),
+              (' PDF files ', 3, None, '___sec35'),
+              (' Remarks ', 3, None, '___sec36'),
+              (' Handling errors ',
+               1,
+               'sec:input:except',
+               'sec:input:except'),
+              (' Exception handling ',
+               2,
+               'sec:input:except:handling',
+               'sec:input:except:handling'),
+              (' Testing for a specific exception ', 3, None, '___sec39'),
+              (' Examples on exception types ', 3, None, '___sec40'),
+              (' Digression ', 3, None, '___sec41'),
+              (' Raising exceptions ', 2, None, '___sec42'),
+              (' Example ', 3, None, '___sec43'),
+              (' A glimpse of graphical user interfaces ',
+               1,
+               'sec:input:GUI',
+               'sec:input:GUI'),
+              (' Making modules ',
+               1,
+               'sec:input:modules',
+               'sec:input:modules'),
+              (' Example: Interest on bank deposits ', 2, None, '___sec46'),
+              (' Collecting functions in a module file ',
+               2,
+               'sec:input:module:create',
+               'sec:input:module:create'),
+              (' Test block ',
+               2,
+               'sec:input:module:testblock',
+               'sec:input:module:testblock'),
+              (' Example on a test block in a minimalistic module ',
+               3,
+               None,
+               '___sec49'),
+              (' A test block in the `interest` module ',
+               3,
+               None,
+               '___sec50'),
+              (' Verification of the module code ',
+               2,
+               'sec:input:modules:testfunc',
+               'sec:input:modules:testfunc'),
+              (' Getting input data ',
+               2,
+               'sec:input:modules:inputdata',
+               'sec:input:modules:inputdata'),
+              (' Doc strings in modules ', 2, None, '___sec53'),
+              (' Using modules ',
+               2,
+               'sec:input:modules:usage',
+               'sec:input:modules:usage'),
+              (' What gets imported by various import statements? ',
+               3,
+               None,
+               '___sec55'),
+              (' How to make Python find a module file ',
+               3,
+               None,
+               '___sec56'),
+              (' How to make Python run the module file ',
+               3,
+               None,
+               '___sec57'),
+              (' Distributing modules ',
+               2,
+               'sec:input:modules:setuppy',
+               'sec:input:modules:setuppy'),
+              (' Making software available on the Internet ',
+               2,
+               None,
+               '___sec59'),
+              (' Summary ', 1, 'sec:input:summary', 'sec:input:summary'),
+              (' Chapter topics ',
+               2,
+               'sec:input:summary:topics',
+               'sec:input:summary:topics'),
+              (' Question and answer input ', 3, None, '___sec62'),
+              (' Getting command-line arguments ', 3, None, '___sec63'),
+              (' Using option-value pairs ', 3, None, '___sec64'),
+              (' Generating code on the fly ', 3, None, '___sec65'),
+              (' Turning string formulas into Python functions ',
+               3,
+               None,
+               '___sec66'),
+              (' File operations ', 3, None, '___sec67'),
+              (' Handling exceptions ', 3, None, '___sec68'),
+              (' Raising exceptions ', 3, None, '___sec69'),
+              (' Modules ', 3, None, '___sec70'),
+              (' Terminology ', 3, None, '___sec71'),
+              (' Example: Bisection root finding ',
+               2,
+               'sec:input:summarizingex',
+               'sec:input:summarizingex'),
+              (' Problem ', 3, None, '___sec73'),
+              (' Solution ', 3, None, '___sec74'),
+              (' Verification ', 3, None, '___sec75'),
+              (' Making a function ', 3, None, '___sec76'),
+              (' Making a test function ', 3, None, '___sec77'),
+              (' Making a module ', 3, None, '___sec78'),
+              (' Defining a user interface ', 3, None, '___sec79'),
+              (' Using the module ', 3, None, '___sec80'),
+              (' Potential problems with the software ', 3, None, '___sec81'),
+              (' Distributing the bisection module to others ',
+               3,
+               None,
+               '___sec82'),
+              (' Exercises ', 1, None, '___sec83'),
+              (' Exercise 1: Make an interactive program ',
+               2,
+               'sec:input:ex24',
+               'sec:input:ex24'),
+              (' Exercise 2: Read a number from the command line ',
+               2,
+               'sec:input:ex24b',
+               'sec:input:ex24b'),
+              (' Exercise 3: Read a number from a file ',
+               2,
+               'sec:input:ex24bfile',
+               'sec:input:ex24bfile'),
+              (' Exercise 4: Read and write several numbers from and to file ',
+               2,
+               'sec:input:ex24bfile2',
+               'sec:input:ex24bfile2'),
+              (' Exercise 5: Use exceptions to handle wrong input ',
+               2,
+               'sec:input:ex24c',
+               'sec:input:ex24c'),
+              (' Exercise 6: Read input from the keyboard ',
+               2,
+               'sec:input:ex25',
+               'sec:input:ex25'),
+              (' Exercise 7: Read input from the command line ',
+               2,
+               'sec:input:ex26',
+               'sec:input:ex26'),
+              (' Exercise 8: Try MSWord or LibreOffice to write a program ',
+               2,
+               'sec:files:ex7',
+               'sec:files:ex7'),
+              (' Exercise 9: Prompt the user for input to a formula ',
+               2,
+               'sec:input:ex6',
+               'sec:input:ex6'),
+              (' Exercise 10: Read parameters in a formula from the command line ',
+               2,
+               'sec:input:ex5',
+               'sec:input:ex5'),
+              (' Exercise 11: Use exceptions to handle wrong input ',
+               2,
+               'sec:input:ex8b',
+               'sec:input:ex8b'),
+              (' Exercise 12: Test validity of input data ',
+               2,
+               'sec:input:ex7',
+               'sec:input:ex7'),
+              (' Exercise 13: Raise an exception in case of wrong input ',
+               2,
+               'sec:input:ex8',
+               'sec:input:ex8'),
+              (' Exercise 14: Evaluate a formula for data in a file ',
+               2,
+               'sec:input:ex:ball:file',
+               'sec:input:ex:ball:file'),
+              (' Exercise 15: Compute the distance it takes to stop a car ',
+               2,
+               'sec:input:ex21',
+               'sec:input:ex21'),
+              (' Exercise 16: Look up calendar functionality ',
+               2,
+               'sec:input:ex48',
+               'sec:input:ex48'),
+              (' Exercise 17: Use the StringFunction tool ',
+               2,
+               'sec:input:ex28b',
+               'sec:input:ex28b'),
+              (' Exercise 18: Why we test for specific exception types ',
+               2,
+               'sec:input:ex11',
+               'sec:input:ex11'),
+              (' Exercise 19: Make a complete module ',
+               2,
+               'sec:input:ex27',
+               'sec:input:ex27'),
+              (' Exercise 20: Check if mathematical identities hold ',
+               2,
+               'sec:input:ex2',
+               'sec:input:ex2'),
+              (' Exercise 21: Compute probabilities with the binomial distribution ',
+               2,
+               'sec:input:ex15',
+               'sec:input:ex15'),
+              (' Exercise 22: Compute probabilities with the Poisson distribution ',
+               2,
+               'sec:input:ex16',
+               'sec:input:ex16'),
+              (' References ', 1, None, '___sec106')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- newcommands_keep.tex -->
+$$
+\newcommand{\tp}{\thinspace .}
+$$
+
+
+
+
+    
+<!-- Bootstrap navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="input-readable.html">User input and error handling</a>
+  </div>
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     <!-- navigation toc: --> <li><a href="._input-readable001.html#sec:input:rawinput" style="font-size: 80%;">Asking questions and reading answers</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable002.html#sec:input:sysargv" style="font-size: 80%;">Reading from the command line</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable003.html#___sec6" style="font-size: 80%;">Turning user text into live objects</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable004.html#sec:input:argparse" style="font-size: 80%;">Option-value pairs on the command line</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable005.html#sec:files:reading" style="font-size: 80%;">Reading data from file</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable006.html#sec:files:writing" style="font-size: 80%;">Writing data to file</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable007.html#sec:input:except" style="font-size: 80%;">Handling errors</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable008.html#sec:input:GUI" style="font-size: 80%;">A glimpse of graphical user interfaces</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:input:modules" style="font-size: 80%;">Making modules</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable010.html#sec:input:summary" style="font-size: 80%;">Summary</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable011.html#___sec83" style="font-size: 80%;">Exercises</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable011.html#___sec106" style="font-size: 80%;">References</a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div> <!-- end of navigation bar -->
+
+<div class="container">
+
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+
+<a name="part0009"></a>
+<!-- !split -->
+
+<h1 id="sec:input:modules">Making modules<a name="sec:input:modules"></a></h1>
+
+<p>
+Sometimes you want to reuse a function from an old program in a new
+program. The simplest way to do this is to copy and paste the old
+source code into the new program.  However, this is not good
+programming practice, because you then over time end up with multiple
+identical versions of the same function. When you want to improve the
+function or correct a bug, you need to remember to do the same update
+in all files with a copy of the function, and in real life most
+programmers fail to do so. You easily end up with a mess of different
+versions with different quality of basically the same code.
+Therefore, a golden
+rule of programming is to have one and only one version of a piece of code.
+All programs that want to use this piece of code must access
+one and only one place where the source code is kept.
+This principle is easy
+to implement if we create a module containing the code we want to
+reuse later in different programs.
+
+<p>
+When reading this, you probably know how to use a ready-made module.
+For example, if you want to compute the factorial \( k!=k(k-1)(k-2)\cdots 1 \),
+there is a function <code>factorial</code> in Python's <code>math</code> module that
+can be help us out. The usage goes with the <code>math</code> prefix,
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">math</span>
+value <span style="color: #666666">=</span> math<span style="color: #666666">.</span>factorial(<span style="color: #666666">5</span>)
+</pre></div>
+<p>
+or without,
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">math</span> <span style="color: #008000; font-weight: bold">import</span> factorial
+<span style="color: #408080; font-style: italic"># or: from math import *</span>
+value <span style="color: #666666">=</span> factorial(<span style="color: #666666">5</span>)
+</pre></div>
+<p>
+Now you shall learn how to make your own Python modules.  There is
+hardly anything to learn, because you just collect all the functions
+that constitute the module in one file, say with name
+<code>mymodule.py</code>. This file is automatically a module, with name
+<code>mymodule</code>, and you can import functions from this module in the
+standard way.  Let us make everything clear in detail by looking at an
+example.
+
+<h2 id="___sec46">Example: Interest on bank deposits <a name="___sec46"></a></h2>
+
+<p>
+The classical formula for the growth of money in a bank reads
+
+$$
+\begin{equation}
+A = A_0\left( 1 + {p\over 360\cdot 100}\right)^n,
+\tag{2}
+\end{equation}
+$$
+
+where \( A_0 \) is the initial amount of money, and \( A \) is the present amount
+after \( n \) days with \( p \) percent annual interest rate.
+(The formula applies the convention that
+the rate per day is computed as \( p/360 \), while \( n \) counts the actual
+number of days the money is in the bank, see the Wikipedia entry
+<a href="http://en.wikipedia.org/wiki/Day_count_convention" target="_self">Day count convention</a>
+for explanation.
+There is a handy Python module
+<code>datetime</code> for
+computing the number of days between two dates.)
+
+<p>
+Equation <a href="#mjx-eqn-2">(2)</a> involves four parameters: \( A \), \( A_0 \), \( p \), and
+\( n \). We may solve for any of these, given the other three:
+
+$$
+\begin{align}
+A_0 &= A\left( 1 + {p\over 360\cdot 100}\right)^{-n},
+\tag{3}\\ 
+n &= \frac{\ln {A\over A_0}}{\ln \left( 1 + {p\over 360\cdot 100}\right)} ,\\ 
+p &= 360\cdot 100 \left(\left({A\over A_0}\right)^{1/n} - 1\right)\tp
+\tag{4}
+\end{align}
+$$
+
+Suppose we have implemented <a href="#mjx-eqn-2">(2)</a>-<a href="#mjx-eqn-4">(4)</a>
+in four functions:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">math</span> <span style="color: #008000; font-weight: bold">import</span> log <span style="color: #008000; font-weight: bold">as</span> ln
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">present_amount</span>(A0, p, n):
+    <span style="color: #008000; font-weight: bold">return</span> A0<span style="color: #666666">*</span>(<span style="color: #666666">1</span> <span style="color: #666666">+</span> p<span style="color: #666666">/</span>(<span style="color: #666666">360.0*100</span>))<span style="color: #666666">**</span>n
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">initial_amount</span>(A, p, n):
+    <span style="color: #008000; font-weight: bold">return</span> A<span style="color: #666666">*</span>(<span style="color: #666666">1</span> <span style="color: #666666">+</span> p<span style="color: #666666">/</span>(<span style="color: #666666">360.0*100</span>))<span style="color: #666666">**</span>(<span style="color: #666666">-</span>n)
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">days</span>(A0, A, p):
+    <span style="color: #008000; font-weight: bold">return</span> ln(A<span style="color: #666666">/</span>A0)<span style="color: #666666">/</span>ln(<span style="color: #666666">1</span> <span style="color: #666666">+</span> p<span style="color: #666666">/</span>(<span style="color: #666666">360.0*100</span>))
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">annual_rate</span>(A0, A, n):
+    <span style="color: #008000; font-weight: bold">return</span> <span style="color: #666666">360*100*</span>((A<span style="color: #666666">/</span>A0)<span style="color: #666666">**</span>(<span style="color: #666666">1.0/</span>n) <span style="color: #666666">-</span> <span style="color: #666666">1</span>)
+</pre></div>
+<p>
+We want to make these functions available in a module, say with
+name <code>interest</code>, so that we
+can import functions and compute with them in a program. For example,
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">interest</span> <span style="color: #008000; font-weight: bold">import</span> days
+A0 <span style="color: #666666">=</span> <span style="color: #666666">1</span>; A <span style="color: #666666">=</span> <span style="color: #666666">2</span>; p <span style="color: #666666">=</span> <span style="color: #666666">5</span>
+n <span style="color: #666666">=</span> days(A0, <span style="color: #666666">2</span>, p)
+years <span style="color: #666666">=</span> n<span style="color: #666666">/365.0</span>
+<span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;Money has doubled after </span><span style="color: #BB6688; font-weight: bold">%.1f</span><span style="color: #BA2121"> years&#39;</span> <span style="color: #666666">%</span> years
+</pre></div>
+<p>
+How to make the <code>interest</code> module is described next.
+
+<h2 id="sec:input:module:create">Collecting functions in a module file<a name="sec:input:module:create"></a></h2>
+
+<p>
+To make a module of the four functions
+<code>present_amount</code>,
+<code>initial_amount</code>,
+<code>days</code>, and
+<code>annual_rate</code>,
+we simply open an empty file in a text
+editor and copy the program code for all the four functions over
+to this file. This file is then automatically a Python module
+provided we save the file under any valid filename.
+The extension must be <code>.py</code>, but the module name is only the
+base part of the filename. In our case, the filename
+<code>interest.py</code> implies a module name
+<code>interest</code>. To use the <code>annual_rate</code> function in another program
+we simply write, in that program file,
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">interest</span> <span style="color: #008000; font-weight: bold">import</span> annual_rate
+</pre></div>
+<p>
+or we can write
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">interest</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #666666">*</span>
+</pre></div>
+<p>
+to import all four functions, or we can write
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">interest</span>
+</pre></div>
+<p>
+and access individual functions as <code>interest.annual_rate</code> and so forth.
+
+<h2 id="sec:input:module:testblock">Test block<a name="sec:input:module:testblock"></a></h2>
+
+<p>
+It is recommended to only have functions and not any statements
+outside functions in a module. The reason is that the module file is
+executed from top to bottom during the import. With function
+definitions only in the module file, and no main program, there will
+be no calculations or output from the import, just definitions of
+functions.  This is the desirable behavior.  However, it is often
+convenient to have test or demonstrations in the module file, and then
+there is need for a main program.  Python allows a very fortunate
+construction to let the file act both as a module with function
+definitions only (and no main program) <em>and</em> as an ordinary
+program we can run, with functions and a main program.
+
+<p>
+This two-fold &quot;magic&quot; is realized by putting the main program after an
+<code>if</code> test of the form
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">if</span> __name__ <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;__main__&#39;</span>:
+    <span style="color: #666666">&lt;</span>block of statements<span style="color: #666666">&gt;</span>
+</pre></div>
+<p>
+The <code>__name__</code> variable is automatically defined in any
+module and equals the module name if the module file is imported
+in another program, or <code>__name__</code> equals
+the string <code>'__main__'</code> if the module file is run
+as a program. This implies that the <code>&lt;block of statements&gt;</code> part
+is executed if and only if
+we run the module file as a program. We shall refer to
+<code>&lt;block of statements&gt;</code> as the <em>test block</em> of a module.
+
+<h3 id="___sec49">Example on a test block in a minimalistic module <a name="___sec49"></a></h3>
+
+<p>
+A very simple example will illustrate how this works. Consider a
+file <code>mymod.py</code> with the content
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">add1</span>(x):
+    <span style="color: #008000; font-weight: bold">return</span> x <span style="color: #666666">+</span> <span style="color: #666666">1</span>
+
+<span style="color: #008000; font-weight: bold">if</span> __name__ <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;__main__&#39;</span>:
+    <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;run as program&#39;</span>
+    <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">sys</span>
+    <span style="color: #008000; font-weight: bold">print</span> add1(<span style="color: #008000">float</span>(sys<span style="color: #666666">.</span>argv[<span style="color: #666666">1</span>]))
+</pre></div>
+<p>
+We can import <code>mymod</code> as a module and make use of the <code>add1</code>
+function:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">mymod</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">print</span> mymod<span style="color: #666666">.</span>add1(<span style="color: #666666">4</span>)
+<span style="color: #666666">5</span>
+</pre></div>
+<p>
+During the import, the <code>if</code> test is false, and the only the function
+definition is executed. However, if we run <code>mymod.py</code> as a program,
+
+<p>
+
+<!-- code=text (!bc sys) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">mymod.py 5
+run as program
+6
+</pre></div>
+<p>
+the <code>if</code> test becomes true, and the <code>print</code> statements are
+executed.
+
+<p>
+<div class="alert alert-block alert-success alert-text-normal"><b>Tip on easy creation of a module.</b>
+If you have some functions and a main program in some program file,
+just move the main program to the test block. Then the file can act
+as a module, giving access to all the functions in other files,
+or the file can be executed from the command line,
+in the same way as the original program.
+</div>
+
+
+<h3 id="___sec50">A test block in the <code>interest</code> module <a name="___sec50"></a></h3>
+
+<p>
+Let us write a little main program  for demonstrating
+the <code>interest</code> module in a test block.
+We read \( p \) from the command line and write out how many years
+it takes to double an amount with that interest rate:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">if</span> __name__ <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;__main__&#39;</span>:
+    <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">sys</span>
+    p <span style="color: #666666">=</span> <span style="color: #008000">float</span>(sys<span style="color: #666666">.</span>argv[<span style="color: #666666">1</span>])
+    years <span style="color: #666666">=</span> days(<span style="color: #666666">1</span>, <span style="color: #666666">2</span>, p)<span style="color: #666666">/365.0</span>
+    <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;With p=</span><span style="color: #BB6688; font-weight: bold">%.2f</span><span style="color: #BA2121"> it takes %.1 years to double&#39;</span> <span style="color: #666666">%</span> (p, years)
+</pre></div>
+<p>
+Running the module file as a program gives this output:
+
+<p>
+
+<!-- code=text (!bc sys) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">interest.py 2.45
+With p=2.45 it takes 27.9 years to double
+</pre></div>
+<p>
+To test that the <code>interest.py</code> file also works as a module,
+invoke a Python shell and try to
+import a function and compute with it:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">interest</span> <span style="color: #008000; font-weight: bold">import</span> present_amount
+<span style="color: #666666">&gt;&gt;&gt;</span> present_amount(<span style="color: #666666">2</span>, <span style="color: #666666">5</span>, <span style="color: #666666">730</span>)
+<span style="color: #666666">2.2133983053266699</span>
+</pre></div>
+<p>
+We have hence demonstrated that
+the file <code>interest.py</code> works both as a program and as a module.
+
+<p>
+<div class="alert alert-block alert-success alert-text-normal"><b>Recommended practice in a test block.</b>
+It is a good programming habit to let the test block do one or more
+of three things:
+
+<ul>
+  <li> provide information on how the module or program is used,</li>
+  <li> test if the module functions work properly,</li>
+  <li> offer interaction with users such that the module file
+    can be applied as a useful program.</li>
+</ul>
+
+Instead of having a lot of statements in the test block, it is
+better to collect the statements in separate functions, which then
+are called from the test block.
+</div>
+
+
+<h2 id="sec:input:modules:testfunc">Verification of the module code<a name="sec:input:modules:testfunc"></a></h2>
+
+<p>
+Functions that verify the implementation in a module should
+
+<ul>
+ <li> have names starting with <code>test_</code>,</li>
+ <li> express the success or failure of a test through a boolean variable,
+   say <code>success</code>,</li>
+ <li> run <code>assert success, msg</code> to raise an <code>AssertionError</code>
+   with an optional message <code>msg</code> in case the test fails.</li>
+</ul>
+
+Adopting this style makes it trivial to let the tools <em>pytest</em> or <em>nose</em>
+automatically run through all our <code>test_*()</code> functions in all files
+in a folder tree.
+The
+document <a href="http://tcse6.on.net/nose" target="_self">Unit testing with pytest and nose</a>
+<a href="._input-readable011.html#Langtangen_TCSE6_nose">[7]</a>
+contains a more thorough introduction to the pytest and nose testing
+frameworks for beginners.
+
+<p>
+A proper test function for verifying the functionality of the
+<code>interest</code> module, written in a way that is compatible with the pytest
+and nose testing frameworks, looks as follows:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">test_all_functions</span>():
+    <span style="color: #408080; font-style: italic"># Compatible values</span>
+    A <span style="color: #666666">=</span> <span style="color: #666666">2.2133983053266699</span>; A0 <span style="color: #666666">=</span> <span style="color: #666666">2.0</span>; p <span style="color: #666666">=</span> <span style="color: #666666">5</span>; n <span style="color: #666666">=</span> <span style="color: #666666">730</span>
+    <span style="color: #408080; font-style: italic"># Given three of these, compute the remaining one</span>
+    <span style="color: #408080; font-style: italic"># and compare with the correct value (in parenthesis)</span>
+    A_computed  <span style="color: #666666">=</span> present_amount(A0, p, n)
+    A0_computed <span style="color: #666666">=</span> initial_amount(A, p, n)
+    n_computed  <span style="color: #666666">=</span> days(A0, A, p)
+    p_computed  <span style="color: #666666">=</span> annual_rate(A0, A, n)
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">float_eq</span>(a, b, tolerance<span style="color: #666666">=1E-14</span>):
+        <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Return True if a == b within the tolerance.&quot;&quot;&quot;</span>
+        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">abs</span>(a <span style="color: #666666">-</span> b) <span style="color: #666666">&lt;</span> tolerance
+
+    success <span style="color: #666666">=</span> float_eq(A_computed,  A)  <span style="color: #AA22FF; font-weight: bold">and</span> \ 
+              float_eq(A0_computed, A0) <span style="color: #AA22FF; font-weight: bold">and</span> \ 
+              float_eq(p_computed,  p)  <span style="color: #AA22FF; font-weight: bold">and</span> \ 
+              float_eq(n_computed,  n)
+    msg <span style="color: #666666">=</span> <span style="color: #BA2121">&quot;&quot;&quot;Computations failed (correct answers in parenthesis):</span>
+<span style="color: #BA2121">A=</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121"> (</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">)</span>
+<span style="color: #BA2121">A0=</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121"> (</span><span style="color: #BB6688; font-weight: bold">%.1f</span><span style="color: #BA2121">)</span>
+<span style="color: #BA2121">n=</span><span style="color: #BB6688; font-weight: bold">%d</span><span style="color: #BA2121"> (</span><span style="color: #BB6688; font-weight: bold">%d</span><span style="color: #BA2121">)</span>
+<span style="color: #BA2121">p=</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121"> (</span><span style="color: #BB6688; font-weight: bold">%.1f</span><span style="color: #BA2121">)&quot;&quot;&quot;</span> <span style="color: #666666">%</span> (A_computed, A, A0_computed, A0,
+                  n_computed, n, p_computed, p)
+    <span style="color: #008000; font-weight: bold">assert</span> success, msg
+</pre></div>
+<p>
+We may require a single command-line argument
+<code>test</code> to run the verification. The test block can then be expressed as
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">if</span> __name__ <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;__main__&#39;</span>:
+    <span style="color: #008000; font-weight: bold">if</span> <span style="color: #008000">len</span>(sys<span style="color: #666666">.</span>argv) <span style="color: #666666">==</span> <span style="color: #666666">2</span> <span style="color: #AA22FF; font-weight: bold">and</span> sys<span style="color: #666666">.</span>argv[<span style="color: #666666">1</span>] <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;test&#39;</span>:
+        test_all_functions()
+</pre></div>
+
+<h2 id="sec:input:modules:inputdata">Getting input data<a name="sec:input:modules:inputdata"></a></h2>
+
+<p>
+To make a useful program, we should allow setting three parameters
+on the command line and let the program compute the remaining parameter.
+For example, running the program as
+
+<p>
+
+<!-- code=text (!bc sys) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">interest.py A0=2 A=1 n=1095
+</pre></div>
+<p>
+will lead to a computation of \( p \), in this case
+for seeing the size of the annual
+interest rate if the amount is to be doubled after three years.
+
+<p>
+How can we achieve the desired functionality? Since variables are already
+introduced and &quot;initialized&quot; on the command line, we could grab this
+text and execute it as Python code, either as three different lines or
+with semicolon between each assignment. This is easy:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">init_code <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;&#39;</span>
+<span style="color: #008000; font-weight: bold">for</span> statement <span style="color: #AA22FF; font-weight: bold">in</span> sys<span style="color: #666666">.</span>argv[<span style="color: #666666">1</span>:]:
+    init_code <span style="color: #666666">+=</span> statement <span style="color: #666666">+</span> <span style="color: #BA2121">&#39;</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121">&#39;</span>
+<span style="color: #008000; font-weight: bold">exec</span>(init_code)
+</pre></div>
+<p>
+(We remark that an experienced Python programmer
+would have created <code>init_code</code> by <code>'\n'.join(sys.argv[1:])</code>.)
+For the sample run above with <code>A0=2 A=1 n=1095</code> on the command line,
+<code>init_code</code> becomes the string
+
+<p>
+
+<!-- code=text (!bc ccq) typeset with pygments style "default" -->
+<blockquote>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">A0=2
+A=1
+n=1095
+</pre></div>
+</blockquote><p>
+Note that one cannot have spaces around the equal signs on the command
+line as this will break an assignment like <code>A0 = 2</code> into
+three command-line arguments, which will give rise to a
+<code>SyntaxError</code> in <code>exec(init_code)</code>.
+To tell the user about such errors, we
+execute <code>init_code</code> inside a <code>try-except</code>
+block:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">try</span>:
+    <span style="color: #008000; font-weight: bold">exec</span>(init_code)
+<span style="color: #008000; font-weight: bold">except</span> <span style="color: #D2413A; font-weight: bold">SyntaxError</span> <span style="color: #008000; font-weight: bold">as</span> e:
+    <span style="color: #008000; font-weight: bold">print</span> e
+    <span style="color: #008000; font-weight: bold">print</span> init_code
+    sys<span style="color: #666666">.</span>exit(<span style="color: #666666">1</span>)
+</pre></div>
+<p>
+At this stage, our program has hopefully initialized three parameters in a
+successful way, and it remains to detect the remaining parameter to
+be computed. The following code does the work:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">if</span> <span style="color: #BA2121">&#39;A=&#39;</span> <span style="color: #AA22FF; font-weight: bold">not</span> <span style="color: #AA22FF; font-weight: bold">in</span> init_code:
+    <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;A =&#39;</span>, present_amount(A0, p, n)
+<span style="color: #008000; font-weight: bold">elif</span> <span style="color: #BA2121">&#39;A0=&#39;</span> <span style="color: #AA22FF; font-weight: bold">not</span> <span style="color: #AA22FF; font-weight: bold">in</span> init_code:
+    <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;A0 =&#39;</span>, initial_amount(A, p, n)
+<span style="color: #008000; font-weight: bold">elif</span> <span style="color: #BA2121">&#39;n=&#39;</span> <span style="color: #AA22FF; font-weight: bold">not</span> <span style="color: #AA22FF; font-weight: bold">in</span> init_code:
+    <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;n =&#39;</span>, days(A0, A , p)
+<span style="color: #008000; font-weight: bold">elif</span> <span style="color: #BA2121">&#39;p=&#39;</span> <span style="color: #AA22FF; font-weight: bold">not</span> <span style="color: #AA22FF; font-weight: bold">in</span> init_code:
+    <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;p =&#39;</span>, annual_rate(A0, A, n)
+</pre></div>
+<p>
+It may happen that the user of the program assigns value to a parameter
+with wrong name or forget a parameter. In those cases we call
+one of our four functions with uninitialized arguments, and Python raises
+an exception.
+Therefore, we should embed the code above in a <code>try-except</code>
+block. An uninitialized variable will lead to a <code>NameError</code> exception, while
+another frequent error is illegal values in the computations, leading to
+a <code>ValueError</code> exception.
+It is also a good habit to collect
+all the code related to computing the remaining, fourth parameter
+in a function for separating this piece of code from other parts of
+the module file:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">compute_missing_parameter</span>(init_code):
+    <span style="color: #008000; font-weight: bold">try</span>:
+        <span style="color: #008000; font-weight: bold">exec</span>(init_code)
+    <span style="color: #008000; font-weight: bold">except</span> <span style="color: #D2413A; font-weight: bold">SyntaxError</span> <span style="color: #008000; font-weight: bold">as</span> e:
+        <span style="color: #008000; font-weight: bold">print</span> e
+        <span style="color: #008000; font-weight: bold">print</span> init_code
+        sys<span style="color: #666666">.</span>exit(<span style="color: #666666">1</span>)
+    <span style="color: #408080; font-style: italic"># Find missing parameter</span>
+    <span style="color: #008000; font-weight: bold">try</span>:
+        <span style="color: #008000; font-weight: bold">if</span> <span style="color: #BA2121">&#39;A=&#39;</span> <span style="color: #AA22FF; font-weight: bold">not</span> <span style="color: #AA22FF; font-weight: bold">in</span> init_code:
+            <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;A =&#39;</span>, present_amount(A0, p, n)
+        <span style="color: #008000; font-weight: bold">elif</span> <span style="color: #BA2121">&#39;A0=&#39;</span> <span style="color: #AA22FF; font-weight: bold">not</span> <span style="color: #AA22FF; font-weight: bold">in</span> init_code:
+            <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;A0 =&#39;</span>, initial_amount(A, p, n)
+        <span style="color: #008000; font-weight: bold">elif</span> <span style="color: #BA2121">&#39;n=&#39;</span> <span style="color: #AA22FF; font-weight: bold">not</span> <span style="color: #AA22FF; font-weight: bold">in</span> init_code:
+            <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;n =&#39;</span>, days(A0, A , p)
+        <span style="color: #008000; font-weight: bold">elif</span> <span style="color: #BA2121">&#39;p=&#39;</span> <span style="color: #AA22FF; font-weight: bold">not</span> <span style="color: #AA22FF; font-weight: bold">in</span> init_code:
+            <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;p =&#39;</span>, annual_rate(A0, A, n)
+    <span style="color: #008000; font-weight: bold">except</span> <span style="color: #D2413A; font-weight: bold">NameError</span> <span style="color: #008000; font-weight: bold">as</span> e:
+        <span style="color: #008000; font-weight: bold">print</span> e
+        sys<span style="color: #666666">.</span>exit(<span style="color: #666666">1</span>)
+    <span style="color: #008000; font-weight: bold">except</span> <span style="color: #D2413A; font-weight: bold">ValueError</span>:
+        <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;Illegal values in input:&#39;</span>, init_code
+        sys<span style="color: #666666">.</span>exit(<span style="color: #666666">1</span>)
+</pre></div>
+<p>
+If the user of the program fails to give any command-line arguments,
+we print a usage statement.
+Otherwise, we run a verification if the first command-line
+argument is <code>test</code>, and else we run the missing parameter
+computation (i.e., the useful main program):
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">_filename <span style="color: #666666">=</span> sys<span style="color: #666666">.</span>argv[<span style="color: #666666">0</span>]
+_usage <span style="color: #666666">=</span> <span style="color: #BA2121">&quot;&quot;&quot;</span>
+<span style="color: #BA2121">Usage: </span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121"> A=10 p=5 n=730</span>
+<span style="color: #BA2121">Program computes and prints the 4th parameter&#39;</span>
+<span style="color: #BA2121">(A, A0, p, or n)&quot;&quot;&quot;</span> <span style="color: #666666">%</span> _filename
+
+<span style="color: #008000; font-weight: bold">if</span> __name__ <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;__main__&#39;</span>:
+    <span style="color: #008000; font-weight: bold">if</span> <span style="color: #008000">len</span>(sys<span style="color: #666666">.</span>argv) <span style="color: #666666">==</span> <span style="color: #666666">1</span>:
+        <span style="color: #008000; font-weight: bold">print</span> _usage
+    <span style="color: #008000; font-weight: bold">elif</span> <span style="color: #008000">len</span>(sys<span style="color: #666666">.</span>argv) <span style="color: #666666">==</span> <span style="color: #666666">2</span> <span style="color: #AA22FF; font-weight: bold">and</span> sys<span style="color: #666666">.</span>argv[<span style="color: #666666">1</span>] <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;test&#39;</span>:
+        test_all_functions()
+    <span style="color: #008000; font-weight: bold">else</span>:
+        init_code <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;&#39;</span>
+        <span style="color: #008000; font-weight: bold">for</span> statement <span style="color: #AA22FF; font-weight: bold">in</span> sys<span style="color: #666666">.</span>argv[<span style="color: #666666">1</span>:]:
+            init_code <span style="color: #666666">+=</span> statement <span style="color: #666666">+</span> <span style="color: #BA2121">&#39;</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121">&#39;</span>
+        compute_missing_parameter(init_code)
+</pre></div>
+<p>
+<div class="alert alert-block alert-danger alert-text-normal"><b>Executing user input can be dangerous.</b>
+Some purists would never demonstrate <code>exec</code> the way we do above.
+The reason is that our program tries to execute whatever the
+user writes. Consider
+
+<p>
+
+<!-- code=text (!bc sys) typeset with pygments style "default" -->
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%">input.py &#39;import shutil; shutil.rmtree(&quot;/&quot;)&#39;
+</pre></div>
+<p>
+This evil use of the program leads to an attempt to remove all
+files on the computer system (the same as writing <code>rm -rf /</code>
+in the terminal window!). However, for small private programs
+helping the program writer out with mathematical calculations,
+this potential dangerous misuse is not so much of a concern
+(the user just does harm to his own computer anyway).
+</div>
+
+
+<h2 id="___sec53">Doc strings in modules <a name="___sec53"></a></h2>
+
+<p>
+It is also a good habit to include a doc string in the beginning of
+the module file. This doc string explains the purpose and use of
+the module:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">Module for computing with interest rates.</span>
+<span style="color: #BA2121; font-style: italic">Symbols: A is present amount, A0 is initial amount,</span>
+<span style="color: #BA2121; font-style: italic">n counts days, and p is the interest rate per year.</span>
+
+<span style="color: #BA2121; font-style: italic">Given three of these parameters, the fourth can be</span>
+<span style="color: #BA2121; font-style: italic">computed as follows:</span>
+
+<span style="color: #BA2121; font-style: italic">    A  = present_amount(A0, p, n)</span>
+<span style="color: #BA2121; font-style: italic">    A0 = initial_amount(A, p, n)</span>
+<span style="color: #BA2121; font-style: italic">    n  = days(A0, A, p)</span>
+<span style="color: #BA2121; font-style: italic">    p  = annual_rate(A0, A, n)</span>
+<span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
+</pre></div>
+<p>
+You can run the <code>pydoc</code> program to see a documentation of the new
+module, containing the doc string above and a list of the functions
+in the module: just write <code>pydoc interest</code> in a terminal window.
+
+<p>
+Now the reader is recommended to take a look at the actual file
+<a href="http://tinyurl.com/pwyasaa/input/interest.py" target="_self"><tt>interest.py</tt></a> to see all elements
+of a good module file at once: doc strings, a set of functions,
+a test function, a function with the main program, a usage string,
+and a test block.
+
+<h2 id="sec:input:modules:usage">Using modules<a name="sec:input:modules:usage"></a></h2>
+
+<p>
+Let us further demonstrate how to use the <code>interest.py</code> module in
+programs. For illustration purposes, we make a separate program file,
+say with name <code>doubling.py</code>, containing some computations:
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">interest</span> <span style="color: #008000; font-weight: bold">import</span> days
+
+<span style="color: #408080; font-style: italic"># How many days does it take to double an amount when the</span>
+<span style="color: #408080; font-style: italic"># interest rate is p=1,2,3,...14?</span>
+<span style="color: #008000; font-weight: bold">for</span> p <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">1</span>, <span style="color: #666666">15</span>):
+    years <span style="color: #666666">=</span> days(<span style="color: #666666">1</span>, <span style="color: #666666">2</span>, p)<span style="color: #666666">/365.0</span>
+    <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;With p=</span><span style="color: #BB6688; font-weight: bold">%d%%</span><span style="color: #BA2121"> it takes </span><span style="color: #BB6688; font-weight: bold">%.1f</span><span style="color: #BA2121"> years to double the amount&#39;</span> <span style="color: #666666">%</span>\ 
+    (p, years)
+</pre></div>
+
+<h3 id="___sec55">What gets imported by various import statements? <a name="___sec55"></a></h3>
+
+<p>
+There are different ways to import functions in a module, and let us
+explore these in an interactive session. The function call <code>dir()</code>
+will list all names we have defined, including imported names of
+variables and functions. Calling <code>dir(m)</code> will print the names
+defined inside a module with name <code>m</code>.
+First we start an interactive shell and call <code>dir()</code>
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000">dir</span>()
+[<span style="color: #BA2121">&#39;__builtins__&#39;</span>, <span style="color: #BA2121">&#39;__doc__&#39;</span>, <span style="color: #BA2121">&#39;__name__&#39;</span>, <span style="color: #BA2121">&#39;__package__&#39;</span>]
+</pre></div>
+<p>
+These variables are always defined. Running the IPython shell
+will introduce several
+other standard variables too.
+Doing
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">interest</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #666666">*</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000">dir</span>()
+[<span style="color: #BA2121">&#39;__builtins__&#39;</span>, <span style="color: #BA2121">&#39;__doc__&#39;</span>, <span style="color: #BA2121">&#39;__name__&#39;</span>, <span style="color: #BA2121">&#39;__package__&#39;</span>,
+ <span style="color: #BA2121">&#39;annual_rate&#39;</span>, <span style="color: #BA2121">&#39;compute_missing_parameter&#39;</span>, <span style="color: #BA2121">&#39;days&#39;</span>,
+ <span style="color: #BA2121">&#39;initial_amount&#39;</span>, <span style="color: #BA2121">&#39;ln&#39;</span>, <span style="color: #BA2121">&#39;present_amount&#39;</span>, <span style="color: #BA2121">&#39;sys&#39;</span>,
+ <span style="color: #BA2121">&#39;test_all_functions&#39;</span>]
+</pre></div>
+<p>
+shows that we get our four functions imported, along with
+<code>ln</code> and <code>sys</code>. The latter two are needed in the
+<code>interest</code> module, but not necessarily in our new program
+<code>doubling.py</code>.
+
+<p>
+The alternative <code>import interest</code> actually gives us access to
+more names in the module, namely also all variables and functions
+that start with an underscore:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">interest</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000">dir</span>(interest)
+[<span style="color: #BA2121">&#39;__builtins__&#39;</span>, <span style="color: #BA2121">&#39;__doc__&#39;</span>, <span style="color: #BA2121">&#39;__file__&#39;</span>, <span style="color: #BA2121">&#39;__name__&#39;</span>,
+ <span style="color: #BA2121">&#39;__package__&#39;</span>, <span style="color: #BA2121">&#39;_filename&#39;</span>, <span style="color: #BA2121">&#39;_usage&#39;</span>, <span style="color: #BA2121">&#39;annual_rate&#39;</span>,
+ <span style="color: #BA2121">&#39;compute_missing_parameter&#39;</span>, <span style="color: #BA2121">&#39;days&#39;</span>, <span style="color: #BA2121">&#39;initial_amount&#39;</span>,
+ <span style="color: #BA2121">&#39;ln&#39;</span>, <span style="color: #BA2121">&#39;present_amount&#39;</span>, <span style="color: #BA2121">&#39;sys&#39;</span>, <span style="color: #BA2121">&#39;test_all_functions&#39;</span>]
+</pre></div>
+<p>
+It is a habit to use an underscore for all variables that
+are not to be included in a <code>from interest import *</code> statement.
+These variables can, however, be reached through <code>interest._filename</code>
+and <code>interest._usage</code> in the present example.
+
+<p>
+It would be best that a statement <code>from interest import *</code> just
+imported the four functions doing the computations of
+general interest in other programs. This can be archived by
+deleting all unwanted names (among those without an initial underscore)
+at the very end of the module:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">del</span> sys, ln, compute_missing_parameter, test_all_functions
+</pre></div>
+<p>
+Instead of deleting variables and using initial underscores in names,
+it is in general better to specify the special variable <code>__all__</code>,
+which is used by Python to select functions to be imported in
+<code>from interest import *</code> statements. Here we can define
+<code>__all__</code> to contain the four function of main interest:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">__all__ <span style="color: #666666">=</span> [<span style="color: #BA2121">&#39;annual_rate&#39;</span>, <span style="color: #BA2121">&#39;days&#39;</span>, <span style="color: #BA2121">&#39;initial_amount&#39;</span>, <span style="color: #BA2121">&#39;present_amount&#39;</span>]
+</pre></div>
+<p>
+Now we get
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">interest</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #666666">*</span>
+[<span style="color: #BA2121">&#39;__builtins__&#39;</span>, <span style="color: #BA2121">&#39;__doc__&#39;</span>, <span style="color: #BA2121">&#39;__name__&#39;</span>, <span style="color: #BA2121">&#39;__package__&#39;</span>,
+ <span style="color: #BA2121">&#39;annual_rate&#39;</span>, <span style="color: #BA2121">&#39;days&#39;</span>, <span style="color: #BA2121">&#39;initial_amount&#39;</span>, <span style="color: #BA2121">&#39;present_amount&#39;</span>]
+</pre></div>
+
+<h3 id="___sec56">How to make Python find a module file <a name="___sec56"></a></h3>
+
+<p>
+The <code>doubling.py</code> program works well as long as it is located in the
+same folder as the <code>interest.py</code> module. However, if we
+move <code>doubling.py</code> to another folder and run it, we get
+an error:
+
+<p>
+
+<!-- code=text (!bc sys) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">doubling.py
+Traceback (most recent call last):
+  File &quot;doubling.py&quot;, line 1, in &lt;module&gt;
+    from interest import days
+ImportError: No module named interest
+</pre></div>
+<p>
+Unless the module file resides in the same folder, we need to tell Python
+where to find our module.
+Python looks for modules in the folders contained
+in the list <code>sys.path</code>.
+A little program
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">sys</span><span style="color: #666666">,</span> <span style="color: #0000FF; font-weight: bold">pprint</span>
+pprint<span style="color: #666666">.</span>pprint(sys<span style="color: #666666">.</span>path)
+</pre></div>
+<p>
+prints out all these predefined module folders.
+You can now do one of two things:
+
+<ol>
+ <li> Place the module file in one of the folders in <code>sys.path</code>.</li>
+ <li> Include the folder containing the module file in <code>sys.path</code>.</li>
+</ol>
+
+There are two ways of doing the latter task. Alternative 1 is to
+explicitly insert a new folder name in <code>sys.path</code> in
+the program that uses the module:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">modulefolder <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;../../pymodules&#39;</span>
+sys<span style="color: #666666">.</span>path<span style="color: #666666">.</span>insert(<span style="color: #666666">0</span>, modulefolder)
+</pre></div>
+<p>
+(In this sample path,
+the slashes are Unix specific. On
+Windows you must use backslashes and a raw string.
+A better solution is to express the path as
+<code>os.path.join(os.pardir, os.pardir, 'mymodules')</code>.
+This will work on all platforms.)
+
+<p>
+Python searches the folders in the sequence they appear in the
+<code>sys.path</code> list so by inserting the folder name as the
+first list element we ensure that our module is found quickly,
+and in case there are other modules with the same name in other
+folders in <code>sys.path</code>, the one in <code>modulefolder</code> gets
+imported.
+
+<p>
+Alternative 2 is to specify the folder name in the
+<code>PYTHONPATH</code> environment variable. All folder names listed
+in <code>PYTHONPATH</code> are automatically included in <code>sys.path</code>
+when a Python program starts. On Mac and Linux systems, environment
+variables like <code>PYTHONPATH</code> are set in the <code>.bashrc</code> file
+in the home folder, typically as
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">export PYTHONPATH<span style="color: #666666">=</span>$HOME<span style="color: #666666">/</span>software<span style="color: #666666">/</span>lib<span style="color: #666666">/</span>pymodules:$PYTHONPATH
+</pre></div>
+<p>
+if <code>$HOME/software/lib/pymodules</code> is the folder containing
+Python modules. On Windows, you launch
+<em>Computer - Properties - Advanced System Settings - Environment Variables</em>,
+click under <em>System Variable</em>, write in <code>PYTHONPATH</code> as
+variable name and the relevant folder(s) as value.
+
+<h3 id="___sec57">How to make Python run the module file <a name="___sec57"></a></h3>
+
+<p>
+The description above concerns importing the module in a program
+located anywhere on the system. If we want to
+run the module file as a program, anywhere on the system,
+the operating system searches the <code>PATH</code> environment variable
+for the program name <code>interst.py</code>. It is therefore necessary
+to update <code>PATH</code> with the folder where <code>interest.py</code> resides.
+
+<p>
+On Mac and Linux system this is done in <code>.bashrc</code> in the same
+way as for <code>PYTHONPATH</code>:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">export PYTH<span style="color: #666666">=</span>$HOME<span style="color: #666666">/</span>software<span style="color: #666666">/</span>lib<span style="color: #666666">/</span>pymodules:$PATH
+</pre></div>
+<p>
+On Windows, launch the dialog for setting environment variables
+as described above and find the <code>PATH</code> variable. It already
+has much content, so you add your new folder value either at
+the beginning or end, using a semicolon to separate the new
+value from the existing ones.
+
+<h2 id="sec:input:modules:setuppy">Distributing modules<a name="sec:input:modules:setuppy"></a></h2>
+
+<p>
+Modules are usually useful pieces of software that others can take
+advantage of. Even though our simple <code>interest</code> module is of less
+interest to the world, we can illustrate how such a module is most
+effectively distributed to other users. The standard in Python is to
+distribute the module file together with a program called <code>setup.py</code>
+such that any user can just do
+
+<p>
+
+<!-- code=text (!bc sys) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">Terminal&gt; sudo python setup.py install
+</pre></div>
+<p>
+to install the module in one of the directories in <code>sys.path</code> so
+that the module is immediately accessible anywhere, both for
+import in a Python program and for execution as a stand-alone program.
+
+<p>
+The <a href="http://tinyurl.com/pwyasaa/input/setup.py" target="_self"><tt>setup.py</tt></a> file is in the case of
+one module file very short:
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">distutils.core</span> <span style="color: #008000; font-weight: bold">import</span> setup
+setup(name<span style="color: #666666">=</span><span style="color: #BA2121">&#39;interest&#39;</span>,
+      version<span style="color: #666666">=</span><span style="color: #BA2121">&#39;1.0&#39;</span>,
+      py_modules<span style="color: #666666">=</span>[<span style="color: #BA2121">&#39;interest&#39;</span>],
+      scripts<span style="color: #666666">=</span>[<span style="color: #BA2121">&#39;interest.py&#39;</span>],
+      )
+</pre></div>
+<p>
+The <code>scripts=</code> keyword argument can be dropped if the module is just
+to be imported and not run as a program as well.
+More module files can trivially be added to the list.
+
+<p>
+A user who runs <code>setup.py install</code> on an Ubuntu machine will see from
+the output that <code>interest.py</code> is copied to the system
+folders <code>/usr/local/lib/python2.7/dist-packages</code> and <code>/usr/local/bin</code>.
+The former folder is for module files, the latter for executable
+programs.
+
+<p>
+<div class="alert alert-block alert-success alert-text-normal"><b>Remark.</b>
+Distributing a single module file can be done as shown, but if you
+have two or more module files that belong together, you should
+definitely create a <em>package</em> <a href="._input-readable011.html#PySetup:py">[8]</a>.
+</div>
+
+
+<h2 id="___sec59">Making software available on the Internet <a name="___sec59"></a></h2>
+
+<p>
+Distributing software today means making it available on one of the
+major project hosting sites such as Googlecode, GitHub, or Bitbucket.
+You will develop and maintain the project files on your own
+computer(s), but frequently push the software out in the
+cloud such that others also get your updates. The mentioned sites
+have is very strong support for collaborative software development.
+
+<p>
+Since many already have a Gmail or Google account, we briefly describe
+how you can make your software available at Googlecode.
+
+<ol>
+<li> Go to <code>http://googlecode.com</code>.</li>
+<li> Sign in with your Gmail/Google username and password.</li>
+<li> Click on <em>Create a new project</em>.</li>
+<li> Fill in project name, summary, and description.</li>
+<li> Choose a <em>version control system</em>. Git is recommended.</li>
+<li> Select a license for the software. Notice that on Googlecode a
+   software project must be available to the whole world as open source code.
+   Other sites (Bitbucket and GitHub) allows private projects.</li>
+<li> Press <em>Create project</em>.</li>
+<li> Click on <em>Source</em> and then on <em>Checkout</em>.</li>
+<li> Go to some appropriate place in your home folder tree where you want to
+   store this Googlecode project.</li>
+<li> Copy and paste the command under <em>Option 1</em> and run it in a
+   terminal window (this requires that Git is installed on your system).</li>
+</ol>
+
+You now have a folder with the same name as the project name. Copy
+<code>setup.py</code> and <code>interst.py</code> to the folder and move to the folder.
+It is good to also write a short <code>README</code> file explaining what
+the project is about. Alternatively, you can later extend the
+description on the Googlecode web page for the project.
+Run
+
+<p>
+
+<!-- code=text (!bc sys) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">Terminal&gt; git add .
+Terminal&gt; git commit -am &#39;First registration of project files&#39;
+Terminal&gt; git push origin master
+</pre></div>
+<p>
+You are now prompted for the <code>googlecode.com</code> password, which
+you can click on right under the <em>Option 1</em> command on the
+web page.
+
+<p>
+The above <code>git</code> commands look cryptic, but these commands plus
+2-3 more are the essence of how programmers today work on
+software projects, small or big. I strongly encourage you to
+learn more about version control systems and project hosting
+sites <a href="._input-readable011.html#Langtangen_bitgit">[9]</a>. The tools are in nature like Dropbox
+and Google Drive, just much more powerful when you collaborate
+with others.
+
+<p>
+Your project files are now stored in the cloud at
+<a href="http://code.google.com/p/project-name" target="_self"><tt>http://code.google.com/p/project-name</tt></a>. Anyone can
+get the software by the listed <code>git clone</code> command you used above,
+or by clicking on the <code>zip</code> link under <em>Source</em> and <em>Browse</em> to
+download a zip file.
+
+<p>
+Every time you update the project files, you need to register
+the update at the Googlecode project site by
+
+<p>
+
+<!-- code=text (!bc sys) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">Terminal&gt; git commit -am &#39;Description of the changes you made...&#39;
+Terminal&gt; git push origin master
+</pre></div>
+<p>
+The files at Googlecode are now synchronized with your local ones.
+
+<p>
+There is a bit more
+to be said here to make you up and going with this style of
+professional work <a href="._input-readable011.html#Langtangen_bitgit">[9]</a>, but the information above
+gives you at least a glimpse of how to put your software project
+in the cloud and opening it up for others.
+The Googlecode address for the
+particular <code>interest</code> module described above is
+<a href="http://code.google.com/p/interest-primer" target="_self"><tt>http://code.google.com/p/interest-primer</tt></a>.
+
+<p>
+<p>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pager">
+  <li class="previous">
+    <a href="._input-readable008.html">&larr; Prev</a>
+  </li>
+  <li class="next">
+    <a href="._input-readable010.html">Next &rarr;</a>
+  </li>
+</ul>
+<!-- ------------------- end of main content --------------- -->
+
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap footer
+<footer>
+<a href="http://..."><img width="250" align=right src="http://..."></a>
+</footer>
+-->
+
+
+</body>
+</html>
+    
+

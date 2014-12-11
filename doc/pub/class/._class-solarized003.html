@@ -1,0 +1,1636 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Introduction to classes in Python">
+<meta name="keywords" content="constructor (class),UML class diagram,instance (class),user-defined datatype (class),method class),attribute (class),namespace,test function,nose tests,pytest tests,special methods (class),callable objects,test function,closure,Newton's method,wrapper code,integration numerical,symbolic computing,integration symbolic,mutable objects,immutable objects,protected attributes (class),test function,information hiding,private attributes (class),API,application programming interface,protected attributes (class),check an object's type,static typing,weak typing,strong typing,dynamic typing,duck typing,static class attributes,static class variables,static class methods,interval arithmetic">
+
+<title>Introduction to classes in Python</title>
+
+
+<link href="https://raw.githubusercontent.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/css/solarized_light_code.css" rel="stylesheet" type="text/css" title="light"/>
+<script src="https://rawgit.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<link href="http://thomasf.github.io/solarized-css/solarized-light.min.css" rel="stylesheet">
+<style type="text/css">
+h1 {color: #b58900;}  /* yellow */
+/* h1 {color: #cb4b16;}  orange */
+/* h1 {color: #d33682;}  magenta, the original choice of thomasf */
+.alert-text-small   { font-size: 80%;  }
+.alert-text-large   { font-size: 130%; }
+.alert-text-normal  { font-size: 90%;  }
+.alert {
+  padding:8px 35px 8px 14px; margin-bottom:18px;
+  text-shadow:0 1px 0 rgba(255,255,255,0.5);
+  border:1px solid #93a1a1;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  color: #555;
+  background-color: #eee8d5;
+  background-position: 10px 5px;
+  background-repeat: no-repeat;
+  background-size: 38px;
+  padding-left: 55px;
+  width: 75%;
+ }
+.alert-block {padding-top:14px; padding-bottom:14px}
+.alert-block > p, .alert-block > ul {margin-bottom:1em}
+.alert li {margin-top: 1em}
+.alert-block p+p {margin-top:5px}
+.alert-notice { background-image: url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_notice.png); }
+.alert-summary  { background-image:url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_summary.png); }
+.alert-warning { background-image: url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_warning.png); }
+.alert-question {background-image:url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_question.png); }
+
+div { text-align: justify; text-justify: inter-word; }
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [(' Simple function classes ',
+               1,
+               'sec:class:functors',
+               'sec:class:functors'),
+              (' Challenge: functions with parameters ',
+               2,
+               'sec:class:func1',
+               'sec:class:func1'),
+              (' Problem ', 3, None, '___sec2'),
+              (' A bad solution: global variables ', 3, None, '___sec3'),
+              (' Representing a function as a class ',
+               2,
+               'sec:class:func2',
+               'sec:class:func2'),
+              (' Implementation ', 3, None, '___sec5'),
+              (' Usage and dissection ', 3, None, '___sec6'),
+              (' The self  variable ', 3, None, '___sec7'),
+              (' Extension of the class ', 3, None, '___sec8'),
+              (' Remark ', 3, None, '___sec9'),
+              (' Using methods as ordinary functions ', 3, None, '___sec10'),
+              (' Doc strings ', 3, None, '___sec11'),
+              (' Another function class example ',
+               2,
+               'sec:class:func3',
+               'sec:class:func3'),
+              (' Remark ', 3, None, '___sec13'),
+              (' Alternative function class implementations ',
+               2,
+               'sec:class:func2b',
+               'sec:class:func2b'),
+              (' Making classes without the class construct ',
+               2,
+               'sec:class:whatis',
+               'sec:class:whatis'),
+              (' First remark ', 3, None, '___sec16'),
+              (' Second remark ', 3, None, '___sec17'),
+              (' More examples on classes ',
+               1,
+               'sec:class:addex',
+               'sec:class:addex'),
+              (' Bank accounts ',
+               2,
+               'sec:class:account',
+               'sec:class:account'),
+              (' Phone book ',
+               2,
+               'sec:class:phonebook',
+               'sec:class:phonebook'),
+              (' A circle ', 2, 'sec:class:circle', 'sec:class:circle'),
+              (' Verification ', 3, None, '___sec22'),
+              (' Remark ', 3, None, '___sec23'),
+              (' Special methods ',
+               1,
+               'sec:class:specialmethods',
+               'sec:class:specialmethods'),
+              (' The call special method ',
+               2,
+               'sec:class:call',
+               'sec:class:call'),
+              (' Example: Automagic differentiation ',
+               2,
+               'sec:class:autodF',
+               'sec:class:autodF'),
+              (' Problem ', 3, None, '___sec27'),
+              (' Solution ', 3, None, '___sec28'),
+              (' Verification ', 3, None, '___sec29'),
+              (" Application: Newton's method ", 3, None, '___sec30'),
+              (' Example: Automagic integration ',
+               2,
+               'sec:class:autoint',
+               'sec:class:autoint'),
+              (' A simple implementation ', 3, None, '___sec32'),
+              (' Verification via symbolic computing ', 3, None, '___sec33'),
+              (' Remark ', 3, None, '___sec34'),
+              (' Turning an instance into a string ',
+               2,
+               'sec:class:str',
+               'sec:class:str'),
+              (' Example: Phone book with special methods ',
+               2,
+               'sec:class:phonebook2',
+               'sec:class:phonebook2'),
+              (' Remark ', 3, None, '___sec37'),
+              (' Adding objects ', 2, 'sec:class:add', 'sec:class:add'),
+              (' Example: Class for polynomials ',
+               2,
+               'sec:class:Polynomial',
+               'sec:class:Polynomial'),
+              (' Implementation ', 3, None, '___sec40'),
+              (' Usage ', 3, None, '___sec41'),
+              (' Pretty print of polynomials ', 3, None, '___sec42'),
+              (' Verifying the implementation ', 3, None, '___sec43'),
+              (' Arithmetic operations and other special methods ',
+               2,
+               'sec:class:arithmetics',
+               'sec:class:arithmetics'),
+              (' Special methods for string conversion ',
+               2,
+               'sec:class:repr',
+               'sec:class:repr'),
+              (' Recreating objects from strings ', 3, None, '___sec46'),
+              (' Example: Class for vectors in the plane ',
+               1,
+               'sec:class:Vec2D',
+               'sec:class:Vec2D'),
+              (' Some mathematical operations on vectors ',
+               2,
+               None,
+               '___sec48'),
+              (' Implementation ', 2, None, '___sec49'),
+              (' Usage ', 2, None, '___sec50'),
+              (' Comment ', 3, None, '___sec51'),
+              (' Example: Class for complex numbers ', 1, None, '___sec52'),
+              (' Implementation ',
+               2,
+               'sec:class:Complex',
+               'sec:class:Complex'),
+              (' Illegal operations ',
+               2,
+               'sec:class:illegalop',
+               'sec:class:illegalop'),
+              (' Mixing complex and real numbers ',
+               2,
+               'sec:class:complex:mixed',
+               'sec:class:complex:mixed'),
+              (' Dynamic, static, strong, weak, and duck typing ',
+               2,
+               None,
+               '___sec56'),
+              (" Special methods for ``right'' operands ",
+               2,
+               'sec:class:complex:rightop',
+               'sec:class:complex:rightop'),
+              (' Remark ', 3, None, '___sec58'),
+              (' Inspecting instances ',
+               2,
+               'sec:class:inspect',
+               'sec:class:inspect'),
+              (' Static methods and attributes ',
+               1,
+               'sec:class:static',
+               'sec:class:static'),
+              (' Summary ', 1, None, '___sec61'),
+              (' Chapter topics ',
+               2,
+               'sec:class:summary',
+               'sec:class:summary'),
+              (' Classes ', 3, None, '___sec63'),
+              (' Special methods ', 3, None, '___sec64'),
+              (' Terminology ', 3, None, '___sec65'),
+              (' Example: interval arithmetic ', 2, None, '___sec66'),
+              (' Problem ', 3, None, '___sec67'),
+              (' Solution ', 3, None, '___sec68'),
+              (' Exercises ', 1, None, '___sec69'),
+              (' Exercise 1: Make a function class ',
+               2,
+               'sec:class:ex2',
+               'sec:class:ex2'),
+              (' Exercise 2: Add an attribute to a class ',
+               2,
+               'sec:class:ex25q',
+               'sec:class:ex25q'),
+              (' Exercise 3: Add functionality to a class ',
+               2,
+               'sec:class:ex25q2',
+               'sec:class:ex25q2'),
+              (' Exercise 4: Make classes for a rectangle and a triangle ',
+               2,
+               'sec:class:ex23',
+               'sec:class:ex23'),
+              (' Exercise 5: Make a class for quadratic functions ',
+               2,
+               'sec:class:ex11',
+               'sec:class:ex11'),
+              (' Exercise 6: Make a class for straight lines ',
+               2,
+               'sec:class:ex25',
+               'sec:class:ex25'),
+              (' Exercise 7: Flexible handling of function arguments ',
+               2,
+               'sec:class:ex25b',
+               'sec:class:ex25b'),
+              (' Exercise 8: Wrap functions in a class ',
+               2,
+               'sec:class:ex27d',
+               'sec:class:ex27d'),
+              (' Exercise 9: Flexible handling of function arguments ',
+               2,
+               'sec:class:ex27e',
+               'sec:class:ex27e'),
+              (' Exercise 10: Deduce a class implementation ',
+               2,
+               'sec:class:ex1',
+               'sec:class:ex1'),
+              (' Exercise 11: Implement special methods in a class ',
+               2,
+               'sec:class:ex2b2',
+               'sec:class:ex2b2'),
+              (' Exercise 12: Make a class for summation of series ',
+               2,
+               'sec:class:ex2b',
+               'sec:class:ex2b'),
+              (' Exercise 13: Apply a numerical differentiation class ',
+               2,
+               'sec:class:ex10',
+               'sec:class:ex10'),
+              (' Exercise 14: Apply symbolic differentiation ',
+               2,
+               'sec:class:exer:sympy:diff',
+               'sec:class:exer:sympy:diff'),
+              (' Exercise 15: Implement in-place `+=` and `-=` operators ',
+               2,
+               'sec:class:ex25qb',
+               'sec:class:ex25qb'),
+              (' Exercise 16: Implement a class for numerical differentiation ',
+               2,
+               'sec:class:ex21',
+               'sec:class:ex21'),
+              (' Exercise 17: Examine a program ',
+               2,
+               'sec:class:ex21b',
+               'sec:class:ex21b'),
+              (' Exercise 18: Modify a class for numerical differentiation ',
+               2,
+               'sec:class:ex23s',
+               'sec:class:ex23s'),
+              (' Exercise 19: Make a class for the Heaviside function ',
+               2,
+               'sec:basic:exHclass',
+               'sec:basic:exHclass'),
+              (' Exercise 20: Make a class for the indicator function ',
+               2,
+               'sec:basic:exIndclass',
+               'sec:basic:exIndclass'),
+              (' Exercise 21: Make a class for piecewise constant functions ',
+               2,
+               'sec:basic:ex:piecewisefunc',
+               'sec:basic:ex:piecewisefunc'),
+              (' Exercise 22: Speed up repeated integral calculations ',
+               2,
+               'sec:class:ex13c',
+               'sec:class:ex13c'),
+              (' Exercise 23: Apply a class for polynomials ',
+               2,
+               'sec:class:ex5',
+               'sec:class:ex5'),
+              (' Exercise 24: Find a bug in a class for polynomials ',
+               2,
+               'sec:class:ex4',
+               'sec:class:ex4'),
+              (' Exercise 25: Implement subtraction of polynomials ',
+               2,
+               'sec:class:ex6a',
+               'sec:class:ex6a'),
+              (' Exercise 26: Test the functionality of pretty print of polynomials ',
+               2,
+               'sec:class:exer:str',
+               'sec:class:exer:str'),
+              (' Exercise 27: Vectorize a class for polynomials ',
+               2,
+               'sec:class:ex7v',
+               'sec:class:ex7v'),
+              (' Remarks ', 3, None, '___sec97'),
+              (' Exercise 28: Use a dict to hold polynomial coefficients ',
+               2,
+               'sec:class:ex8',
+               'sec:class:ex8'),
+              (' Exercise 29: Extend class Vec2D to work with lists/tuples ',
+               2,
+               'sec:class:ex16',
+               'sec:class:ex16'),
+              (' Exercise 30: Extend class Vec2D to 3D vectors ',
+               2,
+               'sec:class:ex17b',
+               'sec:class:ex17b'),
+              (' Exercise 31: Use NumPy arrays in class Vec2D ',
+               2,
+               'sec:class:ex17',
+               'sec:class:ex17'),
+              (' Exercise 32: Make classes for students and courses ',
+               2,
+               'sec:class:ex15',
+               'sec:class:ex15'),
+              (' Exercise 33: Find local and global extrema of a function ',
+               2,
+               'sec:plot:ex28',
+               'sec:plot:ex28'),
+              (' Exercise 34: Find the optimal production for a company ',
+               2,
+               'sec:class:ex18a',
+               'sec:class:ex18a'),
+              (' References ', 1, None, '___sec105')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- newcommands_keep.tex -->
+$$
+\newcommand{\tp}{\thinspace .}
+$$
+
+
+
+
+    
+<a name="part0003"></a>
+<p>
+<!-- begin top navigation -->
+<table style="width: 100%"><tr><td>
+<div style="text-align: left;"><a href="._class-solarized002.html">&laquo; Previous</a></div>
+</td><td>
+<div style="text-align: right;"><a href="._class-solarized004.html">Next &raquo;</a></div>
+</td></tr></table>
+<!-- end top navigation -->
+</p>
+
+<p>
+<!-- !split -->
+
+<h1>Special methods <a name="sec:class:specialmethods"></a></h1>
+
+<p>
+Some class methods have names starting and ending with a double
+underscore.  These methods allow a special syntax in the program and
+are called <em>special methods</em>.  The constructor <code>__init__</code> is one
+example. This method is automatically called when an instance is
+created (by calling the class as a function), but we do not need to
+explicitly write <code>__init__</code>.  Other special methods make it possible
+to perform arithmetic operations with instances, to compare instances
+with <code>&gt;</code>, <code>&gt;=</code>, <code>!=</code>, etc., to call instances as we call ordinary
+functions, and to test if an instance evaluates to <code>True</code> or <code>False</code>,
+to mention some possibilities.
+
+<h2>The call special method <a name="sec:class:call"></a></h2>
+
+<p>
+Computing the value of the mathematical function represented by class
+<code>Y</code> from the section <a href="._class-solarized001.html#sec:class:func2">Representing a function as a class</a>, with <code>y</code> as the name of the
+instance, is performed by writing <code>y.value(t)</code>.  If we could write
+just <code>y(t)</code>, the <code>y</code> instance would look as an ordinary function. Such
+a syntax is indeed possible and offered by the special method named
+<code>__call__</code>. Writing <code>y(t)</code> implies a call
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>y.__call__(t)
+</code></pre>
+<!-- end verbatim block -->
+if class <code>Y</code> has the method <code>__call__</code> defined.
+We may easily add this special method:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>class Y:
+    ...
+    def __call__(self, t):
+        return self.v0*t - 0.5*self.g*t**2
+</code></pre>
+<!-- end verbatim block -->
+The previous <code>value</code> method is now redundant.  A good programming
+convention is to include a <code>__call__</code> method in all classes that
+represent a mathematical function.  Instances with <code>__call__</code> methods
+are said to be <em>callable</em> objects, just as plain functions are
+callable objects as well. The call syntax for callable objects is the
+same, regardless of whether the object is a function or a class
+instance.  Given an object <code>a</code>,
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>if callable(a):
+</code></pre>
+<!-- end verbatim block -->
+tests whether <code>a</code> behaves as a callable, i.e., if <code>a</code>
+is a Python function or an instance with a <code>__call__</code>
+method.
+<!-- isinstance(a, collections.Callable) for v3.0 and 3.1, but -->
+<!-- callable is back in 3.2 -->
+
+<p>
+In particular, an instance of class <code>Y</code> can be passed as the
+<code>f</code> argument to the <code>diff</code> function from the section <a href="._class-solarized001.html#sec:class:func1">Challenge: functions with parameters</a>:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>y = Y(v0=5)
+dydt = diff(y, 0.1)
+</code></pre>
+<!-- end verbatim block -->
+Inside <code>diff</code>, we can test that <code>f</code> is not a function but an
+instance of class <code>Y</code>. However, we only use <code>f</code> in calls, like
+<code>f(x)</code>, and for this purpose an instance with a
+<code>__call__</code> method works as a plain function.
+This feature is very convenient.
+
+<p>
+The next section demonstrates a neat application of the call
+operator <code>__call__</code> in a numerical algorithm.
+
+<h2>Example: Automagic differentiation <a name="sec:class:autodF"></a></h2>
+
+<h3>Problem  <a name="___sec27"></a></h3>
+
+<p>
+Given a Python implementation <code>f(x)</code> of a mathematical function
+\( f(x) \), we want to create an object that behaves as a Python function
+for computing the derivative \( f'(x) \). For example, if this object is
+of type <code>Derivative</code>, we should be able to write something like
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; def f(x):
+        return x**3
+...
+&gt;&gt;&gt; dfdx = Derivative(f)
+&gt;&gt;&gt; x = 2
+&gt;&gt;&gt; dfdx(x)
+12.000000992884452
+</code></pre>
+<!-- end verbatim block -->
+That is, <code>dfdx</code> behaves as a straight Python function for implementing
+the derivative \( 3x^2 \) of \( x^3 \) (well, the answer is only approximate,
+with an error in the 7th decimal,
+but the approximation can easily be improved).
+
+<p>
+Maple, Mathematica, and many other software packages can do exact
+symbolic mathematics, including differentiation and integration.  The
+Python package <code>sympy</code> for symbolic mathematics
+(see the section ref{sec:formula:sympy})
+makes it trivial to calculate the exact derivative of
+a large class of functions \( f(x) \) and turn the result into
+an ordinary Python function. However, mathematical functions that are defined
+in an algorithmic way (e.g., solution of another mathematical
+problem), or functions with branches, random numbers, etc., pose
+fundamental problems to symbolic differentiation, and then numerical
+differentiation is required. Therefore we base the computation of
+derivatives in <code>Derivative</code> instances on finite difference
+formulas. Use of exact symbolic differentiation is also possible
+as indicated in <a href="._class-solarized008.html#sec:class:exer:sympy:diff">Exercise 14: Apply symbolic differentiation</a>.
+
+<h3>Solution  <a name="___sec28"></a></h3>
+
+<p>
+The most basic (but not the best) formula for a numerical derivative is
+
+$$
+\begin{equation}
+f'(x)\approx {f(x+h)-f(x)\over h}\tp
+\tag{2}
+\end{equation}
+$$
+
+The idea is that we make a class to hold the function to be
+differentiated, call it <code>f</code>, and a step size <code>h</code> to be used in
+<a href="#mjx-eqn-2">(2)</a>.
+These variables can be set in the
+constructor.  The <code>__call__</code> operator computes the derivative with aid
+of <a href="._class-solarized001.html#mjx-eqn-1">(1)</a>.  All this can be
+coded in a few lines:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>class Derivative:
+    def __init__(self, f, h=1E-5):
+        self.f = f
+        self.h = float(h)
+
+    def __call__(self, x):
+        f, h = self.f, self.h      # make short forms
+        return (f(x+h) - f(x))/h
+</code></pre>
+<!-- end verbatim block -->
+Note that we turn <code>h</code> into a <code>float</code> to avoid
+potential integer division.
+
+<p>
+Below follows an application of the class to differentiate two
+functions \( f(x)=\sin x \)
+and \( g(t)=t^3 \):
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; from math import sin, cos, pi
+&gt;&gt;&gt; df = Derivative(sin)
+&gt;&gt;&gt; x = pi
+&gt;&gt;&gt; df(x)
+-1.000000082740371
+&gt;&gt;&gt; cos(x)  # exact
+-1.0
+&gt;&gt;&gt; def g(t):
+...     return t**3
+...
+&gt;&gt;&gt; dg = Derivative(g)
+&gt;&gt;&gt; t = 1
+&gt;&gt;&gt; dg(t)  # compare with 3 (exact)
+3.000000248221113
+</code></pre>
+<!-- end verbatim block -->
+The expressions <code>df(x)</code> and <code>dg(t)</code>
+look as ordinary Python functions that
+evaluate the derivative of the functions <code>sin(x)</code> and <code>g(t)</code>.
+Class <code>Derivative</code> works for (almost) any function \( f(x) \).
+
+<h3>Verification  <a name="___sec29"></a></h3>
+
+<p>
+It is a good programming habit to include a test function for
+verifying the implementation of a class.
+We can construct a test based on the fact that the
+approximate differentiation formula <a href="#mjx-eqn-2">(2)</a>
+is exact for linear functions:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>def test_Derivative():
+    # The formula is exact for linear functions, regardless of h
+    f = lambda x: a*x + b
+    a = 3.5; b = 8
+    dfdx = Derivative(f, h=0.5)
+    diff = abs(dfdx(4.5) - a)
+    assert diff &lt; 1E-14, 'bug in class Derivative, diff=%s' % diff
+</code></pre>
+<!-- end verbatim block -->
+We have here used a lambda function for compactly defining a function
+<code>f</code>, see the section ref{sec:basic:lambdafunc}.
+A special feature of <code>f</code> is that it remembers the variables <code>a</code> and
+<code>b</code> when <code>f</code> is sent to class <code>Derivative</code> (such a function  is called a
+<em>closure</em>).
+Note that the test function above follows
+the conventions for test functions
+outlined in the section <a href="._class-solarized002.html#sec:class:circle">A circle</a>.
+
+<h3>Application: Newton's method  <a name="___sec30"></a></h3>
+
+<p>
+In what situations will it be convenient to automatically produce a
+Python function <code>df(x)</code> which is the derivative of another Python
+function <code>f(x)</code>? One example arises when solving nonlinear algebraic
+equations \( f(x)=0 \) with Newton's method and we, because of laziness,
+lack of time, or lack of training do not manage to derive \( f'(x) \) by
+hand. Consider a function <code>Newton</code> for solving \( f(x)=0 \): <code>Newton(f, x,
+dfdx, epsilon=1.0E-7, N=100)</code>.
+The section ref{sec:diffeq:Newtonsmethod:sec} presents a specific implementation
+in a module file
+<a href="http://tinyurl.com/pwyasaa/diffeq/Newton.py" target="_self"><tt>Newton.py</tt></a>.  The arguments are a
+Python function <code>f</code> for \( f(x) \), a <code>float x</code> for the initial guess
+(start value) of \( x \), a Python function <code>dfdx</code> for \( f'(x) \), a <code>float</code>
+<code>epsilon</code> for the accuracy \( \epsilon \) of the root: the algorithms
+iterates until \( |f(x)| < \epsilon \), and an <code>int N</code> for the maximum
+number of iterations that we allow.  All arguments are easy to
+provide, except <code>dfdx</code>, which requires computing \( f'(x) \) by hand then
+implementation of the formula in a Python function.  Suppose our
+target equation reads
+
+$$
+\begin{equation*}
+f(x) =  10^5(x-0.9)^2(x-1.1)^3=0 \thinspace .
+\end{equation*}
+$$
+
+The function \( f(x) \) is plotted in Figure
+<a href="#fig:hard_polynomial4Newton1">2</a>.  The following session employs the
+<code>Derivative</code> class to quickly make a derivative so we can call
+Newton's method:
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; from classes import Derivative
+&gt;&gt;&gt; from Newton import Newton
+&gt;&gt;&gt; def f(x):
+...     return 100000*(x - 0.9)**2 * (x - 1.1)**3
+...
+&gt;&gt;&gt; df = Derivative(f)
+&gt;&gt;&gt; Newton(f, 1.01, df, epsilon=1E-5)
+(1.0987610068093443, 8, -7.5139644257961411e-06)
+</code></pre>
+<!-- end verbatim block -->
+The output 3-tuple holds the approximation to a root, the number of
+iterations, and the value of \( f \) at the approximate root (a measure of
+the error in the equation).
+
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 2:  Plot of \( y = 10^5(x-0.9)^2(x-1.1)^3 \). <a name="fig:hard_polynomial4Newton1"></a> </p></center>
+<p><img src="fig-class/hard_polynomial4Newton1.png" align="bottom" width=400></p>
+</center>
+
+<p>
+The exact root is 1.1, and the convergence toward this value is very
+slow. (Newton's method converges very slowly when the derivative of
+\( f \) is zero at the roots of \( f \). Even slower convergence appears when
+higher-order derivatives also are zero, like in this example. Notice
+that the error in <code>x</code> is much larger than the error in the equation
+(<code>epsilon</code>).  For example, an <code>epsilon</code> tolerance of \( 10^{-10} \)
+requires 18 iterations with an error of \( 10^{-3} \).)  Using an exact
+derivative gives almost the same result:
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; def df_exact(x):
+...     return 100000*(2*(x-0.9)*(x-1.1)**3 + \ 
+...                    (x-0.9)**2*3*(x-1.1)**2)
+...
+&gt;&gt;&gt; Newton(f, 1.01, df_exact, epsilon=1E-5)
+(1.0987610065618421, 8, -7.5139689100699629e-06)
+</code></pre>
+<!-- end verbatim block -->
+This example indicates that there are hardly any drawbacks in using a
+"smart" inexact general differentiation approach as in the
+<code>Derivative</code> class. The advantages are many - most notably,
+<code>Derivative</code> avoids potential errors from possibly incorrect manual
+coding of possibly lengthy expressions of possibly wrong
+hand-calculations.  The errors in the involved approximations can be
+made smaller, usually much smaller than other errors, like the
+tolerance in Newton's method in this example or the uncertainty in
+physical parameters in real-life problems.
+
+<h2>Example: Automagic integration <a name="sec:class:autoint"></a></h2>
+
+<p>
+We can apply the ideas from the section <a href="#sec:class:autodF">Example: Automagic differentiation</a> to
+make a class for computing the integral of a function numerically.
+Given a function \( f(x) \), we want to compute
+
+$$
+\begin{equation*}
+F(x; a) = \int_a^x f(t)dt  \thinspace .
+\end{equation*}
+$$
+
+The computational technique consists of using the Trapezoidal rule with \( n \)
+intervals (\( n+1 \) points):
+
+$$
+\begin{equation}
+\int_a^x f(t)dt = h\left(\frac{1}{2}f(a) + \sum_{i=1}^{n-1} f(a+ih) + \frac{1}{2}f(x)\right),\ 
+\end{equation}
+$$
+
+where \( h=(x-a)/n \).
+In an application
+program, we want to compute \( F(x;a) \) by a simple syntax like
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>def f(x):
+    return exp(-x**2)*sin(10*x)
+
+a = 0; n = 200
+F = Integral(f, a, n)
+print F(x)
+</code></pre>
+<!-- end verbatim block -->
+Here, <code>f(x)</code> is the Python function to be integrated, and <code>F(x)</code>
+behaves as a Python function that calculates values of \( F(x;a) \).
+
+<h3>A simple implementation  <a name="___sec32"></a></h3>
+
+<p>
+Consider a straightforward implementation of the Trapezoidal rule
+in a Python function:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>def trapezoidal(f, a, x, n):
+    h = (x-a)/float(n)
+    I = 0.5*f(a)
+    for i in range(1, n):
+        I += f(a + i*h)
+    I += 0.5*f(x)
+    I *= h
+    return I
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+Class <code>Integral</code> must have some attributes and a <code>__call__</code>
+method. Since the latter method is supposed to take <code>x</code> as argument,
+the other parameters <code>a</code>, <code>f</code>, and <code>n</code> must be class attributes.  The
+implementation then becomes
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>class Integral:
+    def __init__(self, f, a, n=100):
+        self.f, self.a, self.n = f, a, n
+
+    def __call__(self, x):
+        return trapezoidal(self.f, self.a, x, self.n)
+</code></pre>
+<!-- end verbatim block -->
+Observe that we just reuse the <code>trapezoidal</code> function to perform
+the calculation. We could alternatively have copied the body of
+the <code>trapezoidal</code> function into the <code>__call__</code> method.
+However, if we already have this algorithm implemented and tested as
+a function, it is better to call the function.
+The class is then known as a <em>wrapper</em> of the underlying function.
+A wrapper allows something to be called with alternative syntax.
+
+<p>
+An application program computing \( \int_0^{2\pi}\sin x\, dx \)
+might look as follows:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>from math import sin, pi
+
+G = Integral(sin, 0, 200)
+value = G(2*pi)
+</code></pre>
+<!-- end verbatim block -->
+An equivalent calculation is
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>value = trapezoidal(sin, 0, 2*pi, 200)
+</code></pre>
+<!-- end verbatim block -->
+
+<h3>Verification via symbolic computing  <a name="___sec33"></a></h3>
+
+<p>
+We should always provide a test function for verification of
+the implementation. To avoid dealing with unknown approximation errors
+of the Trapezoidal rule, we use the obvious fact that linear functions
+are integrated exactly by the rule. Although it is really easy to
+pick a linear function, integrate it, and figure out what an integral
+is, we can also demonstrate how to automate such a process by the
+symbolic computing package <code>sympy</code>. Essentially, we define an
+expression in <code>sympy</code>, ask <code>sympy</code> to integrate it, and then turn
+the resulting symbolic integral to a plain Python function for
+computing:
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; import sympy
+&gt;&gt;&gt; x = sympy.Symbol('x')
+&gt;&gt;&gt; f_expr = sympy.cos(x) + 5*x
+&gt;&gt;&gt; f_expr
+5*x + cos(x)
+&gt;&gt;&gt; F_expr = sympy.integrate(f_expr, x)
+&gt;&gt;&gt; F_expr
+5*x**2/2 + sin(x)
+&gt;&gt;&gt; F = sympy.lambdify([x], F_expr)  # turn f_expr to F(x) func.
+&gt;&gt;&gt; F(0)
+0.0
+&gt;&gt;&gt; F(1)
+3.3414709848078967
+</code></pre>
+<!-- end verbatim block -->
+Using such functionality to do exact integration, we can write
+our test function as
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>def test_Integral():
+    # The Trapezoidal rule is exact for linear functions
+    import sympy
+    x = sympy.Symbol('x')
+    f_expr = 2*x + 5
+    # Turn sympy expression into plain Python function f(x)
+    f = sympy.lambdify([x], f_expr)
+    # Find integral of f_expr and turn into plain Python function F
+    F_expr = sympy.integrate(f_expr, x)
+    F = sympy.lambdify([x], F_expr)
+
+    a = 2
+    I = Integral(f, a, n=4)
+    x = 6
+    diff = abs(I(x) - (F(x) - F(a)))
+    assert diff &lt; 1E-15, 'bug in class Integral, diff=%s' % diff
+</code></pre>
+<!-- end verbatim block -->
+
+<h3>Remark  <a name="___sec34"></a></h3>
+
+<p>
+Class <code>Integral</code> is inefficient (but probably more
+than fast enough) for plotting \( F(x;a) \) as a function \( x \).
+<a href="._class-solarized008.html#sec:class:ex13c">Exercise 22: Speed up repeated integral calculations</a> suggests to optimize the class
+for this purpose.
+
+<h2>Turning an instance into a string <a name="sec:class:str"></a></h2>
+
+<p>
+Another special method is <code>__str__</code>. It is called when
+a class instance needs to be converted to a string. This happens when
+we say <code>print a</code>, and <code>a</code> is an instance. Python will then look
+into the <code>a</code> instance
+for a <code>__str__</code> method, which is supposed to return a string.
+If such a special method is found, the returned string is printed,
+otherwise just the name of the class is printed. An example will illustrate
+the point. First we try to print an <code>y</code> instance of class
+<code>Y</code> from the section <a href="._class-solarized001.html#sec:class:func2">Representing a function as a class</a>
+(where there is no <code>__str__</code> method):
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; print y
+&lt;__main__.Y instance at 0xb751238c&gt;
+</code></pre>
+<!-- end verbatim block -->
+This means that <code>y</code> is an <code>Y</code> instance in the <code>__main__</code>
+module (the main program or the interactive session). The output also
+contains an address telling where the <code>y</code> instance is stored
+in the computer's memory.
+
+<p>
+If we want <code>print y</code> to print out the <code>y</code> instance, we need
+to define the <code>__str__</code> method in class <code>Y</code>:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>class Y:
+    ...
+    def __str__(self):
+        return 'v0*t - 0.5*g*t**2; v0=%g' % self.v0
+</code></pre>
+<!-- end verbatim block -->
+Typically, <code>__str__</code> replaces our previous <code>formula</code>
+method and <code>__call__</code> replaces our previous <code>value</code> method.
+Python programmers with the experience that we now have gained will
+therefore write class <code>Y</code> with special methods only:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>class Y:
+    def __init__(self, v0):
+        self.v0 = v0
+        self.g = 9.81
+
+    def __call__(self, t):
+        return self.v0*t - 0.5*self.g*t**2
+
+    def __str__(self):
+        return 'v0*t - 0.5*g*t**2; v0=%g' % self.v0
+</code></pre>
+<!-- end verbatim block -->
+Let us see the class in action:
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; y = Y(1.5)
+&gt;&gt;&gt; y(0.2)
+0.1038
+&gt;&gt;&gt; print y
+v0*t - 0.5*g*t**2; v0=1.5
+</code></pre>
+<!-- end verbatim block -->
+What have we gained by using special methods? Well, we can still only
+evaluate the formula and write it out, but many users of the class will
+claim that the syntax is more attractive since <code>y(t)</code> in code
+means \( y(t) \) in mathematics,
+and we can do a <code>print y</code> to view the formula.
+The bottom line of using special methods is to achieve a more
+user-friendly syntax. The next sections illustrate this point further.
+
+<h2>Example: Phone book with special methods <a name="sec:class:phonebook2"></a></h2>
+
+<p>
+Let us reconsider class <code>Person</code> from the section <a href="._class-solarized002.html#sec:class:phonebook">Phone book</a>.
+The <code>dump</code> method in that class is better implemented as
+a <code>__str__</code> special method. This is easy: we just change
+the method name and replace <code>print s</code> by <code>return s</code>.
+
+<p>
+Storing <code>Person</code> instances in a dictionary to form a phone book is
+straightforward. However, we make the dictionary a bit easier to use
+if we wrap a class around it. That is, we make a class <code>PhoneBook</code>
+which holds the dictionary as an attribute. An
+<code>add</code> method can be used to add a new person:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>class PhoneBook:
+    def __init__(self):
+        self.contacts = {}   # dict of Person instances
+
+    def add(self, name, mobile=None, office=None,
+            private=None, email=None):
+        p = Person(name, mobile, office, private, email)
+        self.contacts[name] = p
+</code></pre>
+<!-- end verbatim block -->
+A <code>__str__</code> can print the phone book in alphabetic order:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>    def __str__(self):
+        s = ''
+        for p in sorted(self.contacts):
+            s += str(self.contacts[p]) + '\n'
+        return s
+</code></pre>
+<!-- end verbatim block -->
+To retrieve a <code>Person</code> instance, we use the <code>__call__</code>
+with the person's name as argument:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>    def __call__(self, name):
+        return self.contacts[name]
+</code></pre>
+<!-- end verbatim block -->
+The only advantage of this method is simpler syntax: for a <code>PhoneBook</code>
+<code>b</code> we can get data about <code>NN</code> by calling
+<code>b('NN')</code> rather than accessing the internal dictionary
+<code>b.contacts['NN']</code>.
+
+<p>
+We can make a simple demo code for a phone book with three
+names:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>b = PhoneBook()
+b.add('Ole Olsen', office='767828292',
+      email='olsen@somemail.net')
+b.add('Hans Hanson',
+      office='767828283', mobile='995320221')
+b.add('Per Person', mobile='906849781')
+print b('Per Person')
+print b
+</code></pre>
+<!-- end verbatim block -->
+The output becomes
+
+<p>
+<!-- begin verbatim block  ccq-->
+<pre><code>Per Person
+mobile phone:   906849781
+
+Hans Hanson
+mobile phone:   995320221
+office phone:   767828283
+
+Ole Olsen
+office phone:   767828292
+email address:  olsen@somemail.net
+
+Per Person
+mobile phone:   906849781
+</code></pre>
+<!-- end verbatim block -->
+You are strongly encouraged to work through this last demo program
+by hand and simulate what the program does. That is, jump around in
+the code and write down on a piece of paper what various variables
+contain after each statement. This is an important and good exercise!
+You enjoy the happiness of mastering classes if you get the same output
+as above. The complete program with classes <code>Person</code> and
+<code>PhoneBook</code> and the test above is found in the file
+<a href="http://tinyurl.com/pwyasaa/class/PhoneBook.py" target="_self"><tt>PhoneBook.py</tt></a>.
+You can run this program, statement by statement,
+either in the <a href="http://www.pythontutor.com/" target="_self">Online Python Tutor</a> or
+in a debugger (see the document <a href="http://tcse6.on.net/debug" target="_self">Debugging in Python</a> <a href="._class-solarized008.html#Langtangen_TCSE6_debug">[3]</a>)
+to control that your understanding of the program flow is correct.
+
+<h3>Remark  <a name="___sec37"></a></h3>
+
+<p>
+Note that the names are sorted with respect to the first names.
+The reason is that strings are sorted after the first character,
+then the second character, and so on.
+We can supply our own tailored sort
+function, as explained in ref{sec:basic:ex28}.
+One possibility is to split the
+name into words and use the last word for sorting:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>def last_name_sort(name1, name2):
+    lastname1 = name1.split()[-1]
+    lastname2 = name2.split()[-1]
+    if lastname1 &lt; lastname2:
+        return -1
+    elif lastname1 &gt; lastname2:
+        return 1
+    else: # equality
+        return 0
+
+for p in sorted(self.contacts, last_name_sort):
+   ...
+</code></pre>
+<!-- end verbatim block -->
+
+<h2>Adding objects <a name="sec:class:add"></a></h2>
+
+<p>
+Let <code>a</code> and <code>b</code> be instances of some class <code>C</code>. Does it
+make sense to write <code>a + b</code>? Yes, this makes sense if class
+<code>C</code> has defined a special method <code>__add__</code>:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>class C:
+    ...
+    __add__(self, other):
+        ...
+</code></pre>
+<!-- end verbatim block -->
+The <code>__add__</code> method should add the instances <code>self</code>
+and <code>other</code> and return the result as an instance.
+So when Python encounters <code>a + b</code>, it will check if class
+<code>C</code> has an <code>__add__</code> method and interpret <code>a + b</code>
+as the call <code>a.__add__(b)</code>.
+The next example will hopefully clarify what this idea can be used for.
+
+<h2>Example: Class for polynomials <a name="sec:class:Polynomial"></a></h2>
+
+<p>
+Let us create a class <code>Polynomial</code>
+for polynomials. The coefficients in the polynomial can be given to
+the constructor as a list. Index number \( i \) in this list represents the
+coefficients of the \( x^i \) term in the polynomial. That is, writing
+<code>Polynomial([1,0,-1,2])</code>
+defines a polynomial
+
+$$
+\begin{equation*} 1 + 0\cdot x - 1\cdot x^2 + 2\cdot x^3 =
+1 - x^2 + 2x^3 \thinspace .
+\end{equation*}
+$$
+
+Polynomials can be added (by just adding the coefficients corresponding
+to the same powers)
+so our class may have
+an <code>__add__</code> method.
+A <code>__call__</code> method is natural for evaluating the polynomial,
+given a value of \( x \). The class is listed below and explained afterwards.
+
+<h3>Implementation  <a name="___sec40"></a></h3>
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>class Polynomial:
+    def __init__(self, coefficients):
+        self.coeff = coefficients
+
+    def __call__(self, x):
+        s = 0
+        for i in range(len(self.coeff)):
+            s += self.coeff[i]*x**i
+        return s
+
+    def __add__(self, other):
+        # Start with the longest list and add in the other
+        if len(self.coeff) &gt; len(other.coeff):
+            result_coeff = self.coeff[:]  # copy!
+            for i in range(len(other.coeff)):
+                result_coeff[i] += other.coeff[i]
+        else:
+            result_coeff = other.coeff[:] # copy!
+            for i in range(len(self.coeff)):
+                result_coeff[i] += self.coeff[i]
+        return Polynomial(result_coeff)
+</code></pre>
+<!-- end verbatim block -->
+Class <code>Polynomial</code> has one attribute: the list of coefficients.
+To evaluate the polynomial, we just sum up coefficient no. \( i \) times
+\( x^i \) for \( i=0 \) to the number of coefficients in the list.
+
+<p>
+The <code>__add__</code> method looks more advanced. The idea is to add the two
+lists of coefficients. However, it may happen that the lists are of
+unequal length. We therefore start with the longest list and add in
+the other list, element by element.  Observe that <code>result_coeff</code>
+starts out as a <em>copy</em> of <code>self.coeff</code>: if not, changes in
+<code>result_coeff</code> as we compute the sum will be reflected in
+<code>self.coeff</code>. This means that <code>self</code> would be the sum of itself and
+the <code>other</code> instance, or in other words, adding two instances,
+<code>p1+p2</code>, changes <code>p1</code> - this is not what we want!  An alternative
+implementation of class <code>Polynomial</code> is found in <a href="._class-solarized008.html#sec:class:ex4">Exercise 24: Find a bug in a class for polynomials</a>.
+
+<p>
+A subtraction method <code>__sub__</code> can be implemented along the lines of
+<code>__add__</code>, but is slightly more complicated and left to the reader
+through <a href="._class-solarized008.html#sec:class:ex6a">Exercise 25: Implement subtraction of polynomials</a>.  A somewhat more complicated
+operation, from a mathematical point of view, is the multiplication of
+two polynomials. Let \( p(x)=\sum_{i=0}^Mc_ix^i \) and \( q(x)=\sum_{j=0}^N
+d_jx^j \) be the two polynomials. The product becomes
+
+$$
+\begin{equation*} \left(\sum_{i=0}^Mc_ix^i\right)\left( \sum_{j=0}^N d_jx^j\right)
+= \sum_{i=0}^M \sum_{j=0}^N c_id_j x^{i+j} \thinspace . \end{equation*}
+$$
+
+The double sum must be implemented as a double loop, but first the
+list for the resulting polynomial must be created with length \( M+N+1 \)
+(the highest exponent is \( M+N \) and then we need a constant term).
+The implementation of the multiplication operator becomes
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>    def __mul__(self, other):
+        c = self.coeff
+        d = other.coeff
+        M = len(c) - 1
+        N = len(d) - 1
+        result_coeff = numpy.zeros(M+N+1)
+        for i in range(0, M+1):
+            for j in range(0, N+1):
+                result_coeff[i+j] += c[i]*d[j]
+        return Polynomial(result_coeff)
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+We could also include a method for
+differentiating the polynomial according to the formula
+
+$$
+\begin{equation*}
+{d\over dx}\sum_{i=0}^n c_ix^i = \sum_{i=1}^n ic_ix^{i-1} \thinspace .
+\end{equation*}
+$$
+
+If \( c_i \) is stored as a list <code>c</code>,
+the list representation of the derivative, say its name is <code>dc</code>,
+fulfills <code>dc[i-1] = i*c[i]</code> for <code>i</code> running from 1 to the
+largest index in <code>c</code>. Note that <code>dc</code> has one element less
+than <code>c</code>.
+
+<p>
+There are two different ways of implementing the differentiation
+functionality, either by changing the polynomial coefficients, or by
+returning a new <code>Polynomial</code> instance from the method such that the
+original polynomial instance is intact.  We let <code>p.differentiate()</code> be
+an implementation of the first approach, i.e., this method does not
+return anything, but the coefficients in the <code>Polynomial</code> instance <code>p</code>
+are altered.  The other approach is implemented by <code>p.derivative()</code>,
+which returns a new <code>Polynomial</code> object with coefficients
+corresponding to the derivative of <code>p</code>.
+
+<p>
+The complete implementation of the two methods
+is given below:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>class Polynomial:
+    ...
+    def differentiate(self):
+        &quot;&quot;&quot;Differentiate this polynomial in-place.&quot;&quot;&quot;
+        for i in range(1, len(self.coeff)):
+            self.coeff[i-1] = i*self.coeff[i]
+        del self.coeff[-1]
+
+    def derivative(self):
+        &quot;&quot;&quot;Copy this polynomial and return its derivative.&quot;&quot;&quot;
+        dpdx = Polynomial(self.coeff[:])  # make a copy
+        dpdx.differentiate()
+        return dpdx
+</code></pre>
+<!-- end verbatim block -->
+The <code>Polynomial</code> class with a <code>differentiate</code> method and not a
+<code>derivative</code> method would be mutable (i.e., the object's content can
+change) and allow in-place changes of the data, while the <code>Polynomial</code>
+class with <code>derivative</code> and not <code>differentiate</code> would yield an
+immutable object where the polynomial initialized in the constructor
+is never altered.  (Technically, it is possible to grab the <code>coeff</code>
+variable in a class instance and alter this list. By starting <code>coeff</code>
+with an underscore, a Python programming convention tells programmers
+that this variable is for internal use in the class only, and not to
+be altered by users of the instance, see the sections <a href="._class-solarized002.html#sec:class:account">Bank accounts</a> and <a href="._class-solarized005.html#sec:class:illegalop">Illegal operations</a>.)  A good rule is
+to offer only one of these two functions such that a <code>Polynomial</code>
+object is either mutable or immutable (if we leave out
+<code>differentiate</code>, its function body must of course be copied into
+<code>derivative</code> since <code>derivative</code> now relies on that code).  However,
+since the main purpose of this class is to illustrate various types of
+programming techniques, we keep both versions.
+
+<h3>Usage  <a name="___sec41"></a></h3>
+
+<p>
+As a demonstration of the functionality of class <code>Polynomial</code>, we introduce
+the two polynomials
+
+$$
+\begin{equation*} p_1(x)= 1-x,\quad p_2(x)=x - 6x^4 - x^5  \thinspace . \end{equation*}
+$$
+
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; p1 = Polynomial([1, -1])
+&gt;&gt;&gt; p2 = Polynomial([0, 1, 0, 0, -6, -1])
+&gt;&gt;&gt; p3 = p1 + p2
+&gt;&gt;&gt; print p3.coeff
+[1, 0, 0, 0, -6, -1]
+&gt;&gt;&gt; p4 = p1*p2
+&gt;&gt;&gt; print p4.coeff
+[0, 1, -1, 0, -6, 5, 1]
+&gt;&gt;&gt; p5 = p2.derivative()
+&gt;&gt;&gt; print p5.coeff
+[1, 0, 0, -24, -5]
+</code></pre>
+<!-- end verbatim block -->
+One verification of the implementation may be to compare
+<code>p3</code> at (e.g.) \( x=1/2 \) with \( p_1(x) + p_2(x) \):
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; x = 0.5
+&gt;&gt;&gt; p1_plus_p2_value = p1(x) + p2(x)
+&gt;&gt;&gt; p3_value = p3(x)
+&gt;&gt;&gt; print p1_plus_p2_value - p3_value
+0.0
+</code></pre>
+<!-- end verbatim block -->
+Note that <code>p1 + p2</code> is very different from <code>p1(x) + p2(x)</code>.  In the
+former case, we add two instances of class <code>Polynomial</code>, while in the
+latter case we add two instances of class <code>float</code> (since <code>p1(x)</code> and
+<code>p2(x)</code> imply calling <code>__call__</code> and that method returns a <code>float</code>
+object).
+
+<h3>Pretty print of polynomials  <a name="___sec42"></a></h3>
+
+<p>
+The <code>Polynomial</code> class can also be equipped with a
+<code>__str__</code> method for printing the polynomial to the screen.
+A first, rough implementation could simply add up strings
+of the form <code>+ self.coeff[i]*x^i</code>:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>class Polynomial:
+    ...
+    def __str__(self):
+        s = ''
+        for i in range(len(self.coeff)):
+            s += ' + %g*x^%d' % (self.coeff[i], i)
+        return s
+</code></pre>
+<!-- end verbatim block -->
+However, this implementation leads to ugly output from a mathematical
+viewpoint. For instance,
+a polynomial with coefficients <code>[1,0,0,-1,-6]</code>
+gets printed as
+
+<p>
+<!-- begin verbatim block  ccq-->
+<pre><code> + 1*x^0 + 0*x^1 + 0*x^2 + -1*x^3 + -6*x^4
+</code></pre>
+<!-- end verbatim block -->
+A more desired output would be
+
+<p>
+<!-- begin verbatim block  ccq-->
+<pre><code>1 - x^3 - 6*x^4
+</code></pre>
+<!-- end verbatim block -->
+That is, terms with a zero coefficient should be dropped; a part <code>'+
+-'</code> of the output string should be replaced by <code>'- '</code>; unit
+coefficients should be dropped, i.e., <code>' 1*'</code> should be replaced by
+space <code>' '</code>; unit power should be dropped by replacing <code>'x^1 '</code> by <code>'x
+'</code>; zero power should be dropped and replaced by <code>1</code>, initial spaces
+should be fixed, etc.  These adjustments can be implemented using the
+<code>replace</code> method in string objects and by composing slices of the
+strings. The new version of the <code>__str__</code> method below contains the
+necessary adjustments. If you find this type of string manipulation
+tricky and difficult to understand, you may safely skip further
+inspection of the improved <code>__str__</code> code since the details are not
+essential for your present learning about the class concept and
+special methods.
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>class Polynomial:
+    ...
+    def __str__(self):
+        s = ''
+        for i in range(0, len(self.coeff)):
+            if self.coeff[i] != 0:
+                s += ' + %g*x^%d' % (self.coeff[i], i)
+        # Fix layout
+        s = s.replace('+ -', '- ')
+        s = s.replace('x^0', '1')
+        s = s.replace(' 1*', ' ')
+        s = s.replace('x^1 ', 'x ')
+        if s[0:3] == ' + ':  # remove initial +
+            s = s[3:]
+        if s[0:3] == ' - ':  # fix spaces for initial -
+            s = '-' + s[3:]
+        return s
+</code></pre>
+<!-- end verbatim block -->
+Programming sometimes turns into coding (what one think is)
+a general solution followed
+by a series of special cases to fix caveats in the &quot;general&quot; solution,
+just as we experienced with the <code>__str__</code> method above.
+This situation often calls for additional future fixes and is often
+a sign of a suboptimal solution to the programming problem.
+
+<p>
+Pretty print of <code>Polynomial</code> instances can be demonstrated in an
+interactive session:
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; p1 = Polynomial([1, -1])
+&gt;&gt;&gt; print p1
+1 - x^1
+&gt;&gt;&gt; p2 = Polynomial([0, 1, 0, 0, -6, -1])
+&gt;&gt;&gt; p2.differentiate()
+&gt;&gt;&gt; print p2
+1 - 24*x^3 - 5*x^4
+</code></pre>
+<!-- end verbatim block -->
+
+<h3>Verifying the implementation  <a name="___sec43"></a></h3>
+
+<p>
+It is always a good habit to include a test function <code>test_Polynomial()</code>
+for verifying the functionality in class <code>Polynomial</code>.
+To this end, we construct some examples of addition, multiplication,
+and differentiation of polynomials by hand and make tests that class
+<code>Polynomial</code> reproduces the correct results. Testing the <code>__str__</code>
+method is left as <a href="._class-solarized008.html#sec:class:exer:str">Exercise 26: Test the functionality of pretty print of polynomials</a>.
+
+<p>
+Round-off errors may be an issue in class <code>Polynomial</code>: <code>__add__</code>,
+<code>derivative</code>, and <code>differentiate</code> will lead to integer coefficients if
+the polynomials to be added have integer coefficients, while <code>__mul__</code>
+always results in a polynomial with the coefficients stored in a
+<code>numpy</code> array with <code>float</code> elements. Integer coefficients in lists can
+be compared using <code>==</code> for lists, while coefficients in <code>numpy</code> arrays
+must be compared with a tolerance. One can either subtract the <code>numpy</code>
+arrays and use the <code>max</code> method to find the largest deviation and
+compare this with a tolerance, or one can use <code>numpy.allclose(a, b,
+rtol=tol)</code> for comparing the arrays <code>a</code> and <code>b</code> with a (relative)
+tolerance <code>tol</code>.
+
+<p>
+Let us pick polynomials with integer coefficients as test cases
+such that <code>__add__</code>, <code>derivative</code>, and <code>differentiate</code> can
+be verified by testing equality (<code>==</code>) of the <code>coeff</code> lists.
+Multiplication in <code>__mul__</code> must employ <code>numpy.allclose</code>.
+
+<p>
+We follow the convention that all tests are on the form
+<code>assert success</code>, where <code>success</code> is a boolean expression
+for the test. (The actual version of the test function in
+the file <a href="http://tinyurl.com/pwyasaa/class/Polynomial.py" target="_self"><tt>Polynomial.py</tt></a>
+adds an error message <code>msg</code> to the test:
+<code>assert success, msg</code>.) Another part of the convention is
+that the function starts with <code>test_</code> and the function takes no
+arguments.
+
+<p>
+Our test function now becomes
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>def test_Polynomial():
+    p1 = Polynomial([1, -1])
+    p2 = Polynomial([0, 1, 0, 0, -6, -1])
+
+    p3 = p1 + p2
+    p3_exact = Polynomial([1, 0, 0, 0, -6, -1])
+    assert p3.coeff == p3_exact.coeff
+
+    p4 = p1*p2
+    p4_exact = Polynomial(numpy.array([0,  1, -1,  0, -6,  5,  1]))
+    assert numpy.allclose(p4.coeff, p4_exact.coeff, rtol=1E-14)
+
+    p5 = p2.derivative()
+    p5_exact = Polynomial([1, 0, 0, -24, -5])
+    assert p5.coeff == p5_exact.coeff
+
+    p6 = Polynomial([0, 1, 0, 0, -6, -1])  # p2
+    p6.differentiate()
+    p6_exact = p5_exact
+    assert p6.coeff == p6_exact.coeff
+</code></pre>
+<!-- end verbatim block -->
+
+<h2>Arithmetic operations and other special methods <a name="sec:class:arithmetics"></a></h2>
+
+<p>
+Given two instances <code>a</code> and <code>b</code>, the standard binary arithmetic
+operations with <code>a</code> and <code>b</code> are defined by the following
+special methods:
+
+<ul>
+  <li> <code>a + b</code> : <code>a.__add__(b)</code></li>
+  <li> <code>a - b</code> : <code>a.__sub__(b)</code></li>
+  <li> <code>a*b</code> : <code>a.__mul__(b)</code></li>
+  <li> <code>a/b</code> : <code>a.__div__(b)</code></li>
+  <li> <code>a**b</code> : <code>a.__pow__(b)</code></li>
+</ul>
+
+Some other special methods are also often useful:
+
+<ul>
+  <li> the length of <code>a</code>, <code>len(a)</code>: <code>a.__len__()</code></li>
+  <li> the absolute value of <code>a</code>, <code>abs(a)</code>: <code>a.__abs__()</code></li>
+  <li> <code>a == b</code> : <code>a.__eq__(b)</code></li>
+  <li> <code>a &gt; b</code> : <code>a.__gt__(b)</code></li>
+  <li> <code>a &gt;= b</code> : <code>a.__ge__(b)</code></li>
+  <li> <code>a &lt; b</code> : <code>a.__lt__(b)</code></li>
+  <li> <code>a &lt;= b</code> : <code>a.__le__(b)</code></li>
+  <li> <code>a != b</code> : <code>a.__ne__(b)</code></li>
+  <li> <code>-a</code> : <code>a.__neg__()</code></li>
+  <li> evaluating <code>a</code> as a boolean expression (as in the test <code>if a:</code>) implies calling the special method <code>a.__bool__()</code>, which must return <code>True</code> or <code>False</code> - if <code>__bool__</code> is not defined, <code>__len__</code> is called to see if the length is zero (<code>False</code>) or not (<code>True</code>)</li>
+</ul>
+
+We can implement such methods in class <code>Polynomial</code>, see <a href="._class-solarized008.html#sec:class:ex6a">Exercise 25: Implement subtraction of polynomials</a>.  The section <a href="._class-solarized004.html#sec:class:Vec2D">Example: Class for vectors in the plane</a> contains
+examples on implementing the special methods listed above.
+
+<h2>Special methods for string conversion <a name="sec:class:repr"></a></h2>
+
+<p>
+Look at this class with a <code>__str__</code> method:
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; class MyClass:
+...     def __init__(self):
+...         self.data = 2
+...     def __str__(self):
+...         return 'In __str__: %s' % str(self.data)
+...
+&gt;&gt;&gt; a = MyClass()
+&gt;&gt;&gt; print a
+In __str__: 2
+</code></pre>
+<!-- end verbatim block -->
+Hopefully, you understand well why we get this output (if not, go back to
+the section <a href="#sec:class:str">Turning an instance into a string</a>).
+
+<p>
+But what will happen
+if we write just <code>a</code> at the command prompt in an interactive shell?
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; a
+&lt;__main__.MyClass instance at 0xb75125ac&gt;
+</code></pre>
+<!-- end verbatim block -->
+When writing just <code>a</code> in an interactive session,
+Python looks for a special method
+<code>__repr__</code> in <code>a</code>. This method is similar to
+<code>__str__</code> in that it turns the instance into a string,
+but there is a convention that <code>__str__</code> is a pretty print
+of the instance contents while <code>__repr__</code> is a complete
+representation of the contents of the instance. For a lot of
+Python classes, including <code>int</code>, <code>float</code>, <code>complex</code>,
+<code>list</code>, <code>tuple</code>, and <code>dict</code>, <code>__repr__</code>
+and <code>__str__</code> give identical output. In our class <code>MyClass</code>
+the <code>__repr__</code> is missing, and we need to add it if we want
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; a
+</code></pre>
+<!-- end verbatim block -->
+to write the contents like <code>print a</code> does.
+
+<p>
+Given an instance <code>a</code>, <code>str(a)</code> implies calling
+<code>a.__str__()</code> and <code>repr(a)</code> implies calling
+<code>a.__repr__()</code>. This means that
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; a
+</code></pre>
+<!-- end verbatim block -->
+is actually a <code>repr(a)</code> call and
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; print a
+</code></pre>
+<!-- end verbatim block -->
+is actually a <code>print str(a)</code> statement.
+
+<p>
+A simple remedy in class <code>MyClass</code> is to define
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>def __repr__(self):
+    return self.__str__()  # or return str(self)
+</code></pre>
+<!-- end verbatim block -->
+However, as we explain below, the <code>__repr__</code> is best defined
+differently.
+
+<h3>Recreating objects from strings  <a name="___sec46"></a></h3>
+
+<p>
+The Python function <code>eval(e)</code> evaluates a valid Python expression
+contained in the string
+<code>e</code>, see the section ref{sec:input:eval}.
+It is a convention that <code>__repr__</code> returns a string such that
+<code>eval</code> applied to the string recreates the instance.
+For example, in case of the <code>Y</code> class
+from the section <a href="._class-solarized001.html#sec:class:func2">Representing a function as a class</a>, <code>__repr__</code>
+should return <code>'Y(10)'</code> if the <code>v0</code> variable has the value <code>10</code>.
+Then <code>eval('Y(10)')</code> will be the same as if we had coded
+<code>Y(10)</code> directly in the program or an interactive session.
+
+<p>
+Below we show examples of <code>__repr__</code> methods in classes <code>Y</code>
+(the section <a href="._class-solarized001.html#sec:class:func2">Representing a function as a class</a>),
+<code>Polynomial</code> (the section <a href="#sec:class:Polynomial">Example: Class for polynomials</a>),
+and <code>MyClass</code> (above):
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>class Y:
+    ...
+    def __repr__(self):
+        return 'Y(v0=%s)' % self.v0
+
+class Polynomial:
+    ...
+    def __repr__(self):
+        return 'Polynomial(coefficients=%s)' % self.coeff
+
+class MyClass:
+    ...
+    def __repr__(self):
+        return 'MyClass()'
+</code></pre>
+<!-- end verbatim block -->
+With these definitions, <code>eval(repr(x))</code> recreates the object <code>x</code>
+if it is of one of the three types above.
+In particular, we can write <code>x</code> to file and later recreate the
+<code>x</code> from the file information:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code># somefile is some file object
+somefile.write(repr(x))
+somefile.close()
+...
+data = somefile.readline()
+x2 = eval(data)  # recreate object
+</code></pre>
+<!-- end verbatim block -->
+Now, <code>x2</code> will be equal to <code>x</code> (<code>x2 == x</code> evaluates to <code>True</code>).
+
+<p>
+<p>
+<!-- begin bottom navigation -->
+<table style="width: 100%"><tr><td>
+<div style="text-align: left;"><a href="._class-solarized002.html">&laquo; Previous</a></div>
+</td><td>
+<div style="text-align: right;"><a href="._class-solarized004.html">Next &raquo;</a></div>
+</td></tr></table>
+<!-- end bottom navigation -->
+</p>
+
+<!-- ------------------- end of main content --------------- -->
+
+
+</body>
+</html>
+    
+

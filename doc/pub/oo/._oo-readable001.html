@@ -1,0 +1,936 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Object-oriented programming">
+<meta name="keywords" content="object-based programming,class hierarchy,class relationship superclass,class relationship derived class,class relationship inheritance,derived class,parent class,base class,superclass,subclass,class relationship subclass,Online Python Tutor,check an object's type,is-a class relationship,has-a class relationship,class relationship is-a,class relationship has-a,dynamic binding,factory function,closure,functional programming,Midpoint rule for integration,Trapezoidal rule for integration,overloading (of methods),polymorphism,Midpoint rule for integration,Trapezoidal rule for integration,recursive function calls,multiple inheritance,convergence rate,Trapezoidal rule for integration,Midpoint rule for integration,object-oriented programming">
+
+<title>Object-oriented programming</title>
+
+<!-- Bootstrap style: bootswatch_readable -->
+<link href="http://netdna.bootstrapcdn.com/bootswatch/3.1.1/readable/bootstrap.min.css" rel="stylesheet">
+<!-- not necessary
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+
+<style type="text/css">
+/* Let inline verbatim have the same color as the surroundings */
+code { color: inherit; background-color: transparent; }
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [(' Inheritance and class hierarchies ',
+               1,
+               'sec:oo:inheritance',
+               'sec:oo:inheritance'),
+              (' A class for straight lines ',
+               2,
+               'sec:oo:Line',
+               'sec:oo:Line'),
+              (' A first try on a class for parabolas ',
+               2,
+               'sec:oo:Parabola1',
+               'sec:oo:Parabola1'),
+              (' A class for parabolas using inheritance ',
+               2,
+               None,
+               '___sec3'),
+              (' Program flow ', 3, None, '___sec4'),
+              (' Checking the class type ', 2, None, '___sec5'),
+              (' Attribute vs inheritance: has-a vs is-a relationship ',
+               2,
+               None,
+               '___sec6'),
+              (' Superclass for defining an interface ',
+               2,
+               'sec:oo:Func',
+               'sec:oo:Func'),
+              (' Class hierarchy for numerical differentiation ',
+               1,
+               'sec:oo:numdiff',
+               'sec:oo:numdiff'),
+              (' Classes for differentiation ',
+               2,
+               'sec:oo:Diff',
+               'sec:oo:Diff'),
+              (' Computer science remark ', 3, None, '___sec10'),
+              (' Verification ', 2, None, '___sec11'),
+              (' A flexible main program ', 2, None, '___sec12'),
+              (' Extensions ', 2, 'sec:oo:Diff:extend', 'sec:oo:Diff:extend'),
+              (' Application ', 3, None, '___sec14'),
+              (' Alternative implementation via functions ',
+               2,
+               'sec:oo:diff:alt:func',
+               'sec:oo:diff:alt:func'),
+              (' Alternative implementation via functional programming ',
+               2,
+               'sec:oo:diff:alt:FP',
+               'sec:oo:diff:alt:FP'),
+              (' Alternative implementation via a single class ',
+               2,
+               'sec:oo:diff:oneclass',
+               'sec:oo:diff:oneclass'),
+              (' Remark ', 3, None, '___sec18'),
+              (' Class hierarchy for numerical integration ',
+               1,
+               'sec:oo:int',
+               'sec:oo:int'),
+              (' Numerical integration methods ',
+               2,
+               'sec:oo:int:methods',
+               'sec:oo:int:methods'),
+              (' Classes for integration ',
+               2,
+               'sec:oo:Integrator',
+               'sec:oo:Integrator'),
+              (' Verification ', 2, None, '___sec22'),
+              (' Using the class hierarchy ', 2, None, '___sec23'),
+              (' About object-oriented programming ', 2, None, '___sec24'),
+              (' Class hierarchy for making drawings ',
+               1,
+               'sec:oo:shapes',
+               'sec:oo:shapes'),
+              (' Using the object collection ', 2, None, '___sec26'),
+              (' Basic drawing ', 3, None, '___sec27'),
+              (' Groups of objects ', 3, None, '___sec28'),
+              (' Changing line styles and colors ', 3, None, '___sec29'),
+              (' The figure composition as an object hierarchy ',
+               3,
+               None,
+               '___sec30'),
+              (' Animation: translating the vehicle ', 3, None, '___sec31'),
+              (' Animation: rolling the wheels ',
+               3,
+               'sketcher:vehicle1:anim',
+               'sketcher:vehicle1:anim'),
+              (' Example of classes for geometric objects ',
+               2,
+               None,
+               '___sec33'),
+              (' Simple geometric objects ', 3, None, '___sec34'),
+              (' Class curve ', 3, None, '___sec35'),
+              (' Compound geometric objects ', 3, None, '___sec36'),
+              (' Adding functionality via recursion ', 2, None, '___sec37'),
+              (' Basic principles of recursion ', 3, None, '___sec38'),
+              (' Explaining recursion ', 3, None, '___sec39'),
+              (' Scaling, translating, and rotating a figure ',
+               2,
+               'sketcher:scaling',
+               'sketcher:scaling'),
+              (' Scaling ', 3, None, '___sec41'),
+              (' Translation ', 3, None, '___sec42'),
+              (' Rotation ', 3, None, '___sec43'),
+              (' Classes for DNA analysis ', 1, 'bioinf:oo', 'bioinf:oo'),
+              (' Class for regions ', 2, None, '___sec45'),
+              (' Class for genes ', 2, None, '___sec46'),
+              (' Basic features of class gene ', 3, None, '___sec47'),
+              (' Flexible constructor ', 3, None, '___sec48'),
+              (' Other methods ', 3, None, '___sec49'),
+              (' Subclasses ', 2, None, '___sec50'),
+              (' Summary ', 1, None, '___sec51'),
+              (' Chapter topics ', 2, None, '___sec52'),
+              (' Subclass example ', 3, None, '___sec53'),
+              (' Subclassing in general ', 3, None, '___sec54'),
+              (' Terminology ', 3, None, '___sec55'),
+              (' Example: Input data reader ',
+               2,
+               'sec:oo:ReadInput',
+               'sec:oo:ReadInput'),
+              (' Problem ', 3, None, '___sec57'),
+              (' Solution ', 3, None, '___sec58'),
+              (' Prompting the user ', 3, None, '___sec59'),
+              (' Reading from file ', 3, None, '___sec60'),
+              (' Reading from the command line ', 3, None, '___sec61'),
+              (' Reading from a gui ', 3, None, '___sec62'),
+              (' More flexibility in the superclass ', 3, None, '___sec63'),
+              (' Demonstrating the tool ', 3, None, '___sec64'),
+              (' Exercises ', 1, None, '___sec65'),
+              (' Exercise 1: Demonstrate the magic of inheritance ',
+               2,
+               'sec:oo:ex1',
+               'sec:oo:ex1'),
+              (' Exercise 2: Make polynomial subclasses of parabolas ',
+               2,
+               'sec:oo:ex2',
+               'sec:oo:ex2'),
+              (' Remarks ', 3, None, '___sec68'),
+              (' Exercise 3: Implement a class for a function as a subclass ',
+               2,
+               'sec:oo:ex3',
+               'sec:oo:ex3'),
+              (' Exercise 4: Create an alternative class hierarchy for polynomials ',
+               2,
+               'sec:oo:ex5',
+               'sec:oo:ex5'),
+              (' Exercise 5: Make circle a subclass of an ellipse ',
+               2,
+               'sec:oo:ex5b',
+               'sec:oo:ex5b'),
+              (' Exercise 6: Make super- and subclass for a point ',
+               2,
+               'sec:oo:ex17',
+               'sec:oo:ex17'),
+              (' Exercise 7: Modify a function class by subclassing ',
+               2,
+               'sec:oo:ex7',
+               'sec:oo:ex7'),
+              (' Exercise 8: Explore the accuracy of difference formulas ',
+               2,
+               'sec:oo:ex18',
+               'sec:oo:ex18'),
+              (' Exercise 9: Implement a subclass ',
+               2,
+               'sec:oo:ex15b',
+               'sec:oo:ex15b'),
+              (' Exercise 10: Make classes for numerical differentiation ',
+               2,
+               'sec:oo:ex33',
+               'sec:oo:ex33'),
+              (' Exercise 11: Implement a new subclass for differentiation ',
+               2,
+               'sec:oo:ex31',
+               'sec:oo:ex31'),
+              (' Exercise 12: Understand if a class can be used recursively ',
+               2,
+               'sec:oo:ex14',
+               'sec:oo:ex14'),
+              (' Exercise 13: Represent people by a class hierarchy ',
+               2,
+               'sec:oo:ex4',
+               'sec:oo:ex4'),
+              (' Remark ', 3, None, '___sec80'),
+              (' Exercise 14: Add a new class in a class hierarchy ',
+               2,
+               'sec:oo:ex15',
+               'sec:oo:ex15'),
+              (' Exercise 15: Compute convergence rates of numerical integration methods ',
+               2,
+               'sec:oo:ex16',
+               'sec:oo:ex16'),
+              (' Exercise 16: Add common functionality in a class hierarchy ',
+               2,
+               'sec:oo:ex6',
+               'sec:oo:ex6'),
+              (' Exercise 17: Make a class hierarchy for root finding ',
+               2,
+               'sec:oo:ex41',
+               'sec:oo:ex41'),
+              (' Exercise 18: Make a calculus calculator class ',
+               2,
+               'sec:plot:ex30',
+               'sec:plot:ex30'),
+              (' Exercise 19: Compute inverse functions ',
+               2,
+               'sec:plot:ex30b',
+               'sec:plot:ex30b'),
+              (' Exercise 20: Make line drawing of a person; program ',
+               2,
+               'pysketcher:exer:person:prog',
+               'pysketcher:exer:person:prog'),
+              (' Exercise 21: Make line drawing of a person; class ',
+               2,
+               'pysketcher:exer:person:class',
+               'pysketcher:exer:person:class'),
+              (' Exercise 22: Animate a person with waving hands ',
+               2,
+               'pysketcher:exer:person:anim',
+               'pysketcher:exer:person:anim'),
+              (' References ', 1, None, '___sec90')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- newcommands_keep.tex -->
+$$
+\newcommand{\tp}{\thinspace .}
+$$
+
+
+
+
+    
+<!-- Bootstrap navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="oo-readable.html">Object-oriented programming</a>
+  </div>
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     <!-- navigation toc: --> <li><a href="#sec:oo:inheritance" style="font-size: 80%;">Inheritance and class hierarchies</a></li>
+     <!-- navigation toc: --> <li><a href="._oo-readable002.html#sec:oo:numdiff" style="font-size: 80%;">Class hierarchy for numerical differentiation</a></li>
+     <!-- navigation toc: --> <li><a href="._oo-readable003.html#sec:oo:int" style="font-size: 80%;">Class hierarchy for numerical integration</a></li>
+     <!-- navigation toc: --> <li><a href="._oo-readable004.html#sec:oo:shapes" style="font-size: 80%;">Class hierarchy for making drawings</a></li>
+     <!-- navigation toc: --> <li><a href="._oo-readable004.html#bioinf:oo" style="font-size: 80%;">Classes for DNA analysis</a></li>
+     <!-- navigation toc: --> <li><a href="._oo-readable005.html#___sec51" style="font-size: 80%;">Summary</a></li>
+     <!-- navigation toc: --> <li><a href="._oo-readable006.html#___sec65" style="font-size: 80%;">Exercises</a></li>
+     <!-- navigation toc: --> <li><a href="._oo-readable006.html#___sec90" style="font-size: 80%;">References</a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div> <!-- end of navigation bar -->
+
+<div class="container">
+
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+
+<a name="part0001"></a>
+<!-- !split -->
+
+<h1 id="sec:oo:inheritance">Inheritance and class hierarchies<a name="sec:oo:inheritance"></a></h1>
+
+<p>
+Most of this document tells you how to put related classes together
+in families such that the family can be viewed as one unit.  This idea
+helps to hide details in a program, and makes it easier to modify or
+extend the program.
+
+<p>
+A family of classes is known as a <em>class hierarchy</em>.  As in a
+biological family, there are parent classes and child classes.  Child
+classes can <em>inherit</em> data and methods from parent classes, they can
+modify these data and methods, and they can add their own data and
+methods. This means that if we have a class with some functionality,
+we can extend this class by creating a child class and simply add the
+functionality we need. The original class is still available and the
+separate child class is small, since it does not need to repeat the
+code in the parent class.
+
+<p>
+The magic of object-oriented programming is that other parts of the
+code do not need to distinguish whether an object is the parent or the
+child - all generations in a family tree can be treated as a unified
+object. In other words, one piece of code can work with all members in
+a class family or hierarchy.  This principle has revolutionized the
+development of large computer systems. As an illustration, two of the
+most widely used computer languages today are Java and <code>C#</code>, and both
+of them force programs to be written in an object-oriented style.
+
+<p>
+The concepts of classes and object-oriented programming first appeared
+in the Simula programming language in the 1960s. Simula was invented
+by the Norwegian computer scientists Ole-Johan Dahl and Kristen
+Nygaard, and the impact of the language is particularly evident in
+C++, Java, and C#, three of the most dominating programming languages
+in the world today.  The invention of object-oriented programming was
+a remarkable achievement, and the professors Dahl and Nygaard received
+two very prestigious prizes: the von Neumann medal and the Turing
+prize (popularly known as the Nobel prize of computer science).
+
+<p>
+A parent class is usually called <em>base class</em> or <em>superclass</em>, while
+the child class is known as a <em>subclass</em> or <em>derived class</em>.  We shall
+use the terms superclass and subclass from now on.
+
+<h2 id="sec:oo:Line">A class for straight lines<a name="sec:oo:Line"></a></h2>
+
+<p>
+Assume that we have written a class for straight lines, \( y=c_0 + c_1x \):
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Line</span>:
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__init__</span>(<span style="color: #008000">self</span>, c0, c1):
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>c0 <span style="color: #666666">=</span> c0
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>c1 <span style="color: #666666">=</span> c1
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__call__</span>(<span style="color: #008000">self</span>, x):
+        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>c0 <span style="color: #666666">+</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>c1<span style="color: #666666">*</span>x
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">table</span>(<span style="color: #008000">self</span>, L, R, n):
+        <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Return a table with n points for L &lt;= x &lt;= R.&quot;&quot;&quot;</span>
+        s <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;&#39;</span>
+        <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
+        <span style="color: #008000; font-weight: bold">for</span> x <span style="color: #AA22FF; font-weight: bold">in</span> np<span style="color: #666666">.</span>linspace(L, R, n):
+            y <span style="color: #666666">=</span> <span style="color: #008000">self</span>(x)
+            s <span style="color: #666666">+=</span> <span style="color: #BA2121">&#39;</span><span style="color: #BB6688; font-weight: bold">%12g</span><span style="color: #BA2121"> </span><span style="color: #BB6688; font-weight: bold">%12g</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> (x, y)
+        <span style="color: #008000; font-weight: bold">return</span> s
+</pre></div>
+<p>
+The constructor <code>__init__</code> initializes the coefficients \( c_0 \) and
+\( c_1 \) in the expression for the straight line: \( y=c_0 + c_1x \).  The
+call operator <code>__call__</code> evaluates the function \( c_1x+c_0 \), while the
+<code>table</code> method samples the function at <code>n</code> points and creates a table
+of \( x \) and \( y \) values.
+
+<h2 id="sec:oo:Parabola1">A first try on a class for parabolas<a name="sec:oo:Parabola1"></a></h2>
+
+<p>
+A parabola \( y=c_0 + c_1x + c_2x^2 \) contains a straight line as a
+special case (\( c_2=0 \)). A class for parabolas will therefore be
+similar to a class for straight lines. All we have do to is to add the
+new term \( c_2x^2 \) in the function evaluation and store \( c_2 \) in the
+constructor:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Parabola</span>:
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__init__</span>(<span style="color: #008000">self</span>, c0, c1, c2):
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>c0 <span style="color: #666666">=</span> c0
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>c1 <span style="color: #666666">=</span> c1
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>c2 <span style="color: #666666">=</span> c2
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__call__</span>(<span style="color: #008000">self</span>, x):
+        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>c2<span style="color: #666666">*</span>x<span style="color: #666666">**2</span> <span style="color: #666666">+</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>c1<span style="color: #666666">*</span>x <span style="color: #666666">+</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>c0
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">table</span>(<span style="color: #008000">self</span>, L, R, n):
+        <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Return a table with n points for L &lt;= x &lt;= R.&quot;&quot;&quot;</span>
+        s <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;&#39;</span>
+        <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
+        <span style="color: #008000; font-weight: bold">for</span> x <span style="color: #AA22FF; font-weight: bold">in</span> np<span style="color: #666666">.</span>linspace(L, R, n):
+            y <span style="color: #666666">=</span> <span style="color: #008000">self</span>(x)
+            s <span style="color: #666666">+=</span> <span style="color: #BA2121">&#39;</span><span style="color: #BB6688; font-weight: bold">%12g</span><span style="color: #BA2121"> </span><span style="color: #BB6688; font-weight: bold">%12g</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> (x, y)
+        <span style="color: #008000; font-weight: bold">return</span> s
+</pre></div>
+<p>
+Observe that we can copy the <code>table</code> method from class <code>Line</code>
+without any modifications.
+
+<h2 id="___sec3">A class for parabolas using inheritance <a name="___sec3"></a></h2>
+
+<p>
+Python and other languages that support object-oriented programming
+have a special construct, so that class <code>Parabola</code> does not need
+to repeat the code that we have already written in class <code>Line</code>.
+We can specify that class <code>Parabola</code> <em>inherits</em> all code from class
+<code>Line</code> by adding <code>(Line)</code> in the class headline:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Parabola</span>(Line):
+</pre></div>
+<p>
+Class <code>Parabola</code> now automatically gets all the code from class
+<code>Line</code>. <a href="._oo-readable006.html#sec:oo:ex1">Exercise 1: Demonstrate the magic of inheritance</a> asks you to explicitly demonstrate
+the validity of this assertion.  We say that class <code>Parabola</code> is
+<em>derived</em> from class <code>Line</code>, or equivalently, that class <code>Parabola</code> is
+a subclass of its superclass <code>Line</code>.
+
+<p>
+Now, class <code>Parabola</code> should not be identical to class <code>Line</code>: it
+needs to add data in the constructor (for the new term) and to modify
+the call operator (because of the new term), but the <code>table</code> method
+can be inherited as it is.  If we implement the constructor and the
+call operator in class <code>Parabola</code>, these will <em>override</em> the inherited
+versions from class <code>Line</code>. If we do not implement a <code>table</code> method,
+the one inherited from class <code>Line</code> is available as if it were coded
+visibly in class <code>Parabola</code>.
+
+<p>
+Class <code>Parabola</code> must first have the statements from the class <code>Line</code>
+methods <code>__call__</code> and <code>__init__</code>, and then add extra code in these
+methods. An important principle in computer programming is to avoid
+repeating code. We should therefore call up functionality in class
+<code>Line</code> instead of copying statements from class <code>Line</code> methods to
+<code>Parabola</code> methods.  Any method in the superclass <code>Line</code> can be called
+using the syntax
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">Line<span style="color: #666666">.</span>methodname(<span style="color: #008000">self</span>, arg1, arg2, <span style="color: #666666">...</span>)
+<span style="color: #408080; font-style: italic"># or</span>
+<span style="color: #008000">super</span>(Parabola, <span style="color: #008000">self</span>)<span style="color: #666666">.</span>methodname(arg1, arg2, <span style="color: #666666">...</span>)
+</pre></div>
+<p>
+The latter construction only works if the super class is derived from
+Python's general super class <code>object</code> (i.e., class <code>Line</code> must be a
+new-style class).
+
+<p>
+Let us now show how to write class <code>Parabola</code> as a subclass of class
+<code>Line</code>, and implement just the new additional code that we need and
+that is not already written in the superclass:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Parabola</span>(Line):
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__init__</span>(<span style="color: #008000">self</span>, c0, c1, c2):
+        Line<span style="color: #666666">.</span>__init__(<span style="color: #008000">self</span>, c0, c1)  <span style="color: #408080; font-style: italic"># let Line store c0 and c1</span>
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>c2 <span style="color: #666666">=</span> c2
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__call__</span>(<span style="color: #008000">self</span>, x):
+        <span style="color: #008000; font-weight: bold">return</span> Line<span style="color: #666666">.</span>__call__(<span style="color: #008000">self</span>, x) <span style="color: #666666">+</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>c2<span style="color: #666666">*</span>x<span style="color: #666666">**2</span>
+</pre></div>
+<p>
+This short implementation of class <code>Parabola</code> provides exactly the
+same functionality as the first version of class <code>Parabola</code> that
+we showed in the section <a href="#sec:oo:Parabola1">A first try on a class for parabolas</a> and that did not inherit
+from class <code>Line</code>. Figure <a href="#fig:oo:Parabola:fig">1</a> shows the
+class hierarchy in UML fashion. The arrow from one class to another
+indicates inheritance.
+
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 1:  UML diagram for the class hierarchy with superclass <code>Line</code>   and subclass <code>Parabola</code>. <a name="fig:oo:Parabola:fig"></a> </p></center>
+<p><img src="fig-oo/lumpy_Parabola_hier.png" align="bottom" width=400></p>
+</center>
+
+<p>
+A quick demo of the <code>Parabola</code> class in a main program,
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">p <span style="color: #666666">=</span> Parabola(<span style="color: #666666">1</span>, <span style="color: #666666">-2</span>, <span style="color: #666666">2</span>)
+p1 <span style="color: #666666">=</span> p(x<span style="color: #666666">=2.5</span>)
+<span style="color: #008000; font-weight: bold">print</span> p1
+<span style="color: #008000; font-weight: bold">print</span> p<span style="color: #666666">.</span>table(<span style="color: #666666">0</span>, <span style="color: #666666">1</span>, <span style="color: #666666">3</span>)
+</pre></div>
+<p>
+gives this output:
+
+<p>
+
+<!-- code=text (!bc ccq) typeset with pygments style "default" -->
+<blockquote>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">8.5
+           0            1
+         0.5          0.5
+           1            1
+</pre></div>
+</blockquote><h3 id="___sec4">Program flow <a name="___sec4"></a></h3>
+
+<p>
+The program flow can be somewhat complicated when we work with class
+hierarchies. Consider the code segment
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">p <span style="color: #666666">=</span> Parabola(<span style="color: #666666">1</span>, <span style="color: #666666">-1</span>, <span style="color: #666666">2</span>)
+p1 <span style="color: #666666">=</span> p(x<span style="color: #666666">=2.5</span>)
+</pre></div>
+<p>
+Let us explain the program flow in detail for these two statements.
+As always, you can monitor the program flow in a debugger as explained
+in the document <a href="http://tcse6.on.net/debug" target="_self">Debugging in Python</a> <a href="._oo-readable006.html#Langtangen_TCSE6_debug">[1]</a> or you can
+invoke the very illustrative <a href="http://www.pythontutor.com/" target="_self">Online Python Tutor</a>.
+
+<p>
+Calling <code>Parabola(1, -1, 2)</code> leads to a call to the constructor method
+<code>__init__</code>, where the arguments <code>c0</code>, <code>c1</code>, and <code>c2</code> in this case are
+<code>int</code> objects with values 1, -1, and 2.  The <code>self</code> argument in the
+constructor is the object that will be returned and referred to by the
+variable <code>p</code>.  Inside the constructor in class <code>Parabola</code> we call the
+constructor in class <code>Line</code>. In this latter method, we create two
+attributes in the <code>self</code> object. Printing out <code>dir(self)</code> will
+explicitly demonstrate what <code>self</code> contains so far in the construction
+process.  Back in class <code>Parabola</code>'s constructor, we add a third
+attribute <code>c2</code> to the same <code>self</code> object.  Then the <code>self</code> object is
+invisibly returned and referred to by <code>p</code>.
+
+<p>
+The other statement, <code>p1 = p(x=2.5)</code>, has a similar program
+flow. First we enter the <code>p.__call__</code> method with <code>self</code> as <code>p</code> and
+<code>x</code> as a <code>float</code> object with value 2.5.  The program flow jumps to the
+<code>__call__</code> method in class <code>Line</code> for evaluating the linear part
+\( c_1x+c_0 \) of the expression for the parabola, and then the flow jumps
+back to the <code>__call__</code> method in class <code>Parabola</code> where we add the new
+quadratic term.
+
+<h2 id="___sec5">Checking the class type <a name="___sec5"></a></h2>
+
+<p>
+Python has the function <code>isinstance(i,t)</code> for checking if an
+instance <code>i</code> is of class type <code>t</code>:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> l <span style="color: #666666">=</span> Line(<span style="color: #666666">-1</span>, <span style="color: #666666">1</span>)
+<span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000">isinstance</span>(l, Line)
+<span style="color: #008000">True</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000">isinstance</span>(l, Parabola)
+<span style="color: #008000">False</span>
+</pre></div>
+<p>
+A <code>Line</code> is not a <code>Parabola</code>, but is a <code>Parabola</code> a
+<code>Line</code>?
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> p <span style="color: #666666">=</span> Parabola(<span style="color: #666666">-1</span>, <span style="color: #666666">0</span>, <span style="color: #666666">10</span>)
+<span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000">isinstance</span>(p, Parabola)
+<span style="color: #008000">True</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000">isinstance</span>(p, Line)
+<span style="color: #008000">True</span>
+</pre></div>
+<p>
+Yes, from a class hierarchy perspective, a <code>Parabola</code>
+instance is regarded as a
+<code>Line</code> instance too, since it contains everything that a <code>Line</code>
+instance contains.
+
+<p>
+Every instance has an attribute <code>__class__</code> that holds the
+type of class:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> p<span style="color: #666666">.</span>__class__
+<span style="color: #666666">&lt;</span><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">__main__</span><span style="color: #666666">.</span>Parabola at <span style="color: #666666">0xb68f108c&gt;</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> p<span style="color: #666666">.</span>__class__ <span style="color: #666666">==</span> Parabola
+<span style="color: #008000">True</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> p<span style="color: #666666">.</span>__class__<span style="color: #666666">.</span>__name__   <span style="color: #408080; font-style: italic"># string version of the class name</span>
+<span style="color: #BA2121">&#39;Parabola&#39;</span>
+</pre></div>
+<p>
+Note that <code>p.__class__</code> is a <code>class</code> object (or class
+definition one may say), while <code>p.__class__.__name__</code>
+is a string.
+These two variables can be used as an alternative test for
+the class type:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">if</span> p<span style="color: #666666">.</span>__class__<span style="color: #666666">.</span>__name__ <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;Parabola&#39;</span>:
+    <span style="color: #666666">...</span>
+<span style="color: #408080; font-style: italic"># or</span>
+<span style="color: #008000; font-weight: bold">if</span> p<span style="color: #666666">.</span>__class__ <span style="color: #666666">==</span> Parabola:
+    <span style="color: #666666">...</span>
+</pre></div>
+<p>
+However, <code>isinstance(p, Parabola)</code> is the recommended programming style
+for checking the type of an object.
+
+<p>
+A function
+<code>issubclass(c1, c2)</code> tests if class <code>c1</code> is a subclass of class
+<code>c2</code>, e.g.,
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000">issubclass</span>(Parabola, Line)
+<span style="color: #008000">True</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000">issubclass</span>(Line, Parabola)
+<span style="color: #008000">False</span>
+</pre></div>
+<p>
+The superclasses of a class are stored as a tuple in the
+<code>__bases__</code> attribute of the class object:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> p<span style="color: #666666">.</span>__class__<span style="color: #666666">.</span>__bases__
+(<span style="color: #666666">&lt;</span><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">__main__</span><span style="color: #666666">.</span>Line at <span style="color: #666666">0xb7c5d2fc&gt;</span>,)
+<span style="color: #666666">&gt;&gt;&gt;</span> p<span style="color: #666666">.</span>__class__<span style="color: #666666">.</span>__bases__[<span style="color: #666666">0</span>]<span style="color: #666666">.</span>__name__  <span style="color: #408080; font-style: italic"># extract name as string</span>
+<span style="color: #BA2121">&#39;Line&#39;</span>
+</pre></div>
+
+<h2 id="___sec6">Attribute vs inheritance: has-a vs is-a relationship <a name="___sec6"></a></h2>
+
+<p>
+Instead of letting class <code>Parabola</code>
+inherit from a class <code>Line</code>, we may let it <em>contain</em> a
+class <code>Line</code> instance as an attribute:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Parabola</span>:
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__init__</span>(<span style="color: #008000">self</span>, c0, c1, c2):
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>line <span style="color: #666666">=</span> Line(c0, c1)  <span style="color: #408080; font-style: italic"># let Line store c0 and c1</span>
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>c2 <span style="color: #666666">=</span> c2
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__call__</span>(<span style="color: #008000">self</span>, x):
+        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>line(x) <span style="color: #666666">+</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>c2<span style="color: #666666">*</span>x<span style="color: #666666">**2</span>
+</pre></div>
+<p>
+Whether to use inheritance or an attribute depends on the problem
+being solved.
+
+<p>
+If it is natural to say that class <code>Parabola</code> <em>is</em> a <code>Line</code> object, we
+say that <code>Parabola</code> has an <em>is-a relationship</em> with class
+<code>Line</code>. Alternatively, if it is natural to think that class <code>Parabola</code>
+<em>has a</em> <code>Line</code> object, we speak about a <em>has-a relationship</em> with
+class <code>Line</code>.  In the present example, we may argue that technically
+the expression for the parabola <em>is a</em> straight line plus another term
+and hence claim an is-a relationship, but we can also view a parabola
+as a quantity that <em>has a</em> line plus an extra term, which makes the
+<em>has-a</em> relationship relevant.
+
+<p>
+From a mathematical point of view, many will say that a parabola <em>is
+not</em> a line, but that a line is a special case of a parabola.
+Adopting this reasoning reverses the dependency of the classes: now it
+is more natural to let <code>Line</code> is a subclass of <code>Parabola</code> (<code>Line</code> <em>is
+a</em> <code>Parabola</code>).  This easy, and all we have to do is
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Parabola</span>:
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__init__</span>(<span style="color: #008000">self</span>, c0, c1, c2):
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>c0, <span style="color: #008000">self</span><span style="color: #666666">.</span>c1, <span style="color: #008000">self</span><span style="color: #666666">.</span>c2 <span style="color: #666666">=</span> c0, c2, c2
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__call__</span>(<span style="color: #008000">self</span>, x):
+        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>c0 <span style="color: #666666">+</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>c1<span style="color: #666666">*</span>x <span style="color: #666666">+</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>c2<span style="color: #666666">*</span>x<span style="color: #666666">**2</span>
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">table</span>(<span style="color: #008000">self</span>, L, R, n):  <span style="color: #408080; font-style: italic"># implemented as shown above</span>
+
+<span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Line</span>(Parabola):
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__init__</span>(<span style="color: #008000">self</span>, c0, c1):
+        Parabola<span style="color: #666666">.</span>__init__(<span style="color: #008000">self</span>, c0, c1, <span style="color: #666666">0</span>)
+</pre></div>
+<p>
+The inherited <code>__call__</code> method from class <code>Parabola</code> will
+work since the <code>c2</code> coefficient is zero.
+<a href="._oo-readable006.html#sec:oo:ex5">Exercise 4: Create an alternative class hierarchy for polynomials</a> suggests deriving <code>Parabola</code> from
+a general class <code>Polynomial</code> and asks you to discuss the alternative class
+designs.
+
+<p>
+<div class="alert alert-block alert-success alert-text-normal"><b>Extension and restriction of a superclass.</b>
+In the example where <code>Parabola</code> as a subclass of <code>Line</code>, we
+used inheritance to <em>extend</em> the functionality of the superclass.
+The case where <code>Line</code> is a subclass of <code>Parabola</code> is an example on
+<em>restricting</em> the superclass functionality in a subclass.
+</div>
+
+
+<p>
+How classes depend on each other is influenced by two factors: sharing
+of code and logical relations. From a sharing of code perspective,
+many will say that class <code>Parabola</code> is naturally a subclass of <code>Line</code>,
+the former adds code to the latter.  On the other hand, <code>Line</code> is
+naturally a subclass of <code>Parabola</code> from the logical relations in
+mathematics.  Computational efficiency is a third perspective when we
+implement mathematics.  When <code>Line</code> is a subclass of <code>Parabola</code> we
+always evaluate the \( c_2x^2 \) term in the parabola although this term
+is zero.  Nevertheless, when <code>Parabola</code> is a subclass of <code>Line</code>, we
+call <code>Line.__call__</code> to evaluate the linear part of the second-degree
+polynomial, and this call is costly in Python.  From a pure efficiency
+point of view, we would reprogram the linear part in
+<code>Parabola.__call__</code> (which is against the programming habit we have
+been arguing for!). This little discussion here highlights the many
+different considerations that come into play when establishing class
+relations.
+
+<h2 id="sec:oo:Func">Superclass for defining an interface<a name="sec:oo:Func"></a></h2>
+
+<p>
+As another example of class hierarchies, we now want to represent
+functions by classes, as described in the document
+<a href="http://tcse6.on.net/class" target="_self">Introduction to classes in Python</a>
+<a href="._oo-readable006.html#Langtangen_TCSE6_class">[2]</a>, but in addition to the <code>__call__</code>
+method, we also want to provide methods for the first and second
+derivative. The class can be sketched as
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">SomeFunc</span>:
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__init__</span>(<span style="color: #008000">self</span>, parameter1, parameter2, <span style="color: #666666">...</span>)
+        <span style="color: #408080; font-style: italic"># Store parameters</span>
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__call__</span>(<span style="color: #008000">self</span>, x):
+        <span style="color: #408080; font-style: italic"># Evaluate function</span>
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">df</span>(<span style="color: #008000">self</span>, x):
+        <span style="color: #408080; font-style: italic"># Evaluate the first derivative</span>
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">ddf</span>(<span style="color: #008000">self</span>, x):
+        <span style="color: #408080; font-style: italic"># Evaluate the second derivative</span>
+</pre></div>
+<p>
+For a given function, the analytical expressions for first and second
+derivative must be manually coded. However, we could think of
+inheriting general functions for computing these derivatives
+numerically, such that the only thing we must always implement is the
+function itself. To realize this idea, we create a superclass
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">FuncWithDerivatives</span>:
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__init__</span>(<span style="color: #008000">self</span>, h<span style="color: #666666">=1.0E-5</span>):
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>h <span style="color: #666666">=</span> h  <span style="color: #408080; font-style: italic"># spacing for numerical derivatives</span>
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__call__</span>(<span style="color: #008000">self</span>, x):
+        <span style="color: #008000; font-weight: bold">raise</span> <span style="color: #D2413A; font-weight: bold">NotImplementedError</span>\ 
+        (<span style="color: #BA2121">&#39;___call__ missing in class </span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>__class__<span style="color: #666666">.</span>__name__)
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">df</span>(<span style="color: #008000">self</span>, x):
+        <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Return the 1st derivative of self.f.&quot;&quot;&quot;</span>
+        <span style="color: #408080; font-style: italic"># Compute first derivative by a finite difference</span>
+        h <span style="color: #666666">=</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>h
+        <span style="color: #008000; font-weight: bold">return</span> (<span style="color: #008000">self</span>(x<span style="color: #666666">+</span>h) <span style="color: #666666">-</span> <span style="color: #008000">self</span>(x<span style="color: #666666">-</span>h))<span style="color: #666666">/</span>(<span style="color: #666666">2.0*</span>h)
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">ddf</span>(<span style="color: #008000">self</span>, x):
+        <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Return the 2nd derivative of self.f.&quot;&quot;&quot;</span>
+        <span style="color: #408080; font-style: italic"># Compute second derivative by a finite difference:</span>
+        h <span style="color: #666666">=</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>h
+        <span style="color: #008000; font-weight: bold">return</span> (<span style="color: #008000">self</span>(x<span style="color: #666666">+</span>h) <span style="color: #666666">-</span> <span style="color: #666666">2*</span><span style="color: #008000">self</span>(x) <span style="color: #666666">+</span> <span style="color: #008000">self</span>(x<span style="color: #666666">-</span>h))<span style="color: #666666">/</span>(<span style="color: #008000">float</span>(h)<span style="color: #666666">**2</span>)
+</pre></div>
+<p>
+This class is only meant as a superclass of other classes.
+For a particular function, say \( f(x)=\cos (ax)+x^3 \), we represent it by
+a subclass:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">MyFunc</span>(FuncWithDerivatives):
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__init__</span>(<span style="color: #008000">self</span>, a):
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>a <span style="color: #666666">=</span> a
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__call__</span>(<span style="color: #008000">self</span>, x):
+        <span style="color: #008000; font-weight: bold">return</span> cos(<span style="color: #008000">self</span><span style="color: #666666">.</span>a<span style="color: #666666">*</span>x) <span style="color: #666666">+</span> x<span style="color: #666666">**3</span>
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">df</span>(<span style="color: #008000">self</span>, x):
+        a <span style="color: #666666">=</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>a
+        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #666666">-</span>a<span style="color: #666666">*</span>sin(a<span style="color: #666666">*</span>x) <span style="color: #666666">+</span> <span style="color: #666666">3*</span>x<span style="color: #666666">**2</span>
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">ddf</span>(<span style="color: #008000">self</span>, x):
+        a <span style="color: #666666">=</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>a
+        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #666666">-</span>a<span style="color: #666666">*</span>a<span style="color: #666666">*</span>cos(a<span style="color: #666666">*</span>x) <span style="color: #666666">+</span> <span style="color: #666666">6*</span>x
+</pre></div>
+<p>
+The superclass constructor is never called, hence <code>h</code> is never
+initialized, and there are no possibilities for using numerical
+approximations via the superclass methods
+<code>df</code> and <code>ddf</code>.
+Instead, we override all the inherited methods and implement our own
+versions.
+
+<p>
+<div class="alert alert-block alert-success alert-text-normal"><b>Tip.</b>
+Many think it is a good programming style
+to always call the superclass constructor in a subclass constructor,
+even in simple classes where
+we do not need the functionality of the superclass constructor.
+</div>
+
+
+<p>
+For a more complicated function, e.g., \( f(x)=\ln |p\tanh(qx\cos rx)| \),
+we may skip the analytical derivation of the derivatives, and just code
+\( f(x) \) and rely on the difference approximations inherited from the
+superclass to compute the derivatives:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">MyComplicatedFunc</span>(FuncWithDerivatives):
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__init__</span>(<span style="color: #008000">self</span>, p, q, r, h<span style="color: #666666">=1.0E-5</span>):
+        FuncWithDerivatives<span style="color: #666666">.</span>__init__(<span style="color: #008000">self</span>, h)
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>p, <span style="color: #008000">self</span><span style="color: #666666">.</span>q, <span style="color: #008000">self</span><span style="color: #666666">.</span>r <span style="color: #666666">=</span> p, q, r
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__call__</span>(<span style="color: #008000">self</span>, x):
+        <span style="color: #008000; font-weight: bold">return</span> log(<span style="color: #008000">abs</span>(<span style="color: #008000">self</span><span style="color: #666666">.</span>p<span style="color: #666666">*</span>tanh(<span style="color: #008000">self</span><span style="color: #666666">.</span>q<span style="color: #666666">*</span>x<span style="color: #666666">*</span>cos(<span style="color: #008000">self</span><span style="color: #666666">.</span>r<span style="color: #666666">*</span>x))))
+</pre></div>
+<p>
+That's it! We are now ready to use this class:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> f <span style="color: #666666">=</span> MyComplicatedFunc(<span style="color: #666666">1</span>, <span style="color: #666666">1</span>, <span style="color: #666666">1</span>)
+<span style="color: #666666">&gt;&gt;&gt;</span> x <span style="color: #666666">=</span> pi<span style="color: #666666">/2</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> f(x)
+<span style="color: #666666">-36.880306514638988</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> f<span style="color: #666666">.</span>df(x)
+<span style="color: #666666">-60.593693618216086</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> f<span style="color: #666666">.</span>ddf(x)
+<span style="color: #666666">3.3217246931444789e+19</span>
+</pre></div>
+<p>
+Class <code>MyComplicatedFunc</code> inherits the <code>df</code> and <code>ddf</code> methods from the
+superclass <code>FuncWithDerivatives</code>. These methods compute the first and
+second derivatives approximately, provided that we have defined a
+<code>__call__</code> method. If we fail to define this method, we will inherit
+<code>__call__</code> from the superclass, which just raises an exception, saying
+that the method is not properly implemented in class
+<code>MyComplicatedFunc</code>.
+
+<p>
+The important message in this subsection is that we introduced a super
+class to mainly define an <em>interface</em>, i.e., the operations (in terms
+of methods) that one can do with a class in this class hierarchy. The
+superclass itself is of no direct use, since it does not implement any
+function evaluation in the <code>__call__</code> method. However, it stores a
+variable common to all subclasses (<code>h</code>), and it implements general
+methods <code>df</code> and <code>ddf</code> that any subclass can make use of.  A specific
+mathematical function must be represented as a subclass, where the
+programmer can decide whether analytical derivatives are to be used,
+or if the more lazy approach of inheriting general functionality (<code>df</code>
+and <code>ddf</code>) for computing numerical derivatives is satisfactory.
+
+<p>
+In object-oriented programming, the superclass very often defines an
+interface, and instances of the superclass have no applications on
+their own - only instances of subclasses can do anything useful.
+
+<p>
+To digest the present material on inheritance, we recommend doing <a href="._oo-readable006.html#sec:oo:ex1">Exercise 1: Demonstrate the magic of inheritance</a>-<a href="._oo-readable006.html#sec:oo:ex5">Exercise 4: Create an alternative class hierarchy for polynomials</a> before reading the next section.
+
+<p>
+<p>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pager">
+  <li class="previous">
+    <a href="._oo-readable000.html">&larr; Prev</a>
+  </li>
+  <li class="next">
+    <a href="._oo-readable002.html">Next &rarr;</a>
+  </li>
+</ul>
+<!-- ------------------- end of main content --------------- -->
+
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap footer
+<footer>
+<a href="http://..."><img width="250" align=right src="http://..."></a>
+</footer>
+-->
+
+
+</body>
+</html>
+    
+

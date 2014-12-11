@@ -1,0 +1,591 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="User input and error handling">
+<meta name="keywords" content="command-line arguments,option-value pairs (command line),standard input,standard output,standard error,bytes,bits,exceptions,widgets,event loop,modules,test block (in module files),test function,nose tests,pytest tests,search for module files,module folders,refactoring,binomial distribution,Bernoulli trials,Poisson distribution,Poisson process">
+
+<title>User input and error handling</title>
+
+
+<link href="https://raw.githubusercontent.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/css/solarized_light_code.css" rel="stylesheet" type="text/css" title="light"/>
+<script src="https://rawgit.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<link href="http://thomasf.github.io/solarized-css/solarized-light.min.css" rel="stylesheet">
+<style type="text/css">
+h1 {color: #b58900;}  /* yellow */
+/* h1 {color: #cb4b16;}  orange */
+/* h1 {color: #d33682;}  magenta, the original choice of thomasf */
+.alert-text-small   { font-size: 80%;  }
+.alert-text-large   { font-size: 130%; }
+.alert-text-normal  { font-size: 90%;  }
+.alert {
+  padding:8px 35px 8px 14px; margin-bottom:18px;
+  text-shadow:0 1px 0 rgba(255,255,255,0.5);
+  border:1px solid #93a1a1;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  color: #555;
+  background-color: #eee8d5;
+  background-position: 10px 5px;
+  background-repeat: no-repeat;
+  background-size: 38px;
+  padding-left: 55px;
+  width: 75%;
+ }
+.alert-block {padding-top:14px; padding-bottom:14px}
+.alert-block > p, .alert-block > ul {margin-bottom:1em}
+.alert li {margin-top: 1em}
+.alert-block p+p {margin-top:5px}
+.alert-notice { background-image: url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_notice.png); }
+.alert-summary  { background-image:url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_summary.png); }
+.alert-warning { background-image: url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_warning.png); }
+.alert-question {background-image:url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_question.png); }
+
+div { text-align: justify; text-justify: inter-word; }
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [(' Asking questions and reading answers ',
+               1,
+               'sec:input:rawinput',
+               'sec:input:rawinput'),
+              (' Reading keyboard input ',
+               2,
+               'sec:input:rawinput2',
+               'sec:input:rawinput2'),
+              (' Reading from the command line ',
+               1,
+               'sec:input:sysargv',
+               'sec:input:sysargv'),
+              (' Providing input on the command line ',
+               2,
+               'sec:input:cml',
+               'sec:input:cml'),
+              (' A variable number of command-line arguments ',
+               2,
+               None,
+               '___sec4'),
+              (' More on command-line arguments ', 2, None, '___sec5'),
+              (' Turning user text into live objects ', 1, None, '___sec6'),
+              (' The magic eval function ',
+               2,
+               'sec:input:eval',
+               'sec:input:eval'),
+              (' Applying eval to strings ', 3, None, '___sec8'),
+              (' Applying eval to user input ', 3, None, '___sec9'),
+              (' The magic exec function ',
+               2,
+               'sec:input:exec',
+               'sec:input:exec'),
+              (' Turning string expressions into functions ',
+               2,
+               'sec:input:StringFunction',
+               'sec:input:StringFunction'),
+              (' Option-value pairs on the command line ',
+               1,
+               'sec:input:argparse',
+               'sec:input:argparse'),
+              (' Basic usage of the argparse module ', 2, None, '___sec13'),
+              (' Mathematical expressions as values ', 2, None, '___sec14'),
+              (' Reading data from file ',
+               1,
+               'sec:files:reading',
+               'sec:files:reading'),
+              (' Reading a file line by line ', 2, None, '___sec16'),
+              (' Alternative ways of reading a file ',
+               2,
+               'sec:files:reading:other',
+               'sec:files:reading:other'),
+              (' The modern with statement ', 3, None, '___sec18'),
+              (' The old while construction ', 3, None, '___sec19'),
+              (' Reading a file into a string ', 3, None, '___sec20'),
+              (' Reading a mixture of text and numbers ',
+               2,
+               'sec:files:textnum',
+               'sec:files:textnum'),
+              (' Is it more to file reading? ', 3, None, '___sec22'),
+              (' Writing data to file ',
+               1,
+               'sec:files:writing',
+               'sec:files:writing'),
+              (' Example: Writing a table to file ', 2, None, '___sec24'),
+              (' Problem ', 3, None, '___sec25'),
+              (' Solution ', 3, None, '___sec26'),
+              (' Standard input and output as file objects ',
+               2,
+               None,
+               '___sec27'),
+              (' Redirecting standard input, output, and error ',
+               3,
+               None,
+               '___sec28'),
+              (' Note ', 3, None, '___sec29'),
+              (' What is a file, really? ',
+               2,
+               'sec:files:really',
+               'sec:files:really'),
+              (' Pure text files ', 3, None, '___sec31'),
+              (' Word processor files ', 3, None, '___sec32'),
+              (' Image files ', 3, None, '___sec33'),
+              (' Music files ', 3, None, '___sec34'),
+              (' PDF files ', 3, None, '___sec35'),
+              (' Remarks ', 3, None, '___sec36'),
+              (' Handling errors ',
+               1,
+               'sec:input:except',
+               'sec:input:except'),
+              (' Exception handling ',
+               2,
+               'sec:input:except:handling',
+               'sec:input:except:handling'),
+              (' Testing for a specific exception ', 3, None, '___sec39'),
+              (' Examples on exception types ', 3, None, '___sec40'),
+              (' Digression ', 3, None, '___sec41'),
+              (' Raising exceptions ', 2, None, '___sec42'),
+              (' Example ', 3, None, '___sec43'),
+              (' A glimpse of graphical user interfaces ',
+               1,
+               'sec:input:GUI',
+               'sec:input:GUI'),
+              (' Making modules ',
+               1,
+               'sec:input:modules',
+               'sec:input:modules'),
+              (' Example: Interest on bank deposits ', 2, None, '___sec46'),
+              (' Collecting functions in a module file ',
+               2,
+               'sec:input:module:create',
+               'sec:input:module:create'),
+              (' Test block ',
+               2,
+               'sec:input:module:testblock',
+               'sec:input:module:testblock'),
+              (' Example on a test block in a minimalistic module ',
+               3,
+               None,
+               '___sec49'),
+              (' A test block in the `interest` module ',
+               3,
+               None,
+               '___sec50'),
+              (' Verification of the module code ',
+               2,
+               'sec:input:modules:testfunc',
+               'sec:input:modules:testfunc'),
+              (' Getting input data ',
+               2,
+               'sec:input:modules:inputdata',
+               'sec:input:modules:inputdata'),
+              (' Doc strings in modules ', 2, None, '___sec53'),
+              (' Using modules ',
+               2,
+               'sec:input:modules:usage',
+               'sec:input:modules:usage'),
+              (' What gets imported by various import statements? ',
+               3,
+               None,
+               '___sec55'),
+              (' How to make Python find a module file ',
+               3,
+               None,
+               '___sec56'),
+              (' How to make Python run the module file ',
+               3,
+               None,
+               '___sec57'),
+              (' Distributing modules ',
+               2,
+               'sec:input:modules:setuppy',
+               'sec:input:modules:setuppy'),
+              (' Making software available on the Internet ',
+               2,
+               None,
+               '___sec59'),
+              (' Summary ', 1, 'sec:input:summary', 'sec:input:summary'),
+              (' Chapter topics ',
+               2,
+               'sec:input:summary:topics',
+               'sec:input:summary:topics'),
+              (' Question and answer input ', 3, None, '___sec62'),
+              (' Getting command-line arguments ', 3, None, '___sec63'),
+              (' Using option-value pairs ', 3, None, '___sec64'),
+              (' Generating code on the fly ', 3, None, '___sec65'),
+              (' Turning string formulas into Python functions ',
+               3,
+               None,
+               '___sec66'),
+              (' File operations ', 3, None, '___sec67'),
+              (' Handling exceptions ', 3, None, '___sec68'),
+              (' Raising exceptions ', 3, None, '___sec69'),
+              (' Modules ', 3, None, '___sec70'),
+              (' Terminology ', 3, None, '___sec71'),
+              (' Example: Bisection root finding ',
+               2,
+               'sec:input:summarizingex',
+               'sec:input:summarizingex'),
+              (' Problem ', 3, None, '___sec73'),
+              (' Solution ', 3, None, '___sec74'),
+              (' Verification ', 3, None, '___sec75'),
+              (' Making a function ', 3, None, '___sec76'),
+              (' Making a test function ', 3, None, '___sec77'),
+              (' Making a module ', 3, None, '___sec78'),
+              (' Defining a user interface ', 3, None, '___sec79'),
+              (' Using the module ', 3, None, '___sec80'),
+              (' Potential problems with the software ', 3, None, '___sec81'),
+              (' Distributing the bisection module to others ',
+               3,
+               None,
+               '___sec82'),
+              (' Exercises ', 1, None, '___sec83'),
+              (' Exercise 1: Make an interactive program ',
+               2,
+               'sec:input:ex24',
+               'sec:input:ex24'),
+              (' Exercise 2: Read a number from the command line ',
+               2,
+               'sec:input:ex24b',
+               'sec:input:ex24b'),
+              (' Exercise 3: Read a number from a file ',
+               2,
+               'sec:input:ex24bfile',
+               'sec:input:ex24bfile'),
+              (' Exercise 4: Read and write several numbers from and to file ',
+               2,
+               'sec:input:ex24bfile2',
+               'sec:input:ex24bfile2'),
+              (' Exercise 5: Use exceptions to handle wrong input ',
+               2,
+               'sec:input:ex24c',
+               'sec:input:ex24c'),
+              (' Exercise 6: Read input from the keyboard ',
+               2,
+               'sec:input:ex25',
+               'sec:input:ex25'),
+              (' Exercise 7: Read input from the command line ',
+               2,
+               'sec:input:ex26',
+               'sec:input:ex26'),
+              (' Exercise 8: Try MSWord or LibreOffice to write a program ',
+               2,
+               'sec:files:ex7',
+               'sec:files:ex7'),
+              (' Exercise 9: Prompt the user for input to a formula ',
+               2,
+               'sec:input:ex6',
+               'sec:input:ex6'),
+              (' Exercise 10: Read parameters in a formula from the command line ',
+               2,
+               'sec:input:ex5',
+               'sec:input:ex5'),
+              (' Exercise 11: Use exceptions to handle wrong input ',
+               2,
+               'sec:input:ex8b',
+               'sec:input:ex8b'),
+              (' Exercise 12: Test validity of input data ',
+               2,
+               'sec:input:ex7',
+               'sec:input:ex7'),
+              (' Exercise 13: Raise an exception in case of wrong input ',
+               2,
+               'sec:input:ex8',
+               'sec:input:ex8'),
+              (' Exercise 14: Evaluate a formula for data in a file ',
+               2,
+               'sec:input:ex:ball:file',
+               'sec:input:ex:ball:file'),
+              (' Exercise 15: Compute the distance it takes to stop a car ',
+               2,
+               'sec:input:ex21',
+               'sec:input:ex21'),
+              (' Exercise 16: Look up calendar functionality ',
+               2,
+               'sec:input:ex48',
+               'sec:input:ex48'),
+              (' Exercise 17: Use the StringFunction tool ',
+               2,
+               'sec:input:ex28b',
+               'sec:input:ex28b'),
+              (' Exercise 18: Why we test for specific exception types ',
+               2,
+               'sec:input:ex11',
+               'sec:input:ex11'),
+              (' Exercise 19: Make a complete module ',
+               2,
+               'sec:input:ex27',
+               'sec:input:ex27'),
+              (' Exercise 20: Check if mathematical identities hold ',
+               2,
+               'sec:input:ex2',
+               'sec:input:ex2'),
+              (' Exercise 21: Compute probabilities with the binomial distribution ',
+               2,
+               'sec:input:ex15',
+               'sec:input:ex15'),
+              (' Exercise 22: Compute probabilities with the Poisson distribution ',
+               2,
+               'sec:input:ex16',
+               'sec:input:ex16'),
+              (' References ', 1, None, '___sec106')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- newcommands_keep.tex -->
+$$
+\newcommand{\tp}{\thinspace .}
+$$
+
+
+
+
+    
+<a name="part0002"></a>
+<p>
+<!-- begin top navigation -->
+<table style="width: 100%"><tr><td>
+<div style="text-align: left;"><a href="._input-solarized001.html">&laquo; Previous</a></div>
+</td><td>
+<div style="text-align: right;"><a href="._input-solarized003.html">Next &raquo;</a></div>
+</td></tr></table>
+<!-- end top navigation -->
+</p>
+
+<p>
+<!-- !split -->
+
+<h1>Reading from the command line <a name="sec:input:sysargv"></a></h1>
+
+<p>
+Programs running on Unix computers usually avoid asking the user questions.
+Instead, input data are very often
+fetched from the <em>command line</em>.
+This section explains how we can access information on the command line
+in Python programs.
+
+<h2>Providing input on the command line <a name="sec:input:cml"></a></h2>
+
+<p>
+We look at the Celsius-Fahrenheit conversion program again.  The idea
+now is to provide the Celsius input temperature as a <em>command-line
+argument</em> right after the program name. This means that we write the
+program name, here <a href="http://tinyurl.com/pwyasaa/c2f_cml.py" target="_self"><tt>c2f_cml.py</tt></a> (<code>cml</code>
+for <em>command line</em>), followed the Celsius temperature:
+
+<p>
+<!-- begin verbatim block  sys-->
+<pre><code>c2f_cml.py 21
+69.8
+</code></pre>
+<!-- end verbatim block -->
+Inside the program we can fetch the text <code>21</code> as <code>sys.argv[1]</code>. The
+<code>sys</code> module has a list <code>argv</code> containing all the command-line
+arguments to the program, i.e., all the &quot;words&quot; appearing after the
+program name when we run the program.  In the present case there is
+only one argument and it is stored in <code>sys.argv[1]</code>.  The first
+element in the <code>sys.argv</code> list, <code>sys.argv[0]</code>, is always the name of
+the program.
+
+<p>
+A command-line argument is treated as a text, so <code>sys.argv[1]</code> refers
+to a string object, in this case <code>'21'</code>.  Since we interpret the
+command-line argument as a number and want to compute with it, it is
+necessary to explicitly convert the string to a <code>float</code> object. In the
+program we therefore write
+
+<p>
+<!-- begin verbatim block  pypro-->
+<pre><code>import sys
+C = float(sys.argv[1])
+F = 9.0*C/5 + 32
+print F
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+As another example, consider the program
+
+<p>
+<!-- begin verbatim block  pypro-->
+<pre><code>v0 = 5
+g = 9.81
+t = 0.6
+y = v0*t - 0.5*g*t**2
+print y
+</code></pre>
+<!-- end verbatim block -->
+for computing the formula \( y(t)=v_0t - \frac{1}{2}gt^2 \).  Instead of
+hardcoding the values of <code>v0</code> and <code>t</code> in the program we can read the
+two values from the command line:
+
+<p>
+<!-- begin verbatim block  sys-->
+<pre><code>ball2_cml.py 0.6 5
+1.2342
+</code></pre>
+<!-- end verbatim block -->
+The two command-line arguments are now available as <code>sys.argv[1]</code>
+and <code>sys.argv[2]</code>.
+The complete <a href="http://tinyurl.com/pwyasaa/input/ball2_cml.py" target="_self"><tt>ball2_cml.py</tt></a>
+program thus takes the form
+
+<p>
+<!-- begin verbatim block  pypro-->
+<pre><code>import sys
+t  = float(sys.argv[1])
+v0 = float(sys.argv[2])
+g = 9.81
+y = v0*t - 0.5*g*t**2
+print y
+</code></pre>
+<!-- end verbatim block -->
+
+<h2>A variable number of command-line arguments  <a name="___sec4"></a></h2>
+
+<p>
+Let us make a program <code>addall.py</code> that adds all its command-line arguments.
+That is, we may run something like
+
+<p>
+<!-- begin verbatim block  sys-->
+<pre><code>addall.py 1 3 5 -9.9
+The sum of 1 3 5 -9.9 is -0.9
+</code></pre>
+<!-- end verbatim block -->
+The command-line arguments are stored in the sublist <code>sys.argv[1:]</code>.
+Each element is a string so we must perform a conversion to <code>float</code>
+before performing the addition. There are many ways to write
+this program. Let us start with version 1, <code>addall_v1.py</code>:
+
+<p>
+<!-- begin verbatim block  pypro-->
+<pre><code>import sys
+s = 0
+for arg in sys.argv[1:]:
+    number = float(arg)
+    s += number
+print 'The sum of ',
+for arg in sys.argv[1:]:
+    print arg,
+print 'is ', s
+</code></pre>
+<!-- end verbatim block -->
+The output is on one line, but built of several <code>print</code> statements
+with a comma at the end to prevent the usual
+newline character that <code>print</code> otherwise adds to the text.
+The command-line arguments must be converted to numbers in the first
+<code>for</code> loop because we need to compute with them, but in the second
+loop we only need to print them and then the string representation
+is appropriate.
+
+<p>
+The program above can be written more compactly if desired:
+<a name="sec:input:join"></a>
+
+<p>
+<!-- begin verbatim block  pypro-->
+<pre><code>import sys
+s = sum([float(x) for x in sys.argv[1:]])
+print 'The sum of %s is %s' % (' '.join(sys.argv[1:]), s)
+</code></pre>
+<!-- end verbatim block -->
+Here, we convert the list <code>sys.argv[1:]</code> to a list of
+<code>float</code> objects and then pass this list to Python's
+<code>sum</code> function for adding the numbers.
+The construction <code>S.join(L)</code> places all the elements in the list
+<code>L</code> after each other with the string <code>S</code> in between. The
+result here is a string with all the elements in <code>sys.argv[1:]</code>
+and a space in between, which is the text that originally appeared on
+the command line.
+
+<h2>More on command-line arguments  <a name="___sec5"></a></h2>
+
+<p>
+Unix commands make heavy use of command-line arguments.  For example,
+when you write <code>ls -s -t</code> to list the files in the current folder, you
+run the program <code>ls</code> with two command-line arguments: <code>-s</code> and
+<code>-t</code>. The former specifies that <code>ls</code> is to print the file name
+together with the size of the file, and the latter sorts the list of
+files according to their dates of last modification.  Similarly, <code>cp
+-r my new</code> for copying a folder tree <code>my</code> to a new folder tree <code>new</code>
+invokes the <code>cp</code> program with three command line arguments: <code>-r</code> (for
+recursive copying of files), <code>my</code>, and <code>new</code>. Most programming
+languages have support for extracting the command-line arguments given
+to a program.
+
+<p>
+An important rule is that
+<em>command-line arguments are separated by blanks</em>. What if we want to
+provide a text containing blanks as command-line argument?
+The text containing blanks must then appear inside single or double
+quotes. Let us demonstrate this with a program that simply prints
+the command-line arguments:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>import sys, pprint
+pprint.pprint(sys.argv[1:])
+</code></pre>
+<!-- end verbatim block -->
+Say this program is named <code>print_cml.py</code>. The execution
+
+<p>
+<!-- begin verbatim block  sys-->
+<pre><code>print_cml.py 21 a string with blanks 31.3
+['21', 'a', 'string', 'with', 'blanks', '31.3']
+</code></pre>
+<!-- end verbatim block -->
+demonstrates that each word on the command line becomes an element
+in <code>sys.argv</code>. Enclosing strings in quotes, as in
+
+<p>
+<!-- begin verbatim block  sys-->
+<pre><code>print_cml.py 21 &quot;a string with blanks&quot; 31.3
+['21', 'a string with blanks', '31.3']
+</code></pre>
+<!-- end verbatim block -->
+shows that the text inside the quotes becomes a single command line
+argument.
+
+<p>
+<p>
+<!-- begin bottom navigation -->
+<table style="width: 100%"><tr><td>
+<div style="text-align: left;"><a href="._input-solarized001.html">&laquo; Previous</a></div>
+</td><td>
+<div style="text-align: right;"><a href="._input-solarized003.html">Next &raquo;</a></div>
+</td></tr></table>
+<!-- end bottom navigation -->
+</p>
+
+<!-- ------------------- end of main content --------------- -->
+
+
+</body>
+</html>
+    
+

@@ -1,0 +1,1004 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="User input and error handling">
+<meta name="keywords" content="command-line arguments,option-value pairs (command line),standard input,standard output,standard error,bytes,bits,exceptions,widgets,event loop,modules,test block (in module files),test function,nose tests,pytest tests,search for module files,module folders,refactoring,binomial distribution,Bernoulli trials,Poisson distribution,Poisson process">
+
+<title>User input and error handling</title>
+
+<!-- Bootstrap style: bootstrap_bluegray -->
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://raw.github.com/hplgit/doconce/master/bundled/html_styles/style_bootstrap/css/bootstrap_bluegray.css" rel="stylesheet">
+<!-- not necessary
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+
+<style type="text/css">
+/* Let inline verbatim have the same color as the surroundings */
+code { color: inherit; background-color: transparent; }
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [(' Asking questions and reading answers ',
+               1,
+               'sec:input:rawinput',
+               'sec:input:rawinput'),
+              (' Reading keyboard input ',
+               2,
+               'sec:input:rawinput2',
+               'sec:input:rawinput2'),
+              (' Reading from the command line ',
+               1,
+               'sec:input:sysargv',
+               'sec:input:sysargv'),
+              (' Providing input on the command line ',
+               2,
+               'sec:input:cml',
+               'sec:input:cml'),
+              (' A variable number of command-line arguments ',
+               2,
+               None,
+               '___sec4'),
+              (' More on command-line arguments ', 2, None, '___sec5'),
+              (' Turning user text into live objects ', 1, None, '___sec6'),
+              (' The magic eval function ',
+               2,
+               'sec:input:eval',
+               'sec:input:eval'),
+              (' Applying eval to strings ', 3, None, '___sec8'),
+              (' Applying eval to user input ', 3, None, '___sec9'),
+              (' The magic exec function ',
+               2,
+               'sec:input:exec',
+               'sec:input:exec'),
+              (' Turning string expressions into functions ',
+               2,
+               'sec:input:StringFunction',
+               'sec:input:StringFunction'),
+              (' Option-value pairs on the command line ',
+               1,
+               'sec:input:argparse',
+               'sec:input:argparse'),
+              (' Basic usage of the argparse module ', 2, None, '___sec13'),
+              (' Mathematical expressions as values ', 2, None, '___sec14'),
+              (' Reading data from file ',
+               1,
+               'sec:files:reading',
+               'sec:files:reading'),
+              (' Reading a file line by line ', 2, None, '___sec16'),
+              (' Alternative ways of reading a file ',
+               2,
+               'sec:files:reading:other',
+               'sec:files:reading:other'),
+              (' The modern with statement ', 3, None, '___sec18'),
+              (' The old while construction ', 3, None, '___sec19'),
+              (' Reading a file into a string ', 3, None, '___sec20'),
+              (' Reading a mixture of text and numbers ',
+               2,
+               'sec:files:textnum',
+               'sec:files:textnum'),
+              (' Is it more to file reading? ', 3, None, '___sec22'),
+              (' Writing data to file ',
+               1,
+               'sec:files:writing',
+               'sec:files:writing'),
+              (' Example: Writing a table to file ', 2, None, '___sec24'),
+              (' Problem ', 3, None, '___sec25'),
+              (' Solution ', 3, None, '___sec26'),
+              (' Standard input and output as file objects ',
+               2,
+               None,
+               '___sec27'),
+              (' Redirecting standard input, output, and error ',
+               3,
+               None,
+               '___sec28'),
+              (' Note ', 3, None, '___sec29'),
+              (' What is a file, really? ',
+               2,
+               'sec:files:really',
+               'sec:files:really'),
+              (' Pure text files ', 3, None, '___sec31'),
+              (' Word processor files ', 3, None, '___sec32'),
+              (' Image files ', 3, None, '___sec33'),
+              (' Music files ', 3, None, '___sec34'),
+              (' PDF files ', 3, None, '___sec35'),
+              (' Remarks ', 3, None, '___sec36'),
+              (' Handling errors ',
+               1,
+               'sec:input:except',
+               'sec:input:except'),
+              (' Exception handling ',
+               2,
+               'sec:input:except:handling',
+               'sec:input:except:handling'),
+              (' Testing for a specific exception ', 3, None, '___sec39'),
+              (' Examples on exception types ', 3, None, '___sec40'),
+              (' Digression ', 3, None, '___sec41'),
+              (' Raising exceptions ', 2, None, '___sec42'),
+              (' Example ', 3, None, '___sec43'),
+              (' A glimpse of graphical user interfaces ',
+               1,
+               'sec:input:GUI',
+               'sec:input:GUI'),
+              (' Making modules ',
+               1,
+               'sec:input:modules',
+               'sec:input:modules'),
+              (' Example: Interest on bank deposits ', 2, None, '___sec46'),
+              (' Collecting functions in a module file ',
+               2,
+               'sec:input:module:create',
+               'sec:input:module:create'),
+              (' Test block ',
+               2,
+               'sec:input:module:testblock',
+               'sec:input:module:testblock'),
+              (' Example on a test block in a minimalistic module ',
+               3,
+               None,
+               '___sec49'),
+              (' A test block in the `interest` module ',
+               3,
+               None,
+               '___sec50'),
+              (' Verification of the module code ',
+               2,
+               'sec:input:modules:testfunc',
+               'sec:input:modules:testfunc'),
+              (' Getting input data ',
+               2,
+               'sec:input:modules:inputdata',
+               'sec:input:modules:inputdata'),
+              (' Doc strings in modules ', 2, None, '___sec53'),
+              (' Using modules ',
+               2,
+               'sec:input:modules:usage',
+               'sec:input:modules:usage'),
+              (' What gets imported by various import statements? ',
+               3,
+               None,
+               '___sec55'),
+              (' How to make Python find a module file ',
+               3,
+               None,
+               '___sec56'),
+              (' How to make Python run the module file ',
+               3,
+               None,
+               '___sec57'),
+              (' Distributing modules ',
+               2,
+               'sec:input:modules:setuppy',
+               'sec:input:modules:setuppy'),
+              (' Making software available on the Internet ',
+               2,
+               None,
+               '___sec59'),
+              (' Summary ', 1, 'sec:input:summary', 'sec:input:summary'),
+              (' Chapter topics ',
+               2,
+               'sec:input:summary:topics',
+               'sec:input:summary:topics'),
+              (' Question and answer input ', 3, None, '___sec62'),
+              (' Getting command-line arguments ', 3, None, '___sec63'),
+              (' Using option-value pairs ', 3, None, '___sec64'),
+              (' Generating code on the fly ', 3, None, '___sec65'),
+              (' Turning string formulas into Python functions ',
+               3,
+               None,
+               '___sec66'),
+              (' File operations ', 3, None, '___sec67'),
+              (' Handling exceptions ', 3, None, '___sec68'),
+              (' Raising exceptions ', 3, None, '___sec69'),
+              (' Modules ', 3, None, '___sec70'),
+              (' Terminology ', 3, None, '___sec71'),
+              (' Example: Bisection root finding ',
+               2,
+               'sec:input:summarizingex',
+               'sec:input:summarizingex'),
+              (' Problem ', 3, None, '___sec73'),
+              (' Solution ', 3, None, '___sec74'),
+              (' Verification ', 3, None, '___sec75'),
+              (' Making a function ', 3, None, '___sec76'),
+              (' Making a test function ', 3, None, '___sec77'),
+              (' Making a module ', 3, None, '___sec78'),
+              (' Defining a user interface ', 3, None, '___sec79'),
+              (' Using the module ', 3, None, '___sec80'),
+              (' Potential problems with the software ', 3, None, '___sec81'),
+              (' Distributing the bisection module to others ',
+               3,
+               None,
+               '___sec82'),
+              (' Exercises ', 1, None, '___sec83'),
+              (' Exercise 1: Make an interactive program ',
+               2,
+               'sec:input:ex24',
+               'sec:input:ex24'),
+              (' Exercise 2: Read a number from the command line ',
+               2,
+               'sec:input:ex24b',
+               'sec:input:ex24b'),
+              (' Exercise 3: Read a number from a file ',
+               2,
+               'sec:input:ex24bfile',
+               'sec:input:ex24bfile'),
+              (' Exercise 4: Read and write several numbers from and to file ',
+               2,
+               'sec:input:ex24bfile2',
+               'sec:input:ex24bfile2'),
+              (' Exercise 5: Use exceptions to handle wrong input ',
+               2,
+               'sec:input:ex24c',
+               'sec:input:ex24c'),
+              (' Exercise 6: Read input from the keyboard ',
+               2,
+               'sec:input:ex25',
+               'sec:input:ex25'),
+              (' Exercise 7: Read input from the command line ',
+               2,
+               'sec:input:ex26',
+               'sec:input:ex26'),
+              (' Exercise 8: Try MSWord or LibreOffice to write a program ',
+               2,
+               'sec:files:ex7',
+               'sec:files:ex7'),
+              (' Exercise 9: Prompt the user for input to a formula ',
+               2,
+               'sec:input:ex6',
+               'sec:input:ex6'),
+              (' Exercise 10: Read parameters in a formula from the command line ',
+               2,
+               'sec:input:ex5',
+               'sec:input:ex5'),
+              (' Exercise 11: Use exceptions to handle wrong input ',
+               2,
+               'sec:input:ex8b',
+               'sec:input:ex8b'),
+              (' Exercise 12: Test validity of input data ',
+               2,
+               'sec:input:ex7',
+               'sec:input:ex7'),
+              (' Exercise 13: Raise an exception in case of wrong input ',
+               2,
+               'sec:input:ex8',
+               'sec:input:ex8'),
+              (' Exercise 14: Evaluate a formula for data in a file ',
+               2,
+               'sec:input:ex:ball:file',
+               'sec:input:ex:ball:file'),
+              (' Exercise 15: Compute the distance it takes to stop a car ',
+               2,
+               'sec:input:ex21',
+               'sec:input:ex21'),
+              (' Exercise 16: Look up calendar functionality ',
+               2,
+               'sec:input:ex48',
+               'sec:input:ex48'),
+              (' Exercise 17: Use the StringFunction tool ',
+               2,
+               'sec:input:ex28b',
+               'sec:input:ex28b'),
+              (' Exercise 18: Why we test for specific exception types ',
+               2,
+               'sec:input:ex11',
+               'sec:input:ex11'),
+              (' Exercise 19: Make a complete module ',
+               2,
+               'sec:input:ex27',
+               'sec:input:ex27'),
+              (' Exercise 20: Check if mathematical identities hold ',
+               2,
+               'sec:input:ex2',
+               'sec:input:ex2'),
+              (' Exercise 21: Compute probabilities with the binomial distribution ',
+               2,
+               'sec:input:ex15',
+               'sec:input:ex15'),
+              (' Exercise 22: Compute probabilities with the Poisson distribution ',
+               2,
+               'sec:input:ex16',
+               'sec:input:ex16'),
+              (' References ', 1, None, '___sec106')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- newcommands_keep.tex -->
+$$
+\newcommand{\tp}{\thinspace .}
+$$
+
+
+
+
+    
+<!-- Bootstrap navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="input-bootstrap.html">User input and error handling</a>
+  </div>
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     <!-- navigation toc: --> <li><a href="._input-bootstrap001.html#sec:input:rawinput" style="font-size: 80%;">Asking questions and reading answers</a></li>
+     <!-- navigation toc: --> <li><a href="._input-bootstrap002.html#sec:input:sysargv" style="font-size: 80%;">Reading from the command line</a></li>
+     <!-- navigation toc: --> <li><a href="._input-bootstrap003.html#___sec6" style="font-size: 80%;">Turning user text into live objects</a></li>
+     <!-- navigation toc: --> <li><a href="._input-bootstrap004.html#sec:input:argparse" style="font-size: 80%;">Option-value pairs on the command line</a></li>
+     <!-- navigation toc: --> <li><a href="._input-bootstrap005.html#sec:files:reading" style="font-size: 80%;">Reading data from file</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:files:writing" style="font-size: 80%;">Writing data to file</a></li>
+     <!-- navigation toc: --> <li><a href="._input-bootstrap007.html#sec:input:except" style="font-size: 80%;">Handling errors</a></li>
+     <!-- navigation toc: --> <li><a href="._input-bootstrap008.html#sec:input:GUI" style="font-size: 80%;">A glimpse of graphical user interfaces</a></li>
+     <!-- navigation toc: --> <li><a href="._input-bootstrap009.html#sec:input:modules" style="font-size: 80%;">Making modules</a></li>
+     <!-- navigation toc: --> <li><a href="._input-bootstrap010.html#sec:input:summary" style="font-size: 80%;">Summary</a></li>
+     <!-- navigation toc: --> <li><a href="._input-bootstrap011.html#___sec83" style="font-size: 80%;">Exercises</a></li>
+     <!-- navigation toc: --> <li><a href="._input-bootstrap011.html#___sec106" style="font-size: 80%;">References</a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div> <!-- end of navigation bar -->
+
+<div class="container">
+
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+
+<a name="part0006"></a>
+<!-- !split -->
+
+<h1 id="sec:files:writing">Writing data to file<a name="sec:files:writing"></a></h1>
+
+<p>
+Writing data to file is easy.
+There is basically one function to pay attention to: <code>outfile.write(s)</code>,
+which writes a string <code>s</code> to
+a file handled by the file object <code>outfile</code>. Unlike <code>print</code>,
+<code>outfile.write(s)</code>
+does not append a newline character to the written string.
+It will therefore
+often be necessary to add a newline character,
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">outfile<span style="color: #666666">.</span>write(s <span style="color: #666666">+</span> <span style="color: #BA2121">&#39;</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121">&#39;</span>)
+</pre></div>
+<p>
+if the string <code>s</code> is meant to appear on a single line in the file
+and <code>s</code> does not already contain a trailing newline character.
+File writing is then a matter of constructing strings containing the
+text we want to have in the file and for each such string call
+<code>outfile.write</code>.
+
+<p>
+Writing to a file demands
+the file object <code>f</code>
+to be opened for writing:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #408080; font-style: italic"># write to new file, or overwrite file:</span>
+outfile <span style="color: #666666">=</span> <span style="color: #008000">open</span>(filename, <span style="color: #BA2121">&#39;w&#39;</span>)
+
+<span style="color: #408080; font-style: italic"># append to the end of an existing file:</span>
+outfile <span style="color: #666666">=</span> <span style="color: #008000">open</span>(filename, <span style="color: #BA2121">&#39;a&#39;</span>)
+</pre></div>
+
+<h2 id="___sec24">Example: Writing a table to file <a name="___sec24"></a></h2>
+
+<h3 id="___sec25">Problem <a name="___sec25"></a></h3>
+
+<p>
+As a worked example of file writing, we shall write out a nested list
+with tabular data to file.  A sample list may take look as
+
+<p>
+
+<!-- code=text (!bc ccq) typeset with pygments style "default" -->
+<blockquote>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">[[ 0.75,        0.29619813, -0.29619813, -0.75      ],
+ [ 0.29619813,  0.11697778, -0.11697778, -0.29619813],
+ [-0.29619813, -0.11697778,  0.11697778,  0.29619813],
+ [-0.75,       -0.29619813,  0.29619813,  0.75      ]]
+</pre></div>
+</blockquote><h3 id="___sec26">Solution <a name="___sec26"></a></h3>
+
+<p>
+We iterate through the rows (first index) in the list, and for each row,
+we iterate through the column values (second index)
+and write each value to the file.
+At the end of each row, we must insert a newline character in the file to get
+a linebreak. The code resides in the file <a href="http://tinyurl.com/pwyasaa/input/write1.py" target="_self"><tt>write1.py</tt></a>:
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">data <span style="color: #666666">=</span> [[ <span style="color: #666666">0.75</span>,        <span style="color: #666666">0.29619813</span>, <span style="color: #666666">-0.29619813</span>, <span style="color: #666666">-0.75</span>      ],
+        [ <span style="color: #666666">0.29619813</span>,  <span style="color: #666666">0.11697778</span>, <span style="color: #666666">-0.11697778</span>, <span style="color: #666666">-0.29619813</span>],
+        [<span style="color: #666666">-0.29619813</span>, <span style="color: #666666">-0.11697778</span>,  <span style="color: #666666">0.11697778</span>,  <span style="color: #666666">0.29619813</span>],
+        [<span style="color: #666666">-0.75</span>,       <span style="color: #666666">-0.29619813</span>,  <span style="color: #666666">0.29619813</span>,  <span style="color: #666666">0.75</span>      ]]
+
+outfile <span style="color: #666666">=</span> <span style="color: #008000">open</span>(<span style="color: #BA2121">&#39;tmp_table.dat&#39;</span>, <span style="color: #BA2121">&#39;w&#39;</span>)
+<span style="color: #008000; font-weight: bold">for</span> row <span style="color: #AA22FF; font-weight: bold">in</span> data:
+    <span style="color: #008000; font-weight: bold">for</span> column <span style="color: #AA22FF; font-weight: bold">in</span> row:
+        outfile<span style="color: #666666">.</span>write(<span style="color: #BA2121">&#39;</span><span style="color: #BB6688; font-weight: bold">%14.8f</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> column)
+    outfile<span style="color: #666666">.</span>write(<span style="color: #BA2121">&#39;</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121">&#39;</span>)
+outfile<span style="color: #666666">.</span>close()
+</pre></div>
+<p>
+The resulting data file becomes
+
+<p>
+
+<!-- code=text (!bc dat) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">    0.75000000    0.29619813   -0.29619813   -0.75000000
+    0.29619813    0.11697778   -0.11697778   -0.29619813
+   -0.29619813   -0.11697778    0.11697778    0.29619813
+   -0.75000000   -0.29619813    0.29619813    0.75000000
+</pre></div>
+<p>
+An extension of this program consists in adding column and row headings:
+
+<p>
+
+<!-- code=text (!bc dat) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">           column  1     column  2     column  3     column  4
+row  1    0.75000000    0.29619813   -0.29619813   -0.75000000
+row  2    0.29619813    0.11697778   -0.11697778   -0.29619813
+row  3   -0.29619813   -0.11697778    0.11697778    0.29619813
+row  4   -0.75000000   -0.29619813    0.29619813    0.75000000
+</pre></div>
+<p>
+To obtain this end result, we need to the add some statements to
+the program <code>write1.py</code>. For the column headings we must
+know the number of columns, i.e., the length of the rows,
+and loop from 1 to this length:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">ncolumns <span style="color: #666666">=</span> <span style="color: #008000">len</span>(data[<span style="color: #666666">0</span>])
+outfile<span style="color: #666666">.</span>write(<span style="color: #BA2121">&#39;          &#39;</span>)
+<span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">1</span>, ncolumns<span style="color: #666666">+1</span>):
+    outfile<span style="color: #666666">.</span>write(<span style="color: #BA2121">&#39;</span><span style="color: #BB6688; font-weight: bold">%10s</span><span style="color: #BA2121">    &#39;</span> <span style="color: #666666">%</span> (<span style="color: #BA2121">&#39;column </span><span style="color: #BB6688; font-weight: bold">%2d</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> i))
+outfile<span style="color: #666666">.</span>write(<span style="color: #BA2121">&#39;</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121">&#39;</span>)
+</pre></div>
+<p>
+Note the use of a nested printf construction: the text we want to
+insert is itself a printf string. We could also have written the
+text as <code>'column  ' + str(i)</code>, but then the length of the
+resulting string would depend on the number of digits in <code>i</code>.
+It is recommended to always use printf constructions for
+a tabular output format, because this gives automatic padding of
+blanks so that the width of the output strings remains the same.
+The tuning of the widths is commonly done in a trial-and-error
+process.
+
+<p>
+To add the row headings, we need a counter over the row numbers:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">row_counter <span style="color: #666666">=</span> <span style="color: #666666">1</span>
+<span style="color: #008000; font-weight: bold">for</span> row <span style="color: #AA22FF; font-weight: bold">in</span> data:
+    outfile<span style="color: #666666">.</span>write(<span style="color: #BA2121">&#39;row </span><span style="color: #BB6688; font-weight: bold">%2d</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> row_counter)
+    <span style="color: #008000; font-weight: bold">for</span> column <span style="color: #AA22FF; font-weight: bold">in</span> row:
+        outfile<span style="color: #666666">.</span>write(<span style="color: #BA2121">&#39;</span><span style="color: #BB6688; font-weight: bold">%14.8f</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> column)
+    outfile<span style="color: #666666">.</span>write(<span style="color: #BA2121">&#39;</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121">&#39;</span>)
+    row_counter <span style="color: #666666">+=</span> <span style="color: #666666">1</span>
+</pre></div>
+<p>
+The complete code is found in the file <a href="http://tinyurl.com/pwyasaa/input/write2.py" target="_self"><tt>write2.py</tt></a>.
+We could, alternatively, iterate over the indices in the list:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #008000">len</span>(data)):
+    outfile<span style="color: #666666">.</span>write(<span style="color: #BA2121">&#39;row </span><span style="color: #BB6688; font-weight: bold">%2d</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> (i<span style="color: #666666">+1</span>))
+    <span style="color: #008000; font-weight: bold">for</span> j <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #008000">len</span>(data[i])):
+        outfile<span style="color: #666666">.</span>write(<span style="color: #BA2121">&#39;</span><span style="color: #BB6688; font-weight: bold">%14.8f</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> data[i][j])
+    outfile<span style="color: #666666">.</span>write(<span style="color: #BA2121">&#39;</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121">&#39;</span>)
+</pre></div>
+
+<h2 id="___sec27">Standard input and output as file objects <a name="___sec27"></a></h2>
+
+<p>
+Reading user input from the keyboard applies the function
+<code>raw_input</code>.
+The keyboard is a medium that the computer in fact
+treats as a file, referred to
+as <em>standard input</em>.
+
+<p>
+The <code>print</code> command prints text in the terminal window. This medium is
+also viewed as a file from the computer's point of view and called
+<em>standard output</em>. All general-purpose programming languages allow
+reading from standard input and writing to standard output. This
+reading and writing can be done with two types of tools, either
+file-like objects or special tools like <code>raw_input</code> and <code>print</code> in
+Python.  We will here describe the file-line objects: <code>sys.stdin</code> for
+standard input and <code>sys.stdout</code> for standard output. These objects
+behave as file objects, except that they do not need to be opened or
+closed. The statement
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">s <span style="color: #666666">=</span> <span style="color: #008000">raw_input</span>(<span style="color: #BA2121">&#39;Give s:&#39;</span>)
+</pre></div>
+<p>
+is equivalent to
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;Give s: &#39;</span>,
+s <span style="color: #666666">=</span> sys<span style="color: #666666">.</span>stdin<span style="color: #666666">.</span>readline()
+</pre></div>
+<p>
+Recall that the trailing comma in the <code>print</code> statement avoids the
+newline that <code>print</code> by default adds to the output string.
+Similarly,
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">s <span style="color: #666666">=</span> <span style="color: #008000">eval</span>(<span style="color: #008000">raw_input</span>(<span style="color: #BA2121">&#39;Give s:&#39;</span>))
+</pre></div>
+<p>
+is equivalent to
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;Give s: &#39;</span>,
+s <span style="color: #666666">=</span> <span style="color: #008000">eval</span>(sys<span style="color: #666666">.</span>stdin<span style="color: #666666">.</span>readline())
+</pre></div>
+<p>
+For output to the terminal window, the statement
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">print</span> s
+</pre></div>
+<p>
+is equivalent to
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">sys<span style="color: #666666">.</span>stdout<span style="color: #666666">.</span>write(s <span style="color: #666666">+</span> <span style="color: #BA2121">&#39;</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121">&#39;</span>)
+</pre></div>
+<p>
+Why it is handy to have access to standard input and output
+as file objects can be illustrated by an example. Suppose you have a
+function that reads data from a file object <code>infile</code>
+and writes data to a file object <code>outfile</code>.
+A sample function may take the form
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">x2f</span>(infile, outfile, f):
+    <span style="color: #008000; font-weight: bold">for</span> line <span style="color: #AA22FF; font-weight: bold">in</span> infile:
+        x <span style="color: #666666">=</span> <span style="color: #008000">float</span>(line)
+        y <span style="color: #666666">=</span> f(x)
+        outfile<span style="color: #666666">.</span>write(<span style="color: #BA2121">&#39;</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> y)
+</pre></div>
+<p>
+This function works with all types of files, including
+web pages as
+<code>infile</code>.
+With <code>sys.stdin</code> as <code>infile</code> and/or <code>sys.stdout</code>
+as <code>outfile</code>, the <code>x2f</code> function also works with standard input
+and/or standard output. Without <code>sys.stdin</code> and <code>sys.stdout</code>,
+we would need different code, employing <code>raw_input</code>
+and <code>print</code>,
+to deal with standard input and output. Now we can write a single
+function that deals with all file media in a unified way.
+
+<p>
+There is also something called <em>standard error</em>.
+Usually this is the terminal window, just as standard output, but
+programs can distinguish between writing ordinary output to standard
+output and error messages to standard error, and these output media
+can be redirected to, e.g., files such that one can separate
+error messages from ordinary output.
+In Python, standard error is the file-like object <code>sys.stderr</code>.
+A typical application of <code>sys.stderr</code> is to report errors:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">if</span> x <span style="color: #666666">&lt;</span> <span style="color: #666666">0</span>:
+    sys<span style="color: #666666">.</span>stderr<span style="color: #666666">.</span>write(<span style="color: #BA2121">&#39;Illegal value of x&#39;</span>); sys<span style="color: #666666">.</span>exit(<span style="color: #666666">1</span>)
+</pre></div>
+<p>
+This message to <code>sys.stderr</code> is an alternative to
+<code>print</code> or raising an exception.
+
+<h3 id="___sec28">Redirecting standard input, output, and error <a name="___sec28"></a></h3>
+
+<p>
+Standard output from a program <code>prog</code>
+can be redirected to a file
+<code>output</code> instead of the screen, by
+using the greater than sign:
+
+<p>
+
+<!-- code=text (!bc sys) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">Terminal&gt; prog &gt; output
+</pre></div>
+<p>
+Here, <code>prog</code> can be any
+program, including a Python program run as <code>python myprog.py</code>.
+Similarly, output to the medium called <em>standard error</em>
+can be redirected by
+
+<p>
+
+<!-- code=text (!bc sys) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">Terminal&gt; prog &amp;&gt; output
+</pre></div>
+<p>
+For example, error messages are normally written to standard error, which
+is exemplified in this little terminal session on a Unix machine:
+
+<p>
+
+<!-- code=text (!bc sys) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">Terminal&gt; ls bla-bla1 bla-bla2
+ls: cannot access bla-bla1: No such file or directory
+ls: cannot access bla-bla2: No such file or directory
+Terminal&gt; ls bla-bla1 bla-bla2 &amp;&gt; errors
+Terminal&gt; cat errors  # print the file errors
+ls: cannot access bla-bla1: No such file or directory
+ls: cannot access bla-bla2: No such file or directory
+</pre></div>
+<p>
+When the program reads from standard input (the keyboard),
+we can equally well redirect
+standard input from a file, say with name <code>input</code>, such that
+the program reads from this file rather than from the keyboard:
+
+<p>
+
+<!-- code=text (!bc sys) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">Terminal&gt; prog &lt; input
+</pre></div>
+<p>
+Combinations are also possible:
+
+<p>
+
+<!-- code=text (!bc sys) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">Terminal&gt; prog &lt; input &gt; output
+</pre></div>
+
+<h3 id="___sec29">Note <a name="___sec29"></a></h3>
+
+<p>
+The redirection of standard output, input, and error
+does not work for Python programs executed with the <code>run</code>
+command inside IPython, only when executed directly
+in the operating system in a terminal window, or with the same
+command prefixed with an exclamation mark in IPython.
+
+<p>
+Inside a Python program we can also let standard input, output, and
+error work with ordinary files instead. Here is the technique:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">sys_stdout_orig <span style="color: #666666">=</span> sys<span style="color: #666666">.</span>stdout
+sys<span style="color: #666666">.</span>stdout <span style="color: #666666">=</span> <span style="color: #008000">open</span>(<span style="color: #BA2121">&#39;output&#39;</span>, <span style="color: #BA2121">&#39;w&#39;</span>)
+sys_stdin_orig <span style="color: #666666">=</span> sys<span style="color: #666666">.</span>stdin
+sys<span style="color: #666666">.</span>stdin <span style="color: #666666">=</span> <span style="color: #008000">open</span>(<span style="color: #BA2121">&#39;input&#39;</span>, <span style="color: #BA2121">&#39;r&#39;</span>)
+</pre></div>
+<p>
+Now, any <code>print</code> statement will write to the <code>output</code> file, and
+any <code>raw_input</code> call will read from the <code>input</code> file.
+(Without storing the original <code>sys.stdout</code> and <code>sys.stdin</code>
+objects in new variables, these objects would get lost in the redefinition
+above and we would never be able to reach the common standard input and
+output in the program.)
+
+<h2 id="sec:files:really">What is a file, really?<a name="sec:files:really"></a></h2>
+
+<p>
+This section is not mandatory for understanding the rest of the document.
+Nevertheless, the information here is fundamental for understanding
+what files are about.
+
+<p>
+A file is simply a sequence of characters. In addition to the sequence
+of characters, a file has some data associated with it, typically the
+name of the file, its location on the disk, and the file size.  These
+data are stored somewhere by the operating system.  Without this extra
+information beyond the pure file contents as a sequence of characters,
+the operating system cannot find a file with a given name on the disk.
+
+<p>
+Each character in the file is represented as a <em>byte</em>, consisting of
+eight <em>bits</em>.  Each bit is either 0 or 1.  The zeros and ones in a
+byte can be combined in \( 2^8=256 \) ways. This means that there are 256
+different types of characters.  Some of these characters can be
+recognized from the keyboard, but there are also characters that do
+not have a familiar symbol. Such characters looks cryptic
+when printed.
+
+<h3 id="___sec31">Pure text files <a name="___sec31"></a></h3>
+
+<p>
+To see that a file is really just a sequence of characters, invoke an
+editor for plain text, typically the editor you use to write Python
+programs.  Write the four characters <code>ABCD</code> into the editor, do not
+press the Return key, and save the text to a file <code>test1.txt</code>. Use
+your favorite tool for file and folder overview and move to the folder
+containing the <code>test1.txt</code> file.  This tool may be Windows Explorer,
+My Computer, or a DOS window on Windows; a terminal window, Konqueror,
+or Nautilus on Linux; or a terminal window or Finder on Mac.  If you
+choose a terminal window, use the <code>cd</code> (change directory) command to
+move to the proper folder and write <code>dir</code> (Windows) or <code>ls -l</code>
+(Linux/Mac) to list the files and their sizes. In a graphical program
+like Windows Explorer, Konqueror, Nautilus, or Finder, select a view
+that shows the <em>size</em> of each file (choose <em>view as details</em> in
+Windows Explorer, <em>View as List</em> in Nautilus, the list view icon in
+Finder, or you just point at a file icon in Konqueror and watch the
+pop-up text).  You will see that the <code>test1.txt</code> file has a size of 4
+bytes (if you use <code>ls -l</code>, the size measured in bytes is found in
+column 5, right before the date).  The 4 bytes are exactly the 4
+characters <code>ABCD</code> in the file. Physically, the file is just a sequence
+of 4 bytes on your hard disk.
+
+<p>
+Go back to the editor again and add a newline by pressing the Return key.
+Save this new version of the file as <code>test2.txt</code>. When you now
+check the size of the file it has grown to five bytes. The reason is
+that we added a newline character (symbolically known as <em>backslash n</em>:
+<code>\n</code>).
+
+<p>
+Instead of examining files via editors and folder viewers
+we may use Python interactively:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> file1 <span style="color: #666666">=</span> <span style="color: #008000">open</span>(<span style="color: #BA2121">&#39;test1.txt&#39;</span>, <span style="color: #BA2121">&#39;r&#39;</span>)<span style="color: #666666">.</span>read()  <span style="color: #408080; font-style: italic"># read file into string</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> file1
+<span style="color: #BA2121">&#39;ABCD&#39;</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000">len</span>(file1)        <span style="color: #408080; font-style: italic"># length of string in bytes/characters</span>
+<span style="color: #666666">4</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> file2 <span style="color: #666666">=</span> <span style="color: #008000">open</span>(<span style="color: #BA2121">&#39;test2.txt&#39;</span>, <span style="color: #BA2121">&#39;r&#39;</span>)<span style="color: #666666">.</span>read()
+<span style="color: #666666">&gt;&gt;&gt;</span> file2
+<span style="color: #BA2121">&#39;ABCD</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121">&#39;</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000">len</span>(file2)
+<span style="color: #666666">5</span>
+</pre></div>
+<p>
+Python has in fact a function that returns the size of a file
+directly:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">os</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> size <span style="color: #666666">=</span> os<span style="color: #666666">.</span>path<span style="color: #666666">.</span>getsize(<span style="color: #BA2121">&#39;test1.txt&#39;</span>)
+<span style="color: #666666">&gt;&gt;&gt;</span> size
+<span style="color: #666666">4</span>
+</pre></div>
+
+<h3 id="___sec32">Word processor files <a name="___sec32"></a></h3>
+
+<p>
+Most computer users write text in a word processing program, such as
+Microsoft Word or LibreOffice.  Let us investigate what happens with
+our four characters <code>ABCD</code> in such a program. Start the word
+processor, open a new document, and type in the four characters <code>ABCD</code>
+only. Save the document as a <code>.docx</code> file (Microsoft Word) or an <code>.odt</code>
+file (LibreOffice). Load this file into an editor for pure text and
+look at the contents. You will see that there are numerous strange
+characters that you did not write (!). This additional &quot;text&quot;
+contains information on what type of document this is, the font you
+used, etc. The LibreOffice version of this file has 8858 bytes
+and the Microsoft Word version contains over 26 Kb!
+However, if you save the file as a pure text file, with extension
+<code>.txt</code>, the size is down to 8 bytes in LibreOffice and
+five in Microsoft Word.
+
+<p>
+Instead of loading the LibreOffice file into an editor we can again
+read the file contents into a string in Python and examine this string:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> infile <span style="color: #666666">=</span> <span style="color: #008000">open</span>(<span style="color: #BA2121">&#39;test3.odt&#39;</span>, <span style="color: #BA2121">&#39;r&#39;</span>)  <span style="color: #408080; font-style: italic"># open LibreOffice file</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> s <span style="color: #666666">=</span> infile<span style="color: #666666">.</span>read()
+<span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000">len</span>(s)   <span style="color: #408080; font-style: italic"># file size</span>
+<span style="color: #666666">8858</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> s
+<span style="color: #BA2121">&#39;PK</span><span style="color: #BB6622; font-weight: bold">\x03\x04\x14\x00\x00\x08\x00\x00</span><span style="color: #BA2121">sKWD^</span><span style="color: #BB6622; font-weight: bold">\xc6</span><span style="color: #BA2121">2</span><span style="color: #BB6622; font-weight: bold">\x0c\&#39;\x00</span><span style="color: #BA2121">...</span>
+\x00meta<span style="color: #666666">.</span>xml<span style="color: #666666">&lt;</span>?xml version<span style="color: #666666">=</span><span style="color: #BA2121">&quot;1.0&quot;</span> encoding<span style="color: #666666">=</span><span style="color: #BA2121">&quot;UTF-8&quot;</span>?<span style="color: #666666">&gt;</span>\n<span style="color: #666666">&lt;</span>office:<span style="color: #666666">...</span>
+<span style="color: #BA2121">&quot; xmlns:meta=&quot;</span>urn:oasis:names:tc:opendocument:xmlns:meta:<span style="color: #666666">1.0</span><span style="color: #BA2121">&quot;</span>
+</pre></div>
+<p>
+Each backslash followed by <code>x</code> and a number is a code for a
+special character not found on the keyboard (recall that there are
+256 characters and only a subset is associated with keyboard symbols).
+Although we show just a small portion of all the characters in this file
+in the above output (otherwise, the output would have occupied several
+pages in this document with thousands symbols like <code>\x04</code>...),
+we can guarantee that you cannot find the pure sequence of characters
+<code>ABCD</code>. However, the computer program that generated the file,
+LibreOffice in this example, can easily interpret the meaning of
+all the characters in the file
+and translate the information into nice, readable text on the screen
+where you can recognize the text <code>ABCD</code>.
+
+<p>
+Your are now in a position to look into <a href="._input-bootstrap011.html#sec:files:ex7">Exercise 8: Try MSWord or LibreOffice to write a program</a> to
+see what happens if one attempts to use LibreOffice to write Python
+programs.
+
+<h3 id="___sec33">Image files <a name="___sec33"></a></h3>
+
+<p>
+A digital image - captured by a digital camera or a mobile phone - is
+a file. And since it is a file, the image is just a sequence of
+characters. Loading some JPEG file into a pure text editor, reveals
+all the strange characters in there. On the first line you will
+(normally) find some recognizable text in between the strange
+characters.  This text reflects the type of camera used to capture the
+image and the date and time when the picture was taken.  The next
+lines contain more information about the image.  Thereafter, the file
+contains a set of numbers representing the image.  The basic
+representation of an image is a set of \( m\times n \) pixels, where each
+pixel has a color represented as a combination of 256 values of red,
+green, and blue, which can be stored as three bytes (resulting in
+\( 256^3 \) color values).  A 6-megapixel camera will then need to store
+\( 3\times 6\cdot 10^6 = 18 \) megabytes for one picture.  The JPEG file
+contains only a couple of megabytes. The reason is that JPEG is a
+<em>compressed</em> file format, produced by applying a smart technique that
+can throw away pixel information in the original picture such that the
+human eye hardly can detect the inferior quality.
+
+<p>
+A video is just a sequence of images, and therefore a video is also a
+stream of bytes.  If the change from one video frame (image) to the
+next is small, one can use smart methods to compress the image
+information in time. Such compression is particularly important for
+videos since the file sizes soon get too large for being transferred
+over the Internet. A small video file occasionally has bad visual
+quality, caused by too much compression.
+
+<h3 id="___sec34">Music files <a name="___sec34"></a></h3>
+
+<p>
+An MP3 file is much like a JPEG file: first, there is some information
+about the music (artist, title, album, etc.), and then comes the music
+itself as a stream of bytes. A typical MP3 file has a size of
+something like five million bytes or five megabytes (5 Mb). The exact
+size depends on the complexity of the music, the length of the track,
+and the MP3 resolution.  On a 16 Gb MP3 player you can then store
+roughly \( 16,000,000,000/5,000,000 = 3200 \) MP3 files. MP3 is, like JPEG,
+a compressed format. The complete data of a song on a CD (the WAV
+file) contains about ten times as many bytes. As for pictures, the
+idea is that one can throw away a lot of bytes in an intelligent way,
+such that the human ear hardly detects the difference between a
+compressed and uncompressed version of the music file.
+
+<h3 id="___sec35">PDF files <a name="___sec35"></a></h3>
+
+<p>
+Looking at a PDF file in a pure text editor shows that the file
+contains some readable text mixed with some unreadable characters. It
+is not possible for a human to look at the stream of bytes and deduce
+the text in the document (well, from the assumption that there are
+always some strange people doing strange things, there might be
+somebody out there who, with a lot of training, can interpret the pure
+PDF code with the eyes).  A PDF file reader can easily interpret the
+contents of the file and display the text in a human-readable form on
+the screen.
+
+<h3 id="___sec36">Remarks <a name="___sec36"></a></h3>
+
+<p>
+We have repeated many times that a file is just a stream of bytes.  A
+human can interpret (read) the stream of bytes if it makes sense in a
+human language - or a computer language (provided the human is a
+programmer).  When the series of bytes does not make sense to any
+human, a computer program must be used to interpret the sequence of
+characters.
+
+<p>
+Think of a report. When you write the report as pure text in a text
+editor, the resulting file contains just the characters you typed in
+from the keyboard. On the other hand, if you applied a word processor
+like Microsoft Word or LibreOffice, the report file contains a large
+number of extra bytes describing properties of the formatting of the
+text.  This stream of extra bytes does not make sense to a human, and
+a computer program is required to interpret the file content and
+display it in a form that a human can understand. Behind the sequence
+of bytes in the file there are strict rules telling what the series of
+bytes means.  These rules reflect the <em>file format</em>. When the rules or
+file format is publicly documented, a programmer can use this
+documentation to make her own program for interpreting the file
+contents (however, interpreting such files is much more complicated
+than our examples on reading human-readable files in this document). It
+happens, though, that secret file formats are used, which require
+certain programs from certain companies to interpret the files.
+
+<p>
+<!-- It is a political question whether such secret -->
+<!-- formats are suitable for storing important reports over periods of time that -->
+<!-- are longer than the expected life of software companies. -->
+
+<p>
+<p>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pager">
+  <li class="previous">
+    <a href="._input-bootstrap005.html">&larr; Prev</a>
+  </li>
+  <li class="next">
+    <a href="._input-bootstrap007.html">Next &rarr;</a>
+  </li>
+</ul>
+<!-- ------------------- end of main content --------------- -->
+
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap footer
+<footer>
+<a href="http://..."><img width="250" align=right src="http://..."></a>
+</footer>
+-->
+
+
+</body>
+</html>
+    
+

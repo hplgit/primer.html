@@ -1,0 +1,973 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Array computing and curve plotting">
+<meta name="keywords" content="vectors,vector computing,scalar (math quantity),heterogeneous lists,Numerical Python,NumPy,array (datatype),array computing,vectorization,array slicing,subarrays,allocate,vectorization,scalar code,curve plotting,plotting,making graphs,backend (Easyviz),backend (Easyviz),remove files (in Python),delete files (in Python),boolean indexing,boolean indexing,in-place array arithmetics,check an object's type,shape (of an array),array shape,matrix,shape (of an array),array shape,least squares approximation,Trapezoidal rule for integration,Lagrange's interpolation formula,interpolation,Midpoint rule for integration,Trapezoidal rule for integration">
+
+<title>Array computing and curve plotting</title>
+
+
+<link href="https://raw.githubusercontent.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/css/solarized_light_code.css" rel="stylesheet" type="text/css" title="light"/>
+<script src="https://rawgit.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<link href="http://thomasf.github.io/solarized-css/solarized-light.min.css" rel="stylesheet">
+<style type="text/css">
+h1 {color: #b58900;}  /* yellow */
+/* h1 {color: #cb4b16;}  orange */
+/* h1 {color: #d33682;}  magenta, the original choice of thomasf */
+.alert-text-small   { font-size: 80%;  }
+.alert-text-large   { font-size: 130%; }
+.alert-text-normal  { font-size: 90%;  }
+.alert {
+  padding:8px 35px 8px 14px; margin-bottom:18px;
+  text-shadow:0 1px 0 rgba(255,255,255,0.5);
+  border:1px solid #93a1a1;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  color: #555;
+  background-color: #eee8d5;
+  background-position: 10px 5px;
+  background-repeat: no-repeat;
+  background-size: 38px;
+  padding-left: 55px;
+  width: 75%;
+ }
+.alert-block {padding-top:14px; padding-bottom:14px}
+.alert-block > p, .alert-block > ul {margin-bottom:1em}
+.alert li {margin-top: 1em}
+.alert-block p+p {margin-top:5px}
+.alert-notice { background-image: url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_notice.png); }
+.alert-summary  { background-image:url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_summary.png); }
+.alert-warning { background-image: url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_warning.png); }
+.alert-question {background-image:url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_question.png); }
+
+div { text-align: justify; text-justify: inter-word; }
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [(' Vectors ', 1, None, '___sec0'),
+              (' The vector concept ', 2, None, '___sec1'),
+              (' Mathematical operations on vectors ',
+               2,
+               'sec:plot:vectors',
+               'sec:plot:vectors'),
+              (' Vector arithmetics and vector functions ',
+               2,
+               'sec:plot:arraycomp',
+               'sec:plot:arraycomp'),
+              (' Arrays in Python programs ', 1, None, '___sec4'),
+              (' Using lists for collecting function data ',
+               2,
+               'sec:plot:listdata',
+               'sec:plot:listdata'),
+              (' Basics of numerical Python arrays ',
+               2,
+               'sec:plot:array:basics',
+               'sec:plot:array:basics'),
+              (' Computing coordinates and function values ',
+               2,
+               None,
+               '___sec7'),
+              (' Vectorization ',
+               2,
+               'sec:plot:vectorization',
+               'sec:plot:vectorization'),
+              (' Curve plotting ',
+               1,
+               'sec:plot:curveplots',
+               'sec:plot:curveplots'),
+              (' Matplotlib; pylab ', 2, 'sec:plot:pylab', 'sec:plot:pylab'),
+              (' A basic plot ', 3, None, '___sec11'),
+              (' Decorating the plot ', 3, None, '___sec12'),
+              (' Plotting multiple curves ', 3, None, '___sec13'),
+              (' Placing several plots in one figure ', 3, None, '___sec14'),
+              (' Matplotlib; pyplot ',
+               2,
+               'sec:plot:pyplot',
+               'sec:plot:pyplot'),
+              (' SciTools and Easyviz ',
+               2,
+               'sec:plot:SciTools',
+               'sec:plot:SciTools'),
+              (' Importing SciTools and Easyviz ', 3, None, '___sec17'),
+              (' A basic plot ', 3, None, '___sec18'),
+              (' Decorating the plot ', 3, None, '___sec19'),
+              (' Plotting multiple curves ', 3, None, '___sec20'),
+              (' Changing backend ', 3, None, '___sec21'),
+              (' Placing several plots in one figure ', 3, None, '___sec22'),
+              (' Making animations ', 2, 'easyviz:movie', 'easyviz:movie'),
+              (' Example ', 3, None, '___sec24'),
+              (' Animation in Easyviz ', 3, None, '___sec25'),
+              (' Basic animation in Matplotlib ', 3, None, '___sec26'),
+              (' Using FuncAnimation in Matplotlib ', 3, None, '___sec27'),
+              (' Making videos ', 2, 'sec:plot:video', 'sec:plot:video'),
+              (' Animated GIF file ', 3, None, '___sec29'),
+              (' MP4, Ogg, WebM, and Flash videos ', 3, None, '___sec30'),
+              (' Curve plots in pure text ', 2, None, '___sec31'),
+              (' Plotting difficulties ',
+               1,
+               'sec:plot:difficulties',
+               'sec:plot:difficulties'),
+              (' Piecewisely defined functions ',
+               2,
+               'sec:plot:pwisefunc',
+               'sec:plot:pwisefunc'),
+              (' Example: The Heaviside function ', 3, None, '___sec34'),
+              (' Example: A hat function ', 3, None, '___sec35'),
+              (' Rapidly varying functions ',
+               2,
+               'sec:plot:sin1x',
+               'sec:plot:sin1x'),
+              (' More advanced vectorization of functions ',
+               1,
+               'sec:plot:if:vectorize',
+               'sec:plot:if:vectorize'),
+              (' Vectorization of StringFunction objects ',
+               2,
+               'sec:plot:StringFunction:vectorize',
+               'sec:plot:StringFunction:vectorize'),
+              (' Vectorization of the Heaviside function ',
+               2,
+               'sec:vec:Heaviside',
+               'sec:vec:Heaviside'),
+              (' Loop ', 3, None, '___sec40'),
+              (' Automatic vectorization ', 3, None, '___sec41'),
+              (' Mixing boolean and floating-point calculations ',
+               3,
+               None,
+               '___sec42'),
+              (' Manual vectorization ', 3, None, '___sec43'),
+              (' Vectorization of a hat function ',
+               2,
+               'sec:vec:hatfunc',
+               'sec:vec:hatfunc'),
+              (' More on numerical Python arrays ',
+               1,
+               'sec:plot:numpy:more',
+               'sec:plot:numpy:more'),
+              (' Copying arrays ', 2, None, '___sec46'),
+              (' In-place arithmetics ', 2, None, '___sec47'),
+              (' Allocating arrays ', 2, None, '___sec48'),
+              (' Generalized indexing ',
+               2,
+               'sec:plot:generalized:index',
+               'sec:plot:generalized:index'),
+              (' Testing for the array type ', 2, None, '___sec50'),
+              (' Example: Vectorizing a constant function ',
+               3,
+               None,
+               '___sec51'),
+              (' Compact syntax for array generation ', 2, None, '___sec52'),
+              (' Shape manipulation ', 2, None, '___sec53'),
+              (' Higher-dimensional arrays ',
+               1,
+               'sec:plot:2Darrays',
+               'sec:plot:2Darrays'),
+              (' Matrices and arrays ', 2, None, '___sec55'),
+              (' Two-dimensional numerical Python arrays ',
+               2,
+               'sec:plot:2D:arrays',
+               'sec:plot:2D:arrays'),
+              (' Array computing ',
+               2,
+               'sec:plot:array2comp',
+               'sec:plot:array2comp'),
+              (' Remark ', 3, None, '___sec58'),
+              (' Two-dimensional arrays and functions of two variables ',
+               2,
+               None,
+               '___sec59'),
+              (' Matrix objects ',
+               2,
+               'sec:plot:numpy:matrix',
+               'sec:plot:numpy:matrix'),
+              (' Summary ', 1, None, '___sec61'),
+              (' Chapter topics ', 2, None, '___sec62'),
+              (' Array computing ', 3, None, '___sec63'),
+              (' Plotting curves ', 3, None, '___sec64'),
+              (' Making movies ', 3, None, '___sec65'),
+              (' Terminology ', 3, None, '___sec66'),
+              (' Example: Animating a function ',
+               2,
+               'sec:plot:summarizing',
+               'sec:plot:summarizing'),
+              (' Problem ', 3, None, '___sec68'),
+              (' Solution ', 3, None, '___sec69'),
+              (' Scaling ', 3, None, '___sec70'),
+              (' Exercises ', 1, 'sec:plot:exer', 'sec:plot:exer'),
+              (' Exercise 1: Fill lists with function values ',
+               2,
+               'sec:plot:ex1',
+               'sec:plot:ex1'),
+              (' Exercise 2: Fill arrays; loop version ',
+               2,
+               'sec:plot:ex2',
+               'sec:plot:ex2'),
+              (' Exercise 3: Fill arrays; vectorized version ',
+               2,
+               'sec:plot:ex2b',
+               'sec:plot:ex2b'),
+              (' Exercise 4: Plot a function ',
+               2,
+               'sec:plot:ex2c',
+               'sec:plot:ex2c'),
+              (' Exercise 5: Apply a function to a vector ',
+               2,
+               'sec:plot:math:ex1',
+               'sec:plot:math:ex1'),
+              (' Exercise 6: Simulate by hand a vectorized expression ',
+               2,
+               'sec:plot:ex3',
+               'sec:plot:ex3'),
+              (' Exercise 7: Demonstrate array slicing ',
+               2,
+               'sec:plot:ex15d',
+               'sec:plot:ex15d'),
+              (' Exercise 8: Plot a formula ',
+               2,
+               'sec:plot:ex15',
+               'sec:plot:ex15'),
+              (' Exercise 9: Plot a formula for several parameters ',
+               2,
+               'sec:plot:ex15b',
+               'sec:plot:ex15b'),
+              (' Exercise 10: Specify the extent of the axes in a plot ',
+               2,
+               'sec:plot:ex15ba',
+               'sec:plot:ex15ba'),
+              (' Exercise 11: Plot exact and inexact Fahrenheit-Celsius conversion formulas ',
+               2,
+               'sec:plot:ex15c',
+               'sec:plot:ex15c'),
+              (' Exercise 12: Plot the trajectory of a ball ',
+               2,
+               'sec:plot:ex5',
+               'sec:plot:ex5'),
+              (' Exercise 13: Plot data in a two-column file ',
+               2,
+               'sec:files:ex12',
+               'sec:files:ex12'),
+              (' Remarks ', 3, None, '___sec85'),
+              (' Exercise 14: Plot data from a file ',
+               2,
+               'sec:files:ex12c',
+               'sec:files:ex12c'),
+              (' Exercise 15: Fit a polynomial to data points ',
+               2,
+               'sec:files:ex12c2',
+               'sec:files:ex12c2'),
+              (' Exercise 16: Fit a polynomial to experimental data ',
+               2,
+               'sec:files:ex19',
+               'sec:files:ex19'),
+              (' Exercise 17: Read acceleration data and find velocities ',
+               2,
+               'sec:files:ex22',
+               'sec:files:ex22'),
+              (' Exercise 18: Read acceleration data and plot velocities ',
+               2,
+               'sec:files:ex23',
+               'sec:files:ex23'),
+              (" Exercise 19: Plot a trip's path and velocity from GPS coordinates ",
+               2,
+               'sec:files:ex24',
+               'sec:files:ex24'),
+              (' Exercise 20: Vectorize the Midpoint rule for integration ',
+               2,
+               'sec:class:exer:sum',
+               'sec:class:exer:sum'),
+              (' Remarks ', 3, None, '___sec93'),
+              (" Exercise 21: Implement Lagrange's interpolation formula ",
+               2,
+               'sec:class:ex27a',
+               'sec:class:ex27a'),
+              (" Exercise 22: Plot Lagrange's interpolating polynomial ",
+               2,
+               'sec:class:ex27b',
+               'sec:class:ex27b'),
+              (" Exercise 23: Investigate the behavior of Lagrange's interpolating polynomials ",
+               2,
+               'sec:class:ex27c',
+               'sec:class:ex27c'),
+              (' Remarks ', 3, None, '___sec97'),
+              (' Exercise 24: Plot a wave packet ',
+               2,
+               'sec:plot:ex5d',
+               'sec:plot:ex5d'),
+              (' Exercise 25: Judge a plot ',
+               2,
+               'sec:plot:ex7',
+               'sec:plot:ex7'),
+              (' Exercise 26: Plot the viscosity of water ',
+               2,
+               'sec:plot:ex13c',
+               'sec:plot:ex13c'),
+              (' Exercise 27: Explore a complicated function graphically ',
+               2,
+               'sec:plot:ex16',
+               'sec:plot:ex16'),
+              (' Exercise 28: Plot Taylor polynomial approximations to $\\sin x$ ',
+               2,
+               'sec:plot:ex5b',
+               'sec:plot:ex5b'),
+              (' Exercise 29: Animate a wave packet ',
+               2,
+               'sec:plot:ex5e',
+               'sec:plot:ex5e'),
+              (' Exercise 30: Animate two-scale temperature variations ',
+               2,
+               'sec:plot:ex18',
+               'sec:plot:ex18'),
+              (' Remarks ', 3, None, '___sec105'),
+              (' Exercise 31: Use non-uniformly distributed coordinates for visualization ',
+               2,
+               'sec:plot:ex19',
+               'sec:plot:ex19'),
+              (" Exercise 32: Animate a planet's orbit ",
+               2,
+               'sec:plot:ex5g',
+               'sec:plot:ex5g'),
+              (' Exercise 33: Animate the evolution of Taylor polynomials ',
+               2,
+               'sec:plot:ex17',
+               'sec:plot:ex17'),
+              (' Exercise 34: Plot the velocity profile for pipeflow ',
+               2,
+               'sec:plot:ex4',
+               'sec:plot:ex4'),
+              (' Exercise 35: Plot sum-of-sines approximations to a function ',
+               2,
+               'sec:plot:ex8',
+               'sec:plot:ex8'),
+              (' Exercise 36: Animate the evolution of a sum-of-sine approximation to a function ',
+               2,
+               'sec:plot:ex8m',
+               'sec:plot:ex8m'),
+              (' Exercise 37: Plot functions from the command line ',
+               2,
+               'sec:plot:ex14',
+               'sec:plot:ex14'),
+              (' Exercise 38: Improve command-line input ',
+               2,
+               'sec:plot:ex14b',
+               'sec:plot:ex14b'),
+              (' Exercise 39: Demonstrate energy concepts from physics ',
+               2,
+               'sec:plot:ex20',
+               'sec:plot:ex20'),
+              (' Exercise 40: Plot a w-like function ',
+               2,
+               'sec:plot:math:ex9',
+               'sec:plot:math:ex9'),
+              (' Exercise 41: Visualize approximations in the Midpoint integration rule ',
+               2,
+               'sec:plot:ex:vizmidpoint',
+               'sec:plot:ex:vizmidpoint'),
+              (' Exercise 42: Visualize approximations in the Trapezoidal integration rule ',
+               2,
+               'sec:plot:ex:viztrapezoidal',
+               'sec:plot:ex:viztrapezoidal'),
+              (' Exercise 43: Experience overflow in a function ',
+               2,
+               'sec:plot:ex13',
+               'sec:plot:ex13'),
+              (' Remarks ', 3, None, '___sec119'),
+              (' Exercise 44: Apply a function to a rank 2 array ',
+               2,
+               'sec:plot:math:ex2',
+               'sec:plot:math:ex2'),
+              (' Exercise 45: Explain why array computations fail ',
+               2,
+               'sec:plot:ex11',
+               'sec:plot:ex11'),
+              (' References ', 1, None, '___sec122')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- newcommands_keep.tex -->
+$$
+\newcommand{\tp}{\thinspace .}
+$$
+
+
+
+
+    
+<a name="part0005"></a>
+<p>
+<!-- begin top navigation -->
+<table style="width: 100%"><tr><td>
+<div style="text-align: left;"><a href="._plot-solarized004.html">&laquo; Previous</a></div>
+</td><td>
+<div style="text-align: right;"><a href="._plot-solarized006.html">Next &raquo;</a></div>
+</td></tr></table>
+<!-- end top navigation -->
+</p>
+
+<p>
+<!-- !split -->
+
+<h1>More advanced vectorization of functions <a name="sec:plot:if:vectorize"></a></h1>
+
+<p>
+So far we have seen that vectorization of a Python function <code>f(x)</code>
+implementing some mathematical function \( f(x) \) seems trivial: <code>f(x)</code>
+works right away with an array argument <code>x</code> and, in that case, returns
+an array where \( f \) is applied to each element in <code>x</code>.  When the
+expression for \( f(x) \) is given in terms of a string and the
+<code>StringFunction</code> tool is used to generate the corresponding Python
+function <code>f(x)</code>, one extra step must be performed to vectorize the
+Python function. This step is explained in the section <a href="#sec:plot:StringFunction:vectorize">Vectorization of StringFunction objects</a>.
+
+<p>
+The described vectorization works well as long as the expression
+\( f(x) \) is a mathematical formula without any <code>if</code> test. As soon as we
+have <code>if</code> tests (conditional mathematical expressions) the
+vectorization becomes more challenging.  Some useful techniques are
+explained through two examples in the sections <a href="#sec:vec:Heaviside">Vectorization of the Heaviside function</a> and
+<a href="#sec:vec:hatfunc">Vectorization of a hat function</a>.  The described techniques are considered
+advanced material and only necessary when the time spent on evaluating
+a function at a very large set of points needs to be significantly
+decreased.
+
+<h2>Vectorization of StringFunction objects <a name="sec:plot:StringFunction:vectorize"></a></h2>
+
+<p>
+The <code>StringFunction</code> object from <code>scitools.std</code> can
+convert a formula, available as a string, to a callable Python
+function (see the document <a href="http://tcse6.on.net/input" target="_self">User input and error handling</a> <a href="._plot-solarized009.html#Langtangen_TCSE6_input">[3]</a>).
+However, the function cannot work with array arguments unless we explicitly tell
+the <code>StringFunction</code>
+object to do so. The recipe is very simple. Say <code>f</code>
+is some
+<code>StringFunction</code> object.
+To allow array arguments we are required to call
+<code>f.vectorize(globals())</code> once:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>from numpy import *
+x = linspace(0, 1, 30)
+# f(x) will in general not work
+
+f.vectorize(globals())
+values = f(x)            # f works with array arguments
+</code></pre>
+<!-- end verbatim block -->
+It is important that you import everything from <code>numpy</code> (or
+<code>scitools.std</code>) <em>before</em> calling <code>f.vectorize</code>, exactly as shown.
+
+<p>
+You may take the <code>f.vectorize</code> call as a magic recipe.  Still, some
+readers want to know what problem <code>f.vectorize</code> solves. Inside the
+<code>StringFunction</code> module we need to have access to mathematical
+functions for expressions like <code>sin(x)*exp(x)</code> to be evaluated. These
+mathematical functions are by default taken from the <code>math</code> module and
+hence they do not work with array arguments.  If the user, in the main
+program, has imported mathematical functions that work with array
+arguments, these functions are registered in a dictionary returned
+from <code>globals()</code>. By the <code>f.vectorize</code> call we supply the
+<code>StringFunction</code> module with the user's global namespace so that the
+evaluation of the string expression can make use of the mathematical
+functions for arrays from the user's program.  Unless you use
+<code>np.sin(x)*np.cos(x)</code> etc. in the string formulas, make sure you do a
+<code>from numpy import *</code> so that the function names are defined without
+any prefix.
+
+<p>
+Even after calling <code>f.vectorize(globals())</code>, a <code>StringFunction</code> object
+may face problems with vectorization. One example is a piecewise
+constant function as specified by a string expression <code>'1 if x &gt; 2
+else 0'</code>. The section <a href="#sec:vec:Heaviside">Vectorization of the Heaviside function</a> explains why <code>if</code> tests fail
+for arrays and what the remedies are.
+
+<h2>Vectorization of the Heaviside function <a name="sec:vec:Heaviside"></a></h2>
+
+<p>
+We consider the widely used Heaviside function defined by
+
+$$
+\begin{equation*}
+H(x) = \left\lbrace\begin{array}{ll}
+0, & x < 0\\ 
+1, & x\geq 0
+\end{array}\right.
+\end{equation*}
+$$
+
+The most compact way if implementing this function is
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>def H(x):
+    return (0 if x &lt; 0 else 1)
+</code></pre>
+<!-- end verbatim block -->
+Trying to call <code>H(x)</code> with an array argument <code>x</code>
+fails:
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; def H(x): return (0 if x &lt; 0 else 1)
+...
+&gt;&gt;&gt; import numpy as np
+&gt;&gt;&gt; x = np.linspace(-10, 10, 5)
+&gt;&gt;&gt; x
+array([-10.,  -5.,   0.,   5.,  10.])
+&gt;&gt;&gt; H(x)
+...
+ValueError: The truth value of an array with more than
+one element is ambiguous. Use a.any() or a.all()
+</code></pre>
+<!-- end verbatim block -->
+The problem is related to the test <code>x &lt; 0</code>, which results
+in an array of boolean values, while the <code>if</code> test needs a
+single boolean value (essentially taking <code>bool(x &lt; 0)</code>):
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; b = x &lt; 0
+&gt;&gt;&gt; b
+array([ True,  True, False, False, False], dtype=bool)
+&gt;&gt;&gt; bool(b)  # evaluate b in a boolean context
+...
+ValueError: The truth value of an array with more than
+one element is ambiguous. Use a.any() or a.all()
+&gt;&gt;&gt; b.any()  # True if any element in b is True
+True
+&gt;&gt;&gt; b.all()  # True if all elements in b are True
+False
+</code></pre>
+<!-- end verbatim block -->
+The <code>any</code> and <code>all</code> calls do not help us since we
+want to take actions element by element depending on whether
+<code>x[i] &lt; 0</code> or not.
+
+<p>
+There are four ways to find a remedy to our problems with the <code>if x &lt;
+0</code> test: (i) we can write an explicit loop for computing the elements,
+(ii) we can use a tool for automatically vectorize <code>H(x)</code>, (iii) we
+can mix boolean and floating-point calculations, or (iv) we can
+manually vectorize the <code>H(x)</code> function.  All four methods will be
+illustrated next.
+
+<h3>Loop  <a name="___sec40"></a></h3>
+
+<p>
+The following function works well for arrays if we insert
+a simple loop over the array elements (such that <code>H(x)</code> operates
+on scalars only):
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>def H_loop(x):
+    r = np.zeros(len(x))
+    for i in xrange(len(x)):
+        r[i] = H(x[i])
+    return r
+
+# Example:
+x = np.linspace(-5, 5, 6)
+y = H_loop(x)
+</code></pre>
+<!-- end verbatim block -->
+
+<h3>Automatic vectorization  <a name="___sec41"></a></h3>
+
+<p>
+Numerical Python contains a method for automatically vectorizing
+a Python function <code>H(x)</code> that works with scalars
+(pure numbers) as <code>x</code> argument:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>import numpy as np
+H_vec = np.vectorize(H)
+</code></pre>
+<!-- end verbatim block -->
+The <code>H_vec(x)</code> function will now work with vector/array arguments
+<code>x</code>. Unfortunately, such automatically vectorized functions runs
+at a fairly slow speed compared to the implementations below
+(see the end of the section <a href="#sec:vec:hatfunc">Vectorization of a hat function</a> for specific timings).
+
+<h3>Mixing boolean and floating-point calculations  <a name="___sec42"></a></h3>
+
+<p>
+It appears that a very simple solution to vectorizing the <code>H(x)</code>
+function is to implement it as
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>def H(x):
+    return x &gt;= 0
+</code></pre>
+<!-- end verbatim block -->
+The return value is now a <code>bool</code> object, not an <code>int</code> or <code>float</code> as we
+would mathematically expect to be the proper type of the
+result. However, the <code>bool</code> object works well in both scalar and
+vectorized operations as long as we involve the returned <code>H(x)</code> in
+some arithmetic expression. The <code>True</code> and <code>False</code> values are then
+interpreted as 1 and 0. Here is a demonstration:
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; x = np.linspace(-1, 1, 5)
+&gt;&gt;&gt; H(x)
+array([False, False,  True,  True,  True], dtype=bool)
+&gt;&gt;&gt; 1*H(x)
+array([0, 0, 1, 1, 1])
+&gt;&gt;&gt; H(x) - 2
+array([-2, -2, -1, -1, -1])
+&gt;&gt;&gt;
+&gt;&gt;&gt; x = 0.2   # test scalar argument
+&gt;&gt;&gt; H(x)
+True
+&gt;&gt;&gt; 1*H(x)
+1
+&gt;&gt;&gt; H(x) - 2
+-1
+</code></pre>
+<!-- end verbatim block -->
+If returning a boolean value is considered undesirable, we can turn
+the <code>bool</code> object into the proper type by
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>def H(x):
+    r = x &gt;= 0
+    if isinstance(x, (int,float)):
+        return int(r)
+    elif isinstance(x, np.ndarray):
+        return np.asarray(r, dtype=np.int)
+</code></pre>
+<!-- end verbatim block -->
+
+<h3>Manual vectorization  <a name="___sec43"></a></h3>
+
+<p>
+By manual vectorization we normally mean translating the algorithm
+into a set of calls to functions in the <code>numpy</code> package such that no
+loops are visible in the Python code. The last version of the <code>H(x)</code>
+is a manual vectorization, but now we shall look at a more general
+technique when the result is not necessarily 0 or 1.  In general,
+manual vectorization is non-trivial and requires knowledge of and
+experience with the underlying library for array computations.
+Fortunately, there is a simple <code>numpy</code> recipe for turning functions of
+the form
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>def f(x):
+    if condition:
+        r = &lt;expression1&gt;
+    else:
+        r = &lt;expression2&gt;
+    return r
+</code></pre>
+<!-- end verbatim block -->
+into vectorized form:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>def f_vectorized(x):
+    x1 = &lt;expression1&gt;
+    x2 = &lt;expression2&gt;
+    r = np.where(condition, x1, x2)
+    return r
+</code></pre>
+<!-- end verbatim block -->
+The <code>np.where</code> function returns an array of the same length as
+<code>condition</code>, whose % (for one-dimensional arrays <code>x1</code> and <code>x2</code>)
+element no. <code>i</code> equals <code>x1[i]</code> if <code>condition[i]</code> is <code>True</code>, and
+<code>x2[i]</code> otherwise.  With Python loops we can express this principle as
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>def my_where(condition, x1, x2):
+    r = np.zeros(len(condition))   # result
+    for i in xrange(condition):
+        r[i] = x1[i] if condition[i] else x2[i]
+    return r
+</code></pre>
+<!-- end verbatim block -->
+The <code>x1</code> and <code>x2</code> variables can be pure numbers too in the call
+to <code>np.where</code>.
+
+<p>
+In our case we can use the <code>np.where</code> function as follows:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>def Hv(x):
+    return np.where(x &lt; 0, 0.0, 1.0)
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+Instead of using <code>np.where</code> we can apply <em>boolean indexing</em>.  The idea
+is that an array <code>a</code> allows to be indexed by an array <code>b</code> of boolean
+values: <code>a[b]</code>.  The result <code>a[b]</code> is a new array with all the
+elements <code>a[i]</code> where <code>b[i]</code> is <code>True</code>:
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; a
+array([  0. ,   2.5,   5. ,   7.5,  10. ])
+&gt;&gt;&gt; b = a &gt; 5
+&gt;&gt;&gt; b
+array([False, False, False,  True,  True], dtype=bool)
+&gt;&gt;&gt; a[b]
+array([  7.5,  10. ])
+</code></pre>
+<!-- end verbatim block -->
+We can assign new values to the elements in <code>a</code> where <code>b</code> is <code>True</code>:
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; a[b]
+array([  7.5,  10. ])
+&gt;&gt;&gt; a[b] = np.array([-10, -20], dtype=np.float)
+&gt;&gt;&gt; a
+array([  0. ,   2.5,   5. , -10. , -20. ])
+&gt;&gt;&gt; a[b] = -4
+&gt;&gt;&gt; a
+array([ 0. ,  2.5,  5. , -4. , -4. ])
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+To implement the Heaviside function, we start with an array of zeros
+and then assign 1 to the elements where <code>x &gt;= 0</code>:
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>def Hv(x):
+    r = np.zeros(len(x), dtype=np.int)
+    r[x &gt;= 0] = 1
+    return r
+</code></pre>
+<!-- end verbatim block -->
+
+<h2>Vectorization of a hat function <a name="sec:vec:hatfunc"></a></h2>
+
+<p>
+We now turn the attention to the hat function \( N(x) \) defined by
+
+$$
+\begin{equation*}
+N(x) = \left\lbrace\begin{array}{ll}
+0, & x < 0\\ 
+x, & 0\leq x < 1\\ 
+2-x, & 1\leq x < 2\\ 
+0, & x \geq 2
+\end{array}\right.
+\end{equation*}
+$$
+
+The corresponding Python implementation <code>N(x)</code> is
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>def N(x):
+    if x &lt; 0:
+        return 0.0
+    elif 0 &lt;= x &lt; 1:
+        return x
+    elif 1 &lt;= x &lt; 2:
+        return 2 - x
+    elif x &gt;= 2:
+        return 0.0
+</code></pre>
+<!-- end verbatim block -->
+Unfortunately, this <code>N(x)</code> function does not work with array arguments
+<code>x</code>, because the boolean expressions, like <code>x &lt; 0</code>, are arrays and
+they cannot yield a single <code>True</code> or <code>False</code> value for the <code>if</code> tests,
+as explained in the section <a href="#sec:vec:Heaviside">Vectorization of the Heaviside function</a>.
+
+<p>
+The simplest remedy is to use <code>np.vectorize</code> from the section <a href="#sec:vec:Heaviside">Vectorization of the Heaviside function</a>:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>N_vec = np.vectorize(N)
+</code></pre>
+<!-- end verbatim block -->
+It is then important that <code>N(x)</code> returns <code>float</code> and not <code>int</code> values,
+otherwise the vectorized version will produce <code>int</code> values and hence
+be incorrect.
+
+<p>
+A manual rewrite, yielding a faster vectorized function, is more
+demanding than for the Heaviside function because we now have multiple
+branches in the <code>if</code> test.  One sketch is to replace
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>if condition1:
+   r = &lt;expression1&gt;
+elif condition2:
+   r = &lt;expression2&gt;
+elif condition3:
+   r = &lt;expression3&gt;
+else:
+   r = &lt;expression4&gt;
+</code></pre>
+<!-- end verbatim block -->
+by
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>x1 = &lt;expression1&gt;
+x2 = &lt;expression2&gt;
+x3 = &lt;expression3&gt;
+x4 = &lt;expression4&gt;
+r = np.where(condition1, x1, x4)  # initialize with &quot;else&quot; expr.
+r = np.where(condition2, x2, r)
+r = np.where(condition3, x3, r)
+</code></pre>
+<!-- end verbatim block -->
+Alternatively, we can use boolean indexing. Assuming that
+<code>&lt;expressionX&gt;</code> is some expression involving an array <code>x</code> and coded as
+a Python function <code>fX(x)</code> (<code>X</code> is <code>1</code>, <code>2</code>, <code>3</code>, or <code>4</code>), we can write
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>r = f4(x)
+r[condition1] = f1(x[condition1])
+r[condition2] = f2(x[condition2])
+r[condition3] = f2(x[condition3])
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+Specifically, when the function for scalar arguments <code>x</code> reads
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>def N(x):
+    if x &lt; 0:
+        return 0.0
+    elif 0 &lt;= x &lt; 1:
+        return x
+    elif 1 &lt;= x &lt; 2:
+        return 2 - x
+    elif x &gt;= 2:
+        return 0.0
+</code></pre>
+<!-- end verbatim block -->
+a vectorized attempt would be
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>def Nv(x):
+    r = np.where(x &lt; 0,      0.0,  0.0)
+    r = np.where(0 &lt;= x &lt; 1, x,    r)
+    r = np.where(1 &lt;= x &lt; 2, 2-x,  r)
+    r = np.where(x &gt;= 2,     0.0,  r)
+    return r
+</code></pre>
+<!-- end verbatim block -->
+The first and last line are not strictly necessary as we could just
+start with a zero vector (making the insertion of zeros for the first
+and last condition a redundant operation).
+
+<p>
+However, any condition like <code>0 &lt;= x &lt; 1</code>, which is equivalent to <code>0 &lt;=
+x and x &lt; 1</code>, does not work because the <code>and</code> operator does not work
+with array arguments. Fortunately, there is a simple solution to this
+problem: the function <code>logical_and</code> in <code>numpy</code>.  A working <code>Nv</code>
+function must apply <code>logical_and</code> instead in each condition:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>def Nv1(x):
+    condition1 = x &lt; 0
+    condition2 = np.logical_and(0 &lt;= x, x &lt; 1)
+    condition3 = np.logical_and(1 &lt;= x, x &lt; 2)
+    condition4 = x &gt;= 2
+
+    r = np.where(condition1, 0.0, 0.0)
+    r = np.where(condition2, x,   r)
+    r = np.where(condition3, 2-x, r)
+    r = np.where(condition4, 0.0, r)
+    return r
+</code></pre>
+<!-- end verbatim block -->
+With boolean indexing we get the alternative form
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>def Nv2(x):
+    condition1 = x &lt; 0
+    condition2 = np.logical_and(0 &lt;= x, x &lt; 1)
+    condition3 = np.logical_and(1 &lt;= x, x &lt; 2)
+    condition4 = x &gt;= 2
+
+    r = np.zeros(len(x))
+    r[condition1] = 0.0
+    r[condition2] = x[condition2]
+    r[condition3] = 2-x[condition3]
+    r[condition4] = 0.0
+    return r
+</code></pre>
+<!-- end verbatim block -->
+Again, the first and last assignment to <code>r</code> can be omitted in this
+special case where we start with a zero vector.
+
+<p>
+The file <a href="http://tinyurl.com/pwyasaa/plot/hat.py" target="_self"><tt>hat.py</tt></a>
+implements four vectorized versions of the <code>N(x)</code>
+function: <code>N_loop</code>, which is a plain loop calling up <code>N(x)</code> for each
+<code>x[i]</code> element in the array <code>x</code>; <code>N_vec</code>, which is the result of
+automatic vectorization via <code>np.vectorize</code>; the <code>Nv1</code> function shown
+above, which uses the <code>np.where</code> constructions; and the <code>Nv2</code> function,
+which uses boolean indexing. With a length of <code>x</code> of 1,000,000, the
+results on my computer (MacBook Air 11'', 2 1.6GHz Intel CPU, running
+Ubuntu 12.04 in a VMWare virtual machine) became 4.8 s for <code>N_loop</code>, 1
+s <code>N_vec</code>, 0.3 s for <code>Nv1</code>, and 0.08 s for <code>Nv2</code>. Boolean indexing is
+clearly the fastest method.
+
+<p>
+<p>
+<!-- begin bottom navigation -->
+<table style="width: 100%"><tr><td>
+<div style="text-align: left;"><a href="._plot-solarized004.html">&laquo; Previous</a></div>
+</td><td>
+<div style="text-align: right;"><a href="._plot-solarized006.html">Next &raquo;</a></div>
+</td></tr></table>
+<!-- end bottom navigation -->
+</p>
+
+<!-- ------------------- end of main content --------------- -->
+
+
+</body>
+</html>
+    
+

@@ -1,0 +1,924 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Object-oriented programming">
+<meta name="keywords" content="object-based programming,class hierarchy,class relationship superclass,class relationship derived class,class relationship inheritance,derived class,parent class,base class,superclass,subclass,class relationship subclass,Online Python Tutor,check an object's type,is-a class relationship,has-a class relationship,class relationship is-a,class relationship has-a,dynamic binding,factory function,closure,functional programming,Midpoint rule for integration,Trapezoidal rule for integration,overloading (of methods),polymorphism,Midpoint rule for integration,Trapezoidal rule for integration,recursive function calls,multiple inheritance,convergence rate,Trapezoidal rule for integration,Midpoint rule for integration,object-oriented programming">
+
+<title>Object-oriented programming</title>
+
+<!-- Bootstrap style: bootstrap_bluegray -->
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://raw.github.com/hplgit/doconce/master/bundled/html_styles/style_bootstrap/css/bootstrap_bluegray.css" rel="stylesheet">
+<!-- not necessary
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+
+<style type="text/css">
+/* Let inline verbatim have the same color as the surroundings */
+code { color: inherit; background-color: transparent; }
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [(' Inheritance and class hierarchies ',
+               1,
+               'sec:oo:inheritance',
+               'sec:oo:inheritance'),
+              (' A class for straight lines ',
+               2,
+               'sec:oo:Line',
+               'sec:oo:Line'),
+              (' A first try on a class for parabolas ',
+               2,
+               'sec:oo:Parabola1',
+               'sec:oo:Parabola1'),
+              (' A class for parabolas using inheritance ',
+               2,
+               None,
+               '___sec3'),
+              (' Program flow ', 3, None, '___sec4'),
+              (' Checking the class type ', 2, None, '___sec5'),
+              (' Attribute vs inheritance: has-a vs is-a relationship ',
+               2,
+               None,
+               '___sec6'),
+              (' Superclass for defining an interface ',
+               2,
+               'sec:oo:Func',
+               'sec:oo:Func'),
+              (' Class hierarchy for numerical differentiation ',
+               1,
+               'sec:oo:numdiff',
+               'sec:oo:numdiff'),
+              (' Classes for differentiation ',
+               2,
+               'sec:oo:Diff',
+               'sec:oo:Diff'),
+              (' Computer science remark ', 3, None, '___sec10'),
+              (' Verification ', 2, None, '___sec11'),
+              (' A flexible main program ', 2, None, '___sec12'),
+              (' Extensions ', 2, 'sec:oo:Diff:extend', 'sec:oo:Diff:extend'),
+              (' Application ', 3, None, '___sec14'),
+              (' Alternative implementation via functions ',
+               2,
+               'sec:oo:diff:alt:func',
+               'sec:oo:diff:alt:func'),
+              (' Alternative implementation via functional programming ',
+               2,
+               'sec:oo:diff:alt:FP',
+               'sec:oo:diff:alt:FP'),
+              (' Alternative implementation via a single class ',
+               2,
+               'sec:oo:diff:oneclass',
+               'sec:oo:diff:oneclass'),
+              (' Remark ', 3, None, '___sec18'),
+              (' Class hierarchy for numerical integration ',
+               1,
+               'sec:oo:int',
+               'sec:oo:int'),
+              (' Numerical integration methods ',
+               2,
+               'sec:oo:int:methods',
+               'sec:oo:int:methods'),
+              (' Classes for integration ',
+               2,
+               'sec:oo:Integrator',
+               'sec:oo:Integrator'),
+              (' Verification ', 2, None, '___sec22'),
+              (' Using the class hierarchy ', 2, None, '___sec23'),
+              (' About object-oriented programming ', 2, None, '___sec24'),
+              (' Class hierarchy for making drawings ',
+               1,
+               'sec:oo:shapes',
+               'sec:oo:shapes'),
+              (' Using the object collection ', 2, None, '___sec26'),
+              (' Basic drawing ', 3, None, '___sec27'),
+              (' Groups of objects ', 3, None, '___sec28'),
+              (' Changing line styles and colors ', 3, None, '___sec29'),
+              (' The figure composition as an object hierarchy ',
+               3,
+               None,
+               '___sec30'),
+              (' Animation: translating the vehicle ', 3, None, '___sec31'),
+              (' Animation: rolling the wheels ',
+               3,
+               'sketcher:vehicle1:anim',
+               'sketcher:vehicle1:anim'),
+              (' Example of classes for geometric objects ',
+               2,
+               None,
+               '___sec33'),
+              (' Simple geometric objects ', 3, None, '___sec34'),
+              (' Class curve ', 3, None, '___sec35'),
+              (' Compound geometric objects ', 3, None, '___sec36'),
+              (' Adding functionality via recursion ', 2, None, '___sec37'),
+              (' Basic principles of recursion ', 3, None, '___sec38'),
+              (' Explaining recursion ', 3, None, '___sec39'),
+              (' Scaling, translating, and rotating a figure ',
+               2,
+               'sketcher:scaling',
+               'sketcher:scaling'),
+              (' Scaling ', 3, None, '___sec41'),
+              (' Translation ', 3, None, '___sec42'),
+              (' Rotation ', 3, None, '___sec43'),
+              (' Classes for DNA analysis ', 1, 'bioinf:oo', 'bioinf:oo'),
+              (' Class for regions ', 2, None, '___sec45'),
+              (' Class for genes ', 2, None, '___sec46'),
+              (' Basic features of class gene ', 3, None, '___sec47'),
+              (' Flexible constructor ', 3, None, '___sec48'),
+              (' Other methods ', 3, None, '___sec49'),
+              (' Subclasses ', 2, None, '___sec50'),
+              (' Summary ', 1, None, '___sec51'),
+              (' Chapter topics ', 2, None, '___sec52'),
+              (' Subclass example ', 3, None, '___sec53'),
+              (' Subclassing in general ', 3, None, '___sec54'),
+              (' Terminology ', 3, None, '___sec55'),
+              (' Example: Input data reader ',
+               2,
+               'sec:oo:ReadInput',
+               'sec:oo:ReadInput'),
+              (' Problem ', 3, None, '___sec57'),
+              (' Solution ', 3, None, '___sec58'),
+              (' Prompting the user ', 3, None, '___sec59'),
+              (' Reading from file ', 3, None, '___sec60'),
+              (' Reading from the command line ', 3, None, '___sec61'),
+              (' Reading from a gui ', 3, None, '___sec62'),
+              (' More flexibility in the superclass ', 3, None, '___sec63'),
+              (' Demonstrating the tool ', 3, None, '___sec64'),
+              (' Exercises ', 1, None, '___sec65'),
+              (' Exercise 1: Demonstrate the magic of inheritance ',
+               2,
+               'sec:oo:ex1',
+               'sec:oo:ex1'),
+              (' Exercise 2: Make polynomial subclasses of parabolas ',
+               2,
+               'sec:oo:ex2',
+               'sec:oo:ex2'),
+              (' Remarks ', 3, None, '___sec68'),
+              (' Exercise 3: Implement a class for a function as a subclass ',
+               2,
+               'sec:oo:ex3',
+               'sec:oo:ex3'),
+              (' Exercise 4: Create an alternative class hierarchy for polynomials ',
+               2,
+               'sec:oo:ex5',
+               'sec:oo:ex5'),
+              (' Exercise 5: Make circle a subclass of an ellipse ',
+               2,
+               'sec:oo:ex5b',
+               'sec:oo:ex5b'),
+              (' Exercise 6: Make super- and subclass for a point ',
+               2,
+               'sec:oo:ex17',
+               'sec:oo:ex17'),
+              (' Exercise 7: Modify a function class by subclassing ',
+               2,
+               'sec:oo:ex7',
+               'sec:oo:ex7'),
+              (' Exercise 8: Explore the accuracy of difference formulas ',
+               2,
+               'sec:oo:ex18',
+               'sec:oo:ex18'),
+              (' Exercise 9: Implement a subclass ',
+               2,
+               'sec:oo:ex15b',
+               'sec:oo:ex15b'),
+              (' Exercise 10: Make classes for numerical differentiation ',
+               2,
+               'sec:oo:ex33',
+               'sec:oo:ex33'),
+              (' Exercise 11: Implement a new subclass for differentiation ',
+               2,
+               'sec:oo:ex31',
+               'sec:oo:ex31'),
+              (' Exercise 12: Understand if a class can be used recursively ',
+               2,
+               'sec:oo:ex14',
+               'sec:oo:ex14'),
+              (' Exercise 13: Represent people by a class hierarchy ',
+               2,
+               'sec:oo:ex4',
+               'sec:oo:ex4'),
+              (' Remark ', 3, None, '___sec80'),
+              (' Exercise 14: Add a new class in a class hierarchy ',
+               2,
+               'sec:oo:ex15',
+               'sec:oo:ex15'),
+              (' Exercise 15: Compute convergence rates of numerical integration methods ',
+               2,
+               'sec:oo:ex16',
+               'sec:oo:ex16'),
+              (' Exercise 16: Add common functionality in a class hierarchy ',
+               2,
+               'sec:oo:ex6',
+               'sec:oo:ex6'),
+              (' Exercise 17: Make a class hierarchy for root finding ',
+               2,
+               'sec:oo:ex41',
+               'sec:oo:ex41'),
+              (' Exercise 18: Make a calculus calculator class ',
+               2,
+               'sec:plot:ex30',
+               'sec:plot:ex30'),
+              (' Exercise 19: Compute inverse functions ',
+               2,
+               'sec:plot:ex30b',
+               'sec:plot:ex30b'),
+              (' Exercise 20: Make line drawing of a person; program ',
+               2,
+               'pysketcher:exer:person:prog',
+               'pysketcher:exer:person:prog'),
+              (' Exercise 21: Make line drawing of a person; class ',
+               2,
+               'pysketcher:exer:person:class',
+               'pysketcher:exer:person:class'),
+              (' Exercise 22: Animate a person with waving hands ',
+               2,
+               'pysketcher:exer:person:anim',
+               'pysketcher:exer:person:anim'),
+              (' References ', 1, None, '___sec90')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- newcommands_keep.tex -->
+$$
+\newcommand{\tp}{\thinspace .}
+$$
+
+
+
+
+    
+<!-- Bootstrap navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="oo-bootstrap.html">Object-oriented programming</a>
+  </div>
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     <!-- navigation toc: --> <li><a href="._oo-bootstrap001.html#sec:oo:inheritance" style="font-size: 80%;">Inheritance and class hierarchies</a></li>
+     <!-- navigation toc: --> <li><a href="._oo-bootstrap002.html#sec:oo:numdiff" style="font-size: 80%;">Class hierarchy for numerical differentiation</a></li>
+     <!-- navigation toc: --> <li><a href="._oo-bootstrap003.html#sec:oo:int" style="font-size: 80%;">Class hierarchy for numerical integration</a></li>
+     <!-- navigation toc: --> <li><a href="._oo-bootstrap004.html#sec:oo:shapes" style="font-size: 80%;">Class hierarchy for making drawings</a></li>
+     <!-- navigation toc: --> <li><a href="._oo-bootstrap004.html#bioinf:oo" style="font-size: 80%;">Classes for DNA analysis</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec51" style="font-size: 80%;">Summary</a></li>
+     <!-- navigation toc: --> <li><a href="._oo-bootstrap006.html#___sec65" style="font-size: 80%;">Exercises</a></li>
+     <!-- navigation toc: --> <li><a href="._oo-bootstrap006.html#___sec90" style="font-size: 80%;">References</a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div> <!-- end of navigation bar -->
+
+<div class="container">
+
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+
+<a name="part0005"></a>
+<!-- !split -->
+
+<h1 id="___sec51">Summary <a name="___sec51"></a></h1>
+
+<h2 id="___sec52">Chapter topics <a name="___sec52"></a></h2>
+
+<p>
+A subclass inherits everything from its superclass, both attributes
+and methods. The subclass can add new attributes, overload methods,
+and thereby enrich or restrict functionality of the superclass.
+
+<h3 id="___sec53">Subclass example <a name="___sec53"></a></h3>
+
+<p>
+Consider class <code>Gravity</code> from the final section of the document
+<a href="http://tcse6.on.net/class" target="_self">Introduction to classes in Python</a>
+<a href="._oo-bootstrap006.html#Langtangen_TCSE6_class">[2]</a> for representing the gravity force
+\( GMm/r^2 \) between two masses \( m \) and \( M \) being a distance \( r \) apart.
+Suppose we want to make a class for the electric force between two
+charges \( q_1 \) and \( q_2 \), being a distance \( r \) apart in a medium with
+permittivity \( \epsilon_0 \) is \( Gq_1q_2/r^2 \), where
+\( G^{-1}=4\pi\epsilon_0 \). We use the approximate value \( G=8.99\cdot
+10^9\hbox{ Nm}^2/\hbox{C}^2 \) (C is the Coulomb unit used to measure
+electric charges such as \( q_1 \) and \( q_2 \)).  Since the electric force
+is similar to the gravity force, we can easily implement the electric
+force as a subclass of <code>Gravity</code>.  The implementation just needs to
+redefine the value of \( G \)!
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">CoulombsLaw</span>(Gravity):
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__init__</span>(<span style="color: #008000">self</span>, q1, q2):
+        Gravity<span style="color: #666666">.</span>__init__(<span style="color: #008000">self</span>, q1, q2)
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>G <span style="color: #666666">=</span> <span style="color: #666666">8.99E9</span>
+</pre></div>
+<p>
+We can now call the inherited <code>force(r)</code> method to compute the electric
+force and the <code>visualize</code> method to make a plot of the force:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">c <span style="color: #666666">=</span> CoulombsLaw(<span style="color: #666666">1E-6</span>, <span style="color: #666666">-2E-6</span>)
+<span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;Electric force:&#39;</span>, c<span style="color: #666666">.</span>force(<span style="color: #666666">0.1</span>)
+c<span style="color: #666666">.</span>visualize(<span style="color: #666666">0.01</span>, <span style="color: #666666">0.2</span>)
+</pre></div>
+<p>
+However, the <code>plot</code> method inherited from class <code>Gravity</code> has
+an inappropriate title referring to &quot;Gravity force&quot; and the masses
+\( m \) and \( M \). An easy fix could be to have the plot title as an
+attribute set in the constructor. The subclass can then override
+the contents of this attribute, as it overrides <code>self.G</code>.
+It is quite common to discover that a class needs adjustments if it
+is to be used as superclass.
+
+<h3 id="___sec54">Subclassing in general <a name="___sec54"></a></h3>
+
+<p>
+The typical sketch of creating a subclass goes as follows:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">SuperClass</span>:
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__init__</span>(<span style="color: #008000">self</span>, p, q):
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>p, <span style="color: #008000">self</span><span style="color: #666666">.</span>q <span style="color: #666666">=</span> p, q
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">where</span>(<span style="color: #008000">self</span>):
+        <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;In superclass&#39;</span>, <span style="color: #008000">self</span><span style="color: #666666">.</span>__class__<span style="color: #666666">.</span>__name__
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">compute</span>(<span style="color: #008000">self</span>, x):
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>where()
+        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>p<span style="color: #666666">*</span>x <span style="color: #666666">+</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>q
+
+
+<span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">SubClass</span>(SuperClass):
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__init__</span>(<span style="color: #008000">self</span>, p, q, a):
+        SuperClass<span style="color: #666666">.</span>__init__(<span style="color: #008000">self</span>, p, q)
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>a <span style="color: #666666">=</span> a
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">where</span>(<span style="color: #008000">self</span>):
+        <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;In subclass&#39;</span>, <span style="color: #008000">self</span><span style="color: #666666">.</span>__class__<span style="color: #666666">.</span>__name__
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">compute</span>(<span style="color: #008000">self</span>, x):
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>where()
+        <span style="color: #008000; font-weight: bold">return</span> SuperClass<span style="color: #666666">.</span>compute(<span style="color: #008000">self</span>, x) <span style="color: #666666">+</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>a<span style="color: #666666">*</span>x<span style="color: #666666">**2</span>
+</pre></div>
+<p>
+This example shows how a subclass extends a superclass with one
+attribute (<code>a</code>). The subclass' <code>compute</code> method calls the
+corresponding superclass method, as well as the overloaded method
+<code>where</code>. Let us invoke the <code>compute</code> method through superclass and
+subclass instances:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000">super</span> <span style="color: #666666">=</span> SuperClass(<span style="color: #666666">1</span>, <span style="color: #666666">2</span>)
+<span style="color: #666666">&gt;&gt;&gt;</span> sub <span style="color: #666666">=</span> SubClass(<span style="color: #666666">1</span>, <span style="color: #666666">2</span>, <span style="color: #666666">3</span>)
+<span style="color: #666666">&gt;&gt;&gt;</span> v1 <span style="color: #666666">=</span> <span style="color: #008000">super</span><span style="color: #666666">.</span>compute(<span style="color: #666666">0</span>)
+In superclass SuperClass
+<span style="color: #666666">&gt;&gt;&gt;</span> v2 <span style="color: #666666">=</span> sub<span style="color: #666666">.</span>compute(<span style="color: #666666">0</span>)
+In subclass SubClass
+In subclass SubClass
+</pre></div>
+<p>
+Observe that in the subclass <code>sub</code>, method <code>compute</code> calls
+<code>self.where</code>, which translates to the <code>where</code> method in
+<code>SubClass</code>. Then the <code>compute</code> method in <code>SuperClass</code>
+is invoked, and this method also makes a <code>self.where</code> call,
+which is a call to <code>SubClass</code>' <code>where</code> method (think of
+what <code>self</code> is here, it is <code>sub</code>, so it is natural that
+we get <code>where</code> in the subclass (<code>sub.where</code>) and not
+<code>where</code> in the superclass part of <code>sub</code>).
+
+<p>
+In this example, classes <code>SuperClass</code> and <code>SubClass</code> constitute a
+class hierarchy. Class <code>SubClass</code> inherits the attributes <code>p</code> and <code>q</code>
+from its superclass, and overrides the methods <code>where</code> and <code>compute</code>.
+
+<h3 id="___sec55">Terminology <a name="___sec55"></a></h3>
+
+<p>
+The important computer science topics in this document are
+
+<ul>
+  <li> superclass</li>
+  <li> subclass</li>
+  <li> inheritance</li>
+  <li> class hierarchies</li>
+  <li> tree structures</li>
+  <li> recursion</li>
+</ul>
+
+<h2 id="sec:oo:ReadInput">Example: Input data reader<a name="sec:oo:ReadInput"></a></h2>
+
+<p>
+The summarizing example of this document concerns a class hierarchy
+for simplifying reading input data into programs. Input data may come
+from several different sources: the command line, a file, or from a
+dialog with the user, either of <code>input</code> form or in a graphical user
+interface (GUI). Therefore it makes sense to create a class hierarchy
+where subclasses are specialized to read from different sources and
+where the common code is placed in a superclass. The resulting tool
+will make it easy for you to let your programs read from many
+different input sources by adding just a few lines.
+
+<p>
+<!-- === A Motivating Example === -->
+
+<h3 id="___sec57">Problem <a name="___sec57"></a></h3>
+
+<p>
+Let us motivate the problem by a case where we want to write a program
+for dumping \( n \) function values of \( f(x) \) to a file for \( x\in [a,b] \).
+The core part of the program typically reads
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
+<span style="color: #008000; font-weight: bold">with</span> <span style="color: #008000">open</span>(filename, <span style="color: #BA2121">&#39;w&#39;</span>) <span style="color: #008000; font-weight: bold">as</span> outfile:
+    <span style="color: #008000; font-weight: bold">for</span> x <span style="color: #AA22FF; font-weight: bold">in</span> np<span style="color: #666666">.</span>linspace(a, b, n):
+        outfile<span style="color: #666666">.</span>write(<span style="color: #BA2121">&#39;</span><span style="color: #BB6688; font-weight: bold">%12g</span><span style="color: #BA2121">  </span><span style="color: #BB6688; font-weight: bold">%12g</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> (x, f(x)))
+</pre></div>
+<p>
+Our purpose is to read data into the variables <code>a</code>, <code>b</code>, <code>n</code>,
+<code>filename</code>, and <code>f</code>. For the latter we want to specify a
+formula and use the <code>StringFunction</code> tool
+(the section ref{sec:input:StringFunction})
+to make the function <code>f</code>:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">scitools.StringFunction</span> <span style="color: #008000; font-weight: bold">import</span> StringFunction
+f <span style="color: #666666">=</span> StringFunction(formula)
+</pre></div>
+<p>
+How can we read <code>a</code>, <code>b</code>, <code>n</code>, <code>formula</code>, and <code>filename</code>
+conveniently into the program?
+
+<p>
+The basic idea is that we place the input data in a dictionary, and create
+a tool that can update this dictionary from sources like the command line,
+a file, a GUI, etc.
+Our dictionary is then
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">p <span style="color: #666666">=</span> <span style="color: #008000">dict</span>(formula<span style="color: #666666">=</span><span style="color: #BA2121">&#39;x+1&#39;</span>, a<span style="color: #666666">=0</span>, b<span style="color: #666666">=1</span>, n<span style="color: #666666">=2</span>, filename<span style="color: #666666">=</span><span style="color: #BA2121">&#39;tmp.dat&#39;</span>)
+</pre></div>
+<p>
+This dictionary specifies the names of the input parameters
+to the program and the default values of these parameters.
+
+<p>
+Using the tool is a matter of feeding <code>p</code> into the constructor
+of a subclass in the tools' class hierarchy and extract the parameters
+into, for example, distinct variables:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">inp <span style="color: #666666">=</span> Subclassname(p)
+a, b, filename, formula, n <span style="color: #666666">=</span> inp<span style="color: #666666">.</span>get_all()
+</pre></div>
+<p>
+Depending on what we write as <code>Subclassname</code>, the five
+variables can be read from the command line, the terminal window,
+a file, or a GUI.
+The task now is to implement a class hierarchy to facilitate
+the described flexible reading of input data.
+
+<p>
+<!-- === The Superclass === -->
+
+<h3 id="___sec58">Solution <a name="___sec58"></a></h3>
+
+<p>
+We first create a very simple superclass <code>ReadInput</code>. Its main purpose
+is to store the parameter dictionary as an attribute, provide a
+method <code>get</code> to extract single values, and a method <code>get_all</code>
+to extract all parameters into distinct variables:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">ReadInput</span>:
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__init__</span>(<span style="color: #008000">self</span>, parameters):
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>p <span style="color: #666666">=</span> parameters
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">get</span>(<span style="color: #008000">self</span>, parameter_name):
+        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>p[parameter_name]
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">get_all</span>(<span style="color: #008000">self</span>):
+        <span style="color: #008000; font-weight: bold">return</span> [<span style="color: #008000">self</span><span style="color: #666666">.</span>p[name] <span style="color: #008000; font-weight: bold">for</span> name <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">sorted</span>(<span style="color: #008000">self</span><span style="color: #666666">.</span>p)]
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__str__</span>(<span style="color: #008000">self</span>):
+        <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">pprint</span>
+        <span style="color: #008000; font-weight: bold">return</span> pprint<span style="color: #666666">.</span>pformat(<span style="color: #008000">self</span><span style="color: #666666">.</span>p)
+</pre></div>
+<p>
+Note that we in the <code>get_all</code> method must sort the keys in
+<code>self.p</code> such that the list of returned variables is well defined.
+In the calling program we can then list variables in the same
+order as the alphabetic order of the parameter names, for example:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">a, b, filename, formula, n <span style="color: #666666">=</span> inp<span style="color: #666666">.</span>get_all()
+</pre></div>
+<p>
+The <code>__str__</code> method applies the <code>pprint</code> module to
+get a pretty print of all the parameter names and their values.
+
+<p>
+Class <code>ReadInput</code> cannot read from any source - subclasses are supposed
+to do this. The forthcoming text describes various types of subclasses
+for various types of reading input.
+
+<h3 id="___sec59">Prompting the user <a name="___sec59"></a></h3>
+
+<p>
+The perhaps simplest way of getting data into a program is
+to use <code>raw_input</code>. We then prompt the user with a text <code>Give name:</code>
+and get an appropriate object back (recall that strings must be
+enclosed in quotes).  The subclass <code>PromptUser</code> for doing this
+then reads
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">PromptUser</span>(ReadInput):
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__init__</span>(<span style="color: #008000">self</span>, parameters):
+        ReadInput<span style="color: #666666">.</span>__init__(<span style="color: #008000">self</span>, parameters)
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>_prompt_user()
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">_prompt_user</span>(<span style="color: #008000">self</span>):
+        <span style="color: #008000; font-weight: bold">for</span> name <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>p:
+            <span style="color: #008000">self</span><span style="color: #666666">.</span>p[name] <span style="color: #666666">=</span> <span style="color: #008000">eval</span>(<span style="color: #008000">raw_input</span>(<span style="color: #BA2121">&quot;Give &quot;</span> <span style="color: #666666">+</span> name <span style="color: #666666">+</span> <span style="color: #BA2121">&quot;: &quot;</span>))
+</pre></div>
+<p>
+Note the underscore in <code>_prompt_user</code>: the underscore signifies
+that this is a &quot;private&quot; method in the <code>PromptUser</code> class, not
+intended to be called by users of the class.
+
+<p>
+There is a major difficulty with using <code>eval</code> on the input from the
+user. When the input is intended to be a string object, such as a
+filename, say <code>tmp.inp</code>, the program will perform the operation
+<code>eval(tmp.inp)</code>, which leads to an exception because <code>tmp.inp</code> is
+treated as a variable <code>inp</code> in a module <code>tmp</code> and not as the string
+<code>'tmp.inp'</code>.  To solve this problem, we use the <code>str2obj</code> function
+from the <code>scitools.misc</code> module. This function will return the right
+Python object also in the case where the argument should result in a
+string
+object (see the section ref{sec:input:summary:topics} for
+some information about <code>str2obj</code>).
+The bottom line is that <code>str2obj</code> acts as a safer
+<code>eval(raw_input(...))</code> call. The key assignment in class <code>PromptUser</code>
+is then changed to
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000">self</span><span style="color: #666666">.</span>p[name] <span style="color: #666666">=</span> str2obj(<span style="color: #008000">raw_input</span>(<span style="color: #BA2121">&quot;Give &quot;</span> <span style="color: #666666">+</span> name <span style="color: #666666">+</span> <span style="color: #BA2121">&quot;: &quot;</span>))
+</pre></div>
+
+<h3 id="___sec60">Reading from file <a name="___sec60"></a></h3>
+
+<p>
+We can also place <code>name = value</code> commands in a file and load this
+information into the dictionary <code>self.p</code>.  An example of a file can be
+
+<p>
+
+<!-- code=text (!bc ccq) typeset with pygments style "default" -->
+<blockquote>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">formula    = sin(x) + cos(x)
+filename   = tmp.dat
+a          = 0
+b          = 1
+</pre></div>
+</blockquote><p>
+In this example we have omitted <code>n</code>, so we rely on its default value.
+
+<p>
+A problem is how to give the filename. The easy way out of this
+problem is to read from standard input, and just redirect standard
+input from a file when we run the program. For example, if the
+filename is <code>tmp.inp</code>, we run the program as follows in a terminal
+window
+
+<p>
+
+<!-- code=text (!bc sys) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">Terminal&gt; python myprog.py &lt; tmp.inp
+</pre></div>
+<p>
+(The redirection
+of standard input from a file does not work in IPython so we are in this
+case forced
+to run the program in a terminal window.)
+
+<p>
+To interpret the contents of the file, we read line by line, split
+each line with respect to <code>=</code>, use the left-hand side as the parameter
+name and the right-hand side as the corresponding value.  It is
+important to strip away unnecessary blanks in the name and value.  The
+complete class now reads
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">ReadInputFile</span>(ReadInput):
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__init__</span>(<span style="color: #008000">self</span>, parameters):
+        ReadInput<span style="color: #666666">.</span>__init__(<span style="color: #008000">self</span>, parameters)
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>_read_file()
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">_read_file</span>(<span style="color: #008000">self</span>, infile<span style="color: #666666">=</span>sys<span style="color: #666666">.</span>stdin):
+        <span style="color: #008000; font-weight: bold">for</span> line <span style="color: #AA22FF; font-weight: bold">in</span> infile:
+            <span style="color: #008000; font-weight: bold">if</span> <span style="color: #BA2121">&quot;=&quot;</span> <span style="color: #AA22FF; font-weight: bold">in</span> line:
+                name, value <span style="color: #666666">=</span> line<span style="color: #666666">.</span>split(<span style="color: #BA2121">&quot;=&quot;</span>)
+                <span style="color: #008000">self</span><span style="color: #666666">.</span>p[name<span style="color: #666666">.</span>strip()] <span style="color: #666666">=</span> str2obj(value<span style="color: #666666">.</span>strip())
+</pre></div>
+<p>
+A nice feature with reading from standard input is that if we do not
+redirect standard input to a file, the program will prompt the user in
+the terminal window, where the user can give commands of the type
+<code>name = value</code> for setting selected input data.  A <code>Ctrl+d</code> is needed
+to terminate the interactive session in the terminal window and
+continue execution of the program.
+
+<h3 id="___sec61">Reading from the command line <a name="___sec61"></a></h3>
+
+<p>
+For input from the command line we assume that parameters and values
+are given as option-value pairs, e.g., as in
+
+<p>
+
+<!-- code=text (!bc ccq) typeset with pygments style "default" -->
+<blockquote>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">--a 1 --b 10 --n 101 --formula &quot;sin(x) + cos(x)&quot;
+</pre></div>
+</blockquote><p>
+We apply the <code>argparse</code> module
+(see the section ref{sec:input:argparse})
+to parse the command-line arguments. The list of legal option names
+must be constructed from the list of keys in the <code>self.p</code> dictionary.
+The complete class takes the form
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">ReadCommandLine</span>(ReadInput):
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__init__</span>(<span style="color: #008000">self</span>, parameters):
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>sys_argv <span style="color: #666666">=</span> sys<span style="color: #666666">.</span>argv[<span style="color: #666666">1</span>:]  <span style="color: #408080; font-style: italic"># copy</span>
+        ReadInput<span style="color: #666666">.</span>__init__(<span style="color: #008000">self</span>, parameters)
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>_read_command_line()
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">_read_command_line</span>(<span style="color: #008000">self</span>):
+        parser <span style="color: #666666">=</span> argparse<span style="color: #666666">.</span>ArgumentParser()
+        <span style="color: #408080; font-style: italic"># Make argparse list of options</span>
+        <span style="color: #008000; font-weight: bold">for</span> name <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>p:
+            <span style="color: #408080; font-style: italic"># Default type: str</span>
+            parser<span style="color: #666666">.</span>add_argument(<span style="color: #BA2121">&#39;--&#39;</span><span style="color: #666666">+</span>name, default<span style="color: #666666">=</span><span style="color: #008000">self</span><span style="color: #666666">.</span>p[name])
+
+        args <span style="color: #666666">=</span> parser<span style="color: #666666">.</span>parse_args()
+        <span style="color: #008000; font-weight: bold">for</span> name <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>p:
+            <span style="color: #008000">self</span><span style="color: #666666">.</span>p[name] <span style="color: #666666">=</span> str2obj(<span style="color: #008000">getattr</span>(args, name))
+
+<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">Tkinter</span>
+<span style="color: #008000; font-weight: bold">try</span>:
+</pre></div>
+<p>
+We could specify the type of a parameter as <code>type(self.p[name])</code> or
+<code>self.p[name].__class__</code>, but if a <code>float</code> parameter has been given an
+integer default value, the type will be <code>int</code> and <code>argparse</code> will not
+accept a decimal number as input. Our more general strategy is to drop
+specifying the type, which implies that all parameters in the <code>args</code>
+object become strings. We then use the <code>str2obj</code> function to convert
+to the right type, a technique that is used throughout the <code>ReadInput</code>
+module.
+
+<h3 id="___sec62">Reading from a gui <a name="___sec62"></a></h3>
+
+<p>
+We can with a little extra effort also make a graphical user interface
+(GUI) for reading the input data. An example of a user interface is
+displayed in Figure <a href="#sec:oo:summary:GUI:fig1">13</a>.  Since the
+technicalities of the implementation is beyond the scope of this
+document, we do not show the subclass <code>GUI</code> that creates the GUI and
+loads the user input into the <code>self.p</code> dictionary.
+
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 13:  Screen dump of a graphical user interface to read input data into a program (class <code>GUI</code> in the <code>ReadInput</code> hierarchy). <a name="sec:oo:summary:GUI:fig1"></a> </p></center>
+<p><img src="fig-oo/ReadInputGUI.png" align="bottom" width=400></p>
+</center>
+
+<h3 id="___sec63">More flexibility in the superclass <a name="___sec63"></a></h3>
+
+<p>
+Some extra flexibility can easily be added to the <code>get</code> method
+in the superclass. Say we want to extract a variable number of
+parameters:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">a, b, n <span style="color: #666666">=</span> inp<span style="color: #666666">.</span>get(<span style="color: #BA2121">&#39;a&#39;</span>, <span style="color: #BA2121">&#39;b&#39;</span>, <span style="color: #BA2121">&#39;n&#39;</span>)  <span style="color: #408080; font-style: italic"># 3 variables</span>
+n <span style="color: #666666">=</span> inp<span style="color: #666666">.</span>get(<span style="color: #BA2121">&#39;n&#39;</span>)                  <span style="color: #408080; font-style: italic"># 1 variable</span>
+</pre></div>
+<p>
+The key to this extension is to use a variable number of arguments as
+explained in the document <a href="http://tcse6.on.net/varargs" target="_self">Variable number of
+function arguments in Python</a>
+<a href="._oo-bootstrap006.html#Langtangen_TCSE6_varargs">[7]</a>:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">ReadInput</span>:
+    <span style="color: #666666">...</span>
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">get</span>(<span style="color: #008000">self</span>, <span style="color: #666666">*</span>parameter_names):
+        <span style="color: #008000; font-weight: bold">if</span> <span style="color: #008000">len</span>(parameter_names) <span style="color: #666666">==</span> <span style="color: #666666">1</span>:
+            <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>p[parameter_names[<span style="color: #666666">0</span>]]
+        <span style="color: #008000; font-weight: bold">else</span>:
+            <span style="color: #008000; font-weight: bold">return</span> [<span style="color: #008000">self</span><span style="color: #666666">.</span>p[name] <span style="color: #008000; font-weight: bold">for</span> name <span style="color: #AA22FF; font-weight: bold">in</span> parameter_names]
+</pre></div>
+
+<h3 id="___sec64">Demonstrating the tool <a name="___sec64"></a></h3>
+
+<p>
+Let us show how we can use the classes in the <code>ReadInput</code>
+hierarchy. We apply the motivating example described earlier.  The
+name of the program is <a href="http://tinyurl.com/pwyasaa/oo/demo_ReadInput.py" target="_self"><tt>demo_ReadInput.py</tt></a>.  As first command-line argument it
+takes the name of the input source, given as the name of a subclass in
+the <code>ReadInput</code> hierarchy. The code for loading input data from any of
+the sources supported by the <code>ReadInput</code> hierarchy goes as follows:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">p <span style="color: #666666">=</span> <span style="color: #008000">dict</span>(formula<span style="color: #666666">=</span><span style="color: #BA2121">&#39;x+1&#39;</span>, a<span style="color: #666666">=0</span>, b<span style="color: #666666">=1</span>, n<span style="color: #666666">=2</span>, filename<span style="color: #666666">=</span><span style="color: #BA2121">&#39;tmp.dat&#39;</span>)
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">ReadInput</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #666666">*</span>
+input_reader <span style="color: #666666">=</span> <span style="color: #008000">eval</span>(sys<span style="color: #666666">.</span>argv[<span style="color: #666666">1</span>])  <span style="color: #408080; font-style: italic"># PromptUser, ReadInputFile, ...</span>
+<span style="color: #008000; font-weight: bold">del</span> sys<span style="color: #666666">.</span>argv[<span style="color: #666666">1</span>]  <span style="color: #408080; font-style: italic"># otherwise argparse don&#39;t like our extra option</span>
+inp <span style="color: #666666">=</span> input_reader(p)
+a, b, filename, formula, n <span style="color: #666666">=</span> inp<span style="color: #666666">.</span>get_all()
+<span style="color: #008000; font-weight: bold">print</span> inp
+</pre></div>
+<p>
+Note how convenient <code>eval</code> is to automatically create the right
+subclass for reading input data.
+
+<p>
+Our first try on running this program applies the <code>PromptUser</code> class:
+
+<p>
+
+<!-- code=text (!bc sys) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">demo_ReadInput.py PromptUser
+Give a: 0
+Give formula: sin(x) + cos(x)
+Give b: 10
+Give filename: function_data
+Give n: 101
+{&#39;a&#39;: 0,
+ &#39;b&#39;: 10,
+ &#39;filename&#39;: &#39;function_data&#39;,
+ &#39;formula&#39;: &#39;sin(x) + cos(x)&#39;,
+ &#39;n&#39;: 101}
+</pre></div>
+<p>
+The next example reads data from a file <code>tmp.inp</code> with the same
+contents as shown in paragraph above about reading from file.
+
+<p>
+
+<!-- code=text (!bc sys) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">Terminal&gt; demo_ReadInput.py ReadFileInput &lt; tmp.inp
+{&#39;a&#39;: 0, &#39;b&#39;: 1, &#39;filename&#39;: &#39;tmp.dat&#39;,
+ &#39;formula&#39;: &#39;sin(x) + cos(x)&#39;, &#39;n&#39;: 2}
+</pre></div>
+<p>
+We can also drop the redirection of standard input to a file, and
+instead run an interactive session in IPython or the terminal window:
+
+<p>
+
+<!-- code=text (!bc sys) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">demo_ReadInput.py ReadFileInput
+n = 101
+filename = myfunction_data_file.dat
+^D
+{&#39;a&#39;: 0,
+ &#39;b&#39;: 1,
+ &#39;filename&#39;: &#39;myfunction_data_file.dat&#39;,
+ &#39;formula&#39;: &#39;x+1&#39;,
+ &#39;n&#39;: 101}
+</pre></div>
+<p>
+Note that <code>Ctrl+d</code> is needed to end the interactive
+session with the user and continue program execution.
+
+<p>
+Command-line arguments can also be specified:
+
+<p>
+
+<!-- code=text (!bc sys) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">demo_ReadInput.py ReadCommandLine \ 
+          --a -1 --b 1 --formula &quot;sin(x) + cos(x)&quot;
+{&#39;a&#39;: -1, &#39;b&#39;: 1, &#39;filename&#39;: &#39;tmp.dat&#39;,
+ &#39;formula&#39;: &#39;sin(x) + cos(x)&#39;, &#39;n&#39;: 2}
+</pre></div>
+<p>
+Finally, we can run the program with a GUI,
+
+<p>
+
+<!-- code=text (!bc sys) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">demo_ReadInput.py GUI
+{&#39;a&#39;: -1, &#39;b&#39;: 10, &#39;filename&#39;: &#39;tmp.dat&#39;,
+ &#39;formula&#39;: &#39;x+1&#39;, &#39;n&#39;: 2}
+</pre></div>
+<p>
+The GUI is shown in Figure <a href="#sec:oo:summary:GUI:fig1">13</a>.
+
+<p>
+Fortunately, it is now quite obvious how to apply the <code>ReadInput</code>
+hierarchy of classes in your own programs to simplify input.
+Especially in applications with a large number of parameters one can
+initially define these in a dictionary and then automatically create
+quite comprehensive user interfaces where the user can specify only
+some subset of the parameters (if the default values for the rest of
+the parameters are suitable).
+
+<p>
+<p>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pager">
+  <li class="previous">
+    <a href="._oo-bootstrap004.html">&larr; Prev</a>
+  </li>
+  <li class="next">
+    <a href="._oo-bootstrap006.html">Next &rarr;</a>
+  </li>
+</ul>
+<!-- ------------------- end of main content --------------- -->
+
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap footer
+<footer>
+<a href="http://..."><img width="250" align=right src="http://..."></a>
+</footer>
+-->
+
+
+</body>
+</html>
+    
+

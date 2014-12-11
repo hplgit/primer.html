@@ -1,0 +1,714 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="User input and error handling">
+<meta name="keywords" content="command-line arguments,option-value pairs (command line),standard input,standard output,standard error,bytes,bits,exceptions,widgets,event loop,modules,test block (in module files),test function,nose tests,pytest tests,search for module files,module folders,refactoring,binomial distribution,Bernoulli trials,Poisson distribution,Poisson process">
+
+<title>User input and error handling</title>
+
+<!-- Bootstrap style: bootswatch_readable -->
+<link href="http://netdna.bootstrapcdn.com/bootswatch/3.1.1/readable/bootstrap.min.css" rel="stylesheet">
+<!-- not necessary
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+
+<style type="text/css">
+/* Let inline verbatim have the same color as the surroundings */
+code { color: inherit; background-color: transparent; }
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [(' Asking questions and reading answers ',
+               1,
+               'sec:input:rawinput',
+               'sec:input:rawinput'),
+              (' Reading keyboard input ',
+               2,
+               'sec:input:rawinput2',
+               'sec:input:rawinput2'),
+              (' Reading from the command line ',
+               1,
+               'sec:input:sysargv',
+               'sec:input:sysargv'),
+              (' Providing input on the command line ',
+               2,
+               'sec:input:cml',
+               'sec:input:cml'),
+              (' A variable number of command-line arguments ',
+               2,
+               None,
+               '___sec4'),
+              (' More on command-line arguments ', 2, None, '___sec5'),
+              (' Turning user text into live objects ', 1, None, '___sec6'),
+              (' The magic eval function ',
+               2,
+               'sec:input:eval',
+               'sec:input:eval'),
+              (' Applying eval to strings ', 3, None, '___sec8'),
+              (' Applying eval to user input ', 3, None, '___sec9'),
+              (' The magic exec function ',
+               2,
+               'sec:input:exec',
+               'sec:input:exec'),
+              (' Turning string expressions into functions ',
+               2,
+               'sec:input:StringFunction',
+               'sec:input:StringFunction'),
+              (' Option-value pairs on the command line ',
+               1,
+               'sec:input:argparse',
+               'sec:input:argparse'),
+              (' Basic usage of the argparse module ', 2, None, '___sec13'),
+              (' Mathematical expressions as values ', 2, None, '___sec14'),
+              (' Reading data from file ',
+               1,
+               'sec:files:reading',
+               'sec:files:reading'),
+              (' Reading a file line by line ', 2, None, '___sec16'),
+              (' Alternative ways of reading a file ',
+               2,
+               'sec:files:reading:other',
+               'sec:files:reading:other'),
+              (' The modern with statement ', 3, None, '___sec18'),
+              (' The old while construction ', 3, None, '___sec19'),
+              (' Reading a file into a string ', 3, None, '___sec20'),
+              (' Reading a mixture of text and numbers ',
+               2,
+               'sec:files:textnum',
+               'sec:files:textnum'),
+              (' Is it more to file reading? ', 3, None, '___sec22'),
+              (' Writing data to file ',
+               1,
+               'sec:files:writing',
+               'sec:files:writing'),
+              (' Example: Writing a table to file ', 2, None, '___sec24'),
+              (' Problem ', 3, None, '___sec25'),
+              (' Solution ', 3, None, '___sec26'),
+              (' Standard input and output as file objects ',
+               2,
+               None,
+               '___sec27'),
+              (' Redirecting standard input, output, and error ',
+               3,
+               None,
+               '___sec28'),
+              (' Note ', 3, None, '___sec29'),
+              (' What is a file, really? ',
+               2,
+               'sec:files:really',
+               'sec:files:really'),
+              (' Pure text files ', 3, None, '___sec31'),
+              (' Word processor files ', 3, None, '___sec32'),
+              (' Image files ', 3, None, '___sec33'),
+              (' Music files ', 3, None, '___sec34'),
+              (' PDF files ', 3, None, '___sec35'),
+              (' Remarks ', 3, None, '___sec36'),
+              (' Handling errors ',
+               1,
+               'sec:input:except',
+               'sec:input:except'),
+              (' Exception handling ',
+               2,
+               'sec:input:except:handling',
+               'sec:input:except:handling'),
+              (' Testing for a specific exception ', 3, None, '___sec39'),
+              (' Examples on exception types ', 3, None, '___sec40'),
+              (' Digression ', 3, None, '___sec41'),
+              (' Raising exceptions ', 2, None, '___sec42'),
+              (' Example ', 3, None, '___sec43'),
+              (' A glimpse of graphical user interfaces ',
+               1,
+               'sec:input:GUI',
+               'sec:input:GUI'),
+              (' Making modules ',
+               1,
+               'sec:input:modules',
+               'sec:input:modules'),
+              (' Example: Interest on bank deposits ', 2, None, '___sec46'),
+              (' Collecting functions in a module file ',
+               2,
+               'sec:input:module:create',
+               'sec:input:module:create'),
+              (' Test block ',
+               2,
+               'sec:input:module:testblock',
+               'sec:input:module:testblock'),
+              (' Example on a test block in a minimalistic module ',
+               3,
+               None,
+               '___sec49'),
+              (' A test block in the `interest` module ',
+               3,
+               None,
+               '___sec50'),
+              (' Verification of the module code ',
+               2,
+               'sec:input:modules:testfunc',
+               'sec:input:modules:testfunc'),
+              (' Getting input data ',
+               2,
+               'sec:input:modules:inputdata',
+               'sec:input:modules:inputdata'),
+              (' Doc strings in modules ', 2, None, '___sec53'),
+              (' Using modules ',
+               2,
+               'sec:input:modules:usage',
+               'sec:input:modules:usage'),
+              (' What gets imported by various import statements? ',
+               3,
+               None,
+               '___sec55'),
+              (' How to make Python find a module file ',
+               3,
+               None,
+               '___sec56'),
+              (' How to make Python run the module file ',
+               3,
+               None,
+               '___sec57'),
+              (' Distributing modules ',
+               2,
+               'sec:input:modules:setuppy',
+               'sec:input:modules:setuppy'),
+              (' Making software available on the Internet ',
+               2,
+               None,
+               '___sec59'),
+              (' Summary ', 1, 'sec:input:summary', 'sec:input:summary'),
+              (' Chapter topics ',
+               2,
+               'sec:input:summary:topics',
+               'sec:input:summary:topics'),
+              (' Question and answer input ', 3, None, '___sec62'),
+              (' Getting command-line arguments ', 3, None, '___sec63'),
+              (' Using option-value pairs ', 3, None, '___sec64'),
+              (' Generating code on the fly ', 3, None, '___sec65'),
+              (' Turning string formulas into Python functions ',
+               3,
+               None,
+               '___sec66'),
+              (' File operations ', 3, None, '___sec67'),
+              (' Handling exceptions ', 3, None, '___sec68'),
+              (' Raising exceptions ', 3, None, '___sec69'),
+              (' Modules ', 3, None, '___sec70'),
+              (' Terminology ', 3, None, '___sec71'),
+              (' Example: Bisection root finding ',
+               2,
+               'sec:input:summarizingex',
+               'sec:input:summarizingex'),
+              (' Problem ', 3, None, '___sec73'),
+              (' Solution ', 3, None, '___sec74'),
+              (' Verification ', 3, None, '___sec75'),
+              (' Making a function ', 3, None, '___sec76'),
+              (' Making a test function ', 3, None, '___sec77'),
+              (' Making a module ', 3, None, '___sec78'),
+              (' Defining a user interface ', 3, None, '___sec79'),
+              (' Using the module ', 3, None, '___sec80'),
+              (' Potential problems with the software ', 3, None, '___sec81'),
+              (' Distributing the bisection module to others ',
+               3,
+               None,
+               '___sec82'),
+              (' Exercises ', 1, None, '___sec83'),
+              (' Exercise 1: Make an interactive program ',
+               2,
+               'sec:input:ex24',
+               'sec:input:ex24'),
+              (' Exercise 2: Read a number from the command line ',
+               2,
+               'sec:input:ex24b',
+               'sec:input:ex24b'),
+              (' Exercise 3: Read a number from a file ',
+               2,
+               'sec:input:ex24bfile',
+               'sec:input:ex24bfile'),
+              (' Exercise 4: Read and write several numbers from and to file ',
+               2,
+               'sec:input:ex24bfile2',
+               'sec:input:ex24bfile2'),
+              (' Exercise 5: Use exceptions to handle wrong input ',
+               2,
+               'sec:input:ex24c',
+               'sec:input:ex24c'),
+              (' Exercise 6: Read input from the keyboard ',
+               2,
+               'sec:input:ex25',
+               'sec:input:ex25'),
+              (' Exercise 7: Read input from the command line ',
+               2,
+               'sec:input:ex26',
+               'sec:input:ex26'),
+              (' Exercise 8: Try MSWord or LibreOffice to write a program ',
+               2,
+               'sec:files:ex7',
+               'sec:files:ex7'),
+              (' Exercise 9: Prompt the user for input to a formula ',
+               2,
+               'sec:input:ex6',
+               'sec:input:ex6'),
+              (' Exercise 10: Read parameters in a formula from the command line ',
+               2,
+               'sec:input:ex5',
+               'sec:input:ex5'),
+              (' Exercise 11: Use exceptions to handle wrong input ',
+               2,
+               'sec:input:ex8b',
+               'sec:input:ex8b'),
+              (' Exercise 12: Test validity of input data ',
+               2,
+               'sec:input:ex7',
+               'sec:input:ex7'),
+              (' Exercise 13: Raise an exception in case of wrong input ',
+               2,
+               'sec:input:ex8',
+               'sec:input:ex8'),
+              (' Exercise 14: Evaluate a formula for data in a file ',
+               2,
+               'sec:input:ex:ball:file',
+               'sec:input:ex:ball:file'),
+              (' Exercise 15: Compute the distance it takes to stop a car ',
+               2,
+               'sec:input:ex21',
+               'sec:input:ex21'),
+              (' Exercise 16: Look up calendar functionality ',
+               2,
+               'sec:input:ex48',
+               'sec:input:ex48'),
+              (' Exercise 17: Use the StringFunction tool ',
+               2,
+               'sec:input:ex28b',
+               'sec:input:ex28b'),
+              (' Exercise 18: Why we test for specific exception types ',
+               2,
+               'sec:input:ex11',
+               'sec:input:ex11'),
+              (' Exercise 19: Make a complete module ',
+               2,
+               'sec:input:ex27',
+               'sec:input:ex27'),
+              (' Exercise 20: Check if mathematical identities hold ',
+               2,
+               'sec:input:ex2',
+               'sec:input:ex2'),
+              (' Exercise 21: Compute probabilities with the binomial distribution ',
+               2,
+               'sec:input:ex15',
+               'sec:input:ex15'),
+              (' Exercise 22: Compute probabilities with the Poisson distribution ',
+               2,
+               'sec:input:ex16',
+               'sec:input:ex16'),
+              (' References ', 1, None, '___sec106')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- newcommands_keep.tex -->
+$$
+\newcommand{\tp}{\thinspace .}
+$$
+
+
+
+
+    
+<!-- Bootstrap navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="input-readable.html">User input and error handling</a>
+  </div>
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     <!-- navigation toc: --> <li><a href="._input-readable001.html#sec:input:rawinput" style="font-size: 80%;">Asking questions and reading answers</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable002.html#sec:input:sysargv" style="font-size: 80%;">Reading from the command line</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable003.html#___sec6" style="font-size: 80%;">Turning user text into live objects</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:input:argparse" style="font-size: 80%;">Option-value pairs on the command line</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable005.html#sec:files:reading" style="font-size: 80%;">Reading data from file</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable006.html#sec:files:writing" style="font-size: 80%;">Writing data to file</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable007.html#sec:input:except" style="font-size: 80%;">Handling errors</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable008.html#sec:input:GUI" style="font-size: 80%;">A glimpse of graphical user interfaces</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable009.html#sec:input:modules" style="font-size: 80%;">Making modules</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable010.html#sec:input:summary" style="font-size: 80%;">Summary</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable011.html#___sec83" style="font-size: 80%;">Exercises</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable011.html#___sec106" style="font-size: 80%;">References</a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div> <!-- end of navigation bar -->
+
+<div class="container">
+
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+
+<a name="part0004"></a>
+<!-- !split -->
+
+<h1 id="sec:input:argparse">Option-value pairs on the command line<a name="sec:input:argparse"></a></h1>
+
+<p>
+The examples on using command-line arguments so far require the user
+of the program to type all arguments in their right sequence, just as
+when calling a function with positional arguments in the right
+order. It would be very convenient to assign command-line arguments in
+the same way as we use keyword arguments. That is, arguments are
+associated with a name, their sequence can be arbitrary, and only the
+arguments where the default value is not appropriate need to be given.
+Such type of command-line arguments may have <code>--option value</code> pairs,
+where <code>option</code> is some name of the argument.
+
+<p>
+As usual, we shall use an example to illustrate how to work with
+<code>--option value</code> pairs. Consider the physics formula for the location
+\( s(t) \) of an object at time \( t \), given that the object started at \( s=s_0 \) at
+\( t=0 \) with a velocity \( v_0 \), and thereafter was subject to a constant
+acceleration \( a \):
+
+$$
+\begin{equation}
+s(t) = s_0 + v_0t + \frac{1}{2}at^2\tp
+\tag{1}
+\end{equation}
+$$
+
+This formula
+requires four input variables: \( s_0 \), \( v_0 \), \( a \), and \( t \).
+We can make a program <code>location.py</code> that takes four options,
+<code>--s0</code>,
+<code>--v0</code>,
+<code>--a</code>, and
+<code>--t</code>, on the command line.
+The program is typically run like this:
+
+<p>
+
+<!-- code=text (!bc sys) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">location.py --t 3 --s0 1 --v0 1 --a 0.5
+</pre></div>
+<p>
+The sequence of <code>--option value</code> pairs is arbitrary. All options have
+a default value such that one does not have to specify all options
+on the command line.
+
+<p>
+All input variables should have sensible default values such that we
+can leave out the options for which the default value is suitable.
+For example, if \( s_0=0 \), \( v_0=0 \), \( a=1 \), and \( t=1 \) by default, and we
+only want to change \( t \), we can run
+
+<p>
+
+<!-- code=text (!bc sys) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">location.py --t 3
+</pre></div>
+
+<h2 id="___sec13">Basic usage of the argparse module <a name="___sec13"></a></h2>
+
+<p>
+Python has a flexible and powerful module <code>argparse</code> for reading
+(parsing) <code>--option value</code> pairs on the command line.  Using
+<code>argparse</code> consists of three steps. First, a parser object must be
+created:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">argparse</span>
+parser <span style="color: #666666">=</span> argparse<span style="color: #666666">.</span>ArgumentParser()
+</pre></div>
+<p>
+Second, we need to define the various command-line options,
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">parser<span style="color: #666666">.</span>add_argument(<span style="color: #BA2121">&#39;--v0&#39;</span>, <span style="color: #BA2121">&#39;--initial_velocity&#39;</span>, <span style="color: #008000">type</span><span style="color: #666666">=</span><span style="color: #008000">float</span>,
+                    default<span style="color: #666666">=0.0</span>, help<span style="color: #666666">=</span><span style="color: #BA2121">&#39;initial velocity&#39;</span>,
+                    metavar<span style="color: #666666">=</span><span style="color: #BA2121">&#39;v&#39;</span>)
+parser<span style="color: #666666">.</span>add_argument(<span style="color: #BA2121">&#39;--s0&#39;</span>, <span style="color: #BA2121">&#39;--initial_position&#39;</span>, <span style="color: #008000">type</span><span style="color: #666666">=</span><span style="color: #008000">float</span>,
+                    default<span style="color: #666666">=0.0</span>, help<span style="color: #666666">=</span><span style="color: #BA2121">&#39;initial position&#39;</span>,
+                    metavar<span style="color: #666666">=</span><span style="color: #BA2121">&#39;s&#39;</span>)
+parser<span style="color: #666666">.</span>add_argument(<span style="color: #BA2121">&#39;--a&#39;</span>, <span style="color: #BA2121">&#39;--acceleration&#39;</span>, <span style="color: #008000">type</span><span style="color: #666666">=</span><span style="color: #008000">float</span>,
+                    default<span style="color: #666666">=1.0</span>, help<span style="color: #666666">=</span><span style="color: #BA2121">&#39;acceleration&#39;</span>, metavar<span style="color: #666666">=</span><span style="color: #BA2121">&#39;a&#39;</span>)
+parser<span style="color: #666666">.</span>add_argument(<span style="color: #BA2121">&#39;--t&#39;</span>, <span style="color: #BA2121">&#39;--time&#39;</span>, <span style="color: #008000">type</span><span style="color: #666666">=</span><span style="color: #008000">float</span>,
+                    default<span style="color: #666666">=1.0</span>, help<span style="color: #666666">=</span><span style="color: #BA2121">&#39;time&#39;</span>, metavar<span style="color: #666666">=</span><span style="color: #BA2121">&#39;t&#39;</span>)
+</pre></div>
+<p>
+The first arguments to <code>parser.add_argument</code> is the set of options
+that we want to associate with an input parameter.  Optional arguments
+are the type, a default value, a help string, and a name for the value
+of the argument (<code>metavar</code>) in a usage string.  The <code>argparse</code> module
+will automatically allow an option <code>-h</code> or <code>--help</code> that prints a
+usage string for all the registered options.  By default, the type is
+<code>str</code>, the default value is <code>None</code>, the help string is empty, and
+<code>metavar</code> is the option in upper case without initial dashes.
+
+<p>
+Third, we must read the command line arguments and interpret them:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">args <span style="color: #666666">=</span> parser<span style="color: #666666">.</span>parse_args()
+</pre></div>
+<p>
+Through the <code>args</code> object we can extract the values of the
+various registered parameters: <code>args.v0</code>, <code>args.s0</code>, <code>args.a</code>,
+and <code>args.t</code>. The name of the parameter is determined by
+the first option to <code>parser.add_argument</code>, so writing
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">parser<span style="color: #666666">.</span>add_argument(<span style="color: #BA2121">&#39;--initial_velocity&#39;</span>, <span style="color: #BA2121">&#39;--v0&#39;</span>, <span style="color: #008000">type</span><span style="color: #666666">=</span><span style="color: #008000">float</span>,
+                    default<span style="color: #666666">=0.0</span>, help<span style="color: #666666">=</span><span style="color: #BA2121">&#39;initial velocity&#39;</span>)
+</pre></div>
+<p>
+will make the initial velocity value appear as <code>args.initial_velocity</code>.
+We can add the <code>dest</code> keyword to explicitly specify the name where
+the value is stored:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">parser<span style="color: #666666">.</span>add_argument(<span style="color: #BA2121">&#39;--initial_velocity&#39;</span>, <span style="color: #BA2121">&#39;--v0&#39;</span>, dest<span style="color: #666666">=</span><span style="color: #BA2121">&#39;V0&#39;</span>,
+                    <span style="color: #008000">type</span><span style="color: #666666">=</span><span style="color: #008000">float</span>, default<span style="color: #666666">=0</span>, help<span style="color: #666666">=</span><span style="color: #BA2121">&#39;initial velocity&#39;</span>)
+</pre></div>
+<p>
+Now, <code>args.V0</code> will retrieve the value of the initial velocity.
+In case we do not provide any default value, the value will be <code>None</code>.
+
+<p>
+Our example is completed either by evaluating <code>s</code> as
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">s <span style="color: #666666">=</span> args<span style="color: #666666">.</span>s0 <span style="color: #666666">+</span> args<span style="color: #666666">.</span>v0<span style="color: #666666">*</span>t <span style="color: #666666">+</span> <span style="color: #666666">0.5*</span>args<span style="color: #666666">.</span>a<span style="color: #666666">*</span>args<span style="color: #666666">.</span>t<span style="color: #666666">**2</span>
+</pre></div>
+<p>
+or by introducing new variables so that the formula aligns better
+with the mathematical notation:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">s0 <span style="color: #666666">=</span> args<span style="color: #666666">.</span>s0; v0 <span style="color: #666666">=</span> args<span style="color: #666666">.</span>v0; a <span style="color: #666666">=</span> args<span style="color: #666666">.</span>a; t <span style="color: #666666">=</span> args<span style="color: #666666">.</span>t
+s <span style="color: #666666">=</span> s0 <span style="color: #666666">+</span> v0<span style="color: #666666">*</span>t <span style="color: #666666">+</span> <span style="color: #666666">0.5*</span>a<span style="color: #666666">*</span>t<span style="color: #666666">**2</span>
+</pre></div>
+<p>
+A complete program for the example above is
+found in the file <a href="http://tinyurl.com/pwyasaa/input/location.py" target="_self"><tt>location.py</tt></a>.
+Try to run it with the <code>-h</code> option to see
+an automatically generated explanation of legal command-line options.
+
+<h2 id="___sec14">Mathematical expressions as values <a name="___sec14"></a></h2>
+
+<p>
+Values on the command line involving mathematical symbols and
+functions, say <code>--v0 'pi/2'</code>, pose a problem with the code example
+above.  The <code>argparse</code> module will in that case try to do
+<code>float('pi/2')</code> which does not work well since <code>pi</code> is an undefined
+name. Changing <code>type=float</code> to <code>type=eval</code> is required to interpret
+the expression <code>pi/2</code>, but even <code>eval('pi/2')</code> fails since <code>pi</code> is not
+defined inside the <code>argparse</code> module. There are various remedies for
+this problem.
+
+<p>
+One can write a tailored function for converting a string value given
+on the command line to the desired object. For example,
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">evalcmlarg</span>(text):
+    <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">eval</span>(text)
+
+parser<span style="color: #666666">.</span>add_argument(<span style="color: #BA2121">&#39;--s0&#39;</span>, <span style="color: #BA2121">&#39;--initial_position&#39;</span>, <span style="color: #008000">type</span><span style="color: #666666">=</span>evalcmlarg,
+                    default<span style="color: #666666">=0.0</span>, help<span style="color: #666666">=</span><span style="color: #BA2121">&#39;initial position&#39;</span>)
+</pre></div>
+<p>
+The file <a href="http://tinyurl.com/pwyasaa/input/location_v2.py" target="_self"><tt>location_v2.py</tt></a>
+demonstrates such explicit type conversion through a user-provided
+conversion function.
+Note that <code>eval</code> is now taken in the programmer's namespace where
+(hopefully) <code>pi</code> or other symbols are imported.
+
+<p>
+More sophisticated conversions are possible. Say \( s_0 \) is specified in
+terms of a function of some parameter \( p \), like \( s_0=(1-p^2) \).  We
+could then use a string for <code>--s0</code> and the <code>StringFunction</code> tool from
+the section <a href="._input-readable003.html#sec:input:StringFunction">Turning string expressions into functions</a> to turn the string into a
+function:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">toStringFunction4s0</span>(text):
+    <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">scitools.std</span> <span style="color: #008000; font-weight: bold">import</span> StringFunction
+    <span style="color: #008000; font-weight: bold">return</span> StringFunction(text, independent_variable<span style="color: #666666">=</span><span style="color: #BA2121">&#39;p&#39;</span>)
+
+parser<span style="color: #666666">.</span>add_argument(<span style="color: #BA2121">&#39;--s0&#39;</span>, <span style="color: #BA2121">&#39;--initial_position&#39;</span>,
+                    <span style="color: #008000">type</span><span style="color: #666666">=</span>toStringFunction4s0,
+                    default<span style="color: #666666">=</span><span style="color: #BA2121">&#39;0.0&#39;</span>, help<span style="color: #666666">=</span><span style="color: #BA2121">&#39;initial position&#39;</span>)
+</pre></div>
+<p>
+Giving a command-line argument <code>--s0 'exp(-1.5) + 10(1-p**2)</code>
+results in <code>args.s0</code> being a <code>StringFunction</code> object, which we
+must evaluate for a <code>p</code> value:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">s0 <span style="color: #666666">=</span> args<span style="color: #666666">.</span>s0
+p <span style="color: #666666">=</span> <span style="color: #666666">0.05</span>
+<span style="color: #666666">...</span>
+s <span style="color: #666666">=</span> s0(p) <span style="color: #666666">+</span> v0<span style="color: #666666">*</span>t <span style="color: #666666">+</span> <span style="color: #666666">0.5*</span>a<span style="color: #666666">*</span>t<span style="color: #666666">**2</span>
+</pre></div>
+<p>
+The file <a href="http://tinyurl.com/pwyasaa/input/location_v3.py" target="_self"><tt>location_v3.py</tt></a>
+contains the complete code for this example.
+
+<p>
+Another alternative is to perform the correct conversion of values in
+our own code <em>after</em> the <code>parser</code> object has read the values.  To this
+end, we treat argument types as strings in the <code>parser.add_argument</code>
+calls, meaning that we replace <code>type=float</code> by set <code>type=str</code> (which
+is also the default choice of <code>type</code>). Recall that this approach requires
+specification of default values as strings too, say <code>'0'</code>:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">parser<span style="color: #666666">.</span>add_argument(<span style="color: #BA2121">&#39;--s0&#39;</span>, <span style="color: #BA2121">&#39;--initial_position&#39;</span>, <span style="color: #008000">type</span><span style="color: #666666">=</span><span style="color: #008000">str</span>,
+                    default<span style="color: #666666">=</span><span style="color: #BA2121">&#39;0&#39;</span>, help<span style="color: #666666">=</span><span style="color: #BA2121">&#39;initial position&#39;</span>)
+<span style="color: #666666">...</span>
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">math</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #666666">*</span>
+args<span style="color: #666666">.</span>v0 <span style="color: #666666">=</span> <span style="color: #008000">eval</span>(args<span style="color: #666666">.</span>v0)
+<span style="color: #408080; font-style: italic"># or</span>
+v0 <span style="color: #666666">=</span> <span style="color: #008000">eval</span>(args<span style="color: #666666">.</span>v0)
+
+s0 <span style="color: #666666">=</span> StringFunction(args<span style="color: #666666">.</span>s0, independent_variable<span style="color: #666666">=</span><span style="color: #BA2121">&#39;p&#39;</span>)
+p <span style="color: #666666">=</span> <span style="color: #666666">0.5</span>
+<span style="color: #666666">...</span>
+s <span style="color: #666666">=</span> s0(p) <span style="color: #666666">+</span> v0<span style="color: #666666">*</span>t <span style="color: #666666">+</span> <span style="color: #666666">0.5*</span>a<span style="color: #666666">*</span>t<span style="color: #666666">**2</span>
+</pre></div>
+<p>
+Such code is found in the file <a href="http://tinyurl.com/pwyasaa/input/location_v4.py" target="_self"><tt>location_v4.py</tt></a>.  You can try out that program with
+the command-line arguments <code>--s0 'pi/2 + sqrt(p)' --v0 pi/4'</code>.
+
+<p>
+The final alternative is to write an <code>Action</code> class to handle the
+conversion from string to the right type. This is the preferred way to
+perform conversions and well described in the <code>argparse</code>
+documentation.  We shall exemplify it here, but the technicalities
+involved require understanding of classes (see the document
+<a href="http://tcse6.on.net/class" target="_self">Introduction to classes in Python</a>
+<a href="._input-readable011.html#Langtangen_TCSE6_class">[1]</a>) and inheritance (see the document
+<a href="http://tcse6.on.net/oo" target="_self">Object-oriented programming</a>
+<a href="._input-readable011.html#Langtangen_TCSE6_oo">[2]</a>).  For the conversion from string to any
+object via <code>eval</code> we write
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">argparse</span>
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">math</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #666666">*</span>
+
+<span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">ActionEval</span>(argparse<span style="color: #666666">.</span>Action):
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__call__</span>(<span style="color: #008000">self</span>, parser, namespace, values,
+                 option_string<span style="color: #666666">=</span><span style="color: #008000">None</span>):
+        <span style="color: #008000">setattr</span>(namespace, <span style="color: #008000">self</span><span style="color: #666666">.</span>dest, <span style="color: #008000">eval</span>(values))
+</pre></div>
+<p>
+The command-line arguments supposed to be run through <code>eval</code> must
+then have an <code>action</code> parameter:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">parser<span style="color: #666666">.</span>add_argument(<span style="color: #BA2121">&#39;--v0&#39;</span>, <span style="color: #BA2121">&#39;--initial_velocity&#39;</span>,
+                    default<span style="color: #666666">=0.0</span>, help<span style="color: #666666">=</span><span style="color: #BA2121">&#39;initial velocity&#39;</span>,
+                    action<span style="color: #666666">=</span>ActionEval)
+</pre></div>
+<p>
+From string to function via <code>StringFunction</code> for the
+<code>--s0</code> argument we write
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">scitools.std</span> <span style="color: #008000; font-weight: bold">import</span> StringFunction
+
+<span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">ActionStringFunction4s0</span>(argparse<span style="color: #666666">.</span>Action):
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__call__</span>(<span style="color: #008000">self</span>, parser, namespace, values,
+                 option_string<span style="color: #666666">=</span><span style="color: #008000">None</span>):
+        <span style="color: #008000">setattr</span>(namespace, <span style="color: #008000">self</span><span style="color: #666666">.</span>dest,
+                StringFunction(values, independent_variable<span style="color: #666666">=</span><span style="color: #BA2121">&#39;p&#39;</span>))
+</pre></div>
+<p>
+A complete code appears in the file
+<a href="http://tinyurl.com/pwyasaa/input/location_v5.py" target="_self"><tt>location_v5.py</tt></a>.
+
+<p>
+<p>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pager">
+  <li class="previous">
+    <a href="._input-readable003.html">&larr; Prev</a>
+  </li>
+  <li class="next">
+    <a href="._input-readable005.html">Next &rarr;</a>
+  </li>
+</ul>
+<!-- ------------------- end of main content --------------- -->
+
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap footer
+<footer>
+<a href="http://..."><img width="250" align=right src="http://..."></a>
+</footer>
+-->
+
+
+</body>
+</html>
+    
+
