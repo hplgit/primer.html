@@ -1,0 +1,1270 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Random numbers and simple games">
+<meta name="keywords" content="random numbers,seed,uniformly distributed random numbers,random numbers uniform distribution,bin (histogram),histogram (normalized),random numbers histogram,vectorized drawing of random numbers,random numbers vectorization,mean,average,random numbers statistics,variance,standard deviation,mod function,normally distributed random numbers,random numbers normal distribution,random numbers integers,integer random numbers,probability,random numbers Monte Carlo simulation,Monte Carlo simulation,Monte Carlo integration,random numbers integration,Midpoint rule for integration,mod function,measure time in programs,efficiency measure,random walk,random numbers random walk,making movie,cumulative sum">
+
+<title>Random numbers and simple games</title>
+
+<!-- Bootstrap style: bootstrap_bluegray -->
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_styles/style_bootstrap/css/bootstrap_bluegray.css" rel="stylesheet">
+<!-- not necessary
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+
+<style type="text/css">
+/* Let inline verbatim have the same color as the surroundings */
+code { color: inherit; background-color: transparent; }
+
+/* Add scrollbar to dropdown menus in bootstrap navigation bar */
+.dropdown-menu {
+   height: auto;
+   max-height: 400px;
+   overflow-x: hidden;
+}
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [('Drawing random numbers', 1, None, '___sec0'),
+              ('The seed', 2, None, '___sec1'),
+              ('Uniformly distributed random numbers',
+               2,
+               'sec:random:uniform',
+               'sec:random:uniform'),
+              ('Visualizing the distribution', 2, None, '___sec3'),
+              ('Vectorized drawing of random numbers', 2, None, '___sec4'),
+              ('Warning', 3, None, '___sec5'),
+              ('Computing the mean and standard deviation',
+               2,
+               'sec:random:statistics',
+               'sec:random:statistics'),
+              ('The Gaussian or normal distribution',
+               2,
+               'sec:random:normal',
+               'sec:random:normal'),
+              ('Drawing integers', 1, 'sec:random:ints', 'sec:random:ints'),
+              ('Random integer functions', 2, None, '___sec9'),
+              ('Example: Throwing a die', 2, None, '___sec10'),
+              ('Scalar version', 3, None, '___sec11'),
+              ('Vectorized version', 3, None, '___sec12'),
+              ('Vectorized version with batches', 3, None, '___sec13'),
+              ('Verification of the scalar version', 3, None, '___sec14'),
+              ('Verification of all versions', 3, None, '___sec15'),
+              ('Drawing a random element from a list', 2, None, '___sec16'),
+              ('Example: Drawing cards from a deck',
+               2,
+               'sec:random:deck1',
+               'sec:random:deck1'),
+              ('Example: Class implementation of a deck',
+               2,
+               'sec:class:deck:class',
+               'sec:class:deck:class'),
+              ('Computing probabilities',
+               1,
+               'sec:random:probability',
+               'sec:random:probability'),
+              ('Principles of Monte Carlo simulation', 2, None, '___sec20'),
+              ('Example: Throwing dice',
+               2,
+               'sec:random:probability:dice',
+               'sec:random:probability:dice'),
+              ('Straightforward solution', 3, None, '___sec22'),
+              ('Vectorization', 3, None, '___sec23'),
+              ('Exact solution', 3, None, '___sec24'),
+              ('A game', 3, None, '___sec25'),
+              ('Decide if a game is fair', 3, None, '___sec26'),
+              ('Example: Drawing balls from a hat',
+               2,
+               'sec:random:balls',
+               'sec:random:balls'),
+              ('Random mutations of genes',
+               2,
+               'bioinf:random',
+               'bioinf:random'),
+              ('A simple mutation model', 3, None, '___sec29'),
+              ('Vectorized version', 3, None, '___sec30'),
+              ('A Markov chain mutation model', 3, None, '___sec31'),
+              ('Example: Policies for limiting population growth',
+               2,
+               'sec:random:china',
+               'sec:random:china'),
+              ('Simple games', 1, None, '___sec33'),
+              ('Guessing a number',
+               2,
+               'sec:random:game:guessn',
+               'sec:random:game:guessn'),
+              ('The game', 3, None, '___sec35'),
+              ('The implementation', 3, None, '___sec36'),
+              ('Rolling two dice',
+               2,
+               'sec:random:twodicesumguess',
+               'sec:random:twodicesumguess'),
+              ('The game', 3, None, '___sec38'),
+              ('The implementation', 3, None, '___sec39'),
+              ('Example', 3, None, '___sec40'),
+              ('A class version', 3, None, '___sec41'),
+              ('Monte Carlo integration',
+               1,
+               'sec:random:MonteCarlo:integration',
+               'sec:random:MonteCarlo:integration'),
+              ('Derivation of Monte Carlo integration',
+               2,
+               'sec:random:MCint:ideas',
+               'sec:random:MCint:ideas'),
+              ('The calculus approach via the mean-value theorem',
+               3,
+               None,
+               '___sec44'),
+              ('The probability theory approach', 3, None, '___sec45'),
+              ('Implementation of standard Monte Carlo integration',
+               2,
+               'sec:random:MCint:std',
+               'sec:random:MCint:std'),
+              ('Example', 3, None, '___sec47'),
+              ('Remark', 3, None, '___sec48'),
+              ('Area computing by throwing random points',
+               2,
+               'sec:random:MCdart',
+               'sec:random:MCdart'),
+              ('Random walk in one space dimension',
+               1,
+               'sec:random:rw1D',
+               'sec:random:rw1D'),
+              ('Basic implementation', 2, None, '___sec51'),
+              ('Visualization', 2, None, '___sec52'),
+              ('Random walk as a difference equation', 2, None, '___sec53'),
+              ('Computing statistics of the particle positions',
+               2,
+               'sec:random:walk:1D:statistics',
+               'sec:random:walk:1D:statistics'),
+              ('Vectorized implementation',
+               2,
+               'sec:random:walk:1D:vectorized',
+               'sec:random:walk:1D:vectorized'),
+              ('Random walk in two space dimensions',
+               1,
+               'sec:random:rw2D',
+               'sec:random:rw2D'),
+              ('Basic implementation',
+               2,
+               'sec:random:rw2D:scalar',
+               'sec:random:rw2D:scalar'),
+              ('Vectorized implementation',
+               2,
+               'sec:random:walk:2D:vectorized',
+               'sec:random:walk:2D:vectorized'),
+              ('Summary', 1, None, '___sec59'),
+              ('Chapter topics', 2, None, '___sec60'),
+              ('Drawing random numbers', 3, None, '___sec61'),
+              ('Typical probability computation via Monte Carlo simulation',
+               3,
+               None,
+               '___sec62'),
+              ('Statistical measures', 3, None, '___sec63'),
+              ('Terminology', 3, None, '___sec64'),
+              ('Example: Random growth',
+               2,
+               'sec:random:summarizingex',
+               'sec:random:summarizingex'),
+              ('Problem', 3, None, '___sec66'),
+              ('Solution', 3, None, '___sec67'),
+              ('Exercises', 1, None, '___sec68'),
+              ('Exercise 1: Flip a coin times',
+               2,
+               'sec:random:ex17',
+               'sec:random:ex17'),
+              ('Exercise 2: Compute a probability',
+               2,
+               'sec:random:ex7',
+               'sec:random:ex7'),
+              ('Exercise 3: Choose random colors',
+               2,
+               'sec:random:ex6',
+               'sec:random:ex6'),
+              ('Exercise 4: Draw balls from a hat',
+               2,
+               'sec:random:ex4',
+               'sec:random:ex4'),
+              ('Exercise 5: Computing probabilities of rolling dice',
+               2,
+               'sec:random:ex2',
+               'sec:random:ex2'),
+              ('Exercise 6: Estimate the probability in a dice game',
+               2,
+               'sec:random:ex10',
+               'sec:random:ex10'),
+              ('Exercise 7: Compute the probability of hands of cards',
+               2,
+               'sec:random:ex44',
+               'sec:random:ex44'),
+              ('Exercise 8: Decide if a dice game is fair',
+               2,
+               'sec:random:ex11',
+               'sec:random:ex11'),
+              ('Exercise 9: Adjust a game to make it fair',
+               2,
+               'sec:random:ex12',
+               'sec:random:ex12'),
+              ('Exercise 10: Generalize a game',
+               2,
+               'sec:random:ex12b',
+               'sec:random:ex12b'),
+              ('Exercise 11: Compare two playing strategies',
+               2,
+               'sec:random:ex2c',
+               'sec:random:ex2c'),
+              ('Exercise 12: Investigate strategies in a game',
+               2,
+               'sec:random:ex2e',
+               'sec:random:ex2e'),
+              ('Exercise 13: Investigate the winning chances of some games',
+               2,
+               'sec:random:ex45',
+               'sec:random:ex45'),
+              ('Exercise 14: Compute probabilities of throwing two dice',
+               2,
+               'sec:random:ex2b',
+               'sec:random:ex2b'),
+              ('Exercise 15: Vectorize flipping a coin',
+               2,
+               'sec:random:ex18',
+               'sec:random:ex18'),
+              ('Exercise 16: Vectorize a probablility computation',
+               2,
+               'sec:random:ex7b',
+               'sec:random:ex7b'),
+              ('Exercise 17: Throw dice and compute a small probability',
+               2,
+               'sec:random:ex30',
+               'sec:random:ex30'),
+              ('Exercise 18: Difference equation for random numbers',
+               2,
+               'sec:random:ex27',
+               'sec:random:ex27'),
+              ('Exercise 19: Make a class for drawing balls from a hat',
+               2,
+               'sec:random:ex9',
+               'sec:random:ex9'),
+              ('Exercise 20: Independent  versus dependent random numbers',
+               2,
+               'sec:random:ex21',
+               'sec:random:ex21'),
+              ('Exercise 21: Compute the probability of flipping a coin',
+               2,
+               'sec:random:ex19',
+               'sec:random:ex19'),
+              ('Exercise 22: Simulate a poker game',
+               2,
+               'sec:random:ex41',
+               'sec:random:ex41'),
+              ('Exercise 23: Estimate growth in a simulation model',
+               2,
+               'sec:random:ex29',
+               'sec:random:ex29'),
+              ('Exercise 24: Investigate guessing strategies',
+               2,
+               'sec:random:ex15',
+               'sec:random:ex15'),
+              ('Exercise 25: Vectorize a dice game',
+               2,
+               'sec:random:ex13',
+               'sec:random:ex13'),
+              ('Exercise 26: Compute $\\pi$ by a Monte Carlo method',
+               2,
+               'sec:random:ex31',
+               'sec:random:ex31'),
+              ('Exercise 27: Compute $\\pi$ by a Monte Carlo method',
+               2,
+               'sec:random:ex32',
+               'sec:random:ex32'),
+              ('Exercise 28: Compute $\\pi$ by a random sum',
+               2,
+               'sec:random:ex31b',
+               'sec:random:ex31b'),
+              ('Exercise 29: 1D random walk with drift',
+               2,
+               'sec:random:ex1',
+               'sec:random:ex1'),
+              ('Exercise 30: 1D random walk until a point is hit',
+               2,
+               'sec:random:ex3',
+               'sec:random:ex3'),
+              ('Exercise 31: Simulate making a fortune from gaming',
+               2,
+               'sec:random:ex3:rwgame',
+               'sec:random:ex3:rwgame'),
+              ('Exercise 32: Make classes for 2D random walk',
+               2,
+               'sec:random:ex33',
+               'sec:random:ex33'),
+              ('Exercise 33: 2D random walk with walls; scalar version',
+               2,
+               'sec:random:ex36',
+               'sec:random:ex36'),
+              ('Exercise 34: 2D random walk with walls; vectorized version',
+               2,
+               'sec:random:ex37',
+               'sec:random:ex37'),
+              ('Exercise 35: Simulate mixing of gas molecules',
+               2,
+               'sec:random:ex38',
+               'sec:random:ex38'),
+              ('Remarks', 3, None, '___sec104'),
+              ('Exercise 36: Simulate slow mixing of gas molecules',
+               2,
+               'sec:random:ex39',
+               'sec:random:ex39'),
+              ('Exercise 37: Guess beer brands',
+               2,
+               'sec:random:ex35',
+               'sec:random:ex35'),
+              ('Exercise 38: Simulate stock prices',
+               2,
+               'sec:random:ex26',
+               'sec:random:ex26'),
+              ('Exercise 39: Compute with option prices in finance',
+               2,
+               'sec:random:ex16',
+               'sec:random:ex16'),
+              ('Remarks', 3, None, '___sec109'),
+              ('Exercise 40: Differentiate noise measurements',
+               2,
+               'sec:random:ex22',
+               'sec:random:ex22'),
+              ('Exercise 41: Differentiate noisy signals',
+               2,
+               'sec:random:ex25',
+               'sec:random:ex25'),
+              ('Exercise 42: Model noise in a time signal',
+               2,
+               'sec:random:ex23',
+               'sec:random:ex23'),
+              ('Exercise 43: Speed up Markov chain mutation',
+               2,
+               'bioinf:exer:Markov:chain:eff',
+               'bioinf:exer:Markov:chain:eff'),
+              ('References', 1, None, '___sec114')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- newcommands_keep.tex -->
+$$
+\newcommand{\tp}{\thinspace .}
+\newcommand{\Prob}[1]{\hbox{P}(#1)}
+$$
+
+
+
+
+    
+<!-- Bootstrap navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="random-bootstrap.html">Random numbers and simple games</a>
+  </div>
+
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     <!-- navigation toc: --> <li><a href="._random-bootstrap001.html#___sec0" style="font-size: 80%;"><b>Drawing random numbers</b></a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap001.html#___sec1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The seed</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap001.html#sec:random:uniform" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Uniformly distributed random numbers</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap001.html#___sec3" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Visualizing the distribution</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap001.html#___sec4" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Vectorized drawing of random numbers</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap001.html#___sec5" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Warning</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap001.html#sec:random:statistics" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Computing the mean and standard deviation</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap001.html#sec:random:normal" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The Gaussian or normal distribution</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:random:ints" style="font-size: 80%;"><b>Drawing integers</b></a></li>
+     <!-- navigation toc: --> <li><a href="#___sec9" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Random integer functions</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec10" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Throwing a die</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec11" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scalar version</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec12" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Vectorized version</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec13" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Vectorized version with batches</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec14" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Verification of the scalar version</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec15" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Verification of all versions</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec16" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Drawing a random element from a list</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:random:deck1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Drawing cards from a deck</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:class:deck:class" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Class implementation of a deck</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap003.html#sec:random:probability" style="font-size: 80%;"><b>Computing probabilities</b></a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap003.html#___sec20" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Principles of Monte Carlo simulation</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap003.html#sec:random:probability:dice" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Throwing dice</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap003.html#___sec22" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Straightforward solution</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap003.html#___sec23" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Vectorization</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap003.html#___sec24" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exact solution</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap003.html#___sec25" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A game</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap003.html#___sec26" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Decide if a game is fair</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap003.html#sec:random:balls" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Drawing balls from a hat</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap003.html#bioinf:random" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Random mutations of genes</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap003.html#___sec29" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A simple mutation model</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap003.html#___sec30" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Vectorized version</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap003.html#___sec31" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A Markov chain mutation model</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap003.html#sec:random:china" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Policies for limiting population growth</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap004.html#___sec33" style="font-size: 80%;"><b>Simple games</b></a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap004.html#sec:random:game:guessn" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Guessing a number</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap004.html#___sec35" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The game</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap004.html#___sec36" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The implementation</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap004.html#sec:random:twodicesumguess" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Rolling two dice</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap004.html#___sec38" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The game</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap004.html#___sec39" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The implementation</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap004.html#___sec40" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap004.html#___sec41" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A class version</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap004.html#sec:random:MonteCarlo:integration" style="font-size: 80%;"><b>Monte Carlo integration</b></a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap004.html#sec:random:MCint:ideas" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Derivation of Monte Carlo integration</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap004.html#___sec44" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The calculus approach via the mean-value theorem</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap004.html#___sec45" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The probability theory approach</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap004.html#sec:random:MCint:std" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Implementation of standard Monte Carlo integration</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap004.html#___sec47" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap004.html#___sec48" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remark</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap004.html#sec:random:MCdart" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Area computing by throwing random points</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap005.html#sec:random:rw1D" style="font-size: 80%;"><b>Random walk in one space dimension</b></a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap005.html#___sec51" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Basic implementation</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap005.html#___sec52" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Visualization</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap005.html#___sec53" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Random walk as a difference equation</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap005.html#sec:random:walk:1D:statistics" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Computing statistics of the particle positions</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap005.html#sec:random:walk:1D:vectorized" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Vectorized implementation</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap006.html#sec:random:rw2D" style="font-size: 80%;"><b>Random walk in two space dimensions</b></a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap006.html#sec:random:rw2D:scalar" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Basic implementation</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap006.html#sec:random:walk:2D:vectorized" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Vectorized implementation</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap007.html#___sec59" style="font-size: 80%;"><b>Summary</b></a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap007.html#___sec60" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Chapter topics</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap007.html#___sec61" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Drawing random numbers</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap007.html#___sec62" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Typical probability computation via Monte Carlo simulation</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap007.html#___sec63" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Statistical measures</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap007.html#___sec64" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Terminology</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap007.html#sec:random:summarizingex" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Random growth</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap007.html#___sec66" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap007.html#___sec67" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Solution</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#___sec68" style="font-size: 80%;"><b>Exercises</b></a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex17" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 1: Flip a coin times</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex7" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 2: Compute a probability</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex6" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 3: Choose random colors</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex4" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 4: Draw balls from a hat</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 5: Computing probabilities of rolling dice</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex10" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 6: Estimate the probability in a dice game</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex44" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 7: Compute the probability of hands of cards</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex11" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 8: Decide if a dice game is fair</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex12" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 9: Adjust a game to make it fair</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex12b" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 10: Generalize a game</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex2c" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 11: Compare two playing strategies</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex2e" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 12: Investigate strategies in a game</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex45" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 13: Investigate the winning chances of some games</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex2b" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 14: Compute probabilities of throwing two dice</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex18" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 15: Vectorize flipping a coin</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex7b" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 16: Vectorize a probablility computation</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex30" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 17: Throw dice and compute a small probability</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex27" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 18: Difference equation for random numbers</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex9" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 19: Make a class for drawing balls from a hat</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex21" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 20: Independent  versus dependent random numbers</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex19" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 21: Compute the probability of flipping a coin</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex41" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 22: Simulate a poker game</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex29" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 23: Estimate growth in a simulation model</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex15" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 24: Investigate guessing strategies</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex13" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 25: Vectorize a dice game</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex31" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 26: Compute \( \pi \) by a Monte Carlo method</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex32" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 27: Compute \( \pi \) by a Monte Carlo method</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex31b" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 28: Compute \( \pi \) by a random sum</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 29: 1D random walk with drift</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex3" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 30: 1D random walk until a point is hit</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex3:rwgame" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 31: Simulate making a fortune from gaming</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex33" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 32: Make classes for 2D random walk</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex36" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 33: 2D random walk with walls; scalar version</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex37" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 34: 2D random walk with walls; vectorized version</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex38" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 35: Simulate mixing of gas molecules</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#___sec104" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remarks</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex39" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 36: Simulate slow mixing of gas molecules</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex35" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 37: Guess beer brands</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex26" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 38: Simulate stock prices</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex16" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 39: Compute with option prices in finance</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#___sec109" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remarks</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex22" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 40: Differentiate noise measurements</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex25" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 41: Differentiate noisy signals</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex23" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 42: Model noise in a time signal</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#bioinf:exer:Markov:chain:eff" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 43: Speed up Markov chain mutation</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#___sec114" style="font-size: 80%;"><b>References</b></a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div> <!-- end of navigation bar -->
+
+<div class="container">
+
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+
+<a name="part0002"></a>
+<!-- !split -->
+<p style="font-size:80%">This chapter is taken from book <a href="http://www.springer.com/gp/book/9783642549588">A Primer on Scientific Programming with Python</a> by H. P. Langtangen, 4th edition, Springer, 2014.</p>
+
+<h1 id="sec:random:ints">Drawing integers</h1>
+
+<p>
+Suppose we want to draw a random integer among the values 1, 2, 3, and 4,
+and that each of the four values is equally probable.
+One possibility is to draw real numbers from the uniform distribution
+on, e.g., \( [0,1) \) and divide this interval into four equal subintervals:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">random</span>
+r <span style="color: #666666">=</span> random<span style="color: #666666">.</span>random()
+<span style="color: #008000; font-weight: bold">if</span> <span style="color: #666666">0</span> <span style="color: #666666">&lt;=</span>  r <span style="color: #666666">&lt;</span> <span style="color: #666666">0.25</span>:
+    r <span style="color: #666666">=</span> <span style="color: #666666">1</span>
+<span style="color: #008000; font-weight: bold">elif</span> <span style="color: #666666">0.25</span> <span style="color: #666666">&lt;=</span> r <span style="color: #666666">&lt;</span> <span style="color: #666666">0.5</span>:
+    r <span style="color: #666666">=</span> <span style="color: #666666">2</span>
+<span style="color: #008000; font-weight: bold">elif</span> <span style="color: #666666">0.5</span> <span style="color: #666666">&lt;=</span> r <span style="color: #666666">&lt;</span> <span style="color: #666666">0.75</span>:
+    r <span style="color: #666666">=</span> <span style="color: #666666">3</span>
+<span style="color: #008000; font-weight: bold">else</span>:
+    r <span style="color: #666666">=</span> <span style="color: #666666">4</span>
+</pre></div>
+<p>
+Nevertheless, the need for drawing uniformly distributed integers occurs quite
+frequently, so there are special functions for returning random integers
+in a specified interval \( [a, b] \).
+
+<h2 id="___sec9">Random integer functions </h2>
+
+<p>
+Python's <code>random</code> module has a built-in function
+<code>randint(a,b)</code> for drawing an integer in \( [a,b] \), i.e.,
+the return value is among the numbers
+<code>a</code>, <code>a+1</code>, \( \ldots \), <code>b-1</code>, <code>b</code>.
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">random</span>
+r <span style="color: #666666">=</span> random<span style="color: #666666">.</span>randint(a, b)
+</pre></div>
+<p>
+The <code>numpy.random.randint(a, b, N)</code> function has a similar
+functionality for vectorized drawing of an array of length <code>N</code> of
+random integers in \( [a, b) \).  The upper limit <code>b</code> is not among the
+drawn numbers, so if we want to draw from <code>a</code>, <code>a+1</code>, \( \ldots \), <code>b-1</code>,
+<code>b</code>, we must write
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
+r <span style="color: #666666">=</span> np<span style="color: #666666">.</span>random<span style="color: #666666">.</span>randint(a, b<span style="color: #666666">+1</span>, N)
+</pre></div>
+<p>
+Another function, <code>random_integers(a, b, N)</code>, also in <code>numpy.random</code>,
+includes the upper limit <code>b</code> in the possible set of random integers:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">r <span style="color: #666666">=</span> np<span style="color: #666666">.</span>random<span style="color: #666666">.</span>random_integers(a, b, N)
+</pre></div>
+
+<h2 id="___sec10">Example: Throwing a die </h2>
+
+<h3 id="___sec11">Scalar version </h3>
+
+<p>
+We can make a function that lets the computer
+throw a die <code>N</code> times and returns the fraction of the throws
+the die shows six eyes:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">six_eyes</span>(N):
+    M <span style="color: #666666">=</span> <span style="color: #666666">0</span>                  <span style="color: #408080; font-style: italic"># no of times we get 6 eyes</span>
+    <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">xrange</span>(N):
+        outcome <span style="color: #666666">=</span> random<span style="color: #666666">.</span>randint(<span style="color: #666666">1</span>, <span style="color: #666666">6</span>)
+        <span style="color: #008000; font-weight: bold">if</span> outcome <span style="color: #666666">==</span> <span style="color: #666666">6</span>:
+            M <span style="color: #666666">+=</span> <span style="color: #666666">1</span>
+    <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">float</span>(M)<span style="color: #666666">/</span>N
+</pre></div>
+<p>
+We use <code>xrange</code> instead of <code>range</code> because the former avoids
+storing <code>N</code> numbers in memory, which can be an important feature
+when <code>N</code> is large.
+
+<h3 id="___sec12">Vectorized version </h3>
+
+<p>
+Too speed up the experiments, we can vectorize the drawing of the
+random numbers and the counting of the number successful experiments:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">six_eyes_vec</span>(N):
+    eyes <span style="color: #666666">=</span> np<span style="color: #666666">.</span>random<span style="color: #666666">.</span>randint(<span style="color: #666666">1</span>, <span style="color: #666666">7</span>, N)
+    success <span style="color: #666666">=</span> eyes <span style="color: #666666">==</span> <span style="color: #666666">6</span>     <span style="color: #408080; font-style: italic"># True/False array</span>
+    M <span style="color: #666666">=</span> np<span style="color: #666666">.</span>sum(success)     <span style="color: #408080; font-style: italic"># treats True as 1, False as 0</span>
+    <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">float</span>(M)<span style="color: #666666">/</span>N
+</pre></div>
+<p>
+The <code>eyes == 6</code> construction results in an array with <code>True</code>
+or <code>False</code> values, and <code>np.sum</code> applied to this array treats
+<code>True</code> as 1 and <code>False</code> as 0 (the integer equivalents to the
+boolean values), so the sum is the number of elements in <code>eyes</code>
+that equals 6. A very important point here for computational
+efficiency is to use <code>np.sum</code> and not the standard
+<code>sum</code> function that is available in standard Python.
+With <code>np.sum</code> function, the vectorized version runs about
+60 times faster than the scalar version. With Python's standard
+<code>sum</code> function, the vectorized versions is in fact twice as slow
+as the scalar version (!). We can illustrate the gain and loss
+in efficiency by the follow IPython session:
+
+<p>
+
+<!-- code=ipy (!bc ipy) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #000080; font-weight: bold">In [1]: </span><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">roll_die</span> <span style="color: #008000; font-weight: bold">import</span> six_eyes, six_eyes_vec
+
+<span style="color: #000080; font-weight: bold">In [2]: </span><span style="color: #666666">%</span><span style="color: #008000; font-weight: bold">timeit</span> six_eyes(100000)
+<span style="color: #888888">1 loops, best of 3: 250 ms per loop</span>
+
+<span style="color: #000080; font-weight: bold">In [3]: </span><span style="color: #666666">%</span><span style="color: #008000; font-weight: bold">timeit</span> six_eyes_vec(100000)
+<span style="color: #888888">100 loops, best of 3: 4.11 ms per loop</span>
+
+<span style="color: #000080; font-weight: bold">In [4]: </span><span style="color: #666666">250/4.11</span>           <span style="color: #408080; font-style: italic"># performance fraction</span>
+<span style="color: #000080; font-weight: bold">Out[4]: </span><span style="color: #888888">60.8272506082725</span>
+
+<span style="color: #000080; font-weight: bold">In [5]: </span><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">roll_die</span> <span style="color: #008000; font-weight: bold">import</span> np
+
+<span style="color: #000080; font-weight: bold">In [6]: </span>np<span style="color: #666666">.</span>sum <span style="color: #666666">=</span> <span style="color: #008000">sum</span>  <span style="color: #408080; font-style: italic"># fool numpy to use built-in Python sum</span>
+
+<span style="color: #000080; font-weight: bold">In [7]: </span><span style="color: #666666">%</span><span style="color: #008000; font-weight: bold">timeit</span> six_eyes_vec(100000)
+<span style="color: #888888">1 loops, best of 3: 543 ms per loop</span>
+</pre></div>
+<p>
+(Note how we can bind Python's built-in <code>sum</code> function to the
+<code>np.sum</code> name such that <code>np.sum</code> in <code>six_eyes_vec</code> applies
+Python's <code>sum</code> function instead of the original <code>np.sum</code>.)
+
+<h3 id="___sec13">Vectorized version with batches </h3>
+
+<p>
+The disadvantage with the vectorized version is that all the random
+numbers must be stored in the computer's memory. A large <code>N</code> may cause
+the program to run out of memory and raise a <code>MemoryError</code>.
+Instead of drawing all random numbers at once, we can draw them
+in batches of size <code>arraysize</code>. There will be <code>N//arraysize</code> such
+batches, plus a rest. Note the double slash in <code>N//arraysize</code>: here
+we indeed want integer division, which is explicitly instructed in
+Python by the double forward slash. The rest is obtained by the
+mod operator: <code>rest = N % arraysize</code>. The size of the batches can
+be stored in a list:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">rest <span style="color: #666666">=</span> N <span style="color: #666666">%</span> arraysize
+batch_sizes <span style="color: #666666">=</span> [arraysize]<span style="color: #666666">*</span>(N<span style="color: #666666">//</span>arraysize) <span style="color: #666666">+</span> [rest]
+</pre></div>
+<p>
+We can now make one batch of random numbers at a time and
+count how many times we get six:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">six_eyes_vec2</span>(N, arraysize<span style="color: #666666">=1000000</span>):
+    <span style="color: #408080; font-style: italic"># Split all experiments into batches of size arraysize,</span>
+    <span style="color: #408080; font-style: italic"># plus a final batch of size rest</span>
+    <span style="color: #408080; font-style: italic"># (note: N//arraysize is integer division)</span>
+    rest <span style="color: #666666">=</span> N <span style="color: #666666">%</span> arraysize
+    batch_sizes <span style="color: #666666">=</span> [arraysize]<span style="color: #666666">*</span>(N<span style="color: #666666">//</span>arraysize) <span style="color: #666666">+</span> [rest]
+
+    M <span style="color: #666666">=</span> <span style="color: #666666">0</span>
+    <span style="color: #008000; font-weight: bold">for</span> batch_size <span style="color: #AA22FF; font-weight: bold">in</span> batch_sizes:
+        eyes <span style="color: #666666">=</span> np<span style="color: #666666">.</span>random<span style="color: #666666">.</span>randint(<span style="color: #666666">1</span>, <span style="color: #666666">7</span>, batch_size)
+        success <span style="color: #666666">=</span> eyes <span style="color: #666666">==</span> <span style="color: #666666">6</span>      <span style="color: #408080; font-style: italic"># True/False array</span>
+        M <span style="color: #666666">+=</span> np<span style="color: #666666">.</span>sum(success)     <span style="color: #408080; font-style: italic"># treats True as 1, False as 0</span>
+    <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">float</span>(M)<span style="color: #666666">/</span>N
+</pre></div>
+<p>
+Because we fix the seed, the computed <code>f</code> will always be the same in
+this function.
+
+<h3 id="___sec14">Verification of the scalar version </h3>
+
+<p>
+Verifying computations with random numbers requires the seed to be
+fixed. When we believe the scalar version in function <code>six_eyes</code> is
+correct, mainly by observing that the return value approaches 1/6
+as the number of experiments, <code>N</code>, grows, we can call the function
+with a small <code>N</code> and record the return value for use in a test function:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">test_scalar</span>():
+    random<span style="color: #666666">.</span>seed(<span style="color: #666666">3</span>)
+    f <span style="color: #666666">=</span> six_eyes(<span style="color: #666666">100</span>)
+    f_exact <span style="color: #666666">=</span> <span style="color: #666666">0.26</span>
+    <span style="color: #008000; font-weight: bold">assert</span> <span style="color: #008000">abs</span>(f_exact <span style="color: #666666">-</span> f) <span style="color: #666666">&lt;</span> <span style="color: #666666">1E-15</span>
+</pre></div>
+
+<h3 id="___sec15">Verification of all versions </h3>
+
+<p>
+Since we have three alternative functions for computing the same
+quantity, a verification can be based on comparing the output of
+all three functions. This is somewhat problematic since the scalar
+and vectorized versions apply different random number generators.
+Fixing the seed of Python's <code>random</code> module and <code>numpy.random</code>
+does not help as these two tools will generate different sequences
+of random integers. Nevertheless, we can fool the scalar version
+in the <code>six_eyes</code> function to use <code>np.random.randint</code> instead
+of <code>random.randit</code>: this is just a matter of setting <code>random = np.random</code>
+(with a declaration <code>global random</code>) before calling <code>six_eyes</code>.
+The problem is that the call <code>np.random.randint(1, 6)</code> in <code>six_eyes</code>
+will then generate the numbers up to <em>but not including</em> 6, so
+<code>M</code> will always be zero. A little trick, can solve the problem:
+we redefine <code>random.randit</code> to be a function that calls
+<code>np.random.randint</code>:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">random<span style="color: #666666">.</span>randint <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">lambda</span> a, b: np<span style="color: #666666">.</span>random<span style="color: #666666">.</span>randint(a, b<span style="color: #666666">+1</span>, <span style="color: #666666">1</span>)[<span style="color: #666666">0</span>]
+</pre></div>
+<p>
+The call <code>random.randint(1, 6)</code> in <code>six_eyes</code> now becomes
+<code>np.random.randint(1, 7, 1)[0]</code>, i.e., we generate an array of
+1 random integer and extract the first element so the result is
+a scalar number as before.
+
+<p>
+A test function can call all three functions, with the same fixed seed,
+and compare the returned values:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">test_all</span>():
+    <span style="color: #408080; font-style: italic"># Use np.random as random number generator for all three</span>
+    <span style="color: #408080; font-style: italic"># functions and make sure all of them applies the same seed</span>
+    N <span style="color: #666666">=</span> <span style="color: #666666">100</span>
+    arraysize <span style="color: #666666">=</span> <span style="color: #666666">40</span>
+    random<span style="color: #666666">.</span>randint <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">lambda</span> a, b: np<span style="color: #666666">.</span>random<span style="color: #666666">.</span>randint(a, b<span style="color: #666666">+1</span>, <span style="color: #666666">1</span>)[<span style="color: #666666">0</span>]
+    tol <span style="color: #666666">=</span> <span style="color: #666666">1E-15</span>
+
+    np<span style="color: #666666">.</span>random<span style="color: #666666">.</span>seed(<span style="color: #666666">3</span>)
+    f_scalar <span style="color: #666666">=</span> six_eyes(N)
+    np<span style="color: #666666">.</span>random<span style="color: #666666">.</span>seed(<span style="color: #666666">3</span>)
+    f_vec <span style="color: #666666">=</span> six_eyes_vec(N)
+    <span style="color: #008000; font-weight: bold">assert</span> <span style="color: #008000">abs</span>(f_scalar <span style="color: #666666">-</span> f_vec) <span style="color: #666666">&lt;</span> tol
+
+    np<span style="color: #666666">.</span>random<span style="color: #666666">.</span>seed(<span style="color: #666666">3</span>)
+    f_vec2 <span style="color: #666666">=</span> six_eyes_vec2(N, arraysize<span style="color: #666666">=80</span>)
+    <span style="color: #008000; font-weight: bold">assert</span> <span style="color: #008000">abs</span>(f_vec <span style="color: #666666">-</span> f_vec2) <span style="color: #666666">&lt;</span> tol
+</pre></div>
+<p>
+All the functions above are found in
+the file <a href="http://tinyurl.com/pwyasaa/random/roll_die" target="_self"><tt>roll_die.py</tt></a>.
+
+<h2 id="___sec16">Drawing a random element from a list </h2>
+
+<p>
+Given a list <code>a</code>, the statement
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">re <span style="color: #666666">=</span> random<span style="color: #666666">.</span>choice(a)
+</pre></div>
+<p>
+picks out an element of <code>a</code> at random, and <code>re</code> refers to
+this element.
+The shown call to <code>random.choice</code> is the same as
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">re <span style="color: #666666">=</span> a[random<span style="color: #666666">.</span>randint(<span style="color: #666666">0</span>, <span style="color: #008000">len</span>(a)<span style="color: #666666">-1</span>)]
+</pre></div>
+<p>
+There is also a function <code>shuffle</code> that performs a random permutation
+of the list elements:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">random<span style="color: #666666">.</span>shuffle(a)
+</pre></div>
+<p>
+Picking now <code>a[0]</code>, for instance, has the same effect as
+<code>random.choice</code> on the original, unshuffled list.
+Note that <code>shuffle</code> changes the list given as argument.
+
+<p>
+The <code>numpy.random</code> module has also a <code>shuffle</code> function with
+the same functionality.
+
+<p>
+A small session illustrates the various methods for picking a random
+element from a list:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> awards <span style="color: #666666">=</span> [<span style="color: #BA2121">&#39;car&#39;</span>, <span style="color: #BA2121">&#39;computer&#39;</span>, <span style="color: #BA2121">&#39;ball&#39;</span>, <span style="color: #BA2121">&#39;pen&#39;</span>]
+<span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">random</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> random<span style="color: #666666">.</span>choice(awards)
+<span style="color: #BA2121">&#39;car&#39;</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> awards[random<span style="color: #666666">.</span>randint(<span style="color: #666666">0</span>, <span style="color: #008000">len</span>(awards)<span style="color: #666666">-1</span>)]
+<span style="color: #BA2121">&#39;pen&#39;</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> random<span style="color: #666666">.</span>shuffle(awards)
+<span style="color: #666666">&gt;&gt;&gt;</span> awards[<span style="color: #666666">0</span>]
+<span style="color: #BA2121">&#39;computer&#39;</span>
+</pre></div>
+
+<h2 id="sec:random:deck1">Example: Drawing cards from a deck</h2>
+
+<p>
+The following function creates a deck of cards, where each card
+is represented as a string, and the deck is a list of such strings:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">make_deck</span>():
+    ranks <span style="color: #666666">=</span> [<span style="color: #BA2121">&#39;A&#39;</span>, <span style="color: #BA2121">&#39;2&#39;</span>, <span style="color: #BA2121">&#39;3&#39;</span>, <span style="color: #BA2121">&#39;4&#39;</span>, <span style="color: #BA2121">&#39;5&#39;</span>, <span style="color: #BA2121">&#39;6&#39;</span>, <span style="color: #BA2121">&#39;7&#39;</span>,
+             <span style="color: #BA2121">&#39;8&#39;</span>, <span style="color: #BA2121">&#39;9&#39;</span>, <span style="color: #BA2121">&#39;10&#39;</span>, <span style="color: #BA2121">&#39;J&#39;</span>, <span style="color: #BA2121">&#39;Q&#39;</span>, <span style="color: #BA2121">&#39;K&#39;</span>]
+    suits <span style="color: #666666">=</span> [<span style="color: #BA2121">&#39;C&#39;</span>, <span style="color: #BA2121">&#39;D&#39;</span>, <span style="color: #BA2121">&#39;H&#39;</span>, <span style="color: #BA2121">&#39;S&#39;</span>]
+    deck <span style="color: #666666">=</span> []
+    <span style="color: #008000; font-weight: bold">for</span> s <span style="color: #AA22FF; font-weight: bold">in</span> suits:
+        <span style="color: #008000; font-weight: bold">for</span> r <span style="color: #AA22FF; font-weight: bold">in</span> ranks:
+            deck<span style="color: #666666">.</span>append(s <span style="color: #666666">+</span> r)
+    random<span style="color: #666666">.</span>shuffle(deck)
+    <span style="color: #008000; font-weight: bold">return</span> deck
+</pre></div>
+<p>
+Here, <code>'A'</code> means an ace, <code>'J'</code> represents a jack, <code>'Q'</code>
+represents a queen, <code>'K'</code> represents a king,
+<code>'C'</code> stands for clubs, <code>'D'</code> stands for diamonds,
+<code>'H'</code> means hearts, and <code>'S'</code> means spades.
+The computation of the list <code>deck</code>
+can alternatively (and more compactly)
+be done by a one-line list comprehension:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">    deck <span style="color: #666666">=</span> [s<span style="color: #666666">+</span>r <span style="color: #008000; font-weight: bold">for</span> s <span style="color: #AA22FF; font-weight: bold">in</span> suits <span style="color: #008000; font-weight: bold">for</span> r <span style="color: #AA22FF; font-weight: bold">in</span> ranks]
+</pre></div>
+<p>
+We can draw a card at random by
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">deck <span style="color: #666666">=</span> make_deck()
+card <span style="color: #666666">=</span> deck[<span style="color: #666666">0</span>]
+<span style="color: #008000; font-weight: bold">del</span> deck[<span style="color: #666666">0</span>]
+<span style="color: #408080; font-style: italic"># or better:</span>
+card <span style="color: #666666">=</span> deck<span style="color: #666666">.</span>pop(<span style="color: #666666">0</span>)  <span style="color: #408080; font-style: italic"># return and remove element with index 0</span>
+</pre></div>
+<p>
+Drawing a hand of <code>n</code> cards from a shuffled deck is accomplished by
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">deal_hand</span>(n, deck):
+    hand <span style="color: #666666">=</span> [deck[i] <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(n)]
+    <span style="color: #008000; font-weight: bold">del</span> deck[:n]
+    <span style="color: #008000; font-weight: bold">return</span> hand, deck
+</pre></div>
+<p>
+Note that we must return <code>deck</code> to the calling code since this
+list is changed. Also note that the <code>n</code> first cards of the deck
+are random cards if the deck is shuffled (and any deck made by
+<code>make_deck</code> is shuffled).
+
+<p>
+The following function deals cards to a set of players:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">deal</span>(cards_per_hand, no_of_players):
+    deck <span style="color: #666666">=</span> make_deck()
+    hands <span style="color: #666666">=</span> []
+    <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(no_of_players):
+        hand, deck <span style="color: #666666">=</span> deal_hand(cards_per_hand, deck)
+        hands<span style="color: #666666">.</span>append(hand)
+    <span style="color: #008000; font-weight: bold">return</span> hands
+</pre></div>
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">players <span style="color: #666666">=</span> deal(<span style="color: #666666">5</span>, <span style="color: #666666">4</span>)
+<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">pprint</span>; pprint<span style="color: #666666">.</span>pprint(players)
+</pre></div>
+<p>
+The <code>players</code> list may look like
+
+<p>
+
+<!-- code=text (!bc ccq) typeset with pygments style "default" -->
+<blockquote>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">[[&#39;D4&#39;, &#39;CQ&#39;, &#39;H10&#39;, &#39;DK&#39;, &#39;CK&#39;],
+ [&#39;D7&#39;, &#39;D6&#39;, &#39;SJ&#39;, &#39;S4&#39;, &#39;C5&#39;],
+ [&#39;C3&#39;, &#39;DQ&#39;, &#39;S3&#39;, &#39;C9&#39;, &#39;DJ&#39;],
+ [&#39;H6&#39;, &#39;H9&#39;, &#39;C6&#39;, &#39;D5&#39;, &#39;S6&#39;]]
+</pre></div>
+</blockquote><p>
+The next step is to analyze a hand. Of particular interest is the
+number of pairs, three of a kind, four of a kind, etc. That is,
+how many combinations there are of <code>n_of_a_kind</code>
+cards of the same rank (e.g., <code>n_of_a_kind=2</code> finds the number of
+pairs):
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">same_rank</span>(hand, n_of_a_kind):
+    ranks <span style="color: #666666">=</span> [card[<span style="color: #666666">1</span>:] <span style="color: #008000; font-weight: bold">for</span> card <span style="color: #AA22FF; font-weight: bold">in</span> hand]
+    counter <span style="color: #666666">=</span> <span style="color: #666666">0</span>
+    already_counted <span style="color: #666666">=</span> []
+    <span style="color: #008000; font-weight: bold">for</span> rank <span style="color: #AA22FF; font-weight: bold">in</span> ranks:
+        <span style="color: #008000; font-weight: bold">if</span> rank <span style="color: #AA22FF; font-weight: bold">not</span> <span style="color: #AA22FF; font-weight: bold">in</span> already_counted <span style="color: #AA22FF; font-weight: bold">and</span> \ 
+               ranks<span style="color: #666666">.</span>count(rank) <span style="color: #666666">==</span> n_of_a_kind:
+            counter <span style="color: #666666">+=</span> <span style="color: #666666">1</span>
+            already_counted<span style="color: #666666">.</span>append(rank)
+    <span style="color: #008000; font-weight: bold">return</span> counter
+</pre></div>
+<p>
+Note how convenient the <code>count</code> method in list objects is for counting
+how many copies there are of one element in the list.
+
+<p>
+Another analysis of the hand is to count how many cards there are of
+each suit. A dictionary with the suit as key and the number of
+cards with that suit as value, seems appropriate to return. We
+pay attention only to suits that occur more than once:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">same_suit</span>(hand):
+    suits <span style="color: #666666">=</span> [card[<span style="color: #666666">0</span>] <span style="color: #008000; font-weight: bold">for</span> card <span style="color: #AA22FF; font-weight: bold">in</span> hand]
+    counter <span style="color: #666666">=</span> {}   <span style="color: #408080; font-style: italic"># counter[suit] = how many cards of suit</span>
+    <span style="color: #008000; font-weight: bold">for</span> suit <span style="color: #AA22FF; font-weight: bold">in</span> suits:
+        count <span style="color: #666666">=</span> suits<span style="color: #666666">.</span>count(suit)
+        <span style="color: #008000; font-weight: bold">if</span> count <span style="color: #666666">&gt;</span> <span style="color: #666666">1</span>:
+            counter[suit] <span style="color: #666666">=</span> count
+    <span style="color: #008000; font-weight: bold">return</span> counter
+</pre></div>
+<p>
+For a set of players we can now analyze their hands:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">for</span> hand <span style="color: #AA22FF; font-weight: bold">in</span> players:
+    <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&quot;&quot;&quot;\ </span>
+<span style="color: #BA2121">The hand </span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121"></span>
+<span style="color: #BA2121">    has </span><span style="color: #BB6688; font-weight: bold">%d</span><span style="color: #BA2121"> pairs, </span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121"> 3-of-a-kind and </span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121"> cards of the same suit.&quot;&quot;&quot;</span><span style="color: #666666">%</span>\ 
+    (<span style="color: #BA2121">&#39;, &#39;</span><span style="color: #666666">.</span>join(hand), same_rank(hand, <span style="color: #666666">2</span>),
+     same_rank(hand, <span style="color: #666666">3</span>),
+     <span style="color: #BA2121">&#39;+&#39;</span><span style="color: #666666">.</span>join([<span style="color: #008000">str</span>(s) <span style="color: #008000; font-weight: bold">for</span> s <span style="color: #AA22FF; font-weight: bold">in</span> same_suit(hand)<span style="color: #666666">.</span>values()]))
+</pre></div>
+<p>
+The values we feed into the printf string undergo some massage:
+we join the card values with comma and put a plus in between the
+counts of cards with the same suit. (The <code>join</code> function
+requires a string
+argument. That is why the integer counters of cards with the
+same suit, returned from <code>same_suit</code>, must be converted to
+strings.)
+The output of the <code>for</code> loop becomes
+
+<p>
+
+<!-- code=text (!bc ccq) typeset with pygments style "default" -->
+<blockquote>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">The hand D4, CQ, H10, DK, CK
+    has 1 pairs, 0 3-of-a-kind and 2+2 cards of the same suit.
+The hand D7, D6, SJ, S4, C5
+    has 0 pairs, 0 3-of-a-kind and 2+2 cards of the same suit.
+The hand C3, DQ, S3, C9, DJ
+    has 1 pairs, 0 3-of-a-kind and 2+2 cards of the same suit.
+The hand H6, H9, C6, D5, S6
+    has 0 pairs, 1 3-of-a-kind and 2 cards of the same suit.
+</pre></div>
+</blockquote><p>
+The file <a href="http://tinyurl.com/pwyasaa/random/cards.py" target="_self"><tt>cards.py</tt></a> contains the
+functions <code>make_deck</code>, <code>hand</code>, <code>same_rank</code>, <code>same_suit</code>, and the test
+snippets above. With the <code>cards.py</code> file one can start to implement
+real card games.
+
+<h2 id="sec:class:deck:class">Example: Class implementation of a deck</h2>
+
+<p>
+To work with a deck of cards with the code from the previous section
+one needs to shuffle a global variable <code>deck</code> in and out of
+functions. A set of functions that update global variables (like <code>deck</code>) is
+a primary candidate for a class: the global variables are stored as
+attributes and the functions become class methods.
+This means that the code from the previous section is better implemented
+as a class. We introduce class <code>Deck</code> with a list of cards, <code>deck</code>,
+as attribute, and methods for dealing one or several hands and for
+putting back a card:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Deck</span>:
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__init__</span>(<span style="color: #008000">self</span>):
+        ranks <span style="color: #666666">=</span> [<span style="color: #BA2121">&#39;A&#39;</span>, <span style="color: #BA2121">&#39;2&#39;</span>, <span style="color: #BA2121">&#39;3&#39;</span>, <span style="color: #BA2121">&#39;4&#39;</span>, <span style="color: #BA2121">&#39;5&#39;</span>, <span style="color: #BA2121">&#39;6&#39;</span>, <span style="color: #BA2121">&#39;7&#39;</span>,
+                 <span style="color: #BA2121">&#39;8&#39;</span>, <span style="color: #BA2121">&#39;9&#39;</span>, <span style="color: #BA2121">&#39;10&#39;</span>, <span style="color: #BA2121">&#39;J&#39;</span>, <span style="color: #BA2121">&#39;Q&#39;</span>, <span style="color: #BA2121">&#39;K&#39;</span>]
+        suits <span style="color: #666666">=</span> [<span style="color: #BA2121">&#39;C&#39;</span>, <span style="color: #BA2121">&#39;D&#39;</span>, <span style="color: #BA2121">&#39;H&#39;</span>, <span style="color: #BA2121">&#39;S&#39;</span>]
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>deck <span style="color: #666666">=</span> [s<span style="color: #666666">+</span>r <span style="color: #008000; font-weight: bold">for</span> s <span style="color: #AA22FF; font-weight: bold">in</span> suits <span style="color: #008000; font-weight: bold">for</span> r <span style="color: #AA22FF; font-weight: bold">in</span> ranks]
+        random<span style="color: #666666">.</span>shuffle(<span style="color: #008000">self</span><span style="color: #666666">.</span>deck)
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">hand</span>(<span style="color: #008000">self</span>, n<span style="color: #666666">=1</span>):
+        <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Deal n cards. Return hand as list.&quot;&quot;&quot;</span>
+        hand <span style="color: #666666">=</span> [<span style="color: #008000">self</span><span style="color: #666666">.</span>deck[i] <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(n)]  <span style="color: #408080; font-style: italic"># pick cards</span>
+        <span style="color: #008000; font-weight: bold">del</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>deck[:n]                        <span style="color: #408080; font-style: italic"># remove cards</span>
+        <span style="color: #008000; font-weight: bold">return</span> hand
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">deal</span>(<span style="color: #008000">self</span>, cards_per_hand, no_of_players):
+        <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Deal no_of_players hands. Return list of lists.&quot;&quot;&quot;</span>
+        <span style="color: #008000; font-weight: bold">return</span> [<span style="color: #008000">self</span><span style="color: #666666">.</span>hand(cards_per_hand) \ 
+                <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(no_of_players)]
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">putback</span>(<span style="color: #008000">self</span>, card):
+        <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Put back a card under the rest.&quot;&quot;&quot;</span>
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>deck<span style="color: #666666">.</span>append(card)
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__str__</span>(<span style="color: #008000">self</span>):
+        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">str</span>(<span style="color: #008000">self</span><span style="color: #666666">.</span>deck)
+</pre></div>
+<p>
+This class is found in the module file <a href="http://tinyurl.com/pwyasaa/random/Deck.py" target="_self"><tt>Deck.py</tt></a>.  Dealing a hand of five cards to <code>p</code>
+players is coded as
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">Deck</span> <span style="color: #008000; font-weight: bold">import</span> Deck
+deck <span style="color: #666666">=</span> Deck()
+<span style="color: #008000; font-weight: bold">print</span> deck
+players <span style="color: #666666">=</span> deck<span style="color: #666666">.</span>deal(<span style="color: #666666">5</span>, <span style="color: #666666">4</span>)
+</pre></div>
+<p>
+Here, <code>players</code> become a nested list as shown in
+the section <a href="#sec:random:deck1">Example: Drawing cards from a deck</a>.
+
+<p>
+One can go a step further and make more classes for assisting card
+games. For example, a card has so far been represented by a plain string,
+but we may well put that string in a class <code>Card</code>:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Card</span>:
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Representation of a card as a string (suit+rank).&quot;&quot;&quot;</span>
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__init__</span>(<span style="color: #008000">self</span>, suit, rank):
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>card <span style="color: #666666">=</span> suit <span style="color: #666666">+</span> <span style="color: #008000">str</span>(rank)
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__str__</span>(<span style="color: #008000">self</span>):   <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>card
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__repr__</span>(<span style="color: #008000">self</span>):  <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">str</span>(<span style="color: #008000">self</span>)
+</pre></div>
+<p>
+Note that <code>str(self)</code> is equivalent to <code>self.__str__()</code>.
+
+<p>
+A <code>Hand</code> contains a set of <code>Card</code> instances and
+is another natural abstraction, and hence a candidate
+for a class:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Hand</span>:
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Representation of a hand as a list of Card objects.&quot;&quot;&quot;</span>
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__init__</span>(<span style="color: #008000">self</span>, list_of_cards):
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>hand <span style="color: #666666">=</span> list_of_cards
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__str__</span>(<span style="color: #008000">self</span>):   <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">str</span>(<span style="color: #008000">self</span><span style="color: #666666">.</span>hand)
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__repr__</span>(<span style="color: #008000">self</span>):  <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">str</span>(<span style="color: #008000">self</span>)
+</pre></div>
+<p>
+With the aid of classes <code>Card</code> and <code>Hand</code>, class <code>Deck</code>
+can be reimplemented as
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Deck</span>:
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Representation of a deck as a list of Card objects.&quot;&quot;&quot;</span>
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__init__</span>(<span style="color: #008000">self</span>):
+        ranks <span style="color: #666666">=</span> [<span style="color: #BA2121">&#39;A&#39;</span>, <span style="color: #BA2121">&#39;2&#39;</span>, <span style="color: #BA2121">&#39;3&#39;</span>, <span style="color: #BA2121">&#39;4&#39;</span>, <span style="color: #BA2121">&#39;5&#39;</span>, <span style="color: #BA2121">&#39;6&#39;</span>, <span style="color: #BA2121">&#39;7&#39;</span>,
+                 <span style="color: #BA2121">&#39;8&#39;</span>, <span style="color: #BA2121">&#39;9&#39;</span>, <span style="color: #BA2121">&#39;10&#39;</span>, <span style="color: #BA2121">&#39;J&#39;</span>, <span style="color: #BA2121">&#39;Q&#39;</span>, <span style="color: #BA2121">&#39;K&#39;</span>]
+        suits <span style="color: #666666">=</span> [<span style="color: #BA2121">&#39;C&#39;</span>, <span style="color: #BA2121">&#39;D&#39;</span>, <span style="color: #BA2121">&#39;H&#39;</span>, <span style="color: #BA2121">&#39;S&#39;</span>]
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>deck <span style="color: #666666">=</span> [Card(s,r) <span style="color: #008000; font-weight: bold">for</span> s <span style="color: #AA22FF; font-weight: bold">in</span> suits <span style="color: #008000; font-weight: bold">for</span> r <span style="color: #AA22FF; font-weight: bold">in</span> ranks]
+        random<span style="color: #666666">.</span>shuffle(<span style="color: #008000">self</span><span style="color: #666666">.</span>deck)
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">hand</span>(<span style="color: #008000">self</span>, n<span style="color: #666666">=1</span>):
+        <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Deal n cards. Return hand as a Hand object.&quot;&quot;&quot;</span>
+        hand <span style="color: #666666">=</span> Hand([<span style="color: #008000">self</span><span style="color: #666666">.</span>deck[i] <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(n)])
+        <span style="color: #008000; font-weight: bold">del</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>deck[:n]         <span style="color: #408080; font-style: italic"># remove cards</span>
+        <span style="color: #008000; font-weight: bold">return</span> hand
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">deal</span>(<span style="color: #008000">self</span>, cards_per_hand, no_of_players):
+        <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Deal no_of_players hands. Return list of Hand obj.&quot;&quot;&quot;</span>
+        <span style="color: #008000; font-weight: bold">return</span> [<span style="color: #008000">self</span><span style="color: #666666">.</span>hand(cards_per_hand) \ 
+                <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(no_of_players)]
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">putback</span>(<span style="color: #008000">self</span>, card):
+        <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Put back a card under the rest.&quot;&quot;&quot;</span>
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>deck<span style="color: #666666">.</span>append(card)
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__str__</span>(<span style="color: #008000">self</span>):
+        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">str</span>(<span style="color: #008000">self</span><span style="color: #666666">.</span>deck)
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__repr__</span>(<span style="color: #008000">self</span>):
+        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">str</span>(<span style="color: #008000">self</span>)
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__len__</span>(<span style="color: #008000">self</span>):
+        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">len</span>(<span style="color: #008000">self</span><span style="color: #666666">.</span>deck)
+</pre></div>
+<p>
+The module file <a href="http://tinyurl.com/pwyasaa/random/Deck2.py" target="_self"><tt>Deck2.py</tt></a>
+contains this implementation. The usage
+of the two <code>Deck</code> classes is the same,
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">Deck2</span> <span style="color: #008000; font-weight: bold">import</span> Deck
+deck <span style="color: #666666">=</span> Deck()
+players <span style="color: #666666">=</span> deck<span style="color: #666666">.</span>deal(<span style="color: #666666">5</span>, <span style="color: #666666">4</span>)
+</pre></div>
+<p>
+with the exception that <code>players</code> in the last case holds a list
+of <code>Hand</code> instances, and each <code>Hand</code> instance holds a list of
+<code>Card</code> instances.
+
+<p>
+The golden rule is
+that the
+<code>__repr__</code> method should return a string such that
+one can recreate the object from this string by the aid of <code>eval</code>.
+However, we did not follow this rule in the implementation of
+classes <code>Card</code>, <code>Hand</code>, and <code>Deck</code>. Why?
+The reason is that we want to print a <code>Deck</code> instance.
+Python's <code>print</code> or <code>pprint</code> on a list applies <code>repr(e)</code>
+to print an element <code>e</code> in the list.
+Therefore, if we had implemented
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Card</span>:
+    <span style="color: #666666">...</span>
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__repr__</span>(<span style="color: #008000">self</span>):
+        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #BA2121">&quot;Card(&#39;</span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121">&#39;, </span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121">)&quot;</span> <span style="color: #666666">%</span> (<span style="color: #008000">self</span><span style="color: #666666">.</span>card[<span style="color: #666666">0</span>], <span style="color: #008000">self</span><span style="color: #666666">.</span>card[<span style="color: #666666">1</span>:])
+
+<span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Hand</span>:
+    <span style="color: #666666">...</span>
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__repr__</span>(<span style="color: #008000">self</span>):  <span style="color: #008000; font-weight: bold">return</span> <span style="color: #BA2121">&#39;Hand(</span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121">)&#39;</span> <span style="color: #666666">%</span> <span style="color: #008000">repr</span>(<span style="color: #008000">self</span><span style="color: #666666">.</span>hand)
+</pre></div>
+<p>
+a plain printing of the <code>deck</code> list of <code>Hand</code> instances
+would lead to output like
+
+<p>
+
+<!-- code=text (!bc ccq) typeset with pygments style "default" -->
+<blockquote>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">[Hand([Card(&#39;C&#39;, &#39;10&#39;), Card(&#39;C&#39;, &#39;4&#39;), Card(&#39;H&#39;, &#39;K&#39;), ...]),
+ ...,
+ Hand([Card(&#39;D&#39;, &#39;7&#39;), Card(&#39;C&#39;, &#39;5&#39;), ..., Card(&#39;D&#39;, &#39;9&#39;)])]
+</pre></div>
+</blockquote><p>
+This output is harder to read than
+
+<p>
+
+<!-- code=text (!bc ccq) typeset with pygments style "default" -->
+<blockquote>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">[[C10, C4, HK, DQ, HQ],
+ [SA, S8, H3, H10, C2],
+ [HJ, C7, S2, CQ, DK],
+ [D7, C5, DJ, S3, D9]]
+</pre></div>
+</blockquote><p>
+That is why we let <code>__repr__</code> in classes <code>Card</code> and <code>Hand</code>
+return the same pretty print string
+as <code>__str__</code>, obtained by returning <code>str(self)</code>.
+
+<p>
+<p>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pager">
+  <li class="previous">
+    <a href="._random-bootstrap001.html">&larr; Prev</a>
+  </li>
+  <li class="next">
+    <a href="._random-bootstrap003.html">Next &rarr;</a>
+  </li>
+</ul>
+<!-- ------------------- end of main content --------------- -->
+
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap footer
+<footer>
+<a href="http://..."><img width="250" align=right src="http://..."></a>
+</footer>
+-->
+
+
+</body>
+</html>
+    
+

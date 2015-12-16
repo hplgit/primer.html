@@ -1,0 +1,1054 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Random numbers and simple games">
+<meta name="keywords" content="random numbers,seed,uniformly distributed random numbers,random numbers uniform distribution,bin (histogram),histogram (normalized),random numbers histogram,vectorized drawing of random numbers,random numbers vectorization,mean,average,random numbers statistics,variance,standard deviation,mod function,normally distributed random numbers,random numbers normal distribution,random numbers integers,integer random numbers,probability,random numbers Monte Carlo simulation,Monte Carlo simulation,Monte Carlo integration,random numbers integration,Midpoint rule for integration,mod function,measure time in programs,efficiency measure,random walk,random numbers random walk,making movie,cumulative sum">
+
+<title>Random numbers and simple games</title>
+
+<!-- Bootstrap style: bootswatch_readable -->
+<link href="http://netdna.bootstrapcdn.com/bootswatch/3.1.1/readable/bootstrap.min.css" rel="stylesheet">
+<!-- not necessary
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+
+<style type="text/css">
+/* Let inline verbatim have the same color as the surroundings */
+code { color: inherit; background-color: transparent; }
+
+/* Add scrollbar to dropdown menus in bootstrap navigation bar */
+.dropdown-menu {
+   height: auto;
+   max-height: 400px;
+   overflow-x: hidden;
+}
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [('Drawing random numbers', 1, None, '___sec0'),
+              ('The seed', 2, None, '___sec1'),
+              ('Uniformly distributed random numbers',
+               2,
+               'sec:random:uniform',
+               'sec:random:uniform'),
+              ('Visualizing the distribution', 2, None, '___sec3'),
+              ('Vectorized drawing of random numbers', 2, None, '___sec4'),
+              ('Warning', 3, None, '___sec5'),
+              ('Computing the mean and standard deviation',
+               2,
+               'sec:random:statistics',
+               'sec:random:statistics'),
+              ('The Gaussian or normal distribution',
+               2,
+               'sec:random:normal',
+               'sec:random:normal'),
+              ('Drawing integers', 1, 'sec:random:ints', 'sec:random:ints'),
+              ('Random integer functions', 2, None, '___sec9'),
+              ('Example: Throwing a die', 2, None, '___sec10'),
+              ('Scalar version', 3, None, '___sec11'),
+              ('Vectorized version', 3, None, '___sec12'),
+              ('Vectorized version with batches', 3, None, '___sec13'),
+              ('Verification of the scalar version', 3, None, '___sec14'),
+              ('Verification of all versions', 3, None, '___sec15'),
+              ('Drawing a random element from a list', 2, None, '___sec16'),
+              ('Example: Drawing cards from a deck',
+               2,
+               'sec:random:deck1',
+               'sec:random:deck1'),
+              ('Example: Class implementation of a deck',
+               2,
+               'sec:class:deck:class',
+               'sec:class:deck:class'),
+              ('Computing probabilities',
+               1,
+               'sec:random:probability',
+               'sec:random:probability'),
+              ('Principles of Monte Carlo simulation', 2, None, '___sec20'),
+              ('Example: Throwing dice',
+               2,
+               'sec:random:probability:dice',
+               'sec:random:probability:dice'),
+              ('Straightforward solution', 3, None, '___sec22'),
+              ('Vectorization', 3, None, '___sec23'),
+              ('Exact solution', 3, None, '___sec24'),
+              ('A game', 3, None, '___sec25'),
+              ('Decide if a game is fair', 3, None, '___sec26'),
+              ('Example: Drawing balls from a hat',
+               2,
+               'sec:random:balls',
+               'sec:random:balls'),
+              ('Random mutations of genes',
+               2,
+               'bioinf:random',
+               'bioinf:random'),
+              ('A simple mutation model', 3, None, '___sec29'),
+              ('Vectorized version', 3, None, '___sec30'),
+              ('A Markov chain mutation model', 3, None, '___sec31'),
+              ('Example: Policies for limiting population growth',
+               2,
+               'sec:random:china',
+               'sec:random:china'),
+              ('Simple games', 1, None, '___sec33'),
+              ('Guessing a number',
+               2,
+               'sec:random:game:guessn',
+               'sec:random:game:guessn'),
+              ('The game', 3, None, '___sec35'),
+              ('The implementation', 3, None, '___sec36'),
+              ('Rolling two dice',
+               2,
+               'sec:random:twodicesumguess',
+               'sec:random:twodicesumguess'),
+              ('The game', 3, None, '___sec38'),
+              ('The implementation', 3, None, '___sec39'),
+              ('Example', 3, None, '___sec40'),
+              ('A class version', 3, None, '___sec41'),
+              ('Monte Carlo integration',
+               1,
+               'sec:random:MonteCarlo:integration',
+               'sec:random:MonteCarlo:integration'),
+              ('Derivation of Monte Carlo integration',
+               2,
+               'sec:random:MCint:ideas',
+               'sec:random:MCint:ideas'),
+              ('The calculus approach via the mean-value theorem',
+               3,
+               None,
+               '___sec44'),
+              ('The probability theory approach', 3, None, '___sec45'),
+              ('Implementation of standard Monte Carlo integration',
+               2,
+               'sec:random:MCint:std',
+               'sec:random:MCint:std'),
+              ('Example', 3, None, '___sec47'),
+              ('Remark', 3, None, '___sec48'),
+              ('Area computing by throwing random points',
+               2,
+               'sec:random:MCdart',
+               'sec:random:MCdart'),
+              ('Random walk in one space dimension',
+               1,
+               'sec:random:rw1D',
+               'sec:random:rw1D'),
+              ('Basic implementation', 2, None, '___sec51'),
+              ('Visualization', 2, None, '___sec52'),
+              ('Random walk as a difference equation', 2, None, '___sec53'),
+              ('Computing statistics of the particle positions',
+               2,
+               'sec:random:walk:1D:statistics',
+               'sec:random:walk:1D:statistics'),
+              ('Vectorized implementation',
+               2,
+               'sec:random:walk:1D:vectorized',
+               'sec:random:walk:1D:vectorized'),
+              ('Random walk in two space dimensions',
+               1,
+               'sec:random:rw2D',
+               'sec:random:rw2D'),
+              ('Basic implementation',
+               2,
+               'sec:random:rw2D:scalar',
+               'sec:random:rw2D:scalar'),
+              ('Vectorized implementation',
+               2,
+               'sec:random:walk:2D:vectorized',
+               'sec:random:walk:2D:vectorized'),
+              ('Summary', 1, None, '___sec59'),
+              ('Chapter topics', 2, None, '___sec60'),
+              ('Drawing random numbers', 3, None, '___sec61'),
+              ('Typical probability computation via Monte Carlo simulation',
+               3,
+               None,
+               '___sec62'),
+              ('Statistical measures', 3, None, '___sec63'),
+              ('Terminology', 3, None, '___sec64'),
+              ('Example: Random growth',
+               2,
+               'sec:random:summarizingex',
+               'sec:random:summarizingex'),
+              ('Problem', 3, None, '___sec66'),
+              ('Solution', 3, None, '___sec67'),
+              ('Exercises', 1, None, '___sec68'),
+              ('Exercise 1: Flip a coin times',
+               2,
+               'sec:random:ex17',
+               'sec:random:ex17'),
+              ('Exercise 2: Compute a probability',
+               2,
+               'sec:random:ex7',
+               'sec:random:ex7'),
+              ('Exercise 3: Choose random colors',
+               2,
+               'sec:random:ex6',
+               'sec:random:ex6'),
+              ('Exercise 4: Draw balls from a hat',
+               2,
+               'sec:random:ex4',
+               'sec:random:ex4'),
+              ('Exercise 5: Computing probabilities of rolling dice',
+               2,
+               'sec:random:ex2',
+               'sec:random:ex2'),
+              ('Exercise 6: Estimate the probability in a dice game',
+               2,
+               'sec:random:ex10',
+               'sec:random:ex10'),
+              ('Exercise 7: Compute the probability of hands of cards',
+               2,
+               'sec:random:ex44',
+               'sec:random:ex44'),
+              ('Exercise 8: Decide if a dice game is fair',
+               2,
+               'sec:random:ex11',
+               'sec:random:ex11'),
+              ('Exercise 9: Adjust a game to make it fair',
+               2,
+               'sec:random:ex12',
+               'sec:random:ex12'),
+              ('Exercise 10: Generalize a game',
+               2,
+               'sec:random:ex12b',
+               'sec:random:ex12b'),
+              ('Exercise 11: Compare two playing strategies',
+               2,
+               'sec:random:ex2c',
+               'sec:random:ex2c'),
+              ('Exercise 12: Investigate strategies in a game',
+               2,
+               'sec:random:ex2e',
+               'sec:random:ex2e'),
+              ('Exercise 13: Investigate the winning chances of some games',
+               2,
+               'sec:random:ex45',
+               'sec:random:ex45'),
+              ('Exercise 14: Compute probabilities of throwing two dice',
+               2,
+               'sec:random:ex2b',
+               'sec:random:ex2b'),
+              ('Exercise 15: Vectorize flipping a coin',
+               2,
+               'sec:random:ex18',
+               'sec:random:ex18'),
+              ('Exercise 16: Vectorize a probablility computation',
+               2,
+               'sec:random:ex7b',
+               'sec:random:ex7b'),
+              ('Exercise 17: Throw dice and compute a small probability',
+               2,
+               'sec:random:ex30',
+               'sec:random:ex30'),
+              ('Exercise 18: Difference equation for random numbers',
+               2,
+               'sec:random:ex27',
+               'sec:random:ex27'),
+              ('Exercise 19: Make a class for drawing balls from a hat',
+               2,
+               'sec:random:ex9',
+               'sec:random:ex9'),
+              ('Exercise 20: Independent  versus dependent random numbers',
+               2,
+               'sec:random:ex21',
+               'sec:random:ex21'),
+              ('Exercise 21: Compute the probability of flipping a coin',
+               2,
+               'sec:random:ex19',
+               'sec:random:ex19'),
+              ('Exercise 22: Simulate a poker game',
+               2,
+               'sec:random:ex41',
+               'sec:random:ex41'),
+              ('Exercise 23: Estimate growth in a simulation model',
+               2,
+               'sec:random:ex29',
+               'sec:random:ex29'),
+              ('Exercise 24: Investigate guessing strategies',
+               2,
+               'sec:random:ex15',
+               'sec:random:ex15'),
+              ('Exercise 25: Vectorize a dice game',
+               2,
+               'sec:random:ex13',
+               'sec:random:ex13'),
+              ('Exercise 26: Compute $\\pi$ by a Monte Carlo method',
+               2,
+               'sec:random:ex31',
+               'sec:random:ex31'),
+              ('Exercise 27: Compute $\\pi$ by a Monte Carlo method',
+               2,
+               'sec:random:ex32',
+               'sec:random:ex32'),
+              ('Exercise 28: Compute $\\pi$ by a random sum',
+               2,
+               'sec:random:ex31b',
+               'sec:random:ex31b'),
+              ('Exercise 29: 1D random walk with drift',
+               2,
+               'sec:random:ex1',
+               'sec:random:ex1'),
+              ('Exercise 30: 1D random walk until a point is hit',
+               2,
+               'sec:random:ex3',
+               'sec:random:ex3'),
+              ('Exercise 31: Simulate making a fortune from gaming',
+               2,
+               'sec:random:ex3:rwgame',
+               'sec:random:ex3:rwgame'),
+              ('Exercise 32: Make classes for 2D random walk',
+               2,
+               'sec:random:ex33',
+               'sec:random:ex33'),
+              ('Exercise 33: 2D random walk with walls; scalar version',
+               2,
+               'sec:random:ex36',
+               'sec:random:ex36'),
+              ('Exercise 34: 2D random walk with walls; vectorized version',
+               2,
+               'sec:random:ex37',
+               'sec:random:ex37'),
+              ('Exercise 35: Simulate mixing of gas molecules',
+               2,
+               'sec:random:ex38',
+               'sec:random:ex38'),
+              ('Remarks', 3, None, '___sec104'),
+              ('Exercise 36: Simulate slow mixing of gas molecules',
+               2,
+               'sec:random:ex39',
+               'sec:random:ex39'),
+              ('Exercise 37: Guess beer brands',
+               2,
+               'sec:random:ex35',
+               'sec:random:ex35'),
+              ('Exercise 38: Simulate stock prices',
+               2,
+               'sec:random:ex26',
+               'sec:random:ex26'),
+              ('Exercise 39: Compute with option prices in finance',
+               2,
+               'sec:random:ex16',
+               'sec:random:ex16'),
+              ('Remarks', 3, None, '___sec109'),
+              ('Exercise 40: Differentiate noise measurements',
+               2,
+               'sec:random:ex22',
+               'sec:random:ex22'),
+              ('Exercise 41: Differentiate noisy signals',
+               2,
+               'sec:random:ex25',
+               'sec:random:ex25'),
+              ('Exercise 42: Model noise in a time signal',
+               2,
+               'sec:random:ex23',
+               'sec:random:ex23'),
+              ('Exercise 43: Speed up Markov chain mutation',
+               2,
+               'bioinf:exer:Markov:chain:eff',
+               'bioinf:exer:Markov:chain:eff'),
+              ('References', 1, None, '___sec114')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- newcommands_keep.tex -->
+$$
+\newcommand{\tp}{\thinspace .}
+\newcommand{\Prob}[1]{\hbox{P}(#1)}
+$$
+
+
+
+
+    
+<!-- Bootstrap navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="random-readable.html">Random numbers and simple games</a>
+  </div>
+
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     <!-- navigation toc: --> <li><a href="#___sec0" style="font-size: 80%;"><b>Drawing random numbers</b></a></li>
+     <!-- navigation toc: --> <li><a href="#___sec1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The seed</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:random:uniform" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Uniformly distributed random numbers</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec3" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Visualizing the distribution</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec4" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Vectorized drawing of random numbers</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec5" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Warning</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:random:statistics" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Computing the mean and standard deviation</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:random:normal" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The Gaussian or normal distribution</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable002.html#sec:random:ints" style="font-size: 80%;"><b>Drawing integers</b></a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable002.html#___sec9" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Random integer functions</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable002.html#___sec10" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Throwing a die</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable002.html#___sec11" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scalar version</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable002.html#___sec12" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Vectorized version</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable002.html#___sec13" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Vectorized version with batches</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable002.html#___sec14" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Verification of the scalar version</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable002.html#___sec15" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Verification of all versions</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable002.html#___sec16" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Drawing a random element from a list</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable002.html#sec:random:deck1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Drawing cards from a deck</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable002.html#sec:class:deck:class" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Class implementation of a deck</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable003.html#sec:random:probability" style="font-size: 80%;"><b>Computing probabilities</b></a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable003.html#___sec20" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Principles of Monte Carlo simulation</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable003.html#sec:random:probability:dice" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Throwing dice</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable003.html#___sec22" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Straightforward solution</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable003.html#___sec23" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Vectorization</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable003.html#___sec24" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exact solution</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable003.html#___sec25" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A game</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable003.html#___sec26" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Decide if a game is fair</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable003.html#sec:random:balls" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Drawing balls from a hat</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable003.html#bioinf:random" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Random mutations of genes</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable003.html#___sec29" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A simple mutation model</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable003.html#___sec30" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Vectorized version</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable003.html#___sec31" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A Markov chain mutation model</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable003.html#sec:random:china" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Policies for limiting population growth</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable004.html#___sec33" style="font-size: 80%;"><b>Simple games</b></a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable004.html#sec:random:game:guessn" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Guessing a number</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable004.html#___sec35" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The game</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable004.html#___sec36" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The implementation</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable004.html#sec:random:twodicesumguess" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Rolling two dice</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable004.html#___sec38" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The game</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable004.html#___sec39" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The implementation</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable004.html#___sec40" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable004.html#___sec41" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A class version</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable004.html#sec:random:MonteCarlo:integration" style="font-size: 80%;"><b>Monte Carlo integration</b></a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable004.html#sec:random:MCint:ideas" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Derivation of Monte Carlo integration</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable004.html#___sec44" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The calculus approach via the mean-value theorem</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable004.html#___sec45" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The probability theory approach</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable004.html#sec:random:MCint:std" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Implementation of standard Monte Carlo integration</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable004.html#___sec47" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable004.html#___sec48" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remark</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable004.html#sec:random:MCdart" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Area computing by throwing random points</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable005.html#sec:random:rw1D" style="font-size: 80%;"><b>Random walk in one space dimension</b></a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable005.html#___sec51" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Basic implementation</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable005.html#___sec52" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Visualization</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable005.html#___sec53" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Random walk as a difference equation</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable005.html#sec:random:walk:1D:statistics" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Computing statistics of the particle positions</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable005.html#sec:random:walk:1D:vectorized" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Vectorized implementation</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable006.html#sec:random:rw2D" style="font-size: 80%;"><b>Random walk in two space dimensions</b></a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable006.html#sec:random:rw2D:scalar" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Basic implementation</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable006.html#sec:random:walk:2D:vectorized" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Vectorized implementation</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable007.html#___sec59" style="font-size: 80%;"><b>Summary</b></a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable007.html#___sec60" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Chapter topics</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable007.html#___sec61" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Drawing random numbers</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable007.html#___sec62" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Typical probability computation via Monte Carlo simulation</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable007.html#___sec63" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Statistical measures</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable007.html#___sec64" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Terminology</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable007.html#sec:random:summarizingex" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Random growth</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable007.html#___sec66" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable007.html#___sec67" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Solution</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable008.html#___sec68" style="font-size: 80%;"><b>Exercises</b></a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable008.html#sec:random:ex17" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 1: Flip a coin times</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable008.html#sec:random:ex7" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 2: Compute a probability</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable008.html#sec:random:ex6" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 3: Choose random colors</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable008.html#sec:random:ex4" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 4: Draw balls from a hat</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable008.html#sec:random:ex2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 5: Computing probabilities of rolling dice</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable008.html#sec:random:ex10" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 6: Estimate the probability in a dice game</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable008.html#sec:random:ex44" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 7: Compute the probability of hands of cards</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable008.html#sec:random:ex11" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 8: Decide if a dice game is fair</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable008.html#sec:random:ex12" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 9: Adjust a game to make it fair</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable008.html#sec:random:ex12b" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 10: Generalize a game</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable008.html#sec:random:ex2c" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 11: Compare two playing strategies</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable008.html#sec:random:ex2e" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 12: Investigate strategies in a game</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable008.html#sec:random:ex45" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 13: Investigate the winning chances of some games</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable008.html#sec:random:ex2b" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 14: Compute probabilities of throwing two dice</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable008.html#sec:random:ex18" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 15: Vectorize flipping a coin</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable008.html#sec:random:ex7b" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 16: Vectorize a probablility computation</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable008.html#sec:random:ex30" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 17: Throw dice and compute a small probability</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable008.html#sec:random:ex27" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 18: Difference equation for random numbers</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable008.html#sec:random:ex9" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 19: Make a class for drawing balls from a hat</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable008.html#sec:random:ex21" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 20: Independent  versus dependent random numbers</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable008.html#sec:random:ex19" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 21: Compute the probability of flipping a coin</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable008.html#sec:random:ex41" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 22: Simulate a poker game</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable008.html#sec:random:ex29" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 23: Estimate growth in a simulation model</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable008.html#sec:random:ex15" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 24: Investigate guessing strategies</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable008.html#sec:random:ex13" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 25: Vectorize a dice game</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable008.html#sec:random:ex31" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 26: Compute \( \pi \) by a Monte Carlo method</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable008.html#sec:random:ex32" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 27: Compute \( \pi \) by a Monte Carlo method</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable008.html#sec:random:ex31b" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 28: Compute \( \pi \) by a random sum</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable008.html#sec:random:ex1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 29: 1D random walk with drift</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable008.html#sec:random:ex3" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 30: 1D random walk until a point is hit</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable008.html#sec:random:ex3:rwgame" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 31: Simulate making a fortune from gaming</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable008.html#sec:random:ex33" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 32: Make classes for 2D random walk</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable008.html#sec:random:ex36" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 33: 2D random walk with walls; scalar version</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable008.html#sec:random:ex37" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 34: 2D random walk with walls; vectorized version</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable008.html#sec:random:ex38" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 35: Simulate mixing of gas molecules</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable008.html#___sec104" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remarks</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable008.html#sec:random:ex39" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 36: Simulate slow mixing of gas molecules</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable008.html#sec:random:ex35" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 37: Guess beer brands</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable008.html#sec:random:ex26" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 38: Simulate stock prices</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable008.html#sec:random:ex16" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 39: Compute with option prices in finance</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable008.html#___sec109" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remarks</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable008.html#sec:random:ex22" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 40: Differentiate noise measurements</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable008.html#sec:random:ex25" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 41: Differentiate noisy signals</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable008.html#sec:random:ex23" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 42: Model noise in a time signal</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable008.html#bioinf:exer:Markov:chain:eff" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 43: Speed up Markov chain mutation</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable008.html#___sec114" style="font-size: 80%;"><b>References</b></a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div> <!-- end of navigation bar -->
+
+<div class="container">
+
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+
+<a name="part0001"></a>
+<!-- !split -->
+<p style="font-size:80%">This chapter is taken from book <a href="http://www.springer.com/gp/book/9783642549588">A Primer on Scientific Programming with Python</a> by H. P. Langtangen, 4th edition, Springer, 2014.</p>
+
+<h1 id="___sec0">Drawing random numbers </h1>
+
+<p>
+Python has a module <code>random</code> for generating random numbers.
+The function call <code>random.random()</code> generates a random number in the
+half open interval \( [0, 1) \) (recall that in the half open interval
+\( [0,1) \) the lower limit is included, but the upper limit is not).
+We can try it out:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">random</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> random<span style="color: #666666">.</span>random()
+<span style="color: #666666">0.81550546885338104</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> random<span style="color: #666666">.</span>random()
+<span style="color: #666666">0.44913326809029852</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> random<span style="color: #666666">.</span>random()
+<span style="color: #666666">0.88320653116367454</span>
+</pre></div>
+<p>
+All computations of random numbers are based on deterministic
+algorithms (see <a href="._random-readable008.html#sec:random:ex27">Exercise 18: Difference equation for random numbers</a> for an example),
+so the sequence of numbers cannot be truly random.
+However, the sequence of numbers appears to lack any pattern, and we
+can therefore view the numbers as random.
+
+<p>
+<!-- What it means to view the numbers as random has fortunately a firm -->
+<!-- mathematical foundation, so don't let the fact that -->
+<!-- random numbers are deterministic stop you from using them. -->
+
+<h2 id="___sec1">The seed </h2>
+
+<p>
+Every time we import <code>random</code>, the subsequent
+sequence of <code>random.random()</code>
+calls will yield different numbers. For debugging purposes it is useful
+to get the same sequence of random numbers every time we run the
+program.
+This functionality is obtained by setting a <em>seed</em> before we
+start generating numbers. With a given value of the seed, one and only
+one sequence of numbers is generated. The seed is an integer and
+set by the <code>random.seed</code> function:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> random<span style="color: #666666">.</span>seed(<span style="color: #666666">121</span>)
+</pre></div>
+<p>
+Let us generate two series of random numbers at once,
+using a list comprehension and
+a format with two decimals only:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> random<span style="color: #666666">.</span>seed(<span style="color: #666666">2</span>)
+<span style="color: #666666">&gt;&gt;&gt;</span> [<span style="color: #BA2121">&#39;</span><span style="color: #BB6688; font-weight: bold">%.2f</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> random<span style="color: #666666">.</span>random() <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">7</span>)]
+[<span style="color: #BA2121">&#39;0.96&#39;</span>, <span style="color: #BA2121">&#39;0.95&#39;</span>, <span style="color: #BA2121">&#39;0.06&#39;</span>, <span style="color: #BA2121">&#39;0.08&#39;</span>, <span style="color: #BA2121">&#39;0.84&#39;</span>, <span style="color: #BA2121">&#39;0.74&#39;</span>, <span style="color: #BA2121">&#39;0.67&#39;</span>]
+<span style="color: #666666">&gt;&gt;&gt;</span> [<span style="color: #BA2121">&#39;</span><span style="color: #BB6688; font-weight: bold">%.2f</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> random<span style="color: #666666">.</span>random() <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">7</span>)]
+[<span style="color: #BA2121">&#39;0.31&#39;</span>, <span style="color: #BA2121">&#39;0.61&#39;</span>, <span style="color: #BA2121">&#39;0.61&#39;</span>, <span style="color: #BA2121">&#39;0.58&#39;</span>, <span style="color: #BA2121">&#39;0.16&#39;</span>, <span style="color: #BA2121">&#39;0.43&#39;</span>, <span style="color: #BA2121">&#39;0.39&#39;</span>]
+</pre></div>
+<p>
+If we set the seed to 2 again, the sequence of numbers is regenerated:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> random<span style="color: #666666">.</span>seed(<span style="color: #666666">2</span>)
+<span style="color: #666666">&gt;&gt;&gt;</span> [<span style="color: #BA2121">&#39;</span><span style="color: #BB6688; font-weight: bold">%.2f</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> random<span style="color: #666666">.</span>random() <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">7</span>)]
+[<span style="color: #BA2121">&#39;0.96&#39;</span>, <span style="color: #BA2121">&#39;0.95&#39;</span>, <span style="color: #BA2121">&#39;0.06&#39;</span>, <span style="color: #BA2121">&#39;0.08&#39;</span>, <span style="color: #BA2121">&#39;0.84&#39;</span>, <span style="color: #BA2121">&#39;0.74&#39;</span>, <span style="color: #BA2121">&#39;0.67&#39;</span>]
+</pre></div>
+<p>
+<!-- When do you need to control the seed? Well, think of debugging a program -->
+<!-- that computes with random numbers. Each time you run the program it -->
+<!-- generates different numbers. This can be extremely annoying when you -->
+<!-- try to hunt bugs. -->
+<!-- A fixed seed makes the random sequence the -->
+<!-- same each time the program is run. -->
+<!-- If you record the results in a file, you can easily later, perhaps after -->
+<!-- program is modified, check that the computations are still correct by -->
+<!-- comparing the new results with the old ones in the file. -->
+
+<p>
+If we do not give a seed, the <code>random</code> module sets a seed based on
+the current time. That is, the seed will be different each time we
+run the program and consequently the sequence of random numbers will
+also be different from run to run. This is what we want in most
+applications. However,
+we always recommend setting a seed during program development to
+simplify debugging and verification.
+
+<h2 id="sec:random:uniform">Uniformly distributed random numbers</h2>
+
+<p>
+The numbers generated by <code>random.random()</code> tend to be equally
+distributed between 0 and 1, which means that there is no part of the interval
+\( [0,1) \) with more random numbers than other parts.
+We say that the distribution of random numbers in this case is
+<em>uniform</em>. The function <code>random.uniform(a,b)</code> generates
+uniform random numbers in the half open interval \( [a,b) \), where the user
+can specify \( a \) and \( b \). With the following program
+(in file <a href="http://tinyurl.com/pwyasaa/random/uniform_numbers0.py" target="_self"><tt>uniform_numbers0.py</tt></a>)
+we may generate lots of random numbers
+in the interval \( [-1,1) \)
+and visualize how they are distributed :
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">random</span>
+random<span style="color: #666666">.</span>seed(<span style="color: #666666">42</span>)
+N <span style="color: #666666">=</span> <span style="color: #666666">500</span>  <span style="color: #408080; font-style: italic"># no of samples</span>
+x <span style="color: #666666">=</span> <span style="color: #008000">range</span>(N)
+y <span style="color: #666666">=</span> [random<span style="color: #666666">.</span>uniform(<span style="color: #666666">-1</span>,<span style="color: #666666">1</span>) <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> x]
+
+<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">scitools.std</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">st</span>
+st<span style="color: #666666">.</span>plot(x, y, <span style="color: #BA2121">&#39;+&#39;</span>, axis<span style="color: #666666">=</span>[<span style="color: #666666">0</span>,N<span style="color: #666666">-1</span>,<span style="color: #666666">-1.2</span>,<span style="color: #666666">1.2</span>])
+</pre></div>
+<p>
+Figure <a href="#fig:random:uniform:samples">1</a> shows the values of these 500 numbers,
+and as seen, the numbers appear  to be random and uniformly distributed
+between \( -1 \) and \( 1 \).
+
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 1:  The values of 500 random numbers drawn from the uniform distribution   on \( [-1,1) \). <div id="fig:random:uniform:samples"></div> </p></center>
+<p><img src="fig-random/uniform_numbers.png" align="bottom" width=400></p>
+</center>
+
+<h2 id="___sec3">Visualizing the distribution </h2>
+
+<p>
+It is of interest to see how \( N \) random numbers in an interval \( [a,b] \)
+are distributed throughout the interval, especially as
+\( N\rightarrow\infty \).  For example, when drawing numbers from the
+uniform distribution, we expect that no parts of the interval get more
+numbers than others. To visualize the distribution, we can divide the
+interval into subintervals and display how many numbers there are in
+each subinterval.
+
+<p>
+Let us formulate this method more precisely.  We divide the interval
+\( [a,b) \) into \( n \) equally sized subintervals, each of length
+\( h=(b-a)/n \). These subintervals are called <em>bins</em>.
+We can then draw \( N \) random numbers by calling
+<code>random.random()</code> \( N \) times. Let \( \hat H(i) \) be the number of
+random numbers that fall in bin no. \( i \), \( [a+ih, a+(i+1)h] \),
+\( i=0,\ldots,n-1 \).  If \( N \) is small, the value of \( \hat H(i) \) can be
+quite different for the different bins, but as \( N \) grows, we expect
+that \( \hat H(i) \) varies little with \( i \).
+
+<p>
+Ideally, we would be interested in how the random numbers are
+distributed as \( N\rightarrow\infty \) and \( n\rightarrow\infty \).  One
+major disadvantage is that \( \hat H(i) \) increases as \( N \) increases, and
+it decreases with \( n \).  The quantity \( \hat H(i)/N \), called the
+frequency count, will reach a finite limit as \( N\rightarrow\infty \).
+However, \( \hat H(i)/N \) will be smaller and smaller as we increase the
+number of bins. The quantity \( H(i) = \hat H(i)/(Nh) \) reaches a finite
+limit as \( N,n\rightarrow\infty \).  The probability that a random number
+lies inside subinterval no. \( i \) is then \( \hat H(i)/N = H(i)h \).
+
+<p>
+We can visualize \( H(i) \) as a bar diagram
+(see Figure <a href="#fig:random:uniform:histogram">2</a>), called
+a <em>normalized histogram</em>.
+We can also define a piecewise constant function \( p(x) \) from \( H(i) \):
+\( p(x) = H(i) \) for \( x\in [a+ih, a+(i+1)h) \), \( i=0,\ldots,n-1 \).
+As \( n,N\rightarrow\infty \), \( p(x) \) approaches the probability density
+function of the distribution in question.
+For example, <code>random.uniform(a,b)</code> draws numbers from the
+uniform distribution on \( [a,b) \), and the probability density function
+is constant, equal to \( 1/(b-a) \). As we increase \( n \) and \( N \), we
+therefore expect \( p(x) \) to approach the constant \( 1/(b-a) \).
+
+<p>
+The function <code>compute_histogram</code> from <code>scitools.std</code>
+returns two arrays <code>x</code> and <code>y</code> such that <code>plot(x,y)</code>
+plots the piecewise constant function \( p(x) \). The plot is hence the histogram
+of the set of random samples.
+The program below exemplifies the usage:
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">scitools.std</span> <span style="color: #008000; font-weight: bold">import</span> plot, compute_histogram
+<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">random</span>
+samples <span style="color: #666666">=</span> [random<span style="color: #666666">.</span>random() <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">100000</span>)]
+x, y <span style="color: #666666">=</span> compute_histogram(samples, nbins<span style="color: #666666">=20</span>)
+plot(x, y)
+</pre></div>
+<p>
+Figure <a href="#fig:random:uniform:histogram">2</a> shows two plots corresponding
+to \( N \) taken as \( 10^3 \) and \( 10^6 \). For small \( N \),
+we see that
+some intervals get more random numbers than others, but as \( N \) grows,
+the distribution of the random numbers becomes more and more equal among
+the intervals. In the limit \( N\rightarrow\infty \),
+\( p(x)\rightarrow 1 \), which is illustrated by the plot.
+
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 2:  The histogram of uniformly distributed random numbers in 20 bins. <div id="fig:random:uniform:histogram"></div> </p></center>
+<p><img src="fig-random/uniform_numbers_histogram1.png" align="bottom" width=400></p>
+</center>
+
+<h2 id="___sec4">Vectorized drawing of random numbers </h2>
+
+<p>
+There is a <code>random</code> module in the Numerical Python package, which can
+be used to efficiently draw a possibly large array of random numbers:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
+r <span style="color: #666666">=</span> np<span style="color: #666666">.</span>random<span style="color: #666666">.</span>random()            <span style="color: #408080; font-style: italic"># one number between 0 and 1</span>
+r <span style="color: #666666">=</span> np<span style="color: #666666">.</span>random<span style="color: #666666">.</span>random(size<span style="color: #666666">=10000</span>)  <span style="color: #408080; font-style: italic"># array with 10000 numbers</span>
+r <span style="color: #666666">=</span> np<span style="color: #666666">.</span>random<span style="color: #666666">.</span>uniform(<span style="color: #666666">-1</span>, <span style="color: #666666">10</span>)     <span style="color: #408080; font-style: italic"># one number between -1 and 10</span>
+r <span style="color: #666666">=</span> np<span style="color: #666666">.</span>random<span style="color: #666666">.</span>uniform(<span style="color: #666666">-1</span>, <span style="color: #666666">10</span>, size<span style="color: #666666">=10000</span>)  <span style="color: #408080; font-style: italic"># array</span>
+</pre></div>
+<p>
+There are thus two <code>random</code> modules to be aware of:
+one in the standard Python library and one in <code>numpy</code>.
+For drawing uniformly distributed numbers, the two <code>random</code> modules
+have the same interface, except that the functions from <code>numpy</code>'s
+<code>random</code> module has an extra <code>size</code> parameter.
+Both modules also have a <code>seed</code> function for fixing the seed.
+
+<p>
+Vectorized drawing of random numbers using
+<code>numpy</code>'s
+<code>random</code> module is efficient because all the numbers are drawn
+&quot;at once&quot; in fast C code. You can measure the efficiency gain
+with the <code>time.clock()</code>
+function.
+
+<h3 id="___sec5">Warning </h3>
+
+<p>
+It is easy to do an <code>import random</code> followed by a <code>from numpy import
+*</code> or maybe <code>from scitools.std import *</code> without realizing that the
+latter two import statements import a name <code>random</code> from <code>numpy</code> that
+overwrites the same name that was imported in <code>import random</code>. The
+result is that the effective random module becomes the one from
+<code>numpy</code>.  A possible solution to this problem is to introduce a
+different name for Python's <code>random</code> module, say
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">random</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">random_number</span>
+</pre></div>
+<p>
+Another solution is to do <code>import numpy as np</code> and work
+explicitly with <code>np.random</code>.
+
+<h2 id="sec:random:statistics">Computing the mean and standard deviation</h2>
+
+<p>
+You probably know the formula for the mean or average of
+a set of \( n \) numbers \( x_0,x_1,\ldots,x_{n-1} \):
+
+$$
+\begin{equation}
+x_m = \frac{1}{n}\sum_{j=0}^{n-1} x_j\tp
+\tag{1}
+\end{equation}
+$$
+
+The amount of spreading of the \( x_i \) values around the mean \( x_m \)
+can be measured by the <em>variance</em>,
+
+$$
+\begin{equation}
+x_v = \frac{1}{n}\sum_{j=0}^{n-1} (x_j - x_m)^2\tp
+\tag{2}
+\end{equation}
+$$
+
+Textbooks in statistics teach you that it
+is more appropriate to divide by \( n-1 \) instead of \( n \), but we are
+not going to worry about that fact in this document.
+A variant of <a href="#mjx-eqn-2">(2)</a> reads
+
+$$
+\begin{equation}
+x_v = \frac{1}{n}\left(\sum_{j=0}^{n-1} x_j^2\right) -  x_m^2\tp
+\tag{3}
+\end{equation}
+$$
+
+The good thing with this latter formula is that one can, as a statistical
+experiment progresses and \( n \) increases, record the sums
+
+$$
+\begin{equation}
+s_m= \sum_{j=0}^{q-1} x_j,\quad s_v = \sum_{j=0}^{q-1} x_j^2
+\tag{4}
+\end{equation}
+$$
+
+and then, when desired, efficiently
+compute the most recent estimate on the mean value and the
+variance after \( q \) samples by
+
+$$
+\begin{equation}
+x_m = s_m/q,\quad x_v = s_v/q - s_m^2/q^2\tp
+\tag{5}
+\end{equation}
+$$
+
+<p>
+The <em>standard deviation</em>
+
+$$
+\begin{equation}
+x_s = \sqrt{x_v}
+\tag{6}
+\end{equation}
+$$
+
+is often used as an alternative to the variance, because
+the standard deviation has the same unit as the measurement itself.
+A common way to express an uncertain quantity \( x \), based on
+a data set \( x_0,\ldots,x_{n-1} \), from simulations or physical measurements,
+is \( x_m \pm x_s \). This means that \( x \) has an uncertainty of one
+standard deviation \( x_s \) to either side of the mean value \( x_m \).
+With probability theory and statistics one can provide many other, more
+precise measures of the uncertainty, but that is the topic of a different
+course.
+
+<p>
+Below is an example where we draw numbers from the uniform distribution
+on \( [-1,1) \) and compute the evolution of
+the mean and standard deviation 10 times during the experiment,
+using the formulas <a href="#mjx-eqn-1">(1)</a> and
+<a href="#mjx-eqn-3">(3)</a>-<a href="#mjx-eqn-6">(6)</a>:
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">sys</span>
+N <span style="color: #666666">=</span> <span style="color: #008000">int</span>(sys<span style="color: #666666">.</span>argv[<span style="color: #666666">1</span>])
+<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">random</span>
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">math</span> <span style="color: #008000; font-weight: bold">import</span> sqrt
+sm <span style="color: #666666">=</span> <span style="color: #666666">0</span>; sv <span style="color: #666666">=</span> <span style="color: #666666">0</span>
+<span style="color: #008000; font-weight: bold">for</span> q <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">1</span>, N<span style="color: #666666">+1</span>):
+    x <span style="color: #666666">=</span> random<span style="color: #666666">.</span>uniform(<span style="color: #666666">-1</span>, <span style="color: #666666">1</span>)
+    sm <span style="color: #666666">+=</span> x
+    sv <span style="color: #666666">+=</span> x<span style="color: #666666">**2</span>
+
+    <span style="color: #408080; font-style: italic"># Write out mean and st.dev. 10 times in this loop</span>
+    <span style="color: #008000; font-weight: bold">if</span> q <span style="color: #666666">%</span> (N<span style="color: #666666">/10</span>) <span style="color: #666666">==</span> <span style="color: #666666">0</span>:
+        xm <span style="color: #666666">=</span> sm<span style="color: #666666">/</span>q
+        xs <span style="color: #666666">=</span> sqrt(sv<span style="color: #666666">/</span>q <span style="color: #666666">-</span> xm<span style="color: #666666">**2</span>)
+        <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;</span><span style="color: #BB6688; font-weight: bold">%10d</span><span style="color: #BA2121"> mean: </span><span style="color: #BB6688; font-weight: bold">%12.5e</span><span style="color: #BA2121">  stdev: </span><span style="color: #BB6688; font-weight: bold">%12.5e</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> (q, xm, xs)
+</pre></div>
+<p>
+The <code>if</code> test applies the <em>mod</em>
+function
+for checking if a number
+can be divided by another without any remainder.
+The particular <code>if</code> test here is <code>True</code> when <code>i</code> equals 0,
+<code>N/10</code>, <code>2*N/10</code>, \( \ldots \), <code>N</code>, i.e., 10 times during
+the execution of the loop. The program is available in the file
+<code>mean_stdev_uniform1.py</code>.
+A run with \( N=10^6 \) gives the output
+
+<p>
+
+<!-- code=text (!bc ccq) typeset with pygments style "default" -->
+<blockquote>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">    100000 mean:  1.86276e-03  stdev:  5.77101e-01
+    200000 mean:  8.60276e-04  stdev:  5.77779e-01
+    300000 mean:  7.71621e-04  stdev:  5.77753e-01
+    400000 mean:  6.38626e-04  stdev:  5.77944e-01
+    500000 mean: -1.19830e-04  stdev:  5.77752e-01
+    600000 mean:  4.36091e-05  stdev:  5.77809e-01
+    700000 mean: -1.45486e-04  stdev:  5.77623e-01
+    800000 mean:  5.18499e-05  stdev:  5.77633e-01
+    900000 mean:  3.85897e-05  stdev:  5.77574e-01
+   1000000 mean: -1.44821e-05  stdev:  5.77616e-01
+</pre></div>
+</blockquote><p>
+We see that the mean is getting smaller and approaching zero
+as expected since we generate numbers between \( -1 \) and \( 1 \).
+The theoretical value of the standard deviation, as \( N\rightarrow\infty \),
+equals \( \sqrt{1/3}\approx 0.57735 \).
+
+<p>
+We have also made a corresponding vectorized version of the code above
+using <code>numpy</code>'s <code>random</code> module and the ready-made functions <code>mean</code>,
+<code>var</code>, and <code>std</code> for computing the mean, variance, and standard
+deviation (respectively) of an array of numbers:
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">sys</span>
+N <span style="color: #666666">=</span> <span style="color: #008000">int</span>(sys<span style="color: #666666">.</span>argv[<span style="color: #666666">1</span>])
+<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
+x <span style="color: #666666">=</span> np<span style="color: #666666">.</span>random<span style="color: #666666">.</span>uniform(<span style="color: #666666">-1</span>, <span style="color: #666666">1</span>, size<span style="color: #666666">=</span>N)
+xm <span style="color: #666666">=</span> np<span style="color: #666666">.</span>mean(x)
+xv <span style="color: #666666">=</span> np<span style="color: #666666">.</span>var(x)
+xs <span style="color: #666666">=</span> np<span style="color: #666666">.</span>std(x)
+<span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;</span><span style="color: #BB6688; font-weight: bold">%10d</span><span style="color: #BA2121"> mean: </span><span style="color: #BB6688; font-weight: bold">%12.5e</span><span style="color: #BA2121">  stdev: </span><span style="color: #BB6688; font-weight: bold">%12.5e</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> (N, xm, xs)
+</pre></div>
+<p>
+This program can be found in the file <code>mean_stdev_uniform2.py</code>.
+
+<h2 id="sec:random:normal">The Gaussian or normal distribution</h2>
+
+<p>
+In some applications we want random numbers to cluster around a
+specific value \( m \). This means that it is more probable to generate a number
+close to \( m \) than far away from \( m \).
+A widely used distribution with this qualitative property is the
+Gaussian
+ or normal distribution. For example, the statistical distribution of
+the height or the blood pressure among adults of one gender are
+well described by a normal distribution.
+The normal distribution has two parameters: the mean value \( m \)
+and the standard deviation \( s \).
+The latter
+measures the width of the distribution, in the sense that
+a small \( s \) makes it less likely to draw a number far from the mean
+value, and a large \( s \) makes more likely to draw a number far from
+the mean value.
+
+<p>
+Single random numbers from the normal distribution can be
+generated by
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">random</span>
+r <span style="color: #666666">=</span> random<span style="color: #666666">.</span>normalvariate(m, s)
+</pre></div>
+<p>
+while efficient generation of an array of length <code>N</code> is enabled by
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
+r <span style="color: #666666">=</span> np<span style="color: #666666">.</span>random<span style="color: #666666">.</span>normal(m, s, size<span style="color: #666666">=</span>N)
+r <span style="color: #666666">=</span> np<span style="color: #666666">.</span>random<span style="color: #666666">.</span>randn(N)  <span style="color: #408080; font-style: italic"># mean=0, std.dev.=1</span>
+</pre></div>
+<p>
+The following program draws <code>N</code> random numbers from the normal
+distribution, computes the mean and standard deviation, and
+plots the histogram:
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">sys</span>
+N <span style="color: #666666">=</span> <span style="color: #008000">int</span>(sys<span style="color: #666666">.</span>argv[<span style="color: #666666">1</span>])
+m <span style="color: #666666">=</span> <span style="color: #008000">float</span>(sys<span style="color: #666666">.</span>argv[<span style="color: #666666">2</span>])
+s <span style="color: #666666">=</span> <span style="color: #008000">float</span>(sys<span style="color: #666666">.</span>argv[<span style="color: #666666">3</span>])
+
+<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
+np<span style="color: #666666">.</span>random<span style="color: #666666">.</span>seed(<span style="color: #666666">12</span>)
+samples <span style="color: #666666">=</span> np<span style="color: #666666">.</span>random<span style="color: #666666">.</span>normal(m, s, N)
+<span style="color: #008000; font-weight: bold">print</span> np<span style="color: #666666">.</span>mean(samples), np<span style="color: #666666">.</span>std(samples)
+
+<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">scitools.std</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">st</span>
+x, y <span style="color: #666666">=</span> st<span style="color: #666666">.</span>compute_histogram(samples, <span style="color: #666666">20</span>, piecewise_constant<span style="color: #666666">=</span><span style="color: #008000">True</span>)
+st<span style="color: #666666">.</span>plot(x, y, savefig<span style="color: #666666">=</span><span style="color: #BA2121">&#39;tmp.pdf&#39;</span>,
+        title <span style="color: #666666">=</span><span style="color: #BA2121">&#39;</span><span style="color: #BB6688; font-weight: bold">%d</span><span style="color: #BA2121"> samples of Gaussian/normal numbers on (0,1)&#39;</span> <span style="color: #666666">%</span> N)
+</pre></div>
+<p>
+The corresponding program file is <code>normal_numbers1.py</code>, which gives a
+mean of \( -0.00253 \) and a standard deviation of 0.99970 when run with
+<code>N</code> as 1 million, <code>m</code> as 0, and <code>s</code> equal to 1.  Figure
+<a href="#fig:random:normal:samples">3</a> shows that the random numbers cluster
+around the mean \( m=0 \) in a histogram.  This normalized histogram will,
+as <code>N</code> goes to infinity, approach the famous, bell-shaped, <a href="http://en.wikipedia.org/wiki/Normal_distribution" target="_self">normal
+distribution probability density function</a>.
+
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 3:  Normalized histogram of 1 million random numbers drawn from the   normal distribution. <div id="fig:random:normal:samples"></div> </p></center>
+<p><img src="fig-random/normal_numbers.png" align="bottom" width=400></p>
+</center>
+
+<p>
+<p>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pager">
+  <li class="previous">
+    <a href="._random-readable000.html">&larr; Prev</a>
+  </li>
+  <li class="next">
+    <a href="._random-readable002.html">Next &rarr;</a>
+  </li>
+</ul>
+<!-- ------------------- end of main content --------------- -->
+
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap footer
+<footer>
+<a href="http://..."><img width="250" align=right src="http://..."></a>
+</footer>
+-->
+
+
+</body>
+</html>
+    
+

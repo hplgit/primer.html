@@ -1,0 +1,563 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Random numbers and simple games">
+<meta name="keywords" content="random numbers,seed,uniformly distributed random numbers,random numbers uniform distribution,bin (histogram),histogram (normalized),random numbers histogram,vectorized drawing of random numbers,random numbers vectorization,mean,average,random numbers statistics,variance,standard deviation,mod function,normally distributed random numbers,random numbers normal distribution,random numbers integers,integer random numbers,probability,random numbers Monte Carlo simulation,Monte Carlo simulation,Monte Carlo integration,random numbers integration,Midpoint rule for integration,mod function,measure time in programs,efficiency measure,random walk,random numbers random walk,making movie,cumulative sum">
+
+<title>Random numbers and simple games</title>
+
+
+<link href="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/css/solarized_light_code.css" rel="stylesheet" type="text/css" title="light"/>
+<script src="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<link href="http://thomasf.github.io/solarized-css/solarized-light.min.css" rel="stylesheet">
+<style type="text/css">
+h1 {color: #b58900;}  /* yellow */
+/* h1 {color: #cb4b16;}  orange */
+/* h1 {color: #d33682;}  magenta, the original choice of thomasf */
+code { padding: 0px; background-color: inherit; }
+pre {
+  border: 0pt solid #93a1a1;
+  box-shadow: none;
+}
+
+div { text-align: justify; text-justify: inter-word; }
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [('Drawing random numbers', 1, None, '___sec0'),
+              ('The seed', 2, None, '___sec1'),
+              ('Uniformly distributed random numbers',
+               2,
+               'sec:random:uniform',
+               'sec:random:uniform'),
+              ('Visualizing the distribution', 2, None, '___sec3'),
+              ('Vectorized drawing of random numbers', 2, None, '___sec4'),
+              ('Warning', 3, None, '___sec5'),
+              ('Computing the mean and standard deviation',
+               2,
+               'sec:random:statistics',
+               'sec:random:statistics'),
+              ('The Gaussian or normal distribution',
+               2,
+               'sec:random:normal',
+               'sec:random:normal'),
+              ('Drawing integers', 1, 'sec:random:ints', 'sec:random:ints'),
+              ('Random integer functions', 2, None, '___sec9'),
+              ('Example: Throwing a die', 2, None, '___sec10'),
+              ('Scalar version', 3, None, '___sec11'),
+              ('Vectorized version', 3, None, '___sec12'),
+              ('Vectorized version with batches', 3, None, '___sec13'),
+              ('Verification of the scalar version', 3, None, '___sec14'),
+              ('Verification of all versions', 3, None, '___sec15'),
+              ('Drawing a random element from a list', 2, None, '___sec16'),
+              ('Example: Drawing cards from a deck',
+               2,
+               'sec:random:deck1',
+               'sec:random:deck1'),
+              ('Example: Class implementation of a deck',
+               2,
+               'sec:class:deck:class',
+               'sec:class:deck:class'),
+              ('Computing probabilities',
+               1,
+               'sec:random:probability',
+               'sec:random:probability'),
+              ('Principles of Monte Carlo simulation', 2, None, '___sec20'),
+              ('Example: Throwing dice',
+               2,
+               'sec:random:probability:dice',
+               'sec:random:probability:dice'),
+              ('Straightforward solution', 3, None, '___sec22'),
+              ('Vectorization', 3, None, '___sec23'),
+              ('Exact solution', 3, None, '___sec24'),
+              ('A game', 3, None, '___sec25'),
+              ('Decide if a game is fair', 3, None, '___sec26'),
+              ('Example: Drawing balls from a hat',
+               2,
+               'sec:random:balls',
+               'sec:random:balls'),
+              ('Random mutations of genes',
+               2,
+               'bioinf:random',
+               'bioinf:random'),
+              ('A simple mutation model', 3, None, '___sec29'),
+              ('Vectorized version', 3, None, '___sec30'),
+              ('A Markov chain mutation model', 3, None, '___sec31'),
+              ('Example: Policies for limiting population growth',
+               2,
+               'sec:random:china',
+               'sec:random:china'),
+              ('Simple games', 1, None, '___sec33'),
+              ('Guessing a number',
+               2,
+               'sec:random:game:guessn',
+               'sec:random:game:guessn'),
+              ('The game', 3, None, '___sec35'),
+              ('The implementation', 3, None, '___sec36'),
+              ('Rolling two dice',
+               2,
+               'sec:random:twodicesumguess',
+               'sec:random:twodicesumguess'),
+              ('The game', 3, None, '___sec38'),
+              ('The implementation', 3, None, '___sec39'),
+              ('Example', 3, None, '___sec40'),
+              ('A class version', 3, None, '___sec41'),
+              ('Monte Carlo integration',
+               1,
+               'sec:random:MonteCarlo:integration',
+               'sec:random:MonteCarlo:integration'),
+              ('Derivation of Monte Carlo integration',
+               2,
+               'sec:random:MCint:ideas',
+               'sec:random:MCint:ideas'),
+              ('The calculus approach via the mean-value theorem',
+               3,
+               None,
+               '___sec44'),
+              ('The probability theory approach', 3, None, '___sec45'),
+              ('Implementation of standard Monte Carlo integration',
+               2,
+               'sec:random:MCint:std',
+               'sec:random:MCint:std'),
+              ('Example', 3, None, '___sec47'),
+              ('Remark', 3, None, '___sec48'),
+              ('Area computing by throwing random points',
+               2,
+               'sec:random:MCdart',
+               'sec:random:MCdart'),
+              ('Random walk in one space dimension',
+               1,
+               'sec:random:rw1D',
+               'sec:random:rw1D'),
+              ('Basic implementation', 2, None, '___sec51'),
+              ('Visualization', 2, None, '___sec52'),
+              ('Random walk as a difference equation', 2, None, '___sec53'),
+              ('Computing statistics of the particle positions',
+               2,
+               'sec:random:walk:1D:statistics',
+               'sec:random:walk:1D:statistics'),
+              ('Vectorized implementation',
+               2,
+               'sec:random:walk:1D:vectorized',
+               'sec:random:walk:1D:vectorized'),
+              ('Random walk in two space dimensions',
+               1,
+               'sec:random:rw2D',
+               'sec:random:rw2D'),
+              ('Basic implementation',
+               2,
+               'sec:random:rw2D:scalar',
+               'sec:random:rw2D:scalar'),
+              ('Vectorized implementation',
+               2,
+               'sec:random:walk:2D:vectorized',
+               'sec:random:walk:2D:vectorized'),
+              ('Summary', 1, None, '___sec59'),
+              ('Chapter topics', 2, None, '___sec60'),
+              ('Drawing random numbers', 3, None, '___sec61'),
+              ('Typical probability computation via Monte Carlo simulation',
+               3,
+               None,
+               '___sec62'),
+              ('Statistical measures', 3, None, '___sec63'),
+              ('Terminology', 3, None, '___sec64'),
+              ('Example: Random growth',
+               2,
+               'sec:random:summarizingex',
+               'sec:random:summarizingex'),
+              ('Problem', 3, None, '___sec66'),
+              ('Solution', 3, None, '___sec67'),
+              ('Exercises', 1, None, '___sec68'),
+              ('Exercise 1: Flip a coin times',
+               2,
+               'sec:random:ex17',
+               'sec:random:ex17'),
+              ('Exercise 2: Compute a probability',
+               2,
+               'sec:random:ex7',
+               'sec:random:ex7'),
+              ('Exercise 3: Choose random colors',
+               2,
+               'sec:random:ex6',
+               'sec:random:ex6'),
+              ('Exercise 4: Draw balls from a hat',
+               2,
+               'sec:random:ex4',
+               'sec:random:ex4'),
+              ('Exercise 5: Computing probabilities of rolling dice',
+               2,
+               'sec:random:ex2',
+               'sec:random:ex2'),
+              ('Exercise 6: Estimate the probability in a dice game',
+               2,
+               'sec:random:ex10',
+               'sec:random:ex10'),
+              ('Exercise 7: Compute the probability of hands of cards',
+               2,
+               'sec:random:ex44',
+               'sec:random:ex44'),
+              ('Exercise 8: Decide if a dice game is fair',
+               2,
+               'sec:random:ex11',
+               'sec:random:ex11'),
+              ('Exercise 9: Adjust a game to make it fair',
+               2,
+               'sec:random:ex12',
+               'sec:random:ex12'),
+              ('Exercise 10: Generalize a game',
+               2,
+               'sec:random:ex12b',
+               'sec:random:ex12b'),
+              ('Exercise 11: Compare two playing strategies',
+               2,
+               'sec:random:ex2c',
+               'sec:random:ex2c'),
+              ('Exercise 12: Investigate strategies in a game',
+               2,
+               'sec:random:ex2e',
+               'sec:random:ex2e'),
+              ('Exercise 13: Investigate the winning chances of some games',
+               2,
+               'sec:random:ex45',
+               'sec:random:ex45'),
+              ('Exercise 14: Compute probabilities of throwing two dice',
+               2,
+               'sec:random:ex2b',
+               'sec:random:ex2b'),
+              ('Exercise 15: Vectorize flipping a coin',
+               2,
+               'sec:random:ex18',
+               'sec:random:ex18'),
+              ('Exercise 16: Vectorize a probablility computation',
+               2,
+               'sec:random:ex7b',
+               'sec:random:ex7b'),
+              ('Exercise 17: Throw dice and compute a small probability',
+               2,
+               'sec:random:ex30',
+               'sec:random:ex30'),
+              ('Exercise 18: Difference equation for random numbers',
+               2,
+               'sec:random:ex27',
+               'sec:random:ex27'),
+              ('Exercise 19: Make a class for drawing balls from a hat',
+               2,
+               'sec:random:ex9',
+               'sec:random:ex9'),
+              ('Exercise 20: Independent  versus dependent random numbers',
+               2,
+               'sec:random:ex21',
+               'sec:random:ex21'),
+              ('Exercise 21: Compute the probability of flipping a coin',
+               2,
+               'sec:random:ex19',
+               'sec:random:ex19'),
+              ('Exercise 22: Simulate a poker game',
+               2,
+               'sec:random:ex41',
+               'sec:random:ex41'),
+              ('Exercise 23: Estimate growth in a simulation model',
+               2,
+               'sec:random:ex29',
+               'sec:random:ex29'),
+              ('Exercise 24: Investigate guessing strategies',
+               2,
+               'sec:random:ex15',
+               'sec:random:ex15'),
+              ('Exercise 25: Vectorize a dice game',
+               2,
+               'sec:random:ex13',
+               'sec:random:ex13'),
+              ('Exercise 26: Compute $\\pi$ by a Monte Carlo method',
+               2,
+               'sec:random:ex31',
+               'sec:random:ex31'),
+              ('Exercise 27: Compute $\\pi$ by a Monte Carlo method',
+               2,
+               'sec:random:ex32',
+               'sec:random:ex32'),
+              ('Exercise 28: Compute $\\pi$ by a random sum',
+               2,
+               'sec:random:ex31b',
+               'sec:random:ex31b'),
+              ('Exercise 29: 1D random walk with drift',
+               2,
+               'sec:random:ex1',
+               'sec:random:ex1'),
+              ('Exercise 30: 1D random walk until a point is hit',
+               2,
+               'sec:random:ex3',
+               'sec:random:ex3'),
+              ('Exercise 31: Simulate making a fortune from gaming',
+               2,
+               'sec:random:ex3:rwgame',
+               'sec:random:ex3:rwgame'),
+              ('Exercise 32: Make classes for 2D random walk',
+               2,
+               'sec:random:ex33',
+               'sec:random:ex33'),
+              ('Exercise 33: 2D random walk with walls; scalar version',
+               2,
+               'sec:random:ex36',
+               'sec:random:ex36'),
+              ('Exercise 34: 2D random walk with walls; vectorized version',
+               2,
+               'sec:random:ex37',
+               'sec:random:ex37'),
+              ('Exercise 35: Simulate mixing of gas molecules',
+               2,
+               'sec:random:ex38',
+               'sec:random:ex38'),
+              ('Remarks', 3, None, '___sec104'),
+              ('Exercise 36: Simulate slow mixing of gas molecules',
+               2,
+               'sec:random:ex39',
+               'sec:random:ex39'),
+              ('Exercise 37: Guess beer brands',
+               2,
+               'sec:random:ex35',
+               'sec:random:ex35'),
+              ('Exercise 38: Simulate stock prices',
+               2,
+               'sec:random:ex26',
+               'sec:random:ex26'),
+              ('Exercise 39: Compute with option prices in finance',
+               2,
+               'sec:random:ex16',
+               'sec:random:ex16'),
+              ('Remarks', 3, None, '___sec109'),
+              ('Exercise 40: Differentiate noise measurements',
+               2,
+               'sec:random:ex22',
+               'sec:random:ex22'),
+              ('Exercise 41: Differentiate noisy signals',
+               2,
+               'sec:random:ex25',
+               'sec:random:ex25'),
+              ('Exercise 42: Model noise in a time signal',
+               2,
+               'sec:random:ex23',
+               'sec:random:ex23'),
+              ('Exercise 43: Speed up Markov chain mutation',
+               2,
+               'bioinf:exer:Markov:chain:eff',
+               'bioinf:exer:Markov:chain:eff'),
+              ('References', 1, None, '___sec114')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- newcommands_keep.tex -->
+$$
+\newcommand{\tp}{\thinspace .}
+\newcommand{\Prob}[1]{\hbox{P}(#1)}
+$$
+
+
+
+
+    
+<a name="part0000"></a>
+<p>
+<!-- begin top navigation -->
+<table style="width: 100%"><tr><td>
+</td><td>
+<div style="text-align: right;"><a href="._random-solarized001.html">Next &raquo;</a></div>
+</td></tr></table>
+<!-- end top navigation -->
+</p>
+
+<p>
+<!-- ------------------- main content ---------------------- -->
+
+
+
+<center><h1>Random numbers and simple games</h1></center>  <!-- document title -->
+
+<p>
+<!-- author(s): Hans Petter Langtangen -->
+
+<center>
+<b>Hans Petter Langtangen</b> [1, 2]
+</center>
+
+<p>
+<!-- institution(s) -->
+
+<center>[1] <b>Center for Biomedical Computing, Simula Research Laboratory</b></center>
+<center>[2] <b>Department of Informatics, University of Oslo</b></center>
+<br>
+<p>
+<center><h4>Dec 16, 2015</h4></center> <!-- date -->
+<br>
+
+<h2>Table of contents</h2>
+
+<p>
+<a href="._random-solarized001.html#___sec0"> Drawing random numbers </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._random-solarized001.html#___sec1"> The seed </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._random-solarized001.html#sec:random:uniform"> Uniformly distributed random numbers </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._random-solarized001.html#___sec3"> Visualizing the distribution </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._random-solarized001.html#___sec4"> Vectorized drawing of random numbers </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._random-solarized001.html#sec:random:statistics"> Computing the mean and standard deviation </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._random-solarized001.html#sec:random:normal"> The Gaussian or normal distribution </a><br>
+<a href="._random-solarized002.html#sec:random:ints"> Drawing integers </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._random-solarized002.html#___sec9"> Random integer functions </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._random-solarized002.html#___sec10"> Example: Throwing a die </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._random-solarized002.html#___sec16"> Drawing a random element from a list </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._random-solarized002.html#sec:random:deck1"> Example: Drawing cards from a deck </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._random-solarized002.html#sec:class:deck:class"> Example: Class implementation of a deck </a><br>
+<a href="._random-solarized003.html#sec:random:probability"> Computing probabilities </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._random-solarized003.html#___sec20"> Principles of Monte Carlo simulation </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._random-solarized003.html#sec:random:probability:dice"> Example: Throwing dice </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._random-solarized003.html#sec:random:balls"> Example: Drawing balls from a hat </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._random-solarized003.html#bioinf:random"> Random mutations of genes </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._random-solarized003.html#sec:random:china"> Example: Policies for limiting population growth </a><br>
+<a href="._random-solarized004.html#___sec33"> Simple games </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._random-solarized004.html#sec:random:game:guessn"> Guessing a number </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._random-solarized004.html#sec:random:twodicesumguess"> Rolling two dice </a><br>
+<a href="._random-solarized004.html#sec:random:MonteCarlo:integration"> Monte Carlo integration </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._random-solarized004.html#sec:random:MCint:ideas"> Derivation of Monte Carlo integration </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._random-solarized004.html#sec:random:MCint:std"> Implementation of standard Monte Carlo integration </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._random-solarized004.html#sec:random:MCdart"> Area computing by throwing random points </a><br>
+<a href="._random-solarized005.html#sec:random:rw1D"> Random walk in one space dimension </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._random-solarized005.html#___sec51"> Basic implementation </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._random-solarized005.html#___sec52"> Visualization </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._random-solarized005.html#___sec53"> Random walk as a difference equation </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._random-solarized005.html#sec:random:walk:1D:statistics"> Computing statistics of the particle positions </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._random-solarized005.html#sec:random:walk:1D:vectorized"> Vectorized implementation </a><br>
+<a href="._random-solarized006.html#sec:random:rw2D"> Random walk in two space dimensions </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._random-solarized006.html#sec:random:rw2D:scalar"> Basic implementation </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._random-solarized006.html#sec:random:walk:2D:vectorized"> Vectorized implementation </a><br>
+<a href="._random-solarized007.html#___sec59"> Summary </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._random-solarized007.html#___sec60"> Chapter topics </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._random-solarized007.html#sec:random:summarizingex"> Example: Random growth </a><br>
+<a href="._random-solarized008.html#___sec68"> Exercises </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._random-solarized008.html#sec:random:ex17"> Exercise 1: Flip a coin times </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._random-solarized008.html#sec:random:ex7"> Exercise 2: Compute a probability </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._random-solarized008.html#sec:random:ex6"> Exercise 3: Choose random colors </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._random-solarized008.html#sec:random:ex4"> Exercise 4: Draw balls from a hat </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._random-solarized008.html#sec:random:ex2"> Exercise 5: Computing probabilities of rolling dice </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._random-solarized008.html#sec:random:ex10"> Exercise 6: Estimate the probability in a dice game </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._random-solarized008.html#sec:random:ex44"> Exercise 7: Compute the probability of hands of cards </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._random-solarized008.html#sec:random:ex11"> Exercise 8: Decide if a dice game is fair </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._random-solarized008.html#sec:random:ex12"> Exercise 9: Adjust a game to make it fair </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._random-solarized008.html#sec:random:ex12b"> Exercise 10: Generalize a game </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._random-solarized008.html#sec:random:ex2c"> Exercise 11: Compare two playing strategies </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._random-solarized008.html#sec:random:ex2e"> Exercise 12: Investigate strategies in a game </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._random-solarized008.html#sec:random:ex45"> Exercise 13: Investigate the winning chances of some games </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._random-solarized008.html#sec:random:ex2b"> Exercise 14: Compute probabilities of throwing two dice </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._random-solarized008.html#sec:random:ex18"> Exercise 15: Vectorize flipping a coin </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._random-solarized008.html#sec:random:ex7b"> Exercise 16: Vectorize a probablility computation </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._random-solarized008.html#sec:random:ex30"> Exercise 17: Throw dice and compute a small probability </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._random-solarized008.html#sec:random:ex27"> Exercise 18: Difference equation for random numbers </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._random-solarized008.html#sec:random:ex9"> Exercise 19: Make a class for drawing balls from a hat </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._random-solarized008.html#sec:random:ex21"> Exercise 20: Independent  versus dependent random numbers </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._random-solarized008.html#sec:random:ex19"> Exercise 21: Compute the probability of flipping a coin </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._random-solarized008.html#sec:random:ex41"> Exercise 22: Simulate a poker game </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._random-solarized008.html#sec:random:ex29"> Exercise 23: Estimate growth in a simulation model </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._random-solarized008.html#sec:random:ex15"> Exercise 24: Investigate guessing strategies </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._random-solarized008.html#sec:random:ex13"> Exercise 25: Vectorize a dice game </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._random-solarized008.html#sec:random:ex31"> Exercise 26: Compute \( \pi \) by a Monte Carlo method </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._random-solarized008.html#sec:random:ex32"> Exercise 27: Compute \( \pi \) by a Monte Carlo method </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._random-solarized008.html#sec:random:ex31b"> Exercise 28: Compute \( \pi \) by a random sum </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._random-solarized008.html#sec:random:ex1"> Exercise 29: 1D random walk with drift </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._random-solarized008.html#sec:random:ex3"> Exercise 30: 1D random walk until a point is hit </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._random-solarized008.html#sec:random:ex3:rwgame"> Exercise 31: Simulate making a fortune from gaming </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._random-solarized008.html#sec:random:ex33"> Exercise 32: Make classes for 2D random walk </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._random-solarized008.html#sec:random:ex36"> Exercise 33: 2D random walk with walls; scalar version </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._random-solarized008.html#sec:random:ex37"> Exercise 34: 2D random walk with walls; vectorized version </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._random-solarized008.html#sec:random:ex38"> Exercise 35: Simulate mixing of gas molecules </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._random-solarized008.html#sec:random:ex39"> Exercise 36: Simulate slow mixing of gas molecules </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._random-solarized008.html#sec:random:ex35"> Exercise 37: Guess beer brands </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._random-solarized008.html#sec:random:ex26"> Exercise 38: Simulate stock prices </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._random-solarized008.html#sec:random:ex16"> Exercise 39: Compute with option prices in finance </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._random-solarized008.html#sec:random:ex22"> Exercise 40: Differentiate noise measurements </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._random-solarized008.html#sec:random:ex25"> Exercise 41: Differentiate noisy signals </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._random-solarized008.html#sec:random:ex23"> Exercise 42: Model noise in a time signal </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._random-solarized008.html#bioinf:exer:Markov:chain:eff"> Exercise 43: Speed up Markov chain mutation </a><br>
+<a href="._random-solarized008.html#___sec114"> References </a><br>
+</p>
+<p>
+<!-- Externaldocuments: ../formulas/main_formulas, ../looplist/main_looplist, ../funcif/main_funcif, ../input/main_input, ../plot/main_plot, ../files/main_files, ../class/main_class, ../oo/main_oo, ../diffeq/main_diffeq, ../discalc/main_discalc, ../ode1/main_ode1, ../boxspring/main_boxspring, ../ode2/main_ode2, ../debug/main_debug, ../cython/main_cython, ../tech/main_timing, ../tech/main_varargs, ../tech/main_runpy, ../tech/main_ostasks, ../tech/main_accesspy, ../tech/main_nose -->
+
+<p>
+<div id="ch:random"></div>
+
+<p>
+Random numbers have many applications in science and computer
+programming, especially when there are significant uncertainties in
+a phenomenon of interest.
+The purpose of this document is to look at
+some practical problems involving random numbers and learn how to
+program with such numbers.  We shall make several games and also look
+into how random numbers can be used in physics.
+You need to be familiar with basic programming concepts such
+as loops, lists, arrays, vectorization,
+curve plotting, and command-line arguments
+in order to study the present document.
+A few examples and exercises will require familiarity
+with the class
+concept in Python.
+
+<p>
+The key idea in computer simulations with random numbers is first to
+formulate an algorithmic description of the phenomenon we want to
+study. This description frequently maps directly onto a quite simple
+and short Python program, where we use random numbers to mimic the
+uncertain features of the phenomenon.  The program needs to perform a
+large number of repeated calculations, and the final answers are
+&quot;only&quot; approximate, but the accuracy can usually be made good enough
+for practical purposes. Most programs related to the present document
+produce their results within a few seconds.  In cases where the execution
+times become large, we can vectorize the code.  Vectorized
+computations with random numbers is definitely the most demanding
+topic in this document, but is not mandatory for seeing the power of
+mathematical modeling via random numbers.
+
+<p>
+All files associated with the examples in this document are found in
+the folder <a href="http://tinyurl.com/pwyasaa/random" target="_self"><tt>src/random</tt></a>.
+
+<p>
+<p>
+<!-- begin bottom navigation -->
+<table style="width: 100%"><tr><td>
+</td><td>
+<div style="text-align: right;"><a href="._random-solarized001.html">Next &raquo;</a></div>
+</td></tr></table>
+<!-- end bottom navigation -->
+</p><p style="font-size:80%">This chapter is taken from book <a href="http://www.springer.com/gp/book/9783642549588">A Primer on Scientific Programming with Python</a> by H. P. Langtangen, 4th edition, Springer, 2014.</p>
+
+<!-- ------------------- end of main content --------------- -->
+
+
+</body>
+</html>
+    
+

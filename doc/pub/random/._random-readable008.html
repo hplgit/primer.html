@@ -1,0 +1,2241 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Random numbers and simple games">
+<meta name="keywords" content="random numbers,seed,uniformly distributed random numbers,random numbers uniform distribution,bin (histogram),histogram (normalized),random numbers histogram,vectorized drawing of random numbers,random numbers vectorization,mean,average,random numbers statistics,variance,standard deviation,mod function,normally distributed random numbers,random numbers normal distribution,random numbers integers,integer random numbers,probability,random numbers Monte Carlo simulation,Monte Carlo simulation,Monte Carlo integration,random numbers integration,Midpoint rule for integration,mod function,measure time in programs,efficiency measure,random walk,random numbers random walk,making movie,cumulative sum">
+
+<title>Random numbers and simple games</title>
+
+<!-- Bootstrap style: bootswatch_readable -->
+<link href="http://netdna.bootstrapcdn.com/bootswatch/3.1.1/readable/bootstrap.min.css" rel="stylesheet">
+<!-- not necessary
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+
+<style type="text/css">
+/* Let inline verbatim have the same color as the surroundings */
+code { color: inherit; background-color: transparent; }
+
+/* Add scrollbar to dropdown menus in bootstrap navigation bar */
+.dropdown-menu {
+   height: auto;
+   max-height: 400px;
+   overflow-x: hidden;
+}
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [('Drawing random numbers', 1, None, '___sec0'),
+              ('The seed', 2, None, '___sec1'),
+              ('Uniformly distributed random numbers',
+               2,
+               'sec:random:uniform',
+               'sec:random:uniform'),
+              ('Visualizing the distribution', 2, None, '___sec3'),
+              ('Vectorized drawing of random numbers', 2, None, '___sec4'),
+              ('Warning', 3, None, '___sec5'),
+              ('Computing the mean and standard deviation',
+               2,
+               'sec:random:statistics',
+               'sec:random:statistics'),
+              ('The Gaussian or normal distribution',
+               2,
+               'sec:random:normal',
+               'sec:random:normal'),
+              ('Drawing integers', 1, 'sec:random:ints', 'sec:random:ints'),
+              ('Random integer functions', 2, None, '___sec9'),
+              ('Example: Throwing a die', 2, None, '___sec10'),
+              ('Scalar version', 3, None, '___sec11'),
+              ('Vectorized version', 3, None, '___sec12'),
+              ('Vectorized version with batches', 3, None, '___sec13'),
+              ('Verification of the scalar version', 3, None, '___sec14'),
+              ('Verification of all versions', 3, None, '___sec15'),
+              ('Drawing a random element from a list', 2, None, '___sec16'),
+              ('Example: Drawing cards from a deck',
+               2,
+               'sec:random:deck1',
+               'sec:random:deck1'),
+              ('Example: Class implementation of a deck',
+               2,
+               'sec:class:deck:class',
+               'sec:class:deck:class'),
+              ('Computing probabilities',
+               1,
+               'sec:random:probability',
+               'sec:random:probability'),
+              ('Principles of Monte Carlo simulation', 2, None, '___sec20'),
+              ('Example: Throwing dice',
+               2,
+               'sec:random:probability:dice',
+               'sec:random:probability:dice'),
+              ('Straightforward solution', 3, None, '___sec22'),
+              ('Vectorization', 3, None, '___sec23'),
+              ('Exact solution', 3, None, '___sec24'),
+              ('A game', 3, None, '___sec25'),
+              ('Decide if a game is fair', 3, None, '___sec26'),
+              ('Example: Drawing balls from a hat',
+               2,
+               'sec:random:balls',
+               'sec:random:balls'),
+              ('Random mutations of genes',
+               2,
+               'bioinf:random',
+               'bioinf:random'),
+              ('A simple mutation model', 3, None, '___sec29'),
+              ('Vectorized version', 3, None, '___sec30'),
+              ('A Markov chain mutation model', 3, None, '___sec31'),
+              ('Example: Policies for limiting population growth',
+               2,
+               'sec:random:china',
+               'sec:random:china'),
+              ('Simple games', 1, None, '___sec33'),
+              ('Guessing a number',
+               2,
+               'sec:random:game:guessn',
+               'sec:random:game:guessn'),
+              ('The game', 3, None, '___sec35'),
+              ('The implementation', 3, None, '___sec36'),
+              ('Rolling two dice',
+               2,
+               'sec:random:twodicesumguess',
+               'sec:random:twodicesumguess'),
+              ('The game', 3, None, '___sec38'),
+              ('The implementation', 3, None, '___sec39'),
+              ('Example', 3, None, '___sec40'),
+              ('A class version', 3, None, '___sec41'),
+              ('Monte Carlo integration',
+               1,
+               'sec:random:MonteCarlo:integration',
+               'sec:random:MonteCarlo:integration'),
+              ('Derivation of Monte Carlo integration',
+               2,
+               'sec:random:MCint:ideas',
+               'sec:random:MCint:ideas'),
+              ('The calculus approach via the mean-value theorem',
+               3,
+               None,
+               '___sec44'),
+              ('The probability theory approach', 3, None, '___sec45'),
+              ('Implementation of standard Monte Carlo integration',
+               2,
+               'sec:random:MCint:std',
+               'sec:random:MCint:std'),
+              ('Example', 3, None, '___sec47'),
+              ('Remark', 3, None, '___sec48'),
+              ('Area computing by throwing random points',
+               2,
+               'sec:random:MCdart',
+               'sec:random:MCdart'),
+              ('Random walk in one space dimension',
+               1,
+               'sec:random:rw1D',
+               'sec:random:rw1D'),
+              ('Basic implementation', 2, None, '___sec51'),
+              ('Visualization', 2, None, '___sec52'),
+              ('Random walk as a difference equation', 2, None, '___sec53'),
+              ('Computing statistics of the particle positions',
+               2,
+               'sec:random:walk:1D:statistics',
+               'sec:random:walk:1D:statistics'),
+              ('Vectorized implementation',
+               2,
+               'sec:random:walk:1D:vectorized',
+               'sec:random:walk:1D:vectorized'),
+              ('Random walk in two space dimensions',
+               1,
+               'sec:random:rw2D',
+               'sec:random:rw2D'),
+              ('Basic implementation',
+               2,
+               'sec:random:rw2D:scalar',
+               'sec:random:rw2D:scalar'),
+              ('Vectorized implementation',
+               2,
+               'sec:random:walk:2D:vectorized',
+               'sec:random:walk:2D:vectorized'),
+              ('Summary', 1, None, '___sec59'),
+              ('Chapter topics', 2, None, '___sec60'),
+              ('Drawing random numbers', 3, None, '___sec61'),
+              ('Typical probability computation via Monte Carlo simulation',
+               3,
+               None,
+               '___sec62'),
+              ('Statistical measures', 3, None, '___sec63'),
+              ('Terminology', 3, None, '___sec64'),
+              ('Example: Random growth',
+               2,
+               'sec:random:summarizingex',
+               'sec:random:summarizingex'),
+              ('Problem', 3, None, '___sec66'),
+              ('Solution', 3, None, '___sec67'),
+              ('Exercises', 1, None, '___sec68'),
+              ('Exercise 1: Flip a coin times',
+               2,
+               'sec:random:ex17',
+               'sec:random:ex17'),
+              ('Exercise 2: Compute a probability',
+               2,
+               'sec:random:ex7',
+               'sec:random:ex7'),
+              ('Exercise 3: Choose random colors',
+               2,
+               'sec:random:ex6',
+               'sec:random:ex6'),
+              ('Exercise 4: Draw balls from a hat',
+               2,
+               'sec:random:ex4',
+               'sec:random:ex4'),
+              ('Exercise 5: Computing probabilities of rolling dice',
+               2,
+               'sec:random:ex2',
+               'sec:random:ex2'),
+              ('Exercise 6: Estimate the probability in a dice game',
+               2,
+               'sec:random:ex10',
+               'sec:random:ex10'),
+              ('Exercise 7: Compute the probability of hands of cards',
+               2,
+               'sec:random:ex44',
+               'sec:random:ex44'),
+              ('Exercise 8: Decide if a dice game is fair',
+               2,
+               'sec:random:ex11',
+               'sec:random:ex11'),
+              ('Exercise 9: Adjust a game to make it fair',
+               2,
+               'sec:random:ex12',
+               'sec:random:ex12'),
+              ('Exercise 10: Generalize a game',
+               2,
+               'sec:random:ex12b',
+               'sec:random:ex12b'),
+              ('Exercise 11: Compare two playing strategies',
+               2,
+               'sec:random:ex2c',
+               'sec:random:ex2c'),
+              ('Exercise 12: Investigate strategies in a game',
+               2,
+               'sec:random:ex2e',
+               'sec:random:ex2e'),
+              ('Exercise 13: Investigate the winning chances of some games',
+               2,
+               'sec:random:ex45',
+               'sec:random:ex45'),
+              ('Exercise 14: Compute probabilities of throwing two dice',
+               2,
+               'sec:random:ex2b',
+               'sec:random:ex2b'),
+              ('Exercise 15: Vectorize flipping a coin',
+               2,
+               'sec:random:ex18',
+               'sec:random:ex18'),
+              ('Exercise 16: Vectorize a probablility computation',
+               2,
+               'sec:random:ex7b',
+               'sec:random:ex7b'),
+              ('Exercise 17: Throw dice and compute a small probability',
+               2,
+               'sec:random:ex30',
+               'sec:random:ex30'),
+              ('Exercise 18: Difference equation for random numbers',
+               2,
+               'sec:random:ex27',
+               'sec:random:ex27'),
+              ('Exercise 19: Make a class for drawing balls from a hat',
+               2,
+               'sec:random:ex9',
+               'sec:random:ex9'),
+              ('Exercise 20: Independent  versus dependent random numbers',
+               2,
+               'sec:random:ex21',
+               'sec:random:ex21'),
+              ('Exercise 21: Compute the probability of flipping a coin',
+               2,
+               'sec:random:ex19',
+               'sec:random:ex19'),
+              ('Exercise 22: Simulate a poker game',
+               2,
+               'sec:random:ex41',
+               'sec:random:ex41'),
+              ('Exercise 23: Estimate growth in a simulation model',
+               2,
+               'sec:random:ex29',
+               'sec:random:ex29'),
+              ('Exercise 24: Investigate guessing strategies',
+               2,
+               'sec:random:ex15',
+               'sec:random:ex15'),
+              ('Exercise 25: Vectorize a dice game',
+               2,
+               'sec:random:ex13',
+               'sec:random:ex13'),
+              ('Exercise 26: Compute $\\pi$ by a Monte Carlo method',
+               2,
+               'sec:random:ex31',
+               'sec:random:ex31'),
+              ('Exercise 27: Compute $\\pi$ by a Monte Carlo method',
+               2,
+               'sec:random:ex32',
+               'sec:random:ex32'),
+              ('Exercise 28: Compute $\\pi$ by a random sum',
+               2,
+               'sec:random:ex31b',
+               'sec:random:ex31b'),
+              ('Exercise 29: 1D random walk with drift',
+               2,
+               'sec:random:ex1',
+               'sec:random:ex1'),
+              ('Exercise 30: 1D random walk until a point is hit',
+               2,
+               'sec:random:ex3',
+               'sec:random:ex3'),
+              ('Exercise 31: Simulate making a fortune from gaming',
+               2,
+               'sec:random:ex3:rwgame',
+               'sec:random:ex3:rwgame'),
+              ('Exercise 32: Make classes for 2D random walk',
+               2,
+               'sec:random:ex33',
+               'sec:random:ex33'),
+              ('Exercise 33: 2D random walk with walls; scalar version',
+               2,
+               'sec:random:ex36',
+               'sec:random:ex36'),
+              ('Exercise 34: 2D random walk with walls; vectorized version',
+               2,
+               'sec:random:ex37',
+               'sec:random:ex37'),
+              ('Exercise 35: Simulate mixing of gas molecules',
+               2,
+               'sec:random:ex38',
+               'sec:random:ex38'),
+              ('Remarks', 3, None, '___sec104'),
+              ('Exercise 36: Simulate slow mixing of gas molecules',
+               2,
+               'sec:random:ex39',
+               'sec:random:ex39'),
+              ('Exercise 37: Guess beer brands',
+               2,
+               'sec:random:ex35',
+               'sec:random:ex35'),
+              ('Exercise 38: Simulate stock prices',
+               2,
+               'sec:random:ex26',
+               'sec:random:ex26'),
+              ('Exercise 39: Compute with option prices in finance',
+               2,
+               'sec:random:ex16',
+               'sec:random:ex16'),
+              ('Remarks', 3, None, '___sec109'),
+              ('Exercise 40: Differentiate noise measurements',
+               2,
+               'sec:random:ex22',
+               'sec:random:ex22'),
+              ('Exercise 41: Differentiate noisy signals',
+               2,
+               'sec:random:ex25',
+               'sec:random:ex25'),
+              ('Exercise 42: Model noise in a time signal',
+               2,
+               'sec:random:ex23',
+               'sec:random:ex23'),
+              ('Exercise 43: Speed up Markov chain mutation',
+               2,
+               'bioinf:exer:Markov:chain:eff',
+               'bioinf:exer:Markov:chain:eff'),
+              ('References', 1, None, '___sec114')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- newcommands_keep.tex -->
+$$
+\newcommand{\tp}{\thinspace .}
+\newcommand{\Prob}[1]{\hbox{P}(#1)}
+$$
+
+
+
+
+    
+<!-- Bootstrap navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="random-readable.html">Random numbers and simple games</a>
+  </div>
+
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     <!-- navigation toc: --> <li><a href="._random-readable001.html#___sec0" style="font-size: 80%;"><b>Drawing random numbers</b></a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable001.html#___sec1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The seed</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable001.html#sec:random:uniform" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Uniformly distributed random numbers</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable001.html#___sec3" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Visualizing the distribution</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable001.html#___sec4" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Vectorized drawing of random numbers</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable001.html#___sec5" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Warning</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable001.html#sec:random:statistics" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Computing the mean and standard deviation</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable001.html#sec:random:normal" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The Gaussian or normal distribution</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable002.html#sec:random:ints" style="font-size: 80%;"><b>Drawing integers</b></a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable002.html#___sec9" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Random integer functions</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable002.html#___sec10" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Throwing a die</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable002.html#___sec11" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scalar version</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable002.html#___sec12" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Vectorized version</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable002.html#___sec13" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Vectorized version with batches</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable002.html#___sec14" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Verification of the scalar version</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable002.html#___sec15" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Verification of all versions</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable002.html#___sec16" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Drawing a random element from a list</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable002.html#sec:random:deck1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Drawing cards from a deck</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable002.html#sec:class:deck:class" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Class implementation of a deck</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable003.html#sec:random:probability" style="font-size: 80%;"><b>Computing probabilities</b></a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable003.html#___sec20" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Principles of Monte Carlo simulation</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable003.html#sec:random:probability:dice" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Throwing dice</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable003.html#___sec22" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Straightforward solution</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable003.html#___sec23" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Vectorization</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable003.html#___sec24" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exact solution</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable003.html#___sec25" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A game</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable003.html#___sec26" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Decide if a game is fair</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable003.html#sec:random:balls" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Drawing balls from a hat</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable003.html#bioinf:random" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Random mutations of genes</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable003.html#___sec29" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A simple mutation model</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable003.html#___sec30" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Vectorized version</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable003.html#___sec31" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A Markov chain mutation model</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable003.html#sec:random:china" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Policies for limiting population growth</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable004.html#___sec33" style="font-size: 80%;"><b>Simple games</b></a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable004.html#sec:random:game:guessn" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Guessing a number</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable004.html#___sec35" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The game</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable004.html#___sec36" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The implementation</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable004.html#sec:random:twodicesumguess" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Rolling two dice</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable004.html#___sec38" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The game</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable004.html#___sec39" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The implementation</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable004.html#___sec40" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable004.html#___sec41" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A class version</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable004.html#sec:random:MonteCarlo:integration" style="font-size: 80%;"><b>Monte Carlo integration</b></a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable004.html#sec:random:MCint:ideas" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Derivation of Monte Carlo integration</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable004.html#___sec44" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The calculus approach via the mean-value theorem</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable004.html#___sec45" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The probability theory approach</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable004.html#sec:random:MCint:std" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Implementation of standard Monte Carlo integration</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable004.html#___sec47" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable004.html#___sec48" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remark</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable004.html#sec:random:MCdart" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Area computing by throwing random points</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable005.html#sec:random:rw1D" style="font-size: 80%;"><b>Random walk in one space dimension</b></a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable005.html#___sec51" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Basic implementation</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable005.html#___sec52" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Visualization</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable005.html#___sec53" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Random walk as a difference equation</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable005.html#sec:random:walk:1D:statistics" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Computing statistics of the particle positions</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable005.html#sec:random:walk:1D:vectorized" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Vectorized implementation</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable006.html#sec:random:rw2D" style="font-size: 80%;"><b>Random walk in two space dimensions</b></a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable006.html#sec:random:rw2D:scalar" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Basic implementation</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable006.html#sec:random:walk:2D:vectorized" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Vectorized implementation</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable007.html#___sec59" style="font-size: 80%;"><b>Summary</b></a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable007.html#___sec60" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Chapter topics</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable007.html#___sec61" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Drawing random numbers</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable007.html#___sec62" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Typical probability computation via Monte Carlo simulation</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable007.html#___sec63" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Statistical measures</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable007.html#___sec64" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Terminology</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable007.html#sec:random:summarizingex" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Random growth</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable007.html#___sec66" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem</a></li>
+     <!-- navigation toc: --> <li><a href="._random-readable007.html#___sec67" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Solution</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec68" style="font-size: 80%;"><b>Exercises</b></a></li>
+     <!-- navigation toc: --> <li><a href="#sec:random:ex17" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 1: Flip a coin times</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:random:ex7" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 2: Compute a probability</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:random:ex6" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 3: Choose random colors</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:random:ex4" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 4: Draw balls from a hat</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:random:ex2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 5: Computing probabilities of rolling dice</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:random:ex10" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 6: Estimate the probability in a dice game</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:random:ex44" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 7: Compute the probability of hands of cards</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:random:ex11" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 8: Decide if a dice game is fair</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:random:ex12" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 9: Adjust a game to make it fair</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:random:ex12b" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 10: Generalize a game</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:random:ex2c" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 11: Compare two playing strategies</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:random:ex2e" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 12: Investigate strategies in a game</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:random:ex45" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 13: Investigate the winning chances of some games</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:random:ex2b" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 14: Compute probabilities of throwing two dice</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:random:ex18" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 15: Vectorize flipping a coin</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:random:ex7b" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 16: Vectorize a probablility computation</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:random:ex30" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 17: Throw dice and compute a small probability</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:random:ex27" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 18: Difference equation for random numbers</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:random:ex9" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 19: Make a class for drawing balls from a hat</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:random:ex21" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 20: Independent  versus dependent random numbers</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:random:ex19" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 21: Compute the probability of flipping a coin</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:random:ex41" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 22: Simulate a poker game</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:random:ex29" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 23: Estimate growth in a simulation model</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:random:ex15" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 24: Investigate guessing strategies</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:random:ex13" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 25: Vectorize a dice game</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:random:ex31" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 26: Compute \( \pi \) by a Monte Carlo method</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:random:ex32" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 27: Compute \( \pi \) by a Monte Carlo method</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:random:ex31b" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 28: Compute \( \pi \) by a random sum</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:random:ex1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 29: 1D random walk with drift</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:random:ex3" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 30: 1D random walk until a point is hit</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:random:ex3:rwgame" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 31: Simulate making a fortune from gaming</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:random:ex33" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 32: Make classes for 2D random walk</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:random:ex36" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 33: 2D random walk with walls; scalar version</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:random:ex37" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 34: 2D random walk with walls; vectorized version</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:random:ex38" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 35: Simulate mixing of gas molecules</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec104" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remarks</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:random:ex39" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 36: Simulate slow mixing of gas molecules</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:random:ex35" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 37: Guess beer brands</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:random:ex26" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 38: Simulate stock prices</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:random:ex16" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 39: Compute with option prices in finance</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec109" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remarks</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:random:ex22" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 40: Differentiate noise measurements</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:random:ex25" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 41: Differentiate noisy signals</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:random:ex23" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 42: Model noise in a time signal</a></li>
+     <!-- navigation toc: --> <li><a href="#bioinf:exer:Markov:chain:eff" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 43: Speed up Markov chain mutation</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec114" style="font-size: 80%;"><b>References</b></a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div> <!-- end of navigation bar -->
+
+<div class="container">
+
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+
+<a name="part0008"></a>
+<!-- !split -->
+<p style="font-size:80%">This chapter is taken from book <a href="http://www.springer.com/gp/book/9783642549588">A Primer on Scientific Programming with Python</a> by H. P. Langtangen, 4th edition, Springer, 2014.</p>
+
+<h1 id="___sec68">Exercises </h1>
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:random:ex17">Exercise 1: Flip a coin times</h2>
+
+<p>
+Make a program that simulates flipping a coin \( N \) times.
+Print out <code>tail</code> or <code>head</code> for each flip and
+let the program count and print the number of heads.
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_1_1" style="font-size: 80%;"></a>
+<b>Hint.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_1_1">
+
+<p>
+Use <code>r = random.random()</code> and define head as <code>r &lt;= 0.5</code>,
+or draw an integer among \( \{0,1\} \) with <code>r = random.randint(0,1)</code>
+and define head when <code>r</code> is 0.
+
+<p>
+</div></p>
+</div>
+</p>
+
+<p>
+<!-- --- end hint in exercise --- -->
+Filename: <code>flip_coin.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:random:ex7">Exercise 2: Compute a probability</h2>
+
+<p>
+What is the probability of getting a number between 0.5 and 0.6 when
+drawing uniformly distributed random numbers from the interval \( [0,1) \)?
+To answer this question empirically, let a program
+draw \( N \) such random numbers using Python's standard <code>random</code> module,
+count how many of them, \( M \), that fall in the interval \( [0.5,0.6] \), and
+compute the probability as \( M/N \). Run the program with the four
+values \( N=10^{i} \) for \( i=1,2,3,6 \).
+Filename: <code>compute_prob.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:random:ex6">Exercise 3: Choose random colors</h2>
+
+<p>
+Suppose we have eight different colors. Make a program that chooses
+one of these colors at random and writes out the color.
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_3_1" style="font-size: 80%;"></a>
+<b>Hint.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_3_1">
+
+<p>
+Use a list of color names and use the <code>choice</code> function in
+the <code>random</code> module to pick a list element.
+
+<p>
+</div></p>
+</div>
+</p>
+
+<p>
+<!-- --- end hint in exercise --- -->
+Filename: <code>choose_color.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:random:ex4">Exercise 4: Draw balls from a hat</h2>
+
+<p>
+Suppose there are 40 balls in a hat, of which 10 are red,
+10 are blue, 10 are yellow, and 10 are purple.
+What is the probability of getting two blue and two purple balls
+when drawing 10 balls at random from the hat?
+Filename: <code>4balls_from10.py</code>.
+
+<p>
+<!-- Modify the <code>balls_in_hat.py</code> program from -->
+<!-- the section <a href="._random-readable003.html#sec:random:balls">Example: Drawing balls from a hat</a> to solve this exercise. -->
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:random:ex2">Exercise 5: Computing probabilities of rolling dice</h2>
+
+<ol>
+<li> You throw a die. What is the probability of getting a 6?
+
+<ol type="a"></li>
+ <li> You throw a die four times in a row. What is the probability of getting 6 all the  times?</li>
+ <li> Suppose you have thrown the die three times with 6 coming up all times. What is the probability of getting a 6 in the fourth throw?</li>
+ <li> Suppose you have thrown the die 100 times and experienced a 6 in every throw. What do you think about the probability of getting a 6 in the next throw?</li>
+</ol>
+
+</ol>
+
+First try to solve the questions from a theoretical or common sense
+point of view. Thereafter, make functions for simulating
+cases 1, 2, and 3.
+Filename: <code>rolling_dice.py</code>.
+
+<p>
+<!-- What about Bayesian statistics here? Could have it as a comment. -->
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:random:ex10">Exercise 6: Estimate the probability in a dice game</h2>
+
+<p>
+Make a program for estimating the probability of getting at least one
+die with six eyes when throwing \( n \) dice.
+Read \( n \) and the number of experiments from the command line.
+
+<p>
+As a partial verification, compare the Monte Carlo simulation results
+to the exact answer 11/36 for \( n=2 \) and observe that the approximate
+probabilities approach the exact probability as the number of
+simulations grow.
+Filename: <code>one6_ndice.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:random:ex44">Exercise 7: Compute the probability of hands of cards</h2>
+
+<p>
+Use the <a href="http://tinyurl.com/pwyasaa/random/Deck.py" target="_self"><tt>Deck.py</tt></a> module
+(see the section <a href="._random-readable002.html#sec:class:deck:class">Example: Class implementation of a deck</a>) and the <code>same_rank</code>
+and <code>same_suit</code> functions from the <a href="http://tinyurl.com/pwyasaa/random/cards.py" target="_self"><tt>cards</tt></a> module (see the section <a href="._random-readable002.html#sec:random:deck1">Example: Drawing cards from a deck</a>) to compute the following
+probabilities by Monte Carlo simulation:
+
+<ul>
+  <li> exactly two pairs among five cards,</li>
+  <li> four or five cards of the same suit among five cards,</li>
+  <li> four-of-a-kind among five cards.</li>
+</ul>
+
+Filename: <code>card_hands.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:random:ex11">Exercise 8: Decide if a dice game is fair</h2>
+
+<p>
+Somebody suggests the following game.  You pay 1 euro and are allowed
+to throw four dice.  If the sum of the eyes on the dice is less than
+9, you get paid \( r \) euros back, otherwise you lose the 1 euro
+investment.  Assume \( r=10 \).  Will you then in the long run win or lose
+money by playing this game?  Answer the question by making a program
+that simulates the game.  Read \( r \) and the number of experiments \( N \)
+from the command line.
+Filename: <code>sum_4dice.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:random:ex12">Exercise 9: Adjust a game to make it fair</h2>
+
+<p>
+It turns out that the game in <a href="#sec:random:ex11">Exercise 8: Decide if a dice game is fair</a> is not fair,
+since you lose money in the long run. The purpose of this exercise is
+to adjust the winning award so that the game becomes fair, i.e., that
+you neither lose nor win money in the long run.
+
+<p>
+Make a program that computes the probability \( p \) of getting a sum less
+than \( s \) when rolling \( n \) dice. Use the reasoning in
+the section <a href="._random-readable003.html#sec:random:probability:dice">Example: Throwing dice</a> to find
+the award per game, \( r \), that makes the game fair.  Run the
+program from <a href="#sec:random:ex11">Exercise 8: Decide if a dice game is fair</a> with this \( r \) on
+the command line and verify that the game is now fair.
+Filename: <code>sum_s_ndice_fair.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:random:ex12b">Exercise 10: Generalize a game</h2>
+
+<p>
+Consider the game in the section <a href="._random-readable003.html#sec:random:probability:dice">Example: Throwing dice</a>.
+A generalization is to think as follows: you throw one die until
+the number of eyes is less than or equal to the previous throw.
+Let \( m \) be the number of throws in a game.
+
+<p>
+<b>a)</b>
+Use Monte Carlo simulation to compute the probability of
+getting \( m=2,3,4,\ldots \).
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_10_1" style="font-size: 80%;"></a>
+<b>Hint.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_10_1">
+
+<p>
+For \( m\geq 6 \) the throws must be exactly \( 1,2,3,4,5,6,6,6,\ldots \),
+and the probability of each is 1/6, giving the total probability
+\( 6^{-m} \).
+Use \( N=10^6 \)
+experiments as this should suffice to estimate the
+probabilities for \( m\leq 5 \), and beyond that we have the analytical
+expression.
+
+<p>
+</div></p>
+</div>
+</p>
+
+<p>
+<!-- --- end hint in exercise --- -->
+
+<p>
+<b>b)</b>
+If you pay 1 euro to play this game, what is the fair
+amount to get paid when win? Answer this question for each of the
+cases \( m=2,3,4,5 \).
+
+<p>
+Filename: <code>incr_eyes.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:random:ex2c">Exercise 11: Compare two playing strategies</h2>
+
+<p>
+Suggest a player strategy for the game in the section <a href="._random-readable004.html#sec:random:twodicesumguess">Rolling two dice</a>.  Remove the question in the
+<code>player_guess</code> function in the file <a href="http://tinyurl.com/pwyasaa/random/ndice2.py" target="_self"><tt>ndice2.py</tt></a>, and implement the chosen strategy
+instead.  Let the program play a large number of games, and record the
+number of times the computer wins.  Which strategy is best in the long
+run: the computer's or yours?
+Filename: <code>simulate_strategies1.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:random:ex2e">Exercise 12: Investigate strategies in a game</h2>
+
+<p>
+Extend the program from <a href="#sec:random:ex2c">Exercise 11: Compare two playing strategies</a> such that
+the computer and the player can use a different number of dice.
+Let the computer choose a random number of dice between 2 and 20.
+Experiment to find out if there is a favorable number of dice for
+the player.
+Filename: <code>simulate_strategies2.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:random:ex45">Exercise 13: Investigate the winning chances of some games</h2>
+
+<p>
+An amusement park offers the following game.
+A hat contains 20 balls: 5 red, 5 yellow, 3 green, and 7 brown.
+At a cost of \( 2n \) euros you can draw \( 4 \leq n\leq 10 \) balls at random
+from the hat (without putting them
+back). Before you are allowed to look at the drawn balls, you must
+choose one of the following options:
+
+<ul>
+  <li> win \( 60 \) euros if you have drawn exactly three red balls</li>
+  <li> win \( 7 + 5\sqrt{n} \) euros if you have drawn at least three brown balls</li>
+  <li> win \( n^3-26 \) euros if you have drawn exactly one yellow ball
+    and one brown ball</li>
+  <li> win \( 23 \) euros if you have drawn at least one ball of each color</li>
+</ul>
+
+For each of the four different types of games you can play,
+compute the net income (per play)
+and the probability of winning for
+\( n=1,5,10,20 \). Is there any of the games (i.e., any
+combinations of \( n \) and the four options above) where you will
+win money in the long run?
+Filename: <code>draw_balls.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:random:ex2b">Exercise 14: Compute probabilities of throwing two dice</h2>
+
+<p>
+Throw two dice a large number of times in a program.
+Record the sum of the eyes each time and count how many times
+each of the possibilities for the sum (2, 3, \( \ldots \), 12) appear.
+Compute the corresponding probabilities and compare them with
+the exact values.
+(To find the exact
+probabilities, set up all the \( 6\times 6 \) possible outcomes of throwing
+two dice, and then count how many of them that has a sum \( s \) for
+\( s=2,3,\ldots,12 \).)
+Filename: <code>freq_2dice.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:random:ex18">Exercise 15: Vectorize flipping a coin</h2>
+
+<p>
+Simulate flipping a coin \( N \) times and write out the number of tails.
+The code should be vectorized, i.e., there must be no loops in Python.
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_15_1" style="font-size: 80%;"></a>
+<b>Hint.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_15_1">
+
+<p>
+Constructions like <code>r[r&lt;=0.5]</code> or <code>numpy.where(r&lt;=0.5, 0, 1)</code>,
+combined with <code>numpy.sum</code>, are useful, where <code>r</code> is a vector produced
+by <code>numpy.random.random(N)</code>.
+
+<p>
+</div></p>
+</div>
+</p>
+
+<p>
+<!-- --- end hint in exercise --- -->
+Filename: <code>flip_coin_vec.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:random:ex7b">Exercise 16: Vectorize a probablility computation</h2>
+
+<p>
+The purpose of this exercise is to speed up the code
+in <a href="#sec:random:ex7">Exercise 2: Compute a probability</a> by vectorization.
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_16_1" style="font-size: 80%;"></a>
+<b>Hint.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_16_1">
+
+<p>
+For an array <code>r</code> of  uniformly distributed random numbers on \( [0,1) \),
+make use of <code>r1 = r[r&gt;0.5]</code> and <code>r1[r1&lt;0.6]</code>. An alternative is
+<code>numpy.where</code> combine with a compound boolean expression with
+<code>numpy.logical_and(0.5&gt;=r, r&lt;=0.6)</code>.
+See the discussion of this topic in
+the document <a href="http://hplgit.github.io/primer.html/doc/pub/plot" target="_self">Array computing and curve plotting</a> <a href="#Langtangen_TCSE6_plot">[4]</a>.
+
+<p>
+</div></p>
+</div>
+</p>
+
+<p>
+<!-- --- end hint in exercise --- -->
+Filename: <code>compute_prob_vec.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:random:ex30">Exercise 17: Throw dice and compute a small probability</h2>
+
+<p>
+Use Monte Carlo simulation to compute the probability
+of getting 6 eyes on all dice when rolling \( 7 \) dice.
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_17_1" style="font-size: 80%;"></a>
+<b>Hint.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_17_1">
+
+<p>
+You need a large number of experiments in this case
+because of the small probability
+(see the first paragraph of the section <a href="._random-readable003.html#sec:random:probability">Computing probabilities</a>),
+so a vectorized implementation may be important.
+
+<p>
+</div></p>
+</div>
+</p>
+
+<p>
+<!-- --- end hint in exercise --- -->
+Filename: <code>roll_7dice.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:random:ex27">Exercise 18: Difference equation for random numbers</h2>
+
+<p>
+Simple random number generators are based on simulating difference
+equations. Here is a typical set of two equations:
+
+$$
+\begin{align}
+x_n &= (ax_{n-1} + c) \hbox{ mod } m,
+\tag{19}\\ 
+y_n &= x_n/m,
+\tag{20}
+\end{align}
+$$
+
+for \( n=1,2,\ldots \).
+A seed \( x_0 \) must be given to start the sequence.
+The numbers \( y_1,y_2,\ldots \) represent the random numbers and
+\( x_0,x_1,\ldots \) are &quot;help&quot; numbers.
+Although \( y_n \) is
+completely deterministic from <a href="#mjx-eqn-19">(19)</a>-<a href="#mjx-eqn-20">(20)</a>, the
+sequence \( y_n \) <em>appears</em> random.
+The mathematical
+expression \( p\hbox{ mod }q \) is coded as <code>p % q</code> in Python.
+
+<p>
+Use \( a=8121 \), \( c=28411 \), and \( m=134456 \). Solve the system
+<a href="#mjx-eqn-19">(19)</a>-<a href="#mjx-eqn-20">(20)</a> in a function to
+generate \( N \) random numbers.  Make a histogram to examine the
+distribution of the numbers (the \( y_n \) numbers are uniformly
+distributed if the histogram is approximately flat).
+Filename: <code>diffeq_random.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:random:ex9">Exercise 19: Make a class for drawing balls from a hat</h2>
+
+<p>
+Consider the example about drawing colored balls from a hat in
+the section <a href="._random-readable003.html#sec:random:balls">Example: Drawing balls from a hat</a>.
+It could be handy to have an object that acts as a hat:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">hat <span style="color: #666666">=</span> Hat(red<span style="color: #666666">=3</span>, blue<span style="color: #666666">=4</span>, green<span style="color: #666666">=6</span>)
+balls <span style="color: #666666">=</span> hat<span style="color: #666666">.</span>draw(<span style="color: #666666">3</span>)
+<span style="color: #008000; font-weight: bold">if</span> balls<span style="color: #666666">.</span>count(<span style="color: #BA2121">&#39;red&#39;</span>) <span style="color: #666666">==</span> <span style="color: #666666">1</span> <span style="color: #AA22FF; font-weight: bold">and</span> balls<span style="color: #666666">.</span>count(<span style="color: #BA2121">&#39;green&#39;</span>) <span style="color: #666666">==</span> <span style="color: #666666">2</span>:
+    <span style="color: #666666">...</span>
+</pre></div>
+<p>
+<b>a)</b>
+Write such a class <code>Hat</code> with the shown functionality.
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_19_1" style="font-size: 80%;"></a>
+<b>Hint 1.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_19_1">
+
+<p>
+The flexible syntax in the constructor, where the colors of the balls
+and the number of balls of each color are freely specified, requires
+use of a dictionary (<code>**kwargs</code>) for handling a variable number of
+keyword arguments, see the document <a href="http://hplgit.github.io/primer.html/doc/pub/varargs" target="_self">Variable number of
+function arguments in Python</a>
+<a href="#Langtangen_TCSE6_varargs">[5]</a>.
+
+<p>
+</div></p>
+</div>
+</p>
+
+<p>
+<!-- --- end hint in exercise --- -->
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_19_2" style="font-size: 80%;"></a>
+<b>Hint 2.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_19_2">
+
+<p>
+You can borrow useful code from
+the <a href="http://tinyurl.com/pwyasaa/random/balls_in_hat.py" target="_self"><tt>balls_in_hat.py</tt></a> program
+and ideas from the section <a href="._random-readable002.html#sec:class:deck:class">Example: Class implementation of a deck</a>.
+
+<p>
+</div></p>
+</div>
+</p>
+
+<p>
+<!-- --- end hint in exercise --- -->
+
+<p>
+<b>b)</b>
+Apply class <code>Hat</code> to compute the probability of getting 2 brown
+and 2 blue galls when drawing 6 balls from a hat with
+6 blue, 8 brown, and 3 green balls.
+
+<p>
+Filename: <code>Hat.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:random:ex21">Exercise 20: Independent  versus dependent random numbers</h2>
+
+<p>
+<b>a)</b>
+Generate a sequence of \( N \) independent random variables
+with values 0 or 1 and print out this sequence without space
+between the numbers (i.e., as <code>001011010110111010</code>).
+
+<p>
+<b>b)</b>
+The purpose now is to generate random zeros and ones that are dependent.
+If the last generated number was 0, the probability of generating
+a new 0 is \( p \) and a new 1 is \( 1-p \).
+Conversely, if the last generated was 1, the probability of generating
+a new 1 is \( p \) and a new 0 is \( 1-p \).
+Since the new value depends
+on the last one, we say the variables are dependent.
+Implement this algorithm in a function returning an array of \( N \) zeros
+and ones. Print out this array in the condense format as described above.
+
+<p>
+<b>c)</b>
+Choose \( N=80 \) and try the probabilities \( p=0.5 \), \( p=0.8 \) and \( p=0.9 \).
+Can you by visual inspection of the output characterize
+the differences between sequences of
+independent and dependent random variables?
+
+<p>
+Filename: <code>dependent_random_numbers.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:random:ex19">Exercise 21: Compute the probability of flipping a coin</h2>
+
+<p>
+<b>a)</b>
+Simulate flipping a coin \( N \) times.
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_21_1" style="font-size: 80%;"></a>
+<b>Hint.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_21_1">
+
+<p>
+Draw \( N \) random integers 0 and 1 using <code>numpy.random.randint</code>.
+
+<p>
+</div></p>
+</div>
+</p>
+
+<p>
+<!-- --- end hint in exercise --- -->
+
+<p>
+<b>b)</b>
+Look at a subset \( N_1\leq N \) of the experiments in a) and compute the
+probability of getting a head (\( M_1/N_1 \), where \( M_1 \) is the number
+of heads in \( N_1 \) experiments).
+Choose \( N=1000 \) and print out the probability for \( N_1=10,100,500,1000 \).
+Generate just \( N \) numbers once in the program.
+How do you think the accuracy of the computed probability vary with
+\( N_1 \)? Is the output compatible with this expectation?
+
+<p>
+<b>c)</b>
+Now we want to study the probability of getting a head,
+\( p \), as a function of \( N_1 \), i.e., for \( N_1=1,\ldots,N \).
+A first try to compute the probability array for \( p \) is
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
+h <span style="color: #666666">=</span> np<span style="color: #666666">.</span>where(r <span style="color: #666666">&lt;=</span> <span style="color: #666666">0.5</span>, <span style="color: #666666">1</span>, <span style="color: #666666">0</span>)
+p <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros(N)
+<span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(N):
+    p[i] <span style="color: #666666">=</span> np<span style="color: #666666">.</span>sum(h[:i<span style="color: #666666">+1</span>])<span style="color: #666666">/</span><span style="color: #008000">float</span>(i<span style="color: #666666">+1</span>)
+</pre></div>
+<p>
+Implement these computations in a function.
+
+<p>
+<b>d)</b>
+An array <code>q[i] = np.sum(h([:i]))</code> reflects a <em>cumulative sum</em> and can
+be efficiently generated by <code>np.cumsum</code>: <code>q = np.cumsum(h)</code>.
+Thereafter we can compute <code>p</code> by <code>q/I</code>, where <code>I[i]=i+1</code> and <code>I</code> can
+be computed by <code>np.arange(1,N+1)</code> or <code>r_[1:N+1]</code> (integers 1, 2,
+\( \ldots \), up to but not including <code>N+1</code>).  Use <code>cumsum</code> to make an
+alternative vectorized version of the function in c).
+
+<p>
+<b>e)</b>
+Write a test function that verifies
+that the implementations in c) and d) give the same results.
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_21_2" style="font-size: 80%;"></a>
+<b>Hint.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_21_2">
+
+<p>
+Use <code>numpy.allclose</code> to compare two arrays.
+
+<p>
+</div></p>
+</div>
+</p>
+
+<p>
+<!-- --- end hint in exercise --- -->
+
+<p>
+<b>f)</b>
+Make a function that applies the <code>time</code> module to measure the relative
+efficiency of the implementations in c) and d).
+
+<p>
+<b>g)</b>
+Plot <code>p</code> against <code>I</code> for the case where \( N=10000 \).
+Annotate the axis and the plot with relevant text.
+
+<p>
+Filename: <code>flip_coin_prob.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:random:ex41">Exercise 22: Simulate a poker game</h2>
+
+<p>
+Make a program for simulating the development of a poker (or simplified
+poker) game among
+\( n \) players. Use ideas from the section <a href="._random-readable002.html#sec:random:deck1">Example: Drawing cards from a deck</a>.
+Filename: <code>poker.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:random:ex29">Exercise 23: Estimate growth in a simulation model</h2>
+
+<p>
+The simulation model in the section <a href="._random-readable003.html#sec:random:china">Example: Policies for limiting population growth</a>
+predicts the number of individuals from generation to generation.
+Make a simulation of the one son policy
+with 10 generations, a male portion of 0.51 among
+newborn babies, set the fertility to 0.92, and assume that
+a fraction 0.06 of the population
+will break the law and want 6 children in a family.
+These parameters implies a significant growth of the population.
+See if you can find a factor \( r \) such that the number of individuals
+in generation \( n \) fulfills the difference equation
+
+$$
+\begin{equation*} x_n = (1+r)x_{n-1}\tp\end{equation*}
+$$
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_23_1" style="font-size: 80%;"></a>
+<b>Hint.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_23_1">
+
+<p>
+Compute \( r \) for two consecutive generations \( x_{n-1} \) and \( x_n \)
+(\( r = x_n/x_{n-1} -1 \)) and see if \( r \) is approximately constant
+as \( n \) increases.
+
+<p>
+</div></p>
+</div>
+</p>
+
+<p>
+<!-- --- end hint in exercise --- -->
+Filename: <code>estimate_growth.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:random:ex15">Exercise 24: Investigate guessing strategies</h2>
+
+<p>
+In the game from the section <a href="._random-readable004.html#sec:random:game:guessn">Guessing a number</a> it is smart
+to use the feedback from the program to track an interval \( [p,q] \)
+that must contain the secret number. Start with \( p=1 \) and \( q=100 \).
+If the user guesses at some number \( n \),
+update \( p \) to \( n+1 \) if \( n \) is less than the secret number (no need to care
+about numbers smaller than \( n+1 \)), or
+update \( q \) to \( n-1 \) if \( n \) is larger than the secret number (no need to care
+about numbers larger than \( n-1 \)).
+
+<p>
+Are there any smart strategies to pick a new guess \( s\in [p,q] \)?
+To answer this question, investigate two possible
+strategies: \( s \) as the midpoint in the interval \( [p, q] \),
+or \( s \) as a uniformly
+distributed random integer in \( [p, q] \).
+Make a program that implements both strategies, i.e., the player is not
+prompted for a guess but the computer computes the guess based on the
+chosen strategy. Let the program run a large
+number of games and see if one of the strategies can be considered as
+superior in the long run.
+Filename: <code>strategies4guess.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:random:ex13">Exercise 25: Vectorize a dice game</h2>
+
+<p>
+Vectorize the simulation program from <a href="#sec:random:ex11">Exercise 8: Decide if a dice game is fair</a>
+with the aid of the module <code>numpy.random</code> and the <code>numpy.sum</code>
+function.
+Filename: <code>sum9_4dice_vec.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:random:ex31">Exercise 26: Compute \( \pi \) by a Monte Carlo method</h2>
+
+<p>
+Use the method in the section <a href="._random-readable004.html#sec:random:MCdart">Area computing by throwing random points</a> to compute
+\( \pi \) by computing the area of a circle.
+Choose \( G \) as the circle with its center at the origin and with unit radius,
+and choose \( B \) as the rectangle \( [-1,1]\times [-1,1] \).
+A point \( (x,y) \) lies within \( G \) if \( x^2+y^2 < 1 \).
+Compare the approximate \( \pi \) with <code>math.pi</code>.
+Filename: <code>MC_pi.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:random:ex32">Exercise 27: Compute \( \pi \) by a Monte Carlo method</h2>
+
+<p>
+This exercise has the same purpose of computing \( \pi \) as in
+<a href="#sec:random:ex31">Exercise 26: Compute \( \pi \) by a Monte Carlo method</a>, but this time you should choose
+\( G \) as a circle with center at \( (2,1) \) and radius 4.
+Select an appropriate rectangle \( B \).
+A point \( (x,y) \) lies within a circle with center at
+\( (x_c,y_c) \) and with radius \( R \) if \( (x-x_c)^2 + (y-y_c)^2 < R^2 \).
+Filename: <code>MC_pi2.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:random:ex31b">Exercise 28: Compute \( \pi \) by a random sum</h2>
+
+<p>
+<b>a)</b>
+Let \( x_0,\ldots,x_N \) be \( N+1 \) uniformly distributed
+random numbers between 0 and 1. Explain why the
+random sum \( S_N=(N+1)^{-1}\sum_{i=0}^N 2(1-x_i^2)^{-1/2} \) is
+an approximation to \( \pi \).
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_28_1" style="font-size: 80%;"></a>
+<b>Hint.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_28_1">
+
+<p>
+Interpret the sum as Monte Carlo
+integration and compute the corresponding integral by hand or
+<code>sympy</code>.
+
+<p>
+</div></p>
+</div>
+</p>
+
+<p>
+<!-- --- end hint in exercise --- -->
+
+<p>
+<b>b)</b>
+Compute \( S_0,S_1,\ldots,S_N \) (using just one set of \( N+1 \) random numbers).
+Plot this sequence versus \( N \). Also plot the horizontal line corresponding
+to the value of \( \pi \). Choose \( N \) large, e.g., \( N=10^6 \).
+
+<p>
+Filename: <code>MC_pi_plot.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:random:ex1">Exercise 29: 1D random walk with drift</h2>
+
+<p>
+Modify the <a href="http://tinyurl.com/pwyasaa/random/walk1D.py" target="_self"><tt>walk1D.py</tt></a> program such
+that the probability of going to the right is \( r \) and the probability
+of going to the left is \( 1-r \) (draw numbers in \( [0,1) \) rather than
+integers in \( \{1,2\} \)).  Compute the average position of \( n_p \)
+particles after 100 steps, where \( n_p \) is read from the command
+line. Mathematically one can show that the average position approaches
+\( rn_s - (1-r)n_s \) as \( n_p\rightarrow\infty \) (\( n_s \) is the number of
+walks). Write out this exact
+result together with the computed mean position with a finite number
+of particles.
+Filename: <code>walk1D_drift.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:random:ex3">Exercise 30: 1D random walk until a point is hit</h2>
+
+<p>
+Set <code>np=1</code> in the <a href="http://tinyurl.com/pwyasaa/random/walk1Dv.py" target="_self"><tt>walk1Dv.py</tt></a>
+program and modify the program to measure how many steps it takes for
+one particle to reach a given point \( x=x_p \). Give \( x_p \) on the command
+line.  Report results for \( x_p=5, 50, 5000, 50000 \).
+Filename: <code>walk1Dv_hit_point.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:random:ex3:rwgame">Exercise 31: Simulate making a fortune from gaming</h2>
+
+<p>
+A man plays a game where the probability of winning is \( p \) and
+that of losing is consequently \( 1-p \). When winning he earns 1 euro
+and when losing he loses 1 euro. Let \( x_i \) be the man's fortune
+from playing this game \( i \) number of times. The starting fortune is \( x_0 \).
+We assume that the man gets a necessary loan if \( x_i < 0 \) such that
+the gaming can continue. The target is a
+fortune \( F \), meaning that the playing stops when \( x=F \) is reached.
+
+<p>
+<b>a)</b>
+Explain why \( x_i \) is a 1D random walk.
+
+<p>
+<b>b)</b>
+Modify one of the 1D
+random walk programs to simulate the average number of games it
+takes to reach the target fortune \( x=F \). This average must be
+computed by running a large number of random walks that start at
+\( x_0 \) and reach \( F \). Use \( x_0=10 \), \( F=100 \), and \( p=0.49 \) as example.
+
+<p>
+<b>c)</b>
+Suppose the average number of games to reach \( x=F \) is proportional
+to \( (F-x_0)^r \), where \( r \) is some exponent. Try to find \( r \) by
+experimenting with the program.
+The \( r \) value indicates how difficult it is to make a substantial
+fortune by playing this game. Note that the <em>expected</em>
+earning is negative when \( p < 0.5 \), but there is still a small
+probability for hitting \( x=F \).
+
+<p>
+Filename: <code>game_as_walk1D.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:random:ex33">Exercise 32: Make classes for 2D random walk</h2>
+
+<p>
+The purpose of this exercise is to reimplement the
+<code>walk2D.py</code> program from the section <a href="._random-readable006.html#sec:random:rw2D:scalar">Basic implementation</a>
+with the aid of classes.
+
+<p>
+<b>a)</b>
+Make a class <code>Particle</code> with the coordinates \( (x,y) \)
+and the time step number of a particle as attributes.
+A method <code>move</code> moves the particle in one of the four directions
+and updates the \( (x,y) \) coordinates.
+Another class, <code>Particles</code>, holds a list of <code>Particle</code>
+objects and a <code>plotstep</code> parameter (as in
+<a href="http://tinyurl.com/pwyasaa/random/walk2D.py" target="_self"><tt>walk2D.py</tt></a>).
+A method <code>move</code> moves all the particles one step, a
+method <code>plot</code> can make a plot of all particles, while
+a method <code>moves</code> performs a loop over time steps and
+calls <code>move</code> and <code>plot</code> in each step.
+
+<p>
+<b>b)</b>
+Equip the <code>Particle</code> and <code>Particles</code> classes with print functionality
+such that one can print out all particles in a nice way by saying
+<code>print p</code> (for a <code>Particles</code> instance <code>p</code>) or <code>print self</code> (inside a
+method).
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_32_1" style="font-size: 80%;"></a>
+<b>Hint.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_32_1">
+
+<p>
+In <code>__str__</code>, apply the <code>pformat</code> function from the
+<code>pprint</code> module to the list of particles, and make sure that
+<code>__repr__</code> just reuse <code>__str__</code> in both classes so the output looks nice.
+
+<p>
+</div></p>
+</div>
+</p>
+
+<p>
+<!-- --- end hint in exercise --- -->
+
+<p>
+<b>c)</b>
+Make a test function that compares the first three positions of four
+particles with the corresponding results computed by the
+<code>walk2D.py</code> program. The
+seed of the random number generator must of course be fixed
+identically in the two programs.
+
+<p>
+<b>d)</b>
+Organize the complete code as a module such that the classes
+<code>Particle</code> and <code>Particles</code> can be reused in other programs.
+The test block should read the number of particles from the
+command line and perform a simulation.
+
+<p>
+<b>e)</b>
+Compare the efficiency of the class version against the vectorized
+version in <code>walk2Dv.py</code>, using the techniques in the
+document <a href="http://hplgit.github.io/primer.html/doc/pub/timing" target="_self">Evaluating the efficiency of Python programs</a> <a href="#Langtangen_TCSE6_timing">[6]</a>.
+
+<p>
+<b>f)</b>
+The program developed above cannot be
+vectorized as long as we base the implementation on class
+<code>Particle</code>. However, if we remove that class and focus on class
+<code>Particles</code>, the latter can employ arrays for holding the positions of
+all particles and vectorized updates of these positions in the <code>moves</code>
+method. Use ideas from the
+<a href="http://tinyurl.com/pwyasaa/random/walk2Dv.py" target="_self"><tt>walk2Dv.py</tt></a>
+program to make a new class <code>Particles_vec</code> which vectorizes
+<code>Particles</code>.
+
+<p>
+<b>g)</b>
+Verify the code against the <code>walk2Dv.py</code> program as explained in c).
+Automate the verification in a test function.
+
+<p>
+<b>h)</b>
+Write a Python function that measures the computational
+efficiency the
+vectorized class <code>Particles_vec</code> and the scalar class <code>Particles</code>.
+
+<p>
+Filename: <code>walk2D_class.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:random:ex36">Exercise 33: 2D random walk with walls; scalar version</h2>
+
+<p>
+Modify the <code>walk2D.py</code> or <code>walk2Dc.py</code> programs from <a href="#sec:random:ex33">Exercise 32: Make classes for 2D random walk</a> so that the walkers cannot walk outside a
+rectangular area \( A = [x_L,x_H]\times [y_L,y_H] \).  Do not move the
+particle if its new position is outside \( A \).
+Filename: <code>walk2D_barrier.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:random:ex37">Exercise 34: 2D random walk with walls; vectorized version</h2>
+
+<p>
+Modify the <code>walk2Dv.py</code> program so that the walkers cannot
+walk outside a rectangular area \( A = [x_L,x_H]\times [y_L,y_H] \).
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_34_1" style="font-size: 80%;"></a>
+<b>Hint.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_34_1">
+
+<p>
+First perform the moves of one direction. Then test if new
+positions are outside \( A \). Such a test returns a boolean array that
+can be used as index in the position arrays to pick out the indices
+of the particles that have moved outside \( A \) and move them back to
+the relevant boundary of \( A \).
+
+<p>
+</div></p>
+</div>
+</p>
+
+<p>
+<!-- --- end hint in exercise --- -->
+Filename: <code>walk2Dv_barrier.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:random:ex38">Exercise 35: Simulate mixing of gas molecules</h2>
+
+<p>
+Suppose we have a box with a wall dividing the box into two
+equally sized parts. In one part we have a gas where the molecules
+are uniformly distributed in a random fashion. At \( t=0 \) we
+remove the wall. The gas molecules will now move around and eventually
+fill the whole box.
+
+<p>
+This physical process can be simulated by a 2D random walk inside
+a fixed area \( A \) as introduced in <a href="#sec:random:ex36">Exercise 33: 2D random walk with walls; scalar version</a>
+and <a href="#sec:random:ex37">Exercise 34: 2D random walk with walls; vectorized version</a> (in reality the motion is three-dimensional,
+but we only simulate the two-dimensional part of it since we already
+have programs for doing this).
+Use the program from either
+<a href="#sec:random:ex36">Exercise 33: 2D random walk with walls; scalar version</a>
+or <a href="#sec:random:ex37">Exercise 34: 2D random walk with walls; vectorized version</a> to simulate the process for \( A=[0,1]\times[0,1] \).
+Initially, place 10000 particles at uniformly distributed random positions in
+\( [0,1/2]\times [0,1] \).
+Then start the random walk and visualize what happens.
+Simulate for a long time and make a hardcopy of the animation
+(an animated GIF file, for instance).
+Is the end result what you would expect?
+Filename: <code>disorder1.py</code>.
+
+<p>
+<!-- Closing remarks for this Exercise -->
+
+<h3 id="___sec104">Remarks </h3>
+
+<p>
+Molecules tend to move randomly because of collisions and forces
+between molecules. We do not model
+collisions between particles in the random walk, but the nature of this
+walk, with random movements, simulates the effect of collisions.
+Therefore, the random walk can be used to model molecular motion in
+many simple cases. In particular, the random walk can be used to investigate
+how a quite ordered system, where one gas fills one half of a box,
+evolves through time to a more disordered system.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:random:ex39">Exercise 36: Simulate slow mixing of gas molecules</h2>
+
+<p>
+Solve <a href="#sec:random:ex38">Exercise 35: Simulate mixing of gas molecules</a> when the wall dividing the
+box is not completely removed, but instead has a small
+hole.
+Filename: <code>disorder2.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:random:ex35">Exercise 37: Guess beer brands</h2>
+
+<p>
+You are presented \( n \) glasses of beer, each containing a different
+brand. You are informed that there are \( m\geq n \) possible brands in total,
+and the names of all brands are given.
+For each glass, you can pay \( p \) euros to taste the beer, and if you
+guess the right brand, you get \( q\geq p \) euros back.
+Suppose you have done this before and experienced that you
+typically manage to guess the right brand \( T \) times out of 100, so
+that your probability of guessing the right brand is \( b=T/100 \).
+
+<p>
+Make a function <code>simulate(m, n, p, q, b)</code> for simulating the
+beer tasting process. Let the function return the amount of money earned
+and how many correct guesses (\( \leq n \)) you made. Call <code>simulate</code>
+a large number of times and compute the average earnings and
+the probability of getting full score in the case \( m=n=4 \), \( p=3 \),
+\( q=6 \), and \( b=1/m \) (i.e., four glasses with four brands, completely
+random guessing, and a payback of twice as much as the cost).
+How much more can you earn from this game if your ability to guess the
+right brand is better,
+say \( b=1/2 \)?
+Filename: <code>simulate_beer_tasting.py</code>.
+
+<p>
+<!-- The arguments to the <code>simulate</code> function can be given on the command line. -->
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:random:ex26">Exercise 38: Simulate stock prices</h2>
+
+<p>
+A common mathematical model for the evolution of stock prices can
+be formulated as a difference equation
+
+$$
+\begin{equation}
+x_n = x_{n-1} + \Delta t \mu x_{n-1} + \sigma x_{n-1}\sqrt{\Delta t}r_{n-1},
+\tag{21}
+\end{equation}
+$$
+
+where \( x_n \) is the stock price at time \( t_n \), \( \Delta t \) is the time
+interval between two time levels (\( \Delta t = t_{n}-t_{n-1} \)),
+\( \mu \) is the growth rate of the stock price, \( \sigma \) is the
+volatility of the stock price, and \( r_0,\ldots,r_{n-1} \) are
+normally distributed random numbers with mean zero and unit standard
+deviation. An initial stock price \( x_0 \) must be prescribed together
+with the input data \( \mu \), \( \sigma \), and \( \Delta t \).
+
+<p>
+We can make a remark that
+<a href="#mjx-eqn-21">(21)</a> is a Forward Euler
+discretization of a stochastic differential equation for
+a continuous price function \( x(t) \):
+
+$$
+\begin{equation*} \frac{dx}{dt} = \mu x + \sigma N(t),\end{equation*}
+$$
+
+where \( N(t) \) is a so-called white noise random
+time series signal. Such equations
+play a central role in modeling of stock prices.
+
+<p>
+Make \( R \) realizations of <a href="#mjx-eqn-21">(21)</a> for \( n=0,\ldots,N \)
+for \( N=5000 \) steps over a time period of \( T=180 \) days with
+a step size \( \Delta t = T/N \).
+Filename: <code>stock_prices.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:random:ex16">Exercise 39: Compute with option prices in finance</h2>
+
+<p>
+In this exercise we are going to consider the pricing of so-called
+Asian options. An Asian option is a financial contract where the owner
+earns money when certain market conditions are satisfied.
+
+<p>
+The contract is specified by a <em>strike price</em> \( K \) and a maturity time
+\( T \). It is written on the average price of the underlying stock,
+and if this average is bigger than the strike \( K \), the owner of
+the option will earn the difference. If, on the other hand,
+the average becomes less, the owner receives nothing, and the option
+matures in the value zero. The average is calculated from the last trading
+price of the stock for each day.
+
+<p>
+From the theory of options in finance, the price of the Asian option
+will be the expected present value of the payoff. We assume the stock price
+dynamics given as,
+
+$$
+\begin{equation}
+S(t+1)=(1+r)S(t)+\sigma S(t)\epsilon(t),
+\tag{22}
+\end{equation}
+$$
+
+where \( r \) is the interest-rate, and \( \sigma \) is the volatility of the stock
+price. The time \( t \) is supposed to be measured in days, \( t=0,1,2,\ldots \),
+while \( \epsilon(t) \) are independent identically distributed
+normal random variables with mean zero and unit standard deviation.
+To find the option price, we must calculate
+the expectation
+
+$$
+\begin{equation}
+p=(1+r)^{-T}\hbox{E}\left[\max\left(\frac1T\sum_{t=1}^{T}S(t)-K,0\right)\right]
+\tp
+\tag{23}
+\end{equation}
+$$
+
+The price is thus given as the expected discounted payoff. We will use Monte
+Carlo simulations to estimate the expectation. Typically, \( r \) and \( \sigma \)
+can be set to \( r=0.0002 \) and \( \sigma=0.015 \). Assume further \( S(0)=100 \).
+
+<p>
+<b>a)</b>
+Make a function that simulates a path
+of \( S(t) \), that is, the function computes
+\( S(t) \) for \( t=1,\ldots,T \) for a given \( T \)
+based on the recursive definition in <a href="#mjx-eqn-22">(22)</a>.
+The function should return the path as an array.
+
+<p>
+<b>b)</b>
+Create a function that finds the average of \( S(t) \) from
+\( t=1 \) to \( t=T \). Make another function that
+calculates the price of the Asian option based on
+\( N \) simulated averages. You may choose \( T=100 \) days and \( K=102 \).
+
+<p>
+<b>c)</b>
+Plot the price \( p \) as a function of \( N \). You may start with
+\( N=1000 \).
+
+<p>
+<b>d)</b>
+Plot the error in the price estimation as a function \( N \)
+(assume that the \( p \) value corresponding to the largest \( N \) value
+is the &quot;right&quot; price). Try to fit a curve of the form
+\( c/\sqrt{N} \) for some \( c \) to this error plot.
+The purpose is to show that the error is reduced as
+\( 1/\sqrt{N} \).
+
+<p>
+Filename: <code>option_price.py</code>.
+
+<p>
+<!-- Closing remarks for this Exercise -->
+
+<h3 id="___sec109">Remarks </h3>
+
+<p>
+If you wonder where the values for \( r \) and \( \sigma \) come from, you will
+find the explanation in the following. A reasonable level for the
+yearly interest-rate is around 5 percent, which corresponds to a daily
+rate \( 0.05/250=0.0002 \). The number 250 is chosen because a stock exchange is
+on average open this amount of days for trading. The value for \( \sigma \)
+is calculated as the volatility of the stock price, corresponding to
+the standard deviation of the daily returns of the stock defined as
+\( (S(t+1)-S(t))/S(t) \). &quot;Normally&quot;, the volatility is around 1.5 percent a day.
+Finally, there are theoretical reasons why we assume that the stock price
+dynamics is driven by \( r \), meaning that we consider the <em>risk-neutral</em>
+dynamics of the stock price when pricing options. There is an exciting theory
+explaining the appearance of \( r \) in the dynamics of the stock price. If we
+want to simulate a stock price dynamics mimicing what we see in the market,
+\( r \) in <a href="#mjx-eqn-22">(22)</a> must be substituted with \( \mu \), the
+expected return of the stock. Usually, \( \mu \) is higher than \( r \).
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:random:ex22">Exercise 40: Differentiate noise measurements</h2>
+
+<p>
+In a laboratory experiment waves are generated through the impact of a
+model slide into a wave tank. (The intention of the experiment
+is to model a future tsunami event in a fjord, generated by loose
+rocks that fall into the fjord.) At a certain location, the elevation of
+the surface, denoted by \( \eta \), is measured at discrete points in time
+using an
+ultra-sound wave gauge.  The result is a time
+series of vertical positions of the water surface elevations in
+meter: \( \eta (t_0), \eta(t_1), \eta(t_2),\ldots,\eta(t_n) \).
+There are 300 observations per second, meaning that the time
+difference between two neighboring measurement values \( \eta(t_i) \)
+and \( \eta (t_{i+1}) \) is \( h=1/300 \) second.
+
+<p>
+<b>a)</b>
+Read the \( \eta \) values in the file
+<a href="http://tinyurl.com/pwyasaa/random/gauge.dat" target="_self"><tt>gauge.dat</tt></a> into an array <code>eta</code>.
+Read \( h \) from the command line.
+
+<p>
+<b>b)</b>
+Plot <code>eta</code> versus the time values.
+
+<p>
+<b>c)</b>
+Compute the velocity \( v \) of the surface by the formula
+
+$$ v_i \approx (\eta_{i+1}-\eta_{i-1})/(2h), \quad
+i=1,\ldots,n-1\tp$$
+
+Plot \( v \) versus time values in a separate plot.
+
+<p>
+<b>d)</b>
+Compute the acceleration \( a \) of the surface by the formula
+
+$$ a_i \approx (\eta_{i+1}-2\eta_i + \eta_{i-1})/h^2,\quad
+i=1,\ldots,n-1. $$
+
+Plot \( a \) versus the time values in a separate plot.
+
+<p>
+<b>e)</b>
+If we have a noisy signal \( \eta_i \), where \( i=0,\ldots,n \) counts time levels,
+the noise can be
+reduced by computing a new signal where the value at a point is a weighted
+average of the values at that point and the neighboring points at each side.
+More precisely, given the signal \( \eta_i \), \( i=0,\ldots,n \),
+we compute a filtered (averaged)
+signal with values \( \eta^{(1)}_i \) by the formula
+
+$$
+\begin{equation}
+\eta^{(1)}_i = \frac{1}{4}({\eta_{i+1} + 2\eta_i + \eta_{i-1}}),\quad
+i=1,\ldots,n-1,\ \eta^{(1)}_0=\eta_0,\ \eta^{(1)}_n=\eta_n\tp
+\tag{24}
+\end{equation}
+$$
+
+Make a function <code>filter</code>
+that takes the \( \eta_i \) values in an array <code>eta</code>
+as input and returns the filtered \( \eta^{(1)}_i \) values in an array.
+
+<p>
+<b>f)</b>
+Let \( \eta^{(k)}_i \) be the signal arising by applying the <code>filtered</code>
+function \( k \) times to the same signal.
+Make a plot with curves \( \eta_i \) and the filtered \( \eta^{(k)}_i \) values
+for \( k=1, 10, 100 \). Make similar plots for the velocity and acceleration
+where these are made from both the original, measured
+\( \eta \) data and the filtered
+data. Discuss the results.
+
+<p>
+Filename: <code>labstunami.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:random:ex25">Exercise 41: Differentiate noisy signals</h2>
+
+<p>
+The purpose of this exercise is to look into numerical differentiation
+of time series signals that contain measurement errors. This insight
+might be helpful when analyzing the noise in
+real data from a laboratory experiment
+in <a href="#sec:random:ex22">Exercise 40: Differentiate noise measurements</a>.
+
+<p>
+<b>a)</b>
+Compute a signal
+
+$$
+\begin{equation*} \bar\eta_i = A\sin ({2\pi\over T} t_i),\quad t_i=i{T\over 40},\ i=0,\ldots,200\tp\end{equation*}
+$$
+
+Display \( \bar\eta_i \) versus time \( t_i \) in a plot. Choose \( A=1 \) and
+\( T=2\pi \). Store the \( \bar\eta \) values in an array <code>etabar</code>.
+
+<p>
+<b>b)</b>
+Compute a signal with random noise \( E_i \),
+
+$$
+\begin{equation*} \eta_i = \bar\eta_i + E_i,\end{equation*}
+$$
+
+\( E_i \) is drawn from the normal distribution with mean zero and
+standard deviation \( \sigma = 0.04A \). Plot this \( \eta_i \)
+signal as circles in
+the same plot as \( \bar\eta_i \). Store the \( E_i \) in an array <code>E</code> for
+later use.
+
+<p>
+<b>c)</b>
+Compute the first derivative of \( \bar\eta_i \) by the formula
+
+$$
+\begin{equation*}  {\bar\eta_{i+1}-\bar\eta_{i-1}\over 2h}, \quad i=1,\ldots,n-1, \end{equation*}
+$$
+
+and store the values in an array <code>detabar</code>.
+Display the graph.
+
+<p>
+<b>d)</b>
+Compute the first derivative of the error term by the formula
+
+$$
+\begin{equation*}  {E_{i+1}-E_{i-1}\over 2h}, \quad i=1,\ldots,n-1, \end{equation*}
+$$
+
+and store the values in an array <code>dE</code>. Calculate the mean and
+the standard deviation of <code>dE</code>.
+
+<p>
+<b>e)</b>
+Plot <code>detabar</code> and
+<code>detabar + dE</code>. Use the result of the standard deviation
+calculations to explain the qualitative features of the graphs.
+
+<p>
+<b>f)</b>
+The second derivative of a time signal \( \eta_i \) can be
+computed by
+
+$$
+\begin{equation*}
+{\eta_{i+1}-2\eta_i + \eta_{i-1}\over h^2},
+\quad i=1,\ldots,n-1\tp
+\end{equation*}
+$$
+
+Use this formula on the <code>etabar</code> data and save the result in
+<code>d2etabar</code>. Also apply the formula to the <code>E</code> data and save
+the result in <code>d2E</code>. Plot <code>d2etabar</code> and <code>d2etabar + d2E</code>.
+Compute the standard deviation of <code>d2E</code> and compare with the
+standard deviation of <code>dE</code> and <code>E</code>. Discuss the plot in light
+of these standard deviations.
+
+<p>
+Filename: <code>sine_noise.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:random:ex23">Exercise 42: Model noise in a time signal</h2>
+
+<p>
+We assume that the measured data can be modeled as a smooth
+time signal \( \bar\eta (t) \) plus a random variation \( E(t) \).
+Computing the velocity of \( \eta = \bar\eta + E \) results in a smooth
+velocity from the \( \bar\eta \) term and a noisy signal from the \( E \)
+term.
+
+<p>
+<b>a)</b>
+We can estimate the level of noise in the first derivative of
+\( E \) as follows.
+The random numbers \( E(t_i) \) are assumed to be independent and normally
+distributed with mean zero and standard deviation \( \sigma \).
+It can then be shown that
+
+$$
+\begin{equation*} {E_{i+1}-E_{i-1}\over 2h}\end{equation*}
+$$
+
+produces numbers that come from a normal distribution with mean zero and
+standard deviation \( 2^{-1/2}h^{-1}\sigma \).
+How much is the original noise, reflected by \( \sigma \), magnified when we
+use this numerical approximation of the velocity?
+
+<p>
+<b>b)</b>
+The fraction
+
+$$
+\begin{equation*}{E_{i+1}-2E_i + E_{i-1}\over h^2}\end{equation*}
+$$
+
+will also generate numbers from a normal distribution with mean zero, but
+this time with standard deviation \( 2h^{-2}\sigma \).
+Find out how much the noise is magnified in the computed acceleration signal.
+
+<p>
+<b>c)</b>
+The numbers in the <code>gauge.dat</code> file in <a href="#sec:random:ex22">Exercise 40: Differentiate noise measurements</a>
+are given with 5 digits. This is no
+certain indication of the accuracy of the measurements, but as a test
+we may assume \( \sigma \) is of the order \( 10^{-4} \). Check if the
+visual results for the velocity and acceleration are consistent with
+the standard deviation of the noise in these signals as modeled above.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="bioinf:exer:Markov:chain:eff">Exercise 43: Speed up Markov chain mutation</h2>
+
+<p>
+The functions <code>transition</code> and <code>mutate_via_markov_chain</code> from the section <a href="._random-readable003.html#bioinf:random">Random mutations of genes</a> were made for being easy to read and understand.  Upon
+closer inspection, we realize that the <code>transition</code> function
+constructs the <code>interval_limits</code> every time a random transition is to
+be computed, and we want to run a large number of transitions.  By
+merging the two functions, pre-computing interval limits for each
+<code>from_base</code>, and adding a loop over <code>N</code> mutations, one can
+reduce the computation of interval limits to a minimum. Perform such
+an efficiency enhancement.  Measure the CPU time of this new function
+versus the <code>mutate_via_markov_chain</code> function for 1 million mutations.
+Filename: <code>markov_chain_mutation2.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<h1 id="___sec114">References </h1>
+
+<p>
+<!-- begin bibliography -->
+
+<ol>
+ <li> <div id="Langtangen_TCSE6_cython"></div> <b>H. P. Langtangen</b>. 
+    Migrating Python to compiled code,
+    \emphhttp://hplgit.github.io/primer.html/doc/pub/cython,
+    <a href="http://hplgit.github.io/primer.html/doc/pub/cython" target="_self"><tt>http://hplgit.github.io/primer.html/doc/pub/cython</tt></a>.</li>
+ <li> <div id="Langtangen_TCSE6_files"></div> <b>H. P. Langtangen</b>. 
+    Files, strings, and dictionaries,
+    \emphhttp://hplgit.github.io/primer.html/doc/pub/files,
+    <a href="http://hplgit.github.io/primer.html/doc/pub/files" target="_self"><tt>http://hplgit.github.io/primer.html/doc/pub/files</tt></a>.</li>
+ <li> <div id="Langtangen_TCSE6_diffeq"></div> <b>H. P. Langtangen</b>. 
+    Sequences and difference equations,
+    \emphhttp://hplgit.github.io/primer.html/doc/pub/diffeq,
+    <a href="http://hplgit.github.io/primer.html/doc/pub/diffeq" target="_self"><tt>http://hplgit.github.io/primer.html/doc/pub/diffeq</tt></a>.</li>
+ <li> <div id="Langtangen_TCSE6_plot"></div> <b>H. P. Langtangen</b>. 
+    Array computing and curve plotting,
+    \emphhttp://hplgit.github.io/primer.html/doc/pub/plot,
+    <a href="http://hplgit.github.io/primer.html/doc/pub/plot" target="_self"><tt>http://hplgit.github.io/primer.html/doc/pub/plot</tt></a>.</li>
+ <li> <div id="Langtangen_TCSE6_varargs"></div> <b>H. P. Langtangen</b>. 
+    Variable number of function arguments in Python,
+    \emphhttp://hplgit.github.io/primer.html/doc/pub/varargs,
+    <a href="http://hplgit.github.io/primer.html/doc/pub/varargs" target="_self"><tt>http://hplgit.github.io/primer.html/doc/pub/varargs</tt></a>.</li>
+ <li> <div id="Langtangen_TCSE6_timing"></div> <b>H. P. Langtangen</b>. 
+    Evaluating the efficiency of Python programs,
+    \emphhttp://hplgit.github.io/primer.html/doc/pub/timing,
+    <a href="http://hplgit.github.io/primer.html/doc/pub/timing" target="_self"><tt>http://hplgit.github.io/primer.html/doc/pub/timing</tt></a>.</li>
+</ol>
+
+<!-- end bibliography -->
+
+<p>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pager">
+  <li class="previous">
+    <a href="._random-readable007.html">&larr; Prev</a>
+  </li>
+</ul>
+<!-- ------------------- end of main content --------------- -->
+
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap footer
+<footer>
+<a href="http://..."><img width="250" align=right src="http://..."></a>
+</footer>
+-->
+
+
+</body>
+</html>
+    
+

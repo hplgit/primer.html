@@ -1,0 +1,1319 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Random numbers and simple games">
+<meta name="keywords" content="random numbers,seed,uniformly distributed random numbers,random numbers uniform distribution,bin (histogram),histogram (normalized),random numbers histogram,vectorized drawing of random numbers,random numbers vectorization,mean,average,random numbers statistics,variance,standard deviation,mod function,normally distributed random numbers,random numbers normal distribution,random numbers integers,integer random numbers,probability,random numbers Monte Carlo simulation,Monte Carlo simulation,Monte Carlo integration,random numbers integration,Midpoint rule for integration,mod function,measure time in programs,efficiency measure,random walk,random numbers random walk,making movie,cumulative sum">
+
+<title>Random numbers and simple games</title>
+
+<!-- Bootstrap style: bootstrap_bluegray -->
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_styles/style_bootstrap/css/bootstrap_bluegray.css" rel="stylesheet">
+<!-- not necessary
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+
+<style type="text/css">
+/* Let inline verbatim have the same color as the surroundings */
+code { color: inherit; background-color: transparent; }
+
+/* Add scrollbar to dropdown menus in bootstrap navigation bar */
+.dropdown-menu {
+   height: auto;
+   max-height: 400px;
+   overflow-x: hidden;
+}
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [('Drawing random numbers', 1, None, '___sec0'),
+              ('The seed', 2, None, '___sec1'),
+              ('Uniformly distributed random numbers',
+               2,
+               'sec:random:uniform',
+               'sec:random:uniform'),
+              ('Visualizing the distribution', 2, None, '___sec3'),
+              ('Vectorized drawing of random numbers', 2, None, '___sec4'),
+              ('Warning', 3, None, '___sec5'),
+              ('Computing the mean and standard deviation',
+               2,
+               'sec:random:statistics',
+               'sec:random:statistics'),
+              ('The Gaussian or normal distribution',
+               2,
+               'sec:random:normal',
+               'sec:random:normal'),
+              ('Drawing integers', 1, 'sec:random:ints', 'sec:random:ints'),
+              ('Random integer functions', 2, None, '___sec9'),
+              ('Example: Throwing a die', 2, None, '___sec10'),
+              ('Scalar version', 3, None, '___sec11'),
+              ('Vectorized version', 3, None, '___sec12'),
+              ('Vectorized version with batches', 3, None, '___sec13'),
+              ('Verification of the scalar version', 3, None, '___sec14'),
+              ('Verification of all versions', 3, None, '___sec15'),
+              ('Drawing a random element from a list', 2, None, '___sec16'),
+              ('Example: Drawing cards from a deck',
+               2,
+               'sec:random:deck1',
+               'sec:random:deck1'),
+              ('Example: Class implementation of a deck',
+               2,
+               'sec:class:deck:class',
+               'sec:class:deck:class'),
+              ('Computing probabilities',
+               1,
+               'sec:random:probability',
+               'sec:random:probability'),
+              ('Principles of Monte Carlo simulation', 2, None, '___sec20'),
+              ('Example: Throwing dice',
+               2,
+               'sec:random:probability:dice',
+               'sec:random:probability:dice'),
+              ('Straightforward solution', 3, None, '___sec22'),
+              ('Vectorization', 3, None, '___sec23'),
+              ('Exact solution', 3, None, '___sec24'),
+              ('A game', 3, None, '___sec25'),
+              ('Decide if a game is fair', 3, None, '___sec26'),
+              ('Example: Drawing balls from a hat',
+               2,
+               'sec:random:balls',
+               'sec:random:balls'),
+              ('Random mutations of genes',
+               2,
+               'bioinf:random',
+               'bioinf:random'),
+              ('A simple mutation model', 3, None, '___sec29'),
+              ('Vectorized version', 3, None, '___sec30'),
+              ('A Markov chain mutation model', 3, None, '___sec31'),
+              ('Example: Policies for limiting population growth',
+               2,
+               'sec:random:china',
+               'sec:random:china'),
+              ('Simple games', 1, None, '___sec33'),
+              ('Guessing a number',
+               2,
+               'sec:random:game:guessn',
+               'sec:random:game:guessn'),
+              ('The game', 3, None, '___sec35'),
+              ('The implementation', 3, None, '___sec36'),
+              ('Rolling two dice',
+               2,
+               'sec:random:twodicesumguess',
+               'sec:random:twodicesumguess'),
+              ('The game', 3, None, '___sec38'),
+              ('The implementation', 3, None, '___sec39'),
+              ('Example', 3, None, '___sec40'),
+              ('A class version', 3, None, '___sec41'),
+              ('Monte Carlo integration',
+               1,
+               'sec:random:MonteCarlo:integration',
+               'sec:random:MonteCarlo:integration'),
+              ('Derivation of Monte Carlo integration',
+               2,
+               'sec:random:MCint:ideas',
+               'sec:random:MCint:ideas'),
+              ('The calculus approach via the mean-value theorem',
+               3,
+               None,
+               '___sec44'),
+              ('The probability theory approach', 3, None, '___sec45'),
+              ('Implementation of standard Monte Carlo integration',
+               2,
+               'sec:random:MCint:std',
+               'sec:random:MCint:std'),
+              ('Example', 3, None, '___sec47'),
+              ('Remark', 3, None, '___sec48'),
+              ('Area computing by throwing random points',
+               2,
+               'sec:random:MCdart',
+               'sec:random:MCdart'),
+              ('Random walk in one space dimension',
+               1,
+               'sec:random:rw1D',
+               'sec:random:rw1D'),
+              ('Basic implementation', 2, None, '___sec51'),
+              ('Visualization', 2, None, '___sec52'),
+              ('Random walk as a difference equation', 2, None, '___sec53'),
+              ('Computing statistics of the particle positions',
+               2,
+               'sec:random:walk:1D:statistics',
+               'sec:random:walk:1D:statistics'),
+              ('Vectorized implementation',
+               2,
+               'sec:random:walk:1D:vectorized',
+               'sec:random:walk:1D:vectorized'),
+              ('Random walk in two space dimensions',
+               1,
+               'sec:random:rw2D',
+               'sec:random:rw2D'),
+              ('Basic implementation',
+               2,
+               'sec:random:rw2D:scalar',
+               'sec:random:rw2D:scalar'),
+              ('Vectorized implementation',
+               2,
+               'sec:random:walk:2D:vectorized',
+               'sec:random:walk:2D:vectorized'),
+              ('Summary', 1, None, '___sec59'),
+              ('Chapter topics', 2, None, '___sec60'),
+              ('Drawing random numbers', 3, None, '___sec61'),
+              ('Typical probability computation via Monte Carlo simulation',
+               3,
+               None,
+               '___sec62'),
+              ('Statistical measures', 3, None, '___sec63'),
+              ('Terminology', 3, None, '___sec64'),
+              ('Example: Random growth',
+               2,
+               'sec:random:summarizingex',
+               'sec:random:summarizingex'),
+              ('Problem', 3, None, '___sec66'),
+              ('Solution', 3, None, '___sec67'),
+              ('Exercises', 1, None, '___sec68'),
+              ('Exercise 1: Flip a coin times',
+               2,
+               'sec:random:ex17',
+               'sec:random:ex17'),
+              ('Exercise 2: Compute a probability',
+               2,
+               'sec:random:ex7',
+               'sec:random:ex7'),
+              ('Exercise 3: Choose random colors',
+               2,
+               'sec:random:ex6',
+               'sec:random:ex6'),
+              ('Exercise 4: Draw balls from a hat',
+               2,
+               'sec:random:ex4',
+               'sec:random:ex4'),
+              ('Exercise 5: Computing probabilities of rolling dice',
+               2,
+               'sec:random:ex2',
+               'sec:random:ex2'),
+              ('Exercise 6: Estimate the probability in a dice game',
+               2,
+               'sec:random:ex10',
+               'sec:random:ex10'),
+              ('Exercise 7: Compute the probability of hands of cards',
+               2,
+               'sec:random:ex44',
+               'sec:random:ex44'),
+              ('Exercise 8: Decide if a dice game is fair',
+               2,
+               'sec:random:ex11',
+               'sec:random:ex11'),
+              ('Exercise 9: Adjust a game to make it fair',
+               2,
+               'sec:random:ex12',
+               'sec:random:ex12'),
+              ('Exercise 10: Generalize a game',
+               2,
+               'sec:random:ex12b',
+               'sec:random:ex12b'),
+              ('Exercise 11: Compare two playing strategies',
+               2,
+               'sec:random:ex2c',
+               'sec:random:ex2c'),
+              ('Exercise 12: Investigate strategies in a game',
+               2,
+               'sec:random:ex2e',
+               'sec:random:ex2e'),
+              ('Exercise 13: Investigate the winning chances of some games',
+               2,
+               'sec:random:ex45',
+               'sec:random:ex45'),
+              ('Exercise 14: Compute probabilities of throwing two dice',
+               2,
+               'sec:random:ex2b',
+               'sec:random:ex2b'),
+              ('Exercise 15: Vectorize flipping a coin',
+               2,
+               'sec:random:ex18',
+               'sec:random:ex18'),
+              ('Exercise 16: Vectorize a probablility computation',
+               2,
+               'sec:random:ex7b',
+               'sec:random:ex7b'),
+              ('Exercise 17: Throw dice and compute a small probability',
+               2,
+               'sec:random:ex30',
+               'sec:random:ex30'),
+              ('Exercise 18: Difference equation for random numbers',
+               2,
+               'sec:random:ex27',
+               'sec:random:ex27'),
+              ('Exercise 19: Make a class for drawing balls from a hat',
+               2,
+               'sec:random:ex9',
+               'sec:random:ex9'),
+              ('Exercise 20: Independent  versus dependent random numbers',
+               2,
+               'sec:random:ex21',
+               'sec:random:ex21'),
+              ('Exercise 21: Compute the probability of flipping a coin',
+               2,
+               'sec:random:ex19',
+               'sec:random:ex19'),
+              ('Exercise 22: Simulate a poker game',
+               2,
+               'sec:random:ex41',
+               'sec:random:ex41'),
+              ('Exercise 23: Estimate growth in a simulation model',
+               2,
+               'sec:random:ex29',
+               'sec:random:ex29'),
+              ('Exercise 24: Investigate guessing strategies',
+               2,
+               'sec:random:ex15',
+               'sec:random:ex15'),
+              ('Exercise 25: Vectorize a dice game',
+               2,
+               'sec:random:ex13',
+               'sec:random:ex13'),
+              ('Exercise 26: Compute $\\pi$ by a Monte Carlo method',
+               2,
+               'sec:random:ex31',
+               'sec:random:ex31'),
+              ('Exercise 27: Compute $\\pi$ by a Monte Carlo method',
+               2,
+               'sec:random:ex32',
+               'sec:random:ex32'),
+              ('Exercise 28: Compute $\\pi$ by a random sum',
+               2,
+               'sec:random:ex31b',
+               'sec:random:ex31b'),
+              ('Exercise 29: 1D random walk with drift',
+               2,
+               'sec:random:ex1',
+               'sec:random:ex1'),
+              ('Exercise 30: 1D random walk until a point is hit',
+               2,
+               'sec:random:ex3',
+               'sec:random:ex3'),
+              ('Exercise 31: Simulate making a fortune from gaming',
+               2,
+               'sec:random:ex3:rwgame',
+               'sec:random:ex3:rwgame'),
+              ('Exercise 32: Make classes for 2D random walk',
+               2,
+               'sec:random:ex33',
+               'sec:random:ex33'),
+              ('Exercise 33: 2D random walk with walls; scalar version',
+               2,
+               'sec:random:ex36',
+               'sec:random:ex36'),
+              ('Exercise 34: 2D random walk with walls; vectorized version',
+               2,
+               'sec:random:ex37',
+               'sec:random:ex37'),
+              ('Exercise 35: Simulate mixing of gas molecules',
+               2,
+               'sec:random:ex38',
+               'sec:random:ex38'),
+              ('Remarks', 3, None, '___sec104'),
+              ('Exercise 36: Simulate slow mixing of gas molecules',
+               2,
+               'sec:random:ex39',
+               'sec:random:ex39'),
+              ('Exercise 37: Guess beer brands',
+               2,
+               'sec:random:ex35',
+               'sec:random:ex35'),
+              ('Exercise 38: Simulate stock prices',
+               2,
+               'sec:random:ex26',
+               'sec:random:ex26'),
+              ('Exercise 39: Compute with option prices in finance',
+               2,
+               'sec:random:ex16',
+               'sec:random:ex16'),
+              ('Remarks', 3, None, '___sec109'),
+              ('Exercise 40: Differentiate noise measurements',
+               2,
+               'sec:random:ex22',
+               'sec:random:ex22'),
+              ('Exercise 41: Differentiate noisy signals',
+               2,
+               'sec:random:ex25',
+               'sec:random:ex25'),
+              ('Exercise 42: Model noise in a time signal',
+               2,
+               'sec:random:ex23',
+               'sec:random:ex23'),
+              ('Exercise 43: Speed up Markov chain mutation',
+               2,
+               'bioinf:exer:Markov:chain:eff',
+               'bioinf:exer:Markov:chain:eff'),
+              ('References', 1, None, '___sec114')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- newcommands_keep.tex -->
+$$
+\newcommand{\tp}{\thinspace .}
+\newcommand{\Prob}[1]{\hbox{P}(#1)}
+$$
+
+
+
+
+    
+<!-- Bootstrap navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="random-bootstrap.html">Random numbers and simple games</a>
+  </div>
+
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     <!-- navigation toc: --> <li><a href="._random-bootstrap001.html#___sec0" style="font-size: 80%;"><b>Drawing random numbers</b></a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap001.html#___sec1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The seed</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap001.html#sec:random:uniform" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Uniformly distributed random numbers</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap001.html#___sec3" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Visualizing the distribution</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap001.html#___sec4" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Vectorized drawing of random numbers</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap001.html#___sec5" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Warning</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap001.html#sec:random:statistics" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Computing the mean and standard deviation</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap001.html#sec:random:normal" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The Gaussian or normal distribution</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap002.html#sec:random:ints" style="font-size: 80%;"><b>Drawing integers</b></a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap002.html#___sec9" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Random integer functions</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap002.html#___sec10" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Throwing a die</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap002.html#___sec11" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scalar version</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap002.html#___sec12" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Vectorized version</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap002.html#___sec13" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Vectorized version with batches</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap002.html#___sec14" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Verification of the scalar version</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap002.html#___sec15" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Verification of all versions</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap002.html#___sec16" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Drawing a random element from a list</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap002.html#sec:random:deck1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Drawing cards from a deck</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap002.html#sec:class:deck:class" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Class implementation of a deck</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap003.html#sec:random:probability" style="font-size: 80%;"><b>Computing probabilities</b></a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap003.html#___sec20" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Principles of Monte Carlo simulation</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap003.html#sec:random:probability:dice" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Throwing dice</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap003.html#___sec22" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Straightforward solution</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap003.html#___sec23" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Vectorization</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap003.html#___sec24" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exact solution</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap003.html#___sec25" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A game</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap003.html#___sec26" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Decide if a game is fair</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap003.html#sec:random:balls" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Drawing balls from a hat</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap003.html#bioinf:random" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Random mutations of genes</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap003.html#___sec29" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A simple mutation model</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap003.html#___sec30" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Vectorized version</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap003.html#___sec31" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A Markov chain mutation model</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap003.html#sec:random:china" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Policies for limiting population growth</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec33" style="font-size: 80%;"><b>Simple games</b></a></li>
+     <!-- navigation toc: --> <li><a href="#sec:random:game:guessn" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Guessing a number</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec35" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The game</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec36" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The implementation</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:random:twodicesumguess" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Rolling two dice</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec38" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The game</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec39" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The implementation</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec40" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec41" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A class version</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:random:MonteCarlo:integration" style="font-size: 80%;"><b>Monte Carlo integration</b></a></li>
+     <!-- navigation toc: --> <li><a href="#sec:random:MCint:ideas" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Derivation of Monte Carlo integration</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec44" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The calculus approach via the mean-value theorem</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec45" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The probability theory approach</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:random:MCint:std" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Implementation of standard Monte Carlo integration</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec47" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec48" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remark</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:random:MCdart" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Area computing by throwing random points</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap005.html#sec:random:rw1D" style="font-size: 80%;"><b>Random walk in one space dimension</b></a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap005.html#___sec51" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Basic implementation</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap005.html#___sec52" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Visualization</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap005.html#___sec53" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Random walk as a difference equation</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap005.html#sec:random:walk:1D:statistics" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Computing statistics of the particle positions</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap005.html#sec:random:walk:1D:vectorized" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Vectorized implementation</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap006.html#sec:random:rw2D" style="font-size: 80%;"><b>Random walk in two space dimensions</b></a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap006.html#sec:random:rw2D:scalar" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Basic implementation</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap006.html#sec:random:walk:2D:vectorized" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Vectorized implementation</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap007.html#___sec59" style="font-size: 80%;"><b>Summary</b></a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap007.html#___sec60" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Chapter topics</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap007.html#___sec61" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Drawing random numbers</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap007.html#___sec62" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Typical probability computation via Monte Carlo simulation</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap007.html#___sec63" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Statistical measures</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap007.html#___sec64" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Terminology</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap007.html#sec:random:summarizingex" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Random growth</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap007.html#___sec66" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap007.html#___sec67" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Solution</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#___sec68" style="font-size: 80%;"><b>Exercises</b></a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex17" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 1: Flip a coin times</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex7" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 2: Compute a probability</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex6" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 3: Choose random colors</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex4" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 4: Draw balls from a hat</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 5: Computing probabilities of rolling dice</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex10" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 6: Estimate the probability in a dice game</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex44" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 7: Compute the probability of hands of cards</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex11" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 8: Decide if a dice game is fair</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex12" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 9: Adjust a game to make it fair</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex12b" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 10: Generalize a game</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex2c" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 11: Compare two playing strategies</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex2e" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 12: Investigate strategies in a game</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex45" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 13: Investigate the winning chances of some games</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex2b" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 14: Compute probabilities of throwing two dice</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex18" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 15: Vectorize flipping a coin</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex7b" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 16: Vectorize a probablility computation</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex30" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 17: Throw dice and compute a small probability</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex27" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 18: Difference equation for random numbers</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex9" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 19: Make a class for drawing balls from a hat</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex21" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 20: Independent  versus dependent random numbers</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex19" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 21: Compute the probability of flipping a coin</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex41" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 22: Simulate a poker game</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex29" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 23: Estimate growth in a simulation model</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex15" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 24: Investigate guessing strategies</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex13" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 25: Vectorize a dice game</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex31" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 26: Compute \( \pi \) by a Monte Carlo method</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex32" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 27: Compute \( \pi \) by a Monte Carlo method</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex31b" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 28: Compute \( \pi \) by a random sum</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 29: 1D random walk with drift</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex3" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 30: 1D random walk until a point is hit</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex3:rwgame" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 31: Simulate making a fortune from gaming</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex33" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 32: Make classes for 2D random walk</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex36" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 33: 2D random walk with walls; scalar version</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex37" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 34: 2D random walk with walls; vectorized version</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex38" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 35: Simulate mixing of gas molecules</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#___sec104" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remarks</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex39" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 36: Simulate slow mixing of gas molecules</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex35" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 37: Guess beer brands</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex26" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 38: Simulate stock prices</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex16" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 39: Compute with option prices in finance</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#___sec109" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remarks</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex22" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 40: Differentiate noise measurements</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex25" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 41: Differentiate noisy signals</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex23" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 42: Model noise in a time signal</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#bioinf:exer:Markov:chain:eff" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 43: Speed up Markov chain mutation</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#___sec114" style="font-size: 80%;"><b>References</b></a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div> <!-- end of navigation bar -->
+
+<div class="container">
+
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+
+<a name="part0004"></a>
+<!-- !split -->
+<p style="font-size:80%">This chapter is taken from book <a href="http://www.springer.com/gp/book/9783642549588">A Primer on Scientific Programming with Python</a> by H. P. Langtangen, 4th edition, Springer, 2014.</p>
+
+<h1 id="___sec33">Simple games </h1>
+
+<p>
+This section presents the implementation of some simple games based on
+drawing random numbers. The games can be played by two humans, but here
+we consider a human versus the computer.
+
+<h2 id="sec:random:game:guessn">Guessing a number</h2>
+
+<h3 id="___sec35">The game </h3>
+
+<p>
+The computer determines a secret number, and the player shall guess
+the number. For each guess, the computer tells if the number
+is too high or too low.
+
+<h3 id="___sec36">The implementation </h3>
+
+<p>
+We let the computer draw a random integer in an interval known to the
+player, let us say \( [1,100] \).
+In a <code>while</code> loop the program prompts the player for a guess,
+reads the guess, and checks if the guess is higher or lower than the
+drawn number. An appropriate message is written to the screen.
+We think the algorithm can be expressed directly as executable Python code:
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">random</span>
+number <span style="color: #666666">=</span> random<span style="color: #666666">.</span>randint(<span style="color: #666666">1</span>, <span style="color: #666666">100</span>)
+attempts <span style="color: #666666">=</span> <span style="color: #666666">0</span>  <span style="color: #408080; font-style: italic"># count no of attempts to guess the number</span>
+guess <span style="color: #666666">=</span> <span style="color: #666666">0</span>
+<span style="color: #008000; font-weight: bold">while</span> guess <span style="color: #666666">!=</span> number:
+    guess <span style="color: #666666">=</span> <span style="color: #008000">eval</span>(<span style="color: #008000">raw_input</span>(<span style="color: #BA2121">&#39;Guess a number: &#39;</span>))
+    attempts <span style="color: #666666">+=</span> <span style="color: #666666">1</span>
+    <span style="color: #008000; font-weight: bold">if</span> guess <span style="color: #666666">==</span> number:
+        <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;Correct! You used&#39;</span>, attempts, <span style="color: #BA2121">&#39;attempts!&#39;</span>
+        <span style="color: #008000; font-weight: bold">break</span>
+    <span style="color: #008000; font-weight: bold">elif</span> guess <span style="color: #666666">&lt;</span> number:
+        <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;Go higher!&#39;</span>
+    <span style="color: #008000; font-weight: bold">else</span>:
+        <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;Go lower!&#39;</span>
+</pre></div>
+<p>
+The program is available as the file <a href="http://tinyurl.com/pwyasaa/random/guess_number.py" target="_self"><tt>guess_number.py</tt></a>.
+Try it out! Can you come up with a strategy for reducing the number of
+attempts? See <a href="._random-bootstrap008.html#sec:random:ex15">Exercise 24: Investigate guessing strategies</a> for an automatic
+investigation of two possible strategies.
+
+<h2 id="sec:random:twodicesumguess">Rolling two dice</h2>
+
+<h3 id="___sec38">The game </h3>
+
+<p>
+The player is supposed
+to roll two dice, and beforehand guess the sum of the eyes.  If the
+guess on the sum is \( n \) and it turns out to be right, the player earns \( n \)
+euros. Otherwise, the player must pay 1 euro.  The machine plays in the
+same way, but the machine's guess of the number of eyes is a uniformly
+distributed number between 2 and 12.  The player determines the number
+of rounds, \( r \), to play, and receives \( r \) euros as initial capital.  The
+winner is the one that has the largest amount of euros after \( r \)
+rounds, or the one that avoids to lose all the money.
+
+<h3 id="___sec39">The implementation </h3>
+
+<p>
+There are three actions that we can naturally implement as functions:
+(i) roll two dice and compute the sum; (ii) ask the player to guess
+the number of eyes; (iii) draw the computer's guess of the number of
+eyes. One soon realizes that it is as easy to implement this game
+for an arbitrary number of dice as it is for two dice. Consequently we can
+introduce <code>ndice</code> as the number of dice.
+The three functions take the following forms:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">random</span>
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">roll_dice_and_compute_sum</span>(ndice):
+    <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">sum</span>([random<span style="color: #666666">.</span>randint(<span style="color: #666666">1</span>, <span style="color: #666666">6</span>) \ 
+                <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(ndice)])
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">computer_guess</span>(ndice):
+    <span style="color: #008000; font-weight: bold">return</span> random<span style="color: #666666">.</span>randint(ndice, <span style="color: #666666">6*</span>ndice)
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">player_guess</span>(ndice):
+    <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">input</span>(<span style="color: #BA2121">&#39;Guess the sum of the no of eyes &#39;</span>\ 
+                 <span style="color: #BA2121">&#39;in the next throw: &#39;</span>)
+</pre></div>
+<p>
+We can now implement one round in the game for the player or the
+computer. The round starts with a capital, a guess is performed by
+calling the right function for guessing, and the capital is updated:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">play_one_round</span>(ndice, capital, guess_function):
+    guess <span style="color: #666666">=</span> guess_function(ndice)
+    throw <span style="color: #666666">=</span> roll_dice_and_compute_sum(ndice)
+    <span style="color: #008000; font-weight: bold">if</span> guess <span style="color: #666666">==</span> throw:
+        capital <span style="color: #666666">+=</span> guess
+    <span style="color: #008000; font-weight: bold">else</span>:
+        capital <span style="color: #666666">-=</span> <span style="color: #666666">1</span>
+    <span style="color: #008000; font-weight: bold">return</span> capital, throw, guess
+</pre></div>
+<p>
+Here, <code>guess_function</code> is either
+<code>computer_guess</code> or
+<code>player_guess</code>.
+
+<p>
+With the <code>play_one_round</code> function we can run a number of rounds
+involving both players:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">play</span>(nrounds, ndice<span style="color: #666666">=2</span>):
+    player_capital <span style="color: #666666">=</span> computer_capital <span style="color: #666666">=</span> nrounds  <span style="color: #408080; font-style: italic"># start capital</span>
+
+    <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(nrounds):
+        player_capital, throw, guess <span style="color: #666666">=</span> \ 
+             play_one_round(ndice, player_capital, player_guess)
+        <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;YOU guessed </span><span style="color: #BB6688; font-weight: bold">%d</span><span style="color: #BA2121">, got </span><span style="color: #BB6688; font-weight: bold">%d</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> (guess, throw)
+
+        computer_capital, throw, guess <span style="color: #666666">=</span> \ 
+            play_one_round(ndice, computer_capital, computer_guess)
+
+        <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;Machine guessed </span><span style="color: #BB6688; font-weight: bold">%d</span><span style="color: #BA2121">, got </span><span style="color: #BB6688; font-weight: bold">%d</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> (guess, throw)
+
+        <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;Status: you have </span><span style="color: #BB6688; font-weight: bold">%d</span><span style="color: #BA2121"> euros, machine has </span><span style="color: #BB6688; font-weight: bold">%d</span><span style="color: #BA2121"> euros&#39;</span> <span style="color: #666666">%</span> \ 
+              (player_capital, computer_capital)
+
+        <span style="color: #008000; font-weight: bold">if</span> player_capital <span style="color: #666666">==</span> <span style="color: #666666">0</span> <span style="color: #AA22FF; font-weight: bold">or</span> computer_capital <span style="color: #666666">==</span> <span style="color: #666666">0</span>:
+            <span style="color: #008000; font-weight: bold">break</span>
+
+    <span style="color: #008000; font-weight: bold">if</span> computer_capital <span style="color: #666666">&gt;</span> player_capital:
+        winner <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;Machine&#39;</span>
+    <span style="color: #008000; font-weight: bold">else</span>:
+        winner <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;You&#39;</span>
+    <span style="color: #008000; font-weight: bold">print</span> winner, <span style="color: #BA2121">&#39;won!&#39;</span>
+</pre></div>
+<p>
+The name of the program is <a href="http://tinyurl.com/pwyasaa/random/ndice.py" target="_self"><tt>ndice.py</tt></a>.
+
+<h3 id="___sec40">Example </h3>
+
+<p>
+Here is a session (with a fixed seed of 20):
+
+<p>
+
+<!-- code=text (!bc ccq) typeset with pygments style "default" -->
+<blockquote>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">Guess the sum of the no of eyes in the next throw: 7
+YOU guessed 7, got 11
+Machine guessed 10, got 8
+Status: you have 9 euros, machine has 9 euros
+
+Guess the sum of the no of eyes in the next throw: 9
+YOU guessed 9, got 10
+Machine guessed 11, got 6
+Status: you have 8 euros, machine has 8 euros
+
+Guess the sum of the no of eyes in the next throw: 9
+YOU guessed 9, got 9
+Machine guessed 3, got 8
+Status: you have 17 euros, machine has 7 euros
+</pre></div>
+</blockquote><p>
+<a href="._random-bootstrap008.html#sec:random:ex2c">Exercise 11: Compare two playing strategies</a> asks you to perform simulations
+to determine whether a certain
+strategy can make the player win over the computer in the long run.
+
+<h3 id="___sec41">A class version </h3>
+
+<p>
+We can cast the previous code segment in a class. Many will argue
+that a class-based implementation is closer to the problem being modeled
+and hence easier to modify or extend.
+
+<p>
+A natural class is <code>Dice</code>,
+which can throw <code>n</code> dice:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Dice</span>:
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__init__</span>(<span style="color: #008000">self</span>, n<span style="color: #666666">=1</span>):
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>n <span style="color: #666666">=</span> n   <span style="color: #408080; font-style: italic"># no of dice</span>
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">throw</span>(<span style="color: #008000">self</span>):
+        <span style="color: #008000; font-weight: bold">return</span> [random<span style="color: #666666">.</span>randint(<span style="color: #666666">1</span>,<span style="color: #666666">6</span>) \ 
+                <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #008000">self</span><span style="color: #666666">.</span>n)]
+</pre></div>
+<p>
+Another natural class is <code>Player</code>, which can perform
+the actions of a player.
+Functions can then make use of <code>Player</code> to set up a game.
+A <code>Player</code> has a name, an initial capital, a set of dice,
+and a <code>Dice</code> object to throw the object:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Player</span>:
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__init__</span>(<span style="color: #008000">self</span>, name, capital, guess_function, ndice):
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>name <span style="color: #666666">=</span> name
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>capital <span style="color: #666666">=</span> capital
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>guess_function <span style="color: #666666">=</span> guess_function
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>dice <span style="color: #666666">=</span> Dice(ndice)
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">play_one_round</span>(<span style="color: #008000">self</span>):
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>guess <span style="color: #666666">=</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>guess_function(<span style="color: #008000">self</span><span style="color: #666666">.</span>dice<span style="color: #666666">.</span>n)
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>throw <span style="color: #666666">=</span> <span style="color: #008000">sum</span>(<span style="color: #008000">self</span><span style="color: #666666">.</span>dice<span style="color: #666666">.</span>throw())
+        <span style="color: #008000; font-weight: bold">if</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>guess <span style="color: #666666">==</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>throw:
+            <span style="color: #008000">self</span><span style="color: #666666">.</span>capital <span style="color: #666666">+=</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>guess
+        <span style="color: #008000; font-weight: bold">else</span>:
+            <span style="color: #008000">self</span><span style="color: #666666">.</span>capital <span style="color: #666666">-=</span> <span style="color: #666666">1</span>
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>message()
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>broke()
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">message</span>(<span style="color: #008000">self</span>):
+        <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;</span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121"> guessed </span><span style="color: #BB6688; font-weight: bold">%d</span><span style="color: #BA2121">, got </span><span style="color: #BB6688; font-weight: bold">%d</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> \ 
+              (<span style="color: #008000">self</span><span style="color: #666666">.</span>name, <span style="color: #008000">self</span><span style="color: #666666">.</span>guess, <span style="color: #008000">self</span><span style="color: #666666">.</span>throw)
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">broke</span>(<span style="color: #008000">self</span>):
+        <span style="color: #008000; font-weight: bold">if</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>capital <span style="color: #666666">==</span> <span style="color: #666666">0</span>:
+            <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;</span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121"> lost!&#39;</span> <span style="color: #666666">%</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>name
+            sys<span style="color: #666666">.</span>exit(<span style="color: #666666">0</span>)  <span style="color: #408080; font-style: italic"># end the program</span>
+</pre></div>
+<p>
+The guesses of the computer and the player are specified by functions:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">computer_guess</span>(ndice):
+    <span style="color: #408080; font-style: italic"># All guesses have the same probability</span>
+    <span style="color: #008000; font-weight: bold">return</span> random<span style="color: #666666">.</span>randint(ndice, <span style="color: #666666">6*</span>ndice)
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">player_guess</span>(ndice):
+    <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">input</span>(<span style="color: #BA2121">&#39;Guess the sum of the no of eyes &#39;</span>\ 
+                 <span style="color: #BA2121">&#39;in the next throw: &#39;</span>)
+</pre></div>
+<p>
+The key function to play the whole game, utilizing the <code>Player</code> class
+for the computer and the user,
+can be expressed as
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">play</span>(nrounds, ndice<span style="color: #666666">=2</span>):
+    player <span style="color: #666666">=</span> Player(<span style="color: #BA2121">&#39;YOU&#39;</span>, nrounds, player_guess, ndice)
+    computer <span style="color: #666666">=</span> Player(<span style="color: #BA2121">&#39;Computer&#39;</span>, nrounds, computer_guess, ndice)
+
+    <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(nrounds):
+        player<span style="color: #666666">.</span>play_one_round()
+        computer<span style="color: #666666">.</span>play_one_round()
+        <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;Status: user has </span><span style="color: #BB6688; font-weight: bold">%d</span><span style="color: #BA2121"> euro, machine has </span><span style="color: #BB6688; font-weight: bold">%d</span><span style="color: #BA2121"> euro</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> \ 
+              (player<span style="color: #666666">.</span>capital, computer<span style="color: #666666">.</span>capital)
+
+    <span style="color: #008000; font-weight: bold">if</span> computer<span style="color: #666666">.</span>capital <span style="color: #666666">&gt;</span> player<span style="color: #666666">.</span>capital:
+        winner <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;Machine&#39;</span>
+    <span style="color: #008000; font-weight: bold">else</span>:
+        winner <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;You&#39;</span>
+    <span style="color: #008000; font-weight: bold">print</span> winner, <span style="color: #BA2121">&#39;won!&#39;</span>
+</pre></div>
+<p>
+The complete code is found in the file <a href="http://tinyurl.com/pwyasaa/random/ndice2.py" target="_self"><tt>ndice2.py</tt></a>.  There is no new functionality compared
+to the <code>ndice.py</code> implementation, just a new and better structuring of
+the code.
+
+<h1 id="sec:random:MonteCarlo:integration">Monte Carlo integration</h1>
+
+<p>
+One of the earliest applications of random numbers was numerical computation
+of integrals, which is actually non-random (deterministic) problem.
+Computing integrals with the aid of random numbers is known as
+Monte Carlo integration and is one of the most powerful and widely
+used mathematical technique throughout science and engineering.
+
+<p>
+Our main focus here will be integrals of the type \( \int_a^b f(x)dx \) for
+which the Monte Carlo integration is not a competitive technique compared
+to simple methods such as the Trapezoidal method, the Midpoint
+method, or Simpson's method. However, for integration of functions
+of <em>many variables</em>, the Monte Carlo approach is the best method
+we have. Such integrals arise all the time in quantum physics,
+financial engineering, and when estimating the uncertainty of
+mathematical computations. What you learn about Monte Carlo
+integration of functions of one variable (\( \int_a^b f(x)dx \)) is
+directly transferable to the important application cases where there
+are many variables involved.
+
+<h2 id="sec:random:MCint:ideas">Derivation of Monte Carlo integration</h2>
+
+<p>
+There are two ways to introduce Monte Carlo integration, one based
+on calculus and one based on probability theory. The goal is to
+compute a numerical approximation to
+
+$$ \int_a^b f(x)dx\tp$$
+
+<h3 id="___sec44">The calculus approach via the mean-value theorem </h3>
+
+<p>
+The mean-value theorem from calculus states that
+
+$$
+\begin{equation}
+\int_a^b f(x)dx = (b-a)\bar f,
+\tag{7}
+\end{equation}
+$$
+
+where \( \bar f \) is the mean value of \( f \), defined as
+
+$$ \bar f = {1\over b-a}\int_a^b f(x)dx\tp $$
+
+One way of using <a href="#mjx-eqn-7">(7)</a> to define
+a numerical method for integration is to approximate \( \bar f \)
+by taking the average of \( f \) at \( n \) points \( x_0,\ldots,x_{n-1} \):
+
+$$
+\begin{equation}
+\bar f\approx \frac{1}{n}\sum_{i=0}^{n-1} f(x_i)\tp
+\tag{8}
+\end{equation}
+$$
+
+(We let the numbering of the points go from \( 0 \) to \( n-1 \) because these
+numbers will later be indices in Python arrays, which have to start at \( 0 \).)
+
+<p>
+There is freedom in how to choose the points \( x_0,\ldots,x_{n-1} \).
+We could, for example, make them uniformly spaced in the interval
+\( [a, b] \). The particular choice
+
+$$ x_0 = a + ih + \frac{1}{2}h,\quad i=0,\ldots,n-1,\quad h=\frac{b-a}{n-1},$$
+
+correspond to the famous Midpoint rule for numerical integration.
+Intuitively, we anticipate that the more points we use, the better
+is the approximation \( \frac{1}{n}\sum_if(x_i) \) to the exact
+mean value \( \bar f \). For the Midpoint rule one can show mathematically,
+or numerically estimate through examples, that the error in the
+approximation depends on \( n \) as \( n^{-2} \). That is, doubling the
+number of points reduces the error by a factor 1/4.
+
+<p>
+A slightly different set of uniformly distributed points is
+
+$$ x_i = a + ih,\quad i=0,\ldots,n-1,\ldots,\quad h=\frac{b-1}{n-2}\tp$$
+
+These points might look more intuitive to many since they start at \( a \)
+and end at \( b \) (\( x_0=a \), \( x_{n-1}=b \)), but the error in the
+integration rule now goes as \( n^{-1} \): doubling the number of points just
+halves the error. That is, computing more function values to get
+a better integration estimate is less effective with this set points
+than with the slight displaced points used in the Midpoint rule.
+
+<p>
+One could also throw in the idea of using a set of <em>random</em> points,
+uniformly distributed in \( [a,b] \). This is the Monte Carlo integration
+technique. The error now goes like \( n^{-1/2} \), which means that
+many more points and corresponding function evaluations are needed
+to reduce the error compared to using the Midpoint
+method. The surprising fact, however, is that using random points
+for many variables (in high-dimensional vector spaces) yields a
+very effective integration technique, dramatically more effective
+than extending the ideas of the Midpoint rule to many variables.
+
+<h3 id="___sec45">The probability theory approach </h3>
+
+<p>
+People who are into probability theory usually like to interpret
+integrals as mathematical expectations of a random variable.
+(If you are not one of those, you can safely jump to
+the section <a href="#sec:random:MCint:std">Implementation of standard Monte Carlo integration</a> where we just program the
+simple sum in the Monte Carlo integration method.)
+More precisely, the integral \( \int_a^b f(x)dx \) can be expressed
+as a mathematical expectation of \( f(x) \) if \( x \) is a uniformly
+distributed random variable on \( [a,b] \). This expectation can be
+estimated by the average of random samples, which results in the
+Monte Carlo integration method. To see this, we start with the
+formula for the probability density function for a uniformly distributed
+random variable \( X \) on \( [a,b] \):
+
+$$ p(x) =\left\lbrace\begin{array}{ll}
+(b-a)^{-1},& x\in [a,b]\\ 
+0, & \hbox{otherwise}
+\end{array}\right.
+$$
+
+Now we can write the standard formula for the mathematical expectation
+\( \mbox{E}(f(X)) \):
+
+$$ \mbox{E}(f(X)) = \int_{-\infty}^{\infty} f(x)p(x)dx
+= \int_a^b f(x)\frac{1}{b-a}dx = (b-a)\int_a^b f(x)dx\tp
+$$
+
+The last integral is exactly what we want to compute. An expectation is
+usually estimated from a lot of samples, in this case uniformly
+distributed random numbers \( x_0,\ldots,x_{n-1} \) in \( [a,b] \),
+and computing the sample mean:
+
+$$ \mbox{E}(f(X)) \approx \frac{1}{n}\sum_{i=0}^{n-1} f(x_i)\tp$$
+
+The integral can therefore be estimated by
+
+$$ \int_a^b f(x)dx\approx (b-a)\frac{1}{n}\sum_{i=0}^{n-1} f(x_i),$$
+
+which is nothing but the Monte Carlo integration method.
+
+<h2 id="sec:random:MCint:std">Implementation of standard Monte Carlo integration</h2>
+
+<p>
+To summarize, Monte Carlo integration consists in generating \( n \)
+uniformly distributed random numbers in \( [a,b] \) and then compute
+
+$$
+\begin{equation}
+(b-a)\frac{1}{n}\sum_{i=0}^{n-1} f(x_i)\tp
+\tag{9}
+\end{equation}
+$$
+
+We can implement <a href="#mjx-eqn-9">(9)</a> in a small function:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">random</span>
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">MCint</span>(f, a, b, n):
+    s <span style="color: #666666">=</span> <span style="color: #666666">0</span>
+    <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">xrange</span>(n):
+        x <span style="color: #666666">=</span> random<span style="color: #666666">.</span>uniform(a, b)
+        s <span style="color: #666666">+=</span> f(x)
+    I <span style="color: #666666">=</span> (<span style="color: #008000">float</span>(b<span style="color: #666666">-</span>a)<span style="color: #666666">/</span>n)<span style="color: #666666">*</span>s
+    <span style="color: #008000; font-weight: bold">return</span> I
+</pre></div>
+<p>
+One normally needs a large \( n \) to obtain good results with this method,
+so a faster vectorized version of the <code>MCint</code> function is very useful:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">MCint_vec</span>(f, a, b, n):
+    x <span style="color: #666666">=</span> np<span style="color: #666666">.</span>random<span style="color: #666666">.</span>uniform(a, b, n)
+    s <span style="color: #666666">=</span> np<span style="color: #666666">.</span>sum(f(x))
+    I <span style="color: #666666">=</span> (<span style="color: #008000">float</span>(b<span style="color: #666666">-</span>a)<span style="color: #666666">/</span>n)<span style="color: #666666">*</span>s
+    <span style="color: #008000; font-weight: bold">return</span> I
+</pre></div>
+<p>
+The functions above are available in the module
+file <a href="http://tinyurl.com/pwyasaa/random/MCint.py" target="_self"><tt>MCint.py</tt></a>.
+We can test the gain in efficiency with <code>%timeit</code> in an IPython session:
+
+<p>
+
+<!-- code=ipy (!bc ipy) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #000080; font-weight: bold">In [1]: </span><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">MCint</span> <span style="color: #008000; font-weight: bold">import</span> MCint, MCint_vec
+
+<span style="color: #000080; font-weight: bold">In [2]: </span><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">math</span> <span style="color: #008000; font-weight: bold">import</span> sin, pi
+
+<span style="color: #000080; font-weight: bold">In [3]: </span><span style="color: #666666">%</span><span style="color: #008000; font-weight: bold">timeit</span> MCint(sin, 0, pi, 1000000)
+<span style="color: #888888">1 loops, best of 3: 1.19 s per loop</span>
+
+<span style="color: #000080; font-weight: bold">In [4]: </span><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">import</span> sin
+
+<span style="color: #000080; font-weight: bold">In [5]: </span><span style="color: #666666">%</span><span style="color: #008000; font-weight: bold">timeit</span> MCint_vec(sin, 0, pi, 1000000)
+<span style="color: #888888">1 loops, best of 3: 173 ms per loop</span>
+
+<span style="color: #000080; font-weight: bold">In [6]: </span><span style="color: #666666">1.19/0.173</span>          <span style="color: #408080; font-style: italic"># relative performance</span>
+<span style="color: #000080; font-weight: bold">Out[6]: </span><span style="color: #888888">6.878612716763006</span>
+</pre></div>
+<p>
+Note that we use <code>sin</code> from <code>math</code> in the scalar function <code>MCint</code>
+because this function is significantly faster than <code>sin</code> from
+<code>numpy</code>:
+
+<p>
+
+<!-- code=ipy (!bc ipy) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #000080; font-weight: bold">In [7]: </span><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">math</span> <span style="color: #008000; font-weight: bold">import</span> sin
+
+<span style="color: #000080; font-weight: bold">In [8]: </span><span style="color: #666666">%</span><span style="color: #008000; font-weight: bold">timeit</span> sin(1.2)
+<span style="color: #888888">10000000 loops, best of 3: 179 ns per loop</span>
+
+<span style="color: #000080; font-weight: bold">In [9]: </span><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">import</span> sin
+
+<span style="color: #000080; font-weight: bold">In [10]: </span><span style="color: #666666">%</span><span style="color: #008000; font-weight: bold">timeit</span> sin(1.2)
+<span style="color: #888888">100000 loops, best of 3: 3.22 microsec per loop</span>
+
+<span style="color: #000080; font-weight: bold">In [11]: </span><span style="color: #666666">3.22E-6/179E-9</span>      <span style="color: #408080; font-style: italic"># relative performance</span>
+<span style="color: #000080; font-weight: bold">Out[11]: </span><span style="color: #888888">17.988826815642458</span>
+</pre></div>
+<p>
+(A similar test reveals that <code>math.sin</code> is 1.3 times slower calling
+<code>sin</code> without a prefix. The differences are much smaller between
+<code>numpy.sin</code> and the same function without the prefix.)
+
+<p>
+The increase in efficiency by using <code>MCint_vec</code> instead of
+<code>MCint</code> is in the test above a factor of 6-7, which is not dramatic.
+Moreover, the vectorized version needs to store \( n \) random numbers
+and \( n \) function values
+in memory. A better vectorized implementation for large \( n \)
+is to split the <code>x</code> and <code>f(x)</code> arrays into chunks of a given size
+<code>arraysize</code> such that we can control the memory usage.
+Mathematically, it means to split the sum \( \frac{1}{n}\sum_i f(x_i) \)
+into a sum of smaller sums. An appropriate implementation reads
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">MCint_vec2</span>(f, a, b, n, arraysize<span style="color: #666666">=1000000</span>):
+    s <span style="color: #666666">=</span> <span style="color: #666666">0</span>
+    <span style="color: #408080; font-style: italic"># Split sum into batches of size arraysize</span>
+    <span style="color: #408080; font-style: italic"># + a sum of size rest (note: n//arraysize is integer division)</span>
+    rest <span style="color: #666666">=</span> n <span style="color: #666666">%</span> arraysize
+    batch_sizes <span style="color: #666666">=</span> [arraysize]<span style="color: #666666">*</span>(n<span style="color: #666666">//</span>arraysize) <span style="color: #666666">+</span> [rest]
+    <span style="color: #008000; font-weight: bold">for</span> batch_size <span style="color: #AA22FF; font-weight: bold">in</span> batch_sizes:
+        x <span style="color: #666666">=</span> np<span style="color: #666666">.</span>random<span style="color: #666666">.</span>uniform(a, b, batch_size)
+        s <span style="color: #666666">+=</span> np<span style="color: #666666">.</span>sum(f(x))
+    I <span style="color: #666666">=</span> (<span style="color: #008000">float</span>(b<span style="color: #666666">-</span>a)<span style="color: #666666">/</span>n)<span style="color: #666666">*</span>s
+    <span style="color: #008000; font-weight: bold">return</span> I
+</pre></div>
+<p>
+With 100 million points, <code>MCint_vec2</code> is about 10 faster than <code>MCint</code>.
+(Note that the latter function must use <code>xrange</code> and not <code>range</code>
+for so large \( n \), otherwise the array returned by <code>range</code> may become
+to large to be stored in memory in a small computer. The <code>xrange</code>
+function generates one <code>i</code> at a time without the need to store all
+the <code>i</code> values.)
+
+<h3 id="___sec47">Example </h3>
+
+<p>
+Let us try the Monte Carlo integration method on a simple linear function
+\( f(x)=2+3x \), integrated from 1 to 2. Most other numerical integration
+methods will integrate such a linear function exactly, regardless of the
+number of function evaluations. This is not the case with Monte Carlo
+integration.
+
+<p>
+It would be interesting to see how the quality of the
+Monte Carlo approximation increases with \( n \).
+To plot the evolution of the integral approximation we must store
+intermediate <code>I</code> values. This requires a slightly
+modified <code>MCint</code> method:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">MCint2</span>(f, a, b, n):
+    s <span style="color: #666666">=</span> <span style="color: #666666">0</span>
+    <span style="color: #408080; font-style: italic"># Store the intermediate integral approximations in an</span>
+    <span style="color: #408080; font-style: italic"># array I, where I[k-1] corresponds to k function evals.</span>
+    I <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros(n)
+    <span style="color: #008000; font-weight: bold">for</span> k <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">1</span>, n<span style="color: #666666">+1</span>):
+        x <span style="color: #666666">=</span> random<span style="color: #666666">.</span>uniform(a, b)
+        s <span style="color: #666666">+=</span> f(x)
+        I[k<span style="color: #666666">-1</span>] <span style="color: #666666">=</span> (<span style="color: #008000">float</span>(b<span style="color: #666666">-</span>a)<span style="color: #666666">/</span>k)<span style="color: #666666">*</span>s
+    <span style="color: #008000; font-weight: bold">return</span> I
+</pre></div>
+<p>
+Note that we let <code>k</code> go from 1 to <code>n</code>, such that <code>k</code> reflects the
+actual number of points used in the method. Since <code>n</code> can be very
+large, the <code>I</code> array may consume more memory than what we have
+on the computer. Therefore, we decide to store only
+every \( N \) values of the approximation. Determining if a value is to be stored
+or not can be computed by
+the mod function: <code>k % N</code> gives the remainder when <code>k</code> is
+divided by <code>N</code>. In our case we can store when this reminder is zero,
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">for</span> k <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">1</span>, n<span style="color: #666666">+1</span>):
+    <span style="color: #666666">...</span>
+    <span style="color: #008000; font-weight: bold">if</span> k <span style="color: #666666">%</span> N <span style="color: #666666">==</span> <span style="color: #666666">0</span>:
+        <span style="color: #408080; font-style: italic"># store</span>
+</pre></div>
+<p>
+This recipe of doing something every \( N \)-th pass in long loops has lots
+of applications in scientific computing!
+The complete function now takes the following form:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">MCint3</span>(f, a, b, n, N<span style="color: #666666">=100</span>):
+    s <span style="color: #666666">=</span> <span style="color: #666666">0</span>
+    <span style="color: #408080; font-style: italic"># Store every N intermediate integral approximations in an</span>
+    <span style="color: #408080; font-style: italic"># array I and record the corresponding k value.</span>
+    I_values <span style="color: #666666">=</span> []
+    k_values <span style="color: #666666">=</span> []
+    <span style="color: #008000; font-weight: bold">for</span> k <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">1</span>, n<span style="color: #666666">+1</span>):
+        x <span style="color: #666666">=</span> random<span style="color: #666666">.</span>uniform(a, b)
+        s <span style="color: #666666">+=</span> f(x)
+        <span style="color: #008000; font-weight: bold">if</span> k <span style="color: #666666">%</span> N <span style="color: #666666">==</span> <span style="color: #666666">0</span>:
+            I <span style="color: #666666">=</span> (<span style="color: #008000">float</span>(b<span style="color: #666666">-</span>a)<span style="color: #666666">/</span>k)<span style="color: #666666">*</span>s
+            I_values<span style="color: #666666">.</span>append(I)
+            k_values<span style="color: #666666">.</span>append(k)
+    <span style="color: #008000; font-weight: bold">return</span> k_values, I_values
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">demo</span>():
+</pre></div>
+<p>
+Our sample application goes like
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f1</span>(x):
+    <span style="color: #008000; font-weight: bold">return</span> <span style="color: #666666">2</span> <span style="color: #666666">+</span> <span style="color: #666666">3*</span>x
+
+k, I <span style="color: #666666">=</span> MCint3(f1, <span style="color: #666666">1</span>, <span style="color: #666666">2</span>, <span style="color: #666666">1000000</span>, N<span style="color: #666666">=10000</span>)
+error <span style="color: #666666">=</span> <span style="color: #666666">6.5</span> <span style="color: #666666">-</span> np<span style="color: #666666">.</span>array(I)
+</pre></div>
+<p>
+Figure <a href="#fig:random:MCint1">4</a> shows a plot of <code>error</code> versus the
+number of function evaluation <code>k</code>.
+
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 4:  The convergence of Monte Carlo integration applied to \( \int_1^2 (2 + 3x)dx \). <div id="fig:random:MCint1"></div> </p></center>
+<p><img src="fig-random/MCint_1000000.png" align="bottom" width=400></p>
+</center>
+
+<h3 id="___sec48">Remark </h3>
+
+<p>
+We claimed that the Monte Carlo method is slow for integration
+functions of one variable. There are, however, many techniques that
+applies smarter ways of drawing random numbers, so called
+variance reduction techniques, and thereby increase the computational
+efficiency.
+
+<h2 id="sec:random:MCdart">Area computing by throwing random points</h2>
+
+<p>
+Think of some geometric region \( G \) in the plane and a surrounding bounding
+box \( B \) with geometry \( [x_L,x_H]\times[y_L,y_H] \).
+One way of computing the area of \( G \) is to draw \( N \) random points inside
+\( B \) and count how many of them, \( M \), that lie inside \( G \). The area of
+\( G \) is then the fraction \( M/N \) (\( G \)'s fraction of \( B \)'s area) times
+the area of \( B \), \( (x_H-x_L)(y_H-y_L) \).
+Phrased differently, this method is a kind of dart game where you record
+how many hits there are inside \( G \) if every throw hits uniformly within \( B \).
+
+<p>
+Let us formulate this method for computing the integral \( \int_a^bf(x)dx \).
+The important observation is that this integral is the area under
+the curve \( y=f(x) \) and above the \( x \) axis, between \( x=a \) and \( x=b \).
+We introduce a rectangle \( B \),
+
+$$
+\begin{equation*} B = \{ (x,y)\, |\, a\leq x\leq b, \ 0\leq y\leq m \},\end{equation*}
+$$
+
+where \( m\leq\max_{x\in [a,b]} f(x) \).
+The algorithm for computing the area under the curve is to draw
+\( N \) random points inside \( B \) and count how many of them, \( M \), that
+are above the \( x \) axis and below the \( y=f(x) \) curve, see
+Figure <a href="#fig:random:MCint:dart">5</a>.
+The area or integral is then estimated by
+
+$$
+\begin{equation*} \frac{M}{N}m(b-a)\tp\end{equation*}
+$$
+
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 5:  The &quot;dart&quot; method for computing integrals. When \( M \) out of \( N \) random points in the rectangle \( [0,2]\times [0,2.4] \) lie under the curve, the area under the curve is estimated as the \( M/N \) fraction of the area of the rectangle, i.e., \( (M/N) 2\cdot 2.4 \). <div id="fig:random:MCint:dart"></div> </p></center>
+<p><img src="fig-random/MC_dart.png" align="bottom" width=400></p>
+</center>
+
+<p>
+First we implement the &quot;dart method&quot; by a simple loop over points:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">MCint_area</span>(f, a, b, n, m):
+    below <span style="color: #666666">=</span> <span style="color: #666666">0</span>  <span style="color: #408080; font-style: italic"># counter for no of points below the curve</span>
+    <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(n):
+        x <span style="color: #666666">=</span> random<span style="color: #666666">.</span>uniform(a, b)
+        y <span style="color: #666666">=</span> random<span style="color: #666666">.</span>uniform(<span style="color: #666666">0</span>, m)
+        <span style="color: #008000; font-weight: bold">if</span> y <span style="color: #666666">&lt;=</span> f(x):
+            below <span style="color: #666666">+=</span> <span style="color: #666666">1</span>
+    area <span style="color: #666666">=</span> below<span style="color: #666666">/</span><span style="color: #008000">float</span>(n)<span style="color: #666666">*</span>m<span style="color: #666666">*</span>(b<span style="color: #666666">-</span>a)
+    <span style="color: #008000; font-weight: bold">return</span> area
+</pre></div>
+<p>
+Note that this method draws twice as many random numbers as the previous
+method.
+
+<p>
+A vectorized implementation reads
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">MCint_area_vec</span>(f, a, b, n, m):
+    x <span style="color: #666666">=</span> np<span style="color: #666666">.</span>random<span style="color: #666666">.</span>uniform(a, b, n)
+    y <span style="color: #666666">=</span> np<span style="color: #666666">.</span>random<span style="color: #666666">.</span>uniform(<span style="color: #666666">0</span>, m, n)
+    below <span style="color: #666666">=</span> np<span style="color: #666666">.</span>sum(y <span style="color: #666666">&lt;</span> f(x))
+    area <span style="color: #666666">=</span> below<span style="color: #666666">/</span><span style="color: #008000">float</span>(n)<span style="color: #666666">*</span>m<span style="color: #666666">*</span>(b<span style="color: #666666">-</span>a)
+    <span style="color: #008000; font-weight: bold">return</span> area
+</pre></div>
+<p>
+The only non-trivial line here is the expression <code>y[y &lt; f(x)]</code>,
+which applies boolean indexing
+to extract the <code>y</code> values that are below the <code>f(x)</code> curve.
+The sum of the boolean values (interpreted as 0 and 1)
+in <code>y &lt; f(x)</code> gives the number of points below the curve.
+
+<p>
+Even for 2 million random numbers the plain loop version is not that
+slow as it executes within some seconds on a slow laptop.
+Nevertheless,
+if you need the integration being repeated many times
+inside another calculation, the superior efficiency of
+the vectorized version may be important. We can quantify the
+efficiency gain by the aid of the timer <code>time.clock()</code> in the
+following
+way:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">time</span>
+t0 <span style="color: #666666">=</span> time<span style="color: #666666">.</span>clock()
+<span style="color: #008000; font-weight: bold">print</span> MCint_area(f1, a, b, n, fmax)
+t1 <span style="color: #666666">=</span> time<span style="color: #666666">.</span>clock()   <span style="color: #408080; font-style: italic"># time of MCint_area is t1-t0</span>
+<span style="color: #008000; font-weight: bold">print</span> MCint_area_vec(f1, a, b, n, fmax)
+t2 <span style="color: #666666">=</span> time<span style="color: #666666">.</span>clock()   <span style="color: #408080; font-style: italic"># time of MCint_area_vec is t2-t1</span>
+<span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;loop/vectorized fraction:&#39;</span>, (t1<span style="color: #666666">-</span>t0)<span style="color: #666666">/</span>(t2<span style="color: #666666">-</span>t1)
+</pre></div>
+<p>
+With \( n=10^6 \) the author achieved a factor of about 8 in favor of the vectorized
+version.
+
+<p>
+<p>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pager">
+  <li class="previous">
+    <a href="._random-bootstrap003.html">&larr; Prev</a>
+  </li>
+  <li class="next">
+    <a href="._random-bootstrap005.html">Next &rarr;</a>
+  </li>
+</ul>
+<!-- ------------------- end of main content --------------- -->
+
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap footer
+<footer>
+<a href="http://..."><img width="250" align=right src="http://..."></a>
+</footer>
+-->
+
+
+</body>
+</html>
+    
+

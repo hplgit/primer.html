@@ -1,0 +1,739 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Random numbers and simple games">
+<meta name="keywords" content="random numbers,seed,uniformly distributed random numbers,random numbers uniform distribution,bin (histogram),histogram (normalized),random numbers histogram,vectorized drawing of random numbers,random numbers vectorization,mean,average,random numbers statistics,variance,standard deviation,mod function,normally distributed random numbers,random numbers normal distribution,random numbers integers,integer random numbers,probability,random numbers Monte Carlo simulation,Monte Carlo simulation,Monte Carlo integration,random numbers integration,Midpoint rule for integration,mod function,measure time in programs,efficiency measure,random walk,random numbers random walk,making movie,cumulative sum">
+
+<title>Random numbers and simple games</title>
+
+
+<link href="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/css/solarized_light_code.css" rel="stylesheet" type="text/css" title="light"/>
+<script src="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<link href="http://thomasf.github.io/solarized-css/solarized-light.min.css" rel="stylesheet">
+<style type="text/css">
+h1 {color: #b58900;}  /* yellow */
+/* h1 {color: #cb4b16;}  orange */
+/* h1 {color: #d33682;}  magenta, the original choice of thomasf */
+code { padding: 0px; background-color: inherit; }
+pre {
+  border: 0pt solid #93a1a1;
+  box-shadow: none;
+}
+
+div { text-align: justify; text-justify: inter-word; }
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [('Drawing random numbers', 1, None, '___sec0'),
+              ('The seed', 2, None, '___sec1'),
+              ('Uniformly distributed random numbers',
+               2,
+               'sec:random:uniform',
+               'sec:random:uniform'),
+              ('Visualizing the distribution', 2, None, '___sec3'),
+              ('Vectorized drawing of random numbers', 2, None, '___sec4'),
+              ('Warning', 3, None, '___sec5'),
+              ('Computing the mean and standard deviation',
+               2,
+               'sec:random:statistics',
+               'sec:random:statistics'),
+              ('The Gaussian or normal distribution',
+               2,
+               'sec:random:normal',
+               'sec:random:normal'),
+              ('Drawing integers', 1, 'sec:random:ints', 'sec:random:ints'),
+              ('Random integer functions', 2, None, '___sec9'),
+              ('Example: Throwing a die', 2, None, '___sec10'),
+              ('Scalar version', 3, None, '___sec11'),
+              ('Vectorized version', 3, None, '___sec12'),
+              ('Vectorized version with batches', 3, None, '___sec13'),
+              ('Verification of the scalar version', 3, None, '___sec14'),
+              ('Verification of all versions', 3, None, '___sec15'),
+              ('Drawing a random element from a list', 2, None, '___sec16'),
+              ('Example: Drawing cards from a deck',
+               2,
+               'sec:random:deck1',
+               'sec:random:deck1'),
+              ('Example: Class implementation of a deck',
+               2,
+               'sec:class:deck:class',
+               'sec:class:deck:class'),
+              ('Computing probabilities',
+               1,
+               'sec:random:probability',
+               'sec:random:probability'),
+              ('Principles of Monte Carlo simulation', 2, None, '___sec20'),
+              ('Example: Throwing dice',
+               2,
+               'sec:random:probability:dice',
+               'sec:random:probability:dice'),
+              ('Straightforward solution', 3, None, '___sec22'),
+              ('Vectorization', 3, None, '___sec23'),
+              ('Exact solution', 3, None, '___sec24'),
+              ('A game', 3, None, '___sec25'),
+              ('Decide if a game is fair', 3, None, '___sec26'),
+              ('Example: Drawing balls from a hat',
+               2,
+               'sec:random:balls',
+               'sec:random:balls'),
+              ('Random mutations of genes',
+               2,
+               'bioinf:random',
+               'bioinf:random'),
+              ('A simple mutation model', 3, None, '___sec29'),
+              ('Vectorized version', 3, None, '___sec30'),
+              ('A Markov chain mutation model', 3, None, '___sec31'),
+              ('Example: Policies for limiting population growth',
+               2,
+               'sec:random:china',
+               'sec:random:china'),
+              ('Simple games', 1, None, '___sec33'),
+              ('Guessing a number',
+               2,
+               'sec:random:game:guessn',
+               'sec:random:game:guessn'),
+              ('The game', 3, None, '___sec35'),
+              ('The implementation', 3, None, '___sec36'),
+              ('Rolling two dice',
+               2,
+               'sec:random:twodicesumguess',
+               'sec:random:twodicesumguess'),
+              ('The game', 3, None, '___sec38'),
+              ('The implementation', 3, None, '___sec39'),
+              ('Example', 3, None, '___sec40'),
+              ('A class version', 3, None, '___sec41'),
+              ('Monte Carlo integration',
+               1,
+               'sec:random:MonteCarlo:integration',
+               'sec:random:MonteCarlo:integration'),
+              ('Derivation of Monte Carlo integration',
+               2,
+               'sec:random:MCint:ideas',
+               'sec:random:MCint:ideas'),
+              ('The calculus approach via the mean-value theorem',
+               3,
+               None,
+               '___sec44'),
+              ('The probability theory approach', 3, None, '___sec45'),
+              ('Implementation of standard Monte Carlo integration',
+               2,
+               'sec:random:MCint:std',
+               'sec:random:MCint:std'),
+              ('Example', 3, None, '___sec47'),
+              ('Remark', 3, None, '___sec48'),
+              ('Area computing by throwing random points',
+               2,
+               'sec:random:MCdart',
+               'sec:random:MCdart'),
+              ('Random walk in one space dimension',
+               1,
+               'sec:random:rw1D',
+               'sec:random:rw1D'),
+              ('Basic implementation', 2, None, '___sec51'),
+              ('Visualization', 2, None, '___sec52'),
+              ('Random walk as a difference equation', 2, None, '___sec53'),
+              ('Computing statistics of the particle positions',
+               2,
+               'sec:random:walk:1D:statistics',
+               'sec:random:walk:1D:statistics'),
+              ('Vectorized implementation',
+               2,
+               'sec:random:walk:1D:vectorized',
+               'sec:random:walk:1D:vectorized'),
+              ('Random walk in two space dimensions',
+               1,
+               'sec:random:rw2D',
+               'sec:random:rw2D'),
+              ('Basic implementation',
+               2,
+               'sec:random:rw2D:scalar',
+               'sec:random:rw2D:scalar'),
+              ('Vectorized implementation',
+               2,
+               'sec:random:walk:2D:vectorized',
+               'sec:random:walk:2D:vectorized'),
+              ('Summary', 1, None, '___sec59'),
+              ('Chapter topics', 2, None, '___sec60'),
+              ('Drawing random numbers', 3, None, '___sec61'),
+              ('Typical probability computation via Monte Carlo simulation',
+               3,
+               None,
+               '___sec62'),
+              ('Statistical measures', 3, None, '___sec63'),
+              ('Terminology', 3, None, '___sec64'),
+              ('Example: Random growth',
+               2,
+               'sec:random:summarizingex',
+               'sec:random:summarizingex'),
+              ('Problem', 3, None, '___sec66'),
+              ('Solution', 3, None, '___sec67'),
+              ('Exercises', 1, None, '___sec68'),
+              ('Exercise 1: Flip a coin times',
+               2,
+               'sec:random:ex17',
+               'sec:random:ex17'),
+              ('Exercise 2: Compute a probability',
+               2,
+               'sec:random:ex7',
+               'sec:random:ex7'),
+              ('Exercise 3: Choose random colors',
+               2,
+               'sec:random:ex6',
+               'sec:random:ex6'),
+              ('Exercise 4: Draw balls from a hat',
+               2,
+               'sec:random:ex4',
+               'sec:random:ex4'),
+              ('Exercise 5: Computing probabilities of rolling dice',
+               2,
+               'sec:random:ex2',
+               'sec:random:ex2'),
+              ('Exercise 6: Estimate the probability in a dice game',
+               2,
+               'sec:random:ex10',
+               'sec:random:ex10'),
+              ('Exercise 7: Compute the probability of hands of cards',
+               2,
+               'sec:random:ex44',
+               'sec:random:ex44'),
+              ('Exercise 8: Decide if a dice game is fair',
+               2,
+               'sec:random:ex11',
+               'sec:random:ex11'),
+              ('Exercise 9: Adjust a game to make it fair',
+               2,
+               'sec:random:ex12',
+               'sec:random:ex12'),
+              ('Exercise 10: Generalize a game',
+               2,
+               'sec:random:ex12b',
+               'sec:random:ex12b'),
+              ('Exercise 11: Compare two playing strategies',
+               2,
+               'sec:random:ex2c',
+               'sec:random:ex2c'),
+              ('Exercise 12: Investigate strategies in a game',
+               2,
+               'sec:random:ex2e',
+               'sec:random:ex2e'),
+              ('Exercise 13: Investigate the winning chances of some games',
+               2,
+               'sec:random:ex45',
+               'sec:random:ex45'),
+              ('Exercise 14: Compute probabilities of throwing two dice',
+               2,
+               'sec:random:ex2b',
+               'sec:random:ex2b'),
+              ('Exercise 15: Vectorize flipping a coin',
+               2,
+               'sec:random:ex18',
+               'sec:random:ex18'),
+              ('Exercise 16: Vectorize a probablility computation',
+               2,
+               'sec:random:ex7b',
+               'sec:random:ex7b'),
+              ('Exercise 17: Throw dice and compute a small probability',
+               2,
+               'sec:random:ex30',
+               'sec:random:ex30'),
+              ('Exercise 18: Difference equation for random numbers',
+               2,
+               'sec:random:ex27',
+               'sec:random:ex27'),
+              ('Exercise 19: Make a class for drawing balls from a hat',
+               2,
+               'sec:random:ex9',
+               'sec:random:ex9'),
+              ('Exercise 20: Independent  versus dependent random numbers',
+               2,
+               'sec:random:ex21',
+               'sec:random:ex21'),
+              ('Exercise 21: Compute the probability of flipping a coin',
+               2,
+               'sec:random:ex19',
+               'sec:random:ex19'),
+              ('Exercise 22: Simulate a poker game',
+               2,
+               'sec:random:ex41',
+               'sec:random:ex41'),
+              ('Exercise 23: Estimate growth in a simulation model',
+               2,
+               'sec:random:ex29',
+               'sec:random:ex29'),
+              ('Exercise 24: Investigate guessing strategies',
+               2,
+               'sec:random:ex15',
+               'sec:random:ex15'),
+              ('Exercise 25: Vectorize a dice game',
+               2,
+               'sec:random:ex13',
+               'sec:random:ex13'),
+              ('Exercise 26: Compute $\\pi$ by a Monte Carlo method',
+               2,
+               'sec:random:ex31',
+               'sec:random:ex31'),
+              ('Exercise 27: Compute $\\pi$ by a Monte Carlo method',
+               2,
+               'sec:random:ex32',
+               'sec:random:ex32'),
+              ('Exercise 28: Compute $\\pi$ by a random sum',
+               2,
+               'sec:random:ex31b',
+               'sec:random:ex31b'),
+              ('Exercise 29: 1D random walk with drift',
+               2,
+               'sec:random:ex1',
+               'sec:random:ex1'),
+              ('Exercise 30: 1D random walk until a point is hit',
+               2,
+               'sec:random:ex3',
+               'sec:random:ex3'),
+              ('Exercise 31: Simulate making a fortune from gaming',
+               2,
+               'sec:random:ex3:rwgame',
+               'sec:random:ex3:rwgame'),
+              ('Exercise 32: Make classes for 2D random walk',
+               2,
+               'sec:random:ex33',
+               'sec:random:ex33'),
+              ('Exercise 33: 2D random walk with walls; scalar version',
+               2,
+               'sec:random:ex36',
+               'sec:random:ex36'),
+              ('Exercise 34: 2D random walk with walls; vectorized version',
+               2,
+               'sec:random:ex37',
+               'sec:random:ex37'),
+              ('Exercise 35: Simulate mixing of gas molecules',
+               2,
+               'sec:random:ex38',
+               'sec:random:ex38'),
+              ('Remarks', 3, None, '___sec104'),
+              ('Exercise 36: Simulate slow mixing of gas molecules',
+               2,
+               'sec:random:ex39',
+               'sec:random:ex39'),
+              ('Exercise 37: Guess beer brands',
+               2,
+               'sec:random:ex35',
+               'sec:random:ex35'),
+              ('Exercise 38: Simulate stock prices',
+               2,
+               'sec:random:ex26',
+               'sec:random:ex26'),
+              ('Exercise 39: Compute with option prices in finance',
+               2,
+               'sec:random:ex16',
+               'sec:random:ex16'),
+              ('Remarks', 3, None, '___sec109'),
+              ('Exercise 40: Differentiate noise measurements',
+               2,
+               'sec:random:ex22',
+               'sec:random:ex22'),
+              ('Exercise 41: Differentiate noisy signals',
+               2,
+               'sec:random:ex25',
+               'sec:random:ex25'),
+              ('Exercise 42: Model noise in a time signal',
+               2,
+               'sec:random:ex23',
+               'sec:random:ex23'),
+              ('Exercise 43: Speed up Markov chain mutation',
+               2,
+               'bioinf:exer:Markov:chain:eff',
+               'bioinf:exer:Markov:chain:eff'),
+              ('References', 1, None, '___sec114')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- newcommands_keep.tex -->
+$$
+\newcommand{\tp}{\thinspace .}
+\newcommand{\Prob}[1]{\hbox{P}(#1)}
+$$
+
+
+
+
+    
+<a name="part0005"></a>
+<p>
+<!-- begin top navigation -->
+<table style="width: 100%"><tr><td>
+<div style="text-align: left;"><a href="._random-solarized004.html">&laquo; Previous</a></div>
+</td><td>
+<div style="text-align: right;"><a href="._random-solarized006.html">Next &raquo;</a></div>
+</td></tr></table>
+<!-- end top navigation -->
+</p>
+
+<p>
+<!-- !split -->
+<p style="font-size:80%">This chapter is taken from book <a href="http://www.springer.com/gp/book/9783642549588">A Primer on Scientific Programming with Python</a> by H. P. Langtangen, 4th edition, Springer, 2014.</p>
+
+<h1 id="sec:random:rw1D">Random walk in one space dimension</h1>
+
+<p>
+In this section we shall simulate a collection of particles that move around
+in a random fashion. This type of simulations are fundamental in
+physics, biology, chemistry as well as other sciences
+and can be used to describe many phenomena. Some application areas
+include molecular motion, heat conduction, quantum mechanics,
+polymer chains, population genetics, brain research, hazard games, and
+pricing of financial instruments.
+
+<p>
+Imagine that we have some particles that perform random moves, either to
+the right or to the left. We may flip a coin to decide the movement
+of each particle, say head implies movement to the right and tail means
+movement to the left. Each move is one unit length.
+Physicists use the
+term <em>random walk</em>
+for this type of movement of a particle.
+You may try this yourself: flip the coin and
+make one step to the left or right, and repeat this process.
+
+<p>
+The movement is also
+known as <em>drunkard's walk</em>. You may have experienced this after
+a very wet night on a pub: you step forward and backward in a random fashion.
+Since these movements on average make you stand still, and since you know
+that you normally reach home within reasonable time,
+the model is not good for a
+real walk. We need to add a <em>drift</em> to the walk, so the
+probability is greater for going forward than backward. This is an
+easy adjustment, see <a href="._random-solarized008.html#sec:random:ex1">Exercise 29: 1D random walk with drift</a>. What may come
+as a surprise is the following fact: even when there is
+equal probability of going forward and backward, one can prove
+mathematically that the drunkard will always reach his home. Or
+more precisely, he will get home in finite
+time (&quot;almost surely&quot; as the mathematicians must add to this statement).
+<a href="._random-solarized008.html#sec:random:ex3">Exercise 30: 1D random walk until a point is hit</a> asks you to experiment with this fact.
+For many practical purposes, &quot;finite time&quot; does not help much as
+there might be more steps involved than the time it takes to get
+sufficiently sober to
+remove the completely random component of the walk.
+
+<h2 id="___sec51">Basic implementation </h2>
+
+<p>
+How can we implement \( n_s \) random steps of \( n_p \) particles in a program?
+Let us introduce a coordinate system where all movements are along
+the \( x \) axis. An array of \( x \) values then holds the positions of all
+particles. We draw random numbers to simulate flipping a coin, say
+we draw from the integers 1 and 2, where 1 means head (movement to the
+right) and 2 means tail (movement to the left).
+We think the algorithm is conveniently expressed directly as a
+complete Python program:
+
+<p>
+<!-- begin verbatim block  pypro-->
+<pre><code>import random
+import numpy
+np = 4                          # no of particles
+ns = 100                        # no of steps
+positions = numpy.zeros(np)     # all particles start at x=0
+HEAD = 1;  TAIL = 2             # constants
+
+for step in range(ns):
+    for p in range(np):
+        coin = random.randint(1,2)  # flip coin
+        if coin == HEAD:
+            positions[p] += 1   # one unit length to the right
+        elif coin == TAIL:
+            positions[p] -= 1   # one unit length to the left
+</code></pre>
+<!-- end verbatim block -->
+This program is found in the file <a href="http://tinyurl.com/pwyasaa/random/walk1D.py" target="_self"><tt>walk1D.py</tt></a>.
+
+<h2 id="___sec52">Visualization </h2>
+
+<p>
+We may add some visualization of the movements by inserting a <code>plot</code>
+command at the end of the <code>step</code> loop and a little pause to better
+separate the frames in the animation:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>    plot(positions, y, 'ko3', axis=[xmin, xmax, -0.2, 0.2])
+    time.sleep(0.2)  # pause
+</code></pre>
+<!-- end verbatim block -->
+These two statements require <code>from scitools.std import plot</code> and
+<code>import time</code>.
+
+<p>
+It is very important that the extent of the axis are kept fixed in
+animations, otherwise one gets a wrong visual impression.  We know
+that in \( n_s \) steps, no particle can move longer than \( n_s \) unit
+lengths to the right or to the left so the extent of the \( x \) axis
+becomes \( [-n_s,n_s] \). However, the probability of reaching these lower
+or upper limit is very small.  To be specific, the probability is
+\( 2^{-n_s} \), which becomes about \( 10^{-9} \) for 30 steps.  Most of the
+movements will take place in the center of the plot. We may therefore
+shrink the extent of the axis to better view the movements.  It is
+known that the expected extent of the particles is of the order
+\( \sqrt{n_s} \), so we may take the maximum and minimum values in the
+plot as \( \pm 2\sqrt{n_s} \).  However, if a position of a particle
+exceeds these values, we extend <code>xmax</code> and <code>xmin</code> by
+\( 2\sqrt{n_s} \) in positive and negative \( x \) direction, respectively.
+
+<p>
+The \( y \) positions of the particles are taken as zero, but it is
+necessary to have some extent of the \( y \) axis, otherwise the
+coordinate system collapses and most plotting packages will refuse to
+draw the plot. Here we have just chosen the \( y \) axis to go from -0.2
+to 0.2.  You can find the complete program in
+<a href="http://tinyurl.com/pwyasaa/random/walk1Dp.py" target="_self"><tt>walk1Dp.py</tt></a>.  The <code>np</code>
+and <code>ns</code> parameters can be set as the first two command-line
+arguments:
+
+<p>
+<!-- begin verbatim block  sys-->
+<pre><code>walk1Dp.py 6 200
+</code></pre>
+<!-- end verbatim block -->
+It is hard to claim that this program has astonishing graphics.
+In the section <a href="._random-solarized006.html#sec:random:rw2D">Random walk in two space dimensions</a>, where we let the particles move
+in two space dimensions, the graphics gets much more exciting.
+
+<h2 id="___sec53">Random walk as a difference equation </h2>
+
+<p>
+The random walk process can easily be expressed in terms of a
+difference
+equation (see the document <a href="http://hplgit.github.io/primer.html/doc/pub/diffeq" target="_self">Sequences and difference equations</a> <a href="._random-solarized008.html#Langtangen_TCSE6_diffeq">[3]</a> for an introduction
+to difference equations).
+Let \( x_n \) be the
+position of the particle at time \( n \). This position is an evolution
+from time \( n-1 \), obtained by adding a random variable \( s \) to the previous
+position \( x_{n-1} \), where \( s=1 \) has probability 1/2 and \( s=-1 \) has
+probability 1/2. In statistics, the expression <em>probability of event A</em>
+is written \( \Prob{A} \). We can therefore write
+\( \Prob{s=1}=1/2 \) and \( \Prob{s=-1}=1/2 \). The difference equation
+can now be expressed mathematically as
+
+$$
+\begin{equation}
+x_n = x_{n-1} + s, \quad x_0=0,\quad {\rm P}(s=1)={\rm P}(s=-1)=1/2\tp
+\tag{10}
+\end{equation}
+$$
+
+This equation governs the motion of one particle. For a collection
+\( m \) of particles we introduce \( x^{(i)}_n \) as the position of the
+\( i \)-th particle at the \( n \)-th time step.
+Each \( x^{(i)}_n \) is governed by <a href="#mjx-eqn-10">(10)</a>,
+and all the \( s \) values in each of the \( m \) difference equations
+are independent of each other.
+
+<h2 id="sec:random:walk:1D:statistics">Computing statistics of the particle positions</h2>
+
+<p>
+Scientists interested in random walks are in general not interested in
+the graphics of our <code>walk1D.py</code> program, but more in the
+statistics of the positions of the particles at each step. We may
+therefore, at each step, compute a histogram of the distribution of
+the particles along the \( x \) axis, plus estimate the mean position and
+the standard deviation. These mathematical operations are easily
+accomplished by letting the SciTools function
+<code>compute_histogram</code> and the <code>numpy</code>
+functions <code>mean</code> and <code>std</code> operate on the <code>positions</code>
+array (see the section <a href="._random-solarized001.html#sec:random:statistics">Computing the mean and standard deviation</a>)
+:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>    mean_pos  = numpy.mean(positions)
+    stdev_pos = numpy.std(positions)
+    pos, freq = compute_histogram(positions, nbins=int(xmax),
+                                  piecewise_constant=True)
+</code></pre>
+<!-- end verbatim block -->
+The number of bins in the histogram is just based on the extent of
+the particles. It could also have been a fixed number.
+
+<p>
+We can plot the particles as circles, as before, and add
+the histogram and vertical lines for the mean and the positive and
+negative standard deviation (the latter indicates the &quot;width&quot; of
+the distribution of particles).
+The vertical lines can be defined by the six lists
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>    xmean, ymean   = [mean_pos, mean_pos],     [yminv, ymaxv]
+    xstdv1, ystdv1 = [stdev_pos, stdev_pos],   [yminv, ymaxv]
+    xstdv2, ystdv2 = [-stdev_pos, -stdev_pos], [yminv, ymaxv]
+</code></pre>
+<!-- end verbatim block -->
+where <code>yminv</code> and <code>ymaxv</code> are the minimum and maximum
+\( y \) values of the vertical lines.
+The following command plots the position of every particle
+as circles, the histogram as a curve,
+and the vertical lines with a thicker line:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>    plot(positions, y, 'ko3',     # particles as circles
+         pos, freq, 'r',          # histogram
+         xmean, ymean, 'r2',      # mean position as thick line
+         xstdv1, ystdv1, 'b2',    # +1 standard dev.
+         xstdv2, ystdv2, 'b2',    # -1 standard dev.
+         axis=[xmin, xmax, ymin, ymax],
+         title='random walk of %d particles after %d steps' %
+               (np, step+1))
+</code></pre>
+<!-- end verbatim block -->
+This plot is then created at every step in the random walk.  By
+observing the graphics, one will soon realize that the computation of
+the extent of the \( y \) axis in the plot needs some considerations. We
+have found it convenient to base <code>ymax</code> on the maximum value of the
+histogram (<code>max(freq)</code>), plus some space (chosen as 10 percent of
+<code>max(freq)</code>).  However, we do not change the <code>ymax</code> value unless it is
+more than 0.1 different from the previous <code>ymax</code> value (otherwise the
+axis &quot;jumps&quot; too often).  The minimum value, <code>ymin</code>, is set to
+<code>ymin=-0.1*ymax</code> every time we change the <code>ymax</code> value.  The complete
+code is found in the file <a href="http://tinyurl.com/pwyasaa/random/walk1Ds.py" target="_self"><tt>walk1Ds.py</tt></a>.  If you try out 2000 particles and 30
+steps, the final graphics becomes like that in Figure
+<a href="#fig:random:walk:1D">6</a>.  As the number of steps is increased, the
+particles are dispersed in the positive and negative \( x \) direction,
+and the histogram gets flatter and flatter. Letting \( \hat H(i) \) be the
+histogram value in interval number \( i \), and each interval having width
+\( \Delta x \), the probability of finding a particle in interval \( i \) is
+\( \hat H(i)\Delta x \).  It can be shown mathematically that the
+histogram is an approximation to the probability density function of
+the normal distribution with mean zero and standard deviation \( s\sim
+\sqrt{n} \), where \( n \) is the step number.
+
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 6:  Particle positions (circles), histogram (piecewise constant curve),   and vertical lines indicating the mean value and the standard deviation   from the mean after a one-dimensional random walk of 2000 particles   for 30 steps. <div id="fig:random:walk:1D"></div> </p></center>
+<p><img src="fig-random/randomwalk1D.png" align="bottom" width=400></p>
+</center>
+
+<h2 id="sec:random:walk:1D:vectorized">Vectorized implementation</h2>
+
+<p>
+There is no problem with the speed of our one-dimensional random walkers
+in the <code>walk1Dp.py</code> or <code>walk1Ds.py</code> programs,
+but in real-life applications of such
+simulation models, we often have a very large number of particles performing
+a very large number of steps. It is then important to make the implementation
+as efficient as possible. Two loops over all particles and all steps,
+as we have in the programs above, become
+very slow compared to a vectorized implementation.
+
+<p>
+A vectorized implementation of a one-dimensional walk should utilize
+the functions <code>randint</code>
+or <code>random_integers</code> from <code>numpy</code>'s <code>random</code> module. A first idea may be to
+draw steps for all particles at a step simultaneously. Then we repeat
+this process in a loop from 0 to \( n_s-1 \). However, these repetitions
+are just new vectors of random numbers, and we may avoid the loop
+if we draw \( n_p\times n_s \) random numbers at once:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>moves = numpy.random.randint(1, 3, size=np*ns)
+# or
+moves = numpy.random.random_integers(1, 2, size=np*ns)
+</code></pre>
+<!-- end verbatim block -->
+The values are now either 1 or 2, but we want \( -1 \) or \( 1 \).
+A simple scaling and translation of the numbers transform the
+1 and 2 values to \( -1 \) and \( 1 \) values:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>moves = 2*moves - 3
+</code></pre>
+<!-- end verbatim block -->
+Then we can create a two-dimensional array out of <code>moves</code> such
+that <code>moves[i,j]</code> is the <code>i</code>-th step of particle number <code>j</code>:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>moves.shape = (ns, np)
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+It does not make sense to plot the evolution of the particles and the
+histogram in the vectorized version of the code, because the point with
+vectorization is to speed up the calculations, and the visualization
+takes much more time than drawing random numbers, even in the
+<code>walk1Dp.py</code> and <code>walk1Ds.py</code> programs from
+the section <a href="#sec:random:walk:1D:statistics">Computing statistics of the particle positions</a>. We therefore just
+compute the positions of the particles inside a loop over the steps
+and some simple statistics. At the end, after \( n_s \) steps, we
+plot the histogram of the particle distribution along with circles for
+the positions of the particles. The rest of the program, found in
+the file <a href="http://tinyurl.com/pwyasaa/random/walk1Dv.py" target="_self"><tt>walk1Dv.py</tt></a>, looks as follows:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>positions = numpy.zeros(np)
+for step in range(ns):
+    positions += moves[step, :]
+
+    mean_pos = numpy.mean(positions)
+    stdev_pos = numpy.std(positions)
+    print mean_pos, stdev_pos
+
+nbins = int(3*sqrt(ns))    # no of intervals in histogram
+pos, freq = compute_histogram(positions, nbins,
+                              piecewise_constant=True)
+
+plot(positions, zeros(np), 'ko3',
+     pos, freq, 'r',
+     axis=[min(positions), max(positions), -0.01, 1.1*max(freq)],
+     savefig='tmp.pdf')
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+<p>
+<!-- begin bottom navigation -->
+<table style="width: 100%"><tr><td>
+<div style="text-align: left;"><a href="._random-solarized004.html">&laquo; Previous</a></div>
+</td><td>
+<div style="text-align: right;"><a href="._random-solarized006.html">Next &raquo;</a></div>
+</td></tr></table>
+<!-- end bottom navigation -->
+</p>
+
+<!-- ------------------- end of main content --------------- -->
+
+
+</body>
+</html>
+    
+

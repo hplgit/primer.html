@@ -1,0 +1,748 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Random numbers and simple games">
+<meta name="keywords" content="random numbers,seed,uniformly distributed random numbers,random numbers uniform distribution,bin (histogram),histogram (normalized),random numbers histogram,vectorized drawing of random numbers,random numbers vectorization,mean,average,random numbers statistics,variance,standard deviation,mod function,normally distributed random numbers,random numbers normal distribution,random numbers integers,integer random numbers,probability,random numbers Monte Carlo simulation,Monte Carlo simulation,Monte Carlo integration,random numbers integration,Midpoint rule for integration,mod function,measure time in programs,efficiency measure,random walk,random numbers random walk,making movie,cumulative sum">
+
+<title>Random numbers and simple games</title>
+
+<!-- Bootstrap style: bootstrap_bluegray -->
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_styles/style_bootstrap/css/bootstrap_bluegray.css" rel="stylesheet">
+<!-- not necessary
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+
+<style type="text/css">
+/* Let inline verbatim have the same color as the surroundings */
+code { color: inherit; background-color: transparent; }
+
+/* Add scrollbar to dropdown menus in bootstrap navigation bar */
+.dropdown-menu {
+   height: auto;
+   max-height: 400px;
+   overflow-x: hidden;
+}
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [('Drawing random numbers', 1, None, '___sec0'),
+              ('The seed', 2, None, '___sec1'),
+              ('Uniformly distributed random numbers',
+               2,
+               'sec:random:uniform',
+               'sec:random:uniform'),
+              ('Visualizing the distribution', 2, None, '___sec3'),
+              ('Vectorized drawing of random numbers', 2, None, '___sec4'),
+              ('Warning', 3, None, '___sec5'),
+              ('Computing the mean and standard deviation',
+               2,
+               'sec:random:statistics',
+               'sec:random:statistics'),
+              ('The Gaussian or normal distribution',
+               2,
+               'sec:random:normal',
+               'sec:random:normal'),
+              ('Drawing integers', 1, 'sec:random:ints', 'sec:random:ints'),
+              ('Random integer functions', 2, None, '___sec9'),
+              ('Example: Throwing a die', 2, None, '___sec10'),
+              ('Scalar version', 3, None, '___sec11'),
+              ('Vectorized version', 3, None, '___sec12'),
+              ('Vectorized version with batches', 3, None, '___sec13'),
+              ('Verification of the scalar version', 3, None, '___sec14'),
+              ('Verification of all versions', 3, None, '___sec15'),
+              ('Drawing a random element from a list', 2, None, '___sec16'),
+              ('Example: Drawing cards from a deck',
+               2,
+               'sec:random:deck1',
+               'sec:random:deck1'),
+              ('Example: Class implementation of a deck',
+               2,
+               'sec:class:deck:class',
+               'sec:class:deck:class'),
+              ('Computing probabilities',
+               1,
+               'sec:random:probability',
+               'sec:random:probability'),
+              ('Principles of Monte Carlo simulation', 2, None, '___sec20'),
+              ('Example: Throwing dice',
+               2,
+               'sec:random:probability:dice',
+               'sec:random:probability:dice'),
+              ('Straightforward solution', 3, None, '___sec22'),
+              ('Vectorization', 3, None, '___sec23'),
+              ('Exact solution', 3, None, '___sec24'),
+              ('A game', 3, None, '___sec25'),
+              ('Decide if a game is fair', 3, None, '___sec26'),
+              ('Example: Drawing balls from a hat',
+               2,
+               'sec:random:balls',
+               'sec:random:balls'),
+              ('Random mutations of genes',
+               2,
+               'bioinf:random',
+               'bioinf:random'),
+              ('A simple mutation model', 3, None, '___sec29'),
+              ('Vectorized version', 3, None, '___sec30'),
+              ('A Markov chain mutation model', 3, None, '___sec31'),
+              ('Example: Policies for limiting population growth',
+               2,
+               'sec:random:china',
+               'sec:random:china'),
+              ('Simple games', 1, None, '___sec33'),
+              ('Guessing a number',
+               2,
+               'sec:random:game:guessn',
+               'sec:random:game:guessn'),
+              ('The game', 3, None, '___sec35'),
+              ('The implementation', 3, None, '___sec36'),
+              ('Rolling two dice',
+               2,
+               'sec:random:twodicesumguess',
+               'sec:random:twodicesumguess'),
+              ('The game', 3, None, '___sec38'),
+              ('The implementation', 3, None, '___sec39'),
+              ('Example', 3, None, '___sec40'),
+              ('A class version', 3, None, '___sec41'),
+              ('Monte Carlo integration',
+               1,
+               'sec:random:MonteCarlo:integration',
+               'sec:random:MonteCarlo:integration'),
+              ('Derivation of Monte Carlo integration',
+               2,
+               'sec:random:MCint:ideas',
+               'sec:random:MCint:ideas'),
+              ('The calculus approach via the mean-value theorem',
+               3,
+               None,
+               '___sec44'),
+              ('The probability theory approach', 3, None, '___sec45'),
+              ('Implementation of standard Monte Carlo integration',
+               2,
+               'sec:random:MCint:std',
+               'sec:random:MCint:std'),
+              ('Example', 3, None, '___sec47'),
+              ('Remark', 3, None, '___sec48'),
+              ('Area computing by throwing random points',
+               2,
+               'sec:random:MCdart',
+               'sec:random:MCdart'),
+              ('Random walk in one space dimension',
+               1,
+               'sec:random:rw1D',
+               'sec:random:rw1D'),
+              ('Basic implementation', 2, None, '___sec51'),
+              ('Visualization', 2, None, '___sec52'),
+              ('Random walk as a difference equation', 2, None, '___sec53'),
+              ('Computing statistics of the particle positions',
+               2,
+               'sec:random:walk:1D:statistics',
+               'sec:random:walk:1D:statistics'),
+              ('Vectorized implementation',
+               2,
+               'sec:random:walk:1D:vectorized',
+               'sec:random:walk:1D:vectorized'),
+              ('Random walk in two space dimensions',
+               1,
+               'sec:random:rw2D',
+               'sec:random:rw2D'),
+              ('Basic implementation',
+               2,
+               'sec:random:rw2D:scalar',
+               'sec:random:rw2D:scalar'),
+              ('Vectorized implementation',
+               2,
+               'sec:random:walk:2D:vectorized',
+               'sec:random:walk:2D:vectorized'),
+              ('Summary', 1, None, '___sec59'),
+              ('Chapter topics', 2, None, '___sec60'),
+              ('Drawing random numbers', 3, None, '___sec61'),
+              ('Typical probability computation via Monte Carlo simulation',
+               3,
+               None,
+               '___sec62'),
+              ('Statistical measures', 3, None, '___sec63'),
+              ('Terminology', 3, None, '___sec64'),
+              ('Example: Random growth',
+               2,
+               'sec:random:summarizingex',
+               'sec:random:summarizingex'),
+              ('Problem', 3, None, '___sec66'),
+              ('Solution', 3, None, '___sec67'),
+              ('Exercises', 1, None, '___sec68'),
+              ('Exercise 1: Flip a coin times',
+               2,
+               'sec:random:ex17',
+               'sec:random:ex17'),
+              ('Exercise 2: Compute a probability',
+               2,
+               'sec:random:ex7',
+               'sec:random:ex7'),
+              ('Exercise 3: Choose random colors',
+               2,
+               'sec:random:ex6',
+               'sec:random:ex6'),
+              ('Exercise 4: Draw balls from a hat',
+               2,
+               'sec:random:ex4',
+               'sec:random:ex4'),
+              ('Exercise 5: Computing probabilities of rolling dice',
+               2,
+               'sec:random:ex2',
+               'sec:random:ex2'),
+              ('Exercise 6: Estimate the probability in a dice game',
+               2,
+               'sec:random:ex10',
+               'sec:random:ex10'),
+              ('Exercise 7: Compute the probability of hands of cards',
+               2,
+               'sec:random:ex44',
+               'sec:random:ex44'),
+              ('Exercise 8: Decide if a dice game is fair',
+               2,
+               'sec:random:ex11',
+               'sec:random:ex11'),
+              ('Exercise 9: Adjust a game to make it fair',
+               2,
+               'sec:random:ex12',
+               'sec:random:ex12'),
+              ('Exercise 10: Generalize a game',
+               2,
+               'sec:random:ex12b',
+               'sec:random:ex12b'),
+              ('Exercise 11: Compare two playing strategies',
+               2,
+               'sec:random:ex2c',
+               'sec:random:ex2c'),
+              ('Exercise 12: Investigate strategies in a game',
+               2,
+               'sec:random:ex2e',
+               'sec:random:ex2e'),
+              ('Exercise 13: Investigate the winning chances of some games',
+               2,
+               'sec:random:ex45',
+               'sec:random:ex45'),
+              ('Exercise 14: Compute probabilities of throwing two dice',
+               2,
+               'sec:random:ex2b',
+               'sec:random:ex2b'),
+              ('Exercise 15: Vectorize flipping a coin',
+               2,
+               'sec:random:ex18',
+               'sec:random:ex18'),
+              ('Exercise 16: Vectorize a probablility computation',
+               2,
+               'sec:random:ex7b',
+               'sec:random:ex7b'),
+              ('Exercise 17: Throw dice and compute a small probability',
+               2,
+               'sec:random:ex30',
+               'sec:random:ex30'),
+              ('Exercise 18: Difference equation for random numbers',
+               2,
+               'sec:random:ex27',
+               'sec:random:ex27'),
+              ('Exercise 19: Make a class for drawing balls from a hat',
+               2,
+               'sec:random:ex9',
+               'sec:random:ex9'),
+              ('Exercise 20: Independent  versus dependent random numbers',
+               2,
+               'sec:random:ex21',
+               'sec:random:ex21'),
+              ('Exercise 21: Compute the probability of flipping a coin',
+               2,
+               'sec:random:ex19',
+               'sec:random:ex19'),
+              ('Exercise 22: Simulate a poker game',
+               2,
+               'sec:random:ex41',
+               'sec:random:ex41'),
+              ('Exercise 23: Estimate growth in a simulation model',
+               2,
+               'sec:random:ex29',
+               'sec:random:ex29'),
+              ('Exercise 24: Investigate guessing strategies',
+               2,
+               'sec:random:ex15',
+               'sec:random:ex15'),
+              ('Exercise 25: Vectorize a dice game',
+               2,
+               'sec:random:ex13',
+               'sec:random:ex13'),
+              ('Exercise 26: Compute $\\pi$ by a Monte Carlo method',
+               2,
+               'sec:random:ex31',
+               'sec:random:ex31'),
+              ('Exercise 27: Compute $\\pi$ by a Monte Carlo method',
+               2,
+               'sec:random:ex32',
+               'sec:random:ex32'),
+              ('Exercise 28: Compute $\\pi$ by a random sum',
+               2,
+               'sec:random:ex31b',
+               'sec:random:ex31b'),
+              ('Exercise 29: 1D random walk with drift',
+               2,
+               'sec:random:ex1',
+               'sec:random:ex1'),
+              ('Exercise 30: 1D random walk until a point is hit',
+               2,
+               'sec:random:ex3',
+               'sec:random:ex3'),
+              ('Exercise 31: Simulate making a fortune from gaming',
+               2,
+               'sec:random:ex3:rwgame',
+               'sec:random:ex3:rwgame'),
+              ('Exercise 32: Make classes for 2D random walk',
+               2,
+               'sec:random:ex33',
+               'sec:random:ex33'),
+              ('Exercise 33: 2D random walk with walls; scalar version',
+               2,
+               'sec:random:ex36',
+               'sec:random:ex36'),
+              ('Exercise 34: 2D random walk with walls; vectorized version',
+               2,
+               'sec:random:ex37',
+               'sec:random:ex37'),
+              ('Exercise 35: Simulate mixing of gas molecules',
+               2,
+               'sec:random:ex38',
+               'sec:random:ex38'),
+              ('Remarks', 3, None, '___sec104'),
+              ('Exercise 36: Simulate slow mixing of gas molecules',
+               2,
+               'sec:random:ex39',
+               'sec:random:ex39'),
+              ('Exercise 37: Guess beer brands',
+               2,
+               'sec:random:ex35',
+               'sec:random:ex35'),
+              ('Exercise 38: Simulate stock prices',
+               2,
+               'sec:random:ex26',
+               'sec:random:ex26'),
+              ('Exercise 39: Compute with option prices in finance',
+               2,
+               'sec:random:ex16',
+               'sec:random:ex16'),
+              ('Remarks', 3, None, '___sec109'),
+              ('Exercise 40: Differentiate noise measurements',
+               2,
+               'sec:random:ex22',
+               'sec:random:ex22'),
+              ('Exercise 41: Differentiate noisy signals',
+               2,
+               'sec:random:ex25',
+               'sec:random:ex25'),
+              ('Exercise 42: Model noise in a time signal',
+               2,
+               'sec:random:ex23',
+               'sec:random:ex23'),
+              ('Exercise 43: Speed up Markov chain mutation',
+               2,
+               'bioinf:exer:Markov:chain:eff',
+               'bioinf:exer:Markov:chain:eff'),
+              ('References', 1, None, '___sec114')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- newcommands_keep.tex -->
+$$
+\newcommand{\tp}{\thinspace .}
+\newcommand{\Prob}[1]{\hbox{P}(#1)}
+$$
+
+
+
+
+    
+<!-- Bootstrap navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="random-bootstrap.html">Random numbers and simple games</a>
+  </div>
+
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     <!-- navigation toc: --> <li><a href="._random-bootstrap001.html#___sec0" style="font-size: 80%;"><b>Drawing random numbers</b></a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap001.html#___sec1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The seed</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap001.html#sec:random:uniform" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Uniformly distributed random numbers</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap001.html#___sec3" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Visualizing the distribution</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap001.html#___sec4" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Vectorized drawing of random numbers</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap001.html#___sec5" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Warning</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap001.html#sec:random:statistics" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Computing the mean and standard deviation</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap001.html#sec:random:normal" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The Gaussian or normal distribution</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap002.html#sec:random:ints" style="font-size: 80%;"><b>Drawing integers</b></a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap002.html#___sec9" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Random integer functions</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap002.html#___sec10" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Throwing a die</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap002.html#___sec11" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scalar version</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap002.html#___sec12" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Vectorized version</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap002.html#___sec13" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Vectorized version with batches</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap002.html#___sec14" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Verification of the scalar version</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap002.html#___sec15" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Verification of all versions</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap002.html#___sec16" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Drawing a random element from a list</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap002.html#sec:random:deck1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Drawing cards from a deck</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap002.html#sec:class:deck:class" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Class implementation of a deck</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap003.html#sec:random:probability" style="font-size: 80%;"><b>Computing probabilities</b></a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap003.html#___sec20" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Principles of Monte Carlo simulation</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap003.html#sec:random:probability:dice" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Throwing dice</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap003.html#___sec22" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Straightforward solution</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap003.html#___sec23" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Vectorization</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap003.html#___sec24" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exact solution</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap003.html#___sec25" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A game</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap003.html#___sec26" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Decide if a game is fair</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap003.html#sec:random:balls" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Drawing balls from a hat</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap003.html#bioinf:random" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Random mutations of genes</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap003.html#___sec29" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A simple mutation model</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap003.html#___sec30" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Vectorized version</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap003.html#___sec31" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A Markov chain mutation model</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap003.html#sec:random:china" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Policies for limiting population growth</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap004.html#___sec33" style="font-size: 80%;"><b>Simple games</b></a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap004.html#sec:random:game:guessn" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Guessing a number</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap004.html#___sec35" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The game</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap004.html#___sec36" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The implementation</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap004.html#sec:random:twodicesumguess" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Rolling two dice</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap004.html#___sec38" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The game</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap004.html#___sec39" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The implementation</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap004.html#___sec40" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap004.html#___sec41" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A class version</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap004.html#sec:random:MonteCarlo:integration" style="font-size: 80%;"><b>Monte Carlo integration</b></a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap004.html#sec:random:MCint:ideas" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Derivation of Monte Carlo integration</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap004.html#___sec44" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The calculus approach via the mean-value theorem</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap004.html#___sec45" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The probability theory approach</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap004.html#sec:random:MCint:std" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Implementation of standard Monte Carlo integration</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap004.html#___sec47" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap004.html#___sec48" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remark</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap004.html#sec:random:MCdart" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Area computing by throwing random points</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap005.html#sec:random:rw1D" style="font-size: 80%;"><b>Random walk in one space dimension</b></a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap005.html#___sec51" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Basic implementation</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap005.html#___sec52" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Visualization</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap005.html#___sec53" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Random walk as a difference equation</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap005.html#sec:random:walk:1D:statistics" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Computing statistics of the particle positions</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap005.html#sec:random:walk:1D:vectorized" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Vectorized implementation</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:random:rw2D" style="font-size: 80%;"><b>Random walk in two space dimensions</b></a></li>
+     <!-- navigation toc: --> <li><a href="#sec:random:rw2D:scalar" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Basic implementation</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:random:walk:2D:vectorized" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Vectorized implementation</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap007.html#___sec59" style="font-size: 80%;"><b>Summary</b></a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap007.html#___sec60" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Chapter topics</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap007.html#___sec61" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Drawing random numbers</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap007.html#___sec62" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Typical probability computation via Monte Carlo simulation</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap007.html#___sec63" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Statistical measures</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap007.html#___sec64" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Terminology</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap007.html#sec:random:summarizingex" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Random growth</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap007.html#___sec66" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap007.html#___sec67" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Solution</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#___sec68" style="font-size: 80%;"><b>Exercises</b></a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex17" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 1: Flip a coin times</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex7" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 2: Compute a probability</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex6" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 3: Choose random colors</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex4" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 4: Draw balls from a hat</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 5: Computing probabilities of rolling dice</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex10" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 6: Estimate the probability in a dice game</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex44" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 7: Compute the probability of hands of cards</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex11" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 8: Decide if a dice game is fair</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex12" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 9: Adjust a game to make it fair</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex12b" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 10: Generalize a game</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex2c" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 11: Compare two playing strategies</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex2e" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 12: Investigate strategies in a game</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex45" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 13: Investigate the winning chances of some games</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex2b" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 14: Compute probabilities of throwing two dice</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex18" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 15: Vectorize flipping a coin</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex7b" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 16: Vectorize a probablility computation</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex30" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 17: Throw dice and compute a small probability</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex27" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 18: Difference equation for random numbers</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex9" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 19: Make a class for drawing balls from a hat</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex21" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 20: Independent  versus dependent random numbers</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex19" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 21: Compute the probability of flipping a coin</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex41" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 22: Simulate a poker game</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex29" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 23: Estimate growth in a simulation model</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex15" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 24: Investigate guessing strategies</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex13" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 25: Vectorize a dice game</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex31" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 26: Compute \( \pi \) by a Monte Carlo method</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex32" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 27: Compute \( \pi \) by a Monte Carlo method</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex31b" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 28: Compute \( \pi \) by a random sum</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 29: 1D random walk with drift</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex3" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 30: 1D random walk until a point is hit</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex3:rwgame" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 31: Simulate making a fortune from gaming</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex33" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 32: Make classes for 2D random walk</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex36" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 33: 2D random walk with walls; scalar version</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex37" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 34: 2D random walk with walls; vectorized version</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex38" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 35: Simulate mixing of gas molecules</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#___sec104" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remarks</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex39" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 36: Simulate slow mixing of gas molecules</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex35" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 37: Guess beer brands</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex26" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 38: Simulate stock prices</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex16" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 39: Compute with option prices in finance</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#___sec109" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remarks</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex22" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 40: Differentiate noise measurements</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex25" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 41: Differentiate noisy signals</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex23" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 42: Model noise in a time signal</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#bioinf:exer:Markov:chain:eff" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 43: Speed up Markov chain mutation</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#___sec114" style="font-size: 80%;"><b>References</b></a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div> <!-- end of navigation bar -->
+
+<div class="container">
+
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+
+<a name="part0006"></a>
+<!-- !split -->
+<p style="font-size:80%">This chapter is taken from book <a href="http://www.springer.com/gp/book/9783642549588">A Primer on Scientific Programming with Python</a> by H. P. Langtangen, 4th edition, Springer, 2014.</p>
+
+<h1 id="sec:random:rw2D">Random walk in two space dimensions</h1>
+
+<p>
+A random walk in two dimensions performs a step either to the north,
+south, west, or east, each one with probability \( 1/4 \).
+To demonstrate this process,
+we introduce \( x \) and \( y \) coordinates of \( n_p \) particles and
+draw random numbers among 1, 2, 3, or 4
+to determine the move.
+The positions of the particles can easily
+be visualized as small circles in an \( xy \) coordinate system.
+
+<h2 id="sec:random:rw2D:scalar">Basic implementation</h2>
+
+<p>
+The algorithm described above
+is conveniently expressed directly as a complete working program:
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">random_walk_2D</span>(np, ns, plot_step):
+    xpositions <span style="color: #666666">=</span> numpy<span style="color: #666666">.</span>zeros(np)
+    ypositions <span style="color: #666666">=</span> numpy<span style="color: #666666">.</span>zeros(np)
+    <span style="color: #408080; font-style: italic"># extent of the axis in the plot:</span>
+    xymax <span style="color: #666666">=</span> <span style="color: #666666">3*</span>numpy<span style="color: #666666">.</span>sqrt(ns); xymin <span style="color: #666666">=</span> <span style="color: #666666">-</span>xymax
+
+    NORTH <span style="color: #666666">=</span> <span style="color: #666666">1</span>;  SOUTH <span style="color: #666666">=</span> <span style="color: #666666">2</span>;  WEST <span style="color: #666666">=</span> <span style="color: #666666">3</span>;  EAST <span style="color: #666666">=</span> <span style="color: #666666">4</span>  <span style="color: #408080; font-style: italic"># constants</span>
+
+    <span style="color: #008000; font-weight: bold">for</span> step <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(ns):
+        <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(np):
+            direction <span style="color: #666666">=</span> random<span style="color: #666666">.</span>randint(<span style="color: #666666">1</span>, <span style="color: #666666">4</span>)
+            <span style="color: #008000; font-weight: bold">if</span> direction <span style="color: #666666">==</span> NORTH:
+                ypositions[i] <span style="color: #666666">+=</span> <span style="color: #666666">1</span>
+            <span style="color: #008000; font-weight: bold">elif</span> direction <span style="color: #666666">==</span> SOUTH:
+                ypositions[i] <span style="color: #666666">-=</span> <span style="color: #666666">1</span>
+            <span style="color: #008000; font-weight: bold">elif</span> direction <span style="color: #666666">==</span> EAST:
+                xpositions[i] <span style="color: #666666">+=</span> <span style="color: #666666">1</span>
+            <span style="color: #008000; font-weight: bold">elif</span> direction <span style="color: #666666">==</span> WEST:
+                xpositions[i] <span style="color: #666666">-=</span> <span style="color: #666666">1</span>
+
+        <span style="color: #408080; font-style: italic"># Plot just every plot_step steps</span>
+        <span style="color: #008000; font-weight: bold">if</span> (step<span style="color: #666666">+1</span>) <span style="color: #666666">%</span> plot_step <span style="color: #666666">==</span> <span style="color: #666666">0</span>:
+            plot(xpositions, ypositions, <span style="color: #BA2121">&#39;ko&#39;</span>,
+                 axis<span style="color: #666666">=</span>[xymin, xymax, xymin, xymax],
+                 title<span style="color: #666666">=</span><span style="color: #BA2121">&#39;</span><span style="color: #BB6688; font-weight: bold">%d</span><span style="color: #BA2121"> particles after </span><span style="color: #BB6688; font-weight: bold">%d</span><span style="color: #BA2121"> steps&#39;</span> <span style="color: #666666">%</span> 
+                       (np, step<span style="color: #666666">+1</span>),
+                 savefig<span style="color: #666666">=</span><span style="color: #BA2121">&#39;tmp_</span><span style="color: #BB6688; font-weight: bold">%03d</span><span style="color: #BA2121">.pdf&#39;</span> <span style="color: #666666">%</span> (step<span style="color: #666666">+1</span>))
+    <span style="color: #008000; font-weight: bold">return</span> xpositions, ypositions
+
+<span style="color: #408080; font-style: italic"># main program:</span>
+<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">random</span>
+random<span style="color: #666666">.</span>seed(<span style="color: #666666">10</span>)
+<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">sys</span>
+<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span>
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">scitools.std</span> <span style="color: #008000; font-weight: bold">import</span> plot
+
+np        <span style="color: #666666">=</span> <span style="color: #008000">int</span>(sys<span style="color: #666666">.</span>argv[<span style="color: #666666">1</span>])  <span style="color: #408080; font-style: italic"># number of particles</span>
+ns        <span style="color: #666666">=</span> <span style="color: #008000">int</span>(sys<span style="color: #666666">.</span>argv[<span style="color: #666666">2</span>])  <span style="color: #408080; font-style: italic"># number of steps</span>
+plot_step <span style="color: #666666">=</span> <span style="color: #008000">int</span>(sys<span style="color: #666666">.</span>argv[<span style="color: #666666">3</span>])  <span style="color: #408080; font-style: italic"># plot every plot_step steps</span>
+x, y <span style="color: #666666">=</span> random_walk_2D(np, ns, plot_step)
+</pre></div>
+<p>
+The program is found in the file <a href="http://tinyurl.com/pwyasaa/random/walk2D.py" target="_self"><tt>walk2D.py</tt></a>.  Figure
+<a href="#fig:random:walk:2D:particles">7</a> shows two snapshots of the
+distribution of 3000 particles after 40 and 400 steps.  These plots
+were generated with command-line arguments <code>3000 400 20</code>, the latter
+implying that we visualize the particles every 20 time steps only.
+
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 7:  Location of 3000 particles starting at the origin and performing a random walk, with 40 steps (left) and 400 steps (right). <div id="fig:random:walk:2D:particles"></div> </p></center>
+<p><img src="fig-random/randomwalk2D.png" align="bottom" width=400></p>
+</center>
+
+<p>
+To get a feeling for the two-dimensional random walk you can try out
+only 30 particles for 400 steps and let each step be visualized
+(i.e., command-line arguments <code>30 400 1</code>).
+The update of the movements is now fast.
+
+<p>
+The <code>walk2D.py</code> program dumps the plots to PDF files
+with names of the form <code>tmp_xxx.pdf</code>, where <code>xxx</code> is
+the step number. We can create a movie out of these individual
+files using the program <code>convert</code> from the ImageMagick suite:
+
+<p>
+
+<!-- code=text (!bc sys) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">Terminal&gt; convert -delay 50 -loop 1000 tmp_*.pdf movie.gif
+</pre></div>
+<p>
+All the plots are now put after each other as frames in a movie, with
+a delay of 50 ms between each frame. The movie will run in a loop
+1000 times.
+The resulting movie file is named <code>movie.gif</code>, which can
+be viewed by the <code>animate</code> program (also from the ImageMagick
+program suite), just write <code>animate movie.gif</code>.
+Making and showing the movie are slow processes if a large number of
+steps are included in the movie. The alternative is to make
+a true video file in, e.g., the Flash format:
+
+<p>
+
+<!-- code=text (!bc sys) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">Terminal&gt; avconv -r 5 -i tmp_%04d.png -c:v flv movie.flv
+</pre></div>
+<p>
+This requires the plot files to be in PNG format.
+
+<h2 id="sec:random:walk:2D:vectorized">Vectorized implementation</h2>
+
+<p>
+The <code>walk2D.py</code> program is quite slow. Now the visualization is much
+faster than the movement of the particles.  Vectorization may speed up
+the <code>walk2D.py</code> program significantly.  As in the one-dimensional
+phase, we draw all the movements at once and then invoke a loop over
+the steps to update the \( x \) and \( y \) coordinates.  We draw \( n_s\times
+n_p \) numbers among 1, 2, 3, and 4.  We then reshape the vector of
+random numbers to a two-dimensional array <code>moves[i, j]</code>, where <code>i</code>
+counts the steps, <code>j</code> counts the particles.  The <code>if</code> test on whether
+the current move is to the north, south, east, or west can be
+vectorized using the <code>where</code>
+function.
+For example, if the random numbers for all particles in the current step
+are accessible in an array <code>this_move</code>, we could update the \( x \)
+positions by
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">xpositions <span style="color: #666666">+=</span> np<span style="color: #666666">.</span>where(this_move <span style="color: #666666">==</span> EAST, <span style="color: #666666">1</span>, <span style="color: #666666">0</span>)
+xpositions <span style="color: #666666">-=</span> np<span style="color: #666666">.</span>where(this_move <span style="color: #666666">==</span> WEST, <span style="color: #666666">1</span>, <span style="color: #666666">0</span>)
+</pre></div>
+<p>
+provided <code>EAST</code> and <code>WEST</code> are constants, equal to 3 and 4,
+respectively. A similar construction can be used for the \( y \) moves.
+
+<p>
+The complete program is listed below:
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">random_walk_2D</span>(np, ns, plot_step):
+    xpositions <span style="color: #666666">=</span> numpy<span style="color: #666666">.</span>zeros(np)
+    ypositions <span style="color: #666666">=</span> numpy<span style="color: #666666">.</span>zeros(np)
+    moves <span style="color: #666666">=</span> numpy<span style="color: #666666">.</span>random<span style="color: #666666">.</span>random_integers(<span style="color: #666666">1</span>, <span style="color: #666666">4</span>, size<span style="color: #666666">=</span>ns<span style="color: #666666">*</span>np)
+    moves<span style="color: #666666">.</span>shape <span style="color: #666666">=</span> (ns, np)
+
+    <span style="color: #408080; font-style: italic"># Estimate max and min positions</span>
+    xymax <span style="color: #666666">=</span> <span style="color: #666666">3*</span>numpy<span style="color: #666666">.</span>sqrt(ns); xymin <span style="color: #666666">=</span> <span style="color: #666666">-</span>xymax
+
+    NORTH <span style="color: #666666">=</span> <span style="color: #666666">1</span>;  SOUTH <span style="color: #666666">=</span> <span style="color: #666666">2</span>;  WEST <span style="color: #666666">=</span> <span style="color: #666666">3</span>;  EAST <span style="color: #666666">=</span> <span style="color: #666666">4</span>  <span style="color: #408080; font-style: italic"># constants</span>
+
+    <span style="color: #008000; font-weight: bold">for</span> step <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(ns):
+        this_move <span style="color: #666666">=</span> moves[step,:]
+        ypositions <span style="color: #666666">+=</span> numpy<span style="color: #666666">.</span>where(this_move <span style="color: #666666">==</span> NORTH, <span style="color: #666666">1</span>, <span style="color: #666666">0</span>)
+        ypositions <span style="color: #666666">-=</span> numpy<span style="color: #666666">.</span>where(this_move <span style="color: #666666">==</span> SOUTH, <span style="color: #666666">1</span>, <span style="color: #666666">0</span>)
+        xpositions <span style="color: #666666">+=</span> numpy<span style="color: #666666">.</span>where(this_move <span style="color: #666666">==</span> EAST,  <span style="color: #666666">1</span>, <span style="color: #666666">0</span>)
+        xpositions <span style="color: #666666">-=</span> numpy<span style="color: #666666">.</span>where(this_move <span style="color: #666666">==</span> WEST,  <span style="color: #666666">1</span>, <span style="color: #666666">0</span>)
+
+        <span style="color: #408080; font-style: italic"># Just plot every plot_step steps</span>
+        <span style="color: #008000; font-weight: bold">if</span> (step<span style="color: #666666">+1</span>) <span style="color: #666666">%</span> plot_step <span style="color: #666666">==</span> <span style="color: #666666">0</span>:
+            plot(xpositions, ypositions, <span style="color: #BA2121">&#39;ko&#39;</span>,
+                 axis<span style="color: #666666">=</span>[xymin, xymax, xymin, xymax],
+                 title<span style="color: #666666">=</span><span style="color: #BA2121">&#39;</span><span style="color: #BB6688; font-weight: bold">%d</span><span style="color: #BA2121"> particles after </span><span style="color: #BB6688; font-weight: bold">%d</span><span style="color: #BA2121"> steps&#39;</span> <span style="color: #666666">%</span> 
+                       (np, step<span style="color: #666666">+1</span>),
+                 savefig<span style="color: #666666">=</span><span style="color: #BA2121">&#39;tmp_</span><span style="color: #BB6688; font-weight: bold">%03d</span><span style="color: #BA2121">.pdf&#39;</span> <span style="color: #666666">%</span> (step<span style="color: #666666">+1</span>))
+    <span style="color: #008000; font-weight: bold">return</span> xpositions, ypositions
+
+<span style="color: #408080; font-style: italic"># Main program</span>
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">scitools.std</span> <span style="color: #008000; font-weight: bold">import</span> plot
+<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span><span style="color: #666666">,</span> <span style="color: #0000FF; font-weight: bold">sys</span>
+numpy<span style="color: #666666">.</span>random<span style="color: #666666">.</span>seed(<span style="color: #666666">11</span>)
+
+np <span style="color: #666666">=</span> <span style="color: #008000">int</span>(sys<span style="color: #666666">.</span>argv[<span style="color: #666666">1</span>])  <span style="color: #408080; font-style: italic"># number of particles</span>
+ns <span style="color: #666666">=</span> <span style="color: #008000">int</span>(sys<span style="color: #666666">.</span>argv[<span style="color: #666666">2</span>])  <span style="color: #408080; font-style: italic"># number of steps</span>
+plot_step <span style="color: #666666">=</span> <span style="color: #008000">int</span>(sys<span style="color: #666666">.</span>argv[<span style="color: #666666">3</span>])  <span style="color: #408080; font-style: italic"># plot each plot_step step</span>
+x, y <span style="color: #666666">=</span> random_walk_2D(np, ns, plot_step)
+</pre></div>
+<p>
+You will easily experience that this program, found in the file
+<a href="http://tinyurl.com/pwyasaa/random/walk2Dc.py" target="_self"><tt>walk2Dv.py</tt></a>, runs significantly
+faster than the <code>walk2D.py</code> program.
+
+<p>
+<p>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pager">
+  <li class="previous">
+    <a href="._random-bootstrap005.html">&larr; Prev</a>
+  </li>
+  <li class="next">
+    <a href="._random-bootstrap007.html">Next &rarr;</a>
+  </li>
+</ul>
+<!-- ------------------- end of main content --------------- -->
+
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap footer
+<footer>
+<a href="http://..."><img width="250" align=right src="http://..."></a>
+</footer>
+-->
+
+
+</body>
+</html>
+    
+

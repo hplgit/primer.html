@@ -1,0 +1,1479 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Random numbers and simple games">
+<meta name="keywords" content="random numbers,seed,uniformly distributed random numbers,random numbers uniform distribution,bin (histogram),histogram (normalized),random numbers histogram,vectorized drawing of random numbers,random numbers vectorization,mean,average,random numbers statistics,variance,standard deviation,mod function,normally distributed random numbers,random numbers normal distribution,random numbers integers,integer random numbers,probability,random numbers Monte Carlo simulation,Monte Carlo simulation,Monte Carlo integration,random numbers integration,Midpoint rule for integration,mod function,measure time in programs,efficiency measure,random walk,random numbers random walk,making movie,cumulative sum">
+
+<title>Random numbers and simple games</title>
+
+
+<link href="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/css/solarized_light_code.css" rel="stylesheet" type="text/css" title="light"/>
+<script src="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<link href="http://thomasf.github.io/solarized-css/solarized-light.min.css" rel="stylesheet">
+<style type="text/css">
+h1 {color: #b58900;}  /* yellow */
+/* h1 {color: #cb4b16;}  orange */
+/* h1 {color: #d33682;}  magenta, the original choice of thomasf */
+code { padding: 0px; background-color: inherit; }
+pre {
+  border: 0pt solid #93a1a1;
+  box-shadow: none;
+}
+
+div { text-align: justify; text-justify: inter-word; }
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [('Drawing random numbers', 1, None, '___sec0'),
+              ('The seed', 2, None, '___sec1'),
+              ('Uniformly distributed random numbers',
+               2,
+               'sec:random:uniform',
+               'sec:random:uniform'),
+              ('Visualizing the distribution', 2, None, '___sec3'),
+              ('Vectorized drawing of random numbers', 2, None, '___sec4'),
+              ('Warning', 3, None, '___sec5'),
+              ('Computing the mean and standard deviation',
+               2,
+               'sec:random:statistics',
+               'sec:random:statistics'),
+              ('The Gaussian or normal distribution',
+               2,
+               'sec:random:normal',
+               'sec:random:normal'),
+              ('Drawing integers', 1, 'sec:random:ints', 'sec:random:ints'),
+              ('Random integer functions', 2, None, '___sec9'),
+              ('Example: Throwing a die', 2, None, '___sec10'),
+              ('Scalar version', 3, None, '___sec11'),
+              ('Vectorized version', 3, None, '___sec12'),
+              ('Vectorized version with batches', 3, None, '___sec13'),
+              ('Verification of the scalar version', 3, None, '___sec14'),
+              ('Verification of all versions', 3, None, '___sec15'),
+              ('Drawing a random element from a list', 2, None, '___sec16'),
+              ('Example: Drawing cards from a deck',
+               2,
+               'sec:random:deck1',
+               'sec:random:deck1'),
+              ('Example: Class implementation of a deck',
+               2,
+               'sec:class:deck:class',
+               'sec:class:deck:class'),
+              ('Computing probabilities',
+               1,
+               'sec:random:probability',
+               'sec:random:probability'),
+              ('Principles of Monte Carlo simulation', 2, None, '___sec20'),
+              ('Example: Throwing dice',
+               2,
+               'sec:random:probability:dice',
+               'sec:random:probability:dice'),
+              ('Straightforward solution', 3, None, '___sec22'),
+              ('Vectorization', 3, None, '___sec23'),
+              ('Exact solution', 3, None, '___sec24'),
+              ('A game', 3, None, '___sec25'),
+              ('Decide if a game is fair', 3, None, '___sec26'),
+              ('Example: Drawing balls from a hat',
+               2,
+               'sec:random:balls',
+               'sec:random:balls'),
+              ('Random mutations of genes',
+               2,
+               'bioinf:random',
+               'bioinf:random'),
+              ('A simple mutation model', 3, None, '___sec29'),
+              ('Vectorized version', 3, None, '___sec30'),
+              ('A Markov chain mutation model', 3, None, '___sec31'),
+              ('Example: Policies for limiting population growth',
+               2,
+               'sec:random:china',
+               'sec:random:china'),
+              ('Simple games', 1, None, '___sec33'),
+              ('Guessing a number',
+               2,
+               'sec:random:game:guessn',
+               'sec:random:game:guessn'),
+              ('The game', 3, None, '___sec35'),
+              ('The implementation', 3, None, '___sec36'),
+              ('Rolling two dice',
+               2,
+               'sec:random:twodicesumguess',
+               'sec:random:twodicesumguess'),
+              ('The game', 3, None, '___sec38'),
+              ('The implementation', 3, None, '___sec39'),
+              ('Example', 3, None, '___sec40'),
+              ('A class version', 3, None, '___sec41'),
+              ('Monte Carlo integration',
+               1,
+               'sec:random:MonteCarlo:integration',
+               'sec:random:MonteCarlo:integration'),
+              ('Derivation of Monte Carlo integration',
+               2,
+               'sec:random:MCint:ideas',
+               'sec:random:MCint:ideas'),
+              ('The calculus approach via the mean-value theorem',
+               3,
+               None,
+               '___sec44'),
+              ('The probability theory approach', 3, None, '___sec45'),
+              ('Implementation of standard Monte Carlo integration',
+               2,
+               'sec:random:MCint:std',
+               'sec:random:MCint:std'),
+              ('Example', 3, None, '___sec47'),
+              ('Remark', 3, None, '___sec48'),
+              ('Area computing by throwing random points',
+               2,
+               'sec:random:MCdart',
+               'sec:random:MCdart'),
+              ('Random walk in one space dimension',
+               1,
+               'sec:random:rw1D',
+               'sec:random:rw1D'),
+              ('Basic implementation', 2, None, '___sec51'),
+              ('Visualization', 2, None, '___sec52'),
+              ('Random walk as a difference equation', 2, None, '___sec53'),
+              ('Computing statistics of the particle positions',
+               2,
+               'sec:random:walk:1D:statistics',
+               'sec:random:walk:1D:statistics'),
+              ('Vectorized implementation',
+               2,
+               'sec:random:walk:1D:vectorized',
+               'sec:random:walk:1D:vectorized'),
+              ('Random walk in two space dimensions',
+               1,
+               'sec:random:rw2D',
+               'sec:random:rw2D'),
+              ('Basic implementation',
+               2,
+               'sec:random:rw2D:scalar',
+               'sec:random:rw2D:scalar'),
+              ('Vectorized implementation',
+               2,
+               'sec:random:walk:2D:vectorized',
+               'sec:random:walk:2D:vectorized'),
+              ('Summary', 1, None, '___sec59'),
+              ('Chapter topics', 2, None, '___sec60'),
+              ('Drawing random numbers', 3, None, '___sec61'),
+              ('Typical probability computation via Monte Carlo simulation',
+               3,
+               None,
+               '___sec62'),
+              ('Statistical measures', 3, None, '___sec63'),
+              ('Terminology', 3, None, '___sec64'),
+              ('Example: Random growth',
+               2,
+               'sec:random:summarizingex',
+               'sec:random:summarizingex'),
+              ('Problem', 3, None, '___sec66'),
+              ('Solution', 3, None, '___sec67'),
+              ('Exercises', 1, None, '___sec68'),
+              ('Exercise 1: Flip a coin times',
+               2,
+               'sec:random:ex17',
+               'sec:random:ex17'),
+              ('Exercise 2: Compute a probability',
+               2,
+               'sec:random:ex7',
+               'sec:random:ex7'),
+              ('Exercise 3: Choose random colors',
+               2,
+               'sec:random:ex6',
+               'sec:random:ex6'),
+              ('Exercise 4: Draw balls from a hat',
+               2,
+               'sec:random:ex4',
+               'sec:random:ex4'),
+              ('Exercise 5: Computing probabilities of rolling dice',
+               2,
+               'sec:random:ex2',
+               'sec:random:ex2'),
+              ('Exercise 6: Estimate the probability in a dice game',
+               2,
+               'sec:random:ex10',
+               'sec:random:ex10'),
+              ('Exercise 7: Compute the probability of hands of cards',
+               2,
+               'sec:random:ex44',
+               'sec:random:ex44'),
+              ('Exercise 8: Decide if a dice game is fair',
+               2,
+               'sec:random:ex11',
+               'sec:random:ex11'),
+              ('Exercise 9: Adjust a game to make it fair',
+               2,
+               'sec:random:ex12',
+               'sec:random:ex12'),
+              ('Exercise 10: Generalize a game',
+               2,
+               'sec:random:ex12b',
+               'sec:random:ex12b'),
+              ('Exercise 11: Compare two playing strategies',
+               2,
+               'sec:random:ex2c',
+               'sec:random:ex2c'),
+              ('Exercise 12: Investigate strategies in a game',
+               2,
+               'sec:random:ex2e',
+               'sec:random:ex2e'),
+              ('Exercise 13: Investigate the winning chances of some games',
+               2,
+               'sec:random:ex45',
+               'sec:random:ex45'),
+              ('Exercise 14: Compute probabilities of throwing two dice',
+               2,
+               'sec:random:ex2b',
+               'sec:random:ex2b'),
+              ('Exercise 15: Vectorize flipping a coin',
+               2,
+               'sec:random:ex18',
+               'sec:random:ex18'),
+              ('Exercise 16: Vectorize a probablility computation',
+               2,
+               'sec:random:ex7b',
+               'sec:random:ex7b'),
+              ('Exercise 17: Throw dice and compute a small probability',
+               2,
+               'sec:random:ex30',
+               'sec:random:ex30'),
+              ('Exercise 18: Difference equation for random numbers',
+               2,
+               'sec:random:ex27',
+               'sec:random:ex27'),
+              ('Exercise 19: Make a class for drawing balls from a hat',
+               2,
+               'sec:random:ex9',
+               'sec:random:ex9'),
+              ('Exercise 20: Independent  versus dependent random numbers',
+               2,
+               'sec:random:ex21',
+               'sec:random:ex21'),
+              ('Exercise 21: Compute the probability of flipping a coin',
+               2,
+               'sec:random:ex19',
+               'sec:random:ex19'),
+              ('Exercise 22: Simulate a poker game',
+               2,
+               'sec:random:ex41',
+               'sec:random:ex41'),
+              ('Exercise 23: Estimate growth in a simulation model',
+               2,
+               'sec:random:ex29',
+               'sec:random:ex29'),
+              ('Exercise 24: Investigate guessing strategies',
+               2,
+               'sec:random:ex15',
+               'sec:random:ex15'),
+              ('Exercise 25: Vectorize a dice game',
+               2,
+               'sec:random:ex13',
+               'sec:random:ex13'),
+              ('Exercise 26: Compute $\\pi$ by a Monte Carlo method',
+               2,
+               'sec:random:ex31',
+               'sec:random:ex31'),
+              ('Exercise 27: Compute $\\pi$ by a Monte Carlo method',
+               2,
+               'sec:random:ex32',
+               'sec:random:ex32'),
+              ('Exercise 28: Compute $\\pi$ by a random sum',
+               2,
+               'sec:random:ex31b',
+               'sec:random:ex31b'),
+              ('Exercise 29: 1D random walk with drift',
+               2,
+               'sec:random:ex1',
+               'sec:random:ex1'),
+              ('Exercise 30: 1D random walk until a point is hit',
+               2,
+               'sec:random:ex3',
+               'sec:random:ex3'),
+              ('Exercise 31: Simulate making a fortune from gaming',
+               2,
+               'sec:random:ex3:rwgame',
+               'sec:random:ex3:rwgame'),
+              ('Exercise 32: Make classes for 2D random walk',
+               2,
+               'sec:random:ex33',
+               'sec:random:ex33'),
+              ('Exercise 33: 2D random walk with walls; scalar version',
+               2,
+               'sec:random:ex36',
+               'sec:random:ex36'),
+              ('Exercise 34: 2D random walk with walls; vectorized version',
+               2,
+               'sec:random:ex37',
+               'sec:random:ex37'),
+              ('Exercise 35: Simulate mixing of gas molecules',
+               2,
+               'sec:random:ex38',
+               'sec:random:ex38'),
+              ('Remarks', 3, None, '___sec104'),
+              ('Exercise 36: Simulate slow mixing of gas molecules',
+               2,
+               'sec:random:ex39',
+               'sec:random:ex39'),
+              ('Exercise 37: Guess beer brands',
+               2,
+               'sec:random:ex35',
+               'sec:random:ex35'),
+              ('Exercise 38: Simulate stock prices',
+               2,
+               'sec:random:ex26',
+               'sec:random:ex26'),
+              ('Exercise 39: Compute with option prices in finance',
+               2,
+               'sec:random:ex16',
+               'sec:random:ex16'),
+              ('Remarks', 3, None, '___sec109'),
+              ('Exercise 40: Differentiate noise measurements',
+               2,
+               'sec:random:ex22',
+               'sec:random:ex22'),
+              ('Exercise 41: Differentiate noisy signals',
+               2,
+               'sec:random:ex25',
+               'sec:random:ex25'),
+              ('Exercise 42: Model noise in a time signal',
+               2,
+               'sec:random:ex23',
+               'sec:random:ex23'),
+              ('Exercise 43: Speed up Markov chain mutation',
+               2,
+               'bioinf:exer:Markov:chain:eff',
+               'bioinf:exer:Markov:chain:eff'),
+              ('References', 1, None, '___sec114')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- newcommands_keep.tex -->
+$$
+\newcommand{\tp}{\thinspace .}
+\newcommand{\Prob}[1]{\hbox{P}(#1)}
+$$
+
+
+
+
+    
+<a name="part0003"></a>
+<p>
+<!-- begin top navigation -->
+<table style="width: 100%"><tr><td>
+<div style="text-align: left;"><a href="._random-solarized002.html">&laquo; Previous</a></div>
+</td><td>
+<div style="text-align: right;"><a href="._random-solarized004.html">Next &raquo;</a></div>
+</td></tr></table>
+<!-- end top navigation -->
+</p>
+
+<p>
+<!-- !split -->
+<p style="font-size:80%">This chapter is taken from book <a href="http://www.springer.com/gp/book/9783642549588">A Primer on Scientific Programming with Python</a> by H. P. Langtangen, 4th edition, Springer, 2014.</p>
+
+<h1 id="sec:random:probability">Computing probabilities</h1>
+
+<p>
+With the mathematical rules from <em>probability theory</em> one may compute
+the probability that a certain event happens, say the probability that
+you get one black ball when drawing three balls from a hat
+with four black balls, six white balls, and three green balls.
+Unfortunately, theoretical
+calculations of probabilities may soon become hard or impossible if the
+problem is slightly changed. There is a simple numerical way of
+computing probabilities that is generally applicable to problems with
+uncertainty. The principal ideas of this approximate
+technique is explained below, followed by
+three examples of increasing complexity.
+
+<h2 id="___sec20">Principles of Monte Carlo simulation </h2>
+
+<p>
+Assume that we perform \( N \) experiments where the outcome of each
+experiment is random. Suppose that some event takes place
+\( M \) times in these \( N \) experiments. An estimate of the probability
+of the event is then \( M/N \). The estimate becomes more accurate
+as \( N \) is increased, and the exact probability is assumed to be
+reached in the limit as \( N\rightarrow\infty \). (Note that in this
+limit, \( M\rightarrow\infty \) too, so for rare events, where \( M \)
+may be small in a program, one must increase \( N \) such that
+\( M \) is sufficiently large for \( M/N \) to become a good approximation
+to the probability.)
+
+<p>
+Programs that run a large number of experiments and record the outcome
+of events
+are often called <em>simulation programs</em>. (Note that this term is also
+applied for programs that solve equations arising in mathematical models
+in general, but it is even more common to use the term when
+random numbers are used to estimate probabilities.)
+The mathematical
+technique of letting the computer perform
+lots of experiments based on drawing random numbers
+is commonly called
+<em>Monte Carlo simulation.</em>
+This technique has proven to be extremely useful throughout science
+and industry in problems where there is uncertain or random
+behavior is involved.
+
+<p>
+<blockquote>
+    <em>As far as the laws of mathematics refer
+    to reality, they are not certain, as far as they are certain,
+    they do not refer to reality.</em>
+    Albert Einstein, physicist, 1879-1955.
+</blockquote>
+
+For example,
+in finance the stock market has a random variation that
+must be taken into account when trying to optimize investments.
+In offshore engineering, environmental loads from wind, currents, and waves
+show random behavior. In nuclear and particle physics, random behavior is
+fundamental according to quantum mechanics and statistical physics.
+Many probabilistic problems can be calculated exactly by mathematics
+from probability
+theory, but very often Monte Carlo simulation is the only way to solve
+statistical problems.
+The sections <a href="#sec:random:probability:dice">Example: Throwing dice</a>-<a href="#sec:random:china">Example: Policies for limiting population growth</a>
+applies examples to explain the essence of Monte Carlo simulation in
+problems with inherent uncertainty.
+However, also deterministic problems, such as integration of functions,
+can be computed by Monte Carlo simulation (see the section <a href="._random-solarized004.html#sec:random:MonteCarlo:integration">Monte Carlo integration</a>).
+
+<p>
+It appears that Monte Carlo simulation programmed in pure Python is
+a computationally feasible approach, even on small laptops, in all the
+forthcoming examples. Significant speed-up can be achieved by
+vectorizing the code, which is explained in detail for many of the
+examples. However, large-scale Monte Carlo simulations and other
+heavy computations run slowly in pure Python, and the core of the
+computations should be moved to a compiled language such as C.
+In the document <a href="http://hplgit.github.io/primer.html/doc/pub/cython" target="_self">Migrating Python to compiled code</a> <a href="._random-solarized008.html#Langtangen_TCSE6_cython">[1]</a>, you can find a Monte Carlo application
+that is implemented in pure Python, in vectorized <code>numpy</code> Python,
+in the extended (and very closely related) Cython language, as well as
+in pure C code. Various ways of combining Python with C are also
+illustrated.
+
+<h2 id="sec:random:probability:dice">Example: Throwing dice</h2>
+
+<p>
+You throw two dice, one black and one green.
+What is the probability that the number of eyes on the black die is
+larger than the number of eyes on the green die?
+
+<h3 id="___sec22">Straightforward solution </h3>
+
+<p>
+We can simulate \( N \) throws of two dice in a program. For each
+throw we see if the event is successful, and if so, increase \( M \) by one:
+
+<p>
+<!-- begin verbatim block  pypro-->
+<pre><code>import sys
+N = int(sys.argv[1])               # no of experiments
+
+import random
+M = 0                              # no of successful events
+for i in range(N):
+    black = random.randint(1, 6)   # throw black
+    green = random.randint(1, 6)   # throw brown
+    if black &gt; green:              # success?
+        M += 1
+p = float(M)/N
+print 'probability:', p
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+This program is named <a href="http://tinyurl.com/pwyasaa/random/black_gt_green.py" target="_self"><tt>black_gt_green.py</tt></a>.
+
+<h3 id="___sec23">Vectorization </h3>
+
+<p>
+Although the <code>black_gt_green.py</code> program runs \( N=10^6 \) in a few seconds,
+Monte Carlo simulation programs can quickly require quite some
+simulation time so speeding up the algorithm by vectorization is often
+desired. Let us vectorize the code shown above. The idea is to
+draw all the random numbers (\( 2N \)) at once. We make an array of
+random numbers between 1 and 6 with 2 rows and \( N \) columns.
+The first row can be taken as the number of eyes on the
+black die in all the experiments, while the second row are the
+corresponding eyes on the green die:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>r = np.random.random_integers(1, 6, size=(2, N))
+black = r[0,:]            # eyes for all throws with black
+green = r[1,:]            # eyes for all throws with green
+</code></pre>
+<!-- end verbatim block -->
+The condition <code>black &gt; green</code> results in an array of length \( N \)
+of boolean values: <code>True</code> when the element in <code>black</code> is
+greater than the corresponding element in <code>green</code>, and <code>False</code>
+if not. The number of <code>True</code> elements in the boolean array
+<code>black &gt; green</code> is then \( M \). This number can be computed by
+summing up all the boolean values. In arithmetic operations,
+<code>True</code> is 1 and <code>False</code> i 0, so the sum equals \( M \).
+Fast summation of arrays requires <code>np.sum</code> and not Python's
+standard <code>sum</code> function. The code goes like
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>success = black &gt; green   # success[i] is true if black[i]&gt;green[i]
+M = np.sum(success)       # sum up all successes
+p = float(M)/N
+print 'probability:', p
+</code></pre>
+<!-- end verbatim block -->
+The code, found in the file <a href="http://tinyurl.com/pwyasaa/random/black_gt_green_vec.py" target="_self"><tt>black_gt_green_vec.py</tt></a>, runs over 10 times faster
+than the corresponding scalar code in <code>black_gt_green.py</code>.
+
+<h3 id="___sec24">Exact solution </h3>
+
+<p>
+In this simple example we can quite easily
+compute the exact solution. To this end, we set up all the outcomes
+of the experiment, i.e., all the possible combinations of eyes on
+two dice:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>combinations = [(black, green)
+                for black in range(1, 7)
+                for green in range(1, 7)]
+</code></pre>
+<!-- end verbatim block -->
+Then we count how many of the <code>(black, green)</code> pairs that have
+the property <code>black &gt; green</code>:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>success = [black &gt; green for black, green in combinations]
+M = sum(success)
+</code></pre>
+<!-- end verbatim block -->
+It turns out that <code>M</code> is 15, giving a probability \( 15/36 \approx
+0.41667 \) since there are 36 combinations in total.  Running the Monte
+Carlo simulations with \( N=10^6 \) typically gives probabilities in
+\( [0.416, 0.417] \).
+
+<h3 id="___sec25">A game </h3>
+
+<p>
+Suppose a games is constructed such that you have to pay 1 euro to
+throw the two dice. You win 2 euros if there are more eyes on the
+black than on the green die. Should you play this game?  We can easily
+simulate the game directly (file <a href="http://tinyurl.com/pwyasaa/random/black_gt_green_game.py" target="_self"><tt>black_gt_green_game.py</tt></a>):
+
+<p>
+<!-- begin verbatim block  pypro-->
+<pre><code>import sys
+N = int(sys.argv[1])               # no of experiments
+
+import random
+start_capital = 10
+money = start_capital
+for i in range(N):
+    money -= 1                     # pay for the game
+    black = random.randint(1, 6)   # throw black
+    green = random.randint(1, 6)   # throw brown
+    if black &gt; green:              # success?
+        money += 2                 # get award
+
+net_profit_total = money - start_capital
+net_profit_per_game = net_profit_total/float(N)
+print 'Net profit per game in the long run:', net_profit_per_game
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+Experimenting with a few \( N \) shows that the net profit per game is always
+negative. That is, you should <em>not</em> play this game.
+
+<p>
+A vectorized version is beneficial of efficiency reasons
+(the corresponding file is <code>black_gt_green_game_vec.py</code>):
+
+<p>
+<!-- begin verbatim block  pypro-->
+<pre><code>import sys
+N = int(sys.argv[1])      # no of experiments
+
+import numpy as np
+r = np.random.random_integers(1, 6, size=(2, N))
+
+money = 10 - N            # capital after N throws
+black = r[0,:]            # eyes for all throws with black
+green = r[1,:]            # eyes for all throws with green
+success = black &gt; green   # success[i] is true if black[i]&gt;green[i]
+M = np.sum(success)       # sum up all successes
+money += 2*M              # add all awards for winning
+print 'Net profit per game in the long run:', (money-10)/float(N)
+</code></pre>
+<!-- end verbatim block -->
+
+<h3 id="___sec26">Decide if a game is fair </h3>
+
+<p>
+Suppose the cost of playing a game once is \( q \) and that the award
+for winning is \( r \). The net income in a winning game is \( r-q \).
+Winning \( M \) out of \( N \) games means that the cost is \( Nq \) and
+the income is \( Mr \), making a net profit \( s=Mr-Nq \).
+Now \( p=M/N \) is the probability of winning the game so \( s=(pr-q)N \).
+A fair game means that we neither win nor lose in the long run:
+\( s=0 \), which implies that \( r=q/p \). That is, given the cost \( q \)
+and the probability \( p \) of winning, the award paid for winning
+the game must be \( r=q/p \) in a fair game.
+
+<p>
+When somebody comes up with a game you can use Monte Carlo simulation
+to estimate \( p \) and then conclude that you should not play the
+game of \( r < q/p \). The example above has \( p=15/36 \) (exact) and \( q=1 \),
+so \( r=2.4 \) makes a fair game.
+
+<p>
+The reasoning above is based on common sense and
+an intuitive interpretation of probability. More precise reasoning from
+probability theory will introduce the game as an experiment with two
+outcomes, either you win with probability \( p \) and or lose with probability
+\( 1-p \). The expected payment is then the sum of the probabilities times the
+corresponding net income for each event:
+\( -q(1-p) + (r-q)p \) (recall that the net income
+in a winning game is \( r-q \)). A fair game has zero expected
+payment, which leads to \( r = q/p \).
+
+<h2 id="sec:random:balls">Example: Drawing balls from a hat</h2>
+
+<p>
+Suppose there are 12 balls in a hat: four black, four red, and
+four blue. We want to make a program that draws three balls
+at random from the hat.
+It is natural to represent the collection of balls as a list.
+Each list element can be an integer 1, 2, or 3, since we have three
+different types of balls, but it would be easier to work with the
+program if the balls could have a color instead of an integer number.
+This is easily accomplished by defining color names:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>colors = 'black', 'red', 'blue'   # (tuple of strings)
+hat = []
+for color in colors:
+    for i in range(4):
+        hat.append(color)
+</code></pre>
+<!-- end verbatim block -->
+Drawing a ball at random is performed by
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>import random
+color = random.choice(hat)
+print color
+</code></pre>
+<!-- end verbatim block -->
+Drawing \( n \) balls without replacing the drawn balls requires us to
+remove an element from the hat when it is drawn.
+There are three ways to implement the procedure: (i) we
+perform a <code>hat.remove(color)</code>, (ii) we draw a random index with
+<code>randint</code> from the set of legal indices in the <code>hat</code> list, and
+then we do a <code>del hat[index]</code> to remove the element, or (iii)
+we can compress the code in (ii) to <code>hat.pop(index)</code>.
+
+<p>
+<!-- begin verbatim block  pypro-->
+<pre><code>def draw_ball(hat):
+    color = random.choice(hat)
+    hat.remove(color)
+    return color, hat
+
+def draw_ball(hat):
+    index = random.randint(0, len(hat)-1)
+    color = hat[index]
+    del hat[index]
+    return color, hat
+
+def draw_ball(hat):
+    index = random.randint(0, len(hat)-1)
+    color = hat.pop(index)
+    return color, hat
+
+# Draw n balls from the hat
+balls = []
+for i in range(n):
+    color, hat = draw_ball(hat)
+    balls.append(color)
+print 'Got the balls', balls
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+We can extend the experiment above
+and ask the question: what is the probability
+of drawing two or more black balls from a hat with 12 balls,
+four black, four red, and four blue?
+To this end, we perform \( N \) experiments, count how many times \( M \) we
+get two or more black balls, and estimate the probability as \( M/N \).
+Each experiment consists of making the <code>hat</code> list, drawing a number of
+balls, and counting how many black balls we got.
+The latter task is easy with the <code>count</code> method in list objects:
+<code>hat.count('black')</code> counts how many elements with value <code>'black'</code>
+we have in the list <code>hat</code>.
+A complete program for this task is listed below. The program appears
+in the file <a href="http://tinyurl.com/pwyasaa/random/balls_in_hat.py" target="_self"><tt>balls_in_hat.py</tt></a>.
+
+<p>
+<!-- begin verbatim block  pypro-->
+<pre><code>import random
+
+def draw_ball(hat):
+    &quot;&quot;&quot;Draw a ball using list index.&quot;&quot;&quot;
+    index = random.randint(0, len(hat)-1)
+    color = hat.pop(index)
+    return color, hat
+
+def draw_ball(hat):
+    &quot;&quot;&quot;Draw a ball using list index.&quot;&quot;&quot;
+    index = random.randint(0, len(hat)-1)
+    color = hat[index]
+    del hat[index]
+    return color, hat
+
+def draw_ball(hat):
+    &quot;&quot;&quot;Draw a ball using list element.&quot;&quot;&quot;
+    color = random.choice(hat)
+    hat.remove(color)
+    return color, hat
+
+def new_hat():
+    colors = 'black', 'red', 'blue'   # (tuple of strings)
+    hat = []
+    for color in colors:
+        for i in range(4):
+            hat.append(color)
+    return hat
+
+n = int(raw_input('How many balls are to be drawn? '))
+N = int(raw_input('How many experiments? '))
+
+# Run experiments
+M = 0  # no of successes
+for e in range(N):
+    hat = new_hat()
+    balls = []           # the n balls we draw
+    for i in range(n):
+        color, hat = draw_ball(hat)
+        balls.append(color)
+    if balls.count('black') &gt;= 2:  # at least two black balls?
+        M += 1
+print 'Probability:', float(M)/N
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+Running the program with \( n=5 \) (drawing 5 balls each time) and
+\( N=4000 \) gives a probability of 0.57. Drawing only 2 balls at
+a time reduces the probability to about 0.09.
+
+<p>
+One can with the aid of probability theory derive theoretical
+expressions for such probabilities, but it is much simpler to
+let the computer perform a large number of experiments to estimate
+an approximate probability.
+
+<p>
+A class version of the code in this section is better than the code
+presented, because we avoid shuffling the <code>hat</code> variable in and out
+of functions. <a href="._random-solarized008.html#sec:random:ex9">Exercise 19: Make a class for drawing balls from a hat</a> asks you to design and implement
+a class <code>Hat</code>.
+
+<h2 id="bioinf:random">Random mutations of genes</h2>
+
+<h3 id="___sec29">A simple mutation model </h3>
+
+<p>
+ Mutation of genes
+is easily modeled by replacing the letter in a randomly
+chosen position of the DNA by a randomly chosen letter from
+the alphabet A, C, G, and T.
+Python's <code>random</code> module can be used
+to generate random numbers. Selecting a random position means
+generating a random index in the DNA string, and the function
+<code>random.randint(a, b)</code> generates random integers between <code>a</code> and
+<code>b</code> (both included). Generating a random
+letter is easiest done by having a list of the actual letters
+and using <code>random.choice(list)</code> to pick an arbitrary element from
+<code>list</code>. A function for replacing the letter in a
+randomly selected position (index)
+by a random letter among A, C, G, and T is most straightforwardly
+implemented by converting the DNA string to a list of letters, since
+changing a character in a Python string is impossible without
+constructing a new string. However, an element in a list can be
+changed in-place:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>import random
+
+def mutate_v1(dna):
+    dna_list = list(dna)
+    mutation_site = random.randint(0, len(dna_list) - 1)
+    dna_list[mutation_site] = random.choice(list('ATCG'))
+    return ''.join(dna_list)
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+Using <code>get_base_frequencies_v2</code> and <code>format_frequencies</code>
+from the document <a href="http://hplgit.github.io/primer.html/doc/pub/files" target="_self">Files, strings, and dictionaries</a> <a href="._random-solarized008.html#Langtangen_TCSE6_files">[2]</a>, we can easily mutate a gene a number
+of times and see how the frequencies of the bases A, C, G, and T change:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>dna = 'ACGGAGATTTCGGTATGCAT'
+print 'Starting DNA:', dna
+print format_frequencies(get_base_frequencies_v2(dna))
+
+nmutations = 10000
+for i in range(nmutations):
+    dna = mutate_v1(dna)
+
+print 'DNA after %d mutations:' % nmutations, dna
+print format_frequencies(get_base_frequencies_v2(dna))
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+Here is the output from a run:
+<!-- begin verbatim block  dat-->
+<pre><code>Starting DNA: ACGGAGATTTCGGTATGCAT
+A: 0.25, C: 0.15, T: 0.30, G: 0.30
+DNA after 10000 mutations: AACCAATCCGACGAGGAGTG
+A: 0.35, C: 0.25, T: 0.10, G: 0.30
+</code></pre>
+<!-- end verbatim block -->
+
+<h3 id="___sec30">Vectorized version </h3>
+
+<p>
+The efficiency of the <code>mutate_v1</code> function with its surrounding loop can be
+significantly increased up by performing all the mutations at
+once using <code>numpy</code> arrays. This speed-up is of interest for long <code>dna</code>
+strings and many mutations. The idea is to draw all the mutation sites
+at once, and also all the new bases at these sites at once.
+The <code>np.random</code> module provides functions for drawing several random
+numbers at a time, but only integers and real numbers can be drawn,
+not characters from the alphabet A, C, G, and T. We therefore have
+to simulate these four characters by the numbers (say) 0, 1, 2, and 3.
+Afterwards we can translate the integers to letters by some clever
+vectorized indexing.
+
+<p>
+Drawing <code>N</code> mutation sites is a matter of drawing <code>N</code> random
+integers among the legal indices:
+<!-- begin verbatim block  pycod-->
+<pre><code>import numpy as np
+mutation_sites = np.random.random_integers(0, len(dna)-1, size=N)
+</code></pre>
+<!-- end verbatim block -->
+Drawing <code>N</code> bases, represented as the integers 0-3, is similarly done by
+<!-- begin verbatim block  pycod-->
+<pre><code>new_bases_i = np.random.random_integers(0, 3, N)
+</code></pre>
+<!-- end verbatim block -->
+Converting say the integers 1 to the base symbol C is done by
+picking out the indices (in a boolean array) where <code>new_bases_i</code>
+equals 1, and inserting the character <code>'C'</code> in a companion
+array of characters:
+<!-- begin verbatim block  pycod-->
+<pre><code>new_bases_c = np.zeros(N, dtype='c')
+indices = new_bases_i == 1
+new_bases_c[indices] = 'C'
+</code></pre>
+<!-- end verbatim block -->
+We must do this integer-to-letter conversion for all four integers/letters.
+Thereafter, <code>new_bases_c</code> must be inserted in <code>dna</code> for all the
+indices corresponding to the randomly drawn mutation sites,
+<!-- begin verbatim block  pycod-->
+<pre><code>dna[mutation_sites] = new_bases_c
+</code></pre>
+<!-- end verbatim block -->
+The final step is to convert the <code>numpy</code> array of characters <code>dna</code>
+back to a standard string by first converting <code>dna</code> to a list
+and then joining the list elements: <code>''.join(dna.tolist())</code>.
+
+<p>
+The complete vectorized functions can now be expressed as follows:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>import numpy as np
+# Use integers in random numpy arrays and map these
+# to characters according to
+i2c = {0: 'A', 1: 'C', 2: 'G', 3: 'T'}
+
+def mutate_v2(dna, N):
+    dna = np.array(dna, dtype='c')  # array of characters
+    mutation_sites = np.random.random_integers(
+        0, len(dna) - 1, size=N)
+    # Must draw bases as integers
+    new_bases_i = np.random.random_integers(0, 3, size=N)
+    # Translate integers to characters
+    new_bases_c = np.zeros(N, dtype='c')
+    for i in i2c:
+        new_bases_c[new_bases_i == i] = i2c[i]
+    dna[mutation_sites] = new_bases_c
+    return ''.join(dna.tolist())
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+It is of interest to time <code>mutate_v2</code> versus <code>mutate_v1</code>. For this purpose
+we need a long test string. A straightforward generation of random
+letters is
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>def generate_string_v1(N, alphabet='ACGT'):
+    return ''.join([random.choice(alphabet) for i in xrange(N)])
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+A vectorized version of this function can also be made, using the
+ideas explored above for the <code>mutate_v2</code> function:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>def generate_string_v2(N, alphabet='ACGT'):
+    # Draw random integers 0,1,2,3 to represent bases
+    dna_i = np.random.random_integers(0, 3, N)
+    # Translate integers to characters
+    dna = np.zeros(N, dtype='c')
+    for i in i2c:
+        dna[dna_i == i] = i2c[i]
+    return ''.join(dna.tolist())
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+The <code>time_mutate</code> function in the file <a href="http://tinyurl.com/pwyasaa/random/mutate.py" target="_self"><tt>mutate.py</tt></a> performs
+timing of the generation of test strings and the mutations.  To
+generate a DNA string of length 100,000 the vectorized function is
+about 8 times faster. When performing 10,000 mutations on this string,
+the vectorized version is almost 3000 times faster! These numbers stay
+approximately the same also for larger strings and more mutations.
+Hence, this case study on vectorization is a striking example on the fact
+that a straightforward and convenient function like <code>mutate_v1</code> might
+occasionally be very slow for large-scale computations.
+
+<h3 id="___sec31">A Markov chain mutation model </h3>
+
+<p>
+The observed rate at which mutations occur at a given position in the
+genome is not independent of the type of nucleotide (base) at that
+position, as was assumed in the previous simple mutation model.  We
+should therefore take into account that the rate of transition depends
+on the base.
+
+<p>
+There are a number of reasons why the observed mutation rates vary
+between different nucleotides. One reason is that there are different
+mechanisms generating transitions from one base to another. Another
+reason is that there are extensive repair process in living cells, and
+the efficiency of this repair mechanism varies for different
+nucleotides.
+
+<p>
+Mutation of nucleotides may be modeled using distinct probabilities
+for the transitions from each nucleotide to every other
+nucleotide. For example, the probability of replacing A by C may be
+prescribed as (say) 0.2. In total we need \( 4\times 4 \)
+probabilities since each nucleotide can transform into itself (no
+change) or three others. The sum of all four transition probabilities
+for a given nucleotide must sum up to one. Such statistical evolution,
+based on probabilities for transitioning from one state to another, is
+known as a Markov process or Markov chain.
+
+<p>
+First we need to set up the probability matrix, i.e., the
+\( 4\times4 \) table of probabilities where each row corresponds to the
+transition of A, C, G, or T into A, C, G, or T. Say the probability
+transition from A to A is 0.2, from A to C is 0.1, from A to G is 0.3,
+and from A to T is 0.4.
+
+<p>
+Rather than just prescribing some arbitrary transition probabilities
+for test purposes, we can use random numbers for these probabilities.
+To this end, we generate three random numbers to divide the interval
+\( [0,1] \) into four intervals corresponding to the four possible
+transitions.  The lengths of the intervals give the transition
+probabilities, and their sum is ensured to be 1.  The interval limits,
+0, 1, and three random numbers must be sorted in ascending order to
+form the intervals. We use the function <code>random.random()</code> to generate
+random numbers in \( [0,1) \):
+<!-- begin verbatim block  pycod-->
+<pre><code>slice_points = sorted(
+    [0] + [random.random() for i in range(3)] + [1])
+transition_probabilities = [slice_points[i+1] - slice_points[i]
+                            for i in range(4)]
+</code></pre>
+<!-- end verbatim block -->
+The transition probabilities are handy to have available as a dictionary:
+<!-- begin verbatim block  pycod-->
+<pre><code>markov_chain['A'] = {'A': ..., 'C': ..., 'G': ..., 'T': ...}
+</code></pre>
+<!-- end verbatim block -->
+which can be computed by
+<!-- begin verbatim block  pycod-->
+<pre><code>markov_chain['A'] = {base: p for base, p in
+                     zip('ACGT', transition_probabilities)}
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+To select a transition, we need to draw a random letter
+(A, C, G, or T) according to the probabilities
+<code>markov_chain[b]</code> where <code>b</code> is the base at the current position.
+Actually, this is a very common operation, namely drawing a
+random value from a <em>discrete probability distribution</em> (<code>markov_chain[b]</code>).
+The natural approach is therefore write a general function for
+drawing from any discrete probability distribution given as
+a dictionary:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>def draw(discrete_probdist):
+    &quot;&quot;&quot;
+    Draw random value from discrete probability distribution
+    represented as a dict: P(x=value) = discrete_probdist[value].
+    &quot;&quot;&quot;
+    # Method:
+    # http://en.wikipedia.org/wiki/Pseudo-random_number_sampling
+    limit = 0
+    r = random.random()
+    for value in discrete_probdist:
+        limit += discrete_probdist[value]
+        if r &lt; limit:
+            return value
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+Basically, the algorithm divides \( [0,1] \) into intervals of lengths
+equal to the probabilities of the various outcomes and checks
+which interval is hit by a random variable in \( [0,1] \). The corresponding
+value is the random choice.
+
+<p>
+A complete function creating all the transition probabilities and
+storing them in a dictionary of dictionaries takes the form
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>def create_markov_chain():
+    markov_chain = {}
+    for from_base in 'ATGC':
+        # Generate random transition probabilities by dividing
+        # [0,1] into four intervals of random length
+       slice_points = sorted(
+           [0] + [random.random()for i in range(3)] + [1])
+       transition_probabilities = \ 
+           [slice_points[i+1] - slice_points[i] for i in range(4)]
+       markov_chain[from_base] = {base: p for base, p
+                         in zip('ATGC', transition_probabilities)}
+    return markov_chain
+
+mc = create_markov_chain()
+print mc
+print mc['A']['T'] # probability of transition from A to T
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+It is natural to develop a function for checking that the generated
+probabilities are consistent. The transition from a particular base
+into one of the four bases happens with probability 1, which means that
+the probabilities in a row must sum up to 1:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>def check_transition_probabilities(markov_chain):
+    for from_base in 'ATGC':
+        s = sum(markov_chain[from_base][to_base]
+                for to_base in 'ATGC')
+        if abs(s - 1) &gt; 1E-15:
+            raise ValueError('Wrong sum: %s for &quot;%s&quot;' % \ 
+                             (s, from_base))
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+Another test is to check that <code>draw</code> actually draws random values
+in accordance with the underlying probabilities. To this end, we draw
+a large number of values, <code>N</code>, count the frequencies of the various values,
+divide by <code>N</code> and compare the empirical normalized frequencies
+with the probabilities:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>def check_draw_approx(discrete_probdist, N=1000000):
+    &quot;&quot;&quot;
+    See if draw results in frequencies approx equal to
+    the probability distribution.
+    &quot;&quot;&quot;
+    frequencies = {value: 0 for value in discrete_probdist}
+    for i in range(N):
+        value = draw(discrete_probdist)
+        frequencies[value] += 1
+    for value in frequencies:
+        frequencies[value] /= float(N)
+    print ', '.join(['%s: %.4f (exact %.4f)' % \ 
+                     (v, frequencies[v], discrete_probdist[v])
+                     for v in frequencies])
+</code></pre>
+<!-- end verbatim block -->
+This test is only approximate, but does bring evidence to the correctness
+of the implementation of the <code>draw</code> function.
+
+<p>
+A vectorized version of <code>draw</code> can also be made. We refer to the
+source code file <a href="http://tinyurl.com/pwyasaa/random/mutate.py" target="_self"><tt>mutate.py</tt></a>
+for details (the function is relatively
+complicated).
+
+<p>
+Now we have all the tools needed to run the Markov chain of
+transitions for a randomly selected position in a DNA sequence:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>def mutate_via_markov_chain(dna, markov_chain):
+    dna_list = list(dna)
+    mutation_site = random.randint(0, len(dna_list) - 1)
+    from_base = dna[mutation_site]
+    to_base = draw(markov_chain[from_base])
+    dna_list[mutation_site] = to_base
+    return ''.join(dna_list)
+</code></pre>
+<!-- end verbatim block -->
+<a href="._random-solarized008.html#bioinf:exer:Markov:chain:eff">Exercise 43: Speed up Markov chain mutation</a> suggests some efficiency
+enhancements of simulating mutations via these functions.
+
+<p>
+Here is a simulation of mutations using the method based on Markov chains:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>dna = 'TTACGGAGATTTCGGTATGCAT'
+print 'Starting DNA:', dna
+print format_frequencies(get_base_frequencies_v2(dna))
+
+mc = create_markov_chain()
+import pprint
+print 'Transition probabilities:\n', pprint.pformat(mc)
+nmutations = 10000
+for i in range(nmutations):
+    dna = mutate_via_markov_chain(dna, mc)
+
+print 'DNA after %d mutations (Markov chain):' % nmutations, dna
+print format_frequencies(get_base_frequencies_v2(dna))
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+The output will differ each time the program is run unless
+<code>random.seed(i)</code> is called in the beginning of the program for some
+integer <code>i</code>. This call makes the
+sequence of random numbers the same every time the program is run and
+is very useful for debugging. An example on the output may look like
+<!-- begin verbatim block  dat-->
+<pre><code>Starting DNA: TTACGGAGATTTCGGTATGCAT
+A: 0.23, C: 0.14, T: 0.36, G: 0.27
+Transition probabilities:
+{'A': {'A': 0.4288890546751146,
+       'C': 0.4219086988655296,
+       'G': 0.00668870644455688,
+       'T': 0.14251354001479888},
+ 'C': {'A': 0.24999667668640035,
+       'C': 0.04718309085408834,
+       'G': 0.6250440975238185,
+       'T': 0.0777761349356928},
+ 'G': {'A': 0.16022955651881965,
+       'C': 0.34652746609882423,
+       'G': 0.1328031742612512,
+       'T': 0.3604398031211049},
+ 'T': {'A': 0.20609823213950174,
+       'C': 0.17641112746655452,
+       'G': 0.010267621176125452,
+       'T': 0.6072230192178183}}
+DNA after 10000 mutations (Markov chain): GGTTTAAGTCAGCTATGATTCT
+A: 0.23, C: 0.14, T: 0.41, G: 0.23
+</code></pre>
+<!-- end verbatim block -->
+Note that the mutated DNA should contain more nucleotides of the
+type where the total probability of transitioning into that particular
+nucleotide is largest. The total probability of transitioning into
+a particular base can be computed by a bit a probability algebra.
+Let \( X \) be the initial base at some position in the DNA and let \( Y \)
+be the new base after mutation at this position. The probability
+that \( P(Y=b) \), where \( b \) is some base (A, C, G, or T), is built up
+of four mutually exclusive events:
+$$ P(Y=b) = P(X=A \cup Y=b) + P(X=C \cup Y=b) +
+P(X=G \cup Y=b) + P(X=T \cup Y=b)$$
+
+A joint event can be expressed by the (conditional) transition
+probabilities, e.g.,
+$$ P(X=A \cup Y=b) = P(Y=b | X=A) P(X=A) $$
+
+leading to
+$$ P(Y=b) = \sum_{i\in\{A,C,G,T\}} P(Y=b|X=i)P(X=i)$$
+
+The probabilities \( P(Y=b|X=i) \) correspond to a column in the
+transition probability matrix. If each of the initial events
+\( P(X=i) \) are equally probable, \( P(X=i)=1/4 \), and \( P(Y=b) \)
+is then the sum of the probabilities in the column corresponding to
+\( b \), divided by 4. We can now compute \( P(Y=b) \) for
+\( b \) as A, C, G, and T:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>def transition_into_bases(markov_chain):
+    return {to_base: sum(markov_chain[from_base][to_base]
+                         for from_base in 'ATGC')/4.0
+            for to_base in 'ATGC'}
+
+print transition_into_bases(mc)
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+The \( P(X=b) \) probabilities corresponding to the example run above reads
+<!-- begin verbatim block  dat-->
+<pre><code>{'A': 0.26, 'C': 0.25, 'T': 0.30, 'G': 0.19}
+</code></pre>
+<!-- end verbatim block -->
+Transition into T (\( P(Y=T) \)) has greatest probability (0.3) and this is also
+confirmed by the greatest frequency (0.41).
+
+<p>
+The various functions performing mutations are located
+in the file <a href="http://tinyurl.com/pwyasaa/random/mutate.py" target="_self"><tt>mutate.py</tt></a>.
+
+<h2 id="sec:random:china">Example: Policies for limiting population growth</h2>
+
+<p>
+China has for many years officially allowed only one child per couple.
+However, the success of the policy has been somewhat limited. One challenge
+is the current
+over-representation of males in the population (families have favored
+sons to live up).
+An alternative policy is to allow each couple to continue getting
+children until they get a son. We can simulate both policies and
+see how a population will develop under the <em>one child</em> and the
+<em>one son</em> policies.  Since we expect to work with a large population
+over several generations, we aim at vectorized code at once.
+
+<p>
+Suppose we have a collection of <code>n</code> individuals, called <code>parents</code>,
+consisting of males and females randomly drawn such that a certain portion
+(<code>male_portion</code>) constitutes males. The <code>parents</code> array holds
+integer values, 1 for male and 2 for females. We can introduce constants,
+<code>MALE=1</code> and <code>FEMALE=2</code>, to make the code easier to read.
+Our task is to see how the <code>parents</code> array develop from one
+generation to the next under the two policies. Let us first show how to
+draw the random integer array <code>parents</code> where there is a probability
+<code>male_portion</code> of getting the value <code>MALE</code>:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>import numpy as np
+r = np.random.random(n)
+parents = np.zeros(n, int)
+MALE = 1; FEMALE = 2
+parents[r &lt;  male_portion] = MALE
+parents[r &gt;= male_portion] = FEMALE
+</code></pre>
+<!-- end verbatim block -->
+The number of potential couples is
+the minimum of males and females.
+However, only a fraction (<code>fertility</code>)
+of the couples will actually get a child.
+Under the perfect one child policy, these
+couples can have one child each:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>males = len(parents[parents==MALE])
+females = len(parents) - males
+couples = min(males, females)
+n = int(fertility*couples)  # couples that get a child
+
+# The next generation, one child per couple
+r = random.random(n)
+children = np.zeros(n, int)
+children[r &lt;  male_portion] = MALE
+children[r &gt;= male_portion] = FEMALE
+</code></pre>
+<!-- end verbatim block -->
+The code for generating a new population will be needed in every generation.
+Therefore, it is natural to collect the last statements in
+a separate function such that we can repeat the statements when needed.
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>def get_children(n, male_portion, fertility):
+    n = int(fertility*n)
+    r = random.random(n)
+    children = zeros(n, int)
+    children[r &lt;  male_portion] = MALE
+    children[r &gt;= male_portion] = FEMALE
+    return children
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+Under the one son policy, the families can continue getting a new
+child until they get the first son:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code># First try
+children = get_children(couples, male_portion, fertility)
+
+# Continue with getting a new child for each daughter
+daughters = children[children == FEMALE]
+while len(daughters) &gt; 0:
+    new_children = get_children(len(daughters),
+                                male_portion, fertility)
+    children = np.concatenate((children, new_children))
+    daughters = new_children[new_children == FEMALE]
+</code></pre>
+<!-- end verbatim block -->
+The program <a href="http://tinyurl.com/pwyasaa/random/birth_policy.py" target="_self"><tt>birth_policy.py</tt></a>
+organizes the code segments
+above for the two policies into a function <code>advance_generation</code>,
+which we can call repeatedly to see the evolution of the population.
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>def advance_generation(parents, policy='one child',
+                       male_portion=0.5, fertility=1.0):
+    males = len(parents[parents==MALE])
+    females = len(parents) - males
+    couples = min(males, females)
+
+    if policy == 'one child':
+        children = get_children(couples, male_portion, fertility)
+    elif policy == 'one son':
+        # First try at getting a child
+        children = get_children(couples, male_portion, fertility)
+        # Continue with getting a new child for each daughter
+        daughters = children[children == FEMALE]
+        while len(daughters) &gt; 0:
+            new_children = get_children(len(daughters),
+                                        male_portion, fertility)
+            children = np.concatenate((children, new_children))
+            daughters = new_children[new_children == FEMALE]
+    return children
+</code></pre>
+<!-- end verbatim block -->
+The simulation is then a matter of repeated calls to
+<code>advance_generation</code>:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>N = 1000000              # population size
+male_portion = 0.51
+fertility = 0.92
+# Start with a &quot;perfect&quot; generation of parents
+parents = get_children(N, male_portion=0.5, fertility=1.0)
+print 'one son policy, start: %d' % len(parents)
+for i in range(10):
+    parents = advance_generation(parents, 'one son',
+                                 male_portion, fertility)
+    print '%3d: %d' % (i+1, len(parents))
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+Under ideal conditions with unit <code>fertility</code> and a <code>male_portion</code>
+of 0.5, the program predicts that the one child policy halves
+the population from one generation to the next, while the one son
+policy, where we expect each couple to get one daughter and one son on
+average, keeps the population constant. Increasing
+<code>male_portion</code> slightly and decreasing <code>fertility</code>, which
+corresponds more to reality, will in both cases lead to a reduction of
+the population. You can try the program out with various values of
+these input parameters.
+
+<p>
+An obvious extension is to incorporate the
+effect that a portion of the population does not follow the policy and
+get \( c \) children on average. The program <code>birth_policy.py</code>
+can account for the effect,
+which is quite dramatic: if a fraction 0.01 of the population does not follow
+the one son policy and get 4 children on average, the population
+grows with a factor 1.5 over 10 generations (<code>male_portion</code> and
+<code>fertility</code> kept at the ideal values 0.5 and 1, respectively).
+
+<p>
+Normally, simple models like
+difference or differential equations
+are used to model population growth. However, these
+models track the number of individuals through time with a very simple
+growth factor from one generation to the next. The model above
+tracks each individual in the population and applies rules involving
+random actions to each individual. Such a detailed and much more
+computer-time consuming model can be used to see the effect of
+different policies. Using the results of this detailed model, we can
+(sometimes) estimate growth factors for simpler models so that these
+mimic the overall effect on the population size.
+<a href="._random-solarized008.html#sec:random:ex29">Exercise 23: Estimate growth in a simulation model</a> asks you to investigate if a
+certain realization of the
+one son policy leads to simple exponential growth.
+
+<p>
+<p>
+<!-- begin bottom navigation -->
+<table style="width: 100%"><tr><td>
+<div style="text-align: left;"><a href="._random-solarized002.html">&laquo; Previous</a></div>
+</td><td>
+<div style="text-align: right;"><a href="._random-solarized004.html">Next &raquo;</a></div>
+</td></tr></table>
+<!-- end bottom navigation -->
+</p>
+
+<!-- ------------------- end of main content --------------- -->
+
+
+</body>
+</html>
+    
+

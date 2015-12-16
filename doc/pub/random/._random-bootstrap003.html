@@ -1,0 +1,1635 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Random numbers and simple games">
+<meta name="keywords" content="random numbers,seed,uniformly distributed random numbers,random numbers uniform distribution,bin (histogram),histogram (normalized),random numbers histogram,vectorized drawing of random numbers,random numbers vectorization,mean,average,random numbers statistics,variance,standard deviation,mod function,normally distributed random numbers,random numbers normal distribution,random numbers integers,integer random numbers,probability,random numbers Monte Carlo simulation,Monte Carlo simulation,Monte Carlo integration,random numbers integration,Midpoint rule for integration,mod function,measure time in programs,efficiency measure,random walk,random numbers random walk,making movie,cumulative sum">
+
+<title>Random numbers and simple games</title>
+
+<!-- Bootstrap style: bootstrap_bluegray -->
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_styles/style_bootstrap/css/bootstrap_bluegray.css" rel="stylesheet">
+<!-- not necessary
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+
+<style type="text/css">
+/* Let inline verbatim have the same color as the surroundings */
+code { color: inherit; background-color: transparent; }
+
+/* Add scrollbar to dropdown menus in bootstrap navigation bar */
+.dropdown-menu {
+   height: auto;
+   max-height: 400px;
+   overflow-x: hidden;
+}
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [('Drawing random numbers', 1, None, '___sec0'),
+              ('The seed', 2, None, '___sec1'),
+              ('Uniformly distributed random numbers',
+               2,
+               'sec:random:uniform',
+               'sec:random:uniform'),
+              ('Visualizing the distribution', 2, None, '___sec3'),
+              ('Vectorized drawing of random numbers', 2, None, '___sec4'),
+              ('Warning', 3, None, '___sec5'),
+              ('Computing the mean and standard deviation',
+               2,
+               'sec:random:statistics',
+               'sec:random:statistics'),
+              ('The Gaussian or normal distribution',
+               2,
+               'sec:random:normal',
+               'sec:random:normal'),
+              ('Drawing integers', 1, 'sec:random:ints', 'sec:random:ints'),
+              ('Random integer functions', 2, None, '___sec9'),
+              ('Example: Throwing a die', 2, None, '___sec10'),
+              ('Scalar version', 3, None, '___sec11'),
+              ('Vectorized version', 3, None, '___sec12'),
+              ('Vectorized version with batches', 3, None, '___sec13'),
+              ('Verification of the scalar version', 3, None, '___sec14'),
+              ('Verification of all versions', 3, None, '___sec15'),
+              ('Drawing a random element from a list', 2, None, '___sec16'),
+              ('Example: Drawing cards from a deck',
+               2,
+               'sec:random:deck1',
+               'sec:random:deck1'),
+              ('Example: Class implementation of a deck',
+               2,
+               'sec:class:deck:class',
+               'sec:class:deck:class'),
+              ('Computing probabilities',
+               1,
+               'sec:random:probability',
+               'sec:random:probability'),
+              ('Principles of Monte Carlo simulation', 2, None, '___sec20'),
+              ('Example: Throwing dice',
+               2,
+               'sec:random:probability:dice',
+               'sec:random:probability:dice'),
+              ('Straightforward solution', 3, None, '___sec22'),
+              ('Vectorization', 3, None, '___sec23'),
+              ('Exact solution', 3, None, '___sec24'),
+              ('A game', 3, None, '___sec25'),
+              ('Decide if a game is fair', 3, None, '___sec26'),
+              ('Example: Drawing balls from a hat',
+               2,
+               'sec:random:balls',
+               'sec:random:balls'),
+              ('Random mutations of genes',
+               2,
+               'bioinf:random',
+               'bioinf:random'),
+              ('A simple mutation model', 3, None, '___sec29'),
+              ('Vectorized version', 3, None, '___sec30'),
+              ('A Markov chain mutation model', 3, None, '___sec31'),
+              ('Example: Policies for limiting population growth',
+               2,
+               'sec:random:china',
+               'sec:random:china'),
+              ('Simple games', 1, None, '___sec33'),
+              ('Guessing a number',
+               2,
+               'sec:random:game:guessn',
+               'sec:random:game:guessn'),
+              ('The game', 3, None, '___sec35'),
+              ('The implementation', 3, None, '___sec36'),
+              ('Rolling two dice',
+               2,
+               'sec:random:twodicesumguess',
+               'sec:random:twodicesumguess'),
+              ('The game', 3, None, '___sec38'),
+              ('The implementation', 3, None, '___sec39'),
+              ('Example', 3, None, '___sec40'),
+              ('A class version', 3, None, '___sec41'),
+              ('Monte Carlo integration',
+               1,
+               'sec:random:MonteCarlo:integration',
+               'sec:random:MonteCarlo:integration'),
+              ('Derivation of Monte Carlo integration',
+               2,
+               'sec:random:MCint:ideas',
+               'sec:random:MCint:ideas'),
+              ('The calculus approach via the mean-value theorem',
+               3,
+               None,
+               '___sec44'),
+              ('The probability theory approach', 3, None, '___sec45'),
+              ('Implementation of standard Monte Carlo integration',
+               2,
+               'sec:random:MCint:std',
+               'sec:random:MCint:std'),
+              ('Example', 3, None, '___sec47'),
+              ('Remark', 3, None, '___sec48'),
+              ('Area computing by throwing random points',
+               2,
+               'sec:random:MCdart',
+               'sec:random:MCdart'),
+              ('Random walk in one space dimension',
+               1,
+               'sec:random:rw1D',
+               'sec:random:rw1D'),
+              ('Basic implementation', 2, None, '___sec51'),
+              ('Visualization', 2, None, '___sec52'),
+              ('Random walk as a difference equation', 2, None, '___sec53'),
+              ('Computing statistics of the particle positions',
+               2,
+               'sec:random:walk:1D:statistics',
+               'sec:random:walk:1D:statistics'),
+              ('Vectorized implementation',
+               2,
+               'sec:random:walk:1D:vectorized',
+               'sec:random:walk:1D:vectorized'),
+              ('Random walk in two space dimensions',
+               1,
+               'sec:random:rw2D',
+               'sec:random:rw2D'),
+              ('Basic implementation',
+               2,
+               'sec:random:rw2D:scalar',
+               'sec:random:rw2D:scalar'),
+              ('Vectorized implementation',
+               2,
+               'sec:random:walk:2D:vectorized',
+               'sec:random:walk:2D:vectorized'),
+              ('Summary', 1, None, '___sec59'),
+              ('Chapter topics', 2, None, '___sec60'),
+              ('Drawing random numbers', 3, None, '___sec61'),
+              ('Typical probability computation via Monte Carlo simulation',
+               3,
+               None,
+               '___sec62'),
+              ('Statistical measures', 3, None, '___sec63'),
+              ('Terminology', 3, None, '___sec64'),
+              ('Example: Random growth',
+               2,
+               'sec:random:summarizingex',
+               'sec:random:summarizingex'),
+              ('Problem', 3, None, '___sec66'),
+              ('Solution', 3, None, '___sec67'),
+              ('Exercises', 1, None, '___sec68'),
+              ('Exercise 1: Flip a coin times',
+               2,
+               'sec:random:ex17',
+               'sec:random:ex17'),
+              ('Exercise 2: Compute a probability',
+               2,
+               'sec:random:ex7',
+               'sec:random:ex7'),
+              ('Exercise 3: Choose random colors',
+               2,
+               'sec:random:ex6',
+               'sec:random:ex6'),
+              ('Exercise 4: Draw balls from a hat',
+               2,
+               'sec:random:ex4',
+               'sec:random:ex4'),
+              ('Exercise 5: Computing probabilities of rolling dice',
+               2,
+               'sec:random:ex2',
+               'sec:random:ex2'),
+              ('Exercise 6: Estimate the probability in a dice game',
+               2,
+               'sec:random:ex10',
+               'sec:random:ex10'),
+              ('Exercise 7: Compute the probability of hands of cards',
+               2,
+               'sec:random:ex44',
+               'sec:random:ex44'),
+              ('Exercise 8: Decide if a dice game is fair',
+               2,
+               'sec:random:ex11',
+               'sec:random:ex11'),
+              ('Exercise 9: Adjust a game to make it fair',
+               2,
+               'sec:random:ex12',
+               'sec:random:ex12'),
+              ('Exercise 10: Generalize a game',
+               2,
+               'sec:random:ex12b',
+               'sec:random:ex12b'),
+              ('Exercise 11: Compare two playing strategies',
+               2,
+               'sec:random:ex2c',
+               'sec:random:ex2c'),
+              ('Exercise 12: Investigate strategies in a game',
+               2,
+               'sec:random:ex2e',
+               'sec:random:ex2e'),
+              ('Exercise 13: Investigate the winning chances of some games',
+               2,
+               'sec:random:ex45',
+               'sec:random:ex45'),
+              ('Exercise 14: Compute probabilities of throwing two dice',
+               2,
+               'sec:random:ex2b',
+               'sec:random:ex2b'),
+              ('Exercise 15: Vectorize flipping a coin',
+               2,
+               'sec:random:ex18',
+               'sec:random:ex18'),
+              ('Exercise 16: Vectorize a probablility computation',
+               2,
+               'sec:random:ex7b',
+               'sec:random:ex7b'),
+              ('Exercise 17: Throw dice and compute a small probability',
+               2,
+               'sec:random:ex30',
+               'sec:random:ex30'),
+              ('Exercise 18: Difference equation for random numbers',
+               2,
+               'sec:random:ex27',
+               'sec:random:ex27'),
+              ('Exercise 19: Make a class for drawing balls from a hat',
+               2,
+               'sec:random:ex9',
+               'sec:random:ex9'),
+              ('Exercise 20: Independent  versus dependent random numbers',
+               2,
+               'sec:random:ex21',
+               'sec:random:ex21'),
+              ('Exercise 21: Compute the probability of flipping a coin',
+               2,
+               'sec:random:ex19',
+               'sec:random:ex19'),
+              ('Exercise 22: Simulate a poker game',
+               2,
+               'sec:random:ex41',
+               'sec:random:ex41'),
+              ('Exercise 23: Estimate growth in a simulation model',
+               2,
+               'sec:random:ex29',
+               'sec:random:ex29'),
+              ('Exercise 24: Investigate guessing strategies',
+               2,
+               'sec:random:ex15',
+               'sec:random:ex15'),
+              ('Exercise 25: Vectorize a dice game',
+               2,
+               'sec:random:ex13',
+               'sec:random:ex13'),
+              ('Exercise 26: Compute $\\pi$ by a Monte Carlo method',
+               2,
+               'sec:random:ex31',
+               'sec:random:ex31'),
+              ('Exercise 27: Compute $\\pi$ by a Monte Carlo method',
+               2,
+               'sec:random:ex32',
+               'sec:random:ex32'),
+              ('Exercise 28: Compute $\\pi$ by a random sum',
+               2,
+               'sec:random:ex31b',
+               'sec:random:ex31b'),
+              ('Exercise 29: 1D random walk with drift',
+               2,
+               'sec:random:ex1',
+               'sec:random:ex1'),
+              ('Exercise 30: 1D random walk until a point is hit',
+               2,
+               'sec:random:ex3',
+               'sec:random:ex3'),
+              ('Exercise 31: Simulate making a fortune from gaming',
+               2,
+               'sec:random:ex3:rwgame',
+               'sec:random:ex3:rwgame'),
+              ('Exercise 32: Make classes for 2D random walk',
+               2,
+               'sec:random:ex33',
+               'sec:random:ex33'),
+              ('Exercise 33: 2D random walk with walls; scalar version',
+               2,
+               'sec:random:ex36',
+               'sec:random:ex36'),
+              ('Exercise 34: 2D random walk with walls; vectorized version',
+               2,
+               'sec:random:ex37',
+               'sec:random:ex37'),
+              ('Exercise 35: Simulate mixing of gas molecules',
+               2,
+               'sec:random:ex38',
+               'sec:random:ex38'),
+              ('Remarks', 3, None, '___sec104'),
+              ('Exercise 36: Simulate slow mixing of gas molecules',
+               2,
+               'sec:random:ex39',
+               'sec:random:ex39'),
+              ('Exercise 37: Guess beer brands',
+               2,
+               'sec:random:ex35',
+               'sec:random:ex35'),
+              ('Exercise 38: Simulate stock prices',
+               2,
+               'sec:random:ex26',
+               'sec:random:ex26'),
+              ('Exercise 39: Compute with option prices in finance',
+               2,
+               'sec:random:ex16',
+               'sec:random:ex16'),
+              ('Remarks', 3, None, '___sec109'),
+              ('Exercise 40: Differentiate noise measurements',
+               2,
+               'sec:random:ex22',
+               'sec:random:ex22'),
+              ('Exercise 41: Differentiate noisy signals',
+               2,
+               'sec:random:ex25',
+               'sec:random:ex25'),
+              ('Exercise 42: Model noise in a time signal',
+               2,
+               'sec:random:ex23',
+               'sec:random:ex23'),
+              ('Exercise 43: Speed up Markov chain mutation',
+               2,
+               'bioinf:exer:Markov:chain:eff',
+               'bioinf:exer:Markov:chain:eff'),
+              ('References', 1, None, '___sec114')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- newcommands_keep.tex -->
+$$
+\newcommand{\tp}{\thinspace .}
+\newcommand{\Prob}[1]{\hbox{P}(#1)}
+$$
+
+
+
+
+    
+<!-- Bootstrap navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="random-bootstrap.html">Random numbers and simple games</a>
+  </div>
+
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     <!-- navigation toc: --> <li><a href="._random-bootstrap001.html#___sec0" style="font-size: 80%;"><b>Drawing random numbers</b></a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap001.html#___sec1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The seed</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap001.html#sec:random:uniform" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Uniformly distributed random numbers</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap001.html#___sec3" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Visualizing the distribution</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap001.html#___sec4" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Vectorized drawing of random numbers</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap001.html#___sec5" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Warning</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap001.html#sec:random:statistics" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Computing the mean and standard deviation</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap001.html#sec:random:normal" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The Gaussian or normal distribution</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap002.html#sec:random:ints" style="font-size: 80%;"><b>Drawing integers</b></a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap002.html#___sec9" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Random integer functions</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap002.html#___sec10" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Throwing a die</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap002.html#___sec11" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scalar version</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap002.html#___sec12" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Vectorized version</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap002.html#___sec13" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Vectorized version with batches</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap002.html#___sec14" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Verification of the scalar version</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap002.html#___sec15" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Verification of all versions</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap002.html#___sec16" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Drawing a random element from a list</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap002.html#sec:random:deck1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Drawing cards from a deck</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap002.html#sec:class:deck:class" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Class implementation of a deck</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:random:probability" style="font-size: 80%;"><b>Computing probabilities</b></a></li>
+     <!-- navigation toc: --> <li><a href="#___sec20" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Principles of Monte Carlo simulation</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:random:probability:dice" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Throwing dice</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec22" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Straightforward solution</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec23" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Vectorization</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec24" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exact solution</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec25" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A game</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec26" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Decide if a game is fair</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:random:balls" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Drawing balls from a hat</a></li>
+     <!-- navigation toc: --> <li><a href="#bioinf:random" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Random mutations of genes</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec29" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A simple mutation model</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec30" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Vectorized version</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec31" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A Markov chain mutation model</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:random:china" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Policies for limiting population growth</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap004.html#___sec33" style="font-size: 80%;"><b>Simple games</b></a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap004.html#sec:random:game:guessn" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Guessing a number</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap004.html#___sec35" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The game</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap004.html#___sec36" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The implementation</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap004.html#sec:random:twodicesumguess" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Rolling two dice</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap004.html#___sec38" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The game</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap004.html#___sec39" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The implementation</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap004.html#___sec40" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap004.html#___sec41" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A class version</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap004.html#sec:random:MonteCarlo:integration" style="font-size: 80%;"><b>Monte Carlo integration</b></a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap004.html#sec:random:MCint:ideas" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Derivation of Monte Carlo integration</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap004.html#___sec44" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The calculus approach via the mean-value theorem</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap004.html#___sec45" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The probability theory approach</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap004.html#sec:random:MCint:std" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Implementation of standard Monte Carlo integration</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap004.html#___sec47" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap004.html#___sec48" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remark</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap004.html#sec:random:MCdart" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Area computing by throwing random points</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap005.html#sec:random:rw1D" style="font-size: 80%;"><b>Random walk in one space dimension</b></a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap005.html#___sec51" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Basic implementation</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap005.html#___sec52" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Visualization</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap005.html#___sec53" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Random walk as a difference equation</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap005.html#sec:random:walk:1D:statistics" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Computing statistics of the particle positions</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap005.html#sec:random:walk:1D:vectorized" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Vectorized implementation</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap006.html#sec:random:rw2D" style="font-size: 80%;"><b>Random walk in two space dimensions</b></a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap006.html#sec:random:rw2D:scalar" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Basic implementation</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap006.html#sec:random:walk:2D:vectorized" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Vectorized implementation</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap007.html#___sec59" style="font-size: 80%;"><b>Summary</b></a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap007.html#___sec60" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Chapter topics</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap007.html#___sec61" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Drawing random numbers</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap007.html#___sec62" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Typical probability computation via Monte Carlo simulation</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap007.html#___sec63" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Statistical measures</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap007.html#___sec64" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Terminology</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap007.html#sec:random:summarizingex" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Random growth</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap007.html#___sec66" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap007.html#___sec67" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Solution</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#___sec68" style="font-size: 80%;"><b>Exercises</b></a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex17" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 1: Flip a coin times</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex7" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 2: Compute a probability</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex6" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 3: Choose random colors</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex4" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 4: Draw balls from a hat</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 5: Computing probabilities of rolling dice</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex10" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 6: Estimate the probability in a dice game</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex44" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 7: Compute the probability of hands of cards</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex11" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 8: Decide if a dice game is fair</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex12" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 9: Adjust a game to make it fair</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex12b" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 10: Generalize a game</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex2c" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 11: Compare two playing strategies</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex2e" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 12: Investigate strategies in a game</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex45" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 13: Investigate the winning chances of some games</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex2b" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 14: Compute probabilities of throwing two dice</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex18" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 15: Vectorize flipping a coin</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex7b" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 16: Vectorize a probablility computation</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex30" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 17: Throw dice and compute a small probability</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex27" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 18: Difference equation for random numbers</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex9" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 19: Make a class for drawing balls from a hat</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex21" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 20: Independent  versus dependent random numbers</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex19" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 21: Compute the probability of flipping a coin</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex41" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 22: Simulate a poker game</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex29" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 23: Estimate growth in a simulation model</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex15" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 24: Investigate guessing strategies</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex13" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 25: Vectorize a dice game</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex31" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 26: Compute \( \pi \) by a Monte Carlo method</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex32" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 27: Compute \( \pi \) by a Monte Carlo method</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex31b" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 28: Compute \( \pi \) by a random sum</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 29: 1D random walk with drift</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex3" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 30: 1D random walk until a point is hit</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex3:rwgame" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 31: Simulate making a fortune from gaming</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex33" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 32: Make classes for 2D random walk</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex36" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 33: 2D random walk with walls; scalar version</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex37" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 34: 2D random walk with walls; vectorized version</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex38" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 35: Simulate mixing of gas molecules</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#___sec104" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remarks</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex39" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 36: Simulate slow mixing of gas molecules</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex35" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 37: Guess beer brands</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex26" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 38: Simulate stock prices</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex16" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 39: Compute with option prices in finance</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#___sec109" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remarks</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex22" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 40: Differentiate noise measurements</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex25" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 41: Differentiate noisy signals</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#sec:random:ex23" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 42: Model noise in a time signal</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#bioinf:exer:Markov:chain:eff" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 43: Speed up Markov chain mutation</a></li>
+     <!-- navigation toc: --> <li><a href="._random-bootstrap008.html#___sec114" style="font-size: 80%;"><b>References</b></a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div> <!-- end of navigation bar -->
+
+<div class="container">
+
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+
+<a name="part0003"></a>
+<!-- !split -->
+<p style="font-size:80%">This chapter is taken from book <a href="http://www.springer.com/gp/book/9783642549588">A Primer on Scientific Programming with Python</a> by H. P. Langtangen, 4th edition, Springer, 2014.</p>
+
+<h1 id="sec:random:probability">Computing probabilities</h1>
+
+<p>
+With the mathematical rules from <em>probability theory</em> one may compute
+the probability that a certain event happens, say the probability that
+you get one black ball when drawing three balls from a hat
+with four black balls, six white balls, and three green balls.
+Unfortunately, theoretical
+calculations of probabilities may soon become hard or impossible if the
+problem is slightly changed. There is a simple numerical way of
+computing probabilities that is generally applicable to problems with
+uncertainty. The principal ideas of this approximate
+technique is explained below, followed by
+three examples of increasing complexity.
+
+<h2 id="___sec20">Principles of Monte Carlo simulation </h2>
+
+<p>
+Assume that we perform \( N \) experiments where the outcome of each
+experiment is random. Suppose that some event takes place
+\( M \) times in these \( N \) experiments. An estimate of the probability
+of the event is then \( M/N \). The estimate becomes more accurate
+as \( N \) is increased, and the exact probability is assumed to be
+reached in the limit as \( N\rightarrow\infty \). (Note that in this
+limit, \( M\rightarrow\infty \) too, so for rare events, where \( M \)
+may be small in a program, one must increase \( N \) such that
+\( M \) is sufficiently large for \( M/N \) to become a good approximation
+to the probability.)
+
+<p>
+Programs that run a large number of experiments and record the outcome
+of events
+are often called <em>simulation programs</em>. (Note that this term is also
+applied for programs that solve equations arising in mathematical models
+in general, but it is even more common to use the term when
+random numbers are used to estimate probabilities.)
+The mathematical
+technique of letting the computer perform
+lots of experiments based on drawing random numbers
+is commonly called
+<em>Monte Carlo simulation.</em>
+This technique has proven to be extremely useful throughout science
+and industry in problems where there is uncertain or random
+behavior is involved.
+
+<p>
+<blockquote>
+    <em>As far as the laws of mathematics refer
+    to reality, they are not certain, as far as they are certain,
+    they do not refer to reality.</em>
+    Albert Einstein, physicist, 1879-1955.
+</blockquote>
+
+For example,
+in finance the stock market has a random variation that
+must be taken into account when trying to optimize investments.
+In offshore engineering, environmental loads from wind, currents, and waves
+show random behavior. In nuclear and particle physics, random behavior is
+fundamental according to quantum mechanics and statistical physics.
+Many probabilistic problems can be calculated exactly by mathematics
+from probability
+theory, but very often Monte Carlo simulation is the only way to solve
+statistical problems.
+The sections <a href="#sec:random:probability:dice">Example: Throwing dice</a>-<a href="#sec:random:china">Example: Policies for limiting population growth</a>
+applies examples to explain the essence of Monte Carlo simulation in
+problems with inherent uncertainty.
+However, also deterministic problems, such as integration of functions,
+can be computed by Monte Carlo simulation (see the section <a href="._random-bootstrap004.html#sec:random:MonteCarlo:integration">Monte Carlo integration</a>).
+
+<p>
+It appears that Monte Carlo simulation programmed in pure Python is
+a computationally feasible approach, even on small laptops, in all the
+forthcoming examples. Significant speed-up can be achieved by
+vectorizing the code, which is explained in detail for many of the
+examples. However, large-scale Monte Carlo simulations and other
+heavy computations run slowly in pure Python, and the core of the
+computations should be moved to a compiled language such as C.
+In the document <a href="http://hplgit.github.io/primer.html/doc/pub/cython" target="_self">Migrating Python to compiled code</a> <a href="._random-bootstrap008.html#Langtangen_TCSE6_cython">[1]</a>, you can find a Monte Carlo application
+that is implemented in pure Python, in vectorized <code>numpy</code> Python,
+in the extended (and very closely related) Cython language, as well as
+in pure C code. Various ways of combining Python with C are also
+illustrated.
+
+<h2 id="sec:random:probability:dice">Example: Throwing dice</h2>
+
+<p>
+You throw two dice, one black and one green.
+What is the probability that the number of eyes on the black die is
+larger than the number of eyes on the green die?
+
+<h3 id="___sec22">Straightforward solution </h3>
+
+<p>
+We can simulate \( N \) throws of two dice in a program. For each
+throw we see if the event is successful, and if so, increase \( M \) by one:
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">sys</span>
+N <span style="color: #666666">=</span> <span style="color: #008000">int</span>(sys<span style="color: #666666">.</span>argv[<span style="color: #666666">1</span>])               <span style="color: #408080; font-style: italic"># no of experiments</span>
+
+<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">random</span>
+M <span style="color: #666666">=</span> <span style="color: #666666">0</span>                              <span style="color: #408080; font-style: italic"># no of successful events</span>
+<span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(N):
+    black <span style="color: #666666">=</span> random<span style="color: #666666">.</span>randint(<span style="color: #666666">1</span>, <span style="color: #666666">6</span>)   <span style="color: #408080; font-style: italic"># throw black</span>
+    green <span style="color: #666666">=</span> random<span style="color: #666666">.</span>randint(<span style="color: #666666">1</span>, <span style="color: #666666">6</span>)   <span style="color: #408080; font-style: italic"># throw brown</span>
+    <span style="color: #008000; font-weight: bold">if</span> black <span style="color: #666666">&gt;</span> green:              <span style="color: #408080; font-style: italic"># success?</span>
+        M <span style="color: #666666">+=</span> <span style="color: #666666">1</span>
+p <span style="color: #666666">=</span> <span style="color: #008000">float</span>(M)<span style="color: #666666">/</span>N
+<span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;probability:&#39;</span>, p
+</pre></div>
+<p>
+This program is named <a href="http://tinyurl.com/pwyasaa/random/black_gt_green.py" target="_self"><tt>black_gt_green.py</tt></a>.
+
+<h3 id="___sec23">Vectorization </h3>
+
+<p>
+Although the <code>black_gt_green.py</code> program runs \( N=10^6 \) in a few seconds,
+Monte Carlo simulation programs can quickly require quite some
+simulation time so speeding up the algorithm by vectorization is often
+desired. Let us vectorize the code shown above. The idea is to
+draw all the random numbers (\( 2N \)) at once. We make an array of
+random numbers between 1 and 6 with 2 rows and \( N \) columns.
+The first row can be taken as the number of eyes on the
+black die in all the experiments, while the second row are the
+corresponding eyes on the green die:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">r <span style="color: #666666">=</span> np<span style="color: #666666">.</span>random<span style="color: #666666">.</span>random_integers(<span style="color: #666666">1</span>, <span style="color: #666666">6</span>, size<span style="color: #666666">=</span>(<span style="color: #666666">2</span>, N))
+black <span style="color: #666666">=</span> r[<span style="color: #666666">0</span>,:]            <span style="color: #408080; font-style: italic"># eyes for all throws with black</span>
+green <span style="color: #666666">=</span> r[<span style="color: #666666">1</span>,:]            <span style="color: #408080; font-style: italic"># eyes for all throws with green</span>
+</pre></div>
+<p>
+The condition <code>black &gt; green</code> results in an array of length \( N \)
+of boolean values: <code>True</code> when the element in <code>black</code> is
+greater than the corresponding element in <code>green</code>, and <code>False</code>
+if not. The number of <code>True</code> elements in the boolean array
+<code>black &gt; green</code> is then \( M \). This number can be computed by
+summing up all the boolean values. In arithmetic operations,
+<code>True</code> is 1 and <code>False</code> i 0, so the sum equals \( M \).
+Fast summation of arrays requires <code>np.sum</code> and not Python's
+standard <code>sum</code> function. The code goes like
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">success <span style="color: #666666">=</span> black <span style="color: #666666">&gt;</span> green   <span style="color: #408080; font-style: italic"># success[i] is true if black[i]&gt;green[i]</span>
+M <span style="color: #666666">=</span> np<span style="color: #666666">.</span>sum(success)       <span style="color: #408080; font-style: italic"># sum up all successes</span>
+p <span style="color: #666666">=</span> <span style="color: #008000">float</span>(M)<span style="color: #666666">/</span>N
+<span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;probability:&#39;</span>, p
+</pre></div>
+<p>
+The code, found in the file <a href="http://tinyurl.com/pwyasaa/random/black_gt_green_vec.py" target="_self"><tt>black_gt_green_vec.py</tt></a>, runs over 10 times faster
+than the corresponding scalar code in <code>black_gt_green.py</code>.
+
+<h3 id="___sec24">Exact solution </h3>
+
+<p>
+In this simple example we can quite easily
+compute the exact solution. To this end, we set up all the outcomes
+of the experiment, i.e., all the possible combinations of eyes on
+two dice:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">combinations <span style="color: #666666">=</span> [(black, green)
+                <span style="color: #008000; font-weight: bold">for</span> black <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">1</span>, <span style="color: #666666">7</span>)
+                <span style="color: #008000; font-weight: bold">for</span> green <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">1</span>, <span style="color: #666666">7</span>)]
+</pre></div>
+<p>
+Then we count how many of the <code>(black, green)</code> pairs that have
+the property <code>black &gt; green</code>:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">success <span style="color: #666666">=</span> [black <span style="color: #666666">&gt;</span> green <span style="color: #008000; font-weight: bold">for</span> black, green <span style="color: #AA22FF; font-weight: bold">in</span> combinations]
+M <span style="color: #666666">=</span> <span style="color: #008000">sum</span>(success)
+</pre></div>
+<p>
+It turns out that <code>M</code> is 15, giving a probability \( 15/36 \approx
+0.41667 \) since there are 36 combinations in total.  Running the Monte
+Carlo simulations with \( N=10^6 \) typically gives probabilities in
+\( [0.416, 0.417] \).
+
+<h3 id="___sec25">A game </h3>
+
+<p>
+Suppose a games is constructed such that you have to pay 1 euro to
+throw the two dice. You win 2 euros if there are more eyes on the
+black than on the green die. Should you play this game?  We can easily
+simulate the game directly (file <a href="http://tinyurl.com/pwyasaa/random/black_gt_green_game.py" target="_self"><tt>black_gt_green_game.py</tt></a>):
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">sys</span>
+N <span style="color: #666666">=</span> <span style="color: #008000">int</span>(sys<span style="color: #666666">.</span>argv[<span style="color: #666666">1</span>])               <span style="color: #408080; font-style: italic"># no of experiments</span>
+
+<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">random</span>
+start_capital <span style="color: #666666">=</span> <span style="color: #666666">10</span>
+money <span style="color: #666666">=</span> start_capital
+<span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(N):
+    money <span style="color: #666666">-=</span> <span style="color: #666666">1</span>                     <span style="color: #408080; font-style: italic"># pay for the game</span>
+    black <span style="color: #666666">=</span> random<span style="color: #666666">.</span>randint(<span style="color: #666666">1</span>, <span style="color: #666666">6</span>)   <span style="color: #408080; font-style: italic"># throw black</span>
+    green <span style="color: #666666">=</span> random<span style="color: #666666">.</span>randint(<span style="color: #666666">1</span>, <span style="color: #666666">6</span>)   <span style="color: #408080; font-style: italic"># throw brown</span>
+    <span style="color: #008000; font-weight: bold">if</span> black <span style="color: #666666">&gt;</span> green:              <span style="color: #408080; font-style: italic"># success?</span>
+        money <span style="color: #666666">+=</span> <span style="color: #666666">2</span>                 <span style="color: #408080; font-style: italic"># get award</span>
+
+net_profit_total <span style="color: #666666">=</span> money <span style="color: #666666">-</span> start_capital
+net_profit_per_game <span style="color: #666666">=</span> net_profit_total<span style="color: #666666">/</span><span style="color: #008000">float</span>(N)
+<span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;Net profit per game in the long run:&#39;</span>, net_profit_per_game
+</pre></div>
+<p>
+Experimenting with a few \( N \) shows that the net profit per game is always
+negative. That is, you should <em>not</em> play this game.
+
+<p>
+A vectorized version is beneficial of efficiency reasons
+(the corresponding file is <code>black_gt_green_game_vec.py</code>):
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">sys</span>
+N <span style="color: #666666">=</span> <span style="color: #008000">int</span>(sys<span style="color: #666666">.</span>argv[<span style="color: #666666">1</span>])      <span style="color: #408080; font-style: italic"># no of experiments</span>
+
+<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
+r <span style="color: #666666">=</span> np<span style="color: #666666">.</span>random<span style="color: #666666">.</span>random_integers(<span style="color: #666666">1</span>, <span style="color: #666666">6</span>, size<span style="color: #666666">=</span>(<span style="color: #666666">2</span>, N))
+
+money <span style="color: #666666">=</span> <span style="color: #666666">10</span> <span style="color: #666666">-</span> N            <span style="color: #408080; font-style: italic"># capital after N throws</span>
+black <span style="color: #666666">=</span> r[<span style="color: #666666">0</span>,:]            <span style="color: #408080; font-style: italic"># eyes for all throws with black</span>
+green <span style="color: #666666">=</span> r[<span style="color: #666666">1</span>,:]            <span style="color: #408080; font-style: italic"># eyes for all throws with green</span>
+success <span style="color: #666666">=</span> black <span style="color: #666666">&gt;</span> green   <span style="color: #408080; font-style: italic"># success[i] is true if black[i]&gt;green[i]</span>
+M <span style="color: #666666">=</span> np<span style="color: #666666">.</span>sum(success)       <span style="color: #408080; font-style: italic"># sum up all successes</span>
+money <span style="color: #666666">+=</span> <span style="color: #666666">2*</span>M              <span style="color: #408080; font-style: italic"># add all awards for winning</span>
+<span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;Net profit per game in the long run:&#39;</span>, (money<span style="color: #666666">-10</span>)<span style="color: #666666">/</span><span style="color: #008000">float</span>(N)
+</pre></div>
+
+<h3 id="___sec26">Decide if a game is fair </h3>
+
+<p>
+Suppose the cost of playing a game once is \( q \) and that the award
+for winning is \( r \). The net income in a winning game is \( r-q \).
+Winning \( M \) out of \( N \) games means that the cost is \( Nq \) and
+the income is \( Mr \), making a net profit \( s=Mr-Nq \).
+Now \( p=M/N \) is the probability of winning the game so \( s=(pr-q)N \).
+A fair game means that we neither win nor lose in the long run:
+\( s=0 \), which implies that \( r=q/p \). That is, given the cost \( q \)
+and the probability \( p \) of winning, the award paid for winning
+the game must be \( r=q/p \) in a fair game.
+
+<p>
+When somebody comes up with a game you can use Monte Carlo simulation
+to estimate \( p \) and then conclude that you should not play the
+game of \( r < q/p \). The example above has \( p=15/36 \) (exact) and \( q=1 \),
+so \( r=2.4 \) makes a fair game.
+
+<p>
+The reasoning above is based on common sense and
+an intuitive interpretation of probability. More precise reasoning from
+probability theory will introduce the game as an experiment with two
+outcomes, either you win with probability \( p \) and or lose with probability
+\( 1-p \). The expected payment is then the sum of the probabilities times the
+corresponding net income for each event:
+\( -q(1-p) + (r-q)p \) (recall that the net income
+in a winning game is \( r-q \)). A fair game has zero expected
+payment, which leads to \( r = q/p \).
+
+<h2 id="sec:random:balls">Example: Drawing balls from a hat</h2>
+
+<p>
+Suppose there are 12 balls in a hat: four black, four red, and
+four blue. We want to make a program that draws three balls
+at random from the hat.
+It is natural to represent the collection of balls as a list.
+Each list element can be an integer 1, 2, or 3, since we have three
+different types of balls, but it would be easier to work with the
+program if the balls could have a color instead of an integer number.
+This is easily accomplished by defining color names:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">colors <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;black&#39;</span>, <span style="color: #BA2121">&#39;red&#39;</span>, <span style="color: #BA2121">&#39;blue&#39;</span>   <span style="color: #408080; font-style: italic"># (tuple of strings)</span>
+hat <span style="color: #666666">=</span> []
+<span style="color: #008000; font-weight: bold">for</span> color <span style="color: #AA22FF; font-weight: bold">in</span> colors:
+    <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">4</span>):
+        hat<span style="color: #666666">.</span>append(color)
+</pre></div>
+<p>
+Drawing a ball at random is performed by
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">random</span>
+color <span style="color: #666666">=</span> random<span style="color: #666666">.</span>choice(hat)
+<span style="color: #008000; font-weight: bold">print</span> color
+</pre></div>
+<p>
+Drawing \( n \) balls without replacing the drawn balls requires us to
+remove an element from the hat when it is drawn.
+There are three ways to implement the procedure: (i) we
+perform a <code>hat.remove(color)</code>, (ii) we draw a random index with
+<code>randint</code> from the set of legal indices in the <code>hat</code> list, and
+then we do a <code>del hat[index]</code> to remove the element, or (iii)
+we can compress the code in (ii) to <code>hat.pop(index)</code>.
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">draw_ball</span>(hat):
+    color <span style="color: #666666">=</span> random<span style="color: #666666">.</span>choice(hat)
+    hat<span style="color: #666666">.</span>remove(color)
+    <span style="color: #008000; font-weight: bold">return</span> color, hat
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">draw_ball</span>(hat):
+    index <span style="color: #666666">=</span> random<span style="color: #666666">.</span>randint(<span style="color: #666666">0</span>, <span style="color: #008000">len</span>(hat)<span style="color: #666666">-1</span>)
+    color <span style="color: #666666">=</span> hat[index]
+    <span style="color: #008000; font-weight: bold">del</span> hat[index]
+    <span style="color: #008000; font-weight: bold">return</span> color, hat
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">draw_ball</span>(hat):
+    index <span style="color: #666666">=</span> random<span style="color: #666666">.</span>randint(<span style="color: #666666">0</span>, <span style="color: #008000">len</span>(hat)<span style="color: #666666">-1</span>)
+    color <span style="color: #666666">=</span> hat<span style="color: #666666">.</span>pop(index)
+    <span style="color: #008000; font-weight: bold">return</span> color, hat
+
+<span style="color: #408080; font-style: italic"># Draw n balls from the hat</span>
+balls <span style="color: #666666">=</span> []
+<span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(n):
+    color, hat <span style="color: #666666">=</span> draw_ball(hat)
+    balls<span style="color: #666666">.</span>append(color)
+<span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;Got the balls&#39;</span>, balls
+</pre></div>
+<p>
+We can extend the experiment above
+and ask the question: what is the probability
+of drawing two or more black balls from a hat with 12 balls,
+four black, four red, and four blue?
+To this end, we perform \( N \) experiments, count how many times \( M \) we
+get two or more black balls, and estimate the probability as \( M/N \).
+Each experiment consists of making the <code>hat</code> list, drawing a number of
+balls, and counting how many black balls we got.
+The latter task is easy with the <code>count</code> method in list objects:
+<code>hat.count('black')</code> counts how many elements with value <code>'black'</code>
+we have in the list <code>hat</code>.
+A complete program for this task is listed below. The program appears
+in the file <a href="http://tinyurl.com/pwyasaa/random/balls_in_hat.py" target="_self"><tt>balls_in_hat.py</tt></a>.
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">random</span>
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">draw_ball</span>(hat):
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Draw a ball using list index.&quot;&quot;&quot;</span>
+    index <span style="color: #666666">=</span> random<span style="color: #666666">.</span>randint(<span style="color: #666666">0</span>, <span style="color: #008000">len</span>(hat)<span style="color: #666666">-1</span>)
+    color <span style="color: #666666">=</span> hat<span style="color: #666666">.</span>pop(index)
+    <span style="color: #008000; font-weight: bold">return</span> color, hat
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">draw_ball</span>(hat):
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Draw a ball using list index.&quot;&quot;&quot;</span>
+    index <span style="color: #666666">=</span> random<span style="color: #666666">.</span>randint(<span style="color: #666666">0</span>, <span style="color: #008000">len</span>(hat)<span style="color: #666666">-1</span>)
+    color <span style="color: #666666">=</span> hat[index]
+    <span style="color: #008000; font-weight: bold">del</span> hat[index]
+    <span style="color: #008000; font-weight: bold">return</span> color, hat
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">draw_ball</span>(hat):
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Draw a ball using list element.&quot;&quot;&quot;</span>
+    color <span style="color: #666666">=</span> random<span style="color: #666666">.</span>choice(hat)
+    hat<span style="color: #666666">.</span>remove(color)
+    <span style="color: #008000; font-weight: bold">return</span> color, hat
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">new_hat</span>():
+    colors <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;black&#39;</span>, <span style="color: #BA2121">&#39;red&#39;</span>, <span style="color: #BA2121">&#39;blue&#39;</span>   <span style="color: #408080; font-style: italic"># (tuple of strings)</span>
+    hat <span style="color: #666666">=</span> []
+    <span style="color: #008000; font-weight: bold">for</span> color <span style="color: #AA22FF; font-weight: bold">in</span> colors:
+        <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">4</span>):
+            hat<span style="color: #666666">.</span>append(color)
+    <span style="color: #008000; font-weight: bold">return</span> hat
+
+n <span style="color: #666666">=</span> <span style="color: #008000">int</span>(<span style="color: #008000">raw_input</span>(<span style="color: #BA2121">&#39;How many balls are to be drawn? &#39;</span>))
+N <span style="color: #666666">=</span> <span style="color: #008000">int</span>(<span style="color: #008000">raw_input</span>(<span style="color: #BA2121">&#39;How many experiments? &#39;</span>))
+
+<span style="color: #408080; font-style: italic"># Run experiments</span>
+M <span style="color: #666666">=</span> <span style="color: #666666">0</span>  <span style="color: #408080; font-style: italic"># no of successes</span>
+<span style="color: #008000; font-weight: bold">for</span> e <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(N):
+    hat <span style="color: #666666">=</span> new_hat()
+    balls <span style="color: #666666">=</span> []           <span style="color: #408080; font-style: italic"># the n balls we draw</span>
+    <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(n):
+        color, hat <span style="color: #666666">=</span> draw_ball(hat)
+        balls<span style="color: #666666">.</span>append(color)
+    <span style="color: #008000; font-weight: bold">if</span> balls<span style="color: #666666">.</span>count(<span style="color: #BA2121">&#39;black&#39;</span>) <span style="color: #666666">&gt;=</span> <span style="color: #666666">2</span>:  <span style="color: #408080; font-style: italic"># at least two black balls?</span>
+        M <span style="color: #666666">+=</span> <span style="color: #666666">1</span>
+<span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;Probability:&#39;</span>, <span style="color: #008000">float</span>(M)<span style="color: #666666">/</span>N
+</pre></div>
+<p>
+Running the program with \( n=5 \) (drawing 5 balls each time) and
+\( N=4000 \) gives a probability of 0.57. Drawing only 2 balls at
+a time reduces the probability to about 0.09.
+
+<p>
+One can with the aid of probability theory derive theoretical
+expressions for such probabilities, but it is much simpler to
+let the computer perform a large number of experiments to estimate
+an approximate probability.
+
+<p>
+A class version of the code in this section is better than the code
+presented, because we avoid shuffling the <code>hat</code> variable in and out
+of functions. <a href="._random-bootstrap008.html#sec:random:ex9">Exercise 19: Make a class for drawing balls from a hat</a> asks you to design and implement
+a class <code>Hat</code>.
+
+<h2 id="bioinf:random">Random mutations of genes</h2>
+
+<h3 id="___sec29">A simple mutation model </h3>
+
+<p>
+ Mutation of genes
+is easily modeled by replacing the letter in a randomly
+chosen position of the DNA by a randomly chosen letter from
+the alphabet A, C, G, and T.
+Python's <code>random</code> module can be used
+to generate random numbers. Selecting a random position means
+generating a random index in the DNA string, and the function
+<code>random.randint(a, b)</code> generates random integers between <code>a</code> and
+<code>b</code> (both included). Generating a random
+letter is easiest done by having a list of the actual letters
+and using <code>random.choice(list)</code> to pick an arbitrary element from
+<code>list</code>. A function for replacing the letter in a
+randomly selected position (index)
+by a random letter among A, C, G, and T is most straightforwardly
+implemented by converting the DNA string to a list of letters, since
+changing a character in a Python string is impossible without
+constructing a new string. However, an element in a list can be
+changed in-place:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">random</span>
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">mutate_v1</span>(dna):
+    dna_list <span style="color: #666666">=</span> <span style="color: #008000">list</span>(dna)
+    mutation_site <span style="color: #666666">=</span> random<span style="color: #666666">.</span>randint(<span style="color: #666666">0</span>, <span style="color: #008000">len</span>(dna_list) <span style="color: #666666">-</span> <span style="color: #666666">1</span>)
+    dna_list[mutation_site] <span style="color: #666666">=</span> random<span style="color: #666666">.</span>choice(<span style="color: #008000">list</span>(<span style="color: #BA2121">&#39;ATCG&#39;</span>))
+    <span style="color: #008000; font-weight: bold">return</span> <span style="color: #BA2121">&#39;&#39;</span><span style="color: #666666">.</span>join(dna_list)
+</pre></div>
+<p>
+Using <code>get_base_frequencies_v2</code> and <code>format_frequencies</code>
+from the document <a href="http://hplgit.github.io/primer.html/doc/pub/files" target="_self">Files, strings, and dictionaries</a> <a href="._random-bootstrap008.html#Langtangen_TCSE6_files">[2]</a>, we can easily mutate a gene a number
+of times and see how the frequencies of the bases A, C, G, and T change:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">dna <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;ACGGAGATTTCGGTATGCAT&#39;</span>
+<span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;Starting DNA:&#39;</span>, dna
+<span style="color: #008000; font-weight: bold">print</span> format_frequencies(get_base_frequencies_v2(dna))
+
+nmutations <span style="color: #666666">=</span> <span style="color: #666666">10000</span>
+<span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(nmutations):
+    dna <span style="color: #666666">=</span> mutate_v1(dna)
+
+<span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;DNA after </span><span style="color: #BB6688; font-weight: bold">%d</span><span style="color: #BA2121"> mutations:&#39;</span> <span style="color: #666666">%</span> nmutations, dna
+<span style="color: #008000; font-weight: bold">print</span> format_frequencies(get_base_frequencies_v2(dna))
+</pre></div>
+<p>
+Here is the output from a run:
+<p>
+
+<!-- code=text (!bc dat) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">Starting DNA: ACGGAGATTTCGGTATGCAT
+A: 0.25, C: 0.15, T: 0.30, G: 0.30
+DNA after 10000 mutations: AACCAATCCGACGAGGAGTG
+A: 0.35, C: 0.25, T: 0.10, G: 0.30
+</pre></div>
+
+<h3 id="___sec30">Vectorized version </h3>
+
+<p>
+The efficiency of the <code>mutate_v1</code> function with its surrounding loop can be
+significantly increased up by performing all the mutations at
+once using <code>numpy</code> arrays. This speed-up is of interest for long <code>dna</code>
+strings and many mutations. The idea is to draw all the mutation sites
+at once, and also all the new bases at these sites at once.
+The <code>np.random</code> module provides functions for drawing several random
+numbers at a time, but only integers and real numbers can be drawn,
+not characters from the alphabet A, C, G, and T. We therefore have
+to simulate these four characters by the numbers (say) 0, 1, 2, and 3.
+Afterwards we can translate the integers to letters by some clever
+vectorized indexing.
+
+<p>
+Drawing <code>N</code> mutation sites is a matter of drawing <code>N</code> random
+integers among the legal indices:
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
+mutation_sites <span style="color: #666666">=</span> np<span style="color: #666666">.</span>random<span style="color: #666666">.</span>random_integers(<span style="color: #666666">0</span>, <span style="color: #008000">len</span>(dna)<span style="color: #666666">-1</span>, size<span style="color: #666666">=</span>N)
+</pre></div>
+<p>
+Drawing <code>N</code> bases, represented as the integers 0-3, is similarly done by
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">new_bases_i <span style="color: #666666">=</span> np<span style="color: #666666">.</span>random<span style="color: #666666">.</span>random_integers(<span style="color: #666666">0</span>, <span style="color: #666666">3</span>, N)
+</pre></div>
+<p>
+Converting say the integers 1 to the base symbol C is done by
+picking out the indices (in a boolean array) where <code>new_bases_i</code>
+equals 1, and inserting the character <code>'C'</code> in a companion
+array of characters:
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">new_bases_c <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros(N, dtype<span style="color: #666666">=</span><span style="color: #BA2121">&#39;c&#39;</span>)
+indices <span style="color: #666666">=</span> new_bases_i <span style="color: #666666">==</span> <span style="color: #666666">1</span>
+new_bases_c[indices] <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;C&#39;</span>
+</pre></div>
+<p>
+We must do this integer-to-letter conversion for all four integers/letters.
+Thereafter, <code>new_bases_c</code> must be inserted in <code>dna</code> for all the
+indices corresponding to the randomly drawn mutation sites,
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">dna[mutation_sites] <span style="color: #666666">=</span> new_bases_c
+</pre></div>
+<p>
+The final step is to convert the <code>numpy</code> array of characters <code>dna</code>
+back to a standard string by first converting <code>dna</code> to a list
+and then joining the list elements: <code>''.join(dna.tolist())</code>.
+
+<p>
+The complete vectorized functions can now be expressed as follows:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
+<span style="color: #408080; font-style: italic"># Use integers in random numpy arrays and map these</span>
+<span style="color: #408080; font-style: italic"># to characters according to</span>
+i2c <span style="color: #666666">=</span> {<span style="color: #666666">0</span>: <span style="color: #BA2121">&#39;A&#39;</span>, <span style="color: #666666">1</span>: <span style="color: #BA2121">&#39;C&#39;</span>, <span style="color: #666666">2</span>: <span style="color: #BA2121">&#39;G&#39;</span>, <span style="color: #666666">3</span>: <span style="color: #BA2121">&#39;T&#39;</span>}
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">mutate_v2</span>(dna, N):
+    dna <span style="color: #666666">=</span> np<span style="color: #666666">.</span>array(dna, dtype<span style="color: #666666">=</span><span style="color: #BA2121">&#39;c&#39;</span>)  <span style="color: #408080; font-style: italic"># array of characters</span>
+    mutation_sites <span style="color: #666666">=</span> np<span style="color: #666666">.</span>random<span style="color: #666666">.</span>random_integers(
+        <span style="color: #666666">0</span>, <span style="color: #008000">len</span>(dna) <span style="color: #666666">-</span> <span style="color: #666666">1</span>, size<span style="color: #666666">=</span>N)
+    <span style="color: #408080; font-style: italic"># Must draw bases as integers</span>
+    new_bases_i <span style="color: #666666">=</span> np<span style="color: #666666">.</span>random<span style="color: #666666">.</span>random_integers(<span style="color: #666666">0</span>, <span style="color: #666666">3</span>, size<span style="color: #666666">=</span>N)
+    <span style="color: #408080; font-style: italic"># Translate integers to characters</span>
+    new_bases_c <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros(N, dtype<span style="color: #666666">=</span><span style="color: #BA2121">&#39;c&#39;</span>)
+    <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> i2c:
+        new_bases_c[new_bases_i <span style="color: #666666">==</span> i] <span style="color: #666666">=</span> i2c[i]
+    dna[mutation_sites] <span style="color: #666666">=</span> new_bases_c
+    <span style="color: #008000; font-weight: bold">return</span> <span style="color: #BA2121">&#39;&#39;</span><span style="color: #666666">.</span>join(dna<span style="color: #666666">.</span>tolist())
+</pre></div>
+<p>
+It is of interest to time <code>mutate_v2</code> versus <code>mutate_v1</code>. For this purpose
+we need a long test string. A straightforward generation of random
+letters is
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">generate_string_v1</span>(N, alphabet<span style="color: #666666">=</span><span style="color: #BA2121">&#39;ACGT&#39;</span>):
+    <span style="color: #008000; font-weight: bold">return</span> <span style="color: #BA2121">&#39;&#39;</span><span style="color: #666666">.</span>join([random<span style="color: #666666">.</span>choice(alphabet) <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">xrange</span>(N)])
+</pre></div>
+<p>
+A vectorized version of this function can also be made, using the
+ideas explored above for the <code>mutate_v2</code> function:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">generate_string_v2</span>(N, alphabet<span style="color: #666666">=</span><span style="color: #BA2121">&#39;ACGT&#39;</span>):
+    <span style="color: #408080; font-style: italic"># Draw random integers 0,1,2,3 to represent bases</span>
+    dna_i <span style="color: #666666">=</span> np<span style="color: #666666">.</span>random<span style="color: #666666">.</span>random_integers(<span style="color: #666666">0</span>, <span style="color: #666666">3</span>, N)
+    <span style="color: #408080; font-style: italic"># Translate integers to characters</span>
+    dna <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros(N, dtype<span style="color: #666666">=</span><span style="color: #BA2121">&#39;c&#39;</span>)
+    <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> i2c:
+        dna[dna_i <span style="color: #666666">==</span> i] <span style="color: #666666">=</span> i2c[i]
+    <span style="color: #008000; font-weight: bold">return</span> <span style="color: #BA2121">&#39;&#39;</span><span style="color: #666666">.</span>join(dna<span style="color: #666666">.</span>tolist())
+</pre></div>
+<p>
+The <code>time_mutate</code> function in the file <a href="http://tinyurl.com/pwyasaa/random/mutate.py" target="_self"><tt>mutate.py</tt></a> performs
+timing of the generation of test strings and the mutations.  To
+generate a DNA string of length 100,000 the vectorized function is
+about 8 times faster. When performing 10,000 mutations on this string,
+the vectorized version is almost 3000 times faster! These numbers stay
+approximately the same also for larger strings and more mutations.
+Hence, this case study on vectorization is a striking example on the fact
+that a straightforward and convenient function like <code>mutate_v1</code> might
+occasionally be very slow for large-scale computations.
+
+<h3 id="___sec31">A Markov chain mutation model </h3>
+
+<p>
+The observed rate at which mutations occur at a given position in the
+genome is not independent of the type of nucleotide (base) at that
+position, as was assumed in the previous simple mutation model.  We
+should therefore take into account that the rate of transition depends
+on the base.
+
+<p>
+There are a number of reasons why the observed mutation rates vary
+between different nucleotides. One reason is that there are different
+mechanisms generating transitions from one base to another. Another
+reason is that there are extensive repair process in living cells, and
+the efficiency of this repair mechanism varies for different
+nucleotides.
+
+<p>
+Mutation of nucleotides may be modeled using distinct probabilities
+for the transitions from each nucleotide to every other
+nucleotide. For example, the probability of replacing A by C may be
+prescribed as (say) 0.2. In total we need \( 4\times 4 \)
+probabilities since each nucleotide can transform into itself (no
+change) or three others. The sum of all four transition probabilities
+for a given nucleotide must sum up to one. Such statistical evolution,
+based on probabilities for transitioning from one state to another, is
+known as a Markov process or Markov chain.
+
+<p>
+First we need to set up the probability matrix, i.e., the
+\( 4\times4 \) table of probabilities where each row corresponds to the
+transition of A, C, G, or T into A, C, G, or T. Say the probability
+transition from A to A is 0.2, from A to C is 0.1, from A to G is 0.3,
+and from A to T is 0.4.
+
+<p>
+Rather than just prescribing some arbitrary transition probabilities
+for test purposes, we can use random numbers for these probabilities.
+To this end, we generate three random numbers to divide the interval
+\( [0,1] \) into four intervals corresponding to the four possible
+transitions.  The lengths of the intervals give the transition
+probabilities, and their sum is ensured to be 1.  The interval limits,
+0, 1, and three random numbers must be sorted in ascending order to
+form the intervals. We use the function <code>random.random()</code> to generate
+random numbers in \( [0,1) \):
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">slice_points <span style="color: #666666">=</span> <span style="color: #008000">sorted</span>(
+    [<span style="color: #666666">0</span>] <span style="color: #666666">+</span> [random<span style="color: #666666">.</span>random() <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">3</span>)] <span style="color: #666666">+</span> [<span style="color: #666666">1</span>])
+transition_probabilities <span style="color: #666666">=</span> [slice_points[i<span style="color: #666666">+1</span>] <span style="color: #666666">-</span> slice_points[i]
+                            <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">4</span>)]
+</pre></div>
+<p>
+The transition probabilities are handy to have available as a dictionary:
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">markov_chain[<span style="color: #BA2121">&#39;A&#39;</span>] <span style="color: #666666">=</span> {<span style="color: #BA2121">&#39;A&#39;</span>: <span style="color: #666666">...</span>, <span style="color: #BA2121">&#39;C&#39;</span>: <span style="color: #666666">...</span>, <span style="color: #BA2121">&#39;G&#39;</span>: <span style="color: #666666">...</span>, <span style="color: #BA2121">&#39;T&#39;</span>: <span style="color: #666666">...</span>}
+</pre></div>
+<p>
+which can be computed by
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">markov_chain[<span style="color: #BA2121">&#39;A&#39;</span>] <span style="color: #666666">=</span> {base: p <span style="color: #008000; font-weight: bold">for</span> base, p <span style="color: #AA22FF; font-weight: bold">in</span>
+                     <span style="color: #008000">zip</span>(<span style="color: #BA2121">&#39;ACGT&#39;</span>, transition_probabilities)}
+</pre></div>
+<p>
+To select a transition, we need to draw a random letter
+(A, C, G, or T) according to the probabilities
+<code>markov_chain[b]</code> where <code>b</code> is the base at the current position.
+Actually, this is a very common operation, namely drawing a
+random value from a <em>discrete probability distribution</em> (<code>markov_chain[b]</code>).
+The natural approach is therefore write a general function for
+drawing from any discrete probability distribution given as
+a dictionary:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">draw</span>(discrete_probdist):
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">    Draw random value from discrete probability distribution</span>
+<span style="color: #BA2121; font-style: italic">    represented as a dict: P(x=value) = discrete_probdist[value].</span>
+<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
+    <span style="color: #408080; font-style: italic"># Method:</span>
+    <span style="color: #408080; font-style: italic"># http://en.wikipedia.org/wiki/Pseudo-random_number_sampling</span>
+    limit <span style="color: #666666">=</span> <span style="color: #666666">0</span>
+    r <span style="color: #666666">=</span> random<span style="color: #666666">.</span>random()
+    <span style="color: #008000; font-weight: bold">for</span> value <span style="color: #AA22FF; font-weight: bold">in</span> discrete_probdist:
+        limit <span style="color: #666666">+=</span> discrete_probdist[value]
+        <span style="color: #008000; font-weight: bold">if</span> r <span style="color: #666666">&lt;</span> limit:
+            <span style="color: #008000; font-weight: bold">return</span> value
+</pre></div>
+<p>
+Basically, the algorithm divides \( [0,1] \) into intervals of lengths
+equal to the probabilities of the various outcomes and checks
+which interval is hit by a random variable in \( [0,1] \). The corresponding
+value is the random choice.
+
+<p>
+A complete function creating all the transition probabilities and
+storing them in a dictionary of dictionaries takes the form
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">create_markov_chain</span>():
+    markov_chain <span style="color: #666666">=</span> {}
+    <span style="color: #008000; font-weight: bold">for</span> from_base <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #BA2121">&#39;ATGC&#39;</span>:
+        <span style="color: #408080; font-style: italic"># Generate random transition probabilities by dividing</span>
+        <span style="color: #408080; font-style: italic"># [0,1] into four intervals of random length</span>
+       slice_points <span style="color: #666666">=</span> <span style="color: #008000">sorted</span>(
+           [<span style="color: #666666">0</span>] <span style="color: #666666">+</span> [random<span style="color: #666666">.</span>random()<span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">3</span>)] <span style="color: #666666">+</span> [<span style="color: #666666">1</span>])
+       transition_probabilities <span style="color: #666666">=</span> \ 
+           [slice_points[i<span style="color: #666666">+1</span>] <span style="color: #666666">-</span> slice_points[i] <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">4</span>)]
+       markov_chain[from_base] <span style="color: #666666">=</span> {base: p <span style="color: #008000; font-weight: bold">for</span> base, p
+                         <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">zip</span>(<span style="color: #BA2121">&#39;ATGC&#39;</span>, transition_probabilities)}
+    <span style="color: #008000; font-weight: bold">return</span> markov_chain
+
+mc <span style="color: #666666">=</span> create_markov_chain()
+<span style="color: #008000; font-weight: bold">print</span> mc
+<span style="color: #008000; font-weight: bold">print</span> mc[<span style="color: #BA2121">&#39;A&#39;</span>][<span style="color: #BA2121">&#39;T&#39;</span>] <span style="color: #408080; font-style: italic"># probability of transition from A to T</span>
+</pre></div>
+<p>
+It is natural to develop a function for checking that the generated
+probabilities are consistent. The transition from a particular base
+into one of the four bases happens with probability 1, which means that
+the probabilities in a row must sum up to 1:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">check_transition_probabilities</span>(markov_chain):
+    <span style="color: #008000; font-weight: bold">for</span> from_base <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #BA2121">&#39;ATGC&#39;</span>:
+        s <span style="color: #666666">=</span> <span style="color: #008000">sum</span>(markov_chain[from_base][to_base]
+                <span style="color: #008000; font-weight: bold">for</span> to_base <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #BA2121">&#39;ATGC&#39;</span>)
+        <span style="color: #008000; font-weight: bold">if</span> <span style="color: #008000">abs</span>(s <span style="color: #666666">-</span> <span style="color: #666666">1</span>) <span style="color: #666666">&gt;</span> <span style="color: #666666">1E-15</span>:
+            <span style="color: #008000; font-weight: bold">raise</span> <span style="color: #D2413A; font-weight: bold">ValueError</span>(<span style="color: #BA2121">&#39;Wrong sum: </span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121"> for &quot;</span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121">&quot;&#39;</span> <span style="color: #666666">%</span> \ 
+                             (s, from_base))
+</pre></div>
+<p>
+Another test is to check that <code>draw</code> actually draws random values
+in accordance with the underlying probabilities. To this end, we draw
+a large number of values, <code>N</code>, count the frequencies of the various values,
+divide by <code>N</code> and compare the empirical normalized frequencies
+with the probabilities:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">check_draw_approx</span>(discrete_probdist, N<span style="color: #666666">=1000000</span>):
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">    See if draw results in frequencies approx equal to</span>
+<span style="color: #BA2121; font-style: italic">    the probability distribution.</span>
+<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
+    frequencies <span style="color: #666666">=</span> {value: <span style="color: #666666">0</span> <span style="color: #008000; font-weight: bold">for</span> value <span style="color: #AA22FF; font-weight: bold">in</span> discrete_probdist}
+    <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(N):
+        value <span style="color: #666666">=</span> draw(discrete_probdist)
+        frequencies[value] <span style="color: #666666">+=</span> <span style="color: #666666">1</span>
+    <span style="color: #008000; font-weight: bold">for</span> value <span style="color: #AA22FF; font-weight: bold">in</span> frequencies:
+        frequencies[value] <span style="color: #666666">/=</span> <span style="color: #008000">float</span>(N)
+    <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;, &#39;</span><span style="color: #666666">.</span>join([<span style="color: #BA2121">&#39;</span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121">: </span><span style="color: #BB6688; font-weight: bold">%.4f</span><span style="color: #BA2121"> (exact </span><span style="color: #BB6688; font-weight: bold">%.4f</span><span style="color: #BA2121">)&#39;</span> <span style="color: #666666">%</span> \ 
+                     (v, frequencies[v], discrete_probdist[v])
+                     <span style="color: #008000; font-weight: bold">for</span> v <span style="color: #AA22FF; font-weight: bold">in</span> frequencies])
+</pre></div>
+<p>
+This test is only approximate, but does bring evidence to the correctness
+of the implementation of the <code>draw</code> function.
+
+<p>
+A vectorized version of <code>draw</code> can also be made. We refer to the
+source code file <a href="http://tinyurl.com/pwyasaa/random/mutate.py" target="_self"><tt>mutate.py</tt></a>
+for details (the function is relatively
+complicated).
+
+<p>
+Now we have all the tools needed to run the Markov chain of
+transitions for a randomly selected position in a DNA sequence:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">mutate_via_markov_chain</span>(dna, markov_chain):
+    dna_list <span style="color: #666666">=</span> <span style="color: #008000">list</span>(dna)
+    mutation_site <span style="color: #666666">=</span> random<span style="color: #666666">.</span>randint(<span style="color: #666666">0</span>, <span style="color: #008000">len</span>(dna_list) <span style="color: #666666">-</span> <span style="color: #666666">1</span>)
+    from_base <span style="color: #666666">=</span> dna[mutation_site]
+    to_base <span style="color: #666666">=</span> draw(markov_chain[from_base])
+    dna_list[mutation_site] <span style="color: #666666">=</span> to_base
+    <span style="color: #008000; font-weight: bold">return</span> <span style="color: #BA2121">&#39;&#39;</span><span style="color: #666666">.</span>join(dna_list)
+</pre></div>
+<p>
+<a href="._random-bootstrap008.html#bioinf:exer:Markov:chain:eff">Exercise 43: Speed up Markov chain mutation</a> suggests some efficiency
+enhancements of simulating mutations via these functions.
+
+<p>
+Here is a simulation of mutations using the method based on Markov chains:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">dna <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;TTACGGAGATTTCGGTATGCAT&#39;</span>
+<span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;Starting DNA:&#39;</span>, dna
+<span style="color: #008000; font-weight: bold">print</span> format_frequencies(get_base_frequencies_v2(dna))
+
+mc <span style="color: #666666">=</span> create_markov_chain()
+<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">pprint</span>
+<span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;Transition probabilities:</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121">&#39;</span>, pprint<span style="color: #666666">.</span>pformat(mc)
+nmutations <span style="color: #666666">=</span> <span style="color: #666666">10000</span>
+<span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(nmutations):
+    dna <span style="color: #666666">=</span> mutate_via_markov_chain(dna, mc)
+
+<span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;DNA after </span><span style="color: #BB6688; font-weight: bold">%d</span><span style="color: #BA2121"> mutations (Markov chain):&#39;</span> <span style="color: #666666">%</span> nmutations, dna
+<span style="color: #008000; font-weight: bold">print</span> format_frequencies(get_base_frequencies_v2(dna))
+</pre></div>
+<p>
+The output will differ each time the program is run unless
+<code>random.seed(i)</code> is called in the beginning of the program for some
+integer <code>i</code>. This call makes the
+sequence of random numbers the same every time the program is run and
+is very useful for debugging. An example on the output may look like
+<p>
+
+<!-- code=text (!bc dat) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">Starting DNA: TTACGGAGATTTCGGTATGCAT
+A: 0.23, C: 0.14, T: 0.36, G: 0.27
+Transition probabilities:
+{&#39;A&#39;: {&#39;A&#39;: 0.4288890546751146,
+       &#39;C&#39;: 0.4219086988655296,
+       &#39;G&#39;: 0.00668870644455688,
+       &#39;T&#39;: 0.14251354001479888},
+ &#39;C&#39;: {&#39;A&#39;: 0.24999667668640035,
+       &#39;C&#39;: 0.04718309085408834,
+       &#39;G&#39;: 0.6250440975238185,
+       &#39;T&#39;: 0.0777761349356928},
+ &#39;G&#39;: {&#39;A&#39;: 0.16022955651881965,
+       &#39;C&#39;: 0.34652746609882423,
+       &#39;G&#39;: 0.1328031742612512,
+       &#39;T&#39;: 0.3604398031211049},
+ &#39;T&#39;: {&#39;A&#39;: 0.20609823213950174,
+       &#39;C&#39;: 0.17641112746655452,
+       &#39;G&#39;: 0.010267621176125452,
+       &#39;T&#39;: 0.6072230192178183}}
+DNA after 10000 mutations (Markov chain): GGTTTAAGTCAGCTATGATTCT
+A: 0.23, C: 0.14, T: 0.41, G: 0.23
+</pre></div>
+<p>
+Note that the mutated DNA should contain more nucleotides of the
+type where the total probability of transitioning into that particular
+nucleotide is largest. The total probability of transitioning into
+a particular base can be computed by a bit a probability algebra.
+Let \( X \) be the initial base at some position in the DNA and let \( Y \)
+be the new base after mutation at this position. The probability
+that \( P(Y=b) \), where \( b \) is some base (A, C, G, or T), is built up
+of four mutually exclusive events:
+$$ P(Y=b) = P(X=A \cup Y=b) + P(X=C \cup Y=b) +
+P(X=G \cup Y=b) + P(X=T \cup Y=b)$$
+
+A joint event can be expressed by the (conditional) transition
+probabilities, e.g.,
+$$ P(X=A \cup Y=b) = P(Y=b | X=A) P(X=A) $$
+
+leading to
+$$ P(Y=b) = \sum_{i\in\{A,C,G,T\}} P(Y=b|X=i)P(X=i)$$
+
+The probabilities \( P(Y=b|X=i) \) correspond to a column in the
+transition probability matrix. If each of the initial events
+\( P(X=i) \) are equally probable, \( P(X=i)=1/4 \), and \( P(Y=b) \)
+is then the sum of the probabilities in the column corresponding to
+\( b \), divided by 4. We can now compute \( P(Y=b) \) for
+\( b \) as A, C, G, and T:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">transition_into_bases</span>(markov_chain):
+    <span style="color: #008000; font-weight: bold">return</span> {to_base: <span style="color: #008000">sum</span>(markov_chain[from_base][to_base]
+                         <span style="color: #008000; font-weight: bold">for</span> from_base <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #BA2121">&#39;ATGC&#39;</span>)<span style="color: #666666">/4.0</span>
+            <span style="color: #008000; font-weight: bold">for</span> to_base <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #BA2121">&#39;ATGC&#39;</span>}
+
+<span style="color: #008000; font-weight: bold">print</span> transition_into_bases(mc)
+</pre></div>
+<p>
+The \( P(X=b) \) probabilities corresponding to the example run above reads
+<p>
+
+<!-- code=text (!bc dat) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">{&#39;A&#39;: 0.26, &#39;C&#39;: 0.25, &#39;T&#39;: 0.30, &#39;G&#39;: 0.19}
+</pre></div>
+<p>
+Transition into T (\( P(Y=T) \)) has greatest probability (0.3) and this is also
+confirmed by the greatest frequency (0.41).
+
+<p>
+The various functions performing mutations are located
+in the file <a href="http://tinyurl.com/pwyasaa/random/mutate.py" target="_self"><tt>mutate.py</tt></a>.
+
+<h2 id="sec:random:china">Example: Policies for limiting population growth</h2>
+
+<p>
+China has for many years officially allowed only one child per couple.
+However, the success of the policy has been somewhat limited. One challenge
+is the current
+over-representation of males in the population (families have favored
+sons to live up).
+An alternative policy is to allow each couple to continue getting
+children until they get a son. We can simulate both policies and
+see how a population will develop under the <em>one child</em> and the
+<em>one son</em> policies.  Since we expect to work with a large population
+over several generations, we aim at vectorized code at once.
+
+<p>
+Suppose we have a collection of <code>n</code> individuals, called <code>parents</code>,
+consisting of males and females randomly drawn such that a certain portion
+(<code>male_portion</code>) constitutes males. The <code>parents</code> array holds
+integer values, 1 for male and 2 for females. We can introduce constants,
+<code>MALE=1</code> and <code>FEMALE=2</code>, to make the code easier to read.
+Our task is to see how the <code>parents</code> array develop from one
+generation to the next under the two policies. Let us first show how to
+draw the random integer array <code>parents</code> where there is a probability
+<code>male_portion</code> of getting the value <code>MALE</code>:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
+r <span style="color: #666666">=</span> np<span style="color: #666666">.</span>random<span style="color: #666666">.</span>random(n)
+parents <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros(n, <span style="color: #008000">int</span>)
+MALE <span style="color: #666666">=</span> <span style="color: #666666">1</span>; FEMALE <span style="color: #666666">=</span> <span style="color: #666666">2</span>
+parents[r <span style="color: #666666">&lt;</span>  male_portion] <span style="color: #666666">=</span> MALE
+parents[r <span style="color: #666666">&gt;=</span> male_portion] <span style="color: #666666">=</span> FEMALE
+</pre></div>
+<p>
+The number of potential couples is
+the minimum of males and females.
+However, only a fraction (<code>fertility</code>)
+of the couples will actually get a child.
+Under the perfect one child policy, these
+couples can have one child each:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">males <span style="color: #666666">=</span> <span style="color: #008000">len</span>(parents[parents<span style="color: #666666">==</span>MALE])
+females <span style="color: #666666">=</span> <span style="color: #008000">len</span>(parents) <span style="color: #666666">-</span> males
+couples <span style="color: #666666">=</span> <span style="color: #008000">min</span>(males, females)
+n <span style="color: #666666">=</span> <span style="color: #008000">int</span>(fertility<span style="color: #666666">*</span>couples)  <span style="color: #408080; font-style: italic"># couples that get a child</span>
+
+<span style="color: #408080; font-style: italic"># The next generation, one child per couple</span>
+r <span style="color: #666666">=</span> random<span style="color: #666666">.</span>random(n)
+children <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros(n, <span style="color: #008000">int</span>)
+children[r <span style="color: #666666">&lt;</span>  male_portion] <span style="color: #666666">=</span> MALE
+children[r <span style="color: #666666">&gt;=</span> male_portion] <span style="color: #666666">=</span> FEMALE
+</pre></div>
+<p>
+The code for generating a new population will be needed in every generation.
+Therefore, it is natural to collect the last statements in
+a separate function such that we can repeat the statements when needed.
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">get_children</span>(n, male_portion, fertility):
+    n <span style="color: #666666">=</span> <span style="color: #008000">int</span>(fertility<span style="color: #666666">*</span>n)
+    r <span style="color: #666666">=</span> random<span style="color: #666666">.</span>random(n)
+    children <span style="color: #666666">=</span> zeros(n, <span style="color: #008000">int</span>)
+    children[r <span style="color: #666666">&lt;</span>  male_portion] <span style="color: #666666">=</span> MALE
+    children[r <span style="color: #666666">&gt;=</span> male_portion] <span style="color: #666666">=</span> FEMALE
+    <span style="color: #008000; font-weight: bold">return</span> children
+</pre></div>
+<p>
+Under the one son policy, the families can continue getting a new
+child until they get the first son:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #408080; font-style: italic"># First try</span>
+children <span style="color: #666666">=</span> get_children(couples, male_portion, fertility)
+
+<span style="color: #408080; font-style: italic"># Continue with getting a new child for each daughter</span>
+daughters <span style="color: #666666">=</span> children[children <span style="color: #666666">==</span> FEMALE]
+<span style="color: #008000; font-weight: bold">while</span> <span style="color: #008000">len</span>(daughters) <span style="color: #666666">&gt;</span> <span style="color: #666666">0</span>:
+    new_children <span style="color: #666666">=</span> get_children(<span style="color: #008000">len</span>(daughters),
+                                male_portion, fertility)
+    children <span style="color: #666666">=</span> np<span style="color: #666666">.</span>concatenate((children, new_children))
+    daughters <span style="color: #666666">=</span> new_children[new_children <span style="color: #666666">==</span> FEMALE]
+</pre></div>
+<p>
+The program <a href="http://tinyurl.com/pwyasaa/random/birth_policy.py" target="_self"><tt>birth_policy.py</tt></a>
+organizes the code segments
+above for the two policies into a function <code>advance_generation</code>,
+which we can call repeatedly to see the evolution of the population.
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">advance_generation</span>(parents, policy<span style="color: #666666">=</span><span style="color: #BA2121">&#39;one child&#39;</span>,
+                       male_portion<span style="color: #666666">=0.5</span>, fertility<span style="color: #666666">=1.0</span>):
+    males <span style="color: #666666">=</span> <span style="color: #008000">len</span>(parents[parents<span style="color: #666666">==</span>MALE])
+    females <span style="color: #666666">=</span> <span style="color: #008000">len</span>(parents) <span style="color: #666666">-</span> males
+    couples <span style="color: #666666">=</span> <span style="color: #008000">min</span>(males, females)
+
+    <span style="color: #008000; font-weight: bold">if</span> policy <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;one child&#39;</span>:
+        children <span style="color: #666666">=</span> get_children(couples, male_portion, fertility)
+    <span style="color: #008000; font-weight: bold">elif</span> policy <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;one son&#39;</span>:
+        <span style="color: #408080; font-style: italic"># First try at getting a child</span>
+        children <span style="color: #666666">=</span> get_children(couples, male_portion, fertility)
+        <span style="color: #408080; font-style: italic"># Continue with getting a new child for each daughter</span>
+        daughters <span style="color: #666666">=</span> children[children <span style="color: #666666">==</span> FEMALE]
+        <span style="color: #008000; font-weight: bold">while</span> <span style="color: #008000">len</span>(daughters) <span style="color: #666666">&gt;</span> <span style="color: #666666">0</span>:
+            new_children <span style="color: #666666">=</span> get_children(<span style="color: #008000">len</span>(daughters),
+                                        male_portion, fertility)
+            children <span style="color: #666666">=</span> np<span style="color: #666666">.</span>concatenate((children, new_children))
+            daughters <span style="color: #666666">=</span> new_children[new_children <span style="color: #666666">==</span> FEMALE]
+    <span style="color: #008000; font-weight: bold">return</span> children
+</pre></div>
+<p>
+The simulation is then a matter of repeated calls to
+<code>advance_generation</code>:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">N <span style="color: #666666">=</span> <span style="color: #666666">1000000</span>              <span style="color: #408080; font-style: italic"># population size</span>
+male_portion <span style="color: #666666">=</span> <span style="color: #666666">0.51</span>
+fertility <span style="color: #666666">=</span> <span style="color: #666666">0.92</span>
+<span style="color: #408080; font-style: italic"># Start with a &quot;perfect&quot; generation of parents</span>
+parents <span style="color: #666666">=</span> get_children(N, male_portion<span style="color: #666666">=0.5</span>, fertility<span style="color: #666666">=1.0</span>)
+<span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;one son policy, start: </span><span style="color: #BB6688; font-weight: bold">%d</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> <span style="color: #008000">len</span>(parents)
+<span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">10</span>):
+    parents <span style="color: #666666">=</span> advance_generation(parents, <span style="color: #BA2121">&#39;one son&#39;</span>,
+                                 male_portion, fertility)
+    <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;</span><span style="color: #BB6688; font-weight: bold">%3d</span><span style="color: #BA2121">: </span><span style="color: #BB6688; font-weight: bold">%d</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> (i<span style="color: #666666">+1</span>, <span style="color: #008000">len</span>(parents))
+</pre></div>
+<p>
+Under ideal conditions with unit <code>fertility</code> and a <code>male_portion</code>
+of 0.5, the program predicts that the one child policy halves
+the population from one generation to the next, while the one son
+policy, where we expect each couple to get one daughter and one son on
+average, keeps the population constant. Increasing
+<code>male_portion</code> slightly and decreasing <code>fertility</code>, which
+corresponds more to reality, will in both cases lead to a reduction of
+the population. You can try the program out with various values of
+these input parameters.
+
+<p>
+An obvious extension is to incorporate the
+effect that a portion of the population does not follow the policy and
+get \( c \) children on average. The program <code>birth_policy.py</code>
+can account for the effect,
+which is quite dramatic: if a fraction 0.01 of the population does not follow
+the one son policy and get 4 children on average, the population
+grows with a factor 1.5 over 10 generations (<code>male_portion</code> and
+<code>fertility</code> kept at the ideal values 0.5 and 1, respectively).
+
+<p>
+Normally, simple models like
+difference or differential equations
+are used to model population growth. However, these
+models track the number of individuals through time with a very simple
+growth factor from one generation to the next. The model above
+tracks each individual in the population and applies rules involving
+random actions to each individual. Such a detailed and much more
+computer-time consuming model can be used to see the effect of
+different policies. Using the results of this detailed model, we can
+(sometimes) estimate growth factors for simpler models so that these
+mimic the overall effect on the population size.
+<a href="._random-bootstrap008.html#sec:random:ex29">Exercise 23: Estimate growth in a simulation model</a> asks you to investigate if a
+certain realization of the
+one son policy leads to simple exponential growth.
+
+<p>
+<p>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pager">
+  <li class="previous">
+    <a href="._random-bootstrap002.html">&larr; Prev</a>
+  </li>
+  <li class="next">
+    <a href="._random-bootstrap004.html">Next &rarr;</a>
+  </li>
+</ul>
+<!-- ------------------- end of main content --------------- -->
+
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap footer
+<footer>
+<a href="http://..."><img width="250" align=right src="http://..."></a>
+</footer>
+-->
+
+
+</body>
+</html>
+    
+
