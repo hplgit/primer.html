@@ -7,13 +7,13 @@ Automatically generated HTML file from DocOnce source
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
 <meta name="description" content="Array computing and curve plotting">
-<meta name="keywords" content="vectors,vector computing,scalar (math quantity),heterogeneous lists,Numerical Python,NumPy,array (datatype),array computing,vectorization,array slicing,subarrays,allocate,vectorization,scalar code,curve plotting,plotting,making graphs,backend (Easyviz),backend (Easyviz),remove files (in Python),delete files (in Python),boolean indexing,boolean indexing,in-place array arithmetics,check an object's type,shape (of an array),array shape,matrix,shape (of an array),array shape,least squares approximation,Trapezoidal rule for integration,Lagrange's interpolation formula,interpolation,Midpoint rule for integration,Trapezoidal rule for integration">
+<meta name="keywords" content="vectors,vector computing,scalar (math quantity),heterogeneous lists,Numerical Python,NumPy,array (datatype),array computing,vectorization,array slicing,subarrays,allocate,vectorization,scalar code,curve plotting,plotting,making graphs,backend (Easyviz),backend (Easyviz),remove files (in Python),delete files (in Python),boolean indexing,boolean indexing,in-place array arithmetics,check an object's type,shape (of an array),array shape,matrix,shape (of an array),array shape,eigenvalues,eigenvectors,inverse,determinant,rank of a matrix,least squares approximation,Trapezoidal rule for integration,Lagrange's interpolation formula,interpolation,Midpoint rule for integration,Trapezoidal rule for integration">
 
 <title>Array computing and curve plotting</title>
 
-<!-- Bootstrap style: bootstrap_bluegray -->
+<!-- Bootstrap style: bootstrap_simula -->
 <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
-<link href="https://raw.github.com/hplgit/doconce/master/bundled/html_styles/style_bootstrap/css/bootstrap_bluegray.css" rel="stylesheet">
+<link href="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_styles/style_bootstrap/css/bootstrap_simula.css" rel="stylesheet">
 <!-- not necessary
 <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 -->
@@ -21,6 +21,24 @@ Automatically generated HTML file from DocOnce source
 <style type="text/css">
 /* Let inline verbatim have the same color as the surroundings */
 code { color: inherit; background-color: transparent; }
+
+/* Add scrollbar to dropdown menus in bootstrap navigation bar */
+.dropdown-menu {
+   height: auto;
+   max-height: 400px;
+   overflow-x: hidden;
+}
+
+/* Adds an invisible element before each target to offset for the navigation
+   bar */
+.anchor::before {
+  content:"";
+  display:block;
+  height:50px; /* fixed header height*/
+  margin:-50px 0 0; /* negative fixed header height */
+}
+
+body { font-size:20px;line-height:1.5; }
 </style>
 
 
@@ -28,342 +46,470 @@ code { color: inherit; background-color: transparent; }
 
 <!-- tocinfo
 {'highest level': 1,
- 'sections': [(' Vectors ', 1, None, '___sec0'),
-              (' The vector concept ', 2, None, '___sec1'),
-              (' Mathematical operations on vectors ',
+ 'sections': [('Table of contents',
+               1,
+               'table_of_contents',
+               'table_of_contents'),
+              ('Vectors', 1, None, '___sec0'),
+              ('The vector concept', 2, None, '___sec1'),
+              ('Mathematical operations on vectors',
                2,
                'sec:plot:vectors',
                'sec:plot:vectors'),
-              (' Vector arithmetics and vector functions ',
+              ('Vector arithmetics and vector functions',
                2,
                'sec:plot:arraycomp',
                'sec:plot:arraycomp'),
-              (' Arrays in Python programs ', 1, None, '___sec4'),
-              (' Using lists for collecting function data ',
+              ('Arrays in Python programs', 1, None, '___sec4'),
+              ('Using lists for collecting function data',
                2,
                'sec:plot:listdata',
                'sec:plot:listdata'),
-              (' Basics of numerical Python arrays ',
+              ('Basics of numerical Python arrays',
                2,
                'sec:plot:array:basics',
                'sec:plot:array:basics'),
-              (' Computing coordinates and function values ',
+              ('Computing coordinates and function values',
                2,
                None,
                '___sec7'),
-              (' Vectorization ',
+              ('Vectorization',
                2,
                'sec:plot:vectorization',
                'sec:plot:vectorization'),
-              (' Curve plotting ',
+              ('Curve plotting',
                1,
                'sec:plot:curveplots',
                'sec:plot:curveplots'),
-              (' Matplotlib; pylab ', 2, 'sec:plot:pylab', 'sec:plot:pylab'),
-              (' A basic plot ', 3, None, '___sec11'),
-              (' Decorating the plot ', 3, None, '___sec12'),
-              (' Plotting multiple curves ', 3, None, '___sec13'),
-              (' Placing several plots in one figure ', 3, None, '___sec14'),
-              (' Matplotlib; pyplot ',
+              ('MATLAB-style plotting with Matplotlib',
+               2,
+               'sec:plot:pylab',
+               'sec:plot:pylab'),
+              ('A basic plot', 3, None, '___sec11'),
+              ('Decorating the plot', 3, None, '___sec12'),
+              ('Plotting multiple curves', 3, None, '___sec13'),
+              ('Placing several plots in one figure', 3, None, '___sec14'),
+              ('Matplotlib; pyplot prefix',
                2,
                'sec:plot:pyplot',
                'sec:plot:pyplot'),
-              (' SciTools and Easyviz ',
+              ('SciTools and Easyviz',
                2,
                'sec:plot:SciTools',
                'sec:plot:SciTools'),
-              (' Importing SciTools and Easyviz ', 3, None, '___sec17'),
-              (' A basic plot ', 3, None, '___sec18'),
-              (' Decorating the plot ', 3, None, '___sec19'),
-              (' Plotting multiple curves ', 3, None, '___sec20'),
-              (' Changing backend ', 3, None, '___sec21'),
-              (' Placing several plots in one figure ', 3, None, '___sec22'),
-              (' Making animations ', 2, 'easyviz:movie', 'easyviz:movie'),
-              (' Example ', 3, None, '___sec24'),
-              (' Animation in Easyviz ', 3, None, '___sec25'),
-              (' Basic animation in Matplotlib ', 3, None, '___sec26'),
-              (' Using FuncAnimation in Matplotlib ', 3, None, '___sec27'),
-              (' Making videos ', 2, 'sec:plot:video', 'sec:plot:video'),
-              (' Animated GIF file ', 3, None, '___sec29'),
-              (' MP4, Ogg, WebM, and Flash videos ', 3, None, '___sec30'),
-              (' Curve plots in pure text ', 2, None, '___sec31'),
-              (' Plotting difficulties ',
+              ('Importing SciTools and Easyviz', 3, None, '___sec17'),
+              ('A basic plot', 3, None, '___sec18'),
+              ('Decorating the plot', 3, None, '___sec19'),
+              ('Plotting multiple curves', 3, None, '___sec20'),
+              ('Changing backend', 3, None, '___sec21'),
+              ('Placing several plots in one figure', 3, None, '___sec22'),
+              ('Other plotting alternatives', 3, None, '___sec23'),
+              ('Making animations', 2, 'easyviz:movie', 'easyviz:movie'),
+              ('Example', 3, None, '___sec25'),
+              ('Animation in Easyviz', 3, None, '___sec26'),
+              ('Basic animation in Matplotlib', 3, None, '___sec27'),
+              ('Using FuncAnimation in Matplotlib', 3, None, '___sec28'),
+              ('Making videos', 2, 'sec:plot:video', 'sec:plot:video'),
+              ('Animated GIF file', 3, None, '___sec30'),
+              ('MP4, Ogg, WebM, and Flash videos', 3, None, '___sec31'),
+              ('Curve plots in pure text', 2, None, '___sec32'),
+              ('Plotting difficulties',
                1,
                'sec:plot:difficulties',
                'sec:plot:difficulties'),
-              (' Piecewisely defined functions ',
+              ('Piecewisely defined functions',
                2,
                'sec:plot:pwisefunc',
                'sec:plot:pwisefunc'),
-              (' Example: The Heaviside function ', 3, None, '___sec34'),
-              (' Example: A hat function ', 3, None, '___sec35'),
-              (' Rapidly varying functions ',
+              ('Example: The Heaviside function', 3, None, '___sec35'),
+              ('Example: A hat function', 3, None, '___sec36'),
+              ('Rapidly varying functions',
                2,
                'sec:plot:sin1x',
                'sec:plot:sin1x'),
-              (' More advanced vectorization of functions ',
+              ('More advanced vectorization of functions',
                1,
                'sec:plot:if:vectorize',
                'sec:plot:if:vectorize'),
-              (' Vectorization of StringFunction objects ',
+              ('Vectorization of StringFunction objects',
                2,
                'sec:plot:StringFunction:vectorize',
                'sec:plot:StringFunction:vectorize'),
-              (' Vectorization of the Heaviside function ',
+              ('Vectorization of the Heaviside function',
                2,
                'sec:vec:Heaviside',
                'sec:vec:Heaviside'),
-              (' Loop ', 3, None, '___sec40'),
-              (' Automatic vectorization ', 3, None, '___sec41'),
-              (' Mixing boolean and floating-point calculations ',
+              ('Loop', 3, None, '___sec41'),
+              ('Automatic vectorization', 3, None, '___sec42'),
+              ('Mixing boolean and floating-point calculations',
                3,
                None,
-               '___sec42'),
-              (' Manual vectorization ', 3, None, '___sec43'),
-              (' Vectorization of a hat function ',
+               '___sec43'),
+              ('Manual vectorization', 3, None, '___sec44'),
+              ('Vectorization of a hat function',
                2,
                'sec:vec:hatfunc',
                'sec:vec:hatfunc'),
-              (' More on numerical Python arrays ',
+              ('More on numerical Python arrays',
                1,
                'sec:plot:numpy:more',
                'sec:plot:numpy:more'),
-              (' Copying arrays ', 2, None, '___sec46'),
-              (' In-place arithmetics ', 2, None, '___sec47'),
-              (' Allocating arrays ', 2, None, '___sec48'),
-              (' Generalized indexing ',
+              ('Copying arrays', 2, None, '___sec47'),
+              ('In-place arithmetics',
+               2,
+               'sec:plot:numpy:inplace',
+               'sec:plot:numpy:inplace'),
+              ('Allocating arrays', 2, None, '___sec49'),
+              ('Generalized indexing',
                2,
                'sec:plot:generalized:index',
                'sec:plot:generalized:index'),
-              (' Testing for the array type ', 2, None, '___sec50'),
-              (' Example: Vectorizing a constant function ',
+              ('Testing for the array type', 2, None, '___sec51'),
+              ('Example: Vectorizing a constant function',
                3,
                None,
-               '___sec51'),
-              (' Compact syntax for array generation ', 2, None, '___sec52'),
-              (' Shape manipulation ', 2, None, '___sec53'),
-              (' Higher-dimensional arrays ',
+               '___sec52'),
+              ('Compact syntax for array generation', 2, None, '___sec53'),
+              ('Shape manipulation', 2, None, '___sec54'),
+              ('High-performance computing with arrays',
+               1,
+               'sec:hpc',
+               'sec:hpc'),
+              ('Example: `axpy`', 3, None, '___sec56'),
+              ('Scalar implementation',
+               2,
+               'sec:hpc:scalar',
+               'sec:hpc:scalar'),
+              ('Vectorized implementation', 2, 'sec:hpc:vec', 'sec:hpc:vec'),
+              ('Memory-saving implementation',
+               2,
+               'sec:hpc:vec:inplace',
+               'sec:hpc:vec:inplace'),
+              ('Analysis of memory usage',
+               2,
+               'sec:hpc:vec:memory_profiler',
+               'sec:hpc:vec:memory_profiler'),
+              ('Analysis of the CPU time',
+               2,
+               'sec:hpc:vec:line_profiler',
+               'sec:hpc:vec:line_profiler'),
+              ('Higher-dimensional arrays',
                1,
                'sec:plot:2Darrays',
                'sec:plot:2Darrays'),
-              (' Matrices and arrays ', 2, None, '___sec55'),
-              (' Two-dimensional numerical Python arrays ',
+              ('Matrices and arrays', 2, None, '___sec63'),
+              ('Two-dimensional numerical Python arrays',
                2,
                'sec:plot:2D:arrays',
                'sec:plot:2D:arrays'),
-              (' Array computing ',
+              ('Array computing',
                2,
                'sec:plot:array2comp',
                'sec:plot:array2comp'),
-              (' Remark ', 3, None, '___sec58'),
-              (' Two-dimensional arrays and functions of two variables ',
-               2,
-               None,
-               '___sec59'),
-              (' Matrix objects ',
+              ('Remark', 3, None, '___sec66'),
+              ('Matrix objects',
                2,
                'sec:plot:numpy:matrix',
                'sec:plot:numpy:matrix'),
-              (' Summary ', 1, None, '___sec61'),
-              (' Chapter topics ', 2, None, '___sec62'),
-              (' Array computing ', 3, None, '___sec63'),
-              (' Plotting curves ', 3, None, '___sec64'),
-              (' Making movies ', 3, None, '___sec65'),
-              (' Terminology ', 3, None, '___sec66'),
-              (' Example: Animating a function ',
+              ('Some common linear algebra operations', 1, None, '___sec68'),
+              ('Inverse, determinant, and eigenvalues', 2, None, '___sec69'),
+              ('Products', 2, None, '___sec70'),
+              ('Norms', 2, None, '___sec71'),
+              ('Sum and extreme values', 2, None, '___sec72'),
+              ('Indexing', 2, None, '___sec73'),
+              ('Transpose and upper/lower triangular parts',
+               2,
+               None,
+               '___sec74'),
+              ('Solving linear systems', 2, None, '___sec75'),
+              ('Matrix row and column operations', 2, None, '___sec76'),
+              ('Computing the rank of a matrix', 2, None, '___sec77'),
+              ('Symbolic linear algebra', 2, None, '___sec78'),
+              ('Plotting of scalar and vector fields',
+               1,
+               'plot:surf',
+               'plot:surf'),
+              ('Installation', 2, 'plot:surf:install', 'plot:surf:install'),
+              ('Surface plots',
+               2,
+               'plot:surf:mesh_surf',
+               'plot:surf:mesh_surf'),
+              ('Grid for 2D scalar fields', 3, None, '___sec82'),
+              ('Parameterized curve',
+               2,
+               'plot:surf:3Dcurve',
+               'plot:surf:3Dcurve'),
+              ('Contour lines',
+               2,
+               'plot:surf:contours',
+               'plot:surf:contours'),
+              ('The gradient vector field',
+               2,
+               'plot:surf:gradient',
+               'plot:surf:gradient'),
+              ('Matplotlib', 1, None, '___sec86'),
+              ('Surface plots',
+               2,
+               'matplotlibsurfaceplots',
+               'matplotlibsurfaceplots'),
+              ('Contour plots',
+               2,
+               'matplotlibcontourplots',
+               'matplotlibcontourplots'),
+              ('Vector field plots',
+               2,
+               'plot:surf:mpl:quiver',
+               'plot:surf:mpl:quiver'),
+              ('Mayavi', 1, None, '___sec90'),
+              ('Surface plots', 2, None, '___sec91'),
+              ('Subplots', 3, None, '___sec92'),
+              ('Contour plots', 2, None, '___sec93'),
+              ('Vector field plots',
+               2,
+               'plot:surf:mayavi:quiver',
+               'plot:surf:mayavi:quiver'),
+              ('A 3D scalar field and its gradient field',
+               2,
+               None,
+               '___sec95'),
+              ('Animations', 2, None, '___sec96'),
+              ('Summary', 1, None, '___sec97'),
+              ('Chapter topics', 2, None, '___sec98'),
+              ('Array computing', 3, None, '___sec99'),
+              ('Plotting curves', 3, None, '___sec100'),
+              ('Making movies', 3, None, '___sec101'),
+              ('Terminology', 3, None, '___sec102'),
+              ('Example: Animating a function',
                2,
                'sec:plot:summarizing',
                'sec:plot:summarizing'),
-              (' Problem ', 3, None, '___sec68'),
-              (' Solution ', 3, None, '___sec69'),
-              (' Scaling ', 3, None, '___sec70'),
-              (' Exercises ', 1, 'sec:plot:exer', 'sec:plot:exer'),
-              (' Exercise 1: Fill lists with function values ',
+              ('Problem', 3, None, '___sec104'),
+              ('Solution', 3, None, '___sec105'),
+              ('Scaling', 3, None, '___sec106'),
+              ('Exercises', 1, 'sec:plot:exer', 'sec:plot:exer'),
+              ('Exercise 1: Fill lists with function values',
                2,
                'sec:plot:ex1',
                'sec:plot:ex1'),
-              (' Exercise 2: Fill arrays; loop version ',
+              ('Exercise 2: Fill arrays; loop version',
                2,
                'sec:plot:ex2',
                'sec:plot:ex2'),
-              (' Exercise 3: Fill arrays; vectorized version ',
+              ('Exercise 3: Fill arrays; vectorized version',
                2,
                'sec:plot:ex2b',
                'sec:plot:ex2b'),
-              (' Exercise 4: Plot a function ',
+              ('Exercise 4: Plot a function',
                2,
                'sec:plot:ex2c',
                'sec:plot:ex2c'),
-              (' Exercise 5: Apply a function to a vector ',
+              ('Exercise 5: Apply a function to a vector',
                2,
                'sec:plot:math:ex1',
                'sec:plot:math:ex1'),
-              (' Exercise 6: Simulate by hand a vectorized expression ',
+              ('Exercise 6: Simulate by hand a vectorized expression',
                2,
                'sec:plot:ex3',
                'sec:plot:ex3'),
-              (' Exercise 7: Demonstrate array slicing ',
+              ('Exercise 7: Demonstrate array slicing',
                2,
                'sec:plot:ex15d',
                'sec:plot:ex15d'),
-              (' Exercise 8: Plot a formula ',
+              ('Exercise 8: Replace list operations by array computing',
+               2,
+               'sec:plot:ex33',
+               'sec:plot:ex33'),
+              ('Exercise 9: Plot a formula',
                2,
                'sec:plot:ex15',
                'sec:plot:ex15'),
-              (' Exercise 9: Plot a formula for several parameters ',
+              ('Exercise 10: Plot a formula for several parameters',
                2,
                'sec:plot:ex15b',
                'sec:plot:ex15b'),
-              (' Exercise 10: Specify the extent of the axes in a plot ',
+              ('Exercise 11: Specify the extent of the axes in a plot',
                2,
                'sec:plot:ex15ba',
                'sec:plot:ex15ba'),
-              (' Exercise 11: Plot exact and inexact Fahrenheit-Celsius conversion formulas ',
+              ('Exercise 12: Plot exact and inexact Fahrenheit-Celsius conversion formulas',
                2,
                'sec:plot:ex15c',
                'sec:plot:ex15c'),
-              (' Exercise 12: Plot the trajectory of a ball ',
+              ('Exercise 13: Plot the trajectory of a ball',
                2,
                'sec:plot:ex5',
                'sec:plot:ex5'),
-              (' Exercise 13: Plot data in a two-column file ',
+              ('Exercise 14: Plot data in a two-column file',
                2,
                'sec:files:ex12',
                'sec:files:ex12'),
-              (' Remarks ', 3, None, '___sec85'),
-              (' Exercise 14: Plot data from a file ',
+              ('Remarks', 3, None, '___sec122'),
+              ('Exercise 15: Write function data to file',
+               2,
+               'sec:files:ex12e',
+               'sec:files:ex12e'),
+              ('Exercise 16: Plot data from a file',
                2,
                'sec:files:ex12c',
                'sec:files:ex12c'),
-              (' Exercise 15: Fit a polynomial to data points ',
+              ('Exercise 17: Write table to file',
+               2,
+               'sec:files:exer:write_table',
+               'sec:files:exer:write_table'),
+              ('Exercise 18: Fit a polynomial to data points',
                2,
                'sec:files:ex12c2',
                'sec:files:ex12c2'),
-              (' Exercise 16: Fit a polynomial to experimental data ',
+              ('Exercise 19: Fit a polynomial to experimental data',
                2,
                'sec:files:ex19',
                'sec:files:ex19'),
-              (' Exercise 17: Read acceleration data and find velocities ',
+              ('Exercise 20: Read acceleration data and find velocities',
                2,
                'sec:files:ex22',
                'sec:files:ex22'),
-              (' Exercise 18: Read acceleration data and plot velocities ',
+              ('Exercise 21: Read acceleration data and plot velocities',
                2,
                'sec:files:ex23',
                'sec:files:ex23'),
-              (" Exercise 19: Plot a trip's path and velocity from GPS coordinates ",
+              ("Exercise 22: Plot a trip's path and velocity from GPS coordinates",
                2,
                'sec:files:ex24',
                'sec:files:ex24'),
-              (' Exercise 20: Vectorize the Midpoint rule for integration ',
+              ('Exercise 23: Vectorize the Midpoint rule for integration',
                2,
                'sec:class:exer:sum',
                'sec:class:exer:sum'),
-              (' Remarks ', 3, None, '___sec93'),
-              (" Exercise 21: Implement Lagrange's interpolation formula ",
+              ('Remarks', 3, None, '___sec132'),
+              ('Exercise 24: Vectorize a function for computing the area of a polygon',
+               2,
+               'sec:plot:exer:area:polygon:vec',
+               'sec:plot:exer:area:polygon:vec'),
+              ("Exercise 25: Implement Lagrange's interpolation formula",
                2,
                'sec:class:ex27a',
                'sec:class:ex27a'),
-              (" Exercise 22: Plot Lagrange's interpolating polynomial ",
+              ("Exercise 26: Plot Lagrange's interpolating polynomial",
                2,
                'sec:class:ex27b',
                'sec:class:ex27b'),
-              (" Exercise 23: Investigate the behavior of Lagrange's interpolating polynomials ",
+              ("Exercise 27: Investigate the behavior of Lagrange's interpolating polynomials",
                2,
                'sec:class:ex27c',
                'sec:class:ex27c'),
-              (' Remarks ', 3, None, '___sec97'),
-              (' Exercise 24: Plot a wave packet ',
+              ('Remarks', 3, None, '___sec137'),
+              ('Exercise 28: Plot a wave packet',
                2,
                'sec:plot:ex5d',
                'sec:plot:ex5d'),
-              (' Exercise 25: Judge a plot ',
+              ('Exercise 29: Judge a plot',
                2,
                'sec:plot:ex7',
                'sec:plot:ex7'),
-              (' Exercise 26: Plot the viscosity of water ',
+              ('Exercise 30: Plot the viscosity of water',
                2,
                'sec:plot:ex13c',
                'sec:plot:ex13c'),
-              (' Exercise 27: Explore a complicated function graphically ',
+              ('Exercise 31: Explore a complicated function graphically',
                2,
                'sec:plot:ex16',
                'sec:plot:ex16'),
-              (' Exercise 28: Plot Taylor polynomial approximations to $\\sin x$ ',
+              ('Exercise 32: Plot Taylor polynomial approximations to $\\sin x$',
                2,
                'sec:plot:ex5b',
                'sec:plot:ex5b'),
-              (' Exercise 29: Animate a wave packet ',
+              ('Exercise 33: Animate a wave packet',
                2,
                'sec:plot:ex5e',
                'sec:plot:ex5e'),
-              (' Exercise 30: Animate two-scale temperature variations ',
+              ('Exercise 34: Animate a smoothed Heaviside function',
+               2,
+               'sec:plot:ex32',
+               'sec:plot:ex32'),
+              ('Exercise 35: Animate two-scale temperature variations',
                2,
                'sec:plot:ex18',
                'sec:plot:ex18'),
-              (' Remarks ', 3, None, '___sec105'),
-              (' Exercise 31: Use non-uniformly distributed coordinates for visualization ',
+              ('Remarks', 3, None, '___sec146'),
+              ('Exercise 36: Use non-uniformly distributed coordinates for visualization',
                2,
                'sec:plot:ex19',
                'sec:plot:ex19'),
-              (" Exercise 32: Animate a planet's orbit ",
+              ('Exercise 37: Animate a sequence of approximations to $\\pi$',
+               2,
+               'sec:plot:ex31',
+               'sec:plot:ex31'),
+              ("Exercise 38: Animate a planet's orbit",
                2,
                'sec:plot:ex5g',
                'sec:plot:ex5g'),
-              (' Exercise 33: Animate the evolution of Taylor polynomials ',
+              ('Exercise 39: Animate the evolution of Taylor polynomials',
                2,
                'sec:plot:ex17',
                'sec:plot:ex17'),
-              (' Exercise 34: Plot the velocity profile for pipeflow ',
+              ('Exercise 40: Plot the velocity profile for pipeflow',
                2,
                'sec:plot:ex4',
                'sec:plot:ex4'),
-              (' Exercise 35: Plot sum-of-sines approximations to a function ',
+              ('Exercise 41: Plot sum-of-sines approximations to a function',
                2,
                'sec:plot:ex8',
                'sec:plot:ex8'),
-              (' Exercise 36: Animate the evolution of a sum-of-sine approximation to a function ',
+              ('Exercise 42: Animate the evolution of a sum-of-sine approximation to a function',
                2,
                'sec:plot:ex8m',
                'sec:plot:ex8m'),
-              (' Exercise 37: Plot functions from the command line ',
+              ('Exercise 43: Plot functions from the command line',
                2,
                'sec:plot:ex14',
                'sec:plot:ex14'),
-              (' Exercise 38: Improve command-line input ',
+              ('Exercise 44: Improve command-line input',
                2,
                'sec:plot:ex14b',
                'sec:plot:ex14b'),
-              (' Exercise 39: Demonstrate energy concepts from physics ',
+              ('Exercise 45: Demonstrate energy concepts from physics',
                2,
                'sec:plot:ex20',
                'sec:plot:ex20'),
-              (' Exercise 40: Plot a w-like function ',
+              ('Exercise 46: Plot a w-like function',
                2,
                'sec:plot:math:ex9',
                'sec:plot:math:ex9'),
-              (' Exercise 41: Visualize approximations in the Midpoint integration rule ',
+              ('Exercise 47: Plot a piecewise constant function',
+               2,
+               'sec:basic:exH4plot',
+               'sec:basic:exH4plot'),
+              ('Exercise 48: Vectorize a piecewise constant function',
+               2,
+               'sec:basic:exH4vecz1',
+               'sec:basic:exH4vecz1'),
+              ('Remarks', 3, None, '___sec160'),
+              ('Exercise 49: Visualize approximations in the Midpoint integration rule',
                2,
                'sec:plot:ex:vizmidpoint',
                'sec:plot:ex:vizmidpoint'),
-              (' Exercise 42: Visualize approximations in the Trapezoidal integration rule ',
+              ('Exercise 50: Visualize approximations in the Trapezoidal integration rule',
                2,
                'sec:plot:ex:viztrapezoidal',
                'sec:plot:ex:viztrapezoidal'),
-              (' Exercise 43: Experience overflow in a function ',
+              ('Exercise 51: Experience overflow in a function',
                2,
                'sec:plot:ex13',
                'sec:plot:ex13'),
-              (' Remarks ', 3, None, '___sec119'),
-              (' Exercise 44: Apply a function to a rank 2 array ',
+              ('Remarks', 3, None, '___sec164'),
+              ('Exercise 52: Apply a function to a rank 2 array',
                2,
                'sec:plot:math:ex2',
                'sec:plot:math:ex2'),
-              (' Exercise 45: Explain why array computations fail ',
+              ('Exercise 53: Explain why array computations fail',
                2,
                'sec:plot:ex11',
                'sec:plot:ex11'),
-              (' References ', 1, None, '___sec122')]}
+              ('Exercise 54: Verify linear algebra results',
+               2,
+               'plot:linalg:exer:verify',
+               'plot:linalg:exer:verify'),
+              ('References', 1, None, '___sec168')]}
 end of tocinfo -->
 
 <body>
@@ -401,21 +547,182 @@ $$
     </button>
     <a class="navbar-brand" href="plot-bootstrap.html">Array computing and curve plotting</a>
   </div>
+
   <div class="navbar-collapse collapse navbar-responsive-collapse">
     <ul class="nav navbar-nav navbar-right">
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
         <ul class="dropdown-menu">
-     <!-- navigation toc: --> <li><a href="._plot-bootstrap001.html#___sec0" style="font-size: 80%;">Vectors</a></li>
-     <!-- navigation toc: --> <li><a href="._plot-bootstrap002.html#___sec4" style="font-size: 80%;">Arrays in Python programs</a></li>
-     <!-- navigation toc: --> <li><a href="._plot-bootstrap003.html#sec:plot:curveplots" style="font-size: 80%;">Curve plotting</a></li>
-     <!-- navigation toc: --> <li><a href="._plot-bootstrap004.html#sec:plot:difficulties" style="font-size: 80%;">Plotting difficulties</a></li>
-     <!-- navigation toc: --> <li><a href="._plot-bootstrap005.html#sec:plot:if:vectorize" style="font-size: 80%;">More advanced vectorization of functions</a></li>
-     <!-- navigation toc: --> <li><a href="._plot-bootstrap006.html#sec:plot:numpy:more" style="font-size: 80%;">More on numerical Python arrays</a></li>
-     <!-- navigation toc: --> <li><a href="#sec:plot:2Darrays" style="font-size: 80%;">Higher-dimensional arrays</a></li>
-     <!-- navigation toc: --> <li><a href="._plot-bootstrap008.html#___sec61" style="font-size: 80%;">Summary</a></li>
-     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:plot:exer" style="font-size: 80%;">Exercises</a></li>
-     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#___sec122" style="font-size: 80%;">References</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap000.html#table_of_contents" style="font-size: 80%;"><b>Table of contents</b></a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap001.html#___sec0" style="font-size: 80%;"><b>Vectors</b></a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap001.html#___sec1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The vector concept</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap001.html#sec:plot:vectors" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Mathematical operations on vectors</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap001.html#sec:plot:arraycomp" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Vector arithmetics and vector functions</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap002.html#___sec4" style="font-size: 80%;"><b>Arrays in Python programs</b></a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap002.html#sec:plot:listdata" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Using lists for collecting function data</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap002.html#sec:plot:array:basics" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Basics of numerical Python arrays</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap002.html#___sec7" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Computing coordinates and function values</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap002.html#sec:plot:vectorization" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Vectorization</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap003.html#sec:plot:curveplots" style="font-size: 80%;"><b>Curve plotting</b></a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap003.html#sec:plot:pylab" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;MATLAB-style plotting with Matplotlib</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap003.html#___sec11" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A basic plot</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap003.html#___sec12" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Decorating the plot</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap003.html#___sec13" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Plotting multiple curves</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap003.html#___sec14" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Placing several plots in one figure</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap003.html#sec:plot:pyplot" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Matplotlib; pyplot prefix</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap003.html#sec:plot:SciTools" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;SciTools and Easyviz</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap003.html#___sec17" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Importing SciTools and Easyviz</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap003.html#___sec18" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A basic plot</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap003.html#___sec19" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Decorating the plot</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap003.html#___sec20" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Plotting multiple curves</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap003.html#___sec21" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Changing backend</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap003.html#___sec22" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Placing several plots in one figure</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap003.html#___sec23" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Other plotting alternatives</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap003.html#easyviz:movie" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Making animations</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap003.html#___sec25" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap003.html#___sec26" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Animation in Easyviz</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap003.html#___sec27" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Basic animation in Matplotlib</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap003.html#___sec28" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Using FuncAnimation in Matplotlib</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap003.html#sec:plot:video" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Making videos</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap003.html#___sec30" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Animated GIF file</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap003.html#___sec31" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MP4, Ogg, WebM, and Flash videos</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap003.html#___sec32" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Curve plots in pure text</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap004.html#sec:plot:difficulties" style="font-size: 80%;"><b>Plotting difficulties</b></a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap004.html#sec:plot:pwisefunc" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Piecewisely defined functions</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap004.html#___sec35" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example: The Heaviside function</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap004.html#___sec36" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example: A hat function</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap004.html#sec:plot:sin1x" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Rapidly varying functions</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap005.html#sec:plot:if:vectorize" style="font-size: 80%;"><b>More advanced vectorization of functions</b></a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap005.html#sec:plot:StringFunction:vectorize" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Vectorization of StringFunction objects</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap005.html#sec:vec:Heaviside" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Vectorization of the Heaviside function</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap005.html#___sec41" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Loop</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap005.html#___sec42" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Automatic vectorization</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap005.html#___sec43" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mixing boolean and floating-point calculations</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap005.html#___sec44" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Manual vectorization</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap005.html#sec:vec:hatfunc" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Vectorization of a hat function</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap006.html#sec:plot:numpy:more" style="font-size: 80%;"><b>More on numerical Python arrays</b></a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap006.html#___sec47" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Copying arrays</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap006.html#sec:plot:numpy:inplace" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;In-place arithmetics</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap006.html#___sec49" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Allocating arrays</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap006.html#sec:plot:generalized:index" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Generalized indexing</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap006.html#___sec51" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Testing for the array type</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap006.html#___sec52" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example: Vectorizing a constant function</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap006.html#___sec53" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Compact syntax for array generation</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap006.html#___sec54" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Shape manipulation</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap006.html#sec:hpc" style="font-size: 80%;"><b>High-performance computing with arrays</b></a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap006.html#___sec56" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example: <code>axpy</code></a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap006.html#sec:hpc:scalar" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Scalar implementation</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap006.html#sec:hpc:vec" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Vectorized implementation</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap006.html#sec:hpc:vec:inplace" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Memory-saving implementation</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap006.html#sec:hpc:vec:memory_profiler" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Analysis of memory usage</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap006.html#sec:hpc:vec:line_profiler" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Analysis of the CPU time</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:plot:2Darrays" style="font-size: 80%;"><b>Higher-dimensional arrays</b></a></li>
+     <!-- navigation toc: --> <li><a href="#___sec63" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Matrices and arrays</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:plot:2D:arrays" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Two-dimensional numerical Python arrays</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:plot:array2comp" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Array computing</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec66" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remark</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:plot:numpy:matrix" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Matrix objects</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec68" style="font-size: 80%;"><b>Some common linear algebra operations</b></a></li>
+     <!-- navigation toc: --> <li><a href="#___sec69" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Inverse, determinant, and eigenvalues</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec70" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Products</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec71" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Norms</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec72" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Sum and extreme values</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec73" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Indexing</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec74" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Transpose and upper/lower triangular parts</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec75" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Solving linear systems</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec76" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Matrix row and column operations</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec77" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Computing the rank of a matrix</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec78" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Symbolic linear algebra</a></li>
+     <!-- navigation toc: --> <li><a href="#plot:surf" style="font-size: 80%;"><b>Plotting of scalar and vector fields</b></a></li>
+     <!-- navigation toc: --> <li><a href="#plot:surf:install" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Installation</a></li>
+     <!-- navigation toc: --> <li><a href="#plot:surf:mesh_surf" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Surface plots</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec82" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Grid for 2D scalar fields</a></li>
+     <!-- navigation toc: --> <li><a href="#plot:surf:3Dcurve" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Parameterized curve</a></li>
+     <!-- navigation toc: --> <li><a href="#plot:surf:contours" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Contour lines</a></li>
+     <!-- navigation toc: --> <li><a href="#plot:surf:gradient" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The gradient vector field</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec86" style="font-size: 80%;"><b>Matplotlib</b></a></li>
+     <!-- navigation toc: --> <li><a href="#matplotlibsurfaceplots" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Surface plots</a></li>
+     <!-- navigation toc: --> <li><a href="#matplotlibcontourplots" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Contour plots</a></li>
+     <!-- navigation toc: --> <li><a href="#plot:surf:mpl:quiver" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Vector field plots</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec90" style="font-size: 80%;"><b>Mayavi</b></a></li>
+     <!-- navigation toc: --> <li><a href="#___sec91" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Surface plots</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec92" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Subplots</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec93" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Contour plots</a></li>
+     <!-- navigation toc: --> <li><a href="#plot:surf:mayavi:quiver" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Vector field plots</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec95" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;A 3D scalar field and its gradient field</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec96" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Animations</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap008.html#___sec97" style="font-size: 80%;"><b>Summary</b></a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap008.html#___sec98" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Chapter topics</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap008.html#___sec99" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Array computing</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap008.html#___sec100" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Plotting curves</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap008.html#___sec101" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Making movies</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap008.html#___sec102" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Terminology</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap008.html#sec:plot:summarizing" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Animating a function</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap008.html#___sec104" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap008.html#___sec105" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Solution</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap008.html#___sec106" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scaling</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:plot:exer" style="font-size: 80%;"><b>Exercises</b></a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:plot:ex1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 1: Fill lists with function values</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:plot:ex2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 2: Fill arrays; loop version</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:plot:ex2b" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 3: Fill arrays; vectorized version</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:plot:ex2c" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 4: Plot a function</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:plot:math:ex1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 5: Apply a function to a vector</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:plot:ex3" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 6: Simulate by hand a vectorized expression</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:plot:ex15d" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 7: Demonstrate array slicing</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:plot:ex33" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 8: Replace list operations by array computing</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:plot:ex15" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 9: Plot a formula</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:plot:ex15b" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 10: Plot a formula for several parameters</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:plot:ex15ba" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 11: Specify the extent of the axes in a plot</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:plot:ex15c" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 12: Plot exact and inexact Fahrenheit-Celsius conversion formulas</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:plot:ex5" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 13: Plot the trajectory of a ball</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:files:ex12" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 14: Plot data in a two-column file</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#___sec122" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remarks</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:files:ex12e" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 15: Write function data to file</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:files:ex12c" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 16: Plot data from a file</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:files:exer:write_table" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 17: Write table to file</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:files:ex12c2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 18: Fit a polynomial to data points</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:files:ex19" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 19: Fit a polynomial to experimental data</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:files:ex22" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 20: Read acceleration data and find velocities</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:files:ex23" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 21: Read acceleration data and plot velocities</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:files:ex24" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 22: Plot a trip's path and velocity from GPS coordinates</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:class:exer:sum" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 23: Vectorize the Midpoint rule for integration</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#___sec132" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remarks</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:plot:exer:area:polygon:vec" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 24: Vectorize a function for computing the area of a polygon</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:class:ex27a" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 25: Implement Lagrange's interpolation formula</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:class:ex27b" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 26: Plot Lagrange's interpolating polynomial</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:class:ex27c" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 27: Investigate the behavior of Lagrange's interpolating polynomials</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#___sec137" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remarks</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:plot:ex5d" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 28: Plot a wave packet</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:plot:ex7" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 29: Judge a plot</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:plot:ex13c" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 30: Plot the viscosity of water</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:plot:ex16" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 31: Explore a complicated function graphically</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:plot:ex5b" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 32: Plot Taylor polynomial approximations to \( \sin x \)</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:plot:ex5e" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 33: Animate a wave packet</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:plot:ex32" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 34: Animate a smoothed Heaviside function</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:plot:ex18" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 35: Animate two-scale temperature variations</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#___sec146" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remarks</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:plot:ex19" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 36: Use non-uniformly distributed coordinates for visualization</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:plot:ex31" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 37: Animate a sequence of approximations to \( \pi \)</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:plot:ex5g" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 38: Animate a planet's orbit</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:plot:ex17" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 39: Animate the evolution of Taylor polynomials</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:plot:ex4" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 40: Plot the velocity profile for pipeflow</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:plot:ex8" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 41: Plot sum-of-sines approximations to a function</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:plot:ex8m" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 42: Animate the evolution of a sum-of-sine approximation to a function</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:plot:ex14" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 43: Plot functions from the command line</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:plot:ex14b" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 44: Improve command-line input</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:plot:ex20" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 45: Demonstrate energy concepts from physics</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:plot:math:ex9" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 46: Plot a w-like function</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:basic:exH4plot" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 47: Plot a piecewise constant function</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:basic:exH4vecz1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 48: Vectorize a piecewise constant function</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#___sec160" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remarks</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:plot:ex:vizmidpoint" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 49: Visualize approximations in the Midpoint integration rule</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:plot:ex:viztrapezoidal" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 50: Visualize approximations in the Trapezoidal integration rule</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:plot:ex13" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 51: Experience overflow in a function</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#___sec164" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remarks</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:plot:math:ex2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 52: Apply a function to a rank 2 array</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:plot:ex11" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 53: Explain why array computations fail</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#plot:linalg:exer:verify" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 54: Verify linear algebra results</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#___sec168" style="font-size: 80%;"><b>References</b></a></li>
 
         </ul>
       </li>
@@ -430,10 +737,11 @@ $$
 
 <a name="part0007"></a>
 <!-- !split -->
+<p style="font-size:80%">This chapter is taken from the book <a href="http://www.springer.com/gp/book/9783662498866">A Primer on Scientific Programming with Python</a> by H. P. Langtangen, 5th edition, Springer, 2016.</p>
 
-<h1 id="sec:plot:2Darrays">Higher-dimensional arrays<a name="sec:plot:2Darrays"></a></h1>
+<h1 id="sec:plot:2Darrays" class="anchor">Higher-dimensional arrays</h1>
 
-<h2 id="___sec55">Matrices and arrays <a name="___sec55"></a></h2>
+<h2 id="___sec63" class="anchor">Matrices and arrays </h2>
 
 <p>
 Vectors appeared when mathematicians needed to calculate with a list
@@ -453,7 +761,7 @@ $$
 $$
 
 This table with three rows and four columns is called a \( 3\times4 \)
-matrix (mathematicians don't like this sentence, but it suffices for
+matrix (mathematicians may not like this sentence, but it suffices for
 our purposes).  If the symbol \( A \) is associated with this matrix,
 \( A_{i,j} \) denotes the number in row number \( i \) and column number \( j \).
 Counting rows and columns from 0, we have, for instance, \( A_{0,0}=0 \)
@@ -493,7 +801,7 @@ mathematical point of view) and instead just work with arrays. The
 number of indices corresponds to what is convenient in the programming
 problem we try to solve.
 
-<h2 id="sec:plot:2D:arrays">Two-dimensional numerical Python arrays<a name="sec:plot:2D:arrays"></a></h2>
+<h2 id="sec:plot:2D:arrays" class="anchor">Two-dimensional numerical Python arrays</h2>
 
 <p>
 Consider a nested list <code>table</code> of two-pairs <code>[C, F]</code>
@@ -502,7 +810,7 @@ constructed by
 <p>
 
 <!-- code=python (!bc pyshell) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> Cdegrees <span style="color: #666666">=</span> [<span style="color: #666666">-30</span> <span style="color: #666666">+</span> i<span style="color: #666666">*10</span> <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">3</span>)]
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> Cdegrees <span style="color: #666666">=</span> [<span style="color: #666666">-30</span> <span style="color: #666666">+</span> i<span style="color: #666666">*10</span> <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">3</span>)]
 <span style="color: #666666">&gt;&gt;&gt;</span> Fdegrees <span style="color: #666666">=</span> [<span style="color: #666666">9./5*</span>C <span style="color: #666666">+</span> <span style="color: #666666">32</span> <span style="color: #008000; font-weight: bold">for</span> C <span style="color: #AA22FF; font-weight: bold">in</span> Cdegrees]
 <span style="color: #666666">&gt;&gt;&gt;</span> table <span style="color: #666666">=</span> [[C, F] <span style="color: #008000; font-weight: bold">for</span> C, F <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">zip</span>(Cdegrees, Fdegrees)]
 <span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">print</span> table
@@ -514,7 +822,7 @@ This nested list can be turned into an array,
 <p>
 
 <!-- code=python (!bc pyshell) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> table2 <span style="color: #666666">=</span> np<span style="color: #666666">.</span>array(table)
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> table2 <span style="color: #666666">=</span> np<span style="color: #666666">.</span>array(table)
 <span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">print</span> table2
 [[<span style="color: #666666">-30.</span> <span style="color: #666666">-22.</span>]
  [<span style="color: #666666">-20.</span>  <span style="color: #666666">-4.</span>]
@@ -550,7 +858,7 @@ this latter list is indexed:
 <p>
 
 <!-- code=python (!bc pyshell) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> table[<span style="color: #666666">1</span>][<span style="color: #666666">0</span>]     <span style="color: #408080; font-style: italic"># table[1] is [-20,4], whose index 0 holds -20</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> table[<span style="color: #666666">1</span>][<span style="color: #666666">0</span>]     <span style="color: #408080; font-style: italic"># table[1] is [-20,4], whose index 0 holds -20</span>
 <span style="color: #666666">-20</span>
 </pre></div>
 <p>
@@ -559,7 +867,7 @@ This syntax works for two-dimensional arrays too:
 <p>
 
 <!-- code=python (!bc pyshell) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> table2[<span style="color: #666666">1</span>][<span style="color: #666666">0</span>]
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> table2[<span style="color: #666666">1</span>][<span style="color: #666666">0</span>]
 <span style="color: #666666">-20.0</span>
 </pre></div>
 <p>
@@ -568,7 +876,7 @@ but there is another syntax that is more common for arrays:
 <p>
 
 <!-- code=python (!bc pyshell) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> table2[<span style="color: #666666">1</span>,<span style="color: #666666">0</span>]
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> table2[<span style="color: #666666">1</span>,<span style="color: #666666">0</span>]
 <span style="color: #666666">-20.0</span>
 </pre></div>
 <p>
@@ -580,7 +888,7 @@ available as <code>table2.shape</code>:
 <p>
 
 <!-- code=python (!bc pyshell) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> table2<span style="color: #666666">.</span>shape
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> table2<span style="color: #666666">.</span>shape
 (<span style="color: #666666">3</span>, <span style="color: #666666">2</span>)
 </pre></div>
 <p>
@@ -593,7 +901,7 @@ expressed as two <em>nested</em> <code>for</code> loops, one for each index:
 <p>
 
 <!-- code=python (!bc pyshell) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(table2<span style="color: #666666">.</span>shape[<span style="color: #666666">0</span>]):
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(table2<span style="color: #666666">.</span>shape[<span style="color: #666666">0</span>]):
 <span style="color: #666666">...</span>     <span style="color: #008000; font-weight: bold">for</span> j <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(table2<span style="color: #666666">.</span>shape[<span style="color: #666666">1</span>]):
 <span style="color: #666666">...</span>         <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;table2[</span><span style="color: #BB6688; font-weight: bold">%d</span><span style="color: #BA2121">,</span><span style="color: #BB6688; font-weight: bold">%d</span><span style="color: #BA2121">] = </span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> (i, j, table2[i,j])
 <span style="color: #666666">...</span>
@@ -611,7 +919,7 @@ array with any number of dimensions makes use of a single <code>for</code> loop:
 <p>
 
 <!-- code=python (!bc pyshell) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">for</span> index_tuple, value <span style="color: #AA22FF; font-weight: bold">in</span> np<span style="color: #666666">.</span>ndenumerate(table2):
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">for</span> index_tuple, value <span style="color: #AA22FF; font-weight: bold">in</span> np<span style="color: #666666">.</span>ndenumerate(table2):
 <span style="color: #666666">...</span>     <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;index </span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121"> has value </span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> \ 
 <span style="color: #666666">...</span>           (index_tuple, table2[index_tuple])
 <span style="color: #666666">...</span>
@@ -629,7 +937,7 @@ subarrays of arrays using slices.
 <p>
 
 <!-- code=python (!bc pyshell) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">table2[<span style="color: #666666">0</span>:table2<span style="color: #666666">.</span>shape[<span style="color: #666666">0</span>], <span style="color: #666666">1</span>]  <span style="color: #408080; font-style: italic"># 2nd column (index 1)</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>table2[<span style="color: #666666">0</span>:table2<span style="color: #666666">.</span>shape[<span style="color: #666666">0</span>], <span style="color: #666666">1</span>]  <span style="color: #408080; font-style: italic"># 2nd column (index 1)</span>
 array([<span style="color: #666666">-22.</span>,  <span style="color: #666666">-4.</span>,  <span style="color: #666666">14.</span>])
 
 <span style="color: #666666">&gt;&gt;&gt;</span> table2[<span style="color: #666666">0</span>:, <span style="color: #666666">1</span>]             <span style="color: #408080; font-style: italic"># same</span>
@@ -644,7 +952,7 @@ To illustrate array slicing further, we create a bigger array:
 <p>
 
 <!-- code=python (!bc pyshell) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> t <span style="color: #666666">=</span> np<span style="color: #666666">.</span>linspace(<span style="color: #666666">1</span>, <span style="color: #666666">30</span>, <span style="color: #666666">30</span>)<span style="color: #666666">.</span>reshape(<span style="color: #666666">5</span>, <span style="color: #666666">6</span>)
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> t <span style="color: #666666">=</span> np<span style="color: #666666">.</span>linspace(<span style="color: #666666">1</span>, <span style="color: #666666">30</span>, <span style="color: #666666">30</span>)<span style="color: #666666">.</span>reshape(<span style="color: #666666">5</span>, <span style="color: #666666">6</span>)
 <span style="color: #666666">&gt;&gt;&gt;</span> t
 array([[  <span style="color: #666666">1.</span>,   <span style="color: #666666">2.</span>,   <span style="color: #666666">3.</span>,   <span style="color: #666666">4.</span>,   <span style="color: #666666">5.</span>,   <span style="color: #666666">6.</span>],
        [  <span style="color: #666666">7.</span>,   <span style="color: #666666">8.</span>,   <span style="color: #666666">9.</span>,  <span style="color: #666666">10.</span>,  <span style="color: #666666">11.</span>,  <span style="color: #666666">12.</span>],
@@ -664,7 +972,7 @@ the two rows corresponding to the first slice <code>1:-1:2</code>,
 
 <!-- code=text (!bc ccq) typeset with pygments style "default" -->
 <blockquote>
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">       [  7.,   8.,   9.,  10.,  11.,  12.]
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>       [  7.,   8.,   9.,  10.,  11.,  12.]
        [ 19.,  20.,  21.,  22.,  23.,  24.]
 </pre></div>
 </blockquote><p>
@@ -674,7 +982,7 @@ Among the rows, pick the columns corresponding to the second slice <code>2:</cod
 
 <!-- code=text (!bc ccq) typeset with pygments style "default" -->
 <blockquote>
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">       [  9.,  10.,  11.,  12.]
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>       [  9.,  10.,  11.,  12.]
        [ 21.,  22.,  23.,  24.]
 </pre></div>
 </blockquote><p>
@@ -683,7 +991,7 @@ Another example is
 <p>
 
 <!-- code=python (!bc pyshell) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> t[:<span style="color: #666666">-2</span>, :<span style="color: #666666">-1</span>:<span style="color: #666666">2</span>]
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> t[:<span style="color: #666666">-2</span>, :<span style="color: #666666">-1</span>:<span style="color: #666666">2</span>]
 array([[  <span style="color: #666666">1.</span>,   <span style="color: #666666">3.</span>,   <span style="color: #666666">5.</span>],
        [  <span style="color: #666666">7.</span>,   <span style="color: #666666">9.</span>,  <span style="color: #666666">11.</span>],
        [ <span style="color: #666666">13.</span>,  <span style="color: #666666">15.</span>,  <span style="color: #666666">17.</span>]])
@@ -698,7 +1006,7 @@ columns with indices 1 and 2:
 <p>
 
 <!-- code=python (!bc pyshell) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> t[np<span style="color: #666666">.</span>ix_([<span style="color: #666666">0</span>,<span style="color: #666666">3</span>], [<span style="color: #666666">1</span>,<span style="color: #666666">2</span>])]
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> t[np<span style="color: #666666">.</span>ix_([<span style="color: #666666">0</span>,<span style="color: #666666">3</span>], [<span style="color: #666666">1</span>,<span style="color: #666666">2</span>])]
 array([[  <span style="color: #666666">2.</span>,   <span style="color: #666666">3.</span>],
        [ <span style="color: #666666">20.</span>,  <span style="color: #666666">21.</span>]])
 <span style="color: #666666">&gt;&gt;&gt;</span> t[np<span style="color: #666666">.</span>ix_([<span style="color: #666666">0</span>,<span style="color: #666666">3</span>], [<span style="color: #666666">1</span>,<span style="color: #666666">2</span>])] <span style="color: #666666">=</span> <span style="color: #666666">0</span>
@@ -715,7 +1023,7 @@ Recall that slices only gives a view to the array, not a copy of the values:
 <p>
 
 <!-- code=python (!bc pyshell) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> a <span style="color: #666666">=</span> t[<span style="color: #666666">1</span>:<span style="color: #666666">-1</span>:<span style="color: #666666">2</span>, <span style="color: #666666">1</span>:<span style="color: #666666">-1</span>]
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> a <span style="color: #666666">=</span> t[<span style="color: #666666">1</span>:<span style="color: #666666">-1</span>:<span style="color: #666666">2</span>, <span style="color: #666666">1</span>:<span style="color: #666666">-1</span>]
 <span style="color: #666666">&gt;&gt;&gt;</span> a
 array([[  <span style="color: #666666">8.</span>,   <span style="color: #666666">9.</span>,  <span style="color: #666666">10.</span>,  <span style="color: #666666">11.</span>],
        [  <span style="color: #666666">0.</span>,   <span style="color: #666666">0.</span>,  <span style="color: #666666">22.</span>,  <span style="color: #666666">23.</span>]])
@@ -731,7 +1039,7 @@ array([[  <span style="color: #666666">1.</span>,   <span style="color: #666666"
        [ <span style="color: #666666">25.</span>,  <span style="color: #666666">26.</span>,  <span style="color: #666666">27.</span>,  <span style="color: #666666">28.</span>,  <span style="color: #666666">29.</span>,  <span style="color: #666666">30.</span>]])
 </pre></div>
 
-<h2 id="sec:plot:array2comp">Array computing<a name="sec:plot:array2comp"></a></h2>
+<h2 id="sec:plot:array2comp" class="anchor">Array computing</h2>
 
 <p>
 The operations on vectors in the section <a href="._plot-bootstrap001.html#sec:plot:arraycomp">Vector arithmetics and vector functions</a> can quite
@@ -765,7 +1073,7 @@ vector (this is actually the way the array elements are stored in the
 computer's memory), and the array operations can then easily be
 defined in terms of the vector operations from the section <a href="._plot-bootstrap001.html#sec:plot:arraycomp">Vector arithmetics and vector functions</a>.
 
-<h3 id="___sec58">Remark <a name="___sec58"></a></h3>
+<h3 id="___sec66" class="anchor">Remark </h3>
 
 <p>
 Readers with knowledge of matrix computations may get confused by the
@@ -782,49 +1090,13 @@ matrix-vector product \( Ax \), where \( x \) is a vector, is computed by
 <code>dot(A, x)</code>. However, with matrix objects (see the section <a href="#sec:plot:numpy:matrix">Matrix objects</a>) <code>A*A</code> implies the mathematical matrix
 multiplication \( AA \).
 
-<h2 id="___sec59">Two-dimensional arrays and functions of two variables <a name="___sec59"></a></h2>
+<p>
+<!-- Copied out old_plot3d.do.txt -->
 
 <p>
-Given a function of two variables, say
+<!-- Insert linear algebra here -->
 
-<p>
-
-<!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f</span>(x, y):
-    <span style="color: #008000; font-weight: bold">return</span> sin(sqrt(x<span style="color: #666666">**2</span> <span style="color: #666666">+</span> y<span style="color: #666666">**2</span>))
-</pre></div>
-<p>
-we can plot this function by writing
-
-<p>
-
-<!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">scitools.std</span> <span style="color: #008000; font-weight: bold">import</span> sin, sqrt, linspace, ndgrid, mesh
-x <span style="color: #666666">=</span> y <span style="color: #666666">=</span> linspace(<span style="color: #666666">-5</span>, <span style="color: #666666">5</span>, <span style="color: #666666">21</span>)  <span style="color: #408080; font-style: italic"># coordinates in x and y direction</span>
-xv, yv <span style="color: #666666">=</span> ndgrid(x, y)
-z <span style="color: #666666">=</span> f(xv, yv)
-mesh(xv, yv, z)
-</pre></div>
-<p>
-There are two new things here: (i) the call to <code>ndgrid</code>, which is
-necessary to transform one-dimensional coordinate arrays in the \( x \)
-and \( y \) direction into arrays valid for evaluating <code>f</code> over a
-two-dimensional grid; and (ii) the plot function whose name now is
-<code>mesh</code>, which is one out of many plot functions for two-dimensional
-functions. Another plot type you can try out is
-
-<p>
-
-<!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">surf(xv, yv, z)
-</pre></div>
-<p>
-More material on visualizing \( f(x,y) \) functions is found in the
-section <em>Visualizing Scalar Fields</em> in the Easyviz tutorial.  This
-tutorial can be reached through the command <code>pydoc scitools.easyviz</code>
-in a terminal window or from <a href="http://code.google.com/p/scitools" target="_self"><tt>code.google.com/p/scitools</tt></a>.
-
-<h2 id="sec:plot:numpy:matrix">Matrix objects<a name="sec:plot:numpy:matrix"></a></h2>
+<h2 id="sec:plot:numpy:matrix" class="anchor">Matrix objects</h2>
 
 <p>
 This section only makes sense if you are familiar with basic linear
@@ -837,12 +1109,12 @@ i.e., either a row vector or a column vector:
 <p>
 
 <!-- code=python (!bc pyshell) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
 <span style="color: #666666">&gt;&gt;&gt;</span> x1 <span style="color: #666666">=</span> np<span style="color: #666666">.</span>array([<span style="color: #666666">1</span>, <span style="color: #666666">2</span>, <span style="color: #666666">3</span>], <span style="color: #008000">float</span>)
-<span style="color: #666666">&gt;&gt;&gt;</span> x2 <span style="color: #666666">=</span> np<span style="color: #666666">.</span>matrix(x1)               <span style="color: #408080; font-style: italic"># or mat(x1)</span>
-<span style="color: #666666">&gt;&gt;&gt;</span> x2                               <span style="color: #408080; font-style: italic"># row vector</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> x2 <span style="color: #666666">=</span> np<span style="color: #666666">.</span>matrix(x1)          <span style="color: #408080; font-style: italic"># or mat(x1)</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> x2                          <span style="color: #408080; font-style: italic"># row vector</span>
 matrix([[ <span style="color: #666666">1.</span>,  <span style="color: #666666">2.</span>,  <span style="color: #666666">3.</span>]])
-<span style="color: #666666">&gt;&gt;&gt;</span> x3 <span style="color: #666666">=</span> mat(x1)<span style="color: #666666">.</span>transpose()         <span style="color: #408080; font-style: italic"># column vector</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> x3 <span style="color: #666666">=</span> mat(x1)<span style="color: #666666">.</span>T              <span style="color: #408080; font-style: italic"># transpose = column vector</span>
 <span style="color: #666666">&gt;&gt;&gt;</span> x3
 matrix([[ <span style="color: #666666">1.</span>],
         [ <span style="color: #666666">2.</span>],
@@ -861,7 +1133,7 @@ product as we know from linear algebra:
 <p>
 
 <!-- code=python (!bc pyshell) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> A <span style="color: #666666">=</span> eye(<span style="color: #666666">3</span>)                    <span style="color: #408080; font-style: italic"># identity matrix</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> A <span style="color: #666666">=</span> np<span style="color: #666666">.</span>eye(<span style="color: #666666">3</span>)                 <span style="color: #408080; font-style: italic"># identity matrix</span>
 <span style="color: #666666">&gt;&gt;&gt;</span> A
 array([[ <span style="color: #666666">1.</span>,  <span style="color: #666666">0.</span>,  <span style="color: #666666">0.</span>],
        [ <span style="color: #666666">0.</span>,  <span style="color: #666666">1.</span>,  <span style="color: #666666">0.</span>],
@@ -882,38 +1154,8 @@ matrix([[ <span style="color: #666666">1.</span>],
 </pre></div>
 <p>
 One should note here that the multiplication operator between standard
-<code>ndarray</code> objects is quite different, as the next interactive
-session demonstrates.
+<code>ndarray</code> objects is quite different!
 
-<p>
-
-<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> A<span style="color: #666666">*</span>x1                          <span style="color: #408080; font-style: italic"># no matrix-array product!</span>
-Traceback (most recent call last):
-<span style="color: #666666">...</span>
-<span style="color: #D2413A; font-weight: bold">ValueError</span>: matrices are <span style="color: #AA22FF; font-weight: bold">not</span> aligned
-
-<span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #408080; font-style: italic"># try array*array product:</span>
-<span style="color: #666666">&gt;&gt;&gt;</span> A <span style="color: #666666">=</span> (zeros(<span style="color: #666666">9</span>) <span style="color: #666666">+</span> <span style="color: #666666">1</span>)<span style="color: #666666">.</span>reshape(<span style="color: #666666">3</span>,<span style="color: #666666">3</span>)
-<span style="color: #666666">&gt;&gt;&gt;</span> A
-array([[ <span style="color: #666666">1.</span>,  <span style="color: #666666">1.</span>,  <span style="color: #666666">1.</span>],
-       [ <span style="color: #666666">1.</span>,  <span style="color: #666666">1.</span>,  <span style="color: #666666">1.</span>],
-       [ <span style="color: #666666">1.</span>,  <span style="color: #666666">1.</span>,  <span style="color: #666666">1.</span>]])
-<span style="color: #666666">&gt;&gt;&gt;</span> A<span style="color: #666666">*</span>x1                      <span style="color: #408080; font-style: italic"># [A[0,:]*x1, A[1,:]*x1, A[2,:]*x1]</span>
-array([[ <span style="color: #666666">1.</span>,  <span style="color: #666666">2.</span>,  <span style="color: #666666">3.</span>],
-       [ <span style="color: #666666">1.</span>,  <span style="color: #666666">2.</span>,  <span style="color: #666666">3.</span>],
-       [ <span style="color: #666666">1.</span>,  <span style="color: #666666">2.</span>,  <span style="color: #666666">3.</span>]])
-<span style="color: #666666">&gt;&gt;&gt;</span> B <span style="color: #666666">=</span> A <span style="color: #666666">+</span> <span style="color: #666666">1</span>
-<span style="color: #666666">&gt;&gt;&gt;</span> A<span style="color: #666666">*</span>B                       <span style="color: #408080; font-style: italic"># element-wise product</span>
-array([[ <span style="color: #666666">2.</span>,  <span style="color: #666666">2.</span>,  <span style="color: #666666">2.</span>],
-       [ <span style="color: #666666">2.</span>,  <span style="color: #666666">2.</span>,  <span style="color: #666666">2.</span>],
-       [ <span style="color: #666666">2.</span>,  <span style="color: #666666">2.</span>,  <span style="color: #666666">2.</span>]])
-<span style="color: #666666">&gt;&gt;&gt;</span> A <span style="color: #666666">=</span> mat(A);  B <span style="color: #666666">=</span> mat(B)
-<span style="color: #666666">&gt;&gt;&gt;</span> A<span style="color: #666666">*</span>B                       <span style="color: #408080; font-style: italic"># matrix-matrix product</span>
-matrix([[ <span style="color: #666666">6.</span>,  <span style="color: #666666">6.</span>,  <span style="color: #666666">6.</span>],
-        [ <span style="color: #666666">6.</span>,  <span style="color: #666666">6.</span>,  <span style="color: #666666">6.</span>],
-        [ <span style="color: #666666">6.</span>,  <span style="color: #666666">6.</span>,  <span style="color: #666666">6.</span>]])
-</pre></div>
 <p>
 Readers who are familiar with MATLAB, or intend to use Python and
 MATLAB together, should seriously think about programming with
@@ -922,6 +1164,1412 @@ type behaves quite similar to matrices and vectors in MATLAB.
 Nevertheless, <code>matrix</code> cannot be used for arrays of larger dimension
 than two.
 
+<h1 id="___sec68" class="anchor">Some common linear algebra operations </h1>
+
+<p>
+Python has strong support for numerical linear algebra, much like the
+functionality found in MATLAB. Some of the most widely used
+operations are exemplified below.
+<!-- Contrary to MATLAB, where the fundamental data structure is the matrix, -->
+<!-- the NumPy package in Python features arrays of any dimension. -->
+
+<h2 id="___sec69" class="anchor">Inverse, determinant, and eigenvalues </h2>
+
+<p>
+We start with showing how to find the inverse and the determinant of a
+matrix, and how to compute the eigenvalues and eigenvectors:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> A <span style="color: #666666">=</span> np<span style="color: #666666">.</span>array([[<span style="color: #666666">2</span>, <span style="color: #666666">0</span>], [<span style="color: #666666">0</span>, <span style="color: #666666">5</span>]], dtype<span style="color: #666666">=</span><span style="color: #008000">float</span>)
+
+<span style="color: #666666">&gt;&gt;&gt;</span> np<span style="color: #666666">.</span>linalg<span style="color: #666666">.</span>inv(A)  <span style="color: #408080; font-style: italic"># inverse matrix</span>
+array([[ <span style="color: #666666">0.5</span>,  <span style="color: #666666">0.</span> ],
+       [ <span style="color: #666666">0.</span> ,  <span style="color: #666666">0.2</span>]])
+
+<span style="color: #666666">&gt;&gt;&gt;</span> np<span style="color: #666666">.</span>linalg<span style="color: #666666">.</span>det(A)  <span style="color: #408080; font-style: italic"># determinant</span>
+<span style="color: #666666">9.9999999999999982</span>
+
+<span style="color: #666666">&gt;&gt;&gt;</span> eig_values, eig_vectors <span style="color: #666666">=</span> np<span style="color: #666666">.</span>linalg<span style="color: #666666">.</span>eig(A)
+<span style="color: #666666">&gt;&gt;&gt;</span> eig_values
+array([ <span style="color: #666666">2.</span>,  <span style="color: #666666">5.</span>])
+<span style="color: #666666">&gt;&gt;&gt;</span> eig_vectors
+array([[ <span style="color: #666666">1.</span>,  <span style="color: #666666">0.</span>],
+       [ <span style="color: #666666">0.</span>,  <span style="color: #666666">1.</span>]])
+</pre></div>
+<p>
+The eigenvectors are normalized to have unit lengths.
+
+<h2 id="___sec70" class="anchor">Products </h2>
+
+<p>
+The <code>np.dot</code> function is used for scalar or dot product as well as
+matrix-vector and matrix-matrix products <em>between array objects</em>:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> a <span style="color: #666666">=</span> np<span style="color: #666666">.</span>array([<span style="color: #666666">4</span>, <span style="color: #666666">0</span>])
+<span style="color: #666666">&gt;&gt;&gt;</span> b <span style="color: #666666">=</span> np<span style="color: #666666">.</span>array([<span style="color: #666666">0</span>, <span style="color: #666666">1</span>])
+<span style="color: #666666">&gt;&gt;&gt;</span> np<span style="color: #666666">.</span>dot(A, a)         <span style="color: #408080; font-style: italic"># matrix vector product</span>
+array([ <span style="color: #666666">8.</span>,  <span style="color: #666666">0.</span>])
+<span style="color: #666666">&gt;&gt;&gt;</span> np<span style="color: #666666">.</span>dot(a, b)         <span style="color: #408080; font-style: italic"># dot product between vectors</span>
+<span style="color: #666666">0</span>
+<span style="color: #666666">&gt;&gt;&gt;</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> B <span style="color: #666666">=</span> np<span style="color: #666666">.</span>ones((<span style="color: #666666">2</span>, <span style="color: #666666">2</span>))  <span style="color: #408080; font-style: italic"># 2x2 matrix with 1&#39;s</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> np<span style="color: #666666">.</span>dot(A, B)         <span style="color: #408080; font-style: italic"># matrix-matrix product</span>
+array([[ <span style="color: #666666">2.</span>,  <span style="color: #666666">2.</span>],
+       [ <span style="color: #666666">5.</span>,  <span style="color: #666666">5.</span>]])
+</pre></div>
+<p>
+Note that using the <code>matrix</code> class instead of plain arrays
+(see the section <a href="#sec:plot:numpy:matrix">Matrix objects</a>)
+allows <code>*</code> to be used as operator for matrix-vector and matrix-matrix
+products.
+
+<p>
+The cross product \( a\times b \),
+between vectors \( a \) and \( b \) of length 3, is computed by
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> np<span style="color: #666666">.</span>cross([<span style="color: #666666">1</span>, <span style="color: #666666">1</span>, <span style="color: #666666">1</span>], [<span style="color: #666666">0</span>, <span style="color: #666666">0</span>, <span style="color: #666666">1</span>])
+array([ <span style="color: #666666">1</span>, <span style="color: #666666">-1</span>,  <span style="color: #666666">0</span>])
+</pre></div>
+<p>
+Finding the angle between vectors \( a \) and \( b \),
+
+$$ \theta = \cos^{-1}\left(\frac{a\cdot b}{||a||\,||b||}\right),$$
+
+goes like
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> np<span style="color: #666666">.</span>arccos(np<span style="color: #666666">.</span>dot(a, b)<span style="color: #666666">/</span>(np<span style="color: #666666">.</span>linalg<span style="color: #666666">.</span>norm(a)<span style="color: #666666">*</span>np<span style="color: #666666">.</span>linalg<span style="color: #666666">.</span>norm(b)))
+<span style="color: #666666">1.5707963267948966</span>
+</pre></div>
+
+<h2 id="___sec71" class="anchor">Norms </h2>
+
+<p>
+Various norms of matrices and vectors are well supported by NumPy.
+Some common examples are
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> np<span style="color: #666666">.</span>linalg<span style="color: #666666">.</span>norm(A)        <span style="color: #408080; font-style: italic"># Frobenius norm for matrices</span>
+<span style="color: #666666">5.3851648071345037</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> np<span style="color: #666666">.</span>sqrt(np<span style="color: #666666">.</span>sum(A<span style="color: #666666">**2</span>))    <span style="color: #408080; font-style: italic"># Frobenius norm: direct formula</span>
+<span style="color: #666666">5.3851648071345037</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> np<span style="color: #666666">.</span>linalg<span style="color: #666666">.</span>norm(a)        <span style="color: #408080; font-style: italic"># l2 norm for vectors</span>
+<span style="color: #666666">4.0</span>
+</pre></div>
+<p>
+See <code>pydoc numpy.linalg.norm</code> for information on other norms.
+
+<h2 id="___sec72" class="anchor">Sum and extreme values </h2>
+
+<p>
+The sum of all elements or of the elements in a particular row or column
+is computed by <code>np.sum</code>:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> np<span style="color: #666666">.</span>sum(B)          <span style="color: #408080; font-style: italic"># sum of all elements</span>
+<span style="color: #666666">2.0</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> B<span style="color: #666666">.</span>sum()            <span style="color: #408080; font-style: italic"># sum of all elements; alternative syntax</span>
+<span style="color: #666666">2.0</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> np<span style="color: #666666">.</span>sum(B, axis<span style="color: #666666">=0</span>)  <span style="color: #408080; font-style: italic"># sum over index 0 (rows)</span>
+array([ <span style="color: #666666">4.</span>, <span style="color: #666666">-2.</span>])
+<span style="color: #666666">&gt;&gt;&gt;</span> np<span style="color: #666666">.</span>sum(B, axis<span style="color: #666666">=1</span>)  <span style="color: #408080; font-style: italic"># sum over index 1 (columns)</span>
+array([ <span style="color: #666666">3.</span>, <span style="color: #666666">-1.</span>])
+</pre></div>
+<p>
+The maximum or minimum value of an array is also often needed:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> np<span style="color: #666666">.</span>max(B)          <span style="color: #408080; font-style: italic"># max over all elements</span>
+<span style="color: #666666">3.0</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> B<span style="color: #666666">.</span>max()            <span style="color: #408080; font-style: italic"># max over all elements, alt. syntax</span>
+<span style="color: #666666">3.0</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> np<span style="color: #666666">.</span>min(B)          <span style="color: #408080; font-style: italic"># min over all elements</span>
+<span style="color: #666666">-4.0</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> np<span style="color: #666666">.</span>abs(B)<span style="color: #666666">.</span>min()    <span style="color: #408080; font-style: italic"># min absolute value</span>
+<span style="color: #666666">1.0</span>
+</pre></div>
+<p>
+A very frequent application of computing the minimum absolute value
+occurs in test functions where we want to verify a result, e.g.,
+that \( AA^{-1}=I \), where \( I \) is the identity matrix. We then want to
+check the smallest absolute value in \( AA^{-1}-I \):
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> I <span style="color: #666666">=</span> np<span style="color: #666666">.</span>eye(<span style="color: #666666">2</span>)   <span style="color: #408080; font-style: italic"># identity matrix of size 2</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> I
+array([[ <span style="color: #666666">1.</span>,  <span style="color: #666666">0.</span>],
+       [ <span style="color: #666666">0.</span>,  <span style="color: #666666">1.</span>]])
+<span style="color: #666666">&gt;&gt;&gt;</span> np<span style="color: #666666">.</span>abs(np<span style="color: #666666">.</span>dot(A, np<span style="color: #666666">.</span>linalg<span style="color: #666666">.</span>inv(A)) <span style="color: #666666">-</span> I)<span style="color: #666666">.</span>max()
+<span style="color: #666666">0.0</span>
+</pre></div>
+<p>
+<div class="alert alert-block alert-danger alert-text-normal"><b>Never use <code>==</code> when testing real numbers!</b>
+It could be tempting to test \( AA^{-1}=I \) using the syntax
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> np<span style="color: #666666">.</span>dot(A, np<span style="color: #666666">.</span>linalg<span style="color: #666666">.</span>inv(A)) <span style="color: #666666">==</span> np<span style="color: #666666">.</span>eye(<span style="color: #666666">2</span>)
+array([[ <span style="color: #008000">True</span>,  <span style="color: #008000">True</span>],
+       [ <span style="color: #008000">True</span>,  <span style="color: #008000">True</span>]], dtype<span style="color: #666666">=</span><span style="color: #008000">bool</span>)
+</pre></div>
+<p>
+but there are two major problems with this test:
+
+<ol>
+<li> the result is a boolean matrix, not suitable for an <code>if</code> test</li>
+<li> using <code>==</code> for matrices with float elements may fail because of
+   rounding errors</li>
+</ol>
+
+The second problem must be solved by
+computing differences and comparing them against small tolerances, as we
+did above.
+Here is an example where <code>==</code> fails:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> A <span style="color: #666666">=</span> np<span style="color: #666666">.</span>array([[<span style="color: #666666">4</span>, <span style="color: #666666">0</span>], [<span style="color: #666666">0</span>, <span style="color: #666666">49</span>]], dtype<span style="color: #666666">=</span><span style="color: #008000">float</span>)
+<span style="color: #666666">&gt;&gt;&gt;</span> np<span style="color: #666666">.</span>dot(A, np<span style="color: #666666">.</span>linalg<span style="color: #666666">.</span>inv(A)) <span style="color: #666666">==</span> np<span style="color: #666666">.</span>eye(<span style="color: #666666">2</span>)
+array([[ <span style="color: #008000">True</span>,  <span style="color: #008000">True</span>],
+       [ <span style="color: #008000">True</span>, <span style="color: #008000">False</span>]], dtype<span style="color: #666666">=</span><span style="color: #008000">bool</span>)
+</pre></div>
+<p>
+(<code>1.0/49*49</code> is not exactly <code>1</code> because of rounding errors.)
+
+<p>
+The first problem is solved by using the <code>C.all()</code>, which returns one
+boolean variable <code>True</code> if all elements in the boolean array <code>C</code> are <code>True</code>,
+otherwise it returns <code>False</code>, as in the case above:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> (np<span style="color: #666666">.</span>dot(A, np<span style="color: #666666">.</span>linalg<span style="color: #666666">.</span>inv(A)) <span style="color: #666666">==</span> np<span style="color: #666666">.</span>eye(<span style="color: #666666">2</span>))<span style="color: #666666">.</span>all()
+<span style="color: #008000">False</span>
+</pre></div>
+<p>
+</div>
+
+
+<h2 id="___sec73" class="anchor">Indexing </h2>
+
+<p>
+Indexing an element is done by <code>A[i,j]</code>. A row or column
+is extracted as
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> A[<span style="color: #666666">0</span>,:]  <span style="color: #408080; font-style: italic"># first row</span>
+array([ <span style="color: #666666">2.</span>,  <span style="color: #666666">0.</span>])
+<span style="color: #666666">&gt;&gt;&gt;</span> A[:,<span style="color: #666666">1</span>]  <span style="color: #408080; font-style: italic"># second column</span>
+array([ <span style="color: #666666">0.</span>,  <span style="color: #666666">5.</span>])
+</pre></div>
+<p>
+NumPy also supports
+multiple values for the indices via the <code>np.ix_</code>
+function. Here is an example where we
+grab row 0 and 2, then column 1:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> C <span style="color: #666666">=</span> np<span style="color: #666666">.</span>array([[<span style="color: #666666">1</span>,<span style="color: #666666">2</span>,<span style="color: #666666">3</span>],[<span style="color: #666666">4</span>,<span style="color: #666666">5</span>,<span style="color: #666666">6</span>],[<span style="color: #666666">7</span>,<span style="color: #666666">8</span>,<span style="color: #666666">9</span>]])
+<span style="color: #666666">&gt;&gt;&gt;</span> C[np<span style="color: #666666">.</span>ix_([<span style="color: #666666">0</span>,<span style="color: #666666">2</span>], [<span style="color: #666666">1</span>])]  <span style="color: #408080; font-style: italic"># row 0 and 2, then column 1</span>
+array([[<span style="color: #666666">2</span>],
+       [<span style="color: #666666">8</span>]])
+</pre></div>
+<p>
+You can also use the colon notation to pick out other parts of a matrix.
+If <code>C</code> is a \( 3\times 5 \)-matrix,
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>C[<span style="color: #666666">1</span>:<span style="color: #666666">3</span>, <span style="color: #666666">0</span>:<span style="color: #666666">4</span>]
+</pre></div>
+<p>
+gives a sub-matrix consisting of the two rows of <code>C</code> after the first, and the first four columns of <code>C</code> (recall that the upper limits, here <code>3</code> and <code>4</code>, are
+not included).
+
+<p>
+Readers familiar with MATLAB should note that the indexing may
+be a bit unexpected when referring to parts of a matrix: writing
+<code>C[[0, 2], [0, 2]]</code> one would expect entries residing in rows/columns
+\( 0 \) and \( 2 \), but that behavior requires in Python the <code>np.ix_</code>
+command:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> C <span style="color: #666666">=</span> np<span style="color: #666666">.</span>array([[<span style="color: #666666">1</span>, <span style="color: #666666">2</span>, <span style="color: #666666">3</span>], [<span style="color: #666666">4</span>, <span style="color: #666666">5</span>, <span style="color: #666666">6</span>], [<span style="color: #666666">7</span>, <span style="color: #666666">8</span>, <span style="color: #666666">9</span>]])
+<span style="color: #666666">&gt;&gt;&gt;</span> C[np<span style="color: #666666">.</span>ix_([<span style="color: #666666">0</span>, <span style="color: #666666">2</span>], [<span style="color: #666666">0</span>, <span style="color: #666666">2</span>])]
+[[<span style="color: #666666">1</span> <span style="color: #666666">3</span>]
+ [<span style="color: #666666">7</span> <span style="color: #666666">9</span>]]
+<span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #408080; font-style: italic"># Grab row 0, 2, then column 0 from row 0 and column 2 from row 2</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> C[[<span style="color: #666666">0</span>, <span style="color: #666666">2</span>], [<span style="color: #666666">0</span>, <span style="color: #666666">2</span>]]
+[<span style="color: #666666">1</span> <span style="color: #666666">9</span>]
+</pre></div>
+
+<h2 id="___sec74" class="anchor">Transpose and upper/lower triangular parts </h2>
+
+<p>
+The transpose of a matrix <code>B</code> is obtained by <code>B.T</code>:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> B <span style="color: #666666">=</span> np<span style="color: #666666">.</span>array([[<span style="color: #666666">1</span>, <span style="color: #666666">2</span>], [<span style="color: #666666">3</span>, <span style="color: #666666">-4</span>]], dtype<span style="color: #666666">=</span><span style="color: #008000">float</span>)
+<span style="color: #666666">&gt;&gt;&gt;</span> B<span style="color: #666666">.</span>T                <span style="color: #408080; font-style: italic"># the transpose</span>
+array([[ <span style="color: #666666">1.</span>,  <span style="color: #666666">3.</span>],
+       [ <span style="color: #666666">2.</span>, <span style="color: #666666">-4.</span>]])
+</pre></div>
+<p>
+NumPy has rich functionality for doing operations on array objects.
+For example, one can strip down a matrix to its upper or lower triangular parts:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> np<span style="color: #666666">.</span>triu(B)  <span style="color: #408080; font-style: italic"># upper triangular part of B</span>
+array([[ <span style="color: #666666">1.</span>,  <span style="color: #666666">2.</span>],
+       [ <span style="color: #666666">0.</span>, <span style="color: #666666">-4.</span>]])
+<span style="color: #666666">&gt;&gt;&gt;</span> np<span style="color: #666666">.</span>tril(B)  <span style="color: #408080; font-style: italic"># lower triangular part of B</span>
+array([[ <span style="color: #666666">1.</span>,  <span style="color: #666666">0.</span>],
+       [ <span style="color: #666666">3.</span>, <span style="color: #666666">-4.</span>]])
+</pre></div>
+
+<h2 id="___sec75" class="anchor">Solving linear systems </h2>
+
+<p>
+The perhaps most frequent operation in linear algebra is the solution
+of systems of linear algebraic equations: \( Ax=b \), where \( A \) is a coefficient
+matrix, \( b \) is a given right-hand side vector, and \( x \) is the solution vector.
+The function <code>np.linalg.solve(A, b)</code> does the job:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> A <span style="color: #666666">=</span> np<span style="color: #666666">.</span>array([[<span style="color: #666666">1</span>, <span style="color: #666666">2</span>], [<span style="color: #666666">-2</span>, <span style="color: #666666">2.5</span>]])
+<span style="color: #666666">&gt;&gt;&gt;</span> x <span style="color: #666666">=</span> np<span style="color: #666666">.</span>array([<span style="color: #666666">-1</span>, <span style="color: #666666">1</span>], dtype<span style="color: #666666">=</span><span style="color: #008000">float</span>)  <span style="color: #408080; font-style: italic"># pick a solution</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> b <span style="color: #666666">=</span> np<span style="color: #666666">.</span>dot(A, x)                    <span style="color: #408080; font-style: italic"># find right-hand side</span>
+
+<span style="color: #666666">&gt;&gt;&gt;</span> np<span style="color: #666666">.</span>linalg<span style="color: #666666">.</span>solve(A, b)               <span style="color: #408080; font-style: italic"># will this compute x?</span>
+array([<span style="color: #666666">-1.</span>,  <span style="color: #666666">1.</span>])
+</pre></div>
+
+<h2 id="___sec76" class="anchor">Matrix row and column operations </h2>
+
+<p>
+Implementing Gaussian elimination constitutes a good pedagogical example on
+how to perform row and column operations on a matrix. Some
+needed functionality is
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>A[[i, j]] <span style="color: #666666">=</span> A[[j, i]]  <span style="color: #408080; font-style: italic"># swap rows i and j</span>
+A[i] <span style="color: #666666">*=</span> k              <span style="color: #408080; font-style: italic"># multiply row i by a constant k</span>
+A[j] <span style="color: #666666">+=</span> k<span style="color: #666666">*</span>A[i]         <span style="color: #408080; font-style: italic"># add row i, multiplied by k, to row j</span>
+</pre></div>
+<p>
+With these operations, Gaussian elimination is programmed as follows.
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>m, n <span style="color: #666666">=</span> shape(A)
+<span style="color: #008000; font-weight: bold">for</span> j <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(n <span style="color: #666666">-</span> <span style="color: #666666">1</span>):
+    <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(j <span style="color: #666666">+</span> <span style="color: #666666">1</span>, m):
+        A[i,j:] <span style="color: #666666">-=</span> (A[i,j]<span style="color: #666666">/</span>A[j,j])<span style="color: #666666">*</span>A[j,j:]
+</pre></div>
+<p>
+Note the special syntax <code>j:</code>, which refers to indices from j and up to the end of the array.
+More generally, when referring to an array <code>a</code> with length <code>n</code>, the following are equivalent:
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>a[<span style="color: #666666">0</span>:n]
+a[:n]
+a[<span style="color: #666666">0</span>:]
+a[:]
+</pre></div>
+<p>
+In the code for Gaussian elimination, we first eliminate the entries below the diagonal in the
+first column, by adding a scaled version of the first row to the other
+rows. Then the same procedure is applied for the second row, and so
+on. The result is an upper triangular matrix. The code can fail if
+some of the entries <code>A[j,j]</code> become zero along the way. To avoid
+this, we can swap rows when the problem arises.  The following code
+implements the idea and will not fail, even if some of the columns are zero.
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">Gaussian_elimination</span>(A):
+    rank <span style="color: #666666">=</span> <span style="color: #666666">0</span>
+    m, n <span style="color: #666666">=</span> np<span style="color: #666666">.</span>shape(A)
+    i <span style="color: #666666">=</span> <span style="color: #666666">0</span>
+    <span style="color: #008000; font-weight: bold">for</span> j <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(n):
+        p <span style="color: #666666">=</span> np<span style="color: #666666">.</span>argmax(<span style="color: #008000">abs</span>(A[i:m,j]))
+        <span style="color: #008000; font-weight: bold">if</span> p <span style="color: #666666">&gt;</span> <span style="color: #666666">0</span>: <span style="color: #408080; font-style: italic"># swap rows</span>
+            A[[i,p<span style="color: #666666">+</span>i]] <span style="color: #666666">=</span> A[[p<span style="color: #666666">+</span>i, i]]
+        <span style="color: #008000; font-weight: bold">if</span> A[i,j] <span style="color: #666666">!=</span> <span style="color: #666666">0</span>:
+            <span style="color: #408080; font-style: italic"># j is a pivot column</span>
+            rank <span style="color: #666666">+=</span> <span style="color: #666666">1</span>
+            <span style="color: #008000; font-weight: bold">for</span> r <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(i<span style="color: #666666">+1</span>, m):
+                A[r,j:] <span style="color: #666666">-=</span> (A[r,j]<span style="color: #666666">/</span>A[i,j])<span style="color: #666666">*</span>A[i,j:]
+            i <span style="color: #666666">+=</span> <span style="color: #666666">1</span>
+        <span style="color: #008000; font-weight: bold">if</span> i <span style="color: #666666">&gt;</span> m:
+            <span style="color: #008000; font-weight: bold">break</span>
+    <span style="color: #008000; font-weight: bold">return</span> A, rank
+</pre></div>
+<p>
+Note that we stick to the habit of returning all results from a function,
+here the modified matrix <code>A</code> and its rank.
+
+<h2 id="___sec77" class="anchor">Computing the rank of a matrix </h2>
+
+<p>
+The rank of a matrix equals the number of pivot columns after Gaussian
+elimination.  The variable <code>rank</code> counts these in the code above.
+
+<p>
+Due to rounding errors, the computed rank may be higher than the
+actual rank: the rounding errors may imply that <code>A[i,j] != 0</code> is true,
+even if Gaussian elimination performed in exact arithmetics gives exactly zero.
+Such situations can be avoided by replacing <code>if A[i,j] !=0:</code>
+with <code>if abs(A[i,j]) &gt; tol:</code>, where <code>tol</code> is some small
+tolerance.
+
+<p>
+A more reliable way to compute the rank is to compute the
+singular value decomposition of <code>A</code>, and check how many of the
+singular values that are larger than a threshold <code>epsilon</code>:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> A <span style="color: #666666">=</span> np<span style="color: #666666">.</span>array([[<span style="color: #666666">1</span>, <span style="color: #666666">2.01</span>], [<span style="color: #666666">2.01</span>, <span style="color: #666666">4.0401</span>]])
+<span style="color: #666666">&gt;&gt;&gt;</span> U, s, V <span style="color: #666666">=</span> np<span style="color: #666666">.</span>linalg<span style="color: #666666">.</span>svd(A) <span style="color: #408080; font-style: italic"># s are the singular values of A</span>
+<span style="color: #408080; font-style: italic"># abs(s) &gt; tol gives an array with True and False values</span>
+<span style="color: #408080; font-style: italic"># s.nonzero() lists indices k so that s[k] != 0</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> shape((<span style="color: #008000">abs</span>(s) <span style="color: #666666">&gt;</span> tol)<span style="color: #666666">.</span>nonzero())[<span style="color: #666666">1</span>]  <span style="color: #408080; font-style: italic"># rank</span>
+<span style="color: #666666">1</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> A, rank <span style="color: #666666">=</span> Gaussian_elimination(A)
+<span style="color: #666666">&gt;&gt;&gt;</span> rank
+<span style="color: #666666">2</span>
+</pre></div>
+<p>
+If you use a tolerance check on the form <code>if abs(A[i,j]) &gt; 1E-10:</code>
+in the function <code>Gaussian_elimination</code>, the code will say that the rank is 1,
+which is the correct value also found by using the singular value
+decomposition.
+
+<p>
+It is known that the determinant is nonzero if and only if the rank equals the number of rows/columns.
+For the matrix \( A \) we used above, the determinant should thus be \( 0 \),
+but also here roundoff errors come into play:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> A <span style="color: #666666">=</span> np<span style="color: #666666">.</span>array([[<span style="color: #666666">1</span>, <span style="color: #666666">2.01</span>], [<span style="color: #666666">2.01</span>, <span style="color: #666666">4.0401</span>]])
+<span style="color: #666666">&gt;&gt;&gt;</span> A[<span style="color: #666666">0</span>, <span style="color: #666666">0</span>]<span style="color: #666666">*</span>A[<span style="color: #666666">1</span>, <span style="color: #666666">1</span>] <span style="color: #666666">-</span> A[<span style="color: #666666">0</span>, <span style="color: #666666">1</span>]<span style="color: #666666">*</span>A[<span style="color: #666666">1</span>, <span style="color: #666666">0</span>]
+<span style="color: #666666">8.881784197e-16</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> np<span style="color: #666666">.</span>linalg<span style="color: #666666">.</span>det(A)
+<span style="color: #666666">8.92619311799e-16</span>
+</pre></div>
+<p>
+Using our own Gaussian elimination function for computing the rank is
+less efficient than calling NumPy's singular value decomposition.
+Here are timings for a random \( 100\times 100 \)-matrix:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> A <span style="color: #666666">=</span> np<span style="color: #666666">.</span>random<span style="color: #666666">.</span>uniform(<span style="color: #666666">0</span>, <span style="color: #666666">1</span>, (<span style="color: #666666">100</span>, <span style="color: #666666">100</span>))
+<span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #666666">%</span>timeit U, s, V <span style="color: #666666">=</span> np<span style="color: #666666">.</span>linalg<span style="color: #666666">.</span>svd(A)
+<span style="color: #666666">100</span> loops, best of <span style="color: #666666">3</span>: <span style="color: #666666">3.7</span> ms per loop
+<span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #666666">%</span>timeit A, rank <span style="color: #666666">=</span> Gaussian_elimination(A)
+<span style="color: #666666">100</span> loops, best of <span style="color: #666666">3</span>: <span style="color: #666666">22.3</span> ms per loop
+</pre></div>
+
+<h2 id="___sec78" class="anchor">Symbolic linear algebra </h2>
+
+<p>
+SymPy supports symbolic computations also for linear algebra operations.
+We may create a matrix and find its inverse and determinant:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">sympy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">sym</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> A <span style="color: #666666">=</span> sym<span style="color: #666666">.</span>Matrix([[<span style="color: #666666">2</span>, <span style="color: #666666">0</span>], [<span style="color: #666666">0</span>, <span style="color: #666666">5</span>]])
+
+<span style="color: #666666">&gt;&gt;&gt;</span> A<span style="color: #666666">**-1</span>    <span style="color: #408080; font-style: italic"># the inverse</span>
+Matrix([
+[<span style="color: #666666">1/2</span>,   <span style="color: #666666">0</span>],
+[  <span style="color: #666666">0</span>, <span style="color: #666666">1/5</span>]])
+
+<span style="color: #666666">&gt;&gt;&gt;</span> A<span style="color: #666666">.</span>inv()  <span style="color: #408080; font-style: italic"># the inverse</span>
+Matrix([
+[<span style="color: #666666">1/2</span>,   <span style="color: #666666">0</span>],
+[  <span style="color: #666666">0</span>, <span style="color: #666666">1/5</span>]])
+
+<span style="color: #666666">&gt;&gt;&gt;</span> A<span style="color: #666666">.</span>det()  <span style="color: #408080; font-style: italic"># the determinant</span>
+<span style="color: #666666">10</span>
+</pre></div>
+<p>
+Note that the entries in the inverse matrix are rational numbers
+(<code>sym.Rational</code> objects to be precise).
+
+<p>
+Eigenvalues can also be computed exactly:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> A<span style="color: #666666">.</span>eigenvals()
+{<span style="color: #666666">2</span>: <span style="color: #666666">1</span>, <span style="color: #666666">5</span>: <span style="color: #666666">1</span>}
+</pre></div>
+<p>
+The output is a dictionary
+meaning here that 2 is an eigenvalue with multiplicity 1 and 5 is an
+eigenvalue with multiplicity 1. It is more convenient to have the eigenvalues
+in a list:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> e <span style="color: #666666">=</span> <span style="color: #008000">list</span>(A<span style="color: #666666">.</span>eigenvals()<span style="color: #666666">.</span>keys())
+<span style="color: #666666">&gt;&gt;&gt;</span> e
+[<span style="color: #666666">2</span>, <span style="color: #666666">5</span>]
+</pre></div>
+<p>
+Eigenvector computations have a somewhat complicated output:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> A<span style="color: #666666">.</span>eigenvects()
+[(<span style="color: #666666">2</span>, <span style="color: #666666">1</span>, [Matrix([
+[<span style="color: #666666">1</span>],
+[<span style="color: #666666">0</span>]])]), (<span style="color: #666666">5</span>, <span style="color: #666666">1</span>, [Matrix([
+[<span style="color: #666666">0</span>],
+[<span style="color: #666666">1</span>]])])]
+</pre></div>
+<p>
+The output is a list of three-tuples, one for each eigenvalue and eigenvector.
+The three-tuple contains the eigenvalue, its multiplicity, and the eigenvector
+as a <code>sym.Matrix</code> object.
+To isolate the first eigenvector, we can index the list and tuple:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> v1 <span style="color: #666666">=</span> A<span style="color: #666666">.</span>eigenvects()[<span style="color: #666666">0</span>][<span style="color: #666666">2</span>]
+<span style="color: #666666">&gt;&gt;&gt;</span> v1
+Matrix([
+[<span style="color: #666666">1</span>],
+[<span style="color: #666666">0</span>]])
+</pre></div>
+<p>
+The vector is a <code>sym.Matrix</code> object with two indices. To extract the
+vector elements in a plain list, we can do this:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> v1 <span style="color: #666666">=</span> [v1[i,<span style="color: #666666">0</span>] <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(v1<span style="color: #666666">.</span>shape[<span style="color: #666666">0</span>])]
+<span style="color: #666666">&gt;&gt;&gt;</span> v1
+[<span style="color: #666666">1</span>, <span style="color: #666666">0</span>]
+</pre></div>
+<p>
+The following code extracts all eigenvectors as a list of 2-lists, which may
+be a convenient data structure for the eigenvectors:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> v <span style="color: #666666">=</span> [[t[<span style="color: #666666">2</span>][<span style="color: #666666">0</span>][i,<span style="color: #666666">0</span>] <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(t[<span style="color: #666666">2</span>][<span style="color: #666666">0</span>]<span style="color: #666666">.</span>shape[<span style="color: #666666">0</span>])]
+         <span style="color: #008000; font-weight: bold">for</span> t <span style="color: #AA22FF; font-weight: bold">in</span> A<span style="color: #666666">.</span>eigenvects()]
+<span style="color: #666666">&gt;&gt;&gt;</span> v
+[[<span style="color: #666666">1</span>, <span style="color: #666666">0</span>], [<span style="color: #666666">0</span>, <span style="color: #666666">1</span>]]
+</pre></div>
+<p>
+The norm of a matrix or vector is an exact expression:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> A<span style="color: #666666">.</span>norm()
+sqrt(<span style="color: #666666">29</span>)
+<span style="color: #666666">&gt;&gt;&gt;</span> a <span style="color: #666666">=</span> sym<span style="color: #666666">.</span>Matrix([<span style="color: #666666">1</span>, <span style="color: #666666">2</span>])   <span style="color: #408080; font-style: italic"># vector [1, 2]</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> a
+Matrix([
+[<span style="color: #666666">1</span>],
+[<span style="color: #666666">2</span>]])
+<span style="color: #666666">&gt;&gt;&gt;</span> a<span style="color: #666666">.</span>norm()
+sqrt(<span style="color: #666666">5</span>)
+</pre></div>
+<p>
+The matrix-vector product and the dot product between vectors are
+done like this:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> A<span style="color: #666666">*</span>a                      <span style="color: #408080; font-style: italic"># matrix*vector</span>
+Matrix([
+[ <span style="color: #666666">2</span>],
+[<span style="color: #666666">10</span>]])
+<span style="color: #666666">&gt;&gt;&gt;</span> b <span style="color: #666666">=</span> sym<span style="color: #666666">.</span>Matrix([<span style="color: #666666">2</span>, <span style="color: #666666">-1</span>])  <span style="color: #408080; font-style: italic"># vector [2, -1]</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> a<span style="color: #666666">.</span>dot(b)
+<span style="color: #666666">0</span>
+</pre></div>
+<p>
+Solving linear systems exactly is also possible:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> x <span style="color: #666666">=</span> sym<span style="color: #666666">.</span>Matrix([<span style="color: #666666">-1</span>, <span style="color: #666666">1</span>])<span style="color: #666666">/2</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> x
+Matrix([
+[<span style="color: #666666">-1/2</span>],
+[ <span style="color: #666666">1/2</span>]])
+<span style="color: #666666">&gt;&gt;&gt;</span> b <span style="color: #666666">=</span> A<span style="color: #666666">*</span>x
+<span style="color: #666666">&gt;&gt;&gt;</span> x <span style="color: #666666">=</span> A<span style="color: #666666">.</span>LUsolve(b)  <span style="color: #408080; font-style: italic"># does it compute x?</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> x                 <span style="color: #408080; font-style: italic"># x is a matrix object</span>
+Matrix([
+[<span style="color: #666666">-1/2</span>],
+[ <span style="color: #666666">1/2</span>]])
+</pre></div>
+<p>
+Sometimes one wants to convert <code>x</code> to a plain <code>numpy</code> array with
+<code>float</code> values:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> x <span style="color: #666666">=</span> np<span style="color: #666666">.</span>array([<span style="color: #008000">float</span>(x[i,<span style="color: #666666">0</span>]<span style="color: #666666">.</span>evalf())
+                  <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(x<span style="color: #666666">.</span>shape[<span style="color: #666666">0</span>])])
+<span style="color: #666666">&gt;&gt;&gt;</span> x
+array([<span style="color: #666666">-0.5</span>,  <span style="color: #666666">0.5</span>])
+</pre></div>
+<p>
+Exact row operations can be done as exemplified here:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> A[<span style="color: #666666">1</span>,:] <span style="color: #666666">+</span> <span style="color: #666666">2*</span>A[<span style="color: #666666">0</span>,:]  <span style="color: #408080; font-style: italic"># [0,5] + 2*[2,0]</span>
+Matrix([[<span style="color: #666666">4</span>, <span style="color: #666666">5</span>]])
+</pre></div>
+<p>
+We refer to the online <a href="http://docs.sympy.org/dev/tutorial/matrices.html" target="_self">SymPy linear algebra tutorial</a> for more information.
+
+<h1 id="plot:surf" class="anchor">Plotting of scalar and vector fields</h1>
+
+<p>
+Visualization of scalar and vector fields in Python is commonly done
+using Matplotlib or Mayavi. Both packages support basic visualization of
+2D scalar and vector fields, but Mayavi offers more advanced
+three-dimensional visualization techniques,
+especially for 3D scalar and vector fields.
+
+<p>
+One can also use SciTools for visualizing 2D scalar and vector
+fields, using either Matplotlib, Gnuplot, or VTK as plotting engines, but
+this topic is omitted from the present book.
+However, for fast visualization of large 2D
+scalar fields, Gnuplot is a viable tool, and the SciTools interface
+offers a convenient MATLAB-style set of commands to operate Gnuplot.
+
+<p>
+To exemplify visualization of scalar and vector fields with
+Matplotlib and Mayavi,
+we use a common set of examples. A scalar function of \( x \)
+and \( y \) is visualized either as a flat two-dimensional plot with
+contour lines of the field, or as a three-dimensional surface where
+the height of the surface corresponds to the function value of the
+field. In the latter case we also add a three-dimensional
+parameterized curve to the plot.
+
+<p>
+To illustrate plotting of vector fields, we simply plot the gradient of the scalar field, together with the scalar field.
+Our convention for variable names goes as follows:
+
+<ul>
+<li> <code>x</code>, <code>y</code> for one-dimensional coordinates along each axis direction.</li>
+<li> <code>xv</code>, <code>yv</code> for the corresponding
+  vectorized coordinates in a 2D.</li>
+<li> <code>u</code>, <code>v</code> for the components of a vector field
+  at points corresponding to <code>xv</code>, <code>yv</code>.</li>
+</ul>
+
+The following sections contain more mathematical details on the various
+scalar and vector fields we aim to plot.
+<!-- Most figures in this context -->
+<!-- we generated by Matplotlib.  Succeeding sections explain the -->
+<!-- corresponding code and how the same plots can be made with Mayavi. -->
+
+<h2 id="plot:surf:install" class="anchor">Installation</h2>
+
+<p>
+Previously in the book we have explained how to obtain Matplotlib for various platforms.
+To obtain Mayavi on Ubuntu platforms you can write
+
+<p>
+
+<!-- code=text (!bc sys) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>pip install mayavi --upgrade
+</pre></div>
+<p>
+For Mac OS X and Windows, we recommend using Anaconda.
+To obtain Mayavi for Anaconda you can write
+
+<p>
+
+<!-- code=text (!bc sys) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>conda install mayavi
+</pre></div>
+
+<h2 id="plot:surf:mesh_surf" class="anchor">Surface plots</h2>
+
+<p>
+We consider the 2D scalar field defined by
+
+$$
+\begin{equation}
+h(x,y) = \frac{h_0}{1+ \frac{x^2+y^2}{R^2}}.
+\tag{13}
+\end{equation}
+$$
+
+\( h(x,y) \) may model the height of an isolated circular mountain,
+\( h \) being the height above sea level,
+while \( x \) and \( y \) are Cartesian coordinates on the earth's surface,
+\( h_0 \) the height of the mountain, and \( R \) the radius of the mountain.
+Since mountains are actually quite flat (or more precisely,
+their heights are small compared to the horizontal extent), we use
+meter as length unit for vertical distances (\( z \) direction) and km as length
+unit for horizontal distances (\( x \) and \( y \) coordinates).
+Prior to all code below we have initialized \( h_0 \) and \( R \) with
+the following values: \( h_0=2277 \) m and \( R=4 \) km.
+
+<h3 id="___sec82" class="anchor">Grid for 2D scalar fields </h3>
+
+<p>
+Before we can plot \( h(x,y) \), we need to create a rectangular grid in the \( xy \) plane with all the points used for plotting.
+Regardless of which plotting package we will use later on, the grid can be made as follows:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>x <span style="color: #666666">=</span> y <span style="color: #666666">=</span> np<span style="color: #666666">.</span>linspace(<span style="color: #666666">-10.</span>, <span style="color: #666666">10.</span>, <span style="color: #666666">41</span>)
+xv, yv <span style="color: #666666">=</span> np<span style="color: #666666">.</span>meshgrid(x, y, indexing<span style="color: #666666">=</span><span style="color: #BA2121">&#39;ij&#39;</span>, sparse<span style="color: #666666">=</span><span style="color: #008000">False</span>)
+
+hv <span style="color: #666666">=</span> h0<span style="color: #666666">/</span>(<span style="color: #666666">1</span> <span style="color: #666666">+</span> (xv<span style="color: #666666">**2+</span>yv<span style="color: #666666">**2</span>)<span style="color: #666666">/</span>(R<span style="color: #666666">**2</span>))
+</pre></div>
+<p>
+The grid is based on equally spaced coordinates <code>x</code> and <code>y</code> in the
+interval \( [-10,10] \) km.
+Note the mysterious extra parameters to <code>meshgrid</code> here, which are needed in order for the coordinates to have the right order such that the arithmetics
+in the expression for <code>hv</code> becomes correct.
+The expression computes the
+surface value at the \( 41\times 41 \) grid points in one vectorized operation.
+
+<p>
+A surface plot of a 2D scalar field \( h(x,y) \) is a visualization of the surface \( z=h(x,y) \) in three-dimensional space.
+Most plotting packages have functions which can be used to create surface plots of 2D scalar fields.
+These can be either <em>wireframe plots</em>, where only lines connecting the grid points are drawn,
+or plots where the faces of the surface are colored.
+In Figure <a href="#plotmatplotlib">12</a> we have shown two such plots of the surface \( h(x,y) \). The section <a href="#matplotlibsurfaceplots">Surface plots</a> presents the code which generates these plots.
+
+<p>
+<center> <!-- figure label: --> <div id="plotmatplotlib"></div> <!-- FIGURE -->
+<hr class="figure">
+<center><p class="caption">Figure 12:  Two different plots of a mountain. The right plot also shows a trajectory to the top of the mountain.  <!-- caption label: plotmatplotlib --> </p></center>
+<p><img src="fig-plot/plot_matplotlib.png" align="bottom" ></p>
+</center>
+
+<h2 id="plot:surf:3Dcurve" class="anchor">Parameterized curve</h2>
+
+<p>
+To illustrate the plotting of three-dimensional parameterized curves,
+we consider a trajectory that represents a circular climb to the top
+of the mountain:
+
+$$
+\begin{align}
+\boldsymbol{r}(t) = & \left( 10\left(1 - \frac{t}{2\pi}\right)\cos(t) \right) \boldsymbol{i} + \left( 10\left(1 - \frac{t}{2\pi}\right)\sin(t) \right) \boldsymbol{j} \nonumber\\ 
+ & + \frac{h_0}{1 + \frac{100(1 - t/(2\pi))^2}{R^2}} \boldsymbol{k}.
+\tag{14}
+\end{align}
+$$
+
+Here \( \boldsymbol{i} \), \( \boldsymbol{j} \), and \( \boldsymbol{k} \) denote the unit vectors in the \( x \)-, \( y \)-, and \( z \)-directions, respectively.
+The coordinates of \( \boldsymbol{r}(t) \) can be produced by
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>s <span style="color: #666666">=</span> np<span style="color: #666666">.</span>linspace(<span style="color: #666666">0</span>, <span style="color: #666666">2*</span>np<span style="color: #666666">.</span>pi, <span style="color: #666666">100</span>)
+curve_x <span style="color: #666666">=</span> <span style="color: #666666">10*</span>(<span style="color: #666666">1</span> <span style="color: #666666">-</span> s<span style="color: #666666">/</span>(<span style="color: #666666">2*</span>np<span style="color: #666666">.</span>pi))<span style="color: #666666">*</span>np<span style="color: #666666">.</span>cos(s)
+curve_y <span style="color: #666666">=</span> <span style="color: #666666">10*</span>(<span style="color: #666666">1</span> <span style="color: #666666">-</span> s<span style="color: #666666">/</span>(<span style="color: #666666">2*</span>np<span style="color: #666666">.</span>pi))<span style="color: #666666">*</span>np<span style="color: #666666">.</span>sin(s)
+curve_z <span style="color: #666666">=</span> h0<span style="color: #666666">/</span>(<span style="color: #666666">1</span> <span style="color: #666666">+</span> <span style="color: #666666">100*</span>(<span style="color: #666666">1</span> <span style="color: #666666">-</span> s<span style="color: #666666">/</span>(<span style="color: #666666">2*</span>np<span style="color: #666666">.</span>pi))<span style="color: #666666">**2/</span>(R<span style="color: #666666">**2</span>))
+</pre></div>
+<p>
+The parameterized curve is shown together with the surface \( h(x,y) \) in the right plot in Figure <a href="#plotmatplotlib">12</a>.
+
+<h2 id="plot:surf:contours" class="anchor">Contour lines</h2>
+
+<p>
+Contour lines are lines defined by the implicit equation \( h(x,y)=C \), where
+\( C \) is some constant representing the contour level.
+Normally, we let \( C \) run over some equally spaced values, and very often, the
+plotting program computes the \( C \) values.
+To distinguish contours, one often associates each contour level \( C \) with its own color.
+
+<p>
+Figure <a href="#simplecontourmatplotlib">13</a> shows different ways contour lines
+can be used to visualize the surface \( h(x,y) \).  The first and
+last plot are visualizations utilizing two spatial dimensions.  The
+first draws a small set of contour lines only, while the last one
+displays the surface as an image, whose colors reflect the values of
+the field, or equivalently, the height of the surface.  The third plot
+actually combines three different types of contours, each type
+corresponding to keeping a coordinate constant and projecting the
+contours on a &quot;wall&quot;.  The code used to generate these plots is
+presented in the section <a href="#matplotlibcontourplots">Contour plots</a>.
+
+<p>
+<center> <!-- figure label: --> <div id="simplecontourmatplotlib"></div> <!-- FIGURE -->
+<hr class="figure">
+<center><p class="caption">Figure 13:  Different types of contour plots of a 2D scalar field in two and three dimensions.  <!-- caption label: simplecontourmatplotlib --> </p></center>
+<p><img src="fig-plot/simple_contour_matplotlib.png" align="bottom" ></p>
+</center>
+
+<h2 id="plot:surf:gradient" class="anchor">The gradient vector field</h2>
+
+<p>
+The <em>gradient vector field</em> \( \nabla h \) of a 2D scalar field \( h(x,y) \) is defined by
+
+$$
+\begin{equation}
+\nabla h = \frac{\partial h}{\partial x}\boldsymbol{i} +  \frac{\partial h}{\partial y}\boldsymbol{j}.
+\tag{15}
+\end{equation}
+$$
+
+One learns in vector calculus that the gradient points in the direction where \( h \) increases most, and
+that the gradients are orthogonal to the contour lines.
+This is something we can easily illustrate by creating 2D plots of the contours and the gradient field.
+A challenge in making such plots is to get the right arrow lengths so
+that the arrows are well visible, but they do not collide and make a
+cluttered visual impression. Since the arrows are drawn at each point in
+a 2D grid, one way of controlling the number of arrows is to control
+the resolution of the grid.
+
+<p>
+So, let us create a grid with 20 instead of 40 intervals in the horizontal
+directions:
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>x2 <span style="color: #666666">=</span> y2 <span style="color: #666666">=</span> np<span style="color: #666666">.</span>linspace(<span style="color: #666666">-10.</span>,<span style="color: #666666">10.</span>,<span style="color: #666666">11</span>)
+x2v, y2v <span style="color: #666666">=</span> np<span style="color: #666666">.</span>meshgrid(x2, y2, indexing<span style="color: #666666">=</span><span style="color: #BA2121">&#39;ij&#39;</span>, sparse<span style="color: #666666">=</span><span style="color: #008000">False</span>)
+h2v <span style="color: #666666">=</span> h0<span style="color: #666666">/</span>(<span style="color: #666666">1</span> <span style="color: #666666">+</span> (x2v<span style="color: #666666">**2</span> <span style="color: #666666">+</span> y2v<span style="color: #666666">**2</span>)<span style="color: #666666">/</span>(R<span style="color: #666666">**2</span>)) <span style="color: #408080; font-style: italic"># h on coarse grid</span>
+</pre></div>
+<p>
+The gradient vector field of \( h(x,y) \) can now be computed using the function <code>np.gradient</code>:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>dhdx, dhdy <span style="color: #666666">=</span> np<span style="color: #666666">.</span>gradient(h2v) <span style="color: #408080; font-style: italic"># dh/dx, dh/dy</span>
+</pre></div>
+<p>
+The gradient field <a href="#mjx-eqn-15">(15)</a> together with the contours appear in Figure <a href="#plot:surf:mpl:quiver:fig">14</a>,
+from which the orthogonality can be easily seen.
+The section <a href="#plot:surf:mpl:quiver">Vector field plots</a> explains the code needed to make this plot.
+
+<p>
+<center> <!-- figure label: --> <div id="plot:surf:mpl:quiver:fig"></div> <!-- FIGURE -->
+<hr class="figure">
+<center><p class="caption">Figure 14:  Gradient field with contour plot.  <!-- caption label: plot:surf:mpl:quiver:fig --> </p></center>
+<p><img src="fig-plot/quiver_matplotlib_advanced.png" align="bottom" ></p>
+</center>
+
+<h1 id="___sec86" class="anchor">Matplotlib </h1>
+
+<p>
+We import any visualization package under the name <code>plt</code>, so
+for Matplotlib the import is done by
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">plt</span>
+</pre></div>
+<p>
+When creating two-dimensional plots of
+scalar and vector fields, we shall make use
+of a Matplotlib <code>Axes</code> object, named <code>ax</code> and made by
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>fig <span style="color: #666666">=</span> plt<span style="color: #666666">.</span>figure(<span style="color: #666666">1</span>)   <span style="color: #408080; font-style: italic"># Get current figure</span>
+ax <span style="color: #666666">=</span> fig<span style="color: #666666">.</span>gca()        <span style="color: #408080; font-style: italic"># Get current axes</span>
+</pre></div>
+<p>
+For three-dimensional visualization, we need the following alternative
+lines:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">mpl_toolkits.mplot3d</span> <span style="color: #008000; font-weight: bold">import</span> Axes3D
+
+fig <span style="color: #666666">=</span> plt<span style="color: #666666">.</span>figure(<span style="color: #666666">1</span>)
+ax <span style="color: #666666">=</span> fig<span style="color: #666666">.</span>gca(projection<span style="color: #666666">=</span><span style="color: #BA2121">&#39;3d&#39;</span>)
+</pre></div>
+
+<h2 id="matplotlibsurfaceplots" class="anchor">Surface plots</h2>
+
+<p>
+The Matplotlib functions for producing surface plots of 2D scalar fields  are
+<code>ax.plot_wireframe</code> and <code>ax.plot_surface</code>.
+The first one produces a wireframe plot, and the second one colors the surface.
+The following code uses the functions to produce the plots shown in Figure
+<a href="#plotmatplotlib">12</a>, once the grid has been defined as in the section <a href="#plot:surf:mesh_surf">Surface plots</a>,
+and the coordinates of the parameterized curve have been computed as in the section <a href="#plot:surf:3Dcurve">Parameterized curve</a>.
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>fig <span style="color: #666666">=</span> plt<span style="color: #666666">.</span>figure(<span style="color: #666666">1</span>)
+ax <span style="color: #666666">=</span> fig<span style="color: #666666">.</span>gca(projection<span style="color: #666666">=</span><span style="color: #BA2121">&#39;3d&#39;</span>)
+ax<span style="color: #666666">.</span>plot_wireframe(xv, yv, hv, rstride<span style="color: #666666">=2</span>, cstride<span style="color: #666666">=2</span>)
+
+<span style="color: #408080; font-style: italic"># Simple plot of mountain and parametric curve</span>
+fig <span style="color: #666666">=</span> plt<span style="color: #666666">.</span>figure(<span style="color: #666666">2</span>)
+ax <span style="color: #666666">=</span> fig<span style="color: #666666">.</span>gca(projection<span style="color: #666666">=</span><span style="color: #BA2121">&#39;3d&#39;</span>)
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">matplotlib</span> <span style="color: #008000; font-weight: bold">import</span> cm
+ax<span style="color: #666666">.</span>plot_surface(xv, yv, hv, cmap<span style="color: #666666">=</span>cm<span style="color: #666666">.</span>coolwarm,
+                rstride<span style="color: #666666">=1</span>, cstride<span style="color: #666666">=1</span>)
+
+<span style="color: #408080; font-style: italic"># add the parametric curve. linewidth controls the width of the curve</span>
+ax<span style="color: #666666">.</span>plot(curve_x, curve_y, curve_z, linewidth<span style="color: #666666">=5</span>)
+</pre></div>
+<p>
+Recall that a final
+<code>plt.show()</code> command is necessary to force Matplotlib to show a plot on the screen.
+
+<p>
+Note that the second plot in this figure is drawn using a finer grid.
+This is controlled with the <code>rstride</code> and <code>cstride</code> parameters, which
+sets the number of grid lines in each direction.  Setting one of these
+to 1 means that a grid line is drawn for every value in the grid in
+the corresponding direction, and setting to 2 means that a grid line
+will be drawn for every two values in the grid. You will normally need
+to experiment with such parameters to get a visually attractive plot.
+
+<p>
+A surface with colors reflecting the height of the surface
+needs specification of a <em>color map</em>, which is
+a mapping between function values and colors.
+Above we applied the common <code>coolwarm</code>
+scheme which goes from blue (&quot;cool&quot; color for minimum values) to red
+(&quot;warm&quot; color for maximum values).
+There are lots of colormaps to choose from, and you have
+to experiment to find appropriate choices according to your taste and
+to the problem at hand.
+
+<p>
+To the latter plot we also added the parameterized curve \( \boldsymbol{r}(t) \),
+defined by <a href="#mjx-eqn-14">(14)</a>, using the command <code>plot</code>.  The
+attribute <code>linewidth</code> is increased here in order to make the curve thicker and
+more visible.  By default, Matplotlib adds plots to each other without
+any need for <code>plt.hold('on')</code>, although such a command can indeed be
+used.
+
+<h2 id="matplotlibcontourplots" class="anchor">Contour plots</h2>
+
+<p>
+The following code exemplifies different types of contour plots.  The
+first two plots (default two-dimensional and three-dimensional contour
+plots) are shown in Figure <a href="#simplecontourmatplotlib">13</a>. The next four
+plots appear in Figure <a href="#advancedcontourmatplotlib">15</a>. Note that, when
+we asked Matplotlib to plot 10 contours, the response was,
+surprisingly, 9 contour lines, where one of the contours was
+incomplete.  This kind of behavior may also be found in other plotting
+packages (such as MATLAB): the package will do its best to plot the
+requested number of complete contour lines, but there is no guarantee
+that this number is achieved exactly.
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #408080; font-style: italic"># Default two-dimensional contour plot with 7 colored lines</span>
+fig <span style="color: #666666">=</span> plt<span style="color: #666666">.</span>figure(<span style="color: #666666">3</span>)
+ax <span style="color: #666666">=</span> fig<span style="color: #666666">.</span>gca()
+ax<span style="color: #666666">.</span>contour(xv, yv, hv)
+plt<span style="color: #666666">.</span>axis(<span style="color: #BA2121">&#39;equal&#39;</span>)
+
+<span style="color: #408080; font-style: italic"># Default three-dimensional contour plot</span>
+fig <span style="color: #666666">=</span> plt<span style="color: #666666">.</span>figure(<span style="color: #666666">4</span>)
+ax <span style="color: #666666">=</span> fig<span style="color: #666666">.</span>gca(projection<span style="color: #666666">=</span><span style="color: #BA2121">&#39;3d&#39;</span>)
+ax<span style="color: #666666">.</span>contour(xv, yv, hv)
+
+<span style="color: #408080; font-style: italic"># Plot of mountain and contour lines projected on the</span>
+<span style="color: #408080; font-style: italic"># coordinate planes</span>
+fig <span style="color: #666666">=</span> plt<span style="color: #666666">.</span>figure(<span style="color: #666666">5</span>)
+ax <span style="color: #666666">=</span> fig<span style="color: #666666">.</span>gca(projection<span style="color: #666666">=</span><span style="color: #BA2121">&#39;3d&#39;</span>)
+ax<span style="color: #666666">.</span>plot_surface(xv, yv, hv, cmap<span style="color: #666666">=</span>cm<span style="color: #666666">.</span>coolwarm,
+                rstride<span style="color: #666666">=1</span>, cstride<span style="color: #666666">=1</span>)
+<span style="color: #408080; font-style: italic"># zdir is the projection axis</span>
+<span style="color: #408080; font-style: italic"># offset is the offset of the projection plane</span>
+ax<span style="color: #666666">.</span>contour(xv, yv, hv, zdir<span style="color: #666666">=</span><span style="color: #BA2121">&#39;z&#39;</span>, offset<span style="color: #666666">=-1000</span>, cmap<span style="color: #666666">=</span>cm<span style="color: #666666">.</span>coolwarm)
+ax<span style="color: #666666">.</span>contour(xv, yv, hv, zdir<span style="color: #666666">=</span><span style="color: #BA2121">&#39;x&#39;</span>, offset<span style="color: #666666">=-10</span>,   cmap<span style="color: #666666">=</span>cm<span style="color: #666666">.</span>coolwarm)
+ax<span style="color: #666666">.</span>contour(xv, yv, hv, zdir<span style="color: #666666">=</span><span style="color: #BA2121">&#39;y&#39;</span>, offset<span style="color: #666666">=10</span>,    cmap<span style="color: #666666">=</span>cm<span style="color: #666666">.</span>coolwarm)
+
+<span style="color: #408080; font-style: italic"># View the contours by displaying as an image</span>
+fig <span style="color: #666666">=</span> plt<span style="color: #666666">.</span>figure(<span style="color: #666666">6</span>)
+ax <span style="color: #666666">=</span> fig<span style="color: #666666">.</span>gca()
+ax<span style="color: #666666">.</span>imshow(hv)
+
+<span style="color: #408080; font-style: italic"># 10 contour lines (equally spaced contour levels)</span>
+fig <span style="color: #666666">=</span> plt<span style="color: #666666">.</span>figure(<span style="color: #666666">7</span>)
+ax <span style="color: #666666">=</span> fig<span style="color: #666666">.</span>gca()
+ax<span style="color: #666666">.</span>contour(xv, yv, hv, <span style="color: #666666">10</span>)
+plt<span style="color: #666666">.</span>axis(<span style="color: #BA2121">&#39;equal&#39;</span>)
+
+<span style="color: #408080; font-style: italic"># 10 black (&#39;k&#39;) contour lines</span>
+fig <span style="color: #666666">=</span> plt<span style="color: #666666">.</span>figure(<span style="color: #666666">8</span>)
+ax <span style="color: #666666">=</span> fig<span style="color: #666666">.</span>gca()
+ax<span style="color: #666666">.</span>contour(xv, yv, hv, <span style="color: #666666">10</span>, colors<span style="color: #666666">=</span><span style="color: #BA2121">&#39;k&#39;</span>)
+plt<span style="color: #666666">.</span>axis(<span style="color: #BA2121">&#39;equal&#39;</span>)
+
+<span style="color: #408080; font-style: italic"># Specify the contour levels explicitly as a list</span>
+fig <span style="color: #666666">=</span> plt<span style="color: #666666">.</span>figure(<span style="color: #666666">9</span>)
+ax <span style="color: #666666">=</span> fig<span style="color: #666666">.</span>gca()
+levels <span style="color: #666666">=</span> [<span style="color: #666666">500.</span>, <span style="color: #666666">1000.</span>, <span style="color: #666666">1500.</span>, <span style="color: #666666">2000.</span>]
+ax<span style="color: #666666">.</span>contour(xv, yv, hv, levels<span style="color: #666666">=</span>levels)
+plt<span style="color: #666666">.</span>axis(<span style="color: #BA2121">&#39;equal&#39;</span>)
+
+<span style="color: #408080; font-style: italic"># Add labels with the contour level for each contour line</span>
+fig <span style="color: #666666">=</span> plt<span style="color: #666666">.</span>figure(<span style="color: #666666">10</span>)
+ax <span style="color: #666666">=</span> fig<span style="color: #666666">.</span>gca()
+cs <span style="color: #666666">=</span> ax<span style="color: #666666">.</span>contour(xv, yv, hv)
+plt<span style="color: #666666">.</span>clabel(cs)
+plt<span style="color: #666666">.</span>axis(<span style="color: #BA2121">&#39;equal&#39;</span>)
+</pre></div>
+<p>
+<center> <!-- figure label: --> <div id="advancedcontourmatplotlib"></div> <!-- FIGURE -->
+<hr class="figure">
+<center><p class="caption">Figure 15:  Some other contour plots with Matplotlib: 10 contour lines (upper left), 10 black contour lines (upper right), specified contour levels (lower left), and labeled levels (lower right).  <!-- caption label: advancedcontourmatplotlib --> </p></center>
+<p><img src="fig-plot/advanced_contour_matplotlib.png" align="bottom" height=400 width=600></p>
+</center>
+
+<h2 id="plot:surf:mpl:quiver" class="anchor">Vector field plots</h2>
+
+<p>
+The code for plotting the gradient field <a href="#mjx-eqn-15">(15)</a> together
+with contours goes as explained below, once the grid has been defined as in
+the section <a href="#plot:surf:gradient">The gradient vector field</a>.
+The corresponding plot is shown in Figure <a href="#plot:surf:mpl:quiver:fig">14</a>.
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>fig <span style="color: #666666">=</span> plt<span style="color: #666666">.</span>figure(<span style="color: #666666">11</span>)
+ax <span style="color: #666666">=</span> fig<span style="color: #666666">.</span>gca()
+ax<span style="color: #666666">.</span>quiver(x2v, y2v, dhdx, dhdy, color<span style="color: #666666">=</span><span style="color: #BA2121">&#39;r&#39;</span>,
+          angles<span style="color: #666666">=</span><span style="color: #BA2121">&#39;xy&#39;</span>, scale_units<span style="color: #666666">=</span><span style="color: #BA2121">&#39;xy&#39;</span>)
+ax<span style="color: #666666">.</span>contour(xv, yv, hv)
+plt<span style="color: #666666">.</span>axis(<span style="color: #BA2121">&#39;equal&#39;</span>)
+</pre></div>
+
+<h1 id="___sec90" class="anchor">Mayavi </h1>
+
+<p>
+Mayavi is an advanced, free, easy to use, scientific data visualizer,
+with an emphasis on three-dimensional visualization techniques.  The
+package is written in Python, and uses the Visualization Toolkit (VTK)
+in C++ for rendering graphics. Since VTK can be configured with
+different backends, so can Mayavi.  Mayavi is cross platform and runs
+on most platforms, including Mac OS X, Windows, and Linux.
+
+<p>
+The web page <a href="http://docs.enthought.com/mayavi/mayavi/" target="_self"><tt>http://docs.enthought.com/mayavi/mayavi/</tt></a> collects
+pointers to all relevant documentation of Mayavi.  We shall primarily
+deal with the <code>mayavi.mlab</code> module, which provides a simple interface
+to plotting of 2D scalar and vector fields with commands that mimic
+those of MATLAB.  Let us import this module under our usual name <code>plt</code>
+for a plotting package:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">mayavi.mlab</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">plt</span>
+</pre></div>
+<p>
+The official documentation of the <code>mlab</code> module is provided in two
+places, one for the <a href="http://docs.enthought.com/mayavi/mayavi/auto/mlab_helper_functions.html" target="_self">basic functionality</a>
+and one for <a href="http://docs.enthought.com/mayavi/mayavi/auto/mlab_other_functions.html" target="_self">further functionality</a>.
+Basic <a href="http://docs.enthought.com/mayavi/mayavi/auto/mlab_figure.html" target="_self">figure
+handling</a>
+is very similar to the one we know from Matplotlib.  Just as for
+Matplotlib, all plotting commands you do in <code>mlab</code> will go into the
+same figure, until you manually change to a new figure.
+
+<h2 id="___sec91" class="anchor">Surface plots </h2>
+
+<p>
+Mayavi has the functions <code>mesh</code> and <code>surf</code> for producing surface plots.
+These are similar, but <code>surf</code> assumes an orthogonal grid, and uses this assumption to make efficient data structures, while
+<code>mesh</code> makes no such assumptions on the grid.
+Here we only use orthogonal grids and hence apply <code>surf</code>.
+The following code plots the surface \( h(x,y) \) in <a href="#mjx-eqn-13">(13)</a>, as
+well as the parameterized curve \( \boldsymbol{r}(t) \) in <a href="#mjx-eqn-14">(14)</a>.
+The resulting graphics appears in Figure <a href="#plotmayavi">16</a>.
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #408080; font-style: italic"># Create a figure with white background and black foreground</span>
+plt<span style="color: #666666">.</span>figure(<span style="color: #666666">1</span>, fgcolor<span style="color: #666666">=</span>(<span style="color: #666666">.0</span>, <span style="color: #666666">.0</span>, <span style="color: #666666">.0</span>), bgcolor<span style="color: #666666">=</span>(<span style="color: #666666">1.0</span>, <span style="color: #666666">1.0</span>, <span style="color: #666666">1.0</span>))
+<span style="color: #408080; font-style: italic"># &#39;representation&#39; sets type of plot, here a wireframe plot</span>
+plt<span style="color: #666666">.</span>surf(xv, yv, hv, extent<span style="color: #666666">=</span>(<span style="color: #666666">0</span>,<span style="color: #666666">1</span>,<span style="color: #666666">0</span>,<span style="color: #666666">1</span>,<span style="color: #666666">0</span>,<span style="color: #666666">1</span>),
+         representation<span style="color: #666666">=</span><span style="color: #BA2121">&#39;wireframe&#39;</span>)
+<span style="color: #408080; font-style: italic"># Decorate axes (nb_labels is the number of labels used</span>
+<span style="color: #408080; font-style: italic"># in each direction)</span>
+plt<span style="color: #666666">.</span>axes(xlabel<span style="color: #666666">=</span><span style="color: #BA2121">&#39;x&#39;</span>, ylabel<span style="color: #666666">=</span><span style="color: #BA2121">&#39;y&#39;</span>, zlabel<span style="color: #666666">=</span><span style="color: #BA2121">&#39;z&#39;</span>, nb_labels<span style="color: #666666">=5</span>,
+         color<span style="color: #666666">=</span>(<span style="color: #666666">0.</span>, <span style="color: #666666">0.</span>, <span style="color: #666666">0.</span>))
+<span style="color: #408080; font-style: italic"># Decorate the plot with a title</span>
+plt<span style="color: #666666">.</span>title(<span style="color: #BA2121">&#39;h(x,y)&#39;</span>, size<span style="color: #666666">=0.4</span>)
+
+<span style="color: #408080; font-style: italic"># Simple plot of mountain and parametric curve.</span>
+plt<span style="color: #666666">.</span>figure(<span style="color: #666666">2</span>, fgcolor<span style="color: #666666">=</span>(<span style="color: #666666">.0</span>, <span style="color: #666666">.0</span>, <span style="color: #666666">.0</span>), bgcolor<span style="color: #666666">=</span>(<span style="color: #666666">1.0</span>, <span style="color: #666666">1.0</span>, <span style="color: #666666">1.0</span>))
+<span style="color: #408080; font-style: italic"># Here, representation has default: colored surface elements</span>
+plt<span style="color: #666666">.</span>surf(xv, yv, hv, extent<span style="color: #666666">=</span>(<span style="color: #666666">0</span>,<span style="color: #666666">1</span>,<span style="color: #666666">0</span>,<span style="color: #666666">1</span>,<span style="color: #666666">0</span>,<span style="color: #666666">1</span>))
+<span style="color: #408080; font-style: italic"># Add the parametric curve. tube_radius is the width of the</span>
+<span style="color: #408080; font-style: italic"># curve (use &#39;extent&#39; for auto-scaling)</span>
+plt<span style="color: #666666">.</span>plot3d(curve_x, curve_y, curve_z, tube_radius<span style="color: #666666">=0.2</span>,
+           extent<span style="color: #666666">=</span>(<span style="color: #666666">0</span>,<span style="color: #666666">1</span>,<span style="color: #666666">0</span>,<span style="color: #666666">1</span>,<span style="color: #666666">0</span>,<span style="color: #666666">1</span>))
+
+plt<span style="color: #666666">.</span>figure(<span style="color: #666666">3</span>, fgcolor<span style="color: #666666">=</span>(<span style="color: #666666">.0</span>, <span style="color: #666666">.0</span>, <span style="color: #666666">.0</span>), bgcolor<span style="color: #666666">=</span>(<span style="color: #666666">1.0</span>, <span style="color: #666666">1.0</span>, <span style="color: #666666">1.0</span>))
+<span style="color: #408080; font-style: italic"># Use &#39;warp_scale&#39; for vertical scaling</span>
+plt<span style="color: #666666">.</span>surf(xv, yv, hv, warp_scale<span style="color: #666666">=0.01</span>, color<span style="color: #666666">=</span>(<span style="color: #666666">.5</span>, <span style="color: #666666">.5</span>, <span style="color: #666666">.5</span>))
+plt<span style="color: #666666">.</span>plot3d(curve_x, curve_y, <span style="color: #666666">0.01*</span>curve_z, tube_radius<span style="color: #666666">=0.2</span>)
+</pre></div>
+<p>
+<code>surf</code> can produce wireframe plots,
+as well as plots where the faces of the surface are colored.
+The parameter <code>representation</code> controls this,
+as exemplified in the first two plots.
+The first plot was also decorated with axes and a title.
+
+<p>
+<center> <!-- figure label: --> <div id="plotmayavi"></div> <!-- FIGURE -->
+<hr class="figure">
+<center><p class="caption">Figure 16:  Surface plots produced with the <code>surf</code> function of Mayavi: The curve \( \boldsymbol{r}(t) \) is also shown in the two last plots.  <!-- caption label: plotmayavi --> </p></center>
+<p><img src="fig-plot/plot_mayavi.png" align="bottom" ></p>
+</center>
+
+<p>
+The calls to <code>plt.figure()</code> take three parameters: First the usual index for the plot, then two tuples of numbers ,
+representing the RGB-values to be used for the foreground (<code>fgcolor</code>) and the background (<code>bgcolor</code>).
+White and black are  (1,1,1) and (0,0,0), respectively. The foreground color is used for text and labels included in the plot.
+The <code>color</code> attribute in <code>plt.surf</code> adjusts the surface so that it is colored with small variations from the provided base color, here <code>(.5, .5, .5)</code>.
+
+<p>
+The command <code>plot3d</code> is used to plot the curve \( \boldsymbol{r}(t) \).  We have here increased the
+attribute <code>tube_radius</code> to make the curve thicker and more visible.
+
+<p>
+Mayavi does no auto-scaling of the axes by default (contrary to Matplotlib),
+so if the magnitudes in the vertical and horizontal directions are very different, as they are for \( h(x,y) \),
+the plots may be very concentrated in one direction.
+We therefore need to apply some auto-scaling procedure.
+In Figure <a href="#plotmayavi">16</a> two such procedures are exemplified.
+In the first two plots the parameter <code>extent</code> is used.
+It tells Mayavi to auto-scale the surface and curve to fit the contents described
+by the six listed values (we will return to what these values mean when we have a more illustrating example).
+Since the curve and the surface span different areas in space, we see that they are auto-scaled differently in the second plot,
+with the undesired effect that \( \boldsymbol{r}(t) \) is not drawn on the surface.
+The last plot has avoided this problem by using the <code>warp_scale</code> parameter for scaling the vertical direction.
+Not all Mayavi functions accept this parameter. A remedy for this is to scale the \( z \)-coordinates manually,
+as here exemplified in the last <code>plot3d</code>-call. As is seen, the curve is drawn correctly with respect to the surface in the last plot.
+In the following we will use the <code>warp_scale</code> parameter to avoid such auto-scaling problems.
+
+<h3 id="___sec92" class="anchor">Subplots </h3>
+
+<p>
+The two plots in Figure <a href="#plotmayavi">16</a> were created as separate figures. One can also create them as subplots within one figure:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>plt<span style="color: #666666">.</span>figure(<span style="color: #666666">4</span>, fgcolor<span style="color: #666666">=</span>(<span style="color: #666666">.0</span>, <span style="color: #666666">.0</span>, <span style="color: #666666">.0</span>), bgcolor<span style="color: #666666">=</span>(<span style="color: #666666">1.0</span>, <span style="color: #666666">1.0</span>, <span style="color: #666666">1.0</span>))
+plt<span style="color: #666666">.</span>mesh(xv, yv, hv, extent<span style="color: #666666">=</span>(<span style="color: #666666">0</span>, <span style="color: #666666">0.25</span>, <span style="color: #666666">0</span>, <span style="color: #666666">0.25</span>, <span style="color: #666666">0</span>, <span style="color: #666666">0.25</span>),
+         colormap<span style="color: #666666">=</span><span style="color: #BA2121">&#39;cool&#39;</span>)
+plt<span style="color: #666666">.</span>outline(plt<span style="color: #666666">.</span>mesh(
+    xv, yv, hv,
+    extent<span style="color: #666666">=</span>(<span style="color: #666666">0.375</span>, <span style="color: #666666">0.625</span>, <span style="color: #666666">0</span>, <span style="color: #666666">0.25</span>, <span style="color: #666666">0</span>, <span style="color: #666666">0.25</span>),
+    colormap<span style="color: #666666">=</span><span style="color: #BA2121">&#39;Accent&#39;</span>))
+plt<span style="color: #666666">.</span>outline(plt<span style="color: #666666">.</span>mesh(
+    xv, yv, hv, extent<span style="color: #666666">=</span>(<span style="color: #666666">0.75</span>, <span style="color: #666666">1</span>, <span style="color: #666666">0</span>, <span style="color: #666666">0.25</span>, <span style="color: #666666">0</span>, <span style="color: #666666">0.25</span>),
+    colormap<span style="color: #666666">=</span><span style="color: #BA2121">&#39;prism&#39;</span>), color<span style="color: #666666">=</span>(<span style="color: #666666">.5</span>, <span style="color: #666666">.5</span>, <span style="color: #666666">.5</span>))
+</pre></div>
+<p>
+The result is shown in Figure <a href="#subplot">17</a>.
+Three separate <code>mesh</code> commands are run, each producing a new plot in the current figure.
+The commands use different values for the <code>colormap</code> attribute to color the surface in different ways.
+When this attribute is not provided, as in the code producing the two first plots in Figure <a href="#plotmayavi">16</a>, a default colormap is used.
+
+<p>
+The <code>plt.outline</code> command is used to create a frame around the
+subplots, and as seen, we exemplify this possibility for the last two
+subplots, but not the first one.  We see that one of the two frames
+has a different color, obtained by setting the <code>color</code> attribute of
+the <code>plt.outline</code> command.
+
+<p>
+From the computer code it is hopefully clear that the six values listed in <code>extent</code> represent fractions of the cube <code>(0,1,0,1,0,1)</code>, where the corresponding plots are placed.
+The extents for the three plots are here defined such that they do not overlap.
+
+<p>
+<center> <!-- figure label: --> <div id="subplot"></div> <!-- FIGURE -->
+<hr class="figure">
+<center><p class="caption">Figure 17:  A plot with three subplots created with Mayavi.  <!-- caption label: subplot --> </p></center>
+<p><img src="fig-plot/subplot.png" align="bottom" ></p>
+</center>
+
+<h2 id="___sec93" class="anchor">Contour plots </h2>
+
+<p>
+The following code exemplifies how one can produce contour plots with
+Mayavi.  The code is very similar to that of Matplotlib, but one
+difference is that the attribute <code>contours</code> now can represent the
+number of levels, as well as the levels themselves.
+The plots are shown in Figure <a href="#advancedcontourmayavi">18</a>.
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #408080; font-style: italic"># Default contour plot plotted together with surf.</span>
+plt<span style="color: #666666">.</span>figure(<span style="color: #666666">5</span>, fgcolor<span style="color: #666666">=</span>(<span style="color: #666666">.0</span>, <span style="color: #666666">.0</span>, <span style="color: #666666">.0</span>), bgcolor<span style="color: #666666">=</span>(<span style="color: #666666">1.0</span>, <span style="color: #666666">1.0</span>, <span style="color: #666666">1.0</span>))
+plt<span style="color: #666666">.</span>surf(xv, yv, hv, warp_scale<span style="color: #666666">=0.01</span>)
+plt<span style="color: #666666">.</span>contour_surf(xv, yv, hv, warp_scale<span style="color: #666666">=0.01</span>)
+
+<span style="color: #408080; font-style: italic"># 10 contour lines (equally spaced contour levels).</span>
+plt<span style="color: #666666">.</span>figure(<span style="color: #666666">6</span>, fgcolor<span style="color: #666666">=</span>(<span style="color: #666666">.0</span>, <span style="color: #666666">.0</span>, <span style="color: #666666">.0</span>), bgcolor<span style="color: #666666">=</span>(<span style="color: #666666">1.0</span>, <span style="color: #666666">1.0</span>, <span style="color: #666666">1.0</span>))
+plt<span style="color: #666666">.</span>contour_surf(xv, yv, hv, contours<span style="color: #666666">=10</span>, warp_scale<span style="color: #666666">=0.01</span>)
+
+<span style="color: #408080; font-style: italic"># 10 contour lines (equally spaced contour levels) together</span>
+<span style="color: #408080; font-style: italic"># with surf. Black color for contour lines.</span>
+plt<span style="color: #666666">.</span>figure(<span style="color: #666666">7</span>, fgcolor<span style="color: #666666">=</span>(<span style="color: #666666">.0</span>, <span style="color: #666666">.0</span>, <span style="color: #666666">.0</span>), bgcolor<span style="color: #666666">=</span>(<span style="color: #666666">1.0</span>, <span style="color: #666666">1.0</span>, <span style="color: #666666">1.0</span>))
+plt<span style="color: #666666">.</span>surf(xv, yv, hv, warp_scale<span style="color: #666666">=0.01</span>)
+plt<span style="color: #666666">.</span>contour_surf(xv, yv, hv, contours<span style="color: #666666">=10</span>, color<span style="color: #666666">=</span>(<span style="color: #666666">0.</span>, <span style="color: #666666">0.</span>, <span style="color: #666666">0.</span>),
+                 warp_scale<span style="color: #666666">=0.01</span>)
+
+<span style="color: #408080; font-style: italic"># Specify the contour levels explicitly as a list.</span>
+plt<span style="color: #666666">.</span>figure(<span style="color: #666666">8</span>, fgcolor<span style="color: #666666">=</span>(<span style="color: #666666">.0</span>, <span style="color: #666666">.0</span>, <span style="color: #666666">.0</span>), bgcolor<span style="color: #666666">=</span>(<span style="color: #666666">1.0</span>, <span style="color: #666666">1.0</span>, <span style="color: #666666">1.0</span>))
+levels <span style="color: #666666">=</span> [<span style="color: #666666">500.</span>, <span style="color: #666666">1000.</span>, <span style="color: #666666">1500.</span>, <span style="color: #666666">2000.</span>]
+plt<span style="color: #666666">.</span>contour_surf(xv, yv, hv, contours<span style="color: #666666">=</span>levels, warp_scale<span style="color: #666666">=0.01</span>)
+
+<span style="color: #408080; font-style: italic"># View the contours by displaying as an image.</span>
+plt<span style="color: #666666">.</span>figure(<span style="color: #666666">9</span>, fgcolor<span style="color: #666666">=</span>(<span style="color: #666666">.0</span>, <span style="color: #666666">.0</span>, <span style="color: #666666">.0</span>), bgcolor<span style="color: #666666">=</span>(<span style="color: #666666">1.0</span>, <span style="color: #666666">1.0</span>, <span style="color: #666666">1.0</span>))
+plt<span style="color: #666666">.</span>imshow(hv)
+</pre></div>
+<p>
+Note that there is no function in Mayavi which labels the contours.
+
+<p>
+Contour plots in Mayavi are shown in three-dimensional space, but you
+can rotate and look at them from above if you want a two-dimensional
+plot.  Their visual appearance may be enhanced by also including the
+surface plot itself. We have done this for the top and middle left plots
+in Figure <a href="#advancedcontourmayavi">18</a>.
+There is a clear difference in visual impression between these
+two plots: in the first one, default surface- and contour coloring is used,
+resulting in less visible contours, but in the middle left plot (<code>plt.figure</code> 6), we set black contours to make them better stand out.
+
+<p>
+<center> <!-- figure label: --> <div id="advancedcontourmayavi"></div> <!-- FIGURE -->
+<hr class="figure">
+<center><p class="caption">Figure 18:  Some contour plots with Mayavi.  <!-- caption label: advancedcontourmayavi --> </p></center>
+<p><img src="fig-plot/advanced_contour_mayavi.png" align="bottom" height=400 width=600></p>
+</center>
+
+<h2 id="plot:surf:mayavi:quiver" class="anchor">Vector field plots</h2>
+
+<p>
+Mayavi supports only vector fields in three-dimensional space.
+We will therefore visualize the two-dimensional gradient field <a href="#mjx-eqn-15">(15)</a> by adding a third component of zero.
+The following code plots this gradient field  together with the contours of \( h \).
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>plt<span style="color: #666666">.</span>figure(<span style="color: #666666">11</span>, fgcolor<span style="color: #666666">=</span>(<span style="color: #666666">.0</span>, <span style="color: #666666">.0</span>, <span style="color: #666666">.0</span>), bgcolor<span style="color: #666666">=</span>(<span style="color: #666666">1.0</span>, <span style="color: #666666">1.0</span>, <span style="color: #666666">1.0</span>))
+plt<span style="color: #666666">.</span>contour_surf(xv, yv, hv, contours<span style="color: #666666">=20</span>, warp_scale<span style="color: #666666">=0.01</span>)
+
+<span style="color: #408080; font-style: italic"># mode controls the style how vectors are drawn</span>
+<span style="color: #408080; font-style: italic"># color controls the colors of the vectors</span>
+<span style="color: #408080; font-style: italic"># scale_mode=&#39;none&#39; ensures that vectors are drawn with the same length</span>
+plt<span style="color: #666666">.</span>quiver3d(x2v, y2v, <span style="color: #666666">0.01*</span>h2v, dhdx, dhdy, np<span style="color: #666666">.</span>zeros_like(dhdx),
+             mode<span style="color: #666666">=</span><span style="color: #BA2121">&#39;arrow&#39;</span>, color<span style="color: #666666">=</span>(<span style="color: #666666">1</span>,<span style="color: #666666">0</span>,<span style="color: #666666">0</span>), scale_mode<span style="color: #666666">=</span><span style="color: #BA2121">&#39;none&#39;</span>)
+</pre></div>
+<p>
+This will produce a 3D view, which we again can rotate to obtain a 2D view.
+The result is shown in Figure <a href="#plot:surf:may:quiver:fig">19</a>, which is similar to Figure <a href="#plot:surf:mpl:quiver:fig">14</a>.
+
+<p>
+<center> <!-- figure label: --> <div id="plot:surf:may:quiver:fig"></div> <!-- FIGURE -->
+<hr class="figure">
+<center><p class="caption">Figure 19:  Gradient field with contour plot.  <!-- caption label: plot:surf:may:quiver:fig --> </p></center>
+<p><img src="fig-plot/quiver_mayavi_advanced.png" align="bottom" ></p>
+</center>
+
+<h2 id="___sec95" class="anchor">A 3D scalar field and its gradient field </h2>
+
+<p>
+Mayavi has functionality for drawing contour surfaces of 3D scalar fields.
+Let us consider the 3D scalar field
+
+$$
+\begin{equation} \tag{16}
+g(x,y,z) = z-h(x,y).
+\end{equation}
+$$
+
+A three-dimensional grid for \( g \) can be computed as follows.
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>x <span style="color: #666666">=</span> y <span style="color: #666666">=</span> np<span style="color: #666666">.</span>linspace(<span style="color: #666666">-10.</span>,<span style="color: #666666">10.</span>,<span style="color: #666666">41</span>)
+z <span style="color: #666666">=</span> np<span style="color: #666666">.</span>linspace(<span style="color: #666666">0</span>, <span style="color: #666666">50</span>, <span style="color: #666666">41</span>)
+xv, yv, zv <span style="color: #666666">=</span> np<span style="color: #666666">.</span>meshgrid(x, y, z,
+                         sparse<span style="color: #666666">=</span><span style="color: #008000">False</span>, indexing<span style="color: #666666">=</span><span style="color: #BA2121">&#39;ij&#39;</span>)
+hv <span style="color: #666666">=</span> <span style="color: #666666">0.01*</span>h0<span style="color: #666666">/</span>(<span style="color: #666666">1</span> <span style="color: #666666">+</span> (xv<span style="color: #666666">**2+</span>yv<span style="color: #666666">**2</span>)<span style="color: #666666">/</span>(R<span style="color: #666666">**2</span>))
+gv <span style="color: #666666">=</span> zv <span style="color: #666666">-</span> hv
+</pre></div>
+<p>
+The contours are now surfaces defined by the implicit equation \( g(x,y,z)=C \),
+corresponding to vertical shifts of the surface \( h(x,y) \).
+
+<p>
+A corresponding vector field can be calculated:
+
+$$
+\begin{equation}
+\nabla g = \frac{\partial g}{\partial x}\boldsymbol{i} +  \frac{\partial g}{\partial y}\boldsymbol{j} +  \frac{\partial g}{\partial z}\boldsymbol{k}.
+\tag{17}
+\end{equation}
+$$
+
+<code>numpy</code>'s gradient function can be used to compute a gradient vector field in
+3D as well, but you
+need a three-dimensional grid for the field as input.
+For the field <a href="#mjx-eqn-16">(16)</a>, the gradient field is computed as follows.
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>x2 <span style="color: #666666">=</span> y2 <span style="color: #666666">=</span> np<span style="color: #666666">.</span>linspace(<span style="color: #666666">-10.</span>,<span style="color: #666666">10.</span>,<span style="color: #666666">5</span>)
+z2 <span style="color: #666666">=</span> np<span style="color: #666666">.</span>linspace(<span style="color: #666666">0</span>, <span style="color: #666666">50</span>, <span style="color: #666666">5</span>)
+x2v, y2v, z2v <span style="color: #666666">=</span> np<span style="color: #666666">.</span>meshgrid(x2, y2, z2,
+                            indexing<span style="color: #666666">=</span><span style="color: #BA2121">&#39;ij&#39;</span>, sparse<span style="color: #666666">=</span><span style="color: #008000">False</span>)
+h2v <span style="color: #666666">=</span> <span style="color: #666666">0.01*</span>h0<span style="color: #666666">/</span>(<span style="color: #666666">1</span> <span style="color: #666666">+</span> (x2v<span style="color: #666666">**2</span> <span style="color: #666666">+</span> y2v<span style="color: #666666">**2</span>)<span style="color: #666666">/</span>(R<span style="color: #666666">**2</span>))
+g2v <span style="color: #666666">=</span> z2v <span style="color: #666666">-</span> h2v
+dhdx, dhdy, dhdz <span style="color: #666666">=</span> np<span style="color: #666666">.</span>gradient(g2v)
+</pre></div>
+<p>
+Again we have used a coarser grid for the vector field.
+
+<p>
+To visualize the field <a href="#mjx-eqn-16">(16)</a> and its gradient field together,
+we draw enough contours, as we did in the 2D case in Figure <a href="#plot:surf:mpl:quiver:fig">14</a>.
+The following code can be used.
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>plt<span style="color: #666666">.</span>figure(<span style="color: #666666">12</span>, fgcolor<span style="color: #666666">=</span>(<span style="color: #666666">.0</span>, <span style="color: #666666">.0</span>, <span style="color: #666666">.0</span>), bgcolor<span style="color: #666666">=</span>(<span style="color: #666666">1.0</span>, <span style="color: #666666">1.0</span>, <span style="color: #666666">1.0</span>))
+<span style="color: #408080; font-style: italic"># opacity controls how contours are visible through each other</span>
+plt<span style="color: #666666">.</span>contour3d(xv, yv, zv, gv, contours<span style="color: #666666">=7</span>, opacity<span style="color: #666666">=0.5</span>)
+<span style="color: #408080; font-style: italic"># scale_mode=&#39;none&#39;: vectors should not be scaled</span>
+plt<span style="color: #666666">.</span>quiver3d(x2v, y2v, z2v, dhdx, dhdy, dhdz, mode<span style="color: #666666">=</span><span style="color: #BA2121">&#39;arrow&#39;</span>,
+             scale_mode<span style="color: #666666">=</span><span style="color: #BA2121">&#39;none&#39;</span>, opacity<span style="color: #666666">=0.5</span>)
+</pre></div>
+<p>
+The result is shown in Figure <a href="#fig:quiver:mayavi">20</a>.
+
+<p>
+<center> <!-- figure label: --> <div id="fig:quiver:mayavi"></div> <!-- FIGURE -->
+<hr class="figure">
+<center><p class="caption">Figure 20:  The 3D scalar field <a href="#mjx-eqn-16">(16)</a> and its gradient field.  <!-- caption label: fig:quiver:mayavi --> </p></center>
+<p><img src="fig-plot/quiver_mayavi.png" align="bottom" ></p>
+</center>
+
+<p>
+This example demonstrates some of the challenges in plotting
+three-dimensional vector fields.  The vectors must not be too dense,
+and not too long.  It is inevitable that contours shadow one
+another. Fortunately, Mayavi supports an opacity setting, which
+controls how contours are visible through each other.  Visualizing a
+3D scalar field is clearly challenging, and we have only touched the
+subject.
+
+<h2 id="___sec96" class="anchor">Animations </h2>
+
+<p>
+It is straightforward to create animations with Mayavi.
+In the following code the function \( h(x,y) \) is scaled vertically,
+for different scaling constants between \( 0 \) and \( 1 \),
+and each plot is saved in its own file.
+The files can then be combined to a standard video file.
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>plt<span style="color: #666666">.</span>figure(<span style="color: #666666">13</span>, fgcolor<span style="color: #666666">=</span>(<span style="color: #666666">.0</span>, <span style="color: #666666">.0</span>, <span style="color: #666666">.0</span>), bgcolor<span style="color: #666666">=</span>(<span style="color: #666666">1.0</span>, <span style="color: #666666">1.0</span>, <span style="color: #666666">1.0</span>))
+s <span style="color: #666666">=</span> plt<span style="color: #666666">.</span>surf(xv, yv, hv, warp_scale<span style="color: #666666">=0.01</span>)
+
+<span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">10</span>):
+    <span style="color: #408080; font-style: italic"># s.mlab_source.scalars is a handle for the values of the surface,</span>
+    <span style="color: #408080; font-style: italic"># and is updated here</span>
+    s<span style="color: #666666">.</span>mlab_source<span style="color: #666666">.</span>scalars <span style="color: #666666">=</span> hv<span style="color: #666666">*0.1*</span>(i<span style="color: #666666">+1</span>)
+    plt<span style="color: #666666">.</span>savefig(<span style="color: #BA2121">&#39;tmp_</span><span style="color: #BB6688; font-weight: bold">%04d</span><span style="color: #BA2121">.png&#39;</span> <span style="color: #666666">%</span> i)
+</pre></div>
 <p>
 <p>
 <!-- navigation buttons at the bottom of the page -->

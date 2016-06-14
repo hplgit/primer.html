@@ -1,0 +1,1441 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Introduction to differential equations">
+<meta name="keywords" content="ordinary differential equations,differential equations,ODE,initial condition,first-order ODEs,systems of differential equations,scalar differential equations,oscillating systems,second-order ODEs,spread of a disease (model)">
+
+<title>Introduction to differential equations</title>
+
+<!-- Bootstrap style: bootswatch_readable -->
+<link href="http://netdna.bootstrapcdn.com/bootswatch/3.1.1/readable/bootstrap.min.css" rel="stylesheet">
+<!-- not necessary
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+
+<style type="text/css">
+/* Let inline verbatim have the same color as the surroundings */
+code { color: inherit; background-color: transparent; }
+
+/* Add scrollbar to dropdown menus in bootstrap navigation bar */
+.dropdown-menu {
+   height: auto;
+   max-height: 400px;
+   overflow-x: hidden;
+}
+
+/* Adds an invisible element before each target to offset for the navigation
+   bar */
+.anchor::before {
+  content:"";
+  display:block;
+  height:50px; /* fixed header height*/
+  margin:-50px 0 0; /* negative fixed header height */
+}
+
+body { font-size:20px;line-height:1.5--html_body_style=font-size:20px;line-height:1.5; }
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [('Table of contents',
+               1,
+               'table_of_contents',
+               'table_of_contents'),
+              ('The simplest case', 1, None, '___sec0'),
+              ('Exponential growth',
+               1,
+               'sec:ode:expgrowth',
+               'sec:ode:expgrowth'),
+              ('Analytical solution', 3, None, '___sec2'),
+              ('Numerical solution', 3, None, '___sec3'),
+              ('Logistic growth', 1, None, '___sec4'),
+              ('A simple pendulum', 1, 'pendulum', 'pendulum'),
+              ('A model for the spreading of a disease',
+               1,
+               'sec:ode1:SI',
+               'sec:ode1:SI'),
+              ('Exercises', 1, None, '___sec7'),
+              ('Exercise 1: Solve a nonhomogeneous linear ODE',
+               2,
+               'sec:ode:ex1',
+               'sec:ode:ex1'),
+              ('Exercise 2: Solve a nonlinear ODE',
+               2,
+               'sec:ode:ex2',
+               'sec:ode:ex2'),
+              ('Exercise 3: Solve an ODE for $y(x)$',
+               2,
+               'sec:ode:ex6',
+               'sec:ode:ex6'),
+              ('Exercise 4: Experience instability of an ODE',
+               2,
+               'sec:ode:ex8',
+               'sec:ode:ex8'),
+              ('Exercise 5: Solve an ODE with time-varying growth',
+               2,
+               'sec:ode:ex3',
+               'sec:ode:ex3'),
+              ('References', 1, None, '___sec13')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- newcommands_keep.tex -->
+$$
+\newcommand{\tp}{\thinspace .}
+$$
+
+
+
+
+    
+<!-- Bootstrap navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="ode1-readable.html">Introduction to differential equations</a>
+  </div>
+
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     <!-- navigation toc: --> <li><a href="#table_of_contents" style="font-size: 80%;"><b>Table of contents</b></a></li>
+     <!-- navigation toc: --> <li><a href="#___sec0" style="font-size: 80%;"><b>The simplest case</b></a></li>
+     <!-- navigation toc: --> <li><a href="#sec:ode:expgrowth" style="font-size: 80%;"><b>Exponential growth</b></a></li>
+     <!-- navigation toc: --> <li><a href="#___sec2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Analytical solution</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec3" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Numerical solution</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec4" style="font-size: 80%;"><b>Logistic growth</b></a></li>
+     <!-- navigation toc: --> <li><a href="#pendulum" style="font-size: 80%;"><b>A simple pendulum</b></a></li>
+     <!-- navigation toc: --> <li><a href="#sec:ode1:SI" style="font-size: 80%;"><b>A model for the spreading of a disease</b></a></li>
+     <!-- navigation toc: --> <li><a href="#___sec7" style="font-size: 80%;"><b>Exercises</b></a></li>
+     <!-- navigation toc: --> <li><a href="#sec:ode:ex1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 1: Solve a nonhomogeneous linear ODE</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:ode:ex2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 2: Solve a nonlinear ODE</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:ode:ex6" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 3: Solve an ODE for \( y(x) \)</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:ode:ex8" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 4: Experience instability of an ODE</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:ode:ex3" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 5: Solve an ODE with time-varying growth</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec13" style="font-size: 80%;"><b>References</b></a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div> <!-- end of navigation bar -->
+
+<div class="container">
+
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+
+<a name="part0000"></a>
+<!-- ------------------- main content ---------------------- -->
+
+
+
+<div class="jumbotron">
+<center><h1>Introduction to differential equations</h1></center>  <!-- document title -->
+
+<p>
+<!-- author(s): Aslak Tveito -->
+
+<center>
+<b>Aslak Tveito</b> [1, 2]
+</center>
+
+<p>
+<!-- institution(s) -->
+
+<center>[1] <b>Simula Research Laboratory</b></center>
+<center>[2] <b>Department of Informatics, University of Oslo</b></center>
+<br>
+<p>
+<center><h4>Jun 14, 2016</h4></center> <!-- date -->
+<br>
+<p>
+</div> <!-- end jumbotron -->
+
+<h1 id="table_of_contents">Table of contents</h2>
+
+<p>
+<a href="#___sec0"> The simplest case </a><br>
+<a href="#sec:ode:expgrowth"> Exponential growth </a><br>
+<a href="#___sec4"> Logistic growth </a><br>
+<a href="#pendulum"> A simple pendulum </a><br>
+<a href="#sec:ode1:SI"> A model for the spreading of a disease </a><br>
+<a href="#___sec7"> Exercises </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#sec:ode:ex1"> Exercise 1: Solve a nonhomogeneous linear ODE </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#sec:ode:ex2"> Exercise 2: Solve a nonlinear ODE </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#sec:ode:ex6"> Exercise 3: Solve an ODE for \( y(x) \) </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#sec:ode:ex8"> Exercise 4: Experience instability of an ODE </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#sec:ode:ex3"> Exercise 5: Solve an ODE with time-varying growth </a><br>
+<a href="#___sec13"> References </a><br>
+</p>
+<p>
+<!-- Externaldocuments: ../formulas/main_formulas, ../looplist/main_looplist, ../funcif/main_funcif, ../input/main_input, ../plot/main_plot, ../dictstring/main_dictstring, ../class/main_class, ../random/main_random, ../oo/main_oo, ../diffeq/main_diffeq, ../discalc/main_discalc,../boxspring/main_boxspring, ../ode2/main_ode2, ../debug/main_debug, ../cython/main_cython, ../tech/main_timing, ../tech/main_varargs, ../tech/main_runpy, ../tech/main_ostasks, ../tech/main_accesspy, ../tech/main_nose -->
+
+<p>
+<div id="ch:ode1"></div>
+
+<p>
+Differential equations have proven to be an immensely successful
+instrument for modeling phenomena in science and technology.
+It is hardly an
+exaggeration to say that differential equations are used to
+define mathematical
+models in virtually all parts of the natural sciences. In this document,
+we will take the first steps towards learning how to deal with differential
+equations on a computer. This is a core issue in Computational Science and
+reaches far beyond what we can cover in this text. However, the ideas you will
+see here are reused in lots of advanced applications, so this document will
+hopefully provide useful introduction to a topic that you will probably
+encounter many times later.
+
+<p>
+We will show you how to build programs for solving differential
+equations. More precisely, we will show how a differential equation can be
+formulated in a discrete manner suitable for analysis on a computer, and how
+to implement programs to compute the discrete solutions. The simplest
+differential equations can be solved analytically in the sense that you can
+write down an explicit formula for the solutions. However, differential
+equations arising in practical applications are usually rather complicated and
+thus have to be solved numerically on a computer. Therefore we focus on
+implementing numerical methods to solve the equations.
+The document <a href="http://hplgit.github.io/primer.html/doc/pub/ode2" target="_self">Programming of ordinary differential equations</a> <a href="#Langtangen_TCSE6_ode2">[1]</a> describes
+more advanced implementation
+techniques aimed at making an easy-to-use toolbox for solving
+differential equations. Exercises in the present document
+and the mentioned document
+aim at solving
+a variety of differential equations arising in various disciplines
+of science.
+
+<p>
+As with all the other chapters, the source code can be
+found in <code>src</code>, in this case in the subdirectory <code>ode1</code>. The
+short form ODE (plural: ODEs)
+is commonly used as abbreviation for <em>ordinary
+differential equation</em>, which is the type of differential equation
+that we address in this document. Actually,
+differential equations are
+divided into two groups: ordinary differential equations and partial
+differential equations. Ordinary differential equations contain derivatives
+with respect to one variable (usually \( t \) in our examples), whereas partial
+differential equations contain derivatives with respect to more than one
+variable, typically with respect to space and time. A typical ordinary
+differential equation is
+
+$$
+\begin{equation*}
+u^{\prime}(t)=u(t),
+\end{equation*}
+$$
+
+and a typical partial differential equation is
+
+$$
+\begin{equation*}
+\frac{\partial u}{\partial t}=\frac{\partial^{2}u}{\partial x^{2}}
++\frac{\partial^{2}u}{\partial y^{2}},
+\end{equation*}
+$$
+
+The latter is known as the heat or diffusion equation.
+
+<h1 id="___sec0" class="anchor">The simplest case </h1>
+
+<p>
+Consider the problem of solving the following equation
+
+$$
+\begin{equation}
+u^{\prime}(t)=t^{3}\tp
+\tag{1}
+\end{equation}
+$$
+
+The
+solution can be computed directly by integrating
+<a href="#mjx-eqn-1">(1)</a>, which gives
+
+$$
+\begin{equation*} u(t) = \frac{1}{4} t^4 + C,\end{equation*}
+$$
+
+where \( C \) is an arbitrary constant. To obtain a unique solution, we need
+an extra condition to determine \( C \). Specifying \( u(t_1) \) for some time
+point \( t_1 \) represents a possible extra condition.
+It is common to view
+<a href="#mjx-eqn-1">(1)</a> as an equation for the function \( u(t) \) for
+\( t\in [0,T] \), and the extra condition is usually that the start value \( u(0) \)
+is known. This is called the <em>initial condition</em>.
+Say
+
+$$
+\begin{equation}
+u(0)=1\tp
+\tag{2}
+\end{equation}
+$$
+
+In general, the solution of the differential equation <a href="#mjx-eqn-1">(1)</a>
+subject to the initial condition <a href="#mjx-eqn-2">(2)</a> is
+
+$$
+\begin{align*}
+u(t) &= u(0)+\int_{0}^{t}u^{\prime}(\tau)d\tau,\\ 
+ &= 1+\int_{0}^{t}\tau^{3}d\tau\\ 
+ &= 1+\frac{1}{4}t^{4}\tp
+\end{align*}
+$$
+
+If you are confused
+by the use of \( t \) and \( \tau \), don't get too upset:
+
+<p>
+<blockquote>
+    <em>In mathematics you
+    don't understand things. You just get used to them.</em>
+    John von Neumann, mathematician, 1903-1957.
+</blockquote>
+
+
+<p>
+Let us go back and check the solution derived above.
+Does \( u(t)=1+\frac{1}{4}t^{4} \) really satisfy the two
+requirements listed in <a href="#mjx-eqn-1">(1)</a> and
+<a href="#mjx-eqn-2">(2)</a>? Obviously, \( u(0)=1, \) and \( u^{\prime}(t)=t^{3}, \) so
+the solution is correct.
+
+<p>
+More generally, we consider the equation
+
+$$
+\begin{equation}
+u^{\prime}(t)=f(t)
+\tag{3}
+\end{equation}
+$$
+
+together with the initial condition
+
+$$
+\begin{equation}
+u(0)=u_{0}\tp
+\tag{4}
+\end{equation}
+$$
+
+Here we assume that \( f(t) \) is a given function, and that \( u_{0} \) is a given
+number. Then, by reasoning as above, we have
+
+$$
+\begin{equation}
+u(t)=u_{0}+\int_{0}^{T}f(\tau)d\tau\tp
+\tag{5}
+\end{equation}
+$$
+
+We
+can find a discrete version of \( u \) by approximating the integral.
+Generally, an approximation of the integral
+
+$$
+\begin{equation*}
+\int_{0}^{T}f(\tau)d\tau
+\end{equation*}
+$$
+
+can be computed using the discrete version of a continuous function
+\( f(\tau) \) defined on an interval \( \left[  0,t\right]  . \) The discrete
+version of \( f \) is given by \( (\tau_{i},y_{i})_{i=0}^{n} \) where
+
+$$
+\begin{equation*}
+\tau_{i}=ih,\text{ and }y_{i}=f(\tau_{i})
+\end{equation*}
+$$
+
+for \( i=0,1,\ldots ,n \). Here \( n\geq 1 \) is a given integer and \( h=T/n. \) The
+Trapezoidal rule can now be written as
+
+$$
+\begin{equation}
+\int_{0}^{T}f(\tau)d\tau\approx\frac{h}{2}\left[  y_{0}+2\sum\limits_{k=1}
+^{n-1}y_{k}+y_{n}\right]  \tp
+\tag{6}
+\end{equation}
+$$
+
+By using this approximation, we find that an approximate solution of
+<a href="#mjx-eqn-3">(3)</a>-<a href="#mjx-eqn-4">(4)</a> is given by
+
+$$
+\begin{equation*}
+u(t)\approx u_{0}+\frac{h}{2}\left[  y_{0}+2\sum\limits_{k=1}^{n-1}y_{k}
++y_{n}\right]  .
+\end{equation*}
+$$
+
+The program <a href="http://tinyurl.com/pwyasaa/ode1/integrate_ode.py" target="_self"><tt>integrate_ode.py</tt></a>
+computes a numerical solution of
+<a href="#mjx-eqn-3">(3)</a>-<a href="#mjx-eqn-4">(4)</a>, where the function \( f \), the time
+\( t, \) the initial condition \( u_{0} \), and the number of time-steps \( n \) are inputs
+to the program.
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #408080; font-style: italic">#!/usr/bin/env python</span>
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">integrate</span>(T, n, u0):
+    h <span style="color: #666666">=</span> T<span style="color: #666666">/</span><span style="color: #008000">float</span>(n)
+    t <span style="color: #666666">=</span> linspace(<span style="color: #666666">0</span>, T, n<span style="color: #666666">+1</span>)
+    I <span style="color: #666666">=</span> f(t[<span style="color: #666666">0</span>])
+    <span style="color: #008000; font-weight: bold">for</span> k <span style="color: #AA22FF; font-weight: bold">in</span> iseq(<span style="color: #666666">1</span>, n<span style="color: #666666">-1</span>, <span style="color: #666666">1</span>):
+        I <span style="color: #666666">+=</span> <span style="color: #666666">2*</span>f(t[k])
+    I <span style="color: #666666">+=</span> f(t[<span style="color: #666666">-1</span>])
+    I <span style="color: #666666">*=</span> (h<span style="color: #666666">/2</span>)
+    I <span style="color: #666666">+=</span> u0
+    <span style="color: #008000; font-weight: bold">return</span> I
+
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">scitools.std</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #666666">*</span>
+
+f_formula <span style="color: #666666">=</span> sys<span style="color: #666666">.</span>argv[<span style="color: #666666">1</span>]
+T  <span style="color: #666666">=</span> <span style="color: #008000">eval</span>(sys<span style="color: #666666">.</span>argv[<span style="color: #666666">2</span>])
+u0 <span style="color: #666666">=</span> <span style="color: #008000">eval</span>(sys<span style="color: #666666">.</span>argv[<span style="color: #666666">3</span>])
+n  <span style="color: #666666">=</span> <span style="color: #008000">int</span>(sys<span style="color: #666666">.</span>argv[<span style="color: #666666">4</span>])
+f <span style="color: #666666">=</span> StringFunction(f_formula, independent_variables<span style="color: #666666">=</span><span style="color: #BA2121">&#39;t&#39;</span>)
+<span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&quot;Numerical solution of u&#39;(t)=</span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121">: </span><span style="color: #BB6688; font-weight: bold">%.4f</span><span style="color: #BA2121">&quot;</span> <span style="color: #666666">%</span> \
+      (f_formula, integrate(T, n, u0))
+</pre></div>
+<p>
+We apply the program for computing the solution of
+
+$$
+\begin{align*}
+u^{\prime}(t)  &  =te^{t^{2}},\\ 
+u(0)  &  =0,
+\end{align*}
+$$
+
+at time \( T=2 \) using \( n=10,20,50 \) and \( 100 \):
+
+<p>
+
+<!-- code=text (!bc sys) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>Terminal&gt; python src-ode1/integrate_ode.py &#39;t*exp(t**2)&#39; 2 0 10
+Numerical solution of u&#39;(t)=t*exp(t**2): 28.4066
+</pre></div>
+<p>
+
+<!-- code=text (!bc sys) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>Terminal&gt; python src-ode1/integrate_ode.py &#39;t*exp(t**2)&#39; 2 0 20
+Numerical solution of u&#39;(t)=t*exp(t**2): 27.2060
+</pre></div>
+<p>
+
+<!-- code=text (!bc sys) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>Terminal&gt; python src-ode1/integrate_ode.py &#39;t*exp(t**2)&#39; 2 0 50
+Numerical solution of u&#39;(t)=t*exp(t**2): 26.8644
+</pre></div>
+<p>
+
+<!-- code=text (!bc sys) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>Terminal&gt; python src-ode1/integrate_ode.py &#39;t*exp(t**2)&#39; 2 0 100
+Numerical solution of u&#39;(t)=t*exp(t**2): 26.8154
+</pre></div>
+<p>
+The exact solution is given by
+\( \frac{1}{2}e^{2^{2}}-\frac{1}{2}\approx 26.799, \) so we see that
+the approximate solution becomes better as \( n \) is increased, as expected.
+
+<h1 id="sec:ode:expgrowth" class="anchor">Exponential growth</h1>
+
+<p>
+The example above was really not much of a differential equation, because the
+solution was obtained by straightforward integration. Equations of the form
+
+$$
+\begin{equation}
+u^{\prime}(t)=f(t)
+\tag{7}
+\end{equation}
+$$
+
+arise in situations where we can explicitly specify the derivative of the
+unknown function \( u. \) Usually, the derivative is specified in terms of the
+solution itself. Consider, for instance, population growth under idealized
+conditions.
+We introduce the symbol \( v_i \) for the number of individuals at
+time
+\( \tau_i \).
+The basic model for the evolution of \( v_i \)
+is:
+
+$$
+\begin{equation}
+v_i = (1+r)v_{i-1},\quad i=1,2,\ldots,\hbox{ and } v_0\hbox{ known}\tp
+\tag{8}
+\end{equation}
+$$
+
+The parameter
+\( r \) depends on the
+time difference \( \Delta \tau = \tau_i-\tau_{i-1} \): the larger \( \Delta \tau \) is,
+the larger \( r \) is. It is therefore natural to introduce a
+growth rate \( \alpha \)
+that is independent of \( \Delta \tau \): \( \alpha =r/\Delta \tau \).
+The number \( \alpha \) is then fixed regardless of how long jumps in time
+we take in the difference equation for \( v_i \).
+In fact, \( \alpha \) equals the growth in percent, divided by 100, over
+a time interval of unit length.
+
+<p>
+The difference equation now reads
+
+$$
+\begin{equation*} v_i = v_{i-1} + \alpha\Delta \tau\, v_{i-1}\tp\end{equation*}
+$$
+
+Rearranging this equation we get
+
+$$
+\begin{equation} {v_i - v_{i-1}\over\Delta \tau} = \alpha v_{i-1}\tp
+\tag{9}
+\end{equation}
+$$
+
+Assume now that we shrink the time step \( \Delta \tau \) to a small value.
+The left-hand side of <a href="#mjx-eqn-9">(9)</a> is then an approximation
+to the time-derivative of a function \( v(\tau) \) expressing the number of
+individuals in the population at time \( \tau \).
+In the limit \( \Delta \tau\rightarrow 0 \), the left-hand side becomes
+the derivative exactly, and the equation reads
+
+$$
+\begin{equation}
+v'(\tau) = \alpha v(\tau)\tp
+\tag{10}
+\end{equation}
+$$
+
+As for the underlying difference equation, we need a start value \( v(0)=v_0 \).
+We have seen that reducing the time step in a difference equation to zero,
+we get a differential equation.
+
+<p>
+Many like to scale an equation like <a href="#mjx-eqn-10">(10)</a> such that
+all variables are without physical dimensions and their maximum
+absolute value is typically of the order of unity. In the present model,
+this
+means that we introduce new dimensionless variables
+
+$$
+\begin{equation*} u = {v\over v_0},\quad t = {\tau\over \alpha}\end{equation*}
+$$
+
+and derive an equation for \( u(t) \). Inserting \( v=v_0u \) and \( \tau = \alpha t \) in
+<a href="#mjx-eqn-10">(10)</a> gives the prototype equation for
+population growth:
+
+$$
+\begin{equation}
+u^{\prime}(t)=u(t)
+\tag{11}
+\end{equation}
+$$
+
+with the initial condition
+
+$$
+\begin{equation}
+u(0)=1\tp
+\tag{12}
+\end{equation}
+$$
+
+When we have computed the dimensionless \( u(t) \), we can find the function
+\( v(\tau) \) as
+
+$$
+\begin{equation*} v(\tau) = v_0u(\tau /\alpha)\tp\end{equation*}
+$$
+
+We shall consider practical applications of population growth equations
+later, but let's start by looking at
+the idealized case <a href="#mjx-eqn-11">(11)</a>.
+
+<h3 id="___sec2" class="anchor">Analytical solution </h3>
+
+<p>
+Our differential equation can be written in the form
+
+$$
+\begin{equation*}
+\frac{du}{dt}=u,
+\end{equation*}
+$$
+
+which can be rewritten as
+
+$$
+\begin{equation*}
+\frac{du}{u}=dt,
+\end{equation*}
+$$
+
+and then integration on both sides yields
+
+$$
+\begin{equation*}
+\ln(u)=t+c,
+\end{equation*}
+$$
+
+where \( c \) is a constant that has to be determined by using the initial
+condition. Putting \( t=0, \) we have
+
+$$
+\begin{equation*}
+\ln(u(0))=c,
+\end{equation*}
+$$
+
+hence
+
+$$
+\begin{equation*}
+c=\ln(1)=0,
+\end{equation*}
+$$
+
+and then
+
+$$
+\begin{equation*}
+\ln(u)=t,
+\end{equation*}
+$$
+
+so we have the solution
+
+$$
+\begin{equation}
+u(t)=e^{t}\tp
+\tag{13}
+\end{equation}
+$$
+
+Let us now check that this function really solves <a href="#mjx-eqn-7">(7)</a>-<a href="#mjx-eqn-11">(11)</a>.
+Obviously, \( u(0)=e^{0}=1, \) so <a href="#mjx-eqn-11">(11)</a> is fine. Furthermore
+
+$$
+\begin{equation*}
+u^{\prime}(t)=e^{t}=u(t),
+\end{equation*}
+$$
+
+thus <a href="#mjx-eqn-7">(7)</a> also holds.
+
+<h3 id="___sec3" class="anchor">Numerical solution </h3>
+
+<p>
+We have seen that we can find a formula for the solution of the
+equation of exponential growth. So the problem is solved, and it is trivial to
+write a program to graph the solution. We will, however, go one step further
+and develop a numerical solution strategy for this problem. We don't really
+need such a method for this problem since the solution is available in terms
+of a formula, but as mentioned earlier, it is good practice to develop
+methods for problems where we know the solution; then we are more confident
+when we are confronted with more challenging problems.
+
+<p>
+Suppose we want to compute a numerical approximation of the solution of
+
+$$
+\begin{equation}
+u^{\prime}(t)=u(t)
+\tag{14}
+\end{equation}
+$$
+
+equipped with the initial condition
+
+$$
+\begin{equation}
+u(0)=1\tp
+\tag{15}
+\end{equation}
+$$
+
+We want to compute approximations from time \( t=0 \) to time \( t=1 \). Let
+\( n\geq 1 \) be a given integer, and define
+
+$$
+\begin{equation}
+\Delta t=1/n \tp
+\tag{16}
+\end{equation}
+$$
+
+Furthermore, let \( u_{k} \) denote an approximation of \( u(t_{k}) \) where
+
+$$
+\begin{equation}
+t_{k}=k\Delta t
+\tag{17}
+\end{equation}
+$$
+
+for \( k=0,1,\ldots,n \). The key step in developing a numerical method for this
+differential equation is to invoke the Taylor series as applied to the exact solution,
+
+$$
+\begin{equation}
+u(t_{k+1})=u(t_{k})+\Delta tu^{\prime}(t_{k})+O(\Delta t^{2}),
+\tag{18}
+\end{equation}
+$$
+
+which implies that
+
+$$
+\begin{equation}
+u^{\prime}(t_{k})\approx\frac{u(t_{k+1})-u(t_{k})}{\Delta t}\tp
+\tag{19}
+\end{equation}
+$$
+
+By using <a href="#mjx-eqn-14">(14)</a>, we get
+
+$$
+\begin{equation}
+\frac{u(t_{k+1})-u(t_{k})}{\Delta t}\approx u(t_{k})\tp
+\tag{20}
+\end{equation}
+$$
+
+Recall now that \( u(t_{k}) \) is the exact solution at time \( t_{k}, \) and that
+\( u_{k} \) is the approximate solution at the same point in time. We now want to
+determine \( u_{k} \) for all \( k\geq 0. \) Obviously, we start by defining
+
+$$
+\begin{equation*}
+u_{0}=u(0)=1.
+\end{equation*}
+$$
+
+Since we want \( u_{k}\approx u(t_{k}), \) we require that \( u_{k} \) satisfy the
+following equality
+
+$$
+\begin{equation}
+\frac{u_{k+1}-u_{k}}{\Delta t}=u_{k}
+\tag{21}
+\end{equation}
+$$
+
+motivated by <a href="#mjx-eqn-20">(20)</a>. It follows that
+
+$$
+\begin{equation}
+u_{k+1}=(1+\Delta t)u_{k}\tp
+\tag{22}
+\end{equation}
+$$
+
+Since \( u_{0} \) is known, we can compute \( u_{1},u_{2} \) and so on by using the
+formula above. The formula is implemented in the program
+<a href="http://tinyurl.com/pwyasaa/ode1/exp_growth.py" target="_self"><tt>exp_growth.py</tt></a>.
+Actually, we do not need the
+method and we do not need the program. It follows from <a href="#mjx-eqn-22">(22)</a>
+that
+
+$$
+\begin{equation*}
+u_{k}=(1+\Delta t)^{k}u_0
+\end{equation*}
+$$
+
+for \( k=0,1,\ldots,n \) which can be evaluated on a pocket calculator or even on
+your cellular phone. But again, we show examples where everything is as
+simple as possible (but not simpler!) in order to prepare your mind for more
+complex matters ahead.
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #408080; font-style: italic">#!/usr/bin/env python</span>
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">compute_u</span>(u0, T, n):
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Solve u&#39;(t)=u(t), u(0)=u0 for t in [0,T] with n steps.&quot;&quot;&quot;</span>
+    u <span style="color: #666666">=</span> u0
+    dt <span style="color: #666666">=</span> T<span style="color: #666666">/</span><span style="color: #008000">float</span>(n)
+    <span style="color: #008000; font-weight: bold">for</span> k <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">0</span>, n, <span style="color: #666666">1</span>):
+        u <span style="color: #666666">=</span> (<span style="color: #666666">1+</span>dt)<span style="color: #666666">*</span>u
+    <span style="color: #008000; font-weight: bold">return</span> u  <span style="color: #408080; font-style: italic"># u(T)</span>
+
+<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">sys</span>
+
+n  <span style="color: #666666">=</span> <span style="color: #008000">int</span>(sys<span style="color: #666666">.</span>argv[<span style="color: #666666">1</span>])
+<span style="color: #408080; font-style: italic"># Special test case: u&#39;(t)=u, u(0)=1, t in [0,1]</span>
+T <span style="color: #666666">=</span> <span style="color: #666666">1</span>; u0 <span style="color: #666666">=</span> <span style="color: #666666">1</span>
+<span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;u(1) =&#39;</span>, compute_u(u0, T, n)
+</pre></div>
+<p>
+Observe that we do not store the \( u \) values: we just overwrite a
+<code>float</code> object <code>u</code> by its new value as this saves a lot of storage
+if \( n \) is large.
+
+<p>
+Running the program for \( n=5,10,20 \) and \( 100 \), we get the
+approximations 2.4883, 2.5937, 2.6533, and 2.7048.
+The exact solution at time \( t=1 \) is given
+by \( u(1)=e^{1}\approx2.7183 \),
+so again the approximations become better as \( n \) is increased.
+
+<p>
+An alternative program, where we plot \( u(t) \) and therefore store all
+the \( u_k \) and \( t_k=k\Delta t \) values, is shown below.
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #408080; font-style: italic">#!/usr/bin/env python</span>
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">compute_u</span>(u0, T, n):
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Solve u&#39;(t)=u(t), u(0)=u0 for t in [0,T] with n steps.&quot;&quot;&quot;</span>
+    t <span style="color: #666666">=</span> linspace(<span style="color: #666666">0</span>, T, n<span style="color: #666666">+1</span>)
+    t[<span style="color: #666666">0</span>] <span style="color: #666666">=</span> <span style="color: #666666">0</span>
+    u <span style="color: #666666">=</span> zeros(n<span style="color: #666666">+1</span>)
+    u[<span style="color: #666666">0</span>] <span style="color: #666666">=</span> u0
+    dt <span style="color: #666666">=</span> T<span style="color: #666666">/</span><span style="color: #008000">float</span>(n)
+    <span style="color: #008000; font-weight: bold">for</span> k <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">0</span>, n, <span style="color: #666666">1</span>):
+        u[k<span style="color: #666666">+1</span>] <span style="color: #666666">=</span> (<span style="color: #666666">1+</span>dt)<span style="color: #666666">*</span>u[k]
+        t[k<span style="color: #666666">+1</span>] <span style="color: #666666">=</span> t[k] <span style="color: #666666">+</span> dt
+    <span style="color: #008000; font-weight: bold">return</span> u, t
+
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">scitools.std</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #666666">*</span>
+
+n  <span style="color: #666666">=</span> <span style="color: #008000">int</span>(sys<span style="color: #666666">.</span>argv[<span style="color: #666666">1</span>])
+<span style="color: #408080; font-style: italic"># Special test case: u&#39;(t)=u, u(0)=1, t in [0,1]</span>
+T <span style="color: #666666">=</span> <span style="color: #666666">1</span>; u0 <span style="color: #666666">=</span> <span style="color: #666666">1</span>
+u, t <span style="color: #666666">=</span> compute_u(u0, T, n)
+plot(t, u)
+tfine <span style="color: #666666">=</span> linspace(<span style="color: #666666">0</span>, T, <span style="color: #666666">1001</span>) <span style="color: #408080; font-style: italic"># for accurate plot</span>
+v <span style="color: #666666">=</span> exp(tfine)               <span style="color: #408080; font-style: italic"># correct solution</span>
+hold(<span style="color: #BA2121">&#39;on&#39;</span>)
+plot(tfine, v)
+legend([<span style="color: #BA2121">&#39;Approximate solution&#39;</span>, <span style="color: #BA2121">&#39;Correct function&#39;</span>])
+title(<span style="color: #BA2121">&#39;Approximate and correct discrete functions, n=</span><span style="color: #BB6688; font-weight: bold">%d</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> n)
+savefig(<span style="color: #BA2121">&#39;tmp.pdf&#39;</span>)
+</pre></div>
+<p>
+Using the program for \( n=5,10, 20 \), and \( 100 \), results in the plots
+in Figure <a href="#sec:ode:fig1">1</a>. The convergence towards the exponential
+function is evident from these plots.
+
+<p>
+<center> <!-- figure label: --> <div id="sec:ode:fig1"></div> <!-- FIGURE -->
+<hr class="figure">
+<center><p class="caption">Figure 1:  Plots of exact and approximate solutions of \( u^{\prime}(t) = u(t) \) with varying number of time steps in \( [0,1] \).      <!-- caption label: sec:ode:fig1 --> </p></center>
+<p><img src="fig-ode1/ode_fig1.png" align="bottom" width=400></p>
+</center>
+
+<h1 id="___sec4" class="anchor">Logistic growth </h1>
+
+<p>
+Exponential growth can be modelled by the following equation
+
+$$
+\begin{equation*}
+u^{\prime}(t)=\alpha u(t)
+\end{equation*}
+$$
+
+where \( a>0 \) is a given constant. If the initial condition is given by
+
+$$
+\begin{equation*}
+u(0)=u_{0}
+\end{equation*}
+$$
+
+the solution is given by
+
+$$
+\begin{equation*}
+u(t)=u_{0}e^{\alpha t}.
+\end{equation*}
+$$
+
+Since \( a>0, \) the solution becomes very large as \( t \) increases. For a
+short time, such growth of a population may be realistic, but over a longer
+time, the growth of a population is restricted due to limitations of the
+environment.
+Introducing a logistic growth term,
+we get the differential equation
+
+$$
+\begin{equation}
+u^{\prime}(t)=\alpha u(t)\left(  1-\frac{u(t)}{R}\right),
+\tag{23}
+\end{equation}
+$$
+
+where \( \alpha \) is the growth-rate, and \( R \) is the carrying
+capacity.
+Note that
+\( R \) is typically very large, so if \( u(0) \) is small, we have
+
+$$
+\begin{equation*}
+\frac{u(t)}{R}\approx0
+\end{equation*}
+$$
+
+for small values of \( t, \) and thus we have exponential growth for small \( t; \)
+
+$$
+\begin{equation*}
+u^{\prime}(t)\approx au(t).
+\end{equation*}
+$$
+
+But as \( t \) increases, and \( u \) grows, the term \( u(t)/R \) will become important
+and limit the growth.
+
+<p>
+A numerical scheme for the logistic equation <a href="#mjx-eqn-23">(23)</a>
+is given by
+
+$$
+\begin{equation*}
+\frac{u_{k+1}-u_{k}}{\Delta t}=\alpha u_{k}\left(  1-\frac{u_{k}}{R}\right)  ,
+\end{equation*}
+$$
+
+which we can solve with respect to the unknown \( u_{k+1} \):
+
+$$
+\begin{equation*}
+u_{k+1}=u_{k}+\Delta t\alpha u_{k}\left(  1-\frac{u_{k}}{R}\right) \tp
+\end{equation*}
+$$
+
+This is the form of the equation that is suited for implementation.
+
+<h1 id="pendulum" class="anchor">A simple pendulum</h1>
+
+<p>
+So far we have considered scalar ordinary differential equations,
+i.e., equations with one single function \( u(t) \) as unknown.
+Now we shall deal with systems of ordinary differential equations,
+where in general \( n \) unknown functions are coupled in a system of
+\( n \) equations. Our introductory example will be a system of
+two equations having two unknown functions \( u(t) \) and \( v(t) \).
+The example concerns the motion of a pendulum, see
+Figure <a href="#sec:ode:pendulum">2</a>. A sphere with mass \( m \) is attached to
+a massless rod of length \( L \)
+and oscillates back and forth due to gravity.
+Newton's second law of motion applied to this physical system gives rise
+the differential equation
+
+$$
+\begin{equation}
+\theta^{\prime\prime}(t)+\alpha\sin(\theta)=0,
+\tag{24}
+\end{equation}
+$$
+
+where \( \theta=\theta(t) \) is the angle the rod makes with the vertical,
+measured in radians, and
+\( \alpha=g/L \) (\( g \) is the acceleration of gravity).
+The unknown function to solve for is \( \theta \), and knowing \( \theta \),
+we can quite easily compute the position of the sphere, its velocity,
+and its acceleration, as well as the tension force in the rod.
+Since the highest derivative in <a href="#mjx-eqn-24">(24)</a> is of second order,
+we refer to <a href="#mjx-eqn-24">(24)</a> as a <em>second-order differential
+equations</em>.
+Our previous examples in this document involved only
+first-order derivatives, and therefore they are known as
+<em>first-order differential equations</em>.
+
+<p>
+<center> <!-- figure label: --> <div id="sec:ode:pendulum"></div> <!-- FIGURE -->
+<hr class="figure">
+<center><p class="caption">Figure 2:  A pendulum with \( m= \) mass, \( L= \) length of massless rod and \( \theta=\theta(t)= \) angle.      <!-- caption label: sec:ode:pendulum --> </p></center>
+<p><img src="fig-ode1/pendulum.png" align="bottom" width=150></p>
+</center>
+
+<p>
+We
+shall not solve the second-order
+equation <a href="#mjx-eqn-24">(24)</a> as it stands. We shall
+instead rewrite it as a system of two first-order equations so that
+we can use numerical methods for first-order equations to solve it.
+
+<p>
+To transform a second-order equation to a system of two first-order
+equations, we introduce a new variable for the first-order derivative
+(the angular velocity of the sphere):
+\( v(t) = \theta'(t) \). Using \( v \) and \( \theta \) in <a href="#mjx-eqn-24">(24)</a> yields
+
+$$
+\begin{equation*} v'(t) + \alpha \sin(\theta) =  0\tp\end{equation*}
+$$
+
+In addition, we have the relation
+
+$$
+\begin{equation*} v = \theta'(t)\end{equation*}
+$$
+
+between \( v \) and \( \theta \). This means that <a href="#mjx-eqn-24">(24)</a> is
+equivalent to the following system of two coupled first-order differential
+equations:
+
+$$
+\begin{align}
+\theta^{\prime}(t) &  =v(t),
+\tag{25}\\ 
+v^{\prime}(t) &  =-\alpha\sin(\theta)\tp
+\tag{26}
+\end{align}
+$$
+
+As for scalar differential equations, we need initial conditions, now
+two conditions because we have two unknown functions:
+
+$$
+\begin{align*}
+\theta(0) &  =\theta_{0},\\ 
+v(0) &  =v_{0},
+\end{align*}
+$$
+
+Here we assume the initial angle \( \theta_{0} \) and the initial
+angular velocity \( v_{0} \) to be given.
+
+<p>
+It is common to group the unknowns and the initial conditions
+in 2-vectors: \( (\theta(t),v(t)) \) and \( (\theta_0,v_0) \).
+One may then view <a href="#mjx-eqn-25">(25)</a>-<a href="#mjx-eqn-26">(26)</a> as a
+<em>vector equation</em>, whose first component equation is
+<a href="#mjx-eqn-25">(25)</a>, and the second component equation is
+<a href="#mjx-eqn-26">(26)</a>. In Python software, this vector notation makes
+solution methods for scalar equations (almost) immediately available
+for vector equations, i.e., systems of ordinary differential equations.
+
+<p>
+In order to derive a
+numerical method for the system <a href="#mjx-eqn-25">(25)</a>-<a href="#mjx-eqn-26">(26)</a>,
+we proceed as we did above for one equation with one unknown function.
+Say we want
+to compute the solution from \( t=0 \) to \( t=T \) where \( T>0 \) is given. Let
+\( n\geq 1 \) be a given integer and define the time step
+
+$$
+\begin{equation*}
+\Delta t=T/n.
+\end{equation*}
+$$
+
+Furthermore, we let \( (\theta_{k},v_{k}) \) denote approximations of the exact
+solution \( (\theta(t_{k}),v(t_{k})) \) for \( k=0,1,\ldots,n \). A
+Forward Euler type of method will now read
+
+$$
+\begin{align}
+\frac{\theta_{k+1}-\theta_{k}}{\Delta t} &  =v_{k},
+\tag{27}\\ 
+\frac{v_{k+1}-v_{k}}{\Delta t} &  =-\alpha\sin(\theta_{k})\tp
+\tag{28}
+\end{align}
+$$
+
+This scheme can be rewritten in a form more suitable for implementation:
+
+$$
+\begin{align}
+\theta_{k+1} &  =\theta_{k}+\Delta t\, v_{k},
+\tag{29}\\ 
+v_{k+1} &  =v_{k}-\alpha\Delta t\sin(\theta_{k})\tp
+\tag{30}
+\end{align}
+$$
+
+The next program, <a href="http://tinyurl.com/pwyasaa/ode1/pendulum.py" target="_self"><tt>pendulum.py</tt></a>,
+implements this method
+in the function <code>pendulum</code>. The input parameters to the model,
+\( \theta_{0} \), \( v_{0}, \), the final time \( T \), and the number of time-steps \( n \),
+must be given on the command line.
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #408080; font-style: italic">#!/usr/bin/env python</span>
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">pendulum</span>(T, n, theta0, v0, alpha):
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Return the motion (theta, v, t) of a pendulum.&quot;&quot;&quot;</span>
+    dt <span style="color: #666666">=</span> T<span style="color: #666666">/</span><span style="color: #008000">float</span>(n)
+    t <span style="color: #666666">=</span> linspace(<span style="color: #666666">0</span>, T, n<span style="color: #666666">+1</span>)
+    v <span style="color: #666666">=</span> zeros(n<span style="color: #666666">+1</span>)
+    theta <span style="color: #666666">=</span> zeros(n<span style="color: #666666">+1</span>)
+    v[<span style="color: #666666">0</span>] <span style="color: #666666">=</span> v0
+    theta[<span style="color: #666666">0</span>] <span style="color: #666666">=</span> theta0
+    <span style="color: #008000; font-weight: bold">for</span> k <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(n):
+        theta[k<span style="color: #666666">+1</span>] <span style="color: #666666">=</span> theta[k] <span style="color: #666666">+</span> dt<span style="color: #666666">*</span>v[k]
+        v[k<span style="color: #666666">+1</span>] <span style="color: #666666">=</span> v[k] <span style="color: #666666">-</span> alpha<span style="color: #666666">*</span>dt<span style="color: #666666">*</span>sin(theta[k<span style="color: #666666">+1</span>])
+    <span style="color: #008000; font-weight: bold">return</span> theta, v, t
+
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">scitools.std</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #666666">*</span>
+
+n <span style="color: #666666">=</span> <span style="color: #008000">int</span>(sys<span style="color: #666666">.</span>argv[<span style="color: #666666">1</span>])
+T <span style="color: #666666">=</span> <span style="color: #008000">eval</span>(sys<span style="color: #666666">.</span>argv[<span style="color: #666666">2</span>])
+v0 <span style="color: #666666">=</span> <span style="color: #008000">eval</span>(sys<span style="color: #666666">.</span>argv[<span style="color: #666666">3</span>])
+theta0 <span style="color: #666666">=</span> <span style="color: #008000">eval</span>(sys<span style="color: #666666">.</span>argv[<span style="color: #666666">4</span>])
+alpha <span style="color: #666666">=</span> <span style="color: #008000">eval</span>(sys<span style="color: #666666">.</span>argv[<span style="color: #666666">5</span>])
+
+theta, v, t <span style="color: #666666">=</span> pendulum(T, n, theta0, v0)
+plot(t, v, xlabel<span style="color: #666666">=</span><span style="color: #BA2121">&#39;t&#39;</span>, ylabel<span style="color: #666666">=</span><span style="color: #BA2121">&#39;velocity&#39;</span>)
+figure()
+plot(t, theta, xlabel<span style="color: #666666">=</span><span style="color: #BA2121">&#39;t&#39;</span>, ylabel<span style="color: #666666">=</span><span style="color: #BA2121">&#39;velocity&#39;</span>)
+</pre></div>
+<p>
+By running the program with the input data \( \theta_{0}=\pi/6 \),
+\( v_{0}=0 \), \( \alpha=5 \), \( T=10 \) and \( n=1000 \), we get the results shown in Figure
+<a href="#sec:ode:fig9">3</a>. The angle \( \theta=\theta(t) \) is displayed in the left panel and the
+velocity is given in the right panel.
+
+<p>
+<center> <!-- figure label: --> <div id="sec:ode:fig9"></div> <!-- FIGURE -->
+<hr class="figure">
+<center><p class="caption">Figure 3:  Plot of the motion of a pendulum. Left: the angle \( \theta(t) \). Right: angular velocity \( \theta ' \).      <!-- caption label: sec:ode:fig9 --> </p></center>
+<p><img src="fig-ode1/ode_fig9.png" align="bottom" width=800></p>
+</center>
+
+<h1 id="sec:ode1:SI" class="anchor">A model for the spreading of a disease</h1>
+
+<p>
+Mathematical models are used intensively to analyze the spread of
+infectious diseases. In the simplest case, we may consider a
+population, that is supposed to be constant, consisting of two groups;
+the susceptibles \( (S) \) who can catch the disease, and the infectives
+\( (I) \) who have the disease and are able to transmit it. A system of
+differential equations modelling the evolution of \( S \) and \( I \) is given
+by
+
+$$
+\begin{align}
+S^{\prime}  &  =-rSI,
+\tag{31}\\ 
+I^{\prime}  &  =rSI-aI\tp
+\tag{32}
+\end{align}
+$$
+
+Here \( r \) and \( a \) are given constants reflecting the characteristics of the
+epidemic. The initial conditions are given by
+
+$$
+\begin{align*}
+S(0)  &  =S_{0},\\ 
+I(0)  &  =I_{0},
+\end{align*}
+$$
+
+where the initial state \( (S_{0},I_{0}) \) is assumed to be known.
+
+<p>
+Suppose we want to compute numerical solutions of this system from time \( t=0 \)
+to \( t=T. \) Then, by reasoning as above, we introduce the time step
+
+$$
+\begin{equation*}
+\Delta t=T/n
+\end{equation*}
+$$
+
+and the approximations \( (S_{k},I_{k}) \) of the solution \( (S(t_{k}),I(t_{k})). \)
+An explicit Forward Euler method for the system takes the following form,
+
+$$
+\begin{align*}
+\frac{S_{k+1}-S_{k}}{\Delta t} &  =-rS_{k}I_{k},\\ 
+\frac{I_{k+1}-I_{k}}{\Delta t} &  =rS_{k}I_{k}-aI_{k},
+\end{align*}
+$$
+
+which can be rewritten on computational form
+
+$$
+\begin{align*}
+S_{k+1} &  =S_{k} - \Delta trS_{k}I_{k},\\ 
+I_{k+1} &  =I_{k} + \Delta t\left(  rS_{k}I_{k}-aI_{k}\right)  \tp
+\end{align*}
+$$
+
+This scheme is implemented in the program
+<a href="http://tinyurl.com/pwyasaa/ode1/exp_epidemic.py" target="_self"><tt>exp_epidemic.py</tt></a> where
+\( r,a,S_{0},I_{0},n \) and \( T \) are input data given on the command line.
+The function <code>epidemic</code> computes the solution \( (S,I) \) to the
+differential equation system. This pair of time-dependent
+functions is then plotted
+in two separate plots.
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #408080; font-style: italic">#!/usr/bin/env python</span>
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">epidemic</span>(T, n, S0, I0, r, a):
+    dt <span style="color: #666666">=</span> T<span style="color: #666666">/</span><span style="color: #008000">float</span>(n)
+    t <span style="color: #666666">=</span> linspace(<span style="color: #666666">0</span>, T, n<span style="color: #666666">+1</span>)
+    S <span style="color: #666666">=</span> zeros(n<span style="color: #666666">+1</span>)
+    I <span style="color: #666666">=</span> zeros(n<span style="color: #666666">+1</span>)
+    S[<span style="color: #666666">0</span>] <span style="color: #666666">=</span> S0
+    I[<span style="color: #666666">0</span>] <span style="color: #666666">=</span> I0
+    <span style="color: #008000; font-weight: bold">for</span> k <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(n):
+        S[k<span style="color: #666666">+1</span>] <span style="color: #666666">=</span> S[k] <span style="color: #666666">-</span> dt<span style="color: #666666">*</span>r<span style="color: #666666">*</span>S[k]<span style="color: #666666">*</span>I[k]
+        I[k<span style="color: #666666">+1</span>] <span style="color: #666666">=</span> I[k] <span style="color: #666666">+</span> dt<span style="color: #666666">*</span>(r<span style="color: #666666">*</span>S[k]<span style="color: #666666">*</span>I[k] <span style="color: #666666">-</span> a<span style="color: #666666">*</span>I[k])
+    <span style="color: #008000; font-weight: bold">return</span> S, I, t
+
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">scitools.std</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #666666">*</span>
+
+n <span style="color: #666666">=</span> <span style="color: #008000">int</span>(sys<span style="color: #666666">.</span>argv[<span style="color: #666666">1</span>])
+T <span style="color: #666666">=</span> <span style="color: #008000">eval</span>(sys<span style="color: #666666">.</span>argv[<span style="color: #666666">2</span>])
+S0 <span style="color: #666666">=</span> <span style="color: #008000">eval</span>(sys<span style="color: #666666">.</span>argv[<span style="color: #666666">3</span>])
+I0 <span style="color: #666666">=</span> <span style="color: #008000">eval</span>(sys<span style="color: #666666">.</span>argv[<span style="color: #666666">4</span>])
+r <span style="color: #666666">=</span> <span style="color: #008000">eval</span>(sys<span style="color: #666666">.</span>argv[<span style="color: #666666">5</span>])
+a <span style="color: #666666">=</span> <span style="color: #008000">eval</span>(sys<span style="color: #666666">.</span>argv[<span style="color: #666666">6</span>])
+
+S, I, t <span style="color: #666666">=</span> epidemic(T, n, S0, I0, r, a)
+plot(t, S, xlabel<span style="color: #666666">=</span><span style="color: #BA2121">&#39;t&#39;</span>, ylabel<span style="color: #666666">=</span><span style="color: #BA2121">&#39;Susceptibles&#39;</span>)
+plot(t, I, xlabel<span style="color: #666666">=</span><span style="color: #BA2121">&#39;t&#39;</span>, ylabel<span style="color: #666666">=</span><span style="color: #BA2121">&#39;Infectives&#39;</span>)
+</pre></div>
+<p>
+We want to apply the program to a specific case where an influenza epidemic hit
+a British boarding school with a total of \( 763 \) boys. (The data are taken
+from Murray <a href="#MurrayBio">[2]</a>, and Murray found the data in
+the British Medical Journal, March 4, 1978.) The epidemic lasted from 21st
+January to 4th February in 1978. We let \( t=0 \) denote 21st of January and we
+define \( T=14 \) days. We put \( S_{0}=762 \) and \( I_{0}=1 \) which means that one
+person was ill at \( t=0. \) In the Figure <a href="#sec:ode:fig10">4</a> we see the numerical results using
+\( r=2.18\times10^{-3},a=0.44,n=1000 \). Also, we have plotted actual the
+measurements, and we note that the simulations fit the real data quite well.
+
+<p>
+<center> <!-- figure label: --> <div id="sec:ode:fig10"></div> <!-- FIGURE -->
+<hr class="figure">
+<center><p class="caption">Figure 4:  Graphs of susceptibles (left) and infectives (right) for an influenza in a British boarding school in 1978.      <!-- caption label: sec:ode:fig10 --> </p></center>
+<p><img src="fig-ode1/ode_fig10.png" align="bottom" width=800></p>
+</center>
+
+<p>
+Reader interested in mathematical models for the spreading of
+infectious diseases may consult the excellent
+book <a href="#MurrayBio">[2]</a>
+on Mathematical Biology by J.D. Murray.
+
+<h1 id="___sec7" class="anchor">Exercises </h1>
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:ode:ex1" class="anchor">Exercise 1: Solve a nonhomogeneous linear ODE</h2>
+
+<p>
+Solve the ODE problem
+
+$$
+\begin{equation*} u^{\prime} = 2u-1,\quad u(0)=2,\quad t\in [0,6]\end{equation*}
+$$
+
+using the Forward Euler method.
+Choose \( \Delta t = 0.25 \). Plot the numerical solution together with
+the exact solution \( u(t)=\frac{1}{2} + \frac{3}{2}e^{2t} \).
+Filename: <code>nonhomogeneous_linear_ODE</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:ode:ex2" class="anchor">Exercise 2: Solve a nonlinear ODE</h2>
+
+<p>
+Solve the ODE problem
+
+$$
+\begin{equation*} u^{\prime} = u^{q},\quad u(0)=1,\quad t\in [0,T]\end{equation*}
+$$
+
+using the Forward Euler method.
+The exact solution reads \( u(t)=e^t \) for \( q=1 \) and
+\( u(t)=\left( t(1-q)+1\right)^{1/(1-q)} \) for
+\( q>1 \) and \( t(1-q)+1>0 \).
+Read \( q \), \( \Delta t \), and \( T \) from the command line, solve the ODE,
+and plot the numerical and exact solution.
+Run the program for different cases: \( q=2 \) and \( q=3 \), with
+\( \Delta t =0.01 \) and \( \Delta t =0.1 \). Set \( T=6 \) if \( q=1 \) and
+\( T=1/(q-1) -0.1 \) otherwise.
+Filename: <code>nonlinear_ODE</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:ode:ex6" class="anchor">Exercise 3: Solve an ODE for \( y(x) \)</h2>
+
+<p>
+We have given the following ODE problem:
+
+$$
+\begin{equation}
+ {dy\over dx} = {1\over 2(y-1)},\quad y(0)=1+\sqrt{\epsilon},\quad x\in [0,4],
+\tag{33}
+\end{equation}
+$$
+
+where \( \epsilon >0 \) is a small number.
+Formulate a Forward Euler method for this ODE problem and compute the solution
+for varying step size in \( x \): \( \Delta x=1 \), \( \Delta x=0.25 \), \( \Delta x=0.01 \).
+Plot the numerical solutions together with the exact solution
+\( y(x) = 1 + \sqrt{x+\epsilon} \),
+using 1001 \( x \) coordinates for accurate resolution
+of the latter. Set \( \epsilon \) to  \( 10^{-3} \).
+Study the numerical solution with \( \Delta x=1 \), and use
+that insight to explain why this problem is hard to solve numerically.
+Filename: <code>yx_ODE</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:ode:ex8" class="anchor">Exercise 4: Experience instability of an ODE</h2>
+
+<p>
+Consider the ODE problem
+
+$$
+\begin{equation*} u^{\prime} = \alpha u,\quad u(0)=u_0,\end{equation*}
+$$
+
+solved by the Forward Euler method. Show by repeatedly applying the scheme
+that
+
+$$
+\begin{equation*} u_k = (1 + \alpha\Delta t)^ku_0\tp\end{equation*}
+$$
+
+We now turn to the case \( \alpha < 0 \). Show that the numerical solution
+will oscillate if \( \Delta t > -1/\alpha \). Make a program for computing
+\( u_k \), set \( \alpha = -1 \), and demonstrate oscillatory solutions for
+\( \Delta t = 1.1, 1.5, 1.9 \). Recall that the exact solution, \( u(t)=e^{\alpha t} \), never oscillates.
+
+<p>
+What happens if \( \Delta t > -2/\alpha \)? Try it out in the program and
+explain why we do not experience that \( u_k\rightarrow 0 \) as \( k\rightarrow\infty \).
+Filename: <code>unstable_ODE</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:ode:ex3" class="anchor">Exercise 5: Solve an ODE with time-varying growth</h2>
+
+<p>
+Consider the ODE for exponential growth,
+
+$$
+\begin{equation*} u^{\prime} = \alpha u,\quad u(0)=1,\quad t\in [0,T]\tp\end{equation*}
+$$
+
+Now we introduce a time-dependent \( \alpha \) such that the growth
+decreases with time: \( \alpha (t) = a -bt \). Solve the problem
+for \( a=1 \), \( b=0.1 \), and \( T=10 \).
+Plot the solution and compare with the corresponding exponential
+growth using the mean value of \( \alpha (t) \) as growth factor: \( e^{(a-bT/2)t} \).
+Filename: <code>time_dep_growth</code>.
+
+<p>
+<!-- predator-prey system should be here, but systems are not very well -->
+<!-- covered in this document... -->
+<!-- --- end exercise --- -->
+
+<h1 id="___sec13" class="anchor">References </h1>
+
+<p>
+<!-- begin bibliography -->
+
+<ol>
+ <li> <div id="Langtangen_TCSE6_ode2"></div> <b>H. P. Langtangen</b>. 
+    Programming of ordinary differential equations,
+    \emphhttp://hplgit.github.io/primer.html/doc/pub/ode2,
+    <a href="http://hplgit.github.io/primer.html/doc/pub/ode2" target="_self"><tt>http://hplgit.github.io/primer.html/doc/pub/ode2</tt></a>.</li>
+ <li> <div id="MurrayBio"></div> <b>J. D. Murray</b>. 
+    <em>Mathematical Biology I: an Introduction</em>,
+    3rd edition,
+    Springer,
+    2007.</li>
+</ol>
+
+<!-- end bibliography -->
+
+<p>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pager">
+</ul>
+<!-- ------------------- end of main content --------------- -->
+
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap footer
+<footer>
+<a href="http://..."><img width="250" align=right src="http://..."></a>
+</footer>
+-->
+
+
+</body>
+</html>
+    
+

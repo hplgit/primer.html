@@ -1,0 +1,917 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Dictionaries and strings">
+<meta name="keywords" content="dictionary,keys (dictionaries),immutable objects,mutable objects,summing a list,summing over an iterator,dictionary comprehensions,nested dictionaries,dictionary nested,date conversion,plotting data vs date,string slicing,slicing,substrings,string substrings,string searching,string find,string substitution,substitution (in text),string replace,string splitting,string case change,string testing for number,whitespace,blank lines in files,string stripping leading/trailing blanks,string joining words,dictionary functionality">
+
+<title>Dictionaries and strings</title>
+
+
+<link href="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/css/solarized_light_code.css" rel="stylesheet" type="text/css" title="light"/>
+<script src="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<link href="http://thomasf.github.io/solarized-css/solarized-light.min.css" rel="stylesheet">
+<style type="text/css">
+h1 {color: #b58900;}  /* yellow */
+/* h1 {color: #cb4b16;}  orange */
+/* h1 {color: #d33682;}  magenta, the original choice of thomasf */
+code { padding: 0px; background-color: inherit; }
+pre {
+  border: 0pt solid #93a1a1;
+  box-shadow: none;
+}
+.alert-text-small   { font-size: 80%;  }
+.alert-text-large   { font-size: 130%; }
+.alert-text-normal  { font-size: 90%;  }
+.alert {
+  padding:8px 35px 8px 14px; margin-bottom:18px;
+  text-shadow:0 1px 0 rgba(255,255,255,0.5);
+  border:1px solid #93a1a1;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  color: #555;
+  background-color: #eee8d5;
+  background-position: 10px 5px;
+  background-repeat: no-repeat;
+  background-size: 38px;
+  padding-left: 55px;
+  width: 75%;
+ }
+.alert-block {padding-top:14px; padding-bottom:14px}
+.alert-block > p, .alert-block > ul {margin-bottom:1em}
+.alert li {margin-top: 1em}
+.alert-block p+p {margin-top:5px}
+.alert-notice { background-image: url(https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/small_yellow_notice.png); }
+.alert-summary  { background-image:url(https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/small_yellow_summary.png); }
+.alert-warning { background-image: url(https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/small_yellow_warning.png); }
+.alert-question {background-image:url(https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/small_yellow_question.png); }
+
+div { text-align: justify; text-justify: inter-word; }
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [('Table of contents',
+               1,
+               'table_of_contents',
+               'table_of_contents'),
+              (u'Dictionaries', 1, u'sec:files:dicts', u'sec:files:dicts'),
+              (u'Making dictionaries', 2, None, '___sec1'),
+              (u'Dictionary operations', 2, None, '___sec2'),
+              (u'Remark', 3, None, '___sec3'),
+              (u'Example: Polynomials as dictionaries',
+               2,
+               u'sec:files:poly',
+               u'sec:files:poly'),
+              (u'Dictionaries with default values and ordering',
+               2,
+               u'sec:files:dict:default:order',
+               u'sec:files:dict:default:order'),
+              (u'Dictionaries with default values', 3, None, '___sec6'),
+              (u'Ordered dictionaries', 3, None, '___sec7'),
+              (u'Example: Storing file data in dictionaries',
+               2,
+               u'sec:files:dict:density',
+               u'sec:files:dict:density'),
+              (u'Problem', 3, None, '___sec9'),
+              (u'Solution', 3, None, '___sec10'),
+              (u'Example: Storing file data in nested dictionaries',
+               2,
+               u'sec:files:dictdict',
+               u'sec:files:dictdict'),
+              (u'Problem', 3, None, '___sec12'),
+              (u'Algorithm', 3, None, '___sec13'),
+              (u'Implementation', 3, None, '___sec14'),
+              (u'Dissection', 3, None, '___sec15'),
+              (u'Example: Reading and plotting data recorded at specific dates',
+               2,
+               u'sec:files:stockprices',
+               u'sec:files:stockprices'),
+              (u'Problem', 3, None, '___sec17'),
+              (u'Solution', 3, None, '___sec18'),
+              (u'Strings', 1, u'sec:files:str', u'sec:files:str'),
+              (u'Common operations on strings',
+               2,
+               u'sec:files:stringop',
+               u'sec:files:stringop'),
+              (u'Substring specification', 3, None, '___sec21'),
+              (u'Searching for substrings', 3, None, '___sec22'),
+              (u'Substitution', 3, None, '___sec23'),
+              (u'String splitting', 3, None, '___sec24'),
+              (u'Upper and lower case', 3, None, '___sec25'),
+              (u'Strings are constant', 3, None, '___sec26'),
+              (u'Strings with digits only', 3, None, '___sec27'),
+              (u'Whitespace', 3, None, '___sec28'),
+              (u'Joining strings', 3, None, '___sec29'),
+              (u'Example: Reading pairs of numbers',
+               2,
+               u'sec:files:pairs',
+               u'sec:files:pairs'),
+              (u'Problem', 3, None, '___sec31'),
+              (u'Solution', 3, None, '___sec32'),
+              (u'Example: Reading coordinates', 2, None, '___sec33'),
+              (u'Problem', 3, None, '___sec34'),
+              (u'Solution 1: substring extraction', 3, None, '___sec35'),
+              (u'Solution 2: string search', 3, None, '___sec36'),
+              (u'Solution 3: string split', 3, None, '___sec37'),
+              (u'Reading data from web pages',
+               1,
+               u'sec:files:webtxt',
+               u'sec:files:webtxt'),
+              (u'About web pages',
+               2,
+               u'sec:files:HTMLintro',
+               u'sec:files:HTMLintro'),
+              (u'How to access web pages in programs',
+               2,
+               u'sec:files:urllib',
+               u'sec:files:urllib'),
+              (u'Alternative 1', 3, None, '___sec41'),
+              (u'Alternative 2', 3, None, '___sec42'),
+              (u'Example: Reading pure text files',
+               2,
+               u'sec:files:url:weather',
+               u'sec:files:url:weather'),
+              (u'Example: Extracting data from HTML',
+               2,
+               u'sec:files:url:interpret',
+               u'sec:files:url:interpret'),
+              (u'Handling non-English text',
+               2,
+               u'sec:files:encoding',
+               u'sec:files:encoding'),
+              (u'Reading and writing spreadsheet files',
+               1,
+               u'sec:files:csv',
+               u'sec:files:csv'),
+              (u'CSV files', 2, None, '___sec47'),
+              (u'Reading CSV files', 2, None, '___sec48'),
+              (u'Processing spreadsheet data', 2, None, '___sec49'),
+              (u'Writing CSV files', 2, None, '___sec50'),
+              (u'Remark', 3, None, '___sec51'),
+              (u'Representing number cells with Numerical Python arrays',
+               2,
+               None,
+               '___sec52'),
+              (u'Using more high-level Numerical Python functionality',
+               2,
+               None,
+               '___sec53'),
+              (u'Making code that is compatible with Python 2 and 3',
+               1,
+               u'sec:dictstring:py23',
+               u'sec:dictstring:py23'),
+              (u'Basic differences between Python 2 and 3',
+               2,
+               None,
+               '___sec55'),
+              (u'`xrange` in Python 2 is `range` in Python 3',
+               3,
+               None,
+               '___sec56'),
+              (u'Python 3 often avoids returning lists and dictionaries',
+               3,
+               None,
+               '___sec57'),
+              (u'Library modules have different names', 3, None, '___sec58'),
+              (u'Python 3 has unicode and byte strings', 3, None, '___sec59'),
+              (u'Python 3 has different relative import syntax inside packages',
+               3,
+               None,
+               '___sec60'),
+              (u'Turning Python 2 code into Python 3 code',
+               2,
+               None,
+               '___sec61'),
+              (u'Summary', 1, None, '___sec62'),
+              (u'Chapter topics', 2, None, '___sec63'),
+              (u'Dictionaries', 3, None, '___sec64'),
+              (u'Strings', 3, None, '___sec65'),
+              (u'Downloading Internet files', 3, None, '___sec66'),
+              (u'Terminology', 3, None, '___sec67'),
+              (u'Example: A file database',
+               2,
+               u'sec:files:sumex',
+               u'sec:files:sumex'),
+              (u'Problem', 3, None, '___sec69'),
+              (u'Solution', 3, None, '___sec70'),
+              (u'Exercises',
+               1,
+               u'sec:files:exercises',
+               u'sec:files:exercises'),
+              (u'Exercise 1: Make a dictionary from a table',
+               2,
+               u'sec:files:ex2b:basic',
+               u'sec:files:ex2b:basic'),
+              (u'Exercise 2: Explore syntax differences: lists vs. dicts',
+               2,
+               u'sec:files:ex2',
+               u'sec:files:ex2'),
+              (u'Exercise 3: Use string operations to improve a program',
+               2,
+               u'sec:files:ex17',
+               u'sec:files:ex17'),
+              (u'Exercise 4: Interpret output from a program',
+               2,
+               u'sec:files:ex13',
+               u'sec:files:ex13'),
+              (u'Exercise 5: Make a dictionary',
+               2,
+               u'sec:files:ex2b',
+               u'sec:files:ex2b'),
+              (u'Exercise 6: Make a nested dictionary',
+               2,
+               u'sec:files:ex2c',
+               u'sec:files:ex2c'),
+              (u'Exercise 7: Make a nested dictionary from a file',
+               2,
+               u'sec:files:ex2d:nested',
+               u'sec:files:ex2d:nested'),
+              (u'Exercise 8: Make a nested dictionary from a file',
+               2,
+               u'sec:files:ex2d:nested2',
+               u'sec:files:ex2d:nested2'),
+              (u'Exercise 9: Compute the area of a triangle',
+               2,
+               u'sec:files:ex2d',
+               u'sec:files:ex2d'),
+              (u'Exercise 10: Compare data structures for polynomials',
+               2,
+               u'sec:files:ex16',
+               u'sec:files:ex16'),
+              (u'Exercise 11: Compute the derivative of a polynomial',
+               2,
+               u'sec:files:ex3',
+               u'sec:files:ex3'),
+              (u'Exercise 12: Specify functions on the command line',
+               2,
+               u'sec:basic:ex10',
+               u'sec:basic:ex10'),
+              (u'Exercise 13: Interpret function specifications',
+               2,
+               u'sec:basic:ex10b',
+               u'sec:basic:ex10b'),
+              (u'Exercise 14: Compare average temperatures in cities',
+               2,
+               u'sec:files:ex8',
+               u'sec:files:ex8'),
+              (u'Exercise 15: Generate an HTML report with figures',
+               2,
+               u'sec:files:ex21',
+               u'sec:files:ex21'),
+              (u'References', 1, None, '___sec87')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- newcommands_keep.tex -->
+$$
+\newcommand{\tp}{\thinspace .}
+$$
+
+
+
+
+    
+<a name="part0003"></a>
+<p>
+<!-- begin top navigation -->
+<table style="width: 100%"><tr><td>
+<div style="text-align: left;"><a href="._dictstring-solarized002.html">&laquo; Previous</a></div>
+</td><td>
+<div style="text-align: right;"><a href="._dictstring-solarized004.html">Next &raquo;</a></div>
+</td></tr></table>
+<!-- end top navigation -->
+</p>
+
+<p>
+<!-- !split -->
+<p style="font-size:80%">This chapter is taken from the book <a href="http://www.springer.com/gp/book/9783662498866">A Primer on Scientific Programming with Python</a> by H. P. Langtangen, 5th edition, Springer, 2016.</p>
+
+<h1 id="sec:files:webtxt">Reading data from web pages</h1>
+
+<p>
+Python has a module <code>urllib</code> which makes it possible to read data from
+a web page as easily as
+we can read data from an ordinary file. (In principle this is
+true, but in practice
+the text in web pages tend to be much more complicated than the text
+in the files we have treated so far.)
+Before we do this, a few concepts from the Internet world must be touched.
+
+<h2 id="sec:files:HTMLintro">About web pages</h2>
+
+<p>
+Web pages are viewed with a web browser. There are many browsers:
+Firefox, Internet Explorer, Safari, Opera, and Google Chrome to mention
+the most famous.
+Any web page you visit is associated with an address, usually something like
+
+<p>
+<!-- begin verbatim block  ccq-->
+<pre><code>http://www.some.where.net/some/file.html
+</code></pre>
+<!-- end verbatim block -->
+This type of web address is called
+a URL (Uniform Resource Locator) or
+URI (Uniform Resource Identifier).
+(We stick to the term URL in this document because Python's tools for
+accessing resources on the Internet have <code>url</code> as part of
+module and function names.)
+The graphics you see in a web browser, i.e., the web page you see with
+your eyes, is produced by a series of commands that specifies
+the text on the page, the images, buttons to be pressed, etc.
+Roughly speaking, these commands are like statements in computer programs.
+The commands are stored in a text file and follow rules in a language,
+exactly as you are used to when writing statements in a programming language.
+
+<p>
+The common language for defining web pages is HTML.
+A web page is then simply a text file with text containing
+HTML commands. Instead of a physical file, the web page can also be
+the output text from a program. In that case the URL is the name of the
+program file.
+
+<p>
+<center> <!-- figure label: --> <div id="sec:io:webpagefig"></div> <!-- FIGURE -->
+<hr class="figure">
+<center><p class="caption">Figure 4:  Example of what a very simple HTML file looks like in a web browser.  <!-- caption label: sec:io:webpagefig --> </p></center>
+<p><img src="fig-dictstring/simple_webpage.png" align="bottom" width=400></p>
+</center>
+
+<p>
+The web browser interprets the text and the HTML commands, and then
+decides how to display the
+information visually. Let us demonstrate this for a very simple
+web page shown in Figure <a href="#sec:io:webpagefig">4</a>.
+This page was produced by the following text with embedded HTML commands:
+
+<p>
+<!-- begin verbatim block  htmlpro-->
+<pre><code>&lt;html&gt;
+&lt;body bgcolor=&quot;orange&quot;&gt;
+&lt;h1&gt;A Very Simple HTML Page&lt;/h1&gt; &lt;!-- headline --&gt;
+Web pages are written in a language called
+&lt;a href=&quot;http://www.w3.org/MarkUp/Guide/&quot;&gt;HTML&lt;/a&gt;.
+Ordinary text is written as ordinary text, but when we
+need links, headlines, lists,
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;emphasized words&lt;/em&gt;, or
+&lt;li&gt; &lt;b&gt;boldface text&lt;/b&gt;, 
+&lt;/ul&gt;
+we need to embed the text inside HTML tags. We can also
+insert GIF or PNG images, taken from other Internet sites, 
+if desired.
+&lt;hr&gt; &lt;!-- horizontal line --&gt;
+&lt;img src=&quot;http://www.simula.no/simula_logo.gif&quot;&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+A typical HTML command consists of an opening and a closing <em>tag</em>.
+For example, emphasized text is specified by enclosing the text
+inside <code>em</code> (emphasize) tags:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>&lt;em&gt;emphasized words&lt;/em&gt;
+</code></pre>
+<!-- end verbatim block -->
+The opening tag is enclosed in less than and greater than signs, while
+the closing tag has an additional forward slash before the tag name.
+
+<p>
+In the HTML file we see an opening and closing <code>html</code> tag around the
+whole text in the file. Similarly, there is a pair of <code>body</code> tags,
+where the first one also has a parameter <code>bgcolor</code> which can be used
+to specify a background color in the web page.  Section headlines are
+specified by enclosing the headline text inside <code>h1</code> tags. Subsection
+headlines apply <code>h2</code> tags, which results in a smaller font compared
+with <code>h1</code> tags.  Comments appear inside <code>&lt;!--</code> and <code>--&gt;</code>.  Links to
+other web pages are written inside <code>a</code> tags, with an argument <code>href</code>
+for the link's web address.  Lists apply the <code>ul</code> (unordered list)
+tag, while each item is written with just an opening tag <code>li</code> (list
+item), but no closing tag is necessary. Images are also specified with
+just an opening tag having name <code>img</code>, and the image file is given as
+a file name or URL of a file, enclosed in double quotes, as the <code>src</code>
+parameter.
+
+<p>
+The ultra-quick HTML course in the previous paragraphs gives a glimpse
+of how web pages can be constructed.
+One can either write the HTML
+file by hand in a pure text editor, or one can use programs such as
+Dream Weaver to help design the page graphically in a user-friendly
+environment, and then the program can automatically
+generate the right HTML syntax in files.
+
+<h2 id="sec:files:urllib">How to access web pages in programs</h2>
+
+<p>
+Why is it useful to know some HTML and how web pages are constructed?
+The reason is that the web is full of information that we can
+get access to through programs and use in new contexts. What we can get
+access to is not the visual web page you see, but the underlying HTML
+file. The information you see on the screen appear in text form in
+the HTML file, and by extracting text, we can get hold of the
+text's information in a program.
+
+<p>
+Given the URL as a string stored in a variable,
+there are two ways of accessing the HTML text in a Python program:
+
+<h3 id="___sec41">Alternative 1 </h3>
+
+<p>
+Download the HTML file and store it as a local file with a given name,
+say <code>webpage.html</code>:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>import urllib
+url = 'http://www.simula.no/research/scientific/cbc'
+urllib.urlretrieve(url, filename='webpage.html')
+</code></pre>
+<!-- end verbatim block -->
+
+<h3 id="___sec42">Alternative 2 </h3>
+
+<p>
+Open the HTML file as a file-like object:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>infile = urllib.urlopen(url)
+</code></pre>
+<!-- end verbatim block -->
+This <code>infile</code> object has methods such as <code>read</code>, <code>readline</code>, and
+<code>readlines</code>.
+
+<h2 id="sec:files:url:weather">Example: Reading pure text files</h2>
+
+<p>
+Some web pages are just pure text files. Extracting the data from such
+pages are as easy as reading ordinary text files. Here is an example
+of historic weather data from the UK:
+
+<p>
+<!-- begin verbatim block  ccq-->
+<pre><code>http://www.metoffice.gov.uk/climate/uk/stationdata/
+</code></pre>
+<!-- end verbatim block -->
+We may choose a station, say Oxford, which directs us to the page
+
+<p>
+<!-- begin verbatim block  ccq-->
+<pre><code>http://www.metoffice.gov.uk/climate/uk/stationdata/oxforddata.txt
+</code></pre>
+<!-- end verbatim block -->
+We can download this data file by
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>import urllib
+url = \ 
+'http://www.metoffice.gov.uk/climate/uk/stationdata/oxforddata.txt'
+urllib.urlretrieve(url, filename='Oxford.txt')
+</code></pre>
+<!-- end verbatim block -->
+The files looks as follows:
+
+<p>
+<!-- begin verbatim block  dat-->
+<pre><code>Oxford
+Location: 4509E 2072N, 63 metres amsl
+Estimated data is marked with a * after the value.
+Missing data (more than 2 days missing in month) is marked by  ---.
+Sunshine data taken from an automatic ...
+   yyyy  mm   tmax    tmin      af    rain     sun
+              degC    degC    days      mm   hours
+   1853   1    8.4     2.7       4    62.8     ---
+   1853   2    3.2    -1.8      19    29.3     ---
+   1853   3    7.7    -0.6      20    25.9     ---
+   1853   4   12.6     4.5       0    60.1     ---
+   1853   5   16.8     6.1       0    59.5     ---
+
+...
+
+   2010   1    4.7    -1.0      17    56.4    68.2
+   2010   2    7.1     1.3       7    79.8    59.3
+   2010   3   11.3     3.2       8    47.6   130.2
+   2010   4   15.8     4.9       0    25.5   209.5
+   2010   5   17.6     7.3       0    28.6   207.4
+   2010   6   23.0    11.1       0    34.5   230.5
+   2010   7   23.3*   14.1*      0*   24.4*  184.4*  Provisional
+   2010   8   21.4    12.0       0   146.2   123.8   Provisional
+   2010   9   19.0    10.0       0    48.1   118.6   Provisional
+   2010  10   14.6     7.4       2    43.5   128.8   Provisional
+</code></pre>
+<!-- end verbatim block -->
+After the 7 header lines the data consists of 7 or 8 columns of
+numbers, the 8th being of no interest.
+Some numbers may have <code>*</code> or <code>#</code> appended to them,
+but this character must be stripped off before using the number.
+The columns contain the year, the month number (1-12), average maximum
+temperature, average minimum temperature, total number of days of
+air frost (<code>af</code>) during the month,
+total rainfall during the month, and the total number
+of hours with sun during the month. The temperature averages are taken
+over the maximum and minimum temperatures for all days in the month.
+Unavailable data are marked by three dashes.
+
+<p>
+The data can be conveniently stored in a dictionary with, e.g.,
+three main keys: place (name), location (the info on the 2nd),
+and data. The latter is a dictionary with two keys: year and month.
+
+<p>
+The following program creates the <code>data</code> dictionary:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>infile = open(local_file, 'r')
+data = {}
+data['place'] = infile.readline().strip()
+data['location'] = infile.readline().strip()
+# Skip the next 5 lines
+for i in range(5):
+    infile.readline()
+
+data['data'] ={}
+for line in infile:
+    columns = line.split()
+
+    year = int(columns[0])
+    month = int(columns[1])
+
+    if columns[-1] == 'Provisional':
+        del columns[-1]
+    for i in range(2, len(columns)):
+        if columns[i] == '---':
+            columns[i] = None
+        elif columns[i][-1] == '*' or columns[i][-1] == '#':
+            # Strip off trailing character
+            columns[i] = float(columns[i][:-1])
+        else:
+            columns[i] = float(columns[i])
+
+    tmax, tmin, air_frost, rain, sun = columns[2:]
+
+    if not year in data['data']:
+        data['data'][year] = {}
+    data['data'][year][month] = {'tmax': tmax,
+                                 'tmin': tmin,
+                                 'air frost': air_frost,
+                                 'sun': sun}
+</code></pre>
+<!-- end verbatim block -->
+The code is available in the file
+<a href="http://tinyurl.com/pwyasaa/dictstring/historic_weather.py" target="_self"><tt>historic_weather.py</tt></a>.
+
+<p>
+With a few lines of code, we can extract the data we want, say a
+two-dimensional array of the number of sun hours in a month (these data
+are available from year 1929):
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>sun = [[data['data'][y][m]['sun'] for m in range(1,13)] \ 
+       for y in range(1929, 2010)]
+import numpy as np
+sun = np.array(sun)
+</code></pre>
+<!-- end verbatim block -->
+
+<h2 id="sec:files:url:interpret">Example: Extracting data from HTML</h2>
+
+<p>
+Very often, interesting data in a web page appear inside HTML code.
+We then need to interpret the text using string operations and store
+the data in variables. An example will clarify the principle.
+
+<p>
+The web site <code>www.worldclimate.com</code> contains data on temperature and
+rainfall in a large number of cities around the world.
+For example,
+
+<p>
+<!-- begin verbatim block  ccq-->
+<pre><code>http://www.worldclimate.com/cgi-bin/data.pl?ref=N38W009+2100+08535W
+</code></pre>
+<!-- end verbatim block -->
+contains a table of the average rainfall for each month of the year
+in the town Lisbon, Portugal.
+Our task is to download this web page and extract the tabular data
+(rainfall per month) in a list.
+
+<p>
+Downloading the file is done with <code>urllib</code> as explained in
+the sections <a href="#sec:files:urllib">How to access web pages in programs</a> and <a href="#sec:files:url:weather">Example: Reading pure text files</a>.
+Before attempting to read and interpret the text in the file, we need
+to look at the HTML code to find the interesting parts and determine
+how we can extract the data.
+The table with the rainfall data appears in the middle of the file.
+A sketch of the relevant HTML code goes as follows:
+
+<p>
+<!-- begin verbatim block  dat-->
+<pre><code>&lt;p&gt;Weather station &lt;strong&gt;LISBOA&lt;/strong&gt; ...
+&lt;tr&gt;&lt;th align=right&gt;&lt;th&gt;  Jan&lt;th&gt;  Feb&lt;th&gt; ... &lt;br&gt;
+&lt;tr&gt;&lt;td&gt; mm &lt;td align=right&gt; 95.2 &lt;td align=right&gt; 86.7 ...&lt;br&gt;
+&lt;tr&gt;&lt;td&gt;inches &lt;td align=right&gt;3.7&lt;td align=right&gt;3.4 ...&lt;br&gt;
+</code></pre>
+<!-- end verbatim block -->
+Our task is to walk through the file line by line and stop for processing
+the first and third line above:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>infile = open('Lisbon_rainfall.html', 'r')
+rainfall = []
+for line in infile:
+    if 'Weather station' in line:
+        station = line.split('&lt;/strong&gt;')[0].split('&lt;strong&gt;')[1]
+    if '&lt;td&gt; mm &lt;td' in line:
+        data = line.split('&lt;td align=right&gt;')
+</code></pre>
+<!-- end verbatim block -->
+The resulting <code>data</code> list looks like
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>['&lt;tr&gt;&lt;td&gt; mm ', ' 95.2 ', ..., '702.4&lt;br&gt; \n']
+</code></pre>
+<!-- end verbatim block -->
+To process this list further, we strip off the <code>&lt;br&gt;...</code> part of
+the last element:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>        data[-1] = data[-1].split('&lt;br&gt;')[0]
+</code></pre>
+<!-- end verbatim block -->
+Then we drop the first element and convert the others to <code>float</code>
+objects:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>        data = [float(x) for x in data[1:]]
+</code></pre>
+<!-- end verbatim block -->
+Now we have the rainfall data for each month as a list of real
+numbers. The complete program appears in the file
+<a href="http://tinyurl.com/pwyasaa/dictstring/Lisbon_rainfall.py" target="_self"><tt>Lisbon_rainfall.py</tt></a>.
+The recipe provided in this example can be used to interpret many other
+types of web pages where HTML code and data are wired together.
+
+<p>
+<!-- send SMS to mobile phone -->
+<!-- <a href="http://www.gammu.org/wiki/index.php" target="_self"><tt>http://www.gammu.org/wiki/index.php</tt></a>?title=Main_Page -->
+
+<h2 id="sec:files:encoding">Handling non-English text</h2>
+
+<p>
+By default, Python only accepts English characters in a program file.
+Comments and strings in other languages, containing non-English characters,
+requires a special comment line before any non-English characters appears:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code># -*- coding: utf-8 -*-
+</code></pre>
+<!-- end verbatim block -->
+This line specifies that the file applies the UTF-8 encoding. Alternative
+encodings are UTF-16 and latin-1, depending on what your computer system
+supports. UTF-8 is most common nowadays.
+
+<p>
+There are two types of strings in Python: plain strings (known as
+byte strings) with type <code>str</code>
+and unicode strings with type <code>unicode</code>. Plain strings suffice as long
+as you are writing English text only. A string is then just a
+series of bytes representing integers between 0 and 255.
+The first characters corresponding to the numbers 0 to 127 constitute
+the ASCII set. These can be printed out:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>for i in range(0, 128):
+    print i, chr(i)
+</code></pre>
+<!-- end verbatim block -->
+The keys on an English keyboard can be recognized from <code>i=32</code> to <code>i=126</code>.
+The next numbers are used to represent non-English characters.
+
+<p>
+Texts with non-English
+characters are recommended to be represented by unicode strings.
+This is the default string type in Python 3, while in Python
+2 we need to explicitly annotate a string as unicode by
+a <code>u</code> prefix as in <code>s = u'my text'</code>.
+
+<p>
+We shall now explore plain strings and unicode strings and will for
+that purpose need a help function for displaying a string in the terminal
+window, printing the type of string, dumping the exact content of
+the string, and telling us the length of the string in bytes:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>def check(s):
+    print '%s, %s: %s (%d)' % \ 
+          (s, s.__class__.__name__, repr(s), len(s))
+</code></pre>
+<!-- end verbatim block -->
+Let us start with a German character typed with a German keyboard:
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; Gauss = 'C. F. Gauß'
+&gt;&gt;&gt; check(Gauss)
+C. F. Gauß, str: 'C. F. Gau\xc3\x9f' (11)
+</code></pre>
+<!-- end verbatim block -->
+Observe that there are 10 characters in the string, but <code>len(Gauss)</code>
+is 11. We can write each character:
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; for char in Gauss:
+...     print ord(char),
+...
+67 46 32 70 46 32 71 97 117 195 159
+</code></pre>
+<!-- end verbatim block -->
+The last character in the <code>Gauss</code> object, the special German character,
+is represented
+by two bytes: 195 and 159. The other characters are in the
+range 0-127.
+
+<p>
+The <code>Gauss</code> object above is a plain Python 2 (byte) string. We can define
+the string as unicode in Python 2:
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; Gauss = u'C. F. Gauß'
+&gt;&gt;&gt; check(Gauss)
+C. F. Gauß, unicode: u'C. F. Gau\xdf' (10)
+</code></pre>
+<!-- end verbatim block -->
+This time the unicode representation is as long as the expected number
+of characters, and the special German ß looks like <code>\xdf</code>.
+In fact, this character has unicode representation
+DF and we can use this code directly
+when we define the string, instead of a German keyboard:
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; Gauss = u'C. F. Gau\xdf'
+&gt;&gt;&gt; check(Gauss)
+C. F. Gauß, unicode: u'C. F. Gau\xdf' (10)
+</code></pre>
+<!-- end verbatim block -->
+The string can be defined through the UTF-8 bytecode counterpart to ß,
+which is C3 9F:
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; Gauss = 'C. F. Gau\xc3\x9f'  # plain string
+&gt;&gt;&gt; check(Gauss)
+C. F. Gauß, str: 'C. F. Gau\xc3\x9f' (11)
+</code></pre>
+<!-- end verbatim block -->
+Mixing UTF-8 bytecode in unicode strings, as in <code>u'C. F. Gau\xc3\x9f'</code>,
+gives and unreadable output.
+
+<p>
+We can convert from a unicode representation to UTF-8 bytecode
+and back again:
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; Gauss = u'C. F. Gau\xdf'
+&gt;&gt;&gt; repr(Gauss.encode('utf-8'))  # convert to UTF-8 bytecode
+'C. F. Gau\xc3\x9f'
+&gt;&gt;&gt; unicode(Gauss.encode('utf-8'), 'utf-8')  # convert back again
+u'C. F. Gau\xdf'
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+Other encodings are UTF-16 and latin-1:
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; repr(Gauss.encode('utf-16'))
+'\xff\xfeC\x00.\x00 \x00F\x00.\x00 \x00G\x00a\x00u\x00\xdf\x00'
+&gt;&gt;&gt; repr(Gauss.encode('latin-1'))
+'C. F. Gau\xdf'
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+Writing the unicode variable <code>Gauss</code> to file, a la <code>f.write(Gauss)</code>,
+leads to a <code>UnicodeEncodeError</code> in Python 2, saying that <code>'ascii'
+codec can't encode character u'\xdf' in position 9</code>.  The UTF-8
+bytecode representation of strings does not pose any problems with
+file writing.  The solution for unicode
+strings is to use the <code>codecs</code> module and explicitly work with a
+file object that converts unicode to UTF-8:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>import codecs
+with codecs.open('tmp.txt', 'w', 'utf-8') as f:
+    f.write(Gauss)
+</code></pre>
+<!-- end verbatim block -->
+This is not necessary with Python 3, so if you use non-English characters,
+Python 3 has a clear advantage over Python 2.
+
+<p>
+To summarize, non-English character can be input with a non-English
+keyboard and stored either as a plain (byte) string or as a unicode
+string:
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; name = 'Åsmund Ødegård'  # plain string
+&gt;&gt;&gt; check(name)
+Åsmund Ødegård, str: '\xc3\x85smund \xc3\x98deg\xc3\xa5rd' (17)
+&gt;&gt;&gt; name = u'Åsmund Ødegård' # unicode
+&gt;&gt;&gt; check(name)
+Åsmund Ødegård, unicode: u'\xc5smund \xd8deg\xe5rd' (14)
+</code></pre>
+<!-- end verbatim block -->
+Alternatively, the non-English characters can be specified
+with special codes, depending on whether the representation is a
+plain UTF-8 string or a unicode string.
+Using a <a href="http://www.utf8-chartable.de/" target="_self">table</a> with conversion
+between unicode and UTF-8 representation we find that
+in UTF-8, Å has the code C3 85, Ø is C3 98, and å is C3 A5:
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; name = '\xc3\x85smund \xc3\x98deg\xc3\xa5rd'
+&gt;&gt;&gt; check(name)
+Åsmund Ødegård, str: '\xc3\x85smund \xc3\x98deg\xc3\xa5rd' (17)
+</code></pre>
+<!-- end verbatim block -->
+In unicode, Å is C5, Ø is D8, å is E5:
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; name = u'\xc5smund \xd8deg\xe5rd'
+&gt;&gt;&gt; check(name)
+Åsmund Ødegård, unicode: u'\xc5smund \xd8deg\xe5rd' (14)
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+The examples above have been collected in the file <a href="http://tinyurl.com/pwyasaa/dictstring/unicode_utf8.py" target="_self"><tt>unicode_utf8.py</tt></a>.
+
+<p>
+<p>
+<!-- begin bottom navigation -->
+<table style="width: 100%"><tr><td>
+<div style="text-align: left;"><a href="._dictstring-solarized002.html">&laquo; Previous</a></div>
+</td><td>
+<div style="text-align: right;"><a href="._dictstring-solarized004.html">Next &raquo;</a></div>
+</td></tr></table>
+<!-- end bottom navigation -->
+</p>
+
+<!-- ------------------- end of main content --------------- -->
+
+
+</body>
+</html>
+    
+

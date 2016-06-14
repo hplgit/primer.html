@@ -7,13 +7,13 @@ Automatically generated HTML file from DocOnce source
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
 <meta name="description" content="Introduction to classes in Python">
-<meta name="keywords" content="constructor (class),UML class diagram,instance (class),user-defined datatype (class),method class),attribute (class),namespace,test function,nose tests,pytest tests,special methods (class),callable objects,test function,closure,Newton's method,wrapper code,integration numerical,symbolic computing,integration symbolic,mutable objects,immutable objects,protected attributes (class),test function,information hiding,private attributes (class),API,application programming interface,protected attributes (class),check an object's type,static typing,weak typing,strong typing,dynamic typing,duck typing,static class attributes,static class variables,static class methods,interval arithmetic">
+<meta name="keywords" content="constructor (class),UML class diagram,instance (class),user-defined datatype (class),method class),attribute (class),new-style classes,namespace,closures,test function,nose tests,pytest tests,special methods (class),callable objects,test function,closure,Newton's method,SymPy differentiation,closure,wrapper code,integration numerical,symbolic computing,integration symbolic,SymPy integration,mutable objects,immutable objects,protected attributes (class),test function,information hiding,private attributes (class),API,application programming interface,protected attributes (class),check an object's type,static typing,weak typing,strong typing,dynamic typing,duck typing,static class attributes,static class variables,static class methods,interval arithmetic">
 
 <title>Introduction to classes in Python</title>
 
-<!-- Bootstrap style: bootstrap_bluegray -->
+<!-- Bootstrap style: bootstrap_simula -->
 <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
-<link href="https://raw.github.com/hplgit/doconce/master/bundled/html_styles/style_bootstrap/css/bootstrap_bluegray.css" rel="stylesheet">
+<link href="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_styles/style_bootstrap/css/bootstrap_simula.css" rel="stylesheet">
 <!-- not necessary
 <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 -->
@@ -21,6 +21,24 @@ Automatically generated HTML file from DocOnce source
 <style type="text/css">
 /* Let inline verbatim have the same color as the surroundings */
 code { color: inherit; background-color: transparent; }
+
+/* Add scrollbar to dropdown menus in bootstrap navigation bar */
+.dropdown-menu {
+   height: auto;
+   max-height: 400px;
+   overflow-x: hidden;
+}
+
+/* Adds an invisible element before each target to offset for the navigation
+   bar */
+.anchor::before {
+  content:"";
+  display:block;
+  height:50px; /* fixed header height*/
+  margin:-50px 0 0; /* negative fixed header height */
+}
+
+body { font-size:20px;line-height:1.5; }
 </style>
 
 
@@ -28,298 +46,304 @@ code { color: inherit; background-color: transparent; }
 
 <!-- tocinfo
 {'highest level': 1,
- 'sections': [(' Simple function classes ',
+ 'sections': [('Table of contents',
+               1,
+               'table_of_contents',
+               'table_of_contents'),
+              ('Simple function classes',
                1,
                'sec:class:functors',
                'sec:class:functors'),
-              (' Challenge: functions with parameters ',
+              ('Challenge: functions with parameters',
                2,
                'sec:class:func1',
                'sec:class:func1'),
-              (' Problem ', 3, None, '___sec2'),
-              (' A bad solution: global variables ', 3, None, '___sec3'),
-              (' Representing a function as a class ',
+              ('Problem', 3, None, '___sec2'),
+              ('A bad solution: global variables', 3, None, '___sec3'),
+              ('Representing a function as a class',
                2,
                'sec:class:func2',
                'sec:class:func2'),
-              (' Implementation ', 3, None, '___sec5'),
-              (' Usage and dissection ', 3, None, '___sec6'),
-              (' The self  variable ', 3, None, '___sec7'),
-              (' Extension of the class ', 3, None, '___sec8'),
-              (' Remark ', 3, None, '___sec9'),
-              (' Using methods as ordinary functions ', 3, None, '___sec10'),
-              (' Doc strings ', 3, None, '___sec11'),
-              (' Another function class example ',
+              ('Implementation', 3, None, '___sec5'),
+              ('Usage and dissection', 3, None, '___sec6'),
+              ('Extension of the class', 3, None, '___sec7'),
+              ('Using methods as ordinary functions', 3, None, '___sec8'),
+              ('New-style classes versus classic classes',
+               3,
+               None,
+               '___sec9'),
+              ('Doc strings', 3, None, '___sec10'),
+              ('The self variable', 2, None, '___sec11'),
+              ('Another function class example',
                2,
                'sec:class:func3',
                'sec:class:func3'),
-              (' Remark ', 3, None, '___sec13'),
-              (' Alternative function class implementations ',
+              ('Remark', 3, None, '___sec13'),
+              ('Alternative function class implementations',
                2,
                'sec:class:func2b',
                'sec:class:func2b'),
-              (' Making classes without the class construct ',
+              ('Making classes without the class construct',
                2,
                'sec:class:whatis',
                'sec:class:whatis'),
-              (' First remark ', 3, None, '___sec16'),
-              (' Second remark ', 3, None, '___sec17'),
-              (' More examples on classes ',
+              ('First remark', 3, None, '___sec16'),
+              ('Second remark', 3, None, '___sec17'),
+              ('Closures', 2, 'sec:class:closure', 'sec:class:closure'),
+              ('More examples on classes',
                1,
                'sec:class:addex',
                'sec:class:addex'),
-              (' Bank accounts ',
-               2,
-               'sec:class:account',
-               'sec:class:account'),
-              (' Phone book ',
-               2,
-               'sec:class:phonebook',
-               'sec:class:phonebook'),
-              (' A circle ', 2, 'sec:class:circle', 'sec:class:circle'),
-              (' Verification ', 3, None, '___sec22'),
-              (' Remark ', 3, None, '___sec23'),
-              (' Special methods ',
+              ('Bank accounts', 2, 'sec:class:account', 'sec:class:account'),
+              ('Phone book', 2, 'sec:class:phonebook', 'sec:class:phonebook'),
+              ('A circle', 2, 'sec:class:circle', 'sec:class:circle'),
+              ('Verification', 3, None, '___sec23'),
+              ('Remark', 3, None, '___sec24'),
+              ('Special methods',
                1,
                'sec:class:specialmethods',
                'sec:class:specialmethods'),
-              (' The call special method ',
+              ('The call special method',
                2,
                'sec:class:call',
                'sec:class:call'),
-              (' Example: Automagic differentiation ',
+              ('Example: Automagic differentiation',
                2,
                'sec:class:autodF',
                'sec:class:autodF'),
-              (' Problem ', 3, None, '___sec27'),
-              (' Solution ', 3, None, '___sec28'),
-              (' Verification ', 3, None, '___sec29'),
-              (" Application: Newton's method ", 3, None, '___sec30'),
-              (' Example: Automagic integration ',
+              ('Problem', 3, None, '___sec28'),
+              ('Solution', 3, None, '___sec29'),
+              ('Verification', 3, None, '___sec30'),
+              ("Application: Newton's method", 3, None, '___sec31'),
+              ('Solution utilizing SymPy', 3, None, '___sec32'),
+              ('Example: Automagic integration',
                2,
                'sec:class:autoint',
                'sec:class:autoint'),
-              (' A simple implementation ', 3, None, '___sec32'),
-              (' Verification via symbolic computing ', 3, None, '___sec33'),
-              (' Remark ', 3, None, '___sec34'),
-              (' Turning an instance into a string ',
+              ('A simple implementation', 3, None, '___sec34'),
+              ('Verification via symbolic computing', 3, None, '___sec35'),
+              ('Remark', 3, None, '___sec36'),
+              ('Turning an instance into a string',
                2,
                'sec:class:str',
                'sec:class:str'),
-              (' Example: Phone book with special methods ',
+              ('Example: Phone book with special methods',
                2,
                'sec:class:phonebook2',
                'sec:class:phonebook2'),
-              (' Remark ', 3, None, '___sec37'),
-              (' Adding objects ', 2, 'sec:class:add', 'sec:class:add'),
-              (' Example: Class for polynomials ',
+              ('Remark', 3, None, '___sec39'),
+              ('Adding objects', 2, 'sec:class:add', 'sec:class:add'),
+              ('Example: Class for polynomials',
                2,
                'sec:class:Polynomial',
                'sec:class:Polynomial'),
-              (' Implementation ', 3, None, '___sec40'),
-              (' Usage ', 3, None, '___sec41'),
-              (' Pretty print of polynomials ', 3, None, '___sec42'),
-              (' Verifying the implementation ', 3, None, '___sec43'),
-              (' Arithmetic operations and other special methods ',
+              ('Implementation', 3, None, '___sec42'),
+              ('Usage', 3, None, '___sec43'),
+              ('Pretty print of polynomials', 3, None, '___sec44'),
+              ('Verifying the implementation', 3, None, '___sec45'),
+              ('Arithmetic operations and other special methods',
                2,
                'sec:class:arithmetics',
                'sec:class:arithmetics'),
-              (' Special methods for string conversion ',
+              ('Special methods for string conversion',
                2,
                'sec:class:repr',
                'sec:class:repr'),
-              (' Recreating objects from strings ', 3, None, '___sec46'),
-              (' Example: Class for vectors in the plane ',
+              ('Recreating objects from strings', 3, None, '___sec48'),
+              ('Example: Class for vectors in the plane',
                1,
                'sec:class:Vec2D',
                'sec:class:Vec2D'),
-              (' Some mathematical operations on vectors ',
+              ('Some mathematical operations on vectors',
                2,
                None,
-               '___sec48'),
-              (' Implementation ', 2, None, '___sec49'),
-              (' Usage ', 2, None, '___sec50'),
-              (' Comment ', 3, None, '___sec51'),
-              (' Example: Class for complex numbers ', 1, None, '___sec52'),
-              (' Implementation ',
-               2,
-               'sec:class:Complex',
-               'sec:class:Complex'),
-              (' Illegal operations ',
+               '___sec50'),
+              ('Implementation', 2, None, '___sec51'),
+              ('Usage', 2, None, '___sec52'),
+              ('Comment', 3, None, '___sec53'),
+              ('Example: Class for complex numbers', 1, None, '___sec54'),
+              ('Implementation', 2, 'sec:class:Complex', 'sec:class:Complex'),
+              ('Illegal operations',
                2,
                'sec:class:illegalop',
                'sec:class:illegalop'),
-              (' Mixing complex and real numbers ',
+              ('Mixing complex and real numbers',
                2,
                'sec:class:complex:mixed',
                'sec:class:complex:mixed'),
-              (' Dynamic, static, strong, weak, and duck typing ',
+              ('Dynamic, static, strong, weak, and duck typing',
                2,
                None,
-               '___sec56'),
-              (" Special methods for ``right'' operands ",
+               '___sec58'),
+              ("Special methods for ``right'' operands",
                2,
                'sec:class:complex:rightop',
                'sec:class:complex:rightop'),
-              (' Remark ', 3, None, '___sec58'),
-              (' Inspecting instances ',
+              ('Remark', 3, None, '___sec60'),
+              ('Inspecting instances',
                2,
                'sec:class:inspect',
                'sec:class:inspect'),
-              (' Static methods and attributes ',
+              ('Static methods and attributes',
                1,
                'sec:class:static',
                'sec:class:static'),
-              (' Summary ', 1, None, '___sec61'),
-              (' Chapter topics ',
+              ('Summary', 1, None, '___sec63'),
+              ('Chapter topics', 2, 'sec:class:summary', 'sec:class:summary'),
+              ('Classes', 3, None, '___sec65'),
+              ('Special methods', 3, None, '___sec66'),
+              ('Terminology', 3, None, '___sec67'),
+              ('Example: interval arithmetic',
                2,
-               'sec:class:summary',
-               'sec:class:summary'),
-              (' Classes ', 3, None, '___sec63'),
-              (' Special methods ', 3, None, '___sec64'),
-              (' Terminology ', 3, None, '___sec65'),
-              (' Example: interval arithmetic ', 2, None, '___sec66'),
-              (' Problem ', 3, None, '___sec67'),
-              (' Solution ', 3, None, '___sec68'),
-              (' Exercises ', 1, None, '___sec69'),
-              (' Exercise 1: Make a function class ',
+               'sec:class:interval:arithmetic',
+               'sec:class:interval:arithmetic'),
+              ('Problem', 3, None, '___sec69'),
+              ('Solution', 3, None, '___sec70'),
+              ('Exercises', 1, None, '___sec71'),
+              ('Exercise 1: Make a function class',
                2,
                'sec:class:ex2',
                'sec:class:ex2'),
-              (' Exercise 2: Add an attribute to a class ',
+              ('Exercise 2: Add a data attribute to a class',
                2,
                'sec:class:ex25q',
                'sec:class:ex25q'),
-              (' Exercise 3: Add functionality to a class ',
+              ('Exercise 3: Add functionality to a class',
                2,
                'sec:class:ex25q2',
                'sec:class:ex25q2'),
-              (' Exercise 4: Make classes for a rectangle and a triangle ',
+              ('Remarks', 3, None, '___sec75'),
+              ('Exercise 4: Make classes for a rectangle and a triangle',
                2,
                'sec:class:ex23',
                'sec:class:ex23'),
-              (' Exercise 5: Make a class for quadratic functions ',
+              ('Exercise 5: Make a class for quadratic functions',
                2,
                'sec:class:ex11',
                'sec:class:ex11'),
-              (' Exercise 6: Make a class for straight lines ',
+              ('Exercise 6: Make a class for straight lines',
                2,
                'sec:class:ex25',
                'sec:class:ex25'),
-              (' Exercise 7: Flexible handling of function arguments ',
+              ('Exercise 7: Flexible handling of function arguments',
                2,
                'sec:class:ex25b',
                'sec:class:ex25b'),
-              (' Exercise 8: Wrap functions in a class ',
+              ('Exercise 8: Wrap functions in a class',
                2,
                'sec:class:ex27d',
                'sec:class:ex27d'),
-              (' Exercise 9: Flexible handling of function arguments ',
+              ('Exercise 9: Flexible handling of function arguments',
                2,
                'sec:class:ex27e',
                'sec:class:ex27e'),
-              (' Exercise 10: Deduce a class implementation ',
+              ('Exercise 10: Deduce a class implementation',
                2,
                'sec:class:ex1',
                'sec:class:ex1'),
-              (' Exercise 11: Implement special methods in a class ',
+              ('Exercise 11: Implement special methods in a class',
                2,
                'sec:class:ex2b2',
                'sec:class:ex2b2'),
-              (' Exercise 12: Make a class for summation of series ',
+              ('Exercise 12: Make a class for summation of series',
                2,
                'sec:class:ex2b',
                'sec:class:ex2b'),
-              (' Exercise 13: Apply a numerical differentiation class ',
+              ('Exercise 13: Apply a numerical differentiation class',
                2,
                'sec:class:ex10',
                'sec:class:ex10'),
-              (' Exercise 14: Apply symbolic differentiation ',
+              ('Exercise 14: Implement an addition operator',
                2,
-               'sec:class:exer:sympy:diff',
-               'sec:class:exer:sympy:diff'),
-              (' Exercise 15: Implement in-place `+=` and `-=` operators ',
+               'sec:class:ex:tribesman',
+               'sec:class:ex:tribesman'),
+              ('Exercise 15: Implement in-place `+=` and `-=` operators',
                2,
                'sec:class:ex25qb',
                'sec:class:ex25qb'),
-              (' Exercise 16: Implement a class for numerical differentiation ',
+              ('Exercise 16: Implement a class for numerical differentiation',
                2,
                'sec:class:ex21',
                'sec:class:ex21'),
-              (' Exercise 17: Examine a program ',
+              ('Exercise 17: Examine a program',
                2,
                'sec:class:ex21b',
                'sec:class:ex21b'),
-              (' Exercise 18: Modify a class for numerical differentiation ',
+              ('Exercise 18: Modify a class for numerical differentiation',
                2,
                'sec:class:ex23s',
                'sec:class:ex23s'),
-              (' Exercise 19: Make a class for the Heaviside function ',
+              ('Exercise 19: Make a class for the Heaviside function',
                2,
                'sec:basic:exHclass',
                'sec:basic:exHclass'),
-              (' Exercise 20: Make a class for the indicator function ',
+              ('Exercise 20: Make a class for the indicator function',
                2,
                'sec:basic:exIndclass',
                'sec:basic:exIndclass'),
-              (' Exercise 21: Make a class for piecewise constant functions ',
+              ('Exercise 21: Make a class for piecewise constant functions',
                2,
                'sec:basic:ex:piecewisefunc',
                'sec:basic:ex:piecewisefunc'),
-              (' Exercise 22: Speed up repeated integral calculations ',
+              ('Exercise 22: Speed up repeated integral calculations',
                2,
                'sec:class:ex13c',
                'sec:class:ex13c'),
-              (' Exercise 23: Apply a class for polynomials ',
+              ('Exercise 23: Apply a class for polynomials',
                2,
                'sec:class:ex5',
                'sec:class:ex5'),
-              (' Exercise 24: Find a bug in a class for polynomials ',
+              ('Exercise 24: Find a bug in a class for polynomials',
                2,
                'sec:class:ex4',
                'sec:class:ex4'),
-              (' Exercise 25: Implement subtraction of polynomials ',
+              ('Exercise 25: Implement subtraction of polynomials',
                2,
                'sec:class:ex6a',
                'sec:class:ex6a'),
-              (' Exercise 26: Test the functionality of pretty print of polynomials ',
+              ('Exercise 26: Test the functionality of pretty print of polynomials',
                2,
                'sec:class:exer:str',
                'sec:class:exer:str'),
-              (' Exercise 27: Vectorize a class for polynomials ',
+              ('Exercise 27: Vectorize a class for polynomials',
                2,
                'sec:class:ex7v',
                'sec:class:ex7v'),
-              (' Remarks ', 3, None, '___sec97'),
-              (' Exercise 28: Use a dict to hold polynomial coefficients ',
+              ('Remarks', 3, None, '___sec100'),
+              ('Exercise 28: Use a dict to hold polynomial coefficients',
                2,
                'sec:class:ex8',
                'sec:class:ex8'),
-              (' Exercise 29: Extend class Vec2D to work with lists/tuples ',
+              ('Exercise 29: Extend class Vec2D to work with lists/tuples',
                2,
                'sec:class:ex16',
                'sec:class:ex16'),
-              (' Exercise 30: Extend class Vec2D to 3D vectors ',
+              ('Exercise 30: Extend class Vec2D to 3D vectors',
                2,
                'sec:class:ex17b',
                'sec:class:ex17b'),
-              (' Exercise 31: Use NumPy arrays in class Vec2D ',
+              ('Exercise 31: Use NumPy arrays in class Vec2D',
                2,
                'sec:class:ex17',
                'sec:class:ex17'),
-              (' Exercise 32: Make classes for students and courses ',
+              ('Exercise 32: Impreciseness of interval arithmetics',
+               2,
+               None,
+               '___sec105'),
+              ('Remarks', 3, None, '___sec106'),
+              ('Exercise 33: Make classes for students and courses',
                2,
                'sec:class:ex15',
                'sec:class:ex15'),
-              (' Exercise 33: Find local and global extrema of a function ',
+              ('Exercise 34: Find local and global extrema of a function',
                2,
                'sec:plot:ex28',
                'sec:plot:ex28'),
-              (' Exercise 34: Find the optimal production for a company ',
+              ('Exercise 35: Find the optimal production for a company',
                2,
                'sec:class:ex18a',
                'sec:class:ex18a'),
-              (' References ', 1, None, '___sec105')]}
+              ('References', 1, None, '___sec110')]}
 end of tocinfo -->
 
 <body>
@@ -357,20 +381,124 @@ $$
     </button>
     <a class="navbar-brand" href="class-bootstrap.html">Introduction to classes in Python</a>
   </div>
+
   <div class="navbar-collapse collapse navbar-responsive-collapse">
     <ul class="nav navbar-nav navbar-right">
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
         <ul class="dropdown-menu">
-     <!-- navigation toc: --> <li><a href="._class-bootstrap001.html#sec:class:functors" style="font-size: 80%;">Simple function classes</a></li>
-     <!-- navigation toc: --> <li><a href="._class-bootstrap002.html#sec:class:addex" style="font-size: 80%;">More examples on classes</a></li>
-     <!-- navigation toc: --> <li><a href="#sec:class:specialmethods" style="font-size: 80%;">Special methods</a></li>
-     <!-- navigation toc: --> <li><a href="._class-bootstrap004.html#sec:class:Vec2D" style="font-size: 80%;">Example: Class for vectors in the plane</a></li>
-     <!-- navigation toc: --> <li><a href="._class-bootstrap005.html#___sec52" style="font-size: 80%;">Example: Class for complex numbers</a></li>
-     <!-- navigation toc: --> <li><a href="._class-bootstrap006.html#sec:class:static" style="font-size: 80%;">Static methods and attributes</a></li>
-     <!-- navigation toc: --> <li><a href="._class-bootstrap007.html#___sec61" style="font-size: 80%;">Summary</a></li>
-     <!-- navigation toc: --> <li><a href="._class-bootstrap008.html#___sec69" style="font-size: 80%;">Exercises</a></li>
-     <!-- navigation toc: --> <li><a href="._class-bootstrap008.html#___sec105" style="font-size: 80%;">References</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap000.html#table_of_contents" style="font-size: 80%;"><b>Table of contents</b></a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap001.html#sec:class:functors" style="font-size: 80%;"><b>Simple function classes</b></a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap001.html#sec:class:func1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Challenge: functions with parameters</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap001.html#___sec2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap001.html#___sec3" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A bad solution: global variables</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap001.html#sec:class:func2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Representing a function as a class</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap001.html#___sec5" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Implementation</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap001.html#___sec6" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Usage and dissection</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap001.html#___sec7" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Extension of the class</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap001.html#___sec8" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Using methods as ordinary functions</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap001.html#___sec9" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New-style classes versus classic classes</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap001.html#___sec10" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Doc strings</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap001.html#___sec11" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The self variable</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap001.html#sec:class:func3" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Another function class example</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap001.html#___sec13" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remark</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap001.html#sec:class:func2b" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Alternative function class implementations</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap001.html#sec:class:whatis" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Making classes without the class construct</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap001.html#___sec16" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;First remark</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap001.html#___sec17" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Second remark</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap001.html#sec:class:closure" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Closures</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap002.html#sec:class:addex" style="font-size: 80%;"><b>More examples on classes</b></a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap002.html#sec:class:account" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Bank accounts</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap002.html#sec:class:phonebook" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Phone book</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap002.html#sec:class:circle" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;A circle</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap002.html#___sec23" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Verification</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap002.html#___sec24" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remark</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:class:specialmethods" style="font-size: 80%;"><b>Special methods</b></a></li>
+     <!-- navigation toc: --> <li><a href="#sec:class:call" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The call special method</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:class:autodF" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Automagic differentiation</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec28" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec29" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Solution</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec30" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Verification</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec31" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Application: Newton's method</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec32" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Solution utilizing SymPy</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:class:autoint" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Automagic integration</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec34" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A simple implementation</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec35" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Verification via symbolic computing</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec36" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remark</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:class:str" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Turning an instance into a string</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:class:phonebook2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Phone book with special methods</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec39" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remark</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:class:add" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Adding objects</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:class:Polynomial" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Class for polynomials</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec42" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Implementation</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec43" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Usage</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec44" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pretty print of polynomials</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec45" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Verifying the implementation</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:class:arithmetics" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Arithmetic operations and other special methods</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:class:repr" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Special methods for string conversion</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec48" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Recreating objects from strings</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap004.html#sec:class:Vec2D" style="font-size: 80%;"><b>Example: Class for vectors in the plane</b></a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap004.html#___sec50" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Some mathematical operations on vectors</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap004.html#___sec51" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Implementation</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap004.html#___sec52" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Usage</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap004.html#___sec53" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Comment</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap005.html#___sec54" style="font-size: 80%;"><b>Example: Class for complex numbers</b></a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap005.html#sec:class:Complex" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Implementation</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap005.html#sec:class:illegalop" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Illegal operations</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap005.html#sec:class:complex:mixed" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Mixing complex and real numbers</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap005.html#___sec58" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Dynamic, static, strong, weak, and duck typing</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap005.html#sec:class:complex:rightop" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Special methods for ``right'' operands</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap005.html#___sec60" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remark</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap005.html#sec:class:inspect" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Inspecting instances</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap006.html#sec:class:static" style="font-size: 80%;"><b>Static methods and attributes</b></a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap007.html#___sec63" style="font-size: 80%;"><b>Summary</b></a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap007.html#sec:class:summary" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Chapter topics</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap007.html#___sec65" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Classes</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap007.html#___sec66" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Special methods</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap007.html#___sec67" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Terminology</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap007.html#sec:class:interval:arithmetic" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: interval arithmetic</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap007.html#___sec69" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap007.html#___sec70" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Solution</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap008.html#___sec71" style="font-size: 80%;"><b>Exercises</b></a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap008.html#sec:class:ex2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 1: Make a function class</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap008.html#sec:class:ex25q" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 2: Add a data attribute to a class</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap008.html#sec:class:ex25q2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 3: Add functionality to a class</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap008.html#___sec75" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remarks</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap008.html#sec:class:ex23" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 4: Make classes for a rectangle and a triangle</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap008.html#sec:class:ex11" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 5: Make a class for quadratic functions</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap008.html#sec:class:ex25" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 6: Make a class for straight lines</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap008.html#sec:class:ex25b" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 7: Flexible handling of function arguments</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap008.html#sec:class:ex27d" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 8: Wrap functions in a class</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap008.html#sec:class:ex27e" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 9: Flexible handling of function arguments</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap008.html#sec:class:ex1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 10: Deduce a class implementation</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap008.html#sec:class:ex2b2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 11: Implement special methods in a class</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap008.html#sec:class:ex2b" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 12: Make a class for summation of series</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap008.html#sec:class:ex10" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 13: Apply a numerical differentiation class</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap008.html#sec:class:ex:tribesman" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 14: Implement an addition operator</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap008.html#sec:class:ex25qb" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 15: Implement in-place <code>+=</code> and <code>-=</code> operators</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap008.html#sec:class:ex21" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 16: Implement a class for numerical differentiation</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap008.html#sec:class:ex21b" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 17: Examine a program</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap008.html#sec:class:ex23s" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 18: Modify a class for numerical differentiation</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap008.html#sec:basic:exHclass" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 19: Make a class for the Heaviside function</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap008.html#sec:basic:exIndclass" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 20: Make a class for the indicator function</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap008.html#sec:basic:ex:piecewisefunc" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 21: Make a class for piecewise constant functions</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap008.html#sec:class:ex13c" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 22: Speed up repeated integral calculations</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap008.html#sec:class:ex5" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 23: Apply a class for polynomials</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap008.html#sec:class:ex4" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 24: Find a bug in a class for polynomials</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap008.html#sec:class:ex6a" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 25: Implement subtraction of polynomials</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap008.html#sec:class:exer:str" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 26: Test the functionality of pretty print of polynomials</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap008.html#sec:class:ex7v" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 27: Vectorize a class for polynomials</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap008.html#___sec100" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remarks</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap008.html#sec:class:ex8" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 28: Use a dict to hold polynomial coefficients</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap008.html#sec:class:ex16" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 29: Extend class Vec2D to work with lists/tuples</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap008.html#sec:class:ex17b" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 30: Extend class Vec2D to 3D vectors</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap008.html#sec:class:ex17" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 31: Use NumPy arrays in class Vec2D</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap008.html#___sec105" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 32: Impreciseness of interval arithmetics</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap008.html#___sec106" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remarks</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap008.html#sec:class:ex15" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 33: Make classes for students and courses</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap008.html#sec:plot:ex28" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 34: Find local and global extrema of a function</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap008.html#sec:class:ex18a" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 35: Find the optimal production for a company</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap008.html#___sec110" style="font-size: 80%;"><b>References</b></a></li>
 
         </ul>
       </li>
@@ -385,8 +513,9 @@ $$
 
 <a name="part0003"></a>
 <!-- !split -->
+<p style="font-size:80%">This chapter is taken from the book <a href="http://www.springer.com/gp/book/9783662498866">A Primer on Scientific Programming with Python</a> by H. P. Langtangen, 5th edition, Springer, 2016.</p>
 
-<h1 id="sec:class:specialmethods">Special methods<a name="sec:class:specialmethods"></a></h1>
+<h1 id="sec:class:specialmethods" class="anchor">Special methods</h1>
 
 <p>
 Some class methods have names starting and ending with a double
@@ -400,7 +529,7 @@ with <code>&gt;</code>, <code>&gt;=</code>, <code>!=</code>, etc., to call insta
 functions, and to test if an instance evaluates to <code>True</code> or <code>False</code>,
 to mention some possibilities.
 
-<h2 id="sec:class:call">The call special method<a name="sec:class:call"></a></h2>
+<h2 id="sec:class:call" class="anchor">The call special method</h2>
 
 <p>
 Computing the value of the mathematical function represented by class
@@ -413,7 +542,7 @@ a syntax is indeed possible and offered by the special method named
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">y<span style="color: #666666">.</span>__call__(t)
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>y<span style="color: #666666">.</span>__call__(t)
 </pre></div>
 <p>
 if class <code>Y</code> has the method <code>__call__</code> defined.
@@ -422,7 +551,7 @@ We may easily add this special method:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Y</span>:
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Y</span>(<span style="color: #008000">object</span>):
     <span style="color: #666666">...</span>
     <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__call__</span>(<span style="color: #008000">self</span>, t):
         <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>v0<span style="color: #666666">*</span>t <span style="color: #666666">-</span> <span style="color: #666666">0.5*</span><span style="color: #008000">self</span><span style="color: #666666">.</span>g<span style="color: #666666">*</span>t<span style="color: #666666">**2</span>
@@ -439,7 +568,7 @@ instance.  Given an object <code>a</code>,
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">if</span> <span style="color: #008000">callable</span>(a):
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">if</span> <span style="color: #008000">callable</span>(a):
 </pre></div>
 <p>
 tests whether <code>a</code> behaves as a callable, i.e., if <code>a</code>
@@ -455,7 +584,7 @@ In particular, an instance of class <code>Y</code> can be passed as the
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">y <span style="color: #666666">=</span> Y(v0<span style="color: #666666">=5</span>)
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>y <span style="color: #666666">=</span> Y(v0<span style="color: #666666">=5</span>)
 dydt <span style="color: #666666">=</span> diff(y, <span style="color: #666666">0.1</span>)
 </pre></div>
 <p>
@@ -469,9 +598,9 @@ This feature is very convenient.
 The next section demonstrates a neat application of the call
 operator <code>__call__</code> in a numerical algorithm.
 
-<h2 id="sec:class:autodF">Example: Automagic differentiation<a name="sec:class:autodF"></a></h2>
+<h2 id="sec:class:autodF" class="anchor">Example: Automagic differentiation</h2>
 
-<h3 id="___sec27">Problem <a name="___sec27"></a></h3>
+<h3 id="___sec28" class="anchor">Problem </h3>
 
 <p>
 Given a Python implementation <code>f(x)</code> of a mathematical function
@@ -482,7 +611,7 @@ of type <code>Derivative</code>, we should be able to write something like
 <p>
 
 <!-- code=python (!bc pyshell) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f</span>(x):
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f</span>(x):
         <span style="color: #008000; font-weight: bold">return</span> x<span style="color: #666666">**3</span>
 <span style="color: #666666">...</span>
 <span style="color: #666666">&gt;&gt;&gt;</span> dfdx <span style="color: #666666">=</span> Derivative(f)
@@ -500,7 +629,6 @@ but the approximation can easily be improved).
 Maple, Mathematica, and many other software packages can do exact
 symbolic mathematics, including differentiation and integration.  The
 Python package <code>sympy</code> for symbolic mathematics
-(see the section ref{sec:formula:sympy})
 makes it trivial to calculate the exact derivative of
 a large class of functions \( f(x) \) and turn the result into
 an ordinary Python function. However, mathematical functions that are defined
@@ -509,10 +637,9 @@ problem), or functions with branches, random numbers, etc., pose
 fundamental problems to symbolic differentiation, and then numerical
 differentiation is required. Therefore we base the computation of
 derivatives in <code>Derivative</code> instances on finite difference
-formulas. Use of exact symbolic differentiation is also possible
-as indicated in <a href="._class-bootstrap008.html#sec:class:exer:sympy:diff">Exercise 14: Apply symbolic differentiation</a>.
+formulas. Use of exact symbolic differentiation via SymPy is also possible.
 
-<h3 id="___sec28">Solution <a name="___sec28"></a></h3>
+<h3 id="___sec29" class="anchor">Solution </h3>
 
 <p>
 The most basic (but not the best) formula for a numerical derivative is
@@ -535,7 +662,7 @@ coded in a few lines:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Derivative</span>:
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Derivative</span>(<span style="color: #008000">object</span>):
     <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__init__</span>(<span style="color: #008000">self</span>, f, h<span style="color: #666666">=1E-5</span>):
         <span style="color: #008000">self</span><span style="color: #666666">.</span>f <span style="color: #666666">=</span> f
         <span style="color: #008000">self</span><span style="color: #666666">.</span>h <span style="color: #666666">=</span> <span style="color: #008000">float</span>(h)
@@ -556,7 +683,7 @@ and \( g(t)=t^3 \):
 <p>
 
 <!-- code=python (!bc pyshell) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">math</span> <span style="color: #008000; font-weight: bold">import</span> sin, cos, pi
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">math</span> <span style="color: #008000; font-weight: bold">import</span> sin, cos, pi
 <span style="color: #666666">&gt;&gt;&gt;</span> df <span style="color: #666666">=</span> Derivative(sin)
 <span style="color: #666666">&gt;&gt;&gt;</span> x <span style="color: #666666">=</span> pi
 <span style="color: #666666">&gt;&gt;&gt;</span> df(x)
@@ -577,7 +704,7 @@ look as ordinary Python functions that
 evaluate the derivative of the functions <code>sin(x)</code> and <code>g(t)</code>.
 Class <code>Derivative</code> works for (almost) any function \( f(x) \).
 
-<h3 id="___sec29">Verification <a name="___sec29"></a></h3>
+<h3 id="___sec30" class="anchor">Verification </h3>
 
 <p>
 It is a good programming habit to include a test function for
@@ -589,7 +716,7 @@ is exact for linear functions:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">test_Derivative</span>():
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">test_Derivative</span>():
     <span style="color: #408080; font-style: italic"># The formula is exact for linear functions, regardless of h</span>
     f <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">lambda</span> x: a<span style="color: #666666">*</span>x <span style="color: #666666">+</span> b
     a <span style="color: #666666">=</span> <span style="color: #666666">3.5</span>; b <span style="color: #666666">=</span> <span style="color: #666666">8</span>
@@ -599,15 +726,23 @@ is exact for linear functions:
 </pre></div>
 <p>
 We have here used a lambda function for compactly defining a function
-<code>f</code>, see the section ref{sec:basic:lambdafunc}.
+<code>f</code>. The alternative would be to define <code>f</code> in the standard way
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f</span>(x):
+    <span style="color: #008000; font-weight: bold">return</span> a<span style="color: #666666">*</span>x <span style="color: #666666">+</span> b
+</pre></div>
+<p>
 A special feature of <code>f</code> is that it remembers the variables <code>a</code> and
-<code>b</code> when <code>f</code> is sent to class <code>Derivative</code> (such a function  is called a
-<em>closure</em>).
+<code>b</code> when <code>f</code> is sent to class <code>Derivative</code> (it is a closure,
+see the section <a href="._class-bootstrap001.html#sec:class:closure">Closures</a>).
 Note that the test function above follows
 the conventions for test functions
 outlined in the section <a href="._class-bootstrap002.html#sec:class:circle">A circle</a>.
 
-<h3 id="___sec30">Application: Newton's method <a name="___sec30"></a></h3>
+<h3 id="___sec31" class="anchor">Application: Newton's method </h3>
 
 <p>
 In what situations will it be convenient to automatically produce a
@@ -617,8 +752,7 @@ equations \( f(x)=0 \) with Newton's method and we, because of laziness,
 lack of time, or lack of training do not manage to derive \( f'(x) \) by
 hand. Consider a function <code>Newton</code> for solving \( f(x)=0 \): <code>Newton(f, x,
 dfdx, epsilon=1.0E-7, N=100)</code>.
-The section ref{sec:diffeq:Newtonsmethod:sec} presents a specific implementation
-in a module file
+A specific implementation is found in the module file
 <a href="http://tinyurl.com/pwyasaa/diffeq/Newton.py" target="_self"><tt>Newton.py</tt></a>.  The arguments are a
 Python function <code>f</code> for \( f(x) \), a <code>float x</code> for the initial guess
 (start value) of \( x \), a Python function <code>dfdx</code> for \( f'(x) \), a <code>float</code>
@@ -643,7 +777,7 @@ Newton's method:
 <p>
 
 <!-- code=python (!bc pyshell) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">classes</span> <span style="color: #008000; font-weight: bold">import</span> Derivative
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">classes</span> <span style="color: #008000; font-weight: bold">import</span> Derivative
 <span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">Newton</span> <span style="color: #008000; font-weight: bold">import</span> Newton
 <span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f</span>(x):
 <span style="color: #666666">...</span>     <span style="color: #008000; font-weight: bold">return</span> <span style="color: #666666">100000*</span>(x <span style="color: #666666">-</span> <span style="color: #666666">0.9</span>)<span style="color: #666666">**2</span> <span style="color: #666666">*</span> (x <span style="color: #666666">-</span> <span style="color: #666666">1.1</span>)<span style="color: #666666">**3</span>
@@ -658,9 +792,9 @@ iterations, and the value of \( f \) at the approximate root (a measure of
 the error in the equation).
 
 <p>
-<center> <!-- figure -->
+<center> <!-- figure label: --> <div id="fig:hard_polynomial4Newton1"></div> <!-- FIGURE -->
 <hr class="figure">
-<center><p class="caption">Figure 2:  Plot of \( y = 10^5(x-0.9)^2(x-1.1)^3 \). <a name="fig:hard_polynomial4Newton1"></a> </p></center>
+<center><p class="caption">Figure 2:  Plot of \( y = 10^5(x-0.9)^2(x-1.1)^3 \).  <!-- caption label: fig:hard_polynomial4Newton1 --> </p></center>
 <p><img src="fig-class/hard_polynomial4Newton1.png" align="bottom" width=400></p>
 </center>
 
@@ -677,7 +811,7 @@ derivative gives almost the same result:
 <p>
 
 <!-- code=python (!bc pyshell) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">df_exact</span>(x):
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">df_exact</span>(x):
 <span style="color: #666666">...</span>     <span style="color: #008000; font-weight: bold">return</span> <span style="color: #666666">100000*</span>(<span style="color: #666666">2*</span>(x<span style="color: #666666">-0.9</span>)<span style="color: #666666">*</span>(x<span style="color: #666666">-1.1</span>)<span style="color: #666666">**3</span> <span style="color: #666666">+</span> \ 
 <span style="color: #666666">...</span>                    (x<span style="color: #666666">-0.9</span>)<span style="color: #666666">**2*3*</span>(x<span style="color: #666666">-1.1</span>)<span style="color: #666666">**2</span>)
 <span style="color: #666666">...</span>
@@ -695,7 +829,102 @@ made smaller, usually much smaller than other errors, like the
 tolerance in Newton's method in this example or the uncertainty in
 physical parameters in real-life problems.
 
-<h2 id="sec:class:autoint">Example: Automagic integration<a name="sec:class:autoint"></a></h2>
+<h3 id="___sec32" class="anchor">Solution utilizing SymPy </h3>
+
+<p>
+class <code>Derivative</code> is based on numerical differentiation, but it is
+possible to make an equally short class that can do exact differentiation.
+In SymPy, one can perform symbolic differentiation of an expression
+<code>e</code> with respect to a symbolic independent variable <code>x</code> by
+<code>diff(e, x)</code>.
+Assuming that the user's <code>f</code> function can be evaluated for a
+symbolic independent variable <code>x</code>, we can call <code>f(x)</code> to get
+the SymPy expression for the formula in <code>f</code> and then use
+<code>diff</code> to calculate the exact derivative. Thereafter, we turn
+the symbolic expression of the derivative into an ordinary
+Python function (via <code>lambdify</code>) and define this function as
+the <code>__call__</code> method. The proper Python code is very short:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Derivative_sympy</span>(<span style="color: #008000">object</span>):
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__init__</span>(<span style="color: #008000">self</span>, f):
+        <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">sympy</span> <span style="color: #008000; font-weight: bold">import</span> Symbol, diff, lambdify
+        x <span style="color: #666666">=</span> Symbol(<span style="color: #BA2121">&#39;x&#39;</span>)
+        sympy_f <span style="color: #666666">=</span> f(x)   <span style="color: #408080; font-style: italic"># make sympy expression</span>
+        sympy_dfdx <span style="color: #666666">=</span> diff(sympy_f, x)
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>__call__ <span style="color: #666666">=</span> lambdify([x], sympy_dfdx)
+</pre></div>
+<p>
+Note how the <code>__call__</code> method is defined by assigning a function
+to it (even though the function returned by <code>lambdify</code> is a function
+of <code>x</code> only, it works to call <code>obj(x)</code> for an instance <code>obj</code> of
+type <code>Derivative_sympy</code>).
+
+<p>
+Both demonstration of the class and verification of the implementation
+can be placed in a test function:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">test_Derivative_sympy</span>():
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">g</span>(t):
+        <span style="color: #008000; font-weight: bold">return</span> t<span style="color: #666666">**3</span>
+
+    dg <span style="color: #666666">=</span> Derivative_sympy(g)
+    t <span style="color: #666666">=</span> <span style="color: #666666">2</span>
+    exact <span style="color: #666666">=</span> <span style="color: #666666">3*</span>t<span style="color: #666666">**2</span>
+    computed <span style="color: #666666">=</span> dg(t)
+    tol <span style="color: #666666">=</span> <span style="color: #666666">1E-14</span>
+    <span style="color: #008000; font-weight: bold">assert</span> <span style="color: #008000">abs</span>(exact <span style="color: #666666">-</span> computed) <span style="color: #666666">&lt;</span> tol
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">h</span>(y):
+        <span style="color: #008000; font-weight: bold">return</span> exp(<span style="color: #666666">-</span>y)<span style="color: #666666">*</span>sin(<span style="color: #666666">2*</span>y)
+
+    <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">sympy</span> <span style="color: #008000; font-weight: bold">import</span> exp, sin
+    dh <span style="color: #666666">=</span> Derivative_sympy(h)
+    <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">math</span> <span style="color: #008000; font-weight: bold">import</span> pi, exp, sin, cos
+    y <span style="color: #666666">=</span> pi
+    exact <span style="color: #666666">=</span> <span style="color: #666666">-</span>exp(<span style="color: #666666">-</span>y)<span style="color: #666666">*</span>sin(<span style="color: #666666">2*</span>y) <span style="color: #666666">+</span> exp(<span style="color: #666666">-</span>y)<span style="color: #666666">*2*</span>cos(<span style="color: #666666">2*</span>y)
+    computed <span style="color: #666666">=</span> dh(y)
+    <span style="color: #008000; font-weight: bold">assert</span> <span style="color: #008000">abs</span>(exact <span style="color: #666666">-</span> computed) <span style="color: #666666">&lt;</span> tol
+</pre></div>
+<p>
+The example with the <code>g(t)</code> should be straightforward to understand.
+In the constructor of class <code>Derivative_sympy</code>, we call <code>g(x)</code>, with
+the symbol <code>x</code>, and <code>g</code> returns the SymPy expression <code>x**3</code>.
+The <code>__call__</code> method then becomes a function <code>lambda x: 3*x**2</code>.
+
+<p>
+The <code>h(y)</code> function, however, deserves more explanation. When then
+constructor of class <code>Derivative_sympy</code> makes the call <code>h(x)</code>, with
+the symbol <code>x</code>, the <code>h</code> function will return the SymPy expression
+<code>exp(-x)*sin(2*x)</code>, provided <code>exp</code> and <code>sin</code> are SymPy functions.
+Since we do <code>from sympy import exp, sin</code> prior to calling the
+constructor in class <code>Derivative_sympy</code>, the names <code>exp</code> and <code>sin</code>
+are defined in the test function, and our local <code>h</code> function will
+have access to all local variables, as it is a closure as mentioned
+above and in the section <a href="._class-bootstrap001.html#sec:class:closure">Closures</a>.
+This means that <code>h</code> has access to <code>sympy.sin</code> and <code>sympy.cos</code>
+when the constructor in class <code>Derivative_sympy</code> calls <code>h</code>.
+Thereafter, we want to do some numerical computing and need
+<code>exp</code>, <code>sin</code>, and <code>cos</code> from the <code>math</code> module. If we had tried
+to do <code>Derivative_sympy(h)</code> after the import from <code>math</code>,
+<code>h</code> would then call <code>math.exp</code> and <code>math.sin</code> with a SymPy
+symbol as argument, and would cause a <code>TypeError</code> since
+<code>math.exp</code> expects a <code>float</code>, not a <code>Symbol</code> object from SymPy.
+
+<p>
+Although the <code>Derivative_sympy</code> class is small and compact, its
+construction and use as explained here bring up more
+advanced topics than class <code>Derivative</code> and its plain numerical
+computations. However, it may be interesting to see that
+a class for exact differentiation of a Python function can be
+realized in very few lines.
+
+<h2 id="sec:class:autoint" class="anchor">Example: Automagic integration</h2>
 
 <p>
 We can apply the ideas from the section <a href="#sec:class:autodF">Example: Automagic differentiation</a> to
@@ -714,6 +943,7 @@ intervals (\( n+1 \) points):
 $$
 \begin{equation}
 \int_a^x f(t)dt = h\left(\frac{1}{2}f(a) + \sum_{i=1}^{n-1} f(a+ih) + \frac{1}{2}f(x)\right),\ 
+\tag{3}
 \end{equation}
 $$
 
@@ -724,7 +954,7 @@ program, we want to compute \( F(x;a) \) by a simple syntax like
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f</span>(x):
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f</span>(x):
     <span style="color: #008000; font-weight: bold">return</span> exp(<span style="color: #666666">-</span>x<span style="color: #666666">**2</span>)<span style="color: #666666">*</span>sin(<span style="color: #666666">10*</span>x)
 
 a <span style="color: #666666">=</span> <span style="color: #666666">0</span>; n <span style="color: #666666">=</span> <span style="color: #666666">200</span>
@@ -735,7 +965,7 @@ F <span style="color: #666666">=</span> Integral(f, a, n)
 Here, <code>f(x)</code> is the Python function to be integrated, and <code>F(x)</code>
 behaves as a Python function that calculates values of \( F(x;a) \).
 
-<h3 id="___sec32">A simple implementation <a name="___sec32"></a></h3>
+<h3 id="___sec34" class="anchor">A simple implementation </h3>
 
 <p>
 Consider a straightforward implementation of the Trapezoidal rule
@@ -744,7 +974,7 @@ in a Python function:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">trapezoidal</span>(f, a, x, n):
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">trapezoidal</span>(f, a, x, n):
     h <span style="color: #666666">=</span> (x<span style="color: #666666">-</span>a)<span style="color: #666666">/</span><span style="color: #008000">float</span>(n)
     I <span style="color: #666666">=</span> <span style="color: #666666">0.5*</span>f(a)
     <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">1</span>, n):
@@ -754,15 +984,15 @@ in a Python function:
     <span style="color: #008000; font-weight: bold">return</span> I
 </pre></div>
 <p>
-Class <code>Integral</code> must have some attributes and a <code>__call__</code>
+Class <code>Integral</code> must have some data attributes and a <code>__call__</code>
 method. Since the latter method is supposed to take <code>x</code> as argument,
-the other parameters <code>a</code>, <code>f</code>, and <code>n</code> must be class attributes.  The
+the other parameters <code>a</code>, <code>f</code>, and <code>n</code> must be data attributes.  The
 implementation then becomes
 
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Integral</span>:
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Integral</span>(<span style="color: #008000">object</span>):
     <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__init__</span>(<span style="color: #008000">self</span>, f, a, n<span style="color: #666666">=100</span>):
         <span style="color: #008000">self</span><span style="color: #666666">.</span>f, <span style="color: #008000">self</span><span style="color: #666666">.</span>a, <span style="color: #008000">self</span><span style="color: #666666">.</span>n <span style="color: #666666">=</span> f, a, n
 
@@ -785,7 +1015,7 @@ might look as follows:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">math</span> <span style="color: #008000; font-weight: bold">import</span> sin, pi
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">math</span> <span style="color: #008000; font-weight: bold">import</span> sin, pi
 
 G <span style="color: #666666">=</span> Integral(sin, <span style="color: #666666">0</span>, <span style="color: #666666">200</span>)
 value <span style="color: #666666">=</span> G(<span style="color: #666666">2*</span>pi)
@@ -796,10 +1026,10 @@ An equivalent calculation is
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">value <span style="color: #666666">=</span> trapezoidal(sin, <span style="color: #666666">0</span>, <span style="color: #666666">2*</span>pi, <span style="color: #666666">200</span>)
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>value <span style="color: #666666">=</span> trapezoidal(sin, <span style="color: #666666">0</span>, <span style="color: #666666">2*</span>pi, <span style="color: #666666">200</span>)
 </pre></div>
 
-<h3 id="___sec33">Verification via symbolic computing <a name="___sec33"></a></h3>
+<h3 id="___sec35" class="anchor">Verification via symbolic computing </h3>
 
 <p>
 We should always provide a test function for verification of
@@ -807,24 +1037,24 @@ the implementation. To avoid dealing with unknown approximation errors
 of the Trapezoidal rule, we use the obvious fact that linear functions
 are integrated exactly by the rule. Although it is really easy to
 pick a linear function, integrate it, and figure out what an integral
-is, we can also demonstrate how to automate such a process by the
-symbolic computing package <code>sympy</code>. Essentially, we define an
-expression in <code>sympy</code>, ask <code>sympy</code> to integrate it, and then turn
+is, we can also demonstrate how to automate such a process by
+SymPy. Essentially, we define an
+expression in SymPy, ask SymPy to integrate it, and then turn
 the resulting symbolic integral to a plain Python function for
 computing:
 
 <p>
 
 <!-- code=python (!bc pyshell) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">sympy</span>
-<span style="color: #666666">&gt;&gt;&gt;</span> x <span style="color: #666666">=</span> sympy<span style="color: #666666">.</span>Symbol(<span style="color: #BA2121">&#39;x&#39;</span>)
-<span style="color: #666666">&gt;&gt;&gt;</span> f_expr <span style="color: #666666">=</span> sympy<span style="color: #666666">.</span>cos(x) <span style="color: #666666">+</span> <span style="color: #666666">5*</span>x
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">sympy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">sp</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> x <span style="color: #666666">=</span> sp<span style="color: #666666">.</span>Symbol(<span style="color: #BA2121">&#39;x&#39;</span>)
+<span style="color: #666666">&gt;&gt;&gt;</span> f_expr <span style="color: #666666">=</span> sp<span style="color: #666666">.</span>cos(x) <span style="color: #666666">+</span> <span style="color: #666666">5*</span>x
 <span style="color: #666666">&gt;&gt;&gt;</span> f_expr
 <span style="color: #666666">5*</span>x <span style="color: #666666">+</span> cos(x)
-<span style="color: #666666">&gt;&gt;&gt;</span> F_expr <span style="color: #666666">=</span> sympy<span style="color: #666666">.</span>integrate(f_expr, x)
+<span style="color: #666666">&gt;&gt;&gt;</span> F_expr <span style="color: #666666">=</span> sp<span style="color: #666666">.</span>integrate(f_expr, x)
 <span style="color: #666666">&gt;&gt;&gt;</span> F_expr
 <span style="color: #666666">5*</span>x<span style="color: #666666">**2/2</span> <span style="color: #666666">+</span> sin(x)
-<span style="color: #666666">&gt;&gt;&gt;</span> F <span style="color: #666666">=</span> sympy<span style="color: #666666">.</span>lambdify([x], F_expr)  <span style="color: #408080; font-style: italic"># turn f_expr to F(x) func.</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> F <span style="color: #666666">=</span> sp<span style="color: #666666">.</span>lambdify([x], F_expr)  <span style="color: #408080; font-style: italic"># turn f_expr to F(x) func.</span>
 <span style="color: #666666">&gt;&gt;&gt;</span> F(<span style="color: #666666">0</span>)
 <span style="color: #666666">0.0</span>
 <span style="color: #666666">&gt;&gt;&gt;</span> F(<span style="color: #666666">1</span>)
@@ -837,25 +1067,31 @@ our test function as
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">test_Integral</span>():
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">test_Integral</span>():
     <span style="color: #408080; font-style: italic"># The Trapezoidal rule is exact for linear functions</span>
-    <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">sympy</span>
-    x <span style="color: #666666">=</span> sympy<span style="color: #666666">.</span>Symbol(<span style="color: #BA2121">&#39;x&#39;</span>)
+    <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">sympy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">sp</span>
+    x <span style="color: #666666">=</span> sp<span style="color: #666666">.</span>Symbol(<span style="color: #BA2121">&#39;x&#39;</span>)
     f_expr <span style="color: #666666">=</span> <span style="color: #666666">2*</span>x <span style="color: #666666">+</span> <span style="color: #666666">5</span>
     <span style="color: #408080; font-style: italic"># Turn sympy expression into plain Python function f(x)</span>
-    f <span style="color: #666666">=</span> sympy<span style="color: #666666">.</span>lambdify([x], f_expr)
+    f <span style="color: #666666">=</span> sp<span style="color: #666666">.</span>lambdify([x], f_expr)
     <span style="color: #408080; font-style: italic"># Find integral of f_expr and turn into plain Python function F</span>
-    F_expr <span style="color: #666666">=</span> sympy<span style="color: #666666">.</span>integrate(f_expr, x)
-    F <span style="color: #666666">=</span> sympy<span style="color: #666666">.</span>lambdify([x], F_expr)
+    F_expr <span style="color: #666666">=</span> sp<span style="color: #666666">.</span>integrate(f_expr, x)
+    F <span style="color: #666666">=</span> sp<span style="color: #666666">.</span>lambdify([x], F_expr)
 
     a <span style="color: #666666">=</span> <span style="color: #666666">2</span>
-    I <span style="color: #666666">=</span> Integral(f, a, n<span style="color: #666666">=4</span>)
     x <span style="color: #666666">=</span> <span style="color: #666666">6</span>
-    diff <span style="color: #666666">=</span> <span style="color: #008000">abs</span>(I(x) <span style="color: #666666">-</span> (F(x) <span style="color: #666666">-</span> F(a)))
-    <span style="color: #008000; font-weight: bold">assert</span> diff <span style="color: #666666">&lt;</span> <span style="color: #666666">1E-15</span>, <span style="color: #BA2121">&#39;bug in class Integral, diff=</span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> diff
+    exact <span style="color: #666666">=</span> F(x) <span style="color: #666666">-</span> F(a)
+    computed <span style="color: #666666">=</span> Integral(f, a, n<span style="color: #666666">=4</span>)
+    diff <span style="color: #666666">=</span> <span style="color: #008000">abs</span>(exact <span style="color: #666666">-</span> computed)
+    tol <span style="color: #666666">=</span> <span style="color: #666666">1E-15</span>
+    <span style="color: #008000; font-weight: bold">assert</span> diff <span style="color: #666666">&lt;</span> tol, <span style="color: #BA2121">&#39;bug in class Integral, diff=</span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> diff
 </pre></div>
+<p>
+If you think it is overkill to use SymPy for integrating linear
+functions, you can equally well do it yourself and define
+<code>f = lambda x: 2*x + 5</code> and <code>F = lambda x: x**2 + 5*x</code>.
 
-<h3 id="___sec34">Remark <a name="___sec34"></a></h3>
+<h3 id="___sec36" class="anchor">Remark </h3>
 
 <p>
 Class <code>Integral</code> is inefficient (but probably more
@@ -863,13 +1099,13 @@ than fast enough) for plotting \( F(x;a) \) as a function \( x \).
 <a href="._class-bootstrap008.html#sec:class:ex13c">Exercise 22: Speed up repeated integral calculations</a> suggests to optimize the class
 for this purpose.
 
-<h2 id="sec:class:str">Turning an instance into a string<a name="sec:class:str"></a></h2>
+<h2 id="sec:class:str" class="anchor">Turning an instance into a string</h2>
 
 <p>
-Another special method is <code>__str__</code>. It is called when
+Another useful special method is <code>__str__</code>. It is called when
 a class instance needs to be converted to a string. This happens when
-we say <code>print a</code>, and <code>a</code> is an instance. Python will then look
-into the <code>a</code> instance
+we say <code>print a</code>, and <code>a</code> is an instance.
+Python will then look into the <code>a</code> instance
 for a <code>__str__</code> method, which is supposed to return a string.
 If such a special method is found, the returned string is printed,
 otherwise just the name of the class is printed. An example will illustrate
@@ -880,7 +1116,7 @@ the point. First we try to print an <code>y</code> instance of class
 <p>
 
 <!-- code=python (!bc pyshell) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">print</span> y
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">print</span> y
 <span style="color: #666666">&lt;</span>__main__<span style="color: #666666">.</span>Y instance at <span style="color: #666666">0xb751238c&gt;</span>
 </pre></div>
 <p>
@@ -896,7 +1132,7 @@ to define the <code>__str__</code> method in class <code>Y</code>:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Y</span>:
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Y</span>(<span style="color: #008000">object</span>):
     <span style="color: #666666">...</span>
     <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__str__</span>(<span style="color: #008000">self</span>):
         <span style="color: #008000; font-weight: bold">return</span> <span style="color: #BA2121">&#39;v0*t - 0.5*g*t**2; v0=</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>v0
@@ -910,7 +1146,7 @@ therefore write class <code>Y</code> with special methods only:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Y</span>:
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Y</span>(<span style="color: #008000">object</span>):
     <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__init__</span>(<span style="color: #008000">self</span>, v0):
         <span style="color: #008000">self</span><span style="color: #666666">.</span>v0 <span style="color: #666666">=</span> v0
         <span style="color: #008000">self</span><span style="color: #666666">.</span>g <span style="color: #666666">=</span> <span style="color: #666666">9.81</span>
@@ -927,7 +1163,7 @@ Let us see the class in action:
 <p>
 
 <!-- code=python (!bc pyshell) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> y <span style="color: #666666">=</span> Y(<span style="color: #666666">1.5</span>)
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> y <span style="color: #666666">=</span> Y(<span style="color: #666666">1.5</span>)
 <span style="color: #666666">&gt;&gt;&gt;</span> y(<span style="color: #666666">0.2</span>)
 <span style="color: #666666">0.1038</span>
 <span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">print</span> y
@@ -942,7 +1178,11 @@ and we can do a <code>print y</code> to view the formula.
 The bottom line of using special methods is to achieve a more
 user-friendly syntax. The next sections illustrate this point further.
 
-<h2 id="sec:class:phonebook2">Example: Phone book with special methods<a name="sec:class:phonebook2"></a></h2>
+<p>
+Note that the <code>__str__</code> method is called whenever we do <code>str(a)</code>, and
+<code>print a</code> is effectively <code>print str(a)</code>, i.e., <code>print a.__str__()</code>.
+
+<h2 id="sec:class:phonebook2" class="anchor">Example: Phone book with special methods</h2>
 
 <p>
 Let us reconsider class <code>Person</code> from the section <a href="._class-bootstrap002.html#sec:class:phonebook">Phone book</a>.
@@ -960,7 +1200,7 @@ which holds the dictionary as an attribute. An
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">PhoneBook</span>:
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">PhoneBook</span>(<span style="color: #008000">object</span>):
     <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__init__</span>(<span style="color: #008000">self</span>):
         <span style="color: #008000">self</span><span style="color: #666666">.</span>contacts <span style="color: #666666">=</span> {}   <span style="color: #408080; font-style: italic"># dict of Person instances</span>
 
@@ -975,7 +1215,7 @@ A <code>__str__</code> can print the phone book in alphabetic order:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__str__</span>(<span style="color: #008000">self</span>):
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__str__</span>(<span style="color: #008000">self</span>):
         s <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;&#39;</span>
         <span style="color: #008000; font-weight: bold">for</span> p <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">sorted</span>(<span style="color: #008000">self</span><span style="color: #666666">.</span>contacts):
             s <span style="color: #666666">+=</span> <span style="color: #008000">str</span>(<span style="color: #008000">self</span><span style="color: #666666">.</span>contacts[p]) <span style="color: #666666">+</span> <span style="color: #BA2121">&#39;</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121">&#39;</span>
@@ -988,7 +1228,7 @@ with the person's name as argument:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__call__</span>(<span style="color: #008000">self</span>, name):
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__call__</span>(<span style="color: #008000">self</span>, name):
         <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>contacts[name]
 </pre></div>
 <p>
@@ -1004,7 +1244,7 @@ names:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">b <span style="color: #666666">=</span> PhoneBook()
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>b <span style="color: #666666">=</span> PhoneBook()
 b<span style="color: #666666">.</span>add(<span style="color: #BA2121">&#39;Ole Olsen&#39;</span>, office<span style="color: #666666">=</span><span style="color: #BA2121">&#39;767828292&#39;</span>,
       email<span style="color: #666666">=</span><span style="color: #BA2121">&#39;olsen@somemail.net&#39;</span>)
 b<span style="color: #666666">.</span>add(<span style="color: #BA2121">&#39;Hans Hanson&#39;</span>,
@@ -1020,7 +1260,7 @@ The output becomes
 
 <!-- code=text (!bc ccq) typeset with pygments style "default" -->
 <blockquote>
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">Per Person
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>Per Person
 mobile phone:   906849781
 
 Hans Hanson
@@ -1045,24 +1285,24 @@ as above. The complete program with classes <code>Person</code> and
 <a href="http://tinyurl.com/pwyasaa/class/PhoneBook.py" target="_self"><tt>PhoneBook.py</tt></a>.
 You can run this program, statement by statement,
 either in the <a href="http://www.pythontutor.com/" target="_self">Online Python Tutor</a> or
-in a debugger (see the document <a href="http://tcse6.on.net/debug" target="_self">Debugging in Python</a> <a href="._class-bootstrap008.html#Langtangen_TCSE6_debug">[3]</a>)
+in a debugger (see the document <a href="http://hplgit.github.io/primer.html/doc/pub/debug" target="_self">Debugging in Python</a> <a href="._class-bootstrap008.html#Langtangen_TCSE6_debug">[3]</a>)
 to control that your understanding of the program flow is correct.
 
-<h3 id="___sec37">Remark <a name="___sec37"></a></h3>
+<h3 id="___sec39" class="anchor">Remark </h3>
 
 <p>
 Note that the names are sorted with respect to the first names.
 The reason is that strings are sorted after the first character,
 then the second character, and so on.
 We can supply our own tailored sort
-function, as explained in ref{sec:basic:ex28}.
+function.
 One possibility is to split the
 name into words and use the last word for sorting:
 
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">last_name_sort</span>(name1, name2):
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">last_name_sort</span>(name1, name2):
     lastname1 <span style="color: #666666">=</span> name1<span style="color: #666666">.</span>split()[<span style="color: #666666">-1</span>]
     lastname2 <span style="color: #666666">=</span> name2<span style="color: #666666">.</span>split()[<span style="color: #666666">-1</span>]
     <span style="color: #008000; font-weight: bold">if</span> lastname1 <span style="color: #666666">&lt;</span> lastname2:
@@ -1076,7 +1316,7 @@ name into words and use the last word for sorting:
    <span style="color: #666666">...</span>
 </pre></div>
 
-<h2 id="sec:class:add">Adding objects<a name="sec:class:add"></a></h2>
+<h2 id="sec:class:add" class="anchor">Adding objects</h2>
 
 <p>
 Let <code>a</code> and <code>b</code> be instances of some class <code>C</code>. Does it
@@ -1086,7 +1326,7 @@ make sense to write <code>a + b</code>? Yes, this makes sense if class
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">C</span>:
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">C</span>(<span style="color: #008000">object</span>):
     <span style="color: #666666">...</span>
     __add__(<span style="color: #008000">self</span>, other):
         <span style="color: #666666">...</span>
@@ -1099,7 +1339,7 @@ So when Python encounters <code>a + b</code>, it will check if class
 as the call <code>a.__add__(b)</code>.
 The next example will hopefully clarify what this idea can be used for.
 
-<h2 id="sec:class:Polynomial">Example: Class for polynomials<a name="sec:class:Polynomial"></a></h2>
+<h2 id="sec:class:Polynomial" class="anchor">Example: Class for polynomials</h2>
 
 <p>
 Let us create a class <code>Polynomial</code>
@@ -1122,22 +1362,34 @@ an <code>__add__</code> method.
 A <code>__call__</code> method is natural for evaluating the polynomial,
 given a value of \( x \). The class is listed below and explained afterwards.
 
-<h3 id="___sec40">Implementation <a name="___sec40"></a></h3>
+<h3 id="___sec42" class="anchor">Implementation </h3>
 
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Polynomial</span>:
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Polynomial</span>(<span style="color: #008000">object</span>):
     <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__init__</span>(<span style="color: #008000">self</span>, coefficients):
         <span style="color: #008000">self</span><span style="color: #666666">.</span>coeff <span style="color: #666666">=</span> coefficients
 
     <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__call__</span>(<span style="color: #008000">self</span>, x):
+        <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Evaluate the polynomial.&quot;&quot;&quot;</span>
         s <span style="color: #666666">=</span> <span style="color: #666666">0</span>
         <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #008000">len</span>(<span style="color: #008000">self</span><span style="color: #666666">.</span>coeff)):
             s <span style="color: #666666">+=</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>coeff[i]<span style="color: #666666">*</span>x<span style="color: #666666">**</span>i
         <span style="color: #008000; font-weight: bold">return</span> s
 
     <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__add__</span>(<span style="color: #008000">self</span>, other):
+        <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Return self + other as Polynomial object.&quot;&quot;&quot;</span>
+        <span style="color: #408080; font-style: italic"># Two cases:</span>
+        <span style="color: #408080; font-style: italic">#</span>
+        <span style="color: #408080; font-style: italic"># self:   X X X X X X X</span>
+        <span style="color: #408080; font-style: italic"># other:  X X X</span>
+        <span style="color: #408080; font-style: italic">#</span>
+        <span style="color: #408080; font-style: italic"># or:</span>
+        <span style="color: #408080; font-style: italic">#</span>
+        <span style="color: #408080; font-style: italic"># self:   X X X X X</span>
+        <span style="color: #408080; font-style: italic"># other:  X X X X X X X X</span>
+
         <span style="color: #408080; font-style: italic"># Start with the longest list and add in the other</span>
         <span style="color: #008000; font-weight: bold">if</span> <span style="color: #008000">len</span>(<span style="color: #008000">self</span><span style="color: #666666">.</span>coeff) <span style="color: #666666">&gt;</span> <span style="color: #008000">len</span>(other<span style="color: #666666">.</span>coeff):
             result_coeff <span style="color: #666666">=</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>coeff[:]  <span style="color: #408080; font-style: italic"># copy!</span>
@@ -1150,12 +1402,12 @@ given a value of \( x \). The class is listed below and explained afterwards.
         <span style="color: #008000; font-weight: bold">return</span> Polynomial(result_coeff)
 </pre></div>
 <p>
-Class <code>Polynomial</code> has one attribute: the list of coefficients.
+Class <code>Polynomial</code> has one data attribute: the list of coefficients.
 To evaluate the polynomial, we just sum up coefficient no. \( i \) times
 \( x^i \) for \( i=0 \) to the number of coefficients in the list.
 
 <p>
-The <code>__add__</code> method looks more advanced. The idea is to add the two
+The <code>__add__</code> method looks more advanced. The goal is to add the two
 lists of coefficients. However, it may happen that the lists are of
 unequal length. We therefore start with the longest list and add in
 the other list, element by element.  Observe that <code>result_coeff</code>
@@ -1168,9 +1420,16 @@ implementation of class <code>Polynomial</code> is found in <a href="._class-boo
 
 <p>
 A subtraction method <code>__sub__</code> can be implemented along the lines of
-<code>__add__</code>, but is slightly more complicated and left to the reader
-through <a href="._class-bootstrap008.html#sec:class:ex6a">Exercise 25: Implement subtraction of polynomials</a>.  A somewhat more complicated
-operation, from a mathematical point of view, is the multiplication of
+<code>__add__</code>, but is slightly more complicated and left as
+<a href="._class-bootstrap008.html#sec:class:ex6a">Exercise 25: Implement subtraction of polynomials</a>. You are strongly encouraged to do
+this exercise as it will help increase the understanding of
+the interplay between mathematics and programming in class
+<code>Polynomial</code>.
+
+<p>
+A more complicated
+operation on polynomials,
+from a mathematical point of view, is the multiplication of
 two polynomials. Let \( p(x)=\sum_{i=0}^Mc_ix^i \) and \( q(x)=\sum_{j=0}^N
 d_jx^j \) be the two polynomials. The product becomes
 
@@ -1187,7 +1446,7 @@ The implementation of the multiplication operator becomes
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__mul__</span>(<span style="color: #008000">self</span>, other):
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__mul__</span>(<span style="color: #008000">self</span>, other):
         c <span style="color: #666666">=</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>coeff
         d <span style="color: #666666">=</span> other<span style="color: #666666">.</span>coeff
         M <span style="color: #666666">=</span> <span style="color: #008000">len</span>(c) <span style="color: #666666">-</span> <span style="color: #666666">1</span>
@@ -1232,7 +1491,7 @@ is given below:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Polynomial</span>:
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Polynomial</span>(<span style="color: #008000">object</span>):
     <span style="color: #666666">...</span>
     <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">differentiate</span>(<span style="color: #008000">self</span>):
         <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Differentiate this polynomial in-place.&quot;&quot;&quot;</span>
@@ -1264,7 +1523,7 @@ object is either mutable or immutable (if we leave out
 since the main purpose of this class is to illustrate various types of
 programming techniques, we keep both versions.
 
-<h3 id="___sec41">Usage <a name="___sec41"></a></h3>
+<h3 id="___sec43" class="anchor">Usage </h3>
 
 <p>
 As a demonstration of the functionality of class <code>Polynomial</code>, we introduce
@@ -1274,11 +1533,10 @@ $$
 \begin{equation*} p_1(x)= 1-x,\quad p_2(x)=x - 6x^4 - x^5  \thinspace . \end{equation*}
 $$
 
-
 <p>
 
 <!-- code=python (!bc pyshell) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> p1 <span style="color: #666666">=</span> Polynomial([<span style="color: #666666">1</span>, <span style="color: #666666">-1</span>])
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> p1 <span style="color: #666666">=</span> Polynomial([<span style="color: #666666">1</span>, <span style="color: #666666">-1</span>])
 <span style="color: #666666">&gt;&gt;&gt;</span> p2 <span style="color: #666666">=</span> Polynomial([<span style="color: #666666">0</span>, <span style="color: #666666">1</span>, <span style="color: #666666">0</span>, <span style="color: #666666">0</span>, <span style="color: #666666">-6</span>, <span style="color: #666666">-1</span>])
 <span style="color: #666666">&gt;&gt;&gt;</span> p3 <span style="color: #666666">=</span> p1 <span style="color: #666666">+</span> p2
 <span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">print</span> p3<span style="color: #666666">.</span>coeff
@@ -1297,7 +1555,7 @@ One verification of the implementation may be to compare
 <p>
 
 <!-- code=python (!bc pyshell) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> x <span style="color: #666666">=</span> <span style="color: #666666">0.5</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> x <span style="color: #666666">=</span> <span style="color: #666666">0.5</span>
 <span style="color: #666666">&gt;&gt;&gt;</span> p1_plus_p2_value <span style="color: #666666">=</span> p1(x) <span style="color: #666666">+</span> p2(x)
 <span style="color: #666666">&gt;&gt;&gt;</span> p3_value <span style="color: #666666">=</span> p3(x)
 <span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">print</span> p1_plus_p2_value <span style="color: #666666">-</span> p3_value
@@ -1310,7 +1568,7 @@ latter case we add two instances of class <code>float</code> (since <code>p1(x)<
 <code>p2(x)</code> imply calling <code>__call__</code> and that method returns a <code>float</code>
 object).
 
-<h3 id="___sec42">Pretty print of polynomials <a name="___sec42"></a></h3>
+<h3 id="___sec44" class="anchor">Pretty print of polynomials </h3>
 
 <p>
 The <code>Polynomial</code> class can also be equipped with a
@@ -1321,7 +1579,7 @@ of the form <code>+ self.coeff[i]*x^i</code>:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Polynomial</span>:
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Polynomial</span>(<span style="color: #008000">object</span>):
     <span style="color: #666666">...</span>
     <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__str__</span>(<span style="color: #008000">self</span>):
         s <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;&#39;</span>
@@ -1339,7 +1597,7 @@ gets printed as
 
 <!-- code=text (!bc ccq) typeset with pygments style "default" -->
 <blockquote>
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"> + 1*x^0 + 0*x^1 + 0*x^2 + -1*x^3 + -6*x^4
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span> + 1*x^0 + 0*x^1 + 0*x^2 + -1*x^3 + -6*x^4
 </pre></div>
 </blockquote><p>
 A more desired output would be
@@ -1348,7 +1606,7 @@ A more desired output would be
 
 <!-- code=text (!bc ccq) typeset with pygments style "default" -->
 <blockquote>
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">1 - x^3 - 6*x^4
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>1 - x^3 - 6*x^4
 </pre></div>
 </blockquote><p>
 That is, terms with a zero coefficient should be dropped; a part <code>'+
@@ -1368,7 +1626,7 @@ special methods.
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Polynomial</span>:
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Polynomial</span>(<span style="color: #008000">object</span>):
     <span style="color: #666666">...</span>
     <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__str__</span>(<span style="color: #008000">self</span>):
         s <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;&#39;</span>
@@ -1401,7 +1659,7 @@ interactive session:
 <p>
 
 <!-- code=python (!bc pyshell) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> p1 <span style="color: #666666">=</span> Polynomial([<span style="color: #666666">1</span>, <span style="color: #666666">-1</span>])
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> p1 <span style="color: #666666">=</span> Polynomial([<span style="color: #666666">1</span>, <span style="color: #666666">-1</span>])
 <span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">print</span> p1
 <span style="color: #666666">1</span> <span style="color: #666666">-</span> x<span style="color: #666666">^1</span>
 <span style="color: #666666">&gt;&gt;&gt;</span> p2 <span style="color: #666666">=</span> Polynomial([<span style="color: #666666">0</span>, <span style="color: #666666">1</span>, <span style="color: #666666">0</span>, <span style="color: #666666">0</span>, <span style="color: #666666">-6</span>, <span style="color: #666666">-1</span>])
@@ -1410,7 +1668,7 @@ interactive session:
 <span style="color: #666666">1</span> <span style="color: #666666">-</span> <span style="color: #666666">24*</span>x<span style="color: #666666">^3</span> <span style="color: #666666">-</span> <span style="color: #666666">5*</span>x<span style="color: #666666">^4</span>
 </pre></div>
 
-<h3 id="___sec43">Verifying the implementation <a name="___sec43"></a></h3>
+<h3 id="___sec45" class="anchor">Verifying the implementation </h3>
 
 <p>
 It is always a good habit to include a test function <code>test_Polynomial()</code>
@@ -1421,7 +1679,7 @@ and differentiation of polynomials by hand and make tests that class
 method is left as <a href="._class-bootstrap008.html#sec:class:exer:str">Exercise 26: Test the functionality of pretty print of polynomials</a>.
 
 <p>
-Round-off errors may be an issue in class <code>Polynomial</code>: <code>__add__</code>,
+Rounding errors may be an issue in class <code>Polynomial</code>: <code>__add__</code>,
 <code>derivative</code>, and <code>differentiate</code> will lead to integer coefficients if
 the polynomials to be added have integer coefficients, while <code>__mul__</code>
 always results in a polynomial with the coefficients stored in a
@@ -1455,7 +1713,7 @@ Our test function now becomes
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">test_Polynomial</span>():
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">test_Polynomial</span>():
     p1 <span style="color: #666666">=</span> Polynomial([<span style="color: #666666">1</span>, <span style="color: #666666">-1</span>])
     p2 <span style="color: #666666">=</span> Polynomial([<span style="color: #666666">0</span>, <span style="color: #666666">1</span>, <span style="color: #666666">0</span>, <span style="color: #666666">0</span>, <span style="color: #666666">-6</span>, <span style="color: #666666">-1</span>])
 
@@ -1477,7 +1735,7 @@ Our test function now becomes
     <span style="color: #008000; font-weight: bold">assert</span> p6<span style="color: #666666">.</span>coeff <span style="color: #666666">==</span> p6_exact<span style="color: #666666">.</span>coeff
 </pre></div>
 
-<h2 id="sec:class:arithmetics">Arithmetic operations and other special methods<a name="sec:class:arithmetics"></a></h2>
+<h2 id="sec:class:arithmetics" class="anchor">Arithmetic operations and other special methods</h2>
 
 <p>
 Given two instances <code>a</code> and <code>b</code>, the standard binary arithmetic
@@ -1510,7 +1768,7 @@ Some other special methods are also often useful:
 We can implement such methods in class <code>Polynomial</code>, see <a href="._class-bootstrap008.html#sec:class:ex6a">Exercise 25: Implement subtraction of polynomials</a>.  The section <a href="._class-bootstrap004.html#sec:class:Vec2D">Example: Class for vectors in the plane</a> contains
 examples on implementing the special methods listed above.
 
-<h2 id="sec:class:repr">Special methods for string conversion<a name="sec:class:repr"></a></h2>
+<h2 id="sec:class:repr" class="anchor">Special methods for string conversion</h2>
 
 <p>
 Look at this class with a <code>__str__</code> method:
@@ -1518,7 +1776,7 @@ Look at this class with a <code>__str__</code> method:
 <p>
 
 <!-- code=python (!bc pyshell) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">MyClass</span>:
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">MyClass</span>(<span style="color: #008000">object</span>):
 <span style="color: #666666">...</span>     <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__init__</span>(<span style="color: #008000">self</span>):
 <span style="color: #666666">...</span>         <span style="color: #008000">self</span><span style="color: #666666">.</span>data <span style="color: #666666">=</span> <span style="color: #666666">2</span>
 <span style="color: #666666">...</span>     <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__str__</span>(<span style="color: #008000">self</span>):
@@ -1539,7 +1797,7 @@ if we write just <code>a</code> at the command prompt in an interactive shell?
 <p>
 
 <!-- code=python (!bc pyshell) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> a
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> a
 <span style="color: #666666">&lt;</span>__main__<span style="color: #666666">.</span>MyClass instance at <span style="color: #666666">0xb75125ac&gt;</span>
 </pre></div>
 <p>
@@ -1558,7 +1816,7 @@ the <code>__repr__</code> is missing, and we need to add it if we want
 <p>
 
 <!-- code=python (!bc pyshell) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> a
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> a
 </pre></div>
 <p>
 to write the contents like <code>print a</code> does.
@@ -1571,7 +1829,7 @@ Given an instance <code>a</code>, <code>str(a)</code> implies calling
 <p>
 
 <!-- code=python (!bc pyshell) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> a
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> a
 </pre></div>
 <p>
 is actually a <code>repr(a)</code> call and
@@ -1579,7 +1837,7 @@ is actually a <code>repr(a)</code> call and
 <p>
 
 <!-- code=python (!bc pyshell) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">print</span> a
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">print</span> a
 </pre></div>
 <p>
 is actually a <code>print str(a)</code> statement.
@@ -1590,19 +1848,19 @@ A simple remedy in class <code>MyClass</code> is to define
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__repr__</span>(<span style="color: #008000">self</span>):
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__repr__</span>(<span style="color: #008000">self</span>):
     <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>__str__()  <span style="color: #408080; font-style: italic"># or return str(self)</span>
 </pre></div>
 <p>
 However, as we explain below, the <code>__repr__</code> is best defined
 differently.
 
-<h3 id="___sec46">Recreating objects from strings <a name="___sec46"></a></h3>
+<h3 id="___sec48" class="anchor">Recreating objects from strings </h3>
 
 <p>
 The Python function <code>eval(e)</code> evaluates a valid Python expression
 contained in the string
-<code>e</code>, see the section ref{sec:input:eval}.
+<code>e</code>.
 It is a convention that <code>__repr__</code> returns a string such that
 <code>eval</code> applied to the string recreates the instance.
 For example, in case of the <code>Y</code> class
@@ -1620,17 +1878,17 @@ and <code>MyClass</code> (above):
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Y</span>:
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Y</span>(<span style="color: #008000">object</span>):
     <span style="color: #666666">...</span>
     <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__repr__</span>(<span style="color: #008000">self</span>):
         <span style="color: #008000; font-weight: bold">return</span> <span style="color: #BA2121">&#39;Y(v0=</span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121">)&#39;</span> <span style="color: #666666">%</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>v0
 
-<span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Polynomial</span>:
+<span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Polynomial</span>(<span style="color: #008000">object</span>):
     <span style="color: #666666">...</span>
     <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__repr__</span>(<span style="color: #008000">self</span>):
         <span style="color: #008000; font-weight: bold">return</span> <span style="color: #BA2121">&#39;Polynomial(coefficients=</span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121">)&#39;</span> <span style="color: #666666">%</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>coeff
 
-<span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">MyClass</span>:
+<span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">MyClass</span>(<span style="color: #008000">object</span>):
     <span style="color: #666666">...</span>
     <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__repr__</span>(<span style="color: #008000">self</span>):
         <span style="color: #008000; font-weight: bold">return</span> <span style="color: #BA2121">&#39;MyClass()&#39;</span>
@@ -1644,7 +1902,7 @@ In particular, we can write <code>x</code> to file and later recreate the
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #408080; font-style: italic"># somefile is some file object</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #408080; font-style: italic"># somefile is some file object</span>
 somefile<span style="color: #666666">.</span>write(<span style="color: #008000">repr</span>(x))
 somefile<span style="color: #666666">.</span>close()
 <span style="color: #666666">...</span>

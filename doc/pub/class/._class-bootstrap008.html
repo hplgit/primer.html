@@ -7,13 +7,13 @@ Automatically generated HTML file from DocOnce source
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
 <meta name="description" content="Introduction to classes in Python">
-<meta name="keywords" content="constructor (class),UML class diagram,instance (class),user-defined datatype (class),method class),attribute (class),namespace,test function,nose tests,pytest tests,special methods (class),callable objects,test function,closure,Newton's method,wrapper code,integration numerical,symbolic computing,integration symbolic,mutable objects,immutable objects,protected attributes (class),test function,information hiding,private attributes (class),API,application programming interface,protected attributes (class),check an object's type,static typing,weak typing,strong typing,dynamic typing,duck typing,static class attributes,static class variables,static class methods,interval arithmetic">
+<meta name="keywords" content="constructor (class),UML class diagram,instance (class),user-defined datatype (class),method class),attribute (class),new-style classes,namespace,closures,test function,nose tests,pytest tests,special methods (class),callable objects,test function,closure,Newton's method,SymPy differentiation,closure,wrapper code,integration numerical,symbolic computing,integration symbolic,SymPy integration,mutable objects,immutable objects,protected attributes (class),test function,information hiding,private attributes (class),API,application programming interface,protected attributes (class),check an object's type,static typing,weak typing,strong typing,dynamic typing,duck typing,static class attributes,static class variables,static class methods,interval arithmetic">
 
 <title>Introduction to classes in Python</title>
 
-<!-- Bootstrap style: bootstrap_bluegray -->
+<!-- Bootstrap style: bootstrap_simula -->
 <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
-<link href="https://raw.github.com/hplgit/doconce/master/bundled/html_styles/style_bootstrap/css/bootstrap_bluegray.css" rel="stylesheet">
+<link href="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_styles/style_bootstrap/css/bootstrap_simula.css" rel="stylesheet">
 <!-- not necessary
 <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 -->
@@ -21,6 +21,24 @@ Automatically generated HTML file from DocOnce source
 <style type="text/css">
 /* Let inline verbatim have the same color as the surroundings */
 code { color: inherit; background-color: transparent; }
+
+/* Add scrollbar to dropdown menus in bootstrap navigation bar */
+.dropdown-menu {
+   height: auto;
+   max-height: 400px;
+   overflow-x: hidden;
+}
+
+/* Adds an invisible element before each target to offset for the navigation
+   bar */
+.anchor::before {
+  content:"";
+  display:block;
+  height:50px; /* fixed header height*/
+  margin:-50px 0 0; /* negative fixed header height */
+}
+
+body { font-size:20px;line-height:1.5; }
 </style>
 
 
@@ -28,298 +46,304 @@ code { color: inherit; background-color: transparent; }
 
 <!-- tocinfo
 {'highest level': 1,
- 'sections': [(' Simple function classes ',
+ 'sections': [('Table of contents',
+               1,
+               'table_of_contents',
+               'table_of_contents'),
+              ('Simple function classes',
                1,
                'sec:class:functors',
                'sec:class:functors'),
-              (' Challenge: functions with parameters ',
+              ('Challenge: functions with parameters',
                2,
                'sec:class:func1',
                'sec:class:func1'),
-              (' Problem ', 3, None, '___sec2'),
-              (' A bad solution: global variables ', 3, None, '___sec3'),
-              (' Representing a function as a class ',
+              ('Problem', 3, None, '___sec2'),
+              ('A bad solution: global variables', 3, None, '___sec3'),
+              ('Representing a function as a class',
                2,
                'sec:class:func2',
                'sec:class:func2'),
-              (' Implementation ', 3, None, '___sec5'),
-              (' Usage and dissection ', 3, None, '___sec6'),
-              (' The self  variable ', 3, None, '___sec7'),
-              (' Extension of the class ', 3, None, '___sec8'),
-              (' Remark ', 3, None, '___sec9'),
-              (' Using methods as ordinary functions ', 3, None, '___sec10'),
-              (' Doc strings ', 3, None, '___sec11'),
-              (' Another function class example ',
+              ('Implementation', 3, None, '___sec5'),
+              ('Usage and dissection', 3, None, '___sec6'),
+              ('Extension of the class', 3, None, '___sec7'),
+              ('Using methods as ordinary functions', 3, None, '___sec8'),
+              ('New-style classes versus classic classes',
+               3,
+               None,
+               '___sec9'),
+              ('Doc strings', 3, None, '___sec10'),
+              ('The self variable', 2, None, '___sec11'),
+              ('Another function class example',
                2,
                'sec:class:func3',
                'sec:class:func3'),
-              (' Remark ', 3, None, '___sec13'),
-              (' Alternative function class implementations ',
+              ('Remark', 3, None, '___sec13'),
+              ('Alternative function class implementations',
                2,
                'sec:class:func2b',
                'sec:class:func2b'),
-              (' Making classes without the class construct ',
+              ('Making classes without the class construct',
                2,
                'sec:class:whatis',
                'sec:class:whatis'),
-              (' First remark ', 3, None, '___sec16'),
-              (' Second remark ', 3, None, '___sec17'),
-              (' More examples on classes ',
+              ('First remark', 3, None, '___sec16'),
+              ('Second remark', 3, None, '___sec17'),
+              ('Closures', 2, 'sec:class:closure', 'sec:class:closure'),
+              ('More examples on classes',
                1,
                'sec:class:addex',
                'sec:class:addex'),
-              (' Bank accounts ',
-               2,
-               'sec:class:account',
-               'sec:class:account'),
-              (' Phone book ',
-               2,
-               'sec:class:phonebook',
-               'sec:class:phonebook'),
-              (' A circle ', 2, 'sec:class:circle', 'sec:class:circle'),
-              (' Verification ', 3, None, '___sec22'),
-              (' Remark ', 3, None, '___sec23'),
-              (' Special methods ',
+              ('Bank accounts', 2, 'sec:class:account', 'sec:class:account'),
+              ('Phone book', 2, 'sec:class:phonebook', 'sec:class:phonebook'),
+              ('A circle', 2, 'sec:class:circle', 'sec:class:circle'),
+              ('Verification', 3, None, '___sec23'),
+              ('Remark', 3, None, '___sec24'),
+              ('Special methods',
                1,
                'sec:class:specialmethods',
                'sec:class:specialmethods'),
-              (' The call special method ',
+              ('The call special method',
                2,
                'sec:class:call',
                'sec:class:call'),
-              (' Example: Automagic differentiation ',
+              ('Example: Automagic differentiation',
                2,
                'sec:class:autodF',
                'sec:class:autodF'),
-              (' Problem ', 3, None, '___sec27'),
-              (' Solution ', 3, None, '___sec28'),
-              (' Verification ', 3, None, '___sec29'),
-              (" Application: Newton's method ", 3, None, '___sec30'),
-              (' Example: Automagic integration ',
+              ('Problem', 3, None, '___sec28'),
+              ('Solution', 3, None, '___sec29'),
+              ('Verification', 3, None, '___sec30'),
+              ("Application: Newton's method", 3, None, '___sec31'),
+              ('Solution utilizing SymPy', 3, None, '___sec32'),
+              ('Example: Automagic integration',
                2,
                'sec:class:autoint',
                'sec:class:autoint'),
-              (' A simple implementation ', 3, None, '___sec32'),
-              (' Verification via symbolic computing ', 3, None, '___sec33'),
-              (' Remark ', 3, None, '___sec34'),
-              (' Turning an instance into a string ',
+              ('A simple implementation', 3, None, '___sec34'),
+              ('Verification via symbolic computing', 3, None, '___sec35'),
+              ('Remark', 3, None, '___sec36'),
+              ('Turning an instance into a string',
                2,
                'sec:class:str',
                'sec:class:str'),
-              (' Example: Phone book with special methods ',
+              ('Example: Phone book with special methods',
                2,
                'sec:class:phonebook2',
                'sec:class:phonebook2'),
-              (' Remark ', 3, None, '___sec37'),
-              (' Adding objects ', 2, 'sec:class:add', 'sec:class:add'),
-              (' Example: Class for polynomials ',
+              ('Remark', 3, None, '___sec39'),
+              ('Adding objects', 2, 'sec:class:add', 'sec:class:add'),
+              ('Example: Class for polynomials',
                2,
                'sec:class:Polynomial',
                'sec:class:Polynomial'),
-              (' Implementation ', 3, None, '___sec40'),
-              (' Usage ', 3, None, '___sec41'),
-              (' Pretty print of polynomials ', 3, None, '___sec42'),
-              (' Verifying the implementation ', 3, None, '___sec43'),
-              (' Arithmetic operations and other special methods ',
+              ('Implementation', 3, None, '___sec42'),
+              ('Usage', 3, None, '___sec43'),
+              ('Pretty print of polynomials', 3, None, '___sec44'),
+              ('Verifying the implementation', 3, None, '___sec45'),
+              ('Arithmetic operations and other special methods',
                2,
                'sec:class:arithmetics',
                'sec:class:arithmetics'),
-              (' Special methods for string conversion ',
+              ('Special methods for string conversion',
                2,
                'sec:class:repr',
                'sec:class:repr'),
-              (' Recreating objects from strings ', 3, None, '___sec46'),
-              (' Example: Class for vectors in the plane ',
+              ('Recreating objects from strings', 3, None, '___sec48'),
+              ('Example: Class for vectors in the plane',
                1,
                'sec:class:Vec2D',
                'sec:class:Vec2D'),
-              (' Some mathematical operations on vectors ',
+              ('Some mathematical operations on vectors',
                2,
                None,
-               '___sec48'),
-              (' Implementation ', 2, None, '___sec49'),
-              (' Usage ', 2, None, '___sec50'),
-              (' Comment ', 3, None, '___sec51'),
-              (' Example: Class for complex numbers ', 1, None, '___sec52'),
-              (' Implementation ',
-               2,
-               'sec:class:Complex',
-               'sec:class:Complex'),
-              (' Illegal operations ',
+               '___sec50'),
+              ('Implementation', 2, None, '___sec51'),
+              ('Usage', 2, None, '___sec52'),
+              ('Comment', 3, None, '___sec53'),
+              ('Example: Class for complex numbers', 1, None, '___sec54'),
+              ('Implementation', 2, 'sec:class:Complex', 'sec:class:Complex'),
+              ('Illegal operations',
                2,
                'sec:class:illegalop',
                'sec:class:illegalop'),
-              (' Mixing complex and real numbers ',
+              ('Mixing complex and real numbers',
                2,
                'sec:class:complex:mixed',
                'sec:class:complex:mixed'),
-              (' Dynamic, static, strong, weak, and duck typing ',
+              ('Dynamic, static, strong, weak, and duck typing',
                2,
                None,
-               '___sec56'),
-              (" Special methods for ``right'' operands ",
+               '___sec58'),
+              ("Special methods for ``right'' operands",
                2,
                'sec:class:complex:rightop',
                'sec:class:complex:rightop'),
-              (' Remark ', 3, None, '___sec58'),
-              (' Inspecting instances ',
+              ('Remark', 3, None, '___sec60'),
+              ('Inspecting instances',
                2,
                'sec:class:inspect',
                'sec:class:inspect'),
-              (' Static methods and attributes ',
+              ('Static methods and attributes',
                1,
                'sec:class:static',
                'sec:class:static'),
-              (' Summary ', 1, None, '___sec61'),
-              (' Chapter topics ',
+              ('Summary', 1, None, '___sec63'),
+              ('Chapter topics', 2, 'sec:class:summary', 'sec:class:summary'),
+              ('Classes', 3, None, '___sec65'),
+              ('Special methods', 3, None, '___sec66'),
+              ('Terminology', 3, None, '___sec67'),
+              ('Example: interval arithmetic',
                2,
-               'sec:class:summary',
-               'sec:class:summary'),
-              (' Classes ', 3, None, '___sec63'),
-              (' Special methods ', 3, None, '___sec64'),
-              (' Terminology ', 3, None, '___sec65'),
-              (' Example: interval arithmetic ', 2, None, '___sec66'),
-              (' Problem ', 3, None, '___sec67'),
-              (' Solution ', 3, None, '___sec68'),
-              (' Exercises ', 1, None, '___sec69'),
-              (' Exercise 1: Make a function class ',
+               'sec:class:interval:arithmetic',
+               'sec:class:interval:arithmetic'),
+              ('Problem', 3, None, '___sec69'),
+              ('Solution', 3, None, '___sec70'),
+              ('Exercises', 1, None, '___sec71'),
+              ('Exercise 1: Make a function class',
                2,
                'sec:class:ex2',
                'sec:class:ex2'),
-              (' Exercise 2: Add an attribute to a class ',
+              ('Exercise 2: Add a data attribute to a class',
                2,
                'sec:class:ex25q',
                'sec:class:ex25q'),
-              (' Exercise 3: Add functionality to a class ',
+              ('Exercise 3: Add functionality to a class',
                2,
                'sec:class:ex25q2',
                'sec:class:ex25q2'),
-              (' Exercise 4: Make classes for a rectangle and a triangle ',
+              ('Remarks', 3, None, '___sec75'),
+              ('Exercise 4: Make classes for a rectangle and a triangle',
                2,
                'sec:class:ex23',
                'sec:class:ex23'),
-              (' Exercise 5: Make a class for quadratic functions ',
+              ('Exercise 5: Make a class for quadratic functions',
                2,
                'sec:class:ex11',
                'sec:class:ex11'),
-              (' Exercise 6: Make a class for straight lines ',
+              ('Exercise 6: Make a class for straight lines',
                2,
                'sec:class:ex25',
                'sec:class:ex25'),
-              (' Exercise 7: Flexible handling of function arguments ',
+              ('Exercise 7: Flexible handling of function arguments',
                2,
                'sec:class:ex25b',
                'sec:class:ex25b'),
-              (' Exercise 8: Wrap functions in a class ',
+              ('Exercise 8: Wrap functions in a class',
                2,
                'sec:class:ex27d',
                'sec:class:ex27d'),
-              (' Exercise 9: Flexible handling of function arguments ',
+              ('Exercise 9: Flexible handling of function arguments',
                2,
                'sec:class:ex27e',
                'sec:class:ex27e'),
-              (' Exercise 10: Deduce a class implementation ',
+              ('Exercise 10: Deduce a class implementation',
                2,
                'sec:class:ex1',
                'sec:class:ex1'),
-              (' Exercise 11: Implement special methods in a class ',
+              ('Exercise 11: Implement special methods in a class',
                2,
                'sec:class:ex2b2',
                'sec:class:ex2b2'),
-              (' Exercise 12: Make a class for summation of series ',
+              ('Exercise 12: Make a class for summation of series',
                2,
                'sec:class:ex2b',
                'sec:class:ex2b'),
-              (' Exercise 13: Apply a numerical differentiation class ',
+              ('Exercise 13: Apply a numerical differentiation class',
                2,
                'sec:class:ex10',
                'sec:class:ex10'),
-              (' Exercise 14: Apply symbolic differentiation ',
+              ('Exercise 14: Implement an addition operator',
                2,
-               'sec:class:exer:sympy:diff',
-               'sec:class:exer:sympy:diff'),
-              (' Exercise 15: Implement in-place `+=` and `-=` operators ',
+               'sec:class:ex:tribesman',
+               'sec:class:ex:tribesman'),
+              ('Exercise 15: Implement in-place `+=` and `-=` operators',
                2,
                'sec:class:ex25qb',
                'sec:class:ex25qb'),
-              (' Exercise 16: Implement a class for numerical differentiation ',
+              ('Exercise 16: Implement a class for numerical differentiation',
                2,
                'sec:class:ex21',
                'sec:class:ex21'),
-              (' Exercise 17: Examine a program ',
+              ('Exercise 17: Examine a program',
                2,
                'sec:class:ex21b',
                'sec:class:ex21b'),
-              (' Exercise 18: Modify a class for numerical differentiation ',
+              ('Exercise 18: Modify a class for numerical differentiation',
                2,
                'sec:class:ex23s',
                'sec:class:ex23s'),
-              (' Exercise 19: Make a class for the Heaviside function ',
+              ('Exercise 19: Make a class for the Heaviside function',
                2,
                'sec:basic:exHclass',
                'sec:basic:exHclass'),
-              (' Exercise 20: Make a class for the indicator function ',
+              ('Exercise 20: Make a class for the indicator function',
                2,
                'sec:basic:exIndclass',
                'sec:basic:exIndclass'),
-              (' Exercise 21: Make a class for piecewise constant functions ',
+              ('Exercise 21: Make a class for piecewise constant functions',
                2,
                'sec:basic:ex:piecewisefunc',
                'sec:basic:ex:piecewisefunc'),
-              (' Exercise 22: Speed up repeated integral calculations ',
+              ('Exercise 22: Speed up repeated integral calculations',
                2,
                'sec:class:ex13c',
                'sec:class:ex13c'),
-              (' Exercise 23: Apply a class for polynomials ',
+              ('Exercise 23: Apply a class for polynomials',
                2,
                'sec:class:ex5',
                'sec:class:ex5'),
-              (' Exercise 24: Find a bug in a class for polynomials ',
+              ('Exercise 24: Find a bug in a class for polynomials',
                2,
                'sec:class:ex4',
                'sec:class:ex4'),
-              (' Exercise 25: Implement subtraction of polynomials ',
+              ('Exercise 25: Implement subtraction of polynomials',
                2,
                'sec:class:ex6a',
                'sec:class:ex6a'),
-              (' Exercise 26: Test the functionality of pretty print of polynomials ',
+              ('Exercise 26: Test the functionality of pretty print of polynomials',
                2,
                'sec:class:exer:str',
                'sec:class:exer:str'),
-              (' Exercise 27: Vectorize a class for polynomials ',
+              ('Exercise 27: Vectorize a class for polynomials',
                2,
                'sec:class:ex7v',
                'sec:class:ex7v'),
-              (' Remarks ', 3, None, '___sec97'),
-              (' Exercise 28: Use a dict to hold polynomial coefficients ',
+              ('Remarks', 3, None, '___sec100'),
+              ('Exercise 28: Use a dict to hold polynomial coefficients',
                2,
                'sec:class:ex8',
                'sec:class:ex8'),
-              (' Exercise 29: Extend class Vec2D to work with lists/tuples ',
+              ('Exercise 29: Extend class Vec2D to work with lists/tuples',
                2,
                'sec:class:ex16',
                'sec:class:ex16'),
-              (' Exercise 30: Extend class Vec2D to 3D vectors ',
+              ('Exercise 30: Extend class Vec2D to 3D vectors',
                2,
                'sec:class:ex17b',
                'sec:class:ex17b'),
-              (' Exercise 31: Use NumPy arrays in class Vec2D ',
+              ('Exercise 31: Use NumPy arrays in class Vec2D',
                2,
                'sec:class:ex17',
                'sec:class:ex17'),
-              (' Exercise 32: Make classes for students and courses ',
+              ('Exercise 32: Impreciseness of interval arithmetics',
+               2,
+               None,
+               '___sec105'),
+              ('Remarks', 3, None, '___sec106'),
+              ('Exercise 33: Make classes for students and courses',
                2,
                'sec:class:ex15',
                'sec:class:ex15'),
-              (' Exercise 33: Find local and global extrema of a function ',
+              ('Exercise 34: Find local and global extrema of a function',
                2,
                'sec:plot:ex28',
                'sec:plot:ex28'),
-              (' Exercise 34: Find the optimal production for a company ',
+              ('Exercise 35: Find the optimal production for a company',
                2,
                'sec:class:ex18a',
                'sec:class:ex18a'),
-              (' References ', 1, None, '___sec105')]}
+              ('References', 1, None, '___sec110')]}
 end of tocinfo -->
 
 <body>
@@ -357,20 +381,124 @@ $$
     </button>
     <a class="navbar-brand" href="class-bootstrap.html">Introduction to classes in Python</a>
   </div>
+
   <div class="navbar-collapse collapse navbar-responsive-collapse">
     <ul class="nav navbar-nav navbar-right">
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
         <ul class="dropdown-menu">
-     <!-- navigation toc: --> <li><a href="._class-bootstrap001.html#sec:class:functors" style="font-size: 80%;">Simple function classes</a></li>
-     <!-- navigation toc: --> <li><a href="._class-bootstrap002.html#sec:class:addex" style="font-size: 80%;">More examples on classes</a></li>
-     <!-- navigation toc: --> <li><a href="._class-bootstrap003.html#sec:class:specialmethods" style="font-size: 80%;">Special methods</a></li>
-     <!-- navigation toc: --> <li><a href="._class-bootstrap004.html#sec:class:Vec2D" style="font-size: 80%;">Example: Class for vectors in the plane</a></li>
-     <!-- navigation toc: --> <li><a href="._class-bootstrap005.html#___sec52" style="font-size: 80%;">Example: Class for complex numbers</a></li>
-     <!-- navigation toc: --> <li><a href="._class-bootstrap006.html#sec:class:static" style="font-size: 80%;">Static methods and attributes</a></li>
-     <!-- navigation toc: --> <li><a href="._class-bootstrap007.html#___sec61" style="font-size: 80%;">Summary</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec69" style="font-size: 80%;">Exercises</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec105" style="font-size: 80%;">References</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap000.html#table_of_contents" style="font-size: 80%;"><b>Table of contents</b></a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap001.html#sec:class:functors" style="font-size: 80%;"><b>Simple function classes</b></a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap001.html#sec:class:func1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Challenge: functions with parameters</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap001.html#___sec2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap001.html#___sec3" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A bad solution: global variables</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap001.html#sec:class:func2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Representing a function as a class</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap001.html#___sec5" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Implementation</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap001.html#___sec6" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Usage and dissection</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap001.html#___sec7" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Extension of the class</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap001.html#___sec8" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Using methods as ordinary functions</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap001.html#___sec9" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New-style classes versus classic classes</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap001.html#___sec10" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Doc strings</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap001.html#___sec11" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The self variable</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap001.html#sec:class:func3" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Another function class example</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap001.html#___sec13" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remark</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap001.html#sec:class:func2b" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Alternative function class implementations</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap001.html#sec:class:whatis" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Making classes without the class construct</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap001.html#___sec16" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;First remark</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap001.html#___sec17" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Second remark</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap001.html#sec:class:closure" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Closures</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap002.html#sec:class:addex" style="font-size: 80%;"><b>More examples on classes</b></a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap002.html#sec:class:account" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Bank accounts</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap002.html#sec:class:phonebook" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Phone book</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap002.html#sec:class:circle" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;A circle</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap002.html#___sec23" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Verification</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap002.html#___sec24" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remark</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap003.html#sec:class:specialmethods" style="font-size: 80%;"><b>Special methods</b></a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap003.html#sec:class:call" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The call special method</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap003.html#sec:class:autodF" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Automagic differentiation</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap003.html#___sec28" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap003.html#___sec29" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Solution</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap003.html#___sec30" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Verification</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap003.html#___sec31" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Application: Newton's method</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap003.html#___sec32" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Solution utilizing SymPy</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap003.html#sec:class:autoint" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Automagic integration</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap003.html#___sec34" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A simple implementation</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap003.html#___sec35" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Verification via symbolic computing</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap003.html#___sec36" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remark</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap003.html#sec:class:str" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Turning an instance into a string</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap003.html#sec:class:phonebook2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Phone book with special methods</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap003.html#___sec39" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remark</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap003.html#sec:class:add" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Adding objects</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap003.html#sec:class:Polynomial" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Class for polynomials</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap003.html#___sec42" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Implementation</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap003.html#___sec43" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Usage</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap003.html#___sec44" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pretty print of polynomials</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap003.html#___sec45" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Verifying the implementation</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap003.html#sec:class:arithmetics" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Arithmetic operations and other special methods</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap003.html#sec:class:repr" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Special methods for string conversion</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap003.html#___sec48" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Recreating objects from strings</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap004.html#sec:class:Vec2D" style="font-size: 80%;"><b>Example: Class for vectors in the plane</b></a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap004.html#___sec50" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Some mathematical operations on vectors</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap004.html#___sec51" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Implementation</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap004.html#___sec52" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Usage</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap004.html#___sec53" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Comment</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap005.html#___sec54" style="font-size: 80%;"><b>Example: Class for complex numbers</b></a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap005.html#sec:class:Complex" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Implementation</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap005.html#sec:class:illegalop" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Illegal operations</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap005.html#sec:class:complex:mixed" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Mixing complex and real numbers</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap005.html#___sec58" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Dynamic, static, strong, weak, and duck typing</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap005.html#sec:class:complex:rightop" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Special methods for ``right'' operands</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap005.html#___sec60" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remark</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap005.html#sec:class:inspect" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Inspecting instances</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap006.html#sec:class:static" style="font-size: 80%;"><b>Static methods and attributes</b></a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap007.html#___sec63" style="font-size: 80%;"><b>Summary</b></a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap007.html#sec:class:summary" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Chapter topics</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap007.html#___sec65" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Classes</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap007.html#___sec66" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Special methods</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap007.html#___sec67" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Terminology</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap007.html#sec:class:interval:arithmetic" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: interval arithmetic</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap007.html#___sec69" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap007.html#___sec70" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Solution</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec71" style="font-size: 80%;"><b>Exercises</b></a></li>
+     <!-- navigation toc: --> <li><a href="#sec:class:ex2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 1: Make a function class</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:class:ex25q" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 2: Add a data attribute to a class</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:class:ex25q2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 3: Add functionality to a class</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec75" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remarks</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:class:ex23" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 4: Make classes for a rectangle and a triangle</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:class:ex11" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 5: Make a class for quadratic functions</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:class:ex25" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 6: Make a class for straight lines</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:class:ex25b" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 7: Flexible handling of function arguments</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:class:ex27d" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 8: Wrap functions in a class</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:class:ex27e" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 9: Flexible handling of function arguments</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:class:ex1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 10: Deduce a class implementation</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:class:ex2b2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 11: Implement special methods in a class</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:class:ex2b" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 12: Make a class for summation of series</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:class:ex10" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 13: Apply a numerical differentiation class</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:class:ex:tribesman" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 14: Implement an addition operator</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:class:ex25qb" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 15: Implement in-place <code>+=</code> and <code>-=</code> operators</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:class:ex21" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 16: Implement a class for numerical differentiation</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:class:ex21b" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 17: Examine a program</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:class:ex23s" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 18: Modify a class for numerical differentiation</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:basic:exHclass" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 19: Make a class for the Heaviside function</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:basic:exIndclass" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 20: Make a class for the indicator function</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:basic:ex:piecewisefunc" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 21: Make a class for piecewise constant functions</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:class:ex13c" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 22: Speed up repeated integral calculations</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:class:ex5" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 23: Apply a class for polynomials</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:class:ex4" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 24: Find a bug in a class for polynomials</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:class:ex6a" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 25: Implement subtraction of polynomials</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:class:exer:str" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 26: Test the functionality of pretty print of polynomials</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:class:ex7v" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 27: Vectorize a class for polynomials</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec100" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remarks</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:class:ex8" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 28: Use a dict to hold polynomial coefficients</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:class:ex16" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 29: Extend class Vec2D to work with lists/tuples</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:class:ex17b" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 30: Extend class Vec2D to 3D vectors</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:class:ex17" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 31: Use NumPy arrays in class Vec2D</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec105" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 32: Impreciseness of interval arithmetics</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec106" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remarks</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:class:ex15" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 33: Make classes for students and courses</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:plot:ex28" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 34: Find local and global extrema of a function</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:class:ex18a" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 35: Find the optimal production for a company</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec110" style="font-size: 80%;"><b>References</b></a></li>
 
         </ul>
       </li>
@@ -385,13 +513,14 @@ $$
 
 <a name="part0008"></a>
 <!-- !split -->
+<p style="font-size:80%">This chapter is taken from the book <a href="http://www.springer.com/gp/book/9783662498866">A Primer on Scientific Programming with Python</a> by H. P. Langtangen, 5th edition, Springer, 2016.</p>
 
-<h1 id="___sec69">Exercises <a name="___sec69"></a></h1>
+<h1 id="___sec71" class="anchor">Exercises </h1>
 
 <p>
 <!-- --- begin exercise --- -->
 
-<h2 id="sec:class:ex2">Exercise 1: Make a function class<a name="sec:class:ex2"></a></h2>
+<h2 id="sec:class:ex2" class="anchor">Exercise 1: Make a function class</h2>
 
 <p>
 Make a class <code>F</code> that implements the function
@@ -400,14 +529,14 @@ $$
 \begin{equation*} f(x; a, w)=e^{-ax}\sin(wx) \thinspace . \end{equation*}
 $$
 
-A <code>value(x)</code> method computes values of \( f \), while \( a \) and \( w \) are class
+A <code>value(x)</code> method computes values of \( f \), while \( a \) and \( w \) are data
 attributes.
 Test the class in an interactive session:
 
 <p>
 
 <!-- code=python (!bc pyshell) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">F</span> <span style="color: #008000; font-weight: bold">import</span> F
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">F</span> <span style="color: #008000; font-weight: bold">import</span> F
 <span style="color: #666666">&gt;&gt;&gt;</span> f <span style="color: #666666">=</span> F(a<span style="color: #666666">=1.0</span>, w<span style="color: #666666">=0.1</span>)
 <span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">math</span> <span style="color: #008000; font-weight: bold">import</span> pi
 <span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">print</span> f<span style="color: #666666">.</span>value(x<span style="color: #666666">=</span>pi)
@@ -417,7 +546,7 @@ Test the class in an interactive session:
 <span style="color: #666666">0.00057707154012</span>
 </pre></div>
 <p>
-Filename: <code>F.py</code>.
+Filename: <code>F</code>.
 
 <p>
 <!-- --- end exercise --- -->
@@ -425,16 +554,16 @@ Filename: <code>F.py</code>.
 <p>
 <!-- --- begin exercise --- -->
 
-<h2 id="sec:class:ex25q">Exercise 2: Add an attribute to a class<a name="sec:class:ex25q"></a></h2>
+<h2 id="sec:class:ex25q" class="anchor">Exercise 2: Add a data attribute to a class</h2>
 
 <p>
-Add an attribute <code>transactions</code> to the <code>Account</code> class from
+Add a data attribute <code>transactions</code> to the <code>Account</code> class from
 the section <a href="._class-bootstrap002.html#sec:class:account">Bank accounts</a>. The new attribute counts the number
 of transactions done in the <code>deposit</code> and <code>withdraw</code> methods.
 Print the total number of transactions in the <code>dump</code>
 method. Write a test function <code>test_Account()</code> for testing that the
 implementation of the extended class <code>Account</code> is correct.
-Filename: <code>Account2.py</code>.
+Filename: <code>Account2</code>.
 
 <p>
 <!-- --- end exercise --- -->
@@ -442,27 +571,56 @@ Filename: <code>Account2.py</code>.
 <p>
 <!-- --- begin exercise --- -->
 
-<h2 id="sec:class:ex25q2">Exercise 3: Add functionality to a class<a name="sec:class:ex25q2"></a></h2>
+<h2 id="sec:class:ex25q2" class="anchor">Exercise 3: Add functionality to a class</h2>
 
 <p>
-In class <code>Account</code> from the section <a href="._class-bootstrap002.html#sec:class:account">Bank accounts</a>, introduce a
-list <code>transactions</code>, where each element holds a dictionary with the
-amount of a transaction and the point of time the transaction took
-place. Remove the <code>balance</code> attribute and use instead the
-<code>transactions</code> list to compute the balance in <code>get_balance</code>.  Print
-out a nicely formatted table of all transactions, their amounts, and
-their time in a method <code>print_transactions</code>.
+In class <code>AccountP</code> from the section <a href="._class-bootstrap002.html#sec:class:account">Bank accounts</a>,
+introduce a list <code>self._transactions</code>, where each element holds a dictionary
+with the amount of a transaction and the point of time the transaction
+took place. Remove the <code>_balance</code> attribute and use instead the
+<code>_transactions</code> list to compute the balance in the method
+<code>get_balance</code>.  Print out a nicely formatted table of all
+transactions, their amounts, and their time in a method
+<code>print_transactions</code>.
 
 <p>
 <!-- --- begin hint in exercise --- -->
 
 <p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_3_1" style="font-size: 80%;"></a>
 <b>Hint.</b>
-Use the <code>time</code> module to get the date and local time.
+<div class="collapse-group">
+<p><div class="collapse" id="exer_3_1">
+
+<p>
+Use the <code>time</code> or <code>datetime</code> module to get the date and local time.
+
+<p>
+</div></p>
+</div>
+</p>
 
 <p>
 <!-- --- end hint in exercise --- -->
-Filename: <code>Account3.py</code>.
+Filename: <code>Account3</code>.
+
+<p>
+<!-- Closing remarks for this Exercise -->
+
+<h3 id="___sec75" class="anchor">Remarks </h3>
+
+<p>
+Observe that the computation of the balance is implemented
+in a different way in the present version of class
+<code>AccountP</code> compared
+to the version in the section <a href="._class-bootstrap002.html#sec:class:account">Bank accounts</a>, but the usage
+of the class, especially the <code>get_balance</code> method,
+remains the same. This is one of the great advantages
+of class programming: users are supposed to use the methods only, and
+the implementation of data structures and computational techniques
+inside methods can be changed without affecting existing
+programs that just call the methods.
 
 <p>
 <!-- --- end exercise --- -->
@@ -470,7 +628,7 @@ Filename: <code>Account3.py</code>.
 <p>
 <!-- --- begin exercise --- -->
 
-<h2 id="sec:class:ex23">Exercise 4: Make classes for a rectangle and a triangle<a name="sec:class:ex23"></a></h2>
+<h2 id="sec:class:ex23" class="anchor">Exercise 4: Make classes for a rectangle and a triangle</h2>
 
 <p>
 The purpose of this exercise is to create classes like
@@ -479,13 +637,13 @@ representing other geometric figures: a rectangle with width
 \( W \), height \( H \), and lower left corner \( (x_0, y_0) \); and
 a general triangle specified by its
 three vertices \( (x_0,y_0) \), \( (x_1,y_1) \), and
-\( (x_2,y_2) \) as explained in ref{sec:basic:ex25}.
+\( (x_2,y_2) \).
 Provide three methods: <code>__init__</code> (to initialize the geometric data),
 <code>area</code>, and <code>perimeter</code>. Write test functions <code>test_Rectangle()</code>
 and <code>test_Triangle()</code> for
 checking that the results produced by <code>area</code> and <code>perimeter</code>
 coincide with exact values within a small tolerance.
-Filename: <code>geometric_shapes.py</code>.
+Filename: <code>geometric_shapes</code>.
 
 <p>
 <!-- --- end exercise --- -->
@@ -493,15 +651,16 @@ Filename: <code>geometric_shapes.py</code>.
 <p>
 <!-- --- begin exercise --- -->
 
-<h2 id="sec:class:ex11">Exercise 5: Make a class for quadratic functions<a name="sec:class:ex11"></a></h2>
+<h2 id="sec:class:ex11" class="anchor">Exercise 5: Make a class for quadratic functions</h2>
 
 <p>
 Consider a quadratic function \( f(x;a,b,c)=ax^2 + bx + c \).
 Make a class <code>Quadratic</code>
-for representing \( f \), where \( a \), \( b \), and \( c \) are attributes, and
+for representing \( f \), where \( a \), \( b \), and \( c \) are data attributes, and
 the methods are
 
 <ul>
+  <li> <code>__init__</code> for storing the attributes \( a \), \( b \), and \( c \),</li>
   <li> <code>value</code> for computing a value of \( f \) at a point \( x \),</li>
   <li> <code>table</code> for writing out a table of \( x \) and \( f \) values for \( n \) $x$ values in the interval \( [L,R] \),</li>
   <li> <code>roots</code> for computing the two roots.</li>
@@ -510,7 +669,9 @@ the methods are
 The file with class <code>Quadratic</code> and corresponding demonstrations and/or
 tests should be organized as a module such that other programs can
 do a <code>from Quadratic import Quadratic</code> to use the class.
-Filename: <code>Quadratic.py</code>.
+Also equip the file with a test function for verifying the implementation
+of <code>value</code> and <code>roots</code>.
+Filename: <code>Quadratic</code>.
 
 <p>
 <!-- --- end exercise --- -->
@@ -518,14 +679,13 @@ Filename: <code>Quadratic.py</code>.
 <p>
 <!-- --- begin exercise --- -->
 
-<h2 id="sec:class:ex25">Exercise 6: Make a class for straight lines<a name="sec:class:ex25"></a></h2>
+<h2 id="sec:class:ex25" class="anchor">Exercise 6: Make a class for straight lines</h2>
 
 <p>
 Make a class <code>Line</code> whose constructor takes two points
 <code>p1</code> and <code>p2</code> (2-tuples or 2-lists) as input.
 The line goes through these two
-points (see function <code>line</code> in the section ref{sec:basic:docstring} for
-the relevant formula of the line).
+points.
 A <code>value(x)</code> method computes a value on the line
 at the point <code>x</code>. Also make
 a function <code>test_Line()</code> for verifying the implementation.
@@ -534,14 +694,14 @@ Here is a demo in an interactive session:
 <p>
 
 <!-- code=python (!bc pyshell) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">Line</span> <span style="color: #008000; font-weight: bold">import</span> Line, test_Line
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">Line</span> <span style="color: #008000; font-weight: bold">import</span> Line, test_Line
 <span style="color: #666666">&gt;&gt;&gt;</span> line <span style="color: #666666">=</span> Line((<span style="color: #666666">0</span>,<span style="color: #666666">-1</span>), (<span style="color: #666666">2</span>,<span style="color: #666666">4</span>))
 <span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">print</span> line<span style="color: #666666">.</span>value(<span style="color: #666666">0.5</span>), line<span style="color: #666666">.</span>value(<span style="color: #666666">0</span>), line<span style="color: #666666">.</span>value(<span style="color: #666666">1</span>)
 <span style="color: #666666">0.25</span> <span style="color: #666666">-1.0</span> <span style="color: #666666">1.5</span>
 <span style="color: #666666">&gt;&gt;&gt;</span> test_Line()
 </pre></div>
 <p>
-Filename: <code>Line.py</code>.
+Filename: <code>Line</code>.
 
 <p>
 <!-- --- end exercise --- -->
@@ -549,7 +709,7 @@ Filename: <code>Line.py</code>.
 <p>
 <!-- --- begin exercise --- -->
 
-<h2 id="sec:class:ex25b">Exercise 7: Flexible handling of function arguments<a name="sec:class:ex25b"></a></h2>
+<h2 id="sec:class:ex25b" class="anchor">Exercise 7: Flexible handling of function arguments</h2>
 
 <p>
 The constructor in class <code>Line</code> in <a href="#sec:class:ex25">Exercise 6: Make a class for straight lines</a> takes
@@ -563,7 +723,13 @@ increased flexibility does work.
 <!-- --- begin hint in exercise --- -->
 
 <p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_7_1" style="font-size: 80%;"></a>
 <b>Hint.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_7_1">
+
+<p>
 Let the constructor take two arguments <code>p1</code> and <code>p2</code>
 as before, and test with
 <code>isinstance</code> whether the
@@ -573,15 +739,20 @@ what kind of data the user supplies:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">if</span> <span style="color: #008000">isinstance</span>(p1, (<span style="color: #008000">tuple</span>,<span style="color: #008000">list</span>)) <span style="color: #AA22FF; font-weight: bold">and</span> <span style="color: #008000">isinstance</span>(p2, (<span style="color: #008000">float</span>,<span style="color: #008000">int</span>)):
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">if</span> <span style="color: #008000">isinstance</span>(p1, (<span style="color: #008000">tuple</span>,<span style="color: #008000">list</span>)) <span style="color: #AA22FF; font-weight: bold">and</span> <span style="color: #008000">isinstance</span>(p2, (<span style="color: #008000">float</span>,<span style="color: #008000">int</span>)):
     <span style="color: #408080; font-style: italic"># p1 is a point and p2 is slope</span>
     <span style="color: #008000">self</span><span style="color: #666666">.</span>a <span style="color: #666666">=</span> p2
     <span style="color: #008000">self</span><span style="color: #666666">.</span>b <span style="color: #666666">=</span> p1[<span style="color: #666666">1</span>] <span style="color: #666666">-</span> p2<span style="color: #666666">*</span>p1[<span style="color: #666666">0</span>]
 <span style="color: #008000; font-weight: bold">elif</span> <span style="color: #666666">...</span>
 </pre></div>
 <p>
+</div></p>
+</div>
+</p>
+
+<p>
 <!-- --- end hint in exercise --- -->
-Filename: <code>Line2.py</code>.
+Filename: <code>Line2</code>.
 
 <p>
 <!-- --- end exercise --- -->
@@ -589,18 +760,21 @@ Filename: <code>Line2.py</code>.
 <p>
 <!-- --- begin exercise --- -->
 
-<h2 id="sec:class:ex27d">Exercise 8: Wrap functions in a class<a name="sec:class:ex27d"></a></h2>
+<h2 id="sec:class:ex27d" class="anchor">Exercise 8: Wrap functions in a class</h2>
 
 <p>
 The purpose of this exercise is to make a class interface to an
 already existing set of functions implementing Lagrange's
-interpolation method from ref{sec:class:ex27a}.  We want to
+interpolation method from
+the exercise named ``Implement Lagrange's interpolation formula'' in the document <a href="http://hplgit.github.io/primer.html/doc/pub/plot" target="_self">Arrays and plotting</a>
+<a href="#Langtangen_TCSE6_plot">[4]</a>.
+We want to
 construct a class <code>LagrangeInterpolation</code> with a typical usage like:
 
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
 <span style="color: #408080; font-style: italic"># Compute some interpolation points along y=sin(x)</span>
 xp <span style="color: #666666">=</span> np<span style="color: #666666">.</span>linspace(<span style="color: #666666">0</span>, np<span style="color: #666666">.</span>pi, <span style="color: #666666">5</span>)
 yp <span style="color: #666666">=</span> np<span style="color: #666666">.</span>sin(xp)
@@ -622,7 +796,13 @@ the implementation.
 <!-- --- begin hint in exercise --- -->
 
 <p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_8_1" style="font-size: 80%;"></a>
 <b>Hint.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_8_1">
+
+<p>
 The class does not need much code as it can call
 the functions <code>p_L</code> from
 ref{sec:class:ex27a} and
@@ -630,8 +810,13 @@ ref{sec:class:ex27a} and
 the <code>Lagrange_poly2</code> module made in the latter exercise.
 
 <p>
+</div></p>
+</div>
+</p>
+
+<p>
 <!-- --- end hint in exercise --- -->
-Filename: <code>Lagrange_poly3.py</code>.
+Filename: <code>Lagrange_poly3</code>.
 
 <p>
 <!-- --- end exercise --- -->
@@ -639,7 +824,7 @@ Filename: <code>Lagrange_poly3.py</code>.
 <p>
 <!-- --- begin exercise --- -->
 
-<h2 id="sec:class:ex27e">Exercise 9: Flexible handling of function arguments<a name="sec:class:ex27e"></a></h2>
+<h2 id="sec:class:ex27e" class="anchor">Exercise 9: Flexible handling of function arguments</h2>
 
 <p>
 Instead of manually computing the interpolation points,
@@ -653,7 +838,7 @@ this code:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">import</span> exp, sin, pi
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">import</span> exp, sin, pi
 
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">myfunction</span>(x):
     <span style="color: #008000; font-weight: bold">return</span> exp(<span style="color: #666666">-</span>x<span style="color: #666666">/2.0</span>)<span style="color: #666666">*</span>sin(x)
@@ -672,7 +857,13 @@ these points. Note that the previous types of calls,
 <!-- --- begin hint in exercise --- -->
 
 <p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_9_1" style="font-size: 80%;"></a>
 <b>Hint.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_9_1">
+
+<p>
 The constructor in class <code>LagrangeInterpolation</code> must now
 accept two different sets of arguments: <code>xp, yp</code> vs. <code>f, x, n</code>.
 You can use the <code>isinstance(a, t)</code> function to test if object <code>a</code> is
@@ -687,8 +878,13 @@ and <code>arg3</code> is an integer, set
 <code>f=arg1</code>, <code>x=arg2</code>, and <code>n=arg3</code>.
 
 <p>
+</div></p>
+</div>
+</p>
+
+<p>
 <!-- --- end hint in exercise --- -->
-Filename: <code>Lagrange_poly4.py</code>.
+Filename: <code>Lagrange_poly4</code>.
 
 <p>
 <!-- --- end exercise --- -->
@@ -696,7 +892,7 @@ Filename: <code>Lagrange_poly4.py</code>.
 <p>
 <!-- --- begin exercise --- -->
 
-<h2 id="sec:class:ex1">Exercise 10: Deduce a class implementation<a name="sec:class:ex1"></a></h2>
+<h2 id="sec:class:ex1" class="anchor">Exercise 10: Deduce a class implementation</h2>
 
 <p>
 Write a class <code>Hello</code> that behaves as illustrated in the following
@@ -705,14 +901,14 @@ session:
 <p>
 
 <!-- code=python (!bc pyshell) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> a <span style="color: #666666">=</span> Hello()
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> a <span style="color: #666666">=</span> Hello()
 <span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">print</span> a(<span style="color: #BA2121">&#39;students&#39;</span>)
 Hello, students!
 <span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">print</span> a
 Hello, World!
 </pre></div>
 <p>
-Filename: <code>Hello.py</code>.
+Filename: <code>Hello</code>.
 
 <p>
 <!-- --- end exercise --- -->
@@ -720,7 +916,7 @@ Filename: <code>Hello.py</code>.
 <p>
 <!-- --- begin exercise --- -->
 
-<h2 id="sec:class:ex2b2">Exercise 11: Implement special methods in a class<a name="sec:class:ex2b2"></a></h2>
+<h2 id="sec:class:ex2b2" class="anchor">Exercise 11: Implement special methods in a class</h2>
 
 <p>
 Modify the class from <a href="#sec:class:ex2">Exercise 1: Make a function class</a>
@@ -729,7 +925,7 @@ such that the following interactive session can be run:
 <p>
 
 <!-- code=python (!bc pyshell) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">F</span> <span style="color: #008000; font-weight: bold">import</span> F
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">F</span> <span style="color: #008000; font-weight: bold">import</span> F
 <span style="color: #666666">&gt;&gt;&gt;</span> f <span style="color: #666666">=</span> F(a<span style="color: #666666">=1.0</span>, w<span style="color: #666666">=0.1</span>)
 <span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">math</span> <span style="color: #008000; font-weight: bold">import</span> pi
 <span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">print</span> f(x<span style="color: #666666">=</span>pi)
@@ -741,7 +937,7 @@ such that the following interactive session can be run:
 exp(<span style="color: #666666">-</span>a<span style="color: #666666">*</span>x)<span style="color: #666666">*</span>sin(w<span style="color: #666666">*</span>x)
 </pre></div>
 <p>
-Filename: <code>F2.py</code>.
+Filename: <code>F2</code>.
 
 <p>
 <!-- --- end exercise --- -->
@@ -749,7 +945,7 @@ Filename: <code>F2.py</code>.
 <p>
 <!-- --- begin exercise --- -->
 
-<h2 id="sec:class:ex2b">Exercise 12: Make a class for summation of series<a name="sec:class:ex2b"></a></h2>
+<h2 id="sec:class:ex2b" class="anchor">Exercise 12: Make a class for summation of series</h2>
 
 <p>
 The task in this exercise is to calculate a sum \( S(x)=\sum_{k=M}^N f_k(x) \),
@@ -760,17 +956,14 @@ of a class <code>Sum</code> for computing \( S(x)= \sum_{k=0}^N (-x)^k \):
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">term</span>(k, x):
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">term</span>(k, x):
     <span style="color: #008000; font-weight: bold">return</span> (<span style="color: #666666">-</span>x)<span style="color: #666666">**</span>k
 
 S <span style="color: #666666">=</span> Sum(term, M<span style="color: #666666">=0</span>, N<span style="color: #666666">=3</span>)
 x <span style="color: #666666">=</span> <span style="color: #666666">0.5</span>
 <span style="color: #008000; font-weight: bold">print</span> S(x)
-<span style="color: #008000; font-weight: bold">print</span> S<span style="color: #666666">.</span>term(k<span style="color: #666666">=4</span>)
+<span style="color: #008000; font-weight: bold">print</span> S<span style="color: #666666">.</span>term(k<span style="color: #666666">=4</span>, x<span style="color: #666666">=</span>x)  <span style="color: #408080; font-style: italic"># (-0.5)**4</span>
 </pre></div>
-<p>
-The latter statement prints the term \( (-x)^4 \).
-
 <p>
 <b>a)</b>
 Implement class <code>Sum</code> such that the code snippet above works.
@@ -786,7 +979,7 @@ Apply class <code>Sum</code> to compute the Taylor polynomial approximation to
 \( \sin x \) for \( x=\pi \) and some chosen \( x \) and \( N \).
 
 <p>
-Filename: <code>Sum.py</code>.
+Filename: <code>Sum</code>.
 
 <p>
 <!-- --- end exercise --- -->
@@ -794,7 +987,7 @@ Filename: <code>Sum.py</code>.
 <p>
 <!-- --- begin exercise --- -->
 
-<h2 id="sec:class:ex10">Exercise 13: Apply a numerical differentiation class<a name="sec:class:ex10"></a></h2>
+<h2 id="sec:class:ex10" class="anchor">Exercise 13: Apply a numerical differentiation class</h2>
 
 <p>
 Isolate class <code>Derivative</code> from the section <a href="._class-bootstrap003.html#sec:class:autodF">Example: Automagic differentiation</a>
@@ -813,44 +1006,38 @@ Filenames: <code>dYdt.py</code>, <code>Derivative.py</code>, <code>Y.py</code>.
 <p>
 <!-- --- begin exercise --- -->
 
-<h2 id="sec:class:exer:sympy:diff">Exercise 14: Apply symbolic differentiation<a name="sec:class:exer:sympy:diff"></a></h2>
+<h2 id="sec:class:ex:tribesman" class="anchor">Exercise 14: Implement an addition operator</h2>
 
 <p>
-Class <code>Derivative</code> from the section <a href="._class-bootstrap003.html#sec:class:autodF">Example: Automagic differentiation</a> applies numerical
-differentiation. With the aid of <code>sympy</code> we can quite easily
-offer exact differentiation. Extend class <code>Derivative</code> such
-that the differentiation is exact if the user supplies a <code>sympy</code>
-expression as argument to the constructor:
+An anthropologist was asking a primitive tribesman about arithmetic.  When the anthropologist asked, <em>What does two and two make?</em> the tribesman replied, <em>Five.</em>  Asked to explain, the tribesman said, <em>If I have a rope with two knots, and another rope with two knots, and I join the ropes together, then I have five knots.</em>
+
+<p>
+<b>a)</b>
+Make a class <code>Rope</code> for representing a rope with a given number of knots.
+Implement the addition operator in this class such that we can join two
+ropes together in the way the tribesman described:
 
 <p>
 
 <!-- code=python (!bc pyshell) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f</span>(x):
-        <span style="color: #008000; font-weight: bold">return</span> x<span style="color: #666666">**3</span>
-<span style="color: #666666">...</span>
-<span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">sympy</span>
-<span style="color: #666666">&gt;&gt;&gt;</span> x <span style="color: #666666">=</span> sympy<span style="color: #666666">.</span>symbols(<span style="color: #BA2121">&#39;x&#39;</span>)
-<span style="color: #666666">&gt;&gt;&gt;</span> symbolic_formula <span style="color: #666666">=</span> f(x)
-<span style="color: #666666">&gt;&gt;&gt;</span> dfdx <span style="color: #666666">=</span> Derivative(symbolic_formula)
-<span style="color: #666666">&gt;&gt;&gt;</span> x <span style="color: #666666">=</span> <span style="color: #666666">2</span>
-<span style="color: #666666">&gt;&gt;&gt;</span> dfdx(x)
-<span style="color: #666666">12</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">Rope</span> <span style="color: #008000; font-weight: bold">import</span> Rope
+<span style="color: #666666">&gt;&gt;&gt;</span> rope1 <span style="color: #666666">=</span> Rope(<span style="color: #666666">2</span>)
+<span style="color: #666666">&gt;&gt;&gt;</span> rope2 <span style="color: #666666">=</span> Rope(<span style="color: #666666">2</span>)
+<span style="color: #666666">&gt;&gt;&gt;</span> rope3 <span style="color: #666666">=</span> rope1 <span style="color: #666666">+</span> rope2
+<span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">print</span> rope3
+<span style="color: #666666">5</span>
 </pre></div>
 <p>
-<!-- --- begin hint in exercise --- -->
+As seen, the class also features a <code>__str__</code> method for returning
+the number of knots on the rope.
 
 <p>
-<b>Hint.</b>
-Introduce a test on the type of argument in the constructor in
-class <code>Derivative</code>: if <code>str(type(f))</code> starts with <code>sympy</code>,
-<code>f</code> is a <code>sympy</code> expression that we can differentiate with
-<code>sympy.diff</code> and turn the result into a plain Python with
-<code>sympy.lamdify</code>,
-see the section ref{sec:formula:sympy:diffint}.
+<b>b)</b>
+Equip the module file with a test function for verifying the
+implementation of the addition operator.
 
 <p>
-<!-- --- end hint in exercise --- -->
-Filename: <code>Derivative_sympy.py</code>.
+Filename: <code>Rope.py</code>.
 
 <p>
 <!-- --- end exercise --- -->
@@ -858,7 +1045,7 @@ Filename: <code>Derivative_sympy.py</code>.
 <p>
 <!-- --- begin exercise --- -->
 
-<h2 id="sec:class:ex25qb">Exercise 15: Implement in-place <code>+=</code> and <code>-=</code> operators<a name="sec:class:ex25qb"></a></h2>
+<h2 id="sec:class:ex25qb" class="anchor">Exercise 15: Implement in-place <code>+=</code> and <code>-=</code> operators</h2>
 
 <p>
 As alternatives to the <code>deposit</code> and <code>withdraw</code> methods
@@ -875,7 +1062,13 @@ in class <code>Account</code>.
 <!-- --- begin hint in exercise --- -->
 
 <p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_15_1" style="font-size: 80%;"></a>
 <b>Hint.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_15_1">
+
+<p>
 The special methods <code>__iadd__</code> and <code>__isub__</code>
 implement the <code>+=</code> and <code>-=</code> operators, respectively.
 For instance, <code>a -= p</code> implies a call to <code>a.__isub__(p)</code>.
@@ -885,8 +1078,13 @@ see the documentation of these
 methods in Chapter 3 of the <a href="http://docs.python.org/2/reference/" target="_self">Python Language Reference</a>.
 
 <p>
+</div></p>
+</div>
+</p>
+
+<p>
 <!-- --- end hint in exercise --- -->
-Filename: <code>Account4.py</code>.
+Filename: <code>Account4</code>.
 
 <p>
 <!-- --- end exercise --- -->
@@ -894,7 +1092,7 @@ Filename: <code>Account4.py</code>.
 <p>
 <!-- --- begin exercise --- -->
 
-<h2 id="sec:class:ex21">Exercise 16: Implement a class for numerical differentiation<a name="sec:class:ex21"></a></h2>
+<h2 id="sec:class:ex21" class="anchor">Exercise 16: Implement a class for numerical differentiation</h2>
 
 <p>
 <!-- Class <code>Derivative</code> from the section <a href="._class-bootstrap003.html#sec:class:autodF">Example: Automagic differentiation</a> applies the -->
@@ -906,7 +1104,7 @@ takes the form
 $$
 \begin{align}
 f'(x) & \approx  {f(x+h) - f(x-h)\over 2h} \tp
-\tag{3}
+\tag{8}
 \end{align}
 $$
 
@@ -915,7 +1113,7 @@ This formula usually gives more accurate derivatives than
 a one-sided, difference.
 
 <p>
-The goal of this exercise is to use the formula <a href="#mjx-eqn-3">(3)</a>
+The goal of this exercise is to use the formula <a href="#mjx-eqn-8">(8)</a>
 to automatically differentiate a mathematical function \( f(x) \) implemented
 as a Python function <code>f(x)</code>. More precisely, the following
 code should work:
@@ -923,7 +1121,7 @@ code should work:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f</span>(x):
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f</span>(x):
     <span style="color: #008000; font-weight: bold">return</span> <span style="color: #666666">0.25*</span>x<span style="color: #666666">**4</span>
 
 df <span style="color: #666666">=</span> Central(f)  <span style="color: #408080; font-style: italic"># make function-like object df</span>
@@ -937,31 +1135,39 @@ x <span style="color: #666666">=</span> <span style="color: #666666">2</span>
 Implement class <code>Central</code> and test that the code above works.
 Include an optional argument <code>h</code> to the constructor in class
 <code>Central</code> so that \( h \) in the
-approximation <a href="#mjx-eqn-3">(3)</a> can be specified.
+approximation <a href="#mjx-eqn-8">(8)</a> can be specified.
 
 <p>
 <b>b)</b>
 Write a test function <code>test_Central()</code> to verify the implementation.
-Utilize the fact that the formula <a href="#mjx-eqn-3">(3)</a> is
-exact for quadratic polynomials.
+Utilize the fact that the formula <a href="#mjx-eqn-8">(8)</a> is
+exact for quadratic polynomials (provided \( h \) is not too small, then
+rounding errors in <a href="#mjx-eqn-8">(8)</a> require use of a
+(much) larger tolerance than the expected machine precision).
 
 <p>
 <b>c)</b>
 Write a function <code>table(f, x, h=1E-5)</code> that prints a
-table of errors in the numerical derivative <a href="#mjx-eqn-3">(3)</a>
+table of errors in the numerical derivative <a href="#mjx-eqn-8">(8)</a>
 applied to a function <code>f</code> at some points <code>x</code>.
 The argument <code>f</code> is a <code>sympy</code> expression for
 a function. This <code>f</code> object can be transformed to a Python function and fed
 to the constructor of class <code>Central</code>, and <code>f</code> can be used to compute
 the exact derivative symbolically.
 The argument <code>x</code> is a list or array of points \( x \), and <code>h</code> is the \( h \)
-in <a href="#mjx-eqn-3">(3)</a>.
+in <a href="#mjx-eqn-8">(8)</a>.
 
 <p>
 <!-- --- begin hint in exercise --- -->
 
 <p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_16_1" style="font-size: 80%;"></a>
 <b>Hint.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_16_1">
+
+<p>
 The following session demonstrates how <code>sympy</code> can differentiate a
 mathematical expression and turn the result into a Python
 function:
@@ -969,7 +1175,7 @@ function:
 <p>
 
 <!-- code=python (!bc pyshell) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">sympy</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">sympy</span>
 <span style="color: #666666">&gt;&gt;&gt;</span> x <span style="color: #666666">=</span> sympy<span style="color: #666666">.</span>Symbol(<span style="color: #BA2121">&#39;x&#39;</span>)
 <span style="color: #666666">&gt;&gt;&gt;</span> f_expr <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;x*sin(2*x)&#39;</span>
 <span style="color: #666666">&gt;&gt;&gt;</span> df_expr <span style="color: #666666">=</span> sympy<span style="color: #666666">.</span>diff(f_expr)
@@ -980,6 +1186,11 @@ function:
 <span style="color: #666666">0.0</span>
 </pre></div>
 <p>
+</div></p>
+</div>
+</p>
+
+<p>
 <!-- --- end hint in exercise --- -->
 
 <p>
@@ -988,7 +1199,7 @@ Organize the file with the class and functions such that it can be
 used a module.
 
 <p>
-Filename: <code>Central.py</code>.
+Filename: <code>Central</code>.
 
 <p>
 <!-- --- end exercise --- -->
@@ -996,7 +1207,7 @@ Filename: <code>Central.py</code>.
 <p>
 <!-- --- begin exercise --- -->
 
-<h2 id="sec:class:ex21b">Exercise 17: Examine a program<a name="sec:class:ex21b"></a></h2>
+<h2 id="sec:class:ex21b" class="anchor">Exercise 17: Examine a program</h2>
 
 <p>
 Consider this program file for computing a backward difference approximation
@@ -1005,9 +1216,9 @@ to the derivative of a function <code>f(x)</code>:
 <p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">math</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #666666">*</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">math</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #666666">*</span>
 
-<span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Backward</span>:
+<span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Backward</span>(<span style="color: #008000">object</span>):
     <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__init__</span>(<span style="color: #008000">self</span>, f, h<span style="color: #666666">=</span>e<span style="color: #666666">-9</span>):
         <span style="color: #008000">self</span><span style="color: #666666">.</span>f, <span style="color: #008000">self</span><span style="color: #666666">.</span>h <span style="color: #666666">=</span> f, h
     <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__call__</span>(<span style="color: #008000">self</span>, x):
@@ -1026,11 +1237,12 @@ The output becomes
 
 <!-- code=text (!bc ccq) typeset with pygments style "default" -->
 <blockquote>
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">error: -1.00023355634
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>error: -1.00023355634
 error: 371.570909212
 </pre></div>
 </blockquote><p>
 Is the approximation that bad, or are there bugs in the program?
+Filename: <code>find_errors_class</code>.
 
 <p>
 <!-- h=e-7 means e - 7! Same with e-9 -->
@@ -1039,16 +1251,16 @@ Is the approximation that bad, or are there bugs in the program?
 <p>
 <!-- --- begin exercise --- -->
 
-<h2 id="sec:class:ex23s">Exercise 18: Modify a class for numerical differentiation<a name="sec:class:ex23s"></a></h2>
+<h2 id="sec:class:ex23s" class="anchor">Exercise 18: Modify a class for numerical differentiation</h2>
 
 <p>
-Make the two attributes <code>h</code> and <code>f</code> of class
-<code>Derivative</code> from the section <a href="._class-bootstrap003.html#sec:class:autodF">Example: Automagic differentiation</a> protected as
-explained in the section <a href="._class-bootstrap002.html#sec:class:account">Bank accounts</a>. That is, prefix <code>h</code> and
-<code>f</code> with an underscore to tell users that these attributes should not be
-accessed directly. Add two methods <code>get_precision()</code> and
-<code>set_precision(h)</code> for reading and changing <code>h</code>.
-Filename: <code>Derivative_protected.py</code>.
+Make the two data attributes <code>h</code> and <code>f</code> of class <code>Derivative</code> from
+the section <a href="._class-bootstrap003.html#sec:class:autodF">Example: Automagic differentiation</a> protected as explained in the section <a href="._class-bootstrap002.html#sec:class:account">Bank accounts</a>. That is, prefix <code>h</code> and <code>f</code> with an underscore
+to tell users that these attributes should not be accessed
+directly. Add two methods <code>get_precision()</code> and <code>set_precision(h)</code> for
+reading and changing <code>h</code>.  Make a separate test function for checking
+that the new class works as intended.
+Filename: <code>Derivative_protected</code>.
 
 <p>
 <!-- --- end exercise --- -->
@@ -1056,26 +1268,21 @@ Filename: <code>Derivative_protected.py</code>.
 <p>
 <!-- --- begin exercise --- -->
 
-<h2 id="sec:basic:exHclass">Exercise 19: Make a class for the Heaviside function<a name="sec:basic:exHclass"></a></h2>
-
-<p>
-the exercise &quot;Implement a
-smoothed Heaviside function&quot; in the document <a href="http://tcse6.on.net/funcif" target="_self">Functions and
-branching</a>,
+<h2 id="sec:basic:exHclass" class="anchor">Exercise 19: Make a class for the Heaviside function</h2>
 
 <p>
 <b>a)</b>
 Use a class to implement the
 discontinuous Heaviside function and smoothed continuous version, as defined
 in the exercise &quot;Implement a
-smoothed Heaviside function&quot; in the document <a href="http://tcse6.on.net/funcif" target="_self">Functions and
+smoothed Heaviside function&quot; in the document <a href="http://hplgit.github.io/primer.html/doc/pub/funcif" target="_self">Functions and
 branching</a>,
 such that the following code works:
 
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">H <span style="color: #666666">=</span> Heaviside()         <span style="color: #408080; font-style: italic"># original discontinous Heaviside function</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>H <span style="color: #666666">=</span> Heaviside()         <span style="color: #408080; font-style: italic"># original discontinous Heaviside function</span>
 <span style="color: #008000; font-weight: bold">print</span> H(<span style="color: #666666">0.1</span>)
 H <span style="color: #666666">=</span> Heaviside(eps<span style="color: #666666">=0.8</span>)  <span style="color: #408080; font-style: italic"># smoothed continuous Heaviside function</span>
 <span style="color: #008000; font-weight: bold">print</span> H(<span style="color: #666666">0.1</span>)
@@ -1088,7 +1295,7 @@ array arguments are allowed:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">H <span style="color: #666666">=</span> Heaviside()         <span style="color: #408080; font-style: italic"># original discontinous Heaviside function</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>H <span style="color: #666666">=</span> Heaviside()         <span style="color: #408080; font-style: italic"># original discontinous Heaviside function</span>
 x <span style="color: #666666">=</span> numpy<span style="color: #666666">.</span>linspace(<span style="color: #666666">-1</span>, <span style="color: #666666">1</span>, <span style="color: #666666">11</span>)
 <span style="color: #008000; font-weight: bold">print</span> H(x)
 H <span style="color: #666666">=</span> Heaviside(eps<span style="color: #666666">=0.8</span>)  <span style="color: #408080; font-style: italic"># smoothed Heaviside function</span>
@@ -1098,8 +1305,19 @@ H <span style="color: #666666">=</span> Heaviside(eps<span style="color: #666666
 <!-- --- begin hint in exercise --- -->
 
 <p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_19_1" style="font-size: 80%;"></a>
 <b>Hint.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_19_1">
+
+<p>
 Use ideas from the section ref{sec:vec:Heaviside}.
+
+<p>
+</div></p>
+</div>
+</p>
 
 <p>
 <!-- --- end hint in exercise --- -->
@@ -1111,7 +1329,7 @@ Extend class <code>Heaviside</code> such that it supports plotting:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">H <span style="color: #666666">=</span> Heaviside()
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>H <span style="color: #666666">=</span> Heaviside()
 x, y <span style="color: #666666">=</span> H<span style="color: #666666">.</span>plot(xmin<span style="color: #666666">=-4</span>, xmax<span style="color: #666666">=4</span>)  <span style="color: #408080; font-style: italic"># x in [-4, 4]</span>
 <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #008000; font-weight: bold">import</span> plot
 plot(x, y)
@@ -1124,7 +1342,13 @@ plot(x, y)
 <!-- --- begin hint in exercise --- -->
 
 <p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_19_2" style="font-size: 80%;"></a>
 <b>Hint.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_19_2">
+
+<p>
 Techniques from the section ref{sec:plot:pwisefunc} must in the first case
 be used to return arrays <code>x</code> and <code>y</code> such that the discontinuity is
 exactly reproduced. In the continuous (smoothed) case, one needs to
@@ -1132,6 +1356,11 @@ compute a sufficiently fine resolution (<code>x</code>) based on the <code>eps</
 parameter, e.g., 201/$\epsilon$ points in the interval \( [-\epsilon,
 \epsilon] \), with a coarser set of coordinates outside this interval
 where the smoothed Heaviside function is almost constant, 0 or 1.
+
+<p>
+</div></p>
+</div>
+</p>
 
 <p>
 <!-- --- end hint in exercise --- -->
@@ -1142,7 +1371,7 @@ Write a test function <code>test_Heaviside()</code> for verifying the result
 of the various methods in class <code>Heaviside</code>.
 
 <p>
-Filename: <code>Heaviside_class.py</code>.
+Filename: <code>Heaviside_class</code>.
 
 <p>
 <!-- --- end exercise --- -->
@@ -1150,23 +1379,24 @@ Filename: <code>Heaviside_class.py</code>.
 <p>
 <!-- --- begin exercise --- -->
 
-<h2 id="sec:basic:exIndclass">Exercise 20: Make a class for the indicator function<a name="sec:basic:exIndclass"></a></h2>
+<h2 id="sec:basic:exIndclass" class="anchor">Exercise 20: Make a class for the indicator function</h2>
 
 <p>
-We shall work with indicator
-functions as explained in the exercise &quot;Implement an indicator function&quot;
-in the document <a href="http://tcse6.on.net/funcif" target="_self">Functions and
-branching</a>. Make a class implementation
-of such an indicator function, using a definition in terms of
-Heaviside functions. Allow for an \( \epsilon \) parameter in the calls to the
-Heaviside function such that
-we can easily choose between a discontinuous and a smoothed,
-continuous version of the indicator function:
+The purpose of this exercise is the make a class implementation of the
+indicator function from ref[ref{sec:basic:exH3}[ in
+<a href="#Langtangen_TCSE6_funcif">[5]</a>][the exercise named &quot;Implement an
+indicator function&quot; in the document <a href="http://hplgit.github.io/primer.html/doc/pub/funcif" target="_self">Functions and branching</a>
+<a href="#Langtangen_TCSE6_funcif">[5]</a>]. Let the implementation be based
+on expressing the indicator function in terms of
+Heaviside functions. Allow for an \( \epsilon \) parameter in the calls to
+the Heaviside function, such that we can easily choose between a
+discontinuous and a smoothed, continuous version of the indicator
+function:
 
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">I <span style="color: #666666">=</span> Indicator(a, b)          <span style="color: #408080; font-style: italic"># indicator function on [a,b]</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>I <span style="color: #666666">=</span> Indicator(a, b)          <span style="color: #408080; font-style: italic"># indicator function on [a,b]</span>
 <span style="color: #008000; font-weight: bold">print</span> I(b<span style="color: #666666">+0.1</span>), I((a<span style="color: #666666">+</span>b)<span style="color: #666666">/2.0</span>)
 I <span style="color: #666666">=</span> Indicator(<span style="color: #666666">0</span>, <span style="color: #666666">2</span>, eps<span style="color: #666666">=1</span>)   <span style="color: #408080; font-style: italic"># smoothed indicator function on [0,2]</span>
 <span style="color: #008000; font-weight: bold">print</span> I(<span style="color: #666666">0</span>), I(<span style="color: #666666">1</span>), I(<span style="color: #666666">1.9</span>)
@@ -1175,7 +1405,7 @@ I <span style="color: #666666">=</span> Indicator(<span style="color: #666666">0
 Note that if you build on the version of class <code>Heaviside</code>
 in <a href="#sec:basic:exHclass">Exercise 19: Make a class for the Heaviside function</a>b, any <code>Indicator</code> instance
 will accept array arguments too.
-Filename: <code>Indicator.py</code>.
+Filename: <code>Indicator</code>.
 
 <p>
 <!-- --- end exercise --- -->
@@ -1183,12 +1413,14 @@ Filename: <code>Indicator.py</code>.
 <p>
 <!-- --- begin exercise --- -->
 
-<h2 id="sec:basic:ex:piecewisefunc">Exercise 21: Make a class for piecewise constant functions<a name="sec:basic:ex:piecewisefunc"></a></h2>
+<h2 id="sec:basic:ex:piecewisefunc" class="anchor">Exercise 21: Make a class for piecewise constant functions</h2>
 
 <p>
-The purpose of this exercise is to implement a piecewise constant
-function, as explained in ref{sec:basic:exH4}, in a Python
-class.
+The purpose of this exercise is to make a class implementation of a
+piecewise constant function, as defined in ref[ref{sec:basic:exH4}[ in <a href="#Langtangen_TCSE6_funcif">[5]</a>][the exercise
+named &quot;Implement a piecewise constant function&quot; in the document
+<a href="http://hplgit.github.io/primer.html/doc/pub/funcif" target="_self">Functions and branching</a>
+<a href="#Langtangen_TCSE6_funcif">[5]</a>].
 
 <p>
 <b>a)</b>
@@ -1197,7 +1429,7 @@ Implement the minimum functionality such that the following code works:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">f <span style="color: #666666">=</span> PiecewiseConstant([(<span style="color: #666666">0.4</span>, <span style="color: #666666">1</span>), (<span style="color: #666666">0.2</span>, <span style="color: #666666">1.5</span>), (<span style="color: #666666">0.1</span>, <span style="color: #666666">3</span>)], xmax<span style="color: #666666">=4</span>)
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>f <span style="color: #666666">=</span> PiecewiseConstant([(<span style="color: #666666">0.4</span>, <span style="color: #666666">1</span>), (<span style="color: #666666">0.2</span>, <span style="color: #666666">1.5</span>), (<span style="color: #666666">0.1</span>, <span style="color: #666666">3</span>)], xmax<span style="color: #666666">=4</span>)
 <span style="color: #008000; font-weight: bold">print</span> f(<span style="color: #666666">1.5</span>), f(<span style="color: #666666">1.75</span>), f(<span style="color: #666666">4</span>)
 
 x <span style="color: #666666">=</span> np<span style="color: #666666">.</span>linspace(<span style="color: #666666">0</span>, <span style="color: #666666">4</span>, <span style="color: #666666">21</span>)
@@ -1212,12 +1444,12 @@ can easily plot the graph of the function:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">x, y <span style="color: #666666">=</span> f<span style="color: #666666">.</span>plot()
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>x, y <span style="color: #666666">=</span> f<span style="color: #666666">.</span>plot()
 <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #008000; font-weight: bold">import</span> plot
 plot(x, y)
 </pre></div>
 <p>
-Filename: <code>PiecewiseConstant.py</code>.
+Filename: <code>PiecewiseConstant</code>.
 
 <p>
 <!-- --- end exercise --- -->
@@ -1225,22 +1457,52 @@ Filename: <code>PiecewiseConstant.py</code>.
 <p>
 <!-- --- begin exercise --- -->
 
-<h2 id="sec:class:ex13c">Exercise 22: Speed up repeated integral calculations<a name="sec:class:ex13c"></a></h2>
+<h2 id="sec:class:ex13c" class="anchor">Exercise 22: Speed up repeated integral calculations</h2>
 
 <p>
 The observant reader may have noticed that our <code>Integral</code> class
 from the section <a href="._class-bootstrap003.html#sec:class:autoint">Example: Automagic integration</a>
 is very inefficient if we want to tabulate or plot a
-function \( F(x)=\int_a^xf(x) \) for several consecutive values of \( x \),
-say \( x_0 < x_1 < \cdots < x_n \). Requesting \( F(x_k) \) will recompute
-the integral computed as part of \( F(x_{k-1}) \), and this is of course
+function \( F(x)=\int_a^xf(x) \) for several consecutive values of \( x \):
+\( x_0 < x_1 < \cdots < x_m \). Requesting \( F(x_k) \) will recompute
+the integral computed for \( F(x_{k-1}) \), and this is of course
 waste of computer work.
-Use the ideas from the section ref{sec:diffeq:integral} to modify
+Modify
 the <code>__call__</code> method such that if <code>x</code> is an array,
 assumed to contain coordinates of increasing value:
-\( x_0 < x_1 < \cdots < x_n \), the method returns an array with
-\( F(x_0), F(x_1),\ldots,F(x_n) \) with the minimum computational work.
-Filename: <code>Integral_eff.py</code>.
+\( x_0 < x_1 < \cdots < x_m \), the method returns an array with
+\( F(x_0), F(x_1),\ldots,F(x_m) \) with the minimum computational work.
+Also write a test function to verify that the implementation is correct.
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_22_1" style="font-size: 80%;"></a>
+<b>Hint.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_22_1">
+
+<p>
+The \( n \) (<code>n</code>) parameter in the constructor of the <code>Integral</code> class can be
+taken as the total number of trapezoids (intervals) that are to be used to
+compute the final \( F(x_m) \) value. The integral over an interval
+\( [x_k, x_{k+1}] \) can then be computed by the <code>trapezoidal</code> function
+(or an <code>Integral</code> object) using an appropriate fraction of the \( n \)
+total trapezoids. This fraction can be \( (x_{k+1}-x_k)/(x_m-a) \)
+(i.e., \( n_k = n(x_{k+1}-x_k)/(x_m-a) \)) or
+one may simply use a constant \( n_k=n/m \) number of trapezoids for
+all the integrals over \( [x_k, x_{k+1}] \), \( k=0,\ldots,m-1 \).
+
+<p>
+</div></p>
+</div>
+</p>
+
+<p>
+<!-- --- end hint in exercise --- -->
+Filename: <code>Integral_eff</code>.
 
 <p>
 <!-- --- end exercise --- -->
@@ -1248,7 +1510,7 @@ Filename: <code>Integral_eff.py</code>.
 <p>
 <!-- --- begin exercise --- -->
 
-<h2 id="sec:class:ex5">Exercise 23: Apply a class for polynomials<a name="sec:class:ex5"></a></h2>
+<h2 id="sec:class:ex5" class="anchor">Exercise 23: Apply a class for polynomials</h2>
 
 <p>
 The Taylor polynomial of degree \( N \) for the exponential function \( e^x \)
@@ -1262,13 +1524,13 @@ Make a program that (i) imports class
 <code>Polynomial</code> from the section <a href="._class-bootstrap003.html#sec:class:Polynomial">Example: Class for polynomials</a>, (ii) reads  \( x \)
 and a series of \( N \) values
 from the command line, (iii) creates a
-<code>Polynomial</code> instance representing the Taylor polynomial for each
-\( N \) value, and (iv)
+<code>Polynomial</code> object for each
+\( N \) value for computing with the given Taylor polynomial, and (iv)
 prints the values of \( p(x) \) for all the given \( N \) values as well as the
 exact value \( e^x \).
 Try the program out with
 \( x=0.5, 3, 10 \) and \( N=2,5,10, 15, 25 \).
-Filename: <code>Polynomial_exp.py</code>.
+Filename: <code>Polynomial_exp</code>.
 
 <p>
 <!-- --- end exercise --- -->
@@ -1276,7 +1538,7 @@ Filename: <code>Polynomial_exp.py</code>.
 <p>
 <!-- --- begin exercise --- -->
 
-<h2 id="sec:class:ex4">Exercise 24: Find a bug in a class for polynomials<a name="sec:class:ex4"></a></h2>
+<h2 id="sec:class:ex4" class="anchor">Exercise 24: Find a bug in a class for polynomials</h2>
 
 <p>
 Go through this alternative implementation of class
@@ -1286,7 +1548,7 @@ and explain each line in detail:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Polynomial</span>:
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Polynomial</span>(<span style="color: #008000">object</span>):
     <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__init__</span>(<span style="color: #008000">self</span>, coefficients):
         <span style="color: #008000">self</span><span style="color: #666666">.</span>coeff <span style="color: #666666">=</span> coefficients
 
@@ -1309,7 +1571,7 @@ enables us to iterate over a list <code>somelist</code> with
 both list indices and list elements: <code>for index, element in enumerate(somelist)</code>.
 Write the code above in a file, and demonstrate that adding two polynomials
 does not work. Find the bug and correct it.
-Filename: <code>Polynomial_error.py</code>.
+Filename: <code>Polynomial_error</code>.
 
 <p>
 <!-- result_coeff = self.coeff[:] -->
@@ -1318,13 +1580,36 @@ Filename: <code>Polynomial_error.py</code>.
 <p>
 <!-- --- begin exercise --- -->
 
-<h2 id="sec:class:ex6a">Exercise 25: Implement subtraction of polynomials<a name="sec:class:ex6a"></a></h2>
+<h2 id="sec:class:ex6a" class="anchor">Exercise 25: Implement subtraction of polynomials</h2>
 
 <p>
 Implement the special method <code>__sub__</code> in class
 <code>Polynomial</code> from the section <a href="._class-bootstrap003.html#sec:class:Polynomial">Example: Class for polynomials</a>.
 Add a test for this functionality in function <code>test_Polynomial</code>.
-Filename: <code>Polynomial_sub.py</code>.
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_25_1" style="font-size: 80%;"></a>
+<b>Hint.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_25_1">
+
+<p>
+Study the <code>__add__</code> method in class <code>Polynomial</code> and treat the
+two cases, where the lengths of the lists in the polynomials differs,
+separately.
+
+<p>
+</div></p>
+</div>
+</p>
+
+<p>
+<!-- --- end hint in exercise --- -->
+Filename: <code>Polynomial_sub</code>.
 
 <p>
 <!-- --- end exercise --- -->
@@ -1332,13 +1617,13 @@ Filename: <code>Polynomial_sub.py</code>.
 <p>
 <!-- --- begin exercise --- -->
 
-<h2 id="sec:class:exer:str">Exercise 26: Test the functionality of pretty print of polynomials<a name="sec:class:exer:str"></a></h2>
+<h2 id="sec:class:exer:str" class="anchor">Exercise 26: Test the functionality of pretty print of polynomials</h2>
 
 <p>
 Verify the functionality of the <code>__str__</code> method in class <code>Polynomial</code> from
 the section <a href="._class-bootstrap003.html#sec:class:Polynomial">Example: Class for polynomials</a> by writing a new test function
 <code>test_Polynomial_str()</code>.
-Filename: <code>Polynomial_test_str.py</code>.
+Filename: <code>Polynomial_test_str</code>.
 
 <p>
 <!-- --- end exercise --- -->
@@ -1346,7 +1631,7 @@ Filename: <code>Polynomial_test_str.py</code>.
 <p>
 <!-- --- begin exercise --- -->
 
-<h2 id="sec:class:ex7v">Exercise 27: Vectorize a class for polynomials<a name="sec:class:ex7v"></a></h2>
+<h2 id="sec:class:ex7v" class="anchor">Exercise 27: Vectorize a class for polynomials</h2>
 
 <p>
 Introducing an array instead of a list in class <code>Polynomial</code> does not
@@ -1376,9 +1661,20 @@ the rest of the longest array to the result.
 <!-- --- begin hint in exercise --- -->
 
 <p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_27_1" style="font-size: 80%;"></a>
 <b>Hint.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_27_1">
+
+<p>
 Appending an array
 <code>a</code> to an array <code>b</code> can be done by <code>concatenate(a, b)</code>.
+
+<p>
+</div></p>
+</div>
+</p>
 
 <p>
 <!-- --- end hint in exercise --- -->
@@ -1401,7 +1697,7 @@ the statements
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">n <span style="color: #666666">=</span> <span style="color: #008000">len</span>(<span style="color: #008000">self</span><span style="color: #666666">.</span>coeff)
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>n <span style="color: #666666">=</span> <span style="color: #008000">len</span>(<span style="color: #008000">self</span><span style="color: #666666">.</span>coeff)
 <span style="color: #008000">self</span><span style="color: #666666">.</span>coeff[:<span style="color: #666666">-1</span>] <span style="color: #666666">=</span> linspace(<span style="color: #666666">1</span>, n<span style="color: #666666">-1</span>, n<span style="color: #666666">-1</span>)<span style="color: #666666">*</span><span style="color: #008000">self</span><span style="color: #666666">.</span>coeff[<span style="color: #666666">1</span>:]
 <span style="color: #008000">self</span><span style="color: #666666">.</span>coeff <span style="color: #666666">=</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>coeff[:<span style="color: #666666">-1</span>]
 </pre></div>
@@ -1411,12 +1707,12 @@ the vectorized statements produce the same result as the
 original <code>differentiate</code> method.
 
 <p>
-Filename: <code>Polynomial_vec.py</code>.
+Filename: <code>Polynomial_vec</code>.
 
 <p>
 <!-- Closing remarks for this Exercise -->
 
-<h3 id="___sec97">Remarks <a name="___sec97"></a></h3>
+<h3 id="___sec100" class="anchor">Remarks </h3>
 
 <p>
 The <code>__mul__</code> method is more challenging to vectorize so you may leave
@@ -1431,30 +1727,130 @@ the <code>test_Polynomial</code> function.
 <p>
 <!-- --- begin exercise --- -->
 
-<h2 id="sec:class:ex8">Exercise 28: Use a dict to hold polynomial coefficients<a name="sec:class:ex8"></a></h2>
+<h2 id="sec:class:ex8" class="anchor">Exercise 28: Use a dict to hold polynomial coefficients</h2>
 
 <p>
-Use a dictionary for the <code>coeff</code> attribute in class <code>Polynomial</code> from
+Use a dictionary (instead of a list)
+for the <code>coeff</code> attribute in class <code>Polynomial</code> from
 the section <a href="._class-bootstrap003.html#sec:class:Polynomial">Example: Class for polynomials</a> such that <code>self.coeff[k]</code> holds the
 coefficient of the \( x^k \) term.  The advantage with a dictionary is
-that only the nonzero coefficients need to be stored.
+that only the nonzero coefficients in a polynomial need to be stored.
 
 <p>
 <b>a)</b>
-Implement a constructor and the <code>__add__</code> method.
+Implement a constructor and the <code>__call__</code> method for evaluating the
+polynomial. The following demonstration code should work:
 
 <p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">Polynomial_dict</span> <span style="color: #008000; font-weight: bold">import</span> Polynomial
+p1_dict <span style="color: #666666">=</span> {<span style="color: #666666">4</span>: <span style="color: #666666">1</span>, <span style="color: #666666">2</span>: <span style="color: #666666">-2</span>, <span style="color: #666666">0</span>: <span style="color: #666666">3</span>}  <span style="color: #408080; font-style: italic"># polynomial x^4 - 2*x^2 + 3</span>
+p1 <span style="color: #666666">=</span> Polynomial(p1_dict)
+<span style="color: #008000; font-weight: bold">print</span> p1(<span style="color: #666666">2</span>)  <span style="color: #408080; font-style: italic"># prints 11 (16-8+3)</span>
+</pre></div>
+<p>
 <b>b)</b>
-Implement the <code>__mul__</code> method.
+Implement the <code>__add__</code> method. The following demonstration code should work:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>p1 <span style="color: #666666">=</span> Polynomial({<span style="color: #666666">4</span>: <span style="color: #666666">1</span>, <span style="color: #666666">2</span>: <span style="color: #666666">-2</span>, <span style="color: #666666">0</span>: <span style="color: #666666">3</span>})  <span style="color: #408080; font-style: italic"># x^4 - 2*x^2 + 3</span>
+p2 <span style="color: #666666">=</span> Polynomial({<span style="color: #666666">0</span>: <span style="color: #666666">4</span>, <span style="color: #666666">1</span>: <span style="color: #666666">3</span>}          <span style="color: #408080; font-style: italic"># 4 + 3*x</span>
+p3 <span style="color: #666666">=</span> p1 <span style="color: #666666">+</span> p2                          <span style="color: #408080; font-style: italic"># x^4 - 2*x^2 + 3*x + 7</span>
+<span style="color: #008000; font-weight: bold">print</span> p3<span style="color: #666666">.</span>coeff  <span style="color: #408080; font-style: italic"># prints {0: 7, 1: 3, 2: -2, 4: 1}</span>
+</pre></div>
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_28_1" style="font-size: 80%;"></a>
+<b>Hint.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_28_1">
+
+<p>
+The structure of <code>__add__</code> may be
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Polynomial</span>(<span style="color: #008000">object</span>):
+    <span style="color: #666666">...</span>
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__add__</span>(<span style="color: #008000">self</span>, other):
+        <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Return self + other as a Polynomial object.&quot;&quot;&quot;</span>
+        result <span style="color: #666666">=</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>coeff<span style="color: #666666">.</span>copy()
+        <span style="color: #008000; font-weight: bold">for</span> exponent <span style="color: #AA22FF; font-weight: bold">in</span> result:
+            <span style="color: #008000; font-weight: bold">if</span> exponent <span style="color: #AA22FF; font-weight: bold">in</span> other<span style="color: #666666">.</span>coeff:
+                <span style="color: #408080; font-style: italic"># add other&#39;s term to result&#39;s term</span>
+            <span style="color: #008000; font-weight: bold">else</span>:
+                result[exponent] <span style="color: #666666">=</span> other[exponent]
+        <span style="color: #408080; font-style: italic"># return Polynomial object based on result dict</span>
+</pre></div>
+<p>
+</div></p>
+</div>
+</p>
+
+<p>
+<!-- --- end hint in exercise --- -->
 
 <p>
 <b>c)</b>
-Write a test function for verifying the implementations in a) and b)
-when the polynomials \( x-3x^{100} \) and \( x^{20} - x +4x^{100} \) are added
-and multiplied.
+Implement the <code>__sub__</code> method. The following demonstration code should work:
 
 <p>
-Filename: <code>Polynomial_dict.py</code>.
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>p1 <span style="color: #666666">=</span> Polynomial({<span style="color: #666666">4</span>: <span style="color: #666666">1</span>, <span style="color: #666666">2</span>: <span style="color: #666666">-2</span>, <span style="color: #666666">0</span>: <span style="color: #666666">3</span>})  <span style="color: #408080; font-style: italic"># x^4 - 2*x^2 + 3</span>
+p2 <span style="color: #666666">=</span> Polynomial({<span style="color: #666666">0</span>: <span style="color: #666666">4</span>, <span style="color: #666666">1</span>: <span style="color: #666666">3</span>}          <span style="color: #408080; font-style: italic"># 4 + 3*x</span>
+p3 <span style="color: #666666">=</span> p1 <span style="color: #666666">-</span> p2                          <span style="color: #408080; font-style: italic"># x^4 - 2*x^2 - 3*x - 1</span>
+<span style="color: #008000; font-weight: bold">print</span> p3<span style="color: #666666">.</span>coeff  <span style="color: #408080; font-style: italic"># prints {0: -1, 1: -3, 2: -2, 4: 1}</span>
+</pre></div>
+<p>
+<b>d)</b>
+Implement the <code>__mul__</code> method. The following demonstration code should work:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>p1 <span style="color: #666666">=</span> Polynomial({<span style="color: #666666">0</span>: <span style="color: #666666">1</span>, <span style="color: #666666">3</span>: <span style="color: #666666">1</span>})   <span style="color: #408080; font-style: italic"># 1 + x^3</span>
+p2 <span style="color: #666666">=</span> Polynomial({<span style="color: #666666">1</span>: <span style="color: #666666">-2</span>, <span style="color: #666666">2</span>: <span style="color: #666666">3</span>})  <span style="color: #408080; font-style: italic"># -2*x + 3*x^2</span>
+p3 <span style="color: #666666">=</span> p1<span style="color: #666666">*</span>p3
+<span style="color: #008000; font-weight: bold">print</span> p3<span style="color: #666666">.</span>coeff  <span style="color: #408080; font-style: italic"># prints {1: -2, 2: 3, 4: -2, 5: 3}</span>
+</pre></div>
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_28_2" style="font-size: 80%;"></a>
+<b>Hint.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_28_2">
+
+<p>
+Study the <code>__mul__</code> method in class <code>Polynomial</code> based on a list
+representation of the data in the polynomial and adapt to
+a dictionary representation.
+
+<p>
+</div></p>
+</div>
+</p>
+
+<p>
+<!-- --- end hint in exercise --- -->
+
+<p>
+<b>e)</b>
+Write a test function for each of the methods <code>__call__</code>, <code>__add__</code>,
+and <code>__mul__</code>.
+
+<p>
+Filename: <code>Polynomial_dict</code>.
 
 <p>
 <!-- --- end exercise --- -->
@@ -1462,7 +1858,7 @@ Filename: <code>Polynomial_dict.py</code>.
 <p>
 <!-- --- begin exercise --- -->
 
-<h2 id="sec:class:ex16">Exercise 29: Extend class Vec2D to work with lists/tuples<a name="sec:class:ex16"></a></h2>
+<h2 id="sec:class:ex16" class="anchor">Exercise 29: Extend class Vec2D to work with lists/tuples</h2>
 
 <p>
 The <code>Vec2D</code> class from the section <a href="._class-bootstrap004.html#sec:class:Vec2D">Example: Class for vectors in the plane</a> supports
@@ -1473,7 +1869,7 @@ point that is represented by a list or a tuple:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">u <span style="color: #666666">=</span> Vec2D(<span style="color: #666666">-2</span>, <span style="color: #666666">4</span>)
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>u <span style="color: #666666">=</span> Vec2D(<span style="color: #666666">-2</span>, <span style="color: #666666">4</span>)
 v <span style="color: #666666">=</span> u <span style="color: #666666">+</span> (<span style="color: #666666">1</span>,<span style="color: #666666">1.5</span>)
 w <span style="color: #666666">=</span> [<span style="color: #666666">-3</span>, <span style="color: #666666">2</span>] <span style="color: #666666">-</span> v
 </pre></div>
@@ -1485,13 +1881,24 @@ Implement such an extension of class <code>Vec2D</code>.
 <!-- --- begin hint in exercise --- -->
 
 <p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_29_1" style="font-size: 80%;"></a>
 <b>Hint.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_29_1">
+
+<p>
 Ideas are found in the sections <a href="._class-bootstrap005.html#sec:class:complex:mixed">Mixing complex and real numbers</a> and
 <a href="._class-bootstrap005.html#sec:class:complex:rightop">Special methods for &quot;right&quot; operands</a>.
 
 <p>
+</div></p>
+</div>
+</p>
+
+<p>
 <!-- --- end hint in exercise --- -->
-Filename: <code>Vec2D_lists.py</code>.
+Filename: <code>Vec2D_lists</code>.
 
 <p>
 <!-- --- end exercise --- -->
@@ -1499,14 +1906,14 @@ Filename: <code>Vec2D_lists.py</code>.
 <p>
 <!-- --- begin exercise --- -->
 
-<h2 id="sec:class:ex17b">Exercise 30: Extend class Vec2D to 3D vectors<a name="sec:class:ex17b"></a></h2>
+<h2 id="sec:class:ex17b" class="anchor">Exercise 30: Extend class Vec2D to 3D vectors</h2>
 
 <p>
 Extend the implementation of class <code>Vec2D</code>
 from the section <a href="._class-bootstrap004.html#sec:class:Vec2D">Example: Class for vectors in the plane</a> to a class <code>Vec3D</code> for vectors
 in three-dimensional space. Add a method <code>cross</code> for computing
 the cross product of two 3D vectors.
-Filename: <code>Vec3D.py</code>.
+Filename: <code>Vec3D</code>.
 
 <p>
 <!-- --- end exercise --- -->
@@ -1514,7 +1921,7 @@ Filename: <code>Vec3D.py</code>.
 <p>
 <!-- --- begin exercise --- -->
 
-<h2 id="sec:class:ex17">Exercise 31: Use NumPy arrays in class Vec2D<a name="sec:class:ex17"></a></h2>
+<h2 id="sec:class:ex17" class="anchor">Exercise 31: Use NumPy arrays in class Vec2D</h2>
 
 <p>
 The internal code in class <code>Vec2D</code> from the section <a href="._class-bootstrap004.html#sec:class:Vec2D">Example: Class for vectors in the plane</a>
@@ -1527,7 +1934,7 @@ able to treat all the following ways of initializing a vector:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">a <span style="color: #666666">=</span> array([<span style="color: #666666">1</span>, <span style="color: #666666">-1</span>, <span style="color: #666666">4</span>], <span style="color: #008000">float</span>)  <span style="color: #408080; font-style: italic"># numpy array</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>a <span style="color: #666666">=</span> array([<span style="color: #666666">1</span>, <span style="color: #666666">-1</span>, <span style="color: #666666">4</span>], <span style="color: #008000">float</span>)  <span style="color: #408080; font-style: italic"># numpy array</span>
 v <span style="color: #666666">=</span> Vec(a)
 v <span style="color: #666666">=</span> Vec([<span style="color: #666666">1</span>, <span style="color: #666666">-1</span>, <span style="color: #666666">4</span>])           <span style="color: #408080; font-style: italic"># list</span>
 v <span style="color: #666666">=</span> Vec((<span style="color: #666666">1</span>, <span style="color: #666666">-1</span>, <span style="color: #666666">4</span>))           <span style="color: #408080; font-style: italic"># tuple</span>
@@ -1537,9 +1944,15 @@ v <span style="color: #666666">=</span> Vec(<span style="color: #666666">1</span
 <!-- --- begin hint in exercise --- -->
 
 <p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_31_1" style="font-size: 80%;"></a>
 <b>Hint.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_31_1">
+
+<p>
 In the constructor, use variable number of arguments as
-described in the document <a href="http://tcse6.on.net/varargs" target="_self">Variable number of
+described in the document <a href="http://hplgit.github.io/primer.html/doc/pub/varargs" target="_self">Variable number of
 function arguments in Python</a>
 <a href="#Langtangen_TCSE6_varargs">[2]</a>.  All arguments are then available as
 a tuple, and if there is only one element in the tuple, it should be
@@ -1557,14 +1970,19 @@ operator will typically be implemented as
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Vec</span>:
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Vec</span>(<span style="color: #008000">object</span>):
     <span style="color: #666666">...</span>
     <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__add__</span>(<span style="color: #008000">self</span>, other):
         <span style="color: #008000; font-weight: bold">return</span> Vec(selv<span style="color: #666666">.</span>v <span style="color: #666666">+</span> other<span style="color: #666666">.</span>v)
 </pre></div>
 <p>
+</div></p>
+</div>
+</p>
+
+<p>
 <!-- --- end hint in exercise --- -->
-Filename: <code>Vec.py</code>.
+Filename: <code>Vec</code>.
 
 <p>
 <!-- --- end exercise --- -->
@@ -1572,14 +1990,42 @@ Filename: <code>Vec.py</code>.
 <p>
 <!-- --- begin exercise --- -->
 
-<h2 id="sec:class:ex15">Exercise 32: Make classes for students and courses<a name="sec:class:ex15"></a></h2>
+<h2 id="___sec105" class="anchor">Exercise 32: Impreciseness of interval arithmetics </h2>
 
 <p>
-Redo the summarizing problem in the section ref{sec:files:sumex} by using
-classes.  More precisely, introduce a class <code>Student</code> and a class
-<code>Course</code>.  Find appropriate attributes and methods.  The classes
+Consider the function \( f(x)=x/(1+x) \) on \( [1,2] \). Find the variation of \( f \)
+over \( [1,2] \). Use interval arithmetics from
+the section <a href="._class-bootstrap007.html#sec:class:interval:arithmetic">Example: interval arithmetic</a> to compute the variation of
+\( f \) when \( x\in [1,2] \).
+Filename: <code>interval_arithmetics</code>.
+
+<p>
+<!-- Closing remarks for this Exercise -->
+
+<h3 id="___sec106" class="anchor">Remarks </h3>
+
+<p>
+In this case, interval arithmetics overestimates the variation in \( f \).
+The reason is that \( x \) occurs more than once in the formula for \( f \)
+(the so-called <a href="http://en.wikipedia.org/wiki/Interval_arithmetic#Dependency_problem" target="_self">dependency problem</a>).
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:class:ex15" class="anchor">Exercise 33: Make classes for students and courses</h2>
+
+<p>
+Use classes to reimplement the summarizing problem in
+the section &quot;Example: A file database&quot;
+in the document <a href="http://hplgit.github.io/primer.html/doc/pub/plot" target="_self">Dictionaries and strings</a>
+<a href="#Langtangen_TCSE6_plot">[4]</a>.
+More precisely, introduce a class <code>Student</code> and a class
+<code>Course</code>.  Find appropriate attributes.  The classes
 should have a <code>__str__</code> method for pretty-printing of the contents.
-Filename: <code>Student_Course.py</code>.
+Filename: <code>Student_Course</code>.
 
 <p>
 <!-- --- end exercise --- -->
@@ -1587,7 +2033,7 @@ Filename: <code>Student_Course.py</code>.
 <p>
 <!-- --- begin exercise --- -->
 
-<h2 id="sec:plot:ex28">Exercise 33: Find local and global extrema of a function<a name="sec:plot:ex28"></a></h2>
+<h2 id="sec:plot:ex28" class="anchor">Exercise 34: Find local and global extrema of a function</h2>
 
 <p>
 Extreme points of a function \( f(x) \) are normally found by solving
@@ -1651,7 +2097,7 @@ Here is a sample code using class <code>MinMax</code>:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f</span>(x):
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f</span>(x):
     <span style="color: #008000; font-weight: bold">return</span> x<span style="color: #666666">**2*</span>exp(<span style="color: #666666">-0.2*</span>x)<span style="color: #666666">*</span>sin(<span style="color: #666666">2*</span>pi<span style="color: #666666">*</span>x)
 
 m <span style="color: #666666">=</span> MinMax(f, <span style="color: #666666">0</span>, <span style="color: #666666">4</span>, <span style="color: #666666">5001</span>)
@@ -1664,7 +2110,7 @@ The output becomes
 
 <!-- code=text (!bc ccq) typeset with pygments style "default" -->
 <blockquote>
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">All minima: 0.8056, 1.7736, 2.7632, 3.7584, 0
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>All minima: 0.8056, 1.7736, 2.7632, 3.7584, 0
 All maxima: 0.3616, 1.284, 2.2672, 3.2608, 4
 Global minimum: 3.7584
 Global maximum: 3.2608
@@ -1679,9 +2125,9 @@ The algorithm sketched above finds local extreme
 points \( x_i \), but all we know is that the true extreme point is in the
 interval \( (x_{i-1},x_{i+1}) \). A more accurate algorithm may take this
 interval as a starting point and run a Bisection method (see
-the final part of the document <a href="http://tcse6.on.net/input" target="_self">User
+the final part of the document <a href="http://hplgit.github.io/primer.html/doc/pub/input" target="_self">User
 input and error handling</a>
-<a href="#Langtangen_TCSE6_input">[4]</a>) to find the extreme point \( \bar x \) such
+<a href="#Langtangen_TCSE6_input">[6]</a>) to find the extreme point \( \bar x \) such
 that \( f'(\bar x)=0 \).  Add a method
 <code>_refine_extrema</code> in class <code>MinMax</code>,
 which goes through all the interior local minima
@@ -1690,7 +2136,7 @@ and maxima and solves \( f'(\bar x)=0 \).  Compute \( f'(x) \) using the
 x_{i+1}-x_{i-1} \).
 
 <p>
-Filename: <code>minmaxf.py</code>.
+Filename: <code>minmaxf</code>.
 
 <p>
 <!-- --- end exercise --- -->
@@ -1698,7 +2144,7 @@ Filename: <code>minmaxf.py</code>.
 <p>
 <!-- --- begin exercise --- -->
 
-<h2 id="sec:class:ex18a">Exercise 34: Find the optimal production for a company<a name="sec:class:ex18a"></a></h2>
+<h2 id="sec:class:ex18a" class="anchor">Exercise 35: Find the optimal production for a company</h2>
 
 <p>
 The company PROD produces two different products, P$_1$ and P$_2$,
@@ -1721,20 +2167,20 @@ product P$_j$:
 <tr><td align="center">   \( \mbox{M}_3 \)    </td> <td align="center">   0        </td> <td align="center">   4        </td> </tr>
 </tbody>
     </table>
-  </div>
-</div> <!-- col-xs-3 -->
+  </div> <!-- col-xs-3 -->
+</div> <!-- cell row -->
 <p>
- For instance, to produce one unit of \( \mbox{P}_2 \) one needs 1 unit of
- \( \mbox{M}_1 \), 3 units of \( \mbox{M}_2 \) and 4 units of \( \mbox{M}_3 \).
- Furthermore, PROD has available 100, 80 and 150 units of material
- \( \mbox{M}_1 \), \( \mbox{M}_2 \) and \( \mbox{M}_3 \) respectively (for the
- time period considered).  The revenue per produced unit of product
- \( \mbox{P}_1 \) is 150 NOK, and for one unit of \( \mbox{P}_2 \) it is 175
- NOK. On the other hand the raw materials \( \mbox{M}_1 \), \( \mbox{M}_2 \)
- and \( \mbox{M}_3 \) cost 10, 17 and 25 NOK per unit, respectively.  The
- question is: how much should PROD produce of each product?  We here
- assume that PROD wants to maximize its net revenue (which is revenue
- minus costs).
+For instance, to produce one unit of \( \mbox{P}_2 \) one needs 1 unit of
+\( \mbox{M}_1 \), 3 units of \( \mbox{M}_2 \) and 4 units of \( \mbox{M}_3 \).
+Furthermore, PROD has available 100, 80 and 150 units of material
+\( \mbox{M}_1 \), \( \mbox{M}_2 \) and \( \mbox{M}_3 \) respectively (for the
+time period considered).  The revenue per produced unit of product
+\( \mbox{P}_1 \) is 150 NOK, and for one unit of \( \mbox{P}_2 \) it is 175
+NOK. On the other hand the raw materials \( \mbox{M}_1 \), \( \mbox{M}_2 \)
+and \( \mbox{M}_3 \) cost 10, 17 and 25 NOK per unit, respectively.  The
+question is: how much should PROD produce of each product?  We here
+assume that PROD wants to maximize its net revenue (which is revenue
+minus costs).
 
 <p>
 <b>a)</b>
@@ -1759,7 +2205,7 @@ Explain why PROD's problem may be stated mathematically as follows:
 
 $$
 \begin{equation}
-  \tag{4}
+\tag{9}
   \begin{array}{lrrrrr}
    \mbox{\rm maximize}    &\multicolumn{3}{c}{f(x,y)} \\ 
    \mbox{\rm subject to}  &       \\ 
@@ -1771,24 +2217,35 @@ $$
  \end{equation}
 $$
 
- This is an example of a <em>linear optimization problem.</em>
+This is an example of a <em>linear optimization problem.</em>
 
 <p>
 <b>c)</b>
 The production \( (x,y) \) may be considered as a point in the
 plane. Illustrate geometrically the set \( T \) of all such points that
-satisfy the constraints in model <a href="#mjx-eqn-4">(4)</a>. Every point in this
+satisfy the constraints in model <a href="#mjx-eqn-9">(9)</a>. Every point in this
 set is called a <em>feasible point.</em>
 
 <p>
 <!-- --- begin hint in exercise --- -->
 
 <p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_35_1" style="font-size: 80%;"></a>
 <b>Hint.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_35_1">
+
+<p>
 For every inequality
 determine first the straight line obtained by replacing the
 inequality by equality. Then, find the points satisfying the
 inequality (a half-plane), and finally, intersect these half-planes.
+
+<p>
+</div></p>
+</div>
+</p>
 
 <p>
 <!-- --- end hint in exercise --- -->
@@ -1806,15 +2263,26 @@ the command-line arguments will be
 
 <!-- code=text (!bc ccq) typeset with pygments style "default" -->
 <blockquote>
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">&#39;[2,1,100]&#39; &#39;[5,3,80]&#39; &#39;[0,4,150]&#39; &#39;[1,0,0]&#39; &#39;[0,1,0]&#39;
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>&#39;[2,1,100]&#39; &#39;[5,3,80]&#39; &#39;[0,4,150]&#39; &#39;[1,0,0]&#39; &#39;[0,1,0]&#39;
 </pre></div>
 </blockquote><p>
 <!-- --- begin hint in exercise --- -->
 
 <p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_35_2" style="font-size: 80%;"></a>
 <b>Hint.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_35_2">
+
+<p>
 Perform an <code>eval</code> on the elements of <code>sys.argv[1:]</code> to
 get \( a \), \( b \), and \( c \) for each line as a list in the program.
+
+<p>
+</div></p>
+</div>
+</p>
 
 <p>
 <!-- --- end hint in exercise --- -->
@@ -1839,16 +2307,27 @@ the \( \alpha \) value in the legend for each line).
 
 <p>
 <b>f)</b>
-Use what you saw in e) to solve the problem <a href="#mjx-eqn-4">(4)</a>
+Use what you saw in e) to solve the problem <a href="#mjx-eqn-9">(9)</a>
 geometrically.  This solution is called an <em>optimal solution</em>.
 
 <p>
 <!-- --- begin hint in exercise --- -->
 
 <p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_35_3" style="font-size: 80%;"></a>
 <b>Hint.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_35_3">
+
+<p>
 How large can you choose \( \alpha \) such that
 \( L_{\alpha} \) is nonempty?
+
+<p>
+</div></p>
+</div>
+</p>
 
 <p>
 <!-- --- end hint in exercise --- -->
@@ -1857,7 +2336,7 @@ How large can you choose \( \alpha \) such that
 <b>g)</b>
 Assume that we have other values on the revenues and costs than the
 actual numbers in a).  Explain why
-<a href="#mjx-eqn-4">(4)</a>, with these new parameter values, still has an optimal
+<a href="#mjx-eqn-9">(9)</a>, with these new parameter values, still has an optimal
 solution lying in a corner point of \( T \).  Extend the program
 to calculate all the corner points of a
 region \( T \) in the plane determined by the linear inequalities like
@@ -1867,28 +2346,40 @@ over \( T \) by calculating the function values in the corner points and
 finding the smallest function value.
 
 <p>
-Filename: <code>optimization.py</code>.
+Filename: <code>optimization</code>.
 
 <p>
 <!-- --- end exercise --- -->
 
-<h1 id="___sec105">References <a name="___sec105"></a></h1>
+<h1 id="___sec110" class="anchor">References </h1>
 
 <p>
 <!-- begin bibliography -->
 
 <ol>
- <li> <a name="Langtangen_TCSE6_oo"></a> <b>H. P. Langtangen</b>. 
+ <li> <div id="Langtangen_TCSE6_oo"></div> <b>H. P. Langtangen</b>. 
     Object-oriented programming,
+    \emphhttp://hplgit.github.io/primer.html/doc/pub/oo,
     <a href="http://hplgit.github.io/primer.html/doc/pub/oo" target="_self"><tt>http://hplgit.github.io/primer.html/doc/pub/oo</tt></a>.</li>
- <li> <a name="Langtangen_TCSE6_varargs"></a> <b>H. P. Langtangen</b>. 
+ <li> <div id="Langtangen_TCSE6_varargs"></div> <b>H. P. Langtangen</b>. 
     Variable number of function arguments in Python,
+    \emphhttp://hplgit.github.io/primer.html/doc/pub/varargs,
     <a href="http://hplgit.github.io/primer.html/doc/pub/varargs" target="_self"><tt>http://hplgit.github.io/primer.html/doc/pub/varargs</tt></a>.</li>
- <li> <a name="Langtangen_TCSE6_debug"></a> <b>H. P. Langtangen</b>. 
+ <li> <div id="Langtangen_TCSE6_debug"></div> <b>H. P. Langtangen</b>. 
     Debugging in Python,
+    \emphhttp://hplgit.github.io/primer.html/doc/pub/debug,
     <a href="http://hplgit.github.io/primer.html/doc/pub/debug" target="_self"><tt>http://hplgit.github.io/primer.html/doc/pub/debug</tt></a>.</li>
- <li> <a name="Langtangen_TCSE6_input"></a> <b>H. P. Langtangen</b>. 
+ <li> <div id="Langtangen_TCSE6_plot"></div> <b>H. P. Langtangen</b>. 
+    Array computing and curve plotting,
+    \emphhttp://hplgit.github.io/primer.html/doc/pub/plot,
+    <a href="http://hplgit.github.io/primer.html/doc/pub/plot" target="_self"><tt>http://hplgit.github.io/primer.html/doc/pub/plot</tt></a>.</li>
+ <li> <div id="Langtangen_TCSE6_funcif"></div> <b>H. P. Langtangen</b>. 
+    Functions and branching,
+    \emphhttp://hplgit.github.io/primer.html/doc/pub/funcif,
+    <a href="http://hplgit.github.io/primer.html/doc/pub/funcif" target="_self"><tt>http://hplgit.github.io/primer.html/doc/pub/funcif</tt></a>.</li>
+ <li> <div id="Langtangen_TCSE6_input"></div> <b>H. P. Langtangen</b>. 
     User input and error handling,
+    \emphhttp://hplgit.github.io/primer.html/doc/pub/input,
     <a href="http://hplgit.github.io/primer.html/doc/pub/input" target="_self"><tt>http://hplgit.github.io/primer.html/doc/pub/input</tt></a>.</li>
 </ol>
 

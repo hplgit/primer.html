@@ -7,7 +7,7 @@ Automatically generated HTML file from DocOnce source
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
 <meta name="description" content="User input and error handling">
-<meta name="keywords" content="command-line arguments,option-value pairs (command line),standard input,standard output,standard error,bytes,bits,exceptions,widgets,event loop,modules,test block (in module files),test function,nose tests,pytest tests,search for module files,module folders,refactoring,binomial distribution,Bernoulli trials,Poisson distribution,Poisson process">
+<meta name="keywords" content="command-line arguments,option-value pairs (command line),standard input,standard output,standard error,bytes,bits,exceptions,widgets,event loop,modules,test block (in module files),test function,nose tests,pytest tests,unit testing,search for module files,module folders,refactoring,binomial distribution,Bernoulli trials,Poisson distribution,Poisson process">
 
 <title>User input and error handling</title>
 
@@ -20,6 +20,24 @@ Automatically generated HTML file from DocOnce source
 <style type="text/css">
 /* Let inline verbatim have the same color as the surroundings */
 code { color: inherit; background-color: transparent; }
+
+/* Add scrollbar to dropdown menus in bootstrap navigation bar */
+.dropdown-menu {
+   height: auto;
+   max-height: 400px;
+   overflow-x: hidden;
+}
+
+/* Adds an invisible element before each target to offset for the navigation
+   bar */
+.anchor::before {
+  content:"";
+  display:block;
+  height:50px; /* fixed header height*/
+  margin:-50px 0 0; /* negative fixed header height */
+}
+
+body { font-size:20px;line-height:1.5--html_body_style=font-size:20px;line-height:1.5; }
 </style>
 
 
@@ -27,287 +45,309 @@ code { color: inherit; background-color: transparent; }
 
 <!-- tocinfo
 {'highest level': 1,
- 'sections': [(' Asking questions and reading answers ',
+ 'sections': [('Table of contents',
+               1,
+               'table_of_contents',
+               'table_of_contents'),
+              ('Asking questions and reading answers',
                1,
                'sec:input:rawinput',
                'sec:input:rawinput'),
-              (' Reading keyboard input ',
+              ('Reading keyboard input',
                2,
                'sec:input:rawinput2',
                'sec:input:rawinput2'),
-              (' Reading from the command line ',
+              ('Reading from the command line',
                1,
                'sec:input:sysargv',
                'sec:input:sysargv'),
-              (' Providing input on the command line ',
+              ('Providing input on the command line',
                2,
                'sec:input:cml',
                'sec:input:cml'),
-              (' A variable number of command-line arguments ',
+              ('A variable number of command-line arguments',
                2,
                None,
                '___sec4'),
-              (' More on command-line arguments ', 2, None, '___sec5'),
-              (' Turning user text into live objects ', 1, None, '___sec6'),
-              (' The magic eval function ',
+              ('More on command-line arguments', 2, None, '___sec5'),
+              ('Turning user text into live objects', 1, None, '___sec6'),
+              ('The magic eval function',
                2,
                'sec:input:eval',
                'sec:input:eval'),
-              (' Applying eval to strings ', 3, None, '___sec8'),
-              (' Applying eval to user input ', 3, None, '___sec9'),
-              (' The magic exec function ',
+              ('Applying eval to strings', 3, None, '___sec8'),
+              ('Applying eval to user input', 3, None, '___sec9'),
+              ('The magic exec function',
                2,
                'sec:input:exec',
                'sec:input:exec'),
-              (' Turning string expressions into functions ',
+              ('Turning string expressions into functions',
                2,
                'sec:input:StringFunction',
                'sec:input:StringFunction'),
-              (' Option-value pairs on the command line ',
+              ('Option-value pairs on the command line',
                1,
                'sec:input:argparse',
                'sec:input:argparse'),
-              (' Basic usage of the argparse module ', 2, None, '___sec13'),
-              (' Mathematical expressions as values ', 2, None, '___sec14'),
-              (' Reading data from file ',
+              ('Basic usage of the argparse module', 2, None, '___sec13'),
+              ('Mathematical expressions as values', 2, None, '___sec14'),
+              ('Reading data from file',
                1,
                'sec:files:reading',
                'sec:files:reading'),
-              (' Reading a file line by line ', 2, None, '___sec16'),
-              (' Alternative ways of reading a file ',
+              ('Reading a file line by line', 2, None, '___sec16'),
+              ('Alternative ways of reading a file',
                2,
                'sec:files:reading:other',
                'sec:files:reading:other'),
-              (' The modern with statement ', 3, None, '___sec18'),
-              (' The old while construction ', 3, None, '___sec19'),
-              (' Reading a file into a string ', 3, None, '___sec20'),
-              (' Reading a mixture of text and numbers ',
+              ('The modern with statement', 3, None, '___sec18'),
+              ('The old while construction', 3, None, '___sec19'),
+              ('Reading a file into a string', 3, None, '___sec20'),
+              ('Reading a mixture of text and numbers',
                2,
                'sec:files:textnum',
                'sec:files:textnum'),
-              (' Is it more to file reading? ', 3, None, '___sec22'),
-              (' Writing data to file ',
+              ('Is it more to file reading?', 3, None, '___sec22'),
+              ('Writing data to file',
                1,
                'sec:files:writing',
                'sec:files:writing'),
-              (' Example: Writing a table to file ', 2, None, '___sec24'),
-              (' Problem ', 3, None, '___sec25'),
-              (' Solution ', 3, None, '___sec26'),
-              (' Standard input and output as file objects ',
+              ('Example: Writing a table to file', 2, None, '___sec24'),
+              ('Problem', 3, None, '___sec25'),
+              ('Solution', 3, None, '___sec26'),
+              ('Standard input and output as file objects',
                2,
                None,
                '___sec27'),
-              (' Redirecting standard input, output, and error ',
+              ('Redirecting standard input, output, and error',
                3,
                None,
                '___sec28'),
-              (' Note ', 3, None, '___sec29'),
-              (' What is a file, really? ',
+              ('Note', 3, None, '___sec29'),
+              ('What is a file, really?',
                2,
                'sec:files:really',
                'sec:files:really'),
-              (' Pure text files ', 3, None, '___sec31'),
-              (' Word processor files ', 3, None, '___sec32'),
-              (' Image files ', 3, None, '___sec33'),
-              (' Music files ', 3, None, '___sec34'),
-              (' PDF files ', 3, None, '___sec35'),
-              (' Remarks ', 3, None, '___sec36'),
-              (' Handling errors ',
-               1,
-               'sec:input:except',
-               'sec:input:except'),
-              (' Exception handling ',
+              ('Pure text files', 3, None, '___sec31'),
+              ('Word processor files', 3, None, '___sec32'),
+              ('Image files', 3, None, '___sec33'),
+              ('Music files', 3, None, '___sec34'),
+              ('PDF files', 3, None, '___sec35'),
+              ('Remarks', 3, None, '___sec36'),
+              ('Handling errors', 1, 'sec:input:except', 'sec:input:except'),
+              ('Exception handling',
                2,
                'sec:input:except:handling',
                'sec:input:except:handling'),
-              (' Testing for a specific exception ', 3, None, '___sec39'),
-              (' Examples on exception types ', 3, None, '___sec40'),
-              (' Digression ', 3, None, '___sec41'),
-              (' Raising exceptions ', 2, None, '___sec42'),
-              (' Example ', 3, None, '___sec43'),
-              (' A glimpse of graphical user interfaces ',
+              ('Testing for a specific exception', 3, None, '___sec39'),
+              ('Examples on exception types', 3, None, '___sec40'),
+              ('Digression', 3, None, '___sec41'),
+              ('Raising exceptions', 2, None, '___sec42'),
+              ('Example', 3, None, '___sec43'),
+              ('A glimpse of graphical user interfaces',
                1,
                'sec:input:GUI',
                'sec:input:GUI'),
-              (' Making modules ',
-               1,
-               'sec:input:modules',
-               'sec:input:modules'),
-              (' Example: Interest on bank deposits ', 2, None, '___sec46'),
-              (' Collecting functions in a module file ',
+              ('Making modules', 1, 'sec:input:modules', 'sec:input:modules'),
+              ('Example: Interest on bank deposits', 2, None, '___sec46'),
+              ('Collecting functions in a module file',
                2,
                'sec:input:module:create',
                'sec:input:module:create'),
-              (' Test block ',
+              ('Test block',
                2,
                'sec:input:module:testblock',
                'sec:input:module:testblock'),
-              (' Example on a test block in a minimalistic module ',
+              ('Example on a test block in a minimalistic module',
                3,
                None,
                '___sec49'),
-              (' A test block in the `interest` module ',
-               3,
-               None,
-               '___sec50'),
-              (' Verification of the module code ',
+              ('A test block in the `interest` module', 3, None, '___sec50'),
+              ('Verification of the module code',
                2,
                'sec:input:modules:testfunc',
                'sec:input:modules:testfunc'),
-              (' Getting input data ',
+              ('Getting input data',
                2,
                'sec:input:modules:inputdata',
                'sec:input:modules:inputdata'),
-              (' Doc strings in modules ', 2, None, '___sec53'),
-              (' Using modules ',
+              ('Doc strings in modules', 2, None, '___sec53'),
+              ('Using modules',
                2,
                'sec:input:modules:usage',
                'sec:input:modules:usage'),
-              (' What gets imported by various import statements? ',
+              ('What gets imported by various import statements?',
                3,
                None,
                '___sec55'),
-              (' How to make Python find a module file ',
-               3,
-               None,
-               '___sec56'),
-              (' How to make Python run the module file ',
-               3,
-               None,
-               '___sec57'),
-              (' Distributing modules ',
+              ('How to make Python find a module file', 3, None, '___sec56'),
+              ('How to make Python run the module file', 3, None, '___sec57'),
+              ('Distributing modules',
                2,
                'sec:input:modules:setuppy',
                'sec:input:modules:setuppy'),
-              (' Making software available on the Internet ',
+              ('Making software available on the Internet',
                2,
                None,
                '___sec59'),
-              (' Summary ', 1, 'sec:input:summary', 'sec:input:summary'),
-              (' Chapter topics ',
+              ('Making code for Python 2 and 3',
+               1,
+               'sec:input:py23',
+               'sec:input:py23'),
+              ('Basic differences between Python 2 and 3',
+               2,
+               None,
+               '___sec61'),
+              ('The print statement has changed', 3, None, '___sec62'),
+              ('Integer division is not an issue in Python 3',
+               3,
+               None,
+               '___sec63'),
+              ('The `raw_input` function is named `input` in Python 3',
+               3,
+               None,
+               '___sec64'),
+              ('Turning Python 2 code into Python 3 code',
+               2,
+               None,
+               '___sec65'),
+              ('Summary', 1, 'sec:input:summary', 'sec:input:summary'),
+              ('Chapter topics',
                2,
                'sec:input:summary:topics',
                'sec:input:summary:topics'),
-              (' Question and answer input ', 3, None, '___sec62'),
-              (' Getting command-line arguments ', 3, None, '___sec63'),
-              (' Using option-value pairs ', 3, None, '___sec64'),
-              (' Generating code on the fly ', 3, None, '___sec65'),
-              (' Turning string formulas into Python functions ',
+              ('Question and answer input', 3, None, '___sec68'),
+              ('Getting command-line arguments', 3, None, '___sec69'),
+              ('Using option-value pairs', 3, None, '___sec70'),
+              ('Generating code on the fly', 3, None, '___sec71'),
+              ('Turning string formulas into Python functions',
                3,
                None,
-               '___sec66'),
-              (' File operations ', 3, None, '___sec67'),
-              (' Handling exceptions ', 3, None, '___sec68'),
-              (' Raising exceptions ', 3, None, '___sec69'),
-              (' Modules ', 3, None, '___sec70'),
-              (' Terminology ', 3, None, '___sec71'),
-              (' Example: Bisection root finding ',
+               '___sec72'),
+              ('File operations', 3, None, '___sec73'),
+              ('Handling exceptions', 3, None, '___sec74'),
+              ('Raising exceptions', 3, None, '___sec75'),
+              ('Modules', 3, None, '___sec76'),
+              ('Terminology', 3, None, '___sec77'),
+              ('Example: Bisection root finding',
                2,
                'sec:input:summarizingex',
                'sec:input:summarizingex'),
-              (' Problem ', 3, None, '___sec73'),
-              (' Solution ', 3, None, '___sec74'),
-              (' Verification ', 3, None, '___sec75'),
-              (' Making a function ', 3, None, '___sec76'),
-              (' Making a test function ', 3, None, '___sec77'),
-              (' Making a module ', 3, None, '___sec78'),
-              (' Defining a user interface ', 3, None, '___sec79'),
-              (' Using the module ', 3, None, '___sec80'),
-              (' Potential problems with the software ', 3, None, '___sec81'),
-              (' Distributing the bisection module to others ',
+              ('Problem', 3, None, '___sec79'),
+              ('Solution', 3, None, '___sec80'),
+              ('Verification', 3, None, '___sec81'),
+              ('Making a function', 3, None, '___sec82'),
+              ('Making a test function', 3, None, '___sec83'),
+              ('Making a module', 3, None, '___sec84'),
+              ('Defining a user interface', 3, None, '___sec85'),
+              ('Using the module', 3, None, '___sec86'),
+              ('Potential problems with the software', 3, None, '___sec87'),
+              ('Distributing the bisection module to others',
                3,
                None,
-               '___sec82'),
-              (' Exercises ', 1, None, '___sec83'),
-              (' Exercise 1: Make an interactive program ',
+               '___sec88'),
+              ('Exercises', 1, None, '___sec89'),
+              ('Exercise 1: Make an interactive program',
                2,
                'sec:input:ex24',
                'sec:input:ex24'),
-              (' Exercise 2: Read a number from the command line ',
+              ('Exercise 2: Read a number from the command line',
                2,
                'sec:input:ex24b',
                'sec:input:ex24b'),
-              (' Exercise 3: Read a number from a file ',
+              ('Exercise 3: Read a number from a file',
                2,
                'sec:input:ex24bfile',
                'sec:input:ex24bfile'),
-              (' Exercise 4: Read and write several numbers from and to file ',
+              ('Exercise 4: Read and write several numbers from and to file',
                2,
                'sec:input:ex24bfile2',
                'sec:input:ex24bfile2'),
-              (' Exercise 5: Use exceptions to handle wrong input ',
+              ('Exercise 5: Use exceptions to handle wrong input',
                2,
                'sec:input:ex24c',
                'sec:input:ex24c'),
-              (' Exercise 6: Read input from the keyboard ',
+              ('Exercise 6: Read input from the keyboard',
                2,
                'sec:input:ex25',
                'sec:input:ex25'),
-              (' Exercise 7: Read input from the command line ',
+              ('Exercise 7: Read input from the command line',
                2,
                'sec:input:ex26',
                'sec:input:ex26'),
-              (' Exercise 8: Try MSWord or LibreOffice to write a program ',
+              ('Exercise 8: Try MSWord or LibreOffice to write a program',
                2,
                'sec:files:ex7',
                'sec:files:ex7'),
-              (' Exercise 9: Prompt the user for input to a formula ',
+              ('Exercise 9: Prompt the user for input to a formula',
                2,
                'sec:input:ex6',
                'sec:input:ex6'),
-              (' Exercise 10: Read parameters in a formula from the command line ',
+              ('Exercise 10: Read parameters in a formula from the command line',
                2,
                'sec:input:ex5',
                'sec:input:ex5'),
-              (' Exercise 11: Use exceptions to handle wrong input ',
+              ('Exercise 11: Use exceptions to handle wrong input',
                2,
                'sec:input:ex8b',
                'sec:input:ex8b'),
-              (' Exercise 12: Test validity of input data ',
+              ('Exercise 12: Test validity of input data',
                2,
                'sec:input:ex7',
                'sec:input:ex7'),
-              (' Exercise 13: Raise an exception in case of wrong input ',
+              ('Exercise 13: Raise an exception in case of wrong input',
                2,
                'sec:input:ex8',
                'sec:input:ex8'),
-              (' Exercise 14: Evaluate a formula for data in a file ',
+              ('Exercise 14: Evaluate a formula for data in a file',
                2,
                'sec:input:ex:ball:file',
                'sec:input:ex:ball:file'),
-              (' Exercise 15: Compute the distance it takes to stop a car ',
+              ('Exercise 15: Write a function given its test function',
+               2,
+               'sec:input:ex:testffirst',
+               'sec:input:ex:testffirst'),
+              ('Exercise 16: Compute the distance it takes to stop a car',
                2,
                'sec:input:ex21',
                'sec:input:ex21'),
-              (' Exercise 16: Look up calendar functionality ',
+              ('Exercise 17: Look up calendar functionality',
                2,
                'sec:input:ex48',
                'sec:input:ex48'),
-              (' Exercise 17: Use the StringFunction tool ',
+              ('Exercise 18: Use the StringFunction tool',
                2,
                'sec:input:ex28b',
                'sec:input:ex28b'),
-              (' Exercise 18: Why we test for specific exception types ',
+              ('Exercise 19: Why we test for specific exception types',
                2,
                'sec:input:ex11',
                'sec:input:ex11'),
-              (' Exercise 19: Make a complete module ',
+              ('Exercise 20: Make a complete module',
                2,
                'sec:input:ex27',
                'sec:input:ex27'),
-              (' Exercise 20: Check if mathematical identities hold ',
+              ('Exercise 21: Organize a previous program as a module',
+               2,
+               'sec:input:ex17',
+               'sec:input:ex17'),
+              ('Exercise 22: Read options and values from the command line',
+               2,
+               'sec:input:ex19',
+               'sec:input:ex19'),
+              ('Exercise 23: Check if mathematical identities hold',
                2,
                'sec:input:ex2',
                'sec:input:ex2'),
-              (' Exercise 21: Compute probabilities with the binomial distribution ',
+              ('Exercise 24: Compute probabilities with the binomial distribution',
                2,
                'sec:input:ex15',
                'sec:input:ex15'),
-              (' Exercise 22: Compute probabilities with the Poisson distribution ',
+              ('Exercise 25: Compute probabilities with the Poisson distribution',
                2,
                'sec:input:ex16',
                'sec:input:ex16'),
-              (' References ', 1, None, '___sec106')]}
+              ('References', 1, None, '___sec115')]}
 end of tocinfo -->
 
 <body>
@@ -345,23 +385,129 @@ $$
     </button>
     <a class="navbar-brand" href="input-readable.html">User input and error handling</a>
   </div>
+
   <div class="navbar-collapse collapse navbar-responsive-collapse">
     <ul class="nav navbar-nav navbar-right">
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
         <ul class="dropdown-menu">
-     <!-- navigation toc: --> <li><a href="._input-readable001.html#sec:input:rawinput" style="font-size: 80%;">Asking questions and reading answers</a></li>
-     <!-- navigation toc: --> <li><a href="._input-readable002.html#sec:input:sysargv" style="font-size: 80%;">Reading from the command line</a></li>
-     <!-- navigation toc: --> <li><a href="._input-readable003.html#___sec6" style="font-size: 80%;">Turning user text into live objects</a></li>
-     <!-- navigation toc: --> <li><a href="._input-readable004.html#sec:input:argparse" style="font-size: 80%;">Option-value pairs on the command line</a></li>
-     <!-- navigation toc: --> <li><a href="._input-readable005.html#sec:files:reading" style="font-size: 80%;">Reading data from file</a></li>
-     <!-- navigation toc: --> <li><a href="#sec:files:writing" style="font-size: 80%;">Writing data to file</a></li>
-     <!-- navigation toc: --> <li><a href="._input-readable007.html#sec:input:except" style="font-size: 80%;">Handling errors</a></li>
-     <!-- navigation toc: --> <li><a href="._input-readable008.html#sec:input:GUI" style="font-size: 80%;">A glimpse of graphical user interfaces</a></li>
-     <!-- navigation toc: --> <li><a href="._input-readable009.html#sec:input:modules" style="font-size: 80%;">Making modules</a></li>
-     <!-- navigation toc: --> <li><a href="._input-readable010.html#sec:input:summary" style="font-size: 80%;">Summary</a></li>
-     <!-- navigation toc: --> <li><a href="._input-readable011.html#___sec83" style="font-size: 80%;">Exercises</a></li>
-     <!-- navigation toc: --> <li><a href="._input-readable011.html#___sec106" style="font-size: 80%;">References</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable000.html#table_of_contents" style="font-size: 80%;"><b>Table of contents</b></a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable001.html#sec:input:rawinput" style="font-size: 80%;"><b>Asking questions and reading answers</b></a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable001.html#sec:input:rawinput2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Reading keyboard input</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable002.html#sec:input:sysargv" style="font-size: 80%;"><b>Reading from the command line</b></a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable002.html#sec:input:cml" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Providing input on the command line</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable002.html#___sec4" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;A variable number of command-line arguments</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable002.html#___sec5" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;More on command-line arguments</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable003.html#___sec6" style="font-size: 80%;"><b>Turning user text into live objects</b></a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable003.html#sec:input:eval" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The magic eval function</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable003.html#___sec8" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Applying eval to strings</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable003.html#___sec9" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Applying eval to user input</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable003.html#sec:input:exec" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The magic exec function</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable003.html#sec:input:StringFunction" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Turning string expressions into functions</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable004.html#sec:input:argparse" style="font-size: 80%;"><b>Option-value pairs on the command line</b></a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable004.html#___sec13" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Basic usage of the argparse module</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable004.html#___sec14" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Mathematical expressions as values</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable005.html#sec:files:reading" style="font-size: 80%;"><b>Reading data from file</b></a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable005.html#___sec16" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Reading a file line by line</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable005.html#sec:files:reading:other" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Alternative ways of reading a file</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable005.html#___sec18" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The modern with statement</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable005.html#___sec19" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The old while construction</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable005.html#___sec20" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Reading a file into a string</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable005.html#sec:files:textnum" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Reading a mixture of text and numbers</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable005.html#___sec22" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Is it more to file reading?</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:files:writing" style="font-size: 80%;"><b>Writing data to file</b></a></li>
+     <!-- navigation toc: --> <li><a href="#___sec24" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Writing a table to file</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec25" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec26" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Solution</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec27" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Standard input and output as file objects</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec28" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Redirecting standard input, output, and error</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec29" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Note</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:files:really" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;What is a file, really?</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec31" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pure text files</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec32" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Word processor files</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec33" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Image files</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec34" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Music files</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec35" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PDF files</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec36" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remarks</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable007.html#sec:input:except" style="font-size: 80%;"><b>Handling errors</b></a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable007.html#sec:input:except:handling" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exception handling</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable007.html#___sec39" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Testing for a specific exception</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable007.html#___sec40" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Examples on exception types</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable007.html#___sec41" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Digression</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable007.html#___sec42" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Raising exceptions</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable007.html#___sec43" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable008.html#sec:input:GUI" style="font-size: 80%;"><b>A glimpse of graphical user interfaces</b></a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable009.html#sec:input:modules" style="font-size: 80%;"><b>Making modules</b></a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable009.html#___sec46" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Interest on bank deposits</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable009.html#sec:input:module:create" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Collecting functions in a module file</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable009.html#sec:input:module:testblock" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Test block</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable009.html#___sec49" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example on a test block in a minimalistic module</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable009.html#___sec50" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A test block in the <code>interest</code> module</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable009.html#sec:input:modules:testfunc" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Verification of the module code</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable009.html#sec:input:modules:inputdata" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Getting input data</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable009.html#___sec53" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Doc strings in modules</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable009.html#sec:input:modules:usage" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Using modules</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable009.html#___sec55" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;What gets imported by various import statements?</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable009.html#___sec56" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;How to make Python find a module file</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable009.html#___sec57" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;How to make Python run the module file</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable009.html#sec:input:modules:setuppy" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Distributing modules</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable009.html#___sec59" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Making software available on the Internet</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable010.html#sec:input:py23" style="font-size: 80%;"><b>Making code for Python 2 and 3</b></a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable010.html#___sec61" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Basic differences between Python 2 and 3</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable010.html#___sec62" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The print statement has changed</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable010.html#___sec63" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Integer division is not an issue in Python 3</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable010.html#___sec64" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The <code>raw_input</code> function is named <code>input</code> in Python 3</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable010.html#___sec65" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Turning Python 2 code into Python 3 code</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable011.html#sec:input:summary" style="font-size: 80%;"><b>Summary</b></a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable011.html#sec:input:summary:topics" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Chapter topics</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable011.html#___sec68" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Question and answer input</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable011.html#___sec69" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Getting command-line arguments</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable011.html#___sec70" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Using option-value pairs</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable011.html#___sec71" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Generating code on the fly</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable011.html#___sec72" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Turning string formulas into Python functions</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable011.html#___sec73" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;File operations</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable011.html#___sec74" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Handling exceptions</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable011.html#___sec75" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Raising exceptions</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable011.html#___sec76" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Modules</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable011.html#___sec77" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Terminology</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable011.html#sec:input:summarizingex" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Bisection root finding</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable011.html#___sec79" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable011.html#___sec80" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Solution</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable011.html#___sec81" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Verification</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable011.html#___sec82" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Making a function</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable011.html#___sec83" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Making a test function</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable011.html#___sec84" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Making a module</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable011.html#___sec85" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Defining a user interface</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable011.html#___sec86" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Using the module</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable011.html#___sec87" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Potential problems with the software</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable011.html#___sec88" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Distributing the bisection module to others</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable012.html#___sec89" style="font-size: 80%;"><b>Exercises</b></a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable012.html#sec:input:ex24" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 1: Make an interactive program</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable012.html#sec:input:ex24b" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 2: Read a number from the command line</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable012.html#sec:input:ex24bfile" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 3: Read a number from a file</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable012.html#sec:input:ex24bfile2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 4: Read and write several numbers from and to file</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable012.html#sec:input:ex24c" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 5: Use exceptions to handle wrong input</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable012.html#sec:input:ex25" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 6: Read input from the keyboard</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable012.html#sec:input:ex26" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 7: Read input from the command line</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable012.html#sec:files:ex7" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 8: Try MSWord or LibreOffice to write a program</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable012.html#sec:input:ex6" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 9: Prompt the user for input to a formula</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable012.html#sec:input:ex5" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 10: Read parameters in a formula from the command line</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable012.html#sec:input:ex8b" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 11: Use exceptions to handle wrong input</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable012.html#sec:input:ex7" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 12: Test validity of input data</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable012.html#sec:input:ex8" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 13: Raise an exception in case of wrong input</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable012.html#sec:input:ex:ball:file" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 14: Evaluate a formula for data in a file</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable012.html#sec:input:ex:testffirst" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 15: Write a function given its test function</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable012.html#sec:input:ex21" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 16: Compute the distance it takes to stop a car</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable012.html#sec:input:ex48" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 17: Look up calendar functionality</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable012.html#sec:input:ex28b" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 18: Use the StringFunction tool</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable012.html#sec:input:ex11" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 19: Why we test for specific exception types</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable012.html#sec:input:ex27" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 20: Make a complete module</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable012.html#sec:input:ex17" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 21: Organize a previous program as a module</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable012.html#sec:input:ex19" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 22: Read options and values from the command line</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable012.html#sec:input:ex2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 23: Check if mathematical identities hold</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable012.html#sec:input:ex15" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 24: Compute probabilities with the binomial distribution</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable012.html#sec:input:ex16" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 25: Compute probabilities with the Poisson distribution</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable012.html#___sec115" style="font-size: 80%;"><b>References</b></a></li>
 
         </ul>
       </li>
@@ -376,9 +522,9 @@ $$
 
 <a name="part0006"></a>
 <!-- !split -->
-<p style="font-size:80%">This chapter is taken from book <a href="http://www.springer.com/gp/book/9783642549588">A Primer on Scientific Programming with Python</a> by H. P. Langtangen, 4th edition, Springer, 2014.</p>
+<p style="font-size:80%">This chapter is taken from the book <a href="http://www.springer.com/gp/book/9783662498866">A Primer on Scientific Programming with Python</a> by H. P. Langtangen, 5th edition, Springer, 2016.</p>
 
-<h1 id="sec:files:writing">Writing data to file</h1>
+<h1 id="sec:files:writing" class="anchor">Writing data to file</h1>
 
 <p>
 Writing data to file is easy.
@@ -393,7 +539,7 @@ often be necessary to add a newline character,
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">outfile<span style="color: #666666">.</span>write(s <span style="color: #666666">+</span> <span style="color: #BA2121">&#39;</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121">&#39;</span>)
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>outfile<span style="color: #666666">.</span>write(s <span style="color: #666666">+</span> <span style="color: #BA2121">&#39;</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121">&#39;</span>)
 </pre></div>
 <p>
 if the string <code>s</code> is meant to appear on a single line in the file
@@ -410,31 +556,31 @@ to be opened for writing:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #408080; font-style: italic"># write to new file, or overwrite file:</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #408080; font-style: italic"># write to new file, or overwrite file:</span>
 outfile <span style="color: #666666">=</span> <span style="color: #008000">open</span>(filename, <span style="color: #BA2121">&#39;w&#39;</span>)
 
 <span style="color: #408080; font-style: italic"># append to the end of an existing file:</span>
 outfile <span style="color: #666666">=</span> <span style="color: #008000">open</span>(filename, <span style="color: #BA2121">&#39;a&#39;</span>)
 </pre></div>
 
-<h2 id="___sec24">Example: Writing a table to file </h2>
+<h2 id="___sec24" class="anchor">Example: Writing a table to file </h2>
 
-<h3 id="___sec25">Problem </h3>
+<h3 id="___sec25" class="anchor">Problem </h3>
 
 <p>
 As a worked example of file writing, we shall write out a nested list
-with tabular data to file.  A sample list may take look as
+with tabular data to file.  A sample list may look as
 
 <p>
 
 <!-- code=text (!bc ccq) typeset with pygments style "default" -->
 <blockquote>
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">[[ 0.75,        0.29619813, -0.29619813, -0.75      ],
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>[[ 0.75,        0.29619813, -0.29619813, -0.75      ],
  [ 0.29619813,  0.11697778, -0.11697778, -0.29619813],
  [-0.29619813, -0.11697778,  0.11697778,  0.29619813],
  [-0.75,       -0.29619813,  0.29619813,  0.75      ]]
 </pre></div>
-</blockquote><h3 id="___sec26">Solution </h3>
+</blockquote><h3 id="___sec26" class="anchor">Solution </h3>
 
 <p>
 We iterate through the rows (first index) in the list, and for each row,
@@ -446,7 +592,7 @@ a linebreak. The code resides in the file <a href="http://tinyurl.com/pwyasaa/in
 <p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">data <span style="color: #666666">=</span> [[ <span style="color: #666666">0.75</span>,        <span style="color: #666666">0.29619813</span>, <span style="color: #666666">-0.29619813</span>, <span style="color: #666666">-0.75</span>      ],
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>data <span style="color: #666666">=</span> [[ <span style="color: #666666">0.75</span>,        <span style="color: #666666">0.29619813</span>, <span style="color: #666666">-0.29619813</span>, <span style="color: #666666">-0.75</span>      ],
         [ <span style="color: #666666">0.29619813</span>,  <span style="color: #666666">0.11697778</span>, <span style="color: #666666">-0.11697778</span>, <span style="color: #666666">-0.29619813</span>],
         [<span style="color: #666666">-0.29619813</span>, <span style="color: #666666">-0.11697778</span>,  <span style="color: #666666">0.11697778</span>,  <span style="color: #666666">0.29619813</span>],
         [<span style="color: #666666">-0.75</span>,       <span style="color: #666666">-0.29619813</span>,  <span style="color: #666666">0.29619813</span>,  <span style="color: #666666">0.75</span>      ]]
@@ -464,7 +610,7 @@ The resulting data file becomes
 <p>
 
 <!-- code=text (!bc dat) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">    0.75000000    0.29619813   -0.29619813   -0.75000000
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>    0.75000000    0.29619813   -0.29619813   -0.75000000
     0.29619813    0.11697778   -0.11697778   -0.29619813
    -0.29619813   -0.11697778    0.11697778    0.29619813
    -0.75000000   -0.29619813    0.29619813    0.75000000
@@ -475,7 +621,7 @@ An extension of this program consists in adding column and row headings:
 <p>
 
 <!-- code=text (!bc dat) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">           column  1     column  2     column  3     column  4
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>           column  1     column  2     column  3     column  4
 row  1    0.75000000    0.29619813   -0.29619813   -0.75000000
 row  2    0.29619813    0.11697778   -0.11697778   -0.29619813
 row  3   -0.29619813   -0.11697778    0.11697778    0.29619813
@@ -490,7 +636,7 @@ and loop from 1 to this length:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">ncolumns <span style="color: #666666">=</span> <span style="color: #008000">len</span>(data[<span style="color: #666666">0</span>])
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>ncolumns <span style="color: #666666">=</span> <span style="color: #008000">len</span>(data[<span style="color: #666666">0</span>])
 outfile<span style="color: #666666">.</span>write(<span style="color: #BA2121">&#39;          &#39;</span>)
 <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">1</span>, ncolumns<span style="color: #666666">+1</span>):
     outfile<span style="color: #666666">.</span>write(<span style="color: #BA2121">&#39;</span><span style="color: #BB6688; font-weight: bold">%10s</span><span style="color: #BA2121">    &#39;</span> <span style="color: #666666">%</span> (<span style="color: #BA2121">&#39;column </span><span style="color: #BB6688; font-weight: bold">%2d</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> i))
@@ -513,7 +659,7 @@ To add the row headings, we need a counter over the row numbers:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">row_counter <span style="color: #666666">=</span> <span style="color: #666666">1</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>row_counter <span style="color: #666666">=</span> <span style="color: #666666">1</span>
 <span style="color: #008000; font-weight: bold">for</span> row <span style="color: #AA22FF; font-weight: bold">in</span> data:
     outfile<span style="color: #666666">.</span>write(<span style="color: #BA2121">&#39;row </span><span style="color: #BB6688; font-weight: bold">%2d</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> row_counter)
     <span style="color: #008000; font-weight: bold">for</span> column <span style="color: #AA22FF; font-weight: bold">in</span> row:
@@ -528,14 +674,14 @@ We could, alternatively, iterate over the indices in the list:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #008000">len</span>(data)):
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #008000">len</span>(data)):
     outfile<span style="color: #666666">.</span>write(<span style="color: #BA2121">&#39;row </span><span style="color: #BB6688; font-weight: bold">%2d</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> (i<span style="color: #666666">+1</span>))
     <span style="color: #008000; font-weight: bold">for</span> j <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #008000">len</span>(data[i])):
         outfile<span style="color: #666666">.</span>write(<span style="color: #BA2121">&#39;</span><span style="color: #BB6688; font-weight: bold">%14.8f</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> data[i][j])
     outfile<span style="color: #666666">.</span>write(<span style="color: #BA2121">&#39;</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121">&#39;</span>)
 </pre></div>
 
-<h2 id="___sec27">Standard input and output as file objects </h2>
+<h2 id="___sec27" class="anchor">Standard input and output as file objects </h2>
 
 <p>
 Reading user input from the keyboard applies the function
@@ -559,7 +705,7 @@ closed. The statement
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">s <span style="color: #666666">=</span> <span style="color: #008000">raw_input</span>(<span style="color: #BA2121">&#39;Give s:&#39;</span>)
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>s <span style="color: #666666">=</span> <span style="color: #008000">raw_input</span>(<span style="color: #BA2121">&#39;Give s:&#39;</span>)
 </pre></div>
 <p>
 is equivalent to
@@ -567,7 +713,7 @@ is equivalent to
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;Give s: &#39;</span>,
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;Give s: &#39;</span>,
 s <span style="color: #666666">=</span> sys<span style="color: #666666">.</span>stdin<span style="color: #666666">.</span>readline()
 </pre></div>
 <p>
@@ -578,7 +724,7 @@ Similarly,
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">s <span style="color: #666666">=</span> <span style="color: #008000">eval</span>(<span style="color: #008000">raw_input</span>(<span style="color: #BA2121">&#39;Give s:&#39;</span>))
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>s <span style="color: #666666">=</span> <span style="color: #008000">eval</span>(<span style="color: #008000">raw_input</span>(<span style="color: #BA2121">&#39;Give s:&#39;</span>))
 </pre></div>
 <p>
 is equivalent to
@@ -586,7 +732,7 @@ is equivalent to
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;Give s: &#39;</span>,
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;Give s: &#39;</span>,
 s <span style="color: #666666">=</span> <span style="color: #008000">eval</span>(sys<span style="color: #666666">.</span>stdin<span style="color: #666666">.</span>readline())
 </pre></div>
 <p>
@@ -595,7 +741,7 @@ For output to the terminal window, the statement
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">print</span> s
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">print</span> s
 </pre></div>
 <p>
 is equivalent to
@@ -603,7 +749,7 @@ is equivalent to
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">sys<span style="color: #666666">.</span>stdout<span style="color: #666666">.</span>write(s <span style="color: #666666">+</span> <span style="color: #BA2121">&#39;</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121">&#39;</span>)
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>sys<span style="color: #666666">.</span>stdout<span style="color: #666666">.</span>write(s <span style="color: #666666">+</span> <span style="color: #BA2121">&#39;</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121">&#39;</span>)
 </pre></div>
 <p>
 Why it is handy to have access to standard input and output
@@ -615,7 +761,7 @@ A sample function may take the form
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">x2f</span>(infile, outfile, f):
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">x2f</span>(infile, outfile, f):
     <span style="color: #008000; font-weight: bold">for</span> line <span style="color: #AA22FF; font-weight: bold">in</span> infile:
         x <span style="color: #666666">=</span> <span style="color: #008000">float</span>(line)
         y <span style="color: #666666">=</span> f(x)
@@ -646,14 +792,14 @@ A typical application of <code>sys.stderr</code> is to report errors:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">if</span> x <span style="color: #666666">&lt;</span> <span style="color: #666666">0</span>:
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">if</span> x <span style="color: #666666">&lt;</span> <span style="color: #666666">0</span>:
     sys<span style="color: #666666">.</span>stderr<span style="color: #666666">.</span>write(<span style="color: #BA2121">&#39;Illegal value of x&#39;</span>); sys<span style="color: #666666">.</span>exit(<span style="color: #666666">1</span>)
 </pre></div>
 <p>
 This message to <code>sys.stderr</code> is an alternative to
 <code>print</code> or raising an exception.
 
-<h3 id="___sec28">Redirecting standard input, output, and error </h3>
+<h3 id="___sec28" class="anchor">Redirecting standard input, output, and error </h3>
 
 <p>
 Standard output from a program <code>prog</code>
@@ -664,7 +810,7 @@ using the greater than sign:
 <p>
 
 <!-- code=text (!bc sys) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">Terminal&gt; prog &gt; output
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>Terminal&gt; prog &gt; output
 </pre></div>
 <p>
 Here, <code>prog</code> can be any
@@ -675,7 +821,7 @@ can be redirected by
 <p>
 
 <!-- code=text (!bc sys) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">Terminal&gt; prog &amp;&gt; output
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>Terminal&gt; prog &amp;&gt; output
 </pre></div>
 <p>
 For example, error messages are normally written to standard error, which
@@ -684,7 +830,7 @@ is exemplified in this little terminal session on a Unix machine:
 <p>
 
 <!-- code=text (!bc sys) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">Terminal&gt; ls bla-bla1 bla-bla2
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>Terminal&gt; ls bla-bla1 bla-bla2
 ls: cannot access bla-bla1: No such file or directory
 ls: cannot access bla-bla2: No such file or directory
 Terminal&gt; ls bla-bla1 bla-bla2 &amp;&gt; errors
@@ -701,7 +847,7 @@ the program reads from this file rather than from the keyboard:
 <p>
 
 <!-- code=text (!bc sys) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">Terminal&gt; prog &lt; input
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>Terminal&gt; prog &lt; input
 </pre></div>
 <p>
 Combinations are also possible:
@@ -709,10 +855,10 @@ Combinations are also possible:
 <p>
 
 <!-- code=text (!bc sys) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">Terminal&gt; prog &lt; input &gt; output
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>Terminal&gt; prog &lt; input &gt; output
 </pre></div>
 
-<h3 id="___sec29">Note </h3>
+<h3 id="___sec29" class="anchor">Note </h3>
 
 <p>
 The redirection of standard output, input, and error
@@ -728,7 +874,7 @@ error work with ordinary files instead. Here is the technique:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">sys_stdout_orig <span style="color: #666666">=</span> sys<span style="color: #666666">.</span>stdout
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>sys_stdout_orig <span style="color: #666666">=</span> sys<span style="color: #666666">.</span>stdout
 sys<span style="color: #666666">.</span>stdout <span style="color: #666666">=</span> <span style="color: #008000">open</span>(<span style="color: #BA2121">&#39;output&#39;</span>, <span style="color: #BA2121">&#39;w&#39;</span>)
 sys_stdin_orig <span style="color: #666666">=</span> sys<span style="color: #666666">.</span>stdin
 sys<span style="color: #666666">.</span>stdin <span style="color: #666666">=</span> <span style="color: #008000">open</span>(<span style="color: #BA2121">&#39;input&#39;</span>, <span style="color: #BA2121">&#39;r&#39;</span>)
@@ -741,7 +887,7 @@ objects in new variables, these objects would get lost in the redefinition
 above and we would never be able to reach the common standard input and
 output in the program.)
 
-<h2 id="sec:files:really">What is a file, really?</h2>
+<h2 id="sec:files:really" class="anchor">What is a file, really?</h2>
 
 <p>
 This section is not mandatory for understanding the rest of the document.
@@ -765,7 +911,7 @@ recognized from the keyboard, but there are also characters that do
 not have a familiar symbol. Such characters looks cryptic
 when printed.
 
-<h3 id="___sec31">Pure text files </h3>
+<h3 id="___sec31" class="anchor">Pure text files </h3>
 
 <p>
 To see that a file is really just a sequence of characters, invoke an
@@ -803,7 +949,7 @@ we may use Python interactively:
 <p>
 
 <!-- code=python (!bc pyshell) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> file1 <span style="color: #666666">=</span> <span style="color: #008000">open</span>(<span style="color: #BA2121">&#39;test1.txt&#39;</span>, <span style="color: #BA2121">&#39;r&#39;</span>)<span style="color: #666666">.</span>read()  <span style="color: #408080; font-style: italic"># read file into string</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> file1 <span style="color: #666666">=</span> <span style="color: #008000">open</span>(<span style="color: #BA2121">&#39;test1.txt&#39;</span>, <span style="color: #BA2121">&#39;r&#39;</span>)<span style="color: #666666">.</span>read()  <span style="color: #408080; font-style: italic"># read file into string</span>
 <span style="color: #666666">&gt;&gt;&gt;</span> file1
 <span style="color: #BA2121">&#39;ABCD&#39;</span>
 <span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000">len</span>(file1)        <span style="color: #408080; font-style: italic"># length of string in bytes/characters</span>
@@ -821,13 +967,13 @@ directly:
 <p>
 
 <!-- code=python (!bc pyshell) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">os</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">os</span>
 <span style="color: #666666">&gt;&gt;&gt;</span> size <span style="color: #666666">=</span> os<span style="color: #666666">.</span>path<span style="color: #666666">.</span>getsize(<span style="color: #BA2121">&#39;test1.txt&#39;</span>)
 <span style="color: #666666">&gt;&gt;&gt;</span> size
 <span style="color: #666666">4</span>
 </pre></div>
 
-<h3 id="___sec32">Word processor files </h3>
+<h3 id="___sec32" class="anchor">Word processor files </h3>
 
 <p>
 Most computer users write text in a word processing program, such as
@@ -852,7 +998,7 @@ read the file contents into a string in Python and examine this string:
 <p>
 
 <!-- code=python (!bc pyshell) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> infile <span style="color: #666666">=</span> <span style="color: #008000">open</span>(<span style="color: #BA2121">&#39;test3.odt&#39;</span>, <span style="color: #BA2121">&#39;r&#39;</span>)  <span style="color: #408080; font-style: italic"># open LibreOffice file</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> infile <span style="color: #666666">=</span> <span style="color: #008000">open</span>(<span style="color: #BA2121">&#39;test3.odt&#39;</span>, <span style="color: #BA2121">&#39;r&#39;</span>)  <span style="color: #408080; font-style: italic"># open LibreOffice file</span>
 <span style="color: #666666">&gt;&gt;&gt;</span> s <span style="color: #666666">=</span> infile<span style="color: #666666">.</span>read()
 <span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000">len</span>(s)   <span style="color: #408080; font-style: italic"># file size</span>
 <span style="color: #666666">8858</span>
@@ -876,11 +1022,11 @@ and translate the information into nice, readable text on the screen
 where you can recognize the text <code>ABCD</code>.
 
 <p>
-Your are now in a position to look into <a href="._input-readable011.html#sec:files:ex7">Exercise 8: Try MSWord or LibreOffice to write a program</a> to
+Your are now in a position to look into <a href="._input-readable012.html#sec:files:ex7">Exercise 8: Try MSWord or LibreOffice to write a program</a> to
 see what happens if one attempts to use LibreOffice to write Python
 programs.
 
-<h3 id="___sec33">Image files </h3>
+<h3 id="___sec33" class="anchor">Image files </h3>
 
 <p>
 A digital image - captured by a digital camera or a mobile phone - is
@@ -911,7 +1057,7 @@ videos since the file sizes soon get too large for being transferred
 over the Internet. A small video file occasionally has bad visual
 quality, caused by too much compression.
 
-<h3 id="___sec34">Music files </h3>
+<h3 id="___sec34" class="anchor">Music files </h3>
 
 <p>
 An MP3 file is much like a JPEG file: first, there is some information
@@ -927,7 +1073,7 @@ idea is that one can throw away a lot of bytes in an intelligent way,
 such that the human ear hardly detects the difference between a
 compressed and uncompressed version of the music file.
 
-<h3 id="___sec35">PDF files </h3>
+<h3 id="___sec35" class="anchor">PDF files </h3>
 
 <p>
 Looking at a PDF file in a pure text editor shows that the file
@@ -940,7 +1086,7 @@ PDF code with the eyes).  A PDF file reader can easily interpret the
 contents of the file and display the text in a human-readable form on
 the screen.
 
-<h3 id="___sec36">Remarks </h3>
+<h3 id="___sec36" class="anchor">Remarks </h3>
 
 <p>
 We have repeated many times that a file is just a stream of bytes.  A

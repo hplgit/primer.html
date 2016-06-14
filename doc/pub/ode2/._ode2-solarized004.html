@@ -1,0 +1,3349 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Programming of ordinary differential equations">
+<meta name="keywords" content="ODE,ordinary differential equations,differential equations,scalar function,scalar differential equation,Forward Euler scheme,test function,differential equations,systems of differential equations,Midpoint method for ODEs,Leapfrog method for ODEs,Midpoint method w/iterations for ODEs,function inside function,Forward Euler instability,oscillating systems,second-order ODEs,Midpoint method for ODEs,Midpoint method w/iterations for ODEs,convergence rate,zombies,differential equations,ordinary differential equations">
+
+<title>Programming of ordinary differential equations</title>
+
+
+<link href="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/css/solarized_light_code.css" rel="stylesheet" type="text/css" title="light"/>
+<script src="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<link href="http://thomasf.github.io/solarized-css/solarized-light.min.css" rel="stylesheet">
+<style type="text/css">
+h1 {color: #b58900;}  /* yellow */
+/* h1 {color: #cb4b16;}  orange */
+/* h1 {color: #d33682;}  magenta, the original choice of thomasf */
+code { padding: 0px; background-color: inherit; }
+pre {
+  border: 0pt solid #93a1a1;
+  box-shadow: none;
+}
+.alert-text-small   { font-size: 80%;  }
+.alert-text-large   { font-size: 130%; }
+.alert-text-normal  { font-size: 90%;  }
+.alert {
+  padding:8px 35px 8px 14px; margin-bottom:18px;
+  text-shadow:0 1px 0 rgba(255,255,255,0.5);
+  border:1px solid #93a1a1;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  color: #555;
+  background-color: #eee8d5;
+  background-position: 10px 5px;
+  background-repeat: no-repeat;
+  background-size: 38px;
+  padding-left: 55px;
+  width: 75%;
+ }
+.alert-block {padding-top:14px; padding-bottom:14px}
+.alert-block > p, .alert-block > ul {margin-bottom:1em}
+.alert li {margin-top: 1em}
+.alert-block p+p {margin-top:5px}
+.alert-notice { background-image: url(https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/small_yellow_notice.png); }
+.alert-summary  { background-image:url(https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/small_yellow_summary.png); }
+.alert-warning { background-image: url(https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/small_yellow_warning.png); }
+.alert-question {background-image:url(https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/small_yellow_question.png); }
+
+div { text-align: justify; text-justify: inter-word; }
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [('Table of contents',
+               1,
+               'table_of_contents',
+               'table_of_contents'),
+              ('Scalar ordinary differential equations',
+               1,
+               'sec:ode2:ODE:scalar',
+               'sec:ode2:ODE:scalar'),
+              ('Examples on right-hand-side functions', 2, None, '___sec1'),
+              ('The Forward Euler scheme',
+               2,
+               'sec:ode2:ForwardEuler:func',
+               'sec:ode2:ForwardEuler:func'),
+              ('Function implementation',
+               2,
+               'sec:ode2:funcimpl',
+               'sec:ode2:funcimpl'),
+              ('Verifying the implementation',
+               2,
+               'sec:ode2:verify',
+               'sec:ode2:verify'),
+              ('Visual comparison', 3, None, '___sec5'),
+              ('Comparing with hand calculations', 3, None, '___sec6'),
+              ('Comparing with an exact numerical solution',
+               3,
+               None,
+               '___sec7'),
+              ('From discrete to continuous solution',
+               2,
+               'sec:ode2:wrap2callable',
+               'sec:ode2:wrap2callable'),
+              ('Switching numerical method',
+               2,
+               'sec:ode2:Heun',
+               'sec:ode2:Heun'),
+              ('Class implementation',
+               2,
+               'sec:ode2:classimpl',
+               'sec:ode2:classimpl'),
+              ('Class wrapping of a function', 3, None, '___sec11'),
+              ('Switching numerical method', 3, None, '___sec12'),
+              ('A more flexible class', 3, None, '___sec13'),
+              ('Usage of the class', 3, None, '___sec14'),
+              ('Verification', 3, None, '___sec15'),
+              ('Making a module', 3, None, '___sec16'),
+              ('Remark', 3, None, '___sec17'),
+              ('Logistic growth via a function-based approach',
+               2,
+               'sec:ode2:logistic:func',
+               'sec:ode2:logistic:func'),
+              ('Logistic growth via a class-based approach',
+               2,
+               'sec:ode2:logistic:class',
+               'sec:ode2:logistic:class'),
+              ('The problem class', 3, None, '___sec20'),
+              ('Getting input from the command line', 3, None, '___sec21'),
+              ('Import statements', 3, None, '___sec22'),
+              ('Solving the problem', 3, None, '___sec23'),
+              ('Making a module', 3, None, '___sec24'),
+              ('Pros and cons of the class-based approach',
+               3,
+               None,
+               '___sec25'),
+              ('Systems of ordinary differential equations',
+               1,
+               'sec:ode2:ODE:system',
+               'sec:ode2:ODE:system'),
+              ('Mathematical problem', 2, None, '___sec27'),
+              ('Example of a system of ODEs',
+               2,
+               'sec:ode2:ODE:system:ex',
+               'sec:ode2:ODE:system:ex'),
+              ('Function implementation',
+               2,
+               'sec:ode2:system:func',
+               'sec:ode2:system:func'),
+              ('Allowing lists', 3, None, '___sec30'),
+              ('Class implementation',
+               2,
+               'sec:ode2:system:class',
+               'sec:ode2:system:class'),
+              ('The ODESolver class hierarchy',
+               1,
+               'sec:ode2:ODESolver:hier',
+               'sec:ode2:ODESolver:hier'),
+              ('Numerical methods',
+               2,
+               'sec:ode2:ODE:methods',
+               'sec:ode2:ODE:methods'),
+              ('Construction of a solver hierarchy', 2, None, '___sec34'),
+              ('The superclass', 3, None, '___sec35'),
+              ('The Forward Euler method', 3, None, '___sec36'),
+              ('The 4th-order Runge-Kutta method', 3, None, '___sec37'),
+              ('The Backward Euler method',
+               2,
+               'sec:ode2:ODE:BE',
+               'sec:ode2:ODE:BE'),
+              ('Verification',
+               2,
+               'sec:ode2:ODESolver:verify',
+               'sec:ode2:ODESolver:verify'),
+              ('Remarks', 3, None, '___sec40'),
+              ('Example: Exponential decay',
+               2,
+               'sec:ode2:ODE:app:1',
+               'sec:ode2:ODE:app:1'),
+              ('Example: The logistic equation with problem and solver classes',
+               2,
+               'sec:ode2:ODE:app:2',
+               'sec:ode2:ODE:app:2'),
+              ('Basic problem and solver classes', 3, None, '___sec43'),
+              ('Computing an appropriate $\\Delta t$', 3, None, '___sec44'),
+              ('Dealing with time-dependent coefficients',
+               3,
+               None,
+               '___sec45'),
+              ('Reading input', 3, None, '___sec46'),
+              ('Example: An oscillating system',
+               2,
+               'sec:ode2:ODE:app:3',
+               'sec:ode2:ODE:app:3'),
+              ('Application 4: the trajectory of a ball',
+               2,
+               'sec:ode2:ODE:app:4',
+               'sec:ode2:ODE:app:4'),
+              ('Further developments of ODESolver', 2, None, '___sec49'),
+              ('Exercises', 1, None, '___sec50'),
+              ('Exercise 1: Solve a simple ODE with function-based code',
+               2,
+               'sec:ode2:ex:simple:func',
+               'sec:ode2:ex:simple:func'),
+              ('Exercise 2: Solve a simple ODE with class-based code',
+               2,
+               'sec:ode2:ex:simple:class',
+               'sec:ode2:ex:simple:class'),
+              ('Exercise 3: Solve a simple ODE with the ODEsolver hierarchy',
+               2,
+               'sec:ode2:ex:simple:ODESolver',
+               'sec:ode2:ex:simple:ODESolver'),
+              ('Exercise 4: Solve an ODE specified on the command line',
+               2,
+               'sec:class:ex13d',
+               'sec:class:ex13d'),
+              ('Exercise 5: Implement a numerical method for ODEs',
+               2,
+               'sec:class:ex13g3',
+               'sec:class:ex13g3'),
+              ('Exercise 6: Solve an ODE for emptying a tank',
+               2,
+               'sec:ode:ex5',
+               'sec:ode:ex5'),
+              ('Exercise 7: Solve an ODE for the arc length',
+               2,
+               'sec:ode:ex7',
+               'sec:ode:ex7'),
+              ('Exercise 8: Simulate a falling or rising body in a fluid',
+               2,
+               'sec:ode:ex4',
+               'sec:ode:ex4'),
+              ('Exercise 9: Verify the limit of a solution as time grows',
+               2,
+               'sec:ode2:ex22',
+               'sec:ode2:ex22'),
+              ('Exercise 10: Scale the logistic equation',
+               2,
+               'sec:ode2:ex42b',
+               'sec:ode2:ex42b'),
+              ('Exercise 11: Compute logistic growth with time-varying carrying capacity',
+               2,
+               'sec:ode2:ex42',
+               'sec:ode2:ex42'),
+              ('Exercise 12: Solve an ODE until constant solution',
+               2,
+               'sec:ode2:ex32d',
+               'sec:ode2:ex32d'),
+              ('Exercise 13: Use a problem class to hold data about an ODE',
+               2,
+               'sec:ode2:ex32e',
+               'sec:ode2:ex32e'),
+              ('Exercise 14: Derive and solve a scaled ODE problem',
+               2,
+               'sec:ode2:ex32f',
+               'sec:ode2:ex32f'),
+              ('Exercise 15: Clean up a file to make it a module',
+               2,
+               'sec:ode2:ex:FEfunc:module',
+               'sec:ode2:ex:FEfunc:module'),
+              ('Exercise 16: Simulate radioactive decay',
+               2,
+               'sec:ode2:ex25',
+               'sec:ode2:ex25'),
+              ('Exercise 17: Compute inverse functions by solving an ODE',
+               2,
+               'sec:ode:ex9',
+               'sec:ode:ex9'),
+              ('Exercise 18: Make a class for computing inverse functions',
+               2,
+               'sec:ode:ex10',
+               'sec:ode:ex10'),
+              ('Exercise 19: Add functionality to a class',
+               2,
+               'sec:ode:ex11',
+               'sec:ode:ex11'),
+              ('Exercise 20: Compute inverse functions by interpolation',
+               2,
+               'sec:ode:ex12',
+               'sec:ode:ex12'),
+              ('Exercise 21: Code the 4th-order Runge-Kutta method; function',
+               2,
+               'sec:ode2:ex:RK4:func',
+               'sec:ode2:ex:RK4:func'),
+              ('Exercise 22: Code the 4th-order Runge-Kutta method; class',
+               2,
+               'sec:ode2:ex:RK4:class',
+               'sec:ode2:ex:RK4:class'),
+              ('Exercise 23: Compare ODE methods',
+               2,
+               'sec:ode2:ex32h',
+               'sec:ode2:ex32h'),
+              ('Exercise 24: Code a test function for systems of ODEs',
+               2,
+               'sec:ode2:ex:sys:testfunc',
+               'sec:ode2:ex:sys:testfunc'),
+              ("Exercise 25: Code Heun's method for ODE systems; function",
+               2,
+               'sec:ode2:ex:Heun:sys:func',
+               'sec:ode2:ex:Heun:sys:func'),
+              ("Exercise 26: Code Heun's method for ODE systems; class",
+               2,
+               'sec:ode2:ex:Heun:sys:class',
+               'sec:ode2:ex:Heun:sys:class'),
+              ('Exercise 27: Implement and test the Leapfrog method',
+               2,
+               'sec:ode2:ex25c',
+               'sec:ode2:ex25c'),
+              ('Exercise 28: Implement and test an Adams-Bashforth method',
+               2,
+               'sec:ode2:ex25c:AB3',
+               'sec:ode2:ex25c:AB3'),
+              ('Exercise 29: Solve two coupled ODEs for radioactive decay',
+               2,
+               'sec:ode2:ex25x2',
+               'sec:ode2:ex25x2'),
+              ('Exercise 30: Implement a 2nd-order Runge-Kutta method; function',
+               2,
+               'sec:ode2:ex25b2',
+               'sec:ode2:ex25b2'),
+              ('Exercise 31: Implement a 2nd-order Runge-Kutta method; class',
+               2,
+               'sec:ode2:ex25b',
+               'sec:ode2:ex25b'),
+              ('Exercise 32: Code the iterated midpoint method; function',
+               2,
+               'sec:class:ex13e',
+               'sec:class:ex13e'),
+              ('Exercise 33: Code the iterated midpoint method; class',
+               2,
+               'sec:class:ex13f',
+               'sec:class:ex13f'),
+              ('Exercise 34: Make a subclass for the iterated midpoint method',
+               2,
+               'sec:class:ex13g2',
+               'sec:class:ex13g2'),
+              ('Exercise 35: Compare the accuracy of various methods for ODEs',
+               2,
+               'sec:class:ex:gaussian',
+               'sec:class:ex:gaussian'),
+              ('Exercise 36: Animate how various methods for ODEs converge',
+               2,
+               'sec:class:ex:gaussian2',
+               'sec:class:ex:gaussian2'),
+              ('Exercise 37: Study convergence of numerical methods for ODEs',
+               2,
+               'sec:ode2:ex29',
+               'sec:ode2:ex29'),
+              ("Exercise 38: Find a body's position along with its velocity",
+               2,
+               'sec:ode2:ex21',
+               'sec:ode2:ex21'),
+              ('Exercise 39: Add the effect of air resistance on a ball',
+               2,
+               'sec:ode2:ex27v4',
+               'sec:ode2:ex27v4'),
+              ('Exercise 40: Solve an ODE system for an electric circuit',
+               2,
+               'sec:ode2:ex27',
+               'sec:ode2:ex27'),
+              ('Remarks', 3, None, '___sec91'),
+              ('Exercise 41: Simulate the spreading of a disease by a SIR model',
+               2,
+               'sec:ode:ex14',
+               'sec:ode:ex14'),
+              ('Exercise 42: Introduce problem and solver classes in the SIR model',
+               2,
+               'sec:ode:ex14c',
+               'sec:ode:ex14c'),
+              ('Exercise 43: Introduce vaccination in a SIR model',
+               2,
+               'sec:ode:ex15',
+               'sec:ode:ex15'),
+              ('Exercise 44: Introduce a vaccination campaign in a SIR model',
+               2,
+               'sec:ode:ex16',
+               'sec:ode:ex16'),
+              ('Exercise 45: Find an optimal vaccination period',
+               2,
+               'sec:ode:ex17',
+               'sec:ode:ex17'),
+              ('Exercise 46: Simulate human-zombie interaction',
+               2,
+               'sec:ode:ex18',
+               'sec:ode:ex18'),
+              ('Exercise 47: Simulate a zombie movie',
+               2,
+               'sec:ode:ex19',
+               'sec:ode:ex19'),
+              ('Exercise 48: Simulate a war on zombies',
+               2,
+               'sec:ode:ex20',
+               'sec:ode:ex20'),
+              ('Exercise 49: Explore predator-prey population interactions',
+               2,
+               'sec:ode2:ex41',
+               'sec:ode2:ex41'),
+              ('Exercise 50: Formulate a 2nd-order ODE as a system',
+               2,
+               'sec:ode2:ex34',
+               'sec:ode2:ex34'),
+              ('Physical applications', 3, None, '___sec102'),
+              ('Exercise 51: Solve $\\ddot u + u =0$',
+               2,
+               'sec:ode2:ex35',
+               'sec:ode2:ex35'),
+              ('Exercise 52: Make a tool for analyzing oscillatory solutions',
+               2,
+               'sec:ode2:ex36v',
+               'sec:ode2:ex36v'),
+              ('Exercise 53: Implement problem, solver, and visualizer classes',
+               2,
+               'sec:ode2:ex37',
+               'sec:ode2:ex37'),
+              ('Exercise 54: Use classes for flexible choices of models',
+               2,
+               'sec:ode2:ex38',
+               'sec:ode2:ex38'),
+              ('Exercise 55: Apply software for oscillating systems',
+               2,
+               'sec:ode2:ex40',
+               'sec:ode2:ex40'),
+              ('Exercise 56: Model the economy of fishing',
+               2,
+               'sec:class:ex19',
+               'sec:class:ex19'),
+              ('References', 1, None, '___sec109')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- newcommands_keep.tex -->
+$$
+\newcommand{\tp}{\thinspace .}
+$$
+
+
+
+
+    
+<a name="part0004"></a>
+<p>
+<!-- begin top navigation -->
+<table style="width: 100%"><tr><td>
+<div style="text-align: left;"><a href="._ode2-solarized003.html">&laquo; Previous</a></div>
+</td><td>
+</td></tr></table>
+<!-- end top navigation -->
+</p>
+
+<p>
+<!-- !split -->
+<p style="font-size:80%">This chapter is taken from the book <a href="http://www.springer.com/gp/book/9783662498866">A Primer on Scientific Programming with Python</a> by H. P. Langtangen, 5th edition, Springer, 2016.</p>
+
+<h1 id="___sec50">Exercises </h1>
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:ode2:ex:simple:func">Exercise 1: Solve a simple ODE with function-based code</h2>
+
+<p>
+This exercise aims to solve the ODE problem \( u - 10 u^{\prime}=0 \),
+\( u(0)=0.2 \), for \( t\in [0,20] \).
+
+<p>
+<b>a)</b>
+Identify the mathematical function \( f(u,t) \) in the generic ODE form
+\( u^{\prime}=f(u,t) \).
+
+<p>
+<b>b)</b>
+Implement the \( f(u, t) \) function in a Python function.
+
+<p>
+<b>c)</b>
+Use the <code>ForwardEuler</code> function from
+the section <a href="._ode2-solarized001.html#sec:ode2:funcimpl">Function implementation</a>
+<!-- and the file <a href="http://tinyurl.com/pwyasaa/ode2/ForwardEuler_func.py" target="_self"><tt>ForwardEuler_func.py</tt></a> -->
+to compute a numerical solution of the ODE problem.
+Use a time step \( \Delta t =5 \).
+
+<p>
+<b>d)</b>
+Plot the numerical solution and the exact solution
+\( u(t)=0.2e^{0.1t} \).
+
+<p>
+<b>e)</b>
+Save the numerical solution to file. Decide upon a suitable file format.
+
+<p>
+<b>f)</b>
+Perform simulations for smaller \( \Delta t \) values and demonstrate
+visually that the numerical solution approaches the exact solution.
+
+<p>
+Filename: <code>simple_ODE_func</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:ode2:ex:simple:class">Exercise 2: Solve a simple ODE with class-based code</h2>
+
+<p>
+Solve the same ODE problem as in
+<a href="#sec:ode2:ex:simple:func">Exercise 1: Solve a simple ODE with function-based code</a>, but use
+the <code>ForwardEuler</code> class from
+the section <a href="._ode2-solarized001.html#sec:ode2:classimpl">Class implementation</a>.
+<!-- and the file <a href="http://tinyurl.com/pwyasaa/ode2/ForwardEuler.py" target="_self"><tt>ForwardEuler.py</tt></a>. -->
+Implement the right-hand side function \( f \) as a class too.
+Filename: <code>simple_ODE_class</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:ode2:ex:simple:ODESolver">Exercise 3: Solve a simple ODE with the ODEsolver hierarchy</h2>
+
+<p>
+Solve the same ODE problem as in
+<a href="#sec:ode2:ex:simple:func">Exercise 1: Solve a simple ODE with function-based code</a>, but use
+the <code>ForwardEuler</code> class in the <code>ODESolver</code> hierarchy from
+the section <a href="._ode2-solarized003.html#sec:ode2:ODESolver:hier">The ODESolver class hierarchy</a>.
+Filename: <code>simple_ODE_class_ODESolver</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:class:ex13d">Exercise 4: Solve an ODE specified on the command line</h2>
+
+<p>
+We want to make a program <code>odesolver_cml.py</code> which
+accepts an ODE problem to be specified on the command line. The
+command-line arguments are <code>f u0 dt T</code>, where <code>f</code> is the right-hand
+side \( f(u,t) \) specified as a string formula,
+<code>u0</code> is the initial condition, <code>dt</code> is the
+time step, and <code>T</code> is the final time of the simulation.  A fifth
+optional argument can be given to specify the name of the
+numerical solution method (set any method of your choice as default value).
+A curve plot of the solution versus time should be produced and stored
+in a file <code>plot.png</code>.
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<b>Hint 1.</b>
+Use <code>StringFunction</code> from <code>scitools.std</code> for convenient conversion of
+a formula on the command line to a Python function.
+
+<p>
+<!-- --- end hint in exercise --- -->
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<b>Hint 2.</b>
+Use the <code>ODESolver</code> hierarchy to solve the ODE and let the fifth
+command-line argument be the class name in the <code>ODESolver</code> hierarchy.
+
+<p>
+<!-- --- end hint in exercise --- -->
+Filename: <code>odesolver_cml</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:class:ex13g3">Exercise 5: Implement a numerical method for ODEs</h2>
+
+<p>
+Implement the numerical method
+<a href="._ode2-solarized003.html#mjx-eqn-36">(36)</a>-<a href="._ode2-solarized003.html#mjx-eqn-37">(37)</a>.
+How can you verify that the implementation is correct?
+Filename: <code>Heuns_method</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:ode:ex5">Exercise 6: Solve an ODE for emptying a tank</h2>
+
+<p>
+A cylindrical tank of radius \( R \) is filled with water to a height \( h_0 \).
+By opening a valve of radius \( r \) at the bottom of the tank, water
+flows out, and the height of water, \( h(t) \), decreases with time.
+We can derive an ODE that governs the height function \( h(t) \).
+
+<p>
+Mass conservation of water requires that the reduction in height
+balances the outflow. In a time interval \( \Delta t \), the height is
+reduced by \( \Delta h \), which corresponds to a water volume of
+\( \pi R^2\Delta h \). The water leaving the tank in the same
+interval of time equals \( \pi r^2v\Delta t \), where \( v \) is the outflow
+velocity. It can be shown (from what is known as Bernoulli's equation)
+<a href="#Lerner">[1]</a> <a href="#White1">[2]</a> that
+
+$$
+\begin{equation*} v(t) =  \sqrt{2gh(t) + h'(t)^2},\end{equation*}
+$$
+
+where \( g \) is the
+acceleration of gravity.
+Note that \( \Delta h > 0 \) implies an increase
+in \( h \), which means that \( -\pi R^2\Delta h \) is the corresponding
+decrease in volume that must balance the outflow loss of volume
+\( \pi r^2 v \Delta t \). Elimination of \( v \) and taking
+the limit \( \Delta t\rightarrow 0 \) lead to the ODE
+
+$$
+\begin{equation*}
+{dh\over dt} = -\left( {r\over R}\right)^2 \left( 1 - \left({r\over R}\right)^4\right)^{-1/2}\sqrt{2gh}\tp
+\end{equation*}
+$$
+
+For practical applications \( r\ll R \) so that
+\( 1-(r/R)^4\approx 1 \) is a reasonable approximation, since other
+approximations are done as well: friction is neglected
+in the derivation, and we are going to solve the ODE by approximate
+numerical methods.
+The final ODE then becomes
+
+$$
+\begin{equation}
+{dh\over dt} = -\left( {r\over R}\right)^2 \sqrt{2gh}\tp
+\tag{61}
+\end{equation}
+$$
+
+The initial condition follows from the initial height of water, \( h_0 \),
+in the tank: \( h(0)=h_0 \).
+<!-- We see from <a href="#mjx-eqn-61">(61)</a> -->
+<!-- that \( h'(t)\rightarrow 0 \) as \( h\rightarrow 0 \). -->
+
+<p>
+Solve <a href="#mjx-eqn-61">(61)</a> by a numerical method of your choice in
+a program.  Set \( r = 1\hbox{ cm} \), \( R=20 \hbox{ cm} \), \( g=9.81\hbox{
+m/s}^2 \), and \( h_0=1\hbox{ m} \). Use a time step of 10 seconds.  Plot
+the solution, and experiment to see what a proper time interval for
+the simulation is.  Make sure to test for \( h < 0 \) so that you do not
+apply the square root function to negative numbers.  Can you find an
+analytical solution of the problem to compare the numerical solution
+with?
+Filename: <code>tank_ODE</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:ode:ex7">Exercise 7: Solve an ODE for the arc length</h2>
+
+<p>
+Given a curve \( y=f(x) \), the length of the curve from \( x=x_0 \) to some
+point \( x \) is given by the function \( s(x) \), which solves the problem
+
+$$
+\begin{equation}
+{ds\over dx} = \sqrt{1 + [f'(x)]^2},\quad s(x_0)=0\tp
+\tag{62}
+\end{equation}
+$$
+
+Since \( s \) does not enter the right-hand side, <a href="#mjx-eqn-62">(62)</a> can
+immediately be integrated from \( x_0 \) to
+\( x \).
+However, we shall solve
+<a href="#mjx-eqn-62">(62)</a> as an ODE. Use the Forward Euler method and
+compute the length of a straight line (for easy verification)
+and a parabola:
+\( f(x)=\frac{1}{2} x + 1 \), \( x\in [0,2] \);
+\( f(x)=x^2 \),
+\( x\in [0,2] \).
+Filename: <code>arclength_ODE</code>.
+
+<p>
+<!--  -->
+<!-- from sympy import * -->
+<!-- x=Symbol('x') -->
+<!-- integrate(sqrt(1+4*x**2)) -->
+<!-- x*sqrt(4*x**2 + 1)/2 + asinh(2*x)/4 -->
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:ode:ex4">Exercise 8: Simulate a falling or rising body in a fluid</h2>
+
+<p>
+A body moving vertically through a fluid (liquid or gas) is subject to
+three different types of forces:
+
+<ul>
+  <li> the gravity force \( F_g= -mg \), where \( m \) is the mass of the body and \( g \) is the acceleration of gravity;</li>
+  <li> the drag force \( F_d = -\frac{1}{2}C_D\varrho A|v|v \), where \( C_D \) is a dimensionless drag coefficient depending on the body's shape, \( \varrho \) is the density of the fluid, \( A \) is the cross-sectional area (produced by a cut plane, perpendicular to the motion, through the thickest part of the body), and \( v \) is the velocity;</li>
+  <li> the uplift or buoyancy (&quot;Archimedes&quot;) force \( F_b = \varrho gV \), where \( V \) is the volume of the body.</li>
+</ul>
+
+(Roughly speaking, the \( F_d \) formula is suitable
+for medium to high velocities, while for very small velocities, or
+very small bodies, \( F_d \) is proportional to the velocity, not the
+velocity squared, see <a href="#White1">[2]</a>.)
+
+<p>
+Newton's second law applied to the body says that the sum of the listed forces
+must equal the mass of the body times its acceleration \( a \):
+
+$$
+\begin{equation*} F_g + F_d + F_b = ma,\end{equation*}
+$$
+
+which gives
+
+$$
+\begin{equation*} -mg -\frac{1}{2}C_D\varrho A|v|v + \varrho gV = ma\tp\end{equation*}
+$$
+
+The unknowns here are \( v \) and \( a \), i.e., we have two unknowns but only
+one equation. From kinematics in physics we know that
+the acceleration is the time derivative of the velocity: \( a = dv/dt \).
+This is our second equation.
+We can easily eliminate \( a \) and get a single differential equation for \( v \):
+
+$$
+\begin{equation*}
+-mg -\frac{1}{2}C_D\varrho A|v|v + \varrho gV = m{dv\over dt}\tp
+\end{equation*}
+$$
+
+A small rewrite of this equation is handy: we express \( m \) as \( \varrho_bV \),
+where \( \varrho_b \) is the density of the body, and we isolate \( dv/dt \)
+on the left-hand side,
+
+$$
+\begin{equation}
+{dv\over dt} = -g\left(1 - {\varrho\over\varrho_b}\right)
+-\frac{1}{2}C_D{\varrho A\over\varrho_b V}|v|v\tp
+\tag{63}
+\end{equation}
+$$
+
+This differential equation must be accompanied by an initial condition: \( v(0)=V_0 \).
+
+<p>
+<b>a)</b>
+Make a program for solving <a href="#mjx-eqn-63">(63)</a> numerically,
+using any numerical method of your choice.
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<b>Hint.</b>
+It is not strictly necessary, but it is an elegant Python solution to
+implement the right-hand side of <a href="#mjx-eqn-63">(63)</a> in
+the <code>__call__</code> method of a class where the parameters
+\( g \), \( \varrho \), \( \varrho_b \), \( C_D \), \( A \), and \( V \) are data attributes.
+
+<p>
+<!-- --- end hint in exercise --- -->
+
+<p>
+<b>b)</b>
+To verify the program, assume a heavy body in air such that the \( F_b \)
+force can be neglected, and assume a small velocity such that the
+air resistance \( F_d \) can also be neglected. Mathematically, setting \( \varrho =0 \)
+removes both these terms from the equation.
+The solution is then \( v(t)=y'(t)=v_0 - gt \).
+Observe through experiments that the linear solution is exactly
+reproduced by the numerical solution regardless of the value of \( \Delta t \).
+(Note that if you use the Forward Euler method, the method can become
+unstable for large \( \Delta t \), see the section <a href="._ode2-solarized003.html#sec:ode2:ODE:app:1">Example: Exponential decay</a>.
+and time steps above the critical limit
+for stability cannot be used to reproduce the linear solution.)
+Write a test function for automatically checking that the numerical
+solution is \( u_k=v_0-gk\Delta t \) in this test case.
+
+<p>
+<b>c)</b>
+Make a function for plotting the forces
+\( F_g \), \( F_b \), and \( F_d \) as functions of \( t \).
+Seeing the relative importance of the forces as time
+develops gives an increased understanding of how the different forces
+contribute to changing the velocity.
+
+<p>
+<b>d)</b>
+Simulate a skydiver in free fall before the parachute opens. We set
+the density of the human body as \( \varrho_b = 1003 \hbox{
+kg}/\hbox{m}^3 \) and the mass as \( m=80 \) kg, implying \( V=m/\varrho_b =
+0.08\hbox{ m}^3 \). We can base the cross-sectional area \( A \) the
+assumption of a circular cross section of diameter 50 cm, giving \( A=
+\pi R^2 = 0.9\hbox{ m}^2 \). The density of air decreases with height,
+and we here use the value 0.79 \( \hbox{kg/m}^3 \) which is relevant for
+about 5000 m height. The \( C_D \) coefficient can be set as 0.6. Start
+with \( v_0=0 \).
+
+<p>
+<b>e)</b>
+A ball with the size of a soccer ball is placed in deep water, and we
+seek to compute its motion upwards. Contrary to the former example,
+where the buoyancy force \( F_b \) is very small, \( F_b \) is now the driving
+force, and the gravity force \( F_g \) is small. Set \( A=\pi a^2 \) with
+\( a=11 \) cm. The mass of the ball is 0.43 kg, the density of water is
+1000 \( \hbox{kg/m}^3 \), and \( C_D \) can be taken as 0.4. Start with \( v_0=0 \).
+
+<p>
+Filename: <code>body_in_fluid</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:ode2:ex22">Exercise 9: Verify the limit of a solution as time grows</h2>
+
+<p>
+The solution of <a href="#mjx-eqn-63">(63)</a> often tends to a
+constant velocity, called the terminal velocity. This happens when the
+sum of the forces, i.e., the right-hand side in
+<a href="#mjx-eqn-63">(63)</a>, vanishes.
+
+<p>
+<b>a)</b>
+Compute the formula for the terminal velocity by hand.
+
+<p>
+<b>b)</b>
+Solve the ODE using class <code>ODESolver</code>
+and call the <code>solve</code> method with a <code>terminate</code> function that
+terminates the computations when a constant velocity is reached, that
+is, when \( |v(t_n)-v(t_{n-1})|\leq\epsilon \), where \( \epsilon \) is a
+small number.
+
+<p>
+<b>c)</b>
+Run a series of \( \Delta t \) values and make a graph of
+the terminal velocity as a function of \( \Delta t \) for the two cases in
+<a href="#sec:ode:ex4">Exercise 8: Simulate a falling or rising body in a fluid</a> d) and e).  Indicate the exact terminal velocity in
+the plot by a horizontal line.
+<!-- Would you expect the accuracy of the -->
+<!-- computed terminal velocity to increase with decreasing \( \Delta t \)? -->
+<!-- Discuss! -->
+
+<p>
+Filename: <code>body_in_fluid_termvel</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:ode2:ex42b">Exercise 10: Scale the logistic equation</h2>
+
+<p>
+Consider the logistic model
+<a href="._ode2-solarized001.html#mjx-eqn-5">(5)</a>:
+
+$$
+\begin{equation*} u^{\prime}(t)=\alpha u(t)\left(  1-\frac{u(t)}{R}\right),\quad u(0)=U_0\tp\end{equation*}
+$$
+
+This problem involves three
+input parameters: \( U_0 \), \( R \), and \( \alpha \). Learning how \( u \) varies with
+\( U_0 \), \( R \), and \( \alpha \) requires much experimentation where we
+vary all three parameters and observe the solution. A much more
+effective approach is to <em>scale</em> the problem. By this technique
+the solution depends only on one parameter: \( U_0/R \).
+This exercise tells how the scaling is done.
+
+<p>
+The idea of scaling is to introduce <em>dimensionless</em> versions
+of the independent and dependent variables:
+
+$$
+\begin{equation*} v = \frac{u}{u_c},\quad \tau = \frac{t}{t_c},\end{equation*}
+$$
+
+where \( u_c \) and \( t_c \) are characteristic sizes of \( u \) and \( t \),
+respectively, such that the dimensionless variables \( v \) and \( \tau \)
+are of approximately unit size.
+Since we know that \( u \rightarrow R \)
+as \( t\rightarrow\infty \), \( R \) can be taken as the characteristic size
+of \( u \).
+
+<p>
+Insert \( u=Rv \) and \( t=t_c\tau \) in the governing ODE and choose
+\( t_c = 1/\alpha \). Show that the ODE for the new function \( v(\tau) \)
+becomes
+
+$$
+\begin{equation}
+{dv\over d\tau} = v(1-v),\quad v(0)=v_0\tp
+\tag{64}
+\end{equation}
+$$
+
+We see that the three parameters \( U_0 \), \( R \), and \( \alpha \) have
+disappeared from the ODE problem, and only one parameter \( v_0=U_0/R \)
+is involved.
+
+<p>
+Show that if \( v(\tau) \) is computed, one can recover \( u(t) \) by
+
+$$
+\begin{equation}
+u(t) = Rv(\alpha t)\tp
+\tag{65}
+\end{equation}
+$$
+
+Geometrically, the transformation from \( v \) to \( u \) is just a stretching
+of the two axis in the coordinate system.
+
+<p>
+Make a program <code>logistic_scaled.py</code> where you compute
+\( v(\tau) \), given \( v_0=0.05 \), and then you use <a href="#mjx-eqn-65">(65)</a>
+to plot \( u(t) \) for \( R=100,500,1000 \) and \( \alpha=1 \) in one figure,
+and \( u(t) \) for \( \alpha=1, 5, 10 \) and \( R=1000 \) in another figure.
+Note how effectively you can generate \( u(t) \) without needing to solve
+an ODE problem, and also note how varying \( R \) and \( \alpha \) impacts
+the graph of \( u(t) \).
+Filename: <code>logistic_scaled</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:ode2:ex42">Exercise 11: Compute logistic growth with time-varying carrying capacity</h2>
+
+<p>
+Use classes <code>Problem2</code> and <code>AutoSolver</code>
+from the section <a href="._ode2-solarized003.html#sec:ode2:ODE:app:2">Example: The logistic equation with problem and solver classes</a> to study logistic growth
+when the carrying capacity of
+the environment, \( R \), changes periodically with time:
+\( R=500 \) for \( it_s\leq t < (i+1)t_s \) and \( R=200 \) for
+\( (i+1)t_s\leq t < (i+2)t_s \), with \( i=0, 2, 4, 6, \ldots \).
+Use the same data as in the section <a href="._ode2-solarized003.html#sec:ode2:ODE:app:2">Example: The logistic equation with problem and solver classes</a>, and
+find some relevant sizes of the period of variation, \( t_s \), to
+experiment with.
+Filename: <code>seasonal_logistic_growth</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:ode2:ex32d">Exercise 12: Solve an ODE until constant solution</h2>
+
+<p>
+Newton's law of cooling,
+
+$$
+\begin{equation}
+{dT\over dt} = -h(T-T_s)
+\tag{66}
+\end{equation}
+$$
+
+can be used to see how the temperature \( T \) of an object
+changes because of heat exchange with the surroundings, which have
+a temperature \( T_s \). The parameter \( h \), with unit \( \hbox{s}^{-1} \)
+is an experimental constant (heat transfer coefficient)
+telling how efficient the heat exchange with the surroundings is.
+For example, <a href="#mjx-eqn-66">(66)</a> may model the cooling of
+a hot pizza taken out of the oven. The problem with applying
+<a href="#mjx-eqn-66">(66)</a> is that \( h \) must be measured.
+Suppose we have measured \( T \) at \( t=0 \) and \( t_1 \). We can use a rough
+Forward Euler approximation of <a href="#mjx-eqn-66">(66)</a> with
+one time step of length \( t_1 \),
+
+$$
+\begin{equation*} \frac{T(t_1)-T(0)}{t_1} = -h(T(0)-T_s),\end{equation*}
+$$
+
+to make the estimate
+
+$$
+\begin{equation}
+h = \frac{T(t_1)-T(0)}{t_1(T_s-T(0))}\tp
+\tag{67}
+\end{equation}
+$$
+
+<p>
+<b>a)</b>
+The temperature of a
+pizza is 200 C at \( t=0 \), when it is taken out of the oven,
+and 180 C after 50 seconds, in a room with
+temperature 20 C. Find an estimate of \( h \) from the formula above.
+
+<p>
+<b>b)</b>
+Solve <a href="#mjx-eqn-66">(66)</a> numerically by a method of
+your choice to find the evolution of the
+temperature of the pizza. Plot the solution.
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<b>Hint.</b>
+You may solve the ODE the way you like, but the <code>solve</code> method in
+the classes in the <code>ODESolver</code> hierarchy
+accepts an optional <code>terminate</code> function that can be used to
+terminate the solution process when \( T \) is sufficiently close to \( T_s \).
+Reading the first part of the section <a href="._ode2-solarized003.html#sec:ode2:ODE:app:2">Example: The logistic equation with problem and solver classes</a> may be useful.
+
+<p>
+<!-- --- end hint in exercise --- -->
+
+<p>
+Filename: <code>pizza_cooling1</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:ode2:ex32e">Exercise 13: Use a problem class to hold data about an ODE</h2>
+
+<p>
+We address the same physical problem as in
+<a href="#sec:ode2:ex32d">Exercise 12: Solve an ODE until constant solution</a>, but we will now provide a class-based
+implementation for the user's code.
+
+<p>
+<b>a)</b>
+Make a class <code>Problem</code> containing the parameters \( h \), \( T_s \), \( T(0) \),
+and \( \Delta t \) as data attributes. Let these parameters be set in the
+constructor.
+The right-hand side of the ODE can be
+implemented in a <code>__call__</code> method.  If you use a class from the
+<code>ODESolver</code> hierarchy to solve the ODE, include the <code>terminate</code>
+function as a method in class <code>Problem</code>.
+
+<p>
+Create a stand-alone function <code>estimate_h(t0, t1, T0, T1)</code>
+which applies <a href="#mjx-eqn-67">(67)</a> from <a href="#sec:ode2:ex32d">Exercise 12: Solve an ODE until constant solution</a>
+to estimate the \( h \) parameter based on the initial temperature and
+one data point \( (t_1,T(t_1)) \). You can use this function to estimate
+a value for \( h \) prior to calling the constructor in the <code>Problem</code> class.
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<b>Hint.</b>
+You may want to read the section <a href="._ode2-solarized003.html#sec:ode2:ODE:app:2">Example: The logistic equation with problem and solver classes</a> to see why and how
+a class <code>Problem</code> is constructed.
+
+<p>
+<!-- --- end hint in exercise --- -->
+
+<p>
+<b>b)</b>
+Implement a test function <code>test_Problem()</code> for testing that class
+<code>Problem</code> works. (It is up to you to define how to test the class.)
+
+<p>
+<b>c)</b>
+What are the advantages and disadvantages with class <code>Problem</code>
+compared to using plain functions (in your view)?
+
+<p>
+<b>d)</b>
+We now want to run experiments with different values of some parameters:
+\( T_s=15, 22, 30 \) C and \( T(0)=250, 200 \) C.
+For each \( T(0) \), plot \( T \) for the three \( T_s \) values.
+The estimated value of \( h \) in <a href="#sec:ode2:ex32d">Exercise 12: Solve an ODE until constant solution</a> can be
+reused here.
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<b>Hint.</b>
+The typical elegant Python way to solve such a problem goes as follows.
+Write a function <code>solve(problem)</code> that takes a <code>Problem</code> object
+with name <code>problem</code> as argument and performs what it takes to
+solve one case (i.e., <code>solve</code> must solve the ODE and plot the solution).
+A dictionary can for each \( T_0 \) value hold a list of the cases to
+be plotted together. Then we loop over the problems in the
+dictionary of lists and call <code>solve</code> for each problem:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code># Given h and dt
+problems = {T_0: [Problem(h, T_s, T_0, dt)
+                  for T_s in 15, 22, 30] for T_0 in 250, 200}
+for T_0 in problems:
+    hold('off')
+    for problem in problems[T_0]:
+        solve(problem)
+        hold('on')
+    savefig('T0_%g'.pdf % T_0)
+</code></pre>
+<!-- end verbatim block -->
+When you become familiar with such code, and appreciate it, you can
+call yourself a professional programmer - with a deep knowledge of
+how lists, dictionaries, and classes can play elegantly together to
+conduct scientific experiments. In the present case we perform only
+a few experiments that could also have been done by six separate
+calls to the solver functionality, but in large-scale scientific
+and engineering investigations with hundreds of parameter
+combinations, the above code is still the same, only the generation
+of the <code>Problem</code> instances becomes more involved.
+
+<p>
+<!-- --- end hint in exercise --- -->
+
+<p>
+Filename: <code>pizza_cooling2</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:ode2:ex32f">Exercise 14: Derive and solve a scaled ODE problem</h2>
+
+<p>
+Use the scaling approach outlined in <a href="#sec:ode2:ex42b">Exercise 10: Scale the logistic equation</a> to
+&quot;scale away&quot; the parameters in the ODE in <a href="#sec:ode2:ex32d">Exercise 12: Solve an ODE until constant solution</a>. That is, introduce a new unknown
+\( u=(T-T_s)/(T(0)-T_s) \) and a new time scale \( \tau = th \).  Find the ODE
+and the initial condition that governs the \( u(\tau ) \) function.  Make
+a program that computes \( u(\tau ) \) until \( |u| < 0.001 \). Store the
+discrete \( u \) and \( \tau \) values in a file <code>u_tau.dat</code> if that file is
+not already present (you can use <code>os.path.isfile(f)</code> to test if a file
+with name <code>f</code> exists).  Create a function <code>T(u, tau, h, T0, Ts)</code> that
+loads the \( u \) and \( \tau \) data from the <code>u_tau.dat</code> file and returns
+two arrays with \( T \) and \( t \) values, corresponding to the computed
+arrays for \( u \) and \( \tau \). Plot \( T \) versus \( t \). Give the parameters
+\( h \), \( T_s \), and \( T(0) \) on the command line. Note that this program is
+supposed to solve the ODE once and then recover any \( T(t) \) solution by
+a simple scaling of the single \( u(\tau ) \) solution.
+Filename: <code>pizza_cooling3</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:ode2:ex:FEfunc:module">Exercise 15: Clean up a file to make it a module</h2>
+
+<p>
+The <a href="http://tinyurl.com/pwyasaa/ode2/ForwardEuler_func.py" target="_self"><tt>ForwardEuler_func.py</tt></a>
+file is not well organized to be used as a module, say for doing
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; from ForwardEuler_func import ForwardEuler
+&gt;&gt;&gt; u, t = ForwardEuler(lambda u, t: -u**2, U0=1, T=5, n=30)
+</code></pre>
+<!-- end verbatim block -->
+The reason is that this <code>import</code> statement will execute
+a main program in the <code>ForwardEuler_func.py</code> file,
+involving plotting of the solution in an example.
+Also, the verification tests are run, which in more complicated problems
+could take considerable time and thus make the <code>import</code> statement
+hang until the tests are done.
+
+<p>
+Go through the file and modify it such that it becomes a module where
+no code is executed unless the module file is run as a program.
+Filename: <code>ForwardEuler_func2</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:ode2:ex25">Exercise 16: Simulate radioactive decay</h2>
+
+<p>
+The equation \( u^{\prime} = -au \) is a relevant model for
+radioactive decay, where \( u(t) \) is the fraction of particles
+that remains in the radioactive substance at time \( t \).
+The parameter \( a \) is the inverse of the so-called mean lifetime of
+the substance. The initial condition is \( u(0)=1 \).
+
+<p>
+<b>a)</b>
+Introduce a class <code>Decay</code> to hold information about the physical
+problem: the parameter \( a \) and a <code>__call__</code> method for computing
+the right-hand side \( -au \) of the ODE.
+
+<p>
+<b>b)</b>
+Initialize an instance of class
+<code>Decay</code> with \( a =\ln (2)/5600 \) 1/y. The unit 1/y means one divided
+by year, so time is here measured in years, and the particular value
+of \( a \) corresponds to the Carbon-14 radioactive isotope whose decay is
+used extensively in dating organic material that is tens of thousands
+of years old.
+
+<p>
+<b>c)</b>
+Solve \( u^\prime = -au \) with a time
+step of 500 y, and simulate the radioactive
+decay for \( T=20,000 \) y.
+Plot the solution. Write out the final \( u(T) \) value
+and compare it with the exact value \( e^{-aT} \).
+
+<p>
+<!-- see odespy tutorial for inverse function computation -->
+
+<p>
+Filename: <code>radioactive_decay</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:ode:ex9">Exercise 17: Compute inverse functions by solving an ODE</h2>
+
+<p>
+The inverse function \( g \) of some function \( f(x) \) takes the value
+of \( f(x) \) back to \( x \) again:
+\( g(f(x))=x \). The common technique to compute inverse functions
+is to set \( y=f(x) \) and solve with respect to \( x \).  The formula
+on the right-hand side is then the desired inverse function \( g(y) \).
+
+<p>
+We can formulate a general procedure for computing inverse
+functions from an ODE problem. If we differentiate \( y=f(x) \) with respect to \( y \),
+we get \( 1 = f'(x)\frac{dx}{dy} \) by the chain rule. The inverse function
+we seek is \( x(y) \), but this function then fulfills the ODE
+
+$$
+\begin{equation}
+x'(y) = \frac{1}{f'(x)}\tp
+\tag{68}
+\end{equation}
+$$
+
+That \( y \) is the independent coordinate and \( x \) a function of \( y \) can
+be a somewhat confusing notation, so we might introduce \( u \) for \( x \)
+and \( t \) for \( y \):
+
+$$
+\begin{equation*} u^{\prime}(t) = \frac{1}{f'(u)}\tp\end{equation*}
+$$
+
+The initial condition is \( x(0)=x_r \) where \( x_r \) solves the equation
+\( f(x_r)=0 \) (\( x(0) \) implies \( y=0 \) and then from \( y=f(x) \)
+it follows that \( f(x(0))=0 \)).
+
+<p>
+Make a program that can use the described method to
+compute the inverse function of \( f(x) \), given \( x_r \).
+Use any numerical method of your choice for solving the ODE problem.
+Verify the implementation for \( f(x)=2x \).
+Apply the method for \( f(x)=\sqrt{x} \) and
+plot \( f(x) \) together with its inverse function.
+Filename: <code>inverse_ODE</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:ode:ex10">Exercise 18: Make a class for computing inverse functions</h2>
+
+<p>
+The method for computing inverse functions described in
+<a href="#sec:ode:ex9">Exercise 17: Compute inverse functions by solving an ODE</a> is very general. The purpose now is
+to use this general approach
+to make a more reusable utility, here called <code>Inverse</code>, for
+computing the inverse of some Python function <code>f(x)</code> on
+some interval <code>I=[a,b]</code>.
+The utility can be used as follows to calculate the inverse
+of \( \sin x \) on \( I=[0, \pi/2] \):
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>def f(x):
+    return sin(x)
+
+# Compute the inverse of f
+inverse = Inverse(f, x0=0, I=[0, pi/2], resolution=100)
+x, y = Inverse.compute()
+
+plot(y, x, 'r-',
+     x, f(x), 'b-',
+     y, asin(y), 'go')
+legend(['computed inverse', 'f(x)', 'exact inverse'])
+</code></pre>
+<!-- end verbatim block -->
+Here, <code>x0</code> is the value of <code>x</code> at 0, or in general
+at the left point of the interval: <code>I[0]</code>.
+The parameter <code>resolution</code> tells how many equally sized intervals
+\( \Delta y \) we use in the numerical integration of the ODE.
+A default choice of 1000 can be used if it is not given by the user.
+
+<p>
+Write class <code>Inverse</code> and put it in a module. Include a test function
+<code>test_Inverse()</code> in the module for verifying that class <code>Inverse</code>
+reproduces the exact solution in the test problem \( f(x)=2x \).
+Filename: <code>Inverse1</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:ode:ex11">Exercise 19: Add functionality to a class</h2>
+
+<p>
+Extend the module in <a href="#sec:ode:ex10">Exercise 18: Make a class for computing inverse functions</a> such that
+the value of \( x(0) \) (<code>x0</code> in class <code>Inverse</code>'s constructor)
+does not need to be provided by the user.
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<b>Hint.</b>
+Class <code>Inverse</code> can compute a value of \( x(0) \) as the root
+of \( f(x)=0 \).
+You may use the
+Bisection method from the section ref{sec:input:summarizingex},
+Newton's method from the section ref{sec:diffeq:Newtonsmethod:sec},
+or the Secant method from ref{sec:diffeq:ex14b} to
+solve \( f(x)=0 \). Class <code>Inverse</code> should figure out a suitable
+initial interval for the Bisection method or start values for the
+Newton or Secant methods. Computing \( f(x) \) for \( x \) at many
+points and examining these may help in solving \( f(x)=0 \) without
+any input from the user.
+
+<p>
+<!-- --- end hint in exercise --- -->
+Filename: <code>Inverse2</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:ode:ex12">Exercise 20: Compute inverse functions by interpolation</h2>
+
+<p>
+Instead of solving an ODE for computing the inverse function \( g(y) \)
+of some function \( f(x) \), as explained in <a href="#sec:ode:ex9">Exercise 17: Compute inverse functions by solving an ODE</a>,
+one may use a simpler approach based on ideas from
+the section <a href="._ode2-solarized001.html#sec:ode2:wrap2callable">From discrete to continuous solution</a>.
+Say we compute discrete values of \( x \) and \( f(x) \), stored in
+the arrays <code>x</code> and <code>y</code>. Doing a <code>plot(x, y)</code>
+shows \( y=f(x) \) as a function of \( x \), and doing
+<code>plot(y, x)</code> shows \( x \) as a function of \( y \), i.e., we can
+trivially plot the inverse function \( g(y) \) (!).
+
+<p>
+However, if we want the inverse function of \( f(x) \) as some
+Python function <code>g(y)</code> that we can call for any <code>y</code>,
+we can use the tool <code>wrap2callable</code> from
+the section <a href="._ode2-solarized001.html#sec:ode2:wrap2callable">From discrete to continuous solution</a> to turn the discrete
+inverse function, described by the arrays <code>y</code> (independent
+coordinate) and <code>x</code> (dependent coordinate), into a
+continuous function <code>g(y)</code>:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>from scitools.std import wrap2callable
+g = wrap2callable((y, x))
+
+y = 0.5
+print g(y)
+</code></pre>
+<!-- end verbatim block -->
+The <code>g(y)</code> function applies linear interpolation in each
+interval between the points in the <code>y</code> array.
+
+<p>
+Implement this method in a program.
+Verify the implementation for \( f(x)=2x \), \( x\in [0,4] \), and apply
+the method to \( f(x)=\sin x \) for \( x\in [0, \pi/2] \).
+Filename: <code>inverse_wrap2callable</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:ode2:ex:RK4:func">Exercise 21: Code the 4th-order Runge-Kutta method; function</h2>
+
+<p>
+Use the file <a href="http://tinyurl.com/pwyasaa/ode2/ForwardEuler_func.py" target="_self"><tt>ForwardEuler_func.py</tt></a> from the section <a href="._ode2-solarized001.html#sec:ode2:funcimpl">Function implementation</a> as starting point for implementing the famous
+and widely used 4th-order Runge-Kutta method
+<a href="._ode2-solarized003.html#mjx-eqn-41">(41)</a>-<a href="._ode2-solarized003.html#mjx-eqn-45">(45)</a>.  Use the test
+function involving a linear \( u(t) \) for verifying the
+implementation. <a href="#sec:ode2:ex32h">Exercise 23: Compare ODE methods</a> suggests an application
+of the code.
+Filename: <code>RK4_func</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:ode2:ex:RK4:class">Exercise 22: Code the 4th-order Runge-Kutta method; class</h2>
+
+<p>
+Carry out the steps in <a href="#sec:ode2:ex:RK4:func">Exercise 21: Code the 4th-order Runge-Kutta method; function</a>, but base
+the implementation on the file <a href="http://tinyurl.com/pwyasaa/ode2/ForwardEuler.py" target="_self"><tt>ForwardEuler.py</tt></a> from the section <a href="._ode2-solarized001.html#sec:ode2:classimpl">Class implementation</a>.
+Filename: <code>RK4_class</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:ode2:ex32h">Exercise 23: Compare ODE methods</h2>
+
+<p>
+Investigate the accuracy of the 4th-order Runge-Kutta method and the
+Forward Euler scheme for solving the (challenging)
+ODE problem
+
+$$
+\begin{equation}
+ {dy\over dx} = {1\over 2(y-1)},\quad y(0)=1+\sqrt{\epsilon},\quad x\in [0,4],
+\tag{69}
+\end{equation}
+$$
+
+where \( \epsilon \) is a small number, say \( \epsilon = 0.001 \).
+Start with four steps in \( [0,4] \) and reduce the step size repeatedly by
+a factor of two until you find the solutions sufficiently accurate.
+Make a plot of the numerical solutions along with
+the exact solution \( y(x) = 1 + \sqrt{x+\epsilon} \) for each step size.
+Filename: <code>yx_ODE_FE_vs_RK4</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:ode2:ex:sys:testfunc">Exercise 24: Code a test function for systems of ODEs</h2>
+
+<p>
+The <a href="http://tinyurl.com/pwyasaa/ode2/ForwardEuler_func.py" target="_self"><tt>ForwardEuler_func.py</tt></a>
+file from the section <a href="._ode2-solarized001.html#sec:ode2:funcimpl">Function implementation</a> does not contain any test
+function for verifying the implementation. We can use the fact that
+linear functions of time will be exactly reproduced by most numerical
+methods for ODEs.  A simple system of two ODEs with linear solutions
+\( v(t)=2+3t \) and \( w(t)=3+4t \) is
+
+$$
+\begin{align}
+v' &= 3 + (3 + 4t - w)^3,
+\tag{70} \\ 
+w' &= 4 + (2 + 3t - v)^4
+\tag{71}
+\end{align}
+$$
+
+Write a test function <code>test_ForwardEuler()</code> for comparing the
+numerical solution of this system with the exact solution.
+Filename: <code>ForwardEuler_sys_func2</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:ode2:ex:Heun:sys:func">Exercise 25: Code Heun's method for ODE systems; function</h2>
+
+<p>
+Use the file <a href="http://tinyurl.com/pwyasaa/ode2/ForwardEuler_sys_func.py" target="_self"><tt>ForwardEuler_sys_func.py</tt></a> from the section <a href="._ode2-solarized002.html#sec:ode2:system:func">Function implementation</a> as starting point for implementing
+Heun's method <a href="._ode2-solarized003.html#mjx-eqn-36">(36)</a>-<a href="._ode2-solarized003.html#mjx-eqn-37">(37)</a>
+for systems of ODEs.
+Verify the solution using the test function suggested in
+<a href="#sec:ode2:ex:sys:testfunc">Exercise 24: Code a test function for systems of ODEs</a>.
+Filename: <code>Heun_sys_func</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:ode2:ex:Heun:sys:class">Exercise 26: Code Heun's method for ODE systems; class</h2>
+
+<p>
+Carry out the steps in <a href="#sec:ode2:ex:Heun:sys:func">Exercise 25: Code Heun's method for ODE systems; function</a>, but
+make a class implementation based on the file <a href="http://tinyurl.com/pwyasaa/ode2/ForwardEuler_sys.py" target="_self"><tt>ForwardEuler_sys.py</tt></a> from the section <a href="._ode2-solarized002.html#sec:ode2:system:class">Class implementation</a>.
+Filename: <code>Heun_sys_class</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:ode2:ex25c">Exercise 27: Implement and test the Leapfrog method</h2>
+
+<p>
+<b>a)</b>
+Implement the Leapfrog method specified in formula
+<a href="._ode2-solarized003.html#mjx-eqn-35">(35)</a> from
+the section <a href="._ode2-solarized003.html#sec:ode2:ODE:methods">Numerical methods</a> in a subclass of
+<code>ODESolver</code>. Place the code in a separate module file <code>Leapfrog.py</code>.
+
+<p>
+<b>b)</b>
+Make a test function for verifying the implementation.
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<b>Hint.</b>
+Use the fact that the method will exactly produce a linear
+\( u \).
+
+<p>
+<!-- --- end hint in exercise --- -->
+
+<p>
+<b>c)</b>
+Make a movie that shows how the Leapfrog method, the Forward
+Euler method, and the 4th-order Runge-Kutta method converge to the
+exact solution as \( \Delta t \) is reduced. Use the model problem
+\( u^{\prime}=u \), \( u(0)=1 \), \( t\in [0,8] \), with \( n=2^k \) intervals,
+\( k=1,2\ldots,14 \).  Place the movie generation in a function.
+
+<p>
+<b>d)</b>
+Repeat c) for the model problem \( u^{\prime}=-u \), \( u(0)=1 \),
+\( t\in [0,5] \), with \( n=2^k \) intervals, \( k=1,2\ldots,14 \). In the movie,
+start with the finest resolution and reduce \( n \) until \( n=2 \).  The
+lessons learned is that Leapfrog can give completely wrong,
+oscillating solutions if the time step is not small enough.
+
+<p>
+Filename: <code>Leapfrog</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:ode2:ex25c:AB3">Exercise 28: Implement and test an Adams-Bashforth method</h2>
+
+<p>
+Do <a href="#sec:ode2:ex25c">Exercise 27: Implement and test the Leapfrog method</a> with the
+3rd-order Adams-Bashforth method <a href="._ode2-solarized003.html#mjx-eqn-46">(46)</a>.
+Filename: <code>AdamBashforth3</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:ode2:ex25x2">Exercise 29: Solve two coupled ODEs for radioactive decay</h2>
+
+<p>
+Consider two radioactive substances A and B. The nuclei in substance A
+decay to form nuclei of type B with a mean lifetime \( \tau_A \), while
+substance B decay to form type A nuclei with a mean lifetime \( \tau_B \).
+Letting \( u_A \) and \( u_B \) be the fractions of the initial amount of
+material in substance A and B, respectively, the following system of
+ODEs governs the evolution of \( u_A(t) \) and \( u_B(t) \):
+
+$$
+\begin{align}
+u_A' &= u_B/\tau_B - u_A/\tau_A,
+\tag{72}\\ 
+u_B' &= u_A/\tau_A - u_B/\tau_B,
+\tag{73}
+\end{align}
+$$
+
+with \( u_A(0)=u_B(0)=1 \).
+
+<p>
+<b>a)</b>
+Introduce a problem class, which
+holds the parameters \( \tau_A \) and \( \tau_B \) and offers
+a <code>__call__</code> method to compute the right-hand side
+vector of the ODE system, i.e.,
+\( (u_B/\tau_B - u_A/\tau_A,u_A/\tau_A - u_B/\tau_B) \).
+
+<p>
+<b>b)</b>
+Solve for \( u_A \) and \( u_B \) using a subclass in the <code>ODESolver</code> hierarchy
+and the parameter choices \( \tau_A=8 \) minutes, \( \tau_B=40 \) minutes, and
+\( \Delta t = 10 \) seconds.
+
+<p>
+<b>c)</b>
+Plot \( u_A \) and \( u_B \) against time measured in minutes.
+
+<p>
+<b>d)</b>
+From the ODE system it follows that the ratio
+\( u_A/u_B\rightarrow \tau_A/\tau_B \) as \( t\rightarrow\infty \)
+(assuming \( u_A'=u_B'=0 \) in the limit \( t\rightarrow\infty \)).
+Extend the problem class with a test method for checking that
+two given solutions \( u_A \) and \( u_B \) fulfill this requirement.
+Verify that this is indeed the case with the computed solutions
+in b).
+
+<p>
+Filename: <code>radioactive_decay2</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:ode2:ex25b2">Exercise 30: Implement a 2nd-order Runge-Kutta method; function</h2>
+
+<p>
+Implement the 2nd-order Runge-Kutta method specified in formula
+<a href="._ode2-solarized003.html#mjx-eqn-38">(38)</a>. Use a plain function <code>RungeKutta2</code> of the
+type shown in the section <a href="._ode2-solarized001.html#sec:ode2:ForwardEuler:func">The Forward Euler scheme</a> for the Forward
+Euler method.  Construct a test problem where you know the analytical
+solution, and plot the difference between the numerical and analytical
+solution. Demonstrate that the numerical solution approaches the
+exact solution as \( \Delta t \) is reduced.
+Filename: <code>RungeKutta2_func</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:ode2:ex25b">Exercise 31: Implement a 2nd-order Runge-Kutta method; class</h2>
+
+<p>
+<b>a)</b>
+Make a new subclass <code>RungeKutta2</code> in the <code>ODESolver</code> hierarchy from
+the section <a href="._ode2-solarized003.html#sec:ode2:ODESolver:hier">The ODESolver class hierarchy</a> for solving ordinary differential
+equations with the 2nd-order Runge-Kutta method specified in formula
+<a href="._ode2-solarized003.html#mjx-eqn-38">(38)</a>.
+
+<p>
+<b>b)</b>
+Construct a test problem where you can find an
+exact solution. Run different values of \( \Delta t \) and demonstrate
+in a plot that the numerical solution approaches the exact solution
+as \( \Delta t \) is decreased. Put the code that creates the plot in
+a function.
+
+<p>
+<b>c)</b>
+Make a test function <code>test_RungeKutta2_against_hand_calc()</code>
+where you do the computations of \( u_1 \) and
+\( u_2 \) i Python based on the mathematical formulas. Thereafter, run the
+<code>RungeKutta2</code> class for two time steps and check that the two solutions
+are equal (within a small tolerance).
+Use an ODE where the right-hand side depends on \( t \) as well as \( u \) such
+that you can test that <code>RungeKutta2</code> treats the \( t \) argument
+in \( f(u,t) \) correctly.
+
+<p>
+<b>d)</b>
+Make a module
+out of the <code>RungeKutta2</code> class and the associated functions.
+Call the functions from a test block in the module file.
+
+<p>
+Filename: <code>RungeKutta2</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:class:ex13e">Exercise 32: Code the iterated midpoint method; function</h2>
+
+<p>
+<b>a)</b>
+Implement the numerical method
+<a href="._ode2-solarized003.html#mjx-eqn-47">(47)</a>-<a href="._ode2-solarized003.html#mjx-eqn-48">(48)</a>
+as a function
+
+<p>
+<!-- begin verbatim block  ccq-->
+<pre><code>iterated_Midpoint_method(f, U0, T, n, N)
+</code></pre>
+<!-- end verbatim block -->
+where <code>f</code> is a Python implementation of \( f(u,t) \), <code>U0</code> is the initial
+condition \( u(0)=U_0 \), <code>T</code> is the final time of the simulation, <code>n</code> is
+the number of time steps, and <code>N</code> is the parameter \( N \) in the method
+<a href="._ode2-solarized003.html#mjx-eqn-47">(47)</a>.  The <code>iterated_Midpoint_method</code> should
+return two arrays: \( u_0,\ldots,u_n \) and \( t_0,\ldots,t_n \).
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<b>Hint.</b>
+You may want to build the function on the software described in
+the section <a href="._ode2-solarized001.html#sec:ode2:funcimpl">Function implementation</a>.
+<!-- (for scalar ODEs) or the section <a href="._ode2-solarized002.html#sec:ode2:system:func">Function implementation</a> (for systems of ODEs). -->
+
+<p>
+<!-- --- end hint in exercise --- -->
+
+<p>
+<b>b)</b>
+To verify the implementation, calculate by hand \( u_1 \) and \( u_2 \) when \( N=2 \) for
+the ODE \( u^{\prime}=-2u \), \( u(0)=1 \), with \( \Delta t = 1/4 \).  Compare
+your hand calculations with the results of the program.  Make a
+test function <code>test_iterated_Midpoint_method()</code> for automatically
+comparing the hand calculations with the output of the function in a).
+
+<p>
+<b>c)</b>
+Consider the ODE problem \( u^{\prime}=-2(t-4)u \), \( u(0)=e^{-16} \),
+\( t\in [0,8] \), with exact solution \( u=e^{-(t-4)^2} \).
+Write a function for
+comparing the numerical and exact solution in a plot. Enable
+setting of \( \Delta t \) and \( N \) from the command line and use the function to
+study the behavior of the numerical solution as you vary \( \Delta t \) and \( N \).
+Start with \( \Delta t=0.5 \) and \( N=1 \). Continue with reducing
+\( \Delta t \) and increasing \( N \).
+
+<p>
+Filename: <code>MidpointIter_func</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:class:ex13f">Exercise 33: Code the iterated midpoint method; class</h2>
+
+<p>
+The purpose of this exercise is to implement the numerical method
+<a href="._ode2-solarized003.html#mjx-eqn-47">(47)</a>-<a href="._ode2-solarized003.html#mjx-eqn-48">(48)</a> in a class
+<code>MidpointIter</code>, like the <code>ForwardEuler</code> class from the section <a href="._ode2-solarized001.html#sec:ode2:classimpl">Class implementation</a>.  Also make a test function
+<code>test_MidpointIter()</code> where you apply the verification technique from
+<a href="#sec:class:ex13e">Exercise 32: Code the iterated midpoint method; function</a>b.
+Filename: <code>MidpointIter_class</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:class:ex13g2">Exercise 34: Make a subclass for the iterated midpoint method</h2>
+
+<p>
+Implement the numerical method
+<a href="._ode2-solarized003.html#mjx-eqn-47">(47)</a>-<a href="._ode2-solarized003.html#mjx-eqn-48">(48)</a> in a subclass in
+the <code>ODESolver</code> hierarchy.  The code should reside in a separate file
+where the <code>ODESolver</code> class is imported.  One can either fix \( N \) or
+introduce an \( \epsilon \) and iterate until the change in
+\( |v_q-v_{q-1}| \) is less than \( \epsilon \). Allow the constructor to take
+both \( N \) and \( \epsilon \) as arguments. Compute a new \( v_q \) as long as
+\( q\leq N \) and \( |v_q-v_{q-1}|>\epsilon \).  Let \( N=20 \) and \( \epsilon =
+10^{-6} \) by default.  Store \( N \) as an attribute such that the user's
+code can access what \( N \) was in the last computation. Also write a
+test function for verifying the implementation.
+Filename: <code>MidpointIter</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:class:ex:gaussian">Exercise 35: Compare the accuracy of various methods for ODEs</h2>
+
+<p>
+We want to see how various numerical methods treat the following
+ODE problem:
+
+$$ u^\prime = -2(t-4)u,\quad u(0)=e^{-16},\quad t\in (0,10]\tp$$
+
+The exact solution is a Gaussian function: \( u(t)=e^{-(t-4)^2} \).
+Compare the Forward Euler method with other methods of
+your choice in the same plot. Relevant methods are
+the 2nd-order Runge-Kutta method, Heun's method, the
+4th-order Runge-Kutta method, or an implicit method.
+Put the value of \( \Delta t \) in the title of the plot.
+Perform experiments with \( \Delta t = 0.3, 0.25, 0.1, 0.05, 0.01, 0.001 \)
+and report how the various methods behave.
+Filename: <code>methods4gaussian</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:class:ex:gaussian2">Exercise 36: Animate how various methods for ODEs converge</h2>
+
+<p>
+Make a movie for illustrating how three selected numerical methods
+converge to the exact solution for the problem described in <a href="#sec:class:ex:gaussian">Exercise 35: Compare the accuracy of various methods for ODEs</a> as \( \Delta t \) is reduced.  Start with
+\( \Delta t=1 \), fix the \( y \) axis in \( [-0.1, 1.1] \), and reduce \( \Delta t \)
+by a quite small factor, say 1.5, between each frame in the movie. The
+movie must last until all methods have their
+curves visually on top of the exact solution.
+Filename: <code>animate_methods4gaussian</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:ode2:ex29">Exercise 37: Study convergence of numerical methods for ODEs</h2>
+
+<p>
+The approximation error when solving an ODE numerically is usually
+of the form \( C\Delta t^r \), where \( C \) and \( r \) are constants that can
+be estimated from numerical experiments. The constant \( r \), called
+the <em>convergence rate</em>, is of particular interest.
+Halving \( \Delta t \) halves the error if \( r=1 \), but if \( r=3 \), halving
+\( \Delta t \) reduces the error by a factor of 8.
+
+<p>
+The exercise &quot;Compute convergence rates of numerical integration methods&quot; in the document <a href="http://hplgit.github.io/primer.html/doc/pub/oo" target="_self">Object-oriented programming</a>
+<a href="#Langtangen_TCSE6_oo">[3]</a>
+describes a method for estimating
+\( r \) from two consecutive experiments. Make a function
+
+<p>
+<!-- begin verbatim block  ccq-->
+<pre><code>ODE_convergence(f, U0, u_e, method, dt=[])
+</code></pre>
+<!-- end verbatim block -->
+that returns
+a series of estimated \( r \) values corresponding
+to a series of \( \Delta t \) values given
+as the <code>dt</code> list. The argument <code>f</code> is a Python implementation
+of \( f(u,t) \) in the ODE \( u^{\prime}=f(u,t) \).
+The initial condition is \( u(0)=U_0 \), where \( U_0 \) is given
+as the <code>U0</code> argument, <code>u_e</code> is the exact solution \( u_e(t) \)
+of the ODE, and <code>method</code> is the name of a class in the <code>ODESolver</code>
+hierarchy. The error between the exact solution \( u_e \) and the computed
+solution \( u_0,u_1,\ldots,u_n \) can be defined as
+
+$$
+\begin{equation*} e = \left(\Delta t\sum_{i=0}^n (u_e(t_i) - u_i)^2\right)^{1/2}\tp\end{equation*}
+$$
+
+<p>
+Call the <code>ODE_convergence</code> function for some numerical methods
+and print the estimated \( r \)
+values for each method. Make your own choice of the ODE
+problem and the collection of numerical methods.
+Filename: <code>ODE_convergence</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:ode2:ex21">Exercise 38: Find a body's position along with its velocity</h2>
+
+<p>
+In <a href="#sec:ode:ex4">Exercise 8: Simulate a falling or rising body in a fluid</a> we compute the velocity
+\( v(t) \). The position of the
+body, \( y(t) \), is related to the velocity by \( y'(t)=v(t) \).
+Extend the program from <a href="#sec:ode:ex4">Exercise 8: Simulate a falling or rising body in a fluid</a> to solve
+the system
+
+$$
+\begin{align*}
+{dy\over dt} &= v,\\ 
+{dv\over dt} &= -g\left(1 - {\varrho\over\varrho_b}\right) -
+-\frac{1}{2}C_D{\varrho A\over\varrho_b V}|v|v\tp
+\end{align*}
+$$
+
+Filename: <code>body_in_fluid2</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:ode2:ex27v4">Exercise 39: Add the effect of air resistance on a ball</h2>
+
+<p>
+The differential equations governing the horizontal and vertical
+motion of a ball subject to
+gravity and air resistance read
+
+$$
+\begin{align}
+{d^2 x\over dt^2} = -\frac{3}{8}C_D\bar\varrho
+a^{-1}\sqrt{\left(\frac{dx}{dt}\right)^2 + \left({dy\over dt}\right)^2}
+\frac{dx}{dt},
+\tag{74}\\ 
+{d^2 y\over dt^2} = -g - \frac{3}{8}C_D\bar\varrho
+a^{-1}\sqrt{\left(\frac{dx}{dt}\right)^2 + \left({dy\over dt}\right)^2}
+{dy\over dt},
+\tag{75}
+\end{align}
+$$
+
+where \( (x,y) \) is the position of the ball (\( x \) is a horizontal measure
+and \( y \) is a vertical measure), \( g \) is the acceleration of gravity,
+\( C_D=0.2 \) is a drag coefficient, \( \bar\varrho \) is the ratio of the
+density of air and the ball,
+and \( a \) is the radius of the ball.
+
+<p>
+Let the initial condition be \( x=y=0 \) (start position in the origin) and
+
+$$
+\begin{equation*}dx/dt = v_0\cos\theta, \quad dy/dt = v_0\sin\theta,\end{equation*}
+$$
+
+where \( v_0 \) is
+the magnitude of the initial velocity and \( \theta \) is the angle the velocity
+makes with the horizontal.
+
+<p>
+<b>a)</b>
+Express the two second-order equations above as a system of four
+first-order equations with four initial conditions.
+
+<p>
+<b>b)</b>
+Implement the right-hand side in a problem class
+where the physical parameters \( C_D \), \( \bar\varrho \), \( a \), \( v_0 \), and
+\( \theta \) are stored along with the initial conditions.
+You may also want to add a <code>terminate</code> method in this class for
+checking when the ball hits the ground and then terminate the
+solution process.
+
+<p>
+<b>c)</b>
+Simulate a hard football kick where
+\( v_0=120 \) km/h and \( \theta \) is 30 degrees.
+Take the density of the ball as  0.017 \( \hbox{hg}/\hbox{m}^3 \) and the radius as 11 cm.
+Solve the ODE system for \( C_D=0 \) (no air resistance)
+and \( C_D=0.2 \), and plot \( y \) as a function of \( x \) in both cases to
+illustrate the effect of air resistance.
+Make sure you express all units in kg, m, s, and radians.
+
+<p>
+Filename: <code>kick2D</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:ode2:ex27">Exercise 40: Solve an ODE system for an electric circuit</h2>
+
+<p>
+An electric circuit with a resistor, a capacitor, an inductor,
+and a voltage source can be described by
+the ODE
+
+$$
+\begin{equation}
+L{dI\over dt} + RI + {Q\over C} = E(t),
+\tag{76}
+\end{equation}
+$$
+
+where \( LdI/dt \) is the voltage drop across the inductor,
+\( I \) is the current (measured in amperes, A),
+\( L \) is the inductance (measured in henrys, H),
+\( R \) is the resistance (measured in ohms, \( \Omega \)),
+\( Q \) is the charge on the
+capacitor (measured in coulombs, C),
+\( C \) is the capacitance (measured in farads, F), \( E(t) \) is the
+time-variable voltage source (measured in volts, V),
+and \( t \) is time (measured in seconds, s).
+There is a relation between
+\( I \) and \( Q \):
+
+$$
+\begin{equation}
+{dQ\over dt} = I\tp
+\tag{77}
+\end{equation}
+$$
+
+Equations <a href="#mjx-eqn-76">(76)</a>-<a href="#mjx-eqn-77">(77)</a>
+is a system two ODEs.
+Solve these for \( L=1 \) H,
+\( E(t)=2\sin\omega t \) V, \( \omega^2=3.5\hbox{ s}^{-2} \),
+\( C=0.25 \) C, \( R=0.2\ \Omega \), \( I(0)=1 \) A, and \( Q(0)=1 C \).
+Use the Forward Euler scheme with \( \Delta t = 2\pi/(60\omega) \).
+The solution will, after some time, oscillate with the same period as
+\( E(t) \), a period of \( 2\pi/\omega \). Simulate 10 periods.
+Filename: <code>electric_circuit</code>.
+
+<p>
+<!-- Closing remarks for this Exercise -->
+
+<h3 id="___sec91">Remarks </h3>
+
+<p>
+It turns out that the Forward Euler scheme overestimates the
+amplitudes of the oscillations.
+The more accurate 4th-order Runge-Kutta method is much better for
+this type of differential equation model.
+
+<p>
+<!-- H is the unit henry after the Am. scientist Henry -->
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:ode:ex14">Exercise 41: Simulate the spreading of a disease by a SIR model</h2>
+
+<p>
+We shall in this exercise model epidemiological diseases such as
+measles or swine flu.
+Suppose we have three categories of people: susceptibles (S) who can
+get the disease, infected (I) who have developed the disease and who
+can infect susceptibles, and recovered (R) who have recovered
+from the disease and become immune.  Let \( S(t) \), \( I(t) \), and \( R(t) \)
+be the number of people in category S, I, and R,
+respectively. We have that \( S+I+R=N \), where \( N \) is the size of the
+population, assumed constant here for simplicity.
+
+<p>
+When people mix in the population there are \( SI \) possible pairs
+of susceptibles and infected, and a certain fraction \( \beta SI \)
+per time interval
+meets with the result that the infected &quot;successfully&quot; infect the susceptible.
+During a time interval \( \Delta t \), \( \beta SI\Delta t \) get infected and
+move from the S to the I category:
+
+$$
+\begin{equation*} S(t+\Delta t) = S(t) - \beta SI\Delta t\tp\end{equation*}
+$$
+
+We divide by \( \Delta t \) and let \( \Delta \rightarrow 0 \) to get
+the differential equation
+
+$$
+\begin{equation}
+S'(t) = -\beta SI\tp
+\tag{78}
+\end{equation}
+$$
+
+A fraction \( \nu I \) of the infected will per time unit recover
+from the disease.
+In a time \( \Delta t \), \( \nu I\Delta t \) recover and move from the
+I to the R category. The quantity \( 1/\nu \) typically reflects the
+duration of the disease. In the same time interval, \( \beta SI\Delta t \)
+come from the S to the I category. The accounting for the I category
+therefore becomes
+
+$$
+\begin{equation*} I(t+\Delta t) = I(t) + \beta SI\Delta t - \nu I \Delta t,\end{equation*}
+$$
+
+which in the limit \( \Delta t\rightarrow 0 \) becomes the
+differential equation
+
+$$
+\begin{equation}
+I'(t) = \beta SI - \nu I\tp
+\tag{79}
+\end{equation}
+$$
+
+Finally, the R category gets contributions from the I category:
+
+$$
+\begin{equation*} R(t+\Delta t) = R(t) + \nu I\Delta t\tp\end{equation*}
+$$
+
+The corresponding ODE for \( R \)
+reads
+
+$$
+\begin{equation}
+R'(t) = \nu I\tp
+\tag{80}
+\end{equation}
+$$
+
+In case the recovered do not become immune, we do not need the recovered
+category, since the recovered go directly out of the I category to the
+S category again. This gives a contribution \( \nu I \) to the equation for \( S \)
+and we end up with
+a system for \( S \) and \( I \).
+
+<p>
+The system <a href="#mjx-eqn-78">(78)</a>-<a href="#mjx-eqn-80">(80)</a>
+is known as a SIR model in epidemiology (which is the name of the
+scientific field studying the spreading of epidemic diseases).
+
+<p>
+Make a function for solving the differential equations in the SIR model
+by any numerical method of your choice.
+Make a separate function for visualizing
+\( S(t) \), \( I(t) \), and \( R(t) \) in the same plot.
+
+<p>
+Adding the equations shows that
+\( S'+I'+R'=0 \), which means that \( S+I+R \) must be constant. Perform
+a test at each time level for checking that \( S+I+R \) equals
+\( S_0+I_0+R_0 \) within some small tolerance.
+If a subclass of <code>ODESolver</code>
+is used to solve the ODE system, the test can be implemented as a
+user-specified <code>terminate</code> function that is called by the <code>solve</code>
+method a every time level (simply return <code>True</code> for termination if
+\( S+I+R \) is not sufficiently constant).
+
+<p>
+A specific population has 1500 susceptibles and one infected. We are
+interested in how the disease develops.
+Set \( S(0)=1500 \), \( I(0)=1 \),
+and \( R(0)=0 \). Choose \( \nu = 0.1 \), \( \Delta t = 0.5 \), and \( t\in [0, 60] \).
+Time \( t \) here counts days.
+Visualize first how the disease develops when
+\( \beta = 0.0005 \). Certain precautions, like
+staying inside, will reduce \( \beta \). Try \( \beta = 0.0001 \) and comment
+from the plot how a reduction in \( \beta \) influences \( S(t) \). (Put the comment
+as a multi-line string in the bottom of the program file.)
+Filename: <code>SIR</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:ode:ex14c">Exercise 42: Introduce problem and solver classes in the SIR model</h2>
+
+<p>
+The parameters \( \nu \) and \( \beta \) in the SIR model in
+<a href="#sec:ode:ex14">Exercise 41: Simulate the spreading of a disease by a SIR model</a> can be constants or functions of
+time.
+Now we shall make an implementation of the \( f(u,t) \) function
+specifying the ODE system such that \( \nu \) and \( \beta \) can be
+given as either a constant or a Python function. Introduce a class
+for \( f(u,t) \), with the following code sketch:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>class ProblemSIR(object):
+    def __init__(self, nu, beta, S0, I0, R0, T):
+        &quot;&quot;&quot;
+        nu, beta: parameters in the ODE system
+        S0, I0, R0: initial values
+        T: simulation for t in [0,T]
+        &quot;&quot;&quot;
+        if isinstance(nu, (float,int)):  # number?
+            self.nu = lambda t: nu       # wrap as function
+        elif callable(nu):
+            self.nu = nu
+
+        # same for beta and self.beta
+        ...
+
+        # store the other parameters
+
+    def __call__(self, u, t):
+        &quot;&quot;&quot;Right-hand side function of the ODE system.&quot;&quot;&quot;
+        S, I, R = u
+        return [-self.beta(t)*S*I,    # S equation
+                ...,                  # I equation
+                self.nu(t)*I]         # R equation
+
+# Example:
+problem = ProblemSIR(beta=lambda t: 0.0005 if t &lt;= 12 else 0.0001,
+                     nu=0.1, S0=1500, I0=1, R0=0, T=60)
+solver = ODESolver.ForwardEuler(problem)
+</code></pre>
+<!-- end verbatim block -->
+Write the complete code for class <code>ProblemSIR</code> based on the sketch
+of ideas above. The \( \nu \) parameter is usually not varying with time
+as \( 1/\nu \) is a characteristic size of the period a person is sick,
+but introduction of new medicine during the disease
+might change the picture such that
+time dependence becomes relevant.
+
+<p>
+We can also make a class <code>SolverSIR</code> for solving the problem
+(see the section <a href="._ode2-solarized003.html#sec:ode2:ODE:app:2">Example: The logistic equation with problem and solver classes</a> for similar examples):
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>class SolverSIR(object):
+    def __init__(self, problem, dt):
+        self.problem, self.dt = problem, dt
+
+    def solve(self, method=ODESolver.RungeKutta4):
+        self.solver = method(self.problem)
+        ic = [self.problem.S0, self.problem.I0, self.problem.R0]
+        self.solver.set_initial_condition(ic)
+        n = int(round(self.problem.T/float(self.dt)))
+        t = np.linspace(0, self.problem.T, n+1)
+        u, self.t = self.solver.solve(t)
+        self.S, self.I, self.R = u[:,0], u[:,1], u[:,2]
+
+    def plot(self):
+        # plot S(t), I(t), and R(t)
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+After the breakout of a disease, authorities often start campaigns for
+decreasing the spreading of the disease. Suppose a massive campaign
+telling people to wash their hands more frequently is launched, with
+the effect that \( \beta \) is significantly reduced after some days.
+For the specific case simulated in <a href="#sec:ode:ex14">Exercise 41: Simulate the spreading of a disease by a SIR model</a>, let
+
+$$
+\begin{equation*} \beta(t) = \left\lbrace\begin{array}{ll}
+0.0005,& 0\leq t\leq 12,\\ 
+0.0001,& t > 12\end{array}\right.\end{equation*}
+$$
+
+Simulate this scenario with the <code>Problem</code> and <code>Solver</code> classes.
+Report the maximum number of infected people and compare it to the
+case where \( \beta(t) = 0.0005 \).
+Filename: <code>SIR_class</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:ode:ex15">Exercise 43: Introduce vaccination in a SIR model</h2>
+
+<p>
+We shall now extend the SIR model in <a href="#sec:ode:ex14">Exercise 41: Simulate the spreading of a disease by a SIR model</a> with a
+<a href="https://www.youtube.com/watch?v=s_6QW9sNPEY" target="_self">vaccination</a>
+program. If a fraction \( p \) of the susceptibles per time unit is being
+vaccinated, and we say that the vaccination is 100 percent effective,
+\( pS\Delta t \) individuals will be removed from the S category in a time
+interval \( \Delta t \). We place the vaccinated people in a new category
+V.  The equations for \( S \) and \( V \) becomes
+
+$$
+\begin{align}
+S' &= -\beta SI -pS,
+\tag{81}\\ 
+V' &=  pS\tp
+\tag{82}
+\end{align}
+$$
+
+The equations for \( I \) and \( R \) are not affected. The initial condition
+for \( V \) can be taken as \( V(0)=0 \). The resulting model is named SIRV.
+
+<p>
+Try the same parameters as in <a href="#sec:ode:ex14">Exercise 41: Simulate the spreading of a disease by a SIR model</a> in
+combination with \( p=0.1 \) and compute the evolution of \( S(t) \), \( I(t) \),
+\( R(t) \), and \( V(t) \). Comment on the effect of vaccination on the maximum
+number of infected.
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<b>Hint.</b>
+You can of course
+edit the code from <a href="#sec:ode:ex14c">Exercise 42: Introduce problem and solver classes in the SIR model</a>, but it is much better
+to avoid duplicating code and
+use object-oriented programming to implement the extensions in the
+present exercise as subclasses of the classes from <a href="#sec:ode:ex14c">Exercise 42: Introduce problem and solver classes in the SIR model</a>.
+
+<p>
+<!-- --- end hint in exercise --- -->
+Filename: <code>SIRV</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:ode:ex16">Exercise 44: Introduce a vaccination campaign in a SIR model</h2>
+
+<p>
+Let the vaccination campaign in <a href="#sec:ode:ex15">Exercise 43: Introduce vaccination in a SIR model</a>
+start 6 days after the outbreak of the disease and
+let it last for 10 days,
+
+$$
+\begin{equation*} p(t) = \left\lbrace\begin{array}{ll}
+0.1,& 6\leq t\leq 15,\\ 
+0,& \hbox{otherwise} \end{array}\right.\end{equation*}
+$$
+
+Plot the corresponding solutions \( S(t) \), \( I(t) \), \( R(t) \), and \( V(t) \).
+(It is clearly advantageous to have the SIRV model implemented
+as an extension to the classes in <a href="#sec:ode:ex14c">Exercise 42: Introduce problem and solver classes in the SIR model</a>.)
+Filename: <code>SIRV_varying_p</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:ode:ex17">Exercise 45: Find an optimal vaccination period</h2>
+
+<p>
+Let the vaccination campaign in <a href="#sec:ode:ex16">Exercise 44: Introduce a vaccination campaign in a SIR model</a>
+last for \( V_T \) days:
+
+$$
+\begin{equation*} p(t) = \left\lbrace\begin{array}{ll}
+0.1,& 6\leq t\leq 6 + V_T,\\ 
+0,& \hbox{otherwise} \end{array}\right.\end{equation*}
+$$
+
+Compute the maximum number of infected people, \( \max_t I(t) \), as
+a function of \( V_T\in [0,31] \), by running the model for
+\( V_T=0,1,2\ldots,31 \).
+Plot this function. Determine from the plot
+the optimal \( V_T \), i.e., the smallest
+vaccination period
+\( V_T \) such that increasing \( V_T \) has negligible effect on the maximum
+number of infected people.
+Filename: <code>SIRV_optimal_duration</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:ode:ex18">Exercise 46: Simulate human-zombie interaction</h2>
+
+<p>
+Suppose the human population is attacked by zombies.
+This is quite a common happening in movies, and the &quot;zombification&quot;
+of humans acts much like the spreading of a disease.
+Let us make a differential equation model, inspired by the SIR model
+from <a href="#sec:ode:ex14">Exercise 41: Simulate the spreading of a disease by a SIR model</a>, to simulate how humans and
+zombies interact.
+
+<p>
+We introduce four categories of individuals:
+
+<ol>
+ <li> S: susceptible humans who can become zombies.</li>
+ <li> I: infected humans, being bitten by zombies.</li>
+ <li> Z: zombies.</li>
+ <li> R: removed individuals, either conquered zombies or dead humans.</li>
+</ol>
+
+The corresponding functions counting how many individuals we have
+in each category are named \( S(t) \), \( I(t) \), \( Z(t) \), and \( R(t) \),
+respectively.
+
+<p>
+The type of zombies considered here is inspired by the standard for
+modern zombies set by the classic movie <em>The Night of the Living
+  Dead</em>, by George A. Romero from 1968.  Only a small extension of the
+SIR model is necessary to model the effect of human-zombie
+interaction mathematically.  A fraction of the human susceptibles is
+getting bitten by zombies and moves to the infected category.  A
+fraction of the infected is then turned into zombies.  On the other
+hand, humans can conquer zombies.
+
+<p>
+Now we shall precisely set up all the dynamic features of
+the human-zombie populations we aim to model.
+Changes in the S category are due to three effects:
+
+<ol>
+ <li> Susceptibles are infected by zombies, modeled by a term \( -\Delta t\beta SZ \), similar to the S-I interaction in the SIR model.</li>
+ <li> Susceptibles die naturally or get killed and therefore enter the removed category. If the probability that one susceptible dies during a unit time interval is \( \delta_S \), the total expected number of deaths in a time interval \( \Delta t \) becomes \( \Delta t\delta_S S \).</li>
+ <li> We also allow new humans to enter the area with zombies, as this effect may be necessary to successfully run a war on zombies. The number of new individuals in the S category arriving per time unit is denoted by \( \Sigma \), giving an increase in \( S(t) \) by \( \Delta t\Sigma \) during a time \( \Delta t \).</li>
+</ol>
+
+We could also add newborns to the
+S category, but we simply skip this effect since it will not be
+significant over time scales of a few days.
+
+<p>
+The balance of the S category is then
+
+$$
+\begin{equation*} S' = \Sigma - \beta SZ - \delta_S S,\end{equation*}
+$$
+
+in the limit \( \Delta t\rightarrow 0 \).
+
+<p>
+The infected category gets a contribution \( \Delta t\beta SZ \) from the
+S category, but loses individuals to the Z and R category.  That is,
+some infected are turned into zombies, while others die.  Movies
+reveal that infected may commit suicide or that others (susceptibles)
+may kill them. Let \( \delta_I \) be the probability of being killed in a
+unit time interval.  During time \( \Delta t \), a total of
+\( \delta_I\Delta t I \) will die and hence be transferred to the removed
+category.  The probability that a single infected is turned into a
+zombie during a unit time interval is denoted by \( \rho \), so that a
+total of \( \Delta t\rho I \) individuals are lost from the I to the Z
+category in time \( \Delta t \).  The accounting in the I category becomes
+
+$$
+\begin{equation*} I' = \beta SZ -\rho I -\delta_I I\tp\end{equation*}
+$$
+
+<p>
+The zombie category gains \( -\Delta t\rho I \) individuals from the I
+category. We disregard the effect that any removed individual can turn
+into a zombie again, as we consider that effect as pure magic beyond
+reasonable behavior, at least according to what is observed in the
+Romero movie tradition.  A fundamental feature in zombie movies is
+that humans can conquer zombies. Here we consider zombie killing in a
+&quot;man-to-man&quot; human-zombie fight.  This interaction resembles the
+nature of zombification (or the susceptible-infective interaction in
+the SIR model) and can be modeled by a loss \( -\alpha SZ \) for some
+parameter \( \alpha \) with an interpretation similar to that of \( \beta \).
+The equation for \( Z \) then becomes
+
+$$
+\begin{equation*} Z' = \rho I - \alpha SZ\tp\end{equation*}
+$$
+
+<p>
+The accounting in the R category consists of a gain \( \delta S \) of
+natural deaths from the S category, a gain \( \delta I \) from the I
+category, and a gain \( \alpha SZ \) from defeated zombies:
+
+$$
+\begin{equation*} R' = \delta_S S  + \delta_I I + \alpha SZ\tp\end{equation*}
+$$
+
+<p>
+The complete SIZR model for human-zombie interaction can be summarized
+as
+
+$$
+\begin{align}
+S' &= \Sigma - \beta SZ - \delta_S S,
+\tag{83}\\ 
+I' &= \beta SZ -\rho I -\delta_I I,
+\tag{84}\\ 
+Z' &= \rho I - \alpha SZ ,
+\tag{85}\\ 
+R' &= \delta_S S  + \delta_I I
++ \alpha SZ\tp
+\tag{86}
+\end{align}
+$$
+
+The interpretations of the parameters are as follows:
+
+<ul>
+  <li> \( \Sigma \): the number of new humans brought into the zombified area per unit time.</li>
+  <li> \( \beta \): the probability that a theoretically possible human-zombie pair actually meets physically, during a unit time interval, with the result that the human is infected.</li>
+  <li> \( \delta_S \): the probability that a susceptible human is killed or dies, in a unit time interval.</li>
+  <li> \( \delta_I \): the probability that an infected human is killed or dies, in a unit time interval.</li>
+  <li> \( \rho \): the probability that an infected human is turned into a zombie, during a unit time interval.</li>
+  <li> \( \alpha \): the probability that, during a unit time interval, a theoretically possible human-zombie pair fights and the human kills the zombie.</li>
+</ul>
+
+Note that probabilities per unit time do not necessarily lie in the
+interval \( [0,1] \). The real probability, lying between 0 and 1, arises
+after multiplication by the time interval of interest.
+
+<p>
+Implement the SIZR model with a <code>Problem</code> and <code>Solver</code> class as
+explained in <a href="#sec:ode:ex14c">Exercise 42: Introduce problem and solver classes in the SIR model</a>, allowing parameters to vary
+in time.  The time variation is essential to make a realistic model
+that can mimic what happens in movies.
+
+<p>
+Test the implementation with the following data: \( \beta = 0.0012 \),
+\( \alpha = 0.0016 \), \( \delta_I = 0.014 \), \( \Sigma =2 \), \( \rho = 1 \),
+\( S(0)=10 \), \( Z(0)=100 \), \( I(0)=0 \), \( R(0)=0 \), and simulation time \( T=24 \)
+hours. Other parameters can be set to zero. These values are
+estimated from the hysterical phase of the movie <em>The Night of the
+Living Dead</em>.  The time unit is hours. Plot the \( S \), \( I \), \( Z \), and \( R \)
+quantities.
+Filename: <code>SIZR</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:ode:ex19">Exercise 47: Simulate a zombie movie</h2>
+
+<p>
+The movie <em>The Night of the Living Dead</em> has three phases:
+
+<ol>
+ <li> The initial phase, lasting for (say) 4 hours, where two humans meet one zombie and one of the humans get infected. A rough (and uncertain) estimation of parameters in this phase, taking into account dynamics not shown in the movie, yet necessary to establish a more realistic evolution of the S and Z categories later in the movie, is \( \Sigma =20 \), \( \beta = 0.03 \), \( \rho = 1 \), \( S(0)=60 \), and \( Z(0)=1 \). All other parameters are taken as zero when not specified.</li>
+ <li> The hysterical phase, when the zombie treat is evident. This phase lasts for 24 hours, and relevant parameters can be taken as \( \beta = 0.0012 \), \( \alpha = 0.0016 \), \( \delta_I = 0.014 \), \( \Sigma =2 \), \( \rho = 1 \).</li>
+ <li> The counter attack by humans, estimated to last for 5 hours, with parameters \( \alpha = 0.006 \), \( \beta = 0 \) (humans no longer get infected), \( \delta_S=0.0067 \), \( \rho = 1 \).</li>
+</ol>
+
+Use the program from <a href="#sec:ode:ex18">Exercise 46: Simulate human-zombie interaction</a> to simulate
+all three phases of the movie.
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<b>Hint.</b>
+It becomes necessary to
+work with piecewise constant functions in time. These can be
+hardcoded for each special case, our one can employ a
+ready-made tool for such
+functions:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>from scitools.std import PiecewiseConstant
+
+# Define f(t) as 1.5 in [0,3], 0.1 in [3,4] and 1 in [4,7]
+f = PiecewiseConstant(domain=[0, 7],
+                      data=[(0, 1.5), (3, 0.1), (4, 1)])
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+<!-- --- end hint in exercise --- -->
+Filename: <code>Night_of_the_Living_Dead</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:ode:ex20">Exercise 48: Simulate a war on zombies</h2>
+
+<p>
+A war on zombies can be implemented through large-scale effective
+attacks. A possible model is to increase \( \alpha \) in the SIZR model
+from <a href="#sec:ode:ex18">Exercise 46: Simulate human-zombie interaction</a> by some additional amount \( \omega
+(t) \), where \( \omega (t) \) varies in time to model strong attacks at
+\( m+1 \) distinct points of time \( T_0 < T_1 < \cdots < T_m \).  Around these \( t \)
+values we want \( \omega \) to have a large value, while in between the
+attacks \( \omega \) is small.  One possible mathematical function with
+this behavior is a sum of Gaussian functions:
+
+$$
+\begin{equation}
+\omega (t) = a\sum_{i=0}^m \exp{\left(-\frac{1}{2}\left({t - T_i\over\sigma}
+\right)^2\right)},
+\tag{87}
+\end{equation}
+$$
+
+where \( a \) measures the strength of the attacks (the maximum value of
+\( \omega(t) \)) and \( \sigma \) measures the length of the attacks, which
+should be much less than the time between the points of attack:
+typically, \( 4\sigma \) measures the length of an attack, and we must
+have \( 4\sigma \ll T_i-T_{i-1} \) for \( i=1,\ldots,m \).  We should choose
+\( a \) significantly larger than \( \alpha \) to make the attacks in the war
+on zombies much stronger than the usual &quot;man-to-man&quot; killing of
+zombies.
+
+<p>
+Modify the model and the implementation from <a href="#sec:ode:ex18">Exercise 46: Simulate human-zombie interaction</a> to include a war on zombies.  We start out with 50
+humans and 3 zombies and \( \beta=0.03 \).  This leads to rapid
+zombification. Assume that there are some small resistances against
+zombies from the humans, \( \alpha = 0.2\beta \), throughout the
+simulations.  In addition, the humans implement three strong attacks,
+\( a=50\alpha \), at 5, 10, and 18 hours after the zombification
+starts. The attacks last for about 2 hours (\( \sigma = 0.5 \)).  Set
+\( \delta_S=\Delta_I=\Sigma=0 \), \( \beta =0.03 \), and \( \rho=1 \), simulate
+for \( T=20 \) hours, and see if the war on zombies modeled by the
+suggested \( \omega(t) \) is sufficient to save mankind.
+Filename: <code>war_on_zombies</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:ode2:ex41">Exercise 49: Explore predator-prey population interactions</h2>
+
+<p>
+Suppose we have two species in an environment: a predator and a prey.
+How will the two populations interact and change with time?
+A system of ordinary differential equations can give insight into
+this question. Let \( x(t) \) and \( y(t) \) be the size of the prey and
+the predator populations, respectively. In the absence of a predator,
+the population of the prey will follow the ODE
+
+$$
+\begin{equation*} \frac{dx}{dt} = rx,\end{equation*}
+$$
+
+with \( r>0 \), assuming there are enough resources for exponential growth.
+Similarly, in the absence of prey, the predator population will just
+experience a death rate \( m>0 \):
+
+$$
+\begin{equation*} {dy\over dt} = -my\tp\end{equation*}
+$$
+
+In the presence of the predator, the prey population will experience a
+reduction in the growth proportional to \( xy \). The number of
+interactions (meetings) between \( x \) and \( y \) numbers of animals is
+\( xy \), and in a certain fraction of these interactions the predator
+eats the prey.  The predator population will correspondingly
+experience a growth in the population because of the \( xy \) interactions
+with the prey population.  The adjusted growth of both populations can
+now be expressed as
+
+$$
+\begin{align}
+\frac{dx}{dt} &= rx - axy,
+\tag{88}\\ 
+{dy\over dt} &= -my + bxy,
+\tag{89}
+\end{align}
+$$
+
+for positive constants \( r \), \( m \), \( a \), and \( b \).  Solve this system and
+plot \( x(t) \) and \( y(t) \) for \( r=m=1 \), \( a=0.3 \), \( b=0.2 \), \( x(0)=1 \), and
+\( y(0)=1 \), \( t\in [0,20] \). Try to explain the dynamics of the population
+growth you observe. Experiment with other values of \( a \) and \( b \).
+Filename: <code>predator_prey</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:ode2:ex34">Exercise 50: Formulate a 2nd-order ODE as a system</h2>
+
+<p>
+In this and subsequent exercises we shall deal with the following
+second-order ordinary differential equation with two initial
+conditions:
+
+$$
+\begin{equation}
+m\ddot u + f(\dot u) + s(u) = F(t),\quad t>0,\quad u(0)=U_0,\ \dot u(0)=V_0
+\tp
+\tag{90}
+\end{equation}
+$$
+
+The notation \( \dot u \) and \( \ddot u \) means \( u^{\prime}(t) \) and
+\( u^{\prime\prime}(t) \),
+respectively.
+Write <a href="#mjx-eqn-90">(90)</a> as a system of two first-order
+differential equations. Also set up the initial condition for this system.
+
+<h3 id="___sec102">Physical applications </h3>
+
+<p>
+Equation <a href="#mjx-eqn-90">(90)</a>
+has a wide range of applications throughout science and
+engineering.
+<!-- As the equation is written in <a href="#mjx-eqn-90">(90)</a>, -->
+<!-- \( u(t) \) is the displacement of a -->
+<!-- body with mass \( m \), subject to a friction force \( f(\dot u) \), a -->
+<!-- spring force \( s(u) \), and an external force \( F(t) \) from the surroundings. -->
+A primary application is damped spring systems in, e.g.,
+cars and bicycles: \( u \) is the vertical displacement of the spring
+system attached to a wheel;
+\( \dot u \) is then the corresponding velocity; \( F(t) \) resembles a bumpy road;
+\( s(u) \) represents the force from the spring;
+and \( f(\dot u) \) models
+the damping force (friction) in the spring system.
+For this particular application \( f \) and \( s \) will normally be linear
+functions of their arguments: \( f(\dot u)=\beta\dot u \) and \( s(u)=ku \),
+where \( k \) is a spring constant and \( \beta \) some parameter describing
+viscous damping.
+
+<p>
+Equation <a href="#mjx-eqn-90">(90)</a> can also be used to describe the
+motions of a moored ship or oil platform in waves: the moorings act as
+a nonlinear spring \( s(u) \); \( F(t) \) represents environmental excitation
+from waves, wind, and current; \( f(\dot u) \) models damping of the
+motion; and \( u \) is the one-dimensional displacement of the ship or
+platform.
+
+<p>
+Oscillations of a pendulum can be
+described by <a href="#mjx-eqn-90">(90)</a>: \( u \) is the angle the pendulum makes
+with the vertical; \( s(u)=(mg/L)\sin (u) \), where \( L \) is the length of the
+pendulum, \( m \) is the mass, and \( g \) is the acceleration of gravity;
+\( f(\dot u) = \beta |\dot u|\dot u \) models air resistance (with \( \beta \)
+being some suitable constant,
+and \( F(t) \) might be some motion of the top point
+of the pendulum.
+
+<p>
+Another application is
+electric circuits with \( u(t) \) as the charge,
+\( m=L \) as the inductance, \( f(\dot u)=R\dot u \) as the voltage drop across a
+resistor \( R \), \( s(u)=u/C \) as the voltage drop across a capacitor \( C \),
+and \( F(t) \) as an electromotive force (supplied by
+a battery or generator).
+
+<p>
+Furthermore, Equation <a href="#mjx-eqn-90">(90)</a> can act as a (very) simplified
+model of many other oscillating systems: aircraft wings, lasers,
+loudspeakers, microphones, tuning forks, guitar strings, ultrasound
+imaging, voice, tides, the El Ni\ {n}o phenomenon, climate changes &ndash;
+to mention some.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:ode2:ex35">Exercise 51: Solve \( \ddot u + u =0 \)</h2>
+
+<p>
+Make a function
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>def rhs(u, t):
+    ...
+</code></pre>
+<!-- end verbatim block -->
+for returning a list with two elements with the two right-hand side expressions
+in the first-order differential
+equation system from <a href="#sec:ode2:ex34">Exercise 50: Formulate a 2nd-order ODE as a system</a>. As usual, the
+<code>u</code> argument is an array or list with the two solution components
+<code>u[0]</code> and <code>u[1]</code> at some time <code>t</code>.
+Inside <code>rhs</code>, assume that you have access to three global Python functions
+<code>friction(dudt)</code>, <code>spring(u)</code>, and <code>external(t)</code> for
+evaluating \( f(\dot u) \), \( s(u) \), and \( F(t) \), respectively.
+
+<p>
+Test the <code>rhs</code> function in combination with the functions
+\( f(\dot u)=0 \), \( F(t)=0 \), \( s(u)=u \), and the choice \( m=1 \).
+The differential equation then reads \( \ddot u + u = 0 \). With
+initial conditions \( u(0)=1 \) and \( \dot u(0)=0 \), one can show that
+the solution is given by \( u(t)=\cos(t) \). Apply three
+numerical methods: the 4th-order
+Runge-Kutta method and the Forward Euler method from the <code>ODESolver</code>
+module developed in
+the section <a href="._ode2-solarized003.html#sec:ode2:ODESolver:hier">The ODESolver class hierarchy</a>, as well as the
+2nd-order Runge-Kutta method developed in <a href="#sec:ode2:ex25b">Exercise 31: Implement a 2nd-order Runge-Kutta method; class</a>.
+Use a time step \( \Delta t=\pi/20 \).
+
+<p>
+Plot \( u(t) \) and \( \dot u(t) \) versus \( t \) together with the exact
+solutions.  Also make a plot of \( \dot u \) versus \( u \)
+(<code>plot(u[:,0], u[:,1])</code> if <code>u</code> is the array returned from the solver's
+<code>solve</code> method).  In the latter case, the exact plot should be a
+circle because the points on the curve are \( (\cos t, \sin t) \), which
+all lie on a circle as \( t \) is varied. Observe that the ForwardEuler
+method results in a spiral and investigate how the spiral develops as
+\( \Delta t \) is reduced.
+
+<p>
+The kinetic energy \( K \) of the motion is given by \( \frac{1}{2}m\dot u^2 \),
+and the potential energy \( P \) (stored in the spring) is given by
+the work done by the spring force: \( P = \int_0^u s(v)dv = \frac{1}{2}u^2 \).
+Make a plot with \( K \) and \( P \) as functions
+of time for both the 4th-order Runge-Kutta method and the Forward Euler
+method, for the same physical problem described above.
+In this test case, the sum of the kinetic and potential
+energy should be constant. Compute this constant analytically and plot
+it together with the sum \( K+P \) as calculated
+by the 4th-order Runge-Kutta method and the Forward Euler method.
+Filename: <code>oscillator_v1</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:ode2:ex36v">Exercise 52: Make a tool for analyzing oscillatory solutions</h2>
+
+<p>
+The solution \( u(t) \) of the equation <a href="#mjx-eqn-90">(90)</a>
+often exhibits an oscillatory behavior (for the test problem
+in <a href="#sec:ode2:ex35">Exercise 51: Solve \( \ddot u + u =0 \)</a> we have that \( u(t)=\cos t \)).
+It is then of interest to find the wavelength of the oscillations.
+The purpose of this exercise is to find and visualize the distance
+between peaks in a numerical representation of a continuous function.
+
+<p>
+Given an array \( (y_0,\ldots,y_{n-1}) \) representing a function \( y(t) \)
+sampled at various points \( t_0,\ldots,t_{n-1} \),
+a local maximum of \( y(t) \) occurs at \( t=t_k \) if \( y_{k-1} < y_k>y_{k+1} \).
+Similarly, a local minimum of \( y(t) \) occurs at \( t=t_k \) if
+\( y_{k-1}> y_k < y_{k+1} \). By iterating over the
+\( y_1,\ldots,y_{n-2} \) values and making the two tests,
+one can collect local maxima and minima
+as \( (t_k,y_k) \) pairs. Make a function <code>minmax(t, y)</code> which returns
+two lists, <code>minima</code> and <code>maxima</code>, where each list holds pairs
+(2-tuples) of \( t \) and \( y \)  values of local
+minima or maxima. Ensure that the \( t \) value increases from one
+pair to the next. The arguments <code>t</code> and <code>y</code> in <code>minmax</code>
+hold the coordinates \( t_0,\ldots,t_{n-1} \) and
+\( y_0,\ldots,y_{n-1} \), respectively.
+
+<p>
+Make another function <code>wavelength(peaks)</code> which
+takes a list <code>peaks</code> of 2-tuples with \( t \) and \( y \) values for
+local minima or maxima as argument and returns an array of distances
+between consecutive \( t \) values, i.e., the distances between the peaks.
+These distances reflect the local wavelength of the computed \( y \) function.
+More precisely, the first element in the returned array is
+<code>peaks[1][0]-peaks[0][0]</code>, the next element is
+<code>peaks[2][0]-peaks[1][0]</code>, and so forth.
+
+<p>
+Test the <code>minmax</code> and <code>wavelength</code> functions on \( y \) values
+generated by \( y=e^{t/4}\cos (2t) \) and
+\( y=e^{-t/4}\cos (t^2/5) \) for \( t\in [0,4\pi] \).
+Plot the \( y(t) \) curve in each case, and mark the local minima and maxima
+computed by <code>minmax</code> with circles and
+boxes, respectively. Make a separate plot with the array
+returned from the <code>wavelength</code> function (just plot the array
+against its indices - the point is to see if the wavelength
+varies or not). Plot only the wavelengths corresponding to maxima.
+
+<p>
+Make a module with the <code>minmax</code> and <code>wavelength</code> function, and
+let the test block perform the tests specified above.
+Filename: <code>wavelength</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:ode2:ex37">Exercise 53: Implement problem, solver, and visualizer classes</h2>
+
+<p>
+The user-chosen functions \( f \), \( s \), and \( F \) in
+<a href="#sec:ode2:ex35">Exercise 51: Solve \( \ddot u + u =0 \)</a> must be coded with particular names.
+It is then difficult to have several functions for \( s(u) \) and
+experiment with these. A much more flexible code arises if we
+adopt the ideas of a problem and a solver class as
+explained in the section <a href="._ode2-solarized003.html#sec:ode2:ODE:app:2">Example: The logistic equation with problem and solver classes</a>.
+Specifically, we shall here make use of class <code>Problem3</code>
+in the section <a href="._ode2-solarized003.html#sec:ode2:ODE:app:2">Example: The logistic equation with problem and solver classes</a> to store information
+about \( f(\dot u) \), \( s(u) \), \( F(t) \), \( u(0) \), \( \dot u(0) \),
+\( m \), \( T \), and the exact solution (if available).
+The solver class can store parameters related to the numerical
+quality of the solution, i.e., \( \Delta t \) and the name of
+the solver class in the <code>ODESolver</code> hierarchy.
+In addition we will make a visualizer class for producing plots
+of various kinds.
+
+<p>
+We want all parameters to be set on the command line, but also have
+sensible default values. As in the section <a href="._ode2-solarized003.html#sec:ode2:ODE:app:2">Example: The logistic equation with problem and solver classes</a>,
+the <code>argparse</code> module is used to read data from the command line.
+Class <code>Problem</code> can be sketched as follows:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>class Problem(object):
+    def define_command_line_arguments(self, parser):
+        &quot;&quot;&quot;Add arguments to parser (argparse.ArgumentParser).&quot;&quot;&quot;
+
+        parser.add_argument(
+            '--friction', type=func_dudt, default='0',
+            help='friction function f(dudt)',
+            metavar='&lt;function expression&gt;')
+        parser.add_argument(
+            '--spring', type=func_u, default='u',
+            help='spring function s(u)',
+            metavar='&lt;function expression&gt;')
+        parser.add_argument(
+            '--external', type=func_t, default='0',
+            help='external force function F(t)',
+            metavar='&lt;function expression&gt;')
+        parser.add_argument(
+            '--u_exact', type=func_t_vec, default='0',
+            help='exact solution u(t) (0 or None: now known)',
+            metavar='&lt;function expression&gt;')
+        parser.add_argument(
+            '--m', type=evalcmlarg, default=1.0, help='mass',
+            type=float, metavar='mass')
+        ...
+        return parser
+
+    def set(self, args):
+        &quot;&quot;&quot;Initialize parameters from the command line.&quot;&quot;&quot;
+        self.friction = args.friction
+        self.spring = args.spring
+        self.m = args.m
+        ...
+
+    def __call__(self, u, t):
+        &quot;&quot;&quot;Define the right-hand side in the ODE system.&quot;&quot;&quot;
+        m, f, s, F = \ 
+           self.m, self.friction, self.spring, self.external
+        ...
+</code></pre>
+<!-- end verbatim block -->
+Several functions are specified as the <code>type</code> argument
+to <code>parser.add_argument</code> for turning strings into proper
+objects, in particular <code>StringFunction</code> objects with different
+independent variables:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>def evalcmlarg(text):
+    return eval(text)
+
+def func_dudt(text):
+    return StringFunction(text, independent_variable='dudt')
+
+def func_u(text):
+    return StringFunction(text, independent_variable='u')
+
+def func_t(text):
+    return StringFunction(text, independent_variable='t')
+
+def func_t_vec(text):
+    if text == 'None' or text == '0':
+        return None
+    else:
+        f = StringFunction(text, independent_variable='t')
+        f.vectorize(globals())
+        return f
+</code></pre>
+<!-- end verbatim block -->
+The use of <code>evalcmlarg</code> is essential: this function runs
+the strings from the command line through <code>eval</code>, which means
+that we can use mathematical formulas like <code>--T '4*pi'</code>.
+
+<p>
+Class <code>Solver</code> is relatively much shorter
+than class <code>Problem</code>:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>class Solver(object):
+    def __init__(self, problem):
+        self.problem = problem
+
+    def define_command_line_arguments(self, parser):
+        &quot;&quot;&quot;Add arguments to parser (argparse.ArgumentParser).&quot;&quot;&quot;
+        # add --dt and --method
+        ...
+        return parser
+
+    def set(self, args):
+        self.dt = args.dt
+        self.n = int(round(self.problem.T/self.dt))
+        self.solver = eval(args.method)
+
+    def solve(self):
+        self.solver = self.method(self.problem)
+        ic = [self.problem.initial_u, self.problem.initial_dudt]
+        self.solver.set_initial_condition(ic)
+        time_points = linspace(0, self.problem.T, self.n+1)
+        self.u, self.t = self.solver.solve(time_points)
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+The <code>Visualizer</code> class holds references to a
+<code>Problem</code> and <code>Solver</code> instance and creates plots.
+The user can specify plots in an interactive dialog in the terminal
+window. Inside a loop, the user is repeatedly asked to specify a plot
+until the user responds with <code>quit</code>. The specification of a plot
+can be one of the words <code>u</code>, <code>dudt</code>, <code>dudt-u</code>,
+<code>K</code>, and <code>wavelength</code> which means
+a plot of \( u(t) \) versus \( t \), \( \dot u(t) \) versus \( t \),
+\( \dot u \) versus \( u \), \( K \) (\( =\frac{1}{2}m\dot u^2 \), kinetic energy)
+versus \( t \), and \( u \)'s wavelength versus
+its indices, respectively. The wavelength can be computed
+from the local maxima of \( u \)
+as explained in <a href="#sec:ode2:ex36v">Exercise 52: Make a tool for analyzing oscillatory solutions</a>.
+
+<p>
+A sketch of class <code>Visualizer</code> is given
+next:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>class Visualizer(object):
+    def __init__(self, problem, solver):
+        self.problem = problem
+        self.solver = solver
+
+    def visualize(self):
+        t = self.solver.t   # short form
+        u, dudt = self.solver.u[:,0], self.solver.u[:,1]
+
+        # Tag all plots with numerical and physical input values
+        title = 'solver=%s, dt=%g, m=%g' % \ 
+               (self.solver.method, self.solver.dt, self.problem.m)
+        # Can easily get the formula for friction, spring and force
+        # if these are string formulas.
+        if isinstance(self.problem.friction, StringFunction):
+            title += ' f=%s' % str(self.problem.friction)
+        if isinstance(self.problem.spring, StringFunction):
+            title += ' s=%s' % str(self.problem.spring)
+        if isinstance(self.problem.external, StringFunction):
+            title += ' F=%s' % str(self.problem.external)
+
+        # Let the user interactively specify what
+        # to be plotted
+        plot_type = ''
+        while plot_type != 'quit':
+            plot_type = raw_input('Specify a plot: ')
+            figure()
+            if plot_type == 'u':
+                # Plot u vs t
+                if self.problem.u_exact is not None:
+                    hold('on')
+                    # Plot self.problem.u_exact vs t
+                show()
+                savefig('tmp_u.pdf')
+            elif plot_type == 'dudt':
+            ...
+            elif plot_type == 'dudt-u':
+            ...
+            elif plot_type == 'K':
+            ...
+            elif plot_type == 'wavelength':
+            ...
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+Make a complete implementation of the three proposed classes.  Also
+make a <code>main</code> function that (i) creates a problem, solver, and
+visualizer, (ii) calls the functions to define command-line arguments
+in the problem and solver classes, (iii) reads the command line, (iv)
+passes on the command-line parser object to the problem and solver
+classes, (v) calls the solver, and (vi) calls the visualizer's
+<code>visualize</code> method to create plots.  Collect the classes and
+functions in a module <code>oscillator</code>, which has a call to <code>main</code>
+in the test block.
+
+<p>
+The first task from <a href="#sec:ode2:ex35">Exercise 51: Solve \( \ddot u + u =0 \)</a>
+can now be run as
+
+<p>
+<!-- begin verbatim block  sys-->
+<pre><code>oscillator.py --method ForwardEuler --u_exact &quot;cos(t)&quot; \ 
+              --dt &quot;pi/20&quot; --T &quot;5*pi&quot;
+</code></pre>
+<!-- end verbatim block -->
+The other tasks from <a href="#sec:ode2:ex35">Exercise 51: Solve \( \ddot u + u =0 \)</a>
+can be tested similarly.
+
+<p>
+Explore some of the possibilities of specifying several functions on
+the command line:
+
+<p>
+<!-- begin verbatim block  sys-->
+<pre><code>oscillator.py --method RungeKutta4 --friction &quot;0.1*dudt&quot; \ 
+              --external &quot;sin(0.5*t)&quot; --dt &quot;pi/80&quot; \ 
+              --T &quot;40*pi&quot; --m 10
+
+oscillator.py --method RungeKutta4 --friction &quot;0.8*dudt&quot; \ 
+              --external &quot;sin(0.5*t)&quot; --dt &quot;pi/80&quot; \ 
+              --T &quot;120*pi&quot; --m 50
+</code></pre>
+<!-- end verbatim block -->
+Filename: <code>oscillator</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:ode2:ex38">Exercise 54: Use classes for flexible choices of models</h2>
+
+<p>
+Some typical choices of \( f(\dot u) \), \( s(u) \), and \( F(t) \)
+in <a href="#mjx-eqn-90">(90)</a> are listed below:
+
+<ul>
+  <li> Linear friction force (low velocities): \( f(\dot u) = 6\pi\mu R \dot u \) (Stokes drag), where \( R \) is the radius of a spherical approximation to the body's geometry, and \( \mu \) is the viscosity of the surrounding fluid.</li>
+  <li> Quadratic friction force (high velocities):
+    \( f(\dot u) = \frac{1}{2} C_D \varrho A|\dot u|\dot u \).
+    Here, \( C_D \) is a drag coefficient, \( \varrho \) is the density of the fluid,
+    and \( A \) is the cross section area of the body perpendicular to the flow.</li>
+  <li> Linear spring force: \( s(u)=ku \), where \( k \) is a spring constant.</li>
+  <li> Sinusoidal spring force: \( s(u)=k\sin u \), where \( k \) is a constant.</li>
+  <li> Cubic spring force: \( s(u)=k(u - \frac{1}{6}u^3) \), where \( k \) is a spring constant.</li>
+  <li> Sinusoidal external force: \( F(t)=F_0 + A\sin\omega t \), where \( F_0 \) is the mean value of the force, \( A \) is the amplitude, and \( \omega \) is the frequency.</li>
+  <li> Bump force: \( F(t)= H(t-t_1)(1-H(t-t_2))F_0 \), where \( H(t) \) is the Heaviside function (\( H=0 \) for \( x < 0 \) and \( H=1 \) for \( x\geq 0 \)), \( t_1 \) and \( t_2 \) are two given time points, and \( F_0 \) is the size of the force. This \( F(t) \) is zero for \( t < t_1 \) and \( t>t_2 \), and \( F_0 \) for \( t\in [t_1,t_2] \).</li>
+  <li> Random force 1: \( F(t)=F_0 + A\cdot U(t;B) \), where \( F_0 \) and \( A \) are constants, and \( U(t;B) \) denotes a function whose value at time \( t \) is random and uniformly distributed in the interval \( [-B,B] \).</li>
+  <li> Random force 2: \( F(t)=F_0 + A\cdot N(t;\mu ,\sigma) \), where \( F_0 \) and \( A \) are constants, and \( N(t;\mu,\sigma) \) denotes a function whose value at time \( t \) is random, Gaussian distributed number with mean \( \mu \) and standard deviation \( \sigma \).</li>
+</ul>
+
+Make a module <code>functions</code> where each of the choices above are
+implemented as a class with a <code>__call__</code> special method.  Also add a
+class <code>Zero</code> for a function whose value is always zero.  It is natural
+that the parameters in a function are set as arguments to the
+constructor.  The different classes for spring functions can all have
+a common base class holding the \( k \) parameter as data attribute.
+Filename: <code>functions</code>.
+
+<p>
+<!-- Insert a <code>from functions import *</code> in the <code>oscillator.py</code> file -->
+<!-- from <a href="#sec:ode2:ex37">Exercise 53: Implement problem, solver, and visualizer classes</a> (make sure to do this import before -->
+<!-- importing from <code>scitools.std</code> since the <code>functions</code> module is likely -->
+<!-- to import from <code>math</code> and we need the <code>numpy</code> version of these -->
+<!-- functions in the <code>oscillator</code> module because of vectorized -->
+<!-- expressions in exact \( u(t) \) computations). -->
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:ode2:ex40">Exercise 55: Apply software for oscillating systems</h2>
+
+<p>
+The purpose of this exercise is to demonstrate the use of the
+classes from <a href="#sec:ode2:ex38">Exercise 54: Use classes for flexible choices of models</a> to solve problems described
+by <a href="#mjx-eqn-90">(90)</a>.
+
+<p>
+With a lot of models for \( f(\dot u) \), \( s(u) \), and \( F(t) \) available
+as classes in <code>functions.py</code>, the initialization of <code>self.friction</code>,
+<code>self.spring</code>, etc., from the command line does not work, because
+we assume simple string formulas on the command line. Now we
+want to write things like <code>--spring 'LinearSpring(1.0)'</code>.
+There is a quite simple remedy: replace all the special conversion
+functions to <code>StringFunction</code> objects by <code>evalcmlarg</code> in
+the <code>type</code> specifications in the <code>parser.add_argument</code> calls.
+If a <code>from functions import *</code> is also performed in the
+<code>oscillator.py</code> file, a simple <code>eval</code> will turn
+strings like <code>'LinearSpring(1.0)'</code> into living objects.
+
+<p>
+However, we shall here follow a simpler approach, namely dropping
+initializing parameters on the command line and instead set them
+directly in the code. Here is an example:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>problem = Problem()
+problem.m = 1.0
+k = 1.2
+problem.spring = CubicSpring(k)
+problem.friction = Zero()
+problem.T = 8*pi/sqrt(k)
+...
+</code></pre>
+<!-- end verbatim block -->
+This is the simplest way of making use of the objects
+in the <code>functions</code> module.
+
+<p>
+Note that the <code>set</code> method in classes <code>Solver</code> and
+<code>Visualizer</code> is unaffected
+by the new objects from the <code>functions</code> module, so flexible initialization
+via command-line arguments works as before for <code>--dt</code>,
+<code>--method</code>, and <code>plot</code>. One may also dare to call
+the <code>set</code> method in the problem object to set parameters
+like <code>m</code>, <code>initial_u</code>, etc., or one can choose the safer
+approach of not calling <code>set</code> but initialize all data attributes
+explicitly in the user's code.
+
+<p>
+Make a new file say <code>oscillator_test.py</code>
+where you import class <code>Problem</code>, <code>Solver</code>, and <code>Visualizer</code>,
+plus all classes from the <code>functions</code> module.
+Provide a <code>main1</code> function for solving the following problem:
+\( m=1 \), \( u(0)=1 \), \( \dot u(0)=0 \),
+no friction (use class <code>Zero</code>),
+no external forcing (class <code>Zero</code>),
+a linear spring \( s(u)=u \), \( \Delta t=\pi/20 \), \( T=8\pi \), and
+exact \( u(t)=\cos (t) \). Use the Forward Euler method.
+
+<p>
+Then make another function <code>main2</code> for the
+case with
+\( m=5 \), \( u(0)=1 \), \( \dot u(0)=0 \),
+linear friction \( f(\dot u)=0.1\dot u \), \( s(u)=u \), \( F(t)=\sin (\frac{1}{2}t) \),
+\( \Delta t =\pi/80 \), \( T=60\pi \), and no knowledge of an exact solution.
+Use the 4-th order Runge-Kutta method.
+
+<p>
+Let a test block use the first command-line argument to indicate
+a call to <code>main1</code> or <code>main2</code>.
+Filename: <code>oscillator_test</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:class:ex19">Exercise 56: Model the economy of fishing</h2>
+
+<p>
+A population of fish is governed by the differential equation
+
+$$
+\begin{equation}
+\begin{array}{c}
+ \frac{dx}{dt}=\frac{1}{10}x\left(  1-\frac{x}{100}\right)  -h,
+\quad  x(0) =500,
+\tag{91}
+ \end{array}
+ \end{equation}
+$$
+
+where \( x(t) \) is the size of the population at time \( t \) and \( h \) is the
+harvest.
+
+<p>
+<b>a)</b>
+Assume \( h=0 \). Find an exact solution for \( x(t) \).
+For which value of \( t \) is \( \frac{dx}{dt} \) largest? For which value of \( t \)
+is \( \frac{1}{x}\frac{dx}{dt} \) largest?
+
+<p>
+<b>b)</b>
+Solve the differential equation <a href="#mjx-eqn-91">(91)</a>
+by the Forward Euler method. Plot the numerical and exact solution in
+the same plot.
+
+<p>
+<b>c)</b>
+Suppose the harvest \( h \) depends on the fishers' efforts, \( E \),
+in the following way: \( h=qxE \), with \( q \) as a constant. Set \( q=0.1 \)
+and assume \( E \) is constant. Show the effect of \( E \) on \( x(t) \) by
+plotting several curves, corresponding to different \( E \) values,
+in the same figure.
+
+<p>
+<b>d)</b>
+The fishers' total revenue is given by
+\( \pi=ph-\frac{c}{2}E^{2} \), where \( p \) is a constant.
+In the literature about the economy of fisheries, one is often interested
+in how a fishery will develop in the case the harvest is not regulated.
+Then new fishers will appear as long as there is money to earn
+(\( \pi > 0 \)).
+It can (for simplicity)
+be reasonable to model the dependence of \( E \) on \( \pi \) as
+
+$$
+\begin{equation} {dE\over dt} = \gamma\pi, \tag{92}
+\end{equation}
+$$
+
+where \( \gamma \) is a constant.
+Solve the system of differential equations for \( x(t) \) and \( E(t) \)
+by the 4th-order Runge-Kutta method, and plot the curve with points (\( x(t),E(t) \))
+in the two
+cases \( \gamma =1/2 \) and \( \gamma\rightarrow\infty \).
+Choose \( c=0.3 \), \( p=10 \), \( E(0)=0.5 \), and \( T=1 \).
+
+<p>
+Filename: <code>fishery</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<h1 id="___sec109">References </h1>
+
+<p>
+<!-- begin bibliography -->
+
+<ol>
+ <li> <div id="Lerner"></div> <b>L. S. Lerner</b>. 
+    <em>Physics for Scientists and Engineers</em>,
+    Jones and Barlett,
+    1996.</li>
+ <li> <div id="White1"></div> <b>F. M. White</b>. 
+    <em>Fluid Mechanics</em>,
+    2nd edition,
+    McGraw-Hill,
+    1986.</li>
+ <li> <div id="Langtangen_TCSE6_oo"></div> <b>H. P. Langtangen</b>. 
+    Object-oriented programming,
+    \emphhttp://hplgit.github.io/primer.html/doc/pub/oo,
+    <a href="http://hplgit.github.io/primer.html/doc/pub/oo" target="_self"><tt>http://hplgit.github.io/primer.html/doc/pub/oo</tt></a>.</li>
+</ol>
+
+<!-- end bibliography -->
+
+<p>
+<!-- begin bottom navigation -->
+<table style="width: 100%"><tr><td>
+<div style="text-align: left;"><a href="._ode2-solarized003.html">&laquo; Previous</a></div>
+</td><td>
+</td></tr></table>
+<!-- end bottom navigation -->
+</p>
+
+<!-- ------------------- end of main content --------------- -->
+
+
+</body>
+</html>
+    
+

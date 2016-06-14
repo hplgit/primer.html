@@ -7,13 +7,13 @@ Automatically generated HTML file from DocOnce source
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
 <meta name="description" content="Introduction to classes in Python">
-<meta name="keywords" content="constructor (class),UML class diagram,instance (class),user-defined datatype (class),method class),attribute (class),namespace,test function,nose tests,pytest tests,special methods (class),callable objects,test function,closure,Newton's method,wrapper code,integration numerical,symbolic computing,integration symbolic,mutable objects,immutable objects,protected attributes (class),test function,information hiding,private attributes (class),API,application programming interface,protected attributes (class),check an object's type,static typing,weak typing,strong typing,dynamic typing,duck typing,static class attributes,static class variables,static class methods,interval arithmetic">
+<meta name="keywords" content="constructor (class),UML class diagram,instance (class),user-defined datatype (class),method class),attribute (class),new-style classes,namespace,closures,test function,nose tests,pytest tests,special methods (class),callable objects,test function,closure,Newton's method,SymPy differentiation,closure,wrapper code,integration numerical,symbolic computing,integration symbolic,SymPy integration,mutable objects,immutable objects,protected attributes (class),test function,information hiding,private attributes (class),API,application programming interface,protected attributes (class),check an object's type,static typing,weak typing,strong typing,dynamic typing,duck typing,static class attributes,static class variables,static class methods,interval arithmetic">
 
 <title>Introduction to classes in Python</title>
 
 
-<link href="https://raw.githubusercontent.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/css/solarized_light_code.css" rel="stylesheet" type="text/css" title="light"/>
-<script src="https://rawgit.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/js/highlight.pack.js"></script>
+<link href="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/css/solarized_light_code.css" rel="stylesheet" type="text/css" title="light"/>
+<script src="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/js/highlight.pack.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
 
 <link href="http://thomasf.github.io/solarized-css/solarized-light.min.css" rel="stylesheet">
@@ -21,6 +21,11 @@ Automatically generated HTML file from DocOnce source
 h1 {color: #b58900;}  /* yellow */
 /* h1 {color: #cb4b16;}  orange */
 /* h1 {color: #d33682;}  magenta, the original choice of thomasf */
+code { padding: 0px; background-color: inherit; }
+pre {
+  border: 0pt solid #93a1a1;
+  box-shadow: none;
+}
 .alert-text-small   { font-size: 80%;  }
 .alert-text-large   { font-size: 130%; }
 .alert-text-normal  { font-size: 90%;  }
@@ -43,10 +48,10 @@ h1 {color: #b58900;}  /* yellow */
 .alert-block > p, .alert-block > ul {margin-bottom:1em}
 .alert li {margin-top: 1em}
 .alert-block p+p {margin-top:5px}
-.alert-notice { background-image: url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_notice.png); }
-.alert-summary  { background-image:url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_summary.png); }
-.alert-warning { background-image: url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_warning.png); }
-.alert-question {background-image:url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_question.png); }
+.alert-notice { background-image: url(https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/small_yellow_notice.png); }
+.alert-summary  { background-image:url(https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/small_yellow_summary.png); }
+.alert-warning { background-image: url(https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/small_yellow_warning.png); }
+.alert-question {background-image:url(https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/small_yellow_question.png); }
 
 div { text-align: justify; text-justify: inter-word; }
 </style>
@@ -56,298 +61,304 @@ div { text-align: justify; text-justify: inter-word; }
 
 <!-- tocinfo
 {'highest level': 1,
- 'sections': [(' Simple function classes ',
+ 'sections': [('Table of contents',
+               1,
+               'table_of_contents',
+               'table_of_contents'),
+              ('Simple function classes',
                1,
                'sec:class:functors',
                'sec:class:functors'),
-              (' Challenge: functions with parameters ',
+              ('Challenge: functions with parameters',
                2,
                'sec:class:func1',
                'sec:class:func1'),
-              (' Problem ', 3, None, '___sec2'),
-              (' A bad solution: global variables ', 3, None, '___sec3'),
-              (' Representing a function as a class ',
+              ('Problem', 3, None, '___sec2'),
+              ('A bad solution: global variables', 3, None, '___sec3'),
+              ('Representing a function as a class',
                2,
                'sec:class:func2',
                'sec:class:func2'),
-              (' Implementation ', 3, None, '___sec5'),
-              (' Usage and dissection ', 3, None, '___sec6'),
-              (' The self  variable ', 3, None, '___sec7'),
-              (' Extension of the class ', 3, None, '___sec8'),
-              (' Remark ', 3, None, '___sec9'),
-              (' Using methods as ordinary functions ', 3, None, '___sec10'),
-              (' Doc strings ', 3, None, '___sec11'),
-              (' Another function class example ',
+              ('Implementation', 3, None, '___sec5'),
+              ('Usage and dissection', 3, None, '___sec6'),
+              ('Extension of the class', 3, None, '___sec7'),
+              ('Using methods as ordinary functions', 3, None, '___sec8'),
+              ('New-style classes versus classic classes',
+               3,
+               None,
+               '___sec9'),
+              ('Doc strings', 3, None, '___sec10'),
+              ('The self variable', 2, None, '___sec11'),
+              ('Another function class example',
                2,
                'sec:class:func3',
                'sec:class:func3'),
-              (' Remark ', 3, None, '___sec13'),
-              (' Alternative function class implementations ',
+              ('Remark', 3, None, '___sec13'),
+              ('Alternative function class implementations',
                2,
                'sec:class:func2b',
                'sec:class:func2b'),
-              (' Making classes without the class construct ',
+              ('Making classes without the class construct',
                2,
                'sec:class:whatis',
                'sec:class:whatis'),
-              (' First remark ', 3, None, '___sec16'),
-              (' Second remark ', 3, None, '___sec17'),
-              (' More examples on classes ',
+              ('First remark', 3, None, '___sec16'),
+              ('Second remark', 3, None, '___sec17'),
+              ('Closures', 2, 'sec:class:closure', 'sec:class:closure'),
+              ('More examples on classes',
                1,
                'sec:class:addex',
                'sec:class:addex'),
-              (' Bank accounts ',
-               2,
-               'sec:class:account',
-               'sec:class:account'),
-              (' Phone book ',
-               2,
-               'sec:class:phonebook',
-               'sec:class:phonebook'),
-              (' A circle ', 2, 'sec:class:circle', 'sec:class:circle'),
-              (' Verification ', 3, None, '___sec22'),
-              (' Remark ', 3, None, '___sec23'),
-              (' Special methods ',
+              ('Bank accounts', 2, 'sec:class:account', 'sec:class:account'),
+              ('Phone book', 2, 'sec:class:phonebook', 'sec:class:phonebook'),
+              ('A circle', 2, 'sec:class:circle', 'sec:class:circle'),
+              ('Verification', 3, None, '___sec23'),
+              ('Remark', 3, None, '___sec24'),
+              ('Special methods',
                1,
                'sec:class:specialmethods',
                'sec:class:specialmethods'),
-              (' The call special method ',
+              ('The call special method',
                2,
                'sec:class:call',
                'sec:class:call'),
-              (' Example: Automagic differentiation ',
+              ('Example: Automagic differentiation',
                2,
                'sec:class:autodF',
                'sec:class:autodF'),
-              (' Problem ', 3, None, '___sec27'),
-              (' Solution ', 3, None, '___sec28'),
-              (' Verification ', 3, None, '___sec29'),
-              (" Application: Newton's method ", 3, None, '___sec30'),
-              (' Example: Automagic integration ',
+              ('Problem', 3, None, '___sec28'),
+              ('Solution', 3, None, '___sec29'),
+              ('Verification', 3, None, '___sec30'),
+              ("Application: Newton's method", 3, None, '___sec31'),
+              ('Solution utilizing SymPy', 3, None, '___sec32'),
+              ('Example: Automagic integration',
                2,
                'sec:class:autoint',
                'sec:class:autoint'),
-              (' A simple implementation ', 3, None, '___sec32'),
-              (' Verification via symbolic computing ', 3, None, '___sec33'),
-              (' Remark ', 3, None, '___sec34'),
-              (' Turning an instance into a string ',
+              ('A simple implementation', 3, None, '___sec34'),
+              ('Verification via symbolic computing', 3, None, '___sec35'),
+              ('Remark', 3, None, '___sec36'),
+              ('Turning an instance into a string',
                2,
                'sec:class:str',
                'sec:class:str'),
-              (' Example: Phone book with special methods ',
+              ('Example: Phone book with special methods',
                2,
                'sec:class:phonebook2',
                'sec:class:phonebook2'),
-              (' Remark ', 3, None, '___sec37'),
-              (' Adding objects ', 2, 'sec:class:add', 'sec:class:add'),
-              (' Example: Class for polynomials ',
+              ('Remark', 3, None, '___sec39'),
+              ('Adding objects', 2, 'sec:class:add', 'sec:class:add'),
+              ('Example: Class for polynomials',
                2,
                'sec:class:Polynomial',
                'sec:class:Polynomial'),
-              (' Implementation ', 3, None, '___sec40'),
-              (' Usage ', 3, None, '___sec41'),
-              (' Pretty print of polynomials ', 3, None, '___sec42'),
-              (' Verifying the implementation ', 3, None, '___sec43'),
-              (' Arithmetic operations and other special methods ',
+              ('Implementation', 3, None, '___sec42'),
+              ('Usage', 3, None, '___sec43'),
+              ('Pretty print of polynomials', 3, None, '___sec44'),
+              ('Verifying the implementation', 3, None, '___sec45'),
+              ('Arithmetic operations and other special methods',
                2,
                'sec:class:arithmetics',
                'sec:class:arithmetics'),
-              (' Special methods for string conversion ',
+              ('Special methods for string conversion',
                2,
                'sec:class:repr',
                'sec:class:repr'),
-              (' Recreating objects from strings ', 3, None, '___sec46'),
-              (' Example: Class for vectors in the plane ',
+              ('Recreating objects from strings', 3, None, '___sec48'),
+              ('Example: Class for vectors in the plane',
                1,
                'sec:class:Vec2D',
                'sec:class:Vec2D'),
-              (' Some mathematical operations on vectors ',
+              ('Some mathematical operations on vectors',
                2,
                None,
-               '___sec48'),
-              (' Implementation ', 2, None, '___sec49'),
-              (' Usage ', 2, None, '___sec50'),
-              (' Comment ', 3, None, '___sec51'),
-              (' Example: Class for complex numbers ', 1, None, '___sec52'),
-              (' Implementation ',
-               2,
-               'sec:class:Complex',
-               'sec:class:Complex'),
-              (' Illegal operations ',
+               '___sec50'),
+              ('Implementation', 2, None, '___sec51'),
+              ('Usage', 2, None, '___sec52'),
+              ('Comment', 3, None, '___sec53'),
+              ('Example: Class for complex numbers', 1, None, '___sec54'),
+              ('Implementation', 2, 'sec:class:Complex', 'sec:class:Complex'),
+              ('Illegal operations',
                2,
                'sec:class:illegalop',
                'sec:class:illegalop'),
-              (' Mixing complex and real numbers ',
+              ('Mixing complex and real numbers',
                2,
                'sec:class:complex:mixed',
                'sec:class:complex:mixed'),
-              (' Dynamic, static, strong, weak, and duck typing ',
+              ('Dynamic, static, strong, weak, and duck typing',
                2,
                None,
-               '___sec56'),
-              (" Special methods for ``right'' operands ",
+               '___sec58'),
+              ("Special methods for ``right'' operands",
                2,
                'sec:class:complex:rightop',
                'sec:class:complex:rightop'),
-              (' Remark ', 3, None, '___sec58'),
-              (' Inspecting instances ',
+              ('Remark', 3, None, '___sec60'),
+              ('Inspecting instances',
                2,
                'sec:class:inspect',
                'sec:class:inspect'),
-              (' Static methods and attributes ',
+              ('Static methods and attributes',
                1,
                'sec:class:static',
                'sec:class:static'),
-              (' Summary ', 1, None, '___sec61'),
-              (' Chapter topics ',
+              ('Summary', 1, None, '___sec63'),
+              ('Chapter topics', 2, 'sec:class:summary', 'sec:class:summary'),
+              ('Classes', 3, None, '___sec65'),
+              ('Special methods', 3, None, '___sec66'),
+              ('Terminology', 3, None, '___sec67'),
+              ('Example: interval arithmetic',
                2,
-               'sec:class:summary',
-               'sec:class:summary'),
-              (' Classes ', 3, None, '___sec63'),
-              (' Special methods ', 3, None, '___sec64'),
-              (' Terminology ', 3, None, '___sec65'),
-              (' Example: interval arithmetic ', 2, None, '___sec66'),
-              (' Problem ', 3, None, '___sec67'),
-              (' Solution ', 3, None, '___sec68'),
-              (' Exercises ', 1, None, '___sec69'),
-              (' Exercise 1: Make a function class ',
+               'sec:class:interval:arithmetic',
+               'sec:class:interval:arithmetic'),
+              ('Problem', 3, None, '___sec69'),
+              ('Solution', 3, None, '___sec70'),
+              ('Exercises', 1, None, '___sec71'),
+              ('Exercise 1: Make a function class',
                2,
                'sec:class:ex2',
                'sec:class:ex2'),
-              (' Exercise 2: Add an attribute to a class ',
+              ('Exercise 2: Add a data attribute to a class',
                2,
                'sec:class:ex25q',
                'sec:class:ex25q'),
-              (' Exercise 3: Add functionality to a class ',
+              ('Exercise 3: Add functionality to a class',
                2,
                'sec:class:ex25q2',
                'sec:class:ex25q2'),
-              (' Exercise 4: Make classes for a rectangle and a triangle ',
+              ('Remarks', 3, None, '___sec75'),
+              ('Exercise 4: Make classes for a rectangle and a triangle',
                2,
                'sec:class:ex23',
                'sec:class:ex23'),
-              (' Exercise 5: Make a class for quadratic functions ',
+              ('Exercise 5: Make a class for quadratic functions',
                2,
                'sec:class:ex11',
                'sec:class:ex11'),
-              (' Exercise 6: Make a class for straight lines ',
+              ('Exercise 6: Make a class for straight lines',
                2,
                'sec:class:ex25',
                'sec:class:ex25'),
-              (' Exercise 7: Flexible handling of function arguments ',
+              ('Exercise 7: Flexible handling of function arguments',
                2,
                'sec:class:ex25b',
                'sec:class:ex25b'),
-              (' Exercise 8: Wrap functions in a class ',
+              ('Exercise 8: Wrap functions in a class',
                2,
                'sec:class:ex27d',
                'sec:class:ex27d'),
-              (' Exercise 9: Flexible handling of function arguments ',
+              ('Exercise 9: Flexible handling of function arguments',
                2,
                'sec:class:ex27e',
                'sec:class:ex27e'),
-              (' Exercise 10: Deduce a class implementation ',
+              ('Exercise 10: Deduce a class implementation',
                2,
                'sec:class:ex1',
                'sec:class:ex1'),
-              (' Exercise 11: Implement special methods in a class ',
+              ('Exercise 11: Implement special methods in a class',
                2,
                'sec:class:ex2b2',
                'sec:class:ex2b2'),
-              (' Exercise 12: Make a class for summation of series ',
+              ('Exercise 12: Make a class for summation of series',
                2,
                'sec:class:ex2b',
                'sec:class:ex2b'),
-              (' Exercise 13: Apply a numerical differentiation class ',
+              ('Exercise 13: Apply a numerical differentiation class',
                2,
                'sec:class:ex10',
                'sec:class:ex10'),
-              (' Exercise 14: Apply symbolic differentiation ',
+              ('Exercise 14: Implement an addition operator',
                2,
-               'sec:class:exer:sympy:diff',
-               'sec:class:exer:sympy:diff'),
-              (' Exercise 15: Implement in-place `+=` and `-=` operators ',
+               'sec:class:ex:tribesman',
+               'sec:class:ex:tribesman'),
+              ('Exercise 15: Implement in-place `+=` and `-=` operators',
                2,
                'sec:class:ex25qb',
                'sec:class:ex25qb'),
-              (' Exercise 16: Implement a class for numerical differentiation ',
+              ('Exercise 16: Implement a class for numerical differentiation',
                2,
                'sec:class:ex21',
                'sec:class:ex21'),
-              (' Exercise 17: Examine a program ',
+              ('Exercise 17: Examine a program',
                2,
                'sec:class:ex21b',
                'sec:class:ex21b'),
-              (' Exercise 18: Modify a class for numerical differentiation ',
+              ('Exercise 18: Modify a class for numerical differentiation',
                2,
                'sec:class:ex23s',
                'sec:class:ex23s'),
-              (' Exercise 19: Make a class for the Heaviside function ',
+              ('Exercise 19: Make a class for the Heaviside function',
                2,
                'sec:basic:exHclass',
                'sec:basic:exHclass'),
-              (' Exercise 20: Make a class for the indicator function ',
+              ('Exercise 20: Make a class for the indicator function',
                2,
                'sec:basic:exIndclass',
                'sec:basic:exIndclass'),
-              (' Exercise 21: Make a class for piecewise constant functions ',
+              ('Exercise 21: Make a class for piecewise constant functions',
                2,
                'sec:basic:ex:piecewisefunc',
                'sec:basic:ex:piecewisefunc'),
-              (' Exercise 22: Speed up repeated integral calculations ',
+              ('Exercise 22: Speed up repeated integral calculations',
                2,
                'sec:class:ex13c',
                'sec:class:ex13c'),
-              (' Exercise 23: Apply a class for polynomials ',
+              ('Exercise 23: Apply a class for polynomials',
                2,
                'sec:class:ex5',
                'sec:class:ex5'),
-              (' Exercise 24: Find a bug in a class for polynomials ',
+              ('Exercise 24: Find a bug in a class for polynomials',
                2,
                'sec:class:ex4',
                'sec:class:ex4'),
-              (' Exercise 25: Implement subtraction of polynomials ',
+              ('Exercise 25: Implement subtraction of polynomials',
                2,
                'sec:class:ex6a',
                'sec:class:ex6a'),
-              (' Exercise 26: Test the functionality of pretty print of polynomials ',
+              ('Exercise 26: Test the functionality of pretty print of polynomials',
                2,
                'sec:class:exer:str',
                'sec:class:exer:str'),
-              (' Exercise 27: Vectorize a class for polynomials ',
+              ('Exercise 27: Vectorize a class for polynomials',
                2,
                'sec:class:ex7v',
                'sec:class:ex7v'),
-              (' Remarks ', 3, None, '___sec97'),
-              (' Exercise 28: Use a dict to hold polynomial coefficients ',
+              ('Remarks', 3, None, '___sec100'),
+              ('Exercise 28: Use a dict to hold polynomial coefficients',
                2,
                'sec:class:ex8',
                'sec:class:ex8'),
-              (' Exercise 29: Extend class Vec2D to work with lists/tuples ',
+              ('Exercise 29: Extend class Vec2D to work with lists/tuples',
                2,
                'sec:class:ex16',
                'sec:class:ex16'),
-              (' Exercise 30: Extend class Vec2D to 3D vectors ',
+              ('Exercise 30: Extend class Vec2D to 3D vectors',
                2,
                'sec:class:ex17b',
                'sec:class:ex17b'),
-              (' Exercise 31: Use NumPy arrays in class Vec2D ',
+              ('Exercise 31: Use NumPy arrays in class Vec2D',
                2,
                'sec:class:ex17',
                'sec:class:ex17'),
-              (' Exercise 32: Make classes for students and courses ',
+              ('Exercise 32: Impreciseness of interval arithmetics',
+               2,
+               None,
+               '___sec105'),
+              ('Remarks', 3, None, '___sec106'),
+              ('Exercise 33: Make classes for students and courses',
                2,
                'sec:class:ex15',
                'sec:class:ex15'),
-              (' Exercise 33: Find local and global extrema of a function ',
+              ('Exercise 34: Find local and global extrema of a function',
                2,
                'sec:plot:ex28',
                'sec:plot:ex28'),
-              (' Exercise 34: Find the optimal production for a company ',
+              ('Exercise 35: Find the optimal production for a company',
                2,
                'sec:class:ex18a',
                'sec:class:ex18a'),
-              (' References ', 1, None, '___sec105')]}
+              ('References', 1, None, '___sec110')]}
 end of tocinfo -->
 
 <body>
@@ -388,8 +399,9 @@ $$
 
 <p>
 <!-- !split -->
+<p style="font-size:80%">This chapter is taken from the book <a href="http://www.springer.com/gp/book/9783662498866">A Primer on Scientific Programming with Python</a> by H. P. Langtangen, 5th edition, Springer, 2016.</p>
 
-<h1>Special methods <a name="sec:class:specialmethods"></a></h1>
+<h1 id="sec:class:specialmethods">Special methods</h1>
 
 <p>
 Some class methods have names starting and ending with a double
@@ -403,7 +415,7 @@ with <code>&gt;</code>, <code>&gt;=</code>, <code>!=</code>, etc., to call insta
 functions, and to test if an instance evaluates to <code>True</code> or <code>False</code>,
 to mention some possibilities.
 
-<h2>The call special method <a name="sec:class:call"></a></h2>
+<h2 id="sec:class:call">The call special method</h2>
 
 <p>
 Computing the value of the mathematical function represented by class
@@ -423,7 +435,7 @@ We may easily add this special method:
 
 <p>
 <!-- begin verbatim block  pycod-->
-<pre><code>class Y:
+<pre><code>class Y(object):
     ...
     def __call__(self, t):
         return self.v0*t - 0.5*self.g*t**2
@@ -468,9 +480,9 @@ This feature is very convenient.
 The next section demonstrates a neat application of the call
 operator <code>__call__</code> in a numerical algorithm.
 
-<h2>Example: Automagic differentiation <a name="sec:class:autodF"></a></h2>
+<h2 id="sec:class:autodF">Example: Automagic differentiation</h2>
 
-<h3>Problem  <a name="___sec27"></a></h3>
+<h3 id="___sec28">Problem </h3>
 
 <p>
 Given a Python implementation <code>f(x)</code> of a mathematical function
@@ -498,7 +510,6 @@ but the approximation can easily be improved).
 Maple, Mathematica, and many other software packages can do exact
 symbolic mathematics, including differentiation and integration.  The
 Python package <code>sympy</code> for symbolic mathematics
-(see the section ref{sec:formula:sympy})
 makes it trivial to calculate the exact derivative of
 a large class of functions \( f(x) \) and turn the result into
 an ordinary Python function. However, mathematical functions that are defined
@@ -507,10 +518,9 @@ problem), or functions with branches, random numbers, etc., pose
 fundamental problems to symbolic differentiation, and then numerical
 differentiation is required. Therefore we base the computation of
 derivatives in <code>Derivative</code> instances on finite difference
-formulas. Use of exact symbolic differentiation is also possible
-as indicated in <a href="._class-solarized008.html#sec:class:exer:sympy:diff">Exercise 14: Apply symbolic differentiation</a>.
+formulas. Use of exact symbolic differentiation via SymPy is also possible.
 
-<h3>Solution  <a name="___sec28"></a></h3>
+<h3 id="___sec29">Solution </h3>
 
 <p>
 The most basic (but not the best) formula for a numerical derivative is
@@ -532,7 +542,7 @@ coded in a few lines:
 
 <p>
 <!-- begin verbatim block  pycod-->
-<pre><code>class Derivative:
+<pre><code>class Derivative(object):
     def __init__(self, f, h=1E-5):
         self.f = f
         self.h = float(h)
@@ -573,7 +583,7 @@ look as ordinary Python functions that
 evaluate the derivative of the functions <code>sin(x)</code> and <code>g(t)</code>.
 Class <code>Derivative</code> works for (almost) any function \( f(x) \).
 
-<h3>Verification  <a name="___sec29"></a></h3>
+<h3 id="___sec30">Verification </h3>
 
 <p>
 It is a good programming habit to include a test function for
@@ -594,15 +604,22 @@ is exact for linear functions:
 </code></pre>
 <!-- end verbatim block -->
 We have here used a lambda function for compactly defining a function
-<code>f</code>, see the section ref{sec:basic:lambdafunc}.
+<code>f</code>. The alternative would be to define <code>f</code> in the standard way
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>def f(x):
+    return a*x + b
+</code></pre>
+<!-- end verbatim block -->
 A special feature of <code>f</code> is that it remembers the variables <code>a</code> and
-<code>b</code> when <code>f</code> is sent to class <code>Derivative</code> (such a function  is called a
-<em>closure</em>).
+<code>b</code> when <code>f</code> is sent to class <code>Derivative</code> (it is a closure,
+see the section <a href="._class-solarized001.html#sec:class:closure">Closures</a>).
 Note that the test function above follows
 the conventions for test functions
 outlined in the section <a href="._class-solarized002.html#sec:class:circle">A circle</a>.
 
-<h3>Application: Newton's method  <a name="___sec30"></a></h3>
+<h3 id="___sec31">Application: Newton's method </h3>
 
 <p>
 In what situations will it be convenient to automatically produce a
@@ -612,8 +629,7 @@ equations \( f(x)=0 \) with Newton's method and we, because of laziness,
 lack of time, or lack of training do not manage to derive \( f'(x) \) by
 hand. Consider a function <code>Newton</code> for solving \( f(x)=0 \): <code>Newton(f, x,
 dfdx, epsilon=1.0E-7, N=100)</code>.
-The section ref{sec:diffeq:Newtonsmethod:sec} presents a specific implementation
-in a module file
+A specific implementation is found in the module file
 <a href="http://tinyurl.com/pwyasaa/diffeq/Newton.py" target="_self"><tt>Newton.py</tt></a>.  The arguments are a
 Python function <code>f</code> for \( f(x) \), a <code>float x</code> for the initial guess
 (start value) of \( x \), a Python function <code>dfdx</code> for \( f'(x) \), a <code>float</code>
@@ -652,9 +668,9 @@ iterations, and the value of \( f \) at the approximate root (a measure of
 the error in the equation).
 
 <p>
-<center> <!-- figure -->
+<center> <!-- figure label: --> <div id="fig:hard_polynomial4Newton1"></div> <!-- FIGURE -->
 <hr class="figure">
-<center><p class="caption">Figure 2:  Plot of \( y = 10^5(x-0.9)^2(x-1.1)^3 \). <a name="fig:hard_polynomial4Newton1"></a> </p></center>
+<center><p class="caption">Figure 2:  Plot of \( y = 10^5(x-0.9)^2(x-1.1)^3 \).  <!-- caption label: fig:hard_polynomial4Newton1 --> </p></center>
 <p><img src="fig-class/hard_polynomial4Newton1.png" align="bottom" width=400></p>
 </center>
 
@@ -688,7 +704,102 @@ made smaller, usually much smaller than other errors, like the
 tolerance in Newton's method in this example or the uncertainty in
 physical parameters in real-life problems.
 
-<h2>Example: Automagic integration <a name="sec:class:autoint"></a></h2>
+<h3 id="___sec32">Solution utilizing SymPy </h3>
+
+<p>
+class <code>Derivative</code> is based on numerical differentiation, but it is
+possible to make an equally short class that can do exact differentiation.
+In SymPy, one can perform symbolic differentiation of an expression
+<code>e</code> with respect to a symbolic independent variable <code>x</code> by
+<code>diff(e, x)</code>.
+Assuming that the user's <code>f</code> function can be evaluated for a
+symbolic independent variable <code>x</code>, we can call <code>f(x)</code> to get
+the SymPy expression for the formula in <code>f</code> and then use
+<code>diff</code> to calculate the exact derivative. Thereafter, we turn
+the symbolic expression of the derivative into an ordinary
+Python function (via <code>lambdify</code>) and define this function as
+the <code>__call__</code> method. The proper Python code is very short:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>class Derivative_sympy(object):
+    def __init__(self, f):
+        from sympy import Symbol, diff, lambdify
+        x = Symbol('x')
+        sympy_f = f(x)   # make sympy expression
+        sympy_dfdx = diff(sympy_f, x)
+        self.__call__ = lambdify([x], sympy_dfdx)
+</code></pre>
+<!-- end verbatim block -->
+Note how the <code>__call__</code> method is defined by assigning a function
+to it (even though the function returned by <code>lambdify</code> is a function
+of <code>x</code> only, it works to call <code>obj(x)</code> for an instance <code>obj</code> of
+type <code>Derivative_sympy</code>).
+
+<p>
+Both demonstration of the class and verification of the implementation
+can be placed in a test function:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>def test_Derivative_sympy():
+    def g(t):
+        return t**3
+
+    dg = Derivative_sympy(g)
+    t = 2
+    exact = 3*t**2
+    computed = dg(t)
+    tol = 1E-14
+    assert abs(exact - computed) &lt; tol
+
+    def h(y):
+        return exp(-y)*sin(2*y)
+
+    from sympy import exp, sin
+    dh = Derivative_sympy(h)
+    from math import pi, exp, sin, cos
+    y = pi
+    exact = -exp(-y)*sin(2*y) + exp(-y)*2*cos(2*y)
+    computed = dh(y)
+    assert abs(exact - computed) &lt; tol
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+The example with the <code>g(t)</code> should be straightforward to understand.
+In the constructor of class <code>Derivative_sympy</code>, we call <code>g(x)</code>, with
+the symbol <code>x</code>, and <code>g</code> returns the SymPy expression <code>x**3</code>.
+The <code>__call__</code> method then becomes a function <code>lambda x: 3*x**2</code>.
+
+<p>
+The <code>h(y)</code> function, however, deserves more explanation. When then
+constructor of class <code>Derivative_sympy</code> makes the call <code>h(x)</code>, with
+the symbol <code>x</code>, the <code>h</code> function will return the SymPy expression
+<code>exp(-x)*sin(2*x)</code>, provided <code>exp</code> and <code>sin</code> are SymPy functions.
+Since we do <code>from sympy import exp, sin</code> prior to calling the
+constructor in class <code>Derivative_sympy</code>, the names <code>exp</code> and <code>sin</code>
+are defined in the test function, and our local <code>h</code> function will
+have access to all local variables, as it is a closure as mentioned
+above and in the section <a href="._class-solarized001.html#sec:class:closure">Closures</a>.
+This means that <code>h</code> has access to <code>sympy.sin</code> and <code>sympy.cos</code>
+when the constructor in class <code>Derivative_sympy</code> calls <code>h</code>.
+Thereafter, we want to do some numerical computing and need
+<code>exp</code>, <code>sin</code>, and <code>cos</code> from the <code>math</code> module. If we had tried
+to do <code>Derivative_sympy(h)</code> after the import from <code>math</code>,
+<code>h</code> would then call <code>math.exp</code> and <code>math.sin</code> with a SymPy
+symbol as argument, and would cause a <code>TypeError</code> since
+<code>math.exp</code> expects a <code>float</code>, not a <code>Symbol</code> object from SymPy.
+
+<p>
+Although the <code>Derivative_sympy</code> class is small and compact, its
+construction and use as explained here bring up more
+advanced topics than class <code>Derivative</code> and its plain numerical
+computations. However, it may be interesting to see that
+a class for exact differentiation of a Python function can be
+realized in very few lines.
+
+<h2 id="sec:class:autoint">Example: Automagic integration</h2>
 
 <p>
 We can apply the ideas from the section <a href="#sec:class:autodF">Example: Automagic differentiation</a> to
@@ -707,6 +818,7 @@ intervals (\( n+1 \) points):
 $$
 \begin{equation}
 \int_a^x f(t)dt = h\left(\frac{1}{2}f(a) + \sum_{i=1}^{n-1} f(a+ih) + \frac{1}{2}f(x)\right),\ 
+\tag{3}
 \end{equation}
 $$
 
@@ -727,7 +839,7 @@ print F(x)
 Here, <code>f(x)</code> is the Python function to be integrated, and <code>F(x)</code>
 behaves as a Python function that calculates values of \( F(x;a) \).
 
-<h3>A simple implementation  <a name="___sec32"></a></h3>
+<h3 id="___sec34">A simple implementation </h3>
 
 <p>
 Consider a straightforward implementation of the Trapezoidal rule
@@ -747,14 +859,14 @@ in a Python function:
 <!-- end verbatim block -->
 
 <p>
-Class <code>Integral</code> must have some attributes and a <code>__call__</code>
+Class <code>Integral</code> must have some data attributes and a <code>__call__</code>
 method. Since the latter method is supposed to take <code>x</code> as argument,
-the other parameters <code>a</code>, <code>f</code>, and <code>n</code> must be class attributes.  The
+the other parameters <code>a</code>, <code>f</code>, and <code>n</code> must be data attributes.  The
 implementation then becomes
 
 <p>
 <!-- begin verbatim block  pycod-->
-<pre><code>class Integral:
+<pre><code>class Integral(object):
     def __init__(self, f, a, n=100):
         self.f, self.a, self.n = f, a, n
 
@@ -790,7 +902,7 @@ An equivalent calculation is
 </code></pre>
 <!-- end verbatim block -->
 
-<h3>Verification via symbolic computing  <a name="___sec33"></a></h3>
+<h3 id="___sec35">Verification via symbolic computing </h3>
 
 <p>
 We should always provide a test function for verification of
@@ -798,23 +910,23 @@ the implementation. To avoid dealing with unknown approximation errors
 of the Trapezoidal rule, we use the obvious fact that linear functions
 are integrated exactly by the rule. Although it is really easy to
 pick a linear function, integrate it, and figure out what an integral
-is, we can also demonstrate how to automate such a process by the
-symbolic computing package <code>sympy</code>. Essentially, we define an
-expression in <code>sympy</code>, ask <code>sympy</code> to integrate it, and then turn
+is, we can also demonstrate how to automate such a process by
+SymPy. Essentially, we define an
+expression in SymPy, ask SymPy to integrate it, and then turn
 the resulting symbolic integral to a plain Python function for
 computing:
 
 <p>
 <!-- begin verbatim block  pyshell-->
-<pre><code>&gt;&gt;&gt; import sympy
-&gt;&gt;&gt; x = sympy.Symbol('x')
-&gt;&gt;&gt; f_expr = sympy.cos(x) + 5*x
+<pre><code>&gt;&gt;&gt; import sympy as sp
+&gt;&gt;&gt; x = sp.Symbol('x')
+&gt;&gt;&gt; f_expr = sp.cos(x) + 5*x
 &gt;&gt;&gt; f_expr
 5*x + cos(x)
-&gt;&gt;&gt; F_expr = sympy.integrate(f_expr, x)
+&gt;&gt;&gt; F_expr = sp.integrate(f_expr, x)
 &gt;&gt;&gt; F_expr
 5*x**2/2 + sin(x)
-&gt;&gt;&gt; F = sympy.lambdify([x], F_expr)  # turn f_expr to F(x) func.
+&gt;&gt;&gt; F = sp.lambdify([x], F_expr)  # turn f_expr to F(x) func.
 &gt;&gt;&gt; F(0)
 0.0
 &gt;&gt;&gt; F(1)
@@ -828,24 +940,29 @@ our test function as
 <!-- begin verbatim block  pycod-->
 <pre><code>def test_Integral():
     # The Trapezoidal rule is exact for linear functions
-    import sympy
-    x = sympy.Symbol('x')
+    import sympy as sp
+    x = sp.Symbol('x')
     f_expr = 2*x + 5
     # Turn sympy expression into plain Python function f(x)
-    f = sympy.lambdify([x], f_expr)
+    f = sp.lambdify([x], f_expr)
     # Find integral of f_expr and turn into plain Python function F
-    F_expr = sympy.integrate(f_expr, x)
-    F = sympy.lambdify([x], F_expr)
+    F_expr = sp.integrate(f_expr, x)
+    F = sp.lambdify([x], F_expr)
 
     a = 2
-    I = Integral(f, a, n=4)
     x = 6
-    diff = abs(I(x) - (F(x) - F(a)))
-    assert diff &lt; 1E-15, 'bug in class Integral, diff=%s' % diff
+    exact = F(x) - F(a)
+    computed = Integral(f, a, n=4)
+    diff = abs(exact - computed)
+    tol = 1E-15
+    assert diff &lt; tol, 'bug in class Integral, diff=%s' % diff
 </code></pre>
 <!-- end verbatim block -->
+If you think it is overkill to use SymPy for integrating linear
+functions, you can equally well do it yourself and define
+<code>f = lambda x: 2*x + 5</code> and <code>F = lambda x: x**2 + 5*x</code>.
 
-<h3>Remark  <a name="___sec34"></a></h3>
+<h3 id="___sec36">Remark </h3>
 
 <p>
 Class <code>Integral</code> is inefficient (but probably more
@@ -853,13 +970,13 @@ than fast enough) for plotting \( F(x;a) \) as a function \( x \).
 <a href="._class-solarized008.html#sec:class:ex13c">Exercise 22: Speed up repeated integral calculations</a> suggests to optimize the class
 for this purpose.
 
-<h2>Turning an instance into a string <a name="sec:class:str"></a></h2>
+<h2 id="sec:class:str">Turning an instance into a string</h2>
 
 <p>
-Another special method is <code>__str__</code>. It is called when
+Another useful special method is <code>__str__</code>. It is called when
 a class instance needs to be converted to a string. This happens when
-we say <code>print a</code>, and <code>a</code> is an instance. Python will then look
-into the <code>a</code> instance
+we say <code>print a</code>, and <code>a</code> is an instance.
+Python will then look into the <code>a</code> instance
 for a <code>__str__</code> method, which is supposed to return a string.
 If such a special method is found, the returned string is printed,
 otherwise just the name of the class is printed. An example will illustrate
@@ -884,7 +1001,7 @@ to define the <code>__str__</code> method in class <code>Y</code>:
 
 <p>
 <!-- begin verbatim block  pycod-->
-<pre><code>class Y:
+<pre><code>class Y(object):
     ...
     def __str__(self):
         return 'v0*t - 0.5*g*t**2; v0=%g' % self.v0
@@ -897,7 +1014,7 @@ therefore write class <code>Y</code> with special methods only:
 
 <p>
 <!-- begin verbatim block  pycod-->
-<pre><code>class Y:
+<pre><code>class Y(object):
     def __init__(self, v0):
         self.v0 = v0
         self.g = 9.81
@@ -928,7 +1045,11 @@ and we can do a <code>print y</code> to view the formula.
 The bottom line of using special methods is to achieve a more
 user-friendly syntax. The next sections illustrate this point further.
 
-<h2>Example: Phone book with special methods <a name="sec:class:phonebook2"></a></h2>
+<p>
+Note that the <code>__str__</code> method is called whenever we do <code>str(a)</code>, and
+<code>print a</code> is effectively <code>print str(a)</code>, i.e., <code>print a.__str__()</code>.
+
+<h2 id="sec:class:phonebook2">Example: Phone book with special methods</h2>
 
 <p>
 Let us reconsider class <code>Person</code> from the section <a href="._class-solarized002.html#sec:class:phonebook">Phone book</a>.
@@ -945,7 +1066,7 @@ which holds the dictionary as an attribute. An
 
 <p>
 <!-- begin verbatim block  pycod-->
-<pre><code>class PhoneBook:
+<pre><code>class PhoneBook(object):
     def __init__(self):
         self.contacts = {}   # dict of Person instances
 
@@ -1025,17 +1146,17 @@ as above. The complete program with classes <code>Person</code> and
 <a href="http://tinyurl.com/pwyasaa/class/PhoneBook.py" target="_self"><tt>PhoneBook.py</tt></a>.
 You can run this program, statement by statement,
 either in the <a href="http://www.pythontutor.com/" target="_self">Online Python Tutor</a> or
-in a debugger (see the document <a href="http://tcse6.on.net/debug" target="_self">Debugging in Python</a> <a href="._class-solarized008.html#Langtangen_TCSE6_debug">[3]</a>)
+in a debugger (see the document <a href="http://hplgit.github.io/primer.html/doc/pub/debug" target="_self">Debugging in Python</a> <a href="._class-solarized008.html#Langtangen_TCSE6_debug">[3]</a>)
 to control that your understanding of the program flow is correct.
 
-<h3>Remark  <a name="___sec37"></a></h3>
+<h3 id="___sec39">Remark </h3>
 
 <p>
 Note that the names are sorted with respect to the first names.
 The reason is that strings are sorted after the first character,
 then the second character, and so on.
 We can supply our own tailored sort
-function, as explained in ref{sec:basic:ex28}.
+function.
 One possibility is to split the
 name into words and use the last word for sorting:
 
@@ -1056,7 +1177,7 @@ for p in sorted(self.contacts, last_name_sort):
 </code></pre>
 <!-- end verbatim block -->
 
-<h2>Adding objects <a name="sec:class:add"></a></h2>
+<h2 id="sec:class:add">Adding objects</h2>
 
 <p>
 Let <code>a</code> and <code>b</code> be instances of some class <code>C</code>. Does it
@@ -1065,7 +1186,7 @@ make sense to write <code>a + b</code>? Yes, this makes sense if class
 
 <p>
 <!-- begin verbatim block  pycod-->
-<pre><code>class C:
+<pre><code>class C(object):
     ...
     __add__(self, other):
         ...
@@ -1078,7 +1199,7 @@ So when Python encounters <code>a + b</code>, it will check if class
 as the call <code>a.__add__(b)</code>.
 The next example will hopefully clarify what this idea can be used for.
 
-<h2>Example: Class for polynomials <a name="sec:class:Polynomial"></a></h2>
+<h2 id="sec:class:Polynomial">Example: Class for polynomials</h2>
 
 <p>
 Let us create a class <code>Polynomial</code>
@@ -1101,21 +1222,33 @@ an <code>__add__</code> method.
 A <code>__call__</code> method is natural for evaluating the polynomial,
 given a value of \( x \). The class is listed below and explained afterwards.
 
-<h3>Implementation  <a name="___sec40"></a></h3>
+<h3 id="___sec42">Implementation </h3>
 
 <p>
 <!-- begin verbatim block  pycod-->
-<pre><code>class Polynomial:
+<pre><code>class Polynomial(object):
     def __init__(self, coefficients):
         self.coeff = coefficients
 
     def __call__(self, x):
+        &quot;&quot;&quot;Evaluate the polynomial.&quot;&quot;&quot;
         s = 0
         for i in range(len(self.coeff)):
             s += self.coeff[i]*x**i
         return s
 
     def __add__(self, other):
+        &quot;&quot;&quot;Return self + other as Polynomial object.&quot;&quot;&quot;
+        # Two cases:
+        #
+        # self:   X X X X X X X
+        # other:  X X X
+        #
+        # or:
+        #
+        # self:   X X X X X
+        # other:  X X X X X X X X
+
         # Start with the longest list and add in the other
         if len(self.coeff) &gt; len(other.coeff):
             result_coeff = self.coeff[:]  # copy!
@@ -1128,12 +1261,12 @@ given a value of \( x \). The class is listed below and explained afterwards.
         return Polynomial(result_coeff)
 </code></pre>
 <!-- end verbatim block -->
-Class <code>Polynomial</code> has one attribute: the list of coefficients.
+Class <code>Polynomial</code> has one data attribute: the list of coefficients.
 To evaluate the polynomial, we just sum up coefficient no. \( i \) times
 \( x^i \) for \( i=0 \) to the number of coefficients in the list.
 
 <p>
-The <code>__add__</code> method looks more advanced. The idea is to add the two
+The <code>__add__</code> method looks more advanced. The goal is to add the two
 lists of coefficients. However, it may happen that the lists are of
 unequal length. We therefore start with the longest list and add in
 the other list, element by element.  Observe that <code>result_coeff</code>
@@ -1146,9 +1279,16 @@ implementation of class <code>Polynomial</code> is found in <a href="._class-sol
 
 <p>
 A subtraction method <code>__sub__</code> can be implemented along the lines of
-<code>__add__</code>, but is slightly more complicated and left to the reader
-through <a href="._class-solarized008.html#sec:class:ex6a">Exercise 25: Implement subtraction of polynomials</a>.  A somewhat more complicated
-operation, from a mathematical point of view, is the multiplication of
+<code>__add__</code>, but is slightly more complicated and left as
+<a href="._class-solarized008.html#sec:class:ex6a">Exercise 25: Implement subtraction of polynomials</a>. You are strongly encouraged to do
+this exercise as it will help increase the understanding of
+the interplay between mathematics and programming in class
+<code>Polynomial</code>.
+
+<p>
+A more complicated
+operation on polynomials,
+from a mathematical point of view, is the multiplication of
 two polynomials. Let \( p(x)=\sum_{i=0}^Mc_ix^i \) and \( q(x)=\sum_{j=0}^N
 d_jx^j \) be the two polynomials. The product becomes
 
@@ -1210,7 +1350,7 @@ is given below:
 
 <p>
 <!-- begin verbatim block  pycod-->
-<pre><code>class Polynomial:
+<pre><code>class Polynomial(object):
     ...
     def differentiate(self):
         &quot;&quot;&quot;Differentiate this polynomial in-place.&quot;&quot;&quot;
@@ -1242,7 +1382,7 @@ object is either mutable or immutable (if we leave out
 since the main purpose of this class is to illustrate various types of
 programming techniques, we keep both versions.
 
-<h3>Usage  <a name="___sec41"></a></h3>
+<h3 id="___sec43">Usage </h3>
 
 <p>
 As a demonstration of the functionality of class <code>Polynomial</code>, we introduce
@@ -1251,7 +1391,6 @@ the two polynomials
 $$
 \begin{equation*} p_1(x)= 1-x,\quad p_2(x)=x - 6x^4 - x^5  \thinspace . \end{equation*}
 $$
-
 
 <p>
 <!-- begin verbatim block  pyshell-->
@@ -1286,7 +1425,7 @@ latter case we add two instances of class <code>float</code> (since <code>p1(x)<
 <code>p2(x)</code> imply calling <code>__call__</code> and that method returns a <code>float</code>
 object).
 
-<h3>Pretty print of polynomials  <a name="___sec42"></a></h3>
+<h3 id="___sec44">Pretty print of polynomials </h3>
 
 <p>
 The <code>Polynomial</code> class can also be equipped with a
@@ -1296,7 +1435,7 @@ of the form <code>+ self.coeff[i]*x^i</code>:
 
 <p>
 <!-- begin verbatim block  pycod-->
-<pre><code>class Polynomial:
+<pre><code>class Polynomial(object):
     ...
     def __str__(self):
         s = ''
@@ -1338,7 +1477,7 @@ special methods.
 
 <p>
 <!-- begin verbatim block  pycod-->
-<pre><code>class Polynomial:
+<pre><code>class Polynomial(object):
     ...
     def __str__(self):
         s = ''
@@ -1380,7 +1519,7 @@ interactive session:
 </code></pre>
 <!-- end verbatim block -->
 
-<h3>Verifying the implementation  <a name="___sec43"></a></h3>
+<h3 id="___sec45">Verifying the implementation </h3>
 
 <p>
 It is always a good habit to include a test function <code>test_Polynomial()</code>
@@ -1391,7 +1530,7 @@ and differentiation of polynomials by hand and make tests that class
 method is left as <a href="._class-solarized008.html#sec:class:exer:str">Exercise 26: Test the functionality of pretty print of polynomials</a>.
 
 <p>
-Round-off errors may be an issue in class <code>Polynomial</code>: <code>__add__</code>,
+Rounding errors may be an issue in class <code>Polynomial</code>: <code>__add__</code>,
 <code>derivative</code>, and <code>differentiate</code> will lead to integer coefficients if
 the polynomials to be added have integer coefficients, while <code>__mul__</code>
 always results in a polynomial with the coefficients stored in a
@@ -1447,7 +1586,7 @@ Our test function now becomes
 </code></pre>
 <!-- end verbatim block -->
 
-<h2>Arithmetic operations and other special methods <a name="sec:class:arithmetics"></a></h2>
+<h2 id="sec:class:arithmetics">Arithmetic operations and other special methods</h2>
 
 <p>
 Given two instances <code>a</code> and <code>b</code>, the standard binary arithmetic
@@ -1480,14 +1619,14 @@ Some other special methods are also often useful:
 We can implement such methods in class <code>Polynomial</code>, see <a href="._class-solarized008.html#sec:class:ex6a">Exercise 25: Implement subtraction of polynomials</a>.  The section <a href="._class-solarized004.html#sec:class:Vec2D">Example: Class for vectors in the plane</a> contains
 examples on implementing the special methods listed above.
 
-<h2>Special methods for string conversion <a name="sec:class:repr"></a></h2>
+<h2 id="sec:class:repr">Special methods for string conversion</h2>
 
 <p>
 Look at this class with a <code>__str__</code> method:
 
 <p>
 <!-- begin verbatim block  pyshell-->
-<pre><code>&gt;&gt;&gt; class MyClass:
+<pre><code>&gt;&gt;&gt; class MyClass(object):
 ...     def __init__(self):
 ...         self.data = 2
 ...     def __str__(self):
@@ -1561,12 +1700,12 @@ A simple remedy in class <code>MyClass</code> is to define
 However, as we explain below, the <code>__repr__</code> is best defined
 differently.
 
-<h3>Recreating objects from strings  <a name="___sec46"></a></h3>
+<h3 id="___sec48">Recreating objects from strings </h3>
 
 <p>
 The Python function <code>eval(e)</code> evaluates a valid Python expression
 contained in the string
-<code>e</code>, see the section ref{sec:input:eval}.
+<code>e</code>.
 It is a convention that <code>__repr__</code> returns a string such that
 <code>eval</code> applied to the string recreates the instance.
 For example, in case of the <code>Y</code> class
@@ -1583,17 +1722,17 @@ and <code>MyClass</code> (above):
 
 <p>
 <!-- begin verbatim block  pycod-->
-<pre><code>class Y:
+<pre><code>class Y(object):
     ...
     def __repr__(self):
         return 'Y(v0=%s)' % self.v0
 
-class Polynomial:
+class Polynomial(object):
     ...
     def __repr__(self):
         return 'Polynomial(coefficients=%s)' % self.coeff
 
-class MyClass:
+class MyClass(object):
     ...
     def __repr__(self):
         return 'MyClass()'

@@ -7,7 +7,7 @@ Automatically generated HTML file from DocOnce source
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
 <meta name="description" content="User input and error handling">
-<meta name="keywords" content="command-line arguments,option-value pairs (command line),standard input,standard output,standard error,bytes,bits,exceptions,widgets,event loop,modules,test block (in module files),test function,nose tests,pytest tests,search for module files,module folders,refactoring,binomial distribution,Bernoulli trials,Poisson distribution,Poisson process">
+<meta name="keywords" content="command-line arguments,option-value pairs (command line),standard input,standard output,standard error,bytes,bits,exceptions,widgets,event loop,modules,test block (in module files),test function,nose tests,pytest tests,unit testing,search for module files,module folders,refactoring,binomial distribution,Bernoulli trials,Poisson distribution,Poisson process">
 
 <title>User input and error handling</title>
 
@@ -20,6 +20,24 @@ Automatically generated HTML file from DocOnce source
 <style type="text/css">
 /* Let inline verbatim have the same color as the surroundings */
 code { color: inherit; background-color: transparent; }
+
+/* Add scrollbar to dropdown menus in bootstrap navigation bar */
+.dropdown-menu {
+   height: auto;
+   max-height: 400px;
+   overflow-x: hidden;
+}
+
+/* Adds an invisible element before each target to offset for the navigation
+   bar */
+.anchor::before {
+  content:"";
+  display:block;
+  height:50px; /* fixed header height*/
+  margin:-50px 0 0; /* negative fixed header height */
+}
+
+body { font-size:20px;line-height:1.5--html_body_style=font-size:20px;line-height:1.5; }
 </style>
 
 
@@ -27,287 +45,309 @@ code { color: inherit; background-color: transparent; }
 
 <!-- tocinfo
 {'highest level': 1,
- 'sections': [(' Asking questions and reading answers ',
+ 'sections': [('Table of contents',
+               1,
+               'table_of_contents',
+               'table_of_contents'),
+              ('Asking questions and reading answers',
                1,
                'sec:input:rawinput',
                'sec:input:rawinput'),
-              (' Reading keyboard input ',
+              ('Reading keyboard input',
                2,
                'sec:input:rawinput2',
                'sec:input:rawinput2'),
-              (' Reading from the command line ',
+              ('Reading from the command line',
                1,
                'sec:input:sysargv',
                'sec:input:sysargv'),
-              (' Providing input on the command line ',
+              ('Providing input on the command line',
                2,
                'sec:input:cml',
                'sec:input:cml'),
-              (' A variable number of command-line arguments ',
+              ('A variable number of command-line arguments',
                2,
                None,
                '___sec4'),
-              (' More on command-line arguments ', 2, None, '___sec5'),
-              (' Turning user text into live objects ', 1, None, '___sec6'),
-              (' The magic eval function ',
+              ('More on command-line arguments', 2, None, '___sec5'),
+              ('Turning user text into live objects', 1, None, '___sec6'),
+              ('The magic eval function',
                2,
                'sec:input:eval',
                'sec:input:eval'),
-              (' Applying eval to strings ', 3, None, '___sec8'),
-              (' Applying eval to user input ', 3, None, '___sec9'),
-              (' The magic exec function ',
+              ('Applying eval to strings', 3, None, '___sec8'),
+              ('Applying eval to user input', 3, None, '___sec9'),
+              ('The magic exec function',
                2,
                'sec:input:exec',
                'sec:input:exec'),
-              (' Turning string expressions into functions ',
+              ('Turning string expressions into functions',
                2,
                'sec:input:StringFunction',
                'sec:input:StringFunction'),
-              (' Option-value pairs on the command line ',
+              ('Option-value pairs on the command line',
                1,
                'sec:input:argparse',
                'sec:input:argparse'),
-              (' Basic usage of the argparse module ', 2, None, '___sec13'),
-              (' Mathematical expressions as values ', 2, None, '___sec14'),
-              (' Reading data from file ',
+              ('Basic usage of the argparse module', 2, None, '___sec13'),
+              ('Mathematical expressions as values', 2, None, '___sec14'),
+              ('Reading data from file',
                1,
                'sec:files:reading',
                'sec:files:reading'),
-              (' Reading a file line by line ', 2, None, '___sec16'),
-              (' Alternative ways of reading a file ',
+              ('Reading a file line by line', 2, None, '___sec16'),
+              ('Alternative ways of reading a file',
                2,
                'sec:files:reading:other',
                'sec:files:reading:other'),
-              (' The modern with statement ', 3, None, '___sec18'),
-              (' The old while construction ', 3, None, '___sec19'),
-              (' Reading a file into a string ', 3, None, '___sec20'),
-              (' Reading a mixture of text and numbers ',
+              ('The modern with statement', 3, None, '___sec18'),
+              ('The old while construction', 3, None, '___sec19'),
+              ('Reading a file into a string', 3, None, '___sec20'),
+              ('Reading a mixture of text and numbers',
                2,
                'sec:files:textnum',
                'sec:files:textnum'),
-              (' Is it more to file reading? ', 3, None, '___sec22'),
-              (' Writing data to file ',
+              ('Is it more to file reading?', 3, None, '___sec22'),
+              ('Writing data to file',
                1,
                'sec:files:writing',
                'sec:files:writing'),
-              (' Example: Writing a table to file ', 2, None, '___sec24'),
-              (' Problem ', 3, None, '___sec25'),
-              (' Solution ', 3, None, '___sec26'),
-              (' Standard input and output as file objects ',
+              ('Example: Writing a table to file', 2, None, '___sec24'),
+              ('Problem', 3, None, '___sec25'),
+              ('Solution', 3, None, '___sec26'),
+              ('Standard input and output as file objects',
                2,
                None,
                '___sec27'),
-              (' Redirecting standard input, output, and error ',
+              ('Redirecting standard input, output, and error',
                3,
                None,
                '___sec28'),
-              (' Note ', 3, None, '___sec29'),
-              (' What is a file, really? ',
+              ('Note', 3, None, '___sec29'),
+              ('What is a file, really?',
                2,
                'sec:files:really',
                'sec:files:really'),
-              (' Pure text files ', 3, None, '___sec31'),
-              (' Word processor files ', 3, None, '___sec32'),
-              (' Image files ', 3, None, '___sec33'),
-              (' Music files ', 3, None, '___sec34'),
-              (' PDF files ', 3, None, '___sec35'),
-              (' Remarks ', 3, None, '___sec36'),
-              (' Handling errors ',
-               1,
-               'sec:input:except',
-               'sec:input:except'),
-              (' Exception handling ',
+              ('Pure text files', 3, None, '___sec31'),
+              ('Word processor files', 3, None, '___sec32'),
+              ('Image files', 3, None, '___sec33'),
+              ('Music files', 3, None, '___sec34'),
+              ('PDF files', 3, None, '___sec35'),
+              ('Remarks', 3, None, '___sec36'),
+              ('Handling errors', 1, 'sec:input:except', 'sec:input:except'),
+              ('Exception handling',
                2,
                'sec:input:except:handling',
                'sec:input:except:handling'),
-              (' Testing for a specific exception ', 3, None, '___sec39'),
-              (' Examples on exception types ', 3, None, '___sec40'),
-              (' Digression ', 3, None, '___sec41'),
-              (' Raising exceptions ', 2, None, '___sec42'),
-              (' Example ', 3, None, '___sec43'),
-              (' A glimpse of graphical user interfaces ',
+              ('Testing for a specific exception', 3, None, '___sec39'),
+              ('Examples on exception types', 3, None, '___sec40'),
+              ('Digression', 3, None, '___sec41'),
+              ('Raising exceptions', 2, None, '___sec42'),
+              ('Example', 3, None, '___sec43'),
+              ('A glimpse of graphical user interfaces',
                1,
                'sec:input:GUI',
                'sec:input:GUI'),
-              (' Making modules ',
-               1,
-               'sec:input:modules',
-               'sec:input:modules'),
-              (' Example: Interest on bank deposits ', 2, None, '___sec46'),
-              (' Collecting functions in a module file ',
+              ('Making modules', 1, 'sec:input:modules', 'sec:input:modules'),
+              ('Example: Interest on bank deposits', 2, None, '___sec46'),
+              ('Collecting functions in a module file',
                2,
                'sec:input:module:create',
                'sec:input:module:create'),
-              (' Test block ',
+              ('Test block',
                2,
                'sec:input:module:testblock',
                'sec:input:module:testblock'),
-              (' Example on a test block in a minimalistic module ',
+              ('Example on a test block in a minimalistic module',
                3,
                None,
                '___sec49'),
-              (' A test block in the `interest` module ',
-               3,
-               None,
-               '___sec50'),
-              (' Verification of the module code ',
+              ('A test block in the `interest` module', 3, None, '___sec50'),
+              ('Verification of the module code',
                2,
                'sec:input:modules:testfunc',
                'sec:input:modules:testfunc'),
-              (' Getting input data ',
+              ('Getting input data',
                2,
                'sec:input:modules:inputdata',
                'sec:input:modules:inputdata'),
-              (' Doc strings in modules ', 2, None, '___sec53'),
-              (' Using modules ',
+              ('Doc strings in modules', 2, None, '___sec53'),
+              ('Using modules',
                2,
                'sec:input:modules:usage',
                'sec:input:modules:usage'),
-              (' What gets imported by various import statements? ',
+              ('What gets imported by various import statements?',
                3,
                None,
                '___sec55'),
-              (' How to make Python find a module file ',
-               3,
-               None,
-               '___sec56'),
-              (' How to make Python run the module file ',
-               3,
-               None,
-               '___sec57'),
-              (' Distributing modules ',
+              ('How to make Python find a module file', 3, None, '___sec56'),
+              ('How to make Python run the module file', 3, None, '___sec57'),
+              ('Distributing modules',
                2,
                'sec:input:modules:setuppy',
                'sec:input:modules:setuppy'),
-              (' Making software available on the Internet ',
+              ('Making software available on the Internet',
                2,
                None,
                '___sec59'),
-              (' Summary ', 1, 'sec:input:summary', 'sec:input:summary'),
-              (' Chapter topics ',
+              ('Making code for Python 2 and 3',
+               1,
+               'sec:input:py23',
+               'sec:input:py23'),
+              ('Basic differences between Python 2 and 3',
+               2,
+               None,
+               '___sec61'),
+              ('The print statement has changed', 3, None, '___sec62'),
+              ('Integer division is not an issue in Python 3',
+               3,
+               None,
+               '___sec63'),
+              ('The `raw_input` function is named `input` in Python 3',
+               3,
+               None,
+               '___sec64'),
+              ('Turning Python 2 code into Python 3 code',
+               2,
+               None,
+               '___sec65'),
+              ('Summary', 1, 'sec:input:summary', 'sec:input:summary'),
+              ('Chapter topics',
                2,
                'sec:input:summary:topics',
                'sec:input:summary:topics'),
-              (' Question and answer input ', 3, None, '___sec62'),
-              (' Getting command-line arguments ', 3, None, '___sec63'),
-              (' Using option-value pairs ', 3, None, '___sec64'),
-              (' Generating code on the fly ', 3, None, '___sec65'),
-              (' Turning string formulas into Python functions ',
+              ('Question and answer input', 3, None, '___sec68'),
+              ('Getting command-line arguments', 3, None, '___sec69'),
+              ('Using option-value pairs', 3, None, '___sec70'),
+              ('Generating code on the fly', 3, None, '___sec71'),
+              ('Turning string formulas into Python functions',
                3,
                None,
-               '___sec66'),
-              (' File operations ', 3, None, '___sec67'),
-              (' Handling exceptions ', 3, None, '___sec68'),
-              (' Raising exceptions ', 3, None, '___sec69'),
-              (' Modules ', 3, None, '___sec70'),
-              (' Terminology ', 3, None, '___sec71'),
-              (' Example: Bisection root finding ',
+               '___sec72'),
+              ('File operations', 3, None, '___sec73'),
+              ('Handling exceptions', 3, None, '___sec74'),
+              ('Raising exceptions', 3, None, '___sec75'),
+              ('Modules', 3, None, '___sec76'),
+              ('Terminology', 3, None, '___sec77'),
+              ('Example: Bisection root finding',
                2,
                'sec:input:summarizingex',
                'sec:input:summarizingex'),
-              (' Problem ', 3, None, '___sec73'),
-              (' Solution ', 3, None, '___sec74'),
-              (' Verification ', 3, None, '___sec75'),
-              (' Making a function ', 3, None, '___sec76'),
-              (' Making a test function ', 3, None, '___sec77'),
-              (' Making a module ', 3, None, '___sec78'),
-              (' Defining a user interface ', 3, None, '___sec79'),
-              (' Using the module ', 3, None, '___sec80'),
-              (' Potential problems with the software ', 3, None, '___sec81'),
-              (' Distributing the bisection module to others ',
+              ('Problem', 3, None, '___sec79'),
+              ('Solution', 3, None, '___sec80'),
+              ('Verification', 3, None, '___sec81'),
+              ('Making a function', 3, None, '___sec82'),
+              ('Making a test function', 3, None, '___sec83'),
+              ('Making a module', 3, None, '___sec84'),
+              ('Defining a user interface', 3, None, '___sec85'),
+              ('Using the module', 3, None, '___sec86'),
+              ('Potential problems with the software', 3, None, '___sec87'),
+              ('Distributing the bisection module to others',
                3,
                None,
-               '___sec82'),
-              (' Exercises ', 1, None, '___sec83'),
-              (' Exercise 1: Make an interactive program ',
+               '___sec88'),
+              ('Exercises', 1, None, '___sec89'),
+              ('Exercise 1: Make an interactive program',
                2,
                'sec:input:ex24',
                'sec:input:ex24'),
-              (' Exercise 2: Read a number from the command line ',
+              ('Exercise 2: Read a number from the command line',
                2,
                'sec:input:ex24b',
                'sec:input:ex24b'),
-              (' Exercise 3: Read a number from a file ',
+              ('Exercise 3: Read a number from a file',
                2,
                'sec:input:ex24bfile',
                'sec:input:ex24bfile'),
-              (' Exercise 4: Read and write several numbers from and to file ',
+              ('Exercise 4: Read and write several numbers from and to file',
                2,
                'sec:input:ex24bfile2',
                'sec:input:ex24bfile2'),
-              (' Exercise 5: Use exceptions to handle wrong input ',
+              ('Exercise 5: Use exceptions to handle wrong input',
                2,
                'sec:input:ex24c',
                'sec:input:ex24c'),
-              (' Exercise 6: Read input from the keyboard ',
+              ('Exercise 6: Read input from the keyboard',
                2,
                'sec:input:ex25',
                'sec:input:ex25'),
-              (' Exercise 7: Read input from the command line ',
+              ('Exercise 7: Read input from the command line',
                2,
                'sec:input:ex26',
                'sec:input:ex26'),
-              (' Exercise 8: Try MSWord or LibreOffice to write a program ',
+              ('Exercise 8: Try MSWord or LibreOffice to write a program',
                2,
                'sec:files:ex7',
                'sec:files:ex7'),
-              (' Exercise 9: Prompt the user for input to a formula ',
+              ('Exercise 9: Prompt the user for input to a formula',
                2,
                'sec:input:ex6',
                'sec:input:ex6'),
-              (' Exercise 10: Read parameters in a formula from the command line ',
+              ('Exercise 10: Read parameters in a formula from the command line',
                2,
                'sec:input:ex5',
                'sec:input:ex5'),
-              (' Exercise 11: Use exceptions to handle wrong input ',
+              ('Exercise 11: Use exceptions to handle wrong input',
                2,
                'sec:input:ex8b',
                'sec:input:ex8b'),
-              (' Exercise 12: Test validity of input data ',
+              ('Exercise 12: Test validity of input data',
                2,
                'sec:input:ex7',
                'sec:input:ex7'),
-              (' Exercise 13: Raise an exception in case of wrong input ',
+              ('Exercise 13: Raise an exception in case of wrong input',
                2,
                'sec:input:ex8',
                'sec:input:ex8'),
-              (' Exercise 14: Evaluate a formula for data in a file ',
+              ('Exercise 14: Evaluate a formula for data in a file',
                2,
                'sec:input:ex:ball:file',
                'sec:input:ex:ball:file'),
-              (' Exercise 15: Compute the distance it takes to stop a car ',
+              ('Exercise 15: Write a function given its test function',
+               2,
+               'sec:input:ex:testffirst',
+               'sec:input:ex:testffirst'),
+              ('Exercise 16: Compute the distance it takes to stop a car',
                2,
                'sec:input:ex21',
                'sec:input:ex21'),
-              (' Exercise 16: Look up calendar functionality ',
+              ('Exercise 17: Look up calendar functionality',
                2,
                'sec:input:ex48',
                'sec:input:ex48'),
-              (' Exercise 17: Use the StringFunction tool ',
+              ('Exercise 18: Use the StringFunction tool',
                2,
                'sec:input:ex28b',
                'sec:input:ex28b'),
-              (' Exercise 18: Why we test for specific exception types ',
+              ('Exercise 19: Why we test for specific exception types',
                2,
                'sec:input:ex11',
                'sec:input:ex11'),
-              (' Exercise 19: Make a complete module ',
+              ('Exercise 20: Make a complete module',
                2,
                'sec:input:ex27',
                'sec:input:ex27'),
-              (' Exercise 20: Check if mathematical identities hold ',
+              ('Exercise 21: Organize a previous program as a module',
+               2,
+               'sec:input:ex17',
+               'sec:input:ex17'),
+              ('Exercise 22: Read options and values from the command line',
+               2,
+               'sec:input:ex19',
+               'sec:input:ex19'),
+              ('Exercise 23: Check if mathematical identities hold',
                2,
                'sec:input:ex2',
                'sec:input:ex2'),
-              (' Exercise 21: Compute probabilities with the binomial distribution ',
+              ('Exercise 24: Compute probabilities with the binomial distribution',
                2,
                'sec:input:ex15',
                'sec:input:ex15'),
-              (' Exercise 22: Compute probabilities with the Poisson distribution ',
+              ('Exercise 25: Compute probabilities with the Poisson distribution',
                2,
                'sec:input:ex16',
                'sec:input:ex16'),
-              (' References ', 1, None, '___sec106')]}
+              ('References', 1, None, '___sec115')]}
 end of tocinfo -->
 
 <body>
@@ -345,23 +385,129 @@ $$
     </button>
     <a class="navbar-brand" href="input-readable.html">User input and error handling</a>
   </div>
+
   <div class="navbar-collapse collapse navbar-responsive-collapse">
     <ul class="nav navbar-nav navbar-right">
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
         <ul class="dropdown-menu">
-     <!-- navigation toc: --> <li><a href="._input-readable001.html#sec:input:rawinput" style="font-size: 80%;">Asking questions and reading answers</a></li>
-     <!-- navigation toc: --> <li><a href="._input-readable002.html#sec:input:sysargv" style="font-size: 80%;">Reading from the command line</a></li>
-     <!-- navigation toc: --> <li><a href="._input-readable003.html#___sec6" style="font-size: 80%;">Turning user text into live objects</a></li>
-     <!-- navigation toc: --> <li><a href="._input-readable004.html#sec:input:argparse" style="font-size: 80%;">Option-value pairs on the command line</a></li>
-     <!-- navigation toc: --> <li><a href="._input-readable005.html#sec:files:reading" style="font-size: 80%;">Reading data from file</a></li>
-     <!-- navigation toc: --> <li><a href="._input-readable006.html#sec:files:writing" style="font-size: 80%;">Writing data to file</a></li>
-     <!-- navigation toc: --> <li><a href="._input-readable007.html#sec:input:except" style="font-size: 80%;">Handling errors</a></li>
-     <!-- navigation toc: --> <li><a href="._input-readable008.html#sec:input:GUI" style="font-size: 80%;">A glimpse of graphical user interfaces</a></li>
-     <!-- navigation toc: --> <li><a href="._input-readable009.html#sec:input:modules" style="font-size: 80%;">Making modules</a></li>
-     <!-- navigation toc: --> <li><a href="#sec:input:summary" style="font-size: 80%;">Summary</a></li>
-     <!-- navigation toc: --> <li><a href="._input-readable011.html#___sec83" style="font-size: 80%;">Exercises</a></li>
-     <!-- navigation toc: --> <li><a href="._input-readable011.html#___sec106" style="font-size: 80%;">References</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable000.html#table_of_contents" style="font-size: 80%;"><b>Table of contents</b></a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable001.html#sec:input:rawinput" style="font-size: 80%;"><b>Asking questions and reading answers</b></a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable001.html#sec:input:rawinput2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Reading keyboard input</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable002.html#sec:input:sysargv" style="font-size: 80%;"><b>Reading from the command line</b></a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable002.html#sec:input:cml" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Providing input on the command line</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable002.html#___sec4" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;A variable number of command-line arguments</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable002.html#___sec5" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;More on command-line arguments</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable003.html#___sec6" style="font-size: 80%;"><b>Turning user text into live objects</b></a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable003.html#sec:input:eval" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The magic eval function</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable003.html#___sec8" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Applying eval to strings</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable003.html#___sec9" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Applying eval to user input</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable003.html#sec:input:exec" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The magic exec function</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable003.html#sec:input:StringFunction" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Turning string expressions into functions</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable004.html#sec:input:argparse" style="font-size: 80%;"><b>Option-value pairs on the command line</b></a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable004.html#___sec13" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Basic usage of the argparse module</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable004.html#___sec14" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Mathematical expressions as values</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable005.html#sec:files:reading" style="font-size: 80%;"><b>Reading data from file</b></a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable005.html#___sec16" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Reading a file line by line</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable005.html#sec:files:reading:other" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Alternative ways of reading a file</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable005.html#___sec18" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The modern with statement</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable005.html#___sec19" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The old while construction</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable005.html#___sec20" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Reading a file into a string</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable005.html#sec:files:textnum" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Reading a mixture of text and numbers</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable005.html#___sec22" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Is it more to file reading?</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable006.html#sec:files:writing" style="font-size: 80%;"><b>Writing data to file</b></a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable006.html#___sec24" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Writing a table to file</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable006.html#___sec25" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable006.html#___sec26" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Solution</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable006.html#___sec27" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Standard input and output as file objects</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable006.html#___sec28" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Redirecting standard input, output, and error</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable006.html#___sec29" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Note</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable006.html#sec:files:really" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;What is a file, really?</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable006.html#___sec31" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pure text files</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable006.html#___sec32" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Word processor files</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable006.html#___sec33" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Image files</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable006.html#___sec34" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Music files</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable006.html#___sec35" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PDF files</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable006.html#___sec36" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remarks</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable007.html#sec:input:except" style="font-size: 80%;"><b>Handling errors</b></a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable007.html#sec:input:except:handling" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exception handling</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable007.html#___sec39" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Testing for a specific exception</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable007.html#___sec40" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Examples on exception types</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable007.html#___sec41" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Digression</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable007.html#___sec42" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Raising exceptions</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable007.html#___sec43" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable008.html#sec:input:GUI" style="font-size: 80%;"><b>A glimpse of graphical user interfaces</b></a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable009.html#sec:input:modules" style="font-size: 80%;"><b>Making modules</b></a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable009.html#___sec46" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Interest on bank deposits</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable009.html#sec:input:module:create" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Collecting functions in a module file</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable009.html#sec:input:module:testblock" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Test block</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable009.html#___sec49" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example on a test block in a minimalistic module</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable009.html#___sec50" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A test block in the <code>interest</code> module</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable009.html#sec:input:modules:testfunc" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Verification of the module code</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable009.html#sec:input:modules:inputdata" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Getting input data</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable009.html#___sec53" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Doc strings in modules</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable009.html#sec:input:modules:usage" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Using modules</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable009.html#___sec55" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;What gets imported by various import statements?</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable009.html#___sec56" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;How to make Python find a module file</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable009.html#___sec57" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;How to make Python run the module file</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable009.html#sec:input:modules:setuppy" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Distributing modules</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable009.html#___sec59" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Making software available on the Internet</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:input:py23" style="font-size: 80%;"><b>Making code for Python 2 and 3</b></a></li>
+     <!-- navigation toc: --> <li><a href="#___sec61" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Basic differences between Python 2 and 3</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec62" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The print statement has changed</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec63" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Integer division is not an issue in Python 3</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec64" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The <code>raw_input</code> function is named <code>input</code> in Python 3</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec65" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Turning Python 2 code into Python 3 code</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable011.html#sec:input:summary" style="font-size: 80%;"><b>Summary</b></a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable011.html#sec:input:summary:topics" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Chapter topics</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable011.html#___sec68" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Question and answer input</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable011.html#___sec69" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Getting command-line arguments</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable011.html#___sec70" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Using option-value pairs</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable011.html#___sec71" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Generating code on the fly</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable011.html#___sec72" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Turning string formulas into Python functions</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable011.html#___sec73" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;File operations</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable011.html#___sec74" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Handling exceptions</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable011.html#___sec75" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Raising exceptions</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable011.html#___sec76" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Modules</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable011.html#___sec77" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Terminology</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable011.html#sec:input:summarizingex" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Bisection root finding</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable011.html#___sec79" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable011.html#___sec80" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Solution</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable011.html#___sec81" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Verification</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable011.html#___sec82" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Making a function</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable011.html#___sec83" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Making a test function</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable011.html#___sec84" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Making a module</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable011.html#___sec85" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Defining a user interface</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable011.html#___sec86" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Using the module</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable011.html#___sec87" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Potential problems with the software</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable011.html#___sec88" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Distributing the bisection module to others</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable012.html#___sec89" style="font-size: 80%;"><b>Exercises</b></a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable012.html#sec:input:ex24" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 1: Make an interactive program</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable012.html#sec:input:ex24b" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 2: Read a number from the command line</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable012.html#sec:input:ex24bfile" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 3: Read a number from a file</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable012.html#sec:input:ex24bfile2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 4: Read and write several numbers from and to file</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable012.html#sec:input:ex24c" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 5: Use exceptions to handle wrong input</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable012.html#sec:input:ex25" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 6: Read input from the keyboard</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable012.html#sec:input:ex26" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 7: Read input from the command line</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable012.html#sec:files:ex7" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 8: Try MSWord or LibreOffice to write a program</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable012.html#sec:input:ex6" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 9: Prompt the user for input to a formula</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable012.html#sec:input:ex5" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 10: Read parameters in a formula from the command line</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable012.html#sec:input:ex8b" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 11: Use exceptions to handle wrong input</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable012.html#sec:input:ex7" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 12: Test validity of input data</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable012.html#sec:input:ex8" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 13: Raise an exception in case of wrong input</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable012.html#sec:input:ex:ball:file" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 14: Evaluate a formula for data in a file</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable012.html#sec:input:ex:testffirst" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 15: Write a function given its test function</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable012.html#sec:input:ex21" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 16: Compute the distance it takes to stop a car</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable012.html#sec:input:ex48" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 17: Look up calendar functionality</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable012.html#sec:input:ex28b" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 18: Use the StringFunction tool</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable012.html#sec:input:ex11" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 19: Why we test for specific exception types</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable012.html#sec:input:ex27" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 20: Make a complete module</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable012.html#sec:input:ex17" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 21: Organize a previous program as a module</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable012.html#sec:input:ex19" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 22: Read options and values from the command line</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable012.html#sec:input:ex2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 23: Check if mathematical identities hold</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable012.html#sec:input:ex15" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 24: Compute probabilities with the binomial distribution</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable012.html#sec:input:ex16" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 25: Compute probabilities with the Poisson distribution</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable012.html#___sec115" style="font-size: 80%;"><b>References</b></a></li>
 
         </ul>
       </li>
@@ -376,902 +522,216 @@ $$
 
 <a name="part0010"></a>
 <!-- !split -->
-<p style="font-size:80%">This chapter is taken from book <a href="http://www.springer.com/gp/book/9783642549588">A Primer on Scientific Programming with Python</a> by H. P. Langtangen, 4th edition, Springer, 2014.</p>
+<p style="font-size:80%">This chapter is taken from the book <a href="http://www.springer.com/gp/book/9783662498866">A Primer on Scientific Programming with Python</a> by H. P. Langtangen, 5th edition, Springer, 2016.</p>
 
-<h1 id="sec:input:summary">Summary</h1>
-
-<h2 id="sec:input:summary:topics">Chapter topics</h2>
-
-<h3 id="___sec62">Question and answer input </h3>
+<h1 id="sec:input:py23" class="anchor">Making code for Python 2 and 3</h1>
 
 <p>
-Prompting the user and reading the answer back into a
-variable is done by
+This book applies Python version 2.7, but there is a newer version of
+Python called Python 3 (the current version is 3.5).
+Unfortunately, Python 2 programs do not work with Python 3 and vice versa.
+Newcomers to Python are normally guided to pick up version 3 rather than
+version 2, since the former has many improvements and represents the
+future of the language. However, for scientific computing, version 3
+still lacks many useful libraries, and that is the reason why this book
+applies Python version 2.7.
+
+<h2 id="___sec61" class="anchor">Basic differences between Python 2 and 3 </h2>
 
 <p>
+So, what are the major differences between version 2 and 3? We cover
+only the three differences that involve statements we have seen so
+far in the book.
 
-<!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">var <span style="color: #666666">=</span> <span style="color: #008000">raw_input</span>(<span style="color: #BA2121">&#39;Give value: &#39;</span>)
-</pre></div>
-<p>
-The <code>raw_input</code> function returns a string containing the
-characters that the user wrote on the keyboard before pressing the Return
-key. It is necessary to convert <code>var</code> to an appropriate object
-(<code>int</code> or <code>float</code>, for instance)
-if we want to perform mathematical operations with <code>var</code>.
-Sometimes
+<h3 id="___sec62" class="anchor">The print statement has changed </h3>
 
 <p>
-
-<!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">var <span style="color: #666666">=</span> <span style="color: #008000">eval</span>(<span style="color: #008000">raw_input</span>(<span style="color: #BA2121">&#39;Give value: &#39;</span>))
-</pre></div>
-<p>
-is a flexible and easy way of
-transforming the string to the right type of object (integer, real number,
-list, tuple, and so on).
-This last statement will not work, however, for strings unless the text is
-surrounded by quotes when written on the keyboard.
-A general conversion function that turns any text without quotes
-into the right object is <code>scitools.misc.str2obj</code>:
+Here are some examples on print statements in Python 2:
 
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">scitools.misc</span> <span style="color: #008000; font-weight: bold">import</span> str2obj
-var <span style="color: #666666">=</span> str2obj(<span style="color: #008000">raw_input</span>(<span style="color: #BA2121">&#39;Give value: &#39;</span>))
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>a <span style="color: #666666">=</span> <span style="color: #666666">1</span>
+<span style="color: #008000; font-weight: bold">print</span> a
+<span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;The value of a is&#39;</span>, a
+<span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;The value of a is&#39;</span>, a,  <span style="color: #408080; font-style: italic"># comma prevents newline</span>
+b <span style="color: #666666">=</span> <span style="color: #666666">2</span>
+<span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;and b=</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> b
 </pre></div>
 <p>
-Typing, for example, <code>3</code> makes <code>var</code> refer to an <code>int</code> object, <code>3.14</code>
-results in a <code>float</code> object, <code>[-1,1]</code> results in a <code>list</code>, <code>(1,3,5,7)</code>
-in a <code>tuple</code>, and <code>some text</code> in the string (<code>str</code>) object <code>'some
-text'</code> (run the program <a href="http://tinyurl.com/pwyasaa/input/str2obj_demo.py" target="_self"><tt>str2obj_demo.py</tt></a> to see this functionality
-demonstrated).
-
-<h3 id="___sec63">Getting command-line arguments </h3>
-
-<p>
-The <code>sys.argv[1:]</code> list contains all the command-line arguments
-given to a program (<code>sys.argv[0]</code> contains the program name).
-All elements in <code>sys.argv</code> are strings. A typical usage is
+The print statement is not a statement anymore, but a function in
+Python 3. The above code needs to be written as
 
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">parameter1 <span style="color: #666666">=</span> <span style="color: #008000">float</span>(sys<span style="color: #666666">.</span>argv[<span style="color: #666666">1</span>])
-parameter2 <span style="color: #666666">=</span> <span style="color: #008000">int</span>(sys<span style="color: #666666">.</span>argv[<span style="color: #666666">2</span>])
-parameter3 <span style="color: #666666">=</span> sys<span style="color: #666666">.</span>argv[<span style="color: #666666">3</span>]          <span style="color: #408080; font-style: italic"># parameter3 can be string</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>a <span style="color: #666666">=</span> <span style="color: #666666">1</span>
+<span style="color: #008000; font-weight: bold">print</span>(a)
+<span style="color: #008000; font-weight: bold">print</span>(<span style="color: #BA2121">&#39;The value of a is&#39;</span>, a)
+<span style="color: #008000; font-weight: bold">print</span>(<span style="color: #BA2121">&#39;The value of a is&#39;</span>, a, end<span style="color: #666666">=</span><span style="color: #BA2121">&#39; &#39;</span>)  <span style="color: #408080; font-style: italic"># end=&#39;&#39; prevents newline</span>
+b <span style="color: #666666">=</span> <span style="color: #666666">2</span>
+<span style="color: #008000; font-weight: bold">print</span>(<span style="color: #BA2121">&#39;and b=</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> b)
 </pre></div>
 
-<h3 id="___sec64">Using option-value pairs </h3>
+<h3 id="___sec63" class="anchor">Integer division is not an issue in Python 3 </h3>
 
 <p>
-The <code>argparse</code> module is recommended for
-interpreting command-line arguments of the form <code>--option value</code>.
-A simple recipe with <code>argparse</code> reads
+The expression <code>1/10</code> is <code>0</code> in Python 2, while in Python 3 it equals
+<code>0.1</code>. Nevertheless, there are so many computer languages and tools
+that interpret as <code>1/10</code> integer division, so rather than relying on
+a language's interpretation of integer divided by integer as float
+division, the programmer is strongly encouraged to turn one of
+the operands explicitly to float, as in <code>1.0/10</code>.
+
+<h3 id="___sec64" class="anchor">The <code>raw_input</code> function is named <code>input</code> in Python 3 </h3>
+
+<p>
+The Python 2 code
 
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">argparse</span>
-parser <span style="color: #666666">=</span> argparse<span style="color: #666666">.</span>ArgumentParser()
-parser<span style="color: #666666">.</span>add_argument(<span style="color: #BA2121">&#39;--p1&#39;</span>, <span style="color: #BA2121">&#39;--parameter_1&#39;</span>, <span style="color: #008000">type</span><span style="color: #666666">=</span><span style="color: #008000">float</span>,
-                    default<span style="color: #666666">=0.0</span>, help<span style="color: #666666">=</span><span style="color: #BA2121">&#39;1st parameter&#39;</span>)
-parser<span style="color: #666666">.</span>add_argument(<span style="color: #BA2121">&#39;--p2&#39;</span>, <span style="color: #008000">type</span><span style="color: #666666">=</span><span style="color: #008000">float</span>,
-                    default<span style="color: #666666">=0.0</span>, help<span style="color: #666666">=</span><span style="color: #BA2121">&#39;2nd parameter&#39;</span>)
-
-args <span style="color: #666666">=</span> parser<span style="color: #666666">.</span>parse_args()
-p1 <span style="color: #666666">=</span> args<span style="color: #666666">.</span>p1
-p2 <span style="color: #666666">=</span> args<span style="color: #666666">.</span>p2
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>a <span style="color: #666666">=</span> <span style="color: #008000">float</span>(<span style="color: #008000">raw_input</span>(<span style="color: #BA2121">&#39;Give a: &#39;</span>))
 </pre></div>
 <p>
-On the command line we can provide any or all of these options:
-
-<p>
-
-<!-- code=text (!bc ccq) typeset with pygments style "default" -->
-<blockquote>
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">--parameter_1 --p1 --p2
-</pre></div>
-</blockquote><p>
-where each option must be succeeded by a suitable value.
-However, <code>argparse</code> is very flexible can easily handle options
-without values or command-line arguments without any
-option specifications.
-
-<h3 id="___sec65">Generating code on the fly </h3>
-
-<p>
-Calling <code>eval(s)</code> turns a string <code>s</code>, containing a Python
-expression, into code as if the contents of the string were written
-directly into the program code. The result of the following
-<code>eval</code> call is a <code>float</code> object holding the number 21.1:
-
-<p>
-
-<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> x <span style="color: #666666">=</span> <span style="color: #666666">20</span>
-<span style="color: #666666">&gt;&gt;&gt;</span> r <span style="color: #666666">=</span> <span style="color: #008000">eval</span>(<span style="color: #BA2121">&#39;x + 1.1&#39;</span>)
-<span style="color: #666666">&gt;&gt;&gt;</span> r
-<span style="color: #666666">21.1</span>
-<span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000">type</span>(r)
-<span style="color: #666666">&lt;</span><span style="color: #008000">type</span> <span style="color: #BA2121">&#39;float&#39;</span><span style="color: #666666">&gt;</span>
-</pre></div>
-<p>
-The <code>exec</code> function takes a string with arbitrary Python code
-as argument and executes the code. For example, writing
+reads
 
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">exec</span>(<span style="color: #BA2121">&quot;&quot;&quot;</span>
-<span style="color: #BA2121">def f(x):</span>
-<span style="color: #BA2121">    return </span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121"></span>
-<span style="color: #BA2121">&quot;&quot;&quot;</span> <span style="color: #666666">%</span> sys<span style="color: #666666">.</span>argv[<span style="color: #666666">1</span>])
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>a <span style="color: #666666">=</span> <span style="color: #008000">float</span>(<span style="color: #008000">input</span>(<span style="color: #BA2121">&#39;Give a: &#39;</span>))
 </pre></div>
 <p>
-is the same as if we had hardcoded the (for the programmer unknown)
-contents of <code>sys.argv[1]</code>
-into a function definition in the program.
-
-<h3 id="___sec66">Turning string formulas into Python functions </h3>
+in Python 3.
 
 <p>
-Given a mathematical formula as a string, <code>s</code>, we can turn this
-formula into a callable Python function <code>f(x)</code> by
+Note that in Python 2 there is an <code>input</code> function which equals
+<code>eval</code> applied to <code>raw_input</code>:
 
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">scitools.std</span> <span style="color: #008000; font-weight: bold">import</span> StringFunction
-
-f <span style="color: #666666">=</span> StringFunction(s)
-</pre></div>
-<p>
-The string formula can contain parameters and an independent variable
-with another name than <code>x</code>:
-
-<p>
-
-<!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">Q_formula <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;amplitude*sin(w*t-phaseshift)&#39;</span>
-Q <span style="color: #666666">=</span> StringFunction(Q_formula, independent_variable<span style="color: #666666">=</span><span style="color: #BA2121">&#39;t&#39;</span>,
-                   amplitude<span style="color: #666666">=1.5</span>, w<span style="color: #666666">=</span>pi, phaseshift<span style="color: #666666">=0</span>)
-values1 <span style="color: #666666">=</span> [Q(i<span style="color: #666666">*0.1</span>) <span style="color: #008000; font-weight: bold">for</span> t <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">10</span>)]
-Q<span style="color: #666666">.</span>set_parameters(phaseshift<span style="color: #666666">=</span>pi<span style="color: #666666">/4</span>, amplitude<span style="color: #666666">=1</span>)
-values2 <span style="color: #666666">=</span> [Q(i<span style="color: #666666">*0.1</span>) <span style="color: #008000; font-weight: bold">for</span> t <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">10</span>)]
-</pre></div>
-<p>
-Functions of several independent variables are also supported:
-
-<p>
-
-<!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">f <span style="color: #666666">=</span> StringFunction(<span style="color: #BA2121">&#39;x+y**2+A&#39;</span>, independent_variables<span style="color: #666666">=</span>(<span style="color: #BA2121">&#39;x&#39;</span>, <span style="color: #BA2121">&#39;y&#39;</span>),
-                   A<span style="color: #666666">=0.2</span>)
-x <span style="color: #666666">=</span> <span style="color: #666666">1</span>; y <span style="color: #666666">=</span> <span style="color: #666666">0.5</span>
-<span style="color: #008000; font-weight: bold">print</span> f(x, y)
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>a <span style="color: #666666">=</span> <span style="color: #008000">input</span>(<span style="color: #BA2121">&#39;Give a: &#39;</span>)  <span style="color: #408080; font-style: italic"># Python 2!</span>
+<span style="color: #408080; font-style: italic"># Equivalent to</span>
+a <span style="color: #666666">=</span> <span style="color: #008000">eval</span>(<span style="color: #008000">raw_input</span>(<span style="color: #BA2121">&#39;Give a: &#39;</span>))
 </pre></div>
 
-<h3 id="___sec67">File operations </h3>
+<h2 id="___sec65" class="anchor">Turning Python 2 code into Python 3 code </h2>
 
 <p>
-Reading from or writing to a file first requires that the file
-is opened, either for reading, writing, or appending:
+Suppose you have written some Python 2 code according to this book and
+want it to run under Python 3. We strongly recommend to create a <em>common
+version</em> of your program such that it works under both Python 2 and 3.
+This is quite easy if you use the <a href="http://python-future.org/" target="_self"><tt>future</tt></a>
+package (it is easily
+installed by <code>pip install future</code>).
 
 <p>
-
-<!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">infile  <span style="color: #666666">=</span> <span style="color: #008000">open</span>(filename, <span style="color: #BA2121">&#39;r&#39;</span>)   <span style="color: #408080; font-style: italic"># read</span>
-outfile <span style="color: #666666">=</span> <span style="color: #008000">open</span>(filename, <span style="color: #BA2121">&#39;w&#39;</span>)   <span style="color: #408080; font-style: italic"># write</span>
-outfile <span style="color: #666666">=</span> <span style="color: #008000">open</span>(filename, <span style="color: #BA2121">&#39;a&#39;</span>)   <span style="color: #408080; font-style: italic"># append</span>
-</pre></div>
-<p>
-or using <code>with</code>:
-
-<p>
-
-<!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">with</span> <span style="color: #008000">open</span>(filename, <span style="color: #BA2121">&#39;r&#39;</span>) <span style="color: #008000; font-weight: bold">as</span> infile:   <span style="color: #408080; font-style: italic"># read</span>
-<span style="color: #008000; font-weight: bold">with</span> <span style="color: #008000">open</span>(filename, <span style="color: #BA2121">&#39;w&#39;</span>) <span style="color: #008000; font-weight: bold">as</span> outfile:  <span style="color: #408080; font-style: italic"># write</span>
-<span style="color: #008000; font-weight: bold">with</span> <span style="color: #008000">open</span>(filename, <span style="color: #BA2121">&#39;a&#39;</span>) <span style="color: #008000; font-weight: bold">as</span> outfile:  <span style="color: #408080; font-style: italic"># append</span>
-</pre></div>
-<p>
-There are four basic reading commands:
-
-<p>
-
-<!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">line    <span style="color: #666666">=</span> infile<span style="color: #666666">.</span>readline()   <span style="color: #408080; font-style: italic"># read the next line</span>
-filestr <span style="color: #666666">=</span> infile<span style="color: #666666">.</span>read()       <span style="color: #408080; font-style: italic"># read rest of file into string</span>
-lines   <span style="color: #666666">=</span> infile<span style="color: #666666">.</span>readlines()  <span style="color: #408080; font-style: italic"># read rest of file into list</span>
-<span style="color: #008000; font-weight: bold">for</span> line <span style="color: #AA22FF; font-weight: bold">in</span> infile:           <span style="color: #408080; font-style: italic"># read rest of file line by line</span>
-</pre></div>
-<p>
-File writing is usually about repeatedly using the command
-
-<p>
-
-<!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">outfile<span style="color: #666666">.</span>write(s)
-</pre></div>
-<p>
-where <code>s</code> is a string. Contrary to <code>print s</code>,
-no newline is added to <code>s</code> in <code>outfile.write(s)</code>.
-
-<p>
-After reading or writing is finished, the file must be closed:
-
-<p>
-
-<!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">somefile<span style="color: #666666">.</span>close()
-</pre></div>
-<p>
-However, closing the file is not necessary if we employ the <code>with</code> statement for
-reading or writing files:
-
-<p>
-
-<!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">with</span> <span style="color: #008000">open</span>(filename, <span style="color: #BA2121">&#39;w&#39;</span>) <span style="color: #008000; font-weight: bold">as</span> outfile:
-    <span style="color: #008000; font-weight: bold">for</span> var1, var2 <span style="color: #AA22FF; font-weight: bold">in</span> data:
-        outfile<span style="color: #666666">.</span>write(<span style="color: #BA2121">&#39;</span><span style="color: #BB6688; font-weight: bold">%5.2f</span><span style="color: #BA2121"> </span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> (var1, var2))
-<span style="color: #408080; font-style: italic"># outfile is closed</span>
-</pre></div>
-
-<h3 id="___sec68">Handling exceptions </h3>
-
-<p>
-Testing for potential errors is done with <code>try-except</code> blocks:
-
-<p>
-
-<!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">try</span>:
-    <span style="color: #666666">&lt;</span>statements<span style="color: #666666">&gt;</span>
-<span style="color: #008000; font-weight: bold">except</span> ExceptionType1:
-    <span style="color: #666666">&lt;</span>provide a remedy <span style="color: #008000; font-weight: bold">for</span> ExceptionType1 errors<span style="color: #666666">&gt;</span>
-<span style="color: #008000; font-weight: bold">except</span> ExceptionType2, ExceptionType3, ExceptionType4:
-    <span style="color: #666666">&lt;</span>provide a remedy <span style="color: #008000; font-weight: bold">for</span> three other types of errors<span style="color: #666666">&gt;</span>
-<span style="color: #008000; font-weight: bold">except</span>:
-    <span style="color: #666666">&lt;</span>provide a remedy <span style="color: #008000; font-weight: bold">for</span> <span style="color: #008000">any</span> other errors<span style="color: #666666">&gt;</span>
-<span style="color: #666666">...</span>
-</pre></div>
-<p>
-The most common exception types are
-<code>NameError</code> for an undefined variable, <code>TypeError</code> for an
-illegal value
-in an operation, and <code>IndexError</code> for a list index out of bounds.
-
-<h3 id="___sec69">Raising exceptions </h3>
-
-<p>
-When some error is encountered in a program, the programmer can
-raise an exception:
-
-<p>
-
-<!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">if</span> z <span style="color: #666666">&lt;</span> <span style="color: #666666">0</span>:
-    <span style="color: #008000; font-weight: bold">raise</span> <span style="color: #D2413A; font-weight: bold">ValueError</span>(<span style="color: #BA2121">&#39;z=</span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121"> is negative - cannot do log(z)&#39;</span> <span style="color: #666666">%</span> z)
-r <span style="color: #666666">=</span> log(z)
-</pre></div>
-
-<h3 id="___sec70">Modules </h3>
-
-<p>
-A module is created by putting a set of functions
-in a file. The filename (minus the required extension <code>.py</code>)
-is the name of the module.
-Other programs can import the module only if it resides in the
-same folder or in a folder contained in the <code>sys.path</code>
-list (see the section <a href="._input-readable009.html#sec:input:modules:usage">Using modules</a> for how to
-deal with this potential problem).
-Optionally, the module file can have a special <code>if</code> construct
-at the end, called test block, which tests the module or demonstrates
-its usage. The test block does not get executed when the module is
-imported in another program, only when the module file is run as
-a program.
-
-<h3 id="___sec71">Terminology </h3>
-
-<p>
-The important computer science topics and Python tools in this document are
-
-<ul>
- <li> command line</li>
- <li> <code>sys.argv</code></li>
- <li> <code>raw_input</code></li>
- <li> <code>eval</code> and <code>exec</code></li>
- <li> file reading and writing</li>
- <li> handling and raising exceptions</li>
- <li> module</li>
- <li> test block</li>
-</ul>
-
-<h2 id="sec:input:summarizingex">Example: Bisection root finding</h2>
-
-<h3 id="___sec73">Problem </h3>
-
-<p>
-The summarizing example of this document concerns the implementation
-of the Bisection method for solving nonlinear equations of the
-form \( f(x)=0 \) with respect to \( x \). For example, the equation
-
-$$
-\begin{equation*} x = 1 + \sin x\end{equation*}
-$$
-
-can be cast in the form \( f(x)=0 \) if we move all terms to the
-left-hand side and define
-\( f(x)=x-1-\sin x \). We say that \( x \) is a <em>root</em> of the equation
-\( f(x)=0 \) if \( x \) is a solution of this equation. Nonlinear equations
-\( f(x)=0 \) can have zero, one, several, or infinitely many roots.
-
-<p>
-Numerical methods for computing roots normally lead to approximate
-results only, i.e., \( f(x) \) is not made exactly zero, but very close to
-zero.  More precisely, an approximate root \( x \) fulfills
-\( |f(x)|\leq\epsilon \), where \( \epsilon \) is a small number.  Methods for
-finding roots are of an iterative nature: we start with a rough
-approximation to a root and perform a repetitive set of steps that aim
-to improve the approximation.  Our particular method for computing
-roots, the Bisection method, guarantees to find an
-approximate root, while other methods, such as the widely used
-Newton's
-method,
-can fail to find roots.
-
-<p>
-The idea of the Bisection method is to start with an interval \( [a,b] \)
-that contains a root of \( f(x) \). The interval is halved at \( m=(a+b)/2 \),
-and if \( f(x) \)
-changes sign in the left half interval \( [a,m] \), one continues with that
-interval, otherwise one continues with the right half interval \( [m,b] \).
-This procedure is repeated, say \( n \) times, and the root is then
-guaranteed to be inside an interval of length \( 2^{-n}(b-a) \).
-The task is to write a program that implements the Bisection method
-and verify the implementation.
-
-<h3 id="___sec74">Solution </h3>
-
-<p>
-To implement the Bisection method, we need to translate the description in
-the previous paragraph to a precise algorithm that can be almost directly
-translated to computer code. Since the halving of the interval is
-repeated many times, it is natural to do this inside a loop. We
-start with the interval \( [a,b] \), and adjust \( a \) to \( m \) if the root must
-be in the right half of the interval, or we adjust \( b \) to \( m \) if the
-root must be in the left half. In a language close to computer code
-we can express the algorithm precisely as follows:
-
-<p>
-
-<!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">for</span> i <span style="color: #666666">=</span> <span style="color: #666666">0</span>,<span style="color: #666666">1</span>,<span style="color: #666666">2</span>, <span style="color: #666666">...</span>, n:
-    m <span style="color: #666666">=</span> (a <span style="color: #666666">+</span> b)<span style="color: #666666">/2</span>
-    <span style="color: #008000; font-weight: bold">if</span> f(a)<span style="color: #666666">*</span>f(m) <span style="color: #666666">&lt;=</span> <span style="color: #666666">0</span>:
-        b <span style="color: #666666">=</span> m  <span style="color: #408080; font-style: italic"># root is in left half</span>
-    <span style="color: #008000; font-weight: bold">else</span>:
-        a <span style="color: #666666">=</span> m  <span style="color: #408080; font-style: italic"># root is in right half</span>
-
-<span style="color: #408080; font-style: italic"># f(x) has a root in [a,b]</span>
-</pre></div>
-<p>
-Figure <a href="#fig:plot:bisection:iter">2</a> displays graphically
-the first four steps of
-this algorithm for solving the equation \( \cos (\pi x)=0 \), starting
-with the interval \( [0, 0.82] \). The graphs are automatically produced
-by the program <code>bisection_movie.py</code>, which was run as follows
-for this particular example:
-
-<p>
-
-<!-- code=text (!bc sys) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">bisection_movie.py &#39;cos(pi*x)&#39; 0 0.82
-</pre></div>
-<p>
-The first command-line argument is the formula for \( f(x) \), the next is
-\( a \), and the final is \( b \).
-
-<p>
-<center> <!-- figure -->
-<hr class="figure">
-<center><p class="caption">Figure 2:  Illustration of the first four iterations of the Bisection algorithm for solving \( \cos (\pi x) =0 \). The vertical lines correspond to the current value of \( a \) and \( b \). <div id="fig:plot:bisection:iter"></div> </p></center>
-<p><img src="fig-input/bisection_iter.png" align="bottom" width=400></p>
-</center>
-
-<p>
-In the algorithm listed above,
-we recompute \( f(a) \) in each <code>if</code>-test, but this is
-not necessary if \( a \) has not changed since the last \( f(a) \) computations.
-It is a good habit in numerical programming to avoid
-redundant work.
-On modern computers the Bisection algorithm normally runs so fast that
-we can afford to do more work than necessary. However, if \( f(x) \) is not
-a simple formula, but computed by comprehensive calculations in a
-program, the evaluation of \( f \) might take minutes or even hours, and
-reducing the number of evaluations in the Bisection algorithm is then
-very important. We will therefore introduce extra variables in the
-algorithm above to save an \( f(m) \) evaluation in each iteration in the
-<code>for</code> loop:
-
-<p>
-
-<!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">f_a <span style="color: #666666">=</span> f(a)
-<span style="color: #008000; font-weight: bold">for</span> i <span style="color: #666666">=</span> <span style="color: #666666">0</span>,<span style="color: #666666">1</span>,<span style="color: #666666">2</span>, <span style="color: #666666">...</span>, n:
-    m <span style="color: #666666">=</span> (a <span style="color: #666666">+</span> b)<span style="color: #666666">/2</span>
-    f_m <span style="color: #666666">=</span> f(m)
-    <span style="color: #008000; font-weight: bold">if</span> f_a<span style="color: #666666">*</span>f_m <span style="color: #666666">&lt;=</span> <span style="color: #666666">0</span>:
-        b <span style="color: #666666">=</span> m   <span style="color: #408080; font-style: italic"># root is in left half</span>
-    <span style="color: #008000; font-weight: bold">else</span>:
-        a <span style="color: #666666">=</span> m   <span style="color: #408080; font-style: italic"># root is in right half</span>
-        f_a <span style="color: #666666">=</span> f_m
-
-<span style="color: #408080; font-style: italic"># f(x) has a root in [a,b]</span>
-</pre></div>
-<p>
-To execute the algorithm above, we need to specify \( n \). Say we want
-to be sure that the root lies in an interval of maximum extent \( \epsilon \).
-After \( n \) iterations the length of our current interval is
-\( 2^{-n}(b-a) \), if \( [a,b] \) is the initial interval. The current interval
-is sufficiently small if
-
-$$
-\begin{equation*} 2^{-n}(b-a) = \epsilon,\end{equation*}
-$$
-
-which implies
-
-$$
-\begin{equation} n = - {\ln\epsilon -\ln (b-a)\over\ln 2}\tp\end{equation}
-$$
-
-<p>
-Instead of calculating this \( n \), we may simply stop the iterations when
-the length of the current interval is less than \( \epsilon \). The loop
-is then naturally implemented as a <code>while</code> loop testing on
-whether \( b-a \leq\epsilon \). To make the algorithm more foolproof,
-we also insert a test to ensure that \( f(x) \) really changes sign
-in the initial interval. This guarantees a root
-in \( [a,b] \). (However, \( f(a)f(b) < 0 \) is not a necessary condition
-if there is an even number of roots in the initial interval.)
-
-<p>
-Our final version of the Bisection algorithm now becomes
-
-<p>
-
-<!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">f_a<span style="color: #666666">=</span>f(a)
-<span style="color: #008000; font-weight: bold">if</span> f_a<span style="color: #666666">*</span>f(b) <span style="color: #666666">&gt;</span> <span style="color: #666666">0</span>:
-    <span style="color: #408080; font-style: italic"># error: f does not change sign in [a,b]</span>
-
-i <span style="color: #666666">=</span> <span style="color: #666666">0</span>
-<span style="color: #008000; font-weight: bold">while</span> b<span style="color: #666666">-</span>a <span style="color: #666666">&gt;</span> epsilon:
-    i <span style="color: #666666">=</span> i <span style="color: #666666">+</span> <span style="color: #666666">1</span>
-    m <span style="color: #666666">=</span> (a <span style="color: #666666">+</span> b)<span style="color: #666666">/2</span>
-    f_m <span style="color: #666666">=</span> f(m)
-    <span style="color: #008000; font-weight: bold">if</span> f_a<span style="color: #666666">*</span>f_m <span style="color: #666666">&lt;=</span> <span style="color: #666666">0</span>:
-        b <span style="color: #666666">=</span> m  <span style="color: #408080; font-style: italic"># root is in left half</span>
-    <span style="color: #008000; font-weight: bold">else</span>:
-        a <span style="color: #666666">=</span> m  <span style="color: #408080; font-style: italic"># root is in right half</span>
-        f_a <span style="color: #666666">=</span> f_m
-
-<span style="color: #408080; font-style: italic"># if x is the real root, |x-m| &lt; epsilon</span>
-</pre></div>
-<p>
-This is the algorithm we aim to implement in a Python program.
-
-<p>
-<!-- === A Simple Program === -->
-
-<p>
-A direct translation of the previous algorithm to a valid
-Python program is a matter of some minor edits:
-
-<p>
-
-<!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">eps <span style="color: #666666">=</span> <span style="color: #666666">1E-5</span>
-a, b <span style="color: #666666">=</span> <span style="color: #666666">0</span>, <span style="color: #666666">10</span>
-
-fa <span style="color: #666666">=</span> f(a)
-<span style="color: #008000; font-weight: bold">if</span> fa<span style="color: #666666">*</span>f(b) <span style="color: #666666">&gt;</span> <span style="color: #666666">0</span>:
-    <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;f(x) does not change sign in [</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">,</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">].&#39;</span> <span style="color: #666666">%</span> (a, b)
-    sys<span style="color: #666666">.</span>exit(<span style="color: #666666">1</span>)
-
-i <span style="color: #666666">=</span> <span style="color: #666666">0</span>   <span style="color: #408080; font-style: italic"># iteration counter</span>
-<span style="color: #008000; font-weight: bold">while</span> b<span style="color: #666666">-</span>a <span style="color: #666666">&gt;</span> eps:
-    i <span style="color: #666666">+=</span> <span style="color: #666666">1</span>
-    m <span style="color: #666666">=</span> (a <span style="color: #666666">+</span> b)<span style="color: #666666">/2.0</span>
-    fm <span style="color: #666666">=</span> f(m)
-    <span style="color: #008000; font-weight: bold">if</span> fa<span style="color: #666666">*</span>fm <span style="color: #666666">&lt;=</span> <span style="color: #666666">0</span>:
-        b <span style="color: #666666">=</span> m  <span style="color: #408080; font-style: italic"># root is in left half of [a,b]</span>
-    <span style="color: #008000; font-weight: bold">else</span>:
-        a <span style="color: #666666">=</span> m  <span style="color: #408080; font-style: italic"># root is in right half of [a,b]</span>
-        fa <span style="color: #666666">=</span> fm
-    <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;Iteration </span><span style="color: #BB6688; font-weight: bold">%d</span><span style="color: #BA2121">: interval=[</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">, </span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">]&#39;</span> <span style="color: #666666">%</span> (i, a, b)
-    
-x <span style="color: #666666">=</span> m          <span style="color: #408080; font-style: italic"># this is the approximate root</span>
-<span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;The root is&#39;</span>, x, <span style="color: #BA2121">&#39;found in&#39;</span>, i, <span style="color: #BA2121">&#39;iterations&#39;</span>
-<span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;f(</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">)=</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> (x, f(x))
-</pre></div>
-<p>
-This program is found in the file
-<a href="http://tinyurl.com/pwyasaa/input/bisection_v1.py" target="_self"><tt>bisection_v1.py</tt></a>.
-
-<h3 id="___sec75">Verification </h3>
-
-<p>
-To verify the implementation in <code>bisection_v1.py</code> we choose a very
-simple \( f(x) \) where we know the exact root. One suitable example is a linear
-function, \( f(x)=2x-3 \) such that \( x=3/2 \)
-is the root of \( f \). As can be seen from the source code above,
-we have inserted a <code>print</code> statement inside the
-<code>while</code> loop to control that the program really does the right
-things.
-Running the program yields the output
-
-<p>
-
-<!-- code=text (!bc ccq) typeset with pygments style "default" -->
-<blockquote>
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">Iteration 1: interval=[0, 5]
-Iteration 2: interval=[0, 2.5]
-Iteration 3: interval=[1.25, 2.5]
-Iteration 4: interval=[1.25, 1.875]
-...
-Iteration 19: interval=[1.5, 1.50002]
-Iteration 20: interval=[1.5, 1.50001]
-The root is 1.50000572205 found in 20 iterations
-f(1.50001)=1.14441e-05
-</pre></div>
-</blockquote><p>
-It seems that the implementation works. Further checks should include
-hand calculations for the first (say) three iterations and comparison
-of the results with the program.
-
-<h3 id="___sec76">Making a function </h3>
-
-<p>
-The previous implementation of the bisection algorithm is fine for
-many purposes. To solve a new problem \( f(x)=0 \) it is just necessary
-to change the <code>f(x)</code> function in the program. However, if we
-encounter solving \( f(x)=0 \) in another program in another context,
-we must put the bisection algorithm into that program in the right
-place. This is simple in practice, but it requires some careful work,
-and it is easy to make errors. The task of solving \( f(x)=0 \) by
-the bisection algorithm is much simpler and safer if we have that
-algorithm available as a function in a module. Then we can just
-import the function and call it. This requires a minimum of writing
-in later programs.
-
-<p>
-When you have a &quot;flat&quot; program as shown above, without basic steps
-in the program collected in functions, you should always consider
-dividing the code into functions. The reason is that parts of the
-program will be much easier to reuse in other programs.
-You save coding, and that is a good rule! A program with functions
-is also easier to understand, because statements are collected into
-logical, separate units, which is another good rule! In a mathematical
-context, functions are particularly important since they naturally
-split the code into general algorithms (like the bisection algorithm)
-and a problem-specific part (like a special choice of \( f(x) \)).
-
-<p>
-Shuffling statements in a program around to form a new and better
-designed version of the program is called <em>refactoring</em>.
-We shall now refactor the <code>bisection_v1.py</code> program by putting
-the statements in the bisection algorithm in a function
-<code>bisection</code>. This function naturally takes \( f(x) \), \( a \), \( b \), and
-\( \epsilon \) as parameters and returns the found root, perhaps together
-with the number of iterations required:
-
-<p>
-
-<!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">bisection</span>(f, a, b, eps):
-    fa <span style="color: #666666">=</span> f(a)
-    <span style="color: #008000; font-weight: bold">if</span> fa<span style="color: #666666">*</span>f(b) <span style="color: #666666">&gt;</span> <span style="color: #666666">0</span>:
-        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">None</span>, <span style="color: #666666">0</span>
-
-    i <span style="color: #666666">=</span> <span style="color: #666666">0</span>   <span style="color: #408080; font-style: italic"># iteration counter</span>
-    <span style="color: #008000; font-weight: bold">while</span> b<span style="color: #666666">-</span>a <span style="color: #666666">&gt;</span> eps:
-        i <span style="color: #666666">+=</span> <span style="color: #666666">1</span>
-        m <span style="color: #666666">=</span> (a <span style="color: #666666">+</span> b)<span style="color: #666666">/2.0</span>
-        fm <span style="color: #666666">=</span> f(m)
-        <span style="color: #008000; font-weight: bold">if</span> fa<span style="color: #666666">*</span>fm <span style="color: #666666">&lt;=</span> <span style="color: #666666">0</span>:
-            b <span style="color: #666666">=</span> m  <span style="color: #408080; font-style: italic"># root is in left half of [a,b]</span>
-        <span style="color: #008000; font-weight: bold">else</span>:
-            a <span style="color: #666666">=</span> m  <span style="color: #408080; font-style: italic"># root is in right half of [a,b]</span>
-            fa <span style="color: #666666">=</span> fm
-    <span style="color: #008000; font-weight: bold">return</span> m, i
-</pre></div>
-<p>
-After this function we can have a test program:
-
-<p>
-
-<!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f</span>(x):
-    <span style="color: #008000; font-weight: bold">return</span> <span style="color: #666666">2*</span>x <span style="color: #666666">-</span> <span style="color: #666666">3</span>   <span style="color: #408080; font-style: italic"># one root x=1.5</span>
-
-x, <span style="color: #008000">iter</span> <span style="color: #666666">=</span> bisection(f, a<span style="color: #666666">=0</span>, b<span style="color: #666666">=10</span>, eps<span style="color: #666666">=1E-5</span>)
-<span style="color: #008000; font-weight: bold">if</span> x <span style="color: #AA22FF; font-weight: bold">is</span> <span style="color: #008000">None</span>:
-    <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;f(x) does not change sign in [</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">,</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">].&#39;</span> <span style="color: #666666">%</span> (a, b)
-<span style="color: #008000; font-weight: bold">else</span>:
-    <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;The root is&#39;</span>, x, <span style="color: #BA2121">&#39;found in&#39;</span>, <span style="color: #008000">iter</span>, <span style="color: #BA2121">&#39;iterations&#39;</span>
-    <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;f(</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">)=</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> (x, f(x))
-</pre></div>
-<p>
-The complete code is found in file
-<a href="http://tinyurl.com/pwyasaa/input/bisection_v2.py" target="_self"><tt>bisection_v2.py</tt></a>.
-
-<h3 id="___sec77">Making a test function </h3>
-
-<p>
-Rather than having a main program as above for verifying the
-implementation, we should make a test function <code>test_bisection</code> as
-described in the section <a href="._input-readable009.html#sec:input:modules:testfunc">Verification of the module code</a>. To this end, we
-move the statements above inside a function, drop the output, but
-instead make a boolean variable <code>success</code> that is <code>True</code> if the test
-is passed and <code>False</code> otherwise. Then we do <code>assert success, msg</code>,
-which will abort the program if the test fails. The <code>msg</code> variable is
-a string with more explanation of what went wrong the test fails.
-A test function with this structure is easy to integrate
-into the widely used testing frameworks nose and pytest, and there are no good
-reasons for not adopting this structure.  The code checking that
-the root is within a distance \( \epsilon \) to the exact root becomes
-
-<p>
-
-<!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">test_bisection</span>():
-    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f</span>(x):
-        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #666666">2*</span>x <span style="color: #666666">-</span> <span style="color: #666666">3</span>   <span style="color: #408080; font-style: italic"># one root x=1.5</span>
-
-    eps <span style="color: #666666">=</span> <span style="color: #666666">1E-5</span>
-    x, <span style="color: #008000">iter</span> <span style="color: #666666">=</span> bisection(f, a<span style="color: #666666">=0</span>, b<span style="color: #666666">=10</span>, eps<span style="color: #666666">=</span>eps)
-    success <span style="color: #666666">=</span> <span style="color: #008000">abs</span>(x <span style="color: #666666">-</span> <span style="color: #666666">1.5</span>) <span style="color: #666666">&lt;</span> eps  <span style="color: #408080; font-style: italic"># test within eps tolerance</span>
-    <span style="color: #008000; font-weight: bold">assert</span> success, <span style="color: #BA2121">&#39;found x=</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121"> != 1.5&#39;</span> <span style="color: #666666">%</span> x
-</pre></div>
-
-<h3 id="___sec78">Making a module </h3>
-
-<p>
-A motivating factor for implementing the bisection algorithm as a function
-<code>bisection</code> was that we could import this function in other
-programs to solve \( f(x)=0 \) equations. We therefore need to make a module
-file <code>bisection.py</code> such that we can do, e.g.,
-
-<p>
-
-<!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">bisection</span> <span style="color: #008000; font-weight: bold">import</span> bisection
-x, <span style="color: #008000">iter</span> <span style="color: #666666">=</span> bisection(<span style="color: #008000; font-weight: bold">lambda</span> x: x<span style="color: #666666">**3</span> <span style="color: #666666">+</span> <span style="color: #666666">2*</span>x <span style="color: #666666">-1</span>, <span style="color: #666666">-10</span>, <span style="color: #666666">10</span>, <span style="color: #666666">1E-5</span>)
-</pre></div>
-<p>
-A module file should not execute a main program, but just
-define functions, import modules, and define global variables.
-Any execution of a main program must take place in the test
-block, otherwise the <code>import</code> statement will start executing
-the main program, resulting in very
-disturbing statements for another program that
-wants to solve a different \( f(x)=0 \) equation.
-
-<p>
-The <code>bisection_v2.py</code> file had a main program that was just a
-simple test for checking that the <code>bisection</code> algorithm works
-for a linear function. We took this main program and wrapped
-in a test function <code>test_bisection</code> above. To run the test,
-we make the call to this function from the test block:
-
-<p>
-
-<!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">if</span> __name__ <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;__main__&#39;</span>:
-    test_bisection()
-</pre></div>
-<p>
-This is all that is demanded to turn the file <code>bisection_v2.py</code>
-into a proper module file <code>bisection.py</code>.
-
-<h3 id="___sec79">Defining a user interface </h3>
-
-<p>
-It is nice to have our <code>bisection</code> module do more than just test
-itself: there should be a user interface such that we can
-solve real problems \( f(x)=0 \), where \( f(x) \), \( a \), \( b \), and \( \epsilon \)
-are defined on the command line by the user. A dedicated function
-can read from the command line and return the data as Python
-object. For reading the function \( f(x) \) we can either apply
-<code>eval</code> on the command-line argument, or use the more sophisticated
-<code>StringFunction</code> tool from the section <a href="._input-readable003.html#sec:input:StringFunction">Turning string expressions into functions</a>.
-With <code>eval</code> we need to import functions from the <code>math</code> module in
-case the user have such functions in the expression for \( f(x) \).
-With <code>StringFunction</code> this is not necessary.
-
-<p>
-A <code>get_input()</code> for getting input from the command line can be
-implemented as
-
-<p>
-
-<!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">get_input</span>():
-    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Get f, a, b, eps from the command line.&quot;&quot;&quot;</span>
-    <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">scitools.std</span> <span style="color: #008000; font-weight: bold">import</span> StringFunction
-    <span style="color: #008000; font-weight: bold">try</span>:
-        f <span style="color: #666666">=</span> StringFunction(sys<span style="color: #666666">.</span>argv[<span style="color: #666666">1</span>])
-        a <span style="color: #666666">=</span> <span style="color: #008000">float</span>(sys<span style="color: #666666">.</span>argv[<span style="color: #666666">2</span>])
-        b <span style="color: #666666">=</span> <span style="color: #008000">float</span>(sys<span style="color: #666666">.</span>argv[<span style="color: #666666">3</span>])
-        eps <span style="color: #666666">=</span> <span style="color: #008000">float</span>(sys<span style="color: #666666">.</span>argv[<span style="color: #666666">4</span>])
-    <span style="color: #008000; font-weight: bold">except</span> <span style="color: #D2413A; font-weight: bold">IndexError</span>:
-        <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;Usage </span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121">: f a b eps&#39;</span> <span style="color: #666666">%</span> sys<span style="color: #666666">.</span>argv[<span style="color: #666666">0</span>]
-        sys<span style="color: #666666">.</span>exit(<span style="color: #666666">1</span>)
-    <span style="color: #008000; font-weight: bold">return</span> f, a, b, eps
-</pre></div>
-<p>
-To solve the corresponding \( f(x)=0 \) problem, we simply add a branch
-in the <code>if</code> test in the test block:
-
-<p>
-
-<!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">if</span> __name__ <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;__main__&#39;</span>:
-    <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">sys</span>
-    <span style="color: #008000; font-weight: bold">if</span> <span style="color: #008000">len</span>(sys<span style="color: #666666">.</span>argv) <span style="color: #666666">&gt;=</span> <span style="color: #666666">2</span> <span style="color: #AA22FF; font-weight: bold">and</span> sys<span style="color: #666666">.</span>argv[<span style="color: #666666">1</span>] <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;test&#39;</span>:
-        test_bisection()
-    <span style="color: #008000; font-weight: bold">else</span>:
-        f, a, b, eps <span style="color: #666666">=</span> get_input()
-        x, <span style="color: #008000">iter</span> <span style="color: #666666">=</span> bisection(f, a, b, eps)
-        <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;Found root x=</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121"> in </span><span style="color: #BB6688; font-weight: bold">%d</span><span style="color: #BA2121"> iterations&#39;</span> <span style="color: #666666">%</span> (x, <span style="color: #008000">iter</span>)
-</pre></div>
-<p>
-<div class="alert alert-block alert-warning alert-text-normal"><b>Desired properties of a module.</b>
-Our <a href="http://tinyurl.com/pwyasaa/input/bisection.py" target="_self"><tt>bisection.py</tt></a> code is
-a complete module file with the following generally desired features
-of Python modules:
-
-<ul>
- <li> other programs can import the <code>bisection</code> function,</li>
- <li> the module can test itself (with a pytest/nose-compatible test function),</li>
- <li> the module file can be run as a program with a user interface
-   where a general rooting finding problem can be specified in
-   terms of a formula for \( f(x) \) along with the parameters \( a \), \( b \),
-   and \( \epsilon \).</li>
-</ul>
-</div>
-
-
-<h3 id="___sec80">Using the module </h3>
-
-<p>
-Suppose you want to solve \( x/(x-1)=\sin x \) using the <code>bisection</code> module.
-What do you have to do? First, you must reformulate the equation as
-\( f(x)=0 \), i.e., \( x/(x-1)-\sin x = 0 \), or maybe multiply by
-\( x-1 \) to get \( f(x)=x-(x-1)\sin x \).
-
-<p>
-It is required to identify an interval for the root. By evaluating \( f(x) \)
-for some points \( x \) one can be trial and error locate an interval.
-A more convenient approach is to plot
-the function \( f(x) \) and visually inspect where a root is.
-We start <code>ipython --pylab</code> and write
-<p>
-
-<!-- code=ipy (!bc ipy) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #000080; font-weight: bold">In [1]: </span>x <span style="color: #666666">=</span> linspace(<span style="color: #666666">-3</span>, <span style="color: #666666">3</span>, <span style="color: #666666">50</span>)  <span style="color: #408080; font-style: italic"># generate 50 coordinates in [-3,3]</span>
-
-<span style="color: #000080; font-weight: bold">In [2]: </span>y <span style="color: #666666">=</span> x <span style="color: #666666">-</span> (x<span style="color: #666666">-1</span>)<span style="color: #666666">*</span>sin(x)
-
-<span style="color: #000080; font-weight: bold">In [3]: </span>plot(x, y)
-</pre></div>
-<p>
-Figure <a href="#fig:plot:bisection:xsinx">3</a> shows \( f(x) \) and we clearly see
-that, e.g., \( [-2, 1] \) is an appropriate interval.
-
-<p>
-<center> <!-- figure -->
-<hr class="figure">
-<center><p class="caption">Figure 3:  Plot of \( f(x)=x - \sin (x) \). <div id="fig:plot:bisection:xsinx"></div> </p></center>
-<p><img src="fig-input/f_x_xm1sinx.png" align="bottom" width=500></p>
-</center>
-
-<p>
-The next step is to run the Bisection algorithm.
-There are two possibilities:
-
-<ul>
- <li> make a program where you code \( f(x) \) and run the <code>bisection</code> function, or</li>
- <li> run the <code>bisection.py</code> program directly.</li>
-</ul>
-
-The latter approach is the simplest:
-
-<p>
-
-<!-- code=text (!bc sys) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">bisection.py &quot;x - (x-1)*sin(x)&quot; -2 1 1E-5
-Found root x=-1.90735e-06 in 19 iterations
-</pre></div>
-<p>
-The alternative approach is to make a program:
+The <code>future</code> package has a program <code>futurize</code> that can rewrite a
+<code>.py</code> file such that it works under Python 2 and 3. Let us grab a
+file <code>c2f_qa.py</code>,
 
 <p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">bisection</span> <span style="color: #008000; font-weight: bold">import</span> bisection
-<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">math</span> <span style="color: #008000; font-weight: bold">import</span> sin
-
-<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f</span>(x):
-    <span style="color: #008000; font-weight: bold">return</span> x <span style="color: #666666">-</span> (x<span style="color: #666666">-1</span>)<span style="color: #666666">*</span>sin(x)
-
-x, <span style="color: #008000">iter</span> <span style="color: #666666">=</span> bisection(f, a<span style="color: #666666">=-2</span>, b<span style="color: #666666">=1</span>, eps<span style="color: #666666">=1E-5</span>)
-<span style="color: #008000; font-weight: bold">print</span> x, <span style="color: #008000">iter</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>C <span style="color: #666666">=</span> <span style="color: #008000">raw_input</span>(<span style="color: #BA2121">&#39;C=? &#39;</span>)
+C <span style="color: #666666">=</span> <span style="color: #008000">float</span>(C)
+F <span style="color: #666666">=</span> <span style="color: #666666">9.0/5*</span>C <span style="color: #666666">+</span> <span style="color: #666666">32</span>
+<span style="color: #008000; font-weight: bold">print</span> F
 </pre></div>
-
-<h3 id="___sec81">Potential problems with the software </h3>
-
 <p>
-Let us solve
-
-<ul>
-  <li> \( x = \tanh x \) with start interval \( [-10,10] \) and \( \epsilon=10^{-6} \),</li>
-  <li> \( x^5 = \tanh (x^5) \) with start interval \( [-10,10] \) and \( \epsilon=10^{-6} \).</li>
-</ul>
-
-Both equations have one root \( x=0 \).
+and convert it by
 
 <p>
 
 <!-- code=text (!bc sys) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">bisection.py &quot;x-tanh(x)&quot; -10 10
-Found root x=-5.96046e-07 in 25 iterations
-
-bisection.py &quot;x**5-tanh(x**5)&quot; -10 10
-Found root x=-0.0266892 in 25 iterations
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>Terminal&gt; futurize -w c2f_qa.py
 </pre></div>
 <p>
-These results look strange. In both cases we halve the start
-interval \( [-10,10] \) 25 times, but in the second case we end
-up with a much less accurate root although the value of \( \epsilon \)
-is the same. A closer inspection of what goes on in the bisection
-algorithm reveals that the inaccuracy is caused by round-off
-errors. As \( a, b, m\rightarrow 0 \), raising a small number to the
-fifth power in the expression for \( f(x) \) yields a much smaller result.
-Subtracting a very small number \( \tanh x^5 \) from another
-very small number \( x^5 \) may result in a small number with wrong
-sign, and the sign of \( f \) is essential in the bisection algorithm.
-We encourage the reader to graphically inspect this behavior by
-running these two examples with the
-<a href="http://tinyurl.com/pwyasaa/input/bisection_plot.py" target="_self"><tt>bisection_plot.py</tt></a> program
-using a smaller interval \( [-1,1] \) to better see what is going on.
-The command-line arguments for the <code>bisection_plot.py</code> program
-are <code>'x-tanh(x)' -1 1</code> and <code>'x**5-tanh(x**5)' -1 1</code>.
-The very flat area, in the latter case, where \( f(x)\approx 0 \) for
-\( x\in [-1/2, 1/2] \) illustrates
-well that it is difficult to locate an exact root.
-
-<h3 id="___sec82">Distributing the bisection module to others </h3>
+Now <code>c2f_qa.py</code> has the content
 
 <p>
-The Python standard for installing software is to run a <code>setup.py</code> program,
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">__future__</span> <span style="color: #008000; font-weight: bold">import</span> print_function
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">builtins</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #008000">input</span>
+C <span style="color: #666666">=</span> <span style="color: #008000">input</span>(<span style="color: #BA2121">&#39;C=? &#39;</span>)
+C <span style="color: #666666">=</span> <span style="color: #008000">float</span>(C)
+F <span style="color: #666666">=</span> <span style="color: #666666">9.0/5*</span>C <span style="color: #666666">+</span> <span style="color: #666666">32</span>
+<span style="color: #008000; font-weight: bold">print</span>(F)
+</pre></div>
+<p>
+We notice that the <code>raw_input</code> call has been changed to <code>input</code> and that
+the print statement is a call to the <code>print</code> function. A simple test
+shows that the new file runs on both versions of Python:
 
 <p>
 
 <!-- code=text (!bc sys) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">Terminal&gt; sudo python setup.py install
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>Terminal&gt; python2 c2f_qa.py
+C=? 21
+69.8
+Terminal&gt; python3 py3/c2f_qa.py
+C=? 21
+69.80000000000001
 </pre></div>
 <p>
-to install the system. The relevant <code>setup.py</code> for the <code>bisection</code>
-module arises from substituting the name <code>interest</code> by <code>bisection</code>
-in the <code>setup.py</code> file listed in
-the section <a href="._input-readable009.html#sec:input:modules:setuppy">Distributing modules</a>. You can then distribute
-<code>bisection.py</code> and <code>setup.py</code> together.
+(This test requires that you have Python 3 installed.)
+
+<p>
+Note that if we change the division <code>9.0/5</code> in the file to <code>9/5</code>,
+<code>futurize</code> will not make a float division out of that expression
+(i.e., the Python 2 meaning of the syntax is not changed).
+If we want all syntax to be interpreted the Python 3 way, add the
+<code>--all-imports</code> option:
+
+<p>
+
+<!-- code=text (!bc sys) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>Terminal&gt; futurize -w --all-imports c2f_qa.py
+</pre></div>
+<p>
+The result is
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">__future__</span> <span style="color: #008000; font-weight: bold">import</span> unicode_literals
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">__future__</span> <span style="color: #008000; font-weight: bold">import</span> print_function
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">__future__</span> <span style="color: #008000; font-weight: bold">import</span> division
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">__future__</span> <span style="color: #008000; font-weight: bold">import</span> absolute_import
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">future</span> <span style="color: #008000; font-weight: bold">import</span> standard_library
+standard_library<span style="color: #666666">.</span>install_aliases()
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">builtins</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #008000">input</span>
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">builtins</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #666666">*</span>
+C <span style="color: #666666">=</span> <span style="color: #008000">input</span>(<span style="color: #BA2121">&#39;C=? &#39;</span>)
+C <span style="color: #666666">=</span> <span style="color: #008000">float</span>(C)
+F <span style="color: #666666">=</span> <span style="color: #666666">9/5*</span>C <span style="color: #666666">+</span> <span style="color: #666666">32</span>
+<span style="color: #008000; font-weight: bold">print</span>(F)
+</pre></div>
+<p>
+Now, <code>9/5</code> represents float division, and the program runs under both versions
+of Python.
+
+<p>
+Usually, you do not want <code>futurize</code> to overwrite your original Python 2
+program, but it is easy to let it generate the new version in a
+subfolder instead:
+
+<p>
+
+<!-- code=text (!bc sys) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>Terminal&gt; futurize -w -n -o py23 c2f_qa.py
+</pre></div>
+<p>
+The generated new version of <code>c2f_qa.py</code> is now in <code>py23/c2f_qa.py</code>.
+
+<p>
+Most of the programs in this book apply the command line for input, and
+the programmer should fix all issues about integer division, so
+running <code>futurize</code> on the programs you have seen so far will just change
+the print statement. There are more challenging differences between
+Python 2 and 3 when one applies more advanced objects and modules.
 
 <p>
 <p>

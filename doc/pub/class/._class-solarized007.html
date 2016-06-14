@@ -7,13 +7,13 @@ Automatically generated HTML file from DocOnce source
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
 <meta name="description" content="Introduction to classes in Python">
-<meta name="keywords" content="constructor (class),UML class diagram,instance (class),user-defined datatype (class),method class),attribute (class),namespace,test function,nose tests,pytest tests,special methods (class),callable objects,test function,closure,Newton's method,wrapper code,integration numerical,symbolic computing,integration symbolic,mutable objects,immutable objects,protected attributes (class),test function,information hiding,private attributes (class),API,application programming interface,protected attributes (class),check an object's type,static typing,weak typing,strong typing,dynamic typing,duck typing,static class attributes,static class variables,static class methods,interval arithmetic">
+<meta name="keywords" content="constructor (class),UML class diagram,instance (class),user-defined datatype (class),method class),attribute (class),new-style classes,namespace,closures,test function,nose tests,pytest tests,special methods (class),callable objects,test function,closure,Newton's method,SymPy differentiation,closure,wrapper code,integration numerical,symbolic computing,integration symbolic,SymPy integration,mutable objects,immutable objects,protected attributes (class),test function,information hiding,private attributes (class),API,application programming interface,protected attributes (class),check an object's type,static typing,weak typing,strong typing,dynamic typing,duck typing,static class attributes,static class variables,static class methods,interval arithmetic">
 
 <title>Introduction to classes in Python</title>
 
 
-<link href="https://raw.githubusercontent.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/css/solarized_light_code.css" rel="stylesheet" type="text/css" title="light"/>
-<script src="https://rawgit.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/js/highlight.pack.js"></script>
+<link href="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/css/solarized_light_code.css" rel="stylesheet" type="text/css" title="light"/>
+<script src="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/js/highlight.pack.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
 
 <link href="http://thomasf.github.io/solarized-css/solarized-light.min.css" rel="stylesheet">
@@ -21,6 +21,11 @@ Automatically generated HTML file from DocOnce source
 h1 {color: #b58900;}  /* yellow */
 /* h1 {color: #cb4b16;}  orange */
 /* h1 {color: #d33682;}  magenta, the original choice of thomasf */
+code { padding: 0px; background-color: inherit; }
+pre {
+  border: 0pt solid #93a1a1;
+  box-shadow: none;
+}
 .alert-text-small   { font-size: 80%;  }
 .alert-text-large   { font-size: 130%; }
 .alert-text-normal  { font-size: 90%;  }
@@ -43,10 +48,10 @@ h1 {color: #b58900;}  /* yellow */
 .alert-block > p, .alert-block > ul {margin-bottom:1em}
 .alert li {margin-top: 1em}
 .alert-block p+p {margin-top:5px}
-.alert-notice { background-image: url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_notice.png); }
-.alert-summary  { background-image:url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_summary.png); }
-.alert-warning { background-image: url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_warning.png); }
-.alert-question {background-image:url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_question.png); }
+.alert-notice { background-image: url(https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/small_yellow_notice.png); }
+.alert-summary  { background-image:url(https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/small_yellow_summary.png); }
+.alert-warning { background-image: url(https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/small_yellow_warning.png); }
+.alert-question {background-image:url(https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/small_yellow_question.png); }
 
 div { text-align: justify; text-justify: inter-word; }
 </style>
@@ -56,298 +61,304 @@ div { text-align: justify; text-justify: inter-word; }
 
 <!-- tocinfo
 {'highest level': 1,
- 'sections': [(' Simple function classes ',
+ 'sections': [('Table of contents',
+               1,
+               'table_of_contents',
+               'table_of_contents'),
+              ('Simple function classes',
                1,
                'sec:class:functors',
                'sec:class:functors'),
-              (' Challenge: functions with parameters ',
+              ('Challenge: functions with parameters',
                2,
                'sec:class:func1',
                'sec:class:func1'),
-              (' Problem ', 3, None, '___sec2'),
-              (' A bad solution: global variables ', 3, None, '___sec3'),
-              (' Representing a function as a class ',
+              ('Problem', 3, None, '___sec2'),
+              ('A bad solution: global variables', 3, None, '___sec3'),
+              ('Representing a function as a class',
                2,
                'sec:class:func2',
                'sec:class:func2'),
-              (' Implementation ', 3, None, '___sec5'),
-              (' Usage and dissection ', 3, None, '___sec6'),
-              (' The self  variable ', 3, None, '___sec7'),
-              (' Extension of the class ', 3, None, '___sec8'),
-              (' Remark ', 3, None, '___sec9'),
-              (' Using methods as ordinary functions ', 3, None, '___sec10'),
-              (' Doc strings ', 3, None, '___sec11'),
-              (' Another function class example ',
+              ('Implementation', 3, None, '___sec5'),
+              ('Usage and dissection', 3, None, '___sec6'),
+              ('Extension of the class', 3, None, '___sec7'),
+              ('Using methods as ordinary functions', 3, None, '___sec8'),
+              ('New-style classes versus classic classes',
+               3,
+               None,
+               '___sec9'),
+              ('Doc strings', 3, None, '___sec10'),
+              ('The self variable', 2, None, '___sec11'),
+              ('Another function class example',
                2,
                'sec:class:func3',
                'sec:class:func3'),
-              (' Remark ', 3, None, '___sec13'),
-              (' Alternative function class implementations ',
+              ('Remark', 3, None, '___sec13'),
+              ('Alternative function class implementations',
                2,
                'sec:class:func2b',
                'sec:class:func2b'),
-              (' Making classes without the class construct ',
+              ('Making classes without the class construct',
                2,
                'sec:class:whatis',
                'sec:class:whatis'),
-              (' First remark ', 3, None, '___sec16'),
-              (' Second remark ', 3, None, '___sec17'),
-              (' More examples on classes ',
+              ('First remark', 3, None, '___sec16'),
+              ('Second remark', 3, None, '___sec17'),
+              ('Closures', 2, 'sec:class:closure', 'sec:class:closure'),
+              ('More examples on classes',
                1,
                'sec:class:addex',
                'sec:class:addex'),
-              (' Bank accounts ',
-               2,
-               'sec:class:account',
-               'sec:class:account'),
-              (' Phone book ',
-               2,
-               'sec:class:phonebook',
-               'sec:class:phonebook'),
-              (' A circle ', 2, 'sec:class:circle', 'sec:class:circle'),
-              (' Verification ', 3, None, '___sec22'),
-              (' Remark ', 3, None, '___sec23'),
-              (' Special methods ',
+              ('Bank accounts', 2, 'sec:class:account', 'sec:class:account'),
+              ('Phone book', 2, 'sec:class:phonebook', 'sec:class:phonebook'),
+              ('A circle', 2, 'sec:class:circle', 'sec:class:circle'),
+              ('Verification', 3, None, '___sec23'),
+              ('Remark', 3, None, '___sec24'),
+              ('Special methods',
                1,
                'sec:class:specialmethods',
                'sec:class:specialmethods'),
-              (' The call special method ',
+              ('The call special method',
                2,
                'sec:class:call',
                'sec:class:call'),
-              (' Example: Automagic differentiation ',
+              ('Example: Automagic differentiation',
                2,
                'sec:class:autodF',
                'sec:class:autodF'),
-              (' Problem ', 3, None, '___sec27'),
-              (' Solution ', 3, None, '___sec28'),
-              (' Verification ', 3, None, '___sec29'),
-              (" Application: Newton's method ", 3, None, '___sec30'),
-              (' Example: Automagic integration ',
+              ('Problem', 3, None, '___sec28'),
+              ('Solution', 3, None, '___sec29'),
+              ('Verification', 3, None, '___sec30'),
+              ("Application: Newton's method", 3, None, '___sec31'),
+              ('Solution utilizing SymPy', 3, None, '___sec32'),
+              ('Example: Automagic integration',
                2,
                'sec:class:autoint',
                'sec:class:autoint'),
-              (' A simple implementation ', 3, None, '___sec32'),
-              (' Verification via symbolic computing ', 3, None, '___sec33'),
-              (' Remark ', 3, None, '___sec34'),
-              (' Turning an instance into a string ',
+              ('A simple implementation', 3, None, '___sec34'),
+              ('Verification via symbolic computing', 3, None, '___sec35'),
+              ('Remark', 3, None, '___sec36'),
+              ('Turning an instance into a string',
                2,
                'sec:class:str',
                'sec:class:str'),
-              (' Example: Phone book with special methods ',
+              ('Example: Phone book with special methods',
                2,
                'sec:class:phonebook2',
                'sec:class:phonebook2'),
-              (' Remark ', 3, None, '___sec37'),
-              (' Adding objects ', 2, 'sec:class:add', 'sec:class:add'),
-              (' Example: Class for polynomials ',
+              ('Remark', 3, None, '___sec39'),
+              ('Adding objects', 2, 'sec:class:add', 'sec:class:add'),
+              ('Example: Class for polynomials',
                2,
                'sec:class:Polynomial',
                'sec:class:Polynomial'),
-              (' Implementation ', 3, None, '___sec40'),
-              (' Usage ', 3, None, '___sec41'),
-              (' Pretty print of polynomials ', 3, None, '___sec42'),
-              (' Verifying the implementation ', 3, None, '___sec43'),
-              (' Arithmetic operations and other special methods ',
+              ('Implementation', 3, None, '___sec42'),
+              ('Usage', 3, None, '___sec43'),
+              ('Pretty print of polynomials', 3, None, '___sec44'),
+              ('Verifying the implementation', 3, None, '___sec45'),
+              ('Arithmetic operations and other special methods',
                2,
                'sec:class:arithmetics',
                'sec:class:arithmetics'),
-              (' Special methods for string conversion ',
+              ('Special methods for string conversion',
                2,
                'sec:class:repr',
                'sec:class:repr'),
-              (' Recreating objects from strings ', 3, None, '___sec46'),
-              (' Example: Class for vectors in the plane ',
+              ('Recreating objects from strings', 3, None, '___sec48'),
+              ('Example: Class for vectors in the plane',
                1,
                'sec:class:Vec2D',
                'sec:class:Vec2D'),
-              (' Some mathematical operations on vectors ',
+              ('Some mathematical operations on vectors',
                2,
                None,
-               '___sec48'),
-              (' Implementation ', 2, None, '___sec49'),
-              (' Usage ', 2, None, '___sec50'),
-              (' Comment ', 3, None, '___sec51'),
-              (' Example: Class for complex numbers ', 1, None, '___sec52'),
-              (' Implementation ',
-               2,
-               'sec:class:Complex',
-               'sec:class:Complex'),
-              (' Illegal operations ',
+               '___sec50'),
+              ('Implementation', 2, None, '___sec51'),
+              ('Usage', 2, None, '___sec52'),
+              ('Comment', 3, None, '___sec53'),
+              ('Example: Class for complex numbers', 1, None, '___sec54'),
+              ('Implementation', 2, 'sec:class:Complex', 'sec:class:Complex'),
+              ('Illegal operations',
                2,
                'sec:class:illegalop',
                'sec:class:illegalop'),
-              (' Mixing complex and real numbers ',
+              ('Mixing complex and real numbers',
                2,
                'sec:class:complex:mixed',
                'sec:class:complex:mixed'),
-              (' Dynamic, static, strong, weak, and duck typing ',
+              ('Dynamic, static, strong, weak, and duck typing',
                2,
                None,
-               '___sec56'),
-              (" Special methods for ``right'' operands ",
+               '___sec58'),
+              ("Special methods for ``right'' operands",
                2,
                'sec:class:complex:rightop',
                'sec:class:complex:rightop'),
-              (' Remark ', 3, None, '___sec58'),
-              (' Inspecting instances ',
+              ('Remark', 3, None, '___sec60'),
+              ('Inspecting instances',
                2,
                'sec:class:inspect',
                'sec:class:inspect'),
-              (' Static methods and attributes ',
+              ('Static methods and attributes',
                1,
                'sec:class:static',
                'sec:class:static'),
-              (' Summary ', 1, None, '___sec61'),
-              (' Chapter topics ',
+              ('Summary', 1, None, '___sec63'),
+              ('Chapter topics', 2, 'sec:class:summary', 'sec:class:summary'),
+              ('Classes', 3, None, '___sec65'),
+              ('Special methods', 3, None, '___sec66'),
+              ('Terminology', 3, None, '___sec67'),
+              ('Example: interval arithmetic',
                2,
-               'sec:class:summary',
-               'sec:class:summary'),
-              (' Classes ', 3, None, '___sec63'),
-              (' Special methods ', 3, None, '___sec64'),
-              (' Terminology ', 3, None, '___sec65'),
-              (' Example: interval arithmetic ', 2, None, '___sec66'),
-              (' Problem ', 3, None, '___sec67'),
-              (' Solution ', 3, None, '___sec68'),
-              (' Exercises ', 1, None, '___sec69'),
-              (' Exercise 1: Make a function class ',
+               'sec:class:interval:arithmetic',
+               'sec:class:interval:arithmetic'),
+              ('Problem', 3, None, '___sec69'),
+              ('Solution', 3, None, '___sec70'),
+              ('Exercises', 1, None, '___sec71'),
+              ('Exercise 1: Make a function class',
                2,
                'sec:class:ex2',
                'sec:class:ex2'),
-              (' Exercise 2: Add an attribute to a class ',
+              ('Exercise 2: Add a data attribute to a class',
                2,
                'sec:class:ex25q',
                'sec:class:ex25q'),
-              (' Exercise 3: Add functionality to a class ',
+              ('Exercise 3: Add functionality to a class',
                2,
                'sec:class:ex25q2',
                'sec:class:ex25q2'),
-              (' Exercise 4: Make classes for a rectangle and a triangle ',
+              ('Remarks', 3, None, '___sec75'),
+              ('Exercise 4: Make classes for a rectangle and a triangle',
                2,
                'sec:class:ex23',
                'sec:class:ex23'),
-              (' Exercise 5: Make a class for quadratic functions ',
+              ('Exercise 5: Make a class for quadratic functions',
                2,
                'sec:class:ex11',
                'sec:class:ex11'),
-              (' Exercise 6: Make a class for straight lines ',
+              ('Exercise 6: Make a class for straight lines',
                2,
                'sec:class:ex25',
                'sec:class:ex25'),
-              (' Exercise 7: Flexible handling of function arguments ',
+              ('Exercise 7: Flexible handling of function arguments',
                2,
                'sec:class:ex25b',
                'sec:class:ex25b'),
-              (' Exercise 8: Wrap functions in a class ',
+              ('Exercise 8: Wrap functions in a class',
                2,
                'sec:class:ex27d',
                'sec:class:ex27d'),
-              (' Exercise 9: Flexible handling of function arguments ',
+              ('Exercise 9: Flexible handling of function arguments',
                2,
                'sec:class:ex27e',
                'sec:class:ex27e'),
-              (' Exercise 10: Deduce a class implementation ',
+              ('Exercise 10: Deduce a class implementation',
                2,
                'sec:class:ex1',
                'sec:class:ex1'),
-              (' Exercise 11: Implement special methods in a class ',
+              ('Exercise 11: Implement special methods in a class',
                2,
                'sec:class:ex2b2',
                'sec:class:ex2b2'),
-              (' Exercise 12: Make a class for summation of series ',
+              ('Exercise 12: Make a class for summation of series',
                2,
                'sec:class:ex2b',
                'sec:class:ex2b'),
-              (' Exercise 13: Apply a numerical differentiation class ',
+              ('Exercise 13: Apply a numerical differentiation class',
                2,
                'sec:class:ex10',
                'sec:class:ex10'),
-              (' Exercise 14: Apply symbolic differentiation ',
+              ('Exercise 14: Implement an addition operator',
                2,
-               'sec:class:exer:sympy:diff',
-               'sec:class:exer:sympy:diff'),
-              (' Exercise 15: Implement in-place `+=` and `-=` operators ',
+               'sec:class:ex:tribesman',
+               'sec:class:ex:tribesman'),
+              ('Exercise 15: Implement in-place `+=` and `-=` operators',
                2,
                'sec:class:ex25qb',
                'sec:class:ex25qb'),
-              (' Exercise 16: Implement a class for numerical differentiation ',
+              ('Exercise 16: Implement a class for numerical differentiation',
                2,
                'sec:class:ex21',
                'sec:class:ex21'),
-              (' Exercise 17: Examine a program ',
+              ('Exercise 17: Examine a program',
                2,
                'sec:class:ex21b',
                'sec:class:ex21b'),
-              (' Exercise 18: Modify a class for numerical differentiation ',
+              ('Exercise 18: Modify a class for numerical differentiation',
                2,
                'sec:class:ex23s',
                'sec:class:ex23s'),
-              (' Exercise 19: Make a class for the Heaviside function ',
+              ('Exercise 19: Make a class for the Heaviside function',
                2,
                'sec:basic:exHclass',
                'sec:basic:exHclass'),
-              (' Exercise 20: Make a class for the indicator function ',
+              ('Exercise 20: Make a class for the indicator function',
                2,
                'sec:basic:exIndclass',
                'sec:basic:exIndclass'),
-              (' Exercise 21: Make a class for piecewise constant functions ',
+              ('Exercise 21: Make a class for piecewise constant functions',
                2,
                'sec:basic:ex:piecewisefunc',
                'sec:basic:ex:piecewisefunc'),
-              (' Exercise 22: Speed up repeated integral calculations ',
+              ('Exercise 22: Speed up repeated integral calculations',
                2,
                'sec:class:ex13c',
                'sec:class:ex13c'),
-              (' Exercise 23: Apply a class for polynomials ',
+              ('Exercise 23: Apply a class for polynomials',
                2,
                'sec:class:ex5',
                'sec:class:ex5'),
-              (' Exercise 24: Find a bug in a class for polynomials ',
+              ('Exercise 24: Find a bug in a class for polynomials',
                2,
                'sec:class:ex4',
                'sec:class:ex4'),
-              (' Exercise 25: Implement subtraction of polynomials ',
+              ('Exercise 25: Implement subtraction of polynomials',
                2,
                'sec:class:ex6a',
                'sec:class:ex6a'),
-              (' Exercise 26: Test the functionality of pretty print of polynomials ',
+              ('Exercise 26: Test the functionality of pretty print of polynomials',
                2,
                'sec:class:exer:str',
                'sec:class:exer:str'),
-              (' Exercise 27: Vectorize a class for polynomials ',
+              ('Exercise 27: Vectorize a class for polynomials',
                2,
                'sec:class:ex7v',
                'sec:class:ex7v'),
-              (' Remarks ', 3, None, '___sec97'),
-              (' Exercise 28: Use a dict to hold polynomial coefficients ',
+              ('Remarks', 3, None, '___sec100'),
+              ('Exercise 28: Use a dict to hold polynomial coefficients',
                2,
                'sec:class:ex8',
                'sec:class:ex8'),
-              (' Exercise 29: Extend class Vec2D to work with lists/tuples ',
+              ('Exercise 29: Extend class Vec2D to work with lists/tuples',
                2,
                'sec:class:ex16',
                'sec:class:ex16'),
-              (' Exercise 30: Extend class Vec2D to 3D vectors ',
+              ('Exercise 30: Extend class Vec2D to 3D vectors',
                2,
                'sec:class:ex17b',
                'sec:class:ex17b'),
-              (' Exercise 31: Use NumPy arrays in class Vec2D ',
+              ('Exercise 31: Use NumPy arrays in class Vec2D',
                2,
                'sec:class:ex17',
                'sec:class:ex17'),
-              (' Exercise 32: Make classes for students and courses ',
+              ('Exercise 32: Impreciseness of interval arithmetics',
+               2,
+               None,
+               '___sec105'),
+              ('Remarks', 3, None, '___sec106'),
+              ('Exercise 33: Make classes for students and courses',
                2,
                'sec:class:ex15',
                'sec:class:ex15'),
-              (' Exercise 33: Find local and global extrema of a function ',
+              ('Exercise 34: Find local and global extrema of a function',
                2,
                'sec:plot:ex28',
                'sec:plot:ex28'),
-              (' Exercise 34: Find the optimal production for a company ',
+              ('Exercise 35: Find the optimal production for a company',
                2,
                'sec:class:ex18a',
                'sec:class:ex18a'),
-              (' References ', 1, None, '___sec105')]}
+              ('References', 1, None, '___sec110')]}
 end of tocinfo -->
 
 <body>
@@ -388,20 +399,22 @@ $$
 
 <p>
 <!-- !split -->
+<p style="font-size:80%">This chapter is taken from the book <a href="http://www.springer.com/gp/book/9783662498866">A Primer on Scientific Programming with Python</a> by H. P. Langtangen, 5th edition, Springer, 2016.</p>
 
-<h1>Summary  <a name="___sec61"></a></h1>
+<h1 id="___sec63">Summary </h1>
 
-<h2>Chapter topics <a name="sec:class:summary"></a></h2>
+<h2 id="sec:class:summary">Chapter topics</h2>
 
-<h3>Classes  <a name="___sec63"></a></h3>
+<h3 id="___sec65">Classes </h3>
 
 <p>
-A class contains attributes (variables) and methods.
+A class contains attributes, which are variables (data attributes)
+and functions (method attributes, also called just methods).
 A first rough overview of a class can be to just list the
-attributes and methods, e.g., in a UML diagram.
+attributes, e.g., in a UML diagram.
 
 <p>
-Below is a sample class with three attributes (<code>m</code>, <code>M</code>, and
+Below is a sample class with three data attributes (<code>m</code>, <code>M</code>, and
 <code>G</code>) and three methods (a constructor, <code>force</code>, and <code>visualize</code>).
 The class represents the gravity force between two masses. This force
 is computed by the <code>force</code> method, while the <code>visualize</code> method plots
@@ -409,7 +422,7 @@ the force as a function of the distance between the masses.
 
 <p>
 <!-- begin verbatim block  pycod-->
-<pre><code>class Gravity:
+<pre><code>class Gravity(object):
     &quot;&quot;&quot;Gravity force between two physical objects.&quot;&quot;&quot;
 
     def __init__(self, m, M):
@@ -434,7 +447,7 @@ call the <code>force</code> method inside the <code>visualize</code> method, we 
 with <code>self</code>.
 Also recall that all methods must take <code>self</code>, &quot;this&quot; instance,
 as first argument, but the argument is left out in calls.
-The assignment of attributes to a local variable (e.g., <code>G = self.G</code>)
+The assignment of a data attributes to a local variable (e.g., <code>G = self.G</code>)
 inside methods is not necessary, but here it makes the mathematical
 formula easier to read and compare with standard mathematical notation.
 
@@ -457,7 +470,7 @@ print 'force:', Fg
 <!-- bar plot of experiment type? n values, m bars next to each other for -->
 <!-- each value -->
 
-<h3>Special methods  <a name="___sec64"></a></h3>
+<h3 id="___sec66">Special methods </h3>
 
 <p>
 A collection of special methods, with two leading and trailing underscores in
@@ -499,20 +512,20 @@ most important special methods.
 </tbody>
 </table>
 
-<h3>Terminology  <a name="___sec65"></a></h3>
+<h3 id="___sec67">Terminology </h3>
 
 <p>
 The important computer science topics in this document are
 
 <ul>
   <li> classes</li>
-  <li> methods</li>
   <li> attributes</li>
+  <li> methods</li>
   <li> constructor (<code>__init__</code>)</li>
   <li> special methods (<code>__add__</code>, <code>__str__</code>, <code>__ne__</code>, etc.)</li>
 </ul>
 
-<h2>Example: interval arithmetic  <a name="___sec66"></a></h2>
+<h2 id="sec:class:interval:arithmetic">Example: interval arithmetic</h2>
 
 <p>
 Input data to mathematical formulas are often subject to uncertainty,
@@ -554,7 +567,7 @@ and \( T \) in \( [0.43, 0.47] \) s, reflecting a
 from using a stop watch. What is the error in \( g \)? With the tool to
 be developed below, we can find that there is a 22% error in \( g \).
 
-<h3>Problem  <a name="___sec67"></a></h3>
+<h3 id="___sec69">Problem </h3>
 
 <p>
 Assume that two numbers \( p \) and \( q \) are guaranteed to lie inside intervals,
@@ -577,21 +590,18 @@ subtraction, multiplication, and division of two intervals:
 </ul>
 
 For doing these calculations in a program, it would be natural to have
-a new type for quantities specified by intervals. This new type
-should support
-the operators <code>+</code>, <code>-</code>, <code>*</code>, and <code>/</code> according to the
-rules above.
-The task is hence to implement a class for interval arithmetic with
-special methods for the listed operators.
-Using the class, we should be able to estimate the uncertainty
-of two formulas:
+a new type for quantities specified by intervals. This new type should
+support the operators <code>+</code>, <code>-</code>, <code>*</code>, and <code>/</code> according to the rules
+above.  The task is hence to implement a class for interval
+arithmetics with special methods for the listed operators.  Using the
+class, we should be able to estimate the uncertainty of two formulas:
 
 <ul>
   <li> The acceleration of gravity, \( g=2y_0T^{-2} \), given a 2% uncertainty in \( y_0 \): \( y_0=[0.99,1.01] \), and a 10% uncertainty in \( T \): \( T=[T_m\cdot 0.95, T_m\cdot 1.05] \), with \( T_m=0.45 \).</li>
   <li> The volume of a sphere, \( V=\frac{4}{3}\pi R^3 \), given a 20% uncertainty in \( R \): \( R=[R_m\cdot 0.9, R_m\cdot 1.1] \), with \( R_m =6 \).</li>
 </ul>
 
-<h3>Solution  <a name="___sec68"></a></h3>
+<h3 id="___sec70">Solution </h3>
 
 <p>
 The new type is naturally realized as a class <code>IntervalMath</code>
@@ -603,7 +613,7 @@ it should be straightforward to understand the class below:
 
 <p>
 <!-- begin verbatim block  pycod-->
-<pre><code>class IntervalMath:
+<pre><code>class IntervalMath(object):
     def __init__(self, lower, upper):
         self.lo = float(lower)
         self.up = float(upper)
@@ -849,7 +859,8 @@ The complete code of class <code>IntervalMath</code> is found in
 <code>IntervalMath.py</code>. Compared to the implementations shown above,
 the real implementation in the file employs some ingenious constructions
 and help methods to save typing and repeating code in the special
-methods for arithmetic operations.
+methods for arithmetic operations. You can read more about
+interval arithmetics on <a href="http://en.wikipedia.org/wiki/Interval_arithmetic" target="_self">Wikipedia</a>.
 
 <p>
 <p>

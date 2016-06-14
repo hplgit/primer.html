@@ -7,13 +7,13 @@ Automatically generated HTML file from DocOnce source
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
 <meta name="description" content="Computing with formulas">
-<meta name="keywords" content="directory,run Python program,execute Python program,terminal window,console (terminal) window,directory,comments,non-English characters,formatting text and numbers,printf syntax,string,triple-quoted strings,format string syntax,newline character (line break),line break,source code,application,statements,expression,syntax,whitespace,blanks,whitespace,input (data),output (data),user (of a program),operating system (OS),Windows,Mac OS X,Unix,Linux,objects,round-off errors,interactive sessions standard Python shell,type conversion,check an object's type,rounding float to integer,interactive sessions IPython,IPython,run Python program,execute Python program,IPython running Python programs,IPython start-up file,IPython executing operating system commands,IPython command history,complex numbers,Gaussian function">
+<meta name="keywords" content="directory,run Python program,execute Python program,terminal window,console (terminal) window,directory,comments,non-English characters,formatting text and numbers,printf syntax,string,triple-quoted strings,format string syntax,newline character (line break),line break,source code,application,statements,expression,syntax,whitespace,blanks,whitespace,input (data),output (data),user (of a program),operating system (OS),Windows,Mac OS X,Unix,Linux,objects,rounding errors,interactive sessions standard Python shell,type conversion,check an object's type,rounding float to integer,interactive sessions IPython,IPython,run Python program,execute Python program,IPython running Python programs,IPython start-up file,IPython executing operating system commands,IPython command history,complex numbers,SymPy,SymPy differentiation,SymPy integration,SymPy equation solving,SymPy Taylor series,PEP8,Gaussian function">
 
 <title>Computing with formulas</title>
 
-<!-- Bootstrap style: bootstrap_bluegray -->
+<!-- Bootstrap style: bootstrap_simula -->
 <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
-<link href="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_styles/style_bootstrap/css/bootstrap_bluegray.css" rel="stylesheet">
+<link href="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_styles/style_bootstrap/css/bootstrap_simula.css" rel="stylesheet">
 <!-- not necessary
 <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 -->
@@ -21,6 +21,24 @@ Automatically generated HTML file from DocOnce source
 <style type="text/css">
 /* Let inline verbatim have the same color as the surroundings */
 code { color: inherit; background-color: transparent; }
+
+/* Add scrollbar to dropdown menus in bootstrap navigation bar */
+.dropdown-menu {
+   height: auto;
+   max-height: 400px;
+   overflow-x: hidden;
+}
+
+/* Adds an invisible element before each target to offset for the navigation
+   bar */
+.anchor::before {
+  content:"";
+  display:block;
+  height:50px; /* fixed header height*/
+  margin:-50px 0 0; /* negative fixed header height */
+}
+
+body { font-size:20px;line-height:1.5; }
 </style>
 
 
@@ -28,221 +46,218 @@ code { color: inherit; background-color: transparent; }
 
 <!-- tocinfo
 {'highest level': 1,
- 'sections': [(u' The first programming encounter: a formula ',
+ 'sections': [('Table of contents',
+               1,
+               'table_of_contents',
+               'table_of_contents'),
+              (u'The first programming encounter: a formula',
                1,
                u'sec:formula:1',
                u'sec:formula:1'),
-              (u' Using a program as a calculator ',
+              (u'Using a program as a calculator',
                2,
                u'sec:formula:1st',
                u'sec:formula:1st'),
-              (u' About programs and programming ', 2, None, '___sec2'),
-              (u' Tools for writing programs ', 2, None, '___sec3'),
-              (u' Writing and running your first Python program ',
+              (u'About programs and programming', 2, None, '___sec2'),
+              (u'Tools for writing programs', 2, None, '___sec3'),
+              (u'Writing and running your first Python program',
                2,
                None,
                '___sec4'),
-              (u' Warning about typing program text ', 2, None, '___sec5'),
-              (u' Verifying the result ', 2, None, '___sec6'),
-              (u' Using variables ',
+              (u'Warning about typing program text', 2, None, '___sec5'),
+              (u'Verifying the result', 2, None, '___sec6'),
+              (u'Using variables',
                2,
                u'sec:formula:variables',
                u'sec:formula:variables'),
-              (u' Names of variables ', 2, None, '___sec8'),
-              (u' Reserved words in Python ',
+              (u'Names of variables', 2, None, '___sec8'),
+              (u'Reserved words in Python',
                2,
                u'sec:formula:keywords',
                u'sec:formula:keywords'),
-              (u' Comments ', 2, None, '___sec10'),
-              (u' Remark ', 3, None, '___sec11'),
-              (u' Formatting text and numbers ',
+              (u'Comments', 2, None, '___sec10'),
+              (u'Remark', 3, None, '___sec11'),
+              (u'Formatting text and numbers',
                2,
                u'sec:formula:format',
                u'sec:formula:format'),
-              (u' Printf syntax ', 3, None, '___sec13'),
-              (u' Format string syntax ', 3, None, '___sec14'),
-              (u' The newline character ', 3, None, '___sec15'),
-              (u' Computer science glossary ',
+              (u'Printf syntax', 3, None, '___sec13'),
+              (u'Format string syntax', 3, None, '___sec14'),
+              (u'The newline character', 3, None, '___sec15'),
+              (u'Computer science glossary',
                1,
                u'sec:formula:glossary',
                u'sec:formula:glossary'),
-              (u' Another formula: Celsius-Fahrenheit conversion ',
+              (u'Another formula: Celsius-Fahrenheit conversion',
                1,
                u'sec:formula:c2f',
                u'sec:formula:c2f'),
-              (u' Potential error: integer division ',
+              (u'Potential error: integer division',
                2,
                u'sec:formula:intdiv',
                u'sec:formula:intdiv'),
-              (u' Straightforward coding of the formula ',
-               3,
-               None,
-               '___sec19'),
-              (u' Verifying the results ', 3, None, '___sec20'),
-              (u' Float and integer division ', 3, None, '___sec21'),
-              (u' Objects in Python ', 2, None, '___sec22'),
-              (u' Avoiding integer division ',
+              (u'Straightforward coding of the formula', 3, None, '___sec19'),
+              (u'Verifying the results', 3, None, '___sec20'),
+              (u'Float and integer division', 3, None, '___sec21'),
+              (u'Objects in Python', 2, None, '___sec22'),
+              (u'Avoiding integer division',
                2,
                u'sec:formula:c2f:correct',
                u'sec:formula:c2f:correct'),
-              (u' Locating potential integer division ', 3, None, '___sec24'),
-              (u' Remark ', 3, None, '___sec25'),
-              (u' Arithmetic operators and precedence ',
+              (u'Locating potential integer division', 3, None, '___sec24'),
+              (u'Remark', 3, None, '___sec25'),
+              (u'Arithmetic operators and precedence',
                2,
                u'sec:formula:operators',
                u'sec:formula:operators'),
-              (u' Evaluating standard mathematical functions ',
+              (u'Evaluating standard mathematical functions',
                1,
                u'sec:formula:stdmath',
                u'sec:formula:stdmath'),
-              (u' Example: Using the square root function ',
+              (u'Example: Using the square root function',
                2,
                u'sec:formula:sqrt',
                u'sec:formula:sqrt'),
-              (u' Problem ', 3, None, '___sec29'),
-              (u' The program ', 3, None, '___sec30'),
-              (u' Two ways of importing a module ', 3, None, '___sec31'),
-              (u' Import with new names ', 3, None, '___sec32'),
-              (u' Example: Computing with $\\sinh x$ ', 2, None, '___sec33'),
-              (u' A first glimpse of round-off errors ',
+              (u'Problem', 3, None, '___sec29'),
+              (u'The program', 3, None, '___sec30'),
+              (u'Two ways of importing a module', 3, None, '___sec31'),
+              (u'Import with new names', 3, None, '___sec32'),
+              (u'Example: Computing with $\\sinh x$', 2, None, '___sec33'),
+              (u'A first glimpse of rounding errors',
                2,
                u'sec:formula:roundoff',
                u'sec:formula:roundoff'),
-              (u' Interactive computing ',
+              (u'Interactive computing',
                1,
                u'sec:formula:pyshell',
                u'sec:formula:pyshell'),
-              (u' Using the Python shell ', 2, None, '___sec36'),
-              (u' Type conversion ',
+              (u'Using the Python shell', 2, None, '___sec36'),
+              (u'Type conversion',
                2,
                u'sec:formulas:typeconversion',
                u'sec:formulas:typeconversion'),
-              (u' IPython ',
-               2,
-               u'sec:formula:ipython',
-               u'sec:formula:ipython'),
-              (u' Running programs ', 3, None, '___sec39'),
-              (u' Quick recovery of previous output ', 3, None, '___sec40'),
-              (u' Tab completion ', 3, None, '___sec41'),
-              (u' Recovering previous commands ', 3, None, '___sec42'),
-              (u' Running Unix/Windows commands ', 3, None, '___sec43'),
-              (u' Notebooks ', 3, None, '___sec44'),
-              (u' Complex numbers ',
+              (u'IPython', 2, u'sec:formula:ipython', u'sec:formula:ipython'),
+              (u'Running programs', 3, None, '___sec39'),
+              (u'Quick recovery of previous output', 3, None, '___sec40'),
+              (u'Tab completion', 3, None, '___sec41'),
+              (u'Recovering previous commands', 3, None, '___sec42'),
+              (u'Running Unix/Windows commands', 3, None, '___sec43'),
+              (u'Notebooks', 3, None, '___sec44'),
+              (u'Complex numbers',
                1,
                u'sec:formula:complex',
                u'sec:formula:complex'),
-              (u' Complex arithmetics in Python ', 2, None, '___sec46'),
-              (u' Complex functions in Python ', 2, None, '___sec47'),
-              (u' Unified treatment of complex and real functions ',
+              (u'Complex arithmetics in Python', 2, None, '___sec46'),
+              (u'Complex functions in Python', 2, None, '___sec47'),
+              (u'Unified treatment of complex and real functions',
                2,
                u'formulas:unified:complex:real',
                u'formulas:unified:complex:real'),
-              (u' Symbolic computing ',
+              (u'Symbolic computing',
                1,
                u'sec:formula:sympy',
                u'sec:formula:sympy'),
-              (u' Basic differentiation and integration ',
+              (u'Basic differentiation and integration',
                2,
                u'sec:formula:sympy:diffint',
                u'sec:formula:sympy:diffint'),
-              (u' Equation solving and Taylor series ', 2, None, '___sec51'),
-              (u' Summary ',
-               1,
-               u'sec:formula:summary',
-               u'sec:formula:summary'),
-              (u' Chapter topics ', 2, None, '___sec53'),
-              (u' Programs must be accurate! ', 3, None, '___sec54'),
-              (u' Variables ', 3, None, '___sec55'),
-              (u' Comment lines ', 3, None, '___sec56'),
-              (u' Object types ', 3, None, '___sec57'),
-              (u' Operators ', 3, None, '___sec58'),
-              (u' Common mathematical functions ', 3, None, '___sec59'),
-              (u' Print ', 3, None, '___sec60'),
-              (u' Complex numbers ', 3, None, '___sec61'),
-              (u' Terminology ', 3, None, '___sec62'),
-              (u' Example: Trajectory of a ball ', 2, None, '___sec63'),
-              (u' Problem ', 3, None, '___sec64'),
-              (u' Solution ', 3, None, '___sec65'),
-              (u' About typesetting conventions in this book ',
+              (u'Equation solving', 2, None, '___sec51'),
+              (u'Taylor series and more', 2, None, '___sec52'),
+              (u'Summary', 1, u'sec:formula:summary', u'sec:formula:summary'),
+              (u'Chapter topics', 2, None, '___sec54'),
+              (u'Programs must be accurate!', 3, None, '___sec55'),
+              (u'Variables', 3, None, '___sec56'),
+              (u'Comment lines', 3, None, '___sec57'),
+              (u'Object types', 3, None, '___sec58'),
+              (u'Operators', 3, None, '___sec59'),
+              (u'Common mathematical functions', 3, None, '___sec60'),
+              (u'Print', 3, None, '___sec61'),
+              (u'Complex numbers', 3, None, '___sec62'),
+              (u'Terminology', 3, None, '___sec63'),
+              (u'Example: Trajectory of a ball', 2, None, '___sec64'),
+              (u'Problem', 3, None, '___sec65'),
+              (u'Solution', 3, None, '___sec66'),
+              (u'About typesetting conventions in this book',
                2,
                None,
-               '___sec66'),
-              (u' Style guide for Python code ', 3, None, '___sec67'),
-              (u' Exercises ', 1, u'sec:formula:exer', u'sec:formula:exer'),
-              (u' What does it mean to solve an exercise? ',
-               3,
-               None,
-               '___sec69'),
-              (u' Exercise 1: Compute 1+1 ',
+               '___sec67'),
+              (u'Style guide for Python code', 3, None, '___sec68'),
+              (u'Exercises', 1, u'sec:formula:exer', u'sec:formula:exer'),
+              (u'About solving exercises', 3, None, '___sec70'),
+              (u'Exercise 1: Compute 1+1',
                2,
                u'sec:formula:ex0',
                u'sec:formula:ex0'),
-              (u' Exercise 2: Write a Hello World program ',
+              (u'Exercise 2: Write a Hello World program',
                2,
                u'sec:formula:ex5',
                u'sec:formula:ex5'),
-              (u' Exercise 3: Derive and compute a formula ',
+              (u'Exercise 3: Derive and compute a formula',
                2,
                u'sec:formula:ex16',
                u'sec:formula:ex16'),
-              (u' Exercise 4: Convert from meters to British length units ',
+              (u'Exercise 4: Convert from meters to British length units',
                2,
                u'sec:formula:ex9',
                u'sec:formula:ex9'),
-              (u' Exercise 5: Compute the mass of various substances ',
+              (u'Exercise 5: Compute the mass of various substances',
                2,
                u'sec:formula:exex3',
                u'sec:formula:exex3'),
-              (u' Exercise 6: Compute the growth of money in a bank ',
+              (u'Exercise 6: Compute the growth of money in a bank',
                2,
                u'sec:formula:ex3',
                u'sec:formula:ex3'),
-              (u' Exercise 7: Find error(s) in a program ',
+              (u'Exercise 7: Find error(s) in a program',
                2,
                u'sec:formula:ex12',
                u'sec:formula:ex12'),
-              (u' Exercise 8: Type in program text ',
+              (u'Exercise 8: Type in program text',
                2,
                u'sec:formula:exex1',
                u'sec:formula:exex1'),
-              (u' Exercise 9: Type in programs and debug them ',
+              (u'Exercise 9: Type in programs and debug them',
                2,
                u'sec:formula:exex2a',
                u'sec:formula:exex2a'),
-              (u' Exercise 10: Evaluate a Gaussian function ',
+              (u'Exercise 10: Evaluate a Gaussian function',
                2,
                u'sec:formula:ex7',
                u'sec:formula:ex7'),
-              (u' Remarks ', 3, None, '___sec80'),
-              (u' Exercise 11: Compute the air resistance on a football ',
+              (u'Remarks', 3, None, '___sec81'),
+              (u'Exercise 11: Compute the air resistance on a football',
                2,
                u'sec:formula:ex11',
                u'sec:formula:ex11'),
-              (u' Exercise 12: How to cook the perfect egg ',
+              (u'Exercise 12: How to cook the perfect egg',
                2,
                u'sec:formula:ex14',
                u'sec:formula:ex14'),
-              (u' Exercise 13: Derive the trajectory of a ball ',
+              (u'Exercise 13: Derive the trajectory of a ball',
                2,
                u'sec:formula:ex13',
                u'sec:formula:ex13'),
-              (u' Exercise 14: Find errors in the coding of formulas ',
+              (u'Exercise 14: Find errors in the coding of formulas',
                2,
                u'sec:formula:ex1',
                u'sec:formula:ex1'),
-              (u' Exercise 15: Explain why a program does not work ',
+              (u'Exercise 15: Explain why a program does not work',
                2,
                u'sec:formula:ex15',
                u'sec:formula:ex15'),
-              (u' Exercise 16: Find errors in Python statements ',
+              (u'Exercise 16: Find errors in Python statements',
                2,
                u'sec:formula:ex2',
                u'sec:formula:ex2'),
-              (u' Exercise 17: Find errors in the coding of a formula ',
+              (u'Exercise 17: Find errors in the coding of a formula',
                2,
                u'sec:formula:ex4',
                u'sec:formula:ex4'),
-              (u' References ', 1, None, '___sec88')]}
+              (u'Exercise 18: Find errors in a program',
+               2,
+               u'sec:formula:exer:mathfile',
+               u'sec:formula:exer:mathfile'),
+              (u'References', 1, None, '___sec90')]}
 end of tocinfo -->
 
 <body>
@@ -280,21 +295,104 @@ $$
     </button>
     <a class="navbar-brand" href="formulas-bootstrap.html">Computing with formulas</a>
   </div>
+
   <div class="navbar-collapse collapse navbar-responsive-collapse">
     <ul class="nav navbar-nav navbar-right">
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
         <ul class="dropdown-menu">
-     <!-- navigation toc: --> <li><a href="._formulas-bootstrap001.html#sec:formula:1" style="font-size: 80%;">The first programming encounter: a formula</a></li>
-     <!-- navigation toc: --> <li><a href="._formulas-bootstrap002.html#sec:formula:glossary" style="font-size: 80%;">Computer science glossary</a></li>
-     <!-- navigation toc: --> <li><a href="._formulas-bootstrap003.html#sec:formula:c2f" style="font-size: 80%;">Another formula: Celsius-Fahrenheit conversion</a></li>
-     <!-- navigation toc: --> <li><a href="._formulas-bootstrap004.html#sec:formula:stdmath" style="font-size: 80%;">Evaluating standard mathematical functions</a></li>
-     <!-- navigation toc: --> <li><a href="._formulas-bootstrap005.html#sec:formula:pyshell" style="font-size: 80%;">Interactive computing</a></li>
-     <!-- navigation toc: --> <li><a href="#sec:formula:complex" style="font-size: 80%;">Complex numbers</a></li>
-     <!-- navigation toc: --> <li><a href="._formulas-bootstrap007.html#sec:formula:sympy" style="font-size: 80%;">Symbolic computing</a></li>
-     <!-- navigation toc: --> <li><a href="._formulas-bootstrap008.html#sec:formula:summary" style="font-size: 80%;">Summary</a></li>
-     <!-- navigation toc: --> <li><a href="._formulas-bootstrap009.html#sec:formula:exer" style="font-size: 80%;">Exercises</a></li>
-     <!-- navigation toc: --> <li><a href="._formulas-bootstrap009.html#___sec88" style="font-size: 80%;">References</a></li>
+     <!-- navigation toc: --> <li><a href="._formulas-bootstrap000.html#table_of_contents" style="font-size: 80%;"><b>Table of contents</b></a></li>
+     <!-- navigation toc: --> <li><a href="._formulas-bootstrap001.html#sec:formula:1" style="font-size: 80%;"><b>The first programming encounter: a formula</b></a></li>
+     <!-- navigation toc: --> <li><a href="._formulas-bootstrap001.html#sec:formula:1st" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Using a program as a calculator</a></li>
+     <!-- navigation toc: --> <li><a href="._formulas-bootstrap001.html#___sec2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;About programs and programming</a></li>
+     <!-- navigation toc: --> <li><a href="._formulas-bootstrap001.html#___sec3" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Tools for writing programs</a></li>
+     <!-- navigation toc: --> <li><a href="._formulas-bootstrap001.html#___sec4" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Writing and running your first Python program</a></li>
+     <!-- navigation toc: --> <li><a href="._formulas-bootstrap001.html#___sec5" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Warning about typing program text</a></li>
+     <!-- navigation toc: --> <li><a href="._formulas-bootstrap001.html#___sec6" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Verifying the result</a></li>
+     <!-- navigation toc: --> <li><a href="._formulas-bootstrap001.html#sec:formula:variables" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Using variables</a></li>
+     <!-- navigation toc: --> <li><a href="._formulas-bootstrap001.html#___sec8" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Names of variables</a></li>
+     <!-- navigation toc: --> <li><a href="._formulas-bootstrap001.html#sec:formula:keywords" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Reserved words in Python</a></li>
+     <!-- navigation toc: --> <li><a href="._formulas-bootstrap001.html#___sec10" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Comments</a></li>
+     <!-- navigation toc: --> <li><a href="._formulas-bootstrap001.html#___sec11" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remark</a></li>
+     <!-- navigation toc: --> <li><a href="._formulas-bootstrap001.html#sec:formula:format" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Formatting text and numbers</a></li>
+     <!-- navigation toc: --> <li><a href="._formulas-bootstrap001.html#___sec13" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Printf syntax</a></li>
+     <!-- navigation toc: --> <li><a href="._formulas-bootstrap001.html#___sec14" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Format string syntax</a></li>
+     <!-- navigation toc: --> <li><a href="._formulas-bootstrap001.html#___sec15" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The newline character</a></li>
+     <!-- navigation toc: --> <li><a href="._formulas-bootstrap002.html#sec:formula:glossary" style="font-size: 80%;"><b>Computer science glossary</b></a></li>
+     <!-- navigation toc: --> <li><a href="._formulas-bootstrap003.html#sec:formula:c2f" style="font-size: 80%;"><b>Another formula: Celsius-Fahrenheit conversion</b></a></li>
+     <!-- navigation toc: --> <li><a href="._formulas-bootstrap003.html#sec:formula:intdiv" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Potential error: integer division</a></li>
+     <!-- navigation toc: --> <li><a href="._formulas-bootstrap003.html#___sec19" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Straightforward coding of the formula</a></li>
+     <!-- navigation toc: --> <li><a href="._formulas-bootstrap003.html#___sec20" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Verifying the results</a></li>
+     <!-- navigation toc: --> <li><a href="._formulas-bootstrap003.html#___sec21" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Float and integer division</a></li>
+     <!-- navigation toc: --> <li><a href="._formulas-bootstrap003.html#___sec22" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Objects in Python</a></li>
+     <!-- navigation toc: --> <li><a href="._formulas-bootstrap003.html#sec:formula:c2f:correct" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Avoiding integer division</a></li>
+     <!-- navigation toc: --> <li><a href="._formulas-bootstrap003.html#___sec24" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Locating potential integer division</a></li>
+     <!-- navigation toc: --> <li><a href="._formulas-bootstrap003.html#___sec25" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remark</a></li>
+     <!-- navigation toc: --> <li><a href="._formulas-bootstrap003.html#sec:formula:operators" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Arithmetic operators and precedence</a></li>
+     <!-- navigation toc: --> <li><a href="._formulas-bootstrap004.html#sec:formula:stdmath" style="font-size: 80%;"><b>Evaluating standard mathematical functions</b></a></li>
+     <!-- navigation toc: --> <li><a href="._formulas-bootstrap004.html#sec:formula:sqrt" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Using the square root function</a></li>
+     <!-- navigation toc: --> <li><a href="._formulas-bootstrap004.html#___sec29" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem</a></li>
+     <!-- navigation toc: --> <li><a href="._formulas-bootstrap001.html#___sec30" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The program</a></li>
+     <!-- navigation toc: --> <li><a href="._formulas-bootstrap004.html#___sec31" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Two ways of importing a module</a></li>
+     <!-- navigation toc: --> <li><a href="._formulas-bootstrap004.html#___sec32" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Import with new names</a></li>
+     <!-- navigation toc: --> <li><a href="._formulas-bootstrap004.html#___sec33" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Computing with \( \sinh x \)</a></li>
+     <!-- navigation toc: --> <li><a href="._formulas-bootstrap004.html#sec:formula:roundoff" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;A first glimpse of rounding errors</a></li>
+     <!-- navigation toc: --> <li><a href="._formulas-bootstrap005.html#sec:formula:pyshell" style="font-size: 80%;"><b>Interactive computing</b></a></li>
+     <!-- navigation toc: --> <li><a href="._formulas-bootstrap005.html#___sec36" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Using the Python shell</a></li>
+     <!-- navigation toc: --> <li><a href="._formulas-bootstrap005.html#sec:formulas:typeconversion" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Type conversion</a></li>
+     <!-- navigation toc: --> <li><a href="._formulas-bootstrap005.html#sec:formula:ipython" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;IPython</a></li>
+     <!-- navigation toc: --> <li><a href="._formulas-bootstrap005.html#___sec39" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Running programs</a></li>
+     <!-- navigation toc: --> <li><a href="._formulas-bootstrap005.html#___sec40" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Quick recovery of previous output</a></li>
+     <!-- navigation toc: --> <li><a href="._formulas-bootstrap005.html#___sec41" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tab completion</a></li>
+     <!-- navigation toc: --> <li><a href="._formulas-bootstrap005.html#___sec42" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Recovering previous commands</a></li>
+     <!-- navigation toc: --> <li><a href="._formulas-bootstrap005.html#___sec43" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Running Unix/Windows commands</a></li>
+     <!-- navigation toc: --> <li><a href="._formulas-bootstrap005.html#___sec44" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Notebooks</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:formula:complex" style="font-size: 80%;"><b>Complex numbers</b></a></li>
+     <!-- navigation toc: --> <li><a href="#___sec46" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Complex arithmetics in Python</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec47" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Complex functions in Python</a></li>
+     <!-- navigation toc: --> <li><a href="#formulas:unified:complex:real" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Unified treatment of complex and real functions</a></li>
+     <!-- navigation toc: --> <li><a href="._formulas-bootstrap007.html#sec:formula:sympy" style="font-size: 80%;"><b>Symbolic computing</b></a></li>
+     <!-- navigation toc: --> <li><a href="._formulas-bootstrap007.html#sec:formula:sympy:diffint" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Basic differentiation and integration</a></li>
+     <!-- navigation toc: --> <li><a href="._formulas-bootstrap007.html#___sec51" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Equation solving</a></li>
+     <!-- navigation toc: --> <li><a href="._formulas-bootstrap007.html#___sec52" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Taylor series and more</a></li>
+     <!-- navigation toc: --> <li><a href="._formulas-bootstrap008.html#sec:formula:summary" style="font-size: 80%;"><b>Summary</b></a></li>
+     <!-- navigation toc: --> <li><a href="._formulas-bootstrap008.html#___sec54" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Chapter topics</a></li>
+     <!-- navigation toc: --> <li><a href="._formulas-bootstrap008.html#___sec55" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Programs must be accurate!</a></li>
+     <!-- navigation toc: --> <li><a href="._formulas-bootstrap008.html#___sec56" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Variables</a></li>
+     <!-- navigation toc: --> <li><a href="._formulas-bootstrap008.html#___sec57" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Comment lines</a></li>
+     <!-- navigation toc: --> <li><a href="._formulas-bootstrap008.html#___sec58" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Object types</a></li>
+     <!-- navigation toc: --> <li><a href="._formulas-bootstrap008.html#___sec59" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Operators</a></li>
+     <!-- navigation toc: --> <li><a href="._formulas-bootstrap008.html#___sec60" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Common mathematical functions</a></li>
+     <!-- navigation toc: --> <li><a href="._formulas-bootstrap008.html#___sec61" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Print</a></li>
+     <!-- navigation toc: --> <li><a href="._formulas-bootstrap008.html#___sec62" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Complex numbers</a></li>
+     <!-- navigation toc: --> <li><a href="._formulas-bootstrap008.html#___sec63" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Terminology</a></li>
+     <!-- navigation toc: --> <li><a href="._formulas-bootstrap008.html#___sec64" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Trajectory of a ball</a></li>
+     <!-- navigation toc: --> <li><a href="._formulas-bootstrap008.html#___sec65" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem</a></li>
+     <!-- navigation toc: --> <li><a href="._formulas-bootstrap008.html#___sec66" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Solution</a></li>
+     <!-- navigation toc: --> <li><a href="._formulas-bootstrap008.html#___sec67" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;About typesetting conventions in this book</a></li>
+     <!-- navigation toc: --> <li><a href="._formulas-bootstrap008.html#___sec68" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Style guide for Python code</a></li>
+     <!-- navigation toc: --> <li><a href="._formulas-bootstrap009.html#sec:formula:exer" style="font-size: 80%;"><b>Exercises</b></a></li>
+     <!-- navigation toc: --> <li><a href="._formulas-bootstrap009.html#___sec70" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;About solving exercises</a></li>
+     <!-- navigation toc: --> <li><a href="._formulas-bootstrap009.html#sec:formula:ex0" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 1: Compute 1+1</a></li>
+     <!-- navigation toc: --> <li><a href="._formulas-bootstrap009.html#sec:formula:ex5" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 2: Write a Hello World program</a></li>
+     <!-- navigation toc: --> <li><a href="._formulas-bootstrap009.html#sec:formula:ex16" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 3: Derive and compute a formula</a></li>
+     <!-- navigation toc: --> <li><a href="._formulas-bootstrap009.html#sec:formula:ex9" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 4: Convert from meters to British length units</a></li>
+     <!-- navigation toc: --> <li><a href="._formulas-bootstrap009.html#sec:formula:exex3" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 5: Compute the mass of various substances</a></li>
+     <!-- navigation toc: --> <li><a href="._formulas-bootstrap009.html#sec:formula:ex3" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 6: Compute the growth of money in a bank</a></li>
+     <!-- navigation toc: --> <li><a href="._formulas-bootstrap009.html#sec:formula:ex12" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 7: Find error(s) in a program</a></li>
+     <!-- navigation toc: --> <li><a href="._formulas-bootstrap009.html#sec:formula:exex1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 8: Type in program text</a></li>
+     <!-- navigation toc: --> <li><a href="._formulas-bootstrap009.html#sec:formula:exex2a" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 9: Type in programs and debug them</a></li>
+     <!-- navigation toc: --> <li><a href="._formulas-bootstrap009.html#sec:formula:ex7" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 10: Evaluate a Gaussian function</a></li>
+     <!-- navigation toc: --> <li><a href="._formulas-bootstrap009.html#___sec81" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remarks</a></li>
+     <!-- navigation toc: --> <li><a href="._formulas-bootstrap009.html#sec:formula:ex11" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 11: Compute the air resistance on a football</a></li>
+     <!-- navigation toc: --> <li><a href="._formulas-bootstrap009.html#sec:formula:ex14" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 12: How to cook the perfect egg</a></li>
+     <!-- navigation toc: --> <li><a href="._formulas-bootstrap009.html#sec:formula:ex13" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 13: Derive the trajectory of a ball</a></li>
+     <!-- navigation toc: --> <li><a href="._formulas-bootstrap009.html#sec:formula:ex1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 14: Find errors in the coding of formulas</a></li>
+     <!-- navigation toc: --> <li><a href="._formulas-bootstrap009.html#sec:formula:ex15" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 15: Explain why a program does not work</a></li>
+     <!-- navigation toc: --> <li><a href="._formulas-bootstrap009.html#sec:formula:ex2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 16: Find errors in Python statements</a></li>
+     <!-- navigation toc: --> <li><a href="._formulas-bootstrap009.html#sec:formula:ex4" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 17: Find errors in the coding of a formula</a></li>
+     <!-- navigation toc: --> <li><a href="._formulas-bootstrap009.html#sec:formula:exer:mathfile" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 18: Find errors in a program</a></li>
+     <!-- navigation toc: --> <li><a href="._formulas-bootstrap009.html#___sec90" style="font-size: 80%;"><b>References</b></a></li>
 
         </ul>
       </li>
@@ -309,9 +407,9 @@ $$
 
 <a name="part0006"></a>
 <!-- !split -->
-<p style="font-size:80%">This chapter is taken from book <a href="http://www.springer.com/gp/book/9783642549588">A Primer on Scientific Programming with Python</a> by H. P. Langtangen, 4th edition, Springer, 2014.</p>
+<p style="font-size:80%">This chapter is taken from the book <a href="http://www.springer.com/gp/book/9783662498866">A Primer on Scientific Programming with Python</a> by H. P. Langtangen, 5th edition, Springer, 2016.</p>
 
-<h1 id="sec:formula:complex">Complex numbers</h1>
+<h1 id="sec:formula:complex" class="anchor">Complex numbers</h1>
 
 <p>
 Suppose \( x^2=2 \). Then most of us are able to find out that
@@ -367,7 +465,7 @@ e^{iq} &= \cos q + i\sin q
 \end{align*}
 $$
 
-<h2 id="___sec46">Complex arithmetics in Python </h2>
+<h2 id="___sec46" class="anchor">Complex arithmetics in Python </h2>
 
 <p>
 Python supports computation with complex numbers. The imaginary unit
@@ -380,7 +478,7 @@ simple arithmetics:
 <p>
 
 <!-- code=python (!bc pyshell) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> u <span style="color: #666666">=</span> <span style="color: #666666">2.5</span> <span style="color: #666666">+</span> <span style="color: #666666">3j</span>       <span style="color: #408080; font-style: italic"># create a complex number</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> u <span style="color: #666666">=</span> <span style="color: #666666">2.5</span> <span style="color: #666666">+</span> <span style="color: #666666">3j</span>       <span style="color: #408080; font-style: italic"># create a complex number</span>
 <span style="color: #666666">&gt;&gt;&gt;</span> v <span style="color: #666666">=</span> <span style="color: #666666">2</span>              <span style="color: #408080; font-style: italic"># this is an int</span>
 <span style="color: #666666">&gt;&gt;&gt;</span> w <span style="color: #666666">=</span> u <span style="color: #666666">+</span> v          <span style="color: #408080; font-style: italic"># complex + int</span>
 <span style="color: #666666">&gt;&gt;&gt;</span> w
@@ -405,7 +503,7 @@ parts as well as computing the complex conjugate:
 <p>
 
 <!-- code=python (!bc pyshell) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> s<span style="color: #666666">.</span>real
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> s<span style="color: #666666">.</span>real
 <span style="color: #666666">-2.0</span>
 <span style="color: #666666">&gt;&gt;&gt;</span> s<span style="color: #666666">.</span>imag
 <span style="color: #666666">0.5</span>
@@ -413,7 +511,7 @@ parts as well as computing the complex conjugate:
 (<span style="color: #666666">-2-0.5j</span>)
 </pre></div>
 
-<h2 id="___sec47">Complex functions in Python </h2>
+<h2 id="___sec47" class="anchor">Complex functions in Python </h2>
 
 <p>
 Taking the sine of a complex number does not work:
@@ -421,7 +519,7 @@ Taking the sine of a complex number does not work:
 <p>
 
 <!-- code=python (!bc pyshell) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">math</span> <span style="color: #008000; font-weight: bold">import</span> sin
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">math</span> <span style="color: #008000; font-weight: bold">import</span> sin
 <span style="color: #666666">&gt;&gt;&gt;</span> r <span style="color: #666666">=</span> sin(w)
 Traceback (most recent call last):
   File <span style="color: #BA2121">&quot;&lt;input&gt;&quot;</span>, line <span style="color: #666666">1</span>, <span style="color: #AA22FF; font-weight: bold">in</span> ?
@@ -438,7 +536,7 @@ holds:
 <p>
 
 <!-- code=python (!bc pyshell) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">cmath</span> <span style="color: #008000; font-weight: bold">import</span> sin, sinh
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">cmath</span> <span style="color: #008000; font-weight: bold">import</span> sin, sinh
 <span style="color: #666666">&gt;&gt;&gt;</span> r1 <span style="color: #666666">=</span> sin(<span style="color: #666666">8j</span>)
 <span style="color: #666666">&gt;&gt;&gt;</span> r1
 <span style="color: #666666">1490.4788257895502j</span>
@@ -452,14 +550,14 @@ Another relation, \( e^{iq} = \cos q + i\sin q \), is exemplified next:
 <p>
 
 <!-- code=python (!bc pyshell) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> q <span style="color: #666666">=</span> <span style="color: #666666">8</span>     <span style="color: #408080; font-style: italic"># some arbitrary number</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> q <span style="color: #666666">=</span> <span style="color: #666666">8</span>     <span style="color: #408080; font-style: italic"># some arbitrary number</span>
 <span style="color: #666666">&gt;&gt;&gt;</span> exp(<span style="color: #666666">1j*</span>q)
 (<span style="color: #666666">-0.14550003380861354+0.98935824662338179j</span>)
 <span style="color: #666666">&gt;&gt;&gt;</span> cos(q) <span style="color: #666666">+</span> <span style="color: #666666">1j*</span>sin(q)
 (<span style="color: #666666">-0.14550003380861354+0.98935824662338179j</span>)
 </pre></div>
 
-<h2 id="formulas:unified:complex:real">Unified treatment of complex and real functions</h2>
+<h2 id="formulas:unified:complex:real" class="anchor">Unified treatment of complex and real functions</h2>
 
 <p>
 The <code>cmath</code> functions always return complex numbers. It would be nice
@@ -471,7 +569,7 @@ functions known from <code>math</code> and <code>cmath</code>. By taking a
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy.lib.scimath</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #666666">*</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy.lib.scimath</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #666666">*</span>
 </pre></div>
 <p>
 one obtains access to these flexible versions of mathematical functions.
@@ -480,7 +578,7 @@ The functions also get imported by any of the statements
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">scipy</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #666666">*</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">scipy</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #666666">*</span>
 <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">scitools.std</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #666666">*</span>
 </pre></div>
 <p>
@@ -492,7 +590,7 @@ Let us first use the <code>sqrt</code> function in the
 <p>
 
 <!-- code=python (!bc pyshell) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">math</span> <span style="color: #008000; font-weight: bold">import</span> sqrt
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">math</span> <span style="color: #008000; font-weight: bold">import</span> sqrt
 <span style="color: #666666">&gt;&gt;&gt;</span> sqrt(<span style="color: #666666">4</span>)     <span style="color: #408080; font-style: italic"># float</span>
 <span style="color: #666666">2.0</span>
 <span style="color: #666666">&gt;&gt;&gt;</span> sqrt(<span style="color: #666666">-1</span>)    <span style="color: #408080; font-style: italic"># illegal</span>
@@ -506,7 +604,7 @@ If we now import <code>sqrt</code> from <code>cmath</code>,
 <p>
 
 <!-- code=python (!bc pyshell) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">cmath</span> <span style="color: #008000; font-weight: bold">import</span> sqrt
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">cmath</span> <span style="color: #008000; font-weight: bold">import</span> sqrt
 </pre></div>
 <p>
 the previous <code>sqrt</code> function is overwritten by the new one.
@@ -518,7 +616,7 @@ square root results in a <code>complex</code> object:
 <p>
 
 <!-- code=python (!bc pyshell) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> sqrt(<span style="color: #666666">4</span>)     <span style="color: #408080; font-style: italic"># complex</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> sqrt(<span style="color: #666666">4</span>)     <span style="color: #408080; font-style: italic"># complex</span>
 (<span style="color: #666666">2+0j</span>)
 <span style="color: #666666">&gt;&gt;&gt;</span> sqrt(<span style="color: #666666">-1</span>)    <span style="color: #408080; font-style: italic"># complex</span>
 <span style="color: #666666">1j</span>
@@ -529,7 +627,7 @@ If we now take
 <p>
 
 <!-- code=python (!bc pyshell) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy.lib.scimath</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #666666">*</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy.lib.scimath</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #666666">*</span>
 </pre></div>
 <p>
 we import (among other things) a new <code>sqrt</code> function. This function
@@ -540,7 +638,7 @@ mathematically possible, otherwise a <code>complex</code> is returned:
 <p>
 
 <!-- code=python (!bc pyshell) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> sqrt(<span style="color: #666666">4</span>)     <span style="color: #408080; font-style: italic"># float</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> sqrt(<span style="color: #666666">4</span>)     <span style="color: #408080; font-style: italic"># float</span>
 <span style="color: #666666">2.0</span>
 <span style="color: #666666">&gt;&gt;&gt;</span> sqrt(<span style="color: #666666">-1</span>)    <span style="color: #408080; font-style: italic"># complex</span>
 <span style="color: #666666">1j</span>
@@ -553,7 +651,7 @@ quadratic function \( f(x)=ax^2 + bx + c \):
 <p>
 
 <!-- code=python (!bc pyshell) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> a <span style="color: #666666">=</span> <span style="color: #666666">1</span>; b <span style="color: #666666">=</span> <span style="color: #666666">2</span>; c <span style="color: #666666">=</span> <span style="color: #666666">100</span>   <span style="color: #408080; font-style: italic"># polynomial coefficients</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> a <span style="color: #666666">=</span> <span style="color: #666666">1</span>; b <span style="color: #666666">=</span> <span style="color: #666666">2</span>; c <span style="color: #666666">=</span> <span style="color: #666666">100</span>   <span style="color: #408080; font-style: italic"># polynomial coefficients</span>
 <span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy.lib.scimath</span> <span style="color: #008000; font-weight: bold">import</span> sqrt
 <span style="color: #666666">&gt;&gt;&gt;</span> r1 <span style="color: #666666">=</span> (<span style="color: #666666">-</span>b <span style="color: #666666">+</span> sqrt(b<span style="color: #666666">**2</span> <span style="color: #666666">-</span> <span style="color: #666666">4*</span>a<span style="color: #666666">*</span>c))<span style="color: #666666">/</span>(<span style="color: #666666">2*</span>a)
 <span style="color: #666666">&gt;&gt;&gt;</span> r2 <span style="color: #666666">=</span> (<span style="color: #666666">-</span>b <span style="color: #666666">-</span> sqrt(b<span style="color: #666666">**2</span> <span style="color: #666666">-</span> <span style="color: #666666">4*</span>a<span style="color: #666666">*</span>c))<span style="color: #666666">/</span>(<span style="color: #666666">2*</span>a)
@@ -569,7 +667,7 @@ coefficients and change them so the roots become real numbers:
 <p>
 
 <!-- code=python (!bc pyshell) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> a <span style="color: #666666">=</span> <span style="color: #666666">1</span>; b <span style="color: #666666">=</span> <span style="color: #666666">4</span>; c <span style="color: #666666">=</span> <span style="color: #666666">1</span>   <span style="color: #408080; font-style: italic"># polynomial coefficients</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> a <span style="color: #666666">=</span> <span style="color: #666666">1</span>; b <span style="color: #666666">=</span> <span style="color: #666666">4</span>; c <span style="color: #666666">=</span> <span style="color: #666666">1</span>   <span style="color: #408080; font-style: italic"># polynomial coefficients</span>
 </pre></div>
 <p>
 Going back to the computations of <code>r1</code> and <code>r2</code> and performing
@@ -578,7 +676,7 @@ them again, we get
 <p>
 
 <!-- code=python (!bc pyshell) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> r1
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> r1
 <span style="color: #666666">-0.267949192431</span>
 <span style="color: #666666">&gt;&gt;&gt;</span> r2
 <span style="color: #666666">-3.73205080757</span>

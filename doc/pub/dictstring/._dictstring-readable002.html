@@ -1,0 +1,1122 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Dictionaries and strings">
+<meta name="keywords" content="dictionary,keys (dictionaries),immutable objects,mutable objects,summing a list,summing over an iterator,dictionary comprehensions,nested dictionaries,dictionary nested,date conversion,plotting data vs date,string slicing,slicing,substrings,string substrings,string searching,string find,string substitution,substitution (in text),string replace,string splitting,string case change,string testing for number,whitespace,blank lines in files,string stripping leading/trailing blanks,string joining words,dictionary functionality">
+
+<title>Dictionaries and strings</title>
+
+<!-- Bootstrap style: bootswatch_readable -->
+<link href="http://netdna.bootstrapcdn.com/bootswatch/3.1.1/readable/bootstrap.min.css" rel="stylesheet">
+<!-- not necessary
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+
+<style type="text/css">
+/* Let inline verbatim have the same color as the surroundings */
+code { color: inherit; background-color: transparent; }
+
+/* Add scrollbar to dropdown menus in bootstrap navigation bar */
+.dropdown-menu {
+   height: auto;
+   max-height: 400px;
+   overflow-x: hidden;
+}
+
+/* Adds an invisible element before each target to offset for the navigation
+   bar */
+.anchor::before {
+  content:"";
+  display:block;
+  height:50px; /* fixed header height*/
+  margin:-50px 0 0; /* negative fixed header height */
+}
+
+body { font-size:20px;line-height:1.5--html_body_style=font-size:20px;line-height:1.5; }
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [('Table of contents',
+               1,
+               'table_of_contents',
+               'table_of_contents'),
+              (u'Dictionaries', 1, u'sec:files:dicts', u'sec:files:dicts'),
+              (u'Making dictionaries', 2, None, '___sec1'),
+              (u'Dictionary operations', 2, None, '___sec2'),
+              (u'Remark', 3, None, '___sec3'),
+              (u'Example: Polynomials as dictionaries',
+               2,
+               u'sec:files:poly',
+               u'sec:files:poly'),
+              (u'Dictionaries with default values and ordering',
+               2,
+               u'sec:files:dict:default:order',
+               u'sec:files:dict:default:order'),
+              (u'Dictionaries with default values', 3, None, '___sec6'),
+              (u'Ordered dictionaries', 3, None, '___sec7'),
+              (u'Example: Storing file data in dictionaries',
+               2,
+               u'sec:files:dict:density',
+               u'sec:files:dict:density'),
+              (u'Problem', 3, None, '___sec9'),
+              (u'Solution', 3, None, '___sec10'),
+              (u'Example: Storing file data in nested dictionaries',
+               2,
+               u'sec:files:dictdict',
+               u'sec:files:dictdict'),
+              (u'Problem', 3, None, '___sec12'),
+              (u'Algorithm', 3, None, '___sec13'),
+              (u'Implementation', 3, None, '___sec14'),
+              (u'Dissection', 3, None, '___sec15'),
+              (u'Example: Reading and plotting data recorded at specific dates',
+               2,
+               u'sec:files:stockprices',
+               u'sec:files:stockprices'),
+              (u'Problem', 3, None, '___sec17'),
+              (u'Solution', 3, None, '___sec18'),
+              (u'Strings', 1, u'sec:files:str', u'sec:files:str'),
+              (u'Common operations on strings',
+               2,
+               u'sec:files:stringop',
+               u'sec:files:stringop'),
+              (u'Substring specification', 3, None, '___sec21'),
+              (u'Searching for substrings', 3, None, '___sec22'),
+              (u'Substitution', 3, None, '___sec23'),
+              (u'String splitting', 3, None, '___sec24'),
+              (u'Upper and lower case', 3, None, '___sec25'),
+              (u'Strings are constant', 3, None, '___sec26'),
+              (u'Strings with digits only', 3, None, '___sec27'),
+              (u'Whitespace', 3, None, '___sec28'),
+              (u'Joining strings', 3, None, '___sec29'),
+              (u'Example: Reading pairs of numbers',
+               2,
+               u'sec:files:pairs',
+               u'sec:files:pairs'),
+              (u'Problem', 3, None, '___sec31'),
+              (u'Solution', 3, None, '___sec32'),
+              (u'Example: Reading coordinates', 2, None, '___sec33'),
+              (u'Problem', 3, None, '___sec34'),
+              (u'Solution 1: substring extraction', 3, None, '___sec35'),
+              (u'Solution 2: string search', 3, None, '___sec36'),
+              (u'Solution 3: string split', 3, None, '___sec37'),
+              (u'Reading data from web pages',
+               1,
+               u'sec:files:webtxt',
+               u'sec:files:webtxt'),
+              (u'About web pages',
+               2,
+               u'sec:files:HTMLintro',
+               u'sec:files:HTMLintro'),
+              (u'How to access web pages in programs',
+               2,
+               u'sec:files:urllib',
+               u'sec:files:urllib'),
+              (u'Alternative 1', 3, None, '___sec41'),
+              (u'Alternative 2', 3, None, '___sec42'),
+              (u'Example: Reading pure text files',
+               2,
+               u'sec:files:url:weather',
+               u'sec:files:url:weather'),
+              (u'Example: Extracting data from HTML',
+               2,
+               u'sec:files:url:interpret',
+               u'sec:files:url:interpret'),
+              (u'Handling non-English text',
+               2,
+               u'sec:files:encoding',
+               u'sec:files:encoding'),
+              (u'Reading and writing spreadsheet files',
+               1,
+               u'sec:files:csv',
+               u'sec:files:csv'),
+              (u'CSV files', 2, None, '___sec47'),
+              (u'Reading CSV files', 2, None, '___sec48'),
+              (u'Processing spreadsheet data', 2, None, '___sec49'),
+              (u'Writing CSV files', 2, None, '___sec50'),
+              (u'Remark', 3, None, '___sec51'),
+              (u'Representing number cells with Numerical Python arrays',
+               2,
+               None,
+               '___sec52'),
+              (u'Using more high-level Numerical Python functionality',
+               2,
+               None,
+               '___sec53'),
+              (u'Making code that is compatible with Python 2 and 3',
+               1,
+               u'sec:dictstring:py23',
+               u'sec:dictstring:py23'),
+              (u'Basic differences between Python 2 and 3',
+               2,
+               None,
+               '___sec55'),
+              (u'`xrange` in Python 2 is `range` in Python 3',
+               3,
+               None,
+               '___sec56'),
+              (u'Python 3 often avoids returning lists and dictionaries',
+               3,
+               None,
+               '___sec57'),
+              (u'Library modules have different names', 3, None, '___sec58'),
+              (u'Python 3 has unicode and byte strings', 3, None, '___sec59'),
+              (u'Python 3 has different relative import syntax inside packages',
+               3,
+               None,
+               '___sec60'),
+              (u'Turning Python 2 code into Python 3 code',
+               2,
+               None,
+               '___sec61'),
+              (u'Summary', 1, None, '___sec62'),
+              (u'Chapter topics', 2, None, '___sec63'),
+              (u'Dictionaries', 3, None, '___sec64'),
+              (u'Strings', 3, None, '___sec65'),
+              (u'Downloading Internet files', 3, None, '___sec66'),
+              (u'Terminology', 3, None, '___sec67'),
+              (u'Example: A file database',
+               2,
+               u'sec:files:sumex',
+               u'sec:files:sumex'),
+              (u'Problem', 3, None, '___sec69'),
+              (u'Solution', 3, None, '___sec70'),
+              (u'Exercises',
+               1,
+               u'sec:files:exercises',
+               u'sec:files:exercises'),
+              (u'Exercise 1: Make a dictionary from a table',
+               2,
+               u'sec:files:ex2b:basic',
+               u'sec:files:ex2b:basic'),
+              (u'Exercise 2: Explore syntax differences: lists vs. dicts',
+               2,
+               u'sec:files:ex2',
+               u'sec:files:ex2'),
+              (u'Exercise 3: Use string operations to improve a program',
+               2,
+               u'sec:files:ex17',
+               u'sec:files:ex17'),
+              (u'Exercise 4: Interpret output from a program',
+               2,
+               u'sec:files:ex13',
+               u'sec:files:ex13'),
+              (u'Exercise 5: Make a dictionary',
+               2,
+               u'sec:files:ex2b',
+               u'sec:files:ex2b'),
+              (u'Exercise 6: Make a nested dictionary',
+               2,
+               u'sec:files:ex2c',
+               u'sec:files:ex2c'),
+              (u'Exercise 7: Make a nested dictionary from a file',
+               2,
+               u'sec:files:ex2d:nested',
+               u'sec:files:ex2d:nested'),
+              (u'Exercise 8: Make a nested dictionary from a file',
+               2,
+               u'sec:files:ex2d:nested2',
+               u'sec:files:ex2d:nested2'),
+              (u'Exercise 9: Compute the area of a triangle',
+               2,
+               u'sec:files:ex2d',
+               u'sec:files:ex2d'),
+              (u'Exercise 10: Compare data structures for polynomials',
+               2,
+               u'sec:files:ex16',
+               u'sec:files:ex16'),
+              (u'Exercise 11: Compute the derivative of a polynomial',
+               2,
+               u'sec:files:ex3',
+               u'sec:files:ex3'),
+              (u'Exercise 12: Specify functions on the command line',
+               2,
+               u'sec:basic:ex10',
+               u'sec:basic:ex10'),
+              (u'Exercise 13: Interpret function specifications',
+               2,
+               u'sec:basic:ex10b',
+               u'sec:basic:ex10b'),
+              (u'Exercise 14: Compare average temperatures in cities',
+               2,
+               u'sec:files:ex8',
+               u'sec:files:ex8'),
+              (u'Exercise 15: Generate an HTML report with figures',
+               2,
+               u'sec:files:ex21',
+               u'sec:files:ex21'),
+              (u'References', 1, None, '___sec87')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- newcommands_keep.tex -->
+$$
+\newcommand{\tp}{\thinspace .}
+$$
+
+
+
+
+    
+<!-- Bootstrap navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="dictstring-readable.html">Dictionaries and strings</a>
+  </div>
+
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     <!-- navigation toc: --> <li><a href="._dictstring-readable000.html#table_of_contents" style="font-size: 80%;"><b>Table of contents</b></a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable001.html#sec:files:dicts" style="font-size: 80%;"><b>Dictionaries</b></a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable001.html#___sec1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Making dictionaries</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable001.html#___sec2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Dictionary operations</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable001.html#___sec3" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remark</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable001.html#sec:files:poly" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Polynomials as dictionaries</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable001.html#sec:files:dict:default:order" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Dictionaries with default values and ordering</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable001.html#___sec6" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dictionaries with default values</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable001.html#___sec7" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ordered dictionaries</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable001.html#sec:files:dict:density" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Storing file data in dictionaries</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable001.html#___sec9" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable001.html#___sec10" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Solution</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable001.html#sec:files:dictdict" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Storing file data in nested dictionaries</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable001.html#___sec12" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable001.html#___sec13" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Algorithm</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable001.html#___sec14" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Implementation</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable001.html#___sec15" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dissection</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable001.html#sec:files:stockprices" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Reading and plotting data recorded at specific dates</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable001.html#___sec17" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable001.html#___sec18" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Solution</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:files:str" style="font-size: 80%;"><b>Strings</b></a></li>
+     <!-- navigation toc: --> <li><a href="#sec:files:stringop" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Common operations on strings</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec21" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Substring specification</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec22" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Searching for substrings</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec23" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Substitution</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec24" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String splitting</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec25" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Upper and lower case</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec26" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Strings are constant</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec27" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Strings with digits only</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec28" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Whitespace</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec29" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Joining strings</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:files:pairs" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Reading pairs of numbers</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec31" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec32" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Solution</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec33" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Reading coordinates</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec34" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec35" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Solution 1: substring extraction</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec36" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Solution 2: string search</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec37" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Solution 3: string split</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable003.html#sec:files:webtxt" style="font-size: 80%;"><b>Reading data from web pages</b></a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable003.html#sec:files:HTMLintro" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;About web pages</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable003.html#sec:files:urllib" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;How to access web pages in programs</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable003.html#___sec41" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Alternative 1</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable003.html#___sec42" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Alternative 2</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable003.html#sec:files:url:weather" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Reading pure text files</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable003.html#sec:files:url:interpret" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Extracting data from HTML</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable003.html#sec:files:encoding" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Handling non-English text</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable004.html#sec:files:csv" style="font-size: 80%;"><b>Reading and writing spreadsheet files</b></a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable004.html#___sec47" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;CSV files</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable004.html#___sec48" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Reading CSV files</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable004.html#___sec49" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Processing spreadsheet data</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable004.html#___sec50" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Writing CSV files</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable004.html#___sec51" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remark</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable004.html#___sec52" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Representing number cells with Numerical Python arrays</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable004.html#___sec53" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Using more high-level Numerical Python functionality</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable005.html#sec:dictstring:py23" style="font-size: 80%;"><b>Making code that is compatible with Python 2 and 3</b></a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable005.html#___sec55" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Basic differences between Python 2 and 3</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable005.html#___sec56" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`xrange` in Python 2 is <code>range</code> in Python 3</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable005.html#___sec57" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Python 3 often avoids returning lists and dictionaries</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable005.html#___sec58" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Library modules have different names</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable005.html#___sec59" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Python 3 has unicode and byte strings</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable005.html#___sec60" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Python 3 has different relative import syntax inside packages</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable005.html#___sec61" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Turning Python 2 code into Python 3 code</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable006.html#___sec62" style="font-size: 80%;"><b>Summary</b></a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable006.html#___sec63" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Chapter topics</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable006.html#___sec64" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dictionaries</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable006.html#___sec65" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Strings</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable006.html#___sec66" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Downloading Internet files</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable006.html#___sec67" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Terminology</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable006.html#sec:files:sumex" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: A file database</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable006.html#___sec69" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable006.html#___sec70" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Solution</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable007.html#sec:files:exercises" style="font-size: 80%;"><b>Exercises</b></a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable007.html#sec:files:ex2b:basic" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 1: Make a dictionary from a table</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable007.html#sec:files:ex2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 2: Explore syntax differences: lists vs. dicts</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable007.html#sec:files:ex17" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 3: Use string operations to improve a program</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable007.html#sec:files:ex13" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 4: Interpret output from a program</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable007.html#sec:files:ex2b" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 5: Make a dictionary</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable007.html#sec:files:ex2c" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 6: Make a nested dictionary</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable007.html#sec:files:ex2d:nested" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 7: Make a nested dictionary from a file</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable007.html#sec:files:ex2d:nested2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 8: Make a nested dictionary from a file</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable007.html#sec:files:ex2d" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 9: Compute the area of a triangle</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable007.html#sec:files:ex16" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 10: Compare data structures for polynomials</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable007.html#sec:files:ex3" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 11: Compute the derivative of a polynomial</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable007.html#sec:basic:ex10" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 12: Specify functions on the command line</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable007.html#sec:basic:ex10b" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 13: Interpret function specifications</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable007.html#sec:files:ex8" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 14: Compare average temperatures in cities</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable007.html#sec:files:ex21" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 15: Generate an HTML report with figures</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable007.html#___sec87" style="font-size: 80%;"><b>References</b></a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div> <!-- end of navigation bar -->
+
+<div class="container">
+
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+
+<a name="part0002"></a>
+<!-- !split -->
+<p style="font-size:80%">This chapter is taken from the book <a href="http://www.springer.com/gp/book/9783662498866">A Primer on Scientific Programming with Python</a> by H. P. Langtangen, 5th edition, Springer, 2016.</p>
+
+<h1 id="sec:files:str" class="anchor">Strings</h1>
+
+<p>
+Many programs need to manipulate text. For example, when we read the
+contents of a file into a string or list of strings (lines),
+we may want to change parts of the
+text in the string(s) - and maybe write out the modified text to a new file.
+So far in this document we have converted parts of the text to numbers
+and computed with the numbers. Now it is time to learn how to
+manipulate the text strings themselves.
+
+<h2 id="sec:files:stringop" class="anchor">Common operations on strings</h2>
+
+<p>
+Python has a rich set of operations on string objects.
+<!-- Suppose <code>s</code> is the string <code>Berlin: 18.4 C at 4 pm</code>. -->
+Some of the most common operations are listed below.
+
+<h3 id="___sec21" class="anchor">Substring specification </h3>
+
+<p>
+The expression <code>s[i:j]</code> extracts the
+substring starting with character number <code>i</code>
+and ending with character number <code>j-1</code> (similarly to lists, <code>0</code> is the
+index of the first character):
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> s <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;Berlin: 18.4 C at 4 pm&#39;</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> s[<span style="color: #666666">8</span>:]     <span style="color: #408080; font-style: italic"># from index 8 to the end of the string</span>
+<span style="color: #BA2121">&#39;18.4 C at 4 pm&#39;</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> s[<span style="color: #666666">8</span>:<span style="color: #666666">12</span>]   <span style="color: #408080; font-style: italic"># index 8, 9, 10 and 11 (not 12!)</span>
+<span style="color: #BA2121">&#39;18.4&#39;</span>
+</pre></div>
+<p>
+A negative upper index
+counts, as usual, from the right such that <code>s[-1]</code> is the last
+element, <code>s[-2]</code> is the next last element, and so on.
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> s[<span style="color: #666666">8</span>:<span style="color: #666666">-1</span>]
+<span style="color: #BA2121">&#39;18.4 C at 4 p&#39;</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> s[<span style="color: #666666">8</span>:<span style="color: #666666">-8</span>]
+<span style="color: #BA2121">&#39;18.4 C&#39;</span>
+</pre></div>
+
+<h3 id="___sec22" class="anchor">Searching for substrings </h3>
+
+<p>
+The call
+<code>s.find(s1)</code> returns
+the index where
+the substring <code>s1</code> first appears in <code>s</code>. If the substring is
+not found, -1 is returned.
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> s<span style="color: #666666">.</span>find(<span style="color: #BA2121">&#39;Berlin&#39;</span>)  <span style="color: #408080; font-style: italic"># where does &#39;Berlin&#39; start?</span>
+<span style="color: #666666">0</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> s<span style="color: #666666">.</span>find(<span style="color: #BA2121">&#39;pm&#39;</span>)
+<span style="color: #666666">20</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> s<span style="color: #666666">.</span>find(<span style="color: #BA2121">&#39;Oslo&#39;</span>)    <span style="color: #408080; font-style: italic"># not found</span>
+<span style="color: #666666">-1</span>
+</pre></div>
+<p>
+Sometimes the aim is to just check if a string is contained in
+another string, and then we can use the syntax:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #BA2121">&#39;Berlin&#39;</span> <span style="color: #AA22FF; font-weight: bold">in</span> s:
+<span style="color: #008000">True</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #BA2121">&#39;Oslo&#39;</span> <span style="color: #AA22FF; font-weight: bold">in</span> s:
+<span style="color: #008000">False</span>
+</pre></div>
+<p>
+Here is a typical use of the latter construction in an <code>if</code> test:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">if</span> <span style="color: #BA2121">&#39;C&#39;</span> <span style="color: #AA22FF; font-weight: bold">in</span> s:
+<span style="color: #666666">...</span>     <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;C found&#39;</span>
+<span style="color: #666666">...</span> <span style="color: #008000; font-weight: bold">else</span>:
+<span style="color: #666666">...</span>     <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;no C&#39;</span>
+<span style="color: #666666">...</span>
+C found
+</pre></div>
+<p>
+Two other convenient methods
+for checking if a string starts with or ends with a specified string
+are <code>startswith</code> and <code>endswith</code>:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> s<span style="color: #666666">.</span>startswith(<span style="color: #BA2121">&#39;Berlin&#39;</span>)
+<span style="color: #008000">True</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> s<span style="color: #666666">.</span>endswith(<span style="color: #BA2121">&#39;am&#39;</span>)
+<span style="color: #008000">False</span>
+</pre></div>
+
+<h3 id="___sec23" class="anchor">Substitution </h3>
+
+<p>
+The call
+<code>s.replace(s1, s2)</code> replaces substring
+<code>s1</code> by
+<code>s2</code> everywhere in <code>s</code>:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> s<span style="color: #666666">.</span>replace(<span style="color: #BA2121">&#39; &#39;</span>, <span style="color: #BA2121">&#39;_&#39;</span>)
+<span style="color: #BA2121">&#39;Berlin:_18.4_C__at_4_pm&#39;</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> s<span style="color: #666666">.</span>replace(<span style="color: #BA2121">&#39;Berlin&#39;</span>, <span style="color: #BA2121">&#39;Bonn&#39;</span>)
+<span style="color: #BA2121">&#39;Bonn: 18.4 C at 4 pm&#39;</span>
+</pre></div>
+<p>
+A variant of the last example, where several string operations are
+put together, consists of replacing the text before the first colon:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> s<span style="color: #666666">.</span>replace(s[:s<span style="color: #666666">.</span>find(<span style="color: #BA2121">&#39;:&#39;</span>)], <span style="color: #BA2121">&#39;Bonn&#39;</span>)
+<span style="color: #BA2121">&#39;Bonn: 18.4 C at 4 pm&#39;</span>
+</pre></div>
+<p>
+Take a break at this point and convince yourself that you understand how we
+specify the substring to be replaced!
+
+<h3 id="___sec24" class="anchor">String splitting </h3>
+
+<p>
+The call <code>s.split()</code> splits the string <code>s</code> into words separated by
+whitespace (space, tabulator, or newline):
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> s<span style="color: #666666">.</span>split()
+[<span style="color: #BA2121">&#39;Berlin:&#39;</span>, <span style="color: #BA2121">&#39;18.4&#39;</span>, <span style="color: #BA2121">&#39;C&#39;</span>, <span style="color: #BA2121">&#39;at&#39;</span>, <span style="color: #BA2121">&#39;4&#39;</span>, <span style="color: #BA2121">&#39;pm&#39;</span>]
+</pre></div>
+<p>
+Splitting a string <code>s</code> into words separated by a text <code>t</code> can be
+done by <code>s.split(t)</code>. For example, we may split with respect to colon:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> s<span style="color: #666666">.</span>split(<span style="color: #BA2121">&#39;:&#39;</span>)
+[<span style="color: #BA2121">&#39;Berlin&#39;</span>, <span style="color: #BA2121">&#39; 18.4 C at 4 pm&#39;</span>]
+</pre></div>
+<p>
+We know that <code>s</code> contains a city name, a colon, a temperature,
+and then <code>C</code>:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> s <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;Berlin: 18.4 C at 4 pm&#39;</span>
+</pre></div>
+<p>
+With <code>s.splitlines()</code>, a multi-line string is split into
+lines (very useful when a file has been read into a string and we want
+a list of lines):
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> t <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;1st line</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121">2nd line</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121">3rd line&#39;</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">print</span> t
+<span style="color: #666666">1</span>st line
+<span style="color: #666666">2</span>nd line
+<span style="color: #666666">3</span>rd line
+<span style="color: #666666">&gt;&gt;&gt;</span> t<span style="color: #666666">.</span>splitlines()
+[<span style="color: #BA2121">&#39;1st line&#39;</span>, <span style="color: #BA2121">&#39;2nd line&#39;</span>, <span style="color: #BA2121">&#39;3rd line&#39;</span>]
+</pre></div>
+
+<h3 id="___sec25" class="anchor">Upper and lower case </h3>
+
+<p>
+<code>s.lower()</code> transforms all characters to their lower case
+equivalents, and <code>s.upper()</code> performs a similar transformation to
+upper case letters:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> s<span style="color: #666666">.</span>lower()
+<span style="color: #BA2121">&#39;berlin: 18.4 c at 4 pm&#39;</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> s<span style="color: #666666">.</span>upper()
+<span style="color: #BA2121">&#39;BERLIN: 18.4 C AT 4 PM&#39;</span>
+</pre></div>
+
+<h3 id="___sec26" class="anchor">Strings are constant </h3>
+
+<p>
+A string cannot be changed, i.e., any change always results in a new string.
+Replacement of a character is not possible:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> s[<span style="color: #666666">18</span>] <span style="color: #666666">=</span> <span style="color: #666666">5</span>
+<span style="color: #666666">...</span>
+<span style="color: #D2413A; font-weight: bold">TypeError</span>: <span style="color: #BA2121">&#39;str&#39;</span> <span style="color: #008000">object</span> does <span style="color: #AA22FF; font-weight: bold">not</span> support item assignment
+</pre></div>
+<p>
+If we want to replace <code>s[18]</code>, a new string must
+be constructed, for example by keeping the substrings on
+either side of <code>s[18]</code> and inserting a <code>'5'</code> in between:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> s[:<span style="color: #666666">18</span>] <span style="color: #666666">+</span> <span style="color: #BA2121">&#39;5&#39;</span> <span style="color: #666666">+</span> s[<span style="color: #666666">19</span>:]
+<span style="color: #BA2121">&#39;Berlin: 18.4 C at 5 pm&#39;</span>
+</pre></div>
+
+<h3 id="___sec27" class="anchor">Strings with digits only </h3>
+
+<p>
+One can easily test whether a string contains digits only or not:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #BA2121">&#39;214&#39;</span><span style="color: #666666">.</span>isdigit()
+<span style="color: #008000">True</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #BA2121">&#39;  214 &#39;</span><span style="color: #666666">.</span>isdigit()
+<span style="color: #008000">False</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #BA2121">&#39;2.14&#39;</span><span style="color: #666666">.</span>isdigit()
+<span style="color: #008000">False</span>
+</pre></div>
+
+<h3 id="___sec28" class="anchor">Whitespace </h3>
+
+<p>
+We can also check if a string contains spaces only by calling the
+<code>isspace</code> method.
+More precisely, <code>isspace</code> tests for <em>whitespace</em>, which means the
+space character, newline, or the TAB character:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #BA2121">&#39;    &#39;</span><span style="color: #666666">.</span>isspace()   <span style="color: #408080; font-style: italic"># blanks</span>
+<span style="color: #008000">True</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #BA2121">&#39;  </span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121">&#39;</span><span style="color: #666666">.</span>isspace()   <span style="color: #408080; font-style: italic"># newline</span>
+<span style="color: #008000">True</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #BA2121">&#39;  </span><span style="color: #BB6622; font-weight: bold">\t</span><span style="color: #BA2121"> &#39;</span><span style="color: #666666">.</span>isspace()  <span style="color: #408080; font-style: italic"># TAB</span>
+<span style="color: #008000">True</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #BA2121">&#39;&#39;</span><span style="color: #666666">.</span>isspace()       <span style="color: #408080; font-style: italic"># empty string</span>
+<span style="color: #008000">False</span>
+</pre></div>
+<p>
+The <code>isspace</code> is handy for testing for blank lines in files.
+An alternative is to strip first and then test for an empty string:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> line <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;   </span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121">&#39;</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> line<span style="color: #666666">.</span>strip() <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;&#39;</span>
+<span style="color: #008000">True</span>
+</pre></div>
+<p>
+Stripping off leading and/or trailing spaces in a string is sometimes useful:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> s <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;   text with leading/trailing space   </span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121">&#39;</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> s<span style="color: #666666">.</span>strip()
+<span style="color: #BA2121">&#39;text with leading/trailing space&#39;</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> s<span style="color: #666666">.</span>lstrip()   <span style="color: #408080; font-style: italic"># left strip</span>
+<span style="color: #BA2121">&#39;text with leading/trailing space   </span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121">&#39;</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> s<span style="color: #666666">.</span>rstrip()   <span style="color: #408080; font-style: italic"># right strip</span>
+<span style="color: #BA2121">&#39;   text with leading/trailing space&#39;</span>
+</pre></div>
+<p>
+<div id="sec:files:join"></div>
+
+<h3 id="___sec29" class="anchor">Joining strings </h3>
+
+<p>
+The opposite of the <code>split</code> method is <code>join</code>, which joins elements
+in a list of strings with a specified delimiter in between.
+That is,
+the following two types of statements are inverse operations:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>t <span style="color: #666666">=</span> delimiter<span style="color: #666666">.</span>join(words)
+words <span style="color: #666666">=</span> t<span style="color: #666666">.</span>split(delimiter)
+</pre></div>
+<p>
+An example on using <code>join</code> may be
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> strings <span style="color: #666666">=</span> [<span style="color: #BA2121">&#39;Newton&#39;</span>, <span style="color: #BA2121">&#39;Secant&#39;</span>, <span style="color: #BA2121">&#39;Bisection&#39;</span>]
+<span style="color: #666666">&gt;&gt;&gt;</span> t <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;, &#39;</span><span style="color: #666666">.</span>join(strings)
+<span style="color: #666666">&gt;&gt;&gt;</span> t
+<span style="color: #BA2121">&#39;Newton, Secant, Bisection&#39;</span>
+</pre></div>
+<p>
+As an illustration of the usefulness of <code>split</code> and <code>join</code>,
+we want to remove the first two words on a line.
+This task can be done by
+first splitting the line into words and then joining the words of interest:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> line <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;This is a line of words separated by space&#39;</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> words <span style="color: #666666">=</span> line<span style="color: #666666">.</span>split()
+<span style="color: #666666">&gt;&gt;&gt;</span> line2 <span style="color: #666666">=</span> <span style="color: #BA2121">&#39; &#39;</span><span style="color: #666666">.</span>join(words[<span style="color: #666666">2</span>:])
+<span style="color: #666666">&gt;&gt;&gt;</span> line2
+<span style="color: #BA2121">&#39;a line of words separated by space&#39;</span>
+</pre></div>
+<p>
+There are many more methods in string objects. All methods are described
+in the
+<a href="http://docs.python.org/2/library/stdtypes.html#string-methods" target="_self">String Methods</a> section of the Python Standard Library online document.
+
+<h2 id="sec:files:pairs" class="anchor">Example: Reading pairs of numbers</h2>
+
+<h3 id="___sec31" class="anchor">Problem </h3>
+
+<p>
+Suppose we have a file consisting of pairs of real numbers, i.e.,
+text of the form \( (a,b) \), where \( a \) and \( b \) are real numbers.
+This notation for a pair of numbers is often used for points in the
+plane, vectors in the plane, and complex
+numbers. A sample file may look as follows:
+
+<p>
+
+<!-- code=text (!bc dat) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>(1.3,0)    (-1,2)    (3,-1.5)
+(0,1)      (1,0)     (1,1)
+(0,-0.01)  (10.5,-1) (2.5,-2.5)
+</pre></div>
+<p>
+The file can be found as <code>read_pairs1.dat</code>.  Our task is to read this
+text into a nested list <code>pairs</code> such that <code>pairs[i]</code> holds the pair
+with index <code>i</code>, and this pair is a tuple of two <code>float</code> objects.  We
+assume that there are no blanks inside the parentheses of a pair of
+numbers (we rely on a split operation, which would otherwise not work).
+
+<h3 id="___sec32" class="anchor">Solution </h3>
+
+<p>
+To solve this programming problem, we can read in the file line by
+line; for each line: split the line into words (i.e., split with
+respect to whitespace); for each word: strip off the parentheses,
+split with respect to comma, and convert the resulting two words to
+floats.  Our brief algorithm can be almost directly translated to
+Python code:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #408080; font-style: italic"># Load the file into list of lines</span>
+<span style="color: #008000; font-weight: bold">with</span> <span style="color: #008000">open</span>(<span style="color: #BA2121">&#39;read_pairs1.dat&#39;</span>, <span style="color: #BA2121">&#39;r&#39;</span>) <span style="color: #008000; font-weight: bold">as</span> infile:
+    lines <span style="color: #666666">=</span> infile<span style="color: #666666">.</span>readlines()
+
+<span style="color: #408080; font-style: italic"># Analyze the contents of each line</span>
+pairs <span style="color: #666666">=</span> []   <span style="color: #408080; font-style: italic"># list of (n1, n2) pairs of numbers</span>
+<span style="color: #008000; font-weight: bold">for</span> line <span style="color: #AA22FF; font-weight: bold">in</span> lines:
+    words <span style="color: #666666">=</span> line<span style="color: #666666">.</span>split()
+    <span style="color: #008000; font-weight: bold">for</span> word <span style="color: #AA22FF; font-weight: bold">in</span> words:
+        word <span style="color: #666666">=</span> word[<span style="color: #666666">1</span>:<span style="color: #666666">-1</span>]  <span style="color: #408080; font-style: italic"># strip off parenthesis</span>
+        n1, n2 <span style="color: #666666">=</span> word<span style="color: #666666">.</span>split(<span style="color: #BA2121">&#39;,&#39;</span>)
+        n1 <span style="color: #666666">=</span> <span style="color: #008000">float</span>(n1);  n2 <span style="color: #666666">=</span> <span style="color: #008000">float</span>(n2)
+        pair <span style="color: #666666">=</span> (n1, n2)
+        pairs<span style="color: #666666">.</span>append(pair)  <span style="color: #408080; font-style: italic"># add 2-tuple to last row</span>
+</pre></div>
+<p>
+This code is available in the file
+<a href="http://tinyurl.com/pwyasaa/dictstring/read_pairs1.py" target="_self"><tt>read_pairs1.py</tt></a>.
+The <code>with</code> statement is the modern Python way of reading files,
+with the advantage that we do not need to think about closing the file.
+Figure <a href="#sec:files:fig1">3</a> shows a snapshot of the state of the
+variables in the program after having treated the first line.
+You should explain each line in the program to yourself, and
+compare your understanding with the figure.
+
+<p>
+<center> <!-- figure label: --> <div id="sec:files:fig1"></div> <!-- FIGURE -->
+<hr class="figure">
+<center><p class="caption">Figure 3:  Illustration of the variables in the <code>read_pairs.py</code> program after the first pass in the loop over words in the first line of the data file.  <!-- caption label: sec:files:fig1 --> </p></center>
+<p><img src="fig-dictstring/lumpy_read_pairs.png" align="bottom" width=400></p>
+</center>
+
+<p>
+The output from the program becomes
+
+<p>
+
+<!-- code=text (!bc ccq) typeset with pygments style "default" -->
+<blockquote>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>[(1.3, 0.0),
+ (-1.0, 2.0),
+ (3.0, -1.5),
+ (0.0, 1.0),
+ (1.0, 0.0),
+ (1.0, 1.0),
+ (0.0, -0.01),
+ (10.5, -1.0),
+ (2.5, -2.5)]
+</pre></div>
+</blockquote><p>
+We remark that our solution to this programming problem relies heavily
+on the fact that spaces inside the parentheses are not allowed.  If
+spaces were allowed, the simple split to obtain the pairs on a line as
+words would not work. What can we then do?
+
+<p>
+We can first strip off all blanks on a line, and then observe that the
+pairs are separated by the text <code>')('</code>.  The first and last pair on a
+line will have an extra parenthesis that we need to remove. The rest
+of code is similar to the previous code and can be found in
+<a href="http://tinyurl.com/pwyasaa/dictstring/read_pairs2.py" target="_self"><tt>read_pairs2.py</tt></a>:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">with</span> <span style="color: #008000">open</span>(<span style="color: #BA2121">&#39;read_pairs2.dat&#39;</span>, <span style="color: #BA2121">&#39;r&#39;</span>) <span style="color: #008000; font-weight: bold">as</span> infile:
+    lines <span style="color: #666666">=</span> infile<span style="color: #666666">.</span>readlines()
+
+<span style="color: #408080; font-style: italic"># Analyze the contents of each line</span>
+pairs <span style="color: #666666">=</span> []   <span style="color: #408080; font-style: italic"># list of (n1, n2) pairs of numbers</span>
+<span style="color: #008000; font-weight: bold">for</span> line <span style="color: #AA22FF; font-weight: bold">in</span> lines:
+    line <span style="color: #666666">=</span> line<span style="color: #666666">.</span>strip()  <span style="color: #408080; font-style: italic"># remove whitespace such as newline</span>
+    line <span style="color: #666666">=</span> line<span style="color: #666666">.</span>replace(<span style="color: #BA2121">&#39; &#39;</span>, <span style="color: #BA2121">&#39;&#39;</span>)  <span style="color: #408080; font-style: italic"># remove all blanks</span>
+    words <span style="color: #666666">=</span> line<span style="color: #666666">.</span>split(<span style="color: #BA2121">&#39;)(&#39;</span>)
+    <span style="color: #408080; font-style: italic"># strip off leading/trailing parenthesis in first/last word:</span>
+    words[<span style="color: #666666">0</span>] <span style="color: #666666">=</span> words[<span style="color: #666666">0</span>][<span style="color: #666666">1</span>:]      <span style="color: #408080; font-style: italic"># (-1,3  -&gt;  -1,3</span>
+    words[<span style="color: #666666">-1</span>] <span style="color: #666666">=</span> words[<span style="color: #666666">-1</span>][:<span style="color: #666666">-1</span>]   <span style="color: #408080; font-style: italic"># 8.5,9) -&gt;  8.5,9</span>
+    <span style="color: #008000; font-weight: bold">for</span> word <span style="color: #AA22FF; font-weight: bold">in</span> words:
+        n1, n2 <span style="color: #666666">=</span> word<span style="color: #666666">.</span>split(<span style="color: #BA2121">&#39;,&#39;</span>)
+        n1 <span style="color: #666666">=</span> <span style="color: #008000">float</span>(n1);  n2 <span style="color: #666666">=</span> <span style="color: #008000">float</span>(n2)
+        pair <span style="color: #666666">=</span> (n1, n2)
+        pairs<span style="color: #666666">.</span>append(pair)
+</pre></div>
+<p>
+The program can be tested on the file <code>read_pairs2.dat</code>:
+
+<p>
+
+<!-- code=text (!bc dat) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>   (1.3 , 0)    (-1 , 2 )    (3, -1.5)
+(0 , 1)      ( 1, 0)     ( 1 , 1 )
+(0,-0.01)  (10.5,-1) (2.5, -2.5)
+</pre></div>
+<p>
+A third approach is to notice that if the pairs were separated
+by commas,
+
+<p>
+
+<!-- code=text (!bc ccq) typeset with pygments style "default" -->
+<blockquote>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>(1, 3.0),    (-1, 2),    (3, -1.5),
+(0, 1),      (1, 0),     (1, 1),
+</pre></div>
+</blockquote><p>
+the file text is very close to the Python syntax of a list
+of 2-tuples. We only miss the enclosing brackets:
+
+<p>
+
+<!-- code=text (!bc ccq) typeset with pygments style "default" -->
+<blockquote>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>[(1, 3.0),    (-1, 2),    (3, -1.5),
+(0, 1),      (1, 0),     (1, 1),]
+</pre></div>
+</blockquote><p>
+Running <code>eval</code> on this text will automatically produce the
+list object we want to construct! All we need to do is to
+read the file into a string, add a comma after every right parenthesis,
+add opening and closing bracket, and call <code>eval</code>
+(program <a href="http://tinyurl.com/pwyasaa/dictstring/read_pairs3.py" target="_self"><tt>read_pairs3.py</tt></a>):
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">with</span> <span style="color: #008000">open</span>(<span style="color: #BA2121">&#39;read_pairs2.dat&#39;</span>, <span style="color: #BA2121">&#39;r&#39;</span>) <span style="color: #008000; font-weight: bold">as</span> infile:
+    text <span style="color: #666666">=</span> infile<span style="color: #666666">.</span>read()
+text <span style="color: #666666">=</span> text<span style="color: #666666">.</span>replace(<span style="color: #BA2121">&#39;)&#39;</span>, <span style="color: #BA2121">&#39;),&#39;</span>)
+text <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;[&#39;</span> <span style="color: #666666">+</span> text <span style="color: #666666">+</span> <span style="color: #BA2121">&#39;]&#39;</span>
+pairs <span style="color: #666666">=</span> <span style="color: #008000">eval</span>(text)
+</pre></div>
+<p>
+In general, it is a good idea to construct file formats that are as close
+as possible to valid Python syntax such that one can take advantage
+of the <code>eval</code> or <code>exec</code> functions to turn text into &quot;live objects&quot;.
+
+<h2 id="___sec33" class="anchor">Example: Reading coordinates </h2>
+
+<h3 id="___sec34" class="anchor">Problem </h3>
+
+<p>
+Suppose we have a file with coordinates \( (x,y,z) \)
+in three-dimensional space. The file format looks as follows:
+
+<p>
+
+<!-- code=text (!bc dat) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>  x=-1.345      y= 0.1112      z= 9.1928
+  x=-1.231      y=-0.1251      z= 1001.2
+  x= 0.100      y= 1.4344E+6   z=-1.0100
+  x= 0.200      y= 0.0012      z=-1.3423E+4
+  x= 1.5E+5     y=-0.7666      z= 1027
+</pre></div>
+<p>
+The goal is to read this file and create a list with <code>(x,y,z)</code>
+3-tuples, and thereafter convert the nested list to a two-dimensional
+array with which we can compute.
+
+<p>
+Note that there is sometimes a space between the <code>=</code> signs and the
+following number and sometimes not. Splitting with respect to space and
+extracting every second word is therefore not an option.
+We shall present three solutions.
+
+<h3 id="___sec35" class="anchor">Solution 1: substring extraction </h3>
+
+<p>
+The file format looks very regular with the <code>x=</code>, <code>y=</code>,
+and <code>z=</code> texts starting in the same columns at every line.
+By counting characters, we realize that the <code>x=</code> text starts
+in column 2, the <code>y=</code> text starts in column 16, while the
+<code>z=</code> text starts in column 31. Introducing
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>x_start <span style="color: #666666">=</span> <span style="color: #666666">2</span>
+y_start <span style="color: #666666">=</span> <span style="color: #666666">16</span>
+z_start <span style="color: #666666">=</span> <span style="color: #666666">31</span>
+</pre></div>
+<p>
+the three numbers in a <code>line</code> string are obtained as the substrings
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>x <span style="color: #666666">=</span> line[x_start<span style="color: #666666">+2</span>:y_start]
+y <span style="color: #666666">=</span> line[y_start<span style="color: #666666">+2</span>:z_start]
+z <span style="color: #666666">=</span> line[z_start<span style="color: #666666">+2</span>:]
+</pre></div>
+<p>
+The following code, found in file
+<a href="http://tinyurl.com/pwyasaa/dictstring/file2coor_v1.py" target="_self"><tt>file2coor_v1.py</tt></a>,
+creates the <code>coor</code> array with shape \( (n,3) \),
+where \( n \) is the number of \( (x,y,z) \) coordinates.
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>infile <span style="color: #666666">=</span> <span style="color: #008000">open</span>(<span style="color: #BA2121">&#39;xyz.dat&#39;</span>, <span style="color: #BA2121">&#39;r&#39;</span>)
+coor <span style="color: #666666">=</span> []  <span style="color: #408080; font-style: italic"># list of (x,y,z) tuples</span>
+<span style="color: #008000; font-weight: bold">for</span> line <span style="color: #AA22FF; font-weight: bold">in</span> infile:
+    x_start <span style="color: #666666">=</span> <span style="color: #666666">2</span>
+    y_start <span style="color: #666666">=</span> <span style="color: #666666">16</span>
+    z_start <span style="color: #666666">=</span> <span style="color: #666666">31</span>
+    x <span style="color: #666666">=</span> line[x_start<span style="color: #666666">+2</span>:y_start]
+    y <span style="color: #666666">=</span> line[y_start<span style="color: #666666">+2</span>:z_start]
+    z <span style="color: #666666">=</span> line[z_start<span style="color: #666666">+2</span>:]
+    <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;debug: x=&quot;</span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121">&quot;, y=&quot;</span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121">&quot;, z=&quot;</span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121">&quot;&#39;</span> <span style="color: #666666">%</span> (x,y,z)
+    coor<span style="color: #666666">.</span>append((<span style="color: #008000">float</span>(x), <span style="color: #008000">float</span>(y), <span style="color: #008000">float</span>(z)))
+infile<span style="color: #666666">.</span>close()
+
+<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
+coor <span style="color: #666666">=</span> np<span style="color: #666666">.</span>array(coor)
+<span style="color: #008000; font-weight: bold">print</span> coor<span style="color: #666666">.</span>shape, coor
+</pre></div>
+<p>
+The <code>print</code> statement inside the loop
+is always wise to include when doing string manipulations,
+simply
+because counting indices for substring limits quickly leads to errors.
+Running the program, the output from the loop looks like this
+
+<p>
+
+<!-- code=text (!bc ccq) typeset with pygments style "default" -->
+<blockquote>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>debug: x=&quot;-1.345   &quot;, y=&quot; 0.1112   &quot;, z=&quot; 9.1928
+&quot;
+</pre></div>
+</blockquote><p>
+for the first line in the file. The double quotes show the exact
+extent of the extracted coordinates. Note that the last quote
+appears on the next line. This is because <code>line</code> has a newline
+at the end (this newline must be there to define the end of the line),
+and the substring <code>line[z_start:]</code> contains the newline at the
+of <code>line</code>. Writing <code>line[z_start:-1]</code> would leave the
+newline out of the \( z \) coordinate. However, this has no effect in
+practice since we transform the substrings to <code>float</code>, and an extra
+newline or other blanks make no harm.
+
+<p>
+The <code>coor</code> object at the end of the program has the value
+
+<p>
+
+<!-- code=text (!bc ccq) typeset with pygments style "default" -->
+<blockquote>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>[[ -1.34500000e+00   1.11200000e-01   9.19280000e+00]
+ [ -1.23100000e+00  -1.25100000e-01   1.00120000e+03]
+ [  1.00000000e-01   1.43440000e+06  -1.01000000e+00]
+ [  2.00000000e-01   1.20000000e-03  -1.34230000e+04]
+ [  1.50000000e+05  -7.66600000e-01   1.02700000e+03]]
+</pre></div>
+</blockquote><h3 id="___sec36" class="anchor">Solution 2: string search </h3>
+
+<p>
+One problem with the solution approach above is that the program
+will not work if the file format is subject to a
+change in the
+column positions of <code>x=</code>, <code>y=</code>, or <code>z=</code>.
+Instead of hardcoding numbers for the column positions, we can use
+the <code>find</code> method in string objects to locate these column positions:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>x_start <span style="color: #666666">=</span> line<span style="color: #666666">.</span>find(<span style="color: #BA2121">&#39;x=&#39;</span>)
+y_start <span style="color: #666666">=</span> line<span style="color: #666666">.</span>find(<span style="color: #BA2121">&#39;y=&#39;</span>)
+z_start <span style="color: #666666">=</span> line<span style="color: #666666">.</span>find(<span style="color: #BA2121">&#39;z=&#39;</span>)
+</pre></div>
+<p>
+The rest of the code is similar to the complete program listed above,
+and the complete code is stored in the file
+<a href="http://tinyurl.com/pwyasaa/dictstring/file2coor_v2.py" target="_self"><tt>file2coor_v2.py</tt></a>.
+
+<h3 id="___sec37" class="anchor">Solution 3: string split </h3>
+
+<p>
+String splitting is a powerful tool, also in the present case.
+Let us split with respect to the equal sign. The first line in the file
+then gives us the words
+
+<p>
+
+<!-- code=text (!bc ccq) typeset with pygments style "default" -->
+<blockquote>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>[&#39;x&#39;, &#39;-1.345   y&#39;, &#39; 0.1112   z&#39;, &#39; 9.1928&#39;]
+</pre></div>
+</blockquote><p>
+We throw away the first word, and strip off the last character in the
+next word. The final word can be used as is. The complete program
+is found in the file
+<a href="http://tinyurl.com/pwyasaa/dictstring/file2coor_v3.py" target="_self"><tt>file2coor_v3.py</tt></a> and looks like
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>infile <span style="color: #666666">=</span> <span style="color: #008000">open</span>(<span style="color: #BA2121">&#39;xyz.dat&#39;</span>, <span style="color: #BA2121">&#39;r&#39;</span>)
+coor <span style="color: #666666">=</span> []  <span style="color: #408080; font-style: italic"># list of (x,y,z) tuples</span>
+<span style="color: #008000; font-weight: bold">for</span> line <span style="color: #AA22FF; font-weight: bold">in</span> infile:
+    words <span style="color: #666666">=</span> line<span style="color: #666666">.</span>split(<span style="color: #BA2121">&#39;=&#39;</span>)
+    x <span style="color: #666666">=</span> <span style="color: #008000">float</span>(words[<span style="color: #666666">1</span>][:<span style="color: #666666">-1</span>])
+    y <span style="color: #666666">=</span> <span style="color: #008000">float</span>(words[<span style="color: #666666">2</span>][:<span style="color: #666666">-1</span>])
+    z <span style="color: #666666">=</span> <span style="color: #008000">float</span>(words[<span style="color: #666666">3</span>])
+    coor<span style="color: #666666">.</span>append((x, y, z))
+infile<span style="color: #666666">.</span>close()
+
+<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
+coor <span style="color: #666666">=</span> np<span style="color: #666666">.</span>array(coor)
+<span style="color: #008000; font-weight: bold">print</span> coor<span style="color: #666666">.</span>shape, coor
+</pre></div>
+<p>
+More sophisticated examples of string operations appear in
+the section <a href="._dictstring-readable003.html#sec:files:url:interpret">Example: Extracting data from HTML</a>.
+
+<p>
+<p>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pager">
+  <li class="previous">
+    <a href="._dictstring-readable001.html">&larr; Prev</a>
+  </li>
+  <li class="next">
+    <a href="._dictstring-readable003.html">Next &rarr;</a>
+  </li>
+</ul>
+<!-- ------------------- end of main content --------------- -->
+
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap footer
+<footer>
+<a href="http://..."><img width="250" align=right src="http://..."></a>
+</footer>
+-->
+
+
+</body>
+</html>
+    
+

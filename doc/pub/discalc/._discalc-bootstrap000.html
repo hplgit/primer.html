@@ -1,0 +1,2663 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Introduction to discrete calculus">
+<meta name="keywords" content="mesh,grid,resolution (mesh)">
+
+<title>Introduction to discrete calculus</title>
+
+<!-- Bootstrap style: bootstrap_simula -->
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_styles/style_bootstrap/css/bootstrap_simula.css" rel="stylesheet">
+<!-- not necessary
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+
+<style type="text/css">
+/* Let inline verbatim have the same color as the surroundings */
+code { color: inherit; background-color: transparent; }
+
+/* Add scrollbar to dropdown menus in bootstrap navigation bar */
+.dropdown-menu {
+   height: auto;
+   max-height: 400px;
+   overflow-x: hidden;
+}
+
+/* Adds an invisible element before each target to offset for the navigation
+   bar */
+.anchor::before {
+  content:"";
+  display:block;
+  height:50px; /* fixed header height*/
+  margin:-50px 0 0; /* negative fixed header height */
+}
+
+body { font-size:20px;line-height:1.5; }
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [('Table of contents',
+               1,
+               'table_of_contents',
+               'table_of_contents'),
+              ('Discrete functions', 1, None, '___sec0'),
+              ('The sine function',
+               2,
+               'sec:discalc:sinefunc',
+               'sec:discalc:sinefunc'),
+              ('Interpolation', 2, None, '___sec2'),
+              ('Evaluating the approximation', 2, None, '___sec3'),
+              ('Generalization', 2, None, '___sec4'),
+              ('Differentiation becomes finite differences',
+               1,
+               'sec:dcalculus:finite:differences',
+               'sec:dcalculus:finite:differences'),
+              ('Differentiating the sine function', 2, None, '___sec6'),
+              ('Differences on a mesh', 2, None, '___sec7'),
+              ('Generalization', 2, None, '___sec8'),
+              ('Integration becomes summation',
+               1,
+               'sec:dcalculus:integration',
+               'sec:dcalculus:integration'),
+              ('Dividing into subintervals', 2, None, '___sec10'),
+              ('Integration on subintervals', 2, None, '___sec11'),
+              ('Adding the subintervals', 2, None, '___sec12'),
+              ('Generalization', 2, None, '___sec13'),
+              ('Taylor series',
+               1,
+               'sec:discalc:Taylor',
+               'sec:discalc:Taylor'),
+              ('Approximating functions close to one point',
+               2,
+               None,
+               '___sec15'),
+              ('Approximating the exponential function', 2, None, '___sec16'),
+              ('More accurate expansions', 2, None, '___sec17'),
+              ('Accuracy of the approximation', 2, None, '___sec18'),
+              ('Derivatives revisited', 2, None, '___sec19'),
+              ('More accurate difference approximations',
+               2,
+               None,
+               '___sec20'),
+              ('Second-order derivatives', 2, None, '___sec21'),
+              ('Exercises', 1, None, '___sec22'),
+              ('Exercise 1: Interpolate a discrete function',
+               2,
+               'sec:discalc:ae-2',
+               'sec:discalc:ae-2'),
+              ('Exercise 2: Study a function for different parameter values',
+               2,
+               'sec:discalc:ae-3',
+               'sec:discalc:ae-3'),
+              ('Exercise 3: Study a function and its derivative',
+               2,
+               'sec:discalc:ae-4',
+               'sec:discalc:ae-4'),
+              ('Exercise 4: Use the Trapezoidal method',
+               2,
+               'sec:discalc:ae-5',
+               'sec:discalc:ae-5'),
+              ('Exercise 5: Compute a sequence of integrals',
+               2,
+               'sec:discalc:ae-5-1',
+               'sec:discalc:ae-5-1'),
+              ('Exercise 6: Use the Trapezoidal method',
+               2,
+               'sec:discalc:ae-6',
+               'sec:discalc:ae-6'),
+              ('Remarks', 3, None, '___sec29'),
+              ('Exercise 7: Compute trigonometric integrals',
+               2,
+               'sec:discalc:ae-6-1',
+               'sec:discalc:ae-6-1'),
+              ('Exercise 8: Plot functions and their derivatives',
+               2,
+               'sec:discalc:ae-7',
+               'sec:discalc:ae-7'),
+              ('Exercise 9: Use the Trapezoidal method',
+               2,
+               'sec:discalc:ae-8',
+               'sec:discalc:ae-8'),
+              ('References', 1, None, '___sec33')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- newcommands_keep.tex -->
+$$
+\newcommand{\tp}{\thinspace .}
+$$
+
+
+
+
+    
+<!-- Bootstrap navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="discalc-bootstrap.html">Introduction to discrete calculus</a>
+  </div>
+
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     <!-- navigation toc: --> <li><a href="#table_of_contents" style="font-size: 80%;"><b>Table of contents</b></a></li>
+     <!-- navigation toc: --> <li><a href="#___sec0" style="font-size: 80%;"><b>Discrete functions</b></a></li>
+     <!-- navigation toc: --> <li><a href="#sec:discalc:sinefunc" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The sine function</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Interpolation</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec3" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Evaluating the approximation</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec4" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Generalization</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:dcalculus:finite:differences" style="font-size: 80%;"><b>Differentiation becomes finite differences</b></a></li>
+     <!-- navigation toc: --> <li><a href="#___sec6" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Differentiating the sine function</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec7" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Differences on a mesh</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec8" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Generalization</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:dcalculus:integration" style="font-size: 80%;"><b>Integration becomes summation</b></a></li>
+     <!-- navigation toc: --> <li><a href="#___sec10" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Dividing into subintervals</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec11" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Integration on subintervals</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec12" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Adding the subintervals</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec13" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Generalization</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:discalc:Taylor" style="font-size: 80%;"><b>Taylor series</b></a></li>
+     <!-- navigation toc: --> <li><a href="#___sec15" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Approximating functions close to one point</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec16" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Approximating the exponential function</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec17" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;More accurate expansions</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec18" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Accuracy of the approximation</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec19" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Derivatives revisited</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec20" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;More accurate difference approximations</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec21" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Second-order derivatives</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec22" style="font-size: 80%;"><b>Exercises</b></a></li>
+     <!-- navigation toc: --> <li><a href="#sec:discalc:ae-2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 1: Interpolate a discrete function</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:discalc:ae-3" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 2: Study a function for different parameter values</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:discalc:ae-4" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 3: Study a function and its derivative</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:discalc:ae-5" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 4: Use the Trapezoidal method</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:discalc:ae-5-1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 5: Compute a sequence of integrals</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:discalc:ae-6" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 6: Use the Trapezoidal method</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec29" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remarks</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:discalc:ae-6-1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 7: Compute trigonometric integrals</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:discalc:ae-7" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 8: Plot functions and their derivatives</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:discalc:ae-8" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 9: Use the Trapezoidal method</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec33" style="font-size: 80%;"><b>References</b></a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div> <!-- end of navigation bar -->
+
+<div class="container">
+
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+
+<a name="part0000"></a>
+<!-- ------------------- main content ---------------------- -->
+
+
+
+<div class="jumbotron">
+<center><h1>Introduction to discrete calculus</h1></center>  <!-- document title -->
+
+<p>
+<!-- author(s): Aslak Tveito -->
+
+<center>
+<b>Aslak Tveito</b> [1, 2]
+</center>
+
+<p>
+<!-- institution(s) -->
+
+<center>[1] <b>Simula Research Laboratory</b></center>
+<center>[2] <b>Department of Informatics, University of Oslo</b></center>
+<br>
+<p>
+<center><h4>Jun 14, 2016</h4></center> <!-- date -->
+<br>
+<p>
+</div> <!-- end jumbotron -->
+
+<h1 id="table_of_contents">Table of contents</h2>
+
+<p>
+<a href="#___sec0"> Discrete functions </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#sec:discalc:sinefunc"> The sine function </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec2"> Interpolation </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec3"> Evaluating the approximation </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec4"> Generalization </a><br>
+<a href="#sec:dcalculus:finite:differences"> Differentiation becomes finite differences </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec6"> Differentiating the sine function </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec7"> Differences on a mesh </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec8"> Generalization </a><br>
+<a href="#sec:dcalculus:integration"> Integration becomes summation </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec10"> Dividing into subintervals </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec11"> Integration on subintervals </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec12"> Adding the subintervals </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec13"> Generalization </a><br>
+<a href="#sec:discalc:Taylor"> Taylor series </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec15"> Approximating functions close to one point </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec16"> Approximating the exponential function </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec17"> More accurate expansions </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec18"> Accuracy of the approximation </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec19"> Derivatives revisited </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec20"> More accurate difference approximations </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec21"> Second-order derivatives </a><br>
+<a href="#___sec22"> Exercises </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#sec:discalc:ae-2"> Exercise 1: Interpolate a discrete function </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#sec:discalc:ae-3"> Exercise 2: Study a function for different parameter values </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#sec:discalc:ae-4"> Exercise 3: Study a function and its derivative </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#sec:discalc:ae-5"> Exercise 4: Use the Trapezoidal method </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#sec:discalc:ae-5-1"> Exercise 5: Compute a sequence of integrals </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#sec:discalc:ae-6"> Exercise 6: Use the Trapezoidal method </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#sec:discalc:ae-6-1"> Exercise 7: Compute trigonometric integrals </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#sec:discalc:ae-7"> Exercise 8: Plot functions and their derivatives </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#sec:discalc:ae-8"> Exercise 9: Use the Trapezoidal method </a><br>
+<a href="#___sec33"> References </a><br>
+</p>
+<p>
+<!-- Externaldocuments: ../formulas/main_formulas, ../looplist/main_looplist, ../funcif/main_funcif, ../input/main_input, ../plot/main_plot, ../dictstring/main_dictstring, ../class/main_class, ../random/main_random, ../oo/main_oo, ../diffeq/main_diffeq, ../ode1/main_ode1, ../boxspring/main_boxspring, ../ode2/main_ode2, ../debug/main_debug, ../cython/main_cython, ../tech/main_timing, ../tech/main_varargs, ../tech/main_runpy, ../tech/main_ostasks, ../tech/main_accesspy, ../tech/main_nose -->
+
+<p>
+<div id="ch:dcalculus"></div>
+
+<p>
+In this document we will discuss how to differentiate and integrate
+functions on a computer. To do that, we have to care about how to
+treat mathematical functions on a computer. Handling mathematical
+functions on computers is not entirely straightforward: a function
+\( f(x) \) contains an infinite amount of information (function values at
+an infinite number of \( x \) values on an interval), while the computer
+can only store a finite amount of data.
+(Allow yourself a moment or two to
+think about the terms <em>finite</em> and <em>infinite</em>; infinity is not an
+easy term, but it is not infinitely difficult. Or is it?)
+Think about the \( \cos x \) function. There are typically two ways
+we can work with this function on a computer. One way is to run an
+algorithm to compute its value,
+or we simply call <code>math.cos(x)</code>
+(which runs a similar type of algorithm), to compute an approximation
+to \( \cos x \) for a given \( x \), using a finite number of
+calculations. The other way is to store \( \cos x \) values
+in a table for a finite number of \( x \) values (of
+course, we need to run an algorithm to populate the table with \( \cos
+x \) numbers). and use the
+table in a smart way to compute \( \cos x \) values. This latter way,
+known as a <em>discrete</em> representation of a function,
+is in focus in the present document. With a discrete function representation,
+we can easily integrate and differentiate the function too.
+Read on to see how we can do that.
+
+<p>
+The folder <a href="http://tinyurl.com/pwyasaa/discalc" target="_self"><tt>src/discalc</tt></a> contains all the program example files referred
+to in this document.
+
+<h1 id="___sec0" class="anchor">Discrete functions </h1>
+
+<p>
+Physical quantities, such as temperature, density, and velocity, are
+usually defined as continuous functions of space and time. However, as
+mentioned in above, discrete versions of the functions are more
+convenient on computers.  We will illustrate the concept of discrete
+functions through some introductory examples. In fact, we use discrete
+functions when plotting curves on a computer: we define a finite set
+of coordinates <code>x</code> and store the corresponding function values
+<code>f(x)</code> in an array. A plotting program will then draw straight
+lines between the function values.  A discrete representation of a
+continuous function is, from a programming point of view, nothing but
+storing a finite set of coordinates and function values in an
+array. Nevertheless, we will in this document be more formal and
+describe discrete functions by precise mathematical terms.
+
+<h2 id="sec:discalc:sinefunc" class="anchor">The sine function</h2>
+
+<p>
+Suppose we want to generate a plot of the sine function for values of \( x \)
+between \( 0 \) and \( \pi \). To this end, we define a set of \( x \)-values and an
+associated set of values of the sine function. More precisely, we define \( n+1 \)
+points by
+
+$$
+\begin{equation}
+x_{i}=ih\text{ for }i=0,1,\ldots ,n,
+\tag{1}
+\end{equation}
+$$
+
+where \( h=\pi/n \)
+and \( n\geq 1 \) is an integer. The associated function values are defined
+as
+
+$$
+\begin{equation}
+s_{i}=\sin(x_{i})\text{ for }i=0,1,\ldots ,n\tp
+\tag{2}
+\end{equation}
+$$
+
+Mathematically, we have a sequence of coordinates \( (x_i)_{i=0}^n \)
+and of function values \( (s_i)_{i=0}^n \).
+(Here we have used the sequence notation
+\( (x_i)_{i=0}^n = x_0,x_1,\ldots,x_n \).)
+Often we &quot;merge&quot; the
+two sequences to one sequence of points: \( (x_i,s_i)_{i=0}^n \).
+Sometimes we also use a shorter notation, just \( x_i \), \( s_i \), or
+\( (x_i,s_i) \) if the exact limits are not of importance.
+The set of coordinates \( (x_i)_{i=0}^n \) constitutes a <em>mesh</em> or a
+<em>grid</em>. The individual coordinates \( x_i \) are known as <em>nodes</em>
+in the mesh (or grid). The discrete representation of the sine function
+on \( [0,\pi] \) consists of the mesh and the corresponding sequence
+of function values \( (s_i)_{i=0}^n \) at the nodes. The parameter
+\( n \) is often referred to as the <em>mesh resolution</em>.
+
+<p>
+In a program, we represent the mesh by a coordinate array, say <code>x</code>, and
+the function values by another array, say <code>s</code>.
+To plot the sine function we can simply write
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">scitools.std</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #666666">*</span>
+
+n <span style="color: #666666">=</span> <span style="color: #008000">int</span>(sys<span style="color: #666666">.</span>argv[<span style="color: #666666">1</span>])
+x <span style="color: #666666">=</span> linspace(<span style="color: #666666">0</span>, pi, n<span style="color: #666666">+1</span>)
+s <span style="color: #666666">=</span> sin(x)
+plot(x, s, legend<span style="color: #666666">=</span><span style="color: #BA2121">&#39;sin(x), n=</span><span style="color: #BB6688; font-weight: bold">%d</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> n, savefig<span style="color: #666666">=</span><span style="color: #BA2121">&#39;tmp.pdf&#39;</span>)
+</pre></div>
+<p>
+Figure <a href="#sec:discalc:fig1">1</a> shows the resulting plot for
+\( n=5,10,20 \) and \( 100 \).
+Because the plotting program draws straight lines between the
+points in <code>x</code> and <code>s</code>, the
+curve looks smoother the more points we use, and since \( \sin(x) \) is
+a smooth function, the plots in Figure <a href="#sec:discalc:fig1">1</a>
+do not look sufficiently good. However,
+we can with our eyes hardly distinguish the plot with 100 points from
+the one with 20 points, so 20 points seem sufficient in this example.
+
+<p>
+<center> <!-- figure label: --> <div id="sec:discalc:fig1"></div> <!-- FIGURE -->
+<hr class="figure">
+<center><p class="caption">Figure 1:  Plots of \( \sin(x) \) with various \( n \).  <!-- caption label: sec:discalc:fig1 --> </p></center>
+<p><img src="fig-discalc/discalc_fig1.png" align="bottom" width=400></p>
+</center>
+
+<p>
+There are no tests on the validity of the input data (<code>n</code>)
+in the previous program.
+A program including these tests reads
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">scitools.std</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #666666">*</span>
+
+n <span style="color: #666666">=</span> <span style="color: #008000">int</span>(sys<span style="color: #666666">.</span>argv[<span style="color: #666666">1</span>])
+x <span style="color: #666666">=</span> linspace(<span style="color: #666666">0</span>, pi, n<span style="color: #666666">+1</span>)
+s <span style="color: #666666">=</span> sin(x)
+plot(x, s, legend<span style="color: #666666">=</span><span style="color: #BA2121">&#39;sin(x), n=</span><span style="color: #BB6688; font-weight: bold">%d</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> n, savefig<span style="color: #666666">=</span><span style="color: #BA2121">&#39;tmp.pdf&#39;</span>)
+</pre></div>
+<p>
+Such tests are important parts of a good programming
+philosophy. However, for the programs displayed in this text,
+we skip such
+tests in order to make the programs more compact and readable
+and to strengthen the focus on the mathematics in the programs.
+In the versions of these programs in the files that can be downloaded you
+will, hopefully, always find a test on input data.
+
+<h2 id="___sec2" class="anchor">Interpolation </h2>
+
+<p>
+Suppose we have a discrete representation of the sine function:
+\( (x_i,s_i)_{i=0}^n \). At the nodes
+we have the exact sine values \( s_i \), but what about
+the points in between these nodes? Finding function values between
+the nodes is called <em>interpolation</em>, or we can say that we
+<em>interpolate</em> a discrete function.
+
+<p>
+A graphical interpolation procedure could be to
+look at one of the plots in Figure <a href="#sec:discalc:fig1">1</a> to find the
+function value corresponding to a point \( x \) between the nodes.
+Since the plot is a straight line from node value to node value,
+this means that a function value between two nodes is found from
+a straight line approximation
+to the underlying continuous function.
+(Strictly speaking, we also assume that the function to be
+interpolated is rather smooth. It is easy to see that if the function is very
+wild, i.e., the values of the function change very rapidly, this procedure may
+fail even for very large values of
+\( n \).)
+We formulate this procedure precisely in terms of mathematics in the next
+paragraph.
+
+<p>
+Assume that we know that a given
+\( x^{\ast} \) lies in the interval from \( x=x_{k} \) to \( x_{k+1} \), where the integer
+\( k \) is given. In the interval \( x_{k}\leq  x < x_{k+1} \), we define the
+linear function that passes through \( (x_k,s_k) \) and \( (x_{k+1},s_{k+1}) \):
+
+$$
+\begin{equation}
+S_{k}(x)=s_{k}+\frac{s_{k+1}-s_{k}}{x_{k+1}-x_{k}}(x-x_{k})\tp
+\tag{3}
+\end{equation}
+$$
+
+That is, \( S_k(x) \) coincides with \( \sin (x) \) at \( x_k \) and \( x_{k+1} \), and
+between these nodes, \( S_k(x) \) is linear.
+We say that \( S_k(x) \) interpolates the discrete function \( (x_i,s_i)_{i=0}^n \)
+on the interval \( [x_k,x_{k+1}] \).
+
+<h2 id="___sec3" class="anchor">Evaluating the approximation </h2>
+
+<p>
+Given the values \( (x_{i},s_{i})_{i=0}^{n} \) and the formula
+<a href="#mjx-eqn-3">(3)</a>, we want to compute an approximation of the
+sine function for any \( x \) in the interval from \( x=0 \) to \( x=\pi \). In order to do
+that, we have to compute \( k \) for a given value of \( x \). More precisely, for a
+given \( x \) we have to find k such that \( x_{k} \leq  x\leq  x_{k+1} \). We
+can do that by defining
+
+$$
+\begin{equation*}
+k=\left\lfloor x/h\right\rfloor
+\end{equation*}
+$$
+
+where the function \( \left\lfloor z\right\rfloor  \) denotes the largest integer
+that is smaller than \( z \). In Python, \( \left\lfloor z\right\rfloor  \)
+is computed by <code>int(z)</code>.
+The program below takes \( x \) and \( n \) as input and
+computes the approximation of \( \sin(x) \). The program prints the approximation
+\( S(x) \) and the exact value of \( \sin(x) \) so we can look at the
+development of the error when \( n \) is increased.
+(The value is not really exact, it is the value
+of \( \sin(x) \) provided by the computer, <code>math.sin(x)</code>, and
+this value is calculated from an algorithm that only yields
+an approximation to
+\( \sin(x) \).)
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #666666">*</span>
+<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">sys</span>
+
+xp <span style="color: #666666">=</span> <span style="color: #008000">eval</span>(sys<span style="color: #666666">.</span>argv[<span style="color: #666666">1</span>])
+n <span style="color: #666666">=</span> <span style="color: #008000">int</span>(sys<span style="color: #666666">.</span>argv[<span style="color: #666666">2</span>])
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">S_k</span>(k):
+    <span style="color: #008000; font-weight: bold">return</span> s[k] <span style="color: #666666">+</span> \
+           ((s[k<span style="color: #666666">+1</span>] <span style="color: #666666">-</span> s[k])<span style="color: #666666">/</span>(x[k<span style="color: #666666">+1</span>] <span style="color: #666666">-</span> x[k]))<span style="color: #666666">*</span>(xp <span style="color: #666666">-</span> x[k])
+h <span style="color: #666666">=</span> pi<span style="color: #666666">/</span>n
+x <span style="color: #666666">=</span> linspace(<span style="color: #666666">0</span>, pi, n<span style="color: #666666">+1</span>)
+s <span style="color: #666666">=</span> sin(x)
+k <span style="color: #666666">=</span> <span style="color: #008000">int</span>(xp<span style="color: #666666">/</span>h)
+
+<span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;Approximation of sin(</span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121">):  &#39;</span> <span style="color: #666666">%</span> xp, S_k(k)
+<span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;Exact value of sin(</span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121">):    &#39;</span> <span style="color: #666666">%</span> xp, sin(xp)
+<span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;Eror in approximation:     &#39;</span>, sin(xp) <span style="color: #666666">-</span> S_k(k)
+</pre></div>
+<p>
+To study the approximation, we put \( x=\sqrt{2} \) and use the program
+<a href="http://tinyurl.com/pwyasaa/discalc/eval_sine.py" target="_self"><tt>eval_sine.py</tt></a> for \( n=5,10 \) and
+\( 20 \).
+
+<p>
+
+<!-- code=text (!bc sys) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>Terminal&gt; python src-discalc/eval_sine.py &#39;sqrt(2)&#39; 5
+Approximation of sin(1.41421356237):   0.951056516295
+Exact value of sin(1.41421356237):     0.987765945993
+Eror in approximation:      0.0367094296976
+</pre></div>
+<p>
+
+<!-- code=text (!bc sys) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>Terminal&gt; python src-discalc/eval_sine.py &#39;sqrt(2)&#39; 10
+Approximation of sin(1.41421356237):   0.975605666221
+Exact value of sin(1.41421356237):     0.987765945993
+Eror in approximation:      0.0121602797718
+</pre></div>
+<p>
+
+<!-- code=text (!bc sys) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>Terminal&gt; python src-discalc/eval_sine.py &#39;sqrt(2)&#39; 20
+Approximation of sin(1.41421356237):   0.987727284363
+Exact value of sin(1.41421356237):     0.987765945993
+Eror in approximation:      3.86616296923e-05
+</pre></div>
+<p>
+Note that the error is reduced as the \( n \) increases.
+
+<h2 id="___sec4" class="anchor">Generalization </h2>
+
+<p>
+In general, we can create a discrete version of a continuous function
+as follows. Suppose a continuous function \( f(x) \) is defined on an interval
+ranging from \( x=a \) to \( x=b \), and let \( n\geq 1 \), be a given integer. Define
+the distance between nodes,
+
+$$
+\begin{equation*}
+h=\frac{b-a}{n},
+\end{equation*}
+$$
+
+and the nodes
+
+$$
+\begin{equation}
+x_{i}=a+ih\text{ for }i=0,1,\ldots ,n\tp
+\tag{4}
+\end{equation}
+$$
+
+The discrete function values are given by
+
+$$
+\begin{equation}
+y_i=f(x_{i})\text{ for }i=0,1,\ldots ,n\tp
+\tag{5}
+\end{equation}
+$$
+
+Now, \( (x_{i},y_{i})_{i=0}^{n} \) is the discrete version of the
+continuous function \( f(x) \).  The program <a href="http://tinyurl.com/pwyasaa/discalc/discrete_func.py" target="_self"><tt>discrete_func.py</tt></a> takes \( f,a,b \) and \( n \) as input,
+computes the discrete version of \( f \), and then applies the discrete
+version to make a plot of \( f \).
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">discrete_func</span>(f, a, b, n):
+    x <span style="color: #666666">=</span> linspace(a, b, n<span style="color: #666666">+1</span>)
+    y <span style="color: #666666">=</span> zeros(<span style="color: #008000">len</span>(x))
+    <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">xrange</span>(<span style="color: #008000">len</span>(x)):
+        y[i] <span style="color: #666666">=</span> func(x[i])
+    <span style="color: #008000; font-weight: bold">return</span> x, y
+
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">scitools.std</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #666666">*</span>
+
+f_formula <span style="color: #666666">=</span> sys<span style="color: #666666">.</span>argv[<span style="color: #666666">1</span>]
+a <span style="color: #666666">=</span> <span style="color: #008000">eval</span>(sys<span style="color: #666666">.</span>argv[<span style="color: #666666">2</span>])
+b <span style="color: #666666">=</span> <span style="color: #008000">eval</span>(sys<span style="color: #666666">.</span>argv[<span style="color: #666666">3</span>])
+n <span style="color: #666666">=</span> <span style="color: #008000">int</span>(sys<span style="color: #666666">.</span>argv[<span style="color: #666666">4</span>])
+f <span style="color: #666666">=</span> StringFunction(f_formula)
+
+x, y <span style="color: #666666">=</span> discrete_func(f, a, b, n)
+plot(x, y)
+</pre></div>
+<p>
+We can equally well make a vectorized version of the <code>discrete_func</code>
+function:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">discrete_func</span>(f, a, b, n):
+    x <span style="color: #666666">=</span> linspace(a, b, n<span style="color: #666666">+1</span>)
+    y <span style="color: #666666">=</span> f(x)
+    <span style="color: #008000; font-weight: bold">return</span> x, y
+</pre></div>
+<p>
+However, for the <code>StringFunction</code> tool to work properly in vectorized
+mode, we need to
+do
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>f <span style="color: #666666">=</span> StringFunction(f_formula)
+f<span style="color: #666666">.</span>vectorize(<span style="color: #008000">globals</span>())
+</pre></div>
+<p>
+The corresponding vectorized program is found in the file
+<a href="http://tinyurl.com/pwyasaa/discalc/discrete_func_vec.py" target="_self"><tt>discrete_func_vec.py</tt></a>.
+
+<h1 id="sec:dcalculus:finite:differences" class="anchor">Differentiation becomes finite differences</h1>
+
+<p>
+You have heard about derivatives. Probably, the
+following formulas are well known to you:
+
+$$
+\begin{align*}
+\frac{d}{dx}\sin(x)  &  =\cos(x),\\ 
+\frac{d}{dx}\ln(x)  &  =\frac{1}{x},\\ 
+\frac{d}{dx}x^{m}  &  =mx^{m-1},
+\end{align*}
+$$
+
+But why is differentiation so important? The reason is quite simple: the
+derivative is a mathematical expression of change. And change is, of course,
+essential in modeling various phenomena. If we know the state of a system, and
+we know the laws of change, then we can, in principle, compute the future of
+that system.
+The document <a href="http://hplgit.github.io/primer.html/doc/pub/ode1" target="_self">Introduction to differential equations</a> <a href="#Langtangen_TCSE6_ode1">[1]</a> treats this topic in detail.
+Another document, <a href="http://hplgit.github.io/primer.html/doc/pub/diffeq" target="_self">Sequences and difference equations</a> <a href="#Langtangen_TCSE6_diffeq">[2]</a>, also computes the future of systems,
+based on modeling changes,
+but without using differentiation. In the document <a href="#Langtangen_TCSE6_ode1">[1]</a> you will see
+that reducing the step size in the difference equations
+results in derivatives instead of pure differences.
+However, differentiation
+of continuous functions is somewhat hard on a computer, so we often
+end up replacing the derivatives by differences. This idea is quite general,
+and every time
+we use a discrete representation of a function, differentiation becomes
+differences, or <em>finite differences</em> as we usually say.
+
+<p>
+The mathematical definition of differentiation reads
+
+$$
+\begin{equation*}
+f^{\prime}(x)=\lim_{\varepsilon\rightarrow0}\frac{f(x+\varepsilon
+)-f(x)}{\varepsilon}\tp
+\end{equation*}
+$$
+
+You have probably seen this definition many times, but have you understood
+what it means and do you think the formula has a great practical value?
+Although the definition requires that we pass to the limit, we obtain quite
+good approximations of the derivative by using a  fixed positive value of
+\( \varepsilon \). More precisely, for a small \( \varepsilon>0 \), we have
+
+$$
+\begin{equation*}
+f^{\prime}(x)\approx\frac{f(x+\varepsilon)-f(x)}{\varepsilon}\tp
+\end{equation*}
+$$
+
+The fraction on the right-hand side is a finite difference approximation
+to the derivative of \( f \) at the point \( x \). Instead of using \( \varepsilon \)
+it is more common to introduce \( h=\varepsilon \) in finite differences, i.e., we
+like to write
+
+$$
+\begin{equation}
+f^{\prime}(x)\approx\frac{f(x+h)-f(x)}{h}\tp
+\tag{6}
+\end{equation}
+$$
+
+<h2 id="___sec6" class="anchor">Differentiating the sine function </h2>
+
+<p>
+In order to get a feeling for how good the approximation <a href="#mjx-eqn-6">(6)</a>
+to the derivative really is, we explore an example.
+Consider \( f(x)=\sin(x) \) and
+the associated derivative \( f^{\prime}(x)=\cos(x) \).
+If we put $x=1,$we have
+
+$$
+\begin{equation*}
+f^{\prime}(1)=\cos(1)\approx 0.540,
+\end{equation*}
+$$
+
+and by putting \( h=1/100 \) in <a href="#mjx-eqn-6">(6)</a> we get
+
+$$
+\begin{equation*}
+f^{\prime}(1)\approx\frac{f(1+1/100)-f(1)}{1/100}=\frac{\sin(1.01)-\sin
+(1)}{0.01}\approx0.536\tp
+\end{equation*}
+$$
+
+<p>
+The program <a href="http://tinyurl.com/pwyasaa/discalc/forward_diff.py" target="_self"><tt>forward_diff.py</tt></a>, shown below, computes the
+derivative of \( f(x) \) using the approximation <a href="#mjx-eqn-6">(6)</a>, where
+\( x \) and \( h \) are input parameters.
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">diff</span>(f, x, h):
+    <span style="color: #008000; font-weight: bold">return</span> (f(x<span style="color: #666666">+</span>h) <span style="color: #666666">-</span> f(x))<span style="color: #666666">/</span><span style="color: #008000">float</span>(h)
+
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">math</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #666666">*</span>
+<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">sys</span>
+
+x <span style="color: #666666">=</span> <span style="color: #008000">eval</span>(sys<span style="color: #666666">.</span>argv[<span style="color: #666666">1</span>])
+h <span style="color: #666666">=</span> <span style="color: #008000">eval</span>(sys<span style="color: #666666">.</span>argv[<span style="color: #666666">2</span>])
+
+approx_deriv <span style="color: #666666">=</span> diff(sin, x, h)
+exact <span style="color: #666666">=</span> cos(x)
+<span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;The approximated value is: &#39;</span>, approx_deriv
+<span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;The correct value is:      &#39;</span>, exact
+<span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;The error is:              &#39;</span>, exact <span style="color: #666666">-</span> approx_deriv
+</pre></div>
+<p>
+Running the program for \( x=1 \) and \( h=1/1000 \) gives
+
+<p>
+
+<!-- code=text (!bc sys) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>Terminal&gt; python src-discalc/forward_diff.py 1 0.001
+The approximated value is:  0.53988148036
+The correct value is:       0.540302305868
+The error is:               0.000420825507813
+</pre></div>
+
+<h2 id="___sec7" class="anchor">Differences on a mesh </h2>
+
+<p>
+Frequently, we will need finite difference approximations to
+a discrete function defined on a mesh.
+Suppose we
+have a discrete representation of the sine function:
+\( (x_i,s_i)_{i=0}^n \), as introduced in the section <a href="#sec:discalc:sinefunc">The sine function</a>.
+We want to use <a href="#mjx-eqn-6">(6)</a> to
+compute approximations to the derivative of the sine function at the
+nodes in the mesh. Since we only have function values at the nodes,
+the \( h \) in <a href="#mjx-eqn-6">(6)</a> must be the difference between
+nodes, i.e.,
+\( h = x_{i+1}-x_i \). At node \( x_i \) we then have the following
+approximation of the derivative:
+
+$$
+\begin{equation}
+z_{i}=\frac{s_{i+1}-s_{i}}{h},
+\tag{7}
+\end{equation}
+$$
+
+for \( i=0,1,\ldots ,n-1 \).
+Note that we have not defined an approximate derivative at the end point
+\( x=x_{n} \). We cannot apply <a href="#mjx-eqn-7">(7)</a> directly since
+\( s_{n+1} \) is undefined (outside the mesh).
+However, the derivative of a function can also be
+defined as
+
+$$
+\begin{equation*}
+f^{\prime}(x)=\lim_{\varepsilon\rightarrow0}\frac{f(x)-f(x-\varepsilon
+)}{\varepsilon},
+\end{equation*}
+$$
+
+which motivates the following approximation for a given \( h>0 \),
+
+$$
+\begin{equation}
+f^{\prime}(x)\approx\frac{f(x)-f(x-h)}{h}\tp
+\tag{8}
+\end{equation}
+$$
+
+This alternative approximation to the derivative is referred to as
+a <em>backward difference</em> formula, whereas the expression
+<a href="#mjx-eqn-6">(6)</a> is known as a <em>forward difference</em> formula.
+The names are natural: the forward formula goes forward, i.e.,
+in the direction of increasing \( x \) and \( i \) to collect information
+about the change of the function, while the backward formula goes
+backwards, i.e., toward smaller \( x \) and \( i \) value to fetch function
+information.
+
+<p>
+At the end point we can apply the backward formula and thus
+define
+
+$$
+\begin{equation}
+z_{n}=\frac{s_{n}-s_{n-1}}{h}\tp
+\tag{9}
+\end{equation}
+$$
+
+We now have an approximation to the derivative at all the nodes.
+A plain specialized program for computing the derivative of the sine
+function on a mesh and comparing this discrete derivative with the
+exact derivative is displayed below (the name of the file
+is <a href="http://tinyurl.com/pwyasaa/discalc/diff_sine_plot1.py" target="_self"><tt>diff_sine_plot1.py</tt></a>).
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">scitools.std</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #666666">*</span>
+
+n <span style="color: #666666">=</span> <span style="color: #008000">int</span>(sys<span style="color: #666666">.</span>argv[<span style="color: #666666">1</span>])
+h <span style="color: #666666">=</span> pi<span style="color: #666666">/</span>n
+x <span style="color: #666666">=</span> linspace(<span style="color: #666666">0</span>, pi, n<span style="color: #666666">+1</span>)
+s <span style="color: #666666">=</span> sin(x)
+z <span style="color: #666666">=</span> zeros(<span style="color: #008000">len</span>(s))
+<span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">xrange</span>(<span style="color: #008000">len</span>(z)<span style="color: #666666">-1</span>):
+    z[i] <span style="color: #666666">=</span> (s[i<span style="color: #666666">+1</span>] <span style="color: #666666">-</span> s[i])<span style="color: #666666">/</span>h
+<span style="color: #408080; font-style: italic"># Special formula for end point_</span>
+z[<span style="color: #666666">-1</span>] <span style="color: #666666">=</span> (s[<span style="color: #666666">-1</span>] <span style="color: #666666">-</span> s[<span style="color: #666666">-2</span>])<span style="color: #666666">/</span>h
+plot(x, z)
+
+xfine <span style="color: #666666">=</span> linspace(<span style="color: #666666">0</span>, pi, <span style="color: #666666">1001</span>) <span style="color: #408080; font-style: italic"># for more accurate plot</span>
+exact <span style="color: #666666">=</span> cos(xfine)
+hold()
+plot(xfine, exact)
+legend(<span style="color: #BA2121">&#39;Approximate function&#39;</span>, <span style="color: #BA2121">&#39;Correct function&#39;</span>)
+title(<span style="color: #BA2121">&#39;Approximate and discrete functions, n=</span><span style="color: #BB6688; font-weight: bold">%d</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> n)
+</pre></div>
+<p>
+In Figure <a href="#sec:discalc:fig2">2</a> we see the resulting graphs for
+\( n=5,10,20 \) and \( 100 \). Again, we note that the error is reduced as \( n \)
+increases.
+
+<p>
+<center> <!-- figure label: --> <div id="sec:discalc:fig2"></div> <!-- FIGURE -->
+<hr class="figure">
+<center><p class="caption">Figure 2:  Plots for exact and approximate derivatives of \( \sin(x) \) with varying values of the resolution \( n \).  <!-- caption label: sec:discalc:fig2 --> </p></center>
+<p><img src="fig-discalc/discalc_fig2.png" align="bottom" width=400></p>
+</center>
+
+<h2 id="___sec8" class="anchor">Generalization </h2>
+
+<p>
+The discrete version of a continuous function \( f(x) \) defined on an interval
+\( \left[  a,b\right]   \) is given by \( (x_{i},y_{i})_{i=0}^{n} \) where
+
+$$
+\begin{equation*} x_{i}=a+ih, \end{equation*}
+$$
+
+and
+
+$$
+\begin{equation*} y_{i}=f(x_{i}) \end{equation*}
+$$
+
+for \( i=0,1,\ldots ,n \). Here, \( n\geq 1 \) is a given integer, and the spacing
+between the nodes is given by
+
+$$
+\begin{equation*}
+h=\frac{b-a}{n}\tp
+\end{equation*}
+$$
+
+A discrete approximation of the derivative of \( f \) is given by \( (x_{i}
+,z_{i})_{i=0}^{n} \) where
+
+$$
+\begin{equation*}
+z_{i}=\frac{y_{i+1}-y_{i}}{h}
+\end{equation*}
+$$
+
+\( i=0,1,\ldots ,n-1 \), and
+
+$$
+\begin{equation*}
+z_{n}=\frac{y_{n}-y_{n-1}}{h}.
+\end{equation*}
+$$
+
+The collection \( (x_{i},z_{i})_{i=0}^{n} \) is the discrete derivative of
+the discrete version \( (x_{i},f_{i})_{i=0}^{n} \) of the continuous
+function \( f(x) \). The program below, found in the file
+<a href="http://tinyurl.com/pwyasaa/discalc/diff_func.py" target="_self"><tt>diff_func.py</tt></a>, takes \( f \), \( a \),
+\( b \), and \( n \) as input and computes the discrete derivative of \( f \) on
+the mesh implied by \( a \), \( b \), and \( h \), and then a plot of \( f \) and the
+discrete derivative is made.
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">diff</span>(f, a, b, n):
+    x <span style="color: #666666">=</span> linspace(a, b, n<span style="color: #666666">+1</span>)
+    y <span style="color: #666666">=</span> zeros(<span style="color: #008000">len</span>(x))
+    z <span style="color: #666666">=</span> zeros(<span style="color: #008000">len</span>(x))
+    h <span style="color: #666666">=</span> (b<span style="color: #666666">-</span>a)<span style="color: #666666">/</span><span style="color: #008000">float</span>(n)
+    <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">xrange</span>(<span style="color: #008000">len</span>(x)):
+        y[i] <span style="color: #666666">=</span> func(x[i])
+    <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">xrange</span>(<span style="color: #008000">len</span>(x)<span style="color: #666666">-1</span>):
+        z[i] <span style="color: #666666">=</span> (y[i<span style="color: #666666">+1</span>] <span style="color: #666666">-</span> y[i])<span style="color: #666666">/</span>h
+    z[n] <span style="color: #666666">=</span> (y[n] <span style="color: #666666">-</span> y[n<span style="color: #666666">-1</span>])<span style="color: #666666">/</span>h
+    <span style="color: #008000; font-weight: bold">return</span> y, z
+
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">scitools.std</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #666666">*</span>
+
+f_formula <span style="color: #666666">=</span> sys<span style="color: #666666">.</span>argv[<span style="color: #666666">1</span>]
+a <span style="color: #666666">=</span> <span style="color: #008000">eval</span>(sys<span style="color: #666666">.</span>argv[<span style="color: #666666">2</span>])
+b <span style="color: #666666">=</span> <span style="color: #008000">eval</span>(sys<span style="color: #666666">.</span>argv[<span style="color: #666666">3</span>])
+n <span style="color: #666666">=</span> <span style="color: #008000">int</span>(sys<span style="color: #666666">.</span>argv[<span style="color: #666666">4</span>])
+f <span style="color: #666666">=</span> StringFunction(f_formula)
+y, z <span style="color: #666666">=</span> diff(f, a, b, n)
+plot(x, y, <span style="color: #BA2121">&#39;r-&#39;</span>, x, z, <span style="color: #BA2121">&#39;b-&#39;</span>,
+     legend<span style="color: #666666">=</span>(<span style="color: #BA2121">&#39;function&#39;</span>, <span style="color: #BA2121">&#39;derivative&#39;</span>))
+</pre></div>
+
+<h1 id="sec:dcalculus:integration" class="anchor">Integration becomes summation</h1>
+
+<p>
+Some functions can be integrated analytically. You may
+remember the following cases,
+
+$$
+\begin{align*}
+\int x^{m}dx &  =\frac{1}{m+1}x^{m+1}\text{ for }m\neq-1,\\ 
+\int\sin(x)dx &  =-\cos(x),\\ 
+\int\frac{x}{1+x^{2}}dx &  =\frac{1}{2}\ln\left(  x^{2}+1\right)  .
+\end{align*}
+$$
+
+These are examples of so-called indefinite integrals. If the function can be
+integrated analytically, it is straightforward to evaluate an associated
+definite integral. Recall, in general, that
+
+$$
+\begin{equation*}
+\left[  f(x)\right]  _{a}^{b}=f(b)-f(a).
+\end{equation*}
+$$
+
+Some particular examples are
+
+$$
+\begin{align*}
+\int_{0}^{1}x^{m}dx &  =\left[  \frac{1}{m+1}x^{m+1}\right]  _{0}^{1}=\frac
+{1}{m+1},\\ 
+\int_{0}^{\pi}\sin(x)dx &  =\left[  -\cos(x)\right]  _{0}^{\pi}=2,\\ 
+\int_{0}^{1}\frac{x}{1+x^{2}}dx &  =\left[  \frac{1}{2}\ln\left(
+x^{2}+1\right)  \right]  _{0}^{1}=\frac{1}{2}\ln2.
+\end{align*}
+$$
+
+But lots of functions cannot be integrated analytically and therefore definite
+integrals must be computed using some sort of numerical approximation. Above,
+we introduced the discrete version of a function, and we will now use this
+construction to compute an approximation of a definite integral.
+
+<h2 id="___sec10" class="anchor">Dividing into subintervals </h2>
+
+<p>
+Let us start by considering the problem of computing the
+integral of
+\( \sin(x) \) from \( x=0 \) to \( x=\pi \). This is not the most exciting or
+challenging mathematical problem you can think of, but
+it is good practice to
+start with a problem you know well when you want to learn a new method.
+In the section <a href="#sec:discalc:sinefunc">The sine function</a> we introduce a discrete function
+\( (x_{i},s_{i})_{i=0}^{n} \) where \( h=\pi/n,s_{i}=\sin(x_{i}) \) and \( x_{i}=ih \) for
+\( i=0,1,\ldots ,n \).  Furthermore, in the interval \( x_{k}\leq  x < x_{k+1} \), we
+defined the linear function
+
+$$
+\begin{equation*}
+S_{k}(x)=s_{k}+\frac{s_{k+1}-s_{k}}{x_{k+1}-x_{k}}(x-x_{k}).
+\end{equation*}
+$$
+
+We want to compute an approximation of the integral of the function \( \sin(x) \)
+from \( x=0 \) to \( x=\pi \). The integral
+
+$$
+\begin{equation*}
+\int_{0}^{\pi}\sin(x)dx
+\end{equation*}
+$$
+
+can be divided into subintegrals defined on the intervals \( x_{k}\leq
+x < x_{k+1} \), leading to the following sum of integrals:
+
+$$
+\begin{equation*}
+\int_{0}^{\pi}\sin(x)dx=\sum\limits_{k=0}^{n-1}\int_{x_{k}}^{x_{k+1}}
+\sin(x)dx\tp
+\end{equation*}
+$$
+
+To get a feeling for this split of the integral, let us spell the sum
+out in the case of only four
+subintervals. Then \( n=4, \) $h=\pi/4$,
+
+$$
+\begin{align*}
+x_{0} &  =0,\\ 
+x_{1} &  =\pi/4,\\ 
+x_{2} &  =\pi/2,\\ 
+x_{3} &  =3\pi/4\\ 
+x_{4} &  =\pi.
+\end{align*}
+$$
+
+The interval from \( 0 \) to \( \pi \) is divided into four intervals of equal length,
+and we can divide the integral similarly,
+
+$$
+\begin{align}
+\int_{0}^{\pi}\sin(x)dx &=\int_{x_{0}}^{x_{1}}\sin(x)dx+\int_{x_{1}}^{x_{2}}
+\sin(x)dx + \nonumber\\ 
+& \quad\int_{x_{2}}^{x_{3}}\sin(x)dx+\int_{x_{3}}^{x_{4}}\sin
+(x)dx\tp
+\tag{10}
+\end{align}
+$$
+
+So far we have changed nothing - the integral can be split in this way -
+with no approximation at all. But we have reduced the problem of
+approximating the integral
+
+$$
+\begin{equation*}
+\int_{0}^{\pi}\sin(x)dx
+\end{equation*}
+$$
+
+down to approximating integrals on the subintervals, i.e. we need
+approximations of all the following integrals
+
+$$
+\begin{equation*}
+\int_{x_{0}}^{x_{1}}\sin(x)dx,\int_{x_{1}}^{x_{2}}\sin(x)dx,\int_{x_{2}
+}^{x_{3}}\sin(x)dx,\int_{x_{3}}^{x_{4}}\sin(x)dx\tp
+\end{equation*}
+$$
+
+The idea is that the function to be integrated changes less over
+the subintervals than over the whole domain \( [0,\pi] \) and it might
+be reasonable to approximate the sine by a straight line, \( S_k(x) \),
+over each subinterval. The integration over a subinterval will then
+be very easy.
+
+<h2 id="___sec11" class="anchor">Integration on subintervals </h2>
+
+<p>
+The task now is to approximate integrals on the form
+
+$$
+\begin{equation*}
+\int_{x_{k}}^{x_{k+1}}\sin(x)dx.
+\end{equation*}
+$$
+
+Since
+
+$$
+\begin{equation*}
+\sin(x)\approx S_{k}(x)
+\end{equation*}
+$$
+
+on the interval \( (x_{k},x_{k+1}) \), we have
+
+$$
+\begin{equation*}
+\int_{x_{k}}^{x_{k+1}}\sin(x)dx\approx\int_{x_{k}}^{x_{k+1}}S_{k}(x)dx.
+\end{equation*}
+$$
+
+<p>
+<center> <!-- figure label: --> <div id="sec:discalc:fig3"></div> <!-- FIGURE -->
+<hr class="figure">
+<center><p class="caption">Figure 3:  \( S_k(x) \) and \( \sin(x) \) on the interval \( (x_k, x_{k+1}) \) for \( k=1 \)     and \( n=4 \).  <!-- caption label: sec:discalc:fig3 --> </p></center>
+<p><img src="fig-discalc/discalc_fig3.png" align="bottom" width=400></p>
+</center>
+
+<p>
+In Figure <a href="#sec:discalc:fig3">3</a> we have graphed \( S_{k}(x) \) and \( \sin(x) \) on the interval
+\( (x_{k},x_{k+1}) \) for \( k=1 \) in the case of \( n=4 \). We note that the
+integral of \( S_{1}(x) \) on this interval equals the area of a trapezoid, and
+thus we have
+
+$$
+\begin{equation*}
+\int_{x_{1}}^{x_{2}}S_{1}(x)dx=\frac{1}{2}\left(  S_{1}(x_{2})+S_{1}
+(x_{1})\right)  (x_{2}-x_{1}),
+\end{equation*}
+$$
+
+so
+
+$$
+\begin{equation*}
+\int_{x_{1}}^{x_{2}}S_{1}(x)dx=\frac{h}{2}\left(  s_{2}+s_{1}\right),
+\end{equation*}
+$$
+
+and in general we have
+
+$$
+\begin{align*}
+\int_{x_{k}}^{x_{k+1}}\sin(x)dx  & \approx\frac{1}{2}\left(  s_{k+1}
++s_{k}\right)  (x_{k+1}-x_{k})\\ 
+& =\frac{h}{2}\left(  s_{k+1}+s_{k}\right)  .
+\end{align*}
+$$
+
+<h2 id="___sec12" class="anchor">Adding the subintervals </h2>
+
+<p>
+By adding the contributions from each subinterval, we get
+
+$$
+\begin{align*}
+\int_{0}^{\pi}\sin(x)dx  & =\sum\limits_{k=0}^{n-1}\int_{x_{k}}^{x_{k+1}}
+\sin(x)dx\\ 
+& \approx\sum\limits_{k=0}^{n-1}\frac{h}{2}\left(  s_{k+1}+s_{k}\right)  ,
+\end{align*}
+$$
+
+so
+
+$$
+\begin{equation}
+\int_{0}^{\pi}\sin(x)dx\approx\frac{h}{2}\sum\limits_{k=0}^{n-1}\left(
+s_{k+1}+s_{k}\right)  \tp
+\tag{11}
+\end{equation}
+$$
+
+In the case of \( n=4 \), we have
+
+$$
+\begin{align*}
+\int_{0}^{\pi}\sin(x)dx  & \approx\frac{h}{2}\left[  \left(  s_{1}
++s_{0}\right)  +\left(  s_{2}+s_{1}\right)  +\left(  s_{3}+s_{2}\right)
++\left(  s_{4}+s_{3}\right)  \right]  \\ 
+& =\frac{h}{2}\left[  s_{0}+2\left(  s_{1+}s_{2+}s_{3}\right)  +s_{4}\right]
+\tp
+\end{align*}
+$$
+
+One can show that <a href="#mjx-eqn-11">(11)</a> can be alternatively
+expressed as
+
+$$
+\begin{equation}
+\int_{0}^{\pi}\sin(x)dx\approx\frac{h}{2}\left[  s_{0}+2\sum\limits_{k=1}^{n-1}
+s_{k}+s_{n}\right]  \tp
+\tag{12}
+\end{equation}
+$$
+
+This approximation formula
+is referred to as the Trapezoidal rule of numerical
+integration. Using the more general
+program <code>trapezoidal.py</code>, presented in the next section, on
+integrating \( \int_0^{\pi} \sin (x)dx \) with \( n=5,10,20 \) and \( 100 \) yields
+the numbers 1.5644, 1.8864, 1.9713, and 1.9998 respectively. These numbers are
+to be compared to the exact value 2. As usual,
+the approximation becomes better the more points (\( n \)) we use.
+
+<h2 id="___sec13" class="anchor">Generalization </h2>
+
+<p>
+An approximation of the integral
+
+$$
+\begin{equation*}
+\int_{a}^{b}f(x)dx
+\end{equation*}
+$$
+
+can be computed using the discrete version of a continuous function \( f(x) \)
+defined on an interval \( \left[  a,b\right]   \). We recall that the discrete
+version of \( f \) is given by \( (x_{i},y_{i})_{i=0}^{n} \) where
+
+$$
+\begin{equation*}
+x_{i}=a+ih,\text{ and }y_{i}=f(x_{i})
+\end{equation*}
+$$
+
+for \( i=0,1,\ldots ,n \). Here, \( n\geq 1 \) is a given integer and
+\( h=(b-a)/n \). The Trapezoidal rule can now be written as
+
+$$
+\begin{equation*}
+\int_{a}^{b}f(x)dx\approx\frac{h}{2}\left[  y_{0}+2\sum\limits_{k=1}
+^{n-1}y_{k}+y_{n}\right]  \tp
+\end{equation*}
+$$
+
+<p>
+The program <a href="http://tinyurl.com/pwyasaa/discal/trapezoidal.py" target="_self"><tt>trapezoidal.py</tt></a>
+implements the Trapezoidal rule for a general function \( f \).
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">trapezoidal</span>(f, a, b, n):
+    h <span style="color: #666666">=</span> (b<span style="color: #666666">-</span>a)<span style="color: #666666">/</span><span style="color: #008000">float</span>(n)
+    I <span style="color: #666666">=</span> f(a) <span style="color: #666666">+</span> f(b)
+    <span style="color: #008000; font-weight: bold">for</span> k <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">xrange</span>(<span style="color: #666666">1</span>, n, <span style="color: #666666">1</span>):
+        x <span style="color: #666666">=</span> a <span style="color: #666666">+</span> k<span style="color: #666666">*</span>h
+        I <span style="color: #666666">+=</span> <span style="color: #666666">2*</span>f(x)
+    I <span style="color: #666666">*=</span> h<span style="color: #666666">/2</span>
+    <span style="color: #008000; font-weight: bold">return</span> I
+
+
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">math</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #666666">*</span>
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">scitools.StringFunction</span> <span style="color: #008000; font-weight: bold">import</span> StringFunction
+<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">sys</span>
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">test</span>(argv<span style="color: #666666">=</span>sys<span style="color: #666666">.</span>argv):
+    f_formula <span style="color: #666666">=</span> argv[<span style="color: #666666">1</span>]
+    a <span style="color: #666666">=</span> <span style="color: #008000">eval</span>(argv[<span style="color: #666666">2</span>])
+    b <span style="color: #666666">=</span> <span style="color: #008000">eval</span>(argv[<span style="color: #666666">3</span>])
+    n <span style="color: #666666">=</span> <span style="color: #008000">int</span>(argv[<span style="color: #666666">4</span>])
+    f <span style="color: #666666">=</span> StringFunction(f_formula)
+    I <span style="color: #666666">=</span> trapezoidal(f, a, b, n)
+    <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;Approximation of the integral: &#39;</span>, I
+
+<span style="color: #008000; font-weight: bold">if</span> __name__ <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;__main__&#39;</span>:
+    test()
+</pre></div>
+<p>
+We have made the file as a module such that you can
+easily import the <code>trapezoidal</code> function in another program. Let us do
+that: we make a table of how the approximation and the associated error
+of an integral are reduced as \( n \) is increased. For this purpose,
+we want to integrate \( \int_{t_1}^{t_2}g(t)dt \), where
+
+$$
+\begin{equation*} g(t) = -ae^{-at}\sin(\pi w t) + \pi w e^{-at}\cos(\pi w t)\tp\end{equation*}
+$$
+
+The exact integral \( G(t)=\int g(t)dt \) equals
+
+$$
+\begin{equation*} G(t) = e^{-at}\sin(\pi w t)\tp\end{equation*}
+$$
+
+Here, \( a \) and \( w \) are real numbers that we set to 1/2 and 1, respectively,
+in the program. The integration limits are chosen as \( t_1=0 \) and \( t_2=4 \).
+The integral then equals zero.
+The program and its output appear below.
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">trapezoidal</span> <span style="color: #008000; font-weight: bold">import</span> trapezoidal
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">math</span> <span style="color: #008000; font-weight: bold">import</span> exp, sin, cos, pi
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">g</span>(t):
+    <span style="color: #008000; font-weight: bold">return</span> <span style="color: #666666">-</span>a<span style="color: #666666">*</span>exp(<span style="color: #666666">-</span>a<span style="color: #666666">*</span>t)<span style="color: #666666">*</span>sin(pi<span style="color: #666666">*</span>w<span style="color: #666666">*</span>t) <span style="color: #666666">+</span> pi<span style="color: #666666">*</span>w<span style="color: #666666">*</span>exp(<span style="color: #666666">-</span>a<span style="color: #666666">*</span>t)<span style="color: #666666">*</span>cos(pi<span style="color: #666666">*</span>w<span style="color: #666666">*</span>t)
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">G</span>(t):  <span style="color: #408080; font-style: italic"># integral of g(t)</span>
+    <span style="color: #008000; font-weight: bold">return</span> exp(<span style="color: #666666">-</span>a<span style="color: #666666">*</span>t)<span style="color: #666666">*</span>sin(pi<span style="color: #666666">*</span>w<span style="color: #666666">*</span>t)
+
+a <span style="color: #666666">=</span> <span style="color: #666666">0.5</span>
+w <span style="color: #666666">=</span> <span style="color: #666666">1.0</span>
+t1 <span style="color: #666666">=</span> <span style="color: #666666">0</span>
+t2 <span style="color: #666666">=</span> <span style="color: #666666">4</span>
+exact <span style="color: #666666">=</span> G(t2) <span style="color: #666666">-</span> G(t1)
+<span style="color: #008000; font-weight: bold">for</span> n <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #666666">2</span>, <span style="color: #666666">4</span>, <span style="color: #666666">8</span>, <span style="color: #666666">16</span>, <span style="color: #666666">32</span>, <span style="color: #666666">64</span>, <span style="color: #666666">128</span>, <span style="color: #666666">256</span>, <span style="color: #666666">512</span>:
+    approx <span style="color: #666666">=</span> trapezoidal(g, t1, t2, n)
+    <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;n=</span><span style="color: #BB6688; font-weight: bold">%3d</span><span style="color: #BA2121"> approximation=</span><span style="color: #BB6688; font-weight: bold">%12.5e</span><span style="color: #BA2121">  error=</span><span style="color: #BB6688; font-weight: bold">%12.5e</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> \
+          (n, approx, exact<span style="color: #666666">-</span>approx)
+</pre></div>
+<p>
+
+<!-- code=text (!bc ccq) typeset with pygments style "default" -->
+<blockquote>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>n=  2 approximation= 5.87822e+00  error=-5.87822e+00
+n=  4 approximation= 3.32652e-01  error=-3.32652e-01
+n=  8 approximation= 6.15345e-02  error=-6.15345e-02
+n= 16 approximation= 1.44376e-02  error=-1.44376e-02
+n= 32 approximation= 3.55482e-03  error=-3.55482e-03
+n= 64 approximation= 8.85362e-04  error=-8.85362e-04
+n=128 approximation= 2.21132e-04  error=-2.21132e-04
+n=256 approximation= 5.52701e-05  error=-5.52701e-05
+n=512 approximation= 1.38167e-05  error=-1.38167e-05
+</pre></div>
+</blockquote><p>
+We see that the error is reduced as we increase \( n \).
+In fact, as \( n \) is doubled we realize that the error is roughly reduced
+by a factor of 4, at least when \( n>8 \). This is an important property
+of the Trapezoidal rule, and checking that a program reproduces this
+property is an important check of the validity of the implementation.
+
+<h1 id="sec:discalc:Taylor" class="anchor">Taylor series</h1>
+
+<p>
+The single most important mathematical tool in computational science is the
+Taylor series. It is used to derive new methods and also for the analysis of
+the accuracy of approximations. We will use the series many times in this
+text. Right here, we just introduce it and present a few applications.
+
+<h2 id="___sec15" class="anchor">Approximating functions close to one point </h2>
+
+<p>
+Suppose you know the value of a function \( f \) at some point \( x_{0} \), and you
+are interested in the value of \( f \) close to \( x \). More precisely,
+suppose we know \( f(x_{0}) \) and we want an approximation of \( f(x_{0}+h) \) where
+\( h \) is a small number. If the function is smooth and \( h \) is really small, our
+first approximation reads
+
+$$
+\begin{equation}
+f(x_{0}+h)\approx f(x_{0})\tp
+\tag{13}
+\end{equation}
+$$
+
+That approximation is, of course, not very accurate. In order to derive a more
+accurate approximation, we have to know more about \( f \) at \( x_{0} \). Suppose that
+we know the value of  \( f(x_{0}) \) and \( f^{\prime}(x_{0}) \), then we can find a
+better approximation of \( f(x_{0}+h) \) by recalling that
+
+$$
+\begin{equation*}
+f^{\prime}(x_{0})\approx\frac{f(x_{0}+h)-f(x_{0})}{h}.
+\end{equation*}
+$$
+
+Hence, we have
+
+$$
+\begin{equation}
+f(x_{0}+h)\approx f(x_{0})+hf^{\prime}(x_{0})\tp
+\tag{14}
+\end{equation}
+$$
+
+<h2 id="___sec16" class="anchor">Approximating the exponential function </h2>
+
+<p>
+Let us be a bit more specific and consider the case of
+
+$$
+\begin{equation*}
+f(x)=e^{x}
+\end{equation*}
+$$
+
+around
+
+$$
+\begin{equation*}
+x_{0}=0.
+\end{equation*}
+$$
+
+Since \( f^{\prime}(x)=e^{x} \), we have \( f^{\prime}(0)=1 \), and then it follows
+from <a href="#mjx-eqn-14">(14)</a> that
+
+$$
+\begin{equation*}
+e^{h}\approx1+h\tp
+\end{equation*}
+$$
+
+The little program below (found in <a href="http://tinyurl.com/pwyasaa/discalc/Taylor1.py" target="_self"><tt>Taylor1.py</tt></a>) prints \( e^{h} \) and \( 1+h \) for a range
+of \( h \) values.
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">math</span> <span style="color: #008000; font-weight: bold">import</span> exp
+<span style="color: #008000; font-weight: bold">for</span> h <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #666666">1</span>, <span style="color: #666666">0.5</span>, <span style="color: #666666">1/20.0</span>, <span style="color: #666666">1/100.0</span>, <span style="color: #666666">1/1000.0</span>:
+    <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;h=</span><span style="color: #BB6688; font-weight: bold">%8.6f</span><span style="color: #BA2121"> exp(h)=</span><span style="color: #BB6688; font-weight: bold">%11.5e</span><span style="color: #BA2121">  1+h=</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> (h, exp(h), <span style="color: #666666">1+</span>h)
+</pre></div>
+<p>
+
+<!-- code=text (!bc ccq) typeset with pygments style "default" -->
+<blockquote>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>h=1.000000 exp(h)=2.71828e+00  1+h=2
+h=0.500000 exp(h)=1.64872e+00  1+h=1.5
+h=0.050000 exp(h)=1.05127e+00  1+h=1.05
+h=0.010000 exp(h)=1.01005e+00  1+h=1.01
+h=0.001000 exp(h)=1.00100e+00  1+h=1.001
+</pre></div>
+</blockquote><p>
+As expected, \( 1+h \) is a good approximation to \( e^h \) the smaller \( h \) is.
+
+<h2 id="___sec17" class="anchor">More accurate expansions </h2>
+
+<p>
+The approximations given by <a href="#mjx-eqn-13">(13)</a> and
+<a href="#mjx-eqn-14">(14)</a> are referred to as Taylor series. You can read
+much more
+about Taylor series in any Calculus book. More specifically,
+<a href="#mjx-eqn-13">(13)</a> and <a href="#mjx-eqn-14">(14)</a> are known as
+the zeroth- and first-order Taylor series, respectively. The
+second-order Taylor series is given by
+
+$$
+\begin{equation}
+f(x_{0}+h)\approx f(x_{0})+hf^{\prime}(x_{0})+\frac{h^{2}}{2}f^{\prime\prime
+}(x_{0}),
+\tag{15}
+\end{equation}
+$$
+
+the third-order series is given by
+
+$$
+\begin{equation}
+f(x_{0}+h)\approx f(x_{0})+hf^{\prime}(x_{0})+\frac{h^{2}}{2}f^{\prime\prime
+}(x_{0})+\frac{h^{3}}{6}f^{\prime\prime\prime}(x_{0}),
+\tag{16}
+\end{equation}
+$$
+
+and the fourth-order series reads
+
+$$
+\begin{equation}
+f(x_{0}+h)\approx f(x_{0})+hf^{\prime}(x_{0})+\frac{h^{2}}{2}f^{\prime\prime
+}(x_{0})+\frac{h^{3}}{6}f^{\prime\prime\prime}(x_{0})+\frac{h^{4}}
+{24}f^{\prime\prime\prime\prime}(x_{0}).
+\tag{17}
+\end{equation}
+$$
+
+In general, the \( n \)-th order Taylor series is given by
+
+$$
+\begin{equation}
+f(x_{0}+h)\approx\sum_{k=0}^{n}\frac{h^{k}}{k!}f^{(k)}(x_{0}),
+\tag{18}
+\end{equation}
+$$
+
+where we recall that \( f^{(k)} \) denotes the $k-$\textit{th }derivative of \( f \),
+and
+
+$$
+\begin{equation*}
+k!=1\cdot2\cdot3\cdot4\cdots(k-1)\cdot k
+\end{equation*}
+$$
+
+is the factorial.
+By again considering \( f(x)=e^{x} \) and \( x_{0}=0 \), we have
+
+$$
+\begin{equation*}
+f(x_{0})=f^{\prime}(x_{0})=f^{\prime\prime}(x_{0})=f^{\prime\prime\prime
+}(x_{0})=f^{\prime\prime\prime\prime}(x_{0})=1
+\end{equation*}
+$$
+
+which gives the following Taylor series:
+
+$$
+\begin{equation*}
+e^{h}\approx1+h+\frac{1}{2}h^{2}+\frac{1}{6}h^{3}+\frac{1}{24}h^{4}\tp
+\end{equation*}
+$$
+
+The program below, called <a href="http://tinyurl.com/pwyasaa/discalc/Taylor2.py" target="_self"><tt>Taylor2.py</tt></a>,
+prints the error of these approximations
+for a given value of \( h \) (note that we can easily build up a
+Taylor series in a list by adding a new term to the last
+computed term in the list).
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">math</span> <span style="color: #008000; font-weight: bold">import</span> exp
+<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">sys</span>
+
+h <span style="color: #666666">=</span> <span style="color: #008000">float</span>(sys<span style="color: #666666">.</span>argv[<span style="color: #666666">1</span>])
+Taylor_series <span style="color: #666666">=</span> []
+Taylor_series<span style="color: #666666">.</span>append(<span style="color: #666666">1</span>)
+Taylor_series<span style="color: #666666">.</span>append(Taylor_series[<span style="color: #666666">-1</span>] <span style="color: #666666">+</span> h)
+Taylor_series<span style="color: #666666">.</span>append(Taylor_series[<span style="color: #666666">-1</span>] <span style="color: #666666">+</span> (<span style="color: #666666">1/2.0</span>)<span style="color: #666666">*</span>h<span style="color: #666666">**2</span>)
+Taylor_series<span style="color: #666666">.</span>append(Taylor_series[<span style="color: #666666">-1</span>] <span style="color: #666666">+</span> (<span style="color: #666666">1/6.0</span>)<span style="color: #666666">*</span>h<span style="color: #666666">**3</span>)
+Taylor_series<span style="color: #666666">.</span>append(Taylor_series[<span style="color: #666666">-1</span>] <span style="color: #666666">+</span> (<span style="color: #666666">1/24.0</span>)<span style="color: #666666">*</span>h<span style="color: #666666">**4</span>)
+
+<span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;h =&#39;</span>, h
+<span style="color: #008000; font-weight: bold">for</span> order <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #008000">len</span>(Taylor_series)):
+    <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;order=</span><span style="color: #BB6688; font-weight: bold">%d</span><span style="color: #BA2121">, error=</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> \
+          (order, exp(h) <span style="color: #666666">-</span> Taylor_series[order])
+</pre></div>
+<p>
+By running the program with \( h=0.2 \), we have the following output:
+
+<p>
+
+<!-- code=text (!bc ccq) typeset with pygments style "default" -->
+<blockquote>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>h = 0.2
+order=0, error=0.221403
+order=1, error=0.0214028
+order=2, error=0.00140276
+order=3, error=6.94248e-05
+order=4, error=2.75816e-06
+</pre></div>
+</blockquote><p>
+We see how much the approximation is improved by adding more terms.
+For \( h=3 \) all these approximations are useless:
+
+<p>
+
+<!-- code=text (!bc ccq) typeset with pygments style "default" -->
+<blockquote>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>h = 3.0
+order=0, error=19.0855
+order=1, error=16.0855
+order=2, error=11.5855
+order=3, error=7.08554
+order=4, error=3.71054
+</pre></div>
+</blockquote><p>
+However, by adding more terms we can get accurate results for any \( h \).
+Running the
+program <a href="http://tinyurl.com/pwyasaa/diffeq/exp_Taylor_series_diffeq.py" target="_self"><tt>exp_Taylor_series_diffeq.py</tt></a> for various values
+of \( h \) shows how much is gained by adding more terms to the Taylor
+series. For \( h=3 \), \( e^3=20.086 \) and we have
+
+<p>
+
+<div class="row">
+  <div class="col-xs-2">
+    <table class="table table-striped table-hover table-condensed">
+<thead>
+<tr><td align="center">\( n+1 \)</td> <td align="center"><b>Taylor series</b></td> </tr>
+</thead>
+<tbody>
+<tr><td align="left">   2            </td> <td align="left">   4                </td> </tr>
+<tr><td align="left">   4            </td> <td align="left">   13               </td> </tr>
+<tr><td align="left">   8            </td> <td align="left">   19.846           </td> </tr>
+<tr><td align="left">   16           </td> <td align="left">   20.086           </td> </tr>
+</tbody>
+    </table>
+  </div> <!-- col-xs-2 -->
+</div> <!-- cell row -->
+<p>
+For \( h=50 \), \( e^{50}=5.1847\cdot 10^{21} \) and we have
+
+<p>
+
+<div class="row">
+  <div class="col-xs-4">
+    <table class="table table-striped table-hover table-condensed">
+<thead>
+<tr><td align="center">\( n+1 \)</td> <td align="center"><b>      Taylor series      </b></td> </tr>
+</thead>
+<tbody>
+<tr><td align="left">   2            </td> <td align="left">   51                           </td> </tr>
+<tr><td align="left">   4            </td> <td align="left">   \( 2.2134\cdot 10^{4} \)     </td> </tr>
+<tr><td align="left">   8            </td> <td align="left">   \( 1.7960\cdot 10^{8} \)     </td> </tr>
+<tr><td align="left">   16           </td> <td align="left">   \( 3.2964\cdot 10^{13} \)    </td> </tr>
+<tr><td align="left">   32           </td> <td align="left">   \( 1.3928\cdot 10^{19} \)    </td> </tr>
+<tr><td align="left">   64           </td> <td align="left">   \( 5.0196\cdot 10^{21} \)    </td> </tr>
+<tr><td align="left">   128          </td> <td align="left">   \( 5.1847\cdot 10^{21} \)    </td> </tr>
+</tbody>
+    </table>
+  </div> <!-- col-xs-4 -->
+</div> <!-- cell row -->
+<p>
+Here, the evolution of the series as more terms are added is quite dramatic
+(and impressive!).
+
+<h2 id="___sec18" class="anchor">Accuracy of the approximation </h2>
+
+<p>
+Recall that the Taylor series is given by
+
+$$
+\begin{equation}
+f(x_{0}+h)\approx\sum_{k=0}^{n}\frac{h^{k}}{k!}f^{(k)}(x_{0})\tp
+\tag{19}
+\end{equation}
+$$
+
+This can be rewritten as an equality by introducing an error term,
+
+$$
+\begin{equation}
+f(x_{0}+h)=\sum_{k=0}^{n}\frac{h^{k}}{k!}f^{(k)}(x_{0})+O(h^{n+1})\tp
+\tag{20}
+\end{equation}
+$$
+
+Let's look a bit closer at this for \( f(x)=e^{x} \). In the case of \( n=1 \), we have
+
+$$
+\begin{equation}
+e^{h}=1+h+O(h^{2})\tp
+\tag{21}
+\end{equation}
+$$
+
+This means that there is a constant \( c \) that does not depend on \( h \) such that
+
+$$
+\begin{equation}
+\left\vert e^{h}-(1+h)\right\vert \leq  ch^{2},
+\tag{22}
+\end{equation}
+$$
+
+so the error is reduced quadratically in \( h \). This means that if we compute the
+fraction
+
+$$
+\begin{equation*}
+q_{h}^{1}=\frac{\left\vert e^{h}-(1+h)\right\vert }{h^{2}},
+\end{equation*}
+$$
+
+we expect it to be bounded as \( h \) is reduced. The program
+<a href="http://tinyurl.com/pwyasaa/discalc/Taylor_err1.py" target="_self"><tt>Taylor_err1.py</tt></a> prints
+\( q_{h}^{1} \) for \( h=1/10,1/20,1/100 \) and \( 1/1000 \).
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">import</span> exp, <span style="color: #008000">abs</span>
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">q_h</span>(h):
+    <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">abs</span>(exp(h) <span style="color: #666666">-</span> (<span style="color: #666666">1+</span>h))<span style="color: #666666">/</span>h<span style="color: #666666">**2</span>
+
+<span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&quot;  h     q_h&quot;</span>
+<span style="color: #008000; font-weight: bold">for</span> h <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #666666">0.1</span>, <span style="color: #666666">0.05</span>, <span style="color: #666666">0.01</span>, <span style="color: #666666">0.001</span>:
+    <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&quot;</span><span style="color: #BB6688; font-weight: bold">%5.3f</span><span style="color: #BA2121"> </span><span style="color: #BB6688; font-weight: bold">%f</span><span style="color: #BA2121">&quot;</span> <span style="color: #666666">%</span>(h, q_h(h))
+</pre></div>
+<p>
+We can run the program and watch the output:
+
+<p>
+
+<!-- code=text (!bc sys) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>Terminal&gt; python src-discalc/Taylor_err1.py
+  h     q_h
+0.100 0.517092
+0.050 0.508439
+0.010 0.501671
+0.001 0.500167
+</pre></div>
+<p>
+We observe that \( q_{h}\approx1/2 \) and it is definitely bounded
+independent of \( h \).
+The program <a href="http://tinyurl.com/pwyasaa/discalc/Taylor_err2.py" target="_self"><tt>Taylor_err2.py</tt></a> prints
+
+$$
+\begin{align*}
+q_{h}^{0}= &\frac{\left\vert e^{h}-1\right\vert }{h},\\ 
+q_{h}^{1}= &  \frac{\left\vert e^{h}-\left(  1+h\right)  \right\vert }{h^{2}
+},\\ 
+q_{h}^{2}= &  \frac{\left\vert e^{h}-\left(  1+h+\frac{h^{2}}{2}\right)
+\right\vert }{h^{3}},\\ 
+q_{h}^{3}= &  \frac{\left\vert e^{h}-\left(  1+h+\frac{h^{2}}{2}+\frac{h^{3}
+}{6}\right)  \right\vert }{h^{4}},\\ 
+q_{h}^{4}= &  \frac{\left\vert e^{h}-\left(  1+h+\frac{h^{2}}{2}+\frac{h^{3}
+}{6}+\frac{h^{4}}{24}\right)  \right\vert }{h^{5}},
+\end{align*}
+$$
+
+for \( h=1/5,1/10,1/20 \) and \( 1/100 \).
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">import</span> exp, <span style="color: #008000">abs</span>
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">q_0</span>(h):
+    <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">abs</span>(exp(h) <span style="color: #666666">-</span> <span style="color: #666666">1</span>) <span style="color: #666666">/</span> h
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">q_1</span>(h):
+    <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">abs</span>(exp(h) <span style="color: #666666">-</span> (<span style="color: #666666">1</span> <span style="color: #666666">+</span> h)) <span style="color: #666666">/</span> h<span style="color: #666666">**2</span>
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">q_2</span>(h):
+    <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">abs</span>(exp(h) <span style="color: #666666">-</span> (<span style="color: #666666">1</span> <span style="color: #666666">+</span> h <span style="color: #666666">+</span> (<span style="color: #666666">1/2.0</span>)<span style="color: #666666">*</span>h<span style="color: #666666">**2</span>)) <span style="color: #666666">/</span> h<span style="color: #666666">**3</span>
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">q_3</span>(h):
+    <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">abs</span>(exp(h) <span style="color: #666666">-</span> (<span style="color: #666666">1</span> <span style="color: #666666">+</span> h <span style="color: #666666">+</span> (<span style="color: #666666">1/2.0</span>)<span style="color: #666666">*</span>h<span style="color: #666666">**2</span> <span style="color: #666666">+</span> \
+                         (<span style="color: #666666">1/6.0</span>)<span style="color: #666666">*</span>h<span style="color: #666666">**3</span>)) <span style="color: #666666">/</span> h<span style="color: #666666">**4</span>
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">q_4</span>(h):
+    <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">abs</span>(exp(h) <span style="color: #666666">-</span> (<span style="color: #666666">1</span> <span style="color: #666666">+</span> h <span style="color: #666666">+</span> (<span style="color: #666666">1/2.0</span>)<span style="color: #666666">*</span>h<span style="color: #666666">**2</span> <span style="color: #666666">+</span> (<span style="color: #666666">1/6.0</span>)<span style="color: #666666">*</span>h<span style="color: #666666">**3</span> <span style="color: #666666">+</span> \
+                         (<span style="color: #666666">1/24.0</span>)<span style="color: #666666">*</span>h<span style="color: #666666">**4</span>)) <span style="color: #666666">/</span> h<span style="color: #666666">**5</span>
+hlist <span style="color: #666666">=</span> [<span style="color: #666666">0.2</span>, <span style="color: #666666">0.1</span>, <span style="color: #666666">0.05</span>, <span style="color: #666666">0.01</span>]
+<span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&quot;</span><span style="color: #BB6688; font-weight: bold">%-05s</span><span style="color: #BA2121"> </span><span style="color: #BB6688; font-weight: bold">%-09s</span><span style="color: #BA2121"> </span><span style="color: #BB6688; font-weight: bold">%-09s</span><span style="color: #BA2121"> </span><span style="color: #BB6688; font-weight: bold">%-09s</span><span style="color: #BA2121"> </span><span style="color: #BB6688; font-weight: bold">%-09s</span><span style="color: #BA2121"> </span><span style="color: #BB6688; font-weight: bold">%-09s</span><span style="color: #BA2121">&quot;</span> \
+      <span style="color: #666666">%</span>(<span style="color: #BA2121">&quot;h&quot;</span>, <span style="color: #BA2121">&quot;q_0&quot;</span>, <span style="color: #BA2121">&quot;q_1&quot;</span>, <span style="color: #BA2121">&quot;q_2&quot;</span>, <span style="color: #BA2121">&quot;q_3&quot;</span>, <span style="color: #BA2121">&quot;q_4&quot;</span>)
+<span style="color: #008000; font-weight: bold">for</span> h <span style="color: #AA22FF; font-weight: bold">in</span> hlist:
+    <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&quot;</span><span style="color: #BB6688; font-weight: bold">%.02f</span><span style="color: #BA2121">  </span><span style="color: #BB6688; font-weight: bold">%04f</span><span style="color: #BA2121">  </span><span style="color: #BB6688; font-weight: bold">%04f</span><span style="color: #BA2121">  </span><span style="color: #BB6688; font-weight: bold">%04f</span><span style="color: #BA2121">  </span><span style="color: #BB6688; font-weight: bold">%04f</span><span style="color: #BA2121">  </span><span style="color: #BB6688; font-weight: bold">%04f</span><span style="color: #BA2121">&quot;</span> \
+          <span style="color: #666666">%</span>(h, q_0(h), q_1(h), q_2(h), q_3(h), q_4(h))
+</pre></div>
+<p>
+By using the program, we get the following table:
+
+<p>
+
+<!-- code=text (!bc ccq) typeset with pygments style "default" -->
+<blockquote>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>h     q_0       q_1       q_2       q_3       q_4
+0.20  1.107014  0.535069  0.175345  0.043391  0.008619
+0.10  1.051709  0.517092  0.170918  0.042514  0.008474
+0.05  1.025422  0.508439  0.168771  0.042087  0.008403
+0.01  1.005017  0.501671  0.167084  0.041750  0.008344
+</pre></div>
+</blockquote><p>
+Again we observe that the error of the approximation behaves as indicated in
+<a href="#mjx-eqn-20">(20)</a>.
+
+<h2 id="___sec19" class="anchor">Derivatives revisited </h2>
+
+<p>
+We observed above that
+
+$$
+\begin{equation*}
+f^{\prime}(x)\approx\frac{f(x+h)-f(x)}{h}.
+\end{equation*}
+$$
+
+By using the Taylor series, we can obtain this approximation directly, and
+also get an indication of the error of the approximation. From
+<a href="#mjx-eqn-20">(20)</a> it follows that
+
+$$
+\begin{equation*}
+f(x+h)=f(x)+hf^{\prime}(x)+O(h^{2}),
+\end{equation*}
+$$
+
+and thus
+
+$$
+\begin{equation}
+f^{\prime}(x)=\frac{f(x+h)-f(x)}{h}+O(h),
+\tag{23}
+\end{equation}
+$$
+
+so the error is proportional to \( h \). We can investigate if this is the
+case through some computer experiments.
+Take
+\( f(x)=\ln(x) \), so that \( f^{\prime}(x)=1/x \).
+The program <a href="http://tinyurl.com/pwyasaa/discalc/diff_ln_err.py" target="_self"><tt>diff_ln_err.py</tt></a>
+prints \( h \) and
+
+$$
+\begin{equation}
+\frac{1}{h}\left\vert f^{\prime}(x)-\frac{f(x+h)-f(x)}{h}\right\vert
+\tag{24}
+\end{equation}
+$$
+
+at \( x=10 \) for a range of \( h \) values.
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">error</span>(h):
+    <span style="color: #008000; font-weight: bold">return</span> (<span style="color: #666666">1.0/</span>h)<span style="color: #666666">*</span><span style="color: #008000">abs</span>(df(x) <span style="color: #666666">-</span> (f(x<span style="color: #666666">+</span>h)<span style="color: #666666">-</span>f(x))<span style="color: #666666">/</span>h)
+
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">math</span> <span style="color: #008000; font-weight: bold">import</span> log <span style="color: #008000; font-weight: bold">as</span> ln
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f</span>(x):
+   <span style="color: #008000; font-weight: bold">return</span> ln(x)
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">df</span>(x):
+    <span style="color: #008000; font-weight: bold">return</span> <span style="color: #666666">1.0/</span>x
+
+x <span style="color: #666666">=</span> <span style="color: #666666">10</span>
+hlist <span style="color: #666666">=</span> []
+<span style="color: #008000; font-weight: bold">for</span> h <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #666666">0.2</span>, <span style="color: #666666">0.1</span>, <span style="color: #666666">0.05</span>, <span style="color: #666666">0.01</span>, <span style="color: #666666">0.001</span>:
+    <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&quot;</span><span style="color: #BB6688; font-weight: bold">%.4f</span><span style="color: #BA2121">   </span><span style="color: #BB6688; font-weight: bold">%4f</span><span style="color: #BA2121">&quot;</span> <span style="color: #666666">%</span> (h, error(h))
+</pre></div>
+<p>
+From the output
+
+<p>
+
+<!-- code=text (!bc ccq) typeset with pygments style "default" -->
+<blockquote>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>0.2000   0.004934
+0.1000   0.004967
+0.0500   0.004983
+0.0100   0.004997
+0.0010   0.005000
+</pre></div>
+</blockquote><p>
+we observe that the quantity in <a href="#mjx-eqn-24">(24)</a> is constant (\( \approx 0.5 \))
+independent of \( h \), which indicates that
+the error is proportional to \( h \).
+
+<h2 id="___sec20" class="anchor">More accurate difference approximations </h2>
+
+<p>
+We can also use the Taylor series to derive more accurate
+approximations of the derivatives. From <a href="#mjx-eqn-20">(20)</a>, we
+have
+
+$$
+\begin{equation}
+f(x+h)\approx f(x)+hf^{\prime}(x)+\frac{h^{2}}{2}f^{\prime\prime}
+(x)+O(h^{3})\tp
+\tag{25}
+\end{equation}
+$$
+
+By using \( -h \) instead of \( h \), we get
+
+$$
+\begin{equation}
+f(x-h)\approx f(x)-hf^{\prime}(x)+\frac{h^{2}}{2}f^{\prime\prime}
+(x)+O(h^{3})\tp
+\tag{26}
+\end{equation}
+$$
+
+By subtracting <a href="#mjx-eqn-26">(26)</a> from
+<a href="#mjx-eqn-25">(25)</a>, we have
+
+$$
+\begin{equation*}
+f(x+h)-f(x-h)=2hf^{\prime}(x)+O(h^{3}),
+\end{equation*}
+$$
+
+and consequently
+
+$$
+\begin{equation}
+f^{\prime}(x)=\frac{f(x+h)-f(x-h)}{2h}+O(h^{2}).
+\tag{27}
+\end{equation}
+$$
+
+Note that the error is now \( O(h^2) \) whereas the error term of
+<a href="#mjx-eqn-23">(23)</a> is \( O(h) \). In order to see if the error is actually
+reduced, let us compare the following two approximations
+
+$$
+\begin{equation*}
+f^{\prime}(x)\approx\frac{f(x+h)-f(x)}{h}\text{ and }f^{\prime}(x) \approx \frac
+{f(x+h)-f(x-h)}{2h}
+\end{equation*}
+$$
+
+by applying them to the discrete version of \( \sin(x) \) on the interval \( (0,\pi) \).
+As usual, we let \( n\geq 1 \) be a given integer, and define the mesh
+
+$$
+\begin{equation*}
+x_{i}=ih\text{ for }i=0,1,\ldots ,n,
+\end{equation*}
+$$
+
+where \( h=\pi/n \). At the nodes, we have the functional values
+
+$$
+\begin{equation*}
+s_{i}=\sin(x_{i})\text{ for }i=0,1,\ldots ,n,
+\end{equation*}
+$$
+
+and at the inner nodes we define the first (F) and second (S) order approximations of
+the derivatives given by
+
+$$
+\begin{equation*}
+d_{i}^{F}=\frac{s_{i+1}-s_{i}}{h},
+\end{equation*}
+$$
+
+and
+
+$$
+\begin{equation*}
+d_{i}^{S}=\frac{s_{i+1}-s_{i-1}}{2h},
+\end{equation*}
+$$
+
+respectively for \( i=1,2,\ldots ,n-1 \). These values should be compared to the
+exact derivative given by
+
+$$
+\begin{equation*}
+d_{i}=\cos(x_{i})\text{ for }i=1,2,\ldots ,n-1.
+\end{equation*}
+$$
+
+The following program, found in <a href="http://tinyurl.com/pwyasaa/discalc/diff_1st2nd_order.py" target="_self"><tt>diff_1st2nd_order.py</tt></a>, plots the discrete
+functions \( (x_{i},d_{i})_{i=1}^{n-1}, \)
+\( (x_{i},d_{i}^{F})_{i=1}^{n-1}, \) and \( (x_{i},d_{i}^{S})_{i=1}^{n-1} \)
+for a given \( n \).  Note that the first three functions in this program
+are completely general in that they can be used for any \( f(x) \) on any
+mesh. The special case of \( f(x)=\sin (x) \) and comparing first- and
+second-order formulas is implemented in the <code>example</code> function. This
+latter function is called in the test block of the file. That is, the
+file is a module and we can reuse the first three functions in other
+programs (in particular, we can use the third function in the next
+example).
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">first_order</span>(f, x, h):
+    <span style="color: #008000; font-weight: bold">return</span> (f(x<span style="color: #666666">+</span>h) <span style="color: #666666">-</span> f(x))<span style="color: #666666">/</span>h
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">second_order</span>(f, x, h):
+    <span style="color: #008000; font-weight: bold">return</span> (f(x<span style="color: #666666">+</span>h) <span style="color: #666666">-</span> f(x<span style="color: #666666">-</span>h))<span style="color: #666666">/</span>(<span style="color: #666666">2*</span>h)
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">derivative_on_mesh</span>(formula, f, a, b, n):
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">    Differentiate f(x) at all internal points in a mesh</span>
+<span style="color: #BA2121; font-style: italic">    on [a,b] with n+1 equally spaced points.</span>
+<span style="color: #BA2121; font-style: italic">    The differentiation formula is given by formula(f, x, h).</span>
+<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
+    h <span style="color: #666666">=</span> (b<span style="color: #666666">-</span>a)<span style="color: #666666">/</span><span style="color: #008000">float</span>(n)
+    x <span style="color: #666666">=</span> linspace(a, b, n<span style="color: #666666">+1</span>)
+    df <span style="color: #666666">=</span> zeros(<span style="color: #008000">len</span>(x))
+    <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">xrange</span>(<span style="color: #666666">1</span>, <span style="color: #008000">len</span>(x)<span style="color: #666666">-1</span>):
+        df[i] <span style="color: #666666">=</span> formula(f, x[i], h)
+    <span style="color: #408080; font-style: italic"># Return x and values at internal points only</span>
+    <span style="color: #008000; font-weight: bold">return</span> x[<span style="color: #666666">1</span>:<span style="color: #666666">-1</span>], df[<span style="color: #666666">1</span>:<span style="color: #666666">-1</span>]
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">example</span>(n):
+    a <span style="color: #666666">=</span> <span style="color: #666666">0</span>; b <span style="color: #666666">=</span> pi;
+    x, dF <span style="color: #666666">=</span> derivative_on_mesh(first_order,  sin, a, b, n)
+    x, dS <span style="color: #666666">=</span> derivative_on_mesh(second_order, sin, a, b, n)
+    <span style="color: #408080; font-style: italic"># Accurate plot of the exact derivative at internal points</span>
+    h <span style="color: #666666">=</span> (b<span style="color: #666666">-</span>a)<span style="color: #666666">/</span><span style="color: #008000">float</span>(n)
+    xfine <span style="color: #666666">=</span> linspace(a<span style="color: #666666">+</span>h, b<span style="color: #666666">-</span>h, <span style="color: #666666">1001</span>)
+    exact <span style="color: #666666">=</span> cos(xfine)
+    plot(x, dF, <span style="color: #BA2121">&#39;r-&#39;</span>, x, dS, <span style="color: #BA2121">&#39;b-&#39;</span>, xfine, exact, <span style="color: #BA2121">&#39;y-&#39;</span>,
+         legend<span style="color: #666666">=</span>(<span style="color: #BA2121">&#39;First-order derivative&#39;</span>,
+                 <span style="color: #BA2121">&#39;Second-order derivative&#39;</span>,
+                 <span style="color: #BA2121">&#39;Correct function&#39;</span>),
+         title<span style="color: #666666">=</span><span style="color: #BA2121">&#39;Approximate and correct discrete &#39;</span>\
+               <span style="color: #BA2121">&#39;functions, n=</span><span style="color: #BB6688; font-weight: bold">%d</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> n)
+
+<span style="color: #408080; font-style: italic"># Main program</span>
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">scitools.std</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #666666">*</span>
+n <span style="color: #666666">=</span> <span style="color: #008000">int</span>(sys<span style="color: #666666">.</span>argv[<span style="color: #666666">1</span>])
+example(n)
+</pre></div>
+<p>
+<center> <!-- figure label: --> <div id="sec:discalc:fig4"></div> <!-- FIGURE -->
+<hr class="figure">
+<center><p class="caption">Figure 4:  Plots of exact and approximate derivatives with various number of mesh points \( n \).  <!-- caption label: sec:discalc:fig4 --> </p></center>
+<p><img src="fig-discalc/discalc_fig4.png" align="bottom" width=400></p>
+</center>
+
+<p>
+The result of running the program with four different \( n \) values
+is presented in Figure <a href="#sec:discalc:fig4">4</a>. Observe that
+\( d^{S}_i \) is a better approximation to \( d_i \) than \( d^{F}_i \), and note that both
+approximations become very good as \( n \) is getting large.
+
+<h2 id="___sec21" class="anchor">Second-order derivatives </h2>
+
+<p>
+We have seen that the Taylor series can be used to derive
+approximations of the derivative. But what about higher order derivatives?
+Next we shall
+look at second order derivatives. From <a href="#mjx-eqn-20">(20)</a>
+we have
+
+$$
+\begin{equation*}
+f(x_{0}+h)=f(x_{0})+hf^{\prime}(x_{0})+\frac{h^{2}}{2}f^{\prime\prime}
+(x_{0})+\frac{h^{3}}{6}f^{\prime\prime\prime}(x_{0})+O(h^{4}),
+\end{equation*}
+$$
+
+and by using \( -h \), we have
+
+$$
+\begin{equation*}
+f(x_{0}-h)=f(x_{0})-hf^{\prime}(x_{0})+\frac{h^{2}}{2}f^{\prime\prime}
+(x_{0})-\frac{h^{3}}{6}f^{\prime\prime\prime}(x_{0})+O(h^{4})
+\end{equation*}
+$$
+
+By adding these equations, we have
+
+$$
+\begin{equation*}
+f(x_{0}+h)+f(x_{0}-h)=2f(x_{0})+h^{2}f^{\prime\prime}(x_{0})+O(h^{4}),
+\end{equation*}
+$$
+
+and thus
+
+$$
+\begin{equation}
+f^{\prime\prime}(x_{0})=\frac{f(x_{0}-h)-2f(x_{0})+f(x_{0}+h)}{h^{2}}
++O(h^{2})\tp
+\tag{28}
+\end{equation}
+$$
+
+For a discrete function \( (x_{i},y_{i})_{i=0}^{n} \), \( y_i=f(x_i) \),
+we can define the following
+approximation of the second derivative,
+
+$$
+\begin{equation}
+d_{i}=\frac{y_{i-1}-2y_{i}+y_{i+1}}{h^{2}}\tp
+\tag{29}
+\end{equation}
+$$
+
+<p>
+We can make a function, found in the file <a href="http://tinyurl.com/pwyasaa/discalc/diff2nd.py" target="_self"><tt>diff2nd.py</tt></a>, that evaluates
+<a href="#mjx-eqn-29">(29)</a> on a mesh. As an example, we apply the
+function to
+
+$$
+\begin{equation*}
+f(x)=\sin(e^{x}),
+\end{equation*}
+$$
+
+where the exact second-order derivative is given by
+
+$$
+\begin{equation*}
+f^{\prime\prime}(x)=e^{x}\cos\left(  e^{x}\right)  -\left(  \sin\left(
+e^{x}\right)  \right)  e^{2x}\tp
+\end{equation*}
+$$
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">diff_1st2nd_order</span> <span style="color: #008000; font-weight: bold">import</span> derivative_on_mesh
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">scitools.std</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #666666">*</span>
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">diff2nd</span>(f, x, h):
+    <span style="color: #008000; font-weight: bold">return</span> (f(x<span style="color: #666666">+</span>h) <span style="color: #666666">-</span> <span style="color: #666666">2*</span>f(x) <span style="color: #666666">+</span> f(x<span style="color: #666666">-</span>h))<span style="color: #666666">/</span>(h<span style="color: #666666">**2</span>)
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">example</span>(n):
+    a <span style="color: #666666">=</span> <span style="color: #666666">0</span>;  b <span style="color: #666666">=</span> pi
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f</span>(x):
+        <span style="color: #008000; font-weight: bold">return</span> sin(exp(x))
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">exact_d2f</span>(x):
+        e_x <span style="color: #666666">=</span> exp(x)
+        <span style="color: #008000; font-weight: bold">return</span> e_x<span style="color: #666666">*</span>cos(e_x) <span style="color: #666666">-</span> sin(e_x)<span style="color: #666666">*</span>exp(<span style="color: #666666">2*</span>x)
+
+    x, d2f <span style="color: #666666">=</span> derivative_on_mesh(diff2nd, f, a, b, n)
+    h <span style="color: #666666">=</span> (b<span style="color: #666666">-</span>a)<span style="color: #666666">/</span><span style="color: #008000">float</span>(n)
+    xfine <span style="color: #666666">=</span> linspace(a<span style="color: #666666">+</span>h, b<span style="color: #666666">-</span>h, <span style="color: #666666">1001</span>)  <span style="color: #408080; font-style: italic"># fine mesh for comparison</span>
+    exact <span style="color: #666666">=</span> exact_d2f(xfine)
+    plot(x, d2f, <span style="color: #BA2121">&#39;r-&#39;</span>, xfine, exact, <span style="color: #BA2121">&#39;b-&#39;</span>,
+         legend<span style="color: #666666">=</span>(<span style="color: #BA2121">&#39;Approximate derivative&#39;</span>,
+                 <span style="color: #BA2121">&#39;Correct function&#39;</span>),
+         title<span style="color: #666666">=</span><span style="color: #BA2121">&#39;Approximate and correct second order &#39;</span>\
+               <span style="color: #BA2121">&#39;derivatives, n=</span><span style="color: #BB6688; font-weight: bold">%d</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> n,
+         savefig<span style="color: #666666">=</span><span style="color: #BA2121">&#39;tmp.pdf&#39;</span>)
+
+<span style="color: #008000; font-weight: bold">try</span>:
+    n <span style="color: #666666">=</span> <span style="color: #008000">int</span>(sys<span style="color: #666666">.</span>argv[<span style="color: #666666">1</span>])
+<span style="color: #008000; font-weight: bold">except</span>:
+    <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&quot;usage: </span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121"> n&quot;</span> <span style="color: #666666">%</span> sys<span style="color: #666666">.</span>argv[<span style="color: #666666">0</span>]; sys<span style="color: #666666">.</span>exit(<span style="color: #666666">1</span>)
+
+example(n)
+</pre></div>
+<p>
+In Figure <a href="#sec:discalc:fig5">5</a> we compare the exact and the approximate derivatives for
+\( n=10, 20, 50 \), and \( 100 \). As usual, the error decreases when \( n \)
+becomes larger, but note here that the error is very large for
+small values of \( n \).
+
+<p>
+<center> <!-- figure label: --> <div id="sec:discalc:fig5"></div> <!-- FIGURE -->
+<hr class="figure">
+<center><p class="caption">Figure 5:  Plots of exact and approximate second-order derivatives with various mesh resolution \( n \).  <!-- caption label: sec:discalc:fig5 --> </p></center>
+<p><img src="fig-discalc/discalc_fig5.png" align="bottom" width=400></p>
+</center>
+
+<h1 id="___sec22" class="anchor">Exercises </h1>
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:discalc:ae-2" class="anchor">Exercise 1: Interpolate a discrete function</h2>
+
+<p>
+In a Python function, represent the mathematical function
+
+$$
+\begin{equation*} f(x) = \exp{(-x^2)}\cos(2\pi x)\end{equation*}
+$$
+
+on a mesh
+consisting of \( q+1 \)
+equally spaced points on \( [-1,1] \), and
+return 1) the interpolated function value at \( x=-0.45 \) and 2)
+the error in the interpolated value.
+Call the function and write out the error
+for \( q=2,4,8,16 \).
+Filename: <code>interpolate_exp_cos</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:discalc:ae-3" class="anchor">Exercise 2: Study a function for different parameter values</h2>
+
+<p>
+Develop a program that creates a plot of the function \( f(x)=\sin(\frac
+{1}{x+\varepsilon}) \) for \( x \) in the unit interval, where \( \varepsilon>0 \) is
+a given input parameter. Use \( n+1 \) nodes in the plot.
+
+<p>
+<b>a)</b>
+Test the program using \( n=10 \) and \( \varepsilon=1/5 \).
+
+<p>
+<b>b)</b>
+Refine the program such that it plots the function for two values of
+\( n \); say \( n \) and \( n+10 \).
+
+<p>
+<b>c)</b>
+How large do you have to choose \( n \) in order for the difference between these
+two functions to be less than \( 0.1 \)?
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_2_1" style="font-size: 80%;"></a>
+<b>Hint.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_2_1">
+
+<p>
+Each function gives an
+array. Create a <code>while</code> loop and use
+the <code>max</code> function of the arrays to retrieve the maximum value and
+compare these.
+
+<p>
+</div></p>
+</div>
+</p>
+
+<p>
+<!-- --- end hint in exercise --- -->
+
+<p>
+<b>d)</b>
+Let \( \varepsilon=1/10 \) and recalculate.
+
+<p>
+<b>e)</b>
+Let \( \varepsilon=1/20 \) and recalculate.
+
+<p>
+<b>f)</b>
+Try to find a formula for how large \( n \) needs to be for a given value of
+\( \varepsilon \) such that increasing \( n \) further does not change the plot so
+much that it is visible on the screen. Note that there is no exact answer to
+this question.
+
+<p>
+Filename: <code>plot_sin_eps</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:discalc:ae-4" class="anchor">Exercise 3: Study a function and its derivative</h2>
+
+<p>
+Consider the function
+
+$$
+\begin{equation*}
+f(x)=\sin\left(  \frac{1}{x+\varepsilon}\right)
+\end{equation*}
+$$
+
+for \( x \) ranging from \( 0 \) to \( 1 \), and the derivative
+
+$$
+\begin{equation*}
+f^{\prime}(x)=\frac{-\cos\left(  \frac{1}{x+\varepsilon}\right)  }{\left(
+x+\varepsilon\right)  ^{2}}.
+\end{equation*}
+$$
+
+Here, \( \varepsilon \) is a given input parameter.
+
+<p>
+<b>a)</b>
+Develop a program that creates a plot of the derivative of \( f=f(x) \) based
+on a finite difference approximation using \( n \) computational nodes. The
+program should also graph the exact derivative given by \( f^{\prime}=f^{\prime
+}(x) \) above.
+
+<p>
+<b>b)</b>
+Test the program using \( n=10 \) and \( \varepsilon=1/5 \).
+
+<p>
+<b>c)</b>
+How large do you have to choose \( n \) in order for the difference between these
+two functions to be less than \( 0.1 \)?
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_3_1" style="font-size: 80%;"></a>
+<b>Hint.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_3_1">
+
+<p>
+Each function gives an
+array. Create a <code>while</code> loop and use
+the <code>max</code> function of the arrays to retrieve the maximum value and
+compare these.
+
+<p>
+</div></p>
+</div>
+</p>
+
+<p>
+<!-- --- end hint in exercise --- -->
+
+<p>
+<b>d)</b>
+Let \( \varepsilon=1/10 \) and recalculate.
+
+<p>
+<b>e)</b>
+Let \( \varepsilon=1/20 \) and recalculate.
+
+<p>
+<b>f)</b>
+Try to determine experimentally how large \( n \) needs to be for a given value of
+\( \varepsilon \) such that increasing \( n \) further does not change the plot so
+much that you can view it on the screen. Note, again, that there is no exact
+solution to this problem.
+
+<p>
+Filename: <code>sin_deriv</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:discalc:ae-5" class="anchor">Exercise 4: Use the Trapezoidal method</h2>
+
+<p>
+The purpose of this exercise is to test the program
+<a href="http://tinyurl.com/pwyasaa/discalc/trapezoidal.py" target="_self"><tt>trapezoidal.py</tt></a>.
+
+<p>
+<b>a)</b>
+Let
+
+$$
+\begin{equation*}
+\overline{a}=\int_{0}^{1}e^{4x}dx=\frac{1}{4}e^{4}-\frac{1}{4}.
+\end{equation*}
+$$
+
+Compute the integral using the program <code>trapezoidal.py</code> and, for a given \( n \),
+let \( a(n) \) denote the result. Try to find, experimentally, how large you
+have to choose \( n \) in order for
+
+$$
+\begin{equation*}
+\left\vert \overline{a}-a(n)\right\vert \leq \varepsilon
+\end{equation*}
+$$
+
+where \( \varepsilon=1/100 \).
+
+<p>
+<b>b)</b>
+Recalculate with \( \varepsilon=1/1000 \).
+
+<p>
+<b>c)</b>
+Recalculate with \( \varepsilon=1/10000 \).
+
+<p>
+<b>d)</b>
+Try to figure out, in general, how large \( n \) has to be such that
+
+$$
+\begin{equation*}
+\left\vert \overline{a}-a(n)\right\vert \leq \varepsilon
+\end{equation*}
+$$
+
+for a given value of \( \varepsilon \).
+
+<p>
+Filename: <code>trapezoidal_test_exp</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:discalc:ae-5-1" class="anchor">Exercise 5: Compute a sequence of integrals</h2>
+
+<p>
+<b>a)</b>
+Let
+
+$$
+\begin{equation*}
+\overline{b}_{k}=\int_{0}^{1}x^{k}dx=\frac{1}{k+1},
+\end{equation*}
+$$
+
+and let \( b_{k}(n) \) denote the result of using the program <code>trapezoidal.py</code> to
+compute \( \int_{0}^{1}x^{k}dx \). For \( k=4,6 \) and \( 8 \), try to figure out, by doing
+numerical experiments, how large \( n \) needs to be in order for \( b_{k}(n) \) to
+satisfy
+
+$$
+\begin{equation*}
+\left\vert \overline{b}_{k}-b_{k}(n)\right\vert \leq 0.0001.
+\end{equation*}
+$$
+
+Note that \( n \) will depend on \( k \).
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_5_1" style="font-size: 80%;"></a>
+<b>Hint.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_5_1">
+
+<p>
+Run the program for each \( k \), look at
+the output,
+and calculate \( \left\vert \overline{b}_{k}-b_{k}(n)\right\vert \) manually.
+
+<p>
+</div></p>
+</div>
+</p>
+
+<p>
+<!-- --- end hint in exercise --- -->
+
+<p>
+<b>b)</b>
+Try to generalize the result in the previous point to arbitrary \( k\geq 2 \).
+
+<p>
+<b>c)</b>
+Generate a plot of \( x^{k} \) on the unit interval for \( k=2,4,6,8, \) and \( 10 \),
+and try to figure out if the results obtained in (a) and (b) are reasonable
+taking into account that the program <code>trapezoidal.py</code> was developed using a
+piecewise linear approximation of the function.
+
+<p>
+Filename: <code>trapezoidal_test_power</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:discalc:ae-6" class="anchor">Exercise 6: Use the Trapezoidal method</h2>
+
+<p>
+The purpose of this exercise is to compute an approximation of the
+integral
+
+$$
+\begin{equation*}
+I=\int_{-\infty}^{\infty}e^{-x^{2}}dx
+\end{equation*}
+$$
+
+using the Trapezoidal method.
+
+<p>
+<b>a)</b>
+Plot the function \( e^{-x^{2}} \) for \( x \) ranging from \( -10 \) to \( 10 \) and use
+the plot to argue that
+
+$$
+\begin{equation*}
+\int_{-\infty}^{\infty}e^{-x^{2}}dx=2\int_{0}^{\infty}e^{-x^{2}}dx.
+\end{equation*}
+$$
+
+<p>
+<b>b)</b>
+Let \( T(n,L) \) be the approximation of the integral
+
+$$
+\begin{equation*}
+2\int_{0}^{L}e^{-x^{2}}dx
+\end{equation*}
+$$
+
+computed by the Trapezoidal method using \( n \) subintervals. Develop a
+program that computes the value of \( T \) for a given \( n \) and \( L \).
+
+<p>
+<b>c)</b>
+Extend the program to write out values of \( T(n,L) \) in a
+table with rows corresponding to \( n=100,200,\ldots,500 \) and
+columns corresponding to \( L=2,4,6,8,10 \).
+
+<p>
+<b>d)</b>
+Extend the program to also print a table of the errors in \( T(n,L) \)
+for the same \( n \) and \( L \) values as in (c). The exact value
+of the integral is \( \sqrt{\pi} \).
+
+<p>
+Filename: <code>integrate_exp</code>.
+
+<p>
+<!-- Closing remarks for this Exercise -->
+
+<h3 id="___sec29" class="anchor">Remarks </h3>
+
+<p>
+Numerical integration of integrals with finite limits
+requires a choice of \( n \), while with infinite limits we also need to
+truncate the domain, i.e., choose \( L \) in the present example.
+The accuracy depends on both \( n \) and \( L \).
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:discalc:ae-6-1" class="anchor">Exercise 7: Compute trigonometric integrals</h2>
+
+<p>
+The purpose of this exercise is to demonstrate a property of trigonometric
+functions that you will meet in later courses. In this exercise, you may
+compute the integrals using the program <code>trapezoidal.py</code> with \( n=100 \).
+
+<p>
+<b>a)</b>
+Consider the integrals
+
+$$
+\begin{equation*}
+I_{p,q}=2\int_{0}^{1}\sin(p\pi x)\sin(q\pi x)dx
+\end{equation*}
+$$
+
+and fill in values of the integral \( I_{p,q} \) in a table with
+rows corresponding to
+\( q=0,1,\ldots,4 \) and columns corresponding to \( p=0,1,\ldots,4 \).
+
+<p>
+<b>b)</b>
+Repeat the calculations for the integrals
+
+$$
+\begin{equation*}
+I_{p,q}=2\int_{0}^{1}\cos(p\pi x)\cos(q\pi x)dx.
+\end{equation*}
+$$
+
+<p>
+<b>c)</b>
+Repeat the calculations for the integrals
+
+$$
+\begin{equation*}
+I_{p,q}=2\int_{0}^{1}\cos(p\pi x)\sin(q\pi x)dx.
+\end{equation*}
+$$
+
+<p>
+Filename: <code>ortho_trig_funcs</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:discalc:ae-7" class="anchor">Exercise 8: Plot functions and their derivatives</h2>
+
+<p>
+<b>a)</b>
+Use the program <a href="http://tinyurl.com/pwyasaa/discalc/diff_func.py" target="_self"><tt>diff_func.py</tt></a>
+to plot approximations of the derivative for the following functions
+defined on the interval ranging from \( x=1/1000 \) to \( x=1 \):
+
+$$
+\begin{align*}
+f(x)  &  =\ln\left(  x+\frac{1}{100}\right)  ,\\ 
+g(x)  &  =\cos(e^{10x}),\\ 
+h(x)  &  =x^{x}.
+\end{align*}
+$$
+
+<p>
+<b>b)</b>
+Extend the program such that both the discrete approximation and the
+correct (analytical) derivative can be plotted. The analytical derivative
+should be evaluated in the same computational points as the numerical
+approximation. Test the program by comparing the discrete and analytical
+derivative of \( x^{3} \).
+
+<p>
+<b>c)</b>
+Use the program to compare the analytical and discrete
+derivatives of the functions \( f \), \( g \), and \( h \).
+How large do you have to choose \( n \)
+in each case in order for the plots to become indistinguishable on your
+screen. Note that the analytical derivatives are given by:
+
+$$
+\begin{align*}
+f^{\prime}(x) &  =\frac{1}{x+\frac{1}{100}},\\ 
+g^{\prime}(x) &  =-10e^{10x}\sin\left(  e^{10x}\right)  \\ 
+h^{\prime}(x) &  =\left(  \ln x\right)  x^{x}+xx^{x-1}
+\end{align*}
+$$
+
+<p>
+Filename: <code>diff_functions</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:discalc:ae-8" class="anchor">Exercise 9: Use the Trapezoidal method</h2>
+
+<p>
+Develop an efficient program that creates a plot of the function
+
+$$
+\begin{equation*}
+f(x)=\frac{1}{2}+\frac{1}{\sqrt{\pi}}\int_{0}^{x}e^{-t^{2}}dt
+\end{equation*}
+$$
+
+for \( x\in\left[  0,10\right]   \). The integral should be approximated using the
+Trapezoidal method and use as few function evaluations of
+\( e^{-t^2} \) as possible.
+Filename: <code>plot_integral</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<h1 id="___sec33" class="anchor">References </h1>
+
+<p>
+<!-- begin bibliography -->
+
+<ol>
+ <li> <div id="Langtangen_TCSE6_ode1"></div> <b>A. Tveito</b>. 
+    Introduction to differential equations,
+    \emphhttp://hplgit.github.io/primer.html/doc/pub/ode1,
+    <a href="http://hplgit.github.io/primer.html/doc/pub/ode1" target="_self"><tt>http://hplgit.github.io/primer.html/doc/pub/ode1</tt></a>.</li>
+ <li> <div id="Langtangen_TCSE6_diffeq"></div> <b>H. P. Langtangen</b>. 
+    Sequences and difference equations,
+    \emphhttp://hplgit.github.io/primer.html/doc/pub/diffeq,
+    <a href="http://hplgit.github.io/primer.html/doc/pub/diffeq" target="_self"><tt>http://hplgit.github.io/primer.html/doc/pub/diffeq</tt></a>.</li>
+</ol>
+
+<!-- end bibliography -->
+
+<p>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pager">
+</ul>
+<!-- ------------------- end of main content --------------- -->
+
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap footer
+<footer>
+<a href="http://..."><img width="250" align=right src="http://..."></a>
+</footer>
+-->
+
+
+</body>
+</html>
+    
+

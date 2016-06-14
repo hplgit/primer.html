@@ -1,0 +1,583 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Dictionaries and strings">
+<meta name="keywords" content="dictionary,keys (dictionaries),immutable objects,mutable objects,summing a list,summing over an iterator,dictionary comprehensions,nested dictionaries,dictionary nested,date conversion,plotting data vs date,string slicing,slicing,substrings,string substrings,string searching,string find,string substitution,substitution (in text),string replace,string splitting,string case change,string testing for number,whitespace,blank lines in files,string stripping leading/trailing blanks,string joining words,dictionary functionality">
+
+<title>Dictionaries and strings</title>
+
+<!-- Bootstrap style: bootstrap_simula -->
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_styles/style_bootstrap/css/bootstrap_simula.css" rel="stylesheet">
+<!-- not necessary
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+
+<style type="text/css">
+/* Let inline verbatim have the same color as the surroundings */
+code { color: inherit; background-color: transparent; }
+
+/* Add scrollbar to dropdown menus in bootstrap navigation bar */
+.dropdown-menu {
+   height: auto;
+   max-height: 400px;
+   overflow-x: hidden;
+}
+
+/* Adds an invisible element before each target to offset for the navigation
+   bar */
+.anchor::before {
+  content:"";
+  display:block;
+  height:50px; /* fixed header height*/
+  margin:-50px 0 0; /* negative fixed header height */
+}
+
+body { font-size:20px;line-height:1.5; }
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [('Table of contents',
+               1,
+               'table_of_contents',
+               'table_of_contents'),
+              (u'Dictionaries', 1, u'sec:files:dicts', u'sec:files:dicts'),
+              (u'Making dictionaries', 2, None, '___sec1'),
+              (u'Dictionary operations', 2, None, '___sec2'),
+              (u'Remark', 3, None, '___sec3'),
+              (u'Example: Polynomials as dictionaries',
+               2,
+               u'sec:files:poly',
+               u'sec:files:poly'),
+              (u'Dictionaries with default values and ordering',
+               2,
+               u'sec:files:dict:default:order',
+               u'sec:files:dict:default:order'),
+              (u'Dictionaries with default values', 3, None, '___sec6'),
+              (u'Ordered dictionaries', 3, None, '___sec7'),
+              (u'Example: Storing file data in dictionaries',
+               2,
+               u'sec:files:dict:density',
+               u'sec:files:dict:density'),
+              (u'Problem', 3, None, '___sec9'),
+              (u'Solution', 3, None, '___sec10'),
+              (u'Example: Storing file data in nested dictionaries',
+               2,
+               u'sec:files:dictdict',
+               u'sec:files:dictdict'),
+              (u'Problem', 3, None, '___sec12'),
+              (u'Algorithm', 3, None, '___sec13'),
+              (u'Implementation', 3, None, '___sec14'),
+              (u'Dissection', 3, None, '___sec15'),
+              (u'Example: Reading and plotting data recorded at specific dates',
+               2,
+               u'sec:files:stockprices',
+               u'sec:files:stockprices'),
+              (u'Problem', 3, None, '___sec17'),
+              (u'Solution', 3, None, '___sec18'),
+              (u'Strings', 1, u'sec:files:str', u'sec:files:str'),
+              (u'Common operations on strings',
+               2,
+               u'sec:files:stringop',
+               u'sec:files:stringop'),
+              (u'Substring specification', 3, None, '___sec21'),
+              (u'Searching for substrings', 3, None, '___sec22'),
+              (u'Substitution', 3, None, '___sec23'),
+              (u'String splitting', 3, None, '___sec24'),
+              (u'Upper and lower case', 3, None, '___sec25'),
+              (u'Strings are constant', 3, None, '___sec26'),
+              (u'Strings with digits only', 3, None, '___sec27'),
+              (u'Whitespace', 3, None, '___sec28'),
+              (u'Joining strings', 3, None, '___sec29'),
+              (u'Example: Reading pairs of numbers',
+               2,
+               u'sec:files:pairs',
+               u'sec:files:pairs'),
+              (u'Problem', 3, None, '___sec31'),
+              (u'Solution', 3, None, '___sec32'),
+              (u'Example: Reading coordinates', 2, None, '___sec33'),
+              (u'Problem', 3, None, '___sec34'),
+              (u'Solution 1: substring extraction', 3, None, '___sec35'),
+              (u'Solution 2: string search', 3, None, '___sec36'),
+              (u'Solution 3: string split', 3, None, '___sec37'),
+              (u'Reading data from web pages',
+               1,
+               u'sec:files:webtxt',
+               u'sec:files:webtxt'),
+              (u'About web pages',
+               2,
+               u'sec:files:HTMLintro',
+               u'sec:files:HTMLintro'),
+              (u'How to access web pages in programs',
+               2,
+               u'sec:files:urllib',
+               u'sec:files:urllib'),
+              (u'Alternative 1', 3, None, '___sec41'),
+              (u'Alternative 2', 3, None, '___sec42'),
+              (u'Example: Reading pure text files',
+               2,
+               u'sec:files:url:weather',
+               u'sec:files:url:weather'),
+              (u'Example: Extracting data from HTML',
+               2,
+               u'sec:files:url:interpret',
+               u'sec:files:url:interpret'),
+              (u'Handling non-English text',
+               2,
+               u'sec:files:encoding',
+               u'sec:files:encoding'),
+              (u'Reading and writing spreadsheet files',
+               1,
+               u'sec:files:csv',
+               u'sec:files:csv'),
+              (u'CSV files', 2, None, '___sec47'),
+              (u'Reading CSV files', 2, None, '___sec48'),
+              (u'Processing spreadsheet data', 2, None, '___sec49'),
+              (u'Writing CSV files', 2, None, '___sec50'),
+              (u'Remark', 3, None, '___sec51'),
+              (u'Representing number cells with Numerical Python arrays',
+               2,
+               None,
+               '___sec52'),
+              (u'Using more high-level Numerical Python functionality',
+               2,
+               None,
+               '___sec53'),
+              (u'Making code that is compatible with Python 2 and 3',
+               1,
+               u'sec:dictstring:py23',
+               u'sec:dictstring:py23'),
+              (u'Basic differences between Python 2 and 3',
+               2,
+               None,
+               '___sec55'),
+              (u'`xrange` in Python 2 is `range` in Python 3',
+               3,
+               None,
+               '___sec56'),
+              (u'Python 3 often avoids returning lists and dictionaries',
+               3,
+               None,
+               '___sec57'),
+              (u'Library modules have different names', 3, None, '___sec58'),
+              (u'Python 3 has unicode and byte strings', 3, None, '___sec59'),
+              (u'Python 3 has different relative import syntax inside packages',
+               3,
+               None,
+               '___sec60'),
+              (u'Turning Python 2 code into Python 3 code',
+               2,
+               None,
+               '___sec61'),
+              (u'Summary', 1, None, '___sec62'),
+              (u'Chapter topics', 2, None, '___sec63'),
+              (u'Dictionaries', 3, None, '___sec64'),
+              (u'Strings', 3, None, '___sec65'),
+              (u'Downloading Internet files', 3, None, '___sec66'),
+              (u'Terminology', 3, None, '___sec67'),
+              (u'Example: A file database',
+               2,
+               u'sec:files:sumex',
+               u'sec:files:sumex'),
+              (u'Problem', 3, None, '___sec69'),
+              (u'Solution', 3, None, '___sec70'),
+              (u'Exercises',
+               1,
+               u'sec:files:exercises',
+               u'sec:files:exercises'),
+              (u'Exercise 1: Make a dictionary from a table',
+               2,
+               u'sec:files:ex2b:basic',
+               u'sec:files:ex2b:basic'),
+              (u'Exercise 2: Explore syntax differences: lists vs. dicts',
+               2,
+               u'sec:files:ex2',
+               u'sec:files:ex2'),
+              (u'Exercise 3: Use string operations to improve a program',
+               2,
+               u'sec:files:ex17',
+               u'sec:files:ex17'),
+              (u'Exercise 4: Interpret output from a program',
+               2,
+               u'sec:files:ex13',
+               u'sec:files:ex13'),
+              (u'Exercise 5: Make a dictionary',
+               2,
+               u'sec:files:ex2b',
+               u'sec:files:ex2b'),
+              (u'Exercise 6: Make a nested dictionary',
+               2,
+               u'sec:files:ex2c',
+               u'sec:files:ex2c'),
+              (u'Exercise 7: Make a nested dictionary from a file',
+               2,
+               u'sec:files:ex2d:nested',
+               u'sec:files:ex2d:nested'),
+              (u'Exercise 8: Make a nested dictionary from a file',
+               2,
+               u'sec:files:ex2d:nested2',
+               u'sec:files:ex2d:nested2'),
+              (u'Exercise 9: Compute the area of a triangle',
+               2,
+               u'sec:files:ex2d',
+               u'sec:files:ex2d'),
+              (u'Exercise 10: Compare data structures for polynomials',
+               2,
+               u'sec:files:ex16',
+               u'sec:files:ex16'),
+              (u'Exercise 11: Compute the derivative of a polynomial',
+               2,
+               u'sec:files:ex3',
+               u'sec:files:ex3'),
+              (u'Exercise 12: Specify functions on the command line',
+               2,
+               u'sec:basic:ex10',
+               u'sec:basic:ex10'),
+              (u'Exercise 13: Interpret function specifications',
+               2,
+               u'sec:basic:ex10b',
+               u'sec:basic:ex10b'),
+              (u'Exercise 14: Compare average temperatures in cities',
+               2,
+               u'sec:files:ex8',
+               u'sec:files:ex8'),
+              (u'Exercise 15: Generate an HTML report with figures',
+               2,
+               u'sec:files:ex21',
+               u'sec:files:ex21'),
+              (u'References', 1, None, '___sec87')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- newcommands_keep.tex -->
+$$
+\newcommand{\tp}{\thinspace .}
+$$
+
+
+
+
+    
+<!-- Bootstrap navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="dictstring-bootstrap.html">Dictionaries and strings</a>
+  </div>
+
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     <!-- navigation toc: --> <li><a href="._dictstring-bootstrap000.html#table_of_contents" style="font-size: 80%;"><b>Table of contents</b></a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-bootstrap001.html#sec:files:dicts" style="font-size: 80%;"><b>Dictionaries</b></a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-bootstrap001.html#___sec1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Making dictionaries</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-bootstrap001.html#___sec2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Dictionary operations</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-bootstrap001.html#___sec3" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remark</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-bootstrap001.html#sec:files:poly" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Polynomials as dictionaries</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-bootstrap001.html#sec:files:dict:default:order" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Dictionaries with default values and ordering</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-bootstrap001.html#___sec6" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dictionaries with default values</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-bootstrap001.html#___sec7" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ordered dictionaries</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-bootstrap001.html#sec:files:dict:density" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Storing file data in dictionaries</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-bootstrap001.html#___sec9" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-bootstrap001.html#___sec10" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Solution</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-bootstrap001.html#sec:files:dictdict" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Storing file data in nested dictionaries</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-bootstrap001.html#___sec12" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-bootstrap001.html#___sec13" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Algorithm</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-bootstrap001.html#___sec14" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Implementation</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-bootstrap001.html#___sec15" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dissection</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-bootstrap001.html#sec:files:stockprices" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Reading and plotting data recorded at specific dates</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-bootstrap001.html#___sec17" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-bootstrap001.html#___sec18" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Solution</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-bootstrap002.html#sec:files:str" style="font-size: 80%;"><b>Strings</b></a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-bootstrap002.html#sec:files:stringop" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Common operations on strings</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-bootstrap002.html#___sec21" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Substring specification</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-bootstrap002.html#___sec22" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Searching for substrings</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-bootstrap002.html#___sec23" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Substitution</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-bootstrap002.html#___sec24" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String splitting</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-bootstrap002.html#___sec25" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Upper and lower case</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-bootstrap002.html#___sec26" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Strings are constant</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-bootstrap002.html#___sec27" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Strings with digits only</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-bootstrap002.html#___sec28" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Whitespace</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-bootstrap002.html#___sec29" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Joining strings</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-bootstrap002.html#sec:files:pairs" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Reading pairs of numbers</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-bootstrap002.html#___sec31" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-bootstrap002.html#___sec32" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Solution</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-bootstrap002.html#___sec33" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Reading coordinates</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-bootstrap002.html#___sec34" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-bootstrap002.html#___sec35" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Solution 1: substring extraction</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-bootstrap002.html#___sec36" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Solution 2: string search</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-bootstrap002.html#___sec37" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Solution 3: string split</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-bootstrap003.html#sec:files:webtxt" style="font-size: 80%;"><b>Reading data from web pages</b></a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-bootstrap003.html#sec:files:HTMLintro" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;About web pages</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-bootstrap003.html#sec:files:urllib" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;How to access web pages in programs</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-bootstrap003.html#___sec41" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Alternative 1</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-bootstrap003.html#___sec42" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Alternative 2</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-bootstrap003.html#sec:files:url:weather" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Reading pure text files</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-bootstrap003.html#sec:files:url:interpret" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Extracting data from HTML</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-bootstrap003.html#sec:files:encoding" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Handling non-English text</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-bootstrap004.html#sec:files:csv" style="font-size: 80%;"><b>Reading and writing spreadsheet files</b></a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-bootstrap004.html#___sec47" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;CSV files</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-bootstrap004.html#___sec48" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Reading CSV files</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-bootstrap004.html#___sec49" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Processing spreadsheet data</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-bootstrap004.html#___sec50" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Writing CSV files</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-bootstrap004.html#___sec51" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remark</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-bootstrap004.html#___sec52" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Representing number cells with Numerical Python arrays</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-bootstrap004.html#___sec53" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Using more high-level Numerical Python functionality</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:dictstring:py23" style="font-size: 80%;"><b>Making code that is compatible with Python 2 and 3</b></a></li>
+     <!-- navigation toc: --> <li><a href="#___sec55" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Basic differences between Python 2 and 3</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec56" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`xrange` in Python 2 is <code>range</code> in Python 3</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec57" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Python 3 often avoids returning lists and dictionaries</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec58" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Library modules have different names</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec59" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Python 3 has unicode and byte strings</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec60" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Python 3 has different relative import syntax inside packages</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec61" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Turning Python 2 code into Python 3 code</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-bootstrap006.html#___sec62" style="font-size: 80%;"><b>Summary</b></a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-bootstrap006.html#___sec63" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Chapter topics</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-bootstrap006.html#___sec64" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dictionaries</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-bootstrap006.html#___sec65" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Strings</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-bootstrap006.html#___sec66" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Downloading Internet files</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-bootstrap006.html#___sec67" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Terminology</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-bootstrap006.html#sec:files:sumex" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: A file database</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-bootstrap006.html#___sec69" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-bootstrap006.html#___sec70" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Solution</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-bootstrap007.html#sec:files:exercises" style="font-size: 80%;"><b>Exercises</b></a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-bootstrap007.html#sec:files:ex2b:basic" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 1: Make a dictionary from a table</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-bootstrap007.html#sec:files:ex2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 2: Explore syntax differences: lists vs. dicts</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-bootstrap007.html#sec:files:ex17" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 3: Use string operations to improve a program</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-bootstrap007.html#sec:files:ex13" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 4: Interpret output from a program</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-bootstrap007.html#sec:files:ex2b" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 5: Make a dictionary</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-bootstrap007.html#sec:files:ex2c" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 6: Make a nested dictionary</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-bootstrap007.html#sec:files:ex2d:nested" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 7: Make a nested dictionary from a file</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-bootstrap007.html#sec:files:ex2d:nested2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 8: Make a nested dictionary from a file</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-bootstrap007.html#sec:files:ex2d" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 9: Compute the area of a triangle</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-bootstrap007.html#sec:files:ex16" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 10: Compare data structures for polynomials</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-bootstrap007.html#sec:files:ex3" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 11: Compute the derivative of a polynomial</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-bootstrap007.html#sec:basic:ex10" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 12: Specify functions on the command line</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-bootstrap007.html#sec:basic:ex10b" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 13: Interpret function specifications</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-bootstrap007.html#sec:files:ex8" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 14: Compare average temperatures in cities</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-bootstrap007.html#sec:files:ex21" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 15: Generate an HTML report with figures</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-bootstrap007.html#___sec87" style="font-size: 80%;"><b>References</b></a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div> <!-- end of navigation bar -->
+
+<div class="container">
+
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+
+<a name="part0005"></a>
+<!-- !split -->
+<p style="font-size:80%">This chapter is taken from the book <a href="http://www.springer.com/gp/book/9783662498866">A Primer on Scientific Programming with Python</a> by H. P. Langtangen, 5th edition, Springer, 2016.</p>
+
+<h1 id="sec:dictstring:py23" class="anchor">Making code that is compatible with Python 2 and 3</h1>
+
+<p>
+Python 2 and 3 are very similar, but there are some basic differences
+that make a program written in one version incompatible with the
+other version. The most important differences are that <code>1/10</code>
+is interpreted as float division (equal <code>0.1</code>) in Python 3, while
+Python 2 interprets the expression as integer division (which equals <code>0</code>).
+The <code>raw_input</code> function in Python 2 is named <code>input</code> in Python 3, while
+the <code>input</code> function in Python 2 (meaning <code>eval</code> applied to <code>raw_input</code>)
+does not exist in Python 3. The major difference, though, is the
+print statement in Python 2, which must be a call to the
+<code>print</code> function in Python 3. Some more differences related to
+constructions in this document appear below.
+
+<h2 id="___sec55" class="anchor">Basic differences between Python 2 and 3 </h2>
+
+<h3 id="___sec56" class="anchor"><code>xrange</code> in Python 2 is <code>range</code> in Python 3 </h3>
+
+<p>
+The <code>range</code> function in Python 2 generates a list of integers, and for
+very long loops this list may consume significant computer memory.
+The <code>xrange</code> function in Python was therefore made to just generate
+a series of integers without storing them. In Python 3, <code>range</code> is
+the <code>xrange</code> function from Python 2. If one wants a list of
+integers in Python 3, one has to do <code>list(range(5))</code> to store the
+output from <code>range</code> in a list.
+
+<h3 id="___sec57" class="anchor">Python 3 often avoids returning lists and dictionaries </h3>
+
+<p>
+The Python 3 idea of letting <code>range</code> just generate one object at a time
+instead of storing all of them applies to many other constructions too.
+Let <code>d</code> be a dictionary. In Python 2, <code>d.keys()</code> returns a list of
+the keys in the dictionary, while in Python 3, <code>d.keys()</code> just enables
+iteration over the keys in a for loop.
+Similarly, <code>d.values()</code> and <code>d.items()</code> returns lists of values or
+key-value pairs in Python 2, while in Python 3 we can only iterate over
+the values in a for loop. A simple loop like
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">for</span> key <span style="color: #AA22FF; font-weight: bold">in</span> d<span style="color: #666666">.</span>keys():
+    <span style="color: #666666">...</span>
+</pre></div>
+<p>
+works well for both Python versions, but
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>keys <span style="color: #666666">=</span> d<span style="color: #666666">.</span>keys()
+</pre></div>
+<p>
+in Python 2, where we want the keys as a list, needs a modification
+in Python 3:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>keys <span style="color: #666666">=</span> <span style="color: #008000">list</span>(d<span style="color: #666666">.</span>keys())
+</pre></div>
+<p>
+We should add that <code>for key in d.keys()</code> is not the preferred syntax anyway - use <code>for key in d</code>. Also, if we just want a for loop over all key-value pairs,
+we can use <code>d.iteritems()</code> which does not return any list, neither in Python 2
+nor in Python 3.
+
+<h3 id="___sec58" class="anchor">Library modules have different names </h3>
+
+<p>
+We have used the <code>urllib</code> module in
+the sections <a href="._dictstring-bootstrap003.html#sec:files:urllib">How to access web pages in programs</a> and <a href="._dictstring-bootstrap003.html#sec:files:url:weather">Example: Reading pure text files</a>.
+Python 3 has some different names for this module:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #408080; font-style: italic"># Python 2</span>
+<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">urllib</span>
+<span style="color: #008000; font-weight: bold">with</span> urllib<span style="color: #666666">.</span>urlopen(<span style="color: #BA2121">&#39;http://google.com&#39;</span>) <span style="color: #008000; font-weight: bold">as</span> webfile:
+    text <span style="color: #666666">=</span> webfile<span style="color: #666666">.</span>read()
+urllib<span style="color: #666666">.</span>urlretrieve(<span style="color: #BA2121">&#39;http://google.com&#39;</span>, filename<span style="color: #666666">=</span><span style="color: #BA2121">&#39;tmp.html&#39;</span>)
+
+<span style="color: #408080; font-style: italic"># Python 3</span>
+<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">urllib.request</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">urllibr</span>
+<span style="color: #008000; font-weight: bold">with</span> urllibr<span style="color: #666666">.</span>urlopen(<span style="color: #BA2121">&#39;http://google.com&#39;</span>) <span style="color: #008000; font-weight: bold">as</span> webfile:
+    text <span style="color: #666666">=</span> webfile<span style="color: #666666">.</span>read()
+urllibr<span style="color: #666666">.</span>urlretrieve(<span style="color: #BA2121">&#39;http://google.com&#39;</span>, filename<span style="color: #666666">=</span><span style="color: #BA2121">&#39;tmp.html&#39;</span>)
+</pre></div>
+<p>
+A lot of other modules have also changed names, but the <code>futurize</code>
+program (see below) help you to find the right new names.
+
+<h3 id="___sec59" class="anchor">Python 3 has unicode and byte strings </h3>
+
+<p>
+A standard Python 2 string, <code>s = 'abc'</code>, is a sequence of bytes, called
+byte string in Python 3, declared as <code>s = b'abc'</code> in Python 3. The assignment
+<code>s = 'abc'</code> in Python 3 leads to a unicode string and is equivalent to
+<code>s = u'abc'</code> in Python 2. To convert a byte string in Python 3 to
+an ordinary (unicode) string, do <code>s.decode('utf-8')</code>.
+String handling is often the most tricky task when converting Python 2
+code to Python 3.
+
+<h3 id="___sec60" class="anchor">Python 3 has different relative import syntax inside packages </h3>
+
+<p>
+If you work with <a href="https://docs.python.org/3/tutorial/modules.html#packages" target="_self">Python packages</a>, relative imports <em>inside</em> a package has slightly different
+syntax in Python 2 and 3.
+Say you want to import <code>somefunc</code> from a module <code>somemod</code> in some
+other module at the same level (same subfolder) in the package.
+Python 2 syntax would be <code>from somemod import somefunc</code>, while Python 3
+demands <code>from .somemod import somefunc</code>. The leading dot in the
+module name indicates that
+<code>somemod</code> is a module located in the same subfolder as the file containing
+this import statement. The alternative import, <code>import somemod</code>,
+in Python 2 must read <code>from . import somemod</code> in Python 3.
+
+<h2 id="___sec61" class="anchor">Turning Python 2 code into Python 3 code </h2>
+
+<p>
+One
+can use the <code>futurize</code> program to turn a Python 2 program into a version that
+works with both Python 2 and 3. The recommended command for turning a
+program or module <code>prog.py</code> of arbitrary complexity common Python 2/3
+version is
+
+<p>
+
+<!-- code=text (!bc sys) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>Terminal&gt; futurize --all-imports -w -n -o py23 prog.py
+</pre></div>
+<p>
+The file <code>py23/prog.py</code> will usually run under Python 2 and 3, but sometimes
+manual adjustments are needed.
+
+<p>
+By frequently running just <code>futurize prog.py</code> to see what needs to be
+changed, you can learn a lot of the differences between Python 2 and 3
+and also change your programming style in Python 2 so that it comes
+even closer to Python 3. The <code>python-future</code> documentation has
+a very useful <a href="http://python-future.org/compatible_idioms.html" target="_self">list of difference between Python 2 and 3</a> and recipes on
+how to make common code for both versions.
+
+<p>
+Porting of larger programs from Python 2 to 3 is recommended to use
+<code>futurize</code> in a <a href="http://python-future.org/futurize.html#forwards-conversion-stage1" target="_self">two-stage fashion</a>.
+
+<p>
+<p>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pager">
+  <li class="previous">
+    <a href="._dictstring-bootstrap004.html">&larr; Prev</a>
+  </li>
+  <li class="next">
+    <a href="._dictstring-bootstrap006.html">Next &rarr;</a>
+  </li>
+</ul>
+<!-- ------------------- end of main content --------------- -->
+
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap footer
+<footer>
+<a href="http://..."><img width="250" align=right src="http://..."></a>
+</footer>
+-->
+
+
+</body>
+</html>
+    
+

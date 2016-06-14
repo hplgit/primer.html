@@ -1,0 +1,547 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Dictionaries and strings">
+<meta name="keywords" content="dictionary,keys (dictionaries),immutable objects,mutable objects,summing a list,summing over an iterator,dictionary comprehensions,nested dictionaries,dictionary nested,date conversion,plotting data vs date,string slicing,slicing,substrings,string substrings,string searching,string find,string substitution,substitution (in text),string replace,string splitting,string case change,string testing for number,whitespace,blank lines in files,string stripping leading/trailing blanks,string joining words,dictionary functionality">
+
+<title>Dictionaries and strings</title>
+
+<!-- Bootstrap style: bootswatch_readable -->
+<link href="http://netdna.bootstrapcdn.com/bootswatch/3.1.1/readable/bootstrap.min.css" rel="stylesheet">
+<!-- not necessary
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+
+<style type="text/css">
+/* Let inline verbatim have the same color as the surroundings */
+code { color: inherit; background-color: transparent; }
+
+/* Add scrollbar to dropdown menus in bootstrap navigation bar */
+.dropdown-menu {
+   height: auto;
+   max-height: 400px;
+   overflow-x: hidden;
+}
+
+/* Adds an invisible element before each target to offset for the navigation
+   bar */
+.anchor::before {
+  content:"";
+  display:block;
+  height:50px; /* fixed header height*/
+  margin:-50px 0 0; /* negative fixed header height */
+}
+
+body { font-size:20px;line-height:1.5--html_body_style=font-size:20px;line-height:1.5; }
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [('Table of contents',
+               1,
+               'table_of_contents',
+               'table_of_contents'),
+              (u'Dictionaries', 1, u'sec:files:dicts', u'sec:files:dicts'),
+              (u'Making dictionaries', 2, None, '___sec1'),
+              (u'Dictionary operations', 2, None, '___sec2'),
+              (u'Remark', 3, None, '___sec3'),
+              (u'Example: Polynomials as dictionaries',
+               2,
+               u'sec:files:poly',
+               u'sec:files:poly'),
+              (u'Dictionaries with default values and ordering',
+               2,
+               u'sec:files:dict:default:order',
+               u'sec:files:dict:default:order'),
+              (u'Dictionaries with default values', 3, None, '___sec6'),
+              (u'Ordered dictionaries', 3, None, '___sec7'),
+              (u'Example: Storing file data in dictionaries',
+               2,
+               u'sec:files:dict:density',
+               u'sec:files:dict:density'),
+              (u'Problem', 3, None, '___sec9'),
+              (u'Solution', 3, None, '___sec10'),
+              (u'Example: Storing file data in nested dictionaries',
+               2,
+               u'sec:files:dictdict',
+               u'sec:files:dictdict'),
+              (u'Problem', 3, None, '___sec12'),
+              (u'Algorithm', 3, None, '___sec13'),
+              (u'Implementation', 3, None, '___sec14'),
+              (u'Dissection', 3, None, '___sec15'),
+              (u'Example: Reading and plotting data recorded at specific dates',
+               2,
+               u'sec:files:stockprices',
+               u'sec:files:stockprices'),
+              (u'Problem', 3, None, '___sec17'),
+              (u'Solution', 3, None, '___sec18'),
+              (u'Strings', 1, u'sec:files:str', u'sec:files:str'),
+              (u'Common operations on strings',
+               2,
+               u'sec:files:stringop',
+               u'sec:files:stringop'),
+              (u'Substring specification', 3, None, '___sec21'),
+              (u'Searching for substrings', 3, None, '___sec22'),
+              (u'Substitution', 3, None, '___sec23'),
+              (u'String splitting', 3, None, '___sec24'),
+              (u'Upper and lower case', 3, None, '___sec25'),
+              (u'Strings are constant', 3, None, '___sec26'),
+              (u'Strings with digits only', 3, None, '___sec27'),
+              (u'Whitespace', 3, None, '___sec28'),
+              (u'Joining strings', 3, None, '___sec29'),
+              (u'Example: Reading pairs of numbers',
+               2,
+               u'sec:files:pairs',
+               u'sec:files:pairs'),
+              (u'Problem', 3, None, '___sec31'),
+              (u'Solution', 3, None, '___sec32'),
+              (u'Example: Reading coordinates', 2, None, '___sec33'),
+              (u'Problem', 3, None, '___sec34'),
+              (u'Solution 1: substring extraction', 3, None, '___sec35'),
+              (u'Solution 2: string search', 3, None, '___sec36'),
+              (u'Solution 3: string split', 3, None, '___sec37'),
+              (u'Reading data from web pages',
+               1,
+               u'sec:files:webtxt',
+               u'sec:files:webtxt'),
+              (u'About web pages',
+               2,
+               u'sec:files:HTMLintro',
+               u'sec:files:HTMLintro'),
+              (u'How to access web pages in programs',
+               2,
+               u'sec:files:urllib',
+               u'sec:files:urllib'),
+              (u'Alternative 1', 3, None, '___sec41'),
+              (u'Alternative 2', 3, None, '___sec42'),
+              (u'Example: Reading pure text files',
+               2,
+               u'sec:files:url:weather',
+               u'sec:files:url:weather'),
+              (u'Example: Extracting data from HTML',
+               2,
+               u'sec:files:url:interpret',
+               u'sec:files:url:interpret'),
+              (u'Handling non-English text',
+               2,
+               u'sec:files:encoding',
+               u'sec:files:encoding'),
+              (u'Reading and writing spreadsheet files',
+               1,
+               u'sec:files:csv',
+               u'sec:files:csv'),
+              (u'CSV files', 2, None, '___sec47'),
+              (u'Reading CSV files', 2, None, '___sec48'),
+              (u'Processing spreadsheet data', 2, None, '___sec49'),
+              (u'Writing CSV files', 2, None, '___sec50'),
+              (u'Remark', 3, None, '___sec51'),
+              (u'Representing number cells with Numerical Python arrays',
+               2,
+               None,
+               '___sec52'),
+              (u'Using more high-level Numerical Python functionality',
+               2,
+               None,
+               '___sec53'),
+              (u'Making code that is compatible with Python 2 and 3',
+               1,
+               u'sec:dictstring:py23',
+               u'sec:dictstring:py23'),
+              (u'Basic differences between Python 2 and 3',
+               2,
+               None,
+               '___sec55'),
+              (u'`xrange` in Python 2 is `range` in Python 3',
+               3,
+               None,
+               '___sec56'),
+              (u'Python 3 often avoids returning lists and dictionaries',
+               3,
+               None,
+               '___sec57'),
+              (u'Library modules have different names', 3, None, '___sec58'),
+              (u'Python 3 has unicode and byte strings', 3, None, '___sec59'),
+              (u'Python 3 has different relative import syntax inside packages',
+               3,
+               None,
+               '___sec60'),
+              (u'Turning Python 2 code into Python 3 code',
+               2,
+               None,
+               '___sec61'),
+              (u'Summary', 1, None, '___sec62'),
+              (u'Chapter topics', 2, None, '___sec63'),
+              (u'Dictionaries', 3, None, '___sec64'),
+              (u'Strings', 3, None, '___sec65'),
+              (u'Downloading Internet files', 3, None, '___sec66'),
+              (u'Terminology', 3, None, '___sec67'),
+              (u'Example: A file database',
+               2,
+               u'sec:files:sumex',
+               u'sec:files:sumex'),
+              (u'Problem', 3, None, '___sec69'),
+              (u'Solution', 3, None, '___sec70'),
+              (u'Exercises',
+               1,
+               u'sec:files:exercises',
+               u'sec:files:exercises'),
+              (u'Exercise 1: Make a dictionary from a table',
+               2,
+               u'sec:files:ex2b:basic',
+               u'sec:files:ex2b:basic'),
+              (u'Exercise 2: Explore syntax differences: lists vs. dicts',
+               2,
+               u'sec:files:ex2',
+               u'sec:files:ex2'),
+              (u'Exercise 3: Use string operations to improve a program',
+               2,
+               u'sec:files:ex17',
+               u'sec:files:ex17'),
+              (u'Exercise 4: Interpret output from a program',
+               2,
+               u'sec:files:ex13',
+               u'sec:files:ex13'),
+              (u'Exercise 5: Make a dictionary',
+               2,
+               u'sec:files:ex2b',
+               u'sec:files:ex2b'),
+              (u'Exercise 6: Make a nested dictionary',
+               2,
+               u'sec:files:ex2c',
+               u'sec:files:ex2c'),
+              (u'Exercise 7: Make a nested dictionary from a file',
+               2,
+               u'sec:files:ex2d:nested',
+               u'sec:files:ex2d:nested'),
+              (u'Exercise 8: Make a nested dictionary from a file',
+               2,
+               u'sec:files:ex2d:nested2',
+               u'sec:files:ex2d:nested2'),
+              (u'Exercise 9: Compute the area of a triangle',
+               2,
+               u'sec:files:ex2d',
+               u'sec:files:ex2d'),
+              (u'Exercise 10: Compare data structures for polynomials',
+               2,
+               u'sec:files:ex16',
+               u'sec:files:ex16'),
+              (u'Exercise 11: Compute the derivative of a polynomial',
+               2,
+               u'sec:files:ex3',
+               u'sec:files:ex3'),
+              (u'Exercise 12: Specify functions on the command line',
+               2,
+               u'sec:basic:ex10',
+               u'sec:basic:ex10'),
+              (u'Exercise 13: Interpret function specifications',
+               2,
+               u'sec:basic:ex10b',
+               u'sec:basic:ex10b'),
+              (u'Exercise 14: Compare average temperatures in cities',
+               2,
+               u'sec:files:ex8',
+               u'sec:files:ex8'),
+              (u'Exercise 15: Generate an HTML report with figures',
+               2,
+               u'sec:files:ex21',
+               u'sec:files:ex21'),
+              (u'References', 1, None, '___sec87')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- newcommands_keep.tex -->
+$$
+\newcommand{\tp}{\thinspace .}
+$$
+
+
+
+
+    
+<!-- Bootstrap navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="dictstring-readable.html">Dictionaries and strings</a>
+  </div>
+
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     <!-- navigation toc: --> <li><a href="#table_of_contents" style="font-size: 80%;"><b>Table of contents</b></a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable001.html#sec:files:dicts" style="font-size: 80%;"><b>Dictionaries</b></a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable001.html#___sec1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Making dictionaries</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable001.html#___sec2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Dictionary operations</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable001.html#___sec3" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remark</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable001.html#sec:files:poly" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Polynomials as dictionaries</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable001.html#sec:files:dict:default:order" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Dictionaries with default values and ordering</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable001.html#___sec6" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dictionaries with default values</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable001.html#___sec7" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ordered dictionaries</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable001.html#sec:files:dict:density" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Storing file data in dictionaries</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable001.html#___sec9" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable001.html#___sec10" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Solution</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable001.html#sec:files:dictdict" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Storing file data in nested dictionaries</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable001.html#___sec12" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable001.html#___sec13" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Algorithm</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable001.html#___sec14" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Implementation</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable001.html#___sec15" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dissection</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable001.html#sec:files:stockprices" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Reading and plotting data recorded at specific dates</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable001.html#___sec17" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable001.html#___sec18" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Solution</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable002.html#sec:files:str" style="font-size: 80%;"><b>Strings</b></a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable002.html#sec:files:stringop" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Common operations on strings</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable002.html#___sec21" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Substring specification</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable002.html#___sec22" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Searching for substrings</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable002.html#___sec23" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Substitution</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable002.html#___sec24" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String splitting</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable002.html#___sec25" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Upper and lower case</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable002.html#___sec26" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Strings are constant</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable002.html#___sec27" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Strings with digits only</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable002.html#___sec28" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Whitespace</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable002.html#___sec29" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Joining strings</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable002.html#sec:files:pairs" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Reading pairs of numbers</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable002.html#___sec31" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable002.html#___sec32" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Solution</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable002.html#___sec33" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Reading coordinates</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable002.html#___sec34" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable002.html#___sec35" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Solution 1: substring extraction</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable002.html#___sec36" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Solution 2: string search</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable002.html#___sec37" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Solution 3: string split</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable003.html#sec:files:webtxt" style="font-size: 80%;"><b>Reading data from web pages</b></a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable003.html#sec:files:HTMLintro" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;About web pages</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable003.html#sec:files:urllib" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;How to access web pages in programs</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable003.html#___sec41" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Alternative 1</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable003.html#___sec42" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Alternative 2</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable003.html#sec:files:url:weather" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Reading pure text files</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable003.html#sec:files:url:interpret" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Extracting data from HTML</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable003.html#sec:files:encoding" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Handling non-English text</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable004.html#sec:files:csv" style="font-size: 80%;"><b>Reading and writing spreadsheet files</b></a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable004.html#___sec47" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;CSV files</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable004.html#___sec48" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Reading CSV files</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable004.html#___sec49" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Processing spreadsheet data</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable004.html#___sec50" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Writing CSV files</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable004.html#___sec51" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remark</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable004.html#___sec52" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Representing number cells with Numerical Python arrays</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable004.html#___sec53" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Using more high-level Numerical Python functionality</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable005.html#sec:dictstring:py23" style="font-size: 80%;"><b>Making code that is compatible with Python 2 and 3</b></a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable005.html#___sec55" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Basic differences between Python 2 and 3</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable005.html#___sec56" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`xrange` in Python 2 is <code>range</code> in Python 3</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable005.html#___sec57" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Python 3 often avoids returning lists and dictionaries</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable005.html#___sec58" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Library modules have different names</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable005.html#___sec59" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Python 3 has unicode and byte strings</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable005.html#___sec60" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Python 3 has different relative import syntax inside packages</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable005.html#___sec61" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Turning Python 2 code into Python 3 code</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable006.html#___sec62" style="font-size: 80%;"><b>Summary</b></a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable006.html#___sec63" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Chapter topics</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable006.html#___sec64" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dictionaries</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable006.html#___sec65" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Strings</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable006.html#___sec66" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Downloading Internet files</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable006.html#___sec67" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Terminology</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable006.html#sec:files:sumex" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: A file database</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable006.html#___sec69" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable006.html#___sec70" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Solution</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable007.html#sec:files:exercises" style="font-size: 80%;"><b>Exercises</b></a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable007.html#sec:files:ex2b:basic" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 1: Make a dictionary from a table</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable007.html#sec:files:ex2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 2: Explore syntax differences: lists vs. dicts</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable007.html#sec:files:ex17" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 3: Use string operations to improve a program</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable007.html#sec:files:ex13" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 4: Interpret output from a program</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable007.html#sec:files:ex2b" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 5: Make a dictionary</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable007.html#sec:files:ex2c" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 6: Make a nested dictionary</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable007.html#sec:files:ex2d:nested" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 7: Make a nested dictionary from a file</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable007.html#sec:files:ex2d:nested2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 8: Make a nested dictionary from a file</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable007.html#sec:files:ex2d" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 9: Compute the area of a triangle</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable007.html#sec:files:ex16" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 10: Compare data structures for polynomials</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable007.html#sec:files:ex3" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 11: Compute the derivative of a polynomial</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable007.html#sec:basic:ex10" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 12: Specify functions on the command line</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable007.html#sec:basic:ex10b" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 13: Interpret function specifications</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable007.html#sec:files:ex8" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 14: Compare average temperatures in cities</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable007.html#sec:files:ex21" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 15: Generate an HTML report with figures</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable007.html#___sec87" style="font-size: 80%;"><b>References</b></a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div> <!-- end of navigation bar -->
+
+<div class="container">
+
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+
+<a name="part0000"></a>
+<!-- ------------------- main content ---------------------- -->
+
+
+
+<div class="jumbotron">
+<center><h1>Dictionaries and strings</h1></center>  <!-- document title -->
+
+<p>
+<!-- author(s): Hans Petter Langtangen -->
+
+<center>
+<b>Hans Petter Langtangen</b> [1, 2]
+</center>
+
+<p>
+<!-- institution(s) -->
+
+<center>[1] <b>Center for Biomedical Computing, Simula Research Laboratory</b></center>
+<center>[2] <b>Department of Informatics, University of Oslo</b></center>
+<br>
+<p>
+<center><h4>Jun 14, 2016</h4></center> <!-- date -->
+<br>
+<p>
+</div> <!-- end jumbotron -->
+
+<h1 id="table_of_contents">Table of contents</h2>
+
+<p>
+<a href="._dictstring-readable001.html#sec:files:dicts"> Dictionaries </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._dictstring-readable001.html#___sec1"> Making dictionaries </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._dictstring-readable001.html#___sec2"> Dictionary operations </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._dictstring-readable001.html#sec:files:poly"> Example: Polynomials as dictionaries </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._dictstring-readable001.html#sec:files:dict:default:order"> Dictionaries with default values and ordering </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._dictstring-readable001.html#sec:files:dict:density"> Example: Storing file data in dictionaries </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._dictstring-readable001.html#sec:files:dictdict"> Example: Storing file data in nested dictionaries </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._dictstring-readable001.html#sec:files:stockprices"> Example: Reading and plotting data recorded at specific dates </a><br>
+<a href="._dictstring-readable002.html#sec:files:str"> Strings </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._dictstring-readable002.html#sec:files:stringop"> Common operations on strings </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._dictstring-readable002.html#sec:files:pairs"> Example: Reading pairs of numbers </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._dictstring-readable002.html#___sec33"> Example: Reading coordinates </a><br>
+<a href="._dictstring-readable003.html#sec:files:webtxt"> Reading data from web pages </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._dictstring-readable003.html#sec:files:HTMLintro"> About web pages </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._dictstring-readable003.html#sec:files:urllib"> How to access web pages in programs </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._dictstring-readable003.html#sec:files:url:weather"> Example: Reading pure text files </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._dictstring-readable003.html#sec:files:url:interpret"> Example: Extracting data from HTML </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._dictstring-readable003.html#sec:files:encoding"> Handling non-English text </a><br>
+<a href="._dictstring-readable004.html#sec:files:csv"> Reading and writing spreadsheet files </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._dictstring-readable004.html#___sec47"> CSV files </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._dictstring-readable004.html#___sec48"> Reading CSV files </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._dictstring-readable004.html#___sec49"> Processing spreadsheet data </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._dictstring-readable004.html#___sec50"> Writing CSV files </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._dictstring-readable004.html#___sec52"> Representing number cells with Numerical Python arrays </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._dictstring-readable004.html#___sec53"> Using more high-level Numerical Python functionality </a><br>
+<a href="._dictstring-readable005.html#sec:dictstring:py23"> Making code that is compatible with Python 2 and 3 </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._dictstring-readable005.html#___sec55"> Basic differences between Python 2 and 3 </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._dictstring-readable005.html#___sec61"> Turning Python 2 code into Python 3 code </a><br>
+<a href="._dictstring-readable006.html#___sec62"> Summary </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._dictstring-readable006.html#___sec63"> Chapter topics </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._dictstring-readable006.html#sec:files:sumex"> Example: A file database </a><br>
+<a href="._dictstring-readable007.html#sec:files:exercises"> Exercises </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._dictstring-readable007.html#sec:files:ex2b:basic"> Exercise 1: Make a dictionary from a table </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._dictstring-readable007.html#sec:files:ex2"> Exercise 2: Explore syntax differences: lists vs. dicts </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._dictstring-readable007.html#sec:files:ex17"> Exercise 3: Use string operations to improve a program </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._dictstring-readable007.html#sec:files:ex13"> Exercise 4: Interpret output from a program </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._dictstring-readable007.html#sec:files:ex2b"> Exercise 5: Make a dictionary </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._dictstring-readable007.html#sec:files:ex2c"> Exercise 6: Make a nested dictionary </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._dictstring-readable007.html#sec:files:ex2d:nested"> Exercise 7: Make a nested dictionary from a file </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._dictstring-readable007.html#sec:files:ex2d:nested2"> Exercise 8: Make a nested dictionary from a file </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._dictstring-readable007.html#sec:files:ex2d"> Exercise 9: Compute the area of a triangle </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._dictstring-readable007.html#sec:files:ex16"> Exercise 10: Compare data structures for polynomials </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._dictstring-readable007.html#sec:files:ex3"> Exercise 11: Compute the derivative of a polynomial </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._dictstring-readable007.html#sec:basic:ex10"> Exercise 12: Specify functions on the command line </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._dictstring-readable007.html#sec:basic:ex10b"> Exercise 13: Interpret function specifications </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._dictstring-readable007.html#sec:files:ex8"> Exercise 14: Compare average temperatures in cities </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._dictstring-readable007.html#sec:files:ex21"> Exercise 15: Generate an HTML report with figures </a><br>
+<a href="._dictstring-readable007.html#___sec87"> References </a><br>
+</p>
+<p>
+<!-- Externaldocuments: ../formulas/main_formulas, ../looplist/main_looplist, ../funcif/main_funcif, ../input/main_input, ../plot/main_plot, ../class/main_class, ../random/main_random, ../oo/main_oo, ../diffeq/main_diffeq, ../discalc/main_discalc, ../ode1/main_ode1, ../boxspring/main_boxspring, ../ode2/main_ode2, ../debug/main_debug, ../cython/main_cython, ../tech/main_timing, ../tech/main_varargs, ../tech/main_runpy, ../tech/main_ostasks, ../tech/main_accesspy, ../tech/main_nose -->
+
+<p>
+<div id="ch:files"></div>
+
+<p>
+The present chapter addresses many techniques for interpreting
+information in files and storing the data in convenient Python objects
+for further data analysis. A particularly handy object for many
+purposes is the dictionary, which maps objects to objects, very often
+strings to various kinds of data that later can be looked up through
+the strings.  The section <a href="._dictstring-readable001.html#sec:files:dicts">Dictionaries</a> is devoted to dictionaries.
+
+<p>
+Information in files often appear as pure text, so to interpret and
+extract data from files it is sometimes necessary to carry out
+sophisticated operations on the text.  Python strings have many
+methods for performing such operations, and the most important
+functionality is described in the section <a href="._dictstring-readable002.html#sec:files:str">Strings</a>.
+
+<p>
+The World Wide Web is full of information and scientific data that may
+be useful to access from a program. The section <a href="._dictstring-readable003.html#sec:files:webtxt">Reading data from web pages</a>
+tells you how to read web pages from a program and interpret the
+contents using string operations.
+
+<p>
+Working with data often involves spreadsheets. Python programs not
+only need to extract data from spreadsheet files, but it can be
+advantageous and convenient to actually to the data processing in a
+Python program rather than in a spreadsheet program like Microsoft
+Excel or LibreOffice.  The section <a href="._dictstring-readable004.html#sec:files:csv">Reading and writing spreadsheet files</a> goes through relevant
+techniques for reading and writing files in the common CSV format for
+spreadsheets.
+
+<p>
+The present chapter builds on fundamental programming concepts such as
+loops, lists, arrays, <code>if</code> tests, command-line arguments, and curve
+plotting.  The folder <a href="http://tinyurl.com/pwyasaa/files" target="_self"><tt>src/files</tt></a> contains all
+the relevant program example files and associated data files.
+
+<p>
+<p>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pager">
+  <li class="next">
+    <a href="._dictstring-readable001.html">Next &rarr;</a>
+  </li>
+</ul>
+<!-- ------------------- end of main content --------------- -->
+
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap footer
+<footer>
+<a href="http://..."><img width="250" align=right src="http://..."></a>
+</footer>
+-->
+
+
+</body>
+</html>
+    
+

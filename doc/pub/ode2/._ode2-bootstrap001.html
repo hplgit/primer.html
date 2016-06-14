@@ -1,0 +1,1697 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Programming of ordinary differential equations">
+<meta name="keywords" content="ODE,ordinary differential equations,differential equations,scalar function,scalar differential equation,Forward Euler scheme,test function,differential equations,systems of differential equations,Midpoint method for ODEs,Leapfrog method for ODEs,Midpoint method w/iterations for ODEs,function inside function,Forward Euler instability,oscillating systems,second-order ODEs,Midpoint method for ODEs,Midpoint method w/iterations for ODEs,convergence rate,zombies,differential equations,ordinary differential equations">
+
+<title>Programming of ordinary differential equations</title>
+
+<!-- Bootstrap style: bootstrap_simula -->
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_styles/style_bootstrap/css/bootstrap_simula.css" rel="stylesheet">
+<!-- not necessary
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+
+<style type="text/css">
+/* Let inline verbatim have the same color as the surroundings */
+code { color: inherit; background-color: transparent; }
+
+/* Add scrollbar to dropdown menus in bootstrap navigation bar */
+.dropdown-menu {
+   height: auto;
+   max-height: 400px;
+   overflow-x: hidden;
+}
+
+/* Adds an invisible element before each target to offset for the navigation
+   bar */
+.anchor::before {
+  content:"";
+  display:block;
+  height:50px; /* fixed header height*/
+  margin:-50px 0 0; /* negative fixed header height */
+}
+
+body { font-size:20px;line-height:1.5; }
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [('Table of contents',
+               1,
+               'table_of_contents',
+               'table_of_contents'),
+              ('Scalar ordinary differential equations',
+               1,
+               'sec:ode2:ODE:scalar',
+               'sec:ode2:ODE:scalar'),
+              ('Examples on right-hand-side functions', 2, None, '___sec1'),
+              ('The Forward Euler scheme',
+               2,
+               'sec:ode2:ForwardEuler:func',
+               'sec:ode2:ForwardEuler:func'),
+              ('Function implementation',
+               2,
+               'sec:ode2:funcimpl',
+               'sec:ode2:funcimpl'),
+              ('Verifying the implementation',
+               2,
+               'sec:ode2:verify',
+               'sec:ode2:verify'),
+              ('Visual comparison', 3, None, '___sec5'),
+              ('Comparing with hand calculations', 3, None, '___sec6'),
+              ('Comparing with an exact numerical solution',
+               3,
+               None,
+               '___sec7'),
+              ('From discrete to continuous solution',
+               2,
+               'sec:ode2:wrap2callable',
+               'sec:ode2:wrap2callable'),
+              ('Switching numerical method',
+               2,
+               'sec:ode2:Heun',
+               'sec:ode2:Heun'),
+              ('Class implementation',
+               2,
+               'sec:ode2:classimpl',
+               'sec:ode2:classimpl'),
+              ('Class wrapping of a function', 3, None, '___sec11'),
+              ('Switching numerical method', 3, None, '___sec12'),
+              ('A more flexible class', 3, None, '___sec13'),
+              ('Usage of the class', 3, None, '___sec14'),
+              ('Verification', 3, None, '___sec15'),
+              ('Making a module', 3, None, '___sec16'),
+              ('Remark', 3, None, '___sec17'),
+              ('Logistic growth via a function-based approach',
+               2,
+               'sec:ode2:logistic:func',
+               'sec:ode2:logistic:func'),
+              ('Logistic growth via a class-based approach',
+               2,
+               'sec:ode2:logistic:class',
+               'sec:ode2:logistic:class'),
+              ('The problem class', 3, None, '___sec20'),
+              ('Getting input from the command line', 3, None, '___sec21'),
+              ('Import statements', 3, None, '___sec22'),
+              ('Solving the problem', 3, None, '___sec23'),
+              ('Making a module', 3, None, '___sec24'),
+              ('Pros and cons of the class-based approach',
+               3,
+               None,
+               '___sec25'),
+              ('Systems of ordinary differential equations',
+               1,
+               'sec:ode2:ODE:system',
+               'sec:ode2:ODE:system'),
+              ('Mathematical problem', 2, None, '___sec27'),
+              ('Example of a system of ODEs',
+               2,
+               'sec:ode2:ODE:system:ex',
+               'sec:ode2:ODE:system:ex'),
+              ('Function implementation',
+               2,
+               'sec:ode2:system:func',
+               'sec:ode2:system:func'),
+              ('Allowing lists', 3, None, '___sec30'),
+              ('Class implementation',
+               2,
+               'sec:ode2:system:class',
+               'sec:ode2:system:class'),
+              ('The ODESolver class hierarchy',
+               1,
+               'sec:ode2:ODESolver:hier',
+               'sec:ode2:ODESolver:hier'),
+              ('Numerical methods',
+               2,
+               'sec:ode2:ODE:methods',
+               'sec:ode2:ODE:methods'),
+              ('Construction of a solver hierarchy', 2, None, '___sec34'),
+              ('The superclass', 3, None, '___sec35'),
+              ('The Forward Euler method', 3, None, '___sec36'),
+              ('The 4th-order Runge-Kutta method', 3, None, '___sec37'),
+              ('The Backward Euler method',
+               2,
+               'sec:ode2:ODE:BE',
+               'sec:ode2:ODE:BE'),
+              ('Verification',
+               2,
+               'sec:ode2:ODESolver:verify',
+               'sec:ode2:ODESolver:verify'),
+              ('Remarks', 3, None, '___sec40'),
+              ('Example: Exponential decay',
+               2,
+               'sec:ode2:ODE:app:1',
+               'sec:ode2:ODE:app:1'),
+              ('Example: The logistic equation with problem and solver classes',
+               2,
+               'sec:ode2:ODE:app:2',
+               'sec:ode2:ODE:app:2'),
+              ('Basic problem and solver classes', 3, None, '___sec43'),
+              ('Computing an appropriate $\\Delta t$', 3, None, '___sec44'),
+              ('Dealing with time-dependent coefficients',
+               3,
+               None,
+               '___sec45'),
+              ('Reading input', 3, None, '___sec46'),
+              ('Example: An oscillating system',
+               2,
+               'sec:ode2:ODE:app:3',
+               'sec:ode2:ODE:app:3'),
+              ('Application 4: the trajectory of a ball',
+               2,
+               'sec:ode2:ODE:app:4',
+               'sec:ode2:ODE:app:4'),
+              ('Further developments of ODESolver', 2, None, '___sec49'),
+              ('Exercises', 1, None, '___sec50'),
+              ('Exercise 1: Solve a simple ODE with function-based code',
+               2,
+               'sec:ode2:ex:simple:func',
+               'sec:ode2:ex:simple:func'),
+              ('Exercise 2: Solve a simple ODE with class-based code',
+               2,
+               'sec:ode2:ex:simple:class',
+               'sec:ode2:ex:simple:class'),
+              ('Exercise 3: Solve a simple ODE with the ODEsolver hierarchy',
+               2,
+               'sec:ode2:ex:simple:ODESolver',
+               'sec:ode2:ex:simple:ODESolver'),
+              ('Exercise 4: Solve an ODE specified on the command line',
+               2,
+               'sec:class:ex13d',
+               'sec:class:ex13d'),
+              ('Exercise 5: Implement a numerical method for ODEs',
+               2,
+               'sec:class:ex13g3',
+               'sec:class:ex13g3'),
+              ('Exercise 6: Solve an ODE for emptying a tank',
+               2,
+               'sec:ode:ex5',
+               'sec:ode:ex5'),
+              ('Exercise 7: Solve an ODE for the arc length',
+               2,
+               'sec:ode:ex7',
+               'sec:ode:ex7'),
+              ('Exercise 8: Simulate a falling or rising body in a fluid',
+               2,
+               'sec:ode:ex4',
+               'sec:ode:ex4'),
+              ('Exercise 9: Verify the limit of a solution as time grows',
+               2,
+               'sec:ode2:ex22',
+               'sec:ode2:ex22'),
+              ('Exercise 10: Scale the logistic equation',
+               2,
+               'sec:ode2:ex42b',
+               'sec:ode2:ex42b'),
+              ('Exercise 11: Compute logistic growth with time-varying carrying capacity',
+               2,
+               'sec:ode2:ex42',
+               'sec:ode2:ex42'),
+              ('Exercise 12: Solve an ODE until constant solution',
+               2,
+               'sec:ode2:ex32d',
+               'sec:ode2:ex32d'),
+              ('Exercise 13: Use a problem class to hold data about an ODE',
+               2,
+               'sec:ode2:ex32e',
+               'sec:ode2:ex32e'),
+              ('Exercise 14: Derive and solve a scaled ODE problem',
+               2,
+               'sec:ode2:ex32f',
+               'sec:ode2:ex32f'),
+              ('Exercise 15: Clean up a file to make it a module',
+               2,
+               'sec:ode2:ex:FEfunc:module',
+               'sec:ode2:ex:FEfunc:module'),
+              ('Exercise 16: Simulate radioactive decay',
+               2,
+               'sec:ode2:ex25',
+               'sec:ode2:ex25'),
+              ('Exercise 17: Compute inverse functions by solving an ODE',
+               2,
+               'sec:ode:ex9',
+               'sec:ode:ex9'),
+              ('Exercise 18: Make a class for computing inverse functions',
+               2,
+               'sec:ode:ex10',
+               'sec:ode:ex10'),
+              ('Exercise 19: Add functionality to a class',
+               2,
+               'sec:ode:ex11',
+               'sec:ode:ex11'),
+              ('Exercise 20: Compute inverse functions by interpolation',
+               2,
+               'sec:ode:ex12',
+               'sec:ode:ex12'),
+              ('Exercise 21: Code the 4th-order Runge-Kutta method; function',
+               2,
+               'sec:ode2:ex:RK4:func',
+               'sec:ode2:ex:RK4:func'),
+              ('Exercise 22: Code the 4th-order Runge-Kutta method; class',
+               2,
+               'sec:ode2:ex:RK4:class',
+               'sec:ode2:ex:RK4:class'),
+              ('Exercise 23: Compare ODE methods',
+               2,
+               'sec:ode2:ex32h',
+               'sec:ode2:ex32h'),
+              ('Exercise 24: Code a test function for systems of ODEs',
+               2,
+               'sec:ode2:ex:sys:testfunc',
+               'sec:ode2:ex:sys:testfunc'),
+              ("Exercise 25: Code Heun's method for ODE systems; function",
+               2,
+               'sec:ode2:ex:Heun:sys:func',
+               'sec:ode2:ex:Heun:sys:func'),
+              ("Exercise 26: Code Heun's method for ODE systems; class",
+               2,
+               'sec:ode2:ex:Heun:sys:class',
+               'sec:ode2:ex:Heun:sys:class'),
+              ('Exercise 27: Implement and test the Leapfrog method',
+               2,
+               'sec:ode2:ex25c',
+               'sec:ode2:ex25c'),
+              ('Exercise 28: Implement and test an Adams-Bashforth method',
+               2,
+               'sec:ode2:ex25c:AB3',
+               'sec:ode2:ex25c:AB3'),
+              ('Exercise 29: Solve two coupled ODEs for radioactive decay',
+               2,
+               'sec:ode2:ex25x2',
+               'sec:ode2:ex25x2'),
+              ('Exercise 30: Implement a 2nd-order Runge-Kutta method; function',
+               2,
+               'sec:ode2:ex25b2',
+               'sec:ode2:ex25b2'),
+              ('Exercise 31: Implement a 2nd-order Runge-Kutta method; class',
+               2,
+               'sec:ode2:ex25b',
+               'sec:ode2:ex25b'),
+              ('Exercise 32: Code the iterated midpoint method; function',
+               2,
+               'sec:class:ex13e',
+               'sec:class:ex13e'),
+              ('Exercise 33: Code the iterated midpoint method; class',
+               2,
+               'sec:class:ex13f',
+               'sec:class:ex13f'),
+              ('Exercise 34: Make a subclass for the iterated midpoint method',
+               2,
+               'sec:class:ex13g2',
+               'sec:class:ex13g2'),
+              ('Exercise 35: Compare the accuracy of various methods for ODEs',
+               2,
+               'sec:class:ex:gaussian',
+               'sec:class:ex:gaussian'),
+              ('Exercise 36: Animate how various methods for ODEs converge',
+               2,
+               'sec:class:ex:gaussian2',
+               'sec:class:ex:gaussian2'),
+              ('Exercise 37: Study convergence of numerical methods for ODEs',
+               2,
+               'sec:ode2:ex29',
+               'sec:ode2:ex29'),
+              ("Exercise 38: Find a body's position along with its velocity",
+               2,
+               'sec:ode2:ex21',
+               'sec:ode2:ex21'),
+              ('Exercise 39: Add the effect of air resistance on a ball',
+               2,
+               'sec:ode2:ex27v4',
+               'sec:ode2:ex27v4'),
+              ('Exercise 40: Solve an ODE system for an electric circuit',
+               2,
+               'sec:ode2:ex27',
+               'sec:ode2:ex27'),
+              ('Remarks', 3, None, '___sec91'),
+              ('Exercise 41: Simulate the spreading of a disease by a SIR model',
+               2,
+               'sec:ode:ex14',
+               'sec:ode:ex14'),
+              ('Exercise 42: Introduce problem and solver classes in the SIR model',
+               2,
+               'sec:ode:ex14c',
+               'sec:ode:ex14c'),
+              ('Exercise 43: Introduce vaccination in a SIR model',
+               2,
+               'sec:ode:ex15',
+               'sec:ode:ex15'),
+              ('Exercise 44: Introduce a vaccination campaign in a SIR model',
+               2,
+               'sec:ode:ex16',
+               'sec:ode:ex16'),
+              ('Exercise 45: Find an optimal vaccination period',
+               2,
+               'sec:ode:ex17',
+               'sec:ode:ex17'),
+              ('Exercise 46: Simulate human-zombie interaction',
+               2,
+               'sec:ode:ex18',
+               'sec:ode:ex18'),
+              ('Exercise 47: Simulate a zombie movie',
+               2,
+               'sec:ode:ex19',
+               'sec:ode:ex19'),
+              ('Exercise 48: Simulate a war on zombies',
+               2,
+               'sec:ode:ex20',
+               'sec:ode:ex20'),
+              ('Exercise 49: Explore predator-prey population interactions',
+               2,
+               'sec:ode2:ex41',
+               'sec:ode2:ex41'),
+              ('Exercise 50: Formulate a 2nd-order ODE as a system',
+               2,
+               'sec:ode2:ex34',
+               'sec:ode2:ex34'),
+              ('Physical applications', 3, None, '___sec102'),
+              ('Exercise 51: Solve $\\ddot u + u =0$',
+               2,
+               'sec:ode2:ex35',
+               'sec:ode2:ex35'),
+              ('Exercise 52: Make a tool for analyzing oscillatory solutions',
+               2,
+               'sec:ode2:ex36v',
+               'sec:ode2:ex36v'),
+              ('Exercise 53: Implement problem, solver, and visualizer classes',
+               2,
+               'sec:ode2:ex37',
+               'sec:ode2:ex37'),
+              ('Exercise 54: Use classes for flexible choices of models',
+               2,
+               'sec:ode2:ex38',
+               'sec:ode2:ex38'),
+              ('Exercise 55: Apply software for oscillating systems',
+               2,
+               'sec:ode2:ex40',
+               'sec:ode2:ex40'),
+              ('Exercise 56: Model the economy of fishing',
+               2,
+               'sec:class:ex19',
+               'sec:class:ex19'),
+              ('References', 1, None, '___sec109')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- newcommands_keep.tex -->
+$$
+\newcommand{\tp}{\thinspace .}
+$$
+
+
+
+
+    
+<!-- Bootstrap navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="ode2-bootstrap.html">Programming of ordinary differential equations</a>
+  </div>
+
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     <!-- navigation toc: --> <li><a href="._ode2-bootstrap000.html#table_of_contents" style="font-size: 80%;"><b>Table of contents</b></a></li>
+     <!-- navigation toc: --> <li><a href="#sec:ode2:ODE:scalar" style="font-size: 80%;"><b>Scalar ordinary differential equations</b></a></li>
+     <!-- navigation toc: --> <li><a href="#___sec1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Examples on right-hand-side functions</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:ode2:ForwardEuler:func" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The Forward Euler scheme</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:ode2:funcimpl" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Function implementation</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:ode2:verify" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Verifying the implementation</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec5" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Visual comparison</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec6" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Comparing with hand calculations</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec7" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Comparing with an exact numerical solution</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:ode2:wrap2callable" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;From discrete to continuous solution</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:ode2:Heun" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Switching numerical method</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:ode2:classimpl" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Class implementation</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec11" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Class wrapping of a function</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec12" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Switching numerical method</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec13" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A more flexible class</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec14" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Usage of the class</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec15" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Verification</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec16" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Making a module</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec17" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remark</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:ode2:logistic:func" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Logistic growth via a function-based approach</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:ode2:logistic:class" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Logistic growth via a class-based approach</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec20" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The problem class</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec21" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Getting input from the command line</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec22" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Import statements</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec23" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Solving the problem</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec24" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Making a module</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec25" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pros and cons of the class-based approach</a></li>
+     <!-- navigation toc: --> <li><a href="._ode2-bootstrap002.html#sec:ode2:ODE:system" style="font-size: 80%;"><b>Systems of ordinary differential equations</b></a></li>
+     <!-- navigation toc: --> <li><a href="._ode2-bootstrap002.html#___sec27" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Mathematical problem</a></li>
+     <!-- navigation toc: --> <li><a href="._ode2-bootstrap002.html#sec:ode2:ODE:system:ex" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example of a system of ODEs</a></li>
+     <!-- navigation toc: --> <li><a href="._ode2-bootstrap002.html#sec:ode2:system:func" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Function implementation</a></li>
+     <!-- navigation toc: --> <li><a href="._ode2-bootstrap002.html#___sec30" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Allowing lists</a></li>
+     <!-- navigation toc: --> <li><a href="._ode2-bootstrap002.html#sec:ode2:system:class" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Class implementation</a></li>
+     <!-- navigation toc: --> <li><a href="._ode2-bootstrap003.html#sec:ode2:ODESolver:hier" style="font-size: 80%;"><b>The ODESolver class hierarchy</b></a></li>
+     <!-- navigation toc: --> <li><a href="._ode2-bootstrap003.html#sec:ode2:ODE:methods" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Numerical methods</a></li>
+     <!-- navigation toc: --> <li><a href="._ode2-bootstrap003.html#___sec34" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Construction of a solver hierarchy</a></li>
+     <!-- navigation toc: --> <li><a href="._ode2-bootstrap003.html#___sec35" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The superclass</a></li>
+     <!-- navigation toc: --> <li><a href="._ode2-bootstrap003.html#___sec36" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The Forward Euler method</a></li>
+     <!-- navigation toc: --> <li><a href="._ode2-bootstrap003.html#___sec37" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The 4th-order Runge-Kutta method</a></li>
+     <!-- navigation toc: --> <li><a href="._ode2-bootstrap003.html#sec:ode2:ODE:BE" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The Backward Euler method</a></li>
+     <!-- navigation toc: --> <li><a href="._ode2-bootstrap003.html#sec:ode2:ODESolver:verify" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Verification</a></li>
+     <!-- navigation toc: --> <li><a href="._ode2-bootstrap003.html#___sec40" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remarks</a></li>
+     <!-- navigation toc: --> <li><a href="._ode2-bootstrap003.html#sec:ode2:ODE:app:1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Exponential decay</a></li>
+     <!-- navigation toc: --> <li><a href="._ode2-bootstrap003.html#sec:ode2:ODE:app:2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: The logistic equation with problem and solver classes</a></li>
+     <!-- navigation toc: --> <li><a href="._ode2-bootstrap003.html#___sec43" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Basic problem and solver classes</a></li>
+     <!-- navigation toc: --> <li><a href="._ode2-bootstrap003.html#___sec44" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Computing an appropriate \( \Delta t \)</a></li>
+     <!-- navigation toc: --> <li><a href="._ode2-bootstrap003.html#___sec45" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dealing with time-dependent coefficients</a></li>
+     <!-- navigation toc: --> <li><a href="._ode2-bootstrap003.html#___sec46" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Reading input</a></li>
+     <!-- navigation toc: --> <li><a href="._ode2-bootstrap003.html#sec:ode2:ODE:app:3" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: An oscillating system</a></li>
+     <!-- navigation toc: --> <li><a href="._ode2-bootstrap003.html#sec:ode2:ODE:app:4" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Application 4: the trajectory of a ball</a></li>
+     <!-- navigation toc: --> <li><a href="._ode2-bootstrap003.html#___sec49" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Further developments of ODESolver</a></li>
+     <!-- navigation toc: --> <li><a href="._ode2-bootstrap004.html#___sec50" style="font-size: 80%;"><b>Exercises</b></a></li>
+     <!-- navigation toc: --> <li><a href="._ode2-bootstrap004.html#sec:ode2:ex:simple:func" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 1: Solve a simple ODE with function-based code</a></li>
+     <!-- navigation toc: --> <li><a href="._ode2-bootstrap004.html#sec:ode2:ex:simple:class" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 2: Solve a simple ODE with class-based code</a></li>
+     <!-- navigation toc: --> <li><a href="._ode2-bootstrap004.html#sec:ode2:ex:simple:ODESolver" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 3: Solve a simple ODE with the ODEsolver hierarchy</a></li>
+     <!-- navigation toc: --> <li><a href="._ode2-bootstrap004.html#sec:class:ex13d" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 4: Solve an ODE specified on the command line</a></li>
+     <!-- navigation toc: --> <li><a href="._ode2-bootstrap004.html#sec:class:ex13g3" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 5: Implement a numerical method for ODEs</a></li>
+     <!-- navigation toc: --> <li><a href="._ode2-bootstrap004.html#sec:ode:ex5" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 6: Solve an ODE for emptying a tank</a></li>
+     <!-- navigation toc: --> <li><a href="._ode2-bootstrap004.html#sec:ode:ex7" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 7: Solve an ODE for the arc length</a></li>
+     <!-- navigation toc: --> <li><a href="._ode2-bootstrap004.html#sec:ode:ex4" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 8: Simulate a falling or rising body in a fluid</a></li>
+     <!-- navigation toc: --> <li><a href="._ode2-bootstrap004.html#sec:ode2:ex22" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 9: Verify the limit of a solution as time grows</a></li>
+     <!-- navigation toc: --> <li><a href="._ode2-bootstrap004.html#sec:ode2:ex42b" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 10: Scale the logistic equation</a></li>
+     <!-- navigation toc: --> <li><a href="._ode2-bootstrap004.html#sec:ode2:ex42" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 11: Compute logistic growth with time-varying carrying capacity</a></li>
+     <!-- navigation toc: --> <li><a href="._ode2-bootstrap004.html#sec:ode2:ex32d" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 12: Solve an ODE until constant solution</a></li>
+     <!-- navigation toc: --> <li><a href="._ode2-bootstrap004.html#sec:ode2:ex32e" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 13: Use a problem class to hold data about an ODE</a></li>
+     <!-- navigation toc: --> <li><a href="._ode2-bootstrap004.html#sec:ode2:ex32f" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 14: Derive and solve a scaled ODE problem</a></li>
+     <!-- navigation toc: --> <li><a href="._ode2-bootstrap004.html#sec:ode2:ex:FEfunc:module" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 15: Clean up a file to make it a module</a></li>
+     <!-- navigation toc: --> <li><a href="._ode2-bootstrap004.html#sec:ode2:ex25" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 16: Simulate radioactive decay</a></li>
+     <!-- navigation toc: --> <li><a href="._ode2-bootstrap004.html#sec:ode:ex9" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 17: Compute inverse functions by solving an ODE</a></li>
+     <!-- navigation toc: --> <li><a href="._ode2-bootstrap004.html#sec:ode:ex10" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 18: Make a class for computing inverse functions</a></li>
+     <!-- navigation toc: --> <li><a href="._ode2-bootstrap004.html#sec:ode:ex11" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 19: Add functionality to a class</a></li>
+     <!-- navigation toc: --> <li><a href="._ode2-bootstrap004.html#sec:ode:ex12" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 20: Compute inverse functions by interpolation</a></li>
+     <!-- navigation toc: --> <li><a href="._ode2-bootstrap004.html#sec:ode2:ex:RK4:func" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 21: Code the 4th-order Runge-Kutta method; function</a></li>
+     <!-- navigation toc: --> <li><a href="._ode2-bootstrap004.html#sec:ode2:ex:RK4:class" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 22: Code the 4th-order Runge-Kutta method; class</a></li>
+     <!-- navigation toc: --> <li><a href="._ode2-bootstrap004.html#sec:ode2:ex32h" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 23: Compare ODE methods</a></li>
+     <!-- navigation toc: --> <li><a href="._ode2-bootstrap004.html#sec:ode2:ex:sys:testfunc" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 24: Code a test function for systems of ODEs</a></li>
+     <!-- navigation toc: --> <li><a href="._ode2-bootstrap004.html#sec:ode2:ex:Heun:sys:func" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 25: Code Heun's method for ODE systems; function</a></li>
+     <!-- navigation toc: --> <li><a href="._ode2-bootstrap004.html#sec:ode2:ex:Heun:sys:class" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 26: Code Heun's method for ODE systems; class</a></li>
+     <!-- navigation toc: --> <li><a href="._ode2-bootstrap004.html#sec:ode2:ex25c" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 27: Implement and test the Leapfrog method</a></li>
+     <!-- navigation toc: --> <li><a href="._ode2-bootstrap004.html#sec:ode2:ex25c:AB3" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 28: Implement and test an Adams-Bashforth method</a></li>
+     <!-- navigation toc: --> <li><a href="._ode2-bootstrap004.html#sec:ode2:ex25x2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 29: Solve two coupled ODEs for radioactive decay</a></li>
+     <!-- navigation toc: --> <li><a href="._ode2-bootstrap004.html#sec:ode2:ex25b2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 30: Implement a 2nd-order Runge-Kutta method; function</a></li>
+     <!-- navigation toc: --> <li><a href="._ode2-bootstrap004.html#sec:ode2:ex25b" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 31: Implement a 2nd-order Runge-Kutta method; class</a></li>
+     <!-- navigation toc: --> <li><a href="._ode2-bootstrap004.html#sec:class:ex13e" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 32: Code the iterated midpoint method; function</a></li>
+     <!-- navigation toc: --> <li><a href="._ode2-bootstrap004.html#sec:class:ex13f" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 33: Code the iterated midpoint method; class</a></li>
+     <!-- navigation toc: --> <li><a href="._ode2-bootstrap004.html#sec:class:ex13g2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 34: Make a subclass for the iterated midpoint method</a></li>
+     <!-- navigation toc: --> <li><a href="._ode2-bootstrap004.html#sec:class:ex:gaussian" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 35: Compare the accuracy of various methods for ODEs</a></li>
+     <!-- navigation toc: --> <li><a href="._ode2-bootstrap004.html#sec:class:ex:gaussian2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 36: Animate how various methods for ODEs converge</a></li>
+     <!-- navigation toc: --> <li><a href="._ode2-bootstrap004.html#sec:ode2:ex29" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 37: Study convergence of numerical methods for ODEs</a></li>
+     <!-- navigation toc: --> <li><a href="._ode2-bootstrap004.html#sec:ode2:ex21" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 38: Find a body's position along with its velocity</a></li>
+     <!-- navigation toc: --> <li><a href="._ode2-bootstrap004.html#sec:ode2:ex27v4" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 39: Add the effect of air resistance on a ball</a></li>
+     <!-- navigation toc: --> <li><a href="._ode2-bootstrap004.html#sec:ode2:ex27" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 40: Solve an ODE system for an electric circuit</a></li>
+     <!-- navigation toc: --> <li><a href="._ode2-bootstrap004.html#___sec91" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remarks</a></li>
+     <!-- navigation toc: --> <li><a href="._ode2-bootstrap004.html#sec:ode:ex14" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 41: Simulate the spreading of a disease by a SIR model</a></li>
+     <!-- navigation toc: --> <li><a href="._ode2-bootstrap004.html#sec:ode:ex14c" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 42: Introduce problem and solver classes in the SIR model</a></li>
+     <!-- navigation toc: --> <li><a href="._ode2-bootstrap004.html#sec:ode:ex15" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 43: Introduce vaccination in a SIR model</a></li>
+     <!-- navigation toc: --> <li><a href="._ode2-bootstrap004.html#sec:ode:ex16" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 44: Introduce a vaccination campaign in a SIR model</a></li>
+     <!-- navigation toc: --> <li><a href="._ode2-bootstrap004.html#sec:ode:ex17" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 45: Find an optimal vaccination period</a></li>
+     <!-- navigation toc: --> <li><a href="._ode2-bootstrap004.html#sec:ode:ex18" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 46: Simulate human-zombie interaction</a></li>
+     <!-- navigation toc: --> <li><a href="._ode2-bootstrap004.html#sec:ode:ex19" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 47: Simulate a zombie movie</a></li>
+     <!-- navigation toc: --> <li><a href="._ode2-bootstrap004.html#sec:ode:ex20" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 48: Simulate a war on zombies</a></li>
+     <!-- navigation toc: --> <li><a href="._ode2-bootstrap004.html#sec:ode2:ex41" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 49: Explore predator-prey population interactions</a></li>
+     <!-- navigation toc: --> <li><a href="._ode2-bootstrap004.html#sec:ode2:ex34" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 50: Formulate a 2nd-order ODE as a system</a></li>
+     <!-- navigation toc: --> <li><a href="._ode2-bootstrap004.html#___sec102" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Physical applications</a></li>
+     <!-- navigation toc: --> <li><a href="._ode2-bootstrap004.html#sec:ode2:ex35" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 51: Solve \( \ddot u + u =0 \)</a></li>
+     <!-- navigation toc: --> <li><a href="._ode2-bootstrap004.html#sec:ode2:ex36v" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 52: Make a tool for analyzing oscillatory solutions</a></li>
+     <!-- navigation toc: --> <li><a href="._ode2-bootstrap004.html#sec:ode2:ex37" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 53: Implement problem, solver, and visualizer classes</a></li>
+     <!-- navigation toc: --> <li><a href="._ode2-bootstrap004.html#sec:ode2:ex38" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 54: Use classes for flexible choices of models</a></li>
+     <!-- navigation toc: --> <li><a href="._ode2-bootstrap004.html#sec:ode2:ex40" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 55: Apply software for oscillating systems</a></li>
+     <!-- navigation toc: --> <li><a href="._ode2-bootstrap004.html#sec:class:ex19" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 56: Model the economy of fishing</a></li>
+     <!-- navigation toc: --> <li><a href="._ode2-bootstrap004.html#___sec109" style="font-size: 80%;"><b>References</b></a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div> <!-- end of navigation bar -->
+
+<div class="container">
+
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+
+<a name="part0001"></a>
+<!-- !split -->
+<p style="font-size:80%">This chapter is taken from the book <a href="http://www.springer.com/gp/book/9783662498866">A Primer on Scientific Programming with Python</a> by H. P. Langtangen, 5th edition, Springer, 2016.</p>
+
+<h1 id="sec:ode2:ODE:scalar" class="anchor">Scalar ordinary differential equations</h1>
+
+<p>
+We shall in this document work with ordinary differential equations
+(ODEs)
+written on the abstract form
+
+$$
+\begin{equation}
+u^{\prime}(t) = f(u(t), t)\tp
+\tag{1}
+\end{equation}
+$$
+
+There is an infinite number of solutions to such an equation, so to make
+the solution \( u(t) \) unique, we must also specify an initial condition
+
+$$
+\begin{equation}
+u(0)=U_0\tp
+\tag{2}
+\end{equation}
+$$
+
+Given \( f(u,t) \) and \( U_0 \), our task is to compute \( u(t) \).
+
+<p>
+At first sight, <a href="#mjx-eqn-1">(1)</a> is only a first-order
+differential equation, since only \( u^{\prime} \) and not higher-order
+derivatives like \( u^{\prime} \) are present in the equation. However, equations with
+higher-order derivatives can also be written on the abstract form
+<a href="#mjx-eqn-1">(1)</a> by introducing auxiliary variables
+and interpreting \( u \) and \( f \) as vector functions. This rewrite of
+the original equation leads to a system of first-order
+differential equations and will be treated in the section <a href="._ode2-bootstrap002.html#sec:ode2:ODE:system">Systems of ordinary differential equations</a>.
+The bottom line is that a very large family of differential equations
+can be written as <a href="#mjx-eqn-1">(1)</a>. Forthcoming examples will
+provide evidence.
+
+<p>
+We shall first assume that \( u(t) \) is a <em>scalar function</em>,
+meaning that it has one number as value, which can be represented as a
+<code>float</code> object in Python. We then refer to
+<a href="#mjx-eqn-1">(1)</a> as a <em>scalar differential equation</em>.
+The counterpart <em>vector function</em> means that \( u \) is a vector of
+scalar functions and the equation is known as a <em>system of
+ODEs</em> (also known as a <em>vector ODE</em>). The value of a vector function is
+a list or array in a program.
+Systems of ODEs are treated in the section <a href="._ode2-bootstrap002.html#sec:ode2:ODE:system">Systems of ordinary differential equations</a>.
+
+<h2 id="___sec1" class="anchor">Examples on right-hand-side functions </h2>
+
+<p>
+To write a specific differential equation on the form <a href="#mjx-eqn-1">(1)</a>
+we need to identify what the \( f \) function is.
+Say the equation reads
+
+$$
+\begin{equation*} y^2y' = x,\quad y(0)=Y,\end{equation*}
+$$
+
+with \( y(x) \) as the unknown function. First, we need to introduce \( u \) and \( t \)
+as new symbols: \( u=y \), \( t=x \). This gives the equivalent equation
+\( u^2u^{\prime}=t \) and the initial condition \( u(0)=Y \). Second,
+the quantity \( u^{\prime} \) must be isolated on the left-hand side of the equation
+in order to bring the equation on the form <a href="#mjx-eqn-1">(1)</a>. Dividing
+by \( u^2 \) gives
+
+$$
+\begin{equation*} u^{\prime} = tu^{-2}\tp\end{equation*}
+$$
+
+This fits the form <a href="#mjx-eqn-1">(1)</a>, and the \( f(u,t) \) function is
+simply the formula involving \( u \) and \( t \) on the right-hand side:
+
+$$
+\begin{equation*} f(u,t) = tu^{-2}\tp\end{equation*}
+$$
+
+The \( t \) parameter is very often absent on the right-hand side such that
+\( f \) involves \( u \) only.
+
+<p>
+Let us list some common
+scalar differential equations and their corresponding \( f \) functions.
+Exponential growth of money or populations is governed by
+
+$$
+\begin{equation} u^{\prime} = \alpha u,
+\tag{3}
+\end{equation}
+$$
+
+where \( \alpha>0 \) is a given constant expressing the
+growth rate of \( u \). In this case,
+
+$$
+\begin{equation}
+f(u, t) = \alpha u\tp
+\tag{4}
+\end{equation}
+$$
+
+A related model is the logistic ODE for
+growth of a population under limited resources:
+
+$$
+\begin{equation}
+u^{\prime} = \alpha u\left(  1-\frac{u}{R}\right),
+\tag{5}
+\end{equation}
+$$
+
+where \( \alpha>0 \) is the initial growth rate and \( R \) is the
+maximum possible value of \( u \). The corresponding \( f \) is
+
+$$
+\begin{equation}
+f(u, t)=\alpha u\left(  1-\frac{u}{R}\right)\tp
+\tag{6}
+\end{equation}
+$$
+
+Radioactive decay of a substance has the model
+
+$$
+\begin{equation}
+u^{\prime} = -au,
+\tag{7}
+\end{equation}
+$$
+
+where \( a>0 \) is the rate of decay of \( u \). Here,
+
+$$
+\begin{equation} f(u, t) = -au\tp
+\tag{8}
+\end{equation}
+$$
+
+A body falling in a fluid can be modeled by
+
+$$
+\begin{equation}
+u^{\prime} + b|u|u = g,
+\tag{9}
+\end{equation}
+$$
+
+where \( b>0 \) models the fluid resistance, \( g \) is the acceleration of gravity, and
+\( u \) is the body's velocity
+(see <a href="._ode2-bootstrap004.html#sec:ode:ex4">Exercise 8: Simulate a falling or rising body in a fluid</a>). By solving for \( u^{\prime} \) we find
+
+$$
+\begin{equation}
+f(u,t) = -b|u|u + g\tp
+\tag{10}
+\end{equation}
+$$
+
+Finally, Newton's law of cooling is the ODE
+
+$$
+\begin{equation}
+u^{\prime} = -h(u-s),
+\tag{11}
+\end{equation}
+$$
+
+where \( u \) is the temperature of a body,
+\( h>0 \) is a proportionality constant, normally to be estimated from experiments,
+and \( s \) is the temperature of the surroundings. Obviously,
+
+$$
+\begin{equation}
+f(u, t) = -h(u-s)\tp
+\tag{12}
+\end{equation}
+$$
+
+<h2 id="sec:ode2:ForwardEuler:func" class="anchor">The Forward Euler scheme</h2>
+
+<p>
+Our task now is to define numerical methods for solving
+equations of the form <a href="#mjx-eqn-1">(1)</a>. The simplest such method
+is the Forward Euler scheme.
+Equation <a href="#mjx-eqn-1">(1)</a> is to be solved for \( t\in (0,T] \),
+and we seek the solution \( u \) at discrete time points
+\( t_i=i\Delta t \), \( i=1,2,\ldots,n \). Clearly, \( t_n=n\Delta t = T \),
+determining the number of points \( n \) as \( T/\Delta t \).
+The corresponding values \( u(t_i) \) are often abbreviated as \( u_i \), just
+for notational simplicity.
+
+<p>
+Equation <a href="#mjx-eqn-1">(1)</a> is to be fulfilled at all time points
+\( t\in (0,T] \). However, when we solve <a href="#mjx-eqn-1">(1)</a> numerically,
+we only require the equation to be satisfied at the discrete
+time points \( t_1, t_2, \ldots,t_n \).  That is,
+
+$$
+\begin{equation*} u^{\prime}(t_k) = f(u(t_k), t_k),\end{equation*}
+$$
+
+for \( k=1,\ldots,n \).
+The fundamental idea of the Forward Euler scheme is to approximate
+\( u^{\prime}(t_k) \) by a one-sided, forward difference:
+
+$$
+\begin{equation*} u^{\prime}(t_k) \approx {u(t_{k+1})-u(t_k)\over \Delta t} = {u_{k+1}-u_k\over \Delta t}\tp\end{equation*}
+$$
+
+This removes the derivative and leaves us with the equation
+
+$$
+\begin{equation*} {u_{k+1}-u_k\over \Delta t} = f(u_k, t_k)\tp\end{equation*}
+$$
+
+We assume that \( u_k \) is already computed, so that the only unknown
+in this equation is \( u_{k+1} \),
+which we can solve for:
+
+$$
+\begin{equation}
+u_{k+1} = u_k + \Delta t f(u_k, t_k) \tp
+\tag{13}
+\end{equation}
+$$
+
+This is the Forward Euler scheme for a scalar first-order differential
+equation \( u^{\prime}=f(u,t) \).
+
+<p>
+Equation <a href="#mjx-eqn-13">(13)</a> has a recursive nature. We start
+with the initial condition, \( u_0=U_0 \), and compute \( u_1 \) as
+
+$$
+\begin{equation*} u_1 = u_0 + \Delta t f(u_0, t_0)\tp\end{equation*}
+$$
+
+Then we can continue with
+
+$$
+\begin{equation*} u_2 = u_1 + \Delta t f(u_1, t_1),\end{equation*}
+$$
+
+and then with \( u_3 \) and so forth. This recursive nature of the
+method also demonstrates that we <em>must</em> have an initial condition &ndash;
+otherwise the method cannot start.
+
+<h2 id="sec:ode2:funcimpl" class="anchor">Function implementation</h2>
+
+<p>
+The next task is to write a general piece of code that implements
+the Forward Euler scheme <a href="#mjx-eqn-13">(13)</a>.
+The complete original (continuous) mathematical problem is stated as
+
+$$
+\begin{equation}
+u^{\prime} = f(u,t),\ t\in (0,T],\quad u(0)=U_0,
+\tag{14}
+\end{equation}
+$$
+
+while the discrete numerical problem reads
+
+$$
+\begin{align}
+u_0     & = U_0,
+\tag{15}\\ 
+u_{k+1} &=  u_k + \Delta t f(u_k,t_k),\ t_k=k\Delta t, k=1,\ldots, n,\ n
+=T/\Delta t\tp
+\tag{16}
+\end{align}
+$$
+
+We see that the input data to the numerical problem consist of
+\( f \), \( U_0 \), \( T \), and \( \Delta t \) or \( n \). The output consists of
+\( u_1,u_2,\ldots,u_n \) and the corresponding
+set of time points \( t_1,t_2,\ldots,t_n \).
+
+<p>
+Let us implement the Forward Euler method in a function
+<code>ForwardEuler</code> that takes
+\( f \), \( U_0 \), \( T \), and \( n \) as input, and that returns
+\( u_0,\ldots,u_n \) and \( t_0,\ldots,t_n \):
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">ForwardEuler</span>(f, U0, T, n):
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Solve u&#39;=f(u,t), u(0)=U0, with n steps until t=T.&quot;&quot;&quot;</span>
+    t <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros(n<span style="color: #666666">+1</span>)
+    u <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros(n<span style="color: #666666">+1</span>)  <span style="color: #408080; font-style: italic"># u[k] is the solution at time t[k]</span>
+    u[<span style="color: #666666">0</span>] <span style="color: #666666">=</span> U0
+    t[<span style="color: #666666">0</span>] <span style="color: #666666">=</span> <span style="color: #666666">0</span>
+    dt <span style="color: #666666">=</span> T<span style="color: #666666">/</span><span style="color: #008000">float</span>(n)
+    <span style="color: #008000; font-weight: bold">for</span> k <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(n):
+        t[k<span style="color: #666666">+1</span>] <span style="color: #666666">=</span> t[k] <span style="color: #666666">+</span> dt
+        u[k<span style="color: #666666">+1</span>] <span style="color: #666666">=</span> u[k] <span style="color: #666666">+</span> dt<span style="color: #666666">*</span>f(u[k], t[k])
+    <span style="color: #008000; font-weight: bold">return</span> u, t
+</pre></div>
+<p>
+Note the close correspondence between the implementation and the
+mathematical specification of the problem to be solved.  The argument
+<code>f</code> to the <code>ForwardEuler</code> function must be a Python function <code>f(u, t)</code>
+implementing the \( f(u, t) \) function in the differential equation.
+In fact, <code>f</code> is the definition of the equation to be solved.  For
+example, we may solve \( u^{\prime}=u \) for \( t\in (0,3) \), with \( u(0)=1 \),
+and \( \Delta t =0.1 \) by the following code utilizing the <code>ForwardEuler</code>
+function:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f</span>(u, t):
+    <span style="color: #008000; font-weight: bold">return</span> u
+
+u, t <span style="color: #666666">=</span> ForwardEuler(f, U0<span style="color: #666666">=1</span>, T<span style="color: #666666">=4</span>, n<span style="color: #666666">=20</span>)
+</pre></div>
+<p>
+With the <code>u</code> and <code>t</code> arrays we can easily plot the solution
+or perform data analysis on the numbers.
+
+<h2 id="sec:ode2:verify" class="anchor">Verifying the implementation</h2>
+
+<h3 id="___sec5" class="anchor">Visual comparison </h3>
+
+<p>
+Many computational scientists and engineers look at a plot to see if
+a numerical and exact solution are sufficiently close, and if so, they
+conclude that the program works. This is, however, not a very reliable
+test. Consider a first try at running <code>ForwardEuler(f, U0=1, T=4, n=10)</code>,
+which gives the plot to the left in Figure <a href="#sec:ode2:verify:fig:n10:20">1</a>.
+The discrepancy between the solutions is large, and the viewer may be
+uncertain whether the program works correctly or not. Running <code>n=20</code>
+should give a better solution, depicted to the right in
+Figure <a href="#sec:ode2:verify:fig:n10:20">1</a>, but is the improvement good enough?
+Increasing <code>n</code> drives the numerical curve closer to the exact one.
+This brings evidence that the program is correct, but there could
+potentially be errors in the code that makes the curves further apart
+than what is implied by the numerical approximations alone. We cannot
+know if such a problem exists.
+
+<p>
+<center> <!-- figure label: --> <div id="sec:ode2:verify:fig:n10:20"></div> <!-- FIGURE -->
+<hr class="figure">
+<center><p class="caption">Figure 1:  Comparison of numerical exact solution for 10 intervals (left) and 20 (intervals).  <!-- caption label: sec:ode2:verify:fig:n10:20 --> </p></center>
+<p><img src="fig-ode2/FE_n_10_20.png" align="bottom" width=600></p>
+</center>
+
+<h3 id="___sec6" class="anchor">Comparing with hand calculations </h3>
+
+<p>
+A more rigorous way of verifying the implementation builds on a simple
+principle: we run the algorithm by hand a few times and compare the
+results with those in the program. For most practical purposes, it
+suffices to compute \( u_1 \) and \( u_2 \) by hand:
+
+$$
+\begin{equation*} u_1 = 1 + 0.1\cdot 1 = 1.1,\quad u_2= 1.1 + 0.1\cdot 1.1 = 1.21\tp\end{equation*}
+$$
+
+These values are to be compared with the numbers produced by the code.
+A correct program will lead to deviations that are zero (to machine
+precision). Any such test should be wrapped in a proper test function
+such that it can easily be repeated later.
+Here, it means we make a function
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">test_ForwardEuler_against_hand_calculations</span>():
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Verify ForwardEuler against hand calc. for 3 time steps.&quot;&quot;&quot;</span>
+    u, t <span style="color: #666666">=</span> ForwardEuler(f, U0<span style="color: #666666">=1</span>, T<span style="color: #666666">=0.2</span>, n<span style="color: #666666">=2</span>)
+    exact <span style="color: #666666">=</span> np<span style="color: #666666">.</span>array([<span style="color: #666666">1</span>, <span style="color: #666666">1.1</span>, <span style="color: #666666">1.21</span>])  <span style="color: #408080; font-style: italic"># hand calculations</span>
+    error <span style="color: #666666">=</span> np<span style="color: #666666">.</span>abs(exact <span style="color: #666666">-</span> u)<span style="color: #666666">.</span>max()
+    success <span style="color: #666666">=</span> error <span style="color: #666666">&lt;</span> <span style="color: #666666">1E-14</span>
+    <span style="color: #008000; font-weight: bold">assert</span> success, <span style="color: #BA2121">&#39;|exact - u| = </span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121"> != 0&#39;</span> <span style="color: #666666">%</span> error
+</pre></div>
+<p>
+The test function is written in a way that makes it trivial to
+integrate it in the nose testing
+framework.
+This means that the name starts with <code>test_</code>, there are no function
+arguments, and the check for passing the test is done with <code>assert
+success</code>. The test fails if the boolean variable <code>success</code> is <code>False</code>.
+The string after <code>assert success</code> is a message that will be written
+out if the test fails.  The error measure is most conveniently a
+scalar number, which here is taken as the absolute value of the
+largest deviation between the exact and the numerical
+solution. Although we expect the error measure to be zero, we are
+prepared for rounding errors and must use a tolerance when testing if
+the test has passed.
+
+<h3 id="___sec7" class="anchor">Comparing with an exact numerical solution </h3>
+
+<p>
+Another effective way to verify the code, is to find a problem that
+can be solved exactly by the numerical method we use. That is, we seek
+a problem where we do not have to deal with numerical approximation
+errors when comparing the exact solution with the one produced by the
+program.  It turns out that if the solution \( u(t) \) is linear in \( t \),
+the Forward Euler method will reproduce this solution
+exactly. Therefore, we choose \( u(t)=at+U_0 \), with (e.g.)  \( a=0.2 \) and
+\( U_0=3 \). The corresponding \( f \) is the derivative of \( u \), i.e., \( f(u,t)
+= a \). This is obviously a very simple right-hand side without any \( u \)
+or \( t \). However, we can make \( f \) more complicated by adding something
+that is zero, e.g., some expression with \( u-(at+U_0) \), say
+\( (u-(at+U_0))^4 \), so that
+
+$$
+\begin{equation}
+f(u,t) = a + (u-(at+U_0))^4\tp
+\tag{17}
+\end{equation}
+$$
+
+<p>
+We implement our special \( f \) and the exact solution in two functions
+<code>f</code> and <code>u_exact</code>, and compute a scalar measure of the error.  As a
+above, we place the test inside a test function and make an assertion
+that the error is sufficiently close to zero:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">test_ForwardEuler_against_linear_solution</span>():
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Use knowledge of an exact numerical solution for testing.&quot;&quot;&quot;</span>
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f</span>(u, t):
+        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #666666">0.2</span> <span style="color: #666666">+</span> (u <span style="color: #666666">-</span> u_exact(t))<span style="color: #666666">**4</span>
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">u_exact</span>(t):
+        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #666666">0.2*</span>t <span style="color: #666666">+</span> <span style="color: #666666">3</span>
+
+    u, t <span style="color: #666666">=</span> ForwardEuler(f, U0<span style="color: #666666">=</span>u_exact(<span style="color: #666666">0</span>), T<span style="color: #666666">=3</span>, n<span style="color: #666666">=5</span>)
+    u_e <span style="color: #666666">=</span> u_exact(t)
+    error <span style="color: #666666">=</span> np<span style="color: #666666">.</span>abs(u_e <span style="color: #666666">-</span> u)<span style="color: #666666">.</span>max()
+    success <span style="color: #666666">=</span> error <span style="color: #666666">&lt;</span> <span style="color: #666666">1E-14</span>
+    <span style="color: #008000; font-weight: bold">assert</span> success, <span style="color: #BA2121">&#39;|exact - u| = </span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121"> != 0&#39;</span> <span style="color: #666666">%</span> error
+</pre></div>
+<p>
+A &quot;silent&quot; execution of the function indicates that the test works.
+
+<p>
+The shown functions are collected in a file
+<a href="http://tinyurl.com/pwyasaa/ode2/ForwardEuler_func.py" target="_self"><tt>ForwardEuler_func.py</tt></a>.
+
+<h2 id="sec:ode2:wrap2callable" class="anchor">From discrete to continuous solution</h2>
+
+<p>
+The numerical solution of an ODE is a <em>discrete function</em> in the sense
+that we only know the function values \( u_0, u_1, ldots, u_N \) at some
+discrete points \( t_0, t_1, \ldots, t_N \) in time.  What if we want to
+know \( u \) between two computed points?  For example, what is \( u \)
+between \( t_i \) and \( t_{i+1} \), say at the midpoint \( t=t_i +
+\frac{1}{2}\Delta t \)?  One can use <em>interpolation</em> techniques to find
+this value \( u \).  The simplest interpolation technique is to assume
+that \( u \) varies linearly on each time interval. On the interval \( [t_i,
+t_{i+1}] \) the linear variation of \( u \) becomes
+
+$$
+\begin{equation*} u(t) = u_i + \frac{u_{i+1}-u{i}}{t_{i+1}-t_i}(t - t_i)\tp\end{equation*}
+$$
+
+We can then evaluate, e.g., \( u(t_i+\frac{1}{2}\Delta t) \) from
+this formula and show that it becomes \( (u_i + u_{i+1})/2 \).
+
+<p>
+The function <code>scitools.std.wrap2callable</code> can automatically
+convert a discrete function to a continuous function:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">scitools.std</span> <span style="color: #008000; font-weight: bold">import</span> wrap2callable
+u_cont <span style="color: #666666">=</span> wrap2callable((t, u))
+</pre></div>
+<p>
+From the arrays <code>t</code> and <code>u</code>, <code>wrap2callable</code> constructs
+a continuous function based on linear interpolation. The result
+<code>u_cont</code> is a Python function that we can evaluate for any
+value of its argument <code>t</code>:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>dt <span style="color: #666666">=</span> t[i<span style="color: #666666">+1</span>] <span style="color: #666666">-</span> t[i]
+t <span style="color: #666666">=</span> t[i] <span style="color: #666666">+</span> <span style="color: #666666">0.5*</span>dt
+value <span style="color: #666666">=</span> u_cont(t)
+</pre></div>
+<p>
+In general, the <code>wrap2callable</code> function is handy when you have computed
+some discrete function and you want to evaluate this discrete
+function at any point.
+
+<h2 id="sec:ode2:Heun" class="anchor">Switching numerical method</h2>
+
+<p>
+There are numerous alternative numerical methods for solving
+<a href="#mjx-eqn-13">(13)</a>.
+One of the simplest is Heun's method:
+
+$$
+\begin{align}
+u_* &= u_k + \Delta tf(u_k, t_k),
+\tag{18}\\ 
+u_{k+1} &= u_k + \frac{1}{2}\Delta t f(u_k, t_k) + \frac{1}{2}\Delta t
+f(u_*, t_{k+1})\tp
+\tag{19}
+\end{align}
+$$
+
+This scheme is easily implemented in the <code>ForwardEuler</code> function
+by replacing the Forward Euler formula
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>    u[k<span style="color: #666666">+1</span>] <span style="color: #666666">=</span> u[k] <span style="color: #666666">+</span> dt<span style="color: #666666">*</span>f(u[k], t[k])
+</pre></div>
+<p>
+by <a href="#mjx-eqn-18">(18)</a> and <a href="#mjx-eqn-19">(19)</a>:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>    u_star <span style="color: #666666">=</span> u[k] <span style="color: #666666">+</span> dt<span style="color: #666666">*</span>f(u[k], t[k])
+    u[k<span style="color: #666666">+1</span>] <span style="color: #666666">=</span> u[k] <span style="color: #666666">+</span> <span style="color: #666666">0.5*</span>dt<span style="color: #666666">*</span>f(u[k], t[k]) <span style="color: #666666">+</span> <span style="color: #666666">0.5*</span>dt<span style="color: #666666">*</span>f(u_star, t[k<span style="color: #666666">+1</span>])
+</pre></div>
+<p>
+We can, especially if <code>f</code> is expensive to calculate, eliminate
+a call <code>f(u[k], t[k])</code> by introducing an auxiliary variable:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>    f_k <span style="color: #666666">=</span> f(u[k], t[k])
+    u_star <span style="color: #666666">=</span> u[k] <span style="color: #666666">+</span> dt<span style="color: #666666">*</span>f_k
+    u[k<span style="color: #666666">+1</span>] <span style="color: #666666">=</span> u[k] <span style="color: #666666">+</span> <span style="color: #666666">0.5*</span>dt<span style="color: #666666">*</span>f_k <span style="color: #666666">+</span> <span style="color: #666666">0.5*</span>dt<span style="color: #666666">*</span>f(u_star, t[k<span style="color: #666666">+1</span>])
+</pre></div>
+
+<h2 id="sec:ode2:classimpl" class="anchor">Class implementation</h2>
+
+<p>
+As an alternative to the general <code>ForwardEuler</code> function
+in the section <a href="#sec:ode2:funcimpl">Function implementation</a>, we shall now implement the
+numerical method in a class. This requires, of course, familiarity
+with the class
+concept in Python.
+
+<h3 id="___sec11" class="anchor">Class wrapping of a function </h3>
+
+<p>
+Let us start with simply wrapping the <code>ForwardEuler</code> function in a
+class <code>ForwardEuler_v1</code> (the postfix <code>_v1</code> indicates
+that this is the very first class version). That is, we take the
+code in the <code>ForwardEuler</code> function and distribute it among methods
+in a class.
+
+<p>
+The constructor can store the input data of the problem and initialize
+data structures, while
+a <code>solve</code> method can perform the time stepping procedure:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
+
+<span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">ForwardEuler_v1</span>(<span style="color: #008000">object</span>):
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__init__</span>(<span style="color: #008000">self</span>, f, U0, T, n):
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>f, <span style="color: #008000">self</span><span style="color: #666666">.</span>U0, <span style="color: #008000">self</span><span style="color: #666666">.</span>T, <span style="color: #008000">self</span><span style="color: #666666">.</span>n <span style="color: #666666">=</span> f, dt, U0, T, n
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>dt <span style="color: #666666">=</span> T<span style="color: #666666">/</span><span style="color: #008000">float</span>(n)
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>u <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros(n<span style="color: #666666">+1</span>)
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>t <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros(n<span style="color: #666666">+1</span>)
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">solve</span>(<span style="color: #008000">self</span>):
+        <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Compute solution for 0 &lt;= t &lt;= T.&quot;&quot;&quot;</span>
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>u[<span style="color: #666666">0</span>] <span style="color: #666666">=</span> <span style="color: #008000">float</span>(<span style="color: #008000">self</span><span style="color: #666666">.</span>U0)
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>t[<span style="color: #666666">0</span>] <span style="color: #666666">=</span> <span style="color: #008000">float</span>(<span style="color: #666666">0</span>)
+
+        <span style="color: #008000; font-weight: bold">for</span> k <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #008000">self</span><span style="color: #666666">.</span>n):
+            <span style="color: #008000">self</span><span style="color: #666666">.</span>k <span style="color: #666666">=</span> k
+            <span style="color: #008000">self</span><span style="color: #666666">.</span>t[k<span style="color: #666666">+1</span>] <span style="color: #666666">=</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>t[k] <span style="color: #666666">+</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>dt
+            <span style="color: #008000">self</span><span style="color: #666666">.</span>u[k<span style="color: #666666">+1</span>] <span style="color: #666666">=</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>advance()
+        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>u, <span style="color: #008000">self</span><span style="color: #666666">.</span>t
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">advance</span>(<span style="color: #008000">self</span>):
+        <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Advance the solution one time step.&quot;&quot;&quot;</span>
+        u, dt, f, k, t <span style="color: #666666">=</span> \ 
+           <span style="color: #008000">self</span><span style="color: #666666">.</span>u, <span style="color: #008000">self</span><span style="color: #666666">.</span>dt, <span style="color: #008000">self</span><span style="color: #666666">.</span>f, <span style="color: #008000">self</span><span style="color: #666666">.</span>k, <span style="color: #008000">self</span><span style="color: #666666">.</span>t
+
+        u_new <span style="color: #666666">=</span> u[k] <span style="color: #666666">+</span> dt<span style="color: #666666">*</span>f(u[k], t[k])
+        <span style="color: #008000; font-weight: bold">return</span> u_new
+</pre></div>
+<p>
+Note that we have introduced a third class method, <code>advance</code>, which isolates
+the numerical scheme. The motivation is that, by observation,
+the constructor and the <code>solve</code> method
+are completely general as they remain unaltered if we change the
+numerical method (at least this is true for a wide class of
+numerical methods). The only difference between various numerical schemes
+is the updating formula. It is therefore a good programming habit
+to isolate the updating
+formula so that another scheme can be implemented by just replacing the
+<code>advance</code> method - without touching any other parts of the class.
+
+<p>
+Also note that we in the <code>advance</code> method &quot;strip off&quot; the <code>self</code>
+prefix by introducing local symbols with exactly the same names as in
+the mathematical specification of the numerical method. This is important
+if we want a visually one-to-one correspondence between the mathematics and
+the computer code.
+
+<p>
+Application of the class goes as follows, here for the model problem
+\( u^{\prime}=u \), \( u(0)=1 \):
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f</span>(u, t):
+    <span style="color: #008000; font-weight: bold">return</span> u
+
+solver <span style="color: #666666">=</span> ForwardEuler_v1(f, U0<span style="color: #666666">=1</span>, T<span style="color: #666666">=3</span>, n<span style="color: #666666">=15</span>)
+u, t <span style="color: #666666">=</span> solver<span style="color: #666666">.</span>solve()
+</pre></div>
+
+<h3 id="___sec12" class="anchor">Switching numerical method </h3>
+
+<p>
+Implementing, for example, Heun's method <a href="#mjx-eqn-18">(18)</a>-<a href="#mjx-eqn-19">(19)</a> is a matter of replacing the <code>advance</code> method by
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">advance</span>(<span style="color: #008000">self</span>):
+        <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Advance the solution one time step.&quot;&quot;&quot;</span>
+        u, dt, f, k, t <span style="color: #666666">=</span> \ 
+           <span style="color: #008000">self</span><span style="color: #666666">.</span>u, <span style="color: #008000">self</span><span style="color: #666666">.</span>dt, <span style="color: #008000">self</span><span style="color: #666666">.</span>f, <span style="color: #008000">self</span><span style="color: #666666">.</span>k, <span style="color: #008000">self</span><span style="color: #666666">.</span>t
+
+        u_star <span style="color: #666666">=</span> u[k] <span style="color: #666666">+</span> dt<span style="color: #666666">*</span>f(u[k], t[k])
+        u_new <span style="color: #666666">=</span> u[k] <span style="color: #666666">+</span> \ 
+               <span style="color: #666666">0.5*</span>dt<span style="color: #666666">*</span>f(u[k], t[k]) <span style="color: #666666">+</span> <span style="color: #666666">0.5*</span>dt<span style="color: #666666">*</span>f(u_star, t[k<span style="color: #666666">+1</span>])
+        <span style="color: #008000; font-weight: bold">return</span> u_new
+</pre></div>
+<p>
+Checking input data is always a good habit, and in the present class
+the constructor
+may test that the <code>f</code> argument is indeed an object that can be called
+as a function:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">if</span> <span style="color: #AA22FF; font-weight: bold">not</span> <span style="color: #008000">callable</span>(f):
+    <span style="color: #008000; font-weight: bold">raise</span> <span style="color: #D2413A; font-weight: bold">TypeError</span>(<span style="color: #BA2121">&#39;f is </span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121">, not a function&#39;</span> <span style="color: #666666">%</span> <span style="color: #008000">type</span>(f))
+</pre></div>
+<p>
+Any function <code>f</code> or any instance of a class with a <code>__call__</code>
+method will make <code>callable(f)</code> evaluate to <code>True</code>.
+
+<h3 id="___sec13" class="anchor">A more flexible class </h3>
+
+<p>
+Say we solve \( u^{\prime}=f(u,t) \) from \( t=0 \) to \( t=T_1 \). We can continue the
+solution for \( t>T_1 \) simply by restarting the whole procedure with
+initial conditions at \( t=T_1 \). Hence, the implementation
+should allow several consequtive solve steps.
+
+<p>
+Another fact is that the time step \( \Delta t \) does not need to
+be constant. Allowing small \( \Delta t \) in regions where \( u \) changes
+rapidly and letting \( \Delta t \) be larger in areas where \( u \) is slowly
+varying, is an attractive solution strategy. The Forward Euler
+method can be reformulated for a variable time step size \( t_{k+1}-t_k \):
+
+$$
+\begin{equation}
+u_{k+1} = u_k + (t_{k+1}-t_k) f(u_k, t_k) \tp
+\tag{20}
+\end{equation}
+$$
+
+Similarly, Heun's method and many other methods can be formulated with
+a variable step size simply by replacing \( \Delta t \) with \( t_{k+1}-t_k \).
+It then makes sense for the user to provide a list or array with
+time points for which a solution is sought: \( t_0,t_1,\ldots,t_n \).
+The <code>solve</code> method
+can accept such a set of points.
+
+<p>
+The mentioned extensions lead to a modified class:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">ForwardEuler</span>(<span style="color: #008000">object</span>):
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__init__</span>(<span style="color: #008000">self</span>, f):
+        <span style="color: #008000; font-weight: bold">if</span> <span style="color: #AA22FF; font-weight: bold">not</span> <span style="color: #008000">callable</span>(f):
+            <span style="color: #008000; font-weight: bold">raise</span> <span style="color: #D2413A; font-weight: bold">TypeError</span>(<span style="color: #BA2121">&#39;f is </span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121">, not a function&#39;</span> <span style="color: #666666">%</span> <span style="color: #008000">type</span>(f))
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>f <span style="color: #666666">=</span> f
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">set_initial_condition</span>(<span style="color: #008000">self</span>, U0):
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>U0 <span style="color: #666666">=</span> <span style="color: #008000">float</span>(U0)
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">solve</span>(<span style="color: #008000">self</span>, time_points):
+        <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Compute u for t values in time_points list.&quot;&quot;&quot;</span>
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>t <span style="color: #666666">=</span> np<span style="color: #666666">.</span>asarray(time_points)
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>u <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros(<span style="color: #008000">len</span>(time_points))
+        <span style="color: #408080; font-style: italic"># Assume self.t[0] corresponds to self.U0</span>
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>u[<span style="color: #666666">0</span>] <span style="color: #666666">=</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>U0
+
+        <span style="color: #008000; font-weight: bold">for</span> k <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #008000">len</span>(<span style="color: #008000">self</span><span style="color: #666666">.</span>t)<span style="color: #666666">-1</span>):
+            <span style="color: #008000">self</span><span style="color: #666666">.</span>k <span style="color: #666666">=</span> k
+            <span style="color: #008000">self</span><span style="color: #666666">.</span>u[k<span style="color: #666666">+1</span>] <span style="color: #666666">=</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>advance()
+        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>u, <span style="color: #008000">self</span><span style="color: #666666">.</span>t
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">advance</span>(<span style="color: #008000">self</span>):
+        <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Advance the solution one time step.&quot;&quot;&quot;</span>
+        u, f, k, t <span style="color: #666666">=</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>u, <span style="color: #008000">self</span><span style="color: #666666">.</span>f, <span style="color: #008000">self</span><span style="color: #666666">.</span>k, <span style="color: #008000">self</span><span style="color: #666666">.</span>t
+        dt <span style="color: #666666">=</span> t[k<span style="color: #666666">+1</span>] <span style="color: #666666">-</span> t[k]
+        u_new <span style="color: #666666">=</span> u[k] <span style="color: #666666">+</span> dt<span style="color: #666666">*</span>f(u[k], t[k])
+        <span style="color: #008000; font-weight: bold">return</span> u_new
+</pre></div>
+
+<h3 id="___sec14" class="anchor">Usage of the class </h3>
+
+<p>
+We must instantiate an instance, call the <code>set_initial_condition</code> method,
+and then call the <code>solve</code> method with a list or array of the time
+points we want to compute \( u \) at:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f</span>(u, t):
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Right-hand side function for the ODE u&#39; = u.&quot;&quot;&quot;</span>
+    <span style="color: #008000; font-weight: bold">return</span> u
+
+solver <span style="color: #666666">=</span> ForwardEuler(f)
+solver<span style="color: #666666">.</span>set_initial_condition(<span style="color: #666666">2.5</span>)
+u, t <span style="color: #666666">=</span> solver<span style="color: #666666">.</span>solve(np<span style="color: #666666">.</span>linspace(<span style="color: #666666">0</span>, <span style="color: #666666">4</span>, <span style="color: #666666">21</span>))
+</pre></div>
+<p>
+A simple <code>plot(t, u)</code> command can visualize the solution.
+
+<h3 id="___sec15" class="anchor">Verification </h3>
+
+<p>
+It is natural to perform the same verifications as we did for the
+<code>ForwardEuler</code> function in the section <a href="#sec:ode2:verify">Verifying the implementation</a>. First, we
+test the numerical solution against hand calculations. The
+implementation makes use of the same test function, just the way of
+calling up the numerical solver is different:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">test_ForwardEuler_against_hand_calculations</span>():
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Verify ForwardEuler against hand calc. for 2 time steps.&quot;&quot;&quot;</span>
+    solver <span style="color: #666666">=</span> ForwardEuler(<span style="color: #008000; font-weight: bold">lambda</span> u, t: u)
+    solver<span style="color: #666666">.</span>set_initial_condition(<span style="color: #666666">1</span>)
+    u, t <span style="color: #666666">=</span> solver<span style="color: #666666">.</span>solve([<span style="color: #666666">0</span>, <span style="color: #666666">0.1</span>, <span style="color: #666666">0.2</span>])
+    exact <span style="color: #666666">=</span> np<span style="color: #666666">.</span>array([<span style="color: #666666">1</span>, <span style="color: #666666">1</span>,<span style="color: #666666">1</span>, <span style="color: #666666">1.21</span>])  <span style="color: #408080; font-style: italic"># hand calculations</span>
+    error <span style="color: #666666">=</span> np<span style="color: #666666">.</span>abs(exact <span style="color: #666666">-</span> u)<span style="color: #666666">.</span>max()
+    <span style="color: #008000; font-weight: bold">assert</span> error <span style="color: #666666">&lt;</span> <span style="color: #666666">1E-14</span>, <span style="color: #BA2121">&#39;|exact - u| = </span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121"> != 0&#39;</span> <span style="color: #666666">%</span> error
+</pre></div>
+<p>
+We have put some efforts into making this test very compact, mainly to
+demonstrate how Python allows very short, but still readable code.
+With a lambda function we can define the right-hand side of the ODE directly
+in the constructor argument. The <code>solve</code> method accepts a list, tuple, or
+array of time points and turns the data into an array anyway. Instead of
+a separate boolean variable <code>success</code> we have inserted the test inequality
+directly in the <code>assert</code> statement.
+
+<p>
+The second verification method applies the fact that the Forward Euler
+scheme is exact for a \( u \) that is linear in \( t \).  We perform a
+slightly more complicated test than in the section <a href="#sec:ode2:verify">Verifying the implementation</a>:
+now we first solve for the points \( 0, 0.4, 1, 1.2 \), and then we
+continue the solution process for \( t_1=1.4 \) and \( t_2=1.5 \).
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">test_ForwardEuler_against_linear_solution</span>():
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Use knowledge of an exact numerical solution for testing.&quot;&quot;&quot;</span>
+    u_exact <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">lambda</span> t: <span style="color: #666666">0.2*</span>t <span style="color: #666666">+</span> <span style="color: #666666">3</span>
+    solver <span style="color: #666666">=</span> ForwardEuler(<span style="color: #008000; font-weight: bold">lambda</span> u, t: <span style="color: #666666">0.2</span> <span style="color: #666666">+</span> (u <span style="color: #666666">-</span> u_exact(t))<span style="color: #666666">**4</span>)
+
+    <span style="color: #408080; font-style: italic"># Solve for first time interval [0, 1.2]</span>
+    solver<span style="color: #666666">.</span>set_initial_condition(u_exact(<span style="color: #666666">0</span>))
+    u1, t1 <span style="color: #666666">=</span> solver<span style="color: #666666">.</span>solve([<span style="color: #666666">0</span>, <span style="color: #666666">0.4</span>, <span style="color: #666666">1</span>, <span style="color: #666666">1.2</span>])
+
+    <span style="color: #408080; font-style: italic"># Continue with a new time interval [1.2, 1.5]</span>
+    solver<span style="color: #666666">.</span>set_initial_condition(u1[<span style="color: #666666">-1</span>])
+    u2, t2 <span style="color: #666666">=</span> solver<span style="color: #666666">.</span>solve([<span style="color: #666666">1.2</span>, <span style="color: #666666">1.4</span>, <span style="color: #666666">1.5</span>])
+
+    <span style="color: #408080; font-style: italic"># Append u2 to u1 and t2 to t1</span>
+    u <span style="color: #666666">=</span> np<span style="color: #666666">.</span>concatenate((u1, u2))
+    t <span style="color: #666666">=</span> np<span style="color: #666666">.</span>concatenate((t1, t2))
+
+    u_e <span style="color: #666666">=</span> u_exact(t)
+    error <span style="color: #666666">=</span> np<span style="color: #666666">.</span>abs(u_e <span style="color: #666666">-</span> u)<span style="color: #666666">.</span>max()
+    <span style="color: #008000; font-weight: bold">assert</span> error <span style="color: #666666">&lt;</span> <span style="color: #666666">1E-14</span>, <span style="color: #BA2121">&#39;|exact - u| = </span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121"> != 0&#39;</span> <span style="color: #666666">%</span> error
+</pre></div>
+
+<h3 id="___sec16" class="anchor">Making a module </h3>
+
+<p>
+It is a well-established programming habit to have class implementations
+in files that act as Python modules. This means that all code is collected
+within classes or functions, and that the main program is executed
+in a test block. Upon import, no test or demonstration code should be executed.
+
+<p>
+Everything we have made so far is in classes or functions, so the remaining
+task to make a module, is to construct the test block.
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">if</span> __name__ <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;__main__&#39;</span>:
+    <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">sys</span>
+    <span style="color: #008000; font-weight: bold">if</span> <span style="color: #008000">len</span>(sys<span style="color: #666666">.</span>argv) <span style="color: #666666">&gt;=</span> <span style="color: #666666">2</span> <span style="color: #AA22FF; font-weight: bold">and</span> sys<span style="color: #666666">.</span>argv[<span style="color: #666666">1</span>] <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;test&#39;</span>:
+        test_ForwardEuler_v1_against_hand_calculations()
+        test_ForwardEuler_against_hand_calculations()
+        test_ForwardEuler_against_linear_solution()
+</pre></div>
+<p>
+The <code>ForwardEuler_func.py</code> file with functions from the sections <a href="#sec:ode2:funcimpl">Function implementation</a> and <a href="#sec:ode2:verify">Verifying the implementation</a> is in theory a module,
+but not sufficiently cleaned up. <a href="._ode2-bootstrap004.html#sec:ode2:ex:FEfunc:module">Exercise 15: Clean up a file to make it a module</a> encourages you to turn the file into a
+proper module.
+
+<h3 id="___sec17" class="anchor">Remark </h3>
+
+<p>
+We do not need to call the test functions from the test block, since
+we can let nose run the tests
+automatically,
+by <code>nosetests -s ForwardEuler.py</code>.
+
+<h2 id="sec:ode2:logistic:func" class="anchor">Logistic growth via a function-based approach</h2>
+
+<p>
+A more exciting application than the verification problems above
+is to simulate logistic growth of a population. The relevant ODE
+reads
+
+$$
+\begin{equation*}
+u^{\prime}(t)=\alpha u(t)\left(  1-\frac{u(t)}{R}\right)\tp
+\end{equation*}
+$$
+
+The mathematical \( f(u,t) \) function is simply the right-hand side of this ODE.
+The corresponding Python function is
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f</span>(u, t):
+    <span style="color: #008000; font-weight: bold">return</span> alpha<span style="color: #666666">*</span>u<span style="color: #666666">*</span>(<span style="color: #666666">1</span> <span style="color: #666666">-</span> u<span style="color: #666666">/</span>R)
+</pre></div>
+<p>
+where <code>alpha</code> and <code>R</code> are global variables that
+correspond to \( \alpha \) and \( R \). These must be initialized before
+calling the <code>ForwardEuler</code> function (which will call the <code>f(u,t)</code>
+above):
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>alpha <span style="color: #666666">=</span> <span style="color: #666666">0.2</span>
+R <span style="color: #666666">=</span> <span style="color: #666666">1.0</span>
+
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">ForwardEuler_func2</span> <span style="color: #008000; font-weight: bold">import</span> ForwardEuler
+u, t <span style="color: #666666">=</span> ForwardEuler(f, U0<span style="color: #666666">=0.1</span>, T<span style="color: #666666">=40</span>, n<span style="color: #666666">=400</span>)
+</pre></div>
+<p>
+We have in this program assumed that <a href="._ode2-bootstrap004.html#sec:ode2:ex:FEfunc:module">Exercise 15: Clean up a file to make it a module</a>
+has been carried out to clean up the <code>ForwardEuler_func.py</code> file
+such that it becomes a proper module file with the name
+<code>ForwardEuler_func2.py</code>.
+
+<p>
+With <code>u</code> and <code>t</code> computed we can proceed with visualizing the
+solution (see Figure <a href="#fig:logistic:class:ODE">2</a>):
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #666666">*</span>
+plot(t, u)
+xlabel(<span style="color: #BA2121">&#39;t&#39;</span>); ylabel(<span style="color: #BA2121">&#39;u&#39;</span>)
+title(<span style="color: #BA2121">&#39;Logistic growth: alpha=</span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121">, R=</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">, dt=</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span>
+      (alpha, R, t[<span style="color: #666666">1</span>]<span style="color: #666666">-</span>t[<span style="color: #666666">0</span>]))
+savefig(<span style="color: #BA2121">&#39;tmp.pdf&#39;</span>); savefig(<span style="color: #BA2121">&#39;tmp.png&#39;</span>)
+show()
+</pre></div>
+<p>
+The complete code appears in the file <a href="http://tinyurl.com/pwyasaa/ode2/logistic_func.py" target="_self"><tt>logistic_func.py</tt></a>.
+
+<p>
+<center> <!-- figure label: --> <div id="fig:logistic:class:ODE"></div> <!-- FIGURE -->
+<hr class="figure">
+<center><p class="caption">Figure 2:  Plot of the solution of the ODE problem \( u^{\prime} = 0.2u(1-u) \), \( u(0)=0.1 \).  <!-- caption label: fig:logistic:class:ODE --> </p></center>
+<p><img src="fig-ode2/logistic_func_mpl.png" align="bottom" width=400></p>
+</center>
+
+<h2 id="sec:ode2:logistic:class" class="anchor">Logistic growth via a class-based approach</h2>
+
+<p>
+The task of this section is to redo the implementation of the section <a href="#sec:ode2:logistic:func">Logistic growth via a function-based approach</a> using a problem class to store the
+physical parameters and the \( f(u,t) \) function, and using class
+<code>ForwardEuler</code> from the section <a href="#sec:ode2:classimpl">Class implementation</a> to solve the
+ODE. Comparison with the code in the section <a href="#sec:ode2:logistic:func">Logistic growth via a function-based approach</a>
+will then exemplify what the difference between a function-based and a
+class-based implementation is.  There will be two major
+differences. One is related to technical differences between
+programming with functions and programming with classes.  The other is
+psychological: when doing class programming one often puts more efforts
+into making more functions, a complete module, a user interface, more
+testing, etc. A function-based approach, and in particular
+the present &quot;flat&quot; MATLAB-style program,
+tends to be more ad hoc and contain less general,
+reusable code. At least this is the author's experience over many
+years when observing students and professionals create different style
+of code with different type of programming techniques.
+
+<p>
+The style adopted for this class-based example have several important
+ingredients motivated by professional programming habits:
+
+<ul>
+ <li> Modules are imported as <code>import module</code> and calls to functions
+   in the module are therefore prefixed with the module name such that we
+   can easily see where different functionality comes from.</li>
+ <li> All information about the original ODE problem is collected in a class.</li>
+ <li> Physical and numerical parameters can be set on the command line.</li>
+ <li> The main program is collected in a function.</li>
+ <li> The implementation takes the form of a module such that other
+   programs can reuse the class for representing data in a logistic problem.</li>
+</ul>
+
+<h3 id="___sec20" class="anchor">The problem class </h3>
+
+<p>
+Class <code>Logistic</code> holds the parameters of the ODE problem: \( U_0 \),
+\( \alpha \), \( R \), and \( T \) as well as the \( f(u,t) \) function. Whether \( T \)
+should be a member of class <code>Logistic</code> or not is a matter of taste,
+but the appropriate size of \( T \) is strongly linked to the other
+parameters so it is natural to specify them together.  The number of
+time intervals, \( n \), used in the numerical solution method is not a
+part of class <code>Logistic</code> since it influences the accuracy of the
+solution, but not the qualitative properties of the solution curve as
+the other parameters do.
+
+<p>
+The \( f(u,t) \) function is naturally implemented as a <code>__call__</code> method
+such that the problem instance can act as both an instance and a
+callable function at the same time. In addition, we include a
+<code>__str__</code> for printing out the ODE problem. The complete code for the
+class looks like
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Logistic</span>(<span style="color: #008000">object</span>):
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Problem class for a logistic ODE.&quot;&quot;&quot;</span>
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__init__</span>(<span style="color: #008000">self</span>, alpha, R, U0, T):
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>alpha, <span style="color: #008000">self</span><span style="color: #666666">.</span>R, <span style="color: #008000">self</span><span style="color: #666666">.</span>U0, <span style="color: #008000">self</span><span style="color: #666666">.</span>T <span style="color: #666666">=</span> alpha, <span style="color: #008000">float</span>(R), U0, T
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__call__</span>(<span style="color: #008000">self</span>, u, t):
+        <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Return f(u,t) for the logistic ODE.&quot;&quot;&quot;</span>
+        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>alpha<span style="color: #666666">*</span>u<span style="color: #666666">*</span>(<span style="color: #666666">1</span> <span style="color: #666666">-</span> u<span style="color: #666666">/</span><span style="color: #008000">self</span><span style="color: #666666">.</span>R)
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__str__</span>(<span style="color: #008000">self</span>):
+        <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Return ODE and initial condition.&quot;&quot;&quot;</span>
+        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #BA2121">&quot;u&#39;(t) = </span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">*u*(1 - u/</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">), t in [0, </span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">]</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121">u(0)=</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">&quot;</span> <span style="color: #666666">%</span> \ 
+               (<span style="color: #008000">self</span><span style="color: #666666">.</span>alpha, <span style="color: #008000">self</span><span style="color: #666666">.</span>R, <span style="color: #008000">self</span><span style="color: #666666">.</span>T, <span style="color: #008000">self</span><span style="color: #666666">.</span>U0)
+</pre></div>
+
+<h3 id="___sec21" class="anchor">Getting input from the command line </h3>
+
+<p>
+We decide to specify \( \alpha \), \( R \), \( U_0 \), \( T \), and \( n \), in that
+order, on the command line. A function for converting
+the command-line arguments into proper Python objects can be
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">get_input</span>():
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Read alpha, R, U0, T, and n from the command line.&quot;&quot;&quot;</span>
+    <span style="color: #008000; font-weight: bold">try</span>:
+        alpha <span style="color: #666666">=</span> <span style="color: #008000">float</span>(sys<span style="color: #666666">.</span>argv[<span style="color: #666666">1</span>])
+        R <span style="color: #666666">=</span> <span style="color: #008000">float</span>(sys<span style="color: #666666">.</span>argv[<span style="color: #666666">2</span>])
+        U0 <span style="color: #666666">=</span> <span style="color: #008000">float</span>(sys<span style="color: #666666">.</span>argv[<span style="color: #666666">3</span>])
+        T <span style="color: #666666">=</span> <span style="color: #008000">float</span>(sys<span style="color: #666666">.</span>argv[<span style="color: #666666">4</span>])
+        n <span style="color: #666666">=</span> <span style="color: #008000">float</span>(sys<span style="color: #666666">.</span>argv[<span style="color: #666666">5</span>])
+    <span style="color: #008000; font-weight: bold">except</span> <span style="color: #D2413A; font-weight: bold">IndexError</span>:
+        <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;Usage: </span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121"> alpha R U0 T n&#39;</span> <span style="color: #666666">%</span> sys<span style="color: #666666">.</span>argv[<span style="color: #666666">0</span>]
+        sys<span style="color: #666666">.</span>exit(<span style="color: #666666">1</span>)
+    <span style="color: #008000; font-weight: bold">return</span> alpha, R, U0, T, n
+</pre></div>
+<p>
+We have used a standard
+a <code>try-except</code> block to handle potential errors because of
+missing command-line arguments.
+A more user-friendly alternative would be to allow option-value pairs such
+that, e.g., \( T \) can be set by <code>--T 40</code> on the command line, but this requires
+more programming (with the <code>argparse</code> module).
+
+<h3 id="___sec22" class="anchor">Import statements </h3>
+
+<p>
+The <code>import</code> statements necessary for the problem solving process
+are written as
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">ForwardEuler</span>
+<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
+<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">plt</span>
+</pre></div>
+<p>
+The two latter statements with their abbreviations
+have evolved as a standard in Python code for
+scientific computing.
+
+<h3 id="___sec23" class="anchor">Solving the problem </h3>
+
+<p>
+The remaining necessary statements for solving a logistic problem are
+collected in a function
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">logistic</span>():
+    alpha, R, U0, T, n <span style="color: #666666">=</span> get_input()
+    problem <span style="color: #666666">=</span> Logistic(alpha<span style="color: #666666">=</span>alpha, R<span style="color: #666666">=</span>R, U0<span style="color: #666666">=</span>U0)
+    solver <span style="color: #666666">=</span> ForwardEuler<span style="color: #666666">.</span>ForwardEuler(problem)
+    solver<span style="color: #666666">.</span>set_initial_condition(problem<span style="color: #666666">.</span>U0)
+    time_points <span style="color: #666666">=</span> np<span style="color: #666666">.</span>linspace(<span style="color: #666666">0</span>, T, n<span style="color: #666666">+1</span>)
+    u, t <span style="color: #666666">=</span> solver<span style="color: #666666">.</span>solve(time_points)
+
+    plt<span style="color: #666666">.</span>plot(t, u)
+    plt<span style="color: #666666">.</span>xlabel(<span style="color: #BA2121">&#39;t&#39;</span>); plt<span style="color: #666666">.</span>ylabel(<span style="color: #BA2121">&#39;u&#39;</span>)
+    plt<span style="color: #666666">.</span>title(<span style="color: #BA2121">&#39;Logistic growth: alpha=</span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121">, R=</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">, dt=</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">&#39;</span>
+              <span style="color: #666666">%</span> (problem<span style="color: #666666">.</span>alpha, problem<span style="color: #666666">.</span>R, t[<span style="color: #666666">1</span>]<span style="color: #666666">-</span>t[<span style="color: #666666">0</span>]))
+    plt<span style="color: #666666">.</span>savefig(<span style="color: #BA2121">&#39;tmp.pdf&#39;</span>); plt<span style="color: #666666">.</span>savefig(<span style="color: #BA2121">&#39;tmp.png&#39;</span>)
+    plt<span style="color: #666666">.</span>show()
+</pre></div>
+
+<h3 id="___sec24" class="anchor">Making a module </h3>
+
+<p>
+Everything we have created is either a class or a function. The only
+remaining task to ensure that the file is a proper module is to
+place the call to the &quot;main&quot; function <code>logistic</code> in a test block:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">if</span> __name__ <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;__main__&#39;</span>:
+    logistic()
+</pre></div>
+<p>
+The complete module is called <a href="http://tinyurl.com/pwyasaa/ode2/logistic_class.py" target="_self"><tt>logistic_class.py</tt></a>.
+
+<h3 id="___sec25" class="anchor">Pros and cons of the class-based approach </h3>
+
+<p>
+If we quickly need to solve an ODE problem, it is tempting and
+efficient to go for the function-based code, because it is more direct
+and much shorter. A class-based module, with a user interface and
+often also test functions, usually gives more high-quality code that
+pays off when the software is expected to have a longer life time and
+will be extended to more complicated problems.
+
+<p>
+A pragmatic approach is to first make a quick function-based code, but
+refactor that code to a more reusable and extensible class version
+with test functions when you experience that the code frequently
+undergo changes.  The present simple logistic ODE problem is, in my
+honest opinion, not complicated enough to defend a class version for
+practical purposes, but the primary goal here was to use a very simple
+mathematical problem for illustrating class programming.
+
+<p>
+<p>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pager">
+  <li class="previous">
+    <a href="._ode2-bootstrap000.html">&larr; Prev</a>
+  </li>
+  <li class="next">
+    <a href="._ode2-bootstrap002.html">Next &rarr;</a>
+  </li>
+</ul>
+<!-- ------------------- end of main content --------------- -->
+
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap footer
+<footer>
+<a href="http://..."><img width="250" align=right src="http://..."></a>
+</footer>
+-->
+
+
+</body>
+</html>
+    
+

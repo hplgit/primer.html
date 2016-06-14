@@ -7,7 +7,7 @@ Automatically generated HTML file from DocOnce source
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
 <meta name="description" content="Introduction to classes in Python">
-<meta name="keywords" content="constructor (class),UML class diagram,instance (class),user-defined datatype (class),method class),attribute (class),namespace,test function,nose tests,pytest tests,special methods (class),callable objects,test function,closure,Newton's method,wrapper code,integration numerical,symbolic computing,integration symbolic,mutable objects,immutable objects,protected attributes (class),test function,information hiding,private attributes (class),API,application programming interface,protected attributes (class),check an object's type,static typing,weak typing,strong typing,dynamic typing,duck typing,static class attributes,static class variables,static class methods,interval arithmetic">
+<meta name="keywords" content="constructor (class),UML class diagram,instance (class),user-defined datatype (class),method class),attribute (class),new-style classes,namespace,closures,test function,nose tests,pytest tests,special methods (class),callable objects,test function,closure,Newton's method,SymPy differentiation,closure,wrapper code,integration numerical,symbolic computing,integration symbolic,SymPy integration,mutable objects,immutable objects,protected attributes (class),test function,information hiding,private attributes (class),API,application programming interface,protected attributes (class),check an object's type,static typing,weak typing,strong typing,dynamic typing,duck typing,static class attributes,static class variables,static class methods,interval arithmetic">
 
 <title>Introduction to classes in Python</title>
 
@@ -20,6 +20,24 @@ Automatically generated HTML file from DocOnce source
 <style type="text/css">
 /* Let inline verbatim have the same color as the surroundings */
 code { color: inherit; background-color: transparent; }
+
+/* Add scrollbar to dropdown menus in bootstrap navigation bar */
+.dropdown-menu {
+   height: auto;
+   max-height: 400px;
+   overflow-x: hidden;
+}
+
+/* Adds an invisible element before each target to offset for the navigation
+   bar */
+.anchor::before {
+  content:"";
+  display:block;
+  height:50px; /* fixed header height*/
+  margin:-50px 0 0; /* negative fixed header height */
+}
+
+body { font-size:20px;line-height:1.5--html_body_style=font-size:20px;line-height:1.5; }
 </style>
 
 
@@ -27,298 +45,304 @@ code { color: inherit; background-color: transparent; }
 
 <!-- tocinfo
 {'highest level': 1,
- 'sections': [(' Simple function classes ',
+ 'sections': [('Table of contents',
+               1,
+               'table_of_contents',
+               'table_of_contents'),
+              ('Simple function classes',
                1,
                'sec:class:functors',
                'sec:class:functors'),
-              (' Challenge: functions with parameters ',
+              ('Challenge: functions with parameters',
                2,
                'sec:class:func1',
                'sec:class:func1'),
-              (' Problem ', 3, None, '___sec2'),
-              (' A bad solution: global variables ', 3, None, '___sec3'),
-              (' Representing a function as a class ',
+              ('Problem', 3, None, '___sec2'),
+              ('A bad solution: global variables', 3, None, '___sec3'),
+              ('Representing a function as a class',
                2,
                'sec:class:func2',
                'sec:class:func2'),
-              (' Implementation ', 3, None, '___sec5'),
-              (' Usage and dissection ', 3, None, '___sec6'),
-              (' The self  variable ', 3, None, '___sec7'),
-              (' Extension of the class ', 3, None, '___sec8'),
-              (' Remark ', 3, None, '___sec9'),
-              (' Using methods as ordinary functions ', 3, None, '___sec10'),
-              (' Doc strings ', 3, None, '___sec11'),
-              (' Another function class example ',
+              ('Implementation', 3, None, '___sec5'),
+              ('Usage and dissection', 3, None, '___sec6'),
+              ('Extension of the class', 3, None, '___sec7'),
+              ('Using methods as ordinary functions', 3, None, '___sec8'),
+              ('New-style classes versus classic classes',
+               3,
+               None,
+               '___sec9'),
+              ('Doc strings', 3, None, '___sec10'),
+              ('The self variable', 2, None, '___sec11'),
+              ('Another function class example',
                2,
                'sec:class:func3',
                'sec:class:func3'),
-              (' Remark ', 3, None, '___sec13'),
-              (' Alternative function class implementations ',
+              ('Remark', 3, None, '___sec13'),
+              ('Alternative function class implementations',
                2,
                'sec:class:func2b',
                'sec:class:func2b'),
-              (' Making classes without the class construct ',
+              ('Making classes without the class construct',
                2,
                'sec:class:whatis',
                'sec:class:whatis'),
-              (' First remark ', 3, None, '___sec16'),
-              (' Second remark ', 3, None, '___sec17'),
-              (' More examples on classes ',
+              ('First remark', 3, None, '___sec16'),
+              ('Second remark', 3, None, '___sec17'),
+              ('Closures', 2, 'sec:class:closure', 'sec:class:closure'),
+              ('More examples on classes',
                1,
                'sec:class:addex',
                'sec:class:addex'),
-              (' Bank accounts ',
-               2,
-               'sec:class:account',
-               'sec:class:account'),
-              (' Phone book ',
-               2,
-               'sec:class:phonebook',
-               'sec:class:phonebook'),
-              (' A circle ', 2, 'sec:class:circle', 'sec:class:circle'),
-              (' Verification ', 3, None, '___sec22'),
-              (' Remark ', 3, None, '___sec23'),
-              (' Special methods ',
+              ('Bank accounts', 2, 'sec:class:account', 'sec:class:account'),
+              ('Phone book', 2, 'sec:class:phonebook', 'sec:class:phonebook'),
+              ('A circle', 2, 'sec:class:circle', 'sec:class:circle'),
+              ('Verification', 3, None, '___sec23'),
+              ('Remark', 3, None, '___sec24'),
+              ('Special methods',
                1,
                'sec:class:specialmethods',
                'sec:class:specialmethods'),
-              (' The call special method ',
+              ('The call special method',
                2,
                'sec:class:call',
                'sec:class:call'),
-              (' Example: Automagic differentiation ',
+              ('Example: Automagic differentiation',
                2,
                'sec:class:autodF',
                'sec:class:autodF'),
-              (' Problem ', 3, None, '___sec27'),
-              (' Solution ', 3, None, '___sec28'),
-              (' Verification ', 3, None, '___sec29'),
-              (" Application: Newton's method ", 3, None, '___sec30'),
-              (' Example: Automagic integration ',
+              ('Problem', 3, None, '___sec28'),
+              ('Solution', 3, None, '___sec29'),
+              ('Verification', 3, None, '___sec30'),
+              ("Application: Newton's method", 3, None, '___sec31'),
+              ('Solution utilizing SymPy', 3, None, '___sec32'),
+              ('Example: Automagic integration',
                2,
                'sec:class:autoint',
                'sec:class:autoint'),
-              (' A simple implementation ', 3, None, '___sec32'),
-              (' Verification via symbolic computing ', 3, None, '___sec33'),
-              (' Remark ', 3, None, '___sec34'),
-              (' Turning an instance into a string ',
+              ('A simple implementation', 3, None, '___sec34'),
+              ('Verification via symbolic computing', 3, None, '___sec35'),
+              ('Remark', 3, None, '___sec36'),
+              ('Turning an instance into a string',
                2,
                'sec:class:str',
                'sec:class:str'),
-              (' Example: Phone book with special methods ',
+              ('Example: Phone book with special methods',
                2,
                'sec:class:phonebook2',
                'sec:class:phonebook2'),
-              (' Remark ', 3, None, '___sec37'),
-              (' Adding objects ', 2, 'sec:class:add', 'sec:class:add'),
-              (' Example: Class for polynomials ',
+              ('Remark', 3, None, '___sec39'),
+              ('Adding objects', 2, 'sec:class:add', 'sec:class:add'),
+              ('Example: Class for polynomials',
                2,
                'sec:class:Polynomial',
                'sec:class:Polynomial'),
-              (' Implementation ', 3, None, '___sec40'),
-              (' Usage ', 3, None, '___sec41'),
-              (' Pretty print of polynomials ', 3, None, '___sec42'),
-              (' Verifying the implementation ', 3, None, '___sec43'),
-              (' Arithmetic operations and other special methods ',
+              ('Implementation', 3, None, '___sec42'),
+              ('Usage', 3, None, '___sec43'),
+              ('Pretty print of polynomials', 3, None, '___sec44'),
+              ('Verifying the implementation', 3, None, '___sec45'),
+              ('Arithmetic operations and other special methods',
                2,
                'sec:class:arithmetics',
                'sec:class:arithmetics'),
-              (' Special methods for string conversion ',
+              ('Special methods for string conversion',
                2,
                'sec:class:repr',
                'sec:class:repr'),
-              (' Recreating objects from strings ', 3, None, '___sec46'),
-              (' Example: Class for vectors in the plane ',
+              ('Recreating objects from strings', 3, None, '___sec48'),
+              ('Example: Class for vectors in the plane',
                1,
                'sec:class:Vec2D',
                'sec:class:Vec2D'),
-              (' Some mathematical operations on vectors ',
+              ('Some mathematical operations on vectors',
                2,
                None,
-               '___sec48'),
-              (' Implementation ', 2, None, '___sec49'),
-              (' Usage ', 2, None, '___sec50'),
-              (' Comment ', 3, None, '___sec51'),
-              (' Example: Class for complex numbers ', 1, None, '___sec52'),
-              (' Implementation ',
-               2,
-               'sec:class:Complex',
-               'sec:class:Complex'),
-              (' Illegal operations ',
+               '___sec50'),
+              ('Implementation', 2, None, '___sec51'),
+              ('Usage', 2, None, '___sec52'),
+              ('Comment', 3, None, '___sec53'),
+              ('Example: Class for complex numbers', 1, None, '___sec54'),
+              ('Implementation', 2, 'sec:class:Complex', 'sec:class:Complex'),
+              ('Illegal operations',
                2,
                'sec:class:illegalop',
                'sec:class:illegalop'),
-              (' Mixing complex and real numbers ',
+              ('Mixing complex and real numbers',
                2,
                'sec:class:complex:mixed',
                'sec:class:complex:mixed'),
-              (' Dynamic, static, strong, weak, and duck typing ',
+              ('Dynamic, static, strong, weak, and duck typing',
                2,
                None,
-               '___sec56'),
-              (" Special methods for ``right'' operands ",
+               '___sec58'),
+              ("Special methods for ``right'' operands",
                2,
                'sec:class:complex:rightop',
                'sec:class:complex:rightop'),
-              (' Remark ', 3, None, '___sec58'),
-              (' Inspecting instances ',
+              ('Remark', 3, None, '___sec60'),
+              ('Inspecting instances',
                2,
                'sec:class:inspect',
                'sec:class:inspect'),
-              (' Static methods and attributes ',
+              ('Static methods and attributes',
                1,
                'sec:class:static',
                'sec:class:static'),
-              (' Summary ', 1, None, '___sec61'),
-              (' Chapter topics ',
+              ('Summary', 1, None, '___sec63'),
+              ('Chapter topics', 2, 'sec:class:summary', 'sec:class:summary'),
+              ('Classes', 3, None, '___sec65'),
+              ('Special methods', 3, None, '___sec66'),
+              ('Terminology', 3, None, '___sec67'),
+              ('Example: interval arithmetic',
                2,
-               'sec:class:summary',
-               'sec:class:summary'),
-              (' Classes ', 3, None, '___sec63'),
-              (' Special methods ', 3, None, '___sec64'),
-              (' Terminology ', 3, None, '___sec65'),
-              (' Example: interval arithmetic ', 2, None, '___sec66'),
-              (' Problem ', 3, None, '___sec67'),
-              (' Solution ', 3, None, '___sec68'),
-              (' Exercises ', 1, None, '___sec69'),
-              (' Exercise 1: Make a function class ',
+               'sec:class:interval:arithmetic',
+               'sec:class:interval:arithmetic'),
+              ('Problem', 3, None, '___sec69'),
+              ('Solution', 3, None, '___sec70'),
+              ('Exercises', 1, None, '___sec71'),
+              ('Exercise 1: Make a function class',
                2,
                'sec:class:ex2',
                'sec:class:ex2'),
-              (' Exercise 2: Add an attribute to a class ',
+              ('Exercise 2: Add a data attribute to a class',
                2,
                'sec:class:ex25q',
                'sec:class:ex25q'),
-              (' Exercise 3: Add functionality to a class ',
+              ('Exercise 3: Add functionality to a class',
                2,
                'sec:class:ex25q2',
                'sec:class:ex25q2'),
-              (' Exercise 4: Make classes for a rectangle and a triangle ',
+              ('Remarks', 3, None, '___sec75'),
+              ('Exercise 4: Make classes for a rectangle and a triangle',
                2,
                'sec:class:ex23',
                'sec:class:ex23'),
-              (' Exercise 5: Make a class for quadratic functions ',
+              ('Exercise 5: Make a class for quadratic functions',
                2,
                'sec:class:ex11',
                'sec:class:ex11'),
-              (' Exercise 6: Make a class for straight lines ',
+              ('Exercise 6: Make a class for straight lines',
                2,
                'sec:class:ex25',
                'sec:class:ex25'),
-              (' Exercise 7: Flexible handling of function arguments ',
+              ('Exercise 7: Flexible handling of function arguments',
                2,
                'sec:class:ex25b',
                'sec:class:ex25b'),
-              (' Exercise 8: Wrap functions in a class ',
+              ('Exercise 8: Wrap functions in a class',
                2,
                'sec:class:ex27d',
                'sec:class:ex27d'),
-              (' Exercise 9: Flexible handling of function arguments ',
+              ('Exercise 9: Flexible handling of function arguments',
                2,
                'sec:class:ex27e',
                'sec:class:ex27e'),
-              (' Exercise 10: Deduce a class implementation ',
+              ('Exercise 10: Deduce a class implementation',
                2,
                'sec:class:ex1',
                'sec:class:ex1'),
-              (' Exercise 11: Implement special methods in a class ',
+              ('Exercise 11: Implement special methods in a class',
                2,
                'sec:class:ex2b2',
                'sec:class:ex2b2'),
-              (' Exercise 12: Make a class for summation of series ',
+              ('Exercise 12: Make a class for summation of series',
                2,
                'sec:class:ex2b',
                'sec:class:ex2b'),
-              (' Exercise 13: Apply a numerical differentiation class ',
+              ('Exercise 13: Apply a numerical differentiation class',
                2,
                'sec:class:ex10',
                'sec:class:ex10'),
-              (' Exercise 14: Apply symbolic differentiation ',
+              ('Exercise 14: Implement an addition operator',
                2,
-               'sec:class:exer:sympy:diff',
-               'sec:class:exer:sympy:diff'),
-              (' Exercise 15: Implement in-place `+=` and `-=` operators ',
+               'sec:class:ex:tribesman',
+               'sec:class:ex:tribesman'),
+              ('Exercise 15: Implement in-place `+=` and `-=` operators',
                2,
                'sec:class:ex25qb',
                'sec:class:ex25qb'),
-              (' Exercise 16: Implement a class for numerical differentiation ',
+              ('Exercise 16: Implement a class for numerical differentiation',
                2,
                'sec:class:ex21',
                'sec:class:ex21'),
-              (' Exercise 17: Examine a program ',
+              ('Exercise 17: Examine a program',
                2,
                'sec:class:ex21b',
                'sec:class:ex21b'),
-              (' Exercise 18: Modify a class for numerical differentiation ',
+              ('Exercise 18: Modify a class for numerical differentiation',
                2,
                'sec:class:ex23s',
                'sec:class:ex23s'),
-              (' Exercise 19: Make a class for the Heaviside function ',
+              ('Exercise 19: Make a class for the Heaviside function',
                2,
                'sec:basic:exHclass',
                'sec:basic:exHclass'),
-              (' Exercise 20: Make a class for the indicator function ',
+              ('Exercise 20: Make a class for the indicator function',
                2,
                'sec:basic:exIndclass',
                'sec:basic:exIndclass'),
-              (' Exercise 21: Make a class for piecewise constant functions ',
+              ('Exercise 21: Make a class for piecewise constant functions',
                2,
                'sec:basic:ex:piecewisefunc',
                'sec:basic:ex:piecewisefunc'),
-              (' Exercise 22: Speed up repeated integral calculations ',
+              ('Exercise 22: Speed up repeated integral calculations',
                2,
                'sec:class:ex13c',
                'sec:class:ex13c'),
-              (' Exercise 23: Apply a class for polynomials ',
+              ('Exercise 23: Apply a class for polynomials',
                2,
                'sec:class:ex5',
                'sec:class:ex5'),
-              (' Exercise 24: Find a bug in a class for polynomials ',
+              ('Exercise 24: Find a bug in a class for polynomials',
                2,
                'sec:class:ex4',
                'sec:class:ex4'),
-              (' Exercise 25: Implement subtraction of polynomials ',
+              ('Exercise 25: Implement subtraction of polynomials',
                2,
                'sec:class:ex6a',
                'sec:class:ex6a'),
-              (' Exercise 26: Test the functionality of pretty print of polynomials ',
+              ('Exercise 26: Test the functionality of pretty print of polynomials',
                2,
                'sec:class:exer:str',
                'sec:class:exer:str'),
-              (' Exercise 27: Vectorize a class for polynomials ',
+              ('Exercise 27: Vectorize a class for polynomials',
                2,
                'sec:class:ex7v',
                'sec:class:ex7v'),
-              (' Remarks ', 3, None, '___sec97'),
-              (' Exercise 28: Use a dict to hold polynomial coefficients ',
+              ('Remarks', 3, None, '___sec100'),
+              ('Exercise 28: Use a dict to hold polynomial coefficients',
                2,
                'sec:class:ex8',
                'sec:class:ex8'),
-              (' Exercise 29: Extend class Vec2D to work with lists/tuples ',
+              ('Exercise 29: Extend class Vec2D to work with lists/tuples',
                2,
                'sec:class:ex16',
                'sec:class:ex16'),
-              (' Exercise 30: Extend class Vec2D to 3D vectors ',
+              ('Exercise 30: Extend class Vec2D to 3D vectors',
                2,
                'sec:class:ex17b',
                'sec:class:ex17b'),
-              (' Exercise 31: Use NumPy arrays in class Vec2D ',
+              ('Exercise 31: Use NumPy arrays in class Vec2D',
                2,
                'sec:class:ex17',
                'sec:class:ex17'),
-              (' Exercise 32: Make classes for students and courses ',
+              ('Exercise 32: Impreciseness of interval arithmetics',
+               2,
+               None,
+               '___sec105'),
+              ('Remarks', 3, None, '___sec106'),
+              ('Exercise 33: Make classes for students and courses',
                2,
                'sec:class:ex15',
                'sec:class:ex15'),
-              (' Exercise 33: Find local and global extrema of a function ',
+              ('Exercise 34: Find local and global extrema of a function',
                2,
                'sec:plot:ex28',
                'sec:plot:ex28'),
-              (' Exercise 34: Find the optimal production for a company ',
+              ('Exercise 35: Find the optimal production for a company',
                2,
                'sec:class:ex18a',
                'sec:class:ex18a'),
-              (' References ', 1, None, '___sec105')]}
+              ('References', 1, None, '___sec110')]}
 end of tocinfo -->
 
 <body>
@@ -356,20 +380,124 @@ $$
     </button>
     <a class="navbar-brand" href="class-readable.html">Introduction to classes in Python</a>
   </div>
+
   <div class="navbar-collapse collapse navbar-responsive-collapse">
     <ul class="nav navbar-nav navbar-right">
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
         <ul class="dropdown-menu">
-     <!-- navigation toc: --> <li><a href="#sec:class:functors" style="font-size: 80%;">Simple function classes</a></li>
-     <!-- navigation toc: --> <li><a href="._class-readable002.html#sec:class:addex" style="font-size: 80%;">More examples on classes</a></li>
-     <!-- navigation toc: --> <li><a href="._class-readable003.html#sec:class:specialmethods" style="font-size: 80%;">Special methods</a></li>
-     <!-- navigation toc: --> <li><a href="._class-readable004.html#sec:class:Vec2D" style="font-size: 80%;">Example: Class for vectors in the plane</a></li>
-     <!-- navigation toc: --> <li><a href="._class-readable005.html#___sec52" style="font-size: 80%;">Example: Class for complex numbers</a></li>
-     <!-- navigation toc: --> <li><a href="._class-readable006.html#sec:class:static" style="font-size: 80%;">Static methods and attributes</a></li>
-     <!-- navigation toc: --> <li><a href="._class-readable007.html#___sec61" style="font-size: 80%;">Summary</a></li>
-     <!-- navigation toc: --> <li><a href="._class-readable008.html#___sec69" style="font-size: 80%;">Exercises</a></li>
-     <!-- navigation toc: --> <li><a href="._class-readable008.html#___sec105" style="font-size: 80%;">References</a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable000.html#table_of_contents" style="font-size: 80%;"><b>Table of contents</b></a></li>
+     <!-- navigation toc: --> <li><a href="#sec:class:functors" style="font-size: 80%;"><b>Simple function classes</b></a></li>
+     <!-- navigation toc: --> <li><a href="#sec:class:func1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Challenge: functions with parameters</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec3" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A bad solution: global variables</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:class:func2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Representing a function as a class</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec5" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Implementation</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec6" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Usage and dissection</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec7" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Extension of the class</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec8" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Using methods as ordinary functions</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec9" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New-style classes versus classic classes</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec10" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Doc strings</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec11" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The self variable</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:class:func3" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Another function class example</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec13" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remark</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:class:func2b" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Alternative function class implementations</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:class:whatis" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Making classes without the class construct</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec16" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;First remark</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec17" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Second remark</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:class:closure" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Closures</a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable002.html#sec:class:addex" style="font-size: 80%;"><b>More examples on classes</b></a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable002.html#sec:class:account" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Bank accounts</a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable002.html#sec:class:phonebook" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Phone book</a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable002.html#sec:class:circle" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;A circle</a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable002.html#___sec23" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Verification</a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable002.html#___sec24" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remark</a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable003.html#sec:class:specialmethods" style="font-size: 80%;"><b>Special methods</b></a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable003.html#sec:class:call" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The call special method</a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable003.html#sec:class:autodF" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Automagic differentiation</a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable003.html#___sec28" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem</a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable003.html#___sec29" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Solution</a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable003.html#___sec30" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Verification</a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable003.html#___sec31" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Application: Newton's method</a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable003.html#___sec32" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Solution utilizing SymPy</a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable003.html#sec:class:autoint" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Automagic integration</a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable003.html#___sec34" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A simple implementation</a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable003.html#___sec35" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Verification via symbolic computing</a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable003.html#___sec36" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remark</a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable003.html#sec:class:str" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Turning an instance into a string</a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable003.html#sec:class:phonebook2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Phone book with special methods</a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable003.html#___sec39" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remark</a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable003.html#sec:class:add" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Adding objects</a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable003.html#sec:class:Polynomial" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Class for polynomials</a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable003.html#___sec42" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Implementation</a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable003.html#___sec43" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Usage</a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable003.html#___sec44" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pretty print of polynomials</a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable003.html#___sec45" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Verifying the implementation</a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable003.html#sec:class:arithmetics" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Arithmetic operations and other special methods</a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable003.html#sec:class:repr" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Special methods for string conversion</a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable003.html#___sec48" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Recreating objects from strings</a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable004.html#sec:class:Vec2D" style="font-size: 80%;"><b>Example: Class for vectors in the plane</b></a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable004.html#___sec50" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Some mathematical operations on vectors</a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable004.html#___sec51" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Implementation</a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable004.html#___sec52" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Usage</a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable004.html#___sec53" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Comment</a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable005.html#___sec54" style="font-size: 80%;"><b>Example: Class for complex numbers</b></a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable005.html#sec:class:Complex" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Implementation</a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable005.html#sec:class:illegalop" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Illegal operations</a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable005.html#sec:class:complex:mixed" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Mixing complex and real numbers</a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable005.html#___sec58" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Dynamic, static, strong, weak, and duck typing</a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable005.html#sec:class:complex:rightop" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Special methods for ``right'' operands</a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable005.html#___sec60" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remark</a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable005.html#sec:class:inspect" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Inspecting instances</a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable006.html#sec:class:static" style="font-size: 80%;"><b>Static methods and attributes</b></a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable007.html#___sec63" style="font-size: 80%;"><b>Summary</b></a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable007.html#sec:class:summary" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Chapter topics</a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable007.html#___sec65" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Classes</a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable007.html#___sec66" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Special methods</a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable007.html#___sec67" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Terminology</a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable007.html#sec:class:interval:arithmetic" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: interval arithmetic</a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable007.html#___sec69" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem</a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable007.html#___sec70" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Solution</a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable008.html#___sec71" style="font-size: 80%;"><b>Exercises</b></a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable008.html#sec:class:ex2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 1: Make a function class</a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable008.html#sec:class:ex25q" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 2: Add a data attribute to a class</a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable008.html#sec:class:ex25q2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 3: Add functionality to a class</a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable008.html#___sec75" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remarks</a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable008.html#sec:class:ex23" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 4: Make classes for a rectangle and a triangle</a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable008.html#sec:class:ex11" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 5: Make a class for quadratic functions</a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable008.html#sec:class:ex25" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 6: Make a class for straight lines</a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable008.html#sec:class:ex25b" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 7: Flexible handling of function arguments</a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable008.html#sec:class:ex27d" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 8: Wrap functions in a class</a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable008.html#sec:class:ex27e" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 9: Flexible handling of function arguments</a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable008.html#sec:class:ex1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 10: Deduce a class implementation</a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable008.html#sec:class:ex2b2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 11: Implement special methods in a class</a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable008.html#sec:class:ex2b" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 12: Make a class for summation of series</a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable008.html#sec:class:ex10" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 13: Apply a numerical differentiation class</a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable008.html#sec:class:ex:tribesman" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 14: Implement an addition operator</a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable008.html#sec:class:ex25qb" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 15: Implement in-place <code>+=</code> and <code>-=</code> operators</a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable008.html#sec:class:ex21" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 16: Implement a class for numerical differentiation</a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable008.html#sec:class:ex21b" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 17: Examine a program</a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable008.html#sec:class:ex23s" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 18: Modify a class for numerical differentiation</a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable008.html#sec:basic:exHclass" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 19: Make a class for the Heaviside function</a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable008.html#sec:basic:exIndclass" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 20: Make a class for the indicator function</a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable008.html#sec:basic:ex:piecewisefunc" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 21: Make a class for piecewise constant functions</a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable008.html#sec:class:ex13c" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 22: Speed up repeated integral calculations</a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable008.html#sec:class:ex5" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 23: Apply a class for polynomials</a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable008.html#sec:class:ex4" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 24: Find a bug in a class for polynomials</a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable008.html#sec:class:ex6a" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 25: Implement subtraction of polynomials</a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable008.html#sec:class:exer:str" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 26: Test the functionality of pretty print of polynomials</a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable008.html#sec:class:ex7v" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 27: Vectorize a class for polynomials</a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable008.html#___sec100" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remarks</a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable008.html#sec:class:ex8" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 28: Use a dict to hold polynomial coefficients</a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable008.html#sec:class:ex16" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 29: Extend class Vec2D to work with lists/tuples</a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable008.html#sec:class:ex17b" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 30: Extend class Vec2D to 3D vectors</a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable008.html#sec:class:ex17" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 31: Use NumPy arrays in class Vec2D</a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable008.html#___sec105" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 32: Impreciseness of interval arithmetics</a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable008.html#___sec106" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remarks</a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable008.html#sec:class:ex15" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 33: Make classes for students and courses</a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable008.html#sec:plot:ex28" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 34: Find local and global extrema of a function</a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable008.html#sec:class:ex18a" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 35: Find the optimal production for a company</a></li>
+     <!-- navigation toc: --> <li><a href="._class-readable008.html#___sec110" style="font-size: 80%;"><b>References</b></a></li>
 
         </ul>
       </li>
@@ -384,25 +512,24 @@ $$
 
 <a name="part0001"></a>
 <!-- !split -->
+<p style="font-size:80%">This chapter is taken from the book <a href="http://www.springer.com/gp/book/9783662498866">A Primer on Scientific Programming with Python</a> by H. P. Langtangen, 5th edition, Springer, 2016.</p>
 
-<h1 id="sec:class:functors">Simple function classes<a name="sec:class:functors"></a></h1>
+<h1 id="sec:class:functors" class="anchor">Simple function classes</h1>
 
 <p>
 Classes can be used for many things in scientific computations, but
-one of the most frequent programming tasks is to represent mathematical
-functions that have a set of parameters in addition to one or more
-independent variables.  The section <a href="#sec:class:func1">Challenge: functions with parameters</a> explains
-why such mathematical functions pose difficulties for programmers, and
-the section <a href="#sec:class:func2">Representing a function as a class</a> shows how the class idea meets
-these difficulties.
-The sections <a href="#sec:class:func3">Another function class example</a> presents another example where a class
-represents a mathematical function.
-More advanced material about classes, which for some readers may clarify
-the ideas, but which can also be skipped in a first reading,
-appears in the sections <a href="#sec:class:func2b">Alternative function class implementations</a> and
-the section <a href="#sec:class:whatis">Making classes without the class construct</a>.
+one of the most frequent programming tasks is to represent
+mathematical functions that have a set of parameters in addition to
+one or more independent variables.  The section <a href="#sec:class:func1">Challenge: functions with parameters</a>
+explains why such mathematical functions pose difficulties for
+programmers, and the section <a href="#sec:class:func2">Representing a function as a class</a> shows how the class idea
+meets these difficulties.  The sections <a href="#sec:class:func3">Another function class example</a> presents
+another example where a class represents a mathematical function.
+More advanced material about classes, which for some readers may
+clarify the ideas, but which can also be skipped in a first reading,
+appears in the sections <a href="#sec:class:func2b">Alternative function class implementations</a> and the section <a href="#sec:class:whatis">Making classes without the class construct</a>.
 
-<h2 id="sec:class:func1">Challenge: functions with parameters<a name="sec:class:func1"></a></h2>
+<h2 id="sec:class:func1" class="anchor">Challenge: functions with parameters</h2>
 
 <p>
 To motivate for the class concept, we will look at functions with
@@ -426,7 +553,6 @@ $$
 \begin{equation*} g(x; A, a) = Ae^{-ax} \thinspace .  \end{equation*}
 $$
 
-
 <p>
 How should we implement such functions? One obvious way is to have
 the independent variable and the parameters as arguments:
@@ -434,7 +560,7 @@ the independent variable and the parameters as arguments:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">y</span>(t, v0):
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">y</span>(t, v0):
     g <span style="color: #666666">=</span> <span style="color: #666666">9.81</span>
     <span style="color: #008000; font-weight: bold">return</span> v0<span style="color: #666666">*</span>t <span style="color: #666666">-</span> <span style="color: #666666">0.5*</span>g<span style="color: #666666">*</span>t<span style="color: #666666">**2</span>
 
@@ -442,7 +568,7 @@ the independent variable and the parameters as arguments:
     <span style="color: #008000; font-weight: bold">return</span> A<span style="color: #666666">*</span>exp(<span style="color: #666666">-</span>a<span style="color: #666666">*</span>x)
 </pre></div>
 
-<h3 id="___sec2">Problem <a name="___sec2"></a></h3>
+<h3 id="___sec2" class="anchor">Problem </h3>
 
 <p>
 There is one major problem with this solution. Many software tools we can use
@@ -463,7 +589,7 @@ coded as
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">diff</span>(f, x, h<span style="color: #666666">=1E-5</span>):
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">diff</span>(f, x, h<span style="color: #666666">=1E-5</span>):
     <span style="color: #008000; font-weight: bold">return</span> (f(x<span style="color: #666666">+</span>h) <span style="color: #666666">-</span> f(x))<span style="color: #666666">/</span>h
 </pre></div>
 <p>
@@ -473,7 +599,7 @@ one argument:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">h</span>(t):
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">h</span>(t):
     <span style="color: #008000; font-weight: bold">return</span> t<span style="color: #666666">**4</span> <span style="color: #666666">+</span> <span style="color: #666666">4*</span>t
 
 dh <span style="color: #666666">=</span> diff(h, <span style="color: #666666">0.1</span>)
@@ -510,7 +636,7 @@ When our function has more arguments, the code inside the library
 aborts in the call to our function, and such errors may not always
 be easy to track down.
 
-<h3 id="___sec3">A bad solution: global variables <a name="___sec3"></a></h3>
+<h3 id="___sec3" class="anchor">A bad solution: global variables </h3>
 
 <p>
 The requirement is thus
@@ -521,7 +647,7 @@ The two examples above must then be implemented as
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">y</span>(t):
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">y</span>(t):
     g <span style="color: #666666">=</span> <span style="color: #666666">9.81</span>
     <span style="color: #008000; font-weight: bold">return</span> v0<span style="color: #666666">*</span>t <span style="color: #666666">-</span> <span style="color: #666666">0.5*</span>g<span style="color: #666666">*</span>t<span style="color: #666666">**2</span>
 
@@ -537,7 +663,7 @@ Here are two sample calls where <code>diff</code> differentiates <code>y</code> 
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">v0 <span style="color: #666666">=</span> <span style="color: #666666">3</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>v0 <span style="color: #666666">=</span> <span style="color: #666666">3</span>
 dy <span style="color: #666666">=</span> diff(y, <span style="color: #666666">1</span>)
 
 A <span style="color: #666666">=</span> <span style="color: #666666">1</span>; a <span style="color: #666666">=</span> <span style="color: #666666">0.1</span>
@@ -555,7 +681,7 @@ we work with, and set <code>v0</code> accordingly prior to the call:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">v0 <span style="color: #666666">=</span> <span style="color: #666666">1</span>; r1 <span style="color: #666666">=</span> y(t)
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>v0 <span style="color: #666666">=</span> <span style="color: #666666">1</span>; r1 <span style="color: #666666">=</span> y(t)
 v0 <span style="color: #666666">=</span> <span style="color: #666666">5</span>; r2 <span style="color: #666666">=</span> y(t)
 </pre></div>
 <p>
@@ -578,7 +704,7 @@ a distinct \( v_0 \) parameter:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">y1</span>(t):
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">y1</span>(t):
     g <span style="color: #666666">=</span> <span style="color: #666666">9.81</span>
     <span style="color: #008000; font-weight: bold">return</span> v0_1<span style="color: #666666">*</span>t <span style="color: #666666">-</span> <span style="color: #666666">0.5*</span>g<span style="color: #666666">*</span>t<span style="color: #666666">**2</span>
 
@@ -597,7 +723,7 @@ simply a really bad solution to a programming problem.
 So, is there a good remedy? The answer is yes: the class concept
 solves all the problems described above!
 
-<h2 id="sec:class:func2">Representing a function as a class<a name="sec:class:func2"></a></h2>
+<h2 id="sec:class:func2" class="anchor">Representing a function as a class</h2>
 
 <p>
 A class contains a set of variables (data)
@@ -641,13 +767,13 @@ and one where the variables are listed.
 Our next step is to implement this class in Python.
 
 <p>
-<center> <!-- figure -->
+<center> <!-- figure label: --> <div id="fig:lumpy:classY"></div> <!-- FIGURE -->
 <hr class="figure">
-<center><p class="caption">Figure 1:  UML diagram with function and data in the simple class <code>Y</code> for representing a mathematical function \( y(t;v_0) \). <a name="fig:lumpy:classY"></a> </p></center>
+<center><p class="caption">Figure 1:  UML diagram with function and data in the simple class <code>Y</code> for representing a mathematical function \( y(t;v_0) \).  <!-- caption label: fig:lumpy:classY --> </p></center>
 <p><img src="fig-class/class_Y_UML.png" align="bottom" width=400></p>
 </center>
 
-<h3 id="___sec5">Implementation <a name="___sec5"></a></h3>
+<h3 id="___sec5" class="anchor">Implementation </h3>
 
 <p>
 The complete code for our
@@ -656,7 +782,7 @@ class <code>Y</code> looks as follows in Python:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Y</span>:
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Y</span>:
     <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__init__</span>(<span style="color: #008000">self</span>, v0):
         <span style="color: #008000">self</span><span style="color: #666666">.</span>v0 <span style="color: #666666">=</span> v0
         <span style="color: #008000">self</span><span style="color: #666666">.</span>g <span style="color: #666666">=</span> <span style="color: #666666">9.81</span>
@@ -669,10 +795,10 @@ A puzzlement for newcomers to Python classes is the <code>self</code>
 parameter, which may take some efforts and time to fully understand.
 <!-- Just be patient, keep on reading, -->
 
-<h3 id="___sec6">Usage and dissection <a name="___sec6"></a></h3>
+<h3 id="___sec6" class="anchor">Usage and dissection </h3>
 
 <p>
-Before we dig into what each in the class implementation
+Before we dig into what each line in the class implementation
 means, we start by showing how the class can be used to compute values of
 the mathematical function \( y(t;v_0) \).
 
@@ -696,7 +822,7 @@ name <code>y</code>:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">y <span style="color: #666666">=</span> Y(<span style="color: #666666">3</span>)
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>y <span style="color: #666666">=</span> Y(<span style="color: #666666">3</span>)
 </pre></div>
 <p>
 Seemingly, we call the class <code>Y</code> as if it were a function.
@@ -717,7 +843,7 @@ statement
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">v <span style="color: #666666">=</span> y<span style="color: #666666">.</span>value(<span style="color: #666666">0.1</span>)
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>v <span style="color: #666666">=</span> y<span style="color: #666666">.</span>value(<span style="color: #666666">0.1</span>)
 </pre></div>
 <p>
 Here also, the <code>self</code> argument is dropped in the call to <code>value</code>.
@@ -730,7 +856,7 @@ print the value of <code>v0</code> in the instance <code>y</code> by writing
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">print</span> y<span style="color: #666666">.</span>v0
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">print</span> y<span style="color: #666666">.</span>v0
 </pre></div>
 <p>
 The output will in this case be <code>3</code>.
@@ -739,11 +865,13 @@ The output will in this case be <code>3</code>.
 We have already introduced the term "instance'' for the object of a class.
 Functions in classes are commonly called <em>methods</em>,
 and variables (data) in classes are called
-<em>attributes</em>.
+<em>data attributes</em>. Methods are also known as <em>method attributes</em>.
 From now on we will use this terminology. In our sample class <code>Y</code>
-we have two methods, <code>__init__</code> and <code>value</code>, and two
-attributes, <code>v0</code> and <code>g</code>.
-The names of methods and attributes can be chosen freely, just as
+we have two methods or method attributes, <code>__init__</code> and <code>value</code>, two
+data attributes, <code>v0</code> and <code>g</code>, and
+four attributes
+in total (<code>__init__</code>, <code>value</code>, <code>v0</code>, and <code>g</code>).
+The names of attributes can be chosen freely, just as
 names of ordinary Python functions and variables. However, the constructor
 must have the name <code>__init__</code>, otherwise it is not automatically
 called when we create new instances.
@@ -753,96 +881,10 @@ You can do whatever you want in whatever method, but it is a
 common convention
 to use the constructor for initializing the variables in the class.
 
-<h3 id="___sec7">The self  variable <a name="___sec7"></a></h3>
+<h3 id="___sec7" class="anchor">Extension of the class </h3>
 
 <p>
-Now we will provide
-some more explanation of the <code>self</code> parameter and how the
-class methods work. Inside the constructor <code>__init__</code>,
-the argument <code>self</code> is a
-variable holding the new instance to be constructed.
-When we write
-
-<p>
-
-<!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">    <span style="color: #008000">self</span><span style="color: #666666">.</span>v0 <span style="color: #666666">=</span> v0
-    <span style="color: #008000">self</span><span style="color: #666666">.</span>g <span style="color: #666666">=</span> <span style="color: #666666">9.81</span>
-</pre></div>
-<p>
-we define two new attributes in this instance. The <code>self</code> parameter
-is invisibly returned to the calling code. We can imagine that Python
-translates <code>y = Y(3)</code> to
-
-<p>
-
-<!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">Y<span style="color: #666666">.</span>__init__(y, <span style="color: #666666">3</span>)
-</pre></div>
-<p>
-so when we do a <code>self.v0 = v0</code> in the constructor, we actually
-initialize <code>y.v0</code>. The prefix with <code>Y.</code> is necessary to reach
-a class method (just like prefixing a function in a module with the
-module name, e.g., <code>math.exp</code>). If we prefix with <code>Y.</code>, we need
-to explicitly feed in an instance for the <code>self</code> argument, like
-<code>y</code> in the code line above, but
-if we prefix with <code>y.</code> (the instance name)
-the <code>self</code> argument
-is dropped. It is the latter &quot;instance name prefix&quot; which we shall use
-when computing with classes.
-
-<p>
-Let us look at a call to the <code>value</code> method to see a similar
-use of the <code>self</code> argument. When we write
-
-<p>
-
-<!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">value <span style="color: #666666">=</span> y<span style="color: #666666">.</span>value(<span style="color: #666666">0.1</span>)
-</pre></div>
-<p>
-Python translates this to a call
-
-<p>
-
-<!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">value <span style="color: #666666">=</span> Y<span style="color: #666666">.</span>value(y, <span style="color: #666666">0.1</span>)
-</pre></div>
-<p>
-such that the <code>self</code> argument in the <code>value</code> method becomes
-the <code>y</code> instance. In the expression inside the <code>value</code> method,
-
-<p>
-
-<!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000">self</span><span style="color: #666666">.</span>v0<span style="color: #666666">*</span>t <span style="color: #666666">-</span> <span style="color: #666666">0.5*</span><span style="color: #008000">self</span><span style="color: #666666">.</span>g<span style="color: #666666">*</span>t<span style="color: #666666">**2</span>
-</pre></div>
-<p>
-<code>self</code> is <code>y</code> so this is the same as
-
-<p>
-
-<!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">y<span style="color: #666666">.</span>v0<span style="color: #666666">*</span>t <span style="color: #666666">-</span> <span style="color: #666666">0.5*</span>y<span style="color: #666666">.</span>g<span style="color: #666666">*</span>t<span style="color: #666666">**2</span>
-</pre></div>
-<p>
-The rules regarding <code>self</code> are listed below:
-
-<ul>
-  <li> Any class method must have <code>self</code> as first argument. (The name can be any valid variable name, but the name <code>self</code> is a widely established convention in Python.)</li>
-  <li> <code>self</code> represents an (arbitrary) instance of the class.</li>
-  <li> To access another class method or a class attribute, inside class methods, we must prefix with <code>self</code>, as in <code>self.name</code>, where <code>name</code> is the name of the attribute or the other method.</li>
-  <li> <code>self</code> is dropped as argument in calls to class methods.</li>
-</ul>
-
-It takes some time to understand the <code>self</code> variable, but more
-examples and hands-on experience with class programming will help,
-so just be patient and continue reading.
-
-<h3 id="___sec8">Extension of the class <a name="___sec8"></a></h3>
-
-<p>
-We can have as many attributes and methods as we like in a class, so
+We can have as many attributes as we like in a class, so
 let us add a new method to class <code>Y</code>. This method is called
 <code>formula</code> and prints a string containing the formula of
 the mathematical function \( y \). After this formula, we provide the
@@ -852,7 +894,7 @@ constructed as
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #BA2121">&#39;v0*t - 0.5*g*t**2; v0=</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>v0
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #BA2121">&#39;v0*t - 0.5*g*t**2; v0=</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>v0
 </pre></div>
 <p>
 where <code>self</code> is an instance of class <code>Y</code>.
@@ -861,7 +903,7 @@ A call of <code>formula</code> does not need any arguments:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">print</span> y<span style="color: #666666">.</span>formula()
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">print</span> y<span style="color: #666666">.</span>formula()
 </pre></div>
 <p>
 should be enough to create, return, and print the string.
@@ -873,7 +915,7 @@ The implementation of the method is therefore
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">formula</span>(<span style="color: #008000">self</span>):
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">formula</span>(<span style="color: #008000">self</span>):
         <span style="color: #008000; font-weight: bold">return</span> <span style="color: #BA2121">&#39;v0*t - 0.5*g*t**2; v0=</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>v0
 </pre></div>
 <p>
@@ -882,7 +924,7 @@ For completeness, the whole class now reads
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Y</span>:
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Y</span>:
     <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__init__</span>(<span style="color: #008000">self</span>, v0):
         <span style="color: #008000">self</span><span style="color: #666666">.</span>v0 <span style="color: #666666">=</span> v0
         <span style="color: #008000">self</span><span style="color: #666666">.</span>g <span style="color: #666666">=</span> <span style="color: #666666">9.81</span>
@@ -899,7 +941,7 @@ Example on use may be
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">y <span style="color: #666666">=</span> Y(<span style="color: #666666">5</span>)
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>y <span style="color: #666666">=</span> Y(<span style="color: #666666">5</span>)
 t <span style="color: #666666">=</span> <span style="color: #666666">0.2</span>
 v <span style="color: #666666">=</span> y<span style="color: #666666">.</span>value(t)
 <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;y(t=</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">; v0=</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">) = </span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> (t, y<span style="color: #666666">.</span>v0, v)
@@ -912,23 +954,24 @@ with the output
 
 <!-- code=text (!bc ccq) typeset with pygments style "default" -->
 <blockquote>
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">y(t=0.2; v0=5) = 0.8038
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>y(t=0.2; v0=5) = 0.8038
 v0*t - 0.5*g*t**2; v0=5
 </pre></div>
-</blockquote><h3 id="___sec9">Remark <a name="___sec9"></a></h3>
-
-<p>
+</blockquote><p>
+<div class="alert alert-block alert-danger alert-text-normal"><b>Be careful with indentation in class programming.</b>
 A common mistake done by newcomers to the class construction is to place
 the code that applies the class at the same indentation as the class methods.
 This is illegal. Only method definitions and assignments to
-so-called static attributes
+so-called static data attributes
 (the section <a href="._class-readable006.html#sec:class:static">Static methods and attributes</a>) can appear in the indented block under
 the <code>class</code> headline.
-Ordinary attribute assignment must be done inside methods.
+Ordinary data attribute assignment must be done inside methods.
 The main program using the class must appear with the same indent as
 the <code>class</code> headline.
+</div>
 
-<h3 id="___sec10">Using methods as ordinary functions <a name="___sec10"></a></h3>
+
+<h3 id="___sec8" class="anchor">Using methods as ordinary functions </h3>
 
 <p>
 We may create several \( y \) functions with different values of \( v_0 \):
@@ -936,7 +979,7 @@ We may create several \( y \) functions with different values of \( v_0 \):
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">y1 <span style="color: #666666">=</span> Y(<span style="color: #666666">1</span>)
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>y1 <span style="color: #666666">=</span> Y(<span style="color: #666666">1</span>)
 y2 <span style="color: #666666">=</span> Y(<span style="color: #666666">1.5</span>)
 y3 <span style="color: #666666">=</span> Y(<span style="color: #666666">-3</span>)
 </pre></div>
@@ -950,7 +993,7 @@ from the section <a href="#sec:class:func1">Challenge: functions with parameters
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">dy1dt <span style="color: #666666">=</span> diff(y1<span style="color: #666666">.</span>value, <span style="color: #666666">0.1</span>)
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>dy1dt <span style="color: #666666">=</span> diff(y1<span style="color: #666666">.</span>value, <span style="color: #666666">0.1</span>)
 dy2dt <span style="color: #666666">=</span> diff(y2<span style="color: #666666">.</span>value, <span style="color: #666666">0.1</span>)
 dy3dt <span style="color: #666666">=</span> diff(y3<span style="color: #666666">.</span>value, <span style="color: #666666">0.2</span>)
 </pre></div>
@@ -965,7 +1008,36 @@ means <code>y3.value(x)</code>, and inside the <code>y3.value</code> method
 <code>self</code> is <code>y3</code>, and we have
 access to <code>y3.v0</code> and <code>y3.g</code>.
 
-<h3 id="___sec11">Doc strings <a name="___sec11"></a></h3>
+<h3 id="___sec9" class="anchor">New-style classes versus classic classes </h3>
+
+<p>
+When use Python version 2 and write a class like
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">V</span>:
+    <span style="color: #666666">...</span>
+</pre></div>
+<p>
+we get what is known as an old-style or classic class. A revised
+implementation of classes in Python came in version 2.2 with
+<em>new-style</em> classes. The specification of a new-style class requires
+<code>(object)</code> after the class name:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">V</span>(<span style="color: #008000">object</span>):
+    <span style="color: #666666">...</span>
+</pre></div>
+<p>
+New-style classes have more functionality, and it is in general recommended
+to work with new-style classes.
+We shall therefore from now write <code>V(object)</code> rather than just <code>V</code>.
+In Python 3, all classes are new-style whether we write <code>V</code> or <code>V(object)</code>.
+
+<h3 id="___sec10" class="anchor">Doc strings </h3>
 
 <p>
 A function may have a doc string right after the
@@ -979,7 +1051,7 @@ The convention is to enclose the doc string in triple double quotes <code>&quot;
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Y</span>:
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Y</span>(<span style="color: #008000">object</span>):
     <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;The vertical motion of a ball.&quot;&quot;&quot;</span>
 
     <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__init__</span>(<span style="color: #008000">self</span>, v0):
@@ -992,7 +1064,7 @@ class is used in an interactive session:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Y</span>:
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Y</span>(<span style="color: #008000">object</span>):
     <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
 <span style="color: #BA2121; font-style: italic">    Mathematical function for the vertical motion of a ball.</span>
 
@@ -1001,7 +1073,7 @@ class is used in an interactive session:
 <span style="color: #BA2121; font-style: italic">       value(t): compute the height as function of t.</span>
 <span style="color: #BA2121; font-style: italic">       formula(): print out the formula for the height.</span>
 
-<span style="color: #BA2121; font-style: italic">    Attributes:</span>
+<span style="color: #BA2121; font-style: italic">    Data attributes:</span>
 <span style="color: #BA2121; font-style: italic">       v0: the initial velocity of the ball (time 0).</span>
 <span style="color: #BA2121; font-style: italic">       g: acceleration of gravity (fixed).</span>
 
@@ -1014,7 +1086,170 @@ class is used in an interactive session:
 <span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
 </pre></div>
 
-<h2 id="sec:class:func3">Another function class example<a name="sec:class:func3"></a></h2>
+<h2 id="___sec11" class="anchor">The self variable </h2>
+
+<p>
+Now we will provide some more explanation of the <code>self</code> parameter and
+how the class methods work. Inside the constructor <code>__init__</code>, the
+argument <code>self</code> is a variable holding the new instance to be
+constructed.  When we write
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>    <span style="color: #008000">self</span><span style="color: #666666">.</span>v0 <span style="color: #666666">=</span> v0
+    <span style="color: #008000">self</span><span style="color: #666666">.</span>g <span style="color: #666666">=</span> <span style="color: #666666">9.81</span>
+</pre></div>
+<p>
+we define two new data attributes in this instance. The <code>self</code> parameter
+is invisibly returned to the calling code. We can imagine that Python
+translates the syntax <code>y = Y(3)</code> to a call written as
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>Y<span style="color: #666666">.</span>__init__(y, <span style="color: #666666">3</span>)
+</pre></div>
+<p>
+Now, <code>self</code> becomes the new instance <code>y</code> we want to create, so when we
+do <code>self.v0 = v0</code> in the constructor, we actually assign <code>v0</code> to
+<code>y.v0</code>. The prefix with <code>Y.</code> illustrates how to reach a class method
+with a syntax similar to reaching a function in a module (just like
+<code>math.exp</code>). If we prefix with <code>Y.</code>, we need to explicitly feed in an
+instance for the <code>self</code> argument, like <code>y</code> in the code line above, but
+if we prefix with <code>y.</code> (the instance name) the <code>self</code> argument is
+dropped in the syntax, and Python will automatically assign the <code>y</code>
+instance to the <code>self</code> argument.  It is the latter &quot;instance name
+prefix&quot; which we shall use when computing with
+classes. (<code>Y.__init__(y, 3)</code> will not work since <code>y</code> is undefined and
+supposed to be an <code>Y</code> object. However, if we first create <code>y = Y(2)</code>
+and then call <code>Y.__init__(y, 3)</code>, the syntax works, and <code>y.v0</code> is <code>3</code>
+after the call.)
+
+<p>
+Let us look at a call to the <code>value</code> method to see a similar
+use of the <code>self</code> argument. When we write
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>value <span style="color: #666666">=</span> y<span style="color: #666666">.</span>value(<span style="color: #666666">0.1</span>)
+</pre></div>
+<p>
+Python translates this to a call
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>value <span style="color: #666666">=</span> Y<span style="color: #666666">.</span>value(y, <span style="color: #666666">0.1</span>)
+</pre></div>
+<p>
+such that the <code>self</code> argument in the <code>value</code> method becomes
+the <code>y</code> instance. In the expression inside the <code>value</code> method,
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000">self</span><span style="color: #666666">.</span>v0<span style="color: #666666">*</span>t <span style="color: #666666">-</span> <span style="color: #666666">0.5*</span><span style="color: #008000">self</span><span style="color: #666666">.</span>g<span style="color: #666666">*</span>t<span style="color: #666666">**2</span>
+</pre></div>
+<p>
+<code>self</code> is <code>y</code> so this is the same as
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>y<span style="color: #666666">.</span>v0<span style="color: #666666">*</span>t <span style="color: #666666">-</span> <span style="color: #666666">0.5*</span>y<span style="color: #666666">.</span>g<span style="color: #666666">*</span>t<span style="color: #666666">**2</span>
+</pre></div>
+<p>
+The use of <code>self</code> may become more apparent when we have multiple class
+instances. We can make a class that just has one parameter so we
+can easily identify a class instance by printing the value of this
+parameter. In addition, every Python object <code>obj</code> has a unique
+identifier obtained by <code>id(obj)</code> that we can also print to track
+what <code>self</code> is.
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">SelfExplorer</span>(<span style="color: #008000">object</span>):
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__init__</span>(<span style="color: #008000">self</span>, a):
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>a <span style="color: #666666">=</span> a
+        <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;init: a=</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">, id(self)=</span><span style="color: #BB6688; font-weight: bold">%d</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> (<span style="color: #008000">self</span><span style="color: #666666">.</span>a, <span style="color: #008000">id</span>(<span style="color: #008000">self</span>))
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">value</span>(<span style="color: #008000">self</span>, x):
+        <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;value: a=</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">, id(self)=</span><span style="color: #BB6688; font-weight: bold">%d</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> (<span style="color: #008000">self</span><span style="color: #666666">.</span>a, <span style="color: #008000">id</span>(<span style="color: #008000">self</span>))
+        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>a<span style="color: #666666">*</span>x
+</pre></div>
+<p>
+Here is an interactive session with this class:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> s1 <span style="color: #666666">=</span> SelfExplorer(<span style="color: #666666">1</span>)
+init: a<span style="color: #666666">=1</span>, <span style="color: #008000">id</span>(<span style="color: #008000">self</span>)<span style="color: #666666">=38085696</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000">id</span>(s1)
+<span style="color: #666666">38085696</span>
+</pre></div>
+<p>
+We clearly see that <code>self</code> inside the constructor is the same
+object as <code>s1</code>, which we want to create by calling the constructor.
+
+<p>
+A second object is made by
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> s2 <span style="color: #666666">=</span> SelfExplorer(<span style="color: #666666">2</span>)
+init: a<span style="color: #666666">=2</span>, <span style="color: #008000">id</span>(<span style="color: #008000">self</span>)<span style="color: #666666">=38085192</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000">id</span>(s2)
+<span style="color: #666666">38085192</span>
+</pre></div>
+<p>
+Now we can call the <code>value</code> method using the standard syntax <code>s1.value(x)</code>
+and the &quot;more pedagogical&quot; syntax <code>SelfExplorer.value(s1, x)</code>.
+Using both <code>s1</code> and <code>s2</code> illustrates how <code>self</code> take on different
+values, while we may look at the method <code>SelfExplorer.value</code> as
+a single function that just operates on different <code>self</code> and <code>x</code>
+objects:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> s1<span style="color: #666666">.</span>value(<span style="color: #666666">4</span>)
+value: a<span style="color: #666666">=1</span>, <span style="color: #008000">id</span>(<span style="color: #008000">self</span>)<span style="color: #666666">=38085696</span>
+<span style="color: #666666">4</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> SelfExplorer<span style="color: #666666">.</span>value(s1, <span style="color: #666666">4</span>)
+value: a<span style="color: #666666">=1</span>, <span style="color: #008000">id</span>(<span style="color: #008000">self</span>)<span style="color: #666666">=38085696</span>
+<span style="color: #666666">4</span>
+
+<span style="color: #666666">&gt;&gt;&gt;</span> s2<span style="color: #666666">.</span>value(<span style="color: #666666">5</span>)
+value: a<span style="color: #666666">=2</span>, <span style="color: #008000">id</span>(<span style="color: #008000">self</span>)<span style="color: #666666">=38085192</span>
+<span style="color: #666666">10</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> SelfExplorer<span style="color: #666666">.</span>value(s2, <span style="color: #666666">5</span>)
+value: a<span style="color: #666666">=2</span>, <span style="color: #008000">id</span>(<span style="color: #008000">self</span>)<span style="color: #666666">=38085192</span>
+<span style="color: #666666">10</span>
+</pre></div>
+<p>
+Hopefully, these illustrations help to explain that <code>self</code> is just
+the instance used in the method call prefix, here <code>s1</code> or <code>s2</code>.
+If not, patient work with class programming in Python will over
+time reveal an understanding of what <code>self</code> really is.
+
+<p>
+<div class="alert alert-block alert-success alert-text-normal"><b>Rules regarding <code>self</code>.</b>
+
+<ul>
+  <li> Any class method must have <code>self</code> as first argument. (The name can be any valid variable name, but the name <code>self</code> is a widely established convention in Python.)</li>
+  <li> <code>self</code> represents an (arbitrary) instance of the class.</li>
+  <li> To access any class attribute inside class methods, we must prefix with <code>self</code>, as in <code>self.name</code>, where <code>name</code> is the name of the attribute.</li>
+  <li> <code>self</code> is dropped as argument in calls to class methods.</li>
+</ul>
+</div>
+
+
+<h2 id="sec:class:func3" class="anchor">Another function class example</h2>
 
 <p>
 Let us apply the ideas from the <code>Y</code> class to the function
@@ -1031,8 +1266,6 @@ We may write this function as \( v(r; \beta,\mu_0,n,R) \) to
 explicitly indicate that
 there is one primary independent variable (\( r \)) and four physical
 parameters \( \beta \), \( \mu_0 \), \( n \), and \( R \).
-ref{sec:plot:ex4} describes a physical interpretation of
-\( v \) as the velocity of a fluid.
 The class typically holds
 the physical parameters as variables and provides an <code>value(r)</code> method
 for computing the \( v \) function:
@@ -1040,7 +1273,7 @@ for computing the \( v \) function:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">V</span>:
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">V</span>(<span style="color: #008000">object</span>):
     <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__init__</span>(<span style="color: #008000">self</span>, beta, mu0, n, R):
         <span style="color: #008000">self</span><span style="color: #666666">.</span>beta, <span style="color: #008000">self</span><span style="color: #666666">.</span>mu0, <span style="color: #008000">self</span><span style="color: #666666">.</span>n, <span style="color: #008000">self</span><span style="color: #666666">.</span>R <span style="color: #666666">=</span> beta, mu0, n, R
 
@@ -1059,7 +1292,7 @@ same line:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">        <span style="color: #008000">self</span><span style="color: #666666">.</span>beta, <span style="color: #008000">self</span><span style="color: #666666">.</span>mu0, <span style="color: #008000">self</span><span style="color: #666666">.</span>n, <span style="color: #008000">self</span><span style="color: #666666">.</span>R <span style="color: #666666">=</span> beta, mu0, n, R
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>        <span style="color: #008000">self</span><span style="color: #666666">.</span>beta, <span style="color: #008000">self</span><span style="color: #666666">.</span>mu0, <span style="color: #008000">self</span><span style="color: #666666">.</span>n, <span style="color: #008000">self</span><span style="color: #666666">.</span>R <span style="color: #666666">=</span> beta, mu0, n, R
 </pre></div>
 <p>
 The comma-separated list of variables on the right-hand
@@ -1071,7 +1304,7 @@ equivalent multi-line code is
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">        <span style="color: #008000">self</span><span style="color: #666666">.</span>beta <span style="color: #666666">=</span> beta
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>        <span style="color: #008000">self</span><span style="color: #666666">.</span>beta <span style="color: #666666">=</span> beta
         <span style="color: #008000">self</span><span style="color: #666666">.</span>mu0 <span style="color: #666666">=</span> mu0
         <span style="color: #008000">self</span><span style="color: #666666">.</span>n <span style="color: #666666">=</span> n
         <span style="color: #008000">self</span><span style="color: #666666">.</span>R <span style="color: #666666">=</span> R
@@ -1083,18 +1316,18 @@ the local short names <code>beta</code>, <code>mu0</code>, <code>n</code>, and <
 This is in general a good idea, because it makes it easier to read the
 implementation of the formula and check its correctness.
 
-<h3 id="___sec13">Remark <a name="___sec13"></a></h3>
+<h3 id="___sec13" class="anchor">Remark </h3>
 
 <p>
 Another solution to the problem of sending functions with parameters
 to a general library function such as <code>diff</code> is provided in
-the document <a href="http://tcse6.on.net/varargs" target="_self">Variable number of
+the document <a href="http://hplgit.github.io/primer.html/doc/pub/varargs" target="_self">Variable number of
 function arguments in Python</a>
 <a href="._class-readable008.html#Langtangen_TCSE6_varargs">[2]</a>. The remedy there is to transfer the
 parameters as arguments &quot;through&quot; the <code>diff</code> function.  This can be
 done in a general way as explained in that appendix.
 
-<h2 id="sec:class:func2b">Alternative function class implementations<a name="sec:class:func2b"></a></h2>
+<h2 id="sec:class:func2b" class="anchor">Alternative function class implementations</h2>
 
 <p>
 To illustrate class programming further, we will now realize class
@@ -1106,15 +1339,14 @@ class programming in general.
 
 <p>
 It is a good habit always to have a constructor in a class and to
-initialize class attributes here, but this is not a requirement.
-Let us drop the constructor and make <code>v0</code> an optional
-argument to the <code>value</code> method. If the user does not provide
-<code>v0</code> in the call to <code>value</code>, we use a <code>v0</code> value that must have
-been provided
-in an earlier call and stored as an attribute <code>self.v0</code>.
-We can recognize if the user provides <code>v0</code> as argument or
-not by using <code>None</code> as default value for the keyword argument
-and then test if <code>v0 is None</code>.
+initialize the data attributes in the class here, but this is not a
+requirement.  Let us drop the constructor and make <code>v0</code> an optional
+argument to the <code>value</code> method. If the user does not provide <code>v0</code> in
+the call to <code>value</code>, we use a <code>v0</code> value that must have been provided
+in an earlier call and stored as a data attribute <code>self.v0</code>.  We can
+recognize if the user provides <code>v0</code> as argument or not by using <code>None</code>
+as default value for the keyword argument and then test if <code>v0 is
+None</code>.
 
 <p>
 Our alternative implementation of class <code>Y</code>, named <code>Y2</code>, now reads
@@ -1122,7 +1354,7 @@ Our alternative implementation of class <code>Y</code>, named <code>Y2</code>, n
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Y2</span>:
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Y2</span>(<span style="color: #008000">object</span>):
     <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">value</span>(<span style="color: #008000">self</span>, t, v0<span style="color: #666666">=</span><span style="color: #008000">None</span>):
         <span style="color: #008000; font-weight: bold">if</span> v0 <span style="color: #AA22FF; font-weight: bold">is</span> <span style="color: #AA22FF; font-weight: bold">not</span> <span style="color: #008000">None</span>:
             <span style="color: #008000">self</span><span style="color: #666666">.</span>v0 <span style="color: #666666">=</span> v0
@@ -1130,7 +1362,7 @@ Our alternative implementation of class <code>Y</code>, named <code>Y2</code>, n
         <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>v0<span style="color: #666666">*</span>t <span style="color: #666666">-</span> <span style="color: #666666">0.5*</span>g<span style="color: #666666">*</span>t<span style="color: #666666">**2</span>
 </pre></div>
 <p>
-This time the class has only one method and one attribute as we
+This time the class has only one method and one data attribute as we
 skipped the constructor and let <code>g</code> be a local variable in
 the <code>value</code> method.
 
@@ -1141,17 +1373,17 @@ Python fortunately creates an empty constructor. This allows us to write
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">y <span style="color: #666666">=</span> Y2()
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>y <span style="color: #666666">=</span> Y2()
 </pre></div>
 <p>
 to make an instance <code>y</code>. Since nothing happens in the automatically
-generated empty constructor, <code>y</code> has no attributes at this stage.
+generated empty constructor, <code>y</code> has no data attributes at this stage.
 Writing
 
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">print</span> y<span style="color: #666666">.</span>v0
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">print</span> y<span style="color: #666666">.</span>v0
 </pre></div>
 <p>
 therefore leads to the exception
@@ -1159,7 +1391,7 @@ therefore leads to the exception
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #D2413A; font-weight: bold">AttributeError</span>: Y2 instance has no attribute <span style="color: #BA2121">&#39;v0&#39;</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #D2413A; font-weight: bold">AttributeError</span>: Y2 instance has no attribute <span style="color: #BA2121">&#39;v0&#39;</span>
 </pre></div>
 <p>
 By calling
@@ -1167,7 +1399,7 @@ By calling
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">v <span style="color: #666666">=</span> y<span style="color: #666666">.</span>value(<span style="color: #666666">0.1</span>, <span style="color: #666666">5</span>)
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>v <span style="color: #666666">=</span> y<span style="color: #666666">.</span>value(<span style="color: #666666">0.1</span>, <span style="color: #666666">5</span>)
 </pre></div>
 <p>
 we create an attribute <code>self.v0</code> inside the <code>value</code> method.
@@ -1177,7 +1409,7 @@ a value to <code>self.name</code>. Now trying a
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">print</span> y<span style="color: #666666">.</span>v0
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">print</span> y<span style="color: #666666">.</span>v0
 </pre></div>
 <p>
 will print <code>5</code>.
@@ -1186,7 +1418,7 @@ In a new call,
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">v <span style="color: #666666">=</span> y<span style="color: #666666">.</span>value(<span style="color: #666666">0.2</span>)
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>v <span style="color: #666666">=</span> y<span style="color: #666666">.</span>value(<span style="color: #666666">0.2</span>)
 </pre></div>
 <p>
 the previous <code>v0</code> value (<code>5</code>) is used inside <code>value</code> as
@@ -1199,7 +1431,7 @@ The previous implementation is not foolproof if we fail to initialize
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">y <span style="color: #666666">=</span> Y2()
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>y <span style="color: #666666">=</span> Y2()
 v <span style="color: #666666">=</span> y<span style="color: #666666">.</span>value(<span style="color: #666666">0.1</span>)
 </pre></div>
 <p>
@@ -1208,7 +1440,7 @@ will terminate in the <code>value</code> method with the exception
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #D2413A; font-weight: bold">AttributeError</span>: Y2 instance has no attribute <span style="color: #BA2121">&#39;v0&#39;</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #D2413A; font-weight: bold">AttributeError</span>: Y2 instance has no attribute <span style="color: #BA2121">&#39;v0&#39;</span>
 </pre></div>
 <p>
 As usual, it is better to notify the user with a more informative message.
@@ -1220,7 +1452,7 @@ with name <code>'v0'</code>. An improved <code>value</code> method now reads
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">value</span>(<span style="color: #008000">self</span>, t, v0<span style="color: #666666">=</span><span style="color: #008000">None</span>):
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">value</span>(<span style="color: #008000">self</span>, t, v0<span style="color: #666666">=</span><span style="color: #008000">None</span>):
         <span style="color: #008000; font-weight: bold">if</span> v0 <span style="color: #AA22FF; font-weight: bold">is</span> <span style="color: #AA22FF; font-weight: bold">not</span> <span style="color: #008000">None</span>:
             <span style="color: #008000">self</span><span style="color: #666666">.</span>v0 <span style="color: #666666">=</span> v0
         <span style="color: #008000; font-weight: bold">if</span> <span style="color: #AA22FF; font-weight: bold">not</span> <span style="color: #008000">hasattr</span>(<span style="color: #008000">self</span>, <span style="color: #BA2121">&#39;v0&#39;</span>):
@@ -1239,7 +1471,7 @@ there are not enough arguments to a function or method):
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">value</span>(<span style="color: #008000">self</span>, t, v0<span style="color: #666666">=</span><span style="color: #008000">None</span>):
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">value</span>(<span style="color: #008000">self</span>, t, v0<span style="color: #666666">=</span><span style="color: #008000">None</span>):
         <span style="color: #008000; font-weight: bold">if</span> v0 <span style="color: #AA22FF; font-weight: bold">is</span> <span style="color: #AA22FF; font-weight: bold">not</span> <span style="color: #008000">None</span>:
             <span style="color: #008000">self</span><span style="color: #666666">.</span>v0 <span style="color: #666666">=</span> v0
         g <span style="color: #666666">=</span> <span style="color: #666666">9.81</span>
@@ -1261,13 +1493,13 @@ calling code.
 We think class <code>Y</code> is a better implementation than class <code>Y2</code>,
 because the former is simpler. As already mentioned, it
 is a good habit to include
-a constructor and set data here rather than "recording data on the fly"
+a constructor and set data here rather than &quot;recording data on the fly&quot;
 as we try to in class <code>Y2</code>. The whole purpose of class <code>Y2</code>
 is just to show that Python provides great flexibility with respect
 to defining attributes, and that there are no requirements to what
 a class <em>must</em> contain.
 
-<h2 id="sec:class:whatis">Making classes without the class construct<a name="sec:class:whatis"></a></h2>
+<h2 id="sec:class:whatis" class="anchor">Making classes without the class construct</h2>
 
 <p>
 Newcomers to the class concept often have a hard time understanding
@@ -1289,7 +1521,7 @@ has its own set of variables. These variables can be thought of as
 a dictionary with keys equal to the variable names. Each instance
 then has its own dictionary, and we may roughly view the instance
 as this
-dictionary. (The instance can also contain static class attributes
+dictionary. (The instance can also contain static data attributes
 (the section <a href="._class-readable006.html#sec:class:static">Static methods and attributes</a>), but these are to be viewed as global
 variables in the present context.)
 
@@ -1309,7 +1541,7 @@ functions with the following names and arguments:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">Y<span style="color: #666666">.</span>value(y, t)
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>Y<span style="color: #666666">.</span>value(y, t)
 Y<span style="color: #666666">.</span>formula(y)
 </pre></div>
 <p>
@@ -1330,7 +1562,7 @@ it allows us to use an alternative syntax for method calls:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">y<span style="color: #666666">.</span>value(t)
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>y<span style="color: #666666">.</span>value(t)
 y<span style="color: #666666">.</span>formula()
 </pre></div>
 <p>
@@ -1354,7 +1586,7 @@ Our <code>Y</code> class could now be implemented as
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">value</span>(<span style="color: #008000">self</span>, t):
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">value</span>(<span style="color: #008000">self</span>, t):
     <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">self</span>[<span style="color: #BA2121">&#39;v0&#39;</span>]<span style="color: #666666">*</span>t <span style="color: #666666">-</span> <span style="color: #666666">0.5*</span><span style="color: #008000">self</span>[<span style="color: #BA2121">&#39;g&#39;</span>]<span style="color: #666666">*</span>t<span style="color: #666666">**2</span>
 
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">formula</span>(<span style="color: #008000">self</span>):
@@ -1367,7 +1599,7 @@ The usage goes as follows:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">Y</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">Y</span>
 y <span style="color: #666666">=</span> {<span style="color: #BA2121">&#39;v0&#39;</span>: <span style="color: #666666">4</span>, <span style="color: #BA2121">&#39;g&#39;</span>: <span style="color: #666666">9.81</span>}   <span style="color: #408080; font-style: italic"># make an &quot;instance&quot;</span>
 y1 <span style="color: #666666">=</span> Y<span style="color: #666666">.</span>value(y, t)
 </pre></div>
@@ -1379,7 +1611,7 @@ some initialization function in the <code>Y</code> module
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">init</span>(v0):
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">init</span>(v0):
     <span style="color: #008000; font-weight: bold">return</span> {<span style="color: #BA2121">&#39;v0&#39;</span>: v0, <span style="color: #BA2121">&#39;g&#39;</span>: <span style="color: #666666">9.81</span>}
 </pre></div>
 <p>
@@ -1388,7 +1620,7 @@ The usage is now slightly different:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">Y</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">Y</span>
 y <span style="color: #666666">=</span> Y<span style="color: #666666">.</span>init(<span style="color: #666666">4</span>)       <span style="color: #408080; font-style: italic"># make an &quot;instance&quot;</span>
 y1 <span style="color: #666666">=</span> Y<span style="color: #666666">.</span>value(y, t)
 </pre></div>
@@ -1405,7 +1637,7 @@ dictionary in class <code>Y</code>:
 <p>
 
 <!-- code=python (!bc pyshell) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> y <span style="color: #666666">=</span> Y(<span style="color: #666666">1.2</span>)
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> y <span style="color: #666666">=</span> Y(<span style="color: #666666">1.2</span>)
 <span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">print</span> y<span style="color: #666666">.</span>__dict__
 {<span style="color: #BA2121">&#39;v0&#39;</span>: <span style="color: #666666">1.2</span>, <span style="color: #BA2121">&#39;g&#39;</span>: <span style="color: #666666">9.8100000000000005</span>}
 </pre></div>
@@ -1415,9 +1647,10 @@ in a dictionary, and a set of functions where this dictionary is automatically
 provided as first argument such that functions always have full access to
 the class variables.
 
-<h3 id="___sec16">First remark <a name="___sec16"></a></h3>
+<h3 id="___sec16" class="anchor">First remark </h3>
 
- We have in this section provided a view of
+<p>
+We have in this section provided a view of
 classes <em>from a technical point of view</em>. Others may view a class
 as a way of modeling the world in terms of data and operations on
 data.  However, in sciences that employ the language of mathematics,
@@ -1427,12 +1660,12 @@ structure of programs. When appropriate, mathematical structures can
 conveniently be mapped on to classes in programs to make the software
 simpler and more flexible.
 
-<h3 id="___sec17">Second remark <a name="___sec17"></a></h3>
+<h3 id="___sec17" class="anchor">Second remark </h3>
 
 <p>
 The view of classes in this section neglects very important topics
 such as inheritance and dynamic binding
-(explained in the document <a href="http://tcse6.on.net/oo" target="_self">Object-oriented programming</a> <a href="._class-readable008.html#Langtangen_TCSE6_oo">[1]</a>).
+(explained in the document <a href="http://hplgit.github.io/primer.html/doc/pub/oo" target="_self">Object-oriented programming</a> <a href="._class-readable008.html#Langtangen_TCSE6_oo">[1]</a>).
 For more completeness of the present section,
 we therefore briefly describe how our combination of dictionaries and global
 functions can deal with inheritance and dynamic binding
@@ -1447,6 +1680,135 @@ subclass dictionary. Dynamic binding of methods is more complicated, but
 one can think of checking if the method is in the subclass module
 (using <code>hasattr</code>), and if not, one proceeds with checking super
 class modules until a version of the method is found.
+
+<h2 id="sec:class:closure" class="anchor">Closures</h2>
+
+<p>
+This section follows up the discussion in the section <a href="#sec:class:whatis">Making classes without the class construct</a>
+and presents a more advanced construction that may serve as alternative
+to class constructions in some cases.
+
+<p>
+Our motivating example is that we want a Python implementation of
+a mathematical function \( y(t;v_0)=v_0t - \frac{1}{2}gt^2 \) to
+have \( t \) as the only argument, but also have access to the parameter \( v_0 \).
+Consider the following function, which returns a function:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">generate_y</span>():
+<span style="color: #666666">...</span>     v0 <span style="color: #666666">=</span> <span style="color: #666666">5</span>
+<span style="color: #666666">...</span>     g <span style="color: #666666">=</span> <span style="color: #666666">9.81</span>
+<span style="color: #666666">...</span>     <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">y</span>(t):
+<span style="color: #666666">...</span>         <span style="color: #008000; font-weight: bold">return</span> v0<span style="color: #666666">*</span>t <span style="color: #666666">-</span> <span style="color: #666666">0.5*</span>g<span style="color: #666666">*</span>t<span style="color: #666666">**2</span>
+<span style="color: #666666">...</span>     <span style="color: #008000; font-weight: bold">return</span> y
+<span style="color: #666666">...</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> y <span style="color: #666666">=</span> generate_y()
+<span style="color: #666666">&gt;&gt;&gt;</span> y(<span style="color: #666666">1</span>)
+<span style="color: #666666">0.09499999999999975</span>
+</pre></div>
+<p>
+The remarkable property of the <code>y</code> function is that it remembers the
+value of <code>v0</code> and <code>g</code>, although these variables are not local to
+the parent function <code>generate_y</code> and not local in <code>y</code>. In particular,
+we can specify <code>v0</code> as argument to <code>generate_y</code>:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">generate_y</span>(v0):
+<span style="color: #666666">...</span>     g <span style="color: #666666">=</span> <span style="color: #666666">9.81</span>
+<span style="color: #666666">...</span>     <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">y</span>(t):
+<span style="color: #666666">...</span>         <span style="color: #008000; font-weight: bold">return</span> v0<span style="color: #666666">*</span>t <span style="color: #666666">-</span> <span style="color: #666666">0.5*</span>g<span style="color: #666666">*</span>t<span style="color: #666666">**2</span>
+<span style="color: #666666">...</span>     <span style="color: #008000; font-weight: bold">return</span> y
+<span style="color: #666666">...</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> y1 <span style="color: #666666">=</span> generate_y(v0<span style="color: #666666">=1</span>)
+<span style="color: #666666">&gt;&gt;&gt;</span> y2 <span style="color: #666666">=</span> generate_y(v0<span style="color: #666666">=5</span>)
+<span style="color: #666666">&gt;&gt;&gt;</span> y1(<span style="color: #666666">1</span>)
+<span style="color: #666666">-3.9050000000000002</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> y2(<span style="color: #666666">1</span>)
+<span style="color: #666666">0.09499999999999975</span>
+</pre></div>
+<p>
+Here, <code>y1(t)</code> has access to <code>v0=1</code> while <code>y2(t)</code> has access to <code>v0=5</code>.
+
+<p>
+The function <code>y(t)</code> we construct and return from <code>generate_y</code> is
+called a <em>closure</em> and it remembers the value of the surrounding
+local variables in the parent function (at the time we create the
+<code>y</code> function). Closures are very convenient for many
+purposes in mathematical computing.
+Examples appear in the section <a href="._class-readable003.html#sec:class:autodF">Example: Automagic differentiation</a>.
+Closures are also central in
+a programming style called <em>functional programming</em>.
+
+<p>
+<div class="alert alert-block alert-success alert-text-normal"><b>Generating multiple closures in a function.</b>
+As soon as you get the idea of a closure, you will probably use it
+a lot because it is a convenient way to pack a function with extra
+data. However, there are some pitfalls. The biggest is illustrated
+below, but this is considered advanced material!
+
+<p>
+Let us generate a series of functions <code>v(t)</code> for various
+values of a parameter <code>v0</code>. Each function just returns
+a tuple <code>(v0, t)</code> such that we can easily see what the argument and
+the parameter are. We use <code>lambda</code> to quickly define
+each function, and we place the functions in a list:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">generate</span>():
+<span style="color: #666666">...</span>     <span style="color: #008000; font-weight: bold">return</span> [<span style="color: #008000; font-weight: bold">lambda</span> t: (v0, t) <span style="color: #008000; font-weight: bold">for</span> v0 <span style="color: #AA22FF; font-weight: bold">in</span> [<span style="color: #666666">0</span>, <span style="color: #666666">1</span>, <span style="color: #666666">5</span>, <span style="color: #666666">10</span>]]
+<span style="color: #666666">...</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> funcs <span style="color: #666666">=</span> generate()
+</pre></div>
+<p>
+Now, <code>funcs</code> is a list of functions with one argument.
+Calling each function and printing
+the return values <code>v0</code> and <code>t</code> gives
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">for</span> func <span style="color: #AA22FF; font-weight: bold">in</span> funcs:
+<span style="color: #666666">...</span>     <span style="color: #008000; font-weight: bold">print</span> func(<span style="color: #666666">1</span>)
+<span style="color: #666666">...</span>
+(<span style="color: #666666">10</span>, <span style="color: #666666">1</span>)
+(<span style="color: #666666">10</span>, <span style="color: #666666">1</span>)
+(<span style="color: #666666">10</span>, <span style="color: #666666">1</span>)
+(<span style="color: #666666">10</span>, <span style="color: #666666">1</span>)
+</pre></div>
+<p>
+As we see, all functions have <code>v0=10</code>, i.e., they stored the most recent
+value of <code>v0</code> before return. This is not what we wanted.
+
+<p>
+The trick is to let <code>v0</code> be a keyword argument in each function,
+because the value of a keyword argument is frozen at the time the
+function is defined:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">generate</span>():
+<span style="color: #666666">...</span>     <span style="color: #008000; font-weight: bold">return</span> [<span style="color: #008000; font-weight: bold">lambda</span> t, v0<span style="color: #666666">=</span>v0: (v0, t)
+<span style="color: #666666">...</span>             <span style="color: #008000; font-weight: bold">for</span> v0 <span style="color: #AA22FF; font-weight: bold">in</span> [<span style="color: #666666">0</span>, <span style="color: #666666">1</span>, <span style="color: #666666">5</span>, <span style="color: #666666">10</span>]]
+<span style="color: #666666">...</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> funcs <span style="color: #666666">=</span> generate()
+<span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">for</span> func <span style="color: #AA22FF; font-weight: bold">in</span> funcs:
+<span style="color: #666666">...</span>     <span style="color: #008000; font-weight: bold">print</span> func(<span style="color: #666666">1</span>)
+<span style="color: #666666">...</span>
+(<span style="color: #666666">0</span>, <span style="color: #666666">1</span>)
+(<span style="color: #666666">1</span>, <span style="color: #666666">1</span>)
+(<span style="color: #666666">5</span>, <span style="color: #666666">1</span>)
+(<span style="color: #666666">10</span>, <span style="color: #666666">1</span>)
+</pre></div>
+<p>
+</div>
+
 
 <p>
 <p>

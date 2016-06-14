@@ -1,0 +1,1547 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Dictionaries and strings">
+<meta name="keywords" content="dictionary,keys (dictionaries),immutable objects,mutable objects,summing a list,summing over an iterator,dictionary comprehensions,nested dictionaries,dictionary nested,date conversion,plotting data vs date,string slicing,slicing,substrings,string substrings,string searching,string find,string substitution,substitution (in text),string replace,string splitting,string case change,string testing for number,whitespace,blank lines in files,string stripping leading/trailing blanks,string joining words,dictionary functionality">
+
+<title>Dictionaries and strings</title>
+
+
+<link href="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/css/solarized_light_code.css" rel="stylesheet" type="text/css" title="light"/>
+<script src="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<link href="http://thomasf.github.io/solarized-css/solarized-light.min.css" rel="stylesheet">
+<style type="text/css">
+h1 {color: #b58900;}  /* yellow */
+/* h1 {color: #cb4b16;}  orange */
+/* h1 {color: #d33682;}  magenta, the original choice of thomasf */
+code { padding: 0px; background-color: inherit; }
+pre {
+  border: 0pt solid #93a1a1;
+  box-shadow: none;
+}
+.alert-text-small   { font-size: 80%;  }
+.alert-text-large   { font-size: 130%; }
+.alert-text-normal  { font-size: 90%;  }
+.alert {
+  padding:8px 35px 8px 14px; margin-bottom:18px;
+  text-shadow:0 1px 0 rgba(255,255,255,0.5);
+  border:1px solid #93a1a1;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  color: #555;
+  background-color: #eee8d5;
+  background-position: 10px 5px;
+  background-repeat: no-repeat;
+  background-size: 38px;
+  padding-left: 55px;
+  width: 75%;
+ }
+.alert-block {padding-top:14px; padding-bottom:14px}
+.alert-block > p, .alert-block > ul {margin-bottom:1em}
+.alert li {margin-top: 1em}
+.alert-block p+p {margin-top:5px}
+.alert-notice { background-image: url(https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/small_yellow_notice.png); }
+.alert-summary  { background-image:url(https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/small_yellow_summary.png); }
+.alert-warning { background-image: url(https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/small_yellow_warning.png); }
+.alert-question {background-image:url(https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/small_yellow_question.png); }
+
+div { text-align: justify; text-justify: inter-word; }
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [('Table of contents',
+               1,
+               'table_of_contents',
+               'table_of_contents'),
+              (u'Dictionaries', 1, u'sec:files:dicts', u'sec:files:dicts'),
+              (u'Making dictionaries', 2, None, '___sec1'),
+              (u'Dictionary operations', 2, None, '___sec2'),
+              (u'Remark', 3, None, '___sec3'),
+              (u'Example: Polynomials as dictionaries',
+               2,
+               u'sec:files:poly',
+               u'sec:files:poly'),
+              (u'Dictionaries with default values and ordering',
+               2,
+               u'sec:files:dict:default:order',
+               u'sec:files:dict:default:order'),
+              (u'Dictionaries with default values', 3, None, '___sec6'),
+              (u'Ordered dictionaries', 3, None, '___sec7'),
+              (u'Example: Storing file data in dictionaries',
+               2,
+               u'sec:files:dict:density',
+               u'sec:files:dict:density'),
+              (u'Problem', 3, None, '___sec9'),
+              (u'Solution', 3, None, '___sec10'),
+              (u'Example: Storing file data in nested dictionaries',
+               2,
+               u'sec:files:dictdict',
+               u'sec:files:dictdict'),
+              (u'Problem', 3, None, '___sec12'),
+              (u'Algorithm', 3, None, '___sec13'),
+              (u'Implementation', 3, None, '___sec14'),
+              (u'Dissection', 3, None, '___sec15'),
+              (u'Example: Reading and plotting data recorded at specific dates',
+               2,
+               u'sec:files:stockprices',
+               u'sec:files:stockprices'),
+              (u'Problem', 3, None, '___sec17'),
+              (u'Solution', 3, None, '___sec18'),
+              (u'Strings', 1, u'sec:files:str', u'sec:files:str'),
+              (u'Common operations on strings',
+               2,
+               u'sec:files:stringop',
+               u'sec:files:stringop'),
+              (u'Substring specification', 3, None, '___sec21'),
+              (u'Searching for substrings', 3, None, '___sec22'),
+              (u'Substitution', 3, None, '___sec23'),
+              (u'String splitting', 3, None, '___sec24'),
+              (u'Upper and lower case', 3, None, '___sec25'),
+              (u'Strings are constant', 3, None, '___sec26'),
+              (u'Strings with digits only', 3, None, '___sec27'),
+              (u'Whitespace', 3, None, '___sec28'),
+              (u'Joining strings', 3, None, '___sec29'),
+              (u'Example: Reading pairs of numbers',
+               2,
+               u'sec:files:pairs',
+               u'sec:files:pairs'),
+              (u'Problem', 3, None, '___sec31'),
+              (u'Solution', 3, None, '___sec32'),
+              (u'Example: Reading coordinates', 2, None, '___sec33'),
+              (u'Problem', 3, None, '___sec34'),
+              (u'Solution 1: substring extraction', 3, None, '___sec35'),
+              (u'Solution 2: string search', 3, None, '___sec36'),
+              (u'Solution 3: string split', 3, None, '___sec37'),
+              (u'Reading data from web pages',
+               1,
+               u'sec:files:webtxt',
+               u'sec:files:webtxt'),
+              (u'About web pages',
+               2,
+               u'sec:files:HTMLintro',
+               u'sec:files:HTMLintro'),
+              (u'How to access web pages in programs',
+               2,
+               u'sec:files:urllib',
+               u'sec:files:urllib'),
+              (u'Alternative 1', 3, None, '___sec41'),
+              (u'Alternative 2', 3, None, '___sec42'),
+              (u'Example: Reading pure text files',
+               2,
+               u'sec:files:url:weather',
+               u'sec:files:url:weather'),
+              (u'Example: Extracting data from HTML',
+               2,
+               u'sec:files:url:interpret',
+               u'sec:files:url:interpret'),
+              (u'Handling non-English text',
+               2,
+               u'sec:files:encoding',
+               u'sec:files:encoding'),
+              (u'Reading and writing spreadsheet files',
+               1,
+               u'sec:files:csv',
+               u'sec:files:csv'),
+              (u'CSV files', 2, None, '___sec47'),
+              (u'Reading CSV files', 2, None, '___sec48'),
+              (u'Processing spreadsheet data', 2, None, '___sec49'),
+              (u'Writing CSV files', 2, None, '___sec50'),
+              (u'Remark', 3, None, '___sec51'),
+              (u'Representing number cells with Numerical Python arrays',
+               2,
+               None,
+               '___sec52'),
+              (u'Using more high-level Numerical Python functionality',
+               2,
+               None,
+               '___sec53'),
+              (u'Making code that is compatible with Python 2 and 3',
+               1,
+               u'sec:dictstring:py23',
+               u'sec:dictstring:py23'),
+              (u'Basic differences between Python 2 and 3',
+               2,
+               None,
+               '___sec55'),
+              (u'`xrange` in Python 2 is `range` in Python 3',
+               3,
+               None,
+               '___sec56'),
+              (u'Python 3 often avoids returning lists and dictionaries',
+               3,
+               None,
+               '___sec57'),
+              (u'Library modules have different names', 3, None, '___sec58'),
+              (u'Python 3 has unicode and byte strings', 3, None, '___sec59'),
+              (u'Python 3 has different relative import syntax inside packages',
+               3,
+               None,
+               '___sec60'),
+              (u'Turning Python 2 code into Python 3 code',
+               2,
+               None,
+               '___sec61'),
+              (u'Summary', 1, None, '___sec62'),
+              (u'Chapter topics', 2, None, '___sec63'),
+              (u'Dictionaries', 3, None, '___sec64'),
+              (u'Strings', 3, None, '___sec65'),
+              (u'Downloading Internet files', 3, None, '___sec66'),
+              (u'Terminology', 3, None, '___sec67'),
+              (u'Example: A file database',
+               2,
+               u'sec:files:sumex',
+               u'sec:files:sumex'),
+              (u'Problem', 3, None, '___sec69'),
+              (u'Solution', 3, None, '___sec70'),
+              (u'Exercises',
+               1,
+               u'sec:files:exercises',
+               u'sec:files:exercises'),
+              (u'Exercise 1: Make a dictionary from a table',
+               2,
+               u'sec:files:ex2b:basic',
+               u'sec:files:ex2b:basic'),
+              (u'Exercise 2: Explore syntax differences: lists vs. dicts',
+               2,
+               u'sec:files:ex2',
+               u'sec:files:ex2'),
+              (u'Exercise 3: Use string operations to improve a program',
+               2,
+               u'sec:files:ex17',
+               u'sec:files:ex17'),
+              (u'Exercise 4: Interpret output from a program',
+               2,
+               u'sec:files:ex13',
+               u'sec:files:ex13'),
+              (u'Exercise 5: Make a dictionary',
+               2,
+               u'sec:files:ex2b',
+               u'sec:files:ex2b'),
+              (u'Exercise 6: Make a nested dictionary',
+               2,
+               u'sec:files:ex2c',
+               u'sec:files:ex2c'),
+              (u'Exercise 7: Make a nested dictionary from a file',
+               2,
+               u'sec:files:ex2d:nested',
+               u'sec:files:ex2d:nested'),
+              (u'Exercise 8: Make a nested dictionary from a file',
+               2,
+               u'sec:files:ex2d:nested2',
+               u'sec:files:ex2d:nested2'),
+              (u'Exercise 9: Compute the area of a triangle',
+               2,
+               u'sec:files:ex2d',
+               u'sec:files:ex2d'),
+              (u'Exercise 10: Compare data structures for polynomials',
+               2,
+               u'sec:files:ex16',
+               u'sec:files:ex16'),
+              (u'Exercise 11: Compute the derivative of a polynomial',
+               2,
+               u'sec:files:ex3',
+               u'sec:files:ex3'),
+              (u'Exercise 12: Specify functions on the command line',
+               2,
+               u'sec:basic:ex10',
+               u'sec:basic:ex10'),
+              (u'Exercise 13: Interpret function specifications',
+               2,
+               u'sec:basic:ex10b',
+               u'sec:basic:ex10b'),
+              (u'Exercise 14: Compare average temperatures in cities',
+               2,
+               u'sec:files:ex8',
+               u'sec:files:ex8'),
+              (u'Exercise 15: Generate an HTML report with figures',
+               2,
+               u'sec:files:ex21',
+               u'sec:files:ex21'),
+              (u'References', 1, None, '___sec87')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- newcommands_keep.tex -->
+$$
+\newcommand{\tp}{\thinspace .}
+$$
+
+
+
+
+    
+<a name="part0001"></a>
+<p>
+<!-- begin top navigation -->
+<table style="width: 100%"><tr><td>
+<div style="text-align: left;"><a href="._dictstring-solarized000.html">&laquo; Previous</a></div>
+</td><td>
+<div style="text-align: right;"><a href="._dictstring-solarized002.html">Next &raquo;</a></div>
+</td></tr></table>
+<!-- end top navigation -->
+</p>
+
+<p>
+<!-- !split -->
+<p style="font-size:80%">This chapter is taken from the book <a href="http://www.springer.com/gp/book/9783662498866">A Primer on Scientific Programming with Python</a> by H. P. Langtangen, 5th edition, Springer, 2016.</p>
+
+<h1 id="sec:files:dicts">Dictionaries</h1>
+
+<p>
+So far in the document we have stored information in various types of
+objects, such as numbers, strings, list, and arrays.  A <em>dictionary</em>
+is a very flexible object for storing various kind of information, and
+in particular when reading files. It is therefore time to introduce
+the popular dictionary type.
+
+<p>
+A list is a collection of objects indexed by an integer going from 0
+to the number of elements minus one.  Instead of looking up an element
+through an integer index, it can be more handy to use a text.  Roughly
+speaking, a list where the index can be a text is called a
+{dictionary} in Python. Other computer languages use other names for
+the same thing: HashMap, hash, associative array, or map.
+
+<h2 id="___sec1">Making dictionaries </h2>
+
+<p>
+Suppose we need to store
+the temperatures from three cities: Oslo, London,
+and Paris. For this purpose we can use a list,
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>temps = [13, 15.4, 17.5]
+</code></pre>
+<!-- end verbatim block -->
+but then we need to remember the sequence of cities, e.g., that index 0
+corresponds to Oslo, index 1 to London, and index 2 to Paris.
+That is, the London temperature is obtained as <code>temps[1]</code>.
+A dictionary with the city name as index is more convenient, because
+this allows us to write <code>temps['London']</code> to look up the temperature
+in London. Such a dictionary is created by one of the following two statements
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>temps = {'Oslo': 13, 'London': 15.4, 'Paris': 17.5}
+# or
+temps = dict(Oslo=13, London=15.4, Paris=17.5)
+</code></pre>
+<!-- end verbatim block -->
+Additional text-value pairs can be added when desired. We can, for instance,
+write
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>temps['Madrid'] = 26.0
+</code></pre>
+<!-- end verbatim block -->
+The <code>temps</code> dictionary has now four text-value pairs, and
+a <code>print temps</code> yields
+
+<p>
+<!-- begin verbatim block  ccq-->
+<pre><code>{'Oslo': 13, 'London': 15.4, 'Paris': 17.5, 'Madrid': 26.0}
+</code></pre>
+<!-- end verbatim block -->
+
+<h2 id="___sec2">Dictionary operations </h2>
+
+<p>
+The string &quot;indices&quot; in a dictionary are called <em>keys</em>.
+To loop over the keys in a dictionary <code>d</code>, one writes
+<code>for key in d:</code> and works with <code>key</code> and the
+corresponding value <code>d[key]</code>
+inside the loop. We may apply this technique to write out the
+temperatures in the <code>temps</code> dictionary from the previous paragraph:
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; for city in temps:
+...     print 'The temperature in %s is %g' % (city, temps[city])
+...
+The temperature in Paris is 17.5
+The temperature in Oslo is 13
+The temperature in London is 15.4
+The temperature in Madrid is 26
+</code></pre>
+<!-- end verbatim block -->
+We can check if a key is present in a dictionary by the syntax
+<code>if key in d</code>:
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; if 'Berlin' in temps:
+...     print 'Berlin:', temps['Berlin']
+... else:
+...     print 'No temperature data for Berlin'
+...
+No temperature data for Berlin
+</code></pre>
+<!-- end verbatim block -->
+Writing <code>key in d</code> yields a standard boolean expression, e.g.,
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; 'Oslo' in temps
+True
+</code></pre>
+<!-- end verbatim block -->
+The keys and values can be extracted as lists from a dictionary:
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; temps.keys()
+['Paris', 'Oslo', 'London', 'Madrid']
+&gt;&gt;&gt; temps.values()
+[17.5, 13, 15.4, 26.0]
+</code></pre>
+<!-- end verbatim block -->
+An important feature of the <code>keys</code> method in dictionaries
+is that the order of the returned list of
+keys is unpredictable. If you need to traverse the keys in a certain
+order, you can sort the keys. A loop over the keys in the
+<code>temps</code> dictionary in alphabetic order is written as
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; for city in sorted(temps):
+...     print city
+...
+London
+Madrid
+Oslo
+Paris
+</code></pre>
+<!-- end verbatim block -->
+Python also has a special dictionary type <code>OrderedDict</code>
+where the key-value pairs has a specific order, see
+the section <a href="#sec:files:dict:default:order">Dictionaries with default values and ordering</a>.
+
+<p>
+A key-value pair can be removed by <code>del d[key]</code>:
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; del temps['Oslo']
+&gt;&gt;&gt; temps
+{'Paris': 17.5, 'London': 15.4, 'Madrid': 26.0}
+&gt;&gt;&gt; len(temps)  # no of key-value pairs in dictionary
+3
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+Sometimes we need to take a copy of a dictionary:
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; temps_copy = temps.copy()
+&gt;&gt;&gt; del temps_copy['Paris']   # this does not affect temps
+&gt;&gt;&gt; temps_copy
+{'London': 15.4, 'Madrid': 26.0}
+&gt;&gt;&gt; temps
+{'Paris': 17.5, 'London': 15.4, 'Madrid': 26.0}
+</code></pre>
+<!-- end verbatim block -->
+Note that if two variables refer to the same dictionary and we change
+the contents of the dictionary through either of the variables,
+the change will be seen in both variables:
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; t1 = temps
+&gt;&gt;&gt; t1['Stockholm'] = 10.0    # change t1
+&gt;&gt;&gt; temps                     # temps is also changed
+{'Stockholm': 10.0, 'Paris': 17.5, 'London': 15.4, 'Madrid': 26.0}
+</code></pre>
+<!-- end verbatim block -->
+To avoid that <code>temps</code> is affected by adding a new key-value pair
+to <code>t1</code>, <code>t1</code> must be a copy of <code>temps</code>.
+
+<h3 id="___sec3">Remark </h3>
+
+<p>
+In Python version 2.x, <code>temps.keys()</code> returns a list object while
+in Python version 3.x, <code>temps.keys()</code> only enables iterating over
+the keys. To write code that works with both versions one can
+use <code>list(temps.keys())</code> in the cases where a list is really
+needed and just <code>temps.keys()</code> in a <code>for</code> loop over the keys.
+
+<h2 id="sec:files:poly">Example: Polynomials as dictionaries</h2>
+<div id="sec:files:mutable"></div>
+
+<p>
+Python objects that cannot change their contents
+are known as <em>immutable</em> data types
+and consist of <code>int</code>, <code>float</code>, <code>complex</code>,
+<code>str</code>, and <code>tuple</code>. Lists and dictionaries
+can change their contents and are called
+<em>mutable</em> objects.
+
+<p>
+The keys in a dictionary are not restricted to be strings. In fact,
+any immutable Python object can be used as key.
+For example, if you want a list as key, it cannot be used since lists
+can change their contents are hence mutable objects, but a tuple
+will do, since it is immutable.
+
+<p>
+A common type of key in dictionaries is integers.
+Next we shall explain how dictionaries with integers as key provide
+a handy way of representing polynomials.
+Consider the polynomial
+
+$$
+\begin{equation*} p(x)=-1 + x^2 + 3x^7\tp \end{equation*}
+$$
+
+The data associated with this polynomial can be viewed as
+a set of power-coefficient pairs, in this case the coefficient \( -1 \)
+belongs to power 0, the coefficient 1 belongs to power 2, and the
+coefficient 3 belongs to power 7. A dictionary can be used to map a
+power to a coefficient:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>p = {0: -1, 2: 1, 7: 3}
+</code></pre>
+<!-- end verbatim block -->
+A list can, of course, also be used, but in this case we must
+fill in all the zero coefficients too, since the index must match the power:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>p = [-1, 0, 1, 0, 0, 0, 0, 3]
+</code></pre>
+<!-- end verbatim block -->
+The advantage with a dictionary is that we need to store only the
+non-zero coefficients. For the polynomial \( 1+x^{100} \) the dictionary
+holds two elements while the list holds 101 elements (see <a href="._dictstring-solarized007.html#sec:files:ex16">Exercise 10: Compare data structures for polynomials</a>).
+
+<p>
+The following function can be used to evaluate a polynomial represented
+as a dictionary:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>def eval_poly_dict(poly, x):
+    sum = 0.0
+    for power in poly:
+        sum += poly[power]*x**power
+    return sum
+</code></pre>
+<!-- end verbatim block -->
+The <code>poly</code> argument must be a dictionary where <code>poly[power]</code>
+holds the coefficient associated with the term <code>x**power</code>.
+
+<p>
+A more compact implementation can make use of Python's <code>sum</code>
+function to sum the elements of a list:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>def eval_poly_dict2(poly, x):
+    return sum([poly[power]*x**power for power in poly])
+</code></pre>
+<!-- end verbatim block -->
+That is, we first make a list of the terms in the polynomial using a
+list comprehension, and then we feed this list to the <code>sum</code>
+function. We can in fact drop the brackets and storing all the
+<code>poly[power]*x**power</code> numbers in a list, because
+<code>sum</code> can directly add elements of an iterator (like <code>for power in poly</code>):
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>def eval_poly_dict2(poly, x):
+    return sum(poly[power]*x**power for power in poly)
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+<div class="alert alert-block alert-notice alert-text-normal">
+<b>Be careful with redefining variables!</b>
+<p>
+The name <code>sum</code> appears in both <code>eval_poly_dict</code> and <code>eval_poly_dict2</code>.
+In the former, <code>sum</code> is a <code>float</code> object, and in the
+latter, <code>sum</code> is a built-in Python function. When we set <code>sum=0.0</code> in the first
+implementation, we bind the name <code>sum</code> to a new <code>float</code> object, and
+the built-in Python function associated with the name <code>sum</code> is then no
+longer accessible inside the <code>eval_poly_dict</code> function. (Actually, this is not
+strictly correct, because <code>sum</code> is a local variable while the
+built-in Python <code>sum</code> function is associated with a global name <code>sum</code>,
+which can always be reached through <code>globals()['sum']</code>.)
+Outside the <code>eval_poly_dict</code> function,
+nevertheless, <code>sum</code> will be Python's summation function and the local
+<code>sum</code> variable inside the <code>eval_poly_dict</code> function is destroyed.
+
+<p>
+As a rule of thumb, avoid using <code>sum</code> or other names associated with frequently
+used functions as new variables unless you are in a very small function
+(like <code>eval_poly_dict</code>) where there is no danger that you need
+the original meaning of the name.
+</div>
+
+
+<p>
+With a list instead of dictionary for representing
+the polynomial, a slightly different evaluation function is needed:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>def eval_poly_list(poly, x):
+    sum = 0
+    for power in range(len(poly)):
+        sum += poly[power]*x**power
+    return sum
+</code></pre>
+<!-- end verbatim block -->
+If there are many zeros in the <code>poly</code> list, <code>eval_poly_list</code> must
+perform all the multiplications with the zeros, while <code>eval_poly_dict</code>
+computes with the non-zero coefficients only and is hence more
+efficient.
+
+<p>
+Another major advantage of using a dictionary to represent a polynomial rather
+than a list is that negative powers are easily allowed, e.g.,
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>p = {-3: 0.5, 4: 2}
+</code></pre>
+<!-- end verbatim block -->
+can represent \( \frac{1}{2}x^{-3} + 2x^4 \). With a list representation,
+negative powers require much more book-keeping. We may, for example,
+set
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>p = [0.5, 0, 0, 0, 0, 0, 0, 2]
+</code></pre>
+<!-- end verbatim block -->
+and remember that <code>p[i]</code> is the coefficient associated with the
+power <code>i-3</code>. In particular, the <code>eval_poly_list</code> function will no longer
+work for such lists, while the <code>eval_poly_dict</code> function
+works also for dictionaries with negative keys (powers).
+
+<p>
+There is a dictionary counterpart to list comprehensions, called
+<em>dictionary comprehensions</em>, for quickly generating parameterized
+key-value pairs
+with a <code>for</code> loop. Such a construction is convenient to generate
+the coefficients in a polynomial:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>from math import factorial
+d = {k: (-1)**k/float(factorial(k)) for k in range(n+1)}
+</code></pre>
+<!-- end verbatim block -->
+The <code>d</code> dictionary now contains the power-coefficient pairs of the
+Taylor polynomial of degree <code>n</code> for \( e^{-x} \). (Note the use of <code>float</code>
+to avoid integer division.)
+
+<p>
+You are now encouraged to solve <a href="._dictstring-solarized007.html#sec:files:ex3">Exercise 11: Compute the derivative of a polynomial</a>
+to become more familiar with the concept
+of dictionaries.
+
+<h2 id="sec:files:dict:default:order">Dictionaries with default values and ordering</h2>
+
+<h3 id="___sec6">Dictionaries with default values </h3>
+
+<p>
+Looking up keys that are not present in the dictionary requires
+special treatment. Consider a polynomial dictionary of the type
+introduced in the section <a href="#sec:files:poly">Example: Polynomials as dictionaries</a>. Say we have
+\( 2x^{-3} -1.5x^{-1} -2x^2 \) represented by
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>p1 = {-3: 2, -1: -1.5, 2: -2}
+</code></pre>
+<!-- end verbatim block -->
+If the code tries to look up <code>p1[1]</code>,
+this operation results in a <code>KeyError</code> since <code>1</code> is
+not a registered key in <code>p1</code>. We therefore need to do either
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>if key in p1:
+   value = p1[key]
+</code></pre>
+<!-- end verbatim block -->
+or use
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>value = p1.get(key, 0.0)
+</code></pre>
+<!-- end verbatim block -->
+where <code>p1.get</code> returns <code>p1[key]</code> if <code>key in p1</code>
+and the default value <code>0.0</code> if not.
+A third possibility is to work with a dictionary with a
+default value:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>from collections import defaultdict
+
+def polynomial_coeff_default():
+    # default value for polynomial dictionary
+    return 0.0
+
+p2 = defaultdict(polynomial_coeff_default)
+p2.update(p1)
+</code></pre>
+<!-- end verbatim block -->
+The <code>p2</code> can be indexed by any key, and for unregistered keys
+the <code>polynomial_coeff_default</code> function is called to provide
+a value. This must be a function without arguments. Usually,
+a separate function is never made, but either a type is inserted
+or a lambda function. The example above is equivalent to
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>p2 = defaultdict(lambda: 0.0)
+p2 = defaultdict(float)
+</code></pre>
+<!-- end verbatim block -->
+In the latter case <code>float()</code> is called for each unknown key,
+and <code>float()</code> returns a <code>float</code> object with zero value.
+Now we can look up <code>p2[1]</code> and get the default value 0.
+It must be remarked that this key is then a part of the dictionary:
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; p2 = defaultdict(lambda: 0.0)
+&gt;&gt;&gt; p2.update({2: 8})  # only one key
+&gt;&gt;&gt; p2[1]
+0.0
+&gt;&gt;&gt; p2[0]
+0.0
+&gt;&gt;&gt; p2[-2]
+0.0
+&gt;&gt;&gt; print p2
+{0: 0.0, 1: 0.0, 2: 8, -2: 0.0}
+</code></pre>
+<!-- end verbatim block -->
+
+<h3 id="___sec7">Ordered dictionaries </h3>
+
+<p>
+The elements of a dictionary have an undefined order. For example,
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; p1 = {-3: 2, -1: -1.5, 2: -2}
+&gt;&gt;&gt; print p1
+{2: -2, -3: 2, -1: -1.5}
+</code></pre>
+<!-- end verbatim block -->
+One can control the order by sorting the keys, either by the
+default sorting (alphabetically for string keys, ascending order
+for number keys):
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; for key in sorted(p1):
+...     print key, p1[key]
+...
+-3 2
+-1 -1.5
+2 -2
+</code></pre>
+<!-- end verbatim block -->
+The <code>sorted</code> function also accept an optional argument where
+the user can supply a function that sorts two
+keys.
+
+<p>
+However, Python features a dictionary type that preserves the order
+of the keys as they were registered:
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; from collections import OrderedDict
+&gt;&gt;&gt; p2 = OrderedDict({-3: 2, -1: -1.5, 2: -2})
+&gt;&gt;&gt; print p2
+OrderedDict([(2, -2), (-3, 2), (-1, -1.5)])
+&gt;&gt;&gt; p2[-5] = 6
+&gt;&gt;&gt; for key in p2:
+...     print key, p2[key]
+...
+2 -2
+-3 2
+-1 -1.5
+-5 6
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+Here is an example with dates as keys where the order is important.
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; data = {'Jan 2': 33, 'Jan 16': 0.1, 'Feb 2': 2}
+&gt;&gt;&gt; for date in data:
+...     print date, data[date]
+...
+Feb 2 2
+Jan 2 33
+Jan 16 0.1
+</code></pre>
+<!-- end verbatim block -->
+The order of the keys in the loop is not the right registered order,
+but this is easily achieved by <code>OrderedDict</code>
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; data = OrderedDict()
+&gt;&gt;&gt; data['Jan 2'] = 33
+&gt;&gt;&gt; data['Jan 16'] = 0.1
+&gt;&gt;&gt; data['Feb 2'] = 2
+&gt;&gt;&gt; for date in data:
+...     print date, data[date]
+...
+Jan2 33
+Jan 16 0.1
+Feb 2 2
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+A comment on alternative solutions
+should be made here. Trying to sort the <code>data</code> dictionary
+when it is an ordinary <code>dict</code> object does not help, as by
+default the sorting will be alphabetically, resulting in
+the sequence <code>'Feb 2'</code>, <code>'Jan 16'</code>, and <code>'Jan 2'</code>.
+What does help, however, is to use Python's <code>datetime</code> objects
+as keys reflecting dates, since these objects will be correctly
+sorted. A <code>datetime</code> object can be created from
+a string like <code>'Jan 2, 2017'</code> using a special syntax
+(see the module documentation). The relevant code is
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; import datetime
+&gt;&gt;&gt; data = {}
+&gt;&gt;&gt; d = datetime.datetime.strptime  # short form
+&gt;&gt;&gt; data[d('Jan 2, 2017', '%b %d, %Y')] = 33
+&gt;&gt;&gt; data[d('Jan 16, 2017', '%b %d, %Y')] = 0.1
+&gt;&gt;&gt; data[d('Feb 2, 2017', '%b %d, %Y')] = 2
+</code></pre>
+<!-- end verbatim block -->
+Printing out in sorted order gives the right sequence of dates:
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; for date in sorted(data):
+...     print date, data[date]
+...
+2017-01-02 00:00:00 33
+2017-01-16 00:00:00 0.1
+2017-02-02 00:00:00 2
+</code></pre>
+<!-- end verbatim block -->
+The time is automatically part of a <code>datetime</code> object and set to
+<code>00:00:00</code> when not specified.
+
+<p>
+While <code>OrderedDict</code> provides a simpler and shorter solution
+to keeping keys (here dates) in the right order in a dictionary,
+using <code>datetime</code> objects for dates has many advantages: dates can be
+formatted and written out in various ways, counting days between two dates is
+easy,
+calculating the corresponding week number and name of the weekday
+is supported, to mention some functionality.
+
+<h2 id="sec:files:dict:density">Example: Storing file data in dictionaries</h2>
+
+<h3 id="___sec9">Problem </h3>
+
+<p>
+The file <code>files/densities.dat</code> contains a table of densities of
+various substances measured in \( \hbox{g}/\hbox{cm}^3 \):
+
+<p>
+<!-- begin verbatim block  dat-->
+<pre><code>air         0.0012
+gasoline    0.67
+ice         0.9
+pure water  1.0
+seawater    1.025
+human body  1.03
+limestone   2.6
+granite     2.7
+iron        7.8
+silver      10.5
+mercury     13.6
+gold        18.9
+platinium   21.4
+Earth mean  5.52
+Earth core  13
+Moon        3.3
+Sun mean    1.4
+Sun core    160
+proton      2.3E+14
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+In a program we want to access these density data.
+A dictionary
+with the name of the substance as key and the corresponding density
+as value seems well suited for storing the data.
+
+<h3 id="___sec10">Solution </h3>
+
+<p>
+We can read the <code>densities.dat</code> file line by line, split each line
+into words, use a float conversion of the last word as density value,
+and the remaining one or two words as key in the dictionary.
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>def read_densities(filename):
+    infile = open(filename, 'r')
+    densities = {}
+    for line in infile:
+        words = line.split()
+        density = float(words[-1])
+
+        if len(words[:-1]) == 2:
+            substance = words[0] + ' ' + words[1]
+        else:
+            substance = words[0]
+
+        densities[substance] = density
+    infile.close()
+    return densities
+
+densities = read_densities('densities.dat')
+</code></pre>
+<!-- end verbatim block -->
+This code is found in the file
+<a href="http://tinyurl.com/pwyasaa/dictstring/density.py" target="_self"><tt>density.py</tt></a>. With
+string operations
+from the section <a href="._dictstring-solarized002.html#sec:files:stringop">Common operations on strings</a> we can avoid the special treatment
+of one or two words in the name of the substance and achieve simpler and
+more general code, see <a href="._dictstring-solarized007.html#sec:files:ex17">Exercise 3: Use string operations to improve a program</a>.
+
+<h2 id="sec:files:dictdict">Example: Storing file data in nested dictionaries</h2>
+
+<p>
+<!-- keep this example, it has a lot of nice details - then add a section -->
+<!-- on Microsoft_table_monthly.csv -->
+
+<h3 id="___sec12">Problem </h3>
+
+<p>
+We are given a data file with measurements of some properties
+with given names (here <code>A</code>, <code>B</code>, <code>C</code> ...).
+Each property is measured a given number of times.
+The data are organized as a table where the rows contain
+the measurements and the columns represent the measured properties:
+
+<p>
+<!-- begin verbatim block  dat-->
+<pre><code>       A        B       C      D
+1     11.7    0.035    2017    99.1
+2      9.2    0.037    2019   101.2
+3     12.2     no       no    105.2
+4     10.1    0.031     no    102.1
+5      9.1    0.033    2009   103.3
+6      8.7    0.036    2015   101.9
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+The word <code>no</code> stands for no data, i.e., we lack a measurement.
+We want to read this table into a dictionary <code>data</code> so that
+we can look up measurement no. <code>i</code> of (say) property <code>C</code>
+as <code>data['C'][i]</code>.
+For each property <code>p</code>, we want to compute the mean of all measurements
+and store this as <code>data[p]['mean']</code>.
+
+<h3 id="___sec13">Algorithm </h3>
+
+<p>
+The algorithm for creating the <code>data</code> dictionary goes as follows:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>examine the first line: split it into words and
+initialize a dictionary with the property names
+as keys and empty dictionaries {} as values
+
+for each of the remaining lines in the file:
+    split the line into words
+    for each word after the first:
+        if the word is not `no`:
+            transform the word to a real number and store
+            the number in the relevant dictionary
+</code></pre>
+<!-- end verbatim block -->
+<!-- #eldif ALG == "list" -->
+
+<ul>
+ <li> examine the first line: split it into words and
+   initialize a dictionary with the property names
+   as keys and empty dictionaries {} as values</li>
+ <li> for each of the remaining lines in the file</li>
+
+<ul>
+    <li> split the line into words</li>
+    <li> for each word after the first</li>
+
+<ul>
+       <li> if the word is not <code>no</code>:</li>
+
+<ul>
+           <li> transform the word to a real number and store
+             the number in the relevant dictionary</li>
+</ul>
+
+</ul>
+
+</ul>
+
+</ul>
+
+<h3 id="___sec14">Implementation </h3>
+
+<p>
+A new aspect needed in the solution is <em>nested dictionaries</em>, that is,
+dictionaries of dictionaries. The latter topic is first explained, via an
+example:
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; d = {'key1': {'key1': 2, 'key2': 3}, 'key2': 7}
+</code></pre>
+<!-- end verbatim block -->
+Observe here that the value of
+<code>d['key1']</code> is a dictionary, which we can index with its
+keys <code>key1</code> and <code>key2</code>:
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; d['key1']            # this is a dictionary
+{'key2': 3, 'key1': 2}
+&gt;&gt;&gt; type(d['key1'])      # proof
+&lt;type 'dict'&gt;
+&gt;&gt;&gt; d['key1']['key1']    # index a nested dictionary
+2
+&gt;&gt;&gt; d['key1']['key2']
+3
+</code></pre>
+<!-- end verbatim block -->
+In other words, repeated indexing works for nested dictionaries as for
+nested lists.
+The repeated indexing does not apply to <code>d['key2']</code>
+since that value is just an integer:
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; d['key2']['key1']
+  ...
+TypeError: unsubscriptable object
+&gt;&gt;&gt; type(d['key2'])
+&lt;type 'int'&gt;
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+<!-- is it not better to translate the algorithm step by step -->
+<!-- instead of presenting the final solution? -->
+
+<p>
+When we have understood the concept of
+nested dictionaries, we are in a position
+to present a complete code that solves our problem
+of loading the tabular data in the file <code>table.dat</code> into a nested
+dictionary <code>data</code> and computing mean values.
+First, we list the program, stored in the file
+<a href="http://tinyurl.com/pwyasaa/dictstring/table2dict.py" target="_self"><tt>table2dict.py</tt></a>,
+and display the program's output. Thereafter, we dissect the code
+in detail.
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>infile = open('table.dat', 'r')
+lines = infile.readlines()
+infile.close()
+data = {}   #  data[property][measurement_no] = propertyvalue
+first_line = lines[0]
+properties = first_line.split()
+for p in properties:
+    data[p] = {}
+
+for line in lines[1:]:
+    words = line.split()
+    i = int(words[0])       # measurement number
+    values = words[1:]      # values of properties
+    for p, v in zip(properties, values):
+        if v != 'no':
+            data[p][i] = float(v)
+
+# Compute mean values
+for p in data:
+    values = data[p].values()
+    data[p]['mean'] = sum(values)/len(values)
+
+for p in sorted(data):
+    print 'Mean value of property %s = %g' % (p, data[p]['mean'])
+</code></pre>
+<!-- end verbatim block -->
+The corresponding output from this program becomes
+
+<p>
+<!-- begin verbatim block  ccq-->
+<pre><code>Mean value of property A = 10.1667
+Mean value of property B = 0.0344
+Mean value of property C = 2015
+Mean value of property D = 102.133
+</code></pre>
+<!-- end verbatim block -->
+To view the nested <code>data</code> dictionary, we may insert
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>import scitools.pprint2; scitools.pprint2.pprint(data)
+</code></pre>
+<!-- end verbatim block -->
+which produces something like
+
+<p>
+<!-- begin verbatim block  ccq-->
+<pre><code>{'A': {1: 11.7, 2: 9.2, 3: 12.2, 4: 10.1, 5: 9.1, 6: 8.7,
+       'mean': 10.1667},
+ 'B': {1: 0.035, 2: 0.037, 4: 0.031, 5: 0.033, 6: 0.036,
+       'mean': 0.0344},
+ 'C': {1: 2017, 2: 2019, 5: 2009, 6: 2015, 'mean': 2015},
+ 'D': {1: 99.1,
+       2: 101.2,
+       3: 105.2,
+       4: 102.1,
+       5: 103.3,
+       6: 101.9,
+       'mean': 102.133}}
+</code></pre>
+<!-- end verbatim block -->
+
+<h3 id="___sec15">Dissection </h3>
+
+<p>
+To understand a computer program, you need to
+understand what the result of every statement is.
+Let us work through the code, almost line by line, and see what it does.
+
+<p>
+First, we load all the lines of the file into a list of strings
+called <code>lines</code>.
+The <code>first_line</code> variable refers to the string
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>'       A        B       C      D'
+</code></pre>
+<!-- end verbatim block -->
+We split this line into a list of words, called <code>properties</code>,
+which then contains
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>['A', 'B', 'C', 'D']
+</code></pre>
+<!-- end verbatim block -->
+With each of these property names we associate a dictionary with
+the measurement number as key and the property value as value,
+but first we must create these &quot;inner&quot; dictionaries as empty
+before we can add the measurements:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>for p in properties:
+    data[p] = {}
+</code></pre>
+<!-- end verbatim block -->
+The first pass in the <code>for</code> loop picks out the string
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>'1     11.7    0.035    2017    99.1'
+</code></pre>
+<!-- end verbatim block -->
+as the <code>line</code> variable. We split this line into words,
+the first word (<code>words[0]</code>) is the measurement number, while the
+rest <code>words[1:]</code> is a list of property values, here named <code>values</code>.
+To pair up the right properties and values, we loop over
+the <code>properties</code> and <code>values</code> lists simultaneously:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>    for p, v in zip(properties, values):
+        if v != 'no':
+            data[p][i] = float(v)
+</code></pre>
+<!-- end verbatim block -->
+Recall that some values may be missing and we drop to record
+that value (we could, alternatively, set the value to <code>None</code>).
+Because the <code>values</code> list contains strings (words) read from
+the file, we need to explicitly transform each string to a <code>float</code> number
+before we can compute with the values.
+
+<p>
+<center> <!-- figure label: --> <div id="sec:files:fig2"></div> <!-- FIGURE -->
+<hr class="figure">
+<center><p class="caption">Figure 1:  Illustration of the nested dictionary created in the <code>table2dict.py</code> program.  <!-- caption label: sec:files:fig2 --> </p></center>
+<p><img src="fig-dictstring/lumpy_table2dict2.png" align="bottom" width=400></p>
+</center>
+
+<p>
+After the <code>for line in lines[1:]</code> loop, we have a dictionary <code>data</code> of
+dictionaries where all the property values are stored for each
+measurement number and property name.  Figure <a href="#sec:files:fig2">1</a>
+shows a graphical representation of the <code>data</code> dictionary.
+
+<p>
+It remains to compute the average values. For each property name <code>p</code>,
+i.e., key in the <code>data</code> dictionary, we can extract the recorded values
+as the list <code>data[p].values()</code> and simply send this list to Python's
+<code>sum</code> function and divide by the number of measured values for this
+property, i.e., the length of the list:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>for p in data:
+    values = data[p].values()
+    data[p]['mean'] = sum(values)/len(values)
+</code></pre>
+<!-- end verbatim block -->
+Alternatively, we can write an explicit loop to compute the average:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>for p in data:
+    sum_values = 0
+    for value in data[p]:
+        sum_values += value
+    data[p]['mean'] = sum_values/len(data[p])
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+When we want to look up a measurement no. <code>n</code> of property <code>B</code>, we
+must recall that this particular measurement may be missing so we
+must do a test if <code>n</code> is key in the dictionary <code>data[p]</code>:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>if n in data['B']:
+    value = data['B'][n]
+
+# alternative:
+value = data['B'][n] if n in data['B'] else None
+</code></pre>
+<!-- end verbatim block -->
+
+<h2 id="sec:files:stockprices">Example: Reading and plotting data recorded at specific dates</h2>
+
+<h3 id="___sec17">Problem </h3>
+
+<p>
+We want to compare the evolution of the stock prices
+of some giant companies in the computer industry: Microsoft, Apple,
+and Google. Relevant data files for stock prices can be downloaded from
+<a href="http://finance.yahoo.com" target="_self"><tt>http://finance.yahoo.com</tt></a>.
+Fill in the company's name and click on <em>Search Finance</em>
+in the top bar of this page and choose <em>Historical Prices</em> in the left
+pane.
+On the resulting web page one can specify start and end dates
+for the historical prices of the stock. The default values were
+used in this example. Ticking off <em>Monthly</em> values
+and clicking <em>Get Prices</em> result in a table of stock prices for
+each month since the stock was introduced.
+The table can be downloaded as a spreadsheet file in CSV format,
+typically looking like
+
+<p>
+<!-- begin verbatim block  dsni-->
+<pre><code>Date,Open,High,Low,Close,Volume,Adj Close
+2014-02-03,502.61,551.19,499.30,545.99,12244400,545.99
+2014-01-02,555.68,560.20,493.55,500.60,15698500,497.62
+2013-12-02,558.00,575.14,538.80,561.02,12382100,557.68
+2013-11-01,524.02,558.33,512.38,556.07,9898700,552.76
+2013-10-01,478.45,539.25,478.28,522.70,12598400,516.57
+...
+1984-11-01,25.00,26.50,21.87,24.75,5935500,2.71
+1984-10-01,25.00,27.37,22.50,24.87,5654600,2.73
+1984-09-07,26.50,29.00,24.62,25.12,5328800,2.76
+</code></pre>
+<!-- end verbatim block -->
+The file format is simple: columns are separated by comma, the first
+line contains column headings, and the data lines have the date in the
+first column and various measures of stock prices in the next
+columns. Reading about the meaning of the various data on the Yahoo!
+web pages reveals that our interest concerns the final column (as
+these prices are adjusted for splits and dividends). Three relevant
+data files can be found in the folder <a href="http://tinyurl.com/pwyasaa/files" target="_self"><tt>src/files</tt></a> with the names <code>stockprices_X.csv</code>, where <code>X</code> is
+<code>Microsoft</code>, <code>Apple</code>, or <code>Google</code>.
+
+<p>
+The task is visually illustrate the historical, relative stock market
+value of these companies. For this purpose
+it is natural to scale the prices of a company's stock to start at
+a unit value when the most recent company entered the market.
+Since the date of entry varies, the oldest data point can be skipped
+such that all data points correspond to the first trade day every
+month.
+
+<h3 id="___sec18">Solution </h3>
+
+<p>
+There are two major parts of this problem: reading the file and
+plotting the data. The reading part is quite straightforward, while
+the plotting part needs some special considerations since the
+\( x \) values in the plot are dates and not real numbers.
+In the forthcoming text we solve the individual subproblems one by one,
+showing the relevant Python snippets. The complete program is found in the
+file <a href="http://tinyurl.com/pwyasaa/dictstring/stockprices.py" target="_self"><tt>stockprices.py</tt></a>.
+
+<p>
+We start with the reading part. Since the reading will be repeated for
+several companies, we create a function for extracting the relevant
+data for a specific company. These data cover the dates in column 1
+and the stock prices in the last column. Since we want to plot
+prices versus dates, it will be convenient to turn the dates into
+<code>date</code> objects. In more detail the algorithms has the following
+points:
+
+<ol>
+<li> open the file</li>
+<li> create two empty lists, dates and prices, for collecting the data</li>
+<li> read the first line (of no interest)</li>
+<li> for each line in the rest of the file:
+
+<ol type="a"></li>
+  <li> split the line wrt. comma into words</li>
+  <li> append the first word to the dates list</li>
+  <li> append the last word to the prices list</li>
+</ol>
+
+<li> reverse the lists (oldest date first)</li>
+<li> convert date strings to datetime objects</li>
+<li> convert prices list to float array for computations</li>
+<li> return dates and prices, except for the first (oldest) data point</li>
+</ol>
+
+There are a couple of additional points to consider. First,
+the words on a line are strings, and at least the prices (last word)
+should be converted to a float. Second, the recipe for converting
+dates like '2008-02-04' to <code>date</code> (or <code>datetime</code>) objects goes as
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>from datetime import datetime
+datefmt = '%Y-%m-%d'  # date format YYYY-MM-DD used in datetime
+strdate = '2008-02-04'
+datetime_object = datetime.strptime(strdate, datefmt)
+date_object = datetime_object.date()
+</code></pre>
+<!-- end verbatim block -->
+The nice thing with <code>date</code> and <code>datetime</code> object is that we
+can compute with them and in particular used them in
+plotting with Matplotlib.
+
+<p>
+We can now translate the algorithm to Python code:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>from datetime import datetime
+
+def read_file(filename):
+    infile = open(filename, 'r')
+    infile.readline()  # read column headings
+    dates = [];  prices = []
+    for line in infile:
+        words = line.split(',')
+        dates.append(words[0])
+        prices.append(float(words[-1]))
+    infile.close()
+    dates.reverse()
+    prices.reverse()
+    # Convert dates on the form 'YYYY-MM-DD' to date objects
+    datefmt = '%Y-%m-%d'
+    dates = [datetime.strptime(_date, datefmt).date()
+             for _date in dates]
+    prices = np.array(prices)
+    return dates[1:], prices[1:]
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+Although we work with three companies in this example, it is easy
+and almost always a good idea to generalize the program to an
+arbitrary number of companies. All we assume is that their
+stock prices are in files with names of the form <code>stockprices_X.csv</code>,
+where <code>X</code> is the company name.
+With aid of the function call <code>glob.glob('stockprices_*.csv')</code>
+we get a list of all such files. By looping over this list, extracting
+the company name, and calling <code>read_file</code>, we can store the
+dates and corresponding prices in dictionaries <code>dates</code> and <code>prices</code>,
+indexed by the company name:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>dates = {};  prices = {}
+import glob, numpy as np
+filenames = glob.glob('stockprices_*.csv')
+companies = []
+for filename in filenames:
+    company = filename[12:-4]
+    d, p = read_file(filename)
+    dates[company] = d
+    prices[company] = p
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+The next step is to normalize the prices such that they coincide
+on a certain date. We pick this date as the first month we have
+data for the youngest company. In lists of <code>date</code> or <code>datetime</code>
+objects, we can use Python's <code>max</code> and <code>min</code> functions to extract
+the newest and oldest date.
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>first_months = [dates[company][0] for company in dates]
+normalize_date = max(first_months)
+for company in dates:
+    index = dates[company].index(normalize_date)
+    prices[company] /= prices[company][index]
+
+# Plot log of price versus years
+
+import matplotlib.pyplot as plt
+from matplotlib.dates import YearLocator, MonthLocator, DateFormatter
+
+fig, ax = plt.subplots()
+legends = []
+for company in prices:
+    ax.plot_date(dates[company], np.log(prices[company]),
+                 '-', label=company)
+    legends.append(company)
+ax.legend(legends, loc='upper left')
+ax.set_ylabel('logarithm of normalized value')
+
+# Format the ticks
+years    = YearLocator(5)   # major ticks every 5 years
+months   = MonthLocator(6)  # minor ticks every 6 months
+yearsfmt = DateFormatter('%Y')
+ax.xaxis.set_major_locator(years)
+ax.xaxis.set_major_formatter(yearsfmt)
+ax.xaxis.set_minor_locator(months)
+ax.autoscale_view()
+fig.autofmt_xdate()
+
+plt.savefig('tmp.pdf'); plt.savefig('tmp.png')
+plt.show()
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+The normalized prices vary a lot, so to see the development over 30
+years better, we decide to take the logarithm of the prices. The
+plotting procedure is somewhat involved so the reader should take the
+coming code more as a recipe than as a sequence of statement to really
+understand:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>import matplotlib.pyplot as plt
+from matplotlib.dates import YearLocator, MonthLocator, DateFormatter
+
+fig, ax = plt.subplots()
+legends = []
+for company in prices:
+    ax.plot_date(dates[company], np.log(prices[company]),
+                 '-', label=company)
+    legends.append(company)
+ax.legend(legends, loc='upper left')
+ax.set_ylabel('logarithm of normalized value')
+
+# Format the ticks
+years    = YearLocator(5)   # major ticks every 5 years
+months   = MonthLocator(6)  # minor ticks every 6 months
+yearsfmt = DateFormatter('%Y')
+ax.xaxis.set_major_locator(years)
+ax.xaxis.set_major_formatter(yearsfmt)
+ax.xaxis.set_minor_locator(months)
+ax.autoscale_view()
+fig.autofmt_xdate()
+
+plt.savefig('tmp.pdf'); plt.savefig('tmp.png')
+</code></pre>
+<!-- end verbatim block -->
+Figure <a href="#sec:files:fig:stockprices1">2</a> shows the resulting plot.
+We observe that the normalized prices coincide when Google
+entered the market, here at Sep 1, 2004. Note that there is a log scale
+on the vertical axis. You may want to plot the real normalized prices
+to get a stronger impression of the significant recent rise in value,
+especially for Apple.
+
+<p>
+<center> <!-- figure label: --> <div id="sec:files:fig:stockprices1"></div> <!-- FIGURE -->
+<hr class="figure">
+<center><p class="caption">Figure 2:  The evolution of stock prices for three companies.  <!-- caption label: sec:files:fig:stockprices1 --> </p></center>
+<p><img src="fig-dictstring/stockprices1.png" align="bottom" width=400></p>
+</center>
+
+<p>
+<p>
+<!-- begin bottom navigation -->
+<table style="width: 100%"><tr><td>
+<div style="text-align: left;"><a href="._dictstring-solarized000.html">&laquo; Previous</a></div>
+</td><td>
+<div style="text-align: right;"><a href="._dictstring-solarized002.html">Next &raquo;</a></div>
+</td></tr></table>
+<!-- end bottom navigation -->
+</p>
+
+<!-- ------------------- end of main content --------------- -->
+
+
+</body>
+</html>
+    
+

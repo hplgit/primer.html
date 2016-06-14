@@ -1,0 +1,780 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Dictionaries and strings">
+<meta name="keywords" content="dictionary,keys (dictionaries),immutable objects,mutable objects,summing a list,summing over an iterator,dictionary comprehensions,nested dictionaries,dictionary nested,date conversion,plotting data vs date,string slicing,slicing,substrings,string substrings,string searching,string find,string substitution,substitution (in text),string replace,string splitting,string case change,string testing for number,whitespace,blank lines in files,string stripping leading/trailing blanks,string joining words,dictionary functionality">
+
+<title>Dictionaries and strings</title>
+
+
+<link href="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/css/solarized_light_code.css" rel="stylesheet" type="text/css" title="light"/>
+<script src="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<link href="http://thomasf.github.io/solarized-css/solarized-light.min.css" rel="stylesheet">
+<style type="text/css">
+h1 {color: #b58900;}  /* yellow */
+/* h1 {color: #cb4b16;}  orange */
+/* h1 {color: #d33682;}  magenta, the original choice of thomasf */
+code { padding: 0px; background-color: inherit; }
+pre {
+  border: 0pt solid #93a1a1;
+  box-shadow: none;
+}
+.alert-text-small   { font-size: 80%;  }
+.alert-text-large   { font-size: 130%; }
+.alert-text-normal  { font-size: 90%;  }
+.alert {
+  padding:8px 35px 8px 14px; margin-bottom:18px;
+  text-shadow:0 1px 0 rgba(255,255,255,0.5);
+  border:1px solid #93a1a1;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  color: #555;
+  background-color: #eee8d5;
+  background-position: 10px 5px;
+  background-repeat: no-repeat;
+  background-size: 38px;
+  padding-left: 55px;
+  width: 75%;
+ }
+.alert-block {padding-top:14px; padding-bottom:14px}
+.alert-block > p, .alert-block > ul {margin-bottom:1em}
+.alert li {margin-top: 1em}
+.alert-block p+p {margin-top:5px}
+.alert-notice { background-image: url(https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/small_yellow_notice.png); }
+.alert-summary  { background-image:url(https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/small_yellow_summary.png); }
+.alert-warning { background-image: url(https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/small_yellow_warning.png); }
+.alert-question {background-image:url(https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/small_yellow_question.png); }
+
+div { text-align: justify; text-justify: inter-word; }
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [('Table of contents',
+               1,
+               'table_of_contents',
+               'table_of_contents'),
+              (u'Dictionaries', 1, u'sec:files:dicts', u'sec:files:dicts'),
+              (u'Making dictionaries', 2, None, '___sec1'),
+              (u'Dictionary operations', 2, None, '___sec2'),
+              (u'Remark', 3, None, '___sec3'),
+              (u'Example: Polynomials as dictionaries',
+               2,
+               u'sec:files:poly',
+               u'sec:files:poly'),
+              (u'Dictionaries with default values and ordering',
+               2,
+               u'sec:files:dict:default:order',
+               u'sec:files:dict:default:order'),
+              (u'Dictionaries with default values', 3, None, '___sec6'),
+              (u'Ordered dictionaries', 3, None, '___sec7'),
+              (u'Example: Storing file data in dictionaries',
+               2,
+               u'sec:files:dict:density',
+               u'sec:files:dict:density'),
+              (u'Problem', 3, None, '___sec9'),
+              (u'Solution', 3, None, '___sec10'),
+              (u'Example: Storing file data in nested dictionaries',
+               2,
+               u'sec:files:dictdict',
+               u'sec:files:dictdict'),
+              (u'Problem', 3, None, '___sec12'),
+              (u'Algorithm', 3, None, '___sec13'),
+              (u'Implementation', 3, None, '___sec14'),
+              (u'Dissection', 3, None, '___sec15'),
+              (u'Example: Reading and plotting data recorded at specific dates',
+               2,
+               u'sec:files:stockprices',
+               u'sec:files:stockprices'),
+              (u'Problem', 3, None, '___sec17'),
+              (u'Solution', 3, None, '___sec18'),
+              (u'Strings', 1, u'sec:files:str', u'sec:files:str'),
+              (u'Common operations on strings',
+               2,
+               u'sec:files:stringop',
+               u'sec:files:stringop'),
+              (u'Substring specification', 3, None, '___sec21'),
+              (u'Searching for substrings', 3, None, '___sec22'),
+              (u'Substitution', 3, None, '___sec23'),
+              (u'String splitting', 3, None, '___sec24'),
+              (u'Upper and lower case', 3, None, '___sec25'),
+              (u'Strings are constant', 3, None, '___sec26'),
+              (u'Strings with digits only', 3, None, '___sec27'),
+              (u'Whitespace', 3, None, '___sec28'),
+              (u'Joining strings', 3, None, '___sec29'),
+              (u'Example: Reading pairs of numbers',
+               2,
+               u'sec:files:pairs',
+               u'sec:files:pairs'),
+              (u'Problem', 3, None, '___sec31'),
+              (u'Solution', 3, None, '___sec32'),
+              (u'Example: Reading coordinates', 2, None, '___sec33'),
+              (u'Problem', 3, None, '___sec34'),
+              (u'Solution 1: substring extraction', 3, None, '___sec35'),
+              (u'Solution 2: string search', 3, None, '___sec36'),
+              (u'Solution 3: string split', 3, None, '___sec37'),
+              (u'Reading data from web pages',
+               1,
+               u'sec:files:webtxt',
+               u'sec:files:webtxt'),
+              (u'About web pages',
+               2,
+               u'sec:files:HTMLintro',
+               u'sec:files:HTMLintro'),
+              (u'How to access web pages in programs',
+               2,
+               u'sec:files:urllib',
+               u'sec:files:urllib'),
+              (u'Alternative 1', 3, None, '___sec41'),
+              (u'Alternative 2', 3, None, '___sec42'),
+              (u'Example: Reading pure text files',
+               2,
+               u'sec:files:url:weather',
+               u'sec:files:url:weather'),
+              (u'Example: Extracting data from HTML',
+               2,
+               u'sec:files:url:interpret',
+               u'sec:files:url:interpret'),
+              (u'Handling non-English text',
+               2,
+               u'sec:files:encoding',
+               u'sec:files:encoding'),
+              (u'Reading and writing spreadsheet files',
+               1,
+               u'sec:files:csv',
+               u'sec:files:csv'),
+              (u'CSV files', 2, None, '___sec47'),
+              (u'Reading CSV files', 2, None, '___sec48'),
+              (u'Processing spreadsheet data', 2, None, '___sec49'),
+              (u'Writing CSV files', 2, None, '___sec50'),
+              (u'Remark', 3, None, '___sec51'),
+              (u'Representing number cells with Numerical Python arrays',
+               2,
+               None,
+               '___sec52'),
+              (u'Using more high-level Numerical Python functionality',
+               2,
+               None,
+               '___sec53'),
+              (u'Making code that is compatible with Python 2 and 3',
+               1,
+               u'sec:dictstring:py23',
+               u'sec:dictstring:py23'),
+              (u'Basic differences between Python 2 and 3',
+               2,
+               None,
+               '___sec55'),
+              (u'`xrange` in Python 2 is `range` in Python 3',
+               3,
+               None,
+               '___sec56'),
+              (u'Python 3 often avoids returning lists and dictionaries',
+               3,
+               None,
+               '___sec57'),
+              (u'Library modules have different names', 3, None, '___sec58'),
+              (u'Python 3 has unicode and byte strings', 3, None, '___sec59'),
+              (u'Python 3 has different relative import syntax inside packages',
+               3,
+               None,
+               '___sec60'),
+              (u'Turning Python 2 code into Python 3 code',
+               2,
+               None,
+               '___sec61'),
+              (u'Summary', 1, None, '___sec62'),
+              (u'Chapter topics', 2, None, '___sec63'),
+              (u'Dictionaries', 3, None, '___sec64'),
+              (u'Strings', 3, None, '___sec65'),
+              (u'Downloading Internet files', 3, None, '___sec66'),
+              (u'Terminology', 3, None, '___sec67'),
+              (u'Example: A file database',
+               2,
+               u'sec:files:sumex',
+               u'sec:files:sumex'),
+              (u'Problem', 3, None, '___sec69'),
+              (u'Solution', 3, None, '___sec70'),
+              (u'Exercises',
+               1,
+               u'sec:files:exercises',
+               u'sec:files:exercises'),
+              (u'Exercise 1: Make a dictionary from a table',
+               2,
+               u'sec:files:ex2b:basic',
+               u'sec:files:ex2b:basic'),
+              (u'Exercise 2: Explore syntax differences: lists vs. dicts',
+               2,
+               u'sec:files:ex2',
+               u'sec:files:ex2'),
+              (u'Exercise 3: Use string operations to improve a program',
+               2,
+               u'sec:files:ex17',
+               u'sec:files:ex17'),
+              (u'Exercise 4: Interpret output from a program',
+               2,
+               u'sec:files:ex13',
+               u'sec:files:ex13'),
+              (u'Exercise 5: Make a dictionary',
+               2,
+               u'sec:files:ex2b',
+               u'sec:files:ex2b'),
+              (u'Exercise 6: Make a nested dictionary',
+               2,
+               u'sec:files:ex2c',
+               u'sec:files:ex2c'),
+              (u'Exercise 7: Make a nested dictionary from a file',
+               2,
+               u'sec:files:ex2d:nested',
+               u'sec:files:ex2d:nested'),
+              (u'Exercise 8: Make a nested dictionary from a file',
+               2,
+               u'sec:files:ex2d:nested2',
+               u'sec:files:ex2d:nested2'),
+              (u'Exercise 9: Compute the area of a triangle',
+               2,
+               u'sec:files:ex2d',
+               u'sec:files:ex2d'),
+              (u'Exercise 10: Compare data structures for polynomials',
+               2,
+               u'sec:files:ex16',
+               u'sec:files:ex16'),
+              (u'Exercise 11: Compute the derivative of a polynomial',
+               2,
+               u'sec:files:ex3',
+               u'sec:files:ex3'),
+              (u'Exercise 12: Specify functions on the command line',
+               2,
+               u'sec:basic:ex10',
+               u'sec:basic:ex10'),
+              (u'Exercise 13: Interpret function specifications',
+               2,
+               u'sec:basic:ex10b',
+               u'sec:basic:ex10b'),
+              (u'Exercise 14: Compare average temperatures in cities',
+               2,
+               u'sec:files:ex8',
+               u'sec:files:ex8'),
+              (u'Exercise 15: Generate an HTML report with figures',
+               2,
+               u'sec:files:ex21',
+               u'sec:files:ex21'),
+              (u'References', 1, None, '___sec87')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- newcommands_keep.tex -->
+$$
+\newcommand{\tp}{\thinspace .}
+$$
+
+
+
+
+    
+<a name="part0006"></a>
+<p>
+<!-- begin top navigation -->
+<table style="width: 100%"><tr><td>
+<div style="text-align: left;"><a href="._dictstring-solarized005.html">&laquo; Previous</a></div>
+</td><td>
+<div style="text-align: right;"><a href="._dictstring-solarized007.html">Next &raquo;</a></div>
+</td></tr></table>
+<!-- end top navigation -->
+</p>
+
+<p>
+<!-- !split -->
+<p style="font-size:80%">This chapter is taken from the book <a href="http://www.springer.com/gp/book/9783662498866">A Primer on Scientific Programming with Python</a> by H. P. Langtangen, 5th edition, Springer, 2016.</p>
+
+<h1 id="___sec62">Summary </h1>
+
+<h2 id="___sec63">Chapter topics </h2>
+
+<h3 id="___sec64">Dictionaries </h3>
+
+<p>
+Array or list-like objects with text or other (fixed-valued) Python
+objects as indices are called dictionaries. They are very useful for
+storing general collections of objects in a single data structure.
+The table below displays some of the most important dictionary
+operations.
+
+<p>
+<table border="1">
+<thead>
+<tr><th align="center">                  Construction                 </th> <th align="center">                                 Meaning                                 </th> </tr>
+</thead>
+<tbody>
+<tr><td align="left">   <code>a = {}</code>                                </td> <td align="left">   initialize an empty dictionary                                               </td> </tr>
+<tr><td align="left">   <code>a = {'point': [0,0.1], 'value': 7}</code>    </td> <td align="left">   initialize a dictionary                                                      </td> </tr>
+<tr><td align="left">   <code>a = dict(point=[2,7], value=3)</code>        </td> <td align="left">   initialize a dictionary w/string keys                                        </td> </tr>
+<tr><td align="left">   <code>a.update(b)</code>                           </td> <td align="left">   add/update key-value pairs from <code>b</code> in <code>a</code>             </td> </tr>
+<tr><td align="left">   <code>a.update(key1=value1, key2=value2)</code>    </td> <td align="left">   add/update key-value pairs in <code>a</code>                                 </td> </tr>
+<tr><td align="left">   <code>a['hide'] = True</code>                      </td> <td align="left">   add new key-value pair to <code>a</code>                                     </td> </tr>
+<tr><td align="left">   <code>a['point']</code>                            </td> <td align="left">   get value corresponding to key <code>point</code>                            </td> </tr>
+<tr><td align="left">   <code>for key in a:</code>                         </td> <td align="left">   loop over keys in unknown order                                              </td> </tr>
+<tr><td align="left">   <code>for key in sorted(a):</code>                 </td> <td align="left">   loop over keys in alphabetic order                                           </td> </tr>
+<tr><td align="left">   <code>'value' in a</code>                          </td> <td align="left">   <code>True</code> if string <code>value</code> is a key in <code>a</code>    </td> </tr>
+<tr><td align="left">   <code>del a['point']</code>                        </td> <td align="left">   delete a key-value pair from <code>a</code>                                  </td> </tr>
+<tr><td align="left">   <code>list(a.keys())</code>                        </td> <td align="left">   list of keys                                                                 </td> </tr>
+<tr><td align="left">   <code>list(a.values())</code>                      </td> <td align="left">   list of values                                                               </td> </tr>
+<tr><td align="left">   <code>len(a)</code>                                </td> <td align="left">   number of key-value pairs in <code>a</code>                                  </td> </tr>
+<tr><td align="left">   <code>isinstance(a, dict)</code>                   </td> <td align="left">   is <code>True</code> if <code>a</code> is a dictionary                       </td> </tr>
+</tbody>
+</table>
+
+<h3 id="___sec65">Strings </h3>
+
+<p>
+Some of the most useful functionalities in a string object <code>s</code> are
+listed below.
+
+<p>
+<b>Split</b> the string into substrings separated by <code>delimiter</code>:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>words = s.split(delimiter)
+</code></pre>
+<!-- end verbatim block -->
+<b>Join</b> elements in a list of strings:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>newstring = delimiter.join(words[i:j])
+</code></pre>
+<!-- end verbatim block -->
+Extract a <b>substring</b>:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>substring = s[2:n-4]
+</code></pre>
+<!-- end verbatim block -->
+<b>Replace</b> a substring <code>substr</code> by new a string <code>replacement</code>:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>s_new = s.replace(substr, replacement)
+</code></pre>
+<!-- end verbatim block -->
+Check if a substring <b>is contained</b> within another string:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>if 'some text' in s:
+    ...
+</code></pre>
+<!-- end verbatim block -->
+<b>Find</b> the index where some text starts:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>index = s.find(text)
+if index == -1:
+    print 'Could not find &quot;%s&quot; in &quot;%s&quot; (text, s)
+else:
+    substring = s[index:]  # strip off chars before text
+</code></pre>
+<!-- end verbatim block -->
+<b>Extend</b> a string:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>s += another_string     # append at the end
+s = another_string + s  # append at the beginning
+</code></pre>
+<!-- end verbatim block -->
+Check if a string contains <b>whitespace only</b>:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>if s.isspace():
+   ...
+</code></pre>
+<!-- end verbatim block -->
+Note: you cannot change the characters in a string like you can change
+elements in a list (a string is in this sense like a tuple). You have to
+make a new string:
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; filename = 'myfile1.txt'
+&gt;&gt;&gt; filename[6] = '2'
+Traceback (most recent call last):
+  ...
+TypeError: 'str' object does not support item assignment
+&gt;&gt;&gt; filename.replace('1', '2')
+'myfile2.txt'
+&gt;&gt;&gt; filename[:6] + '2' + filename[7:]   # 'myfile' + '2' + '.txt'
+'myfile2.txt'
+</code></pre>
+<!-- end verbatim block -->
+
+<h3 id="___sec66">Downloading Internet files </h3>
+
+<p>
+Internet files can be downloaded if we know their URL:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>import urllib
+url = 'http://www.some.where.net/path/thing.html'
+urllib.urlretrieve(url, filename='thing.html')
+</code></pre>
+<!-- end verbatim block -->
+The downloaded information is put in the local file <code>thing.html</code>
+in the current working folder.
+Alternatively, we can open the URL as a file object:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>webpage = urllib.urlopen(url)
+</code></pre>
+<!-- end verbatim block -->
+HTML files are often messy to interpret by string operations.
+
+<h3 id="___sec67">Terminology </h3>
+
+<p>
+The important computer science topics in this document are
+
+<ul>
+  <li> dictionaries</li>
+  <li> strings and string operations</li>
+  <li> CSV files</li>
+  <li> HTML files</li>
+</ul>
+
+<h2 id="sec:files:sumex">Example: A file database</h2>
+
+<p>
+<!-- names: www.funnyname.com/anonymous.html -->
+<!-- Ola Nordmann -->
+<!-- Jens Hansen -->
+<!-- Sven Svensson, Svea Svensson -->
+<!-- Aleko Konstantinov -->
+<!-- Chan Siu Ming -->
+<!-- Ivan Horvat -->
+<!-- Ivan Petrov -->
+<!-- Jan Met De Pet -->
+<!-- Fred Nurk -->
+<!-- Joe Bloggs -->
+<!-- I. U. Ajn -->
+<!-- Matti Meikalainen (ala skal ha a med todler) -->
+<!-- Jean Dupont -->
+<!-- Otto Normalverbraucher, Otto Normalzocker, Erika Mustermann -->
+<!-- Hans Meier -->
+<!-- Israel Israeli -->
+<!-- Jona Jonsdottir (med akksent over hver o) -->
+<!-- Si Polan -->
+<!-- Mario Rossi -->
+<!-- Nanashi No Gombe -->
+<!-- Jonas Jonaitis -->
+<!-- Jan Kowalski -->
+<!-- Vasya Pupkin -->
+<!-- Jovan Petrovic -->
+<!-- Juan del Pueblo -->
+<!-- Juan dela Cruz -->
+<!-- Sipho Nkosi -->
+<!-- Nguoi La -->
+<!-- Juan Perez, Pablo Perez -->
+
+<h3 id="___sec69">Problem </h3>
+
+<p>
+We have a file containing information about the courses that students
+have taken.  The file format consists of blocks with student data,
+where each block starts with the student's name (<code>Name:</code>), followed by
+the courses that the student has taken. Each course line starts with
+the name of the course, then comes the semester when the exam was
+taken, then the size of the course in terms of credit points, and
+finally the grade is listed (letters <code>A</code> to <code>F</code>).  Here is an example
+of a file with three student entries:
+
+<p>
+<!-- begin verbatim block  dat-->
+<pre><code>Name: John Doe
+Astronomy                         2003 fall 10 A
+Introductory Physics              2003 fall 10 C
+Calculus I                        2003 fall 10 A
+Calculus II                       2004 spring 10 B
+Linear Algebra                    2004 spring 10 C
+Quantum Mechanics I               2004 fall 10 A
+Quantum Mechanics II              2005 spring 10 A
+Numerical Linear Algebra          2004 fall 5 E
+Numerical Methods                 2004 spring 20 C
+
+Name: Jan Modaal
+Calculus I                        2005 fall 10 A
+Calculus II                       2006 spring 10 A
+Introductory C++ Programming      2005 fall 15 D
+Introductory Python Programming   2006 spring 5 A
+Astronomy                         2005 fall 10 A
+Basic Philosophy                  2005 fall 10 F
+
+Name: Kari Nordmann
+Introductory Python Programming   2006 spring 5 A
+Astronomy                         2005 fall 10 D
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+Our problem consists of reading this file into a dictionary <code>data</code>
+with the student name as key and a list of courses as value.  Each
+element in the list of courses is a dictionary holding the course
+name, the semester, the credit points, and the grade.  A value in the
+<code>data</code> dictionary may look as
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>'Kari Nordmann': [{'credit': 5,
+                   'grade': 'A',
+                   'semester': '2006 spring',
+                   'title': 'Introductory Python Programming'},
+                  {'credit': 10,
+                   'grade': 'D',
+                   'semester': '2005 fall',
+                   'title': 'Astronomy'}],
+</code></pre>
+<!-- end verbatim block -->
+Having the <code>data</code> dictionary, the next task is to print out the
+average grade of each student.
+
+<h3 id="___sec70">Solution </h3>
+
+<p>
+We divide the problem into two major tasks: loading the file data into
+the <code>data</code> dictionary, and computing the average grades.
+These two tasks are naturally placed in two functions.
+
+<p>
+We need to have a strategy for reading the file and interpreting the
+contents. It will be natural to read the file line by line, and for
+each line check if this is a line containing a new student's name, a
+course information line, or a blank line.  In the latter case we jump
+to the next pass in the loop. When a new student name is encountered,
+we initialize a new entry in the <code>data</code> dictionary to an empty
+list. In the case of a line about a course, we must interpret the
+contents on that line, which we postpone a bit.
+
+<p>
+We can now sketch the algorithm described above in terms of some
+unfinished Python code, just to get the overview:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>def load(studentfile):
+    infile = open(studentfile, 'r')
+    data = {}
+    for line in infile:
+        i = line.find('Name:')
+        if i != -1:
+            # line contains 'Name:', extract the name.
+            ...
+        elif line.isspace():     # Blank line?
+            continue             # Yes, go to next loop iteration.
+        else:
+            # This must be a course line, interpret the line.
+            ...
+    infile.close()
+    return data
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+If we find <code>'Name:'</code> as a substring in <code>line</code>, we must extract
+the name. This can be done by the substring
+<code>line[i+5:]</code>. Alternatively, we can split the line with respect to
+colon and strip off the first word:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>words = line.split(':')
+name = ' '.join(words[1:])
+</code></pre>
+<!-- end verbatim block -->
+We have chosen the former strategy of extracting the name as a substring
+in the final program.
+
+<p>
+Each course line is naturally split into words for extracting
+information:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>words = line.split()
+</code></pre>
+<!-- end verbatim block -->
+The name of the course consists of a number of words, but we do not know
+how many.
+Nevertheless, we know that the final words contain the semester, the credit
+points, and the grade. We can hence count from the right and extract
+information, and when we are finished with the semester information,
+the rest of the <code>words</code> list holds the words in the name of the course.
+The code goes as follows:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>grade = words[-1]
+credit = int(words[-2])
+semester = ' '.join(words[-4:-2])
+course_name = ' '.join(words[:-4])
+data[name].append({'title':    course_name,
+                   'semester': semester,
+                   'credit':   credit,
+                   'grade':    grade})
+</code></pre>
+<!-- end verbatim block -->
+This code is a good example of the usefulness of split and join
+operations when extracting information from a text.
+
+<p>
+Now to the second task of computing the average grade. Since the grades
+are letters we cannot compute with them. A natural way to proceed is to
+convert the letters to numbers, compute the average number, and then
+convert that number back to a letter.
+Conversion between letters and numbers is easily represented by a dictionary:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>grade2number = {'A': 5, 'B': 4, 'C': 3, 'D': 2, 'E': 1, 'F': 0}
+</code></pre>
+<!-- end verbatim block -->
+To convert from numbers to grades, we construct the inverse dictionary:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>number2grade = {}
+for grade in grade2number:
+    number2grade[grade2number[grade]] = grade
+</code></pre>
+<!-- end verbatim block -->
+In the computation of the average grade we should use a weighted
+sum such that larger courses count more than smaller courses.
+The weighted mean value of a set of numbers \( r_i \) with weights \( w_i \),
+\( i=0,\ldots,n-1 \), is given by
+
+$$
+\begin{equation*} {\sum_{i=0}^{n-1} w_ir_i\over\sum_{i=0}^{n-1} w_i}\tp\end{equation*}
+$$
+
+This weighted mean value must then be rounded to the nearest integer,
+which can be used as key in <code>number2grade</code> to find the corresponding
+grade expressed as a letter.
+The weight \( w_i \) is naturally taken as the number of credit points
+in the course with grade \( r_i \).
+The whole process is performed by the following function:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>def average_grade(data, name):
+    sum = 0; weights = 0
+    for course in data[name]:
+        weight = course['credit']
+        grade  = course['grade']
+        sum += grade2number[grade]*weight
+        weights += weight
+    avg = sum/float(weights)
+    return number2grade[round(avg)]
+</code></pre>
+<!-- end verbatim block -->
+The complete code is found in the file
+<a href="http://tinyurl.com/pwyasaa/dictstring/student.py" target="_self"><tt>students.py</tt></a>.
+Running this program gives the following output of the average grades:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>John Doe: B
+Kari Nordmann: C
+Jan Modaal: C
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+One feature of the <code>students.py</code> code is that the output of the names
+are sorted after the last name. How can we accomplish that?
+A straight <code>for name in data</code> loop will visit the keys in an unknown
+(random) order. To visit the keys in alphabetic order, we must
+use
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>for name in sorted(data):
+</code></pre>
+<!-- end verbatim block -->
+This default sort will sort with respect to the first character in
+the <code>name</code> strings. We want a sort according to the last part of
+the name. A tailored sort function can then be
+written.
+In this function we
+extract the last word in the names and compare them:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>def sort_names(name1, name2):
+    last_name1 = name1.split()[-1]
+    last_name2 = name2.split()[-1]
+    if last_name1 &lt; last_name2:
+        return -1
+    elif last_name1 &gt; last_name2:
+        return 1
+    else:
+        return 0
+</code></pre>
+<!-- end verbatim block -->
+We can now pass on <code>sort_names</code> to the <code>sorted</code> function to
+get a sequence that is sorted with respect to the last word in the students'
+names:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>for name in sorted(data, sort_names):
+    print '%s: %s' % (name, average_grade(data, name))
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+<p>
+<!-- begin bottom navigation -->
+<table style="width: 100%"><tr><td>
+<div style="text-align: left;"><a href="._dictstring-solarized005.html">&laquo; Previous</a></div>
+</td><td>
+<div style="text-align: right;"><a href="._dictstring-solarized007.html">Next &raquo;</a></div>
+</td></tr></table>
+<!-- end bottom navigation -->
+</p>
+
+<!-- ------------------- end of main content --------------- -->
+
+
+</body>
+</html>
+    
+

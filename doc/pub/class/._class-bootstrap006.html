@@ -7,13 +7,13 @@ Automatically generated HTML file from DocOnce source
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
 <meta name="description" content="Introduction to classes in Python">
-<meta name="keywords" content="constructor (class),UML class diagram,instance (class),user-defined datatype (class),method class),attribute (class),namespace,test function,nose tests,pytest tests,special methods (class),callable objects,test function,closure,Newton's method,wrapper code,integration numerical,symbolic computing,integration symbolic,mutable objects,immutable objects,protected attributes (class),test function,information hiding,private attributes (class),API,application programming interface,protected attributes (class),check an object's type,static typing,weak typing,strong typing,dynamic typing,duck typing,static class attributes,static class variables,static class methods,interval arithmetic">
+<meta name="keywords" content="constructor (class),UML class diagram,instance (class),user-defined datatype (class),method class),attribute (class),new-style classes,namespace,closures,test function,nose tests,pytest tests,special methods (class),callable objects,test function,closure,Newton's method,SymPy differentiation,closure,wrapper code,integration numerical,symbolic computing,integration symbolic,SymPy integration,mutable objects,immutable objects,protected attributes (class),test function,information hiding,private attributes (class),API,application programming interface,protected attributes (class),check an object's type,static typing,weak typing,strong typing,dynamic typing,duck typing,static class attributes,static class variables,static class methods,interval arithmetic">
 
 <title>Introduction to classes in Python</title>
 
-<!-- Bootstrap style: bootstrap_bluegray -->
+<!-- Bootstrap style: bootstrap_simula -->
 <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
-<link href="https://raw.github.com/hplgit/doconce/master/bundled/html_styles/style_bootstrap/css/bootstrap_bluegray.css" rel="stylesheet">
+<link href="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_styles/style_bootstrap/css/bootstrap_simula.css" rel="stylesheet">
 <!-- not necessary
 <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 -->
@@ -21,6 +21,24 @@ Automatically generated HTML file from DocOnce source
 <style type="text/css">
 /* Let inline verbatim have the same color as the surroundings */
 code { color: inherit; background-color: transparent; }
+
+/* Add scrollbar to dropdown menus in bootstrap navigation bar */
+.dropdown-menu {
+   height: auto;
+   max-height: 400px;
+   overflow-x: hidden;
+}
+
+/* Adds an invisible element before each target to offset for the navigation
+   bar */
+.anchor::before {
+  content:"";
+  display:block;
+  height:50px; /* fixed header height*/
+  margin:-50px 0 0; /* negative fixed header height */
+}
+
+body { font-size:20px;line-height:1.5; }
 </style>
 
 
@@ -28,298 +46,304 @@ code { color: inherit; background-color: transparent; }
 
 <!-- tocinfo
 {'highest level': 1,
- 'sections': [(' Simple function classes ',
+ 'sections': [('Table of contents',
+               1,
+               'table_of_contents',
+               'table_of_contents'),
+              ('Simple function classes',
                1,
                'sec:class:functors',
                'sec:class:functors'),
-              (' Challenge: functions with parameters ',
+              ('Challenge: functions with parameters',
                2,
                'sec:class:func1',
                'sec:class:func1'),
-              (' Problem ', 3, None, '___sec2'),
-              (' A bad solution: global variables ', 3, None, '___sec3'),
-              (' Representing a function as a class ',
+              ('Problem', 3, None, '___sec2'),
+              ('A bad solution: global variables', 3, None, '___sec3'),
+              ('Representing a function as a class',
                2,
                'sec:class:func2',
                'sec:class:func2'),
-              (' Implementation ', 3, None, '___sec5'),
-              (' Usage and dissection ', 3, None, '___sec6'),
-              (' The self  variable ', 3, None, '___sec7'),
-              (' Extension of the class ', 3, None, '___sec8'),
-              (' Remark ', 3, None, '___sec9'),
-              (' Using methods as ordinary functions ', 3, None, '___sec10'),
-              (' Doc strings ', 3, None, '___sec11'),
-              (' Another function class example ',
+              ('Implementation', 3, None, '___sec5'),
+              ('Usage and dissection', 3, None, '___sec6'),
+              ('Extension of the class', 3, None, '___sec7'),
+              ('Using methods as ordinary functions', 3, None, '___sec8'),
+              ('New-style classes versus classic classes',
+               3,
+               None,
+               '___sec9'),
+              ('Doc strings', 3, None, '___sec10'),
+              ('The self variable', 2, None, '___sec11'),
+              ('Another function class example',
                2,
                'sec:class:func3',
                'sec:class:func3'),
-              (' Remark ', 3, None, '___sec13'),
-              (' Alternative function class implementations ',
+              ('Remark', 3, None, '___sec13'),
+              ('Alternative function class implementations',
                2,
                'sec:class:func2b',
                'sec:class:func2b'),
-              (' Making classes without the class construct ',
+              ('Making classes without the class construct',
                2,
                'sec:class:whatis',
                'sec:class:whatis'),
-              (' First remark ', 3, None, '___sec16'),
-              (' Second remark ', 3, None, '___sec17'),
-              (' More examples on classes ',
+              ('First remark', 3, None, '___sec16'),
+              ('Second remark', 3, None, '___sec17'),
+              ('Closures', 2, 'sec:class:closure', 'sec:class:closure'),
+              ('More examples on classes',
                1,
                'sec:class:addex',
                'sec:class:addex'),
-              (' Bank accounts ',
-               2,
-               'sec:class:account',
-               'sec:class:account'),
-              (' Phone book ',
-               2,
-               'sec:class:phonebook',
-               'sec:class:phonebook'),
-              (' A circle ', 2, 'sec:class:circle', 'sec:class:circle'),
-              (' Verification ', 3, None, '___sec22'),
-              (' Remark ', 3, None, '___sec23'),
-              (' Special methods ',
+              ('Bank accounts', 2, 'sec:class:account', 'sec:class:account'),
+              ('Phone book', 2, 'sec:class:phonebook', 'sec:class:phonebook'),
+              ('A circle', 2, 'sec:class:circle', 'sec:class:circle'),
+              ('Verification', 3, None, '___sec23'),
+              ('Remark', 3, None, '___sec24'),
+              ('Special methods',
                1,
                'sec:class:specialmethods',
                'sec:class:specialmethods'),
-              (' The call special method ',
+              ('The call special method',
                2,
                'sec:class:call',
                'sec:class:call'),
-              (' Example: Automagic differentiation ',
+              ('Example: Automagic differentiation',
                2,
                'sec:class:autodF',
                'sec:class:autodF'),
-              (' Problem ', 3, None, '___sec27'),
-              (' Solution ', 3, None, '___sec28'),
-              (' Verification ', 3, None, '___sec29'),
-              (" Application: Newton's method ", 3, None, '___sec30'),
-              (' Example: Automagic integration ',
+              ('Problem', 3, None, '___sec28'),
+              ('Solution', 3, None, '___sec29'),
+              ('Verification', 3, None, '___sec30'),
+              ("Application: Newton's method", 3, None, '___sec31'),
+              ('Solution utilizing SymPy', 3, None, '___sec32'),
+              ('Example: Automagic integration',
                2,
                'sec:class:autoint',
                'sec:class:autoint'),
-              (' A simple implementation ', 3, None, '___sec32'),
-              (' Verification via symbolic computing ', 3, None, '___sec33'),
-              (' Remark ', 3, None, '___sec34'),
-              (' Turning an instance into a string ',
+              ('A simple implementation', 3, None, '___sec34'),
+              ('Verification via symbolic computing', 3, None, '___sec35'),
+              ('Remark', 3, None, '___sec36'),
+              ('Turning an instance into a string',
                2,
                'sec:class:str',
                'sec:class:str'),
-              (' Example: Phone book with special methods ',
+              ('Example: Phone book with special methods',
                2,
                'sec:class:phonebook2',
                'sec:class:phonebook2'),
-              (' Remark ', 3, None, '___sec37'),
-              (' Adding objects ', 2, 'sec:class:add', 'sec:class:add'),
-              (' Example: Class for polynomials ',
+              ('Remark', 3, None, '___sec39'),
+              ('Adding objects', 2, 'sec:class:add', 'sec:class:add'),
+              ('Example: Class for polynomials',
                2,
                'sec:class:Polynomial',
                'sec:class:Polynomial'),
-              (' Implementation ', 3, None, '___sec40'),
-              (' Usage ', 3, None, '___sec41'),
-              (' Pretty print of polynomials ', 3, None, '___sec42'),
-              (' Verifying the implementation ', 3, None, '___sec43'),
-              (' Arithmetic operations and other special methods ',
+              ('Implementation', 3, None, '___sec42'),
+              ('Usage', 3, None, '___sec43'),
+              ('Pretty print of polynomials', 3, None, '___sec44'),
+              ('Verifying the implementation', 3, None, '___sec45'),
+              ('Arithmetic operations and other special methods',
                2,
                'sec:class:arithmetics',
                'sec:class:arithmetics'),
-              (' Special methods for string conversion ',
+              ('Special methods for string conversion',
                2,
                'sec:class:repr',
                'sec:class:repr'),
-              (' Recreating objects from strings ', 3, None, '___sec46'),
-              (' Example: Class for vectors in the plane ',
+              ('Recreating objects from strings', 3, None, '___sec48'),
+              ('Example: Class for vectors in the plane',
                1,
                'sec:class:Vec2D',
                'sec:class:Vec2D'),
-              (' Some mathematical operations on vectors ',
+              ('Some mathematical operations on vectors',
                2,
                None,
-               '___sec48'),
-              (' Implementation ', 2, None, '___sec49'),
-              (' Usage ', 2, None, '___sec50'),
-              (' Comment ', 3, None, '___sec51'),
-              (' Example: Class for complex numbers ', 1, None, '___sec52'),
-              (' Implementation ',
-               2,
-               'sec:class:Complex',
-               'sec:class:Complex'),
-              (' Illegal operations ',
+               '___sec50'),
+              ('Implementation', 2, None, '___sec51'),
+              ('Usage', 2, None, '___sec52'),
+              ('Comment', 3, None, '___sec53'),
+              ('Example: Class for complex numbers', 1, None, '___sec54'),
+              ('Implementation', 2, 'sec:class:Complex', 'sec:class:Complex'),
+              ('Illegal operations',
                2,
                'sec:class:illegalop',
                'sec:class:illegalop'),
-              (' Mixing complex and real numbers ',
+              ('Mixing complex and real numbers',
                2,
                'sec:class:complex:mixed',
                'sec:class:complex:mixed'),
-              (' Dynamic, static, strong, weak, and duck typing ',
+              ('Dynamic, static, strong, weak, and duck typing',
                2,
                None,
-               '___sec56'),
-              (" Special methods for ``right'' operands ",
+               '___sec58'),
+              ("Special methods for ``right'' operands",
                2,
                'sec:class:complex:rightop',
                'sec:class:complex:rightop'),
-              (' Remark ', 3, None, '___sec58'),
-              (' Inspecting instances ',
+              ('Remark', 3, None, '___sec60'),
+              ('Inspecting instances',
                2,
                'sec:class:inspect',
                'sec:class:inspect'),
-              (' Static methods and attributes ',
+              ('Static methods and attributes',
                1,
                'sec:class:static',
                'sec:class:static'),
-              (' Summary ', 1, None, '___sec61'),
-              (' Chapter topics ',
+              ('Summary', 1, None, '___sec63'),
+              ('Chapter topics', 2, 'sec:class:summary', 'sec:class:summary'),
+              ('Classes', 3, None, '___sec65'),
+              ('Special methods', 3, None, '___sec66'),
+              ('Terminology', 3, None, '___sec67'),
+              ('Example: interval arithmetic',
                2,
-               'sec:class:summary',
-               'sec:class:summary'),
-              (' Classes ', 3, None, '___sec63'),
-              (' Special methods ', 3, None, '___sec64'),
-              (' Terminology ', 3, None, '___sec65'),
-              (' Example: interval arithmetic ', 2, None, '___sec66'),
-              (' Problem ', 3, None, '___sec67'),
-              (' Solution ', 3, None, '___sec68'),
-              (' Exercises ', 1, None, '___sec69'),
-              (' Exercise 1: Make a function class ',
+               'sec:class:interval:arithmetic',
+               'sec:class:interval:arithmetic'),
+              ('Problem', 3, None, '___sec69'),
+              ('Solution', 3, None, '___sec70'),
+              ('Exercises', 1, None, '___sec71'),
+              ('Exercise 1: Make a function class',
                2,
                'sec:class:ex2',
                'sec:class:ex2'),
-              (' Exercise 2: Add an attribute to a class ',
+              ('Exercise 2: Add a data attribute to a class',
                2,
                'sec:class:ex25q',
                'sec:class:ex25q'),
-              (' Exercise 3: Add functionality to a class ',
+              ('Exercise 3: Add functionality to a class',
                2,
                'sec:class:ex25q2',
                'sec:class:ex25q2'),
-              (' Exercise 4: Make classes for a rectangle and a triangle ',
+              ('Remarks', 3, None, '___sec75'),
+              ('Exercise 4: Make classes for a rectangle and a triangle',
                2,
                'sec:class:ex23',
                'sec:class:ex23'),
-              (' Exercise 5: Make a class for quadratic functions ',
+              ('Exercise 5: Make a class for quadratic functions',
                2,
                'sec:class:ex11',
                'sec:class:ex11'),
-              (' Exercise 6: Make a class for straight lines ',
+              ('Exercise 6: Make a class for straight lines',
                2,
                'sec:class:ex25',
                'sec:class:ex25'),
-              (' Exercise 7: Flexible handling of function arguments ',
+              ('Exercise 7: Flexible handling of function arguments',
                2,
                'sec:class:ex25b',
                'sec:class:ex25b'),
-              (' Exercise 8: Wrap functions in a class ',
+              ('Exercise 8: Wrap functions in a class',
                2,
                'sec:class:ex27d',
                'sec:class:ex27d'),
-              (' Exercise 9: Flexible handling of function arguments ',
+              ('Exercise 9: Flexible handling of function arguments',
                2,
                'sec:class:ex27e',
                'sec:class:ex27e'),
-              (' Exercise 10: Deduce a class implementation ',
+              ('Exercise 10: Deduce a class implementation',
                2,
                'sec:class:ex1',
                'sec:class:ex1'),
-              (' Exercise 11: Implement special methods in a class ',
+              ('Exercise 11: Implement special methods in a class',
                2,
                'sec:class:ex2b2',
                'sec:class:ex2b2'),
-              (' Exercise 12: Make a class for summation of series ',
+              ('Exercise 12: Make a class for summation of series',
                2,
                'sec:class:ex2b',
                'sec:class:ex2b'),
-              (' Exercise 13: Apply a numerical differentiation class ',
+              ('Exercise 13: Apply a numerical differentiation class',
                2,
                'sec:class:ex10',
                'sec:class:ex10'),
-              (' Exercise 14: Apply symbolic differentiation ',
+              ('Exercise 14: Implement an addition operator',
                2,
-               'sec:class:exer:sympy:diff',
-               'sec:class:exer:sympy:diff'),
-              (' Exercise 15: Implement in-place `+=` and `-=` operators ',
+               'sec:class:ex:tribesman',
+               'sec:class:ex:tribesman'),
+              ('Exercise 15: Implement in-place `+=` and `-=` operators',
                2,
                'sec:class:ex25qb',
                'sec:class:ex25qb'),
-              (' Exercise 16: Implement a class for numerical differentiation ',
+              ('Exercise 16: Implement a class for numerical differentiation',
                2,
                'sec:class:ex21',
                'sec:class:ex21'),
-              (' Exercise 17: Examine a program ',
+              ('Exercise 17: Examine a program',
                2,
                'sec:class:ex21b',
                'sec:class:ex21b'),
-              (' Exercise 18: Modify a class for numerical differentiation ',
+              ('Exercise 18: Modify a class for numerical differentiation',
                2,
                'sec:class:ex23s',
                'sec:class:ex23s'),
-              (' Exercise 19: Make a class for the Heaviside function ',
+              ('Exercise 19: Make a class for the Heaviside function',
                2,
                'sec:basic:exHclass',
                'sec:basic:exHclass'),
-              (' Exercise 20: Make a class for the indicator function ',
+              ('Exercise 20: Make a class for the indicator function',
                2,
                'sec:basic:exIndclass',
                'sec:basic:exIndclass'),
-              (' Exercise 21: Make a class for piecewise constant functions ',
+              ('Exercise 21: Make a class for piecewise constant functions',
                2,
                'sec:basic:ex:piecewisefunc',
                'sec:basic:ex:piecewisefunc'),
-              (' Exercise 22: Speed up repeated integral calculations ',
+              ('Exercise 22: Speed up repeated integral calculations',
                2,
                'sec:class:ex13c',
                'sec:class:ex13c'),
-              (' Exercise 23: Apply a class for polynomials ',
+              ('Exercise 23: Apply a class for polynomials',
                2,
                'sec:class:ex5',
                'sec:class:ex5'),
-              (' Exercise 24: Find a bug in a class for polynomials ',
+              ('Exercise 24: Find a bug in a class for polynomials',
                2,
                'sec:class:ex4',
                'sec:class:ex4'),
-              (' Exercise 25: Implement subtraction of polynomials ',
+              ('Exercise 25: Implement subtraction of polynomials',
                2,
                'sec:class:ex6a',
                'sec:class:ex6a'),
-              (' Exercise 26: Test the functionality of pretty print of polynomials ',
+              ('Exercise 26: Test the functionality of pretty print of polynomials',
                2,
                'sec:class:exer:str',
                'sec:class:exer:str'),
-              (' Exercise 27: Vectorize a class for polynomials ',
+              ('Exercise 27: Vectorize a class for polynomials',
                2,
                'sec:class:ex7v',
                'sec:class:ex7v'),
-              (' Remarks ', 3, None, '___sec97'),
-              (' Exercise 28: Use a dict to hold polynomial coefficients ',
+              ('Remarks', 3, None, '___sec100'),
+              ('Exercise 28: Use a dict to hold polynomial coefficients',
                2,
                'sec:class:ex8',
                'sec:class:ex8'),
-              (' Exercise 29: Extend class Vec2D to work with lists/tuples ',
+              ('Exercise 29: Extend class Vec2D to work with lists/tuples',
                2,
                'sec:class:ex16',
                'sec:class:ex16'),
-              (' Exercise 30: Extend class Vec2D to 3D vectors ',
+              ('Exercise 30: Extend class Vec2D to 3D vectors',
                2,
                'sec:class:ex17b',
                'sec:class:ex17b'),
-              (' Exercise 31: Use NumPy arrays in class Vec2D ',
+              ('Exercise 31: Use NumPy arrays in class Vec2D',
                2,
                'sec:class:ex17',
                'sec:class:ex17'),
-              (' Exercise 32: Make classes for students and courses ',
+              ('Exercise 32: Impreciseness of interval arithmetics',
+               2,
+               None,
+               '___sec105'),
+              ('Remarks', 3, None, '___sec106'),
+              ('Exercise 33: Make classes for students and courses',
                2,
                'sec:class:ex15',
                'sec:class:ex15'),
-              (' Exercise 33: Find local and global extrema of a function ',
+              ('Exercise 34: Find local and global extrema of a function',
                2,
                'sec:plot:ex28',
                'sec:plot:ex28'),
-              (' Exercise 34: Find the optimal production for a company ',
+              ('Exercise 35: Find the optimal production for a company',
                2,
                'sec:class:ex18a',
                'sec:class:ex18a'),
-              (' References ', 1, None, '___sec105')]}
+              ('References', 1, None, '___sec110')]}
 end of tocinfo -->
 
 <body>
@@ -357,20 +381,124 @@ $$
     </button>
     <a class="navbar-brand" href="class-bootstrap.html">Introduction to classes in Python</a>
   </div>
+
   <div class="navbar-collapse collapse navbar-responsive-collapse">
     <ul class="nav navbar-nav navbar-right">
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
         <ul class="dropdown-menu">
-     <!-- navigation toc: --> <li><a href="._class-bootstrap001.html#sec:class:functors" style="font-size: 80%;">Simple function classes</a></li>
-     <!-- navigation toc: --> <li><a href="._class-bootstrap002.html#sec:class:addex" style="font-size: 80%;">More examples on classes</a></li>
-     <!-- navigation toc: --> <li><a href="._class-bootstrap003.html#sec:class:specialmethods" style="font-size: 80%;">Special methods</a></li>
-     <!-- navigation toc: --> <li><a href="._class-bootstrap004.html#sec:class:Vec2D" style="font-size: 80%;">Example: Class for vectors in the plane</a></li>
-     <!-- navigation toc: --> <li><a href="._class-bootstrap005.html#___sec52" style="font-size: 80%;">Example: Class for complex numbers</a></li>
-     <!-- navigation toc: --> <li><a href="#sec:class:static" style="font-size: 80%;">Static methods and attributes</a></li>
-     <!-- navigation toc: --> <li><a href="._class-bootstrap007.html#___sec61" style="font-size: 80%;">Summary</a></li>
-     <!-- navigation toc: --> <li><a href="._class-bootstrap008.html#___sec69" style="font-size: 80%;">Exercises</a></li>
-     <!-- navigation toc: --> <li><a href="._class-bootstrap008.html#___sec105" style="font-size: 80%;">References</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap000.html#table_of_contents" style="font-size: 80%;"><b>Table of contents</b></a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap001.html#sec:class:functors" style="font-size: 80%;"><b>Simple function classes</b></a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap001.html#sec:class:func1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Challenge: functions with parameters</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap001.html#___sec2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap001.html#___sec3" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A bad solution: global variables</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap001.html#sec:class:func2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Representing a function as a class</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap001.html#___sec5" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Implementation</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap001.html#___sec6" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Usage and dissection</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap001.html#___sec7" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Extension of the class</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap001.html#___sec8" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Using methods as ordinary functions</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap001.html#___sec9" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New-style classes versus classic classes</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap001.html#___sec10" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Doc strings</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap001.html#___sec11" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The self variable</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap001.html#sec:class:func3" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Another function class example</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap001.html#___sec13" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remark</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap001.html#sec:class:func2b" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Alternative function class implementations</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap001.html#sec:class:whatis" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Making classes without the class construct</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap001.html#___sec16" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;First remark</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap001.html#___sec17" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Second remark</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap001.html#sec:class:closure" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Closures</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap002.html#sec:class:addex" style="font-size: 80%;"><b>More examples on classes</b></a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap002.html#sec:class:account" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Bank accounts</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap002.html#sec:class:phonebook" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Phone book</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap002.html#sec:class:circle" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;A circle</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap002.html#___sec23" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Verification</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap002.html#___sec24" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remark</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap003.html#sec:class:specialmethods" style="font-size: 80%;"><b>Special methods</b></a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap003.html#sec:class:call" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The call special method</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap003.html#sec:class:autodF" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Automagic differentiation</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap003.html#___sec28" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap003.html#___sec29" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Solution</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap003.html#___sec30" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Verification</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap003.html#___sec31" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Application: Newton's method</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap003.html#___sec32" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Solution utilizing SymPy</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap003.html#sec:class:autoint" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Automagic integration</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap003.html#___sec34" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A simple implementation</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap003.html#___sec35" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Verification via symbolic computing</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap003.html#___sec36" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remark</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap003.html#sec:class:str" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Turning an instance into a string</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap003.html#sec:class:phonebook2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Phone book with special methods</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap003.html#___sec39" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remark</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap003.html#sec:class:add" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Adding objects</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap003.html#sec:class:Polynomial" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Class for polynomials</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap003.html#___sec42" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Implementation</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap003.html#___sec43" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Usage</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap003.html#___sec44" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pretty print of polynomials</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap003.html#___sec45" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Verifying the implementation</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap003.html#sec:class:arithmetics" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Arithmetic operations and other special methods</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap003.html#sec:class:repr" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Special methods for string conversion</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap003.html#___sec48" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Recreating objects from strings</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap004.html#sec:class:Vec2D" style="font-size: 80%;"><b>Example: Class for vectors in the plane</b></a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap004.html#___sec50" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Some mathematical operations on vectors</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap004.html#___sec51" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Implementation</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap004.html#___sec52" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Usage</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap004.html#___sec53" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Comment</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap005.html#___sec54" style="font-size: 80%;"><b>Example: Class for complex numbers</b></a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap005.html#sec:class:Complex" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Implementation</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap005.html#sec:class:illegalop" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Illegal operations</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap005.html#sec:class:complex:mixed" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Mixing complex and real numbers</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap005.html#___sec58" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Dynamic, static, strong, weak, and duck typing</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap005.html#sec:class:complex:rightop" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Special methods for ``right'' operands</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap005.html#___sec60" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remark</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap005.html#sec:class:inspect" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Inspecting instances</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:class:static" style="font-size: 80%;"><b>Static methods and attributes</b></a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap007.html#___sec63" style="font-size: 80%;"><b>Summary</b></a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap007.html#sec:class:summary" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Chapter topics</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap007.html#___sec65" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Classes</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap007.html#___sec66" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Special methods</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap007.html#___sec67" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Terminology</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap007.html#sec:class:interval:arithmetic" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: interval arithmetic</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap007.html#___sec69" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap007.html#___sec70" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Solution</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap008.html#___sec71" style="font-size: 80%;"><b>Exercises</b></a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap008.html#sec:class:ex2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 1: Make a function class</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap008.html#sec:class:ex25q" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 2: Add a data attribute to a class</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap008.html#sec:class:ex25q2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 3: Add functionality to a class</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap008.html#___sec75" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remarks</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap008.html#sec:class:ex23" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 4: Make classes for a rectangle and a triangle</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap008.html#sec:class:ex11" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 5: Make a class for quadratic functions</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap008.html#sec:class:ex25" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 6: Make a class for straight lines</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap008.html#sec:class:ex25b" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 7: Flexible handling of function arguments</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap008.html#sec:class:ex27d" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 8: Wrap functions in a class</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap008.html#sec:class:ex27e" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 9: Flexible handling of function arguments</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap008.html#sec:class:ex1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 10: Deduce a class implementation</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap008.html#sec:class:ex2b2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 11: Implement special methods in a class</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap008.html#sec:class:ex2b" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 12: Make a class for summation of series</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap008.html#sec:class:ex10" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 13: Apply a numerical differentiation class</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap008.html#sec:class:ex:tribesman" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 14: Implement an addition operator</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap008.html#sec:class:ex25qb" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 15: Implement in-place <code>+=</code> and <code>-=</code> operators</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap008.html#sec:class:ex21" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 16: Implement a class for numerical differentiation</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap008.html#sec:class:ex21b" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 17: Examine a program</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap008.html#sec:class:ex23s" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 18: Modify a class for numerical differentiation</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap008.html#sec:basic:exHclass" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 19: Make a class for the Heaviside function</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap008.html#sec:basic:exIndclass" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 20: Make a class for the indicator function</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap008.html#sec:basic:ex:piecewisefunc" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 21: Make a class for piecewise constant functions</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap008.html#sec:class:ex13c" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 22: Speed up repeated integral calculations</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap008.html#sec:class:ex5" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 23: Apply a class for polynomials</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap008.html#sec:class:ex4" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 24: Find a bug in a class for polynomials</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap008.html#sec:class:ex6a" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 25: Implement subtraction of polynomials</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap008.html#sec:class:exer:str" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 26: Test the functionality of pretty print of polynomials</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap008.html#sec:class:ex7v" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 27: Vectorize a class for polynomials</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap008.html#___sec100" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remarks</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap008.html#sec:class:ex8" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 28: Use a dict to hold polynomial coefficients</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap008.html#sec:class:ex16" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 29: Extend class Vec2D to work with lists/tuples</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap008.html#sec:class:ex17b" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 30: Extend class Vec2D to 3D vectors</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap008.html#sec:class:ex17" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 31: Use NumPy arrays in class Vec2D</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap008.html#___sec105" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 32: Impreciseness of interval arithmetics</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap008.html#___sec106" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remarks</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap008.html#sec:class:ex15" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 33: Make classes for students and courses</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap008.html#sec:plot:ex28" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 34: Find local and global extrema of a function</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap008.html#sec:class:ex18a" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 35: Find the optimal production for a company</a></li>
+     <!-- navigation toc: --> <li><a href="._class-bootstrap008.html#___sec110" style="font-size: 80%;"><b>References</b></a></li>
 
         </ul>
       </li>
@@ -385,13 +513,14 @@ $$
 
 <a name="part0006"></a>
 <!-- !split -->
+<p style="font-size:80%">This chapter is taken from the book <a href="http://www.springer.com/gp/book/9783662498866">A Primer on Scientific Programming with Python</a> by H. P. Langtangen, 5th edition, Springer, 2016.</p>
 
-<h1 id="sec:class:static">Static methods and attributes<a name="sec:class:static"></a></h1>
+<h1 id="sec:class:static" class="anchor">Static methods and attributes</h1>
 
 <p>
-Up to now, each instance has its own copy of attributes.
+Up to now, each instance has its own copy of data attributes.
 Sometimes it can be natural
-to have attributes that are shared among all instances.
+to have data attributes that are shared among all instances.
 For example, we may have an attribute that counts how many
 instances that have been made so far. We can exemplify how to
 do this in a little class for points \( (x,y,z) \) in space:
@@ -399,14 +528,14 @@ do this in a little class for points \( (x,y,z) \) in space:
 <p>
 
 <!-- code=python (!bc pyshell) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">SpacePoint</span>:
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">SpacePoint</span>(<span style="color: #008000">object</span>):
 <span style="color: #666666">...</span>     counter <span style="color: #666666">=</span> <span style="color: #666666">0</span>
 <span style="color: #666666">...</span>     <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__init__</span>(<span style="color: #008000">self</span>, x, y, z):
 <span style="color: #666666">...</span>         <span style="color: #008000">self</span><span style="color: #666666">.</span>p <span style="color: #666666">=</span> (x, y, z)
 <span style="color: #666666">...</span>         SpacePoint<span style="color: #666666">.</span>counter <span style="color: #666666">+=</span> <span style="color: #666666">1</span>
 </pre></div>
 <p>
-The <code>counter</code> attribute is initialized at the same indentation level
+The <code>counter</code> data attribute is initialized at the same indentation level
 as the methods in the class, and the attribute is not prefixed
 by <code>self</code>. Such attributes declared outside methods are shared among
 all instances and called <em>static attributes</em>.
@@ -420,7 +549,7 @@ of how many objects we have created so far:
 <p>
 
 <!-- code=python (!bc pyshell) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> p1 <span style="color: #666666">=</span> SpacePoint(<span style="color: #666666">0</span>,<span style="color: #666666">0</span>,<span style="color: #666666">0</span>)
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> p1 <span style="color: #666666">=</span> SpacePoint(<span style="color: #666666">0</span>,<span style="color: #666666">0</span>,<span style="color: #666666">0</span>)
 <span style="color: #666666">&gt;&gt;&gt;</span> SpacePoint<span style="color: #666666">.</span>counter
 <span style="color: #666666">1</span>
 <span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">400</span>):
@@ -442,7 +571,7 @@ class with just one static method <code>write</code>:
 <p>
 
 <!-- code=python (!bc pyshell) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">A</span>:
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">A</span>(<span style="color: #008000">object</span>):
 <span style="color: #666666">...</span>     <span style="color: #AA22FF">@staticmethod</span>
 <span style="color: #666666">...</span>     <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">write</span>(message):
 <span style="color: #666666">...</span>         <span style="color: #008000; font-weight: bold">print</span> message
@@ -466,7 +595,7 @@ that instance too:
 <p>
 
 <!-- code=python (!bc pyshell) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> a <span style="color: #666666">=</span> A()
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> a <span style="color: #666666">=</span> A()
 <span style="color: #666666">&gt;&gt;&gt;</span> a<span style="color: #666666">.</span>write(<span style="color: #BA2121">&#39;Hello again&#39;</span>)
 Hello again
 </pre></div>

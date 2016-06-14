@@ -1,0 +1,476 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Dictionaries and strings">
+<meta name="keywords" content="dictionary,keys (dictionaries),immutable objects,mutable objects,summing a list,summing over an iterator,dictionary comprehensions,nested dictionaries,dictionary nested,date conversion,plotting data vs date,string slicing,slicing,substrings,string substrings,string searching,string find,string substitution,substitution (in text),string replace,string splitting,string case change,string testing for number,whitespace,blank lines in files,string stripping leading/trailing blanks,string joining words,dictionary functionality">
+
+<title>Dictionaries and strings</title>
+
+
+<link href="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/css/solarized_light_code.css" rel="stylesheet" type="text/css" title="light"/>
+<script src="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<link href="http://thomasf.github.io/solarized-css/solarized-light.min.css" rel="stylesheet">
+<style type="text/css">
+h1 {color: #b58900;}  /* yellow */
+/* h1 {color: #cb4b16;}  orange */
+/* h1 {color: #d33682;}  magenta, the original choice of thomasf */
+code { padding: 0px; background-color: inherit; }
+pre {
+  border: 0pt solid #93a1a1;
+  box-shadow: none;
+}
+.alert-text-small   { font-size: 80%;  }
+.alert-text-large   { font-size: 130%; }
+.alert-text-normal  { font-size: 90%;  }
+.alert {
+  padding:8px 35px 8px 14px; margin-bottom:18px;
+  text-shadow:0 1px 0 rgba(255,255,255,0.5);
+  border:1px solid #93a1a1;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  color: #555;
+  background-color: #eee8d5;
+  background-position: 10px 5px;
+  background-repeat: no-repeat;
+  background-size: 38px;
+  padding-left: 55px;
+  width: 75%;
+ }
+.alert-block {padding-top:14px; padding-bottom:14px}
+.alert-block > p, .alert-block > ul {margin-bottom:1em}
+.alert li {margin-top: 1em}
+.alert-block p+p {margin-top:5px}
+.alert-notice { background-image: url(https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/small_yellow_notice.png); }
+.alert-summary  { background-image:url(https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/small_yellow_summary.png); }
+.alert-warning { background-image: url(https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/small_yellow_warning.png); }
+.alert-question {background-image:url(https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/small_yellow_question.png); }
+
+div { text-align: justify; text-justify: inter-word; }
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [('Table of contents',
+               1,
+               'table_of_contents',
+               'table_of_contents'),
+              (u'Dictionaries', 1, u'sec:files:dicts', u'sec:files:dicts'),
+              (u'Making dictionaries', 2, None, '___sec1'),
+              (u'Dictionary operations', 2, None, '___sec2'),
+              (u'Remark', 3, None, '___sec3'),
+              (u'Example: Polynomials as dictionaries',
+               2,
+               u'sec:files:poly',
+               u'sec:files:poly'),
+              (u'Dictionaries with default values and ordering',
+               2,
+               u'sec:files:dict:default:order',
+               u'sec:files:dict:default:order'),
+              (u'Dictionaries with default values', 3, None, '___sec6'),
+              (u'Ordered dictionaries', 3, None, '___sec7'),
+              (u'Example: Storing file data in dictionaries',
+               2,
+               u'sec:files:dict:density',
+               u'sec:files:dict:density'),
+              (u'Problem', 3, None, '___sec9'),
+              (u'Solution', 3, None, '___sec10'),
+              (u'Example: Storing file data in nested dictionaries',
+               2,
+               u'sec:files:dictdict',
+               u'sec:files:dictdict'),
+              (u'Problem', 3, None, '___sec12'),
+              (u'Algorithm', 3, None, '___sec13'),
+              (u'Implementation', 3, None, '___sec14'),
+              (u'Dissection', 3, None, '___sec15'),
+              (u'Example: Reading and plotting data recorded at specific dates',
+               2,
+               u'sec:files:stockprices',
+               u'sec:files:stockprices'),
+              (u'Problem', 3, None, '___sec17'),
+              (u'Solution', 3, None, '___sec18'),
+              (u'Strings', 1, u'sec:files:str', u'sec:files:str'),
+              (u'Common operations on strings',
+               2,
+               u'sec:files:stringop',
+               u'sec:files:stringop'),
+              (u'Substring specification', 3, None, '___sec21'),
+              (u'Searching for substrings', 3, None, '___sec22'),
+              (u'Substitution', 3, None, '___sec23'),
+              (u'String splitting', 3, None, '___sec24'),
+              (u'Upper and lower case', 3, None, '___sec25'),
+              (u'Strings are constant', 3, None, '___sec26'),
+              (u'Strings with digits only', 3, None, '___sec27'),
+              (u'Whitespace', 3, None, '___sec28'),
+              (u'Joining strings', 3, None, '___sec29'),
+              (u'Example: Reading pairs of numbers',
+               2,
+               u'sec:files:pairs',
+               u'sec:files:pairs'),
+              (u'Problem', 3, None, '___sec31'),
+              (u'Solution', 3, None, '___sec32'),
+              (u'Example: Reading coordinates', 2, None, '___sec33'),
+              (u'Problem', 3, None, '___sec34'),
+              (u'Solution 1: substring extraction', 3, None, '___sec35'),
+              (u'Solution 2: string search', 3, None, '___sec36'),
+              (u'Solution 3: string split', 3, None, '___sec37'),
+              (u'Reading data from web pages',
+               1,
+               u'sec:files:webtxt',
+               u'sec:files:webtxt'),
+              (u'About web pages',
+               2,
+               u'sec:files:HTMLintro',
+               u'sec:files:HTMLintro'),
+              (u'How to access web pages in programs',
+               2,
+               u'sec:files:urllib',
+               u'sec:files:urllib'),
+              (u'Alternative 1', 3, None, '___sec41'),
+              (u'Alternative 2', 3, None, '___sec42'),
+              (u'Example: Reading pure text files',
+               2,
+               u'sec:files:url:weather',
+               u'sec:files:url:weather'),
+              (u'Example: Extracting data from HTML',
+               2,
+               u'sec:files:url:interpret',
+               u'sec:files:url:interpret'),
+              (u'Handling non-English text',
+               2,
+               u'sec:files:encoding',
+               u'sec:files:encoding'),
+              (u'Reading and writing spreadsheet files',
+               1,
+               u'sec:files:csv',
+               u'sec:files:csv'),
+              (u'CSV files', 2, None, '___sec47'),
+              (u'Reading CSV files', 2, None, '___sec48'),
+              (u'Processing spreadsheet data', 2, None, '___sec49'),
+              (u'Writing CSV files', 2, None, '___sec50'),
+              (u'Remark', 3, None, '___sec51'),
+              (u'Representing number cells with Numerical Python arrays',
+               2,
+               None,
+               '___sec52'),
+              (u'Using more high-level Numerical Python functionality',
+               2,
+               None,
+               '___sec53'),
+              (u'Making code that is compatible with Python 2 and 3',
+               1,
+               u'sec:dictstring:py23',
+               u'sec:dictstring:py23'),
+              (u'Basic differences between Python 2 and 3',
+               2,
+               None,
+               '___sec55'),
+              (u'`xrange` in Python 2 is `range` in Python 3',
+               3,
+               None,
+               '___sec56'),
+              (u'Python 3 often avoids returning lists and dictionaries',
+               3,
+               None,
+               '___sec57'),
+              (u'Library modules have different names', 3, None, '___sec58'),
+              (u'Python 3 has unicode and byte strings', 3, None, '___sec59'),
+              (u'Python 3 has different relative import syntax inside packages',
+               3,
+               None,
+               '___sec60'),
+              (u'Turning Python 2 code into Python 3 code',
+               2,
+               None,
+               '___sec61'),
+              (u'Summary', 1, None, '___sec62'),
+              (u'Chapter topics', 2, None, '___sec63'),
+              (u'Dictionaries', 3, None, '___sec64'),
+              (u'Strings', 3, None, '___sec65'),
+              (u'Downloading Internet files', 3, None, '___sec66'),
+              (u'Terminology', 3, None, '___sec67'),
+              (u'Example: A file database',
+               2,
+               u'sec:files:sumex',
+               u'sec:files:sumex'),
+              (u'Problem', 3, None, '___sec69'),
+              (u'Solution', 3, None, '___sec70'),
+              (u'Exercises',
+               1,
+               u'sec:files:exercises',
+               u'sec:files:exercises'),
+              (u'Exercise 1: Make a dictionary from a table',
+               2,
+               u'sec:files:ex2b:basic',
+               u'sec:files:ex2b:basic'),
+              (u'Exercise 2: Explore syntax differences: lists vs. dicts',
+               2,
+               u'sec:files:ex2',
+               u'sec:files:ex2'),
+              (u'Exercise 3: Use string operations to improve a program',
+               2,
+               u'sec:files:ex17',
+               u'sec:files:ex17'),
+              (u'Exercise 4: Interpret output from a program',
+               2,
+               u'sec:files:ex13',
+               u'sec:files:ex13'),
+              (u'Exercise 5: Make a dictionary',
+               2,
+               u'sec:files:ex2b',
+               u'sec:files:ex2b'),
+              (u'Exercise 6: Make a nested dictionary',
+               2,
+               u'sec:files:ex2c',
+               u'sec:files:ex2c'),
+              (u'Exercise 7: Make a nested dictionary from a file',
+               2,
+               u'sec:files:ex2d:nested',
+               u'sec:files:ex2d:nested'),
+              (u'Exercise 8: Make a nested dictionary from a file',
+               2,
+               u'sec:files:ex2d:nested2',
+               u'sec:files:ex2d:nested2'),
+              (u'Exercise 9: Compute the area of a triangle',
+               2,
+               u'sec:files:ex2d',
+               u'sec:files:ex2d'),
+              (u'Exercise 10: Compare data structures for polynomials',
+               2,
+               u'sec:files:ex16',
+               u'sec:files:ex16'),
+              (u'Exercise 11: Compute the derivative of a polynomial',
+               2,
+               u'sec:files:ex3',
+               u'sec:files:ex3'),
+              (u'Exercise 12: Specify functions on the command line',
+               2,
+               u'sec:basic:ex10',
+               u'sec:basic:ex10'),
+              (u'Exercise 13: Interpret function specifications',
+               2,
+               u'sec:basic:ex10b',
+               u'sec:basic:ex10b'),
+              (u'Exercise 14: Compare average temperatures in cities',
+               2,
+               u'sec:files:ex8',
+               u'sec:files:ex8'),
+              (u'Exercise 15: Generate an HTML report with figures',
+               2,
+               u'sec:files:ex21',
+               u'sec:files:ex21'),
+              (u'References', 1, None, '___sec87')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- newcommands_keep.tex -->
+$$
+\newcommand{\tp}{\thinspace .}
+$$
+
+
+
+
+    
+<a name="part0005"></a>
+<p>
+<!-- begin top navigation -->
+<table style="width: 100%"><tr><td>
+<div style="text-align: left;"><a href="._dictstring-solarized004.html">&laquo; Previous</a></div>
+</td><td>
+<div style="text-align: right;"><a href="._dictstring-solarized006.html">Next &raquo;</a></div>
+</td></tr></table>
+<!-- end top navigation -->
+</p>
+
+<p>
+<!-- !split -->
+<p style="font-size:80%">This chapter is taken from the book <a href="http://www.springer.com/gp/book/9783662498866">A Primer on Scientific Programming with Python</a> by H. P. Langtangen, 5th edition, Springer, 2016.</p>
+
+<h1 id="sec:dictstring:py23">Making code that is compatible with Python 2 and 3</h1>
+
+<p>
+Python 2 and 3 are very similar, but there are some basic differences
+that make a program written in one version incompatible with the
+other version. The most important differences are that <code>1/10</code>
+is interpreted as float division (equal <code>0.1</code>) in Python 3, while
+Python 2 interprets the expression as integer division (which equals <code>0</code>).
+The <code>raw_input</code> function in Python 2 is named <code>input</code> in Python 3, while
+the <code>input</code> function in Python 2 (meaning <code>eval</code> applied to <code>raw_input</code>)
+does not exist in Python 3. The major difference, though, is the
+print statement in Python 2, which must be a call to the
+<code>print</code> function in Python 3. Some more differences related to
+constructions in this document appear below.
+
+<h2 id="___sec55">Basic differences between Python 2 and 3 </h2>
+
+<h3 id="___sec56"><code>xrange</code> in Python 2 is <code>range</code> in Python 3 </h3>
+
+<p>
+The <code>range</code> function in Python 2 generates a list of integers, and for
+very long loops this list may consume significant computer memory.
+The <code>xrange</code> function in Python was therefore made to just generate
+a series of integers without storing them. In Python 3, <code>range</code> is
+the <code>xrange</code> function from Python 2. If one wants a list of
+integers in Python 3, one has to do <code>list(range(5))</code> to store the
+output from <code>range</code> in a list.
+
+<h3 id="___sec57">Python 3 often avoids returning lists and dictionaries </h3>
+
+<p>
+The Python 3 idea of letting <code>range</code> just generate one object at a time
+instead of storing all of them applies to many other constructions too.
+Let <code>d</code> be a dictionary. In Python 2, <code>d.keys()</code> returns a list of
+the keys in the dictionary, while in Python 3, <code>d.keys()</code> just enables
+iteration over the keys in a for loop.
+Similarly, <code>d.values()</code> and <code>d.items()</code> returns lists of values or
+key-value pairs in Python 2, while in Python 3 we can only iterate over
+the values in a for loop. A simple loop like
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>for key in d.keys():
+    ...
+</code></pre>
+<!-- end verbatim block -->
+works well for both Python versions, but
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>keys = d.keys()
+</code></pre>
+<!-- end verbatim block -->
+in Python 2, where we want the keys as a list, needs a modification
+in Python 3:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>keys = list(d.keys())
+</code></pre>
+<!-- end verbatim block -->
+We should add that <code>for key in d.keys()</code> is not the preferred syntax anyway - use <code>for key in d</code>. Also, if we just want a for loop over all key-value pairs,
+we can use <code>d.iteritems()</code> which does not return any list, neither in Python 2
+nor in Python 3.
+
+<h3 id="___sec58">Library modules have different names </h3>
+
+<p>
+We have used the <code>urllib</code> module in
+the sections <a href="._dictstring-solarized003.html#sec:files:urllib">How to access web pages in programs</a> and <a href="._dictstring-solarized003.html#sec:files:url:weather">Example: Reading pure text files</a>.
+Python 3 has some different names for this module:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code># Python 2
+import urllib
+with urllib.urlopen('http://google.com') as webfile:
+    text = webfile.read()
+urllib.urlretrieve('http://google.com', filename='tmp.html')
+
+# Python 3
+import urllib.request as urllibr
+with urllibr.urlopen('http://google.com') as webfile:
+    text = webfile.read()
+urllibr.urlretrieve('http://google.com', filename='tmp.html')
+</code></pre>
+<!-- end verbatim block -->
+A lot of other modules have also changed names, but the <code>futurize</code>
+program (see below) help you to find the right new names.
+
+<h3 id="___sec59">Python 3 has unicode and byte strings </h3>
+
+<p>
+A standard Python 2 string, <code>s = 'abc'</code>, is a sequence of bytes, called
+byte string in Python 3, declared as <code>s = b'abc'</code> in Python 3. The assignment
+<code>s = 'abc'</code> in Python 3 leads to a unicode string and is equivalent to
+<code>s = u'abc'</code> in Python 2. To convert a byte string in Python 3 to
+an ordinary (unicode) string, do <code>s.decode('utf-8')</code>.
+String handling is often the most tricky task when converting Python 2
+code to Python 3.
+
+<h3 id="___sec60">Python 3 has different relative import syntax inside packages </h3>
+
+<p>
+If you work with <a href="https://docs.python.org/3/tutorial/modules.html#packages" target="_self">Python packages</a>, relative imports <em>inside</em> a package has slightly different
+syntax in Python 2 and 3.
+Say you want to import <code>somefunc</code> from a module <code>somemod</code> in some
+other module at the same level (same subfolder) in the package.
+Python 2 syntax would be <code>from somemod import somefunc</code>, while Python 3
+demands <code>from .somemod import somefunc</code>. The leading dot in the
+module name indicates that
+<code>somemod</code> is a module located in the same subfolder as the file containing
+this import statement. The alternative import, <code>import somemod</code>,
+in Python 2 must read <code>from . import somemod</code> in Python 3.
+
+<h2 id="___sec61">Turning Python 2 code into Python 3 code </h2>
+
+<p>
+One
+can use the <code>futurize</code> program to turn a Python 2 program into a version that
+works with both Python 2 and 3. The recommended command for turning a
+program or module <code>prog.py</code> of arbitrary complexity common Python 2/3
+version is
+
+<p>
+<!-- begin verbatim block  sys-->
+<pre><code>Terminal&gt; futurize --all-imports -w -n -o py23 prog.py
+</code></pre>
+<!-- end verbatim block -->
+The file <code>py23/prog.py</code> will usually run under Python 2 and 3, but sometimes
+manual adjustments are needed.
+
+<p>
+By frequently running just <code>futurize prog.py</code> to see what needs to be
+changed, you can learn a lot of the differences between Python 2 and 3
+and also change your programming style in Python 2 so that it comes
+even closer to Python 3. The <code>python-future</code> documentation has
+a very useful <a href="http://python-future.org/compatible_idioms.html" target="_self">list of difference between Python 2 and 3</a> and recipes on
+how to make common code for both versions.
+
+<p>
+Porting of larger programs from Python 2 to 3 is recommended to use
+<code>futurize</code> in a <a href="http://python-future.org/futurize.html#forwards-conversion-stage1" target="_self">two-stage fashion</a>.
+
+<p>
+<p>
+<!-- begin bottom navigation -->
+<table style="width: 100%"><tr><td>
+<div style="text-align: left;"><a href="._dictstring-solarized004.html">&laquo; Previous</a></div>
+</td><td>
+<div style="text-align: right;"><a href="._dictstring-solarized006.html">Next &raquo;</a></div>
+</td></tr></table>
+<!-- end bottom navigation -->
+</p>
+
+<!-- ------------------- end of main content --------------- -->
+
+
+</body>
+</html>
+    
+

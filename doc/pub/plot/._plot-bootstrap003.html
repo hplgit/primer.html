@@ -7,13 +7,13 @@ Automatically generated HTML file from DocOnce source
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
 <meta name="description" content="Array computing and curve plotting">
-<meta name="keywords" content="vectors,vector computing,scalar (math quantity),heterogeneous lists,Numerical Python,NumPy,array (datatype),array computing,vectorization,array slicing,subarrays,allocate,vectorization,scalar code,curve plotting,plotting,making graphs,backend (Easyviz),backend (Easyviz),remove files (in Python),delete files (in Python),boolean indexing,boolean indexing,in-place array arithmetics,check an object's type,shape (of an array),array shape,matrix,shape (of an array),array shape,least squares approximation,Trapezoidal rule for integration,Lagrange's interpolation formula,interpolation,Midpoint rule for integration,Trapezoidal rule for integration">
+<meta name="keywords" content="vectors,vector computing,scalar (math quantity),heterogeneous lists,Numerical Python,NumPy,array (datatype),array computing,vectorization,array slicing,subarrays,allocate,vectorization,scalar code,curve plotting,plotting,making graphs,backend (Easyviz),backend (Easyviz),remove files (in Python),delete files (in Python),boolean indexing,boolean indexing,in-place array arithmetics,check an object's type,shape (of an array),array shape,matrix,shape (of an array),array shape,eigenvalues,eigenvectors,inverse,determinant,rank of a matrix,least squares approximation,Trapezoidal rule for integration,Lagrange's interpolation formula,interpolation,Midpoint rule for integration,Trapezoidal rule for integration">
 
 <title>Array computing and curve plotting</title>
 
-<!-- Bootstrap style: bootstrap_bluegray -->
+<!-- Bootstrap style: bootstrap_simula -->
 <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
-<link href="https://raw.github.com/hplgit/doconce/master/bundled/html_styles/style_bootstrap/css/bootstrap_bluegray.css" rel="stylesheet">
+<link href="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_styles/style_bootstrap/css/bootstrap_simula.css" rel="stylesheet">
 <!-- not necessary
 <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 -->
@@ -21,6 +21,24 @@ Automatically generated HTML file from DocOnce source
 <style type="text/css">
 /* Let inline verbatim have the same color as the surroundings */
 code { color: inherit; background-color: transparent; }
+
+/* Add scrollbar to dropdown menus in bootstrap navigation bar */
+.dropdown-menu {
+   height: auto;
+   max-height: 400px;
+   overflow-x: hidden;
+}
+
+/* Adds an invisible element before each target to offset for the navigation
+   bar */
+.anchor::before {
+  content:"";
+  display:block;
+  height:50px; /* fixed header height*/
+  margin:-50px 0 0; /* negative fixed header height */
+}
+
+body { font-size:20px;line-height:1.5; }
 </style>
 
 
@@ -28,342 +46,470 @@ code { color: inherit; background-color: transparent; }
 
 <!-- tocinfo
 {'highest level': 1,
- 'sections': [(' Vectors ', 1, None, '___sec0'),
-              (' The vector concept ', 2, None, '___sec1'),
-              (' Mathematical operations on vectors ',
+ 'sections': [('Table of contents',
+               1,
+               'table_of_contents',
+               'table_of_contents'),
+              ('Vectors', 1, None, '___sec0'),
+              ('The vector concept', 2, None, '___sec1'),
+              ('Mathematical operations on vectors',
                2,
                'sec:plot:vectors',
                'sec:plot:vectors'),
-              (' Vector arithmetics and vector functions ',
+              ('Vector arithmetics and vector functions',
                2,
                'sec:plot:arraycomp',
                'sec:plot:arraycomp'),
-              (' Arrays in Python programs ', 1, None, '___sec4'),
-              (' Using lists for collecting function data ',
+              ('Arrays in Python programs', 1, None, '___sec4'),
+              ('Using lists for collecting function data',
                2,
                'sec:plot:listdata',
                'sec:plot:listdata'),
-              (' Basics of numerical Python arrays ',
+              ('Basics of numerical Python arrays',
                2,
                'sec:plot:array:basics',
                'sec:plot:array:basics'),
-              (' Computing coordinates and function values ',
+              ('Computing coordinates and function values',
                2,
                None,
                '___sec7'),
-              (' Vectorization ',
+              ('Vectorization',
                2,
                'sec:plot:vectorization',
                'sec:plot:vectorization'),
-              (' Curve plotting ',
+              ('Curve plotting',
                1,
                'sec:plot:curveplots',
                'sec:plot:curveplots'),
-              (' Matplotlib; pylab ', 2, 'sec:plot:pylab', 'sec:plot:pylab'),
-              (' A basic plot ', 3, None, '___sec11'),
-              (' Decorating the plot ', 3, None, '___sec12'),
-              (' Plotting multiple curves ', 3, None, '___sec13'),
-              (' Placing several plots in one figure ', 3, None, '___sec14'),
-              (' Matplotlib; pyplot ',
+              ('MATLAB-style plotting with Matplotlib',
+               2,
+               'sec:plot:pylab',
+               'sec:plot:pylab'),
+              ('A basic plot', 3, None, '___sec11'),
+              ('Decorating the plot', 3, None, '___sec12'),
+              ('Plotting multiple curves', 3, None, '___sec13'),
+              ('Placing several plots in one figure', 3, None, '___sec14'),
+              ('Matplotlib; pyplot prefix',
                2,
                'sec:plot:pyplot',
                'sec:plot:pyplot'),
-              (' SciTools and Easyviz ',
+              ('SciTools and Easyviz',
                2,
                'sec:plot:SciTools',
                'sec:plot:SciTools'),
-              (' Importing SciTools and Easyviz ', 3, None, '___sec17'),
-              (' A basic plot ', 3, None, '___sec18'),
-              (' Decorating the plot ', 3, None, '___sec19'),
-              (' Plotting multiple curves ', 3, None, '___sec20'),
-              (' Changing backend ', 3, None, '___sec21'),
-              (' Placing several plots in one figure ', 3, None, '___sec22'),
-              (' Making animations ', 2, 'easyviz:movie', 'easyviz:movie'),
-              (' Example ', 3, None, '___sec24'),
-              (' Animation in Easyviz ', 3, None, '___sec25'),
-              (' Basic animation in Matplotlib ', 3, None, '___sec26'),
-              (' Using FuncAnimation in Matplotlib ', 3, None, '___sec27'),
-              (' Making videos ', 2, 'sec:plot:video', 'sec:plot:video'),
-              (' Animated GIF file ', 3, None, '___sec29'),
-              (' MP4, Ogg, WebM, and Flash videos ', 3, None, '___sec30'),
-              (' Curve plots in pure text ', 2, None, '___sec31'),
-              (' Plotting difficulties ',
+              ('Importing SciTools and Easyviz', 3, None, '___sec17'),
+              ('A basic plot', 3, None, '___sec18'),
+              ('Decorating the plot', 3, None, '___sec19'),
+              ('Plotting multiple curves', 3, None, '___sec20'),
+              ('Changing backend', 3, None, '___sec21'),
+              ('Placing several plots in one figure', 3, None, '___sec22'),
+              ('Other plotting alternatives', 3, None, '___sec23'),
+              ('Making animations', 2, 'easyviz:movie', 'easyviz:movie'),
+              ('Example', 3, None, '___sec25'),
+              ('Animation in Easyviz', 3, None, '___sec26'),
+              ('Basic animation in Matplotlib', 3, None, '___sec27'),
+              ('Using FuncAnimation in Matplotlib', 3, None, '___sec28'),
+              ('Making videos', 2, 'sec:plot:video', 'sec:plot:video'),
+              ('Animated GIF file', 3, None, '___sec30'),
+              ('MP4, Ogg, WebM, and Flash videos', 3, None, '___sec31'),
+              ('Curve plots in pure text', 2, None, '___sec32'),
+              ('Plotting difficulties',
                1,
                'sec:plot:difficulties',
                'sec:plot:difficulties'),
-              (' Piecewisely defined functions ',
+              ('Piecewisely defined functions',
                2,
                'sec:plot:pwisefunc',
                'sec:plot:pwisefunc'),
-              (' Example: The Heaviside function ', 3, None, '___sec34'),
-              (' Example: A hat function ', 3, None, '___sec35'),
-              (' Rapidly varying functions ',
+              ('Example: The Heaviside function', 3, None, '___sec35'),
+              ('Example: A hat function', 3, None, '___sec36'),
+              ('Rapidly varying functions',
                2,
                'sec:plot:sin1x',
                'sec:plot:sin1x'),
-              (' More advanced vectorization of functions ',
+              ('More advanced vectorization of functions',
                1,
                'sec:plot:if:vectorize',
                'sec:plot:if:vectorize'),
-              (' Vectorization of StringFunction objects ',
+              ('Vectorization of StringFunction objects',
                2,
                'sec:plot:StringFunction:vectorize',
                'sec:plot:StringFunction:vectorize'),
-              (' Vectorization of the Heaviside function ',
+              ('Vectorization of the Heaviside function',
                2,
                'sec:vec:Heaviside',
                'sec:vec:Heaviside'),
-              (' Loop ', 3, None, '___sec40'),
-              (' Automatic vectorization ', 3, None, '___sec41'),
-              (' Mixing boolean and floating-point calculations ',
+              ('Loop', 3, None, '___sec41'),
+              ('Automatic vectorization', 3, None, '___sec42'),
+              ('Mixing boolean and floating-point calculations',
                3,
                None,
-               '___sec42'),
-              (' Manual vectorization ', 3, None, '___sec43'),
-              (' Vectorization of a hat function ',
+               '___sec43'),
+              ('Manual vectorization', 3, None, '___sec44'),
+              ('Vectorization of a hat function',
                2,
                'sec:vec:hatfunc',
                'sec:vec:hatfunc'),
-              (' More on numerical Python arrays ',
+              ('More on numerical Python arrays',
                1,
                'sec:plot:numpy:more',
                'sec:plot:numpy:more'),
-              (' Copying arrays ', 2, None, '___sec46'),
-              (' In-place arithmetics ', 2, None, '___sec47'),
-              (' Allocating arrays ', 2, None, '___sec48'),
-              (' Generalized indexing ',
+              ('Copying arrays', 2, None, '___sec47'),
+              ('In-place arithmetics',
+               2,
+               'sec:plot:numpy:inplace',
+               'sec:plot:numpy:inplace'),
+              ('Allocating arrays', 2, None, '___sec49'),
+              ('Generalized indexing',
                2,
                'sec:plot:generalized:index',
                'sec:plot:generalized:index'),
-              (' Testing for the array type ', 2, None, '___sec50'),
-              (' Example: Vectorizing a constant function ',
+              ('Testing for the array type', 2, None, '___sec51'),
+              ('Example: Vectorizing a constant function',
                3,
                None,
-               '___sec51'),
-              (' Compact syntax for array generation ', 2, None, '___sec52'),
-              (' Shape manipulation ', 2, None, '___sec53'),
-              (' Higher-dimensional arrays ',
+               '___sec52'),
+              ('Compact syntax for array generation', 2, None, '___sec53'),
+              ('Shape manipulation', 2, None, '___sec54'),
+              ('High-performance computing with arrays',
+               1,
+               'sec:hpc',
+               'sec:hpc'),
+              ('Example: `axpy`', 3, None, '___sec56'),
+              ('Scalar implementation',
+               2,
+               'sec:hpc:scalar',
+               'sec:hpc:scalar'),
+              ('Vectorized implementation', 2, 'sec:hpc:vec', 'sec:hpc:vec'),
+              ('Memory-saving implementation',
+               2,
+               'sec:hpc:vec:inplace',
+               'sec:hpc:vec:inplace'),
+              ('Analysis of memory usage',
+               2,
+               'sec:hpc:vec:memory_profiler',
+               'sec:hpc:vec:memory_profiler'),
+              ('Analysis of the CPU time',
+               2,
+               'sec:hpc:vec:line_profiler',
+               'sec:hpc:vec:line_profiler'),
+              ('Higher-dimensional arrays',
                1,
                'sec:plot:2Darrays',
                'sec:plot:2Darrays'),
-              (' Matrices and arrays ', 2, None, '___sec55'),
-              (' Two-dimensional numerical Python arrays ',
+              ('Matrices and arrays', 2, None, '___sec63'),
+              ('Two-dimensional numerical Python arrays',
                2,
                'sec:plot:2D:arrays',
                'sec:plot:2D:arrays'),
-              (' Array computing ',
+              ('Array computing',
                2,
                'sec:plot:array2comp',
                'sec:plot:array2comp'),
-              (' Remark ', 3, None, '___sec58'),
-              (' Two-dimensional arrays and functions of two variables ',
-               2,
-               None,
-               '___sec59'),
-              (' Matrix objects ',
+              ('Remark', 3, None, '___sec66'),
+              ('Matrix objects',
                2,
                'sec:plot:numpy:matrix',
                'sec:plot:numpy:matrix'),
-              (' Summary ', 1, None, '___sec61'),
-              (' Chapter topics ', 2, None, '___sec62'),
-              (' Array computing ', 3, None, '___sec63'),
-              (' Plotting curves ', 3, None, '___sec64'),
-              (' Making movies ', 3, None, '___sec65'),
-              (' Terminology ', 3, None, '___sec66'),
-              (' Example: Animating a function ',
+              ('Some common linear algebra operations', 1, None, '___sec68'),
+              ('Inverse, determinant, and eigenvalues', 2, None, '___sec69'),
+              ('Products', 2, None, '___sec70'),
+              ('Norms', 2, None, '___sec71'),
+              ('Sum and extreme values', 2, None, '___sec72'),
+              ('Indexing', 2, None, '___sec73'),
+              ('Transpose and upper/lower triangular parts',
+               2,
+               None,
+               '___sec74'),
+              ('Solving linear systems', 2, None, '___sec75'),
+              ('Matrix row and column operations', 2, None, '___sec76'),
+              ('Computing the rank of a matrix', 2, None, '___sec77'),
+              ('Symbolic linear algebra', 2, None, '___sec78'),
+              ('Plotting of scalar and vector fields',
+               1,
+               'plot:surf',
+               'plot:surf'),
+              ('Installation', 2, 'plot:surf:install', 'plot:surf:install'),
+              ('Surface plots',
+               2,
+               'plot:surf:mesh_surf',
+               'plot:surf:mesh_surf'),
+              ('Grid for 2D scalar fields', 3, None, '___sec82'),
+              ('Parameterized curve',
+               2,
+               'plot:surf:3Dcurve',
+               'plot:surf:3Dcurve'),
+              ('Contour lines',
+               2,
+               'plot:surf:contours',
+               'plot:surf:contours'),
+              ('The gradient vector field',
+               2,
+               'plot:surf:gradient',
+               'plot:surf:gradient'),
+              ('Matplotlib', 1, None, '___sec86'),
+              ('Surface plots',
+               2,
+               'matplotlibsurfaceplots',
+               'matplotlibsurfaceplots'),
+              ('Contour plots',
+               2,
+               'matplotlibcontourplots',
+               'matplotlibcontourplots'),
+              ('Vector field plots',
+               2,
+               'plot:surf:mpl:quiver',
+               'plot:surf:mpl:quiver'),
+              ('Mayavi', 1, None, '___sec90'),
+              ('Surface plots', 2, None, '___sec91'),
+              ('Subplots', 3, None, '___sec92'),
+              ('Contour plots', 2, None, '___sec93'),
+              ('Vector field plots',
+               2,
+               'plot:surf:mayavi:quiver',
+               'plot:surf:mayavi:quiver'),
+              ('A 3D scalar field and its gradient field',
+               2,
+               None,
+               '___sec95'),
+              ('Animations', 2, None, '___sec96'),
+              ('Summary', 1, None, '___sec97'),
+              ('Chapter topics', 2, None, '___sec98'),
+              ('Array computing', 3, None, '___sec99'),
+              ('Plotting curves', 3, None, '___sec100'),
+              ('Making movies', 3, None, '___sec101'),
+              ('Terminology', 3, None, '___sec102'),
+              ('Example: Animating a function',
                2,
                'sec:plot:summarizing',
                'sec:plot:summarizing'),
-              (' Problem ', 3, None, '___sec68'),
-              (' Solution ', 3, None, '___sec69'),
-              (' Scaling ', 3, None, '___sec70'),
-              (' Exercises ', 1, 'sec:plot:exer', 'sec:plot:exer'),
-              (' Exercise 1: Fill lists with function values ',
+              ('Problem', 3, None, '___sec104'),
+              ('Solution', 3, None, '___sec105'),
+              ('Scaling', 3, None, '___sec106'),
+              ('Exercises', 1, 'sec:plot:exer', 'sec:plot:exer'),
+              ('Exercise 1: Fill lists with function values',
                2,
                'sec:plot:ex1',
                'sec:plot:ex1'),
-              (' Exercise 2: Fill arrays; loop version ',
+              ('Exercise 2: Fill arrays; loop version',
                2,
                'sec:plot:ex2',
                'sec:plot:ex2'),
-              (' Exercise 3: Fill arrays; vectorized version ',
+              ('Exercise 3: Fill arrays; vectorized version',
                2,
                'sec:plot:ex2b',
                'sec:plot:ex2b'),
-              (' Exercise 4: Plot a function ',
+              ('Exercise 4: Plot a function',
                2,
                'sec:plot:ex2c',
                'sec:plot:ex2c'),
-              (' Exercise 5: Apply a function to a vector ',
+              ('Exercise 5: Apply a function to a vector',
                2,
                'sec:plot:math:ex1',
                'sec:plot:math:ex1'),
-              (' Exercise 6: Simulate by hand a vectorized expression ',
+              ('Exercise 6: Simulate by hand a vectorized expression',
                2,
                'sec:plot:ex3',
                'sec:plot:ex3'),
-              (' Exercise 7: Demonstrate array slicing ',
+              ('Exercise 7: Demonstrate array slicing',
                2,
                'sec:plot:ex15d',
                'sec:plot:ex15d'),
-              (' Exercise 8: Plot a formula ',
+              ('Exercise 8: Replace list operations by array computing',
+               2,
+               'sec:plot:ex33',
+               'sec:plot:ex33'),
+              ('Exercise 9: Plot a formula',
                2,
                'sec:plot:ex15',
                'sec:plot:ex15'),
-              (' Exercise 9: Plot a formula for several parameters ',
+              ('Exercise 10: Plot a formula for several parameters',
                2,
                'sec:plot:ex15b',
                'sec:plot:ex15b'),
-              (' Exercise 10: Specify the extent of the axes in a plot ',
+              ('Exercise 11: Specify the extent of the axes in a plot',
                2,
                'sec:plot:ex15ba',
                'sec:plot:ex15ba'),
-              (' Exercise 11: Plot exact and inexact Fahrenheit-Celsius conversion formulas ',
+              ('Exercise 12: Plot exact and inexact Fahrenheit-Celsius conversion formulas',
                2,
                'sec:plot:ex15c',
                'sec:plot:ex15c'),
-              (' Exercise 12: Plot the trajectory of a ball ',
+              ('Exercise 13: Plot the trajectory of a ball',
                2,
                'sec:plot:ex5',
                'sec:plot:ex5'),
-              (' Exercise 13: Plot data in a two-column file ',
+              ('Exercise 14: Plot data in a two-column file',
                2,
                'sec:files:ex12',
                'sec:files:ex12'),
-              (' Remarks ', 3, None, '___sec85'),
-              (' Exercise 14: Plot data from a file ',
+              ('Remarks', 3, None, '___sec122'),
+              ('Exercise 15: Write function data to file',
+               2,
+               'sec:files:ex12e',
+               'sec:files:ex12e'),
+              ('Exercise 16: Plot data from a file',
                2,
                'sec:files:ex12c',
                'sec:files:ex12c'),
-              (' Exercise 15: Fit a polynomial to data points ',
+              ('Exercise 17: Write table to file',
+               2,
+               'sec:files:exer:write_table',
+               'sec:files:exer:write_table'),
+              ('Exercise 18: Fit a polynomial to data points',
                2,
                'sec:files:ex12c2',
                'sec:files:ex12c2'),
-              (' Exercise 16: Fit a polynomial to experimental data ',
+              ('Exercise 19: Fit a polynomial to experimental data',
                2,
                'sec:files:ex19',
                'sec:files:ex19'),
-              (' Exercise 17: Read acceleration data and find velocities ',
+              ('Exercise 20: Read acceleration data and find velocities',
                2,
                'sec:files:ex22',
                'sec:files:ex22'),
-              (' Exercise 18: Read acceleration data and plot velocities ',
+              ('Exercise 21: Read acceleration data and plot velocities',
                2,
                'sec:files:ex23',
                'sec:files:ex23'),
-              (" Exercise 19: Plot a trip's path and velocity from GPS coordinates ",
+              ("Exercise 22: Plot a trip's path and velocity from GPS coordinates",
                2,
                'sec:files:ex24',
                'sec:files:ex24'),
-              (' Exercise 20: Vectorize the Midpoint rule for integration ',
+              ('Exercise 23: Vectorize the Midpoint rule for integration',
                2,
                'sec:class:exer:sum',
                'sec:class:exer:sum'),
-              (' Remarks ', 3, None, '___sec93'),
-              (" Exercise 21: Implement Lagrange's interpolation formula ",
+              ('Remarks', 3, None, '___sec132'),
+              ('Exercise 24: Vectorize a function for computing the area of a polygon',
+               2,
+               'sec:plot:exer:area:polygon:vec',
+               'sec:plot:exer:area:polygon:vec'),
+              ("Exercise 25: Implement Lagrange's interpolation formula",
                2,
                'sec:class:ex27a',
                'sec:class:ex27a'),
-              (" Exercise 22: Plot Lagrange's interpolating polynomial ",
+              ("Exercise 26: Plot Lagrange's interpolating polynomial",
                2,
                'sec:class:ex27b',
                'sec:class:ex27b'),
-              (" Exercise 23: Investigate the behavior of Lagrange's interpolating polynomials ",
+              ("Exercise 27: Investigate the behavior of Lagrange's interpolating polynomials",
                2,
                'sec:class:ex27c',
                'sec:class:ex27c'),
-              (' Remarks ', 3, None, '___sec97'),
-              (' Exercise 24: Plot a wave packet ',
+              ('Remarks', 3, None, '___sec137'),
+              ('Exercise 28: Plot a wave packet',
                2,
                'sec:plot:ex5d',
                'sec:plot:ex5d'),
-              (' Exercise 25: Judge a plot ',
+              ('Exercise 29: Judge a plot',
                2,
                'sec:plot:ex7',
                'sec:plot:ex7'),
-              (' Exercise 26: Plot the viscosity of water ',
+              ('Exercise 30: Plot the viscosity of water',
                2,
                'sec:plot:ex13c',
                'sec:plot:ex13c'),
-              (' Exercise 27: Explore a complicated function graphically ',
+              ('Exercise 31: Explore a complicated function graphically',
                2,
                'sec:plot:ex16',
                'sec:plot:ex16'),
-              (' Exercise 28: Plot Taylor polynomial approximations to $\\sin x$ ',
+              ('Exercise 32: Plot Taylor polynomial approximations to $\\sin x$',
                2,
                'sec:plot:ex5b',
                'sec:plot:ex5b'),
-              (' Exercise 29: Animate a wave packet ',
+              ('Exercise 33: Animate a wave packet',
                2,
                'sec:plot:ex5e',
                'sec:plot:ex5e'),
-              (' Exercise 30: Animate two-scale temperature variations ',
+              ('Exercise 34: Animate a smoothed Heaviside function',
+               2,
+               'sec:plot:ex32',
+               'sec:plot:ex32'),
+              ('Exercise 35: Animate two-scale temperature variations',
                2,
                'sec:plot:ex18',
                'sec:plot:ex18'),
-              (' Remarks ', 3, None, '___sec105'),
-              (' Exercise 31: Use non-uniformly distributed coordinates for visualization ',
+              ('Remarks', 3, None, '___sec146'),
+              ('Exercise 36: Use non-uniformly distributed coordinates for visualization',
                2,
                'sec:plot:ex19',
                'sec:plot:ex19'),
-              (" Exercise 32: Animate a planet's orbit ",
+              ('Exercise 37: Animate a sequence of approximations to $\\pi$',
+               2,
+               'sec:plot:ex31',
+               'sec:plot:ex31'),
+              ("Exercise 38: Animate a planet's orbit",
                2,
                'sec:plot:ex5g',
                'sec:plot:ex5g'),
-              (' Exercise 33: Animate the evolution of Taylor polynomials ',
+              ('Exercise 39: Animate the evolution of Taylor polynomials',
                2,
                'sec:plot:ex17',
                'sec:plot:ex17'),
-              (' Exercise 34: Plot the velocity profile for pipeflow ',
+              ('Exercise 40: Plot the velocity profile for pipeflow',
                2,
                'sec:plot:ex4',
                'sec:plot:ex4'),
-              (' Exercise 35: Plot sum-of-sines approximations to a function ',
+              ('Exercise 41: Plot sum-of-sines approximations to a function',
                2,
                'sec:plot:ex8',
                'sec:plot:ex8'),
-              (' Exercise 36: Animate the evolution of a sum-of-sine approximation to a function ',
+              ('Exercise 42: Animate the evolution of a sum-of-sine approximation to a function',
                2,
                'sec:plot:ex8m',
                'sec:plot:ex8m'),
-              (' Exercise 37: Plot functions from the command line ',
+              ('Exercise 43: Plot functions from the command line',
                2,
                'sec:plot:ex14',
                'sec:plot:ex14'),
-              (' Exercise 38: Improve command-line input ',
+              ('Exercise 44: Improve command-line input',
                2,
                'sec:plot:ex14b',
                'sec:plot:ex14b'),
-              (' Exercise 39: Demonstrate energy concepts from physics ',
+              ('Exercise 45: Demonstrate energy concepts from physics',
                2,
                'sec:plot:ex20',
                'sec:plot:ex20'),
-              (' Exercise 40: Plot a w-like function ',
+              ('Exercise 46: Plot a w-like function',
                2,
                'sec:plot:math:ex9',
                'sec:plot:math:ex9'),
-              (' Exercise 41: Visualize approximations in the Midpoint integration rule ',
+              ('Exercise 47: Plot a piecewise constant function',
+               2,
+               'sec:basic:exH4plot',
+               'sec:basic:exH4plot'),
+              ('Exercise 48: Vectorize a piecewise constant function',
+               2,
+               'sec:basic:exH4vecz1',
+               'sec:basic:exH4vecz1'),
+              ('Remarks', 3, None, '___sec160'),
+              ('Exercise 49: Visualize approximations in the Midpoint integration rule',
                2,
                'sec:plot:ex:vizmidpoint',
                'sec:plot:ex:vizmidpoint'),
-              (' Exercise 42: Visualize approximations in the Trapezoidal integration rule ',
+              ('Exercise 50: Visualize approximations in the Trapezoidal integration rule',
                2,
                'sec:plot:ex:viztrapezoidal',
                'sec:plot:ex:viztrapezoidal'),
-              (' Exercise 43: Experience overflow in a function ',
+              ('Exercise 51: Experience overflow in a function',
                2,
                'sec:plot:ex13',
                'sec:plot:ex13'),
-              (' Remarks ', 3, None, '___sec119'),
-              (' Exercise 44: Apply a function to a rank 2 array ',
+              ('Remarks', 3, None, '___sec164'),
+              ('Exercise 52: Apply a function to a rank 2 array',
                2,
                'sec:plot:math:ex2',
                'sec:plot:math:ex2'),
-              (' Exercise 45: Explain why array computations fail ',
+              ('Exercise 53: Explain why array computations fail',
                2,
                'sec:plot:ex11',
                'sec:plot:ex11'),
-              (' References ', 1, None, '___sec122')]}
+              ('Exercise 54: Verify linear algebra results',
+               2,
+               'plot:linalg:exer:verify',
+               'plot:linalg:exer:verify'),
+              ('References', 1, None, '___sec168')]}
 end of tocinfo -->
 
 <body>
@@ -401,21 +547,182 @@ $$
     </button>
     <a class="navbar-brand" href="plot-bootstrap.html">Array computing and curve plotting</a>
   </div>
+
   <div class="navbar-collapse collapse navbar-responsive-collapse">
     <ul class="nav navbar-nav navbar-right">
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
         <ul class="dropdown-menu">
-     <!-- navigation toc: --> <li><a href="._plot-bootstrap001.html#___sec0" style="font-size: 80%;">Vectors</a></li>
-     <!-- navigation toc: --> <li><a href="._plot-bootstrap002.html#___sec4" style="font-size: 80%;">Arrays in Python programs</a></li>
-     <!-- navigation toc: --> <li><a href="#sec:plot:curveplots" style="font-size: 80%;">Curve plotting</a></li>
-     <!-- navigation toc: --> <li><a href="._plot-bootstrap004.html#sec:plot:difficulties" style="font-size: 80%;">Plotting difficulties</a></li>
-     <!-- navigation toc: --> <li><a href="._plot-bootstrap005.html#sec:plot:if:vectorize" style="font-size: 80%;">More advanced vectorization of functions</a></li>
-     <!-- navigation toc: --> <li><a href="._plot-bootstrap006.html#sec:plot:numpy:more" style="font-size: 80%;">More on numerical Python arrays</a></li>
-     <!-- navigation toc: --> <li><a href="._plot-bootstrap007.html#sec:plot:2Darrays" style="font-size: 80%;">Higher-dimensional arrays</a></li>
-     <!-- navigation toc: --> <li><a href="._plot-bootstrap008.html#___sec61" style="font-size: 80%;">Summary</a></li>
-     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:plot:exer" style="font-size: 80%;">Exercises</a></li>
-     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#___sec122" style="font-size: 80%;">References</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap000.html#table_of_contents" style="font-size: 80%;"><b>Table of contents</b></a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap001.html#___sec0" style="font-size: 80%;"><b>Vectors</b></a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap001.html#___sec1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The vector concept</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap001.html#sec:plot:vectors" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Mathematical operations on vectors</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap001.html#sec:plot:arraycomp" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Vector arithmetics and vector functions</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap002.html#___sec4" style="font-size: 80%;"><b>Arrays in Python programs</b></a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap002.html#sec:plot:listdata" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Using lists for collecting function data</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap002.html#sec:plot:array:basics" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Basics of numerical Python arrays</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap002.html#___sec7" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Computing coordinates and function values</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap002.html#sec:plot:vectorization" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Vectorization</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:plot:curveplots" style="font-size: 80%;"><b>Curve plotting</b></a></li>
+     <!-- navigation toc: --> <li><a href="#sec:plot:pylab" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;MATLAB-style plotting with Matplotlib</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec11" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A basic plot</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec12" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Decorating the plot</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec13" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Plotting multiple curves</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec14" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Placing several plots in one figure</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:plot:pyplot" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Matplotlib; pyplot prefix</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:plot:SciTools" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;SciTools and Easyviz</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec17" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Importing SciTools and Easyviz</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec18" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A basic plot</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec19" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Decorating the plot</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec20" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Plotting multiple curves</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec21" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Changing backend</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec22" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Placing several plots in one figure</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec23" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Other plotting alternatives</a></li>
+     <!-- navigation toc: --> <li><a href="#easyviz:movie" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Making animations</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec25" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec26" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Animation in Easyviz</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec27" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Basic animation in Matplotlib</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec28" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Using FuncAnimation in Matplotlib</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:plot:video" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Making videos</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec30" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Animated GIF file</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec31" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MP4, Ogg, WebM, and Flash videos</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec32" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Curve plots in pure text</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap004.html#sec:plot:difficulties" style="font-size: 80%;"><b>Plotting difficulties</b></a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap004.html#sec:plot:pwisefunc" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Piecewisely defined functions</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap004.html#___sec35" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example: The Heaviside function</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap004.html#___sec36" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example: A hat function</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap004.html#sec:plot:sin1x" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Rapidly varying functions</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap005.html#sec:plot:if:vectorize" style="font-size: 80%;"><b>More advanced vectorization of functions</b></a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap005.html#sec:plot:StringFunction:vectorize" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Vectorization of StringFunction objects</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap005.html#sec:vec:Heaviside" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Vectorization of the Heaviside function</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap005.html#___sec41" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Loop</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap005.html#___sec42" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Automatic vectorization</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap005.html#___sec43" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mixing boolean and floating-point calculations</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap005.html#___sec44" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Manual vectorization</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap005.html#sec:vec:hatfunc" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Vectorization of a hat function</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap006.html#sec:plot:numpy:more" style="font-size: 80%;"><b>More on numerical Python arrays</b></a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap006.html#___sec47" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Copying arrays</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap006.html#sec:plot:numpy:inplace" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;In-place arithmetics</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap006.html#___sec49" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Allocating arrays</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap006.html#sec:plot:generalized:index" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Generalized indexing</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap006.html#___sec51" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Testing for the array type</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap006.html#___sec52" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example: Vectorizing a constant function</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap006.html#___sec53" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Compact syntax for array generation</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap006.html#___sec54" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Shape manipulation</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap006.html#sec:hpc" style="font-size: 80%;"><b>High-performance computing with arrays</b></a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap006.html#___sec56" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example: <code>axpy</code></a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap006.html#sec:hpc:scalar" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Scalar implementation</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap006.html#sec:hpc:vec" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Vectorized implementation</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap006.html#sec:hpc:vec:inplace" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Memory-saving implementation</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap006.html#sec:hpc:vec:memory_profiler" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Analysis of memory usage</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap006.html#sec:hpc:vec:line_profiler" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Analysis of the CPU time</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap007.html#sec:plot:2Darrays" style="font-size: 80%;"><b>Higher-dimensional arrays</b></a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap007.html#___sec63" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Matrices and arrays</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap007.html#sec:plot:2D:arrays" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Two-dimensional numerical Python arrays</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap007.html#sec:plot:array2comp" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Array computing</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap007.html#___sec66" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remark</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap007.html#sec:plot:numpy:matrix" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Matrix objects</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap007.html#___sec68" style="font-size: 80%;"><b>Some common linear algebra operations</b></a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap007.html#___sec69" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Inverse, determinant, and eigenvalues</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap007.html#___sec70" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Products</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap007.html#___sec71" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Norms</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap007.html#___sec72" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Sum and extreme values</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap007.html#___sec73" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Indexing</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap007.html#___sec74" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Transpose and upper/lower triangular parts</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap007.html#___sec75" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Solving linear systems</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap007.html#___sec76" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Matrix row and column operations</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap007.html#___sec77" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Computing the rank of a matrix</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap007.html#___sec78" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Symbolic linear algebra</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap007.html#plot:surf" style="font-size: 80%;"><b>Plotting of scalar and vector fields</b></a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap007.html#plot:surf:install" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Installation</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap007.html#plot:surf:mesh_surf" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Surface plots</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap007.html#___sec82" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Grid for 2D scalar fields</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap007.html#plot:surf:3Dcurve" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Parameterized curve</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap007.html#plot:surf:contours" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Contour lines</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap007.html#plot:surf:gradient" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The gradient vector field</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap007.html#___sec86" style="font-size: 80%;"><b>Matplotlib</b></a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap007.html#matplotlibsurfaceplots" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Surface plots</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap007.html#matplotlibcontourplots" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Contour plots</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap007.html#plot:surf:mpl:quiver" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Vector field plots</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap007.html#___sec90" style="font-size: 80%;"><b>Mayavi</b></a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap007.html#___sec91" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Surface plots</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap007.html#___sec92" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Subplots</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap007.html#___sec93" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Contour plots</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap007.html#plot:surf:mayavi:quiver" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Vector field plots</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap007.html#___sec95" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;A 3D scalar field and its gradient field</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap007.html#___sec96" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Animations</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap008.html#___sec97" style="font-size: 80%;"><b>Summary</b></a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap008.html#___sec98" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Chapter topics</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap008.html#___sec99" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Array computing</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap008.html#___sec100" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Plotting curves</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap008.html#___sec101" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Making movies</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap008.html#___sec102" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Terminology</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap008.html#sec:plot:summarizing" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Animating a function</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap008.html#___sec104" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap008.html#___sec105" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Solution</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap008.html#___sec106" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scaling</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:plot:exer" style="font-size: 80%;"><b>Exercises</b></a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:plot:ex1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 1: Fill lists with function values</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:plot:ex2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 2: Fill arrays; loop version</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:plot:ex2b" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 3: Fill arrays; vectorized version</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:plot:ex2c" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 4: Plot a function</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:plot:math:ex1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 5: Apply a function to a vector</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:plot:ex3" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 6: Simulate by hand a vectorized expression</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:plot:ex15d" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 7: Demonstrate array slicing</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:plot:ex33" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 8: Replace list operations by array computing</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:plot:ex15" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 9: Plot a formula</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:plot:ex15b" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 10: Plot a formula for several parameters</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:plot:ex15ba" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 11: Specify the extent of the axes in a plot</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:plot:ex15c" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 12: Plot exact and inexact Fahrenheit-Celsius conversion formulas</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:plot:ex5" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 13: Plot the trajectory of a ball</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:files:ex12" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 14: Plot data in a two-column file</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#___sec122" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remarks</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:files:ex12e" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 15: Write function data to file</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:files:ex12c" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 16: Plot data from a file</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:files:exer:write_table" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 17: Write table to file</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:files:ex12c2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 18: Fit a polynomial to data points</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:files:ex19" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 19: Fit a polynomial to experimental data</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:files:ex22" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 20: Read acceleration data and find velocities</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:files:ex23" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 21: Read acceleration data and plot velocities</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:files:ex24" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 22: Plot a trip's path and velocity from GPS coordinates</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:class:exer:sum" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 23: Vectorize the Midpoint rule for integration</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#___sec132" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remarks</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:plot:exer:area:polygon:vec" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 24: Vectorize a function for computing the area of a polygon</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:class:ex27a" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 25: Implement Lagrange's interpolation formula</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:class:ex27b" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 26: Plot Lagrange's interpolating polynomial</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:class:ex27c" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 27: Investigate the behavior of Lagrange's interpolating polynomials</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#___sec137" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remarks</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:plot:ex5d" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 28: Plot a wave packet</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:plot:ex7" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 29: Judge a plot</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:plot:ex13c" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 30: Plot the viscosity of water</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:plot:ex16" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 31: Explore a complicated function graphically</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:plot:ex5b" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 32: Plot Taylor polynomial approximations to \( \sin x \)</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:plot:ex5e" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 33: Animate a wave packet</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:plot:ex32" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 34: Animate a smoothed Heaviside function</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:plot:ex18" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 35: Animate two-scale temperature variations</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#___sec146" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remarks</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:plot:ex19" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 36: Use non-uniformly distributed coordinates for visualization</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:plot:ex31" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 37: Animate a sequence of approximations to \( \pi \)</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:plot:ex5g" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 38: Animate a planet's orbit</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:plot:ex17" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 39: Animate the evolution of Taylor polynomials</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:plot:ex4" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 40: Plot the velocity profile for pipeflow</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:plot:ex8" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 41: Plot sum-of-sines approximations to a function</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:plot:ex8m" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 42: Animate the evolution of a sum-of-sine approximation to a function</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:plot:ex14" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 43: Plot functions from the command line</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:plot:ex14b" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 44: Improve command-line input</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:plot:ex20" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 45: Demonstrate energy concepts from physics</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:plot:math:ex9" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 46: Plot a w-like function</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:basic:exH4plot" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 47: Plot a piecewise constant function</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:basic:exH4vecz1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 48: Vectorize a piecewise constant function</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#___sec160" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remarks</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:plot:ex:vizmidpoint" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 49: Visualize approximations in the Midpoint integration rule</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:plot:ex:viztrapezoidal" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 50: Visualize approximations in the Trapezoidal integration rule</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:plot:ex13" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 51: Experience overflow in a function</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#___sec164" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remarks</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:plot:math:ex2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 52: Apply a function to a rank 2 array</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#sec:plot:ex11" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 53: Explain why array computations fail</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#plot:linalg:exer:verify" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 54: Verify linear algebra results</a></li>
+     <!-- navigation toc: --> <li><a href="._plot-bootstrap009.html#___sec168" style="font-size: 80%;"><b>References</b></a></li>
 
         </ul>
       </li>
@@ -430,8 +737,9 @@ $$
 
 <a name="part0003"></a>
 <!-- !split -->
+<p style="font-size:80%">This chapter is taken from the book <a href="http://www.springer.com/gp/book/9783662498866">A Primer on Scientific Programming with Python</a> by H. P. Langtangen, 5th edition, Springer, 2016.</p>
 
-<h1 id="sec:plot:curveplots">Curve plotting<a name="sec:plot:curveplots"></a></h1>
+<h1 id="sec:plot:curveplots" class="anchor">Curve plotting</h1>
 
 <p>
 Visualizing a function \( f(x) \) is done by drawing the curve \( y=f(x) \) in
@@ -461,16 +769,15 @@ differ from \( x \) and \( f \), but the plotting procedure is the same. Our
 first example of curve plotting demonstrates this fact by involving a
 function of \( t \).
 
-<h2 id="sec:plot:pylab">Matplotlib; pylab<a name="sec:plot:pylab"></a></h2>
+<h2 id="sec:plot:pylab" class="anchor">MATLAB-style plotting with Matplotlib</h2>
 
 <p>
 The standard package for curve plotting in Python is Matplotlib.
-First we exemplify Matplotlib using <code>matplotlib.pylab</code>, which enables
-a syntax very close to that of MATLAB. This is a great advantage since
-many readers may have experience with plotting in MATLAB, or they will
-certainly meet MATLAB sometime in their scientific work.
+We first exemplify a usage of this package that is very similar
+with how you plot in MATLAB as many readers will have MATLAB
+knowledge of will need to operate MATLAB at some point.
 
-<h3 id="___sec11">A basic plot <a name="___sec11"></a></h3>
+<h3 id="___sec11" class="anchor">A basic plot </h3>
 
 <p>
 Let us plot the curve \( y = t^2\exp(-t^2) \) for \( t \) values between 0 and
@@ -482,7 +789,8 @@ plot.  Here is the complete program:
 <p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">matplotlib.pylab</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #666666">*</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #666666">*</span>
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #666666">*</span>
 
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f</span>(t):
     <span style="color: #008000; font-weight: bold">return</span> t<span style="color: #666666">**2*</span>exp(<span style="color: #666666">-</span>t<span style="color: #666666">**2</span>)
@@ -496,9 +804,7 @@ plot(t, y)
 show()
 </pre></div>
 <p>
-The <code>from matplotlib.pylab import *</code> performs a <code>from numpy import *</code>
-import as well as an import of all Matplotlib commands that resemble
-MATLAB-style syntax.  In this program we pre-allocate the <code>y</code> array
+In this program we pre-allocate the <code>y</code> array
 and fill it with values, element by element, in a Python
 loop. Alternatively, we may operate on the whole <code>t</code> array at once,
 which yields faster and shorter code:
@@ -506,7 +812,7 @@ which yields faster and shorter code:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">y <span style="color: #666666">=</span> f(t)
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>y <span style="color: #666666">=</span> f(t)
 </pre></div>
 <p>
 To include the plot in electronic documents, we need a hardcopy of the
@@ -516,7 +822,7 @@ saves the plot to files in various image formats:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">savefig(<span style="color: #BA2121">&#39;tmp1.pdf&#39;</span>) <span style="color: #408080; font-style: italic"># produce PDF</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>savefig(<span style="color: #BA2121">&#39;tmp1.pdf&#39;</span>) <span style="color: #408080; font-style: italic"># produce PDF</span>
 savefig(<span style="color: #BA2121">&#39;tmp1.png&#39;</span>) <span style="color: #408080; font-style: italic"># produce PNG</span>
 </pre></div>
 <p>
@@ -525,13 +831,13 @@ The filename extension determines the format: <code>.pdf</code> for PDF and
 plot.
 
 <p>
-<center> <!-- figure -->
+<center> <!-- figure label: --> <div id="fig:plot1a:pylab"></div> <!-- FIGURE -->
 <hr class="figure">
-<center><p class="caption">Figure 2:  A simple plot in PDF format (Matplotlib). <a name="fig:plot1a:pylab"></a> </p></center>
+<center><p class="caption">Figure 2:  A simple plot in PDF format (Matplotlib).  <!-- caption label: fig:plot1a:pylab --> </p></center>
 <p><img src="fig-plot/plot1a_pylab.png" align="bottom" width=400></p>
 </center>
 
-<h3 id="___sec12">Decorating the plot <a name="___sec12"></a></h3>
+<h3 id="___sec12" class="anchor">Decorating the plot </h3>
 
 <p>
 The \( x \) and \( y \) axes in curve plots should have labels, here \( t \) and
@@ -545,7 +851,7 @@ the range of the data).  All such things are easily added after the
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">plot(t, y)
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>plot(t, y)
 xlabel(<span style="color: #BA2121">&#39;t&#39;</span>)
 ylabel(<span style="color: #BA2121">&#39;y&#39;</span>)
 legend([<span style="color: #BA2121">&#39;t^2*exp(-t^2)&#39;</span>])
@@ -563,13 +869,13 @@ manually).  This decorated plot is displayed in Figure
 <a href="#fig:plot1c:pylab">3</a>.
 
 <p>
-<center> <!-- figure -->
+<center> <!-- figure label: --> <div id="fig:plot1c:pylab"></div> <!-- FIGURE -->
 <hr class="figure">
-<center><p class="caption">Figure 3:  A single curve with label, title, and axis adjusted (Matplotlib). <a name="fig:plot1c:pylab"></a> </p></center>
+<center><p class="caption">Figure 3:  A single curve with label, title, and axis adjusted (Matplotlib).  <!-- caption label: fig:plot1c:pylab --> </p></center>
 <p><img src="fig-plot/plot1c_pylab.png" align="bottom" width=400></p>
 </center>
 
-<h3 id="___sec13">Plotting multiple curves <a name="___sec13"></a></h3>
+<h3 id="___sec13" class="anchor">Plotting multiple curves </h3>
 
 <p>
 A common plotting task is to compare two or more curves, which
@@ -583,7 +889,7 @@ subsequent <code>plot</code> commands are to draw the curves in the first plot.
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f1</span>(t):
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f1</span>(t):
     <span style="color: #008000; font-weight: bold">return</span> t<span style="color: #666666">**2*</span>exp(<span style="color: #666666">-</span>t<span style="color: #666666">**2</span>)
 
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f2</span>(t):
@@ -613,13 +919,13 @@ Doing a <code>hold('off')</code> makes the next <code>plot</code> command create
 plot.
 
 <p>
-<center> <!-- figure -->
+<center> <!-- figure label: --> <div id="fig:plot2a:pylab"></div> <!-- FIGURE -->
 <hr class="figure">
-<center><p class="caption">Figure 4:  Two curves in the same plot (Matplotlib). <a name="fig:plot2a:pylab"></a> </p></center>
+<center><p class="caption">Figure 4:  Two curves in the same plot (Matplotlib).  <!-- caption label: fig:plot2a:pylab --> </p></center>
 <p><img src="fig-plot/plot2a_pylab.png" align="bottom" width=400></p>
 </center>
 
-<h3 id="___sec14">Placing several plots in one figure <a name="___sec14"></a></h3>
+<h3 id="___sec14" class="anchor">Placing several plots in one figure </h3>
 
 <p>
 We may also put plots together in a figure with <code>r</code> rows
@@ -631,7 +937,7 @@ Here is an example with two rows of plots, and one plot in each row,
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">figure()  <span style="color: #408080; font-style: italic"># make separate figure</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>figure()  <span style="color: #408080; font-style: italic"># make separate figure</span>
 subplot(<span style="color: #666666">2</span>, <span style="color: #666666">1</span>, <span style="color: #666666">1</span>)
 t <span style="color: #666666">=</span> linspace(<span style="color: #666666">0</span>, <span style="color: #666666">3</span>, <span style="color: #666666">51</span>)
 y1 <span style="color: #666666">=</span> f1(t)
@@ -660,9 +966,9 @@ show()
 The <code>figure()</code> call creates a new plot window on the screen.
 
 <p>
-<center> <!-- figure -->
+<center> <!-- figure label: --> <div id="fig:subplot:pylab"></div> <!-- FIGURE -->
 <hr class="figure">
-<center><p class="caption">Figure 5:  Example on two plots in one figure (Matplotlib). <a name="fig:subplot:pylab"></a> </p></center>
+<center><p class="caption">Figure 5:  Example on two plots in one figure (Matplotlib).  <!-- caption label: fig:subplot:pylab --> </p></center>
 <p><img src="fig-plot/plotsubplot_pylab.png" align="bottom" width=400></p>
 </center>
 
@@ -670,30 +976,30 @@ The <code>figure()</code> call creates a new plot window on the screen.
 All of the examples above on plotting with Matplotlib are collected in the
 file <a href="http://tinyurl.com/pwyasaa/plot/mpl_pylab_examples.py" target="_self"><tt>mpl_pylab_examples.py</tt></a>.
 
-<h2 id="sec:plot:pyplot">Matplotlib; pyplot<a name="sec:plot:pyplot"></a></h2>
+<h2 id="sec:plot:pyplot" class="anchor">Matplotlib; pyplot prefix</h2>
 
 <p>
-The Matplotlib developers do not promote the <code>matplotlib.pylab</code>
-interface. Instead, they recommend the <code>matplotlib.pyplot</code> module and
-prefix Numerical Python and Matplotlib functionality by short forms of
-their package names:
+The Matplotlib developers do not promote the plotting style we
+exemplified above.
+Instead, they recommend to prefix plotting commands
+by the <code>matplotlib.pyplot</code> module and also prefix
+array computing commands to demonstrate that they come from
+Numerical Python:
 
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
 <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">plt</span>
 </pre></div>
 <p>
-The commands in <code>matplotlib.pyplot</code> are similar to those in
-<code>matplotlib.pylab</code>.
 The plot in Figure <a href="#fig:plot1c:pylab">3</a> can typically be obtained
-by prefixing the <code>pylab</code> commands with <code>plt</code>:
+by prefixing the previously shown plotting commands with <code>plt</code>:
 
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">plt<span style="color: #666666">.</span>plot(t, y)
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>plt<span style="color: #666666">.</span>plot(t, y)
 plt<span style="color: #666666">.</span>legend([<span style="color: #BA2121">&#39;t^2*exp(-t^2)&#39;</span>])
 plt<span style="color: #666666">.</span>xlabel(<span style="color: #BA2121">&#39;t&#39;</span>)
 plt<span style="color: #666666">.</span>ylabel(<span style="color: #BA2121">&#39;y&#39;</span>)
@@ -709,7 +1015,7 @@ to write
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">plt<span style="color: #666666">.</span>plot(t, y, label<span style="color: #666666">=</span><span style="color: #BA2121">&#39;t^2*exp(-t^2)&#39;</span>)
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>plt<span style="color: #666666">.</span>plot(t, y, label<span style="color: #666666">=</span><span style="color: #BA2121">&#39;t^2*exp(-t^2)&#39;</span>)
 </pre></div>
 <p>
 However, in this document we shall stick to the <code>legend</code> command since
@@ -721,7 +1027,7 @@ Figure <a href="#fig:plot2a:pylab">4</a> can be produced by
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f1</span>(t):
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f1</span>(t):
     <span style="color: #008000; font-weight: bold">return</span> t<span style="color: #666666">**2*</span>np<span style="color: #666666">.</span>exp(<span style="color: #666666">-</span>t<span style="color: #666666">**2</span>)
 
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f2</span>(t):
@@ -742,15 +1048,10 @@ plt<span style="color: #666666">.</span>show()
 </pre></div>
 <p>
 Putting multiple plots in a figure follows the same set-up with
-<code>subplot</code> as shown
-for <code>pylab</code>, except that commands are prefixed by <code>plt</code>.
+<code>subplot</code> as previously shown,
+except that commands are prefixed by <code>plt</code>.
 The complete example, along with the codes listed above, are found in
 the file <a href="http://tinyurl.com/pwyasaa/input/mpl_pyplot_examples.py" target="_self"><tt>mpl_pyplot_examples.py</tt></a>.
-
-<p>
-The <code>plt</code> prefix is not a requirement for using <code>matplotlib.pyplot</code>,
-as one can equally well do <code>from matplotlib.pyplot import *</code> and
-get access to the same functions as shown in the section <a href="#sec:plot:pylab">Matplotlib; pylab</a> for the <code>pylab</code> functions.
 
 <p>
 Once you have created a basic plot, there are numerous possibilities
@@ -758,7 +1059,7 @@ for fine-tuning the figure, i.e., adjusting tick marks on the axis,
 inserting text, etc. The Matplotlib website is full of instructive
 examples on what you can do with this excellent package.
 
-<h2 id="sec:plot:SciTools">SciTools and Easyviz<a name="sec:plot:SciTools"></a></h2>
+<h2 id="sec:plot:SciTools" class="anchor">SciTools and Easyviz</h2>
 
 <p>
 Matplotlib has become the <em>de facto</em> standard for curve plotting in
@@ -782,9 +1083,9 @@ Python tools building on Numerical Python, ScientificPython, the
 comprehensive SciPy environment, and other packages for scientific
 computing with Python.  SciTools contains in particular software
 related to the document <a href="._plot-bootstrap009.html#TCSE3">[2]</a> and the present text. Installation
-is straightforward as described on the web page <a href="http://code.google.com/p/scitools" target="_self"><tt>http://code.google.com/p/scitools</tt></a>.
+is straightforward as described on the web page <a href="https://github.com/hplgit/scitools" target="_self"><tt>https://github.com/hplgit/scitools</tt></a>.
 
-<h3 id="___sec17">Importing SciTools and Easyviz <a name="___sec17"></a></h3>
+<h3 id="___sec17" class="anchor">Importing SciTools and Easyviz </h3>
 
 <p>
 A standard import of SciTools is
@@ -792,14 +1093,14 @@ A standard import of SciTools is
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">scitools.std</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #666666">*</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">scitools.std</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #666666">*</span>
 </pre></div>
 <p>
 The advantage of this statement is that it, with a minimum of typing,
 imports a lot of useful modules for numerical Python programming:
 Easyviz for MATLAB-style plotting, all of <code>numpy</code> (<code>from numpy import
 *</code>), all of <code>scipy</code> (<code>from scipy import *</code>) if available, the
-<code>StringFunction</code> tool (see the document <a href="http://tcse6.on.net/input" target="_self">User input and error
+<code>StringFunction</code> tool (see the document <a href="http://hplgit.github.io/primer.html/doc/pub/input" target="_self">User input and error
 handling</a> <a href="._plot-bootstrap009.html#Langtangen_TCSE6_input">[3]</a>),
 many mathematical functions and tools in SciTools, plus commonly
 applied modules such as <code>sys</code>, <code>os</code>, and <code>math</code>.  The imported
@@ -810,7 +1111,7 @@ complex input/output (as the corresponding MATLAB functions):
 <p>
 
 <!-- code=python (!bc pyshell) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">scitools.std</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #666666">*</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">scitools.std</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #666666">*</span>
 <span style="color: #666666">&gt;&gt;&gt;</span> a <span style="color: #666666">=</span> array([<span style="color: #666666">-4.</span>, <span style="color: #666666">4</span>])
 <span style="color: #666666">&gt;&gt;&gt;</span> sqrt(a)                 <span style="color: #408080; font-style: italic"># need complex output</span>
 array([ <span style="color: #666666">0.+2.j</span>,  <span style="color: #666666">2.+0.j</span>])
@@ -833,12 +1134,12 @@ The downside of the &quot;star import&quot; from <code>scitools.std</code> is tw
 First, it fills up your program or interactive session with the names
 of several hundred functions. Second, when using a particular
 function, you do not know the package it comes from. Both problems are
-solved by doing an import of the type used in the section <a href="#sec:plot:pyplot">Matplotlib; pyplot</a>:
+solved by doing an import of the type used in the section <a href="#sec:plot:pyplot">Matplotlib; pyplot prefix</a>:
 
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">scitools.std</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">st</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">scitools.std</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">st</span>
 <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
 </pre></div>
 <p>
@@ -861,10 +1162,10 @@ Other popular alternatives are Gnuplot and MATLAB. For 2D/3D scalar
 and vector fields, VTK is a popular backend for Easyviz.
 
 <p>
-We shall next redo the curve plotting examples from the section <a href="#sec:plot:pylab">Matplotlib; pylab</a>
+We shall next redo the curve plotting examples from the section <a href="#sec:plot:pylab">MATLAB-style plotting with Matplotlib</a>
 using Easyviz syntax.
 
-<h3 id="___sec18">A basic plot <a name="___sec18"></a></h3>
+<h3 id="___sec18" class="anchor">A basic plot </h3>
 
 <p>
 Plotting the curve \( y = t^2\exp(-t^2) \) for \( t\in [0,3] \), using 31
@@ -873,7 +1174,7 @@ equally spaced points (30 intervals) is performed by like this:
 <p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">scitools.std</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #666666">*</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">scitools.std</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #666666">*</span>
 
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f</span>(t):
     <span style="color: #008000; font-weight: bold">return</span> t<span style="color: #666666">**2*</span>exp(<span style="color: #666666">-</span>t<span style="color: #666666">**2</span>)
@@ -889,7 +1190,7 @@ the filename as argument:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">savefig(<span style="color: #BA2121">&#39;tmp1.pdf&#39;</span>) <span style="color: #408080; font-style: italic"># produce PDF</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>savefig(<span style="color: #BA2121">&#39;tmp1.pdf&#39;</span>) <span style="color: #408080; font-style: italic"># produce PDF</span>
 savefig(<span style="color: #BA2121">&#39;tmp1.eps&#39;</span>) <span style="color: #408080; font-style: italic"># produce PostScript</span>
 savefig(<span style="color: #BA2121">&#39;tmp1.png&#39;</span>) <span style="color: #408080; font-style: italic"># produce PNG</span>
 </pre></div>
@@ -910,7 +1211,7 @@ stay on the screen, add
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span style="color: #008000">raw_input</span>(<span style="color: #BA2121">&#39;Press the Return key to quit: &#39;</span>)
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #008000">raw_input</span>(<span style="color: #BA2121">&#39;Press the Return key to quit: &#39;</span>)
 </pre></div>
 <p>
 at the end of the program. The plot window is killed when the program
@@ -919,7 +1220,7 @@ hits the Return key.
 </div>
 
 
-<h3 id="___sec19">Decorating the plot <a name="___sec19"></a></h3>
+<h3 id="___sec19" class="anchor">Decorating the plot </h3>
 
 <p>
 Let us plot the same curve, but now with a legend, a plot title,
@@ -928,7 +1229,7 @@ labels on the axes, and specified ranges of the axes:
 <p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">scitools.std</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #666666">*</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">scitools.std</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #666666">*</span>
 
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f</span>(t):
     <span style="color: #008000; font-weight: bold">return</span> t<span style="color: #666666">**2*</span>exp(<span style="color: #666666">-</span>t<span style="color: #666666">**2</span>)
@@ -949,7 +1250,7 @@ the plot properties can be set at once through keyword arguments:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">plot(t, y, <span style="color: #BA2121">&#39;-&#39;</span>,
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>plot(t, y, <span style="color: #BA2121">&#39;-&#39;</span>,
      xlabel<span style="color: #666666">=</span><span style="color: #BA2121">&#39;t&#39;</span>,
      ylabel<span style="color: #666666">=</span><span style="color: #BA2121">&#39;y&#39;</span>,
      legend<span style="color: #666666">=</span><span style="color: #BA2121">&#39;t^2*exp(-t^2)&#39;</span>,
@@ -968,7 +1269,7 @@ style) rather than <code>t**2</code> (program style). Whichever form you choose
 is up to you, but the {\LaTeX} form sometimes looks better in some
 plotting programs (Matplotlib and Gnuplot are two examples).
 
-<h3 id="___sec20">Plotting multiple curves <a name="___sec20"></a></h3>
+<h3 id="___sec20" class="anchor">Plotting multiple curves </h3>
 
 <p>
 Next we want to compare the two functions \( f_1(t)=t^2\exp(-t^2) \) and
@@ -981,7 +1282,7 @@ curves in the same plot, until <code>hold('off')</code> is called.
 <p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">scitools.std</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #666666">*</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">scitools.std</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #666666">*</span>
 
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f1</span>(t):
     <span style="color: #008000; font-weight: bold">return</span> t<span style="color: #666666">**2*</span>exp(<span style="color: #666666">-</span>t<span style="color: #666666">**2</span>)
@@ -1015,7 +1316,7 @@ we can do everything at once and just send several curves to <code>plot</code>:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">plot(t, y1, <span style="color: #BA2121">&#39;r-&#39;</span>, t, y2, <span style="color: #BA2121">&#39;b-&#39;</span>, xlabel<span style="color: #666666">=</span><span style="color: #BA2121">&#39;t&#39;</span>, ylabel<span style="color: #666666">=</span><span style="color: #BA2121">&#39;y&#39;</span>,
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>plot(t, y1, <span style="color: #BA2121">&#39;r-&#39;</span>, t, y2, <span style="color: #BA2121">&#39;b-&#39;</span>, xlabel<span style="color: #666666">=</span><span style="color: #BA2121">&#39;t&#39;</span>, ylabel<span style="color: #666666">=</span><span style="color: #BA2121">&#39;y&#39;</span>,
      legend<span style="color: #666666">=</span>(<span style="color: #BA2121">&#39;t^2*exp(-t^2)&#39;</span>, <span style="color: #BA2121">&#39;t^4*exp(-t^2)&#39;</span>),
      title<span style="color: #666666">=</span><span style="color: #BA2121">&#39;Plotting two curves in the same plot&#39;</span>,
      savefig<span style="color: #666666">=</span><span style="color: #BA2121">&#39;tmp3.pdf&#39;</span>)
@@ -1025,7 +1326,7 @@ Throughout this document, we very often make use of this type of
 compact <code>plot</code> command, which also only requires an import of
 the form <code>from scitools.std import plot</code>.
 
-<h3 id="___sec21">Changing backend <a name="___sec21"></a></h3>
+<h3 id="___sec21" class="anchor">Changing backend </h3>
 
 <p>
 Easyviz applies Matplotlib for plotting by default, so the resulting
@@ -1042,7 +1343,7 @@ line:
 <p>
 
 <!-- code=text (!bc sys) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">Terminal&gt; python myprog.py --SCITOOLS_easyviz_backend gnuplot
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>Terminal&gt; python myprog.py --SCITOOLS_easyviz_backend gnuplot
 </pre></div>
 <p>
 Now, the plotting commands in <code>myprog.py</code> will make use of Gnuplot
@@ -1055,22 +1356,22 @@ With Matplotlib one has to carefully set the line types to make
 them effective on a grayscale.
 
 <p>
-<center> <!-- figure -->
+<center> <!-- figure label: --> <div id="fig:plot2a"></div> <!-- FIGURE -->
 <hr class="figure">
-<center><p class="caption">Figure 6:  Two curves in the same plot (Gnuplot). <a name="fig:plot2a"></a> </p></center>
+<center><p class="caption">Figure 6:  Two curves in the same plot (Gnuplot).  <!-- caption label: fig:plot2a --> </p></center>
 <p><img src="fig-plot/plot2a_thick.png" align="bottom" width=400></p>
 </center>
 
-<h3 id="___sec22">Placing several plots in one figure <a name="___sec22"></a></h3>
+<h3 id="___sec22" class="anchor">Placing several plots in one figure </h3>
 
 <p>
-Finally, we redo the example from the section <a href="#sec:plot:pylab">Matplotlib; pylab</a> where
+Finally, we redo the example from the section <a href="#sec:plot:pylab">MATLAB-style plotting with Matplotlib</a> where
 two plots are combined into one figure, using the <code>subplot</code> command:
 
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">figure()
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>figure()
 subplot(<span style="color: #666666">2</span>, <span style="color: #666666">1</span>, <span style="color: #666666">1</span>)
 t <span style="color: #666666">=</span> linspace(<span style="color: #666666">0</span>, <span style="color: #666666">3</span>, <span style="color: #666666">51</span>)
 y1 <span style="color: #666666">=</span> f1(t)
@@ -1113,7 +1414,25 @@ also comes up by running <code>pydoc scitools.easyviz</code>.  As soon as you
 have digested the very basics of plotting, you are strongly recommend
 to read through the curve plotting part of the Easyviz manual.
 
-<h2 id="easyviz:movie">Making animations<a name="easyviz:movie"></a></h2>
+<h3 id="___sec23" class="anchor">Other plotting alternatives </h3>
+
+<p>
+In recent years, there have been several attempts to build new plotting
+libraries in Python, especially aimed at visualizations in web browser
+and handling &quot;big data&quot;. Some packages are
+<a href="http://pandas.pydata.org/" target="_self">Pandas</a>,
+<a href="http://stanford.edu/~mwaskom/software/seaborn/" target="_self">Seaborn</a>,
+<a href="http://bokeh.pydata.org/en/latest/" target="_self">Bokeh</a>,
+<a href="http://ggplot.yhathq.com/" target="_self">ggplot</a>,
+<a href="http://pygal.org/" target="_self">pygal</a>, and
+<a href="https://plot.ly/" target="_self">Plotly</a>,
+A comparison of these packages for creating
+bar charts is made in <a href="http://pbpython.com/visualization-tools-1.html" target="_self">an article by Chris Moffitt</a>.
+We must also mention the
+<a href="https://github.com/bloomberg/bqplot" target="_self">bqplot</a>
+for powerful plotting in Jupyter notebooks.
+
+<h2 id="easyviz:movie" class="anchor">Making animations</h2>
 
 <p>
 A sequence of plots can be combined into an animation on the
@@ -1123,7 +1442,7 @@ The standard procedure is to generate a series of individual plots
 and to show them in sequence to obtain an animation effect.
 Plots store in files can be combined to a video file.
 
-<h3 id="___sec24">Example <a name="___sec24"></a></h3>
+<h3 id="___sec25" class="anchor">Example </h3>
 
 <p>
 The function
@@ -1143,9 +1462,9 @@ function evolves as \( s \) is decreased. In Python we implement the
 formula above as a function <code>f(x, m, s)</code>.
 
 <p>
-<center> <!-- figure -->
+<center> <!-- figure label: --> <div id="fig:plot4"></div> <!-- FIGURE -->
 <hr class="figure">
-<center><p class="caption">Figure 7:  Different shapes of a Gaussian function. <a name="fig:plot4"></a> </p></center>
+<center><p class="caption">Figure 7:  Different shapes of a Gaussian function.  <!-- caption label: fig:plot4 --> </p></center>
 <p><img src="fig-plot/plot4_thick.png" align="bottom" width=400></p>
 </center>
 
@@ -1181,7 +1500,7 @@ The function \( f \) is defined for all \( -\infty < x < \infty \), but the
 function value is very small already \( 3s \) away from \( x=m \). We may
 therefore limit the \( x \) coordinates to \( [m-3s,m+3s] \).
 
-<h3 id="___sec25">Animation in Easyviz <a name="___sec25"></a></h3>
+<h3 id="___sec26" class="anchor">Animation in Easyviz </h3>
 
 <p>
 We start with using Easyviz for animation since this is almost
@@ -1193,7 +1512,7 @@ from 2 to 0.2 looks as follows.
 <p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">scitools.std</span> <span style="color: #008000; font-weight: bold">import</span> sqrt, pi, exp, linspace, plot, movie
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">scitools.std</span> <span style="color: #008000; font-weight: bold">import</span> sqrt, pi, exp, linspace, plot, movie
 <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">time</span>
 
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f</span>(x, m, s):
@@ -1259,7 +1578,7 @@ will give a wrong sequence of frames in the movie. For instance,
 </div>
 
 
-<h3 id="___sec26">Basic animation in Matplotlib <a name="___sec26"></a></h3>
+<h3 id="___sec27" class="anchor">Basic animation in Matplotlib </h3>
 
 <p>
 Animation is Matplotib requires more than a loop over a parameter and
@@ -1275,7 +1594,7 @@ technique. Therefore, we concentrate on the graphics part here:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">plt</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">plt</span>
 <span style="color: #666666">...</span>
 <span style="color: #408080; font-style: italic"># Make a first plot</span>
 plt<span style="color: #666666">.</span>ion()
@@ -1306,7 +1625,7 @@ e.g.,
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">lines <span style="color: #666666">=</span> plot(x, y1, x, y2, x, y3)
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>lines <span style="color: #666666">=</span> plot(x, y1, x, y2, x, y3)
 
 <span style="color: #008000; font-weight: bold">for</span> parameter <span style="color: #AA22FF; font-weight: bold">in</span> parameters:
     y1 <span style="color: #666666">=</span> <span style="color: #666666">...</span>
@@ -1321,7 +1640,7 @@ The file <a href="http://tinyurl.com/pwyasaa/plot/movie1_mpl1.py" target="_self"
 contains the complete program for doing animation
 with native Matplotlib syntax.
 
-<h3 id="___sec27">Using FuncAnimation in Matplotlib <a name="___sec27"></a></h3>
+<h3 id="___sec28" class="anchor">Using FuncAnimation in Matplotlib </h3>
 
 <p>
 The recommended approach to animation in Matplotlib is to use the
@@ -1330,7 +1649,7 @@ The recommended approach to animation in Matplotlib is to use the
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">plt</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">plt</span>
 <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">matplotlib.animation</span> <span style="color: #008000; font-weight: bold">import</span> animation
 
 anim <span style="color: #666666">=</span> animation<span style="color: #666666">.</span>FuncAnimation(
@@ -1354,7 +1673,7 @@ as shown earlier, we have to make a first plot:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">fig <span style="color: #666666">=</span> plt<span style="color: #666666">.</span>figure()
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>fig <span style="color: #666666">=</span> plt<span style="color: #666666">.</span>figure()
 plt<span style="color: #666666">.</span>axis([x[<span style="color: #666666">0</span>], x[<span style="color: #666666">-1</span>], <span style="color: #666666">-0.1</span>, max_f])
 lines <span style="color: #666666">=</span> plt<span style="color: #666666">.</span>plot([], [])
 plt<span style="color: #666666">.</span>xlabel(<span style="color: #BA2121">&#39;x&#39;</span>)
@@ -1371,7 +1690,7 @@ in this example:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">init</span>():
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">init</span>():
     lines[<span style="color: #666666">0</span>]<span style="color: #666666">.</span>set_data([], [])  <span style="color: #408080; font-style: italic"># empty plot</span>
     <span style="color: #008000; font-weight: bold">return</span> lines
 </pre></div>
@@ -1382,7 +1701,7 @@ basically computes <code>y</code> from <code>f</code> and updates the data of th
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">frame</span>(args):
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">frame</span>(args):
     frame_no, s, x, lines <span style="color: #666666">=</span> args
     y <span style="color: #666666">=</span> f(x, m, s)
     lines[<span style="color: #666666">0</span>]<span style="color: #666666">.</span>set_data(x, y)
@@ -1397,7 +1716,7 @@ We are now ready to call <code>animation.FuncAnimation</code>:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">anim <span style="color: #666666">=</span> animation<span style="color: #666666">.</span>FuncAnimation(
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>anim <span style="color: #666666">=</span> animation<span style="color: #666666">.</span>FuncAnimation(
     fig, frame, all_args, interval<span style="color: #666666">=150</span>, init_func<span style="color: #666666">=</span>init, blit<span style="color: #666666">=</span><span style="color: #008000">True</span>)
 </pre></div>
 <p>
@@ -1407,7 +1726,7 @@ the MP4 format with 5 frames per second:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">anim<span style="color: #666666">.</span>save(<span style="color: #BA2121">&#39;movie1.mp4&#39;</span>, fps<span style="color: #666666">=5</span>)   <span style="color: #408080; font-style: italic"># movie in MP4 format</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>anim<span style="color: #666666">.</span>save(<span style="color: #BA2121">&#39;movie1.mp4&#39;</span>, fps<span style="color: #666666">=5</span>)   <span style="color: #408080; font-style: italic"># movie in MP4 format</span>
 </pre></div>
 <p>
 Finally, we must <code>plt.show()</code> as always to watch any plots on
@@ -1423,7 +1742,7 @@ later. Such programs are explained in the section <a href="#sec:plot:video">Maki
 <p>
 The complete code showing the basic use of
 <code>FuncAnimation</code> is available in <a href="http://tinyurl.com/pwyasaa/plot/movie1_FuncAnimation.py" target="_self"><tt>movie1_FuncAnimation.py</tt></a>.
-There is also a <a href="http://jakevdp.github.io/blog/2012/08/18/matplotlib-animation-tutorial/" target="_self">Matlab Animation
+There is also a <a href="http://jakevdp.github.io/blog/2012/08/18/matplotlib-animation-tutorial/" target="_self">MATLAB Animation
 Tutorial</a>
 with more basic information, plus a set of animation examples on <a href="http://matplotlib.org/examples" target="_self"><tt>http://matplotlib.org/examples</tt></a>.
 
@@ -1437,7 +1756,7 @@ form <code>tmp*.png</code>:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">glob</span><span style="color: #666666">,</span> <span style="color: #0000FF; font-weight: bold">os</span>
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">glob</span><span style="color: #666666">,</span> <span style="color: #0000FF; font-weight: bold">os</span>
 <span style="color: #008000; font-weight: bold">for</span> filename <span style="color: #AA22FF; font-weight: bold">in</span> glob<span style="color: #666666">.</span>glob(<span style="color: #BA2121">&#39;tmp*.png&#39;</span>):
     os<span style="color: #666666">.</span>remove(filename)
 </pre></div>
@@ -1455,7 +1774,7 @@ and later delete the subfolder. Here is a suitable code segment:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">shutil</span><span style="color: #666666">,</span> <span style="color: #0000FF; font-weight: bold">os</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">shutil</span><span style="color: #666666">,</span> <span style="color: #0000FF; font-weight: bold">os</span>
 subdir <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;temp&#39;</span>            <span style="color: #408080; font-style: italic"># subfolder name for plot files</span>
 <span style="color: #008000; font-weight: bold">if</span> os<span style="color: #666666">.</span>path<span style="color: #666666">.</span>isdir(subdir):  <span style="color: #408080; font-style: italic"># does the subfolder already exist?</span>
     shutil<span style="color: #666666">.</span>rmtree(subdir)  <span style="color: #408080; font-style: italic"># delete the whole folder</span>
@@ -1469,7 +1788,7 @@ Note that Python and many other languages use the word directory
 instead of folder.  Consequently, the name of functions dealing with
 folders have a name containing <code>dir</code> for directory.
 
-<h2 id="sec:plot:video">Making videos<a name="sec:plot:video"></a></h2>
+<h2 id="sec:plot:video" class="anchor">Making videos</h2>
 
 <p>
 Suppose we have a set of frames in an animation, saved
@@ -1480,7 +1799,7 @@ that goes from 0 to some value. The corresponding files are then
 Several tools can be used to create videos in common formats from
 the individual frames in the plot files.
 
-<h3 id="___sec29">Animated GIF file <a name="___sec29"></a></h3>
+<h3 id="___sec30" class="anchor">Animated GIF file </h3>
 
 <p>
 The <a href="http://www.imagemagick.org/" target="_self">ImageMagick</a> software suite contains
@@ -1489,7 +1808,7 @@ a program <code>convert</code> for making animated GIF files:
 <p>
 
 <!-- code=text (!bc sys) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">Terminal&gt; convert -delay 50 tmp_*.png movie.gif
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>Terminal&gt; convert -delay 50 tmp_*.png movie.gif
 </pre></div>
 <p>
 The delay between frames, here 50, is measured in units of 1/100 s.
@@ -1501,14 +1820,14 @@ in web pages. Writing the HTML code
 <p>
 
 <!-- code=html (!bc htmlcod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">&lt;img</span> <span style="color: #7D9029">src=</span><span style="color: #BA2121">&quot;movie.gif&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>&lt;<span style="color: #008000; font-weight: bold">img</span> <span style="color: #7D9029">src</span><span style="color: #666666">=</span><span style="color: #BA2121">&quot;movie.gif&quot;</span>&gt;
 </pre></div>
 <p>
 in some file with extension <code>.html</code> and loading this file into a
 web browser will play the movie repeatedly.
 You may try this out <a href="http://hplgit.github.io/scipro-primer/video/gaussian.html" target="_self">online</a>.
 
-<h3 id="___sec30">MP4, Ogg, WebM, and Flash videos <a name="___sec30"></a></h3>
+<h3 id="___sec31" class="anchor">MP4, Ogg, WebM, and Flash videos </h3>
 
 <p>
 The modern video formats that are best suited for being displayed
@@ -1519,13 +1838,14 @@ movies. Creating a flash video is done by
 <p>
 
 <!-- code=text (!bc sys) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">Terminal&gt; ffmpeg -r 5 -i tmp_%04d.png -vcodec flv movie.flv
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>Terminal&gt; ffmpeg -i tmp_%04d.png -r 5 -vcodec flv movie.flv
 </pre></div>
 <p>
-The <code>-r</code> option specifies the number of frames per second, here 5,
-the <code>-i</code> option
+The <code>-i</code> option
 specifies the printf string that was used to make the names of the
-individual plot files, <code>-vcodec</code> is the video codec for Flash,
+individual plot files,
+<code>-r</code> specifies the number of frames per second, here 5,
+<code>-vcodec</code> is the video codec for Flash,
 which is called <code>flv</code>, and the final argument is the name of the
 video file. On Debian Linux systems, such as Ubuntu, you use
 the <code>avconv</code> program instead of <code>ffmpeg</code>.
@@ -1549,8 +1869,8 @@ specify the codec and use the right extension in the video file:
 <tr><td align="left">   Ogg       </td> <td align="left">   <code>-vcodec libtheora movie.ogg</code>    </td> </tr>
 </tbody>
     </table>
-  </div>
-</div> <!-- col-xs-5 -->
+  </div> <!-- col-xs-5 -->
+</div> <!-- cell row -->
 <p>
 Video files are normally trivial to play in graphical file
 browser: double lick
@@ -1565,7 +1885,7 @@ can run any operating system command in (e.g.) <code>os.system</code>:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">cmd <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;convert -delay 50 tmp_*.png movie.gif&#39;</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>cmd <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;convert -delay 50 tmp_*.png movie.gif&#39;</span>
 os<span style="color: #666666">.</span>system(cmd)
 </pre></div>
 <p>
@@ -1581,11 +1901,11 @@ the time of this writing goes like
 <p>
 
 <!-- code=text (!bc sys) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">Terminal&gt; sudo apt-get install lib-avtools libavcodec-extra-53 \ 
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>Terminal&gt; sudo apt-get install lib-avtools libavcodec-extra-53 \ 
           libx264-dev
 </pre></div>
 
-<h2 id="___sec31">Curve plots in pure text <a name="___sec31"></a></h2>
+<h2 id="___sec32" class="anchor">Curve plots in pure text </h2>
 
 <p>
 Sometimes it can be desirable to show a graph in pure ASCII text,
@@ -1599,7 +1919,7 @@ of primitive plotting. Here we just give an example of what it can do:
 <p>
 
 <!-- code=python (!bc pyshell) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
 <span style="color: #666666">&gt;&gt;&gt;</span> x <span style="color: #666666">=</span> np<span style="color: #666666">.</span>linspace(<span style="color: #666666">-2</span>, <span style="color: #666666">2</span>, <span style="color: #666666">81</span>)
 <span style="color: #666666">&gt;&gt;&gt;</span> y <span style="color: #666666">=</span> np<span style="color: #666666">.</span>exp(<span style="color: #666666">-0.5*</span>x<span style="color: #666666">**2</span>)<span style="color: #666666">*</span>np<span style="color: #666666">.</span>cos(np<span style="color: #666666">.</span>pi<span style="color: #666666">*</span>x)
 <span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">scitools.aplotter</span> <span style="color: #008000; font-weight: bold">import</span> plot
@@ -1623,36 +1943,7 @@ of primitive plotting. Here we just give an example of what it can do:
                    \       <span style="color: #666666">/</span>            <span style="color: #666666">|</span>           \       <span style="color: #666666">/</span>
                     \    <span style="color: #666666">//</span>             <span style="color: #666666">|</span>            \<span style="color: #666666">-</span>    <span style="color: #666666">//</span>
                      <span style="color: #666666">----</span>               <span style="color: #666666">-0.63</span>          <span style="color: #666666">---/</span>
-                                        <span style="color: #666666">|</span>
-<span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #408080; font-style: italic"># plot circles at data points only:</span>
-<span style="color: #666666">&gt;&gt;&gt;</span> plot(x, y, dot<span style="color: #666666">=</span><span style="color: #BA2121">&#39;o&#39;</span>, plot_slope<span style="color: #666666">=</span><span style="color: #008000">False</span>)
-                                        <span style="color: #666666">|</span>
-                                       o<span style="color: #666666">+1</span>
-                                     oo <span style="color: #666666">|</span>oo
-                                    o   <span style="color: #666666">|</span>  o
-                                   o    <span style="color: #666666">|</span>   o
-                                        <span style="color: #666666">|</span>
-                                  o     <span style="color: #666666">|</span>    o
-                                 o      <span style="color: #666666">|</span>     o
-                                o       <span style="color: #666666">|</span>      o
-                                        <span style="color: #666666">|</span>
-   oooooooo                    o        <span style="color: #666666">|</span>       o
-<span style="color: #666666">---+-------</span>oo<span style="color: #666666">-----------------</span>o<span style="color: #666666">---------+--------</span>o<span style="color: #666666">-----------------</span>o
-   <span style="color: #666666">-2</span>        o                          <span style="color: #666666">|</span>                         o
-              oo              o         <span style="color: #666666">|</span>         o             oo
-                o            o          <span style="color: #666666">|</span>         o            o
-                 oo         o           <span style="color: #666666">|</span>          o         oo
-                   o       o            <span style="color: #666666">|</span>           o       o
-                    o    oo             <span style="color: #666666">|</span>            oo    oo
-                     oooo               <span style="color: #666666">-0.63</span>          oooo
-                                        <span style="color: #666666">|</span>
-<span style="color: #666666">&gt;&gt;&gt;</span> p <span style="color: #666666">=</span> plot(x, y, output<span style="color: #666666">=</span><span style="color: #008000">str</span>)   <span style="color: #408080; font-style: italic"># store plot in a string p</span>
-<span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">print</span> p
 </pre></div>
-<p>
-(The last 13 characters of the output lines are here removed to make the lines
-fit the maximum textwidth of this document.)
-
 <p>
 <p>
 <!-- navigation buttons at the bottom of the page -->

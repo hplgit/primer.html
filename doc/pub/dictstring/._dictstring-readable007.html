@@ -1,0 +1,1096 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Dictionaries and strings">
+<meta name="keywords" content="dictionary,keys (dictionaries),immutable objects,mutable objects,summing a list,summing over an iterator,dictionary comprehensions,nested dictionaries,dictionary nested,date conversion,plotting data vs date,string slicing,slicing,substrings,string substrings,string searching,string find,string substitution,substitution (in text),string replace,string splitting,string case change,string testing for number,whitespace,blank lines in files,string stripping leading/trailing blanks,string joining words,dictionary functionality">
+
+<title>Dictionaries and strings</title>
+
+<!-- Bootstrap style: bootswatch_readable -->
+<link href="http://netdna.bootstrapcdn.com/bootswatch/3.1.1/readable/bootstrap.min.css" rel="stylesheet">
+<!-- not necessary
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+
+<style type="text/css">
+/* Let inline verbatim have the same color as the surroundings */
+code { color: inherit; background-color: transparent; }
+
+/* Add scrollbar to dropdown menus in bootstrap navigation bar */
+.dropdown-menu {
+   height: auto;
+   max-height: 400px;
+   overflow-x: hidden;
+}
+
+/* Adds an invisible element before each target to offset for the navigation
+   bar */
+.anchor::before {
+  content:"";
+  display:block;
+  height:50px; /* fixed header height*/
+  margin:-50px 0 0; /* negative fixed header height */
+}
+
+body { font-size:20px;line-height:1.5--html_body_style=font-size:20px;line-height:1.5; }
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [('Table of contents',
+               1,
+               'table_of_contents',
+               'table_of_contents'),
+              (u'Dictionaries', 1, u'sec:files:dicts', u'sec:files:dicts'),
+              (u'Making dictionaries', 2, None, '___sec1'),
+              (u'Dictionary operations', 2, None, '___sec2'),
+              (u'Remark', 3, None, '___sec3'),
+              (u'Example: Polynomials as dictionaries',
+               2,
+               u'sec:files:poly',
+               u'sec:files:poly'),
+              (u'Dictionaries with default values and ordering',
+               2,
+               u'sec:files:dict:default:order',
+               u'sec:files:dict:default:order'),
+              (u'Dictionaries with default values', 3, None, '___sec6'),
+              (u'Ordered dictionaries', 3, None, '___sec7'),
+              (u'Example: Storing file data in dictionaries',
+               2,
+               u'sec:files:dict:density',
+               u'sec:files:dict:density'),
+              (u'Problem', 3, None, '___sec9'),
+              (u'Solution', 3, None, '___sec10'),
+              (u'Example: Storing file data in nested dictionaries',
+               2,
+               u'sec:files:dictdict',
+               u'sec:files:dictdict'),
+              (u'Problem', 3, None, '___sec12'),
+              (u'Algorithm', 3, None, '___sec13'),
+              (u'Implementation', 3, None, '___sec14'),
+              (u'Dissection', 3, None, '___sec15'),
+              (u'Example: Reading and plotting data recorded at specific dates',
+               2,
+               u'sec:files:stockprices',
+               u'sec:files:stockprices'),
+              (u'Problem', 3, None, '___sec17'),
+              (u'Solution', 3, None, '___sec18'),
+              (u'Strings', 1, u'sec:files:str', u'sec:files:str'),
+              (u'Common operations on strings',
+               2,
+               u'sec:files:stringop',
+               u'sec:files:stringop'),
+              (u'Substring specification', 3, None, '___sec21'),
+              (u'Searching for substrings', 3, None, '___sec22'),
+              (u'Substitution', 3, None, '___sec23'),
+              (u'String splitting', 3, None, '___sec24'),
+              (u'Upper and lower case', 3, None, '___sec25'),
+              (u'Strings are constant', 3, None, '___sec26'),
+              (u'Strings with digits only', 3, None, '___sec27'),
+              (u'Whitespace', 3, None, '___sec28'),
+              (u'Joining strings', 3, None, '___sec29'),
+              (u'Example: Reading pairs of numbers',
+               2,
+               u'sec:files:pairs',
+               u'sec:files:pairs'),
+              (u'Problem', 3, None, '___sec31'),
+              (u'Solution', 3, None, '___sec32'),
+              (u'Example: Reading coordinates', 2, None, '___sec33'),
+              (u'Problem', 3, None, '___sec34'),
+              (u'Solution 1: substring extraction', 3, None, '___sec35'),
+              (u'Solution 2: string search', 3, None, '___sec36'),
+              (u'Solution 3: string split', 3, None, '___sec37'),
+              (u'Reading data from web pages',
+               1,
+               u'sec:files:webtxt',
+               u'sec:files:webtxt'),
+              (u'About web pages',
+               2,
+               u'sec:files:HTMLintro',
+               u'sec:files:HTMLintro'),
+              (u'How to access web pages in programs',
+               2,
+               u'sec:files:urllib',
+               u'sec:files:urllib'),
+              (u'Alternative 1', 3, None, '___sec41'),
+              (u'Alternative 2', 3, None, '___sec42'),
+              (u'Example: Reading pure text files',
+               2,
+               u'sec:files:url:weather',
+               u'sec:files:url:weather'),
+              (u'Example: Extracting data from HTML',
+               2,
+               u'sec:files:url:interpret',
+               u'sec:files:url:interpret'),
+              (u'Handling non-English text',
+               2,
+               u'sec:files:encoding',
+               u'sec:files:encoding'),
+              (u'Reading and writing spreadsheet files',
+               1,
+               u'sec:files:csv',
+               u'sec:files:csv'),
+              (u'CSV files', 2, None, '___sec47'),
+              (u'Reading CSV files', 2, None, '___sec48'),
+              (u'Processing spreadsheet data', 2, None, '___sec49'),
+              (u'Writing CSV files', 2, None, '___sec50'),
+              (u'Remark', 3, None, '___sec51'),
+              (u'Representing number cells with Numerical Python arrays',
+               2,
+               None,
+               '___sec52'),
+              (u'Using more high-level Numerical Python functionality',
+               2,
+               None,
+               '___sec53'),
+              (u'Making code that is compatible with Python 2 and 3',
+               1,
+               u'sec:dictstring:py23',
+               u'sec:dictstring:py23'),
+              (u'Basic differences between Python 2 and 3',
+               2,
+               None,
+               '___sec55'),
+              (u'`xrange` in Python 2 is `range` in Python 3',
+               3,
+               None,
+               '___sec56'),
+              (u'Python 3 often avoids returning lists and dictionaries',
+               3,
+               None,
+               '___sec57'),
+              (u'Library modules have different names', 3, None, '___sec58'),
+              (u'Python 3 has unicode and byte strings', 3, None, '___sec59'),
+              (u'Python 3 has different relative import syntax inside packages',
+               3,
+               None,
+               '___sec60'),
+              (u'Turning Python 2 code into Python 3 code',
+               2,
+               None,
+               '___sec61'),
+              (u'Summary', 1, None, '___sec62'),
+              (u'Chapter topics', 2, None, '___sec63'),
+              (u'Dictionaries', 3, None, '___sec64'),
+              (u'Strings', 3, None, '___sec65'),
+              (u'Downloading Internet files', 3, None, '___sec66'),
+              (u'Terminology', 3, None, '___sec67'),
+              (u'Example: A file database',
+               2,
+               u'sec:files:sumex',
+               u'sec:files:sumex'),
+              (u'Problem', 3, None, '___sec69'),
+              (u'Solution', 3, None, '___sec70'),
+              (u'Exercises',
+               1,
+               u'sec:files:exercises',
+               u'sec:files:exercises'),
+              (u'Exercise 1: Make a dictionary from a table',
+               2,
+               u'sec:files:ex2b:basic',
+               u'sec:files:ex2b:basic'),
+              (u'Exercise 2: Explore syntax differences: lists vs. dicts',
+               2,
+               u'sec:files:ex2',
+               u'sec:files:ex2'),
+              (u'Exercise 3: Use string operations to improve a program',
+               2,
+               u'sec:files:ex17',
+               u'sec:files:ex17'),
+              (u'Exercise 4: Interpret output from a program',
+               2,
+               u'sec:files:ex13',
+               u'sec:files:ex13'),
+              (u'Exercise 5: Make a dictionary',
+               2,
+               u'sec:files:ex2b',
+               u'sec:files:ex2b'),
+              (u'Exercise 6: Make a nested dictionary',
+               2,
+               u'sec:files:ex2c',
+               u'sec:files:ex2c'),
+              (u'Exercise 7: Make a nested dictionary from a file',
+               2,
+               u'sec:files:ex2d:nested',
+               u'sec:files:ex2d:nested'),
+              (u'Exercise 8: Make a nested dictionary from a file',
+               2,
+               u'sec:files:ex2d:nested2',
+               u'sec:files:ex2d:nested2'),
+              (u'Exercise 9: Compute the area of a triangle',
+               2,
+               u'sec:files:ex2d',
+               u'sec:files:ex2d'),
+              (u'Exercise 10: Compare data structures for polynomials',
+               2,
+               u'sec:files:ex16',
+               u'sec:files:ex16'),
+              (u'Exercise 11: Compute the derivative of a polynomial',
+               2,
+               u'sec:files:ex3',
+               u'sec:files:ex3'),
+              (u'Exercise 12: Specify functions on the command line',
+               2,
+               u'sec:basic:ex10',
+               u'sec:basic:ex10'),
+              (u'Exercise 13: Interpret function specifications',
+               2,
+               u'sec:basic:ex10b',
+               u'sec:basic:ex10b'),
+              (u'Exercise 14: Compare average temperatures in cities',
+               2,
+               u'sec:files:ex8',
+               u'sec:files:ex8'),
+              (u'Exercise 15: Generate an HTML report with figures',
+               2,
+               u'sec:files:ex21',
+               u'sec:files:ex21'),
+              (u'References', 1, None, '___sec87')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- newcommands_keep.tex -->
+$$
+\newcommand{\tp}{\thinspace .}
+$$
+
+
+
+
+    
+<!-- Bootstrap navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="dictstring-readable.html">Dictionaries and strings</a>
+  </div>
+
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     <!-- navigation toc: --> <li><a href="._dictstring-readable000.html#table_of_contents" style="font-size: 80%;"><b>Table of contents</b></a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable001.html#sec:files:dicts" style="font-size: 80%;"><b>Dictionaries</b></a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable001.html#___sec1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Making dictionaries</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable001.html#___sec2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Dictionary operations</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable001.html#___sec3" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remark</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable001.html#sec:files:poly" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Polynomials as dictionaries</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable001.html#sec:files:dict:default:order" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Dictionaries with default values and ordering</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable001.html#___sec6" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dictionaries with default values</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable001.html#___sec7" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ordered dictionaries</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable001.html#sec:files:dict:density" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Storing file data in dictionaries</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable001.html#___sec9" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable001.html#___sec10" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Solution</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable001.html#sec:files:dictdict" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Storing file data in nested dictionaries</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable001.html#___sec12" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable001.html#___sec13" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Algorithm</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable001.html#___sec14" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Implementation</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable001.html#___sec15" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dissection</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable001.html#sec:files:stockprices" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Reading and plotting data recorded at specific dates</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable001.html#___sec17" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable001.html#___sec18" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Solution</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable002.html#sec:files:str" style="font-size: 80%;"><b>Strings</b></a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable002.html#sec:files:stringop" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Common operations on strings</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable002.html#___sec21" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Substring specification</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable002.html#___sec22" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Searching for substrings</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable002.html#___sec23" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Substitution</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable002.html#___sec24" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String splitting</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable002.html#___sec25" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Upper and lower case</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable002.html#___sec26" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Strings are constant</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable002.html#___sec27" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Strings with digits only</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable002.html#___sec28" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Whitespace</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable002.html#___sec29" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Joining strings</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable002.html#sec:files:pairs" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Reading pairs of numbers</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable002.html#___sec31" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable002.html#___sec32" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Solution</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable002.html#___sec33" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Reading coordinates</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable002.html#___sec34" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable002.html#___sec35" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Solution 1: substring extraction</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable002.html#___sec36" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Solution 2: string search</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable002.html#___sec37" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Solution 3: string split</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable003.html#sec:files:webtxt" style="font-size: 80%;"><b>Reading data from web pages</b></a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable003.html#sec:files:HTMLintro" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;About web pages</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable003.html#sec:files:urllib" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;How to access web pages in programs</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable003.html#___sec41" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Alternative 1</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable003.html#___sec42" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Alternative 2</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable003.html#sec:files:url:weather" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Reading pure text files</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable003.html#sec:files:url:interpret" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Extracting data from HTML</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable003.html#sec:files:encoding" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Handling non-English text</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable004.html#sec:files:csv" style="font-size: 80%;"><b>Reading and writing spreadsheet files</b></a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable004.html#___sec47" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;CSV files</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable004.html#___sec48" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Reading CSV files</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable004.html#___sec49" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Processing spreadsheet data</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable004.html#___sec50" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Writing CSV files</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable004.html#___sec51" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remark</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable004.html#___sec52" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Representing number cells with Numerical Python arrays</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable004.html#___sec53" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Using more high-level Numerical Python functionality</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable005.html#sec:dictstring:py23" style="font-size: 80%;"><b>Making code that is compatible with Python 2 and 3</b></a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable005.html#___sec55" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Basic differences between Python 2 and 3</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable005.html#___sec56" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`xrange` in Python 2 is <code>range</code> in Python 3</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable005.html#___sec57" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Python 3 often avoids returning lists and dictionaries</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable005.html#___sec58" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Library modules have different names</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable005.html#___sec59" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Python 3 has unicode and byte strings</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable005.html#___sec60" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Python 3 has different relative import syntax inside packages</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable005.html#___sec61" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Turning Python 2 code into Python 3 code</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable006.html#___sec62" style="font-size: 80%;"><b>Summary</b></a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable006.html#___sec63" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Chapter topics</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable006.html#___sec64" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dictionaries</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable006.html#___sec65" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Strings</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable006.html#___sec66" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Downloading Internet files</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable006.html#___sec67" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Terminology</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable006.html#sec:files:sumex" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: A file database</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable006.html#___sec69" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem</a></li>
+     <!-- navigation toc: --> <li><a href="._dictstring-readable006.html#___sec70" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Solution</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:files:exercises" style="font-size: 80%;"><b>Exercises</b></a></li>
+     <!-- navigation toc: --> <li><a href="#sec:files:ex2b:basic" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 1: Make a dictionary from a table</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:files:ex2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 2: Explore syntax differences: lists vs. dicts</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:files:ex17" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 3: Use string operations to improve a program</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:files:ex13" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 4: Interpret output from a program</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:files:ex2b" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 5: Make a dictionary</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:files:ex2c" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 6: Make a nested dictionary</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:files:ex2d:nested" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 7: Make a nested dictionary from a file</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:files:ex2d:nested2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 8: Make a nested dictionary from a file</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:files:ex2d" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 9: Compute the area of a triangle</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:files:ex16" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 10: Compare data structures for polynomials</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:files:ex3" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 11: Compute the derivative of a polynomial</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:basic:ex10" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 12: Specify functions on the command line</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:basic:ex10b" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 13: Interpret function specifications</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:files:ex8" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 14: Compare average temperatures in cities</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:files:ex21" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 15: Generate an HTML report with figures</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec87" style="font-size: 80%;"><b>References</b></a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div> <!-- end of navigation bar -->
+
+<div class="container">
+
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+
+<a name="part0007"></a>
+<!-- !split -->
+<p style="font-size:80%">This chapter is taken from the book <a href="http://www.springer.com/gp/book/9783662498866">A Primer on Scientific Programming with Python</a> by H. P. Langtangen, 5th edition, Springer, 2016.</p>
+
+<h1 id="sec:files:exercises" class="anchor">Exercises</h1>
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:files:ex2b:basic" class="anchor">Exercise 1: Make a dictionary from a table</h2>
+
+<p>
+The file <a href="http://tinyurl.com/pwyasaa/dictstring/constants.txt" target="_self"><tt>src/dictstring/constants.txt</tt></a> contains a table of the values and
+the dimensions of some fundamental constants from physics.  We want to
+load this table into a dictionary <code>constants</code>, where the keys are the
+names of the constants. For example, <code>constants['gravitational
+constant']</code> holds the value of the gravitational constant
+(\( 6.67259\cdot 10^{-11} \)) in Newton's law of gravitation.  Make a
+function that reads and interprets the text in the file, and
+finally returns the dictionary.
+Filename: <code>fundamental_constants</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:files:ex2" class="anchor">Exercise 2: Explore syntax differences: lists vs. dicts</h2>
+
+<p>
+Consider this code:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>t1 <span style="color: #666666">=</span> {}
+t1[<span style="color: #666666">0</span>] <span style="color: #666666">=</span> <span style="color: #666666">-5</span>
+t1[<span style="color: #666666">1</span>] <span style="color: #666666">=</span> <span style="color: #666666">10.5</span>
+</pre></div>
+<p>
+Explain why the lines above work fine while the ones below do not:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>t2 <span style="color: #666666">=</span> []
+t2[<span style="color: #666666">0</span>] <span style="color: #666666">=</span> <span style="color: #666666">-5</span>
+t2[<span style="color: #666666">1</span>] <span style="color: #666666">=</span> <span style="color: #666666">10.5</span>
+</pre></div>
+<p>
+What must be done in the last code snippet to make it work properly?
+Filename: <code>list_vs_dict</code>.
+
+<p>
+<!-- best for teaching, not students -->
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:files:ex17" class="anchor">Exercise 3: Use string operations to improve a program</h2>
+
+<p>
+Consider the program <code>density.py</code> from the section <a href="._dictstring-readable001.html#sec:files:dict:density">Example: Storing file data in dictionaries</a>.  One problem with this program is that
+the name of the substance can contain only one or two words, while
+more comprehensive tables may have substances with names consisting of
+several words. The purpose of this exercise is to use string
+operations to shorten the code and make it more general and elegant.
+
+<p>
+<b>a)</b>
+Make a Python function that lets the name <code>substance</code> consist of all the
+words that <code>line</code> is split into, but not the last (which is the value
+of the corresponding density).
+Use the <code>join</code> method in string objects to combine the words that
+make up the name of the substance.
+
+<p>
+<b>b)</b>
+Observe that all the density values in the file <code>densities.dat</code>
+start in the same column.
+Write an alternative function that makes use of
+substring indexing to divide <code>line</code> into two parts (<code>substance</code> and <code>density</code>).
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_3_1" style="font-size: 80%;"></a>
+<b>Hint.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_3_1">
+
+<p>
+Remember to strip the first part such that, e.g.,
+the density of ice is obtained as <code>densities['ice']</code> and not
+<code>densities['ice         ']</code>.
+
+<p>
+</div></p>
+</div>
+</p>
+
+<p>
+<!-- --- end hint in exercise --- -->
+
+<p>
+<b>c)</b>
+Make a test function that calls the two other functions and
+tests that they produce the same result.
+
+<p>
+Filename: <code>density_improved</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:files:ex13" class="anchor">Exercise 4: Interpret output from a program</h2>
+
+<p>
+The program <a href="http://tinyurl.com/pwyasaa/funcif/lnsum.py" target="_self"><tt>src/funcif/lnsum.py</tt></a>
+produces, among other things, this output:
+
+<p>
+
+<!-- code=text (!bc ccq) typeset with pygments style "default" -->
+<blockquote>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>epsilon: 1e-04, exact error: 8.18e-04, n=55
+epsilon: 1e-06, exact error: 9.02e-06, n=97
+epsilon: 1e-08, exact error: 8.70e-08, n=142
+epsilon: 1e-10, exact error: 9.20e-10, n=187
+epsilon: 1e-12, exact error: 9.31e-12, n=233
+</pre></div>
+</blockquote><p>
+Redirect the output to a file (by <code>python lnsum.py &gt; file</code>).
+Write a Python program that reads the file and extracts
+the numbers corresponding to <code>epsilon</code>, <code>exact error</code>,
+and <code>n</code>. Store the numbers in three arrays and plot
+<code>epsilon</code> and the <code>exact error</code> versus <code>n</code>.
+Use a logarithmic scale on the \( y \) axis.
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_4_1" style="font-size: 80%;"></a>
+<b>Hint.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_4_1">
+
+<p>
+The function <code>semilogy</code> is
+an alternative to <code>plot</code> and gives logarithmic scale on \( y \) axis.
+
+<p>
+</div></p>
+</div>
+</p>
+
+<p>
+<!-- --- end hint in exercise --- -->
+Filename: <code>read_error</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:files:ex2b" class="anchor">Exercise 5: Make a dictionary</h2>
+
+<p>
+Based on the stars data in
+the
+exercise named &quot;Write a sort function for a list of 4-tuples&quot; in the
+document <a href="http://hplgit.github.io/primer.html/doc/pub/funcif" target="_self">Functions and branching</a>
+<a href="#Langtangen_TCSE6_funcif">[1]</a>,
+make a dictionary where the keys contain the names of the stars
+and the values correspond to the luminosity.
+Filename: <code>stars_data_dict1</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:files:ex2c" class="anchor">Exercise 6: Make a nested dictionary</h2>
+
+<p>
+Store the data about stars from the exercise named &quot;Write a sort
+function for a list of 4-tuples&quot; in the document <a href="http://hplgit.github.io/primer.html/doc/pub/funcif" target="_self">Functions and
+branching</a>
+<a href="#Langtangen_TCSE6_funcif">[1]</a> in a nested dictionary such that we can
+look up the distance, the apparent brightness, and the luminosity of a
+star with name <code>N</code> by
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>stars[N][<span style="color: #BA2121">&#39;distance&#39;</span>]
+stars[N][<span style="color: #BA2121">&#39;apparent brightness&#39;</span>]
+stars[N][<span style="color: #BA2121">&#39;luminosity&#39;</span>]
+</pre></div>
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_6_1" style="font-size: 80%;"></a>
+<b>Hint.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_6_1">
+
+<p>
+Initialize the data by just copying the
+<a href="http://tinyurl.com/pwyasaa/funcif/stars.txt" target="_self"><tt>stars.txt</tt></a> text into the program.
+
+<p>
+</div></p>
+</div>
+</p>
+
+<p>
+<!-- --- end hint in exercise --- -->
+Filename: <code>stars_data_dict2</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:files:ex2d:nested" class="anchor">Exercise 7: Make a nested dictionary from a file</h2>
+
+<p>
+The file <a href="http://tinyurl.com/pwyasaa/dictstring/human_evolution.txt" target="_self"><tt>src/dictstring/human_evolution.txt</tt></a> holds information about
+various human species and their height, weight, and brain volume.
+Make a program that reads this file and stores the tabular data in
+a nested dictionary <code>humans</code>. The keys in <code>humans</code> correspond
+to the specie name (e.g., <code>homo erectus</code>), and the values are
+dictionaries with keys for <code>height</code>, <code>weight</code>, <code>brain volume</code>,
+and <code>when</code> (the latter for when the specie lived).
+For example, <code>humans['homo neanderthalensis']['mass']</code> should
+equal <code>'55-70'</code>. Let the program write out the <code>humans</code>
+dictionary in a nice tabular form similar to that in the file.
+Filename: <code>humans</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:files:ex2d:nested2" class="anchor">Exercise 8: Make a nested dictionary from a file</h2>
+
+<p>
+The viscosity \( \mu \) of gases depends on the temperature.
+For some gases the following formula is relevant:
+
+$$ \mu (T) = \mu_0\frac{T_0-C}{T+C}\left(\frac{T}{T_0}\right)^{1.5},$$
+
+where the values of the constants \( C \), \( T_0 \), and \( \mu_0 \) are
+found in the file
+<a href="http://tinyurl.com/pwyasaa/dictstring/viscosity_of_gases.txt" target="_self"><tt>src/dictstring/viscosity_of_gases.dat</tt></a>. The temperature is measured in Kelvin.
+
+<p>
+<b>a)</b>
+Load the file into a nested dictionary <code>mu_data</code> such that we can
+look up \( C \), \( T_0 \), and \( \mu_0 \) for a gas with name <code>name</code> by
+<code>mu_data[name][X]</code>, where <code>X</code> is <code>'C'</code> for \( C \),
+<code>'T_0'</code> for \( T_0 \), and <code>'mu_0'</code> for \( \mu_0 \).
+
+<p>
+<b>b)</b>
+Make a function <code>mu(T, gas, mu_data)</code> for computing \( \mu(T) \) for a
+gas with name <code>gas</code> (according to the file) and information about
+constants \( C \), \( T_0 \), and \( \mu_0 \) in <code>mu_data</code>.
+
+<p>
+<b>c)</b>
+Plot \( \mu(T) \) for air, carbon dioxide, and hydrogen with
+\( T\in [223, 373] \).
+
+<p>
+Filename: <code>viscosity_of_gases</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:files:ex2d" class="anchor">Exercise 9: Compute the area of a triangle</h2>
+
+<p>
+The purpose of this exercise is to write
+an <code>area</code> function as in
+the
+exercise named &quot;Compute the area of an arbitrary triangle&quot; in the
+document <a href="http://hplgit.github.io/primer.html/doc/pub/funcif" target="_self">Functions and branching</a>
+<a href="#Langtangen_TCSE6_funcif">[1]</a>,
+but now we assume that the vertices of the triangle is stored in
+a dictionary and not a list. The keys in the dictionary correspond to
+the vertex number (1, 2, or 3) while the values are 2-tuples with the
+\( x \) and \( y \) coordinates of the vertex. For example,
+in a triangle with vertices \( (0,0) \), \( (1,0) \), and \( (0,2) \) the
+<code>vertices</code> argument becomes
+
+<p>
+
+<!-- code=text (!bc ccq) typeset with pygments style "default" -->
+<blockquote>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>{1: (0,0), 2: (1,0), 3: (0,2)}
+</pre></div>
+</blockquote><p>
+Filename: <code>area_triangle_dict</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:files:ex16" class="anchor">Exercise 10: Compare data structures for polynomials</h2>
+
+<p>
+Write a code snippet that uses both a list and a dictionary to
+represent the polynomial \( -\frac{1}{2} + 2x^{100} \).
+Print the list and the dictionary, and use them
+to evaluate the polynomial for \( x=1.05 \).
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_10_1" style="font-size: 80%;"></a>
+<b>Hint.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_10_1">
+
+<p>
+You can apply the <code>eval_poly_dict</code>
+and <code>eval_poly_list</code> functions from the section <a href="._dictstring-readable001.html#sec:files:poly">Example: Polynomials as dictionaries</a>).
+
+<p>
+</div></p>
+</div>
+</p>
+
+<p>
+<!-- --- end hint in exercise --- -->
+Filename: <code>poly_repr</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:files:ex3" class="anchor">Exercise 11: Compute the derivative of a polynomial</h2>
+
+<p>
+A polynomial can be represented by a dictionary as explained
+in the section <a href="._dictstring-readable001.html#sec:files:poly">Example: Polynomials as dictionaries</a>.
+Write a function <code>diff</code> for differentiating such a polynomial.
+The <code>diff</code> function takes the polynomial as a dictionary argument
+and returns the dictionary representation
+of the derivative.
+Here is an example of
+the use of the function <code>diff</code>:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> p <span style="color: #666666">=</span> {<span style="color: #666666">0</span>: <span style="color: #666666">-3</span>, <span style="color: #666666">3</span>: <span style="color: #666666">2</span>, <span style="color: #666666">5</span>: <span style="color: #666666">-1</span>}    <span style="color: #408080; font-style: italic"># -3 + 2*x**3 - x**5</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> diff(p)                     <span style="color: #408080; font-style: italic"># should be 6*x**2 - 5*x**4</span>
+{<span style="color: #666666">2</span>: <span style="color: #666666">6</span>, <span style="color: #666666">4</span>: <span style="color: #666666">-5</span>}
+</pre></div>
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_11_1" style="font-size: 80%;"></a>
+<b>Hint.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_11_1">
+
+<p>
+Recall the formula for differentiation of polynomials:
+
+$$
+\begin{equation}
+{d\over dx}\sum_{j=0}^n c_jx^j = \sum_{j=1}^{n} jc_jx^{j-1}\tp
+\tag{1}
+\end{equation}
+$$
+
+This means that the coefficient of the \( x^{j-1} \) term in the derivative
+equals \( j \) times the coefficient of \( x^j \) term of the original polynomial.
+With <code>p</code> as the polynomial dictionary and <code>dp</code>
+as the dictionary representing the derivative, we then have
+<code>dp[j-1] = j*p[j]</code> for <code>j</code> running over all keys in <code>p</code>,
+except when <code>j</code> equals 0.
+
+<p>
+</div></p>
+</div>
+</p>
+
+<p>
+<!-- --- end hint in exercise --- -->
+Filename: <code>poly_diff</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:basic:ex10" class="anchor">Exercise 12: Specify functions on the command line</h2>
+
+<p>
+Explain what the following two code snippets do and give an example of how
+they can be used.
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_12_1" style="font-size: 80%;"></a>
+<b>Hint.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_12_1">
+
+<p>
+Read about the <code>StringFunction</code> tool
+in the document <a href="http://hplgit.github.io/primer.html/doc/pub/input" target="_self">User input and error handling</a> <a href="#Langtangen_TCSE6_input">[2]</a>
+and about a variable number of keyword
+arguments in the document <a href="http://hplgit.github.io/primer.html/doc/pub/varargs" target="_self">Variable number of function arguments in Python</a> <a href="#Langtangen_TCSE6_varargs">[3]</a>.
+
+<p>
+</div></p>
+</div>
+</p>
+
+<p>
+<!-- --- end hint in exercise --- -->
+
+<p>
+<b>a)</b>
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">sys</span>
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">scitools.StringFunction</span> <span style="color: #008000; font-weight: bold">import</span> StringFunction
+parameters <span style="color: #666666">=</span> {}
+<span style="color: #008000; font-weight: bold">for</span> prm <span style="color: #AA22FF; font-weight: bold">in</span> sys<span style="color: #666666">.</span>argv[<span style="color: #666666">4</span>:]:
+    key, value <span style="color: #666666">=</span> prm<span style="color: #666666">.</span>split(<span style="color: #BA2121">&#39;=&#39;</span>)
+    parameters[key] <span style="color: #666666">=</span> <span style="color: #008000">eval</span>(value)
+f <span style="color: #666666">=</span> StringFunction(sys<span style="color: #666666">.</span>argv[<span style="color: #666666">1</span>], independent_variables<span style="color: #666666">=</span>sys<span style="color: #666666">.</span>argv[<span style="color: #666666">2</span>],
+                   <span style="color: #666666">**</span>parameters)
+var <span style="color: #666666">=</span> <span style="color: #008000">float</span>(sys<span style="color: #666666">.</span>argv[<span style="color: #666666">3</span>])
+<span style="color: #008000; font-weight: bold">print</span> f(var)
+</pre></div>
+<p>
+<b>b)</b>
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">sys</span>
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">scitools.StringFunction</span> <span style="color: #008000; font-weight: bold">import</span> StringFunction
+f <span style="color: #666666">=</span> <span style="color: #008000">eval</span>(<span style="color: #BA2121">&#39;StringFunction(sys.argv[1], &#39;</span> <span style="color: #666666">+</span> \ 
+         <span style="color: #BA2121">&#39;independent_variables=sys.argv[2], </span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121">)&#39;</span> <span style="color: #666666">%</span> \ 
+         (<span style="color: #BA2121">&#39;, &#39;</span><span style="color: #666666">.</span>join(sys<span style="color: #666666">.</span>argv[<span style="color: #666666">4</span>:])))
+var <span style="color: #666666">=</span> <span style="color: #008000">float</span>(sys<span style="color: #666666">.</span>argv[<span style="color: #666666">3</span>])
+<span style="color: #008000; font-weight: bold">print</span> f(var)
+</pre></div>
+<p>
+Filename: <code>cml_functions</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:basic:ex10b" class="anchor">Exercise 13: Interpret function specifications</h2>
+
+<p>
+To specify arbitrary functions \( f(x_1,x_2,\ldots; p_1, p_2, \ldots) \)
+with independent variables \( x_1, x_2, \ldots \) and a set of parameters
+\( p_1, p_2, \ldots \), we allow the following syntax on the command line
+or in a file:
+
+<p>
+
+<!-- code=text (!bc ccq) typeset with pygments style "default" -->
+<blockquote>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>&lt;expression&gt; is function of &lt;list1&gt; with parameter &lt;list2&gt;
+</pre></div>
+</blockquote><p>
+where <code>&lt;expression&gt;</code> denotes the function formula,
+<code>&lt;list1&gt;</code> is a comma-separated list of the independent variables,
+and <code>&lt;list2&gt;</code> is a comma-separated list of name=value parameters. The part
+<code>with parameters &lt;list2&gt;</code> is omitted if there are no parameters.
+The names of the independent variables and the parameters can be
+chosen freely as long as the names can be used as Python variables.
+Here are four different examples of what we can specify on the
+command line using this syntax:
+
+<p>
+
+<!-- code=text (!bc ccq) typeset with pygments style "default" -->
+<blockquote>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>sin(x) is a function of x
+sin(a*y) is a function of y with parameter a=2
+sin(a*x-phi) is a function of x with parameter a=3, phi=-pi
+exp(-a*x)*cos(w*t) is a function of t with parameter a=1,w=pi,x=2
+</pre></div>
+</blockquote><p>
+Create a Python function that takes such function specifications as input
+and returns an appropriate <code>StringFunction</code> object.
+This object must be created from the function expression and the list
+of independent variables and parameters. For example, the last
+function specification above leads to the following <code>StringFunction</code>
+creation:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>f <span style="color: #666666">=</span> StringFunction(<span style="color: #BA2121">&#39;exp(-a*x)*cos(w*t)&#39;</span>,
+                   independent_variables<span style="color: #666666">=</span>[<span style="color: #BA2121">&#39;t&#39;</span>],
+                   a<span style="color: #666666">=1</span>, w<span style="color: #666666">=</span>pi, x<span style="color: #666666">=2</span>)
+</pre></div>
+<p>
+Write a test function for verifying the implementation (fill <code>sys.argv</code>
+with appropriate content prior to each individual test).
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_13_1" style="font-size: 80%;"></a>
+<b>Hint.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_13_1">
+
+<p>
+Use string operations to extract the various parts of the string.
+For example, the expression can be split out by calling
+<code>split('is a function of')</code>.
+Typically, you need to extract <code>&lt;expression&gt;</code>, <code>&lt;list1&gt;</code>,
+and <code>&lt;list2&gt;</code>, and create a string like
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>StringFunction(<span style="color: #666666">&lt;</span>expression<span style="color: #666666">&gt;</span>, independent_variables<span style="color: #666666">=</span>[<span style="color: #666666">&lt;</span>list1<span style="color: #666666">&gt;</span>],
+               <span style="color: #666666">&lt;</span>list2<span style="color: #666666">&gt;</span>)
+</pre></div>
+<p>
+and sending it to <code>eval</code> to create the object.
+
+<p>
+</div></p>
+</div>
+</p>
+
+<p>
+<!-- --- end hint in exercise --- -->
+Filename: <code>text2func</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:files:ex8" class="anchor">Exercise 14: Compare average temperatures in cities</h2>
+
+<p>
+The tarfile <a href="http://tinyurl.com/pwyasaa/misc/city_temp.tar.gz" target="_self"><tt>src/misc/city_temp.tar.gz</tt></a> contains a set of files with
+temperature data for a large number of cities around the world. The
+files are in text format with four columns, containing the month
+number, the date, the year, and the temperature, respectively.
+Missing temperature observations are represented by the value \( -99 \).
+The mapping between the names of the text files and the names of the
+cities are defined in an HTML file <code>citylistWorld.htm</code>.
+
+<p>
+<b>a)</b>
+Write a function that can read the <code>citylistWorld.htm</code>
+file and create a dictionary with mapping between city and filenames.
+
+<p>
+<b>b)</b>
+Write a function that takes this dictionary and a city name
+as input, opens the corresponding text file, and loads the data
+into an appropriate data structure (dictionary of arrays and city name
+is a suggestion).
+
+<p>
+<b>c)</b>
+Write a function that can take a number of data
+structures and the corresponding city names to create a plot of
+the temperatures over a certain time period.
+
+<p>
+Filename: <code>temperature_data</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:files:ex21" class="anchor">Exercise 15: Generate an HTML report with figures</h2>
+
+<p>
+The goal of this exercise is to let a program write a report in HTML
+format containing the solution to the exercise named &quot;Animate a wave
+packet&quot; in the document <a href="http://hplgit.github.io/primer.html/doc/pub/plot" target="_self">Arrays and plotting</a>
+<a href="#Langtangen_TCSE6_plot">[4]</a>.  First, include the program from that
+exercise, with additional explaining text if necessary.  Program code
+can be placed inside <code>&lt;pre&gt;</code> and <code>&lt;/pre&gt;</code> tags.  Second, insert three
+plots of the \( f(x,t) \) function for three different \( t \) values (find
+suitable \( t \) values that illustrate the displacement of the wave
+packet).  Third, add an animated GIF file with the movie of \( f(x,t) \).
+Insert headlines (<code>&lt;h1&gt;</code> tags) wherever appropriate.
+Filename: <code>wavepacket_report</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<h1 id="___sec87" class="anchor">References </h1>
+
+<p>
+<!-- begin bibliography -->
+
+<ol>
+ <li> <div id="Langtangen_TCSE6_funcif"></div> <b>H. P. Langtangen</b>. 
+    Functions and branching,
+    \emphhttp://hplgit.github.io/primer.html/doc/pub/funcif,
+    <a href="http://hplgit.github.io/primer.html/doc/pub/funcif" target="_self"><tt>http://hplgit.github.io/primer.html/doc/pub/funcif</tt></a>.</li>
+ <li> <div id="Langtangen_TCSE6_input"></div> <b>H. P. Langtangen</b>. 
+    User input and error handling,
+    \emphhttp://hplgit.github.io/primer.html/doc/pub/input,
+    <a href="http://hplgit.github.io/primer.html/doc/pub/input" target="_self"><tt>http://hplgit.github.io/primer.html/doc/pub/input</tt></a>.</li>
+ <li> <div id="Langtangen_TCSE6_varargs"></div> <b>H. P. Langtangen</b>. 
+    Variable number of function arguments in Python,
+    \emphhttp://hplgit.github.io/primer.html/doc/pub/varargs,
+    <a href="http://hplgit.github.io/primer.html/doc/pub/varargs" target="_self"><tt>http://hplgit.github.io/primer.html/doc/pub/varargs</tt></a>.</li>
+ <li> <div id="Langtangen_TCSE6_plot"></div> <b>H. P. Langtangen</b>. 
+    Array computing and curve plotting,
+    \emphhttp://hplgit.github.io/primer.html/doc/pub/plot,
+    <a href="http://hplgit.github.io/primer.html/doc/pub/plot" target="_self"><tt>http://hplgit.github.io/primer.html/doc/pub/plot</tt></a>.</li>
+</ol>
+
+<!-- end bibliography -->
+
+<p>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pager">
+  <li class="previous">
+    <a href="._dictstring-readable006.html">&larr; Prev</a>
+  </li>
+</ul>
+<!-- ------------------- end of main content --------------- -->
+
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap footer
+<footer>
+<a href="http://..."><img width="250" align=right src="http://..."></a>
+</footer>
+-->
+
+
+</body>
+</html>
+    
+

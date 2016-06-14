@@ -7,7 +7,7 @@ Automatically generated HTML file from DocOnce source
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
 <meta name="description" content="User input and error handling">
-<meta name="keywords" content="command-line arguments,option-value pairs (command line),standard input,standard output,standard error,bytes,bits,exceptions,widgets,event loop,modules,test block (in module files),test function,nose tests,pytest tests,search for module files,module folders,refactoring,binomial distribution,Bernoulli trials,Poisson distribution,Poisson process">
+<meta name="keywords" content="command-line arguments,option-value pairs (command line),standard input,standard output,standard error,bytes,bits,exceptions,widgets,event loop,modules,test block (in module files),test function,nose tests,pytest tests,unit testing,search for module files,module folders,refactoring,binomial distribution,Bernoulli trials,Poisson distribution,Poisson process">
 
 <title>User input and error handling</title>
 
@@ -20,6 +20,24 @@ Automatically generated HTML file from DocOnce source
 <style type="text/css">
 /* Let inline verbatim have the same color as the surroundings */
 code { color: inherit; background-color: transparent; }
+
+/* Add scrollbar to dropdown menus in bootstrap navigation bar */
+.dropdown-menu {
+   height: auto;
+   max-height: 400px;
+   overflow-x: hidden;
+}
+
+/* Adds an invisible element before each target to offset for the navigation
+   bar */
+.anchor::before {
+  content:"";
+  display:block;
+  height:50px; /* fixed header height*/
+  margin:-50px 0 0; /* negative fixed header height */
+}
+
+body { font-size:20px;line-height:1.5--html_body_style=font-size:20px;line-height:1.5; }
 </style>
 
 
@@ -27,287 +45,309 @@ code { color: inherit; background-color: transparent; }
 
 <!-- tocinfo
 {'highest level': 1,
- 'sections': [(' Asking questions and reading answers ',
+ 'sections': [('Table of contents',
+               1,
+               'table_of_contents',
+               'table_of_contents'),
+              ('Asking questions and reading answers',
                1,
                'sec:input:rawinput',
                'sec:input:rawinput'),
-              (' Reading keyboard input ',
+              ('Reading keyboard input',
                2,
                'sec:input:rawinput2',
                'sec:input:rawinput2'),
-              (' Reading from the command line ',
+              ('Reading from the command line',
                1,
                'sec:input:sysargv',
                'sec:input:sysargv'),
-              (' Providing input on the command line ',
+              ('Providing input on the command line',
                2,
                'sec:input:cml',
                'sec:input:cml'),
-              (' A variable number of command-line arguments ',
+              ('A variable number of command-line arguments',
                2,
                None,
                '___sec4'),
-              (' More on command-line arguments ', 2, None, '___sec5'),
-              (' Turning user text into live objects ', 1, None, '___sec6'),
-              (' The magic eval function ',
+              ('More on command-line arguments', 2, None, '___sec5'),
+              ('Turning user text into live objects', 1, None, '___sec6'),
+              ('The magic eval function',
                2,
                'sec:input:eval',
                'sec:input:eval'),
-              (' Applying eval to strings ', 3, None, '___sec8'),
-              (' Applying eval to user input ', 3, None, '___sec9'),
-              (' The magic exec function ',
+              ('Applying eval to strings', 3, None, '___sec8'),
+              ('Applying eval to user input', 3, None, '___sec9'),
+              ('The magic exec function',
                2,
                'sec:input:exec',
                'sec:input:exec'),
-              (' Turning string expressions into functions ',
+              ('Turning string expressions into functions',
                2,
                'sec:input:StringFunction',
                'sec:input:StringFunction'),
-              (' Option-value pairs on the command line ',
+              ('Option-value pairs on the command line',
                1,
                'sec:input:argparse',
                'sec:input:argparse'),
-              (' Basic usage of the argparse module ', 2, None, '___sec13'),
-              (' Mathematical expressions as values ', 2, None, '___sec14'),
-              (' Reading data from file ',
+              ('Basic usage of the argparse module', 2, None, '___sec13'),
+              ('Mathematical expressions as values', 2, None, '___sec14'),
+              ('Reading data from file',
                1,
                'sec:files:reading',
                'sec:files:reading'),
-              (' Reading a file line by line ', 2, None, '___sec16'),
-              (' Alternative ways of reading a file ',
+              ('Reading a file line by line', 2, None, '___sec16'),
+              ('Alternative ways of reading a file',
                2,
                'sec:files:reading:other',
                'sec:files:reading:other'),
-              (' The modern with statement ', 3, None, '___sec18'),
-              (' The old while construction ', 3, None, '___sec19'),
-              (' Reading a file into a string ', 3, None, '___sec20'),
-              (' Reading a mixture of text and numbers ',
+              ('The modern with statement', 3, None, '___sec18'),
+              ('The old while construction', 3, None, '___sec19'),
+              ('Reading a file into a string', 3, None, '___sec20'),
+              ('Reading a mixture of text and numbers',
                2,
                'sec:files:textnum',
                'sec:files:textnum'),
-              (' Is it more to file reading? ', 3, None, '___sec22'),
-              (' Writing data to file ',
+              ('Is it more to file reading?', 3, None, '___sec22'),
+              ('Writing data to file',
                1,
                'sec:files:writing',
                'sec:files:writing'),
-              (' Example: Writing a table to file ', 2, None, '___sec24'),
-              (' Problem ', 3, None, '___sec25'),
-              (' Solution ', 3, None, '___sec26'),
-              (' Standard input and output as file objects ',
+              ('Example: Writing a table to file', 2, None, '___sec24'),
+              ('Problem', 3, None, '___sec25'),
+              ('Solution', 3, None, '___sec26'),
+              ('Standard input and output as file objects',
                2,
                None,
                '___sec27'),
-              (' Redirecting standard input, output, and error ',
+              ('Redirecting standard input, output, and error',
                3,
                None,
                '___sec28'),
-              (' Note ', 3, None, '___sec29'),
-              (' What is a file, really? ',
+              ('Note', 3, None, '___sec29'),
+              ('What is a file, really?',
                2,
                'sec:files:really',
                'sec:files:really'),
-              (' Pure text files ', 3, None, '___sec31'),
-              (' Word processor files ', 3, None, '___sec32'),
-              (' Image files ', 3, None, '___sec33'),
-              (' Music files ', 3, None, '___sec34'),
-              (' PDF files ', 3, None, '___sec35'),
-              (' Remarks ', 3, None, '___sec36'),
-              (' Handling errors ',
-               1,
-               'sec:input:except',
-               'sec:input:except'),
-              (' Exception handling ',
+              ('Pure text files', 3, None, '___sec31'),
+              ('Word processor files', 3, None, '___sec32'),
+              ('Image files', 3, None, '___sec33'),
+              ('Music files', 3, None, '___sec34'),
+              ('PDF files', 3, None, '___sec35'),
+              ('Remarks', 3, None, '___sec36'),
+              ('Handling errors', 1, 'sec:input:except', 'sec:input:except'),
+              ('Exception handling',
                2,
                'sec:input:except:handling',
                'sec:input:except:handling'),
-              (' Testing for a specific exception ', 3, None, '___sec39'),
-              (' Examples on exception types ', 3, None, '___sec40'),
-              (' Digression ', 3, None, '___sec41'),
-              (' Raising exceptions ', 2, None, '___sec42'),
-              (' Example ', 3, None, '___sec43'),
-              (' A glimpse of graphical user interfaces ',
+              ('Testing for a specific exception', 3, None, '___sec39'),
+              ('Examples on exception types', 3, None, '___sec40'),
+              ('Digression', 3, None, '___sec41'),
+              ('Raising exceptions', 2, None, '___sec42'),
+              ('Example', 3, None, '___sec43'),
+              ('A glimpse of graphical user interfaces',
                1,
                'sec:input:GUI',
                'sec:input:GUI'),
-              (' Making modules ',
-               1,
-               'sec:input:modules',
-               'sec:input:modules'),
-              (' Example: Interest on bank deposits ', 2, None, '___sec46'),
-              (' Collecting functions in a module file ',
+              ('Making modules', 1, 'sec:input:modules', 'sec:input:modules'),
+              ('Example: Interest on bank deposits', 2, None, '___sec46'),
+              ('Collecting functions in a module file',
                2,
                'sec:input:module:create',
                'sec:input:module:create'),
-              (' Test block ',
+              ('Test block',
                2,
                'sec:input:module:testblock',
                'sec:input:module:testblock'),
-              (' Example on a test block in a minimalistic module ',
+              ('Example on a test block in a minimalistic module',
                3,
                None,
                '___sec49'),
-              (' A test block in the `interest` module ',
-               3,
-               None,
-               '___sec50'),
-              (' Verification of the module code ',
+              ('A test block in the `interest` module', 3, None, '___sec50'),
+              ('Verification of the module code',
                2,
                'sec:input:modules:testfunc',
                'sec:input:modules:testfunc'),
-              (' Getting input data ',
+              ('Getting input data',
                2,
                'sec:input:modules:inputdata',
                'sec:input:modules:inputdata'),
-              (' Doc strings in modules ', 2, None, '___sec53'),
-              (' Using modules ',
+              ('Doc strings in modules', 2, None, '___sec53'),
+              ('Using modules',
                2,
                'sec:input:modules:usage',
                'sec:input:modules:usage'),
-              (' What gets imported by various import statements? ',
+              ('What gets imported by various import statements?',
                3,
                None,
                '___sec55'),
-              (' How to make Python find a module file ',
-               3,
-               None,
-               '___sec56'),
-              (' How to make Python run the module file ',
-               3,
-               None,
-               '___sec57'),
-              (' Distributing modules ',
+              ('How to make Python find a module file', 3, None, '___sec56'),
+              ('How to make Python run the module file', 3, None, '___sec57'),
+              ('Distributing modules',
                2,
                'sec:input:modules:setuppy',
                'sec:input:modules:setuppy'),
-              (' Making software available on the Internet ',
+              ('Making software available on the Internet',
                2,
                None,
                '___sec59'),
-              (' Summary ', 1, 'sec:input:summary', 'sec:input:summary'),
-              (' Chapter topics ',
+              ('Making code for Python 2 and 3',
+               1,
+               'sec:input:py23',
+               'sec:input:py23'),
+              ('Basic differences between Python 2 and 3',
+               2,
+               None,
+               '___sec61'),
+              ('The print statement has changed', 3, None, '___sec62'),
+              ('Integer division is not an issue in Python 3',
+               3,
+               None,
+               '___sec63'),
+              ('The `raw_input` function is named `input` in Python 3',
+               3,
+               None,
+               '___sec64'),
+              ('Turning Python 2 code into Python 3 code',
+               2,
+               None,
+               '___sec65'),
+              ('Summary', 1, 'sec:input:summary', 'sec:input:summary'),
+              ('Chapter topics',
                2,
                'sec:input:summary:topics',
                'sec:input:summary:topics'),
-              (' Question and answer input ', 3, None, '___sec62'),
-              (' Getting command-line arguments ', 3, None, '___sec63'),
-              (' Using option-value pairs ', 3, None, '___sec64'),
-              (' Generating code on the fly ', 3, None, '___sec65'),
-              (' Turning string formulas into Python functions ',
+              ('Question and answer input', 3, None, '___sec68'),
+              ('Getting command-line arguments', 3, None, '___sec69'),
+              ('Using option-value pairs', 3, None, '___sec70'),
+              ('Generating code on the fly', 3, None, '___sec71'),
+              ('Turning string formulas into Python functions',
                3,
                None,
-               '___sec66'),
-              (' File operations ', 3, None, '___sec67'),
-              (' Handling exceptions ', 3, None, '___sec68'),
-              (' Raising exceptions ', 3, None, '___sec69'),
-              (' Modules ', 3, None, '___sec70'),
-              (' Terminology ', 3, None, '___sec71'),
-              (' Example: Bisection root finding ',
+               '___sec72'),
+              ('File operations', 3, None, '___sec73'),
+              ('Handling exceptions', 3, None, '___sec74'),
+              ('Raising exceptions', 3, None, '___sec75'),
+              ('Modules', 3, None, '___sec76'),
+              ('Terminology', 3, None, '___sec77'),
+              ('Example: Bisection root finding',
                2,
                'sec:input:summarizingex',
                'sec:input:summarizingex'),
-              (' Problem ', 3, None, '___sec73'),
-              (' Solution ', 3, None, '___sec74'),
-              (' Verification ', 3, None, '___sec75'),
-              (' Making a function ', 3, None, '___sec76'),
-              (' Making a test function ', 3, None, '___sec77'),
-              (' Making a module ', 3, None, '___sec78'),
-              (' Defining a user interface ', 3, None, '___sec79'),
-              (' Using the module ', 3, None, '___sec80'),
-              (' Potential problems with the software ', 3, None, '___sec81'),
-              (' Distributing the bisection module to others ',
+              ('Problem', 3, None, '___sec79'),
+              ('Solution', 3, None, '___sec80'),
+              ('Verification', 3, None, '___sec81'),
+              ('Making a function', 3, None, '___sec82'),
+              ('Making a test function', 3, None, '___sec83'),
+              ('Making a module', 3, None, '___sec84'),
+              ('Defining a user interface', 3, None, '___sec85'),
+              ('Using the module', 3, None, '___sec86'),
+              ('Potential problems with the software', 3, None, '___sec87'),
+              ('Distributing the bisection module to others',
                3,
                None,
-               '___sec82'),
-              (' Exercises ', 1, None, '___sec83'),
-              (' Exercise 1: Make an interactive program ',
+               '___sec88'),
+              ('Exercises', 1, None, '___sec89'),
+              ('Exercise 1: Make an interactive program',
                2,
                'sec:input:ex24',
                'sec:input:ex24'),
-              (' Exercise 2: Read a number from the command line ',
+              ('Exercise 2: Read a number from the command line',
                2,
                'sec:input:ex24b',
                'sec:input:ex24b'),
-              (' Exercise 3: Read a number from a file ',
+              ('Exercise 3: Read a number from a file',
                2,
                'sec:input:ex24bfile',
                'sec:input:ex24bfile'),
-              (' Exercise 4: Read and write several numbers from and to file ',
+              ('Exercise 4: Read and write several numbers from and to file',
                2,
                'sec:input:ex24bfile2',
                'sec:input:ex24bfile2'),
-              (' Exercise 5: Use exceptions to handle wrong input ',
+              ('Exercise 5: Use exceptions to handle wrong input',
                2,
                'sec:input:ex24c',
                'sec:input:ex24c'),
-              (' Exercise 6: Read input from the keyboard ',
+              ('Exercise 6: Read input from the keyboard',
                2,
                'sec:input:ex25',
                'sec:input:ex25'),
-              (' Exercise 7: Read input from the command line ',
+              ('Exercise 7: Read input from the command line',
                2,
                'sec:input:ex26',
                'sec:input:ex26'),
-              (' Exercise 8: Try MSWord or LibreOffice to write a program ',
+              ('Exercise 8: Try MSWord or LibreOffice to write a program',
                2,
                'sec:files:ex7',
                'sec:files:ex7'),
-              (' Exercise 9: Prompt the user for input to a formula ',
+              ('Exercise 9: Prompt the user for input to a formula',
                2,
                'sec:input:ex6',
                'sec:input:ex6'),
-              (' Exercise 10: Read parameters in a formula from the command line ',
+              ('Exercise 10: Read parameters in a formula from the command line',
                2,
                'sec:input:ex5',
                'sec:input:ex5'),
-              (' Exercise 11: Use exceptions to handle wrong input ',
+              ('Exercise 11: Use exceptions to handle wrong input',
                2,
                'sec:input:ex8b',
                'sec:input:ex8b'),
-              (' Exercise 12: Test validity of input data ',
+              ('Exercise 12: Test validity of input data',
                2,
                'sec:input:ex7',
                'sec:input:ex7'),
-              (' Exercise 13: Raise an exception in case of wrong input ',
+              ('Exercise 13: Raise an exception in case of wrong input',
                2,
                'sec:input:ex8',
                'sec:input:ex8'),
-              (' Exercise 14: Evaluate a formula for data in a file ',
+              ('Exercise 14: Evaluate a formula for data in a file',
                2,
                'sec:input:ex:ball:file',
                'sec:input:ex:ball:file'),
-              (' Exercise 15: Compute the distance it takes to stop a car ',
+              ('Exercise 15: Write a function given its test function',
+               2,
+               'sec:input:ex:testffirst',
+               'sec:input:ex:testffirst'),
+              ('Exercise 16: Compute the distance it takes to stop a car',
                2,
                'sec:input:ex21',
                'sec:input:ex21'),
-              (' Exercise 16: Look up calendar functionality ',
+              ('Exercise 17: Look up calendar functionality',
                2,
                'sec:input:ex48',
                'sec:input:ex48'),
-              (' Exercise 17: Use the StringFunction tool ',
+              ('Exercise 18: Use the StringFunction tool',
                2,
                'sec:input:ex28b',
                'sec:input:ex28b'),
-              (' Exercise 18: Why we test for specific exception types ',
+              ('Exercise 19: Why we test for specific exception types',
                2,
                'sec:input:ex11',
                'sec:input:ex11'),
-              (' Exercise 19: Make a complete module ',
+              ('Exercise 20: Make a complete module',
                2,
                'sec:input:ex27',
                'sec:input:ex27'),
-              (' Exercise 20: Check if mathematical identities hold ',
+              ('Exercise 21: Organize a previous program as a module',
+               2,
+               'sec:input:ex17',
+               'sec:input:ex17'),
+              ('Exercise 22: Read options and values from the command line',
+               2,
+               'sec:input:ex19',
+               'sec:input:ex19'),
+              ('Exercise 23: Check if mathematical identities hold',
                2,
                'sec:input:ex2',
                'sec:input:ex2'),
-              (' Exercise 21: Compute probabilities with the binomial distribution ',
+              ('Exercise 24: Compute probabilities with the binomial distribution',
                2,
                'sec:input:ex15',
                'sec:input:ex15'),
-              (' Exercise 22: Compute probabilities with the Poisson distribution ',
+              ('Exercise 25: Compute probabilities with the Poisson distribution',
                2,
                'sec:input:ex16',
                'sec:input:ex16'),
-              (' References ', 1, None, '___sec106')]}
+              ('References', 1, None, '___sec115')]}
 end of tocinfo -->
 
 <body>
@@ -345,23 +385,129 @@ $$
     </button>
     <a class="navbar-brand" href="input-readable.html">User input and error handling</a>
   </div>
+
   <div class="navbar-collapse collapse navbar-responsive-collapse">
     <ul class="nav navbar-nav navbar-right">
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
         <ul class="dropdown-menu">
-     <!-- navigation toc: --> <li><a href="._input-readable001.html#sec:input:rawinput" style="font-size: 80%;">Asking questions and reading answers</a></li>
-     <!-- navigation toc: --> <li><a href="._input-readable002.html#sec:input:sysargv" style="font-size: 80%;">Reading from the command line</a></li>
-     <!-- navigation toc: --> <li><a href="._input-readable003.html#___sec6" style="font-size: 80%;">Turning user text into live objects</a></li>
-     <!-- navigation toc: --> <li><a href="._input-readable004.html#sec:input:argparse" style="font-size: 80%;">Option-value pairs on the command line</a></li>
-     <!-- navigation toc: --> <li><a href="._input-readable005.html#sec:files:reading" style="font-size: 80%;">Reading data from file</a></li>
-     <!-- navigation toc: --> <li><a href="._input-readable006.html#sec:files:writing" style="font-size: 80%;">Writing data to file</a></li>
-     <!-- navigation toc: --> <li><a href="._input-readable007.html#sec:input:except" style="font-size: 80%;">Handling errors</a></li>
-     <!-- navigation toc: --> <li><a href="._input-readable008.html#sec:input:GUI" style="font-size: 80%;">A glimpse of graphical user interfaces</a></li>
-     <!-- navigation toc: --> <li><a href="#sec:input:modules" style="font-size: 80%;">Making modules</a></li>
-     <!-- navigation toc: --> <li><a href="._input-readable010.html#sec:input:summary" style="font-size: 80%;">Summary</a></li>
-     <!-- navigation toc: --> <li><a href="._input-readable011.html#___sec83" style="font-size: 80%;">Exercises</a></li>
-     <!-- navigation toc: --> <li><a href="._input-readable011.html#___sec106" style="font-size: 80%;">References</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable000.html#table_of_contents" style="font-size: 80%;"><b>Table of contents</b></a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable001.html#sec:input:rawinput" style="font-size: 80%;"><b>Asking questions and reading answers</b></a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable001.html#sec:input:rawinput2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Reading keyboard input</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable002.html#sec:input:sysargv" style="font-size: 80%;"><b>Reading from the command line</b></a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable002.html#sec:input:cml" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Providing input on the command line</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable002.html#___sec4" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;A variable number of command-line arguments</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable002.html#___sec5" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;More on command-line arguments</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable003.html#___sec6" style="font-size: 80%;"><b>Turning user text into live objects</b></a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable003.html#sec:input:eval" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The magic eval function</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable003.html#___sec8" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Applying eval to strings</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable003.html#___sec9" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Applying eval to user input</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable003.html#sec:input:exec" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The magic exec function</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable003.html#sec:input:StringFunction" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Turning string expressions into functions</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable004.html#sec:input:argparse" style="font-size: 80%;"><b>Option-value pairs on the command line</b></a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable004.html#___sec13" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Basic usage of the argparse module</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable004.html#___sec14" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Mathematical expressions as values</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable005.html#sec:files:reading" style="font-size: 80%;"><b>Reading data from file</b></a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable005.html#___sec16" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Reading a file line by line</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable005.html#sec:files:reading:other" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Alternative ways of reading a file</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable005.html#___sec18" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The modern with statement</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable005.html#___sec19" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The old while construction</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable005.html#___sec20" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Reading a file into a string</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable005.html#sec:files:textnum" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Reading a mixture of text and numbers</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable005.html#___sec22" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Is it more to file reading?</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable006.html#sec:files:writing" style="font-size: 80%;"><b>Writing data to file</b></a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable006.html#___sec24" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Writing a table to file</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable006.html#___sec25" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable006.html#___sec26" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Solution</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable006.html#___sec27" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Standard input and output as file objects</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable006.html#___sec28" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Redirecting standard input, output, and error</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable006.html#___sec29" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Note</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable006.html#sec:files:really" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;What is a file, really?</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable006.html#___sec31" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pure text files</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable006.html#___sec32" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Word processor files</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable006.html#___sec33" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Image files</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable006.html#___sec34" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Music files</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable006.html#___sec35" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PDF files</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable006.html#___sec36" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remarks</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable007.html#sec:input:except" style="font-size: 80%;"><b>Handling errors</b></a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable007.html#sec:input:except:handling" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exception handling</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable007.html#___sec39" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Testing for a specific exception</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable007.html#___sec40" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Examples on exception types</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable007.html#___sec41" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Digression</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable007.html#___sec42" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Raising exceptions</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable007.html#___sec43" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable008.html#sec:input:GUI" style="font-size: 80%;"><b>A glimpse of graphical user interfaces</b></a></li>
+     <!-- navigation toc: --> <li><a href="#sec:input:modules" style="font-size: 80%;"><b>Making modules</b></a></li>
+     <!-- navigation toc: --> <li><a href="#___sec46" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Interest on bank deposits</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:input:module:create" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Collecting functions in a module file</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:input:module:testblock" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Test block</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec49" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example on a test block in a minimalistic module</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec50" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A test block in the <code>interest</code> module</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:input:modules:testfunc" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Verification of the module code</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:input:modules:inputdata" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Getting input data</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec53" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Doc strings in modules</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:input:modules:usage" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Using modules</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec55" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;What gets imported by various import statements?</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec56" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;How to make Python find a module file</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec57" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;How to make Python run the module file</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:input:modules:setuppy" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Distributing modules</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec59" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Making software available on the Internet</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable010.html#sec:input:py23" style="font-size: 80%;"><b>Making code for Python 2 and 3</b></a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable010.html#___sec61" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Basic differences between Python 2 and 3</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable010.html#___sec62" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The print statement has changed</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable010.html#___sec63" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Integer division is not an issue in Python 3</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable010.html#___sec64" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The <code>raw_input</code> function is named <code>input</code> in Python 3</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable010.html#___sec65" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Turning Python 2 code into Python 3 code</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable011.html#sec:input:summary" style="font-size: 80%;"><b>Summary</b></a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable011.html#sec:input:summary:topics" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Chapter topics</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable011.html#___sec68" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Question and answer input</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable011.html#___sec69" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Getting command-line arguments</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable011.html#___sec70" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Using option-value pairs</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable011.html#___sec71" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Generating code on the fly</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable011.html#___sec72" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Turning string formulas into Python functions</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable011.html#___sec73" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;File operations</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable011.html#___sec74" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Handling exceptions</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable011.html#___sec75" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Raising exceptions</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable011.html#___sec76" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Modules</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable011.html#___sec77" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Terminology</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable011.html#sec:input:summarizingex" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Bisection root finding</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable011.html#___sec79" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable011.html#___sec80" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Solution</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable011.html#___sec81" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Verification</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable011.html#___sec82" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Making a function</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable011.html#___sec83" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Making a test function</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable011.html#___sec84" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Making a module</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable011.html#___sec85" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Defining a user interface</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable011.html#___sec86" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Using the module</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable011.html#___sec87" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Potential problems with the software</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable011.html#___sec88" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Distributing the bisection module to others</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable012.html#___sec89" style="font-size: 80%;"><b>Exercises</b></a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable012.html#sec:input:ex24" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 1: Make an interactive program</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable012.html#sec:input:ex24b" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 2: Read a number from the command line</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable012.html#sec:input:ex24bfile" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 3: Read a number from a file</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable012.html#sec:input:ex24bfile2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 4: Read and write several numbers from and to file</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable012.html#sec:input:ex24c" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 5: Use exceptions to handle wrong input</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable012.html#sec:input:ex25" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 6: Read input from the keyboard</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable012.html#sec:input:ex26" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 7: Read input from the command line</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable012.html#sec:files:ex7" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 8: Try MSWord or LibreOffice to write a program</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable012.html#sec:input:ex6" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 9: Prompt the user for input to a formula</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable012.html#sec:input:ex5" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 10: Read parameters in a formula from the command line</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable012.html#sec:input:ex8b" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 11: Use exceptions to handle wrong input</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable012.html#sec:input:ex7" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 12: Test validity of input data</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable012.html#sec:input:ex8" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 13: Raise an exception in case of wrong input</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable012.html#sec:input:ex:ball:file" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 14: Evaluate a formula for data in a file</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable012.html#sec:input:ex:testffirst" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 15: Write a function given its test function</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable012.html#sec:input:ex21" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 16: Compute the distance it takes to stop a car</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable012.html#sec:input:ex48" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 17: Look up calendar functionality</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable012.html#sec:input:ex28b" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 18: Use the StringFunction tool</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable012.html#sec:input:ex11" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 19: Why we test for specific exception types</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable012.html#sec:input:ex27" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 20: Make a complete module</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable012.html#sec:input:ex17" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 21: Organize a previous program as a module</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable012.html#sec:input:ex19" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 22: Read options and values from the command line</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable012.html#sec:input:ex2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 23: Check if mathematical identities hold</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable012.html#sec:input:ex15" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 24: Compute probabilities with the binomial distribution</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable012.html#sec:input:ex16" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 25: Compute probabilities with the Poisson distribution</a></li>
+     <!-- navigation toc: --> <li><a href="._input-readable012.html#___sec115" style="font-size: 80%;"><b>References</b></a></li>
 
         </ul>
       </li>
@@ -376,9 +522,9 @@ $$
 
 <a name="part0009"></a>
 <!-- !split -->
-<p style="font-size:80%">This chapter is taken from book <a href="http://www.springer.com/gp/book/9783642549588">A Primer on Scientific Programming with Python</a> by H. P. Langtangen, 4th edition, Springer, 2014.</p>
+<p style="font-size:80%">This chapter is taken from the book <a href="http://www.springer.com/gp/book/9783662498866">A Primer on Scientific Programming with Python</a> by H. P. Langtangen, 5th edition, Springer, 2016.</p>
 
-<h1 id="sec:input:modules">Making modules</h1>
+<h1 id="sec:input:modules" class="anchor">Making modules</h1>
 
 <p>
 Sometimes you want to reuse a function from an old program in a new
@@ -407,7 +553,7 @@ can be help us out. The usage goes with the <code>math</code> prefix,
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">math</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">math</span>
 value <span style="color: #666666">=</span> math<span style="color: #666666">.</span>factorial(<span style="color: #666666">5</span>)
 </pre></div>
 <p>
@@ -416,7 +562,7 @@ or without,
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">math</span> <span style="color: #008000; font-weight: bold">import</span> factorial
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">math</span> <span style="color: #008000; font-weight: bold">import</span> factorial
 <span style="color: #408080; font-style: italic"># or: from math import *</span>
 value <span style="color: #666666">=</span> factorial(<span style="color: #666666">5</span>)
 </pre></div>
@@ -429,7 +575,7 @@ that constitute the module in one file, say with name
 standard way.  Let us make everything clear in detail by looking at an
 example.
 
-<h2 id="___sec46">Example: Interest on bank deposits </h2>
+<h2 id="___sec46" class="anchor">Example: Interest on bank deposits </h2>
 
 <p>
 The classical formula for the growth of money in a bank reads
@@ -460,19 +606,20 @@ $$
 \begin{align}
 A_0 &= A\left( 1 + {p\over 360\cdot 100}\right)^{-n},
 \tag{3}\\ 
-n &= \frac{\ln {A\over A_0}}{\ln \left( 1 + {p\over 360\cdot 100}\right)} ,\\ 
+n &= \frac{\ln {A\over A_0}}{\ln \left( 1 + {p\over 360\cdot 100}\right)} ,
+\tag{4}\\ 
 p &= 360\cdot 100 \left(\left({A\over A_0}\right)^{1/n} - 1\right)\tp
-\tag{4}
+\tag{5}
 \end{align}
 $$
 
-Suppose we have implemented <a href="#mjx-eqn-2">(2)</a>-<a href="#mjx-eqn-4">(4)</a>
+Suppose we have implemented <a href="#mjx-eqn-2">(2)</a>-<a href="#mjx-eqn-5">(5)</a>
 in four functions:
 
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">math</span> <span style="color: #008000; font-weight: bold">import</span> log <span style="color: #008000; font-weight: bold">as</span> ln
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">math</span> <span style="color: #008000; font-weight: bold">import</span> log <span style="color: #008000; font-weight: bold">as</span> ln
 
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">present_amount</span>(A0, p, n):
     <span style="color: #008000; font-weight: bold">return</span> A0<span style="color: #666666">*</span>(<span style="color: #666666">1</span> <span style="color: #666666">+</span> p<span style="color: #666666">/</span>(<span style="color: #666666">360.0*100</span>))<span style="color: #666666">**</span>n
@@ -494,7 +641,7 @@ can import functions and compute with them in a program. For example,
 <p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">interest</span> <span style="color: #008000; font-weight: bold">import</span> days
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">interest</span> <span style="color: #008000; font-weight: bold">import</span> days
 A0 <span style="color: #666666">=</span> <span style="color: #666666">1</span>; A <span style="color: #666666">=</span> <span style="color: #666666">2</span>; p <span style="color: #666666">=</span> <span style="color: #666666">5</span>
 n <span style="color: #666666">=</span> days(A0, <span style="color: #666666">2</span>, p)
 years <span style="color: #666666">=</span> n<span style="color: #666666">/365.0</span>
@@ -503,7 +650,7 @@ years <span style="color: #666666">=</span> n<span style="color: #666666">/365.0
 <p>
 How to make the <code>interest</code> module is described next.
 
-<h2 id="sec:input:module:create">Collecting functions in a module file</h2>
+<h2 id="sec:input:module:create" class="anchor">Collecting functions in a module file</h2>
 
 <p>
 To make a module of the four functions
@@ -524,7 +671,7 @@ we simply write, in that program file,
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">interest</span> <span style="color: #008000; font-weight: bold">import</span> annual_rate
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">interest</span> <span style="color: #008000; font-weight: bold">import</span> annual_rate
 </pre></div>
 <p>
 or we can write
@@ -532,7 +679,7 @@ or we can write
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">interest</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #666666">*</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">interest</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #666666">*</span>
 </pre></div>
 <p>
 to import all four functions, or we can write
@@ -540,12 +687,12 @@ to import all four functions, or we can write
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">interest</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">interest</span>
 </pre></div>
 <p>
 and access individual functions as <code>interest.annual_rate</code> and so forth.
 
-<h2 id="sec:input:module:testblock">Test block</h2>
+<h2 id="sec:input:module:testblock" class="anchor">Test block</h2>
 
 <p>
 It is recommended to only have functions and not any statements
@@ -567,7 +714,7 @@ This two-fold &quot;magic&quot; is realized by putting the main program after an
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">if</span> __name__ <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;__main__&#39;</span>:
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">if</span> __name__ <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;__main__&#39;</span>:
     <span style="color: #666666">&lt;</span>block of statements<span style="color: #666666">&gt;</span>
 </pre></div>
 <p>
@@ -580,7 +727,7 @@ is executed if and only if
 we run the module file as a program. We shall refer to
 <code>&lt;block of statements&gt;</code> as the <em>test block</em> of a module.
 
-<h3 id="___sec49">Example on a test block in a minimalistic module </h3>
+<h3 id="___sec49" class="anchor">Example on a test block in a minimalistic module </h3>
 
 <p>
 A very simple example will illustrate how this works. Consider a
@@ -589,7 +736,7 @@ file <code>mymod.py</code> with the content
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">add1</span>(x):
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">add1</span>(x):
     <span style="color: #008000; font-weight: bold">return</span> x <span style="color: #666666">+</span> <span style="color: #666666">1</span>
 
 <span style="color: #008000; font-weight: bold">if</span> __name__ <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;__main__&#39;</span>:
@@ -604,7 +751,7 @@ function:
 <p>
 
 <!-- code=python (!bc pyshell) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">mymod</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">mymod</span>
 <span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">print</span> mymod<span style="color: #666666">.</span>add1(<span style="color: #666666">4</span>)
 <span style="color: #666666">5</span>
 </pre></div>
@@ -615,7 +762,7 @@ definition is executed. However, if we run <code>mymod.py</code> as a program,
 <p>
 
 <!-- code=text (!bc sys) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">mymod.py 5
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>mymod.py 5
 run as program
 6
 </pre></div>
@@ -633,7 +780,7 @@ in the same way as the original program.
 </div>
 
 
-<h3 id="___sec50">A test block in the <code>interest</code> module </h3>
+<h3 id="___sec50" class="anchor">A test block in the <code>interest</code> module </h3>
 
 <p>
 Let us write a little main program  for demonstrating
@@ -644,7 +791,7 @@ it takes to double an amount with that interest rate:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">if</span> __name__ <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;__main__&#39;</span>:
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">if</span> __name__ <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;__main__&#39;</span>:
     <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">sys</span>
     p <span style="color: #666666">=</span> <span style="color: #008000">float</span>(sys<span style="color: #666666">.</span>argv[<span style="color: #666666">1</span>])
     years <span style="color: #666666">=</span> days(<span style="color: #666666">1</span>, <span style="color: #666666">2</span>, p)<span style="color: #666666">/365.0</span>
@@ -656,7 +803,7 @@ Running the module file as a program gives this output:
 <p>
 
 <!-- code=text (!bc sys) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">interest.py 2.45
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>interest.py 2.45
 With p=2.45 it takes 27.9 years to double
 </pre></div>
 <p>
@@ -667,7 +814,7 @@ import a function and compute with it:
 <p>
 
 <!-- code=python (!bc pyshell) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">interest</span> <span style="color: #008000; font-weight: bold">import</span> present_amount
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">interest</span> <span style="color: #008000; font-weight: bold">import</span> present_amount
 <span style="color: #666666">&gt;&gt;&gt;</span> present_amount(<span style="color: #666666">2</span>, <span style="color: #666666">5</span>, <span style="color: #666666">730</span>)
 <span style="color: #666666">2.2133983053266699</span>
 </pre></div>
@@ -693,7 +840,7 @@ are called from the test block.
 </div>
 
 
-<h2 id="sec:input:modules:testfunc">Verification of the module code</h2>
+<h2 id="sec:input:modules:testfunc" class="anchor">Verification of the module code</h2>
 
 <p>
 Functions that verify the implementation in a module should
@@ -711,9 +858,20 @@ automatically run through all our <code>test_*()</code> functions in all files
 in a folder tree.
 The
 document <a href="http://hplgit.github.io/primer.html/doc/pub/nose" target="_self">Unit testing with pytest and nose</a>
-<a href="._input-readable011.html#Langtangen_TCSE6_nose">[7]</a>
+<a href="._input-readable012.html#Langtangen_TCSE6_nose">[7]</a>
 contains a more thorough introduction to the pytest and nose testing
 frameworks for beginners.
+
+<p>
+Test functions are used for <em>unit testing</em>. This means that we
+identify some units of our software and write a dedicated test
+function for testing the behavior of each unit. A unit in the present
+example can be the <code>interest</code> module, but we could also think of the
+individual Python functions in <code>interest</code> as units. From a practical
+point of view, the unit is often defined as what we find appropriate to verify
+in a test function. For now it is convenient to test all functions in
+the <code>interest.py</code> file in the same test function,
+so the module becomes the unit.
 
 <p>
 A proper test function for verifying the functionality of the
@@ -723,7 +881,7 @@ and nose testing frameworks, looks as follows:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">test_all_functions</span>():
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">test_all_functions</span>():
     <span style="color: #408080; font-style: italic"># Compatible values</span>
     A <span style="color: #666666">=</span> <span style="color: #666666">2.2133983053266699</span>; A0 <span style="color: #666666">=</span> <span style="color: #666666">2.0</span>; p <span style="color: #666666">=</span> <span style="color: #666666">5</span>; n <span style="color: #666666">=</span> <span style="color: #666666">730</span>
     <span style="color: #408080; font-style: italic"># Given three of these, compute the remaining one</span>
@@ -733,7 +891,7 @@ and nose testing frameworks, looks as follows:
     n_computed  <span style="color: #666666">=</span> days(A0, A, p)
     p_computed  <span style="color: #666666">=</span> annual_rate(A0, A, n)
 
-    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">float_eq</span>(a, b, tolerance<span style="color: #666666">=1E-14</span>):
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">float_eq</span>(a, b, tolerance<span style="color: #666666">=1E-12</span>):
         <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Return True if a == b within the tolerance.&quot;&quot;&quot;</span>
         <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">abs</span>(a <span style="color: #666666">-</span> b) <span style="color: #666666">&lt;</span> tolerance
 
@@ -756,12 +914,12 @@ We may require a single command-line argument
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">if</span> __name__ <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;__main__&#39;</span>:
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">if</span> __name__ <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;__main__&#39;</span>:
     <span style="color: #008000; font-weight: bold">if</span> <span style="color: #008000">len</span>(sys<span style="color: #666666">.</span>argv) <span style="color: #666666">==</span> <span style="color: #666666">2</span> <span style="color: #AA22FF; font-weight: bold">and</span> sys<span style="color: #666666">.</span>argv[<span style="color: #666666">1</span>] <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;test&#39;</span>:
         test_all_functions()
 </pre></div>
 
-<h2 id="sec:input:modules:inputdata">Getting input data</h2>
+<h2 id="sec:input:modules:inputdata" class="anchor">Getting input data</h2>
 
 <p>
 To make a useful program, we should allow setting three parameters
@@ -771,7 +929,7 @@ For example, running the program as
 <p>
 
 <!-- code=text (!bc sys) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">interest.py A0=2 A=1 n=1095
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>interest.py A0=1 A=2 n=1095
 </pre></div>
 <p>
 will lead to a computation of \( p \), in this case
@@ -787,7 +945,7 @@ with semicolon between each assignment. This is easy:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">init_code <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;&#39;</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>init_code <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;&#39;</span>
 <span style="color: #008000; font-weight: bold">for</span> statement <span style="color: #AA22FF; font-weight: bold">in</span> sys<span style="color: #666666">.</span>argv[<span style="color: #666666">1</span>:]:
     init_code <span style="color: #666666">+=</span> statement <span style="color: #666666">+</span> <span style="color: #BA2121">&#39;</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121">&#39;</span>
 <span style="color: #008000; font-weight: bold">exec</span>(init_code)
@@ -795,20 +953,20 @@ with semicolon between each assignment. This is easy:
 <p>
 (We remark that an experienced Python programmer
 would have created <code>init_code</code> by <code>'\n'.join(sys.argv[1:])</code>.)
-For the sample run above with <code>A0=2 A=1 n=1095</code> on the command line,
+For the sample run above with <code>A0=1 A=2 n=1095</code> on the command line,
 <code>init_code</code> becomes the string
 
 <p>
 
 <!-- code=text (!bc ccq) typeset with pygments style "default" -->
 <blockquote>
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">A0=2
-A=1
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>A0=1
+A=2
 n=1095
 </pre></div>
 </blockquote><p>
 Note that one cannot have spaces around the equal signs on the command
-line as this will break an assignment like <code>A0 = 2</code> into
+line as this will break an assignment like <code>A0 = 1</code> into
 three command-line arguments, which will give rise to a
 <code>SyntaxError</code> in <code>exec(init_code)</code>.
 To tell the user about such errors, we
@@ -818,7 +976,7 @@ block:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">try</span>:
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">try</span>:
     <span style="color: #008000; font-weight: bold">exec</span>(init_code)
 <span style="color: #008000; font-weight: bold">except</span> <span style="color: #D2413A; font-weight: bold">SyntaxError</span> <span style="color: #008000; font-weight: bold">as</span> e:
     <span style="color: #008000; font-weight: bold">print</span> e
@@ -833,7 +991,7 @@ be computed. The following code does the work:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">if</span> <span style="color: #BA2121">&#39;A=&#39;</span> <span style="color: #AA22FF; font-weight: bold">not</span> <span style="color: #AA22FF; font-weight: bold">in</span> init_code:
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">if</span> <span style="color: #BA2121">&#39;A=&#39;</span> <span style="color: #AA22FF; font-weight: bold">not</span> <span style="color: #AA22FF; font-weight: bold">in</span> init_code:
     <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;A =&#39;</span>, present_amount(A0, p, n)
 <span style="color: #008000; font-weight: bold">elif</span> <span style="color: #BA2121">&#39;A0=&#39;</span> <span style="color: #AA22FF; font-weight: bold">not</span> <span style="color: #AA22FF; font-weight: bold">in</span> init_code:
     <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;A0 =&#39;</span>, initial_amount(A, p, n)
@@ -859,7 +1017,7 @@ the module file:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">compute_missing_parameter</span>(init_code):
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">compute_missing_parameter</span>(init_code):
     <span style="color: #008000; font-weight: bold">try</span>:
         <span style="color: #008000; font-weight: bold">exec</span>(init_code)
     <span style="color: #008000; font-weight: bold">except</span> <span style="color: #D2413A; font-weight: bold">SyntaxError</span> <span style="color: #008000; font-weight: bold">as</span> e:
@@ -893,7 +1051,7 @@ computation (i.e., the useful main program):
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">_filename <span style="color: #666666">=</span> sys<span style="color: #666666">.</span>argv[<span style="color: #666666">0</span>]
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>_filename <span style="color: #666666">=</span> sys<span style="color: #666666">.</span>argv[<span style="color: #666666">0</span>]
 _usage <span style="color: #666666">=</span> <span style="color: #BA2121">&quot;&quot;&quot;</span>
 <span style="color: #BA2121">Usage: </span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121"> A=10 p=5 n=730</span>
 <span style="color: #BA2121">Program computes and prints the 4th parameter&#39;</span>
@@ -919,7 +1077,7 @@ user writes. Consider
 <p>
 
 <!-- code=text (!bc sys) typeset with pygments style "default" -->
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%">input.py &#39;import shutil; shutil.rmtree(&quot;/&quot;)&#39;
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>input.py &#39;import shutil; shutil.rmtree(&quot;/&quot;)&#39;
 </pre></div>
 <p>
 This evil use of the program leads to an attempt to remove all
@@ -931,7 +1089,7 @@ this potential dangerous misuse is not so much of a concern
 </div>
 
 
-<h2 id="___sec53">Doc strings in modules </h2>
+<h2 id="___sec53" class="anchor">Doc strings in modules </h2>
 
 <p>
 It is also a good habit to include a doc string in the beginning of
@@ -941,7 +1099,7 @@ the module:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
 <span style="color: #BA2121; font-style: italic">Module for computing with interest rates.</span>
 <span style="color: #BA2121; font-style: italic">Symbols: A is present amount, A0 is initial amount,</span>
 <span style="color: #BA2121; font-style: italic">n counts days, and p is the interest rate per year.</span>
@@ -967,7 +1125,7 @@ of a good module file at once: doc strings, a set of functions,
 a test function, a function with the main program, a usage string,
 and a test block.
 
-<h2 id="sec:input:modules:usage">Using modules</h2>
+<h2 id="sec:input:modules:usage" class="anchor">Using modules</h2>
 
 <p>
 Let us further demonstrate how to use the <code>interest.py</code> module in
@@ -977,17 +1135,17 @@ say with name <code>doubling.py</code>, containing some computations:
 <p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">interest</span> <span style="color: #008000; font-weight: bold">import</span> days
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">interest</span> <span style="color: #008000; font-weight: bold">import</span> days
 
 <span style="color: #408080; font-style: italic"># How many days does it take to double an amount when the</span>
 <span style="color: #408080; font-style: italic"># interest rate is p=1,2,3,...14?</span>
 <span style="color: #008000; font-weight: bold">for</span> p <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">1</span>, <span style="color: #666666">15</span>):
     years <span style="color: #666666">=</span> days(<span style="color: #666666">1</span>, <span style="color: #666666">2</span>, p)<span style="color: #666666">/365.0</span>
-    <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;With p=</span><span style="color: #BB6688; font-weight: bold">%d%%</span><span style="color: #BA2121"> it takes </span><span style="color: #BB6688; font-weight: bold">%.1f</span><span style="color: #BA2121"> years to double the amount&#39;</span> <span style="color: #666666">%</span>\ 
+    <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;p=</span><span style="color: #BB6688; font-weight: bold">%d%%</span><span style="color: #BA2121"> implies </span><span style="color: #BB6688; font-weight: bold">%.1f</span><span style="color: #BA2121"> years to double the amount&#39;</span> <span style="color: #666666">%</span>\ 
     (p, years)
 </pre></div>
 
-<h3 id="___sec55">What gets imported by various import statements? </h3>
+<h3 id="___sec55" class="anchor">What gets imported by various import statements? </h3>
 
 <p>
 There are different ways to import functions in a module, and let us
@@ -1000,7 +1158,7 @@ First we start an interactive shell and call <code>dir()</code>
 <p>
 
 <!-- code=python (!bc pyshell) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000">dir</span>()
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000">dir</span>()
 [<span style="color: #BA2121">&#39;__builtins__&#39;</span>, <span style="color: #BA2121">&#39;__doc__&#39;</span>, <span style="color: #BA2121">&#39;__name__&#39;</span>, <span style="color: #BA2121">&#39;__package__&#39;</span>]
 </pre></div>
 <p>
@@ -1012,7 +1170,7 @@ Doing
 <p>
 
 <!-- code=python (!bc pyshell) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">interest</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #666666">*</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">interest</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #666666">*</span>
 <span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000">dir</span>()
 [<span style="color: #BA2121">&#39;__builtins__&#39;</span>, <span style="color: #BA2121">&#39;__doc__&#39;</span>, <span style="color: #BA2121">&#39;__name__&#39;</span>, <span style="color: #BA2121">&#39;__package__&#39;</span>,
  <span style="color: #BA2121">&#39;annual_rate&#39;</span>, <span style="color: #BA2121">&#39;compute_missing_parameter&#39;</span>, <span style="color: #BA2121">&#39;days&#39;</span>,
@@ -1033,7 +1191,7 @@ that start with an underscore:
 <p>
 
 <!-- code=python (!bc pyshell) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">interest</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">interest</span>
 <span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000">dir</span>(interest)
 [<span style="color: #BA2121">&#39;__builtins__&#39;</span>, <span style="color: #BA2121">&#39;__doc__&#39;</span>, <span style="color: #BA2121">&#39;__file__&#39;</span>, <span style="color: #BA2121">&#39;__name__&#39;</span>,
  <span style="color: #BA2121">&#39;__package__&#39;</span>, <span style="color: #BA2121">&#39;_filename&#39;</span>, <span style="color: #BA2121">&#39;_usage&#39;</span>, <span style="color: #BA2121">&#39;annual_rate&#39;</span>,
@@ -1056,7 +1214,7 @@ at the very end of the module:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">del</span> sys, ln, compute_missing_parameter, test_all_functions
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">del</span> sys, ln, compute_missing_parameter, test_all_functions
 </pre></div>
 <p>
 Instead of deleting variables and using initial underscores in names,
@@ -1068,7 +1226,7 @@ which is used by Python to select functions to be imported in
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">__all__ <span style="color: #666666">=</span> [<span style="color: #BA2121">&#39;annual_rate&#39;</span>, <span style="color: #BA2121">&#39;days&#39;</span>, <span style="color: #BA2121">&#39;initial_amount&#39;</span>, <span style="color: #BA2121">&#39;present_amount&#39;</span>]
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>__all__ <span style="color: #666666">=</span> [<span style="color: #BA2121">&#39;annual_rate&#39;</span>, <span style="color: #BA2121">&#39;days&#39;</span>, <span style="color: #BA2121">&#39;initial_amount&#39;</span>, <span style="color: #BA2121">&#39;present_amount&#39;</span>]
 </pre></div>
 <p>
 Now we get
@@ -1076,12 +1234,12 @@ Now we get
 <p>
 
 <!-- code=python (!bc pyshell) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">interest</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #666666">*</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">interest</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #666666">*</span>
 [<span style="color: #BA2121">&#39;__builtins__&#39;</span>, <span style="color: #BA2121">&#39;__doc__&#39;</span>, <span style="color: #BA2121">&#39;__name__&#39;</span>, <span style="color: #BA2121">&#39;__package__&#39;</span>,
  <span style="color: #BA2121">&#39;annual_rate&#39;</span>, <span style="color: #BA2121">&#39;days&#39;</span>, <span style="color: #BA2121">&#39;initial_amount&#39;</span>, <span style="color: #BA2121">&#39;present_amount&#39;</span>]
 </pre></div>
 
-<h3 id="___sec56">How to make Python find a module file </h3>
+<h3 id="___sec56" class="anchor">How to make Python find a module file </h3>
 
 <p>
 The <code>doubling.py</code> program works well as long as it is located in the
@@ -1092,7 +1250,7 @@ an error:
 <p>
 
 <!-- code=text (!bc sys) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">doubling.py
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>doubling.py
 Traceback (most recent call last):
   File &quot;doubling.py&quot;, line 1, in &lt;module&gt;
     from interest import days
@@ -1108,7 +1266,7 @@ A little program
 <p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">sys</span><span style="color: #666666">,</span> <span style="color: #0000FF; font-weight: bold">pprint</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">sys</span><span style="color: #666666">,</span> <span style="color: #0000FF; font-weight: bold">pprint</span>
 pprint<span style="color: #666666">.</span>pprint(sys<span style="color: #666666">.</span>path)
 </pre></div>
 <p>
@@ -1127,7 +1285,7 @@ the program that uses the module:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">modulefolder <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;../../pymodules&#39;</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>modulefolder <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;../../pymodules&#39;</span>
 sys<span style="color: #666666">.</span>path<span style="color: #666666">.</span>insert(<span style="color: #666666">0</span>, modulefolder)
 </pre></div>
 <p>
@@ -1157,7 +1315,7 @@ in the home folder, typically as
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">export PYTHONPATH<span style="color: #666666">=</span>$HOME<span style="color: #666666">/</span>software<span style="color: #666666">/</span>lib<span style="color: #666666">/</span>pymodules:$PYTHONPATH
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>export PYTHONPATH<span style="color: #666666">=</span>$HOME<span style="color: #666666">/</span>software<span style="color: #666666">/</span>lib<span style="color: #666666">/</span>pymodules:$PYTHONPATH
 </pre></div>
 <p>
 if <code>$HOME/software/lib/pymodules</code> is the folder containing
@@ -1166,7 +1324,7 @@ Python modules. On Windows, you launch
 click under <em>System Variable</em>, write in <code>PYTHONPATH</code> as
 variable name and the relevant folder(s) as value.
 
-<h3 id="___sec57">How to make Python run the module file </h3>
+<h3 id="___sec57" class="anchor">How to make Python run the module file </h3>
 
 <p>
 The description above concerns importing the module in a program
@@ -1183,7 +1341,7 @@ way as for <code>PYTHONPATH</code>:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">export PYTH<span style="color: #666666">=</span>$HOME<span style="color: #666666">/</span>software<span style="color: #666666">/</span>lib<span style="color: #666666">/</span>pymodules:$PATH
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>export PATH<span style="color: #666666">=</span>$HOME<span style="color: #666666">/</span>software<span style="color: #666666">/</span>lib<span style="color: #666666">/</span>pymodules:$PATH
 </pre></div>
 <p>
 On Windows, launch the dialog for setting environment variables
@@ -1192,7 +1350,7 @@ has much content, so you add your new folder value either at
 the beginning or end, using a semicolon to separate the new
 value from the existing ones.
 
-<h2 id="sec:input:modules:setuppy">Distributing modules</h2>
+<h2 id="sec:input:modules:setuppy" class="anchor">Distributing modules</h2>
 
 <p>
 Modules are usually useful pieces of software that others can take
@@ -1205,7 +1363,7 @@ such that any user can just do
 <p>
 
 <!-- code=text (!bc sys) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">Terminal&gt; sudo python setup.py install
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>Terminal&gt; sudo python setup.py install
 </pre></div>
 <p>
 to install the module in one of the directories in <code>sys.path</code> so
@@ -1219,7 +1377,7 @@ one module file very short:
 <p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">distutils.core</span> <span style="color: #008000; font-weight: bold">import</span> setup
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">distutils.core</span> <span style="color: #008000; font-weight: bold">import</span> setup
 setup(name<span style="color: #666666">=</span><span style="color: #BA2121">&#39;interest&#39;</span>,
       version<span style="color: #666666">=</span><span style="color: #BA2121">&#39;1.0&#39;</span>,
       py_modules<span style="color: #666666">=</span>[<span style="color: #BA2121">&#39;interest&#39;</span>],
@@ -1242,98 +1400,92 @@ programs.
 <div class="alert alert-block alert-success alert-text-normal"><b>Remark.</b>
 Distributing a single module file can be done as shown, but if you
 have two or more module files that belong together, you should
-definitely create a <em>package</em> <a href="._input-readable011.html#PySetup:py">[8]</a>.
+definitely create a <em>package</em> <a href="._input-readable012.html#PySetup:py">[8]</a>.
 </div>
 
 
-<h2 id="___sec59">Making software available on the Internet </h2>
+<h2 id="___sec59" class="anchor">Making software available on the Internet </h2>
 
 <p>
 Distributing software today means making it available on one of the
-major project hosting sites such as Googlecode, GitHub, or Bitbucket.
+major project hosting sites such as GitHub or Bitbucket.
 You will develop and maintain the project files on your own
 computer(s), but frequently push the software out in the
 cloud such that others also get your updates. The mentioned sites
-have is very strong support for collaborative software development.
+have very strong support for collaborative software development.
 
 <p>
-Since many already have a Gmail or Google account, we briefly describe
-how you can make your software available at Googlecode.
+Sign up for a GitHub account if you do not already have one.
+Go to your account settings and provide an SSH key (typically
+the file <code>~/.ssh/id_rsa.pub</code>) such that
+you can communicate with GitHub without being prompted for your password.
 
-<ol>
-<li> Go to <code>http://googlecode.com</code>.</li>
-<li> Sign in with your Gmail/Google username and password.</li>
-<li> Click on <em>Create a new project</em>.</li>
-<li> Fill in project name, summary, and description.</li>
-<li> Choose a <em>version control system</em>. Git is recommended.</li>
-<li> Select a license for the software. Notice that on Googlecode a
-   software project must be available to the whole world as open source code.
-   Other sites (Bitbucket and GitHub) allows private projects.</li>
-<li> Press <em>Create project</em>.</li>
-<li> Click on <em>Source</em> and then on <em>Checkout</em>.</li>
-<li> Go to some appropriate place in your home folder tree where you want to
-   store this Googlecode project.</li>
-<li> Copy and paste the command under <em>Option 1</em> and run it in a
-   terminal window (this requires that Git is installed on your system).</li>
-</ol>
+<p>
+To create a new project, click on <em>New repository</em> on the main page and
+fill out a project name. Click on the check button <em>Initialize this
+repository with a README</em>, and click on <em>Create repository</em>. The next
+step is to clone (copy) the GitHub repo (short for repository) to
+your own computer(s) and fill it with files. The typical clone command is
 
-You now have a folder with the same name as the project name. Copy
-<code>setup.py</code> and <code>interst.py</code> to the folder and move to the folder.
+<p>
+
+<!-- code=text (!bc sys) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>Terminal&gt; git clone git://github.com:username/projname.git
+</pre></div>
+<p>
+where <code>username</code> is your GitHub username and <code>projname</code> is the
+name of the repo (project). The result of <code>git clone</code> is a
+directory <code>projname</code>. Go to this folder and add files. That is,
+copy
+<code>setup.py</code> and <code>interst.py</code> to the folder.
 It is good to also write a short <code>README</code> file explaining what
-the project is about. Alternatively, you can later extend the
-description on the Googlecode web page for the project.
+the project is about.
 Run
 
 <p>
 
 <!-- code=text (!bc sys) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">Terminal&gt; git add .
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>Terminal&gt; git add .
 Terminal&gt; git commit -am &#39;First registration of project files&#39;
 Terminal&gt; git push origin master
 </pre></div>
-<p>
-You are now prompted for the <code>googlecode.com</code> password, which
-you can click on right under the <em>Option 1</em> command on the
-web page.
-
 <p>
 The above <code>git</code> commands look cryptic, but these commands plus
 2-3 more are the essence of how programmers today work on
 software projects, small or big. I strongly encourage you to
 learn more about version control systems and project hosting
-sites <a href="._input-readable011.html#Langtangen_bitgit">[9]</a>. The tools are in nature like Dropbox
+sites <a href="._input-readable012.html#Langtangen_bitgit">[9]</a>. The tools are in nature like Dropbox
 and Google Drive, just much more powerful when you collaborate
 with others.
 
 <p>
 Your project files are now stored in the cloud at
-<a href="http://code.google.com/p/project-name" target="_self"><tt>http://code.google.com/p/project-name</tt></a>. Anyone can
+<a href="https://github.com/username/projname" target="_self"><tt>https://github.com/username/projname</tt></a>. Anyone can
 get the software by the listed <code>git clone</code> command you used above,
-or by clicking on the <code>zip</code> link under <em>Source</em> and <em>Browse</em> to
-download a zip file.
+or by clicking on the links for zip and tar files.
 
 <p>
 Every time you update the project files, you need to register
-the update at the Googlecode project site by
+the update at GitHub by
 
 <p>
 
 <!-- code=text (!bc sys) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">Terminal&gt; git commit -am &#39;Description of the changes you made...&#39;
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>Terminal&gt; git commit -am &#39;Description of the changes you made...&#39;
 Terminal&gt; git push origin master
 </pre></div>
 <p>
-The files at Googlecode are now synchronized with your local ones.
+The files at GitHub are now synchronized with your local ones.
 
 <p>
 There is a bit more
 to be said here to make you up and going with this style of
-professional work <a href="._input-readable011.html#Langtangen_bitgit">[9]</a>, but the information above
+professional work <a href="._input-readable012.html#Langtangen_bitgit">[9]</a>, but the information above
 gives you at least a glimpse of how to put your software project
 in the cloud and opening it up for others.
-The Googlecode address for the
+The GitHub address for the
 particular <code>interest</code> module described above is
-<a href="http://code.google.com/p/interest-primer" target="_self"><tt>http://code.google.com/p/interest-primer</tt></a>.
+<a href="https://github.com/hplgit/interest-primer" target="_self"><tt>https://github.com/hplgit/interest-primer</tt></a>.
 
 <p>
 <p>

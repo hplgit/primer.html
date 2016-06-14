@@ -1,0 +1,633 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Programming of ordinary differential equations">
+<meta name="keywords" content="ODE,ordinary differential equations,differential equations,scalar function,scalar differential equation,Forward Euler scheme,test function,differential equations,systems of differential equations,Midpoint method for ODEs,Leapfrog method for ODEs,Midpoint method w/iterations for ODEs,function inside function,Forward Euler instability,oscillating systems,second-order ODEs,Midpoint method for ODEs,Midpoint method w/iterations for ODEs,convergence rate,zombies,differential equations,ordinary differential equations">
+
+<title>Programming of ordinary differential equations</title>
+
+
+<link href="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/css/solarized_light_code.css" rel="stylesheet" type="text/css" title="light"/>
+<script src="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<link href="http://thomasf.github.io/solarized-css/solarized-light.min.css" rel="stylesheet">
+<style type="text/css">
+h1 {color: #b58900;}  /* yellow */
+/* h1 {color: #cb4b16;}  orange */
+/* h1 {color: #d33682;}  magenta, the original choice of thomasf */
+code { padding: 0px; background-color: inherit; }
+pre {
+  border: 0pt solid #93a1a1;
+  box-shadow: none;
+}
+.alert-text-small   { font-size: 80%;  }
+.alert-text-large   { font-size: 130%; }
+.alert-text-normal  { font-size: 90%;  }
+.alert {
+  padding:8px 35px 8px 14px; margin-bottom:18px;
+  text-shadow:0 1px 0 rgba(255,255,255,0.5);
+  border:1px solid #93a1a1;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  color: #555;
+  background-color: #eee8d5;
+  background-position: 10px 5px;
+  background-repeat: no-repeat;
+  background-size: 38px;
+  padding-left: 55px;
+  width: 75%;
+ }
+.alert-block {padding-top:14px; padding-bottom:14px}
+.alert-block > p, .alert-block > ul {margin-bottom:1em}
+.alert li {margin-top: 1em}
+.alert-block p+p {margin-top:5px}
+.alert-notice { background-image: url(https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/small_yellow_notice.png); }
+.alert-summary  { background-image:url(https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/small_yellow_summary.png); }
+.alert-warning { background-image: url(https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/small_yellow_warning.png); }
+.alert-question {background-image:url(https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/small_yellow_question.png); }
+
+div { text-align: justify; text-justify: inter-word; }
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [('Table of contents',
+               1,
+               'table_of_contents',
+               'table_of_contents'),
+              ('Scalar ordinary differential equations',
+               1,
+               'sec:ode2:ODE:scalar',
+               'sec:ode2:ODE:scalar'),
+              ('Examples on right-hand-side functions', 2, None, '___sec1'),
+              ('The Forward Euler scheme',
+               2,
+               'sec:ode2:ForwardEuler:func',
+               'sec:ode2:ForwardEuler:func'),
+              ('Function implementation',
+               2,
+               'sec:ode2:funcimpl',
+               'sec:ode2:funcimpl'),
+              ('Verifying the implementation',
+               2,
+               'sec:ode2:verify',
+               'sec:ode2:verify'),
+              ('Visual comparison', 3, None, '___sec5'),
+              ('Comparing with hand calculations', 3, None, '___sec6'),
+              ('Comparing with an exact numerical solution',
+               3,
+               None,
+               '___sec7'),
+              ('From discrete to continuous solution',
+               2,
+               'sec:ode2:wrap2callable',
+               'sec:ode2:wrap2callable'),
+              ('Switching numerical method',
+               2,
+               'sec:ode2:Heun',
+               'sec:ode2:Heun'),
+              ('Class implementation',
+               2,
+               'sec:ode2:classimpl',
+               'sec:ode2:classimpl'),
+              ('Class wrapping of a function', 3, None, '___sec11'),
+              ('Switching numerical method', 3, None, '___sec12'),
+              ('A more flexible class', 3, None, '___sec13'),
+              ('Usage of the class', 3, None, '___sec14'),
+              ('Verification', 3, None, '___sec15'),
+              ('Making a module', 3, None, '___sec16'),
+              ('Remark', 3, None, '___sec17'),
+              ('Logistic growth via a function-based approach',
+               2,
+               'sec:ode2:logistic:func',
+               'sec:ode2:logistic:func'),
+              ('Logistic growth via a class-based approach',
+               2,
+               'sec:ode2:logistic:class',
+               'sec:ode2:logistic:class'),
+              ('The problem class', 3, None, '___sec20'),
+              ('Getting input from the command line', 3, None, '___sec21'),
+              ('Import statements', 3, None, '___sec22'),
+              ('Solving the problem', 3, None, '___sec23'),
+              ('Making a module', 3, None, '___sec24'),
+              ('Pros and cons of the class-based approach',
+               3,
+               None,
+               '___sec25'),
+              ('Systems of ordinary differential equations',
+               1,
+               'sec:ode2:ODE:system',
+               'sec:ode2:ODE:system'),
+              ('Mathematical problem', 2, None, '___sec27'),
+              ('Example of a system of ODEs',
+               2,
+               'sec:ode2:ODE:system:ex',
+               'sec:ode2:ODE:system:ex'),
+              ('Function implementation',
+               2,
+               'sec:ode2:system:func',
+               'sec:ode2:system:func'),
+              ('Allowing lists', 3, None, '___sec30'),
+              ('Class implementation',
+               2,
+               'sec:ode2:system:class',
+               'sec:ode2:system:class'),
+              ('The ODESolver class hierarchy',
+               1,
+               'sec:ode2:ODESolver:hier',
+               'sec:ode2:ODESolver:hier'),
+              ('Numerical methods',
+               2,
+               'sec:ode2:ODE:methods',
+               'sec:ode2:ODE:methods'),
+              ('Construction of a solver hierarchy', 2, None, '___sec34'),
+              ('The superclass', 3, None, '___sec35'),
+              ('The Forward Euler method', 3, None, '___sec36'),
+              ('The 4th-order Runge-Kutta method', 3, None, '___sec37'),
+              ('The Backward Euler method',
+               2,
+               'sec:ode2:ODE:BE',
+               'sec:ode2:ODE:BE'),
+              ('Verification',
+               2,
+               'sec:ode2:ODESolver:verify',
+               'sec:ode2:ODESolver:verify'),
+              ('Remarks', 3, None, '___sec40'),
+              ('Example: Exponential decay',
+               2,
+               'sec:ode2:ODE:app:1',
+               'sec:ode2:ODE:app:1'),
+              ('Example: The logistic equation with problem and solver classes',
+               2,
+               'sec:ode2:ODE:app:2',
+               'sec:ode2:ODE:app:2'),
+              ('Basic problem and solver classes', 3, None, '___sec43'),
+              ('Computing an appropriate $\\Delta t$', 3, None, '___sec44'),
+              ('Dealing with time-dependent coefficients',
+               3,
+               None,
+               '___sec45'),
+              ('Reading input', 3, None, '___sec46'),
+              ('Example: An oscillating system',
+               2,
+               'sec:ode2:ODE:app:3',
+               'sec:ode2:ODE:app:3'),
+              ('Application 4: the trajectory of a ball',
+               2,
+               'sec:ode2:ODE:app:4',
+               'sec:ode2:ODE:app:4'),
+              ('Further developments of ODESolver', 2, None, '___sec49'),
+              ('Exercises', 1, None, '___sec50'),
+              ('Exercise 1: Solve a simple ODE with function-based code',
+               2,
+               'sec:ode2:ex:simple:func',
+               'sec:ode2:ex:simple:func'),
+              ('Exercise 2: Solve a simple ODE with class-based code',
+               2,
+               'sec:ode2:ex:simple:class',
+               'sec:ode2:ex:simple:class'),
+              ('Exercise 3: Solve a simple ODE with the ODEsolver hierarchy',
+               2,
+               'sec:ode2:ex:simple:ODESolver',
+               'sec:ode2:ex:simple:ODESolver'),
+              ('Exercise 4: Solve an ODE specified on the command line',
+               2,
+               'sec:class:ex13d',
+               'sec:class:ex13d'),
+              ('Exercise 5: Implement a numerical method for ODEs',
+               2,
+               'sec:class:ex13g3',
+               'sec:class:ex13g3'),
+              ('Exercise 6: Solve an ODE for emptying a tank',
+               2,
+               'sec:ode:ex5',
+               'sec:ode:ex5'),
+              ('Exercise 7: Solve an ODE for the arc length',
+               2,
+               'sec:ode:ex7',
+               'sec:ode:ex7'),
+              ('Exercise 8: Simulate a falling or rising body in a fluid',
+               2,
+               'sec:ode:ex4',
+               'sec:ode:ex4'),
+              ('Exercise 9: Verify the limit of a solution as time grows',
+               2,
+               'sec:ode2:ex22',
+               'sec:ode2:ex22'),
+              ('Exercise 10: Scale the logistic equation',
+               2,
+               'sec:ode2:ex42b',
+               'sec:ode2:ex42b'),
+              ('Exercise 11: Compute logistic growth with time-varying carrying capacity',
+               2,
+               'sec:ode2:ex42',
+               'sec:ode2:ex42'),
+              ('Exercise 12: Solve an ODE until constant solution',
+               2,
+               'sec:ode2:ex32d',
+               'sec:ode2:ex32d'),
+              ('Exercise 13: Use a problem class to hold data about an ODE',
+               2,
+               'sec:ode2:ex32e',
+               'sec:ode2:ex32e'),
+              ('Exercise 14: Derive and solve a scaled ODE problem',
+               2,
+               'sec:ode2:ex32f',
+               'sec:ode2:ex32f'),
+              ('Exercise 15: Clean up a file to make it a module',
+               2,
+               'sec:ode2:ex:FEfunc:module',
+               'sec:ode2:ex:FEfunc:module'),
+              ('Exercise 16: Simulate radioactive decay',
+               2,
+               'sec:ode2:ex25',
+               'sec:ode2:ex25'),
+              ('Exercise 17: Compute inverse functions by solving an ODE',
+               2,
+               'sec:ode:ex9',
+               'sec:ode:ex9'),
+              ('Exercise 18: Make a class for computing inverse functions',
+               2,
+               'sec:ode:ex10',
+               'sec:ode:ex10'),
+              ('Exercise 19: Add functionality to a class',
+               2,
+               'sec:ode:ex11',
+               'sec:ode:ex11'),
+              ('Exercise 20: Compute inverse functions by interpolation',
+               2,
+               'sec:ode:ex12',
+               'sec:ode:ex12'),
+              ('Exercise 21: Code the 4th-order Runge-Kutta method; function',
+               2,
+               'sec:ode2:ex:RK4:func',
+               'sec:ode2:ex:RK4:func'),
+              ('Exercise 22: Code the 4th-order Runge-Kutta method; class',
+               2,
+               'sec:ode2:ex:RK4:class',
+               'sec:ode2:ex:RK4:class'),
+              ('Exercise 23: Compare ODE methods',
+               2,
+               'sec:ode2:ex32h',
+               'sec:ode2:ex32h'),
+              ('Exercise 24: Code a test function for systems of ODEs',
+               2,
+               'sec:ode2:ex:sys:testfunc',
+               'sec:ode2:ex:sys:testfunc'),
+              ("Exercise 25: Code Heun's method for ODE systems; function",
+               2,
+               'sec:ode2:ex:Heun:sys:func',
+               'sec:ode2:ex:Heun:sys:func'),
+              ("Exercise 26: Code Heun's method for ODE systems; class",
+               2,
+               'sec:ode2:ex:Heun:sys:class',
+               'sec:ode2:ex:Heun:sys:class'),
+              ('Exercise 27: Implement and test the Leapfrog method',
+               2,
+               'sec:ode2:ex25c',
+               'sec:ode2:ex25c'),
+              ('Exercise 28: Implement and test an Adams-Bashforth method',
+               2,
+               'sec:ode2:ex25c:AB3',
+               'sec:ode2:ex25c:AB3'),
+              ('Exercise 29: Solve two coupled ODEs for radioactive decay',
+               2,
+               'sec:ode2:ex25x2',
+               'sec:ode2:ex25x2'),
+              ('Exercise 30: Implement a 2nd-order Runge-Kutta method; function',
+               2,
+               'sec:ode2:ex25b2',
+               'sec:ode2:ex25b2'),
+              ('Exercise 31: Implement a 2nd-order Runge-Kutta method; class',
+               2,
+               'sec:ode2:ex25b',
+               'sec:ode2:ex25b'),
+              ('Exercise 32: Code the iterated midpoint method; function',
+               2,
+               'sec:class:ex13e',
+               'sec:class:ex13e'),
+              ('Exercise 33: Code the iterated midpoint method; class',
+               2,
+               'sec:class:ex13f',
+               'sec:class:ex13f'),
+              ('Exercise 34: Make a subclass for the iterated midpoint method',
+               2,
+               'sec:class:ex13g2',
+               'sec:class:ex13g2'),
+              ('Exercise 35: Compare the accuracy of various methods for ODEs',
+               2,
+               'sec:class:ex:gaussian',
+               'sec:class:ex:gaussian'),
+              ('Exercise 36: Animate how various methods for ODEs converge',
+               2,
+               'sec:class:ex:gaussian2',
+               'sec:class:ex:gaussian2'),
+              ('Exercise 37: Study convergence of numerical methods for ODEs',
+               2,
+               'sec:ode2:ex29',
+               'sec:ode2:ex29'),
+              ("Exercise 38: Find a body's position along with its velocity",
+               2,
+               'sec:ode2:ex21',
+               'sec:ode2:ex21'),
+              ('Exercise 39: Add the effect of air resistance on a ball',
+               2,
+               'sec:ode2:ex27v4',
+               'sec:ode2:ex27v4'),
+              ('Exercise 40: Solve an ODE system for an electric circuit',
+               2,
+               'sec:ode2:ex27',
+               'sec:ode2:ex27'),
+              ('Remarks', 3, None, '___sec91'),
+              ('Exercise 41: Simulate the spreading of a disease by a SIR model',
+               2,
+               'sec:ode:ex14',
+               'sec:ode:ex14'),
+              ('Exercise 42: Introduce problem and solver classes in the SIR model',
+               2,
+               'sec:ode:ex14c',
+               'sec:ode:ex14c'),
+              ('Exercise 43: Introduce vaccination in a SIR model',
+               2,
+               'sec:ode:ex15',
+               'sec:ode:ex15'),
+              ('Exercise 44: Introduce a vaccination campaign in a SIR model',
+               2,
+               'sec:ode:ex16',
+               'sec:ode:ex16'),
+              ('Exercise 45: Find an optimal vaccination period',
+               2,
+               'sec:ode:ex17',
+               'sec:ode:ex17'),
+              ('Exercise 46: Simulate human-zombie interaction',
+               2,
+               'sec:ode:ex18',
+               'sec:ode:ex18'),
+              ('Exercise 47: Simulate a zombie movie',
+               2,
+               'sec:ode:ex19',
+               'sec:ode:ex19'),
+              ('Exercise 48: Simulate a war on zombies',
+               2,
+               'sec:ode:ex20',
+               'sec:ode:ex20'),
+              ('Exercise 49: Explore predator-prey population interactions',
+               2,
+               'sec:ode2:ex41',
+               'sec:ode2:ex41'),
+              ('Exercise 50: Formulate a 2nd-order ODE as a system',
+               2,
+               'sec:ode2:ex34',
+               'sec:ode2:ex34'),
+              ('Physical applications', 3, None, '___sec102'),
+              ('Exercise 51: Solve $\\ddot u + u =0$',
+               2,
+               'sec:ode2:ex35',
+               'sec:ode2:ex35'),
+              ('Exercise 52: Make a tool for analyzing oscillatory solutions',
+               2,
+               'sec:ode2:ex36v',
+               'sec:ode2:ex36v'),
+              ('Exercise 53: Implement problem, solver, and visualizer classes',
+               2,
+               'sec:ode2:ex37',
+               'sec:ode2:ex37'),
+              ('Exercise 54: Use classes for flexible choices of models',
+               2,
+               'sec:ode2:ex38',
+               'sec:ode2:ex38'),
+              ('Exercise 55: Apply software for oscillating systems',
+               2,
+               'sec:ode2:ex40',
+               'sec:ode2:ex40'),
+              ('Exercise 56: Model the economy of fishing',
+               2,
+               'sec:class:ex19',
+               'sec:class:ex19'),
+              ('References', 1, None, '___sec109')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- newcommands_keep.tex -->
+$$
+\newcommand{\tp}{\thinspace .}
+$$
+
+
+
+
+    
+<a name="part0000"></a>
+<p>
+<!-- begin top navigation -->
+<table style="width: 100%"><tr><td>
+</td><td>
+<div style="text-align: right;"><a href="._ode2-solarized001.html">Next &raquo;</a></div>
+</td></tr></table>
+<!-- end top navigation -->
+</p>
+
+<p>
+<!-- ------------------- main content ---------------------- -->
+
+
+
+<center><h1>Programming of ordinary differential equations</h1></center>  <!-- document title -->
+
+<p>
+<!-- author(s): Hans Petter Langtangen -->
+
+<center>
+<b>Hans Petter Langtangen</b> [1, 2]
+</center>
+
+<p>
+<!-- institution(s) -->
+
+<center>[1] <b>Center for Biomedical Computing, Simula Research Laboratory</b></center>
+<center>[2] <b>Department of Informatics, University of Oslo</b></center>
+<br>
+<p>
+<center><h4>Jun 14, 2016</h4></center> <!-- date -->
+<br>
+
+<h1 id="table_of_contents">Table of contents</h2>
+
+<p>
+<a href="._ode2-solarized001.html#sec:ode2:ODE:scalar"> Scalar ordinary differential equations </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._ode2-solarized001.html#___sec1"> Examples on right-hand-side functions </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._ode2-solarized001.html#sec:ode2:ForwardEuler:func"> The Forward Euler scheme </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._ode2-solarized001.html#sec:ode2:funcimpl"> Function implementation </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._ode2-solarized001.html#sec:ode2:verify"> Verifying the implementation </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._ode2-solarized001.html#sec:ode2:wrap2callable"> From discrete to continuous solution </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._ode2-solarized001.html#sec:ode2:Heun"> Switching numerical method </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._ode2-solarized001.html#sec:ode2:classimpl"> Class implementation </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._ode2-solarized001.html#sec:ode2:logistic:func"> Logistic growth via a function-based approach </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._ode2-solarized001.html#sec:ode2:logistic:class"> Logistic growth via a class-based approach </a><br>
+<a href="._ode2-solarized002.html#sec:ode2:ODE:system"> Systems of ordinary differential equations </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._ode2-solarized002.html#___sec27"> Mathematical problem </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._ode2-solarized002.html#sec:ode2:ODE:system:ex"> Example of a system of ODEs </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._ode2-solarized002.html#sec:ode2:system:func"> Function implementation </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._ode2-solarized002.html#sec:ode2:system:class"> Class implementation </a><br>
+<a href="._ode2-solarized003.html#sec:ode2:ODESolver:hier"> The ODESolver class hierarchy </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._ode2-solarized003.html#sec:ode2:ODE:methods"> Numerical methods </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._ode2-solarized003.html#___sec34"> Construction of a solver hierarchy </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._ode2-solarized003.html#sec:ode2:ODE:BE"> The Backward Euler method </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._ode2-solarized003.html#sec:ode2:ODESolver:verify"> Verification </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._ode2-solarized003.html#sec:ode2:ODE:app:1"> Example: Exponential decay </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._ode2-solarized003.html#sec:ode2:ODE:app:2"> Example: The logistic equation with problem and solver classes </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._ode2-solarized003.html#sec:ode2:ODE:app:3"> Example: An oscillating system </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._ode2-solarized003.html#sec:ode2:ODE:app:4"> Application 4: the trajectory of a ball </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._ode2-solarized003.html#___sec49"> Further developments of ODESolver </a><br>
+<a href="._ode2-solarized004.html#___sec50"> Exercises </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._ode2-solarized004.html#sec:ode2:ex:simple:func"> Exercise 1: Solve a simple ODE with function-based code </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._ode2-solarized004.html#sec:ode2:ex:simple:class"> Exercise 2: Solve a simple ODE with class-based code </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._ode2-solarized004.html#sec:ode2:ex:simple:ODESolver"> Exercise 3: Solve a simple ODE with the ODEsolver hierarchy </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._ode2-solarized004.html#sec:class:ex13d"> Exercise 4: Solve an ODE specified on the command line </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._ode2-solarized004.html#sec:class:ex13g3"> Exercise 5: Implement a numerical method for ODEs </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._ode2-solarized004.html#sec:ode:ex5"> Exercise 6: Solve an ODE for emptying a tank </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._ode2-solarized004.html#sec:ode:ex7"> Exercise 7: Solve an ODE for the arc length </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._ode2-solarized004.html#sec:ode:ex4"> Exercise 8: Simulate a falling or rising body in a fluid </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._ode2-solarized004.html#sec:ode2:ex22"> Exercise 9: Verify the limit of a solution as time grows </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._ode2-solarized004.html#sec:ode2:ex42b"> Exercise 10: Scale the logistic equation </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._ode2-solarized004.html#sec:ode2:ex42"> Exercise 11: Compute logistic growth with time-varying carrying capacity </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._ode2-solarized004.html#sec:ode2:ex32d"> Exercise 12: Solve an ODE until constant solution </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._ode2-solarized004.html#sec:ode2:ex32e"> Exercise 13: Use a problem class to hold data about an ODE </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._ode2-solarized004.html#sec:ode2:ex32f"> Exercise 14: Derive and solve a scaled ODE problem </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._ode2-solarized004.html#sec:ode2:ex:FEfunc:module"> Exercise 15: Clean up a file to make it a module </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._ode2-solarized004.html#sec:ode2:ex25"> Exercise 16: Simulate radioactive decay </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._ode2-solarized004.html#sec:ode:ex9"> Exercise 17: Compute inverse functions by solving an ODE </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._ode2-solarized004.html#sec:ode:ex10"> Exercise 18: Make a class for computing inverse functions </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._ode2-solarized004.html#sec:ode:ex11"> Exercise 19: Add functionality to a class </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._ode2-solarized004.html#sec:ode:ex12"> Exercise 20: Compute inverse functions by interpolation </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._ode2-solarized004.html#sec:ode2:ex:RK4:func"> Exercise 21: Code the 4th-order Runge-Kutta method; function </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._ode2-solarized004.html#sec:ode2:ex:RK4:class"> Exercise 22: Code the 4th-order Runge-Kutta method; class </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._ode2-solarized004.html#sec:ode2:ex32h"> Exercise 23: Compare ODE methods </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._ode2-solarized004.html#sec:ode2:ex:sys:testfunc"> Exercise 24: Code a test function for systems of ODEs </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._ode2-solarized004.html#sec:ode2:ex:Heun:sys:func"> Exercise 25: Code Heun's method for ODE systems; function </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._ode2-solarized004.html#sec:ode2:ex:Heun:sys:class"> Exercise 26: Code Heun's method for ODE systems; class </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._ode2-solarized004.html#sec:ode2:ex25c"> Exercise 27: Implement and test the Leapfrog method </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._ode2-solarized004.html#sec:ode2:ex25c:AB3"> Exercise 28: Implement and test an Adams-Bashforth method </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._ode2-solarized004.html#sec:ode2:ex25x2"> Exercise 29: Solve two coupled ODEs for radioactive decay </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._ode2-solarized004.html#sec:ode2:ex25b2"> Exercise 30: Implement a 2nd-order Runge-Kutta method; function </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._ode2-solarized004.html#sec:ode2:ex25b"> Exercise 31: Implement a 2nd-order Runge-Kutta method; class </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._ode2-solarized004.html#sec:class:ex13e"> Exercise 32: Code the iterated midpoint method; function </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._ode2-solarized004.html#sec:class:ex13f"> Exercise 33: Code the iterated midpoint method; class </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._ode2-solarized004.html#sec:class:ex13g2"> Exercise 34: Make a subclass for the iterated midpoint method </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._ode2-solarized004.html#sec:class:ex:gaussian"> Exercise 35: Compare the accuracy of various methods for ODEs </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._ode2-solarized004.html#sec:class:ex:gaussian2"> Exercise 36: Animate how various methods for ODEs converge </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._ode2-solarized004.html#sec:ode2:ex29"> Exercise 37: Study convergence of numerical methods for ODEs </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._ode2-solarized004.html#sec:ode2:ex21"> Exercise 38: Find a body's position along with its velocity </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._ode2-solarized004.html#sec:ode2:ex27v4"> Exercise 39: Add the effect of air resistance on a ball </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._ode2-solarized004.html#sec:ode2:ex27"> Exercise 40: Solve an ODE system for an electric circuit </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._ode2-solarized004.html#sec:ode:ex14"> Exercise 41: Simulate the spreading of a disease by a SIR model </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._ode2-solarized004.html#sec:ode:ex14c"> Exercise 42: Introduce problem and solver classes in the SIR model </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._ode2-solarized004.html#sec:ode:ex15"> Exercise 43: Introduce vaccination in a SIR model </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._ode2-solarized004.html#sec:ode:ex16"> Exercise 44: Introduce a vaccination campaign in a SIR model </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._ode2-solarized004.html#sec:ode:ex17"> Exercise 45: Find an optimal vaccination period </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._ode2-solarized004.html#sec:ode:ex18"> Exercise 46: Simulate human-zombie interaction </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._ode2-solarized004.html#sec:ode:ex19"> Exercise 47: Simulate a zombie movie </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._ode2-solarized004.html#sec:ode:ex20"> Exercise 48: Simulate a war on zombies </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._ode2-solarized004.html#sec:ode2:ex41"> Exercise 49: Explore predator-prey population interactions </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._ode2-solarized004.html#sec:ode2:ex34"> Exercise 50: Formulate a 2nd-order ODE as a system </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._ode2-solarized004.html#sec:ode2:ex35"> Exercise 51: Solve \( \ddot u + u =0 \) </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._ode2-solarized004.html#sec:ode2:ex36v"> Exercise 52: Make a tool for analyzing oscillatory solutions </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._ode2-solarized004.html#sec:ode2:ex37"> Exercise 53: Implement problem, solver, and visualizer classes </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._ode2-solarized004.html#sec:ode2:ex38"> Exercise 54: Use classes for flexible choices of models </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._ode2-solarized004.html#sec:ode2:ex40"> Exercise 55: Apply software for oscillating systems </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._ode2-solarized004.html#sec:class:ex19"> Exercise 56: Model the economy of fishing </a><br>
+<a href="._ode2-solarized004.html#___sec109"> References </a><br>
+</p>
+<p>
+<!-- Externaldocuments: ../formulas/main_formulas, ../looplist/main_looplist, ../funcif/main_funcif, ../input/main_input, ../plot/main_plot, ../dictstring/main_dictstring, ../class/main_class, ../random/main_random, ../oo/main_oo, ../diffeq/main_diffeq, ../discalc/main_discalc, ../ode1/main_ode1, ../boxspring/main_boxspring, ../debug/main_debug, ../cython/main_cython, ../tech/main_timing, ../tech/main_varargs, ../tech/main_runpy, ../tech/main_ostasks, ../tech/main_accesspy, ../tech/main_nose -->
+
+<p>
+<div id="ch:ode2"></div>
+
+<p>
+We shall in the present document
+view differential
+equations from an abstract point of view, which allows us to
+formulate numerical methods and create general
+software that are applicable to a
+large family of widely different differential equation
+problems from mathematics, physics, biology, and finance.
+More specifically, the abstract view is motivated by the slogan
+<em>implement once, apply anywhere</em>.
+This principle is the dominating strategy for implementing
+differentiation (\( f'(x) \) and \( f''(x) \)),
+integration (\( \int_a^b f(x)dx \)),
+and root finding (\( f(x)=0 \)).
+In the mentioned applications,
+we work with a <em>general function</em> \( f(x) \) so that any problem can
+be solved by the same piece of code as long as we can define the problem
+in terms of a function \( f(x) \). This is an excellent demonstration of the
+power of mathematics, and this abstract view of problems in terms of
+some \( f(x) \) is especially powerful in numerical methods
+and programming.
+Now we shall formulate differential equations on the abstract form
+\( u^{\prime}=f(u,t) \) and create software that can solve any equation for
+which the \( f(u,t) \) is given.
+
+<p>
+Before studying the present document, the reader should have some
+familiarity with differential equations
+and basic numerical methods for their solution.
+Only fundamental programming skills regarding loops, lists, arrays, functions,
+<code>if</code> tests, command-line arguments, and curve plotting
+are required for the basic function-based
+material in this document. However, the sections <a href="._ode2-solarized001.html#sec:ode2:classimpl">Class implementation</a> and
+<a href="._ode2-solarized002.html#sec:ode2:system:class">Class implementation</a>,
+as well as many exercises, use classes to a large
+extent and hence demand familiarity with the class
+concept.
+The material on object-oriented programming in
+the section <a href="._ode2-solarized003.html#sec:ode2:ODESolver:hier">The ODESolver class hierarchy</a> requires good knowledge of class
+hierarchies and
+inheritance.
+
+<p>
+All computer codes associated with this document is found in <a href="http://tinyurl.com/pwyasaa/ode2" target="_self"><tt>src/ode2</tt></a>.
+
+<p>
+<p>
+<!-- begin bottom navigation -->
+<table style="width: 100%"><tr><td>
+</td><td>
+<div style="text-align: right;"><a href="._ode2-solarized001.html">Next &raquo;</a></div>
+</td></tr></table>
+<!-- end bottom navigation -->
+</p><p style="font-size:80%">This chapter is taken from the book <a href="http://www.springer.com/gp/book/9783662498866">A Primer on Scientific Programming with Python</a> by H. P. Langtangen, 5th edition, Springer, 2016.</p>
+
+<!-- ------------------- end of main content --------------- -->
+
+
+</body>
+</html>
+    
+

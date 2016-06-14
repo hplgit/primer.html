@@ -7,7 +7,7 @@ Automatically generated HTML file from DocOnce source
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
 <meta name="description" content="Functions and branching">
-<meta name="keywords" content="function header,function body,body of a function,call a function,invoke a function,Online Python Tutor,keyword arguments,function arguments keyword,positional arguments,function arguments positional,named arguments,function arguments named,doc strings,main program,lambda functions,lambda functions,test function,nose tests,pytest tests,mod function,Online Python Tutor,Trapezoidal rule for integration,Midpoint rule for integration,Fourier series,Heaviside function,sort (list)">
+<meta name="keywords" content="function header,function body,body of a function,call a function,invoke a function,Online Python Tutor,keyword arguments,function arguments keyword,positional arguments,function arguments positional,named arguments,function arguments named,doc strings,main program,lambda functions,lambda functions,test function,unit testing,nose tests,pytest tests,mod function,Online Python Tutor,Trapezoidal rule for integration,Midpoint rule for integration,Fourier series,Heaviside function,sort (list)">
 
 <title>Functions and branching</title>
 
@@ -20,6 +20,24 @@ Automatically generated HTML file from DocOnce source
 <style type="text/css">
 /* Let inline verbatim have the same color as the surroundings */
 code { color: inherit; background-color: transparent; }
+
+/* Add scrollbar to dropdown menus in bootstrap navigation bar */
+.dropdown-menu {
+   height: auto;
+   max-height: 400px;
+   overflow-x: hidden;
+}
+
+/* Adds an invisible element before each target to offset for the navigation
+   bar */
+.anchor::before {
+  content:"";
+  display:block;
+  height:50px; /* fixed header height*/
+  margin:-50px 0 0; /* negative fixed header height */
+}
+
+body { font-size:20px;line-height:1.5--html_body_style=font-size:20px;line-height:1.5; }
 </style>
 
 
@@ -27,252 +45,285 @@ code { color: inherit; background-color: transparent; }
 
 <!-- tocinfo
 {'highest level': 1,
- 'sections': [(' Functions ', 1, None, '___sec0'),
-              (' Mathematical functions as Python functions ',
+ 'sections': [('Table of contents',
+               1,
+               'table_of_contents',
+               'table_of_contents'),
+              ('Functions', 1, None, '___sec0'),
+              ('Mathematical functions as Python functions',
                2,
                'sec:basic:func1',
                'sec:basic:func1'),
-              (' Understanding the program flow ',
+              ('Understanding the program flow',
                2,
                'sec:basic:pot',
                'sec:basic:pot'),
-              (' Local and global variables ',
+              ('Local and global variables',
                2,
                'sec:basic:localglobal',
                'sec:basic:localglobal'),
-              (' Local variables are invisible outside functions ',
+              ('Local variables are invisible outside functions',
                3,
                None,
                '___sec4'),
-              (' Local variables hide global variables ', 3, None, '___sec5'),
-              (' Example ', 3, None, '___sec6'),
-              (' Changing global variables inside functions ',
+              ('Local variables hide global variables', 3, None, '___sec5'),
+              ('Example', 3, None, '___sec6'),
+              ('Changing global variables inside functions',
                3,
                None,
                '___sec7'),
-              (' Multiple arguments ',
+              ('Multiple arguments',
                2,
                'sec:basic:multiple:args',
                'sec:basic:multiple:args'),
-              (' Function argument or global variable? ',
+              ('Function argument or global variable?',
                2,
                'sec:basic:arg:or:global',
                'sec:basic:arg:or:global'),
-              (' Beyond mathematical functions ',
+              ('Beyond mathematical functions',
                2,
                'sec:basic:makelist',
                'sec:basic:makelist'),
-              (' Remark 1 ', 3, None, '___sec11'),
-              (' Remark 2 ', 3, None, '___sec12'),
-              (' Multiple return values ',
+              ('Remark 1', 3, None, '___sec11'),
+              ('Remark 2', 3, None, '___sec12'),
+              ('Multiple return values',
                2,
                'sec:basic:multiple:returns',
                'sec:basic:multiple:returns'),
-              (' Computing sums ', 2, 'sec:basic:sum', 'sec:basic:sum'),
-              (' Functions with no return values ',
+              ('Computing sums', 2, 'sec:basic:sum', 'sec:basic:sum'),
+              ('Functions with no return values',
                2,
                'sec:basic:None',
                'sec:basic:None'),
-              (' Keyword arguments ',
+              ('Keyword arguments',
                2,
                'sec:basic:kwargs',
                'sec:basic:kwargs'),
-              (' Example: Function with default parameters ',
+              ('Example: Function with default parameters',
                3,
                None,
                '___sec17'),
-              (' Example: Computing a sum with default tolerance ',
+              ('Example: Computing a sum with default tolerance',
                3,
                None,
                '___sec18'),
-              (' Doc strings ',
+              ('Doc strings',
                2,
                'sec:basic:docstring',
                'sec:basic:docstring'),
-              (' Functions as arguments to functions ',
+              ('Functions as arguments to functions',
                2,
                'sec:basic:farg',
                'sec:basic:farg'),
-              (' The behavior of the numerical derivative as $h\\rightarrow 0$ ',
+              ('The behavior of the numerical derivative as $h\\rightarrow 0$',
                3,
                None,
                '___sec21'),
-              (' The main program ', 2, None, '___sec22'),
-              (' Lambda functions ',
+              ('The main program', 2, None, '___sec22'),
+              ('Lambda functions',
                2,
                'sec:basic:lambdafunc',
                'sec:basic:lambdafunc'),
-              (' Branching ', 1, 'sec:input:if', 'sec:input:if'),
-              (' If-else blocks ', 2, None, '___sec25'),
-              (' Inline if tests ', 2, None, '___sec26'),
-              (' Summary ', 1, 'sec:funcif:summary', 'sec:funcif:summary'),
-              (' Chapter topics ', 2, None, '___sec28'),
-              (' User-defined functions ', 3, None, '___sec29'),
-              (' Keyword arguments ', 3, None, '___sec30'),
-              (' If tests ', 3, None, '___sec31'),
-              (' Inline if tests ', 3, None, '___sec32'),
-              (' Terminology ', 3, None, '___sec33'),
-              (' Example: Numerical integration ',
+              ('Branching', 1, 'sec:input:if', 'sec:input:if'),
+              ('If-else blocks', 2, None, '___sec25'),
+              ('Inline if tests', 2, None, '___sec26'),
+              ('Summary', 1, 'sec:funcif:summary', 'sec:funcif:summary'),
+              ('Chapter topics', 2, None, '___sec28'),
+              ('User-defined functions', 3, None, '___sec29'),
+              ('Keyword arguments', 3, None, '___sec30'),
+              ('If tests', 3, None, '___sec31'),
+              ('Inline if tests', 3, None, '___sec32'),
+              ('Terminology', 3, None, '___sec33'),
+              ('Example: Numerical integration',
                2,
                'sec:funcif:summary:ex',
                'sec:funcif:summary:ex'),
-              (' Problem ', 3, None, '___sec35'),
-              (' Solution ', 3, None, '___sec36'),
-              (' Verification ', 3, None, '___sec37'),
-              (' Checking the validity of function arguments ',
+              ('Problem', 3, None, '___sec35'),
+              ('Solution', 3, None, '___sec36'),
+              ('Verification', 3, None, '___sec37'),
+              ('Unit tests and test functions', 3, None, '___sec38'),
+              ('Checking the validity of function arguments',
                3,
                None,
-               '___sec38'),
-              (' Exercises ', 1, None, '___sec39'),
-              (' Exercise 1: Write a Fahrenheit-Celsius conversion function ',
+               '___sec39'),
+              ('Exercises', 1, None, '___sec40'),
+              ('Exercise 1: Implement a simple mathematical function',
                2,
-               'sec:basic:ex26b',
-               'sec:basic:ex26b'),
-              (' Exercise 2: Evaluate a sum and write a test function ',
+               'sec:basic:ex:exp',
+               'sec:basic:ex:exp'),
+              ('Exercise 2: Implement a simple mathematical function with a parameter',
                2,
-               'sec:basic:ex29d',
-               'sec:basic:ex29d'),
-              (' Exercise 3: Write a function for solving $ax^2 + bx + c =0$ ',
-               2,
-               'sec:funcif:ex1',
-               'sec:funcif:ex1'),
-              (' Exercise 4: Implement the sum function ',
-               2,
-               'sec:input:ex1',
-               'sec:input:ex1'),
-              (' Exercise 5: Compute a polynomial via a product ',
-               2,
-               'sec:basic:ex32',
-               'sec:basic:ex32'),
-              (' Exercise 6: Integrate a function by the Trapezoidal rule ',
-               2,
-               'sec:basic:ex38',
-               'sec:basic:ex38'),
-              (' Remarks ', 3, None, '___sec46'),
-              (' Exercise 7: Derive the general Midpoint integration rule ',
-               2,
-               'sec:basic:ex39c',
-               'sec:basic:ex39c'),
-              (' Exercise 8: Make an adaptive Trapezoidal rule ',
-               2,
-               'sec:basic:ex39d',
-               'sec:basic:ex39d'),
-              (' Remarks ', 3, None, '___sec49'),
-              (' Exercise 9: Explain why a program works ',
+               'sec:basic:ex:exp2',
+               'sec:basic:ex:exp2'),
+              ('Exercise 3: Explain how a program works',
                2,
                'sec:basic:ex48',
                'sec:basic:ex48'),
-              (' Exercise 10: Simulate a program by hand ',
+              ('Exercise 4: Write a Fahrenheit-Celsius conversion functions',
+               2,
+               'sec:basic:ex26b',
+               'sec:basic:ex26b'),
+              ('Exercise 5: Write a test function for Exercise ref{sec:basic:ex26b}',
+               2,
+               'sec:basic:ex26b2',
+               'sec:basic:ex26b2'),
+              ('Exercise 6: Given a test function, write the function',
+               2,
+               'sec:basic:ex:testfunc1',
+               'sec:basic:ex:testfunc1'),
+              ('Exercise 7: Evaluate a sum and write a test function',
+               2,
+               'sec:basic:ex29d',
+               'sec:basic:ex29d'),
+              ('Exercise 8: Write a function for solving $ax^2 + bx + c =0$',
+               2,
+               'sec:funcif:ex1',
+               'sec:funcif:ex1'),
+              ('Exercise 9: Implement the sum function',
+               2,
+               'sec:input:ex1',
+               'sec:input:ex1'),
+              ('Exercise 10: Compute a polynomial via a product',
+               2,
+               'sec:basic:ex32',
+               'sec:basic:ex32'),
+              ('Exercise 11: Integrate a function by the Trapezoidal rule',
+               2,
+               'sec:basic:ex38',
+               'sec:basic:ex38'),
+              ('Remarks', 3, None, '___sec52'),
+              ('Exercise 12: Derive the general Midpoint integration rule',
+               2,
+               'sec:basic:ex39c',
+               'sec:basic:ex39c'),
+              ('Exercise 13: Make an adaptive Trapezoidal rule',
+               2,
+               'sec:basic:ex39d',
+               'sec:basic:ex39d'),
+              ('Remarks', 3, None, '___sec55'),
+              ('Exercise 14: Simulate a program by hand',
                2,
                'sec:basic:ex:locglob',
                'sec:basic:ex:locglob'),
-              (' Exercise 11: Compute the area of an arbitrary triangle ',
+              ('Exercise 15: Debug a given test function',
+               2,
+               'sec:basic:ex:testfunc2',
+               'sec:basic:ex:testfunc2'),
+              ('Exercise 16: Compute the area of an arbitrary triangle',
                2,
                'sec:basic:ex25',
                'sec:basic:ex25'),
-              (' Exercise 12: Compute the length of a path ',
+              ('Exercise 17: Compute the length of a path',
                2,
                'sec:basic:ex25b',
                'sec:basic:ex25b'),
-              (' Exercise 13: Approximate $\\pi$ ',
+              ('Exercise 18: Approximate $\\pi$',
                2,
                'sec:basic:ex25c',
                'sec:basic:ex25c'),
-              (' Exercise 14: Write functions ',
+              ('Exercise 19: Compute the area of a polygon',
+               2,
+               'sec:funcif:exer:area:polygon',
+               'sec:funcif:exer:area:polygon'),
+              ('Exercise 20: Write functions',
                2,
                'sec:basic:ex42a',
                'sec:basic:ex42a'),
-              (' Exercise 15: Approximate a function by a sum of sines ',
+              ('Exercise 21: Approximate a function by a sum of sines',
                2,
                'sec:formula:ex10',
                'sec:formula:ex10'),
-              (' Remarks ', 3, None, '___sec57'),
-              (' Exercise 16: Implement a Gaussian function ',
+              ('Remarks', 3, None, '___sec64'),
+              ('Exercise 22: Implement a Gaussian function',
                2,
                'sec:basic:ex33',
                'sec:basic:ex33'),
-              (' Exercise 17: Write a function for numerical differentiation ',
+              ('Exercise 23: Wrap a formula in a function',
+               2,
+               'sec:basic:ex46',
+               'sec:basic:ex46'),
+              ('Exercise 24: Write a function for numerical differentiation',
                2,
                'sec:basic:ex38a',
                'sec:basic:ex38a'),
-              (' Exercise 18: Implement the factorial function ',
+              ('Exercise 25: Implement the factorial function',
                2,
                'sec:basic:ex35',
                'sec:basic:ex35'),
-              (' Exercise 19: Compute velocity and acceleration from 1D position data ',
+              ('Exercise 26: Compute velocity and acceleration from 1D position data',
                2,
                'sec:basic:ex29q',
                'sec:basic:ex29q'),
-              (' Exercise 20: Find the max and min values of a function ',
+              ('Exercise 27: Find the max and min values of a function',
                2,
                'sec:basic:ex29g',
                'sec:basic:ex29g'),
-              (' Exercise 21: Find the max and min elements in a list ',
+              ('Exercise 28: Find the max and min elements in a list',
                2,
                'sec:basic:ex29g2',
                'sec:basic:ex29g2'),
-              (' Exercise 22: Implement the Heaviside function ',
+              ('Exercise 29: Implement the Heaviside function',
                2,
                'sec:basic:exH1',
                'sec:basic:exH1'),
-              (' Exercise 23: Implement a smoothed Heaviside function ',
+              ('Exercise 30: Implement a smoothed Heaviside function',
                2,
                'sec:basic:exH2',
                'sec:basic:exH2'),
-              (' Exercise 24: Implement an indicator function ',
+              ('Exercise 31: Implement an indicator function',
                2,
                'sec:basic:exH3',
                'sec:basic:exH3'),
-              (' Exercise 25: Implement a piecewise constant function ',
+              ('Exercise 32: Implement a piecewise constant function',
                2,
                'sec:basic:exH4',
                'sec:basic:exH4'),
-              (' Exercise 26: Apply indicator functions ',
+              ('Exercise 33: Apply indicator functions',
                2,
                'sec:basic:exH4b',
                'sec:basic:exH4b'),
-              (' Exercise 27: Test your understanding of branching ',
+              ('Exercise 34: Test your understanding of branching',
                2,
                'sec:basic:ex49',
                'sec:basic:ex49'),
-              (' Exercise 28: Simulate nested loops by hand ',
+              ('Exercise 35: Simulate nested loops by hand',
                2,
                'sec:basic:ex40',
                'sec:basic:ex40'),
-              (' Exercise 29: Rewrite a mathematical function ',
+              ('Exercise 36: Rewrite a mathematical function',
                2,
                'sec:basic:ex29f',
                'sec:basic:ex29f'),
-              (' Exercise 30: Make a table for approximations of $\\cos x$ ',
+              ('Exercise 37: Make a table for approximations of $\\cos x$',
                2,
                'sec:basic:ex29e',
                'sec:basic:ex29e'),
-              (' Exercise 31: Use None in keyword arguments ',
+              ('Exercise 38: Use None in keyword arguments',
                2,
                'sec:basic:ex31b',
                'sec:basic:ex31b'),
-              (' Exercise 32: Write a sort function for a list of 4-tuples ',
+              ('Exercise 39: Write a sort function for a list of 4-tuples',
                2,
                'sec:basic:ex28',
                'sec:basic:ex28'),
-              (' Exercise 33: Find prime numbers ',
+              ('Exercise 40: Find prime numbers',
                2,
                'sec:basic:ex37',
                'sec:basic:ex37'),
-              (' Exercise 34: Resolve a problem with a function ',
+              ('Exercise 41: Resolve a problem with a function',
                2,
                'sec:input:ex35',
                'sec:input:ex35'),
-              (' Exercise 35: Determine the types of some objects ',
+              ('Exercise 42: Determine the types of some objects',
                2,
                'sec:basic:ex20',
                'sec:basic:ex20'),
-              (' Remarks ', 3, None, '___sec78'),
-              (' Exercise 36: Find an error in a program ',
+              ('Remarks', 3, None, '___sec86'),
+              ('Exercise 43: Find an error in a program',
                2,
                'sec:basic:ex34',
                'sec:basic:ex34'),
-              (' References ', 1, None, '___sec80')]}
+              ('References', 1, None, '___sec88')]}
 end of tocinfo -->
 
 <body>
@@ -310,16 +361,102 @@ $$
     </button>
     <a class="navbar-brand" href="funcif-readable.html">Functions and branching</a>
   </div>
+
   <div class="navbar-collapse collapse navbar-responsive-collapse">
     <ul class="nav navbar-nav navbar-right">
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
         <ul class="dropdown-menu">
-     <!-- navigation toc: --> <li><a href="._funcif-readable001.html#___sec0" style="font-size: 80%;">Functions</a></li>
-     <!-- navigation toc: --> <li><a href="._funcif-readable002.html#sec:input:if" style="font-size: 80%;">Branching</a></li>
-     <!-- navigation toc: --> <li><a href="._funcif-readable003.html#sec:funcif:summary" style="font-size: 80%;">Summary</a></li>
-     <!-- navigation toc: --> <li><a href="._funcif-readable004.html#___sec39" style="font-size: 80%;">Exercises</a></li>
-     <!-- navigation toc: --> <li><a href="._funcif-readable004.html#___sec80" style="font-size: 80%;">References</a></li>
+     <!-- navigation toc: --> <li><a href="#table_of_contents" style="font-size: 80%;"><b>Table of contents</b></a></li>
+     <!-- navigation toc: --> <li><a href="._funcif-readable001.html#___sec0" style="font-size: 80%;"><b>Functions</b></a></li>
+     <!-- navigation toc: --> <li><a href="._funcif-readable001.html#sec:basic:func1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Mathematical functions as Python functions</a></li>
+     <!-- navigation toc: --> <li><a href="._funcif-readable001.html#sec:basic:pot" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Understanding the program flow</a></li>
+     <!-- navigation toc: --> <li><a href="._funcif-readable001.html#sec:basic:localglobal" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Local and global variables</a></li>
+     <!-- navigation toc: --> <li><a href="._funcif-readable001.html#___sec4" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Local variables are invisible outside functions</a></li>
+     <!-- navigation toc: --> <li><a href="._funcif-readable001.html#___sec5" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Local variables hide global variables</a></li>
+     <!-- navigation toc: --> <li><a href="._funcif-readable001.html#___sec6" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example</a></li>
+     <!-- navigation toc: --> <li><a href="._funcif-readable001.html#___sec7" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Changing global variables inside functions</a></li>
+     <!-- navigation toc: --> <li><a href="._funcif-readable001.html#sec:basic:multiple:args" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Multiple arguments</a></li>
+     <!-- navigation toc: --> <li><a href="._funcif-readable001.html#sec:basic:arg:or:global" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Function argument or global variable?</a></li>
+     <!-- navigation toc: --> <li><a href="._funcif-readable001.html#sec:basic:makelist" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Beyond mathematical functions</a></li>
+     <!-- navigation toc: --> <li><a href="._funcif-readable001.html#___sec11" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remark 1</a></li>
+     <!-- navigation toc: --> <li><a href="._funcif-readable001.html#___sec12" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remark 2</a></li>
+     <!-- navigation toc: --> <li><a href="._funcif-readable001.html#sec:basic:multiple:returns" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Multiple return values</a></li>
+     <!-- navigation toc: --> <li><a href="._funcif-readable001.html#sec:basic:sum" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Computing sums</a></li>
+     <!-- navigation toc: --> <li><a href="._funcif-readable001.html#sec:basic:None" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Functions with no return values</a></li>
+     <!-- navigation toc: --> <li><a href="._funcif-readable001.html#sec:basic:kwargs" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Keyword arguments</a></li>
+     <!-- navigation toc: --> <li><a href="._funcif-readable001.html#___sec17" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example: Function with default parameters</a></li>
+     <!-- navigation toc: --> <li><a href="._funcif-readable001.html#___sec18" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example: Computing a sum with default tolerance</a></li>
+     <!-- navigation toc: --> <li><a href="._funcif-readable001.html#sec:basic:docstring" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Doc strings</a></li>
+     <!-- navigation toc: --> <li><a href="._funcif-readable001.html#sec:basic:farg" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Functions as arguments to functions</a></li>
+     <!-- navigation toc: --> <li><a href="._funcif-readable001.html#___sec21" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The behavior of the numerical derivative as \( h\rightarrow 0 \)</a></li>
+     <!-- navigation toc: --> <li><a href="._funcif-readable001.html#___sec22" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The main program</a></li>
+     <!-- navigation toc: --> <li><a href="._funcif-readable001.html#sec:basic:lambdafunc" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Lambda functions</a></li>
+     <!-- navigation toc: --> <li><a href="._funcif-readable002.html#sec:input:if" style="font-size: 80%;"><b>Branching</b></a></li>
+     <!-- navigation toc: --> <li><a href="._funcif-readable002.html#___sec25" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;If-else blocks</a></li>
+     <!-- navigation toc: --> <li><a href="._funcif-readable002.html#___sec26" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Inline if tests</a></li>
+     <!-- navigation toc: --> <li><a href="._funcif-readable003.html#sec:funcif:summary" style="font-size: 80%;"><b>Summary</b></a></li>
+     <!-- navigation toc: --> <li><a href="._funcif-readable003.html#___sec28" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Chapter topics</a></li>
+     <!-- navigation toc: --> <li><a href="._funcif-readable003.html#___sec29" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;User-defined functions</a></li>
+     <!-- navigation toc: --> <li><a href="._funcif-readable003.html#___sec30" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Keyword arguments</a></li>
+     <!-- navigation toc: --> <li><a href="._funcif-readable003.html#___sec31" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If tests</a></li>
+     <!-- navigation toc: --> <li><a href="._funcif-readable003.html#___sec32" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Inline if tests</a></li>
+     <!-- navigation toc: --> <li><a href="._funcif-readable003.html#___sec33" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Terminology</a></li>
+     <!-- navigation toc: --> <li><a href="._funcif-readable003.html#sec:funcif:summary:ex" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Numerical integration</a></li>
+     <!-- navigation toc: --> <li><a href="._funcif-readable003.html#___sec35" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem</a></li>
+     <!-- navigation toc: --> <li><a href="._funcif-readable003.html#___sec36" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Solution</a></li>
+     <!-- navigation toc: --> <li><a href="._funcif-readable003.html#___sec37" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Verification</a></li>
+     <!-- navigation toc: --> <li><a href="._funcif-readable003.html#___sec38" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Unit tests and test functions</a></li>
+     <!-- navigation toc: --> <li><a href="._funcif-readable003.html#___sec39" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checking the validity of function arguments</a></li>
+     <!-- navigation toc: --> <li><a href="._funcif-readable004.html#___sec40" style="font-size: 80%;"><b>Exercises</b></a></li>
+     <!-- navigation toc: --> <li><a href="._funcif-readable004.html#sec:basic:ex:exp" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 1: Implement a simple mathematical function</a></li>
+     <!-- navigation toc: --> <li><a href="._funcif-readable004.html#sec:basic:ex:exp2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 2: Implement a simple mathematical function with a parameter</a></li>
+     <!-- navigation toc: --> <li><a href="._funcif-readable004.html#sec:basic:ex48" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 3: Explain how a program works</a></li>
+     <!-- navigation toc: --> <li><a href="._funcif-readable004.html#sec:basic:ex26b" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 4: Write a Fahrenheit-Celsius conversion functions</a></li>
+     <!-- navigation toc: --> <li><a href="._funcif-readable004.html#sec:basic:ex26b2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 5: Write a test function for Exercise ref{sec:basic:ex26b}</a></li>
+     <!-- navigation toc: --> <li><a href="._funcif-readable004.html#sec:basic:ex:testfunc1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 6: Given a test function, write the function</a></li>
+     <!-- navigation toc: --> <li><a href="._funcif-readable004.html#sec:basic:ex29d" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 7: Evaluate a sum and write a test function</a></li>
+     <!-- navigation toc: --> <li><a href="._funcif-readable004.html#sec:funcif:ex1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 8: Write a function for solving \( ax^2 + bx + c =0 \)</a></li>
+     <!-- navigation toc: --> <li><a href="._funcif-readable004.html#sec:input:ex1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 9: Implement the sum function</a></li>
+     <!-- navigation toc: --> <li><a href="._funcif-readable004.html#sec:basic:ex32" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 10: Compute a polynomial via a product</a></li>
+     <!-- navigation toc: --> <li><a href="._funcif-readable004.html#sec:basic:ex38" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 11: Integrate a function by the Trapezoidal rule</a></li>
+     <!-- navigation toc: --> <li><a href="._funcif-readable004.html#___sec52" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remarks</a></li>
+     <!-- navigation toc: --> <li><a href="._funcif-readable004.html#sec:basic:ex39c" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 12: Derive the general Midpoint integration rule</a></li>
+     <!-- navigation toc: --> <li><a href="._funcif-readable004.html#sec:basic:ex39d" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 13: Make an adaptive Trapezoidal rule</a></li>
+     <!-- navigation toc: --> <li><a href="._funcif-readable004.html#___sec55" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remarks</a></li>
+     <!-- navigation toc: --> <li><a href="._funcif-readable004.html#sec:basic:ex:locglob" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 14: Simulate a program by hand</a></li>
+     <!-- navigation toc: --> <li><a href="._funcif-readable004.html#sec:basic:ex:testfunc2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 15: Debug a given test function</a></li>
+     <!-- navigation toc: --> <li><a href="._funcif-readable004.html#sec:basic:ex25" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 16: Compute the area of an arbitrary triangle</a></li>
+     <!-- navigation toc: --> <li><a href="._funcif-readable004.html#sec:basic:ex25b" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 17: Compute the length of a path</a></li>
+     <!-- navigation toc: --> <li><a href="._funcif-readable004.html#sec:basic:ex25c" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 18: Approximate \( \pi \)</a></li>
+     <!-- navigation toc: --> <li><a href="._funcif-readable004.html#sec:funcif:exer:area:polygon" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 19: Compute the area of a polygon</a></li>
+     <!-- navigation toc: --> <li><a href="._funcif-readable004.html#sec:basic:ex42a" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 20: Write functions</a></li>
+     <!-- navigation toc: --> <li><a href="._funcif-readable004.html#sec:formula:ex10" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 21: Approximate a function by a sum of sines</a></li>
+     <!-- navigation toc: --> <li><a href="._funcif-readable004.html#___sec64" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remarks</a></li>
+     <!-- navigation toc: --> <li><a href="._funcif-readable004.html#sec:basic:ex33" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 22: Implement a Gaussian function</a></li>
+     <!-- navigation toc: --> <li><a href="._funcif-readable004.html#sec:basic:ex46" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 23: Wrap a formula in a function</a></li>
+     <!-- navigation toc: --> <li><a href="._funcif-readable004.html#sec:basic:ex38a" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 24: Write a function for numerical differentiation</a></li>
+     <!-- navigation toc: --> <li><a href="._funcif-readable004.html#sec:basic:ex35" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 25: Implement the factorial function</a></li>
+     <!-- navigation toc: --> <li><a href="._funcif-readable004.html#sec:basic:ex29q" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 26: Compute velocity and acceleration from 1D position data</a></li>
+     <!-- navigation toc: --> <li><a href="._funcif-readable004.html#sec:basic:ex29g" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 27: Find the max and min values of a function</a></li>
+     <!-- navigation toc: --> <li><a href="._funcif-readable004.html#sec:basic:ex29g2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 28: Find the max and min elements in a list</a></li>
+     <!-- navigation toc: --> <li><a href="._funcif-readable004.html#sec:basic:exH1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 29: Implement the Heaviside function</a></li>
+     <!-- navigation toc: --> <li><a href="._funcif-readable004.html#sec:basic:exH2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 30: Implement a smoothed Heaviside function</a></li>
+     <!-- navigation toc: --> <li><a href="._funcif-readable004.html#sec:basic:exH3" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 31: Implement an indicator function</a></li>
+     <!-- navigation toc: --> <li><a href="._funcif-readable004.html#sec:basic:exH4" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 32: Implement a piecewise constant function</a></li>
+     <!-- navigation toc: --> <li><a href="._funcif-readable004.html#sec:basic:exH4b" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 33: Apply indicator functions</a></li>
+     <!-- navigation toc: --> <li><a href="._funcif-readable004.html#sec:basic:ex49" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 34: Test your understanding of branching</a></li>
+     <!-- navigation toc: --> <li><a href="._funcif-readable004.html#sec:basic:ex40" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 35: Simulate nested loops by hand</a></li>
+     <!-- navigation toc: --> <li><a href="._funcif-readable004.html#sec:basic:ex29f" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 36: Rewrite a mathematical function</a></li>
+     <!-- navigation toc: --> <li><a href="._funcif-readable004.html#sec:basic:ex29e" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 37: Make a table for approximations of \( \cos x \)</a></li>
+     <!-- navigation toc: --> <li><a href="._funcif-readable004.html#sec:basic:ex31b" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 38: Use None in keyword arguments</a></li>
+     <!-- navigation toc: --> <li><a href="._funcif-readable004.html#sec:basic:ex28" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 39: Write a sort function for a list of 4-tuples</a></li>
+     <!-- navigation toc: --> <li><a href="._funcif-readable004.html#sec:basic:ex37" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 40: Find prime numbers</a></li>
+     <!-- navigation toc: --> <li><a href="._funcif-readable004.html#sec:input:ex35" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 41: Resolve a problem with a function</a></li>
+     <!-- navigation toc: --> <li><a href="._funcif-readable004.html#sec:basic:ex20" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 42: Determine the types of some objects</a></li>
+     <!-- navigation toc: --> <li><a href="._funcif-readable004.html#___sec86" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remarks</a></li>
+     <!-- navigation toc: --> <li><a href="._funcif-readable004.html#sec:basic:ex34" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 43: Find an error in a program</a></li>
+     <!-- navigation toc: --> <li><a href="._funcif-readable004.html#___sec88" style="font-size: 80%;"><b>References</b></a></li>
 
         </ul>
       </li>
@@ -352,10 +489,14 @@ $$
 
 <center>[1] <b>Center for Biomedical Computing, Simula Research Laboratory</b></center>
 <center>[2] <b>Department of Informatics, University of Oslo</b></center>
+<br>
 <p>
-<center><h4>Apr 19, 2015</h4></center> <!-- date -->
+<center><h4>Jun 14, 2016</h4></center> <!-- date -->
+<br>
+<p>
+</div> <!-- end jumbotron -->
 
-<h2>Table of contents</h2>
+<h1 id="table_of_contents">Table of contents</h2>
 
 <p>
 <a href="._funcif-readable001.html#___sec0"> Functions </a><br>
@@ -379,47 +520,54 @@ $$
 <a href="._funcif-readable003.html#sec:funcif:summary"> Summary </a><br>
 &nbsp; &nbsp; &nbsp; <a href="._funcif-readable003.html#___sec28"> Chapter topics </a><br>
 &nbsp; &nbsp; &nbsp; <a href="._funcif-readable003.html#sec:funcif:summary:ex"> Example: Numerical integration </a><br>
-<a href="._funcif-readable004.html#___sec39"> Exercises </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._funcif-readable004.html#sec:basic:ex26b"> Exercise 1: Write a Fahrenheit-Celsius conversion function </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._funcif-readable004.html#sec:basic:ex29d"> Exercise 2: Evaluate a sum and write a test function </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._funcif-readable004.html#sec:funcif:ex1"> Exercise 3: Write a function for solving \( ax^2 + bx + c =0 \) </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._funcif-readable004.html#sec:input:ex1"> Exercise 4: Implement the sum function </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._funcif-readable004.html#sec:basic:ex32"> Exercise 5: Compute a polynomial via a product </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._funcif-readable004.html#sec:basic:ex38"> Exercise 6: Integrate a function by the Trapezoidal rule </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._funcif-readable004.html#sec:basic:ex39c"> Exercise 7: Derive the general Midpoint integration rule </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._funcif-readable004.html#sec:basic:ex39d"> Exercise 8: Make an adaptive Trapezoidal rule </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._funcif-readable004.html#sec:basic:ex48"> Exercise 9: Explain why a program works </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._funcif-readable004.html#sec:basic:ex:locglob"> Exercise 10: Simulate a program by hand </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._funcif-readable004.html#sec:basic:ex25"> Exercise 11: Compute the area of an arbitrary triangle </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._funcif-readable004.html#sec:basic:ex25b"> Exercise 12: Compute the length of a path </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._funcif-readable004.html#sec:basic:ex25c"> Exercise 13: Approximate \( \pi \) </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._funcif-readable004.html#sec:basic:ex42a"> Exercise 14: Write functions </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._funcif-readable004.html#sec:formula:ex10"> Exercise 15: Approximate a function by a sum of sines </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._funcif-readable004.html#sec:basic:ex33"> Exercise 16: Implement a Gaussian function </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._funcif-readable004.html#sec:basic:ex38a"> Exercise 17: Write a function for numerical differentiation </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._funcif-readable004.html#sec:basic:ex35"> Exercise 18: Implement the factorial function </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._funcif-readable004.html#sec:basic:ex29q"> Exercise 19: Compute velocity and acceleration from 1D position data </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._funcif-readable004.html#sec:basic:ex29g"> Exercise 20: Find the max and min values of a function </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._funcif-readable004.html#sec:basic:ex29g2"> Exercise 21: Find the max and min elements in a list </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._funcif-readable004.html#sec:basic:exH1"> Exercise 22: Implement the Heaviside function </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._funcif-readable004.html#sec:basic:exH2"> Exercise 23: Implement a smoothed Heaviside function </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._funcif-readable004.html#sec:basic:exH3"> Exercise 24: Implement an indicator function </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._funcif-readable004.html#sec:basic:exH4"> Exercise 25: Implement a piecewise constant function </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._funcif-readable004.html#sec:basic:exH4b"> Exercise 26: Apply indicator functions </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._funcif-readable004.html#sec:basic:ex49"> Exercise 27: Test your understanding of branching </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._funcif-readable004.html#sec:basic:ex40"> Exercise 28: Simulate nested loops by hand </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._funcif-readable004.html#sec:basic:ex29f"> Exercise 29: Rewrite a mathematical function </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._funcif-readable004.html#sec:basic:ex29e"> Exercise 30: Make a table for approximations of \( \cos x \) </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._funcif-readable004.html#sec:basic:ex31b"> Exercise 31: Use None in keyword arguments </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._funcif-readable004.html#sec:basic:ex28"> Exercise 32: Write a sort function for a list of 4-tuples </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._funcif-readable004.html#sec:basic:ex37"> Exercise 33: Find prime numbers </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._funcif-readable004.html#sec:input:ex35"> Exercise 34: Resolve a problem with a function </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._funcif-readable004.html#sec:basic:ex20"> Exercise 35: Determine the types of some objects </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._funcif-readable004.html#sec:basic:ex34"> Exercise 36: Find an error in a program </a><br>
-<a href="._funcif-readable004.html#___sec80"> References </a><br>
+<a href="._funcif-readable004.html#___sec40"> Exercises </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._funcif-readable004.html#sec:basic:ex:exp"> Exercise 1: Implement a simple mathematical function </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._funcif-readable004.html#sec:basic:ex:exp2"> Exercise 2: Implement a simple mathematical function with a parameter </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._funcif-readable004.html#sec:basic:ex48"> Exercise 3: Explain how a program works </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._funcif-readable004.html#sec:basic:ex26b"> Exercise 4: Write a Fahrenheit-Celsius conversion functions </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._funcif-readable004.html#sec:basic:ex26b2"> Exercise 5: Write a test function for <a href="._funcif-readable004.html#sec:basic:ex26b">Exercise 4: Write a Fahrenheit-Celsius conversion functions</a> </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._funcif-readable004.html#sec:basic:ex:testfunc1"> Exercise 6: Given a test function, write the function </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._funcif-readable004.html#sec:basic:ex29d"> Exercise 7: Evaluate a sum and write a test function </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._funcif-readable004.html#sec:funcif:ex1"> Exercise 8: Write a function for solving \( ax^2 + bx + c =0 \) </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._funcif-readable004.html#sec:input:ex1"> Exercise 9: Implement the sum function </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._funcif-readable004.html#sec:basic:ex32"> Exercise 10: Compute a polynomial via a product </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._funcif-readable004.html#sec:basic:ex38"> Exercise 11: Integrate a function by the Trapezoidal rule </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._funcif-readable004.html#sec:basic:ex39c"> Exercise 12: Derive the general Midpoint integration rule </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._funcif-readable004.html#sec:basic:ex39d"> Exercise 13: Make an adaptive Trapezoidal rule </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._funcif-readable004.html#sec:basic:ex:locglob"> Exercise 14: Simulate a program by hand </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._funcif-readable004.html#sec:basic:ex:testfunc2"> Exercise 15: Debug a given test function </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._funcif-readable004.html#sec:basic:ex25"> Exercise 16: Compute the area of an arbitrary triangle </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._funcif-readable004.html#sec:basic:ex25b"> Exercise 17: Compute the length of a path </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._funcif-readable004.html#sec:basic:ex25c"> Exercise 18: Approximate \( \pi \) </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._funcif-readable004.html#sec:funcif:exer:area:polygon"> Exercise 19: Compute the area of a polygon </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._funcif-readable004.html#sec:basic:ex42a"> Exercise 20: Write functions </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._funcif-readable004.html#sec:formula:ex10"> Exercise 21: Approximate a function by a sum of sines </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._funcif-readable004.html#sec:basic:ex33"> Exercise 22: Implement a Gaussian function </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._funcif-readable004.html#sec:basic:ex46"> Exercise 23: Wrap a formula in a function </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._funcif-readable004.html#sec:basic:ex38a"> Exercise 24: Write a function for numerical differentiation </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._funcif-readable004.html#sec:basic:ex35"> Exercise 25: Implement the factorial function </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._funcif-readable004.html#sec:basic:ex29q"> Exercise 26: Compute velocity and acceleration from 1D position data </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._funcif-readable004.html#sec:basic:ex29g"> Exercise 27: Find the max and min values of a function </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._funcif-readable004.html#sec:basic:ex29g2"> Exercise 28: Find the max and min elements in a list </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._funcif-readable004.html#sec:basic:exH1"> Exercise 29: Implement the Heaviside function </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._funcif-readable004.html#sec:basic:exH2"> Exercise 30: Implement a smoothed Heaviside function </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._funcif-readable004.html#sec:basic:exH3"> Exercise 31: Implement an indicator function </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._funcif-readable004.html#sec:basic:exH4"> Exercise 32: Implement a piecewise constant function </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._funcif-readable004.html#sec:basic:exH4b"> Exercise 33: Apply indicator functions </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._funcif-readable004.html#sec:basic:ex49"> Exercise 34: Test your understanding of branching </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._funcif-readable004.html#sec:basic:ex40"> Exercise 35: Simulate nested loops by hand </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._funcif-readable004.html#sec:basic:ex29f"> Exercise 36: Rewrite a mathematical function </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._funcif-readable004.html#sec:basic:ex29e"> Exercise 37: Make a table for approximations of \( \cos x \) </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._funcif-readable004.html#sec:basic:ex31b"> Exercise 38: Use None in keyword arguments </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._funcif-readable004.html#sec:basic:ex28"> Exercise 39: Write a sort function for a list of 4-tuples </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._funcif-readable004.html#sec:basic:ex37"> Exercise 40: Find prime numbers </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._funcif-readable004.html#sec:input:ex35"> Exercise 41: Resolve a problem with a function </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._funcif-readable004.html#sec:basic:ex20"> Exercise 42: Determine the types of some objects </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._funcif-readable004.html#sec:basic:ex34"> Exercise 43: Find an error in a program </a><br>
+<a href="._funcif-readable004.html#___sec88"> References </a><br>
 </p>
 <p>
-<!-- Externaldocuments: ../formulas/main_formulas, ../looplist/main_looplist, ../input/main_input, ../plot/main_plot, ../files/main_files, ../class/main_class, ../random/main_random, ../oo/main_oo, ../diffeq/main_diffeq, ../discalc/main_discalc, ../ode1/main_ode1, ../boxspring/main_boxspring, ../ode2/main_ode2, ../debug/main_debug, ../cython/main_cython, ../tech/main_timing, ../tech/main_varargs, ../tech/main_runpy, ../tech/main_ostasks, ../tech/main_accesspy, ../tech/main_nose -->
+<!-- Externaldocuments: ../formulas/main_formulas, ../looplist/main_looplist, ../input/main_input, ../plot/main_plot, ../dictstring/main_dictstring, ../class/main_class, ../random/main_random, ../oo/main_oo, ../diffeq/main_diffeq, ../discalc/main_discalc, ../ode1/main_ode1, ../boxspring/main_boxspring, ../ode2/main_ode2, ../debug/main_debug, ../cython/main_cython, ../tech/main_timing, ../tech/main_varargs, ../tech/main_runpy, ../tech/main_ostasks, ../tech/main_accesspy, ../tech/main_nose -->
 
 <p>
 <div id="ch:funcif"></div>
@@ -432,15 +580,6 @@ functions and branching of program flow, the latter often referred to as
 in the folder <a href="http://tinyurl.com/pwyasaa/funcif" target="_self"><tt>src/funcif</tt></a>.
 
 <p>
-
-
-
-<p><div style="font-size:80%">This chapter is taken from book <a href="http://www.springer.com/gp/book/9783642549588">A Primer on Scientific Programming with Python</a> by H. P. Langtangen, 4th edition, Springer, 2014.</div></p>
-<p><a href="._funcif-readable001.html" class="btn btn-primary btn-lg">Read &raquo;</a></p>
-
-
-</div> <!-- end jumbotron -->
-
 <p>
 <!-- navigation buttons at the bottom of the page -->
 <ul class="pager">
